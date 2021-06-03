@@ -1,0 +1,31 @@
+# Uncomment the next line to define a global platform for your project
+ platform :ios, '9.0'
+
+target 'TShopMall' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  #use_frameworks!
+
+  # Pods for TShopMall
+  
+    pod 'AFNetworking','~> 4.0'
+    pod 'YTKNetwork','~> 3.0.6'
+    pod 'CYLTabBarController', '~> 1.29.0'
+    pod 'SDWebImage', '~> 5.11.1'
+    pod 'Masonry','~>1.1.0'
+    pod 'IQKeyboardManager', '~> 6.5.6'
+    pod 'YYKit', '~> 1.0.9'
+    pod 'MJRefresh', '~> 3.5.0'
+    pod 'Toast', '~> 4.0.0'
+    pod 'SDCycleScrollView', '~> 1.82'
+    pod 'KMNavigationBarTransition', '~> 1.1.8'
+
+  target 'TShopMallTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'TShopMallUITests' do
+    # Pods for testing
+  end
+
+end
