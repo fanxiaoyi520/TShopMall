@@ -10,4 +10,11 @@
 
 @implementation AppDelegate (RootController)
 
+-(void)setupRootController{
+    self.window = [[UIWindow alloc] init];
+    self.window.frame = [UIScreen mainScreen].bounds;
+    self.window.rootViewController = [[TSTabBarController alloc] init];
+    [self.window makeKeyAndVisible];
+}
+
 @end

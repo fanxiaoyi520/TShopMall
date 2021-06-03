@@ -55,6 +55,7 @@
 		F54973CB2668C27300181E3F /* TSH5InterfacedConst.m in Sources */ = {isa = PBXBuildFile; fileRef = F54973CA2668C27300181E3F /* TSH5InterfacedConst.m */; };
 		F54973CF2668CABD00181E3F /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = F54973CD2668CABD00181E3F /* UIView+Extension.m */; };
 		F54973D22668CF3300181E3F /* AppDelegate+RootController.m in Sources */ = {isa = PBXBuildFile; fileRef = F54973D12668CF3300181E3F /* AppDelegate+RootController.m */; };
+		F54973D62668DBF500181E3F /* TSGeneralSearchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F54973D52668DBF500181E3F /* TSGeneralSearchButton.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -177,6 +178,8 @@
 		F54973CE2668CABD00181E3F /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
 		F54973D02668CF3300181E3F /* AppDelegate+RootController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+RootController.h"; sourceTree = "<group>"; };
 		F54973D12668CF3300181E3F /* AppDelegate+RootController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+RootController.m"; sourceTree = "<group>"; };
+		F54973D42668DBF500181E3F /* TSGeneralSearchButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSGeneralSearchButton.h; sourceTree = "<group>"; };
+		F54973D52668DBF500181E3F /* TSGeneralSearchButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSGeneralSearchButton.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -779,6 +782,7 @@
 		F54973A22668AE1300181E3F /* Controls */ = {
 			isa = PBXGroup;
 			children = (
+				F54973D32668DB9B00181E3F /* SearchButton */,
 			);
 			path = Controls;
 			sourceTree = "<group>";
@@ -809,6 +813,15 @@
 				F54973CD2668CABD00181E3F /* UIView+Extension.m */,
 			);
 			path = Category;
+			sourceTree = "<group>";
+		};
+		F54973D32668DB9B00181E3F /* SearchButton */ = {
+			isa = PBXGroup;
+			children = (
+				F54973D42668DBF500181E3F /* TSGeneralSearchButton.h */,
+				F54973D52668DBF500181E3F /* TSGeneralSearchButton.m */,
+			);
+			path = SearchButton;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1053,6 +1066,7 @@
 				F54973BA2668BC0B00181E3F /* TSMineViewController.m in Sources */,
 				F54973B72668BBEE00181E3F /* TSCartViewController.m in Sources */,
 				F54973582668A22100181E3F /* SSLayoutHeader.m in Sources */,
+				F54973D62668DBF500181E3F /* TSGeneralSearchButton.m in Sources */,
 				F54973C82668C1D600181E3F /* TSNotificationConst.m in Sources */,
 				F54973542668A22100181E3F /* SSCollectionView.m in Sources */,
 				F54973D22668CF3300181E3F /* AppDelegate+RootController.m in Sources */,

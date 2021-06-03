@@ -6,6 +6,7 @@
 //
 
 #import "AppDelegate.h"
+#import "AppDelegate+RootController.h"
 
 
 @interface AppDelegate ()
@@ -15,12 +16,7 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-
-    self.window = [[UIWindow alloc] init];
-    self.window.frame = [UIScreen mainScreen].bounds;
-    self.window.rootViewController = [[TSTabBarController alloc] init];
-    [self.window makeKeyAndVisible];
-
+    [self setupRootController];
     return YES;
 }
 
