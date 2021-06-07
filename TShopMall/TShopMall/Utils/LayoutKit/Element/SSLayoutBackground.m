@@ -18,4 +18,9 @@ NSString * _Nullable const UICollectionElementKindSectionBackground = @"UICollec
     return background;
 }
 
+- (NSString *)elementKind
+{
+    return UICollectionElementKindSectionBackground;
+}
+
 @end

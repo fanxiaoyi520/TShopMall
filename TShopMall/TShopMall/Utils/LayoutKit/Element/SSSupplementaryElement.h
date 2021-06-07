@@ -17,13 +17,13 @@ typedef NS_ENUM(NSInteger, SSLayoutZIndex){
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SSSupplementaryElement : SSLayoutElement<NSCopying>
+@interface SSSupplementaryElement : SSLayoutElement
 
 /// 该Item的大小（纵向-高度 横向-宽度）
 @property(nonatomic, assign) CGFloat elementSize;
 /// 视图层级
 @property(nonatomic, assign) SSLayoutZIndex zIndex;
-/// 内边距（Header Footer受影响 Background不受影响）<可以为正值（像内偏移），也可以为负值（向外偏移）>
+/// 内边距（Header Footer受影响 Background不受影响）<可以为正值（向内偏移），也可以为负值（向外偏移）>
 @property(nonatomic, assign) UIEdgeInsets edgeInsets;
 /// Element类型（Header Footer Background等）
 @property(nonatomic, copy, readonly) NSString *elementKind;

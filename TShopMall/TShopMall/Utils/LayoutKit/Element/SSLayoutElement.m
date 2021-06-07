@@ -13,14 +13,6 @@
 
 @implementation SSLayoutElement
 
--(id)copyWithZone:(NSZone *)zone
-{
-    SSLayoutElement *element = [[[self class] allocWithZone:zone] init];
-    element.reuseIdentifier = self.reuseIdentifier;
-    element.viewClass = self.viewClass;
-    return element;
-}
-
 +(instancetype)elementWithClass:(Class)viewClass
 {
     return [self elementWithClass:viewClass reuseIdentifier:NSStringFromClass(viewClass)];

@@ -7,17 +7,11 @@
 
 #import "SSSupplementaryElement.h"
 
-@implementation SSSupplementaryElement
+@interface SSSupplementaryElement()
 
--(id)copyWithZone:(NSZone *)zone
-{
-    SSSupplementaryElement *element = [super copyWithZone:zone];
-    element.elementSize = self.elementSize;
-    element.zIndex = self.zIndex;
-    element.autoHeight = self.autoHeight;
-    element.configureElementDataAutoHeight = self.configureElementDataAutoHeight;
-    return element;
-}
+@end
+
+@implementation SSSupplementaryElement
 
 +(instancetype)elementWithElementSize:(CGFloat)elementSize
                             viewClass:(Class)viewClass
