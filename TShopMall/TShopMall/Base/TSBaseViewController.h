@@ -11,6 +11,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TSBaseViewController : UIViewController
 
+/// 基本设置
+-(void)setupBasic;
+/// 隐藏导航栏
+-(void)hiddenNavigationBar;
+
 @end
 
 NS_ASSUME_NONNULL_END

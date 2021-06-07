@@ -17,12 +17,12 @@
 }
 
 -(void)setupBasic{
-//    self.backgroundColor = [UIColor whiteColor];
-//    self.titleLabel.font = KRegularFont(14);
-//    [self setTitleColor:KHexAlphaColor(@"#2D3132", 0.6) forState:UIControlStateNormal];
-//    [self setTitleColor:KHexAlphaColor(@"#2D3132", 0.6) forState:UIControlStateHighlighted];
-//    self.imageView.contentMode = UIViewContentModeCenter;
-//    self.titleLabel.textAlignment = NSTextAlignmentCenter;
+    self.backgroundColor = [UIColor whiteColor];
+    self.titleLabel.font = KRegularFont(14);
+    [self setTitleColor:KHexAlphaColor(@"#2D3132", 0.6) forState:UIControlStateNormal];
+    [self setTitleColor:KHexAlphaColor(@"#2D3132", 0.6) forState:UIControlStateHighlighted];
+    self.imageView.contentMode = UIViewContentModeCenter;
+    self.titleLabel.textAlignment = NSTextAlignmentCenter;
 }
 
 -(CGRect)titleRectForContentRect:(CGRect)contentRect{

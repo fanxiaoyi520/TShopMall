@@ -19,18 +19,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _fontFamilyArray = [UIFont familyNames];
-    _fontArray = [NSMutableArray array];
-    for (NSString* familyName in _fontFamilyArray) {
-        NSArray *fontArray = [UIFont fontNamesForFamilyName:familyName];
-        [_fontArray addObject:fontArray];
-    }
-    
-    [self.navigationController.navigationBar setBackgroundImage:UIImage.new forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBar.shadowImage = UIImage.new;
-
-    self.view.backgroundColor = [UIColor grayColor];
+    [self hiddenNavigationBar];
 }
+
+
 
 
 @end

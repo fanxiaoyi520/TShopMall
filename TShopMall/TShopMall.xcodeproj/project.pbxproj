@@ -64,6 +64,11 @@
 		F56D4B4D266DFB8900C1AD9E /* FMTeslaLayoutView.m in Sources */ = {isa = PBXBuildFile; fileRef = F56D4B30266DFB8900C1AD9E /* FMTeslaLayoutView.m */; };
 		F56D4B4E266DFB8900C1AD9E /* FMKVOArrayObject.m in Sources */ = {isa = PBXBuildFile; fileRef = F56D4B35266DFB8900C1AD9E /* FMKVOArrayObject.m */; };
 		F56D4B4F266DFB8900C1AD9E /* FMLayoutDebugLog.m in Sources */ = {isa = PBXBuildFile; fileRef = F56D4B39266DFB8900C1AD9E /* FMLayoutDebugLog.m */; };
+		F56D4B5A266E02BA00C1AD9E /* UIColor+General.m in Sources */ = {isa = PBXBuildFile; fileRef = F56D4B57266E02BA00C1AD9E /* UIColor+General.m */; };
+		F56D4B5B266E02BA00C1AD9E /* UIFont+General.m in Sources */ = {isa = PBXBuildFile; fileRef = F56D4B58266E02BA00C1AD9E /* UIFont+General.m */; };
+		F56D4B62266E037600C1AD9E /* MyLayoutMath.m in Sources */ = {isa = PBXBuildFile; fileRef = F56D4B60266E037600C1AD9E /* MyLayoutMath.m */; };
+		F56D4B63266E037600C1AD9E /* MyDimeScale.m in Sources */ = {isa = PBXBuildFile; fileRef = F56D4B61266E037600C1AD9E /* MyDimeScale.m */; };
+		F56D4B66266E053800C1AD9E /* AppDelegate+Initialize.m in Sources */ = {isa = PBXBuildFile; fileRef = F56D4B65266E053800C1AD9E /* AppDelegate+Initialize.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -204,6 +209,16 @@
 		F56D4B36266DFB8900C1AD9E /* FMKVOArrayObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMKVOArrayObject.h; sourceTree = "<group>"; };
 		F56D4B38266DFB8900C1AD9E /* FMLayoutDebugLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLayoutDebugLog.h; sourceTree = "<group>"; };
 		F56D4B39266DFB8900C1AD9E /* FMLayoutDebugLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLayoutDebugLog.m; sourceTree = "<group>"; };
+		F56D4B56266E02BA00C1AD9E /* UIColor+General.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+General.h"; sourceTree = "<group>"; };
+		F56D4B57266E02BA00C1AD9E /* UIColor+General.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+General.m"; sourceTree = "<group>"; };
+		F56D4B58266E02BA00C1AD9E /* UIFont+General.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+General.m"; sourceTree = "<group>"; };
+		F56D4B59266E02BA00C1AD9E /* UIFont+General.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+General.h"; sourceTree = "<group>"; };
+		F56D4B5E266E037600C1AD9E /* MyLayoutMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLayoutMath.h; sourceTree = "<group>"; };
+		F56D4B5F266E037600C1AD9E /* MyDimeScale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyDimeScale.h; sourceTree = "<group>"; };
+		F56D4B60266E037600C1AD9E /* MyLayoutMath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLayoutMath.m; sourceTree = "<group>"; };
+		F56D4B61266E037600C1AD9E /* MyDimeScale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyDimeScale.m; sourceTree = "<group>"; };
+		F56D4B64266E053800C1AD9E /* AppDelegate+Initialize.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+Initialize.h"; sourceTree = "<group>"; };
+		F56D4B65266E053800C1AD9E /* AppDelegate+Initialize.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+Initialize.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -288,6 +303,7 @@
 				F549739F2668AD9B00181E3F /* Expand */,
 				F54973162668A22100181E3F /* Utils */,
 				F549736C2668A31000181E3F /* Other */,
+				F56D4B5C266E036300C1AD9E /* Vender */,
 				F54972F22668842400181E3F /* Info.plist */,
 			);
 			path = TShopMall;
@@ -391,6 +407,8 @@
 				F549736A2668A2C700181E3F /* AppDelegate.m */,
 				F54973D02668CF3300181E3F /* AppDelegate+RootController.h */,
 				F54973D12668CF3300181E3F /* AppDelegate+RootController.m */,
+				F56D4B64266E053800C1AD9E /* AppDelegate+Initialize.h */,
+				F56D4B65266E053800C1AD9E /* AppDelegate+Initialize.m */,
 			);
 			path = AppDelegate;
 			sourceTree = "<group>";
@@ -422,6 +440,7 @@
 		F54973792668A94600181E3F /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				F56D4B50266DFE4B00C1AD9E /* LoginRegister */,
 				F549737A2668A94600181E3F /* Home */,
 				F54973802668A94600181E3F /* Category */,
 				F54973862668A94600181E3F /* Message */,
@@ -750,6 +769,10 @@
 			children = (
 				F54973CE2668CABD00181E3F /* UIView+Extension.h */,
 				F54973CD2668CABD00181E3F /* UIView+Extension.m */,
+				F56D4B56266E02BA00C1AD9E /* UIColor+General.h */,
+				F56D4B57266E02BA00C1AD9E /* UIColor+General.m */,
+				F56D4B59266E02BA00C1AD9E /* UIFont+General.h */,
+				F56D4B58266E02BA00C1AD9E /* UIFont+General.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -886,6 +909,72 @@
 				F56D4B39266DFB8900C1AD9E /* FMLayoutDebugLog.m */,
 			);
 			path = Debug;
+			sourceTree = "<group>";
+		};
+		F56D4B50266DFE4B00C1AD9E /* LoginRegister */ = {
+			isa = PBXGroup;
+			children = (
+				F56D4B51266DFE4B00C1AD9E /* ViewModel */,
+				F56D4B52266DFE4B00C1AD9E /* DataController */,
+				F56D4B53266DFE4B00C1AD9E /* Model */,
+				F56D4B54266DFE4B00C1AD9E /* View */,
+				F56D4B55266DFE4B00C1AD9E /* ViewController */,
+			);
+			path = LoginRegister;
+			sourceTree = "<group>";
+		};
+		F56D4B51266DFE4B00C1AD9E /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		F56D4B52266DFE4B00C1AD9E /* DataController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DataController;
+			sourceTree = "<group>";
+		};
+		F56D4B53266DFE4B00C1AD9E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F56D4B54266DFE4B00C1AD9E /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F56D4B55266DFE4B00C1AD9E /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		F56D4B5C266E036300C1AD9E /* Vender */ = {
+			isa = PBXGroup;
+			children = (
+				F56D4B5D266E037600C1AD9E /* MyLinearLayout */,
+			);
+			path = Vender;
+			sourceTree = "<group>";
+		};
+		F56D4B5D266E037600C1AD9E /* MyLinearLayout */ = {
+			isa = PBXGroup;
+			children = (
+				F56D4B5E266E037600C1AD9E /* MyLayoutMath.h */,
+				F56D4B60266E037600C1AD9E /* MyLayoutMath.m */,
+				F56D4B5F266E037600C1AD9E /* MyDimeScale.h */,
+				F56D4B61266E037600C1AD9E /* MyDimeScale.m */,
+			);
+			path = MyLinearLayout;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1130,6 +1219,7 @@
 				F56D4B4C266DFB8900C1AD9E /* FMLayoutCrossCell.m in Sources */,
 				F56D4B3A266DFB8900C1AD9E /* FMLayoutBaseSection.m in Sources */,
 				F54973BA2668BC0B00181E3F /* TSMineViewController.m in Sources */,
+				F56D4B63266E037600C1AD9E /* MyDimeScale.m in Sources */,
 				F54973B72668BBEE00181E3F /* TSCartViewController.m in Sources */,
 				F56D4B4D266DFB8900C1AD9E /* FMTeslaLayoutView.m in Sources */,
 				F56D4B4E266DFB8900C1AD9E /* FMKVOArrayObject.m in Sources */,
@@ -1137,6 +1227,7 @@
 				F54973C82668C1D600181E3F /* TSNotificationConst.m in Sources */,
 				F54973D22668CF3300181E3F /* AppDelegate+RootController.m in Sources */,
 				F54973CB2668C27300181E3F /* TSH5InterfacedConst.m in Sources */,
+				F56D4B62266E037600C1AD9E /* MyLayoutMath.m in Sources */,
 				F54973672668A22100181E3F /* SSNetworkAlertUtil.m in Sources */,
 				F549739B2668AA7900181E3F /* TSBaseViewController.m in Sources */,
 				F56D4B3F266DFB8900C1AD9E /* FMLayoutAbsoluteSection.m in Sources */,
@@ -1151,6 +1242,7 @@
 				F54973CF2668CABD00181E3F /* UIView+Extension.m in Sources */,
 				F56D4B3B266DFB8900C1AD9E /* FMLayoutCombineSection.m in Sources */,
 				F54973AB2668B9B500181E3F /* TSBaseNavigationController.m in Sources */,
+				F56D4B5B266E02BA00C1AD9E /* UIFont+General.m in Sources */,
 				F54973B12668BBB200181E3F /* TSCategoryViewController.m in Sources */,
 				F54973C22668C0BC00181E3F /* TSDeviceHelper.m in Sources */,
 				F56D4B3C266DFB8900C1AD9E /* FMLayoutLabelSection.m in Sources */,
@@ -1161,11 +1253,13 @@
 				F549739E2668AABD00181E3F /* TSInterfacedConst.m in Sources */,
 				F56D4B4A266DFB8900C1AD9E /* FMLayoutCrossSection.m in Sources */,
 				F56D4B4F266DFB8900C1AD9E /* FMLayoutDebugLog.m in Sources */,
+				F56D4B66266E053800C1AD9E /* AppDelegate+Initialize.m in Sources */,
 				F54973652668A22100181E3F /* YTKChainRequest+AnimatingAccessory.m in Sources */,
 				F56D4B41266DFB8900C1AD9E /* FMLayoutFixedSection.m in Sources */,
 				F549736B2668A2C700181E3F /* AppDelegate.m in Sources */,
 				F56D4B46266DFB8900C1AD9E /* FMLayoutHeader.m in Sources */,
 				F56D4B45266DFB8900C1AD9E /* FMLayoutFooter.m in Sources */,
+				F56D4B5A266E02BA00C1AD9E /* UIColor+General.m in Sources */,
 				F54973642668A22100181E3F /* YTKBatchRequest+AnimatingAccessory.m in Sources */,
 				F54973A82668B98000181E3F /* TSTabBarController.m in Sources */,
 				F54973762668A31000181E3F /* main.m in Sources */,
