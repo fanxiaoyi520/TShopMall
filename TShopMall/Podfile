@@ -18,7 +18,8 @@ target 'TShopMall' do
     pod 'Toast', '~> 4.0.0'
     pod 'SDCycleScrollView', '~> 1.82'
     pod 'KMNavigationBarTransition', '~> 1.1.8'
-
+    pod 'JXCategoryView', '~> 1.5.9'
+    
   target 'TShopMallTests' do
     inherit! :search_paths
     # Pods for testing
