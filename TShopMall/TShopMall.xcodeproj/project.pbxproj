@@ -12,20 +12,6 @@
 		E2BE996F8804E0C3E7D5AE61 /* libPods-TShopMall-TShopMallUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD1ABBE857D307088E9BF2DC /* libPods-TShopMall-TShopMallUITests.a */; };
 		F54972FE2668842500181E3F /* TShopMallTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F54972FD2668842500181E3F /* TShopMallTests.m */; };
 		F54973092668842500181E3F /* TShopMallUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F54973082668842500181E3F /* TShopMallUITests.m */; };
-		F54973522668A22100181E3F /* SSLayoutBaseSection.m in Sources */ = {isa = PBXBuildFile; fileRef = F549731B2668A22100181E3F /* SSLayoutBaseSection.m */; };
-		F54973532668A22100181E3F /* SSCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = F549731F2668A22100181E3F /* SSCollectionViewLayout.m */; };
-		F54973542668A22100181E3F /* SSCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = F54973202668A22100181E3F /* SSCollectionView.m */; };
-		F54973552668A22100181E3F /* SSTeslaLayoutView.m in Sources */ = {isa = PBXBuildFile; fileRef = F54973242668A22100181E3F /* SSTeslaLayoutView.m */; };
-		F54973562668A22100181E3F /* SSCollectionViewLayoutAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = F54973262668A22100181E3F /* SSCollectionViewLayoutAttributes.m */; };
-		F54973572668A22100181E3F /* SSLayoutFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = F54973292668A22100181E3F /* SSLayoutFooter.m */; };
-		F54973582668A22100181E3F /* SSLayoutHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = F549732A2668A22100181E3F /* SSLayoutHeader.m */; };
-		F54973592668A22100181E3F /* SSLayoutElement.m in Sources */ = {isa = PBXBuildFile; fileRef = F549732C2668A22100181E3F /* SSLayoutElement.m */; };
-		F549735A2668A22100181E3F /* SSLayoutBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = F549732E2668A22100181E3F /* SSLayoutBackground.m */; };
-		F549735B2668A22100181E3F /* SSSupplementaryElement.m in Sources */ = {isa = PBXBuildFile; fileRef = F54973312668A22100181E3F /* SSSupplementaryElement.m */; };
-		F549735C2668A22100181E3F /* SSLayoutCrossSection.m in Sources */ = {isa = PBXBuildFile; fileRef = F54973342668A22100181E3F /* SSLayoutCrossSection.m */; };
-		F549735D2668A22100181E3F /* SSLayoutCrossTransformSection.m in Sources */ = {isa = PBXBuildFile; fileRef = F54973352668A22100181E3F /* SSLayoutCrossTransformSection.m */; };
-		F549735E2668A22100181E3F /* SSLayoutCrossCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F54973362668A22100181E3F /* SSLayoutCrossCell.m */; };
-		F549735F2668A22100181E3F /* SSKVOArrayObject.m in Sources */ = {isa = PBXBuildFile; fileRef = F549733C2668A22100181E3F /* SSKVOArrayObject.m */; };
 		F54973602668A22100181E3F /* SSGenaralRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F54973402668A22100181E3F /* SSGenaralRequest.m */; };
 		F54973612668A22100181E3F /* SSBaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F54973412668A22100181E3F /* SSBaseRequest.m */; };
 		F54973622668A22100181E3F /* SSResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F54973422668A22100181E3F /* SSResponseModel.m */; };
@@ -115,36 +101,6 @@
 		F54973042668842500181E3F /* TShopMallUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TShopMallUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F54973082668842500181E3F /* TShopMallUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TShopMallUITests.m; sourceTree = "<group>"; };
 		F549730A2668842500181E3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F549731A2668A22100181E3F /* SSLayoutBaseSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSLayoutBaseSection.h; sourceTree = "<group>"; };
-		F549731B2668A22100181E3F /* SSLayoutBaseSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSLayoutBaseSection.m; sourceTree = "<group>"; };
-		F549731D2668A22100181E3F /* SSCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSCollectionView.h; sourceTree = "<group>"; };
-		F549731E2668A22100181E3F /* SSTeslaLayoutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSTeslaLayoutView.h; sourceTree = "<group>"; };
-		F549731F2668A22100181E3F /* SSCollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSCollectionViewLayout.m; sourceTree = "<group>"; };
-		F54973202668A22100181E3F /* SSCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSCollectionView.m; sourceTree = "<group>"; };
-		F54973212668A22100181E3F /* SSLayoutKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSLayoutKit.h; sourceTree = "<group>"; };
-		F54973222668A22100181E3F /* SSTeslaSuspensionHeightChangeDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSTeslaSuspensionHeightChangeDelegate.h; sourceTree = "<group>"; };
-		F54973232668A22100181E3F /* SSCollectionViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSCollectionViewLayout.h; sourceTree = "<group>"; };
-		F54973242668A22100181E3F /* SSTeslaLayoutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSTeslaLayoutView.m; sourceTree = "<group>"; };
-		F54973262668A22100181E3F /* SSCollectionViewLayoutAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSCollectionViewLayoutAttributes.m; sourceTree = "<group>"; };
-		F54973272668A22100181E3F /* SSCollectionViewLayoutAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSCollectionViewLayoutAttributes.h; sourceTree = "<group>"; };
-		F54973292668A22100181E3F /* SSLayoutFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSLayoutFooter.m; sourceTree = "<group>"; };
-		F549732A2668A22100181E3F /* SSLayoutHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSLayoutHeader.m; sourceTree = "<group>"; };
-		F549732B2668A22100181E3F /* SSLayoutBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSLayoutBackground.h; sourceTree = "<group>"; };
-		F549732C2668A22100181E3F /* SSLayoutElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSLayoutElement.m; sourceTree = "<group>"; };
-		F549732D2668A22100181E3F /* SSSupplementaryElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSSupplementaryElement.h; sourceTree = "<group>"; };
-		F549732E2668A22100181E3F /* SSLayoutBackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSLayoutBackground.m; sourceTree = "<group>"; };
-		F549732F2668A22100181E3F /* SSLayoutHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSLayoutHeader.h; sourceTree = "<group>"; };
-		F54973302668A22100181E3F /* SSLayoutFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSLayoutFooter.h; sourceTree = "<group>"; };
-		F54973312668A22100181E3F /* SSSupplementaryElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSSupplementaryElement.m; sourceTree = "<group>"; };
-		F54973322668A22100181E3F /* SSLayoutElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSLayoutElement.h; sourceTree = "<group>"; };
-		F54973342668A22100181E3F /* SSLayoutCrossSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSLayoutCrossSection.m; sourceTree = "<group>"; };
-		F54973352668A22100181E3F /* SSLayoutCrossTransformSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSLayoutCrossTransformSection.m; sourceTree = "<group>"; };
-		F54973362668A22100181E3F /* SSLayoutCrossCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSLayoutCrossCell.m; sourceTree = "<group>"; };
-		F54973372668A22100181E3F /* SSLayoutCrossTransformSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSLayoutCrossTransformSection.h; sourceTree = "<group>"; };
-		F54973382668A22100181E3F /* SSLayoutCrossSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSLayoutCrossSection.h; sourceTree = "<group>"; };
-		F54973392668A22100181E3F /* SSLayoutCrossCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSLayoutCrossCell.h; sourceTree = "<group>"; };
-		F549733B2668A22100181E3F /* SSKVOArrayObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKVOArrayObject.h; sourceTree = "<group>"; };
-		F549733C2668A22100181E3F /* SSKVOArrayObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKVOArrayObject.m; sourceTree = "<group>"; };
 		F54973402668A22100181E3F /* SSGenaralRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSGenaralRequest.m; sourceTree = "<group>"; };
 		F54973412668A22100181E3F /* SSBaseRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSBaseRequest.m; sourceTree = "<group>"; };
 		F54973422668A22100181E3F /* SSResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSResponseModel.m; sourceTree = "<group>"; };
@@ -360,7 +316,6 @@
 			children = (
 				F56D4AB7266DF7A900C1AD9E /* CollectionViewKit */,
 				F54973172668A22100181E3F /* Runloop */,
-				F54973182668A22100181E3F /* LayoutKit */,
 				F549733D2668A22100181E3F /* NewFeature */,
 				F549733E2668A22100181E3F /* Network */,
 			);
@@ -372,91 +327,6 @@
 			children = (
 			);
 			path = Runloop;
-			sourceTree = "<group>";
-		};
-		F54973182668A22100181E3F /* LayoutKit */ = {
-			isa = PBXGroup;
-			children = (
-				F54973192668A22100181E3F /* Sections */,
-				F549731C2668A22100181E3F /* LayoutKit */,
-				F54973252668A22100181E3F /* LayoutAttributes */,
-				F54973282668A22100181E3F /* Element */,
-				F54973332668A22100181E3F /* Cross */,
-				F549733A2668A22100181E3F /* KVOArray */,
-			);
-			path = LayoutKit;
-			sourceTree = "<group>";
-		};
-		F54973192668A22100181E3F /* Sections */ = {
-			isa = PBXGroup;
-			children = (
-				F549731A2668A22100181E3F /* SSLayoutBaseSection.h */,
-				F549731B2668A22100181E3F /* SSLayoutBaseSection.m */,
-			);
-			path = Sections;
-			sourceTree = "<group>";
-		};
-		F549731C2668A22100181E3F /* LayoutKit */ = {
-			isa = PBXGroup;
-			children = (
-				F549731D2668A22100181E3F /* SSCollectionView.h */,
-				F549731E2668A22100181E3F /* SSTeslaLayoutView.h */,
-				F549731F2668A22100181E3F /* SSCollectionViewLayout.m */,
-				F54973202668A22100181E3F /* SSCollectionView.m */,
-				F54973212668A22100181E3F /* SSLayoutKit.h */,
-				F54973222668A22100181E3F /* SSTeslaSuspensionHeightChangeDelegate.h */,
-				F54973232668A22100181E3F /* SSCollectionViewLayout.h */,
-				F54973242668A22100181E3F /* SSTeslaLayoutView.m */,
-			);
-			path = LayoutKit;
-			sourceTree = "<group>";
-		};
-		F54973252668A22100181E3F /* LayoutAttributes */ = {
-			isa = PBXGroup;
-			children = (
-				F54973272668A22100181E3F /* SSCollectionViewLayoutAttributes.h */,
-				F54973262668A22100181E3F /* SSCollectionViewLayoutAttributes.m */,
-			);
-			path = LayoutAttributes;
-			sourceTree = "<group>";
-		};
-		F54973282668A22100181E3F /* Element */ = {
-			isa = PBXGroup;
-			children = (
-				F54973322668A22100181E3F /* SSLayoutElement.h */,
-				F549732C2668A22100181E3F /* SSLayoutElement.m */,
-				F549732D2668A22100181E3F /* SSSupplementaryElement.h */,
-				F54973312668A22100181E3F /* SSSupplementaryElement.m */,
-				F549732F2668A22100181E3F /* SSLayoutHeader.h */,
-				F549732A2668A22100181E3F /* SSLayoutHeader.m */,
-				F54973302668A22100181E3F /* SSLayoutFooter.h */,
-				F54973292668A22100181E3F /* SSLayoutFooter.m */,
-				F549732B2668A22100181E3F /* SSLayoutBackground.h */,
-				F549732E2668A22100181E3F /* SSLayoutBackground.m */,
-			);
-			path = Element;
-			sourceTree = "<group>";
-		};
-		F54973332668A22100181E3F /* Cross */ = {
-			isa = PBXGroup;
-			children = (
-				F54973342668A22100181E3F /* SSLayoutCrossSection.m */,
-				F54973352668A22100181E3F /* SSLayoutCrossTransformSection.m */,
-				F54973362668A22100181E3F /* SSLayoutCrossCell.m */,
-				F54973372668A22100181E3F /* SSLayoutCrossTransformSection.h */,
-				F54973382668A22100181E3F /* SSLayoutCrossSection.h */,
-				F54973392668A22100181E3F /* SSLayoutCrossCell.h */,
-			);
-			path = Cross;
-			sourceTree = "<group>";
-		};
-		F549733A2668A22100181E3F /* KVOArray */ = {
-			isa = PBXGroup;
-			children = (
-				F549733B2668A22100181E3F /* SSKVOArrayObject.h */,
-				F549733C2668A22100181E3F /* SSKVOArrayObject.m */,
-			);
-			path = KVOArray;
 			sourceTree = "<group>";
 		};
 		F549733D2668A22100181E3F /* NewFeature */ = {
@@ -1220,11 +1090,9 @@
 				F54973BA2668BC0B00181E3F /* TSMineViewController.m in Sources */,
 				F54973B72668BBEE00181E3F /* TSCartViewController.m in Sources */,
 				F56D4AF6266DF7A900C1AD9E /* FMLayoutFooter.m in Sources */,
-				F54973582668A22100181E3F /* SSLayoutHeader.m in Sources */,
 				F54973D62668DBF500181E3F /* TSGeneralSearchButton.m in Sources */,
 				F56D4AF0266DF7A900C1AD9E /* FMLayoutAbsoluteSection.m in Sources */,
 				F54973C82668C1D600181E3F /* TSNotificationConst.m in Sources */,
-				F54973542668A22100181E3F /* SSCollectionView.m in Sources */,
 				F54973D22668CF3300181E3F /* AppDelegate+RootController.m in Sources */,
 				F56D4AFB266DF7A900C1AD9E /* FMLayoutCrossSection.m in Sources */,
 				F56D4AEF266DF7A900C1AD9E /* FMLayoutDynamicSection.m in Sources */,
@@ -1232,21 +1100,14 @@
 				F56D4AFD266DF7A900C1AD9E /* FMLayoutCrossCell.m in Sources */,
 				F56D4B01266DF7A900C1AD9E /* FMLayout.m in Sources */,
 				F56D4AEC266DF7A900C1AD9E /* FMLayoutCombineSection.m in Sources */,
-				F549735C2668A22100181E3F /* SSLayoutCrossSection.m in Sources */,
-				F54973592668A22100181E3F /* SSLayoutElement.m in Sources */,
 				F54973672668A22100181E3F /* SSNetworkAlertUtil.m in Sources */,
 				F549739B2668AA7900181E3F /* TSBaseViewController.m in Sources */,
-				F54973522668A22100181E3F /* SSLayoutBaseSection.m in Sources */,
 				F54973BF2668C01F00181E3F /* TSTipsConst.m in Sources */,
 				F56D4AEE266DF7A900C1AD9E /* FMLayoutFillSection.m in Sources */,
 				F54973B42668BBCE00181E3F /* TSRankViewController.m in Sources */,
-				F549735E2668A22100181E3F /* SSLayoutCrossCell.m in Sources */,
 				F54973CF2668CABD00181E3F /* UIView+Extension.m in Sources */,
 				F54973AB2668B9B500181E3F /* TSBaseNavigationController.m in Sources */,
-				F54973562668A22100181E3F /* SSCollectionViewLayoutAttributes.m in Sources */,
 				F56D4AF4266DF7A900C1AD9E /* FMCollectionLayoutAttributes.m in Sources */,
-				F54973532668A22100181E3F /* SSCollectionViewLayout.m in Sources */,
-				F549735D2668A22100181E3F /* SSLayoutCrossTransformSection.m in Sources */,
 				F56D4AFE266DF7A900C1AD9E /* FMKVOArrayObject.m in Sources */,
 				F54973B12668BBB200181E3F /* TSCategoryViewController.m in Sources */,
 				F54973C22668C0BC00181E3F /* TSDeviceHelper.m in Sources */,
@@ -1254,9 +1115,7 @@
 				F54973662668A22100181E3F /* YTKBaseRequest+AnimatingAccessory.m in Sources */,
 				F54973622668A22100181E3F /* SSResponseModel.m in Sources */,
 				F56D4AFC266DF7A900C1AD9E /* FMLayoutCrossTransformSection.m in Sources */,
-				F54973552668A22100181E3F /* SSTeslaLayoutView.m in Sources */,
 				F56D4AFF266DF7A900C1AD9E /* FMLayoutDebugLog.m in Sources */,
-				F549735F2668A22100181E3F /* SSKVOArrayObject.m in Sources */,
 				F56D4AF2266DF7A900C1AD9E /* FMLayoutFixedSection.m in Sources */,
 				F56D4AEB266DF7A900C1AD9E /* FMLayoutBaseSection.m in Sources */,
 				F56D4AED266DF7A900C1AD9E /* FMLayoutLabelSection.m in Sources */,
@@ -1264,13 +1123,10 @@
 				F549739E2668AABD00181E3F /* TSInterfacedConst.m in Sources */,
 				F56D4B00266DF7A900C1AD9E /* FMLayoutView.m in Sources */,
 				F56D4AF7266DF7A900C1AD9E /* FMLayoutHeader.m in Sources */,
-				F549735A2668A22100181E3F /* SSLayoutBackground.m in Sources */,
 				F56D4AF8266DF7A900C1AD9E /* FMLayoutBackground.m in Sources */,
 				F54973652668A22100181E3F /* YTKChainRequest+AnimatingAccessory.m in Sources */,
-				F54973572668A22100181E3F /* SSLayoutFooter.m in Sources */,
 				F56D4AF3266DF7A900C1AD9E /* FMTeslaLayoutView.m in Sources */,
 				F549736B2668A2C700181E3F /* AppDelegate.m in Sources */,
-				F549735B2668A22100181E3F /* SSSupplementaryElement.m in Sources */,
 				F56D4AFA266DF7A900C1AD9E /* FMSupplementary.m in Sources */,
 				F54973642668A22100181E3F /* YTKBatchRequest+AnimatingAccessory.m in Sources */,
 				F54973A82668B98000181E3F /* TSTabBarController.m in Sources */,
