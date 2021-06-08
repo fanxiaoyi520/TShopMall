@@ -15,4 +15,10 @@
     [MyDimeScale setUITemplateSize:CGSizeMake(375, 667)];
 }
 
+-(void)setupRequestFilters
+{
+    YTKNetworkConfig *config = [YTKNetworkConfig sharedConfig];
+    [config setBaseUrl:kApiPrefix];
+}
+
 @end

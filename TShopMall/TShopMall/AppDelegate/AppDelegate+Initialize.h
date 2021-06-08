@@ -11,6 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface AppDelegate (Initialize)
 
+-(void)setupRequestFilters;
 -(void)setUITemplateSize;
 
 @end

@@ -18,28 +18,32 @@
 
 -(void)setupBasic{
     self.backgroundColor = [UIColor whiteColor];
-    self.titleLabel.font = KRegularFont(14);
-    [self setTitleColor:KHexAlphaColor(@"#2D3132", 0.6) forState:UIControlStateNormal];
-    [self setTitleColor:KHexAlphaColor(@"#2D3132", 0.6) forState:UIControlStateHighlighted];
-    self.imageView.contentMode = UIViewContentModeCenter;
-    self.titleLabel.textAlignment = NSTextAlignmentCenter;
+    self.titleLabel.font = KRegularFont(12);
+    [self setTitle:@"搜索商品" forState:UIControlStateNormal];
+    [self setImage:KImageMake(@"mall_home_search") forState:UIControlStateNormal];
+    [self setTitleColor:KHexAlphaColor(@"#2D3132", 0.4) forState:UIControlStateNormal];
+    [self setTitleColor:KHexAlphaColor(@"#2D3132", 0.4) forState:UIControlStateHighlighted];
+    self.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    self.titleLabel.textAlignment = NSTextAlignmentLeft;
 }
 
 -(CGRect)titleRectForContentRect:(CGRect)contentRect{
-    CGFloat titleX = 0;
-    CGFloat titleY = 48 + 11;
-    CGFloat titleW = contentRect.size.width;
-    CGFloat titleH = 18;
+    CGFloat titleX = 8 + 24 + 8;
+    CGFloat titleY = 0;
+    CGFloat titleW = contentRect.size.width - titleX;
+    CGFloat titleH = contentRect.size.height;
     return CGRectMake(titleX, titleY, titleW, titleH);
 }
 
 -(CGRect)imageRectForContentRect:(CGRect)contentRect{
-    CGFloat imageW = 48;
-    CGFloat imageH = 48;
-    CGFloat imageX = (contentRect.size.width - imageW) * 0.5;
-    CGFloat imageY = 0;
+    CGFloat imageW = 24;
+    CGFloat imageH = 24;
+    CGFloat imageX = 8;
+    CGFloat imageY = (contentRect.size.height - imageH) * 0.5;
 
     return CGRectMake(imageX, imageY, imageW, imageH);
 }
+
+-(void)setHighlighted:(BOOL)highlighted{}
 
 @end

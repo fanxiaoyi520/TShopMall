@@ -7,7 +7,7 @@
 
 #import "AppDelegate.h"
 #import "AppDelegate+RootController.h"
-
+#import "AppDelegate+Initialize.h"
 
 @interface AppDelegate ()
 
@@ -15,16 +15,14 @@
 
 @implementation AppDelegate
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
+    [self setUITemplateSize];
+    [self setupRequestFilters];
     [self setupRootController];
     return YES;
 }
 
-#pragma mark - 网络配置
-- (void)setupRequestFilters {
-    YTKNetworkConfig *config = [YTKNetworkConfig sharedConfig];
-    [config setBaseUrl:kApiPrefix];
-}
+
 
 
 @end

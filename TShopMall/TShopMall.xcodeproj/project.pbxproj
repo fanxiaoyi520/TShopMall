@@ -42,6 +42,7 @@
 		F54973CF2668CABD00181E3F /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = F54973CD2668CABD00181E3F /* UIView+Extension.m */; };
 		F54973D22668CF3300181E3F /* AppDelegate+RootController.m in Sources */ = {isa = PBXBuildFile; fileRef = F54973D12668CF3300181E3F /* AppDelegate+RootController.m */; };
 		F54973D62668DBF500181E3F /* TSGeneralSearchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F54973D52668DBF500181E3F /* TSGeneralSearchButton.m */; };
+		F55D2ABE266E0C6B006BACCF /* UIView+TSSafeArea.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2ABD266E0C6B006BACCF /* UIView+TSSafeArea.m */; };
 		F56D4B3A266DFB8900C1AD9E /* FMLayoutBaseSection.m in Sources */ = {isa = PBXBuildFile; fileRef = F56D4B04266DFB8900C1AD9E /* FMLayoutBaseSection.m */; };
 		F56D4B3B266DFB8900C1AD9E /* FMLayoutCombineSection.m in Sources */ = {isa = PBXBuildFile; fileRef = F56D4B06266DFB8900C1AD9E /* FMLayoutCombineSection.m */; };
 		F56D4B3C266DFB8900C1AD9E /* FMLayoutLabelSection.m in Sources */ = {isa = PBXBuildFile; fileRef = F56D4B07266DFB8900C1AD9E /* FMLayoutLabelSection.m */; };
@@ -163,6 +164,8 @@
 		F54973D12668CF3300181E3F /* AppDelegate+RootController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+RootController.m"; sourceTree = "<group>"; };
 		F54973D42668DBF500181E3F /* TSGeneralSearchButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSGeneralSearchButton.h; sourceTree = "<group>"; };
 		F54973D52668DBF500181E3F /* TSGeneralSearchButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSGeneralSearchButton.m; sourceTree = "<group>"; };
+		F55D2ABC266E0C6B006BACCF /* UIView+TSSafeArea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+TSSafeArea.h"; sourceTree = "<group>"; };
+		F55D2ABD266E0C6B006BACCF /* UIView+TSSafeArea.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+TSSafeArea.m"; sourceTree = "<group>"; };
 		F56D4B04266DFB8900C1AD9E /* FMLayoutBaseSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLayoutBaseSection.m; sourceTree = "<group>"; };
 		F56D4B05266DFB8900C1AD9E /* FMLayoutFixedSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLayoutFixedSection.h; sourceTree = "<group>"; };
 		F56D4B06266DFB8900C1AD9E /* FMLayoutCombineSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLayoutCombineSection.m; sourceTree = "<group>"; };
@@ -773,6 +776,8 @@
 				F56D4B57266E02BA00C1AD9E /* UIColor+General.m */,
 				F56D4B59266E02BA00C1AD9E /* UIFont+General.h */,
 				F56D4B58266E02BA00C1AD9E /* UIFont+General.m */,
+				F55D2ABC266E0C6B006BACCF /* UIView+TSSafeArea.h */,
+				F55D2ABD266E0C6B006BACCF /* UIView+TSSafeArea.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -1227,6 +1232,7 @@
 				F54973C82668C1D600181E3F /* TSNotificationConst.m in Sources */,
 				F54973D22668CF3300181E3F /* AppDelegate+RootController.m in Sources */,
 				F54973CB2668C27300181E3F /* TSH5InterfacedConst.m in Sources */,
+				F55D2ABE266E0C6B006BACCF /* UIView+TSSafeArea.m in Sources */,
 				F56D4B62266E037600C1AD9E /* MyLayoutMath.m in Sources */,
 				F54973672668A22100181E3F /* SSNetworkAlertUtil.m in Sources */,
 				F549739B2668AA7900181E3F /* TSBaseViewController.m in Sources */,

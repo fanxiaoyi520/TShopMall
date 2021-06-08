@@ -11,7 +11,7 @@
 @implementation UIFont (General)
 
 + (CGFloat)fontSize:(CGFloat)size{
-    return KW(size);
+    return KRateW(size);
 }
 
 + (UIFont *)font:(FontType)type size:(CGFloat)size{

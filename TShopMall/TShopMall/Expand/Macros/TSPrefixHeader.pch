@@ -13,6 +13,11 @@
 #import "TSConstant.h"
 #import "TSH5InterfacedConst.h"
 #import "TSInterfacedConst.h"
+#import "UIView+Extension.h"
+#import "UIColor+General.h"
+#import "UIFont+General.h"
+#import "UIView+TSSafeArea.h"
+#import "MyDimeScale.h"
 
 #import <YYKit/YYKit.h>
 #import <YTKNetwork/YTKNetwork.h>

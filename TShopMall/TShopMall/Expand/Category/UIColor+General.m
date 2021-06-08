@@ -17,7 +17,6 @@
 
 + (UIColor *)colorWithHexString:(NSString *)hexString{
     NSString *cString = [[hexString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] uppercaseString];
-    KRootController;
     // String should be 6 or 8 characters
     if ([cString length] < 6) {
         return KClearColor;

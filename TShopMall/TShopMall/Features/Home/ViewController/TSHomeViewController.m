@@ -6,6 +6,7 @@
 //
 
 #import "TSHomeViewController.h"
+#import "TSGeneralSearchButton.h"
 
 @interface TSHomeViewController ()
 
@@ -22,7 +23,16 @@
     [self hiddenNavigationBar];
 }
 
-
+-(void)setupNavigationBar
+{
+    TSGeneralSearchButton *searchButton = [TSGeneralSearchButton buttonWithType:UIButtonTypeCustom];
+    searchButton.frame = CGRectMake(0, 0, kScreenWidth - 65, 32);
+    UIBarButtonItem *searchItem = [[UIBarButtonItem alloc] initWithCustomView:searchButton];
+    searchItem.actionBlock = ^(id sender) {
+        
+    };
+    self.navigationItem.titleView = searchButton;
+}
 
 
 @end

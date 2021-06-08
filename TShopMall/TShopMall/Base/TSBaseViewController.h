@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)setupBasic;
 /// 隐藏导航栏
 -(void)hiddenNavigationBar;
+/// 设置导航栏
+-(void)setupNavigationBar;
 
 @end
 

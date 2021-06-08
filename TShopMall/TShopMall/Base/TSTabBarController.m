@@ -43,11 +43,13 @@
 - (void)customizeTabBarAppearance {
     // 普通状态下的文字属性
     NSMutableDictionary *normalAttrs = [NSMutableDictionary dictionary];
-    normalAttrs[NSForegroundColorAttributeName] = [UIColor cyl_systemGrayColor];
+    normalAttrs[NSForegroundColorAttributeName] = KTextColor;
+    normalAttrs[NSFontAttributeName] = KRegularFont(10);
     
     // 选中状态下的文字属性
     NSMutableDictionary *selectedAttrs = [NSMutableDictionary dictionary];
-    selectedAttrs[NSForegroundColorAttributeName] = [UIColor cyl_systemRedColor];
+    normalAttrs[NSForegroundColorAttributeName] = KMainColor;
+    normalAttrs[NSFontAttributeName] = KRegularFont(10);
     
     // 设置文字属性
     UITabBarItem *tabBar = [UITabBarItem appearance];
@@ -56,6 +58,7 @@
     
     [[UITabBar appearance] setBackgroundColor:[UIColor whiteColor]];
     [[UITabBar appearance] setBackgroundImage:[[UIImage alloc] init]];
+    
     self.tabBar.layer.shadowColor = [[UIColor grayColor] colorWithAlphaComponent:0.65].CGColor;
     self.tabBar.layer.shadowOpacity = 0.2;
     self.tabBar.layer.shadowOffset = CGSizeMake(0, 3);
@@ -90,28 +93,28 @@
 - (NSArray *)tabBarItemsAttributesForTabBar {
     NSDictionary *home = @{
         CYLTabBarItemTitle : @"首页",
-        CYLTabBarItemImage : @"tabbar_home_normal",
-        CYLTabBarItemSelectedImage : @"tabbar_home_sel",
+        CYLTabBarItemImage : @"mall_home_normal",
+        CYLTabBarItemSelectedImage : @"mall_home_selected",
     };
     NSDictionary *category = @{
         CYLTabBarItemTitle : @"分类",
-        CYLTabBarItemImage : @"tabbar_goods_normal",
-        CYLTabBarItemSelectedImage : @"tabbar_goods_sel",
+        CYLTabBarItemImage : @"mall_category_normal",
+        CYLTabBarItemSelectedImage : @"mall_category_selected",
     };
     NSDictionary *rank = @{
         CYLTabBarItemTitle : @"排行",
-        CYLTabBarItemImage : @"tabbar_car_normal",
-        CYLTabBarItemSelectedImage : @"tabbar_car_sel",
+        CYLTabBarItemImage : @"mall_rank_normal",
+        CYLTabBarItemSelectedImage : @"mall_rank_selected",
     };
     NSDictionary *cart = @{
         CYLTabBarItemTitle : @"购物车",
-        CYLTabBarItemImage : @"tabbar_message_normal",
-        CYLTabBarItemSelectedImage : @"tabbar_message_sel",
+        CYLTabBarItemImage : @"mall_cart_normal",
+        CYLTabBarItemSelectedImage : @"mall_cart_selected",
     };
     NSDictionary *mine = @{
         CYLTabBarItemTitle : @"我的",
-        CYLTabBarItemImage : @"tabbar_mine_normal",
-        CYLTabBarItemSelectedImage : @"tabbar_mine_new_sel",
+        CYLTabBarItemImage : @"mall_mine_normal",
+        CYLTabBarItemSelectedImage : @"mall_mine_selected",
     };
     
     return @[home,category,rank,cart,mine];

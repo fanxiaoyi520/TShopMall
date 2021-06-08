@@ -17,11 +17,19 @@
     [super viewDidLoad];
 
     [self setupBasic];
+    [self setupNavigationBar];
 }
 
+#pragma mark - 基本设置
 -(void)setupBasic
 {
     self.view.backgroundColor = [UIColor whiteColor];
+}
+
+#pragma mark - 设置导航栏
+-(void)setupNavigationBar
+{
+    
 }
 
 #pragma mark - 隐藏导航栏
@@ -30,5 +38,7 @@
     [self.navigationController.navigationBar setBackgroundImage:UIImage.new forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = UIImage.new;
 }
+
+
 
 @end
