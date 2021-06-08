@@ -43,6 +43,8 @@
 		F54973D22668CF3300181E3F /* AppDelegate+RootController.m in Sources */ = {isa = PBXBuildFile; fileRef = F54973D12668CF3300181E3F /* AppDelegate+RootController.m */; };
 		F54973D62668DBF500181E3F /* TSGeneralSearchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F54973D52668DBF500181E3F /* TSGeneralSearchButton.m */; };
 		F55D2ABE266E0C6B006BACCF /* UIView+TSSafeArea.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2ABD266E0C6B006BACCF /* UIView+TSSafeArea.m */; };
+		F55D2AC1266F110D006BACCF /* TSHomePageBackgroundReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2AC0266F110D006BACCF /* TSHomePageBackgroundReusableView.m */; };
+		F55D2AC4266F15C5006BACCF /* TSHomePageCategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2AC3266F15C5006BACCF /* TSHomePageCategoryCell.m */; };
 		F56D4B3A266DFB8900C1AD9E /* FMLayoutBaseSection.m in Sources */ = {isa = PBXBuildFile; fileRef = F56D4B04266DFB8900C1AD9E /* FMLayoutBaseSection.m */; };
 		F56D4B3B266DFB8900C1AD9E /* FMLayoutCombineSection.m in Sources */ = {isa = PBXBuildFile; fileRef = F56D4B06266DFB8900C1AD9E /* FMLayoutCombineSection.m */; };
 		F56D4B3C266DFB8900C1AD9E /* FMLayoutLabelSection.m in Sources */ = {isa = PBXBuildFile; fileRef = F56D4B07266DFB8900C1AD9E /* FMLayoutLabelSection.m */; };
@@ -166,6 +168,10 @@
 		F54973D52668DBF500181E3F /* TSGeneralSearchButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSGeneralSearchButton.m; sourceTree = "<group>"; };
 		F55D2ABC266E0C6B006BACCF /* UIView+TSSafeArea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+TSSafeArea.h"; sourceTree = "<group>"; };
 		F55D2ABD266E0C6B006BACCF /* UIView+TSSafeArea.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+TSSafeArea.m"; sourceTree = "<group>"; };
+		F55D2ABF266F110D006BACCF /* TSHomePageBackgroundReusableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSHomePageBackgroundReusableView.h; sourceTree = "<group>"; };
+		F55D2AC0266F110D006BACCF /* TSHomePageBackgroundReusableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSHomePageBackgroundReusableView.m; sourceTree = "<group>"; };
+		F55D2AC2266F15C5006BACCF /* TSHomePageCategoryCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSHomePageCategoryCell.h; sourceTree = "<group>"; };
+		F55D2AC3266F15C5006BACCF /* TSHomePageCategoryCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSHomePageCategoryCell.m; sourceTree = "<group>"; };
 		F56D4B04266DFB8900C1AD9E /* FMLayoutBaseSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLayoutBaseSection.m; sourceTree = "<group>"; };
 		F56D4B05266DFB8900C1AD9E /* FMLayoutFixedSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLayoutFixedSection.h; sourceTree = "<group>"; };
 		F56D4B06266DFB8900C1AD9E /* FMLayoutCombineSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLayoutCombineSection.m; sourceTree = "<group>"; };
@@ -489,6 +495,10 @@
 		F549737E2668A94600181E3F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F55D2ABF266F110D006BACCF /* TSHomePageBackgroundReusableView.h */,
+				F55D2AC0266F110D006BACCF /* TSHomePageBackgroundReusableView.m */,
+				F55D2AC2266F15C5006BACCF /* TSHomePageCategoryCell.h */,
+				F55D2AC3266F15C5006BACCF /* TSHomePageCategoryCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1220,6 +1230,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F55D2AC1266F110D006BACCF /* TSHomePageBackgroundReusableView.m in Sources */,
 				F54973632668A22100181E3F /* YTKAnimatingRequestAccessory.m in Sources */,
 				F56D4B4C266DFB8900C1AD9E /* FMLayoutCrossCell.m in Sources */,
 				F56D4B3A266DFB8900C1AD9E /* FMLayoutBaseSection.m in Sources */,
@@ -1262,6 +1273,7 @@
 				F56D4B66266E053800C1AD9E /* AppDelegate+Initialize.m in Sources */,
 				F54973652668A22100181E3F /* YTKChainRequest+AnimatingAccessory.m in Sources */,
 				F56D4B41266DFB8900C1AD9E /* FMLayoutFixedSection.m in Sources */,
+				F55D2AC4266F15C5006BACCF /* TSHomePageCategoryCell.m in Sources */,
 				F549736B2668A2C700181E3F /* AppDelegate.m in Sources */,
 				F56D4B46266DFB8900C1AD9E /* FMLayoutHeader.m in Sources */,
 				F56D4B45266DFB8900C1AD9E /* FMLayoutFooter.m in Sources */,

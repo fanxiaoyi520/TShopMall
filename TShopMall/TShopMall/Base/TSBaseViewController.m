@@ -18,6 +18,7 @@
 
     [self setupBasic];
     [self setupNavigationBar];
+    [self fillCustomView];
 }
 
 #pragma mark - 基本设置
@@ -39,6 +40,10 @@
     self.navigationController.navigationBar.shadowImage = UIImage.new;
 }
 
-
+#pragma mark - 添加子控件
+-(void)fillCustomView
+{
+    
+}
 
 @end

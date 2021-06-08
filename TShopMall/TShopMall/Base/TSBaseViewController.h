@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)hiddenNavigationBar;
 /// 设置导航栏
 -(void)setupNavigationBar;
+/// 添加子控件
+-(void)fillCustomView;
 
 @end
 
