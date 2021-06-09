@@ -22,5 +22,6 @@
 
 @interface TSCartGoodsRow : NSObject
 @property (nonatomic, copy) NSString *cellIdentifier;
+@property (nonatomic, strong) id obj;
 @end
 

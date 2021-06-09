@@ -21,6 +21,11 @@
     }
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle {
+   UIViewController* topVC = self.topViewController;
+   return [topVC preferredStatusBarStyle];
+}
+
 -(BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
     if (self.viewControllers.count <= 1) {
         return false;

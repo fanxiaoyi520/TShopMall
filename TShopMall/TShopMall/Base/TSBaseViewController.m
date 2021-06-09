@@ -21,10 +21,14 @@
     [self fillCustomView];
 }
 
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
+}
+
 #pragma mark - 基本设置
 -(void)setupBasic
 {
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = KGrayColor;
 }
 
 #pragma mark - 设置导航栏

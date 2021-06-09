@@ -6,6 +6,7 @@
 //
 
 #import "TSCartCell.h"
+#import "TSCartModel.h"
 
 @interface TSCartGiftButton : UIButton
 @property (nonatomic, strong) UILabel *tips;
@@ -23,18 +24,35 @@
 @property (nonatomic, strong) UILabel *price;
 @property (nonatomic, strong) UIView *numView;
 @property (nonatomic, strong) TSCartGiftButton *giftBtn;
+
+@property (nonatomic, strong) TSCartModel *cartModel;
 @end
 
 @implementation TSCartCell
 
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self == [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        self.selectionStyle = UITableViewCellSelectionStyleNone;
-        
-        [self layoutView];
-        [self testUI];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cartCellShouldUpdateSelectedStatus:) name:@"CartCellShouldUpdateSelectedStatus" object:nil];
     }
     return self;
+}
+
+- (void)cartCellShouldUpdateSelectedStatus:(NSNotification *)noti{
+    TSCartModel *cartModel = noti.userInfo[@"obj"];
+    if (cartModel == _cartModel) {
+        self.obj = cartModel;
+    }
+}
+
+- (void)setObj:(id)obj{
+     self.cartModel = (TSCartModel *)obj;
+    [self configGiftView];
+    
+    self.selBtn.selected = self.cartModel.isSelected;
 }
 
 - (void)testUI{
@@ -45,11 +63,31 @@
     self.numView.hidden  = NO;
     self.priceTitle.text = @"提货价";
     self.price.text = @"¥ 4999";
-    
-    self.giftBtn.tips.text = @"赠品: ";
-    self.giftBtn.img.image = KImageMake(@"image_test");
-    self.giftBtn.name.text = @"产品信息和标题标题产品信息和标题标题…";
-    self.giftBtn.indeImg.image = KImageMake(@"inde_right_small");
+}
+
+- (void)configGiftView{
+    if (self.cartModel.hasGift) {
+        self.giftBtn.hidden = NO;
+        self.giftBtn.tips.text = @"赠品: ";
+        self.giftBtn.img.image = KImageMake(@"image_test");
+        self.giftBtn.name.text = @"产品信息和标题标题产品信息和标题标题…";
+        self.giftBtn.indeImg.image = KImageMake(@"inde_right_small");
+    } else {
+        self.giftBtn.hidden = YES;
+    }
+    [self.price mas_updateConstraints:^(MASConstraintMaker *make) {
+           make.bottom.equalTo(self.contentView.mas_bottom).offset(-KRateW(self.cartModel.hasGift? 52:16));
+       }];
+}
+
+- (void)selBtnAction:(UIButton *)sender{
+    sender.selected = !sender.selected;
+    self.cartModel.isSelected = sender.selected;
+    [self.delegate goodsSelected:self.cartModel indexPath:self.indexPath];
+}
+
+- (void)checkGift{
+    [self.delegate checkGift:self.cartModel];
 }
 
 - (void)layoutView{
@@ -95,6 +133,7 @@
         make.right.equalTo(self.numView.mas_left).offset(-KRateW(8.0));
         make.centerY.equalTo(self.priceTitle);
         make.height.mas_equalTo(KRateW(24.0));
+        make.bottom.equalTo(self.contentView.mas_bottom).offset(-KRateW(16.0));
     }];
     
     [self.giftBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -102,7 +141,6 @@
         make.height.mas_equalTo(KRateW(20.0));
         make.left.equalTo(self.name.mas_left);
         make.top.mas_equalTo(self.price.mas_bottom).offset(KRateW(16.0));
-        make.bottom.equalTo(self.contentView.mas_bottom).offset(-KRateW(16.0));
     }];
 }
 
@@ -113,6 +151,7 @@
     self.selBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.selBtn setBackgroundImage:KImageMake(@"btn_normal") forState:UIControlStateNormal];
     [self.selBtn setBackgroundImage:KImageMake(@"btn_sel") forState:UIControlStateSelected];
+    [self.selBtn addTarget:self action:@selector(selBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:self.selBtn];
     
     return self.selBtn;
@@ -193,6 +232,7 @@
         return _giftBtn;
     }
     self.giftBtn = [TSCartGiftButton new];
+    [self.giftBtn addTarget:self action:@selector(checkGift) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:self.giftBtn];
     
     return self.giftBtn;

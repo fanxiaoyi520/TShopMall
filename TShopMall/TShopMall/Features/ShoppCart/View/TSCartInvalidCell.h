@@ -5,16 +5,16 @@
 //  Created by 橙子 on 2021/6/9.
 //
 
-#import <UIKit/UIKit.h>
+#import "TSCartBaseCell.h"
 
 @class TSCartInvalideGoodView;
 @class TSCartInvalidTaoCanCell;
 
-@interface TSCartInvalidCell : UITableViewCell
+@interface TSCartInvalidCell : TSCartBaseCell
 
 @end
 
-@interface TSCartInvalidTaoCanCell : UITableViewCell
+@interface TSCartInvalidTaoCanCell : TSCartBaseCell
 @property (nonatomic, strong) UILabel *tips;
 @property (nonatomic, strong) UILabel *taocanName;
 

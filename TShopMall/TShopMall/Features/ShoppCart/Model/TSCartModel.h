@@ -7,10 +7,10 @@
 
 #import <Foundation/Foundation.h>
 
-NS_ASSUME_NONNULL_BEGIN
-
 @interface TSCartModel : NSObject
-
+@property (nonatomic, assign) BOOL hasGift;
+@property (nonatomic, assign) BOOL isSelected;
+@property (nonatomic, assign) NSInteger num;
+@property (nonatomic, copy) NSString *price;
 @end
 
-NS_ASSUME_NONNULL_END

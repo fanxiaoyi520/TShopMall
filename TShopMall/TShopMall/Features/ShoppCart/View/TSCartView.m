@@ -8,7 +8,7 @@
 #import "TSCartView.h"
 #import "TSCartCell.h"
 
-@interface TSCartView()<UITableViewDelegate, UITableViewDataSource>{
+@interface TSCartView()<UITableViewDelegate, UITableViewDataSource, TSCartProtocol>{
     
 }
 @property (nonatomic, strong) UITableView *tableView;
@@ -26,6 +26,16 @@
 }
 
 - (void)clearInvalideGoods{}
+- (void)goodsSelectedStatusChanged{}
+
+- (void)goodsSelected:(TSCartModel *)cartModel indexPath:(NSIndexPath *)indexPath{
+    self.sections[indexPath.section].rows[indexPath.row].obj = cartModel;
+    [self.controller performSelector:@selector(goodsSelectedStatusChanged)];
+}
+
+- (void)checkGift:(TSCartModel *)cartModel{
+    
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return self.sections.count;
@@ -39,7 +49,10 @@
     TSCartGoodsRow *row = self.sections[indexPath.section].rows[indexPath.row];
     Class cla = NSClassFromString(row.cellIdentifier);
     [tableView registerClass:cla forCellReuseIdentifier:row.cellIdentifier];
-    TSCartCell *cell = [tableView dequeueReusableCellWithIdentifier:row.cellIdentifier];
+    TSCartBaseCell *cell = [tableView dequeueReusableCellWithIdentifier:row.cellIdentifier];
+    cell.obj = row.obj;
+    cell.delegate = self;
+    cell.indexPath = indexPath;
     return cell;
 }
 

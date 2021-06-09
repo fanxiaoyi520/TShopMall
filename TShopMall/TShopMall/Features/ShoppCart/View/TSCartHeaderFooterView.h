@@ -8,6 +8,7 @@
 #import <UIKit/UIKit.h>
 
 @class TSCartInvalidHeader;
+@class TSCartRecomendHeader;
 
 @interface TSCartHeaderFooterView : UITableViewHeaderFooterView
 
@@ -18,4 +19,9 @@
 @property (nonatomic, strong) UILabel *title;
 @property (nonatomic, strong) UIButton *clear;
 @property (nonatomic, strong) UIView *line;
+@end
+
+
+@interface TSCartRecomendHeader : TSCartHeaderFooterView
+@property (nonatomic, strong) UILabel *title;
 @end

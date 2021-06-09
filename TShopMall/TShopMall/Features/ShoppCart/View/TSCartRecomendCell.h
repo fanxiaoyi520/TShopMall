@@ -5,11 +5,11 @@
 //  Created by 橙子 on 2021/6/9.
 //
 
-#import <UIKit/UIKit.h>
+#import "TSCartBaseCell.h"
 
 @class TSCartRecomendView;
 
-@interface TSCartRecomendCell : UITableViewCell
+@interface TSCartRecomendCell : TSCartBaseCell
 
 @end
 

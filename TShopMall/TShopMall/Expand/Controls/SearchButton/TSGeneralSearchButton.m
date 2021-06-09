@@ -25,6 +25,8 @@
     [self setTitleColor:KHexAlphaColor(@"#2D3132", 0.4) forState:UIControlStateHighlighted];
     self.imageView.contentMode = UIViewContentModeScaleAspectFit;
     self.titleLabel.textAlignment = NSTextAlignmentLeft;
+    self.layer.cornerRadius = 16;
+    self.clipsToBounds = YES;
 }
 
 -(CGRect)titleRectForContentRect:(CGRect)contentRect{

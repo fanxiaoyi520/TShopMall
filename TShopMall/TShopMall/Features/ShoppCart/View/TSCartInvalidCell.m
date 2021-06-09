@@ -13,14 +13,6 @@
 
 @implementation TSCartInvalidCell
 
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
-    if (self == [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        self.selectionStyle = UITableViewCellSelectionStyleNone;
-        [self layoutView];
-    }
-    return self;
-}
-
 - (void)layoutView{
     [self.goodView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.contentView);
@@ -45,15 +37,6 @@
 
 
 @implementation TSCartInvalidTaoCanCell
-
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
-    if (self == [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        self.selectionStyle = UITableViewCellSelectionStyleNone;
-        [self layoutView];
-        [self testUI];
-    }
-    return self;
-}
 
 - (void)testUI{
     self.tips.text = @"失效";

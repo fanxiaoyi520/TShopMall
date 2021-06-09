@@ -15,5 +15,13 @@
 
 + (instancetype)congfigViewModelWithCartInfo:(TSCartModel *)cartModel;
 //+ (NSArray<TSCartGoodsSection *> *)viewModel:(TSCartModel *)model;
-@end
 
++ (NSArray<TSCartModel *> *)canOperationGoodsInSections:(NSArray<TSCartGoodsSection *> *)sections;
+
+//是否全选
++ (BOOL)isAllGoodsSelected:(NSArray<TSCartModel *> *)goods;
+
+
++ (NSArray<TSCartModel *> *)selectedInfo:(NSArray<TSCartModel *> *)cartModels;
++ (NSString *)totalPrice:(NSArray<TSCartModel *> *)cartModels;
+@end

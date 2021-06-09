@@ -21,6 +21,7 @@
 
 - (instancetype)init{
     if (self == [super init]) {
+        self.backgroundColor = UIColor.whiteColor;
         self.selBtn.selected = NO;
         self.selBtnTips.text = @"全选";
         [self updateSettleBtnText:0];
@@ -41,8 +42,13 @@
     self.price.text = [NSString stringWithFormat:@"¥ %@", price];
 }
 
+- (void)updateSelBtnStatus:(BOOL)status{
+    self.selBtn.selected = status;
+}
+
 - (void)selBtnAction:(UIButton *)sender{
     sender.selected = !sender.selected;
+    [self.delegate allSelected:sender.selected];
 }
 
 - (void)settlement{

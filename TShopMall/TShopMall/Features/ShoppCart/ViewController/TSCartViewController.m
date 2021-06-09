@@ -9,8 +9,9 @@
 #import "TSCartView.h"
 #import "TSCartDataController.h"
 #import "TSCartSettleView.h"
+#import "TSCartProtocol.h"
 
-@interface TSCartViewController ()
+@interface TSCartViewController ()<TSCartProtocol>
 @property (nonatomic, strong) UIButton *editBtn;
 @property (nonatomic, strong) TSCartView *cartView;
 @property (nonatomic, strong) TSCartSettleView *settleView;
@@ -47,8 +48,27 @@
     }];
 }
 
+//失效区清空按钮事件
 - (void)clearInvalideGoods{
-    NSLog(@"啊啊啊");
+
+}
+
+//商品选中状态变更
+- (void)goodsSelectedStatusChanged{
+    
+    NSArray<TSCartModel *> *cartModels = [TSCartViewModel canOperationGoodsInSections:self.cartView.sections];
+    [self.settleView updateSelBtnStatus:[TSCartViewModel isAllGoodsSelected:cartModels]];
+}
+
+- (void)allSelected:(BOOL)status{
+    for (TSCartGoodsSection *section in self.cartView.sections) {
+        TSCartGoodsRow *row = section.rows.lastObject;
+        if ([row.cellIdentifier isEqualToString:@"TSCartCell"]) {
+            TSCartModel *cartModel = (TSCartModel *)row.obj;
+            cartModel.isSelected = status;
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"CartCellShouldUpdateSelectedStatus" object:nil userInfo:@{@"obj":cartModel}];
+        }
+    }
 }
 
 - (void)edit:(UIButton *)sender{
@@ -104,6 +124,7 @@
         return _settleView;
     }
     self.settleView = [TSCartSettleView new];
+    self.settleView.delegate = self;
     [self.view addSubview:self.settleView];
     
     return self.settleView;

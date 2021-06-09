@@ -79,3 +79,28 @@
     return self.line;
 }
 @end
+
+
+@implementation TSCartRecomendHeader
+
+- (void)layoutSubviews{
+    [self.title mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self);
+        make.height.mas_equalTo(KRateW(24.0));
+        make.top.equalTo(self.mas_top).offset(KRateW(22.0));
+    }];
+}
+
+- (UILabel *)title{
+    if (_title) {
+        return _title;
+    }
+    self.title = [UILabel new];
+    self.title.text = @"热销推荐";
+    self.title.font = KFont(PingFangSCRegular, 16.0);
+    self.title.textColor = KHexColor(@"#2D3132");
+    [self.contentView addSubview:self.title];
+    
+    return self.title;
+}
+@end
