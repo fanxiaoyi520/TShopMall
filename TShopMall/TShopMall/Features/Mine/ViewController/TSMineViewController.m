@@ -6,6 +6,7 @@
 //
 
 #import "TSMineViewController.h"
+#import "TSLoginController.h"
 
 @interface TSMineViewController ()
 
@@ -16,6 +17,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [TSLoginController loginFinished:^(BOOL finished) {
+        
+    }];
 }
 
 /*

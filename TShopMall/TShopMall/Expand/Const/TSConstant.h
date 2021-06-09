@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 #define KRateW(width)  [MyDimeScale scaleW:width]
 #define KRateH(height) [MyDimeScale scaleH:height]
 
+#define KNaviBarHeight 44.0
+
 #pragma mark - 图片
 #define KImageMake(img) [UIImage imageNamed:img]
 

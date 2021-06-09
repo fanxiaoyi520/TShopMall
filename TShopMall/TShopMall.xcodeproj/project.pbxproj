@@ -9,6 +9,39 @@
 /* Begin PBXBuildFile section */
 		00093A5046E7E3324EC8CBEB /* libPods-TShopMallTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1942D505D7004833F274B5D1 /* libPods-TShopMallTests.a */; };
 		AE4DC537B4A93FA6C04B9037 /* libPods-TShopMall.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 825A9D1C217F35DCFB651B21 /* libPods-TShopMall.a */; };
+		C206A4FA266F1DA400B69DED /* TSLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = C206A4F8266F1DA400B69DED /* TSLoginController.m */; };
+		C206A4FB266F1DA400B69DED /* TSLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = C206A4F8266F1DA400B69DED /* TSLoginController.m */; };
+		C206A4FC266F1DA400B69DED /* TSLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = C206A4F8266F1DA400B69DED /* TSLoginController.m */; };
+		C2EF88B22670997100E7374A /* TSCartViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EF889B2670997100E7374A /* TSCartViewModel.m */; };
+		C2EF88B32670997100E7374A /* TSCartViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EF889B2670997100E7374A /* TSCartViewModel.m */; };
+		C2EF88B42670997100E7374A /* TSCartViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EF889B2670997100E7374A /* TSCartViewModel.m */; };
+		C2EF88B52670997100E7374A /* TSCartGoodsSection.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EF889C2670997100E7374A /* TSCartGoodsSection.m */; };
+		C2EF88B62670997100E7374A /* TSCartGoodsSection.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EF889C2670997100E7374A /* TSCartGoodsSection.m */; };
+		C2EF88B72670997100E7374A /* TSCartGoodsSection.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EF889C2670997100E7374A /* TSCartGoodsSection.m */; };
+		C2EF88B82670997100E7374A /* TSCartModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EF889F2670997100E7374A /* TSCartModel.m */; };
+		C2EF88B92670997100E7374A /* TSCartModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EF889F2670997100E7374A /* TSCartModel.m */; };
+		C2EF88BA2670997100E7374A /* TSCartModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EF889F2670997100E7374A /* TSCartModel.m */; };
+		C2EF88BB2670997100E7374A /* TSCartHeaderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EF88A22670997100E7374A /* TSCartHeaderFooterView.m */; };
+		C2EF88BC2670997100E7374A /* TSCartHeaderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EF88A22670997100E7374A /* TSCartHeaderFooterView.m */; };
+		C2EF88BD2670997100E7374A /* TSCartHeaderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EF88A22670997100E7374A /* TSCartHeaderFooterView.m */; };
+		C2EF88BE2670997100E7374A /* TSCartView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EF88A42670997100E7374A /* TSCartView.m */; };
+		C2EF88BF2670997100E7374A /* TSCartView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EF88A42670997100E7374A /* TSCartView.m */; };
+		C2EF88C02670997100E7374A /* TSCartView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EF88A42670997100E7374A /* TSCartView.m */; };
+		C2EF88C12670997100E7374A /* TSCartCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EF88A52670997100E7374A /* TSCartCell.m */; };
+		C2EF88C22670997100E7374A /* TSCartCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EF88A52670997100E7374A /* TSCartCell.m */; };
+		C2EF88C32670997100E7374A /* TSCartCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EF88A52670997100E7374A /* TSCartCell.m */; };
+		C2EF88C42670997100E7374A /* TSCartInvalidCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EF88A62670997100E7374A /* TSCartInvalidCell.m */; };
+		C2EF88C52670997100E7374A /* TSCartInvalidCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EF88A62670997100E7374A /* TSCartInvalidCell.m */; };
+		C2EF88C62670997100E7374A /* TSCartInvalidCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EF88A62670997100E7374A /* TSCartInvalidCell.m */; };
+		C2EF88C72670997100E7374A /* TSCartSettleView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EF88A82670997100E7374A /* TSCartSettleView.m */; };
+		C2EF88C82670997100E7374A /* TSCartSettleView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EF88A82670997100E7374A /* TSCartSettleView.m */; };
+		C2EF88C92670997100E7374A /* TSCartSettleView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EF88A82670997100E7374A /* TSCartSettleView.m */; };
+		C2EF88CA2670997100E7374A /* TSCartDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EF88AD2670997100E7374A /* TSCartDataController.m */; };
+		C2EF88CB2670997100E7374A /* TSCartDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EF88AD2670997100E7374A /* TSCartDataController.m */; };
+		C2EF88CC2670997100E7374A /* TSCartDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EF88AD2670997100E7374A /* TSCartDataController.m */; };
+		C2EF88CF2670A3B200E7374A /* TSCartRecomendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EF88CE2670A3B200E7374A /* TSCartRecomendCell.m */; };
+		C2EF88D02670A3B200E7374A /* TSCartRecomendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EF88CE2670A3B200E7374A /* TSCartRecomendCell.m */; };
+		C2EF88D12670A3B200E7374A /* TSCartRecomendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EF88CE2670A3B200E7374A /* TSCartRecomendCell.m */; };
 		E2BE996F8804E0C3E7D5AE61 /* libPods-TShopMall-TShopMallUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD1ABBE857D307088E9BF2DC /* libPods-TShopMall-TShopMallUITests.a */; };
 		F54972FE2668842500181E3F /* TShopMallTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F54972FD2668842500181E3F /* TShopMallTests.m */; };
 		F54973092668842500181E3F /* TShopMallUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F54973082668842500181E3F /* TShopMallUITests.m */; };
@@ -97,6 +130,28 @@
 		825A9D1C217F35DCFB651B21 /* libPods-TShopMall.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TShopMall.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		847295D7102568B80FCAB72E /* Pods-TShopMallTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TShopMallTests.release.xcconfig"; path = "Target Support Files/Pods-TShopMallTests/Pods-TShopMallTests.release.xcconfig"; sourceTree = "<group>"; };
 		BBF16248DC0233F9DA291554 /* Pods-TShopMallTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TShopMallTests.debug.xcconfig"; path = "Target Support Files/Pods-TShopMallTests/Pods-TShopMallTests.debug.xcconfig"; sourceTree = "<group>"; };
+		C206A4F8266F1DA400B69DED /* TSLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSLoginController.m; sourceTree = "<group>"; };
+		C206A4F9266F1DA400B69DED /* TSLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSLoginController.h; sourceTree = "<group>"; };
+		C2EF88982670997100E7374A /* TSCartViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSCartViewModel.h; sourceTree = "<group>"; };
+		C2EF88992670997100E7374A /* TSCartGoodsSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSCartGoodsSection.h; sourceTree = "<group>"; };
+		C2EF889B2670997100E7374A /* TSCartViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSCartViewModel.m; sourceTree = "<group>"; };
+		C2EF889C2670997100E7374A /* TSCartGoodsSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSCartGoodsSection.m; sourceTree = "<group>"; };
+		C2EF889F2670997100E7374A /* TSCartModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSCartModel.m; sourceTree = "<group>"; };
+		C2EF88A02670997100E7374A /* TSCartModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSCartModel.h; sourceTree = "<group>"; };
+		C2EF88A22670997100E7374A /* TSCartHeaderFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSCartHeaderFooterView.m; sourceTree = "<group>"; };
+		C2EF88A32670997100E7374A /* TSCartSettleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSCartSettleView.h; sourceTree = "<group>"; };
+		C2EF88A42670997100E7374A /* TSCartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSCartView.m; sourceTree = "<group>"; };
+		C2EF88A52670997100E7374A /* TSCartCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSCartCell.m; sourceTree = "<group>"; };
+		C2EF88A62670997100E7374A /* TSCartInvalidCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSCartInvalidCell.m; sourceTree = "<group>"; };
+		C2EF88A72670997100E7374A /* TSCartHeaderFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSCartHeaderFooterView.h; sourceTree = "<group>"; };
+		C2EF88A82670997100E7374A /* TSCartSettleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSCartSettleView.m; sourceTree = "<group>"; };
+		C2EF88A92670997100E7374A /* TSCartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSCartView.h; sourceTree = "<group>"; };
+		C2EF88AA2670997100E7374A /* TSCartInvalidCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSCartInvalidCell.h; sourceTree = "<group>"; };
+		C2EF88AB2670997100E7374A /* TSCartCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSCartCell.h; sourceTree = "<group>"; };
+		C2EF88AD2670997100E7374A /* TSCartDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSCartDataController.m; sourceTree = "<group>"; };
+		C2EF88AE2670997100E7374A /* TSCartDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSCartDataController.h; sourceTree = "<group>"; };
+		C2EF88CD2670A3B200E7374A /* TSCartRecomendCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSCartRecomendCell.h; sourceTree = "<group>"; };
+		C2EF88CE2670A3B200E7374A /* TSCartRecomendCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSCartRecomendCell.m; sourceTree = "<group>"; };
 		C4B53CFE051CAFD3DA82AB3F /* Pods-TShopMall-TShopMallUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TShopMall-TShopMallUITests.debug.xcconfig"; path = "Target Support Files/Pods-TShopMall-TShopMallUITests/Pods-TShopMall-TShopMallUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		CD1ABBE857D307088E9BF2DC /* libPods-TShopMall-TShopMallUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TShopMall-TShopMallUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5195F8AB1644614CD0BA09C /* Pods-TShopMall.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TShopMall.release.xcconfig"; path = "Target Support Files/Pods-TShopMall/Pods-TShopMall.release.xcconfig"; sourceTree = "<group>"; };
@@ -269,6 +324,103 @@
 				847295D7102568B80FCAB72E /* Pods-TShopMallTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		C206A4F1266F1D4700B69DED /* LoginRegister */ = {
+			isa = PBXGroup;
+			children = (
+				C206A500266F1DB900B69DED /* ViewModel */,
+				C206A4FF266F1DB200B69DED /* DataController */,
+				C206A4FE266F1DAD00B69DED /* Model */,
+				C206A4FD266F1DA800B69DED /* View */,
+				C206A4F7266F1D7C00B69DED /* ViewController */,
+			);
+			path = LoginRegister;
+			sourceTree = "<group>";
+		};
+		C206A4F7266F1D7C00B69DED /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				C206A4F9266F1DA400B69DED /* TSLoginController.h */,
+				C206A4F8266F1DA400B69DED /* TSLoginController.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		C206A4FD266F1DA800B69DED /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C206A4FE266F1DAD00B69DED /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C206A4FF266F1DB200B69DED /* DataController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DataController;
+			sourceTree = "<group>";
+		};
+		C206A500266F1DB900B69DED /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C2EF88972670997100E7374A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C2EF88992670997100E7374A /* TSCartGoodsSection.h */,
+				C2EF889C2670997100E7374A /* TSCartGoodsSection.m */,
+				C2EF88982670997100E7374A /* TSCartViewModel.h */,
+				C2EF889B2670997100E7374A /* TSCartViewModel.m */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C2EF889E2670997100E7374A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C2EF88A02670997100E7374A /* TSCartModel.h */,
+				C2EF889F2670997100E7374A /* TSCartModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C2EF88A12670997100E7374A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C2EF88A72670997100E7374A /* TSCartHeaderFooterView.h */,
+				C2EF88A22670997100E7374A /* TSCartHeaderFooterView.m */,
+				C2EF88A32670997100E7374A /* TSCartSettleView.h */,
+				C2EF88A82670997100E7374A /* TSCartSettleView.m */,
+				C2EF88AA2670997100E7374A /* TSCartInvalidCell.h */,
+				C2EF88A62670997100E7374A /* TSCartInvalidCell.m */,
+				C2EF88AB2670997100E7374A /* TSCartCell.h */,
+				C2EF88A52670997100E7374A /* TSCartCell.m */,
+				C2EF88CD2670A3B200E7374A /* TSCartRecomendCell.h */,
+				C2EF88CE2670A3B200E7374A /* TSCartRecomendCell.m */,
+				C2EF88A92670997100E7374A /* TSCartView.h */,
+				C2EF88A42670997100E7374A /* TSCartView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C2EF88AC2670997100E7374A /* DataController */ = {
+			isa = PBXGroup;
+			children = (
+				C2EF88AD2670997100E7374A /* TSCartDataController.m */,
+				C2EF88AE2670997100E7374A /* TSCartDataController.h */,
+			);
+			path = DataController;
 			sourceTree = "<group>";
 		};
 		C5E45ABB9D33DF9098089BDE /* Frameworks */ = {
@@ -449,7 +601,7 @@
 		F54973792668A94600181E3F /* Features */ = {
 			isa = PBXGroup;
 			children = (
-				F56D4B50266DFE4B00C1AD9E /* LoginRegister */,
+				C206A4F1266F1D4700B69DED /* LoginRegister */,
 				F549737A2668A94600181E3F /* Home */,
 				F54973802668A94600181E3F /* Category */,
 				F54973862668A94600181E3F /* Message */,
@@ -613,41 +765,13 @@
 		F549738C2668A94600181E3F /* ShoppCart */ = {
 			isa = PBXGroup;
 			children = (
-				F549738D2668A94600181E3F /* ViewModel */,
-				F549738E2668A94600181E3F /* DataController */,
-				F549738F2668A94600181E3F /* Model */,
-				F54973902668A94600181E3F /* View */,
+				C2EF88AC2670997100E7374A /* DataController */,
+				C2EF889E2670997100E7374A /* Model */,
+				C2EF88A12670997100E7374A /* View */,
+				C2EF88972670997100E7374A /* ViewModel */,
 				F54973912668A94600181E3F /* ViewController */,
 			);
 			path = ShoppCart;
-			sourceTree = "<group>";
-		};
-		F549738D2668A94600181E3F /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		F549738E2668A94600181E3F /* DataController */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = DataController;
-			sourceTree = "<group>";
-		};
-		F549738F2668A94600181E3F /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		F54973902668A94600181E3F /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		F54973912668A94600181E3F /* ViewController */ = {
@@ -926,53 +1050,6 @@
 			path = Debug;
 			sourceTree = "<group>";
 		};
-		F56D4B50266DFE4B00C1AD9E /* LoginRegister */ = {
-			isa = PBXGroup;
-			children = (
-				F56D4B51266DFE4B00C1AD9E /* ViewModel */,
-				F56D4B52266DFE4B00C1AD9E /* DataController */,
-				F56D4B53266DFE4B00C1AD9E /* Model */,
-				F56D4B54266DFE4B00C1AD9E /* View */,
-				F56D4B55266DFE4B00C1AD9E /* ViewController */,
-			);
-			path = LoginRegister;
-			sourceTree = "<group>";
-		};
-		F56D4B51266DFE4B00C1AD9E /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		F56D4B52266DFE4B00C1AD9E /* DataController */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = DataController;
-			sourceTree = "<group>";
-		};
-		F56D4B53266DFE4B00C1AD9E /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		F56D4B54266DFE4B00C1AD9E /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		F56D4B55266DFE4B00C1AD9E /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewController;
-			sourceTree = "<group>";
-		};
 		F56D4B5C266E036300C1AD9E /* Vender */ = {
 			isa = PBXGroup;
 			children = (
@@ -1230,10 +1307,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2EF88CA2670997100E7374A /* TSCartDataController.m in Sources */,
 				F55D2AC1266F110D006BACCF /* TSHomePageBackgroundReusableView.m in Sources */,
+				C2EF88C12670997100E7374A /* TSCartCell.m in Sources */,
 				F54973632668A22100181E3F /* YTKAnimatingRequestAccessory.m in Sources */,
 				F56D4B4C266DFB8900C1AD9E /* FMLayoutCrossCell.m in Sources */,
 				F56D4B3A266DFB8900C1AD9E /* FMLayoutBaseSection.m in Sources */,
+				C2EF88BB2670997100E7374A /* TSCartHeaderFooterView.m in Sources */,
 				F54973BA2668BC0B00181E3F /* TSMineViewController.m in Sources */,
 				F56D4B63266E037600C1AD9E /* MyDimeScale.m in Sources */,
 				F54973B72668BBEE00181E3F /* TSCartViewController.m in Sources */,
@@ -1250,9 +1330,11 @@
 				F56D4B3F266DFB8900C1AD9E /* FMLayoutAbsoluteSection.m in Sources */,
 				F56D4B44266DFB8900C1AD9E /* FMCollectionLayoutAttributes.m in Sources */,
 				F54973BF2668C01F00181E3F /* TSTipsConst.m in Sources */,
+				C2EF88B22670997100E7374A /* TSCartViewModel.m in Sources */,
 				F56D4B47266DFB8900C1AD9E /* FMLayoutBackground.m in Sources */,
 				F56D4B49266DFB8900C1AD9E /* FMSupplementary.m in Sources */,
 				F54973B42668BBCE00181E3F /* TSRankViewController.m in Sources */,
+				C2EF88B52670997100E7374A /* TSCartGoodsSection.m in Sources */,
 				F56D4B4B266DFB8900C1AD9E /* FMLayoutCrossTransformSection.m in Sources */,
 				F56D4B48266DFB8900C1AD9E /* FMLayoutElement.m in Sources */,
 				F56D4B3D266DFB8900C1AD9E /* FMLayoutFillSection.m in Sources */,
@@ -1260,22 +1342,28 @@
 				F56D4B3B266DFB8900C1AD9E /* FMLayoutCombineSection.m in Sources */,
 				F54973AB2668B9B500181E3F /* TSBaseNavigationController.m in Sources */,
 				F56D4B5B266E02BA00C1AD9E /* UIFont+General.m in Sources */,
+				C206A4FA266F1DA400B69DED /* TSLoginController.m in Sources */,
 				F54973B12668BBB200181E3F /* TSCategoryViewController.m in Sources */,
 				F54973C22668C0BC00181E3F /* TSDeviceHelper.m in Sources */,
 				F56D4B3C266DFB8900C1AD9E /* FMLayoutLabelSection.m in Sources */,
 				F54973612668A22100181E3F /* SSBaseRequest.m in Sources */,
+				C2EF88B82670997100E7374A /* TSCartModel.m in Sources */,
 				F54973662668A22100181E3F /* YTKBaseRequest+AnimatingAccessory.m in Sources */,
 				F54973622668A22100181E3F /* SSResponseModel.m in Sources */,
 				F54973C52668C14F00181E3F /* TSConstant.m in Sources */,
+				C2EF88C72670997100E7374A /* TSCartSettleView.m in Sources */,
 				F549739E2668AABD00181E3F /* TSInterfacedConst.m in Sources */,
 				F56D4B4A266DFB8900C1AD9E /* FMLayoutCrossSection.m in Sources */,
 				F56D4B4F266DFB8900C1AD9E /* FMLayoutDebugLog.m in Sources */,
 				F56D4B66266E053800C1AD9E /* AppDelegate+Initialize.m in Sources */,
+				C2EF88CF2670A3B200E7374A /* TSCartRecomendCell.m in Sources */,
 				F54973652668A22100181E3F /* YTKChainRequest+AnimatingAccessory.m in Sources */,
 				F56D4B41266DFB8900C1AD9E /* FMLayoutFixedSection.m in Sources */,
 				F55D2AC4266F15C5006BACCF /* TSHomePageCategoryCell.m in Sources */,
 				F549736B2668A2C700181E3F /* AppDelegate.m in Sources */,
+				C2EF88BE2670997100E7374A /* TSCartView.m in Sources */,
 				F56D4B46266DFB8900C1AD9E /* FMLayoutHeader.m in Sources */,
+				C2EF88C42670997100E7374A /* TSCartInvalidCell.m in Sources */,
 				F56D4B45266DFB8900C1AD9E /* FMLayoutFooter.m in Sources */,
 				F56D4B5A266E02BA00C1AD9E /* UIColor+General.m in Sources */,
 				F54973642668A22100181E3F /* YTKBatchRequest+AnimatingAccessory.m in Sources */,
@@ -1294,6 +1382,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2EF88B62670997100E7374A /* TSCartGoodsSection.m in Sources */,
+				C2EF88B32670997100E7374A /* TSCartViewModel.m in Sources */,
+				C2EF88BF2670997100E7374A /* TSCartView.m in Sources */,
+				C2EF88CB2670997100E7374A /* TSCartDataController.m in Sources */,
+				C206A4FB266F1DA400B69DED /* TSLoginController.m in Sources */,
+				C2EF88D02670A3B200E7374A /* TSCartRecomendCell.m in Sources */,
+				C2EF88C22670997100E7374A /* TSCartCell.m in Sources */,
+				C2EF88C52670997100E7374A /* TSCartInvalidCell.m in Sources */,
+				C2EF88B92670997100E7374A /* TSCartModel.m in Sources */,
+				C2EF88C82670997100E7374A /* TSCartSettleView.m in Sources */,
+				C2EF88BC2670997100E7374A /* TSCartHeaderFooterView.m in Sources */,
 				F54972FE2668842500181E3F /* TShopMallTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1302,6 +1401,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2EF88B72670997100E7374A /* TSCartGoodsSection.m in Sources */,
+				C2EF88B42670997100E7374A /* TSCartViewModel.m in Sources */,
+				C2EF88C02670997100E7374A /* TSCartView.m in Sources */,
+				C2EF88CC2670997100E7374A /* TSCartDataController.m in Sources */,
+				C206A4FC266F1DA400B69DED /* TSLoginController.m in Sources */,
+				C2EF88D12670A3B200E7374A /* TSCartRecomendCell.m in Sources */,
+				C2EF88C32670997100E7374A /* TSCartCell.m in Sources */,
+				C2EF88C62670997100E7374A /* TSCartInvalidCell.m in Sources */,
+				C2EF88BA2670997100E7374A /* TSCartModel.m in Sources */,
+				C2EF88C92670997100E7374A /* TSCartSettleView.m in Sources */,
+				C2EF88BD2670997100E7374A /* TSCartHeaderFooterView.m in Sources */,
 				F54973092668842500181E3F /* TShopMallUITests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1463,6 +1573,7 @@
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PREFIX_HEADER = TShopMall/Expand/Macros/TSPrefixHeader.pch;
 				INFOPLIST_FILE = TShopMall/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1483,6 +1594,7 @@
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PREFIX_HEADER = TShopMall/Expand/Macros/TSPrefixHeader.pch;
 				INFOPLIST_FILE = TShopMall/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
