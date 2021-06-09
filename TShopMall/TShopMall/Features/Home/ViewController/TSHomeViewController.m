@@ -6,12 +6,14 @@
 //
 
 #import "TSHomeViewController.h"
-#import "TSGeneralSearchButton.h"
-#import "TSHomePageBackgroundReusableView.h"
-#import "TSHomePageCategoryCell.h"
+#import "TSHomePageDataController.h"
+
 
 @interface TSHomeViewController ()<FMCollectionLayoutViewConfigurationDelegate,UICollectionViewDelegate>
 
+/// 数据中心
+@property(nonatomic, strong) TSHomePageDataController *dataController;
+/// 布局视图
 @property(nonatomic, strong) FMLayoutView *layoutView;
 
 @end
@@ -20,114 +22,73 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    [self.dataController fetchPlaceholderLayouts];
     
-    [self hiddenNavigationBar];
-    
-    self.navigationController.navigationBar.hidden = YES;
-    
-    NSMutableArray *shareSections = [NSMutableArray array];
-    
-    {
-        FMLayoutFixedSection *section = [FMLayoutFixedSection sectionWithSectionInset:UIEdgeInsetsMake(0, 0, 0, 0) itemSpace:10 lineSpace:10 column:1];
-        section.header = [FMLayoutHeader elementSize:205 viewClass:[TSHomePageBackgroundReusableView class]];
-        section.header.lastMargin = 10;
-        section.header.type = FMLayoutHeaderTypeSuspensionBigger;
-        section.header.minSize = 50;
-        section.header.isStickTop = YES;
-        section.header.inset = UIEdgeInsetsMake(0, 0, 0, 0);
-        
-        section.itemSize = CGSizeMake(100, 100);
-        section.itemDatas = [@[@"1", @"2", @"3",@"1", @"2", @"3"] mutableCopy];
-        section.cellElement = [FMLayoutElement elementWithViewClass:[TSHomePageCategoryCell class] isNib:NO];
-        
-        [shareSections addObject:section];
-        
-//        [self.layoutView.sections addObject:section];
-//        [self.layoutView reloadData];
-        
-        self.automaticallyAdjustsScrollViewInsets = NO;
-        
-        FMLayoutView *view = [[FMLayoutView alloc] init];
-        view.delegate = self;
-        view.reloadOlnyChanged = NO;
-        [view.layout setSections:shareSections];
-        view.backgroundColor = [UIColor orangeColor];
-        [self.view addSubview:view];
-        [view mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.left.right.bottom.mas_equalTo(0);
-        }];
-        [view layoutIfNeeded];
-    }
-    
-    
+    self.layoutView.sections = self.dataController.layouts;
+    [self.layoutView reloadData];
 }
 
-- (void)fillCustomView
-{
-//    [self.view addSubview:self.layoutView];
+- (void)fillCustomView{
+    [self.view addSubview:self.layoutView];
 }
 
--(void)viewWillLayoutSubviews
-{
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+}
+
+-(void)viewWillLayoutSubviews{
     [super viewWillLayoutSubviews];
-    
-//    CGFloat top = self.view.ts_safeAreaInsets.top;
-//    [self.layoutView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.right.bottom.mas_equalTo(0);
-//        make.top.mas_equalTo(top);
-//    }];
-}
-
-
--(void)setupNavigationBar
-{
-//    TSGeneralSearchButton *searchButton = [TSGeneralSearchButton buttonWithType:UIButtonTypeCustom];
-//    searchButton.frame = CGRectMake(0, 0, kScreenWidth - 65, 32);
-//    UIBarButtonItem *searchItem = [[UIBarButtonItem alloc] initWithCustomView:searchButton];
-//    searchItem.actionBlock = ^(id sender) {
-//
-//    };
-//    self.navigationItem.titleView = searchButton;
+    CGFloat bottom = self.view.ts_safeAreaInsets.bottom + 10;
+    [self.layoutView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.top.equalTo(self.view);
+        make.bottom.equalTo(self.view).offset(-bottom);
+    }];
 }
 
 #pragma mark - UICollectionViewDelegate
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSLog(@"collectionView:didSelectItemAtIndexPath");
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    NSLog(@"scrollViewDidScroll");
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+
 }
 
 #pragma mark - FMCollectionLayoutViewConfigurationDelegate
-- (void)layoutView:(FMLayoutView *)layoutView configurationCell:(UICollectionViewCell *)cell indexPath:(NSIndexPath *)indexPath
-{
+- (void)layoutView:(FMLayoutView *)layoutView configurationCell:(UICollectionViewCell *)cell indexPath:(NSIndexPath *)indexPath{
     
 }
-- (void)layoutView:(FMLayoutView *)layoutView configurationHeader:(UICollectionReusableView *)header indexPath:(NSIndexPath *)indexPath
-{
+
+- (void)layoutView:(FMLayoutView *)layoutView configurationHeader:(UICollectionReusableView *)header indexPath:(NSIndexPath *)indexPath{
     
 }
-- (void)layoutView:(FMLayoutView *)layoutView configurationFooter:(UICollectionReusableView *)footer indexPath:(NSIndexPath *)indexPath
-{
+
+- (void)layoutView:(FMLayoutView *)layoutView configurationFooter:(UICollectionReusableView *)footer indexPath:(NSIndexPath *)indexPath{
     
 }
-- (void)layoutView:(FMLayoutView *)layoutView configurationSectionBg:(UICollectionReusableView *)bg indexPath:(NSIndexPath *)indexPath
-{
+
+- (void)layoutView:(FMLayoutView *)layoutView configurationSectionBg:(UICollectionReusableView *)bg indexPath:(NSIndexPath *)indexPath{
     
 }
 
 #pragma mark - Getter
--(FMLayoutView *)layoutView
-{
+-(TSHomePageDataController *)dataController{
+    if (!_dataController) {
+        _dataController = [[TSHomePageDataController alloc] init];
+    }
+    return _dataController;
+}
+
+-(FMLayoutView *)layoutView{
     if (!_layoutView) {
         _layoutView = [[FMLayoutView alloc] init];
         _layoutView.configuration = self;
         _layoutView.delegate = self;
-        _layoutView.reloadOlnyChanged = NO;
-        _layoutView.backgroundColor = [UIColor orangeColor];
+        _layoutView.backgroundColor = KGrayColor;
+        _layoutView.showsVerticalScrollIndicator = NO;
+        _layoutView.showsHorizontalScrollIndicator = NO;
     }
     return _layoutView;
 }
