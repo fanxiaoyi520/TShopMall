@@ -23,5 +23,6 @@
 #import <YYKit/YYKit.h>
 #import <YTKNetwork/YTKNetwork.h>
 #import <Masonry/Masonry.h>
+#import <SDWebImage/SDWebImage.h>
 
 #endif /* TSPrefixHeader_pch */
