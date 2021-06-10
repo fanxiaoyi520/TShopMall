@@ -9,4 +9,22 @@
 
 @implementation TSCartModel
 
+- (void)setCartStores:(NSArray<TSCartStore *> *)cartStores{
+    _cartStores = [NSArray modelArrayWithClass:TSCartStore.class json:cartStores];
+}
+
+- (void)setCarts:(NSArray<TSCart *> *)carts{
+    _carts = [NSArray modelArrayWithClass:TSCart.class json:carts];
+}
+
+@end
+
+@implementation TSCartStore
+
+
+@end
+
+@implementation TSCart
+
+
 @end

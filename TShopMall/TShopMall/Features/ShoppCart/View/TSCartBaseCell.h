@@ -12,5 +12,7 @@
 @property (nonatomic, strong) id obj;
 @property (nonatomic, strong) NSIndexPath *indexPath;
 @property (nonatomic, weak) id<TSCartProtocol> delegate;
+- (void)layoutView;
+- (void)testUI;
 @end
 

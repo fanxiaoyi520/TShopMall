@@ -7,6 +7,7 @@
 
 #import "TSCartCell.h"
 #import "TSCartModel.h"
+#import "TSNumOperationView.h"
 
 @interface TSCartGiftButton : UIButton
 @property (nonatomic, strong) UILabel *tips;
@@ -22,10 +23,10 @@
 @property (nonatomic, strong) UILabel *specification;
 @property (nonatomic, strong) UILabel *priceTitle;
 @property (nonatomic, strong) UILabel *price;
-@property (nonatomic, strong) UIView *numView;
+@property (nonatomic, strong) TSNumOperationView *numView;
 @property (nonatomic, strong) TSCartGiftButton *giftBtn;
 
-@property (nonatomic, strong) TSCartModel *cartModel;
+@property (nonatomic, strong) TSCart *cartModel;
 @end
 
 @implementation TSCartCell
@@ -42,14 +43,14 @@
 }
 
 - (void)cartCellShouldUpdateSelectedStatus:(NSNotification *)noti{
-    TSCartModel *cartModel = noti.userInfo[@"obj"];
+    TSCart *cartModel = noti.userInfo[@"obj"];
     if (cartModel == _cartModel) {
         self.obj = cartModel;
     }
 }
 
 - (void)setObj:(id)obj{
-     self.cartModel = (TSCartModel *)obj;
+     self.cartModel = (TSCart *)obj;
     [self configGiftView];
     
     self.selBtn.selected = self.cartModel.isSelected;
@@ -119,13 +120,13 @@
         make.left.equalTo(self.name.mas_left);
         make.centerY.equalTo(self.icon.mas_bottom);
         make.height.mas_equalTo(KRateW(18.0));
+        make.width.mas_equalTo(KRateW(42.0)).priorityHigh();
     }];
     
     [self.numView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.name.mas_right);
         make.centerY.equalTo(self.priceTitle);
-        make.height.mas_equalTo(KRateW(18.0));
-        make.width.mas_equalTo(KRateW(58.0));
+        make.height.mas_equalTo(KRateW(20.0));
     }];
     
     [self.price mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -204,13 +205,15 @@
     return self.priceTitle;
 }
 
-- (UIView *)numView{
+- (TSNumOperationView *)numView{
     if (_numView) {
         return _numView;
     }
-    self.numView = [UIView new];
-    self.numView.backgroundColor = [UIColor yellowColor];
+    self.numView = [TSNumOperationView new];
     [self.contentView addSubview:self.numView];
+    self.numView.numberOperationDone = ^(NSString *currentNumber, NumOperationType type) {
+        
+    };
     
     return self.numView;
 }

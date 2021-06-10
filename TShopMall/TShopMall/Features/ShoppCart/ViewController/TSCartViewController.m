@@ -56,7 +56,7 @@
 //商品选中状态变更
 - (void)goodsSelectedStatusChanged{
     
-    NSArray<TSCartModel *> *cartModels = [TSCartViewModel canOperationGoodsInSections:self.cartView.sections];
+    NSArray<TSCart *> *cartModels = [TSCartViewModel canOperationGoodsInSections:self.cartView.sections];
     [self.settleView updateSelBtnStatus:[TSCartViewModel isAllGoodsSelected:cartModels]];
 }
 
@@ -64,9 +64,8 @@
     for (TSCartGoodsSection *section in self.cartView.sections) {
         TSCartGoodsRow *row = section.rows.lastObject;
         if ([row.cellIdentifier isEqualToString:@"TSCartCell"]) {
-            TSCartModel *cartModel = (TSCartModel *)row.obj;
-            cartModel.isSelected = status;
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"CartCellShouldUpdateSelectedStatus" object:nil userInfo:@{@"obj":cartModel}];
+            [row.obj setValue:@(status) forKey:@"isSelected"];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"CartCellShouldUpdateSelectedStatus" object:nil userInfo:@{@"obj":row.obj}];
         }
     }
 }

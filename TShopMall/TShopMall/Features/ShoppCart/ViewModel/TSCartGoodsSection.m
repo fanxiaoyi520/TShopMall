@@ -26,8 +26,16 @@
 - (instancetype)init{
     if (self == [super init]) {
         self.cellIdentifier = @"UITableViewCell";
+        self.isAutoHeight = YES;
     }
     return self;
 }
 
+
+- (CGFloat)rowHeight{
+    if (_isAutoHeight == NO) {
+        return _rowHeight;
+    }
+    return UITableViewAutomaticDimension;
+}
 @end
