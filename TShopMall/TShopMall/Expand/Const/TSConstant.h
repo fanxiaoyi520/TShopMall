@@ -50,6 +50,29 @@ NS_ASSUME_NONNULL_BEGIN
 #define KPersonalPointColor KHexColor(@"#D8D8D8")
 #define KOrderMsgBGColor KHexColor(@"#FAFAFA")
 
+#pragma mark - 导航栏状态栏
+// 顶部安全区域高度
+#define GK_SAFEAREA_TOP                 [TSConstant safeAreaInsets].top
+// 底部安全区域高度
+#define GK_SAFEAREA_BTM                 [TSConstant safeAreaInsets].bottom
+// 状态栏高度
+#define GK_STATUSBAR_HEIGHT             [TSConstant statusBarFrame].size.height
+// 导航栏高度
+#define GK_NAVBAR_HEIGHT                [TSConstant navBarHeight]
+// 状态栏+导航栏高度
+#define GK_STATUSBAR_NAVBAR_HEIGHT      (GK_STATUSBAR_HEIGHT + GK_NAVBAR_HEIGHT)
+// tabbar高度
+#define GK_TABBAR_HEIGHT                (GK_SAFEAREA_BTM + 49.0f)
+
+//判断是否为iPhone X系列
+#define  kIsiPhoneX (((kScreenWidth == 375.f && kScreenHeight == 812.f) || (kScreenWidth == 414.f && kScreenHeight == 896.f) || (kScreenHeight == 375.f && kScreenWidth == 812.f) || (kScreenHeight == 414.f && kScreenWidth == 896.f)) ? YES : NO)
+
+
+@property(class, nonatomic, readonly) CGFloat      navBarHeight;
+@property(class, nonatomic, readonly) UIEdgeInsets safeAreaInsets;
+@property(class, nonatomic, readonly) CGRect       statusBarFrame;
+@property(class, nonatomic, readonly) UIWindow     *keyWindow;
+
 @end
 
 NS_ASSUME_NONNULL_END

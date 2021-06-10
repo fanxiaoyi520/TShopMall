@@ -99,6 +99,9 @@
 		F55D2C3C2671E14B006BACCF /* TSUniversalSectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2C332671E14B006BACCF /* TSUniversalSectionModel.m */; };
 		F55D2C3D2671E14B006BACCF /* TSUniversaItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2C342671E14B006BACCF /* TSUniversaItemModel.m */; };
 		F55D2C422671E299006BACCF /* UIImage+TSColor.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2C412671E299006BACCF /* UIImage+TSColor.m */; };
+		F55D2C452671EE2B006BACCF /* TSCategoryDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2C442671EE2B006BACCF /* TSCategoryDataController.m */; };
+		F55D2C482671EE56006BACCF /* TSCategoryKindCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2C472671EE56006BACCF /* TSCategoryKindCell.m */; };
+		F55D2C4B2671F13B006BACCF /* TSCategoryKindModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2C4A2671F13B006BACCF /* TSCategoryKindModel.m */; };
 		F56D4B3A266DFB8900C1AD9E /* FMLayoutBaseSection.m in Sources */ = {isa = PBXBuildFile; fileRef = F56D4B04266DFB8900C1AD9E /* FMLayoutBaseSection.m */; };
 		F56D4B3B266DFB8900C1AD9E /* FMLayoutCombineSection.m in Sources */ = {isa = PBXBuildFile; fileRef = F56D4B06266DFB8900C1AD9E /* FMLayoutCombineSection.m */; };
 		F56D4B3C266DFB8900C1AD9E /* FMLayoutLabelSection.m in Sources */ = {isa = PBXBuildFile; fileRef = F56D4B07266DFB8900C1AD9E /* FMLayoutLabelSection.m */; };
@@ -291,6 +294,12 @@
 		F55D2C342671E14B006BACCF /* TSUniversaItemModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSUniversaItemModel.m; sourceTree = "<group>"; };
 		F55D2C402671E298006BACCF /* UIImage+TSColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+TSColor.h"; sourceTree = "<group>"; };
 		F55D2C412671E299006BACCF /* UIImage+TSColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+TSColor.m"; sourceTree = "<group>"; };
+		F55D2C432671EE2B006BACCF /* TSCategoryDataController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TSCategoryDataController.h; path = TShopMall/Expand/Category/TSCategoryDataController.h; sourceTree = SOURCE_ROOT; };
+		F55D2C442671EE2B006BACCF /* TSCategoryDataController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = TSCategoryDataController.m; path = TShopMall/Expand/Category/TSCategoryDataController.m; sourceTree = SOURCE_ROOT; };
+		F55D2C462671EE56006BACCF /* TSCategoryKindCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TSCategoryKindCell.h; path = TShopMall/Expand/Category/TSCategoryKindCell.h; sourceTree = SOURCE_ROOT; };
+		F55D2C472671EE56006BACCF /* TSCategoryKindCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = TSCategoryKindCell.m; path = TShopMall/Expand/Category/TSCategoryKindCell.m; sourceTree = SOURCE_ROOT; };
+		F55D2C492671F13B006BACCF /* TSCategoryKindModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TSCategoryKindModel.h; path = TShopMall/Expand/Category/TSCategoryKindModel.h; sourceTree = SOURCE_ROOT; };
+		F55D2C4A2671F13B006BACCF /* TSCategoryKindModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = TSCategoryKindModel.m; path = TShopMall/Expand/Category/TSCategoryKindModel.m; sourceTree = SOURCE_ROOT; };
 		F56D4B04266DFB8900C1AD9E /* FMLayoutBaseSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLayoutBaseSection.m; sourceTree = "<group>"; };
 		F56D4B05266DFB8900C1AD9E /* FMLayoutFixedSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLayoutFixedSection.h; sourceTree = "<group>"; };
 		F56D4B06266DFB8900C1AD9E /* FMLayoutCombineSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLayoutCombineSection.m; sourceTree = "<group>"; };
@@ -753,8 +762,8 @@
 		F54973802668A94600181E3F /* Category */ = {
 			isa = PBXGroup;
 			children = (
-				F54973812668A94600181E3F /* ViewModel */,
 				F54973822668A94600181E3F /* DataController */,
+				F54973812668A94600181E3F /* ViewModel */,
 				F54973832668A94600181E3F /* Model */,
 				F54973842668A94600181E3F /* View */,
 				F54973852668A94600181E3F /* ViewController */,
@@ -772,6 +781,8 @@
 		F54973822668A94600181E3F /* DataController */ = {
 			isa = PBXGroup;
 			children = (
+				F55D2C432671EE2B006BACCF /* TSCategoryDataController.h */,
+				F55D2C442671EE2B006BACCF /* TSCategoryDataController.m */,
 			);
 			path = DataController;
 			sourceTree = "<group>";
@@ -779,6 +790,8 @@
 		F54973832668A94600181E3F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				F55D2C492671F13B006BACCF /* TSCategoryKindModel.h */,
+				F55D2C4A2671F13B006BACCF /* TSCategoryKindModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -786,6 +799,8 @@
 		F54973842668A94600181E3F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F55D2C462671EE56006BACCF /* TSCategoryKindCell.h */,
+				F55D2C472671EE56006BACCF /* TSCategoryKindCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1473,6 +1488,7 @@
 				F56D4B3F266DFB8900C1AD9E /* FMLayoutAbsoluteSection.m in Sources */,
 				F56D4B44266DFB8900C1AD9E /* FMCollectionLayoutAttributes.m in Sources */,
 				F55D2ACD266F5C95006BACCF /* TSHomePageReleaseCell.m in Sources */,
+				F55D2C4B2671F13B006BACCF /* TSCategoryKindModel.m in Sources */,
 				F54973BF2668C01F00181E3F /* TSTipsConst.m in Sources */,
 				C2EF88B22670997100E7374A /* TSCartViewModel.m in Sources */,
 				F55D2C392671E14B006BACCF /* TSCollectionViewLeftAlignedLayout.m in Sources */,
@@ -1488,6 +1504,8 @@
 				F54973AB2668B9B500181E3F /* TSBaseNavigationController.m in Sources */,
 				F56D4B5B266E02BA00C1AD9E /* UIFont+General.m in Sources */,
 				C206A4FA266F1DA400B69DED /* TSLoginController.m in Sources */,
+				F55D2C482671EE56006BACCF /* TSCategoryKindCell.m in Sources */,
+				F55D2C452671EE2B006BACCF /* TSCategoryDataController.m in Sources */,
 				F54973B12668BBB200181E3F /* TSCategoryViewController.m in Sources */,
 				F55D2C372671E14B006BACCF /* TSUniversalTableViewCell.m in Sources */,
 				F54973C22668C0BC00181E3F /* TSDeviceHelper.m in Sources */,

@@ -19,6 +19,7 @@
 #import "UIView+TSSafeArea.h"
 #import "MyDimeScale.h"
 #import "FMLayoutKit.h"
+#import "UIImage+TSColor.h"
 
 #import <YYKit/YYKit.h>
 #import <YTKNetwork/YTKNetwork.h>

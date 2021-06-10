@@ -25,18 +25,28 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+}
 
-    self.view.backgroundColor = [UIColor orangeColor];
+-(void)setupNavigationBar{
+    [super setupNavigationBar];
+    
+    self.navigationItem.titleView = self.searchButton;
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.categoryButton];
 }
 
 - (void)fillCustomView{
-    [self.view addSubview:self.searchButton];
-    [self.view addSubview:self.categoryButton];
+    [self.view addSubview:self.tableView];
+    [self.view addSubview:self.collectionView];
+    
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view);
+        
+    }];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 -(void)viewWillLayoutSubviews{
@@ -44,18 +54,11 @@
     CGFloat bottom = self.view.ts_safeAreaInsets.bottom + 10;
     CGFloat top = self.view.ts_safeAreaInsets.top + 6;
     
-    [self.searchButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.view).offset(16);
-        make.right.equalTo(self.view).offset(-49);
-        make.top.equalTo(self.view).offset(top);
-        make.height.mas_equalTo(32);
-    }];
     
-    [self.categoryButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.searchButton.mas_right).offset(8);
-        make.centerY.equalTo(self.searchButton);
-        make.width.height.mas_equalTo(24);
-    }];
+}
+
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleDefault;
 }
 
 #pragma mark - Action
@@ -82,7 +85,9 @@
     if (!_searchButton) {
         _searchButton = [TSGeneralSearchButton buttonWithType:UIButtonTypeCustom];
         [_searchButton setTitle:@"电视" forState:UIControlStateNormal];
+        _searchButton.backgroundColor = KGrayColor;
         [_searchButton addTarget:self action:@selector(searchAction:) forControlEvents:UIControlEventTouchUpInside];
+        _searchButton.frame = CGRectMake(16, 0, kScreenWidth - 65, 32);
     }
     return _searchButton;
 }
@@ -90,10 +95,11 @@
 -(UIButton *)categoryButton{
     if (!_categoryButton) {
         _categoryButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_categoryButton setImage:KImageMake(@"mall_home_classification") forState:UIControlStateNormal];
-        [_categoryButton setImage:KImageMake(@"mall_home_classification") forState:UIControlStateHighlighted];
+        [_categoryButton setImage:KImageMake(@"mall_category_cart") forState:UIControlStateNormal];
+        [_categoryButton setImage:KImageMake(@"mall_category_cart") forState:UIControlStateHighlighted];
         [_categoryButton addTarget:self action:@selector(categoryAction:) forControlEvents:UIControlEventTouchUpInside];
         _categoryButton.imageView.contentMode = UIViewContentModeCenter;
+        _categoryButton.bounds = CGRectMake(0, 0, 32, 32);
     }
     return _categoryButton;
 }
@@ -103,6 +109,7 @@
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return _tableView;
 }
