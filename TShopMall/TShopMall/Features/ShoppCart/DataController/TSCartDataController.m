@@ -14,8 +14,14 @@
 @implementation TSCartDataController
 
 + (instancetype)getInfoFinished:(void (^)(TSCartModel *, NSError *))finished{
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"cart" ofType:@"json"];
+    NSError *error;
+    NSData *data = [[NSData alloc] initWithContentsOfFile:path];
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
+    TSCartModel *cartModel = [TSCartModel  modelWithJSON:dic];
+    
     TSCartDataController *dataCon = TSCartDataController.new;
-    finished(nil, nil);
+    finished(cartModel, nil);
     return dataCon;
 }
 

@@ -18,32 +18,11 @@
 + (NSArray<TSCartGoodsSection *> *)viewModel:(TSCartModel *)model{
     NSMutableArray<TSCartGoodsSection *> *sections = [NSMutableArray array];
     
-    for (NSInteger i=0; i<2; i++) {
-        TSCartModel *model = [TSCartModel new];
-        model.hasGift = i;
-        
-        TSCartGoodsRow *row = [TSCartGoodsRow new];
-        row.cellIdentifier = @"TSCartCell";
-        row.obj = model;
-
-        TSCartGoodsSection *section = [TSCartGoodsSection new];
-        section.heightForFooter = KRateW(10.0);
-        section.rows = @[row];
-        [sections addObject:section];
+    if (model == nil || model.carts.count == 0) {
+        [sections addObject:[TSCartViewModel emptyRow]];
+    } else {
+        [sections addObjectsFromArray:[TSCartViewModel congifgsGoods:model.carts]];
     }
-    
-    NSMutableArray *invalidRow = [NSMutableArray array];
-    for (NSInteger i=0; i<2; i++) {
-        TSCartGoodsRow *row = [TSCartGoodsRow new];
-        row.cellIdentifier = i/1==0? @"TSCartInvalidCell":@"TSCartInvalidTaoCanCell";
-        [invalidRow addObject:row];
-    }
-    TSCartGoodsSection *section = [TSCartGoodsSection new];
-    section.heightForHeader = KRateW(54.0);
-    section.headerIdentifier = @"TSCartInvalidHeader";
-    section.heightForFooter = KRateW(10.0);
-    section.rows = invalidRow;
-    [sections addObject:section];
     
     TSCartGoodsRow *recomendRow = [TSCartGoodsRow new];
     recomendRow.cellIdentifier = @"TSCartRecomendCell";
@@ -58,7 +37,52 @@
     return sections;
 }
 
-+ (NSArray<TSCartModel *> *)canOperationGoodsInSections:(NSArray<TSCartGoodsSection *> *)sections{
++ (TSCartGoodsSection *)emptyRow{
+    TSCartGoodsRow *row = [TSCartGoodsRow new];
+    row.cellIdentifier = @"TSCartEmptyCell";
+    row.isAutoHeight = NO;
+    row.rowHeight = KRateW(384.0);
+    
+    TSCartGoodsSection *section = [TSCartGoodsSection new];
+    section.heightForHeader = 0.1f;
+    section.heightForFooter = 0.1f;
+    section.rows = @[row];
+    return section;
+}
+
++ (NSArray<TSCartGoodsSection *> *)congifgsGoods:(NSArray<TSCart *> *)carts{
+    NSMutableArray *sections = [NSMutableArray array];
+    for (NSInteger i=0; i<carts.count; i++) {
+        TSCartGoodsRow *row = [TSCartGoodsRow new];
+        row.cellIdentifier = @"TSCartCell";
+        row.obj = carts[i];
+
+        TSCartGoodsSection *section = [TSCartGoodsSection new];
+        section.heightForFooter = KRateW(10.0);
+        section.rows = @[row];
+        [sections addObject:section];
+    }
+    
+    return sections;
+}
+
++ (TSCartGoodsSection *)congifgInvalidGoods:(id)obj{
+    NSMutableArray *invalidRow = [NSMutableArray array];
+    for (NSInteger i=0; i<2; i++) {
+        TSCartGoodsRow *row = [TSCartGoodsRow new];
+        row.cellIdentifier = i/1==0? @"TSCartInvalidCell":@"TSCartInvalidTaoCanCell";
+        [invalidRow addObject:row];
+    }
+    TSCartGoodsSection *section = [TSCartGoodsSection new];
+    section.heightForHeader = KRateW(54.0);
+    section.headerIdentifier = @"TSCartInvalidHeader";
+    section.heightForFooter = KRateW(10.0);
+    section.rows = invalidRow;
+    
+    return section;
+}
+
++ (NSArray<TSCart *> *)canOperationGoodsInSections:(NSArray<TSCartGoodsSection *> *)sections{
     NSMutableArray *arr = [NSMutableArray array];
     for (TSCartGoodsSection *section in sections) {
         TSCartGoodsRow *row = [section.rows lastObject];
@@ -69,8 +93,8 @@
     return arr;
 }
 
-+ (BOOL)isAllGoodsSelected:(NSArray<TSCartModel *> *)goods{
-    for (TSCartModel *model in goods) {
++ (BOOL)isAllGoodsSelected:(NSArray<TSCart *> *)goods{
+    for (TSCart *model in goods) {
         if (model.isSelected == NO) {
             return NO;
         }
@@ -78,20 +102,20 @@
     return YES;
 }
 
-+ (NSArray<TSCartModel *> *)selectedInfo:(NSArray<TSCartModel *> *)cartModels{
++ (NSArray<TSCart *> *)selectedInfo:(NSArray<TSCart *> *)cartModels{
     NSMutableArray *arr = [NSMutableArray array];
-    for (TSCartModel *model in cartModels) {
+    for (TSCart *model in cartModels) {
         if (model.isSelected == YES) {
             [arr addObject:model];
         }
     }
     return arr;
 }
-+ (NSString *)totalPrice:(NSArray<TSCartModel *> *)cartModels{
++ (NSString *)totalPrice:(NSArray<TSCart *> *)cartModels{
     CGFloat totalPrice = 0;
-    for (TSCartModel *model in cartModels) {
+    for (TSCart *model in cartModels) {
         if (model.isSelected == YES) {
-            totalPrice = totalPrice + model.price.floatValue * model.num;
+            totalPrice = totalPrice + model.finalPrice.floatValue * model.buyNum;
         }
     }
     return [NSString stringWithFormat:@"%.2f", totalPrice];

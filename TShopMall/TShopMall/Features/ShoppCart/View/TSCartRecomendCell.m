@@ -18,11 +18,14 @@
     if (self == [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.selectionStyle =  UITableViewCellSelectionStyleNone;
         self.backgroundColor = KHexColor(@"#F4F4F4");
+        [self layoutView];
     }
     return self;
 }
 
-- (void)layoutSubviews{
+- (void)layoutView{
+    [self.leftView performSelector:@selector(layoutView)];
+    [self.rightView performSelector:@selector(layoutView)];
     [self.leftView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contentView.mas_left).offset(KRateW(16.0));
         make.top.equalTo(self.contentView);
@@ -63,13 +66,6 @@
 @end
 
 @implementation TSCartRecomendView
-
-- (instancetype)init{
-    if (self == [super init]) {
-        [self layoutView];
-    }
-    return self;
-}
 
 - (void)testUI{
     self.backgroundColor = [UIColor whiteColor];

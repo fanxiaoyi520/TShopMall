@@ -43,6 +43,14 @@
 		C2EF88D02670A3B200E7374A /* TSCartRecomendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EF88CE2670A3B200E7374A /* TSCartRecomendCell.m */; };
 		C2EF88D12670A3B200E7374A /* TSCartRecomendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EF88CE2670A3B200E7374A /* TSCartRecomendCell.m */; };
 		C2EF88D52670B8B900E7374A /* TSCartBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EF88D42670B8B900E7374A /* TSCartBaseCell.m */; };
+		C2EF88D82671AB6B00E7374A /* TSNumOperationView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EF88D72671AB6B00E7374A /* TSNumOperationView.m */; };
+		C2EF88DB2671E28100E7374A /* TSEmptyAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EF88DA2671E28100E7374A /* TSEmptyAlertView.m */; };
+		C2EF88DE2671E92400E7374A /* TSCartEmptyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EF88DD2671E92400E7374A /* TSCartEmptyCell.m */; };
+		C2EF88E02671F79800E7374A /* cart.json in Resources */ = {isa = PBXBuildFile; fileRef = C2EF88DF2671F79700E7374A /* cart.json */; };
+		DC3440AC26720D9200F5B0DA /* TSCollectionViewMeanWidthLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3440A826720D9200F5B0DA /* TSCollectionViewMeanWidthLayout.m */; };
+		DC3440AD26720D9200F5B0DA /* TSCollectionViewLineWrapLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3440A926720D9200F5B0DA /* TSCollectionViewLineWrapLayout.m */; };
+		DC3440B226720E4C00F5B0DA /* TSGridButtonCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3440B026720E4C00F5B0DA /* TSGridButtonCollectionView.m */; };
+		DC3440B326720E4C00F5B0DA /* TSGridButtonCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3440B126720E4C00F5B0DA /* TSGridButtonCollectionViewCell.m */; };
 		E2BE996F8804E0C3E7D5AE61 /* libPods-TShopMall-TShopMallUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD1ABBE857D307088E9BF2DC /* libPods-TShopMall-TShopMallUITests.a */; };
 		F54972FE2668842500181E3F /* TShopMallTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F54972FD2668842500181E3F /* TShopMallTests.m */; };
 		F54973092668842500181E3F /* TShopMallUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F54973082668842500181E3F /* TShopMallUITests.m */; };
@@ -184,9 +192,24 @@
 		C2EF88D22670B75000E7374A /* TSCartProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSCartProtocol.h; sourceTree = "<group>"; };
 		C2EF88D32670B8B900E7374A /* TSCartBaseCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSCartBaseCell.h; sourceTree = "<group>"; };
 		C2EF88D42670B8B900E7374A /* TSCartBaseCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSCartBaseCell.m; sourceTree = "<group>"; };
+		C2EF88D62671AB6B00E7374A /* TSNumOperationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSNumOperationView.h; sourceTree = "<group>"; };
+		C2EF88D72671AB6B00E7374A /* TSNumOperationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSNumOperationView.m; sourceTree = "<group>"; };
+		C2EF88D92671E28100E7374A /* TSEmptyAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSEmptyAlertView.h; sourceTree = "<group>"; };
+		C2EF88DA2671E28100E7374A /* TSEmptyAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSEmptyAlertView.m; sourceTree = "<group>"; };
+		C2EF88DC2671E92400E7374A /* TSCartEmptyCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSCartEmptyCell.h; sourceTree = "<group>"; };
+		C2EF88DD2671E92400E7374A /* TSCartEmptyCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSCartEmptyCell.m; sourceTree = "<group>"; };
+		C2EF88DF2671F79700E7374A /* cart.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = cart.json; sourceTree = "<group>"; };
 		C4B53CFE051CAFD3DA82AB3F /* Pods-TShopMall-TShopMallUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TShopMall-TShopMallUITests.debug.xcconfig"; path = "Target Support Files/Pods-TShopMall-TShopMallUITests/Pods-TShopMall-TShopMallUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		CD1ABBE857D307088E9BF2DC /* libPods-TShopMall-TShopMallUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TShopMall-TShopMallUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5195F8AB1644614CD0BA09C /* Pods-TShopMall.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TShopMall.release.xcconfig"; path = "Target Support Files/Pods-TShopMall/Pods-TShopMall.release.xcconfig"; sourceTree = "<group>"; };
+		DC3440A826720D9200F5B0DA /* TSCollectionViewMeanWidthLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSCollectionViewMeanWidthLayout.m; sourceTree = "<group>"; };
+		DC3440A926720D9200F5B0DA /* TSCollectionViewLineWrapLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSCollectionViewLineWrapLayout.m; sourceTree = "<group>"; };
+		DC3440AA26720D9200F5B0DA /* TSCollectionViewMeanWidthLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSCollectionViewMeanWidthLayout.h; sourceTree = "<group>"; };
+		DC3440AB26720D9200F5B0DA /* TSCollectionViewLineWrapLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSCollectionViewLineWrapLayout.h; sourceTree = "<group>"; };
+		DC3440AE26720E4C00F5B0DA /* TSGridButtonCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSGridButtonCollectionViewCell.h; sourceTree = "<group>"; };
+		DC3440AF26720E4C00F5B0DA /* TSGridButtonCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSGridButtonCollectionView.h; sourceTree = "<group>"; };
+		DC3440B026720E4C00F5B0DA /* TSGridButtonCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSGridButtonCollectionView.m; sourceTree = "<group>"; };
+		DC3440B126720E4C00F5B0DA /* TSGridButtonCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSGridButtonCollectionViewCell.m; sourceTree = "<group>"; };
 		ECCE8A564DF47B445E7905B1 /* Pods-TShopMall-TShopMallUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TShopMall-TShopMallUITests.release.xcconfig"; path = "Target Support Files/Pods-TShopMall-TShopMallUITests/Pods-TShopMall-TShopMallUITests.release.xcconfig"; sourceTree = "<group>"; };
 		F54972DE2668842200181E3F /* TShopMall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TShopMall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F54972F22668842400181E3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -479,6 +502,7 @@
 			children = (
 				C2EF88A02670997100E7374A /* TSCartModel.h */,
 				C2EF889F2670997100E7374A /* TSCartModel.m */,
+				C2EF88DF2671F79700E7374A /* cart.json */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -498,9 +522,15 @@
 				C2EF88A62670997100E7374A /* TSCartInvalidCell.m */,
 				C2EF88CD2670A3B200E7374A /* TSCartRecomendCell.h */,
 				C2EF88CE2670A3B200E7374A /* TSCartRecomendCell.m */,
+				C2EF88DC2671E92400E7374A /* TSCartEmptyCell.h */,
+				C2EF88DD2671E92400E7374A /* TSCartEmptyCell.m */,
 				C2EF88D22670B75000E7374A /* TSCartProtocol.h */,
 				C2EF88D32670B8B900E7374A /* TSCartBaseCell.h */,
 				C2EF88D42670B8B900E7374A /* TSCartBaseCell.m */,
+				C2EF88D62671AB6B00E7374A /* TSNumOperationView.h */,
+				C2EF88D72671AB6B00E7374A /* TSNumOperationView.m */,
+				C2EF88D92671E28100E7374A /* TSEmptyAlertView.h */,
+				C2EF88DA2671E28100E7374A /* TSEmptyAlertView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -508,8 +538,8 @@
 		C2EF88AC2670997100E7374A /* DataController */ = {
 			isa = PBXGroup;
 			children = (
-				C2EF88AD2670997100E7374A /* TSCartDataController.m */,
 				C2EF88AE2670997100E7374A /* TSCartDataController.h */,
+				C2EF88AD2670997100E7374A /* TSCartDataController.m */,
 			);
 			path = DataController;
 			sourceTree = "<group>";
@@ -522,6 +552,21 @@
 				1942D505D7004833F274B5D1 /* libPods-TShopMallTests.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DC3440A726720D9200F5B0DA /* CollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				DC3440AF26720E4C00F5B0DA /* TSGridButtonCollectionView.h */,
+				DC3440B026720E4C00F5B0DA /* TSGridButtonCollectionView.m */,
+				DC3440AE26720E4C00F5B0DA /* TSGridButtonCollectionViewCell.h */,
+				DC3440B126720E4C00F5B0DA /* TSGridButtonCollectionViewCell.m */,
+				DC3440A826720D9200F5B0DA /* TSCollectionViewMeanWidthLayout.m */,
+				DC3440A926720D9200F5B0DA /* TSCollectionViewLineWrapLayout.m */,
+				DC3440AA26720D9200F5B0DA /* TSCollectionViewMeanWidthLayout.h */,
+				DC3440AB26720D9200F5B0DA /* TSCollectionViewLineWrapLayout.h */,
+			);
+			path = CollectionView;
 			sourceTree = "<group>";
 		};
 		F54972D52668842200181E3F = {
@@ -958,6 +1003,7 @@
 		F54973A22668AE1300181E3F /* Controls */ = {
 			isa = PBXGroup;
 			children = (
+				DC3440A726720D9200F5B0DA /* CollectionView */,
 				F54973D32668DB9B00181E3F /* SearchButton */,
 			);
 			path = Controls;
@@ -1343,6 +1389,7 @@
 				F54973752668A31000181E3F /* Main.storyboard in Resources */,
 				F54973732668A31000181E3F /* Assets.xcassets in Resources */,
 				F54973742668A31000181E3F /* LaunchScreen.storyboard in Resources */,
+				C2EF88E02671F79800E7374A /* cart.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1483,6 +1530,7 @@
 				F56D4B4C266DFB8900C1AD9E /* FMLayoutCrossCell.m in Sources */,
 				F56D4B3A266DFB8900C1AD9E /* FMLayoutBaseSection.m in Sources */,
 				C2EF88BB2670997100E7374A /* TSCartHeaderFooterView.m in Sources */,
+				C2EF88DE2671E92400E7374A /* TSCartEmptyCell.m in Sources */,
 				F54973BA2668BC0B00181E3F /* TSMineViewController.m in Sources */,
 				F55D2AD6266F67EF006BACCF /* TSHomePageContainerCell.m in Sources */,
 				F56D4B63266E037600C1AD9E /* MyDimeScale.m in Sources */,
@@ -1493,6 +1541,7 @@
 				F56D4B4E266DFB8900C1AD9E /* FMKVOArrayObject.m in Sources */,
 				F54973D62668DBF500181E3F /* TSGeneralSearchButton.m in Sources */,
 				F54973C82668C1D600181E3F /* TSNotificationConst.m in Sources */,
+				DC3440AC26720D9200F5B0DA /* TSCollectionViewMeanWidthLayout.m in Sources */,
 				F54973D22668CF3300181E3F /* AppDelegate+RootController.m in Sources */,
 				F55D2C6C267231AA006BACCF /* TSCategoryHeaderReusableView.m in Sources */,
 				F55D2C6926722807006BACCF /* TSCategoryDataController.m in Sources */,
@@ -1523,6 +1572,7 @@
 				F56D4B3D266DFB8900C1AD9E /* FMLayoutFillSection.m in Sources */,
 				F54973CF2668CABD00181E3F /* UIView+Extension.m in Sources */,
 				F56D4B3B266DFB8900C1AD9E /* FMLayoutCombineSection.m in Sources */,
+				DC3440B326720E4C00F5B0DA /* TSGridButtonCollectionViewCell.m in Sources */,
 				F54973AB2668B9B500181E3F /* TSBaseNavigationController.m in Sources */,
 				F56D4B5B266E02BA00C1AD9E /* UIFont+General.m in Sources */,
 				C206A4FA266F1DA400B69DED /* TSLoginController.m in Sources */,
@@ -1532,6 +1582,7 @@
 				F55D2C352671E14B006BACCF /* TSUniversalFlowLayout.m in Sources */,
 				F56D4B3C266DFB8900C1AD9E /* FMLayoutLabelSection.m in Sources */,
 				F55D2AEA266F9CEC006BACCF /* TSUniverseBackgroundHeaderView.m in Sources */,
+				DC3440B226720E4C00F5B0DA /* TSGridButtonCollectionView.m in Sources */,
 				F54973612668A22100181E3F /* SSBaseRequest.m in Sources */,
 				C2EF88B82670997100E7374A /* TSCartModel.m in Sources */,
 				F54973662668A22100181E3F /* YTKBaseRequest+AnimatingAccessory.m in Sources */,
@@ -1548,11 +1599,13 @@
 				C2EF88CF2670A3B200E7374A /* TSCartRecomendCell.m in Sources */,
 				F54973652668A22100181E3F /* YTKChainRequest+AnimatingAccessory.m in Sources */,
 				F56D4B41266DFB8900C1AD9E /* FMLayoutFixedSection.m in Sources */,
+				DC3440AD26720D9200F5B0DA /* TSCollectionViewLineWrapLayout.m in Sources */,
 				F55D2AC4266F15C5006BACCF /* TSHomePageCategoryCell.m in Sources */,
 				F549736B2668A2C700181E3F /* AppDelegate.m in Sources */,
 				C2EF88BE2670997100E7374A /* TSCartView.m in Sources */,
 				F55D2C3D2671E14B006BACCF /* TSUniversaItemModel.m in Sources */,
 				F56D4B46266DFB8900C1AD9E /* FMLayoutHeader.m in Sources */,
+				C2EF88DB2671E28100E7374A /* TSEmptyAlertView.m in Sources */,
 				C2EF88C42670997100E7374A /* TSCartInvalidCell.m in Sources */,
 				F56D4B45266DFB8900C1AD9E /* FMLayoutFooter.m in Sources */,
 				F55D2AE6266F983E006BACCF /* TSUniverseCollectionBackgroundView.m in Sources */,
@@ -1568,6 +1621,7 @@
 				F56D4B42266DFB8900C1AD9E /* FMLayoutView.m in Sources */,
 				F56D4B3E266DFB8900C1AD9E /* FMLayoutDynamicSection.m in Sources */,
 				F54973602668A22100181E3F /* SSGenaralRequest.m in Sources */,
+				C2EF88D82671AB6B00E7374A /* TSNumOperationView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1763,6 +1817,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				EXCLUDED_ARCHS = arm64;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PREFIX_HEADER = TShopMall/Expand/Macros/TSPrefixHeader.pch;
 				INFOPLIST_FILE = TShopMall/Info.plist;
@@ -1771,6 +1826,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.chenjie.UICollectionView.TShopMall;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1784,6 +1840,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				EXCLUDED_ARCHS = arm64;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PREFIX_HEADER = TShopMall/Expand/Macros/TSPrefixHeader.pch;
 				INFOPLIST_FILE = TShopMall/Info.plist;

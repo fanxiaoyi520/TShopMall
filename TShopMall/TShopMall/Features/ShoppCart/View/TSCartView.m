@@ -28,12 +28,16 @@
 - (void)clearInvalideGoods{}
 - (void)goodsSelectedStatusChanged{}
 
-- (void)goodsSelected:(TSCartModel *)cartModel indexPath:(NSIndexPath *)indexPath{
+- (void)goodsSelected:(TSCart *)cartModel indexPath:(NSIndexPath *)indexPath{
     self.sections[indexPath.section].rows[indexPath.row].obj = cartModel;
     [self.controller performSelector:@selector(goodsSelectedStatusChanged)];
 }
 
-- (void)checkGift:(TSCartModel *)cartModel{
+- (void)checkGift:(TSCart *)cartModel{
+    
+}
+
+- (void)goToShopping{
     
 }
 
@@ -54,6 +58,16 @@
     cell.delegate = self;
     cell.indexPath = indexPath;
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    TSCartGoodsRow *row = self.sections[indexPath.section].rows[indexPath.row];
+    return row.rowHeight;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    TSCartGoodsRow *row = self.sections[indexPath.section].rows[indexPath.row];
+    return row.rowHeight;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
@@ -103,8 +117,6 @@
     self.tableView.backgroundColor = KHexColor(@"#F4F4F4");
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    self.tableView.rowHeight = UITableViewAutomaticDimension;
-    self.tableView.estimatedRowHeight = 200;
     self.tableView.showsVerticalScrollIndicator = NO;
     [self addSubview:self.tableView];
     

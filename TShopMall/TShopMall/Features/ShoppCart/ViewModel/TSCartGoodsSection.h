@@ -23,5 +23,7 @@
 @interface TSCartGoodsRow : NSObject
 @property (nonatomic, copy) NSString *cellIdentifier;
 @property (nonatomic, strong) id obj;
+@property (nonatomic, assign) BOOL isAutoHeight;
+@property (nonatomic, assign) CGFloat rowHeight;
 @end
 

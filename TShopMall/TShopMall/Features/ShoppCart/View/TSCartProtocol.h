@@ -6,14 +6,14 @@
 //
 
 #import <Foundation/Foundation.h>
-
-@class TSCartModel;
+#import "TSCartModel.h"
 
 @protocol TSCartProtocol <NSObject>
 
 @optional
-- (void)goodsSelected:(TSCartModel *)cartModel indexPath:(NSIndexPath *)indexPath;
+- (void)goodsSelected:(TSCart *)cartModel indexPath:(NSIndexPath *)indexPath;
 - (void)allSelected:(BOOL)status;
-- (void)checkGift:(TSCartModel *)cartModel;
+- (void)checkGift:(TSCart *)cartModel;
+- (void)goToShopping;
 @end
 
