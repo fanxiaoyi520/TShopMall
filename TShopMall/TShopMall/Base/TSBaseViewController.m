@@ -9,6 +9,7 @@
 
 @interface TSBaseViewController ()
 
+
 @end
 
 @implementation TSBaseViewController
@@ -26,27 +27,23 @@
 }
 
 #pragma mark - 基本设置
--(void)setupBasic
-{
+-(void)setupBasic{
     self.view.backgroundColor = KGrayColor;
 }
 
-#pragma mark - 设置导航栏
--(void)setupNavigationBar
-{
-    
+#pragma mark - 设置导航栏为白色
+-(void)setupNavigationBar{
+    UIImage *whiteImage = [UIImage imageWithColor:UIColor.whiteColor];
+    [self.navigationController.navigationBar setBackgroundImage:whiteImage forBarMetrics:UIBarMetricsDefault];
 }
 
 #pragma mark - 隐藏导航栏
--(void)hiddenNavigationBar
-{
-    [self.navigationController.navigationBar setBackgroundImage:UIImage.new forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBar.shadowImage = UIImage.new;
+-(void)hiddenNavigationBar{
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 #pragma mark - 添加子控件
--(void)fillCustomView
-{
+-(void)fillCustomView{
     
 }
 
