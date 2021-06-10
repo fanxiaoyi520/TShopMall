@@ -99,9 +99,14 @@
 		F55D2C3C2671E14B006BACCF /* TSUniversalSectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2C332671E14B006BACCF /* TSUniversalSectionModel.m */; };
 		F55D2C3D2671E14B006BACCF /* TSUniversaItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2C342671E14B006BACCF /* TSUniversaItemModel.m */; };
 		F55D2C422671E299006BACCF /* UIImage+TSColor.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2C412671E299006BACCF /* UIImage+TSColor.m */; };
-		F55D2C452671EE2B006BACCF /* TSCategoryDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2C442671EE2B006BACCF /* TSCategoryDataController.m */; };
-		F55D2C482671EE56006BACCF /* TSCategoryKindCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2C472671EE56006BACCF /* TSCategoryKindCell.m */; };
-		F55D2C4B2671F13B006BACCF /* TSCategoryKindModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2C4A2671F13B006BACCF /* TSCategoryKindModel.m */; };
+		F55D2C6426722807006BACCF /* TSCategoryKindCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2C5926722807006BACCF /* TSCategoryKindCell.m */; };
+		F55D2C6526722807006BACCF /* TSCategoryBannerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2C5A26722807006BACCF /* TSCategoryBannerCell.m */; };
+		F55D2C6626722807006BACCF /* TSMeasureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2C5B26722807006BACCF /* TSMeasureCell.m */; };
+		F55D2C6726722807006BACCF /* TSCategoryKindModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2C5D26722807006BACCF /* TSCategoryKindModel.m */; };
+		F55D2C6826722807006BACCF /* TSCategorySectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2C5E26722807006BACCF /* TSCategorySectionModel.m */; };
+		F55D2C6926722807006BACCF /* TSCategoryDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2C6226722807006BACCF /* TSCategoryDataController.m */; };
+		F55D2C6C267231AA006BACCF /* TSCategoryHeaderReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2C6B267231AA006BACCF /* TSCategoryHeaderReusableView.m */; };
+		F55D2C6F26723C2B006BACCF /* TSRecommendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2C6E26723C2B006BACCF /* TSRecommendCell.m */; };
 		F56D4B3A266DFB8900C1AD9E /* FMLayoutBaseSection.m in Sources */ = {isa = PBXBuildFile; fileRef = F56D4B04266DFB8900C1AD9E /* FMLayoutBaseSection.m */; };
 		F56D4B3B266DFB8900C1AD9E /* FMLayoutCombineSection.m in Sources */ = {isa = PBXBuildFile; fileRef = F56D4B06266DFB8900C1AD9E /* FMLayoutCombineSection.m */; };
 		F56D4B3C266DFB8900C1AD9E /* FMLayoutLabelSection.m in Sources */ = {isa = PBXBuildFile; fileRef = F56D4B07266DFB8900C1AD9E /* FMLayoutLabelSection.m */; };
@@ -294,12 +299,22 @@
 		F55D2C342671E14B006BACCF /* TSUniversaItemModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSUniversaItemModel.m; sourceTree = "<group>"; };
 		F55D2C402671E298006BACCF /* UIImage+TSColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+TSColor.h"; sourceTree = "<group>"; };
 		F55D2C412671E299006BACCF /* UIImage+TSColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+TSColor.m"; sourceTree = "<group>"; };
-		F55D2C432671EE2B006BACCF /* TSCategoryDataController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TSCategoryDataController.h; path = TShopMall/Expand/Category/TSCategoryDataController.h; sourceTree = SOURCE_ROOT; };
-		F55D2C442671EE2B006BACCF /* TSCategoryDataController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = TSCategoryDataController.m; path = TShopMall/Expand/Category/TSCategoryDataController.m; sourceTree = SOURCE_ROOT; };
-		F55D2C462671EE56006BACCF /* TSCategoryKindCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TSCategoryKindCell.h; path = TShopMall/Expand/Category/TSCategoryKindCell.h; sourceTree = SOURCE_ROOT; };
-		F55D2C472671EE56006BACCF /* TSCategoryKindCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = TSCategoryKindCell.m; path = TShopMall/Expand/Category/TSCategoryKindCell.m; sourceTree = SOURCE_ROOT; };
-		F55D2C492671F13B006BACCF /* TSCategoryKindModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TSCategoryKindModel.h; path = TShopMall/Expand/Category/TSCategoryKindModel.h; sourceTree = SOURCE_ROOT; };
-		F55D2C4A2671F13B006BACCF /* TSCategoryKindModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = TSCategoryKindModel.m; path = TShopMall/Expand/Category/TSCategoryKindModel.m; sourceTree = SOURCE_ROOT; };
+		F55D2C5626722807006BACCF /* TSCategoryKindCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSCategoryKindCell.h; sourceTree = "<group>"; };
+		F55D2C5726722807006BACCF /* TSCategoryBannerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSCategoryBannerCell.h; sourceTree = "<group>"; };
+		F55D2C5826722807006BACCF /* TSMeasureCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSMeasureCell.h; sourceTree = "<group>"; };
+		F55D2C5926722807006BACCF /* TSCategoryKindCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSCategoryKindCell.m; sourceTree = "<group>"; };
+		F55D2C5A26722807006BACCF /* TSCategoryBannerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSCategoryBannerCell.m; sourceTree = "<group>"; };
+		F55D2C5B26722807006BACCF /* TSMeasureCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSMeasureCell.m; sourceTree = "<group>"; };
+		F55D2C5D26722807006BACCF /* TSCategoryKindModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSCategoryKindModel.m; sourceTree = "<group>"; };
+		F55D2C5E26722807006BACCF /* TSCategorySectionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSCategorySectionModel.m; sourceTree = "<group>"; };
+		F55D2C5F26722807006BACCF /* TSCategorySectionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSCategorySectionModel.h; sourceTree = "<group>"; };
+		F55D2C6026722807006BACCF /* TSCategoryKindModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSCategoryKindModel.h; sourceTree = "<group>"; };
+		F55D2C6226722807006BACCF /* TSCategoryDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSCategoryDataController.m; sourceTree = "<group>"; };
+		F55D2C6326722807006BACCF /* TSCategoryDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSCategoryDataController.h; sourceTree = "<group>"; };
+		F55D2C6A267231AA006BACCF /* TSCategoryHeaderReusableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSCategoryHeaderReusableView.h; sourceTree = "<group>"; };
+		F55D2C6B267231AA006BACCF /* TSCategoryHeaderReusableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSCategoryHeaderReusableView.m; sourceTree = "<group>"; };
+		F55D2C6D26723C2B006BACCF /* TSRecommendCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSRecommendCell.h; sourceTree = "<group>"; };
+		F55D2C6E26723C2B006BACCF /* TSRecommendCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSRecommendCell.m; sourceTree = "<group>"; };
 		F56D4B04266DFB8900C1AD9E /* FMLayoutBaseSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLayoutBaseSection.m; sourceTree = "<group>"; };
 		F56D4B05266DFB8900C1AD9E /* FMLayoutFixedSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLayoutFixedSection.h; sourceTree = "<group>"; };
 		F56D4B06266DFB8900C1AD9E /* FMLayoutCombineSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLayoutCombineSection.m; sourceTree = "<group>"; };
@@ -762,47 +777,12 @@
 		F54973802668A94600181E3F /* Category */ = {
 			isa = PBXGroup;
 			children = (
-				F54973822668A94600181E3F /* DataController */,
-				F54973812668A94600181E3F /* ViewModel */,
-				F54973832668A94600181E3F /* Model */,
-				F54973842668A94600181E3F /* View */,
+				F55D2C6126722807006BACCF /* DataController */,
+				F55D2C5C26722807006BACCF /* Model */,
+				F55D2C5526722807006BACCF /* View */,
 				F54973852668A94600181E3F /* ViewController */,
 			);
 			path = Category;
-			sourceTree = "<group>";
-		};
-		F54973812668A94600181E3F /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		F54973822668A94600181E3F /* DataController */ = {
-			isa = PBXGroup;
-			children = (
-				F55D2C432671EE2B006BACCF /* TSCategoryDataController.h */,
-				F55D2C442671EE2B006BACCF /* TSCategoryDataController.m */,
-			);
-			path = DataController;
-			sourceTree = "<group>";
-		};
-		F54973832668A94600181E3F /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				F55D2C492671F13B006BACCF /* TSCategoryKindModel.h */,
-				F55D2C4A2671F13B006BACCF /* TSCategoryKindModel.m */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		F54973842668A94600181E3F /* View */ = {
-			isa = PBXGroup;
-			children = (
-				F55D2C462671EE56006BACCF /* TSCategoryKindCell.h */,
-				F55D2C472671EE56006BACCF /* TSCategoryKindCell.m */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		F54973852668A94600181E3F /* ViewController */ = {
@@ -1069,6 +1049,43 @@
 				F55D2C332671E14B006BACCF /* TSUniversalSectionModel.m */,
 			);
 			path = BusinessFramework;
+			sourceTree = "<group>";
+		};
+		F55D2C5526722807006BACCF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F55D2C6A267231AA006BACCF /* TSCategoryHeaderReusableView.h */,
+				F55D2C6B267231AA006BACCF /* TSCategoryHeaderReusableView.m */,
+				F55D2C5626722807006BACCF /* TSCategoryKindCell.h */,
+				F55D2C5926722807006BACCF /* TSCategoryKindCell.m */,
+				F55D2C5726722807006BACCF /* TSCategoryBannerCell.h */,
+				F55D2C5A26722807006BACCF /* TSCategoryBannerCell.m */,
+				F55D2C5826722807006BACCF /* TSMeasureCell.h */,
+				F55D2C5B26722807006BACCF /* TSMeasureCell.m */,
+				F55D2C6D26723C2B006BACCF /* TSRecommendCell.h */,
+				F55D2C6E26723C2B006BACCF /* TSRecommendCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F55D2C5C26722807006BACCF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F55D2C6026722807006BACCF /* TSCategoryKindModel.h */,
+				F55D2C5D26722807006BACCF /* TSCategoryKindModel.m */,
+				F55D2C5F26722807006BACCF /* TSCategorySectionModel.h */,
+				F55D2C5E26722807006BACCF /* TSCategorySectionModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F55D2C6126722807006BACCF /* DataController */ = {
+			isa = PBXGroup;
+			children = (
+				F55D2C6326722807006BACCF /* TSCategoryDataController.h */,
+				F55D2C6226722807006BACCF /* TSCategoryDataController.m */,
+			);
+			path = DataController;
 			sourceTree = "<group>";
 		};
 		F56D4B02266DFB8900C1AD9E /* LayoutKit */ = {
@@ -1461,6 +1478,7 @@
 				F55D2AC1266F110D006BACCF /* TSHomePageBackgroundReusableView.m in Sources */,
 				F55D2C3B2671E14B006BACCF /* TSUniversalDecorationView.m in Sources */,
 				F55D2ACA266F5B6E006BACCF /* TSHomePageReleaseHeaderReusableView.m in Sources */,
+				F55D2C6726722807006BACCF /* TSCategoryKindModel.m in Sources */,
 				F54973632668A22100181E3F /* YTKAnimatingRequestAccessory.m in Sources */,
 				F56D4B4C266DFB8900C1AD9E /* FMLayoutCrossCell.m in Sources */,
 				F56D4B3A266DFB8900C1AD9E /* FMLayoutBaseSection.m in Sources */,
@@ -1468,6 +1486,7 @@
 				F54973BA2668BC0B00181E3F /* TSMineViewController.m in Sources */,
 				F55D2AD6266F67EF006BACCF /* TSHomePageContainerCell.m in Sources */,
 				F56D4B63266E037600C1AD9E /* MyDimeScale.m in Sources */,
+				F55D2C6826722807006BACCF /* TSCategorySectionModel.m in Sources */,
 				F55D2C382671E14B006BACCF /* TSUniversalCollectionViewCell.m in Sources */,
 				F54973B72668BBEE00181E3F /* TSCartViewController.m in Sources */,
 				F56D4B4D266DFB8900C1AD9E /* FMTeslaLayoutView.m in Sources */,
@@ -1475,6 +1494,10 @@
 				F54973D62668DBF500181E3F /* TSGeneralSearchButton.m in Sources */,
 				F54973C82668C1D600181E3F /* TSNotificationConst.m in Sources */,
 				F54973D22668CF3300181E3F /* AppDelegate+RootController.m in Sources */,
+				F55D2C6C267231AA006BACCF /* TSCategoryHeaderReusableView.m in Sources */,
+				F55D2C6926722807006BACCF /* TSCategoryDataController.m in Sources */,
+				F55D2C6626722807006BACCF /* TSMeasureCell.m in Sources */,
+				F55D2C6F26723C2B006BACCF /* TSRecommendCell.m in Sources */,
 				F54973CB2668C27300181E3F /* TSH5InterfacedConst.m in Sources */,
 				F55D2ABE266E0C6B006BACCF /* UIView+TSSafeArea.m in Sources */,
 				F56D4B62266E037600C1AD9E /* MyLayoutMath.m in Sources */,
@@ -1488,7 +1511,6 @@
 				F56D4B3F266DFB8900C1AD9E /* FMLayoutAbsoluteSection.m in Sources */,
 				F56D4B44266DFB8900C1AD9E /* FMCollectionLayoutAttributes.m in Sources */,
 				F55D2ACD266F5C95006BACCF /* TSHomePageReleaseCell.m in Sources */,
-				F55D2C4B2671F13B006BACCF /* TSCategoryKindModel.m in Sources */,
 				F54973BF2668C01F00181E3F /* TSTipsConst.m in Sources */,
 				C2EF88B22670997100E7374A /* TSCartViewModel.m in Sources */,
 				F55D2C392671E14B006BACCF /* TSCollectionViewLeftAlignedLayout.m in Sources */,
@@ -1504,8 +1526,6 @@
 				F54973AB2668B9B500181E3F /* TSBaseNavigationController.m in Sources */,
 				F56D4B5B266E02BA00C1AD9E /* UIFont+General.m in Sources */,
 				C206A4FA266F1DA400B69DED /* TSLoginController.m in Sources */,
-				F55D2C482671EE56006BACCF /* TSCategoryKindCell.m in Sources */,
-				F55D2C452671EE2B006BACCF /* TSCategoryDataController.m in Sources */,
 				F54973B12668BBB200181E3F /* TSCategoryViewController.m in Sources */,
 				F55D2C372671E14B006BACCF /* TSUniversalTableViewCell.m in Sources */,
 				F54973C22668C0BC00181E3F /* TSDeviceHelper.m in Sources */,
@@ -1515,6 +1535,7 @@
 				F54973612668A22100181E3F /* SSBaseRequest.m in Sources */,
 				C2EF88B82670997100E7374A /* TSCartModel.m in Sources */,
 				F54973662668A22100181E3F /* YTKBaseRequest+AnimatingAccessory.m in Sources */,
+				F55D2C6426722807006BACCF /* TSCategoryKindCell.m in Sources */,
 				F54973622668A22100181E3F /* SSResponseModel.m in Sources */,
 				F54973C52668C14F00181E3F /* TSConstant.m in Sources */,
 				C2EF88C72670997100E7374A /* TSCartSettleView.m in Sources */,
@@ -1539,6 +1560,7 @@
 				F54973642668A22100181E3F /* YTKBatchRequest+AnimatingAccessory.m in Sources */,
 				F54973A82668B98000181E3F /* TSTabBarController.m in Sources */,
 				F54973762668A31000181E3F /* main.m in Sources */,
+				F55D2C6526722807006BACCF /* TSCategoryBannerCell.m in Sources */,
 				F56D4B43266DFB8900C1AD9E /* FMLayout.m in Sources */,
 				F54973AE2668BB8100181E3F /* TSHomeViewController.m in Sources */,
 				F56D4B40266DFB8900C1AD9E /* FMLayoutScaleSection.m in Sources */,
