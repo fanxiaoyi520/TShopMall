@@ -79,9 +79,9 @@
     }];
     
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.view);
+        make.left.right.bottom.equalTo(self.view);
         make.top.equalTo(self.bgImageView.mas_bottom).offset(-45);
-        make.bottom.equalTo(self.view).offset(-GK_TABBAR_HEIGHT);
+        make.bottom.equalTo(self.view).offset(- (GK_TABBAR_HEIGHT));
     }];
 }
 
@@ -92,7 +92,7 @@
 
 #pragma mark - UIScrollViewDelegate
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    self.bgImageView.frame = CGRectMake(0, -scrollView.contentOffset.y, kScreenHeight, 205);
+    self.bgImageView.frame = CGRectMake(0, -scrollView.contentOffset.y, kScreenWidth, 205);
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -263,7 +263,7 @@ spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
 
 -(TSUserInfoView *)infoView{
     if (!_infoView) {
-        _infoView = [[TSUserInfoView alloc] initWithRoleType:TSRoleTypeUnLogin];
+        _infoView = [[TSUserInfoView alloc] initWithRoleType:TSRoleTypePlatinum];
     }
     return _infoView;
 }

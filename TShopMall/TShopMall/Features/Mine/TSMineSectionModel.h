@@ -37,4 +37,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface TSMineSectionEarnItemModel : TSMineSectionItemModel
+
+@end
+
+@interface TSMineSectionParterItemModel : TSMineSectionItemModel
+
+@end
+
 NS_ASSUME_NONNULL_END

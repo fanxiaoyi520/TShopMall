@@ -53,6 +53,27 @@
     }
     
     {
+        NSMutableArray *items = [NSMutableArray array];
+        
+        TSMineSectionEarnItemModel *item = [[TSMineSectionEarnItemModel alloc] init];
+        item.cellHeight = 66;
+        item.identify = @"TSMineEarningsCell";
+        
+        [items addObject:item];
+        
+        TSMineSectionModel *section = [[TSMineSectionModel alloc] init];
+        section.sectionInset = UIEdgeInsetsMake(0, 16, 0, 16);
+        section.column = 1;
+        section.hasDecorate = YES;
+        section.docorateIdentify = @"TSUniversalAllCornersDecorationView";
+        section.decorateInset = UIEdgeInsetsMake(0, 16, 0, 16);
+        section.spacingWithLastSection = 12;
+        section.items = items;
+        
+        [sections addObject:section];
+    }
+    
+    {
         TSMineSectionAdsItemModel *item = [[TSMineSectionAdsItemModel alloc] init];
         item.cellHeight = 58;
         item.identify = @"TSMineAdsCell";
@@ -62,6 +83,27 @@
         section.sectionInset = UIEdgeInsetsMake(0, 16, 0, 16);
         section.items = @[item];
 
+        [sections addObject:section];
+    }
+    
+    {
+        NSMutableArray *items = [NSMutableArray array];
+        
+        TSMineSectionParterItemModel *item = [[TSMineSectionParterItemModel alloc] init];
+        item.cellHeight = 182;
+        item.identify = @"TSMinePartnerCenterCell";
+        
+        [items addObject:item];
+        
+        TSMineSectionModel *section = [[TSMineSectionModel alloc] init];
+        section.sectionInset = UIEdgeInsetsMake(0, 16, 0, 16);
+        section.column = 1;
+        section.hasDecorate = YES;
+        section.docorateIdentify = @"TSUniversalAllCornersDecorationView";
+        section.decorateInset = UIEdgeInsetsMake(0, 16, 0, 16);
+        section.spacingWithLastSection = 12;
+        section.items = items;
+        
         [sections addObject:section];
     }
 

@@ -13,16 +13,20 @@
 
 @implementation TSMineSectionItemModel
 
-
 @end
 
-
 @implementation TSMineSectionOrderItemModel
-
 
 @end
 
 @implementation TSMineSectionAdsItemModel
 
+@end
+
+@implementation TSMineSectionEarnItemModel
+
+@end
+
+@implementation TSMineSectionParterItemModel
 
 @end

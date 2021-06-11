@@ -124,6 +124,8 @@
 		F55D2C8A267335CE006BACCF /* TSUserInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2C89267335CE006BACCF /* TSUserInfoView.m */; };
 		F55D2C8D2673434A006BACCF /* TSMineOrderHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2C8C2673434A006BACCF /* TSMineOrderHeaderView.m */; };
 		F55D2C9026735A91006BACCF /* TSMineTitleHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2C8F26735A91006BACCF /* TSMineTitleHeaderView.m */; };
+		F55D2C9326736557006BACCF /* TSMineEarningsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2C9226736557006BACCF /* TSMineEarningsCell.m */; };
+		F55D2C9626736E84006BACCF /* TSMinePartnerCenterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2C9526736E84006BACCF /* TSMinePartnerCenterCell.m */; };
 		F56D4B3A266DFB8900C1AD9E /* FMLayoutBaseSection.m in Sources */ = {isa = PBXBuildFile; fileRef = F56D4B04266DFB8900C1AD9E /* FMLayoutBaseSection.m */; };
 		F56D4B3B266DFB8900C1AD9E /* FMLayoutCombineSection.m in Sources */ = {isa = PBXBuildFile; fileRef = F56D4B06266DFB8900C1AD9E /* FMLayoutCombineSection.m */; };
 		F56D4B3C266DFB8900C1AD9E /* FMLayoutLabelSection.m in Sources */ = {isa = PBXBuildFile; fileRef = F56D4B07266DFB8900C1AD9E /* FMLayoutLabelSection.m */; };
@@ -365,6 +367,10 @@
 		F55D2C8C2673434A006BACCF /* TSMineOrderHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = TSMineOrderHeaderView.m; path = TShopMall/Features/Mine/TSMineOrderHeaderView.m; sourceTree = SOURCE_ROOT; };
 		F55D2C8E26735A91006BACCF /* TSMineTitleHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TSMineTitleHeaderView.h; path = TShopMall/Features/Mine/TSMineTitleHeaderView.h; sourceTree = SOURCE_ROOT; };
 		F55D2C8F26735A91006BACCF /* TSMineTitleHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = TSMineTitleHeaderView.m; path = TShopMall/Features/Mine/TSMineTitleHeaderView.m; sourceTree = SOURCE_ROOT; };
+		F55D2C9126736557006BACCF /* TSMineEarningsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TSMineEarningsCell.h; path = TShopMall/Features/Mine/TSMineEarningsCell.h; sourceTree = SOURCE_ROOT; };
+		F55D2C9226736557006BACCF /* TSMineEarningsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = TSMineEarningsCell.m; path = TShopMall/Features/Mine/TSMineEarningsCell.m; sourceTree = SOURCE_ROOT; };
+		F55D2C9426736E84006BACCF /* TSMinePartnerCenterCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TSMinePartnerCenterCell.h; path = TShopMall/Features/Mine/TSMinePartnerCenterCell.h; sourceTree = SOURCE_ROOT; };
+		F55D2C9526736E84006BACCF /* TSMinePartnerCenterCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = TSMinePartnerCenterCell.m; path = TShopMall/Features/Mine/TSMinePartnerCenterCell.m; sourceTree = SOURCE_ROOT; };
 		F56D4B04266DFB8900C1AD9E /* FMLayoutBaseSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLayoutBaseSection.m; sourceTree = "<group>"; };
 		F56D4B05266DFB8900C1AD9E /* FMLayoutFixedSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLayoutFixedSection.h; sourceTree = "<group>"; };
 		F56D4B06266DFB8900C1AD9E /* FMLayoutCombineSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLayoutCombineSection.m; sourceTree = "<group>"; };
@@ -1167,6 +1173,10 @@
 				F55D2C8326730F6D006BACCF /* TSMineAdsCell.m */,
 				F55D2C85267312C5006BACCF /* TSMineImageTextCell.h */,
 				F55D2C86267312C5006BACCF /* TSMineImageTextCell.m */,
+				F55D2C9126736557006BACCF /* TSMineEarningsCell.h */,
+				F55D2C9226736557006BACCF /* TSMineEarningsCell.m */,
+				F55D2C9426736E84006BACCF /* TSMinePartnerCenterCell.h */,
+				F55D2C9526736E84006BACCF /* TSMinePartnerCenterCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1592,6 +1602,7 @@
 				F54973CB2668C27300181E3F /* TSH5InterfacedConst.m in Sources */,
 				F55D2ABE266E0C6B006BACCF /* UIView+TSSafeArea.m in Sources */,
 				F56D4B62266E037600C1AD9E /* MyLayoutMath.m in Sources */,
+				F55D2C9326736557006BACCF /* TSMineEarningsCell.m in Sources */,
 				F55D2AE2266F7866006BACCF /* TSHomePageLayoutModel.m in Sources */,
 				C2EF88D52670B8B900E7374A /* TSCartBaseCell.m in Sources */,
 				F55D2C362671E14B006BACCF /* TSUniversalHeaderView.m in Sources */,
@@ -1626,6 +1637,7 @@
 				F56D4B3C266DFB8900C1AD9E /* FMLayoutLabelSection.m in Sources */,
 				F55D2AEA266F9CEC006BACCF /* TSUniverseBackgroundHeaderView.m in Sources */,
 				DC3440B226720E4C00F5B0DA /* TSGridButtonCollectionView.m in Sources */,
+				F55D2C9626736E84006BACCF /* TSMinePartnerCenterCell.m in Sources */,
 				F54973612668A22100181E3F /* SSBaseRequest.m in Sources */,
 				C2EF88B82670997100E7374A /* TSCartModel.m in Sources */,
 				F54973662668A22100181E3F /* YTKBaseRequest+AnimatingAccessory.m in Sources */,

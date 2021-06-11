@@ -57,4 +57,5 @@
     self.imgView.image = KImageMake(item.imageName);
     self.kindLabel.text = item.title;
 }
+
 @end
