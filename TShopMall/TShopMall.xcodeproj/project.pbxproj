@@ -115,6 +115,8 @@
 		F55D2C6926722807006BACCF /* TSCategoryDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2C6226722807006BACCF /* TSCategoryDataController.m */; };
 		F55D2C6C267231AA006BACCF /* TSCategoryHeaderReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2C6B267231AA006BACCF /* TSCategoryHeaderReusableView.m */; };
 		F55D2C6F26723C2B006BACCF /* TSRecommendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2C6E26723C2B006BACCF /* TSRecommendCell.m */; };
+		F55D2C7226725618006BACCF /* TSRankCoronalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2C7126725618006BACCF /* TSRankCoronalViewController.m */; };
+		F55D2C75267257DA006BACCF /* ListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2C74267257DA006BACCF /* ListViewController.m */; };
 		F56D4B3A266DFB8900C1AD9E /* FMLayoutBaseSection.m in Sources */ = {isa = PBXBuildFile; fileRef = F56D4B04266DFB8900C1AD9E /* FMLayoutBaseSection.m */; };
 		F56D4B3B266DFB8900C1AD9E /* FMLayoutCombineSection.m in Sources */ = {isa = PBXBuildFile; fileRef = F56D4B06266DFB8900C1AD9E /* FMLayoutCombineSection.m */; };
 		F56D4B3C266DFB8900C1AD9E /* FMLayoutLabelSection.m in Sources */ = {isa = PBXBuildFile; fileRef = F56D4B07266DFB8900C1AD9E /* FMLayoutLabelSection.m */; };
@@ -338,6 +340,10 @@
 		F55D2C6B267231AA006BACCF /* TSCategoryHeaderReusableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSCategoryHeaderReusableView.m; sourceTree = "<group>"; };
 		F55D2C6D26723C2B006BACCF /* TSRecommendCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSRecommendCell.h; sourceTree = "<group>"; };
 		F55D2C6E26723C2B006BACCF /* TSRecommendCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSRecommendCell.m; sourceTree = "<group>"; };
+		F55D2C7026725618006BACCF /* TSRankCoronalViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSRankCoronalViewController.h; sourceTree = "<group>"; };
+		F55D2C7126725618006BACCF /* TSRankCoronalViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSRankCoronalViewController.m; sourceTree = "<group>"; };
+		F55D2C73267257D9006BACCF /* ListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListViewController.h; sourceTree = "<group>"; };
+		F55D2C74267257DA006BACCF /* ListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListViewController.m; sourceTree = "<group>"; };
 		F56D4B04266DFB8900C1AD9E /* FMLayoutBaseSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLayoutBaseSection.m; sourceTree = "<group>"; };
 		F56D4B05266DFB8900C1AD9E /* FMLayoutFixedSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLayoutFixedSection.h; sourceTree = "<group>"; };
 		F56D4B06266DFB8900C1AD9E /* FMLayoutCombineSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLayoutCombineSection.m; sourceTree = "<group>"; };
@@ -884,6 +890,10 @@
 			children = (
 				F54973B22668BBCE00181E3F /* TSRankViewController.h */,
 				F54973B32668BBCE00181E3F /* TSRankViewController.m */,
+				F55D2C7026725618006BACCF /* TSRankCoronalViewController.h */,
+				F55D2C7126725618006BACCF /* TSRankCoronalViewController.m */,
+				F55D2C73267257D9006BACCF /* ListViewController.h */,
+				F55D2C74267257DA006BACCF /* ListViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1535,6 +1545,7 @@
 				F55D2AD6266F67EF006BACCF /* TSHomePageContainerCell.m in Sources */,
 				F56D4B63266E037600C1AD9E /* MyDimeScale.m in Sources */,
 				F55D2C6826722807006BACCF /* TSCategorySectionModel.m in Sources */,
+				F55D2C7226725618006BACCF /* TSRankCoronalViewController.m in Sources */,
 				F55D2C382671E14B006BACCF /* TSUniversalCollectionViewCell.m in Sources */,
 				F54973B72668BBEE00181E3F /* TSCartViewController.m in Sources */,
 				F56D4B4D266DFB8900C1AD9E /* FMTeslaLayoutView.m in Sources */,
@@ -1614,6 +1625,7 @@
 				F54973A82668B98000181E3F /* TSTabBarController.m in Sources */,
 				F54973762668A31000181E3F /* main.m in Sources */,
 				F55D2C6526722807006BACCF /* TSCategoryBannerCell.m in Sources */,
+				F55D2C75267257DA006BACCF /* ListViewController.m in Sources */,
 				F56D4B43266DFB8900C1AD9E /* FMLayout.m in Sources */,
 				F54973AE2668BB8100181E3F /* TSHomeViewController.m in Sources */,
 				F56D4B40266DFB8900C1AD9E /* FMLayoutScaleSection.m in Sources */,
