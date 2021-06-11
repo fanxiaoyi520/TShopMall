@@ -60,12 +60,12 @@
     [self.settleView updateSelBtnStatus:[TSCartViewModel isAllGoodsSelected:cartModels]];
 }
 
+//全选
 - (void)allSelected:(BOOL)status{
     for (TSCartGoodsSection *section in self.cartView.sections) {
         TSCartGoodsRow *row = section.rows.lastObject;
         if ([row.cellIdentifier isEqualToString:@"TSCartCell"]) {
             [row.obj setValue:@(status) forKey:@"isSelected"];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"CartCellShouldUpdateSelectedStatus" object:nil userInfo:@{@"obj":row.obj}];
         }
     }
 }
@@ -73,6 +73,11 @@
 - (void)edit:(UIButton *)sender{
     sender.selected = !sender.selected;
     [self.settleView updateSettleViewStates:sender.selected];
+}
+
+//删除商品
+- (void)deleteGoods:(TSCart *)cart{
+    
 }
 
 - (void)viewWillLayoutSubviews{
@@ -88,7 +93,7 @@
     
     [self.cartView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.view);
-        make.top.equalTo(self.view.mas_top).offset(self.view.statusBarHight + KNaviBarHeight);
+        make.top.equalTo(self.view.mas_top);
         make.bottom.equalTo(self.settleView.mas_top);
     }];
 }

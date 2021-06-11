@@ -21,19 +21,12 @@
     if (model == nil || model.carts.count == 0) {
         [sections addObject:[TSCartViewModel emptyRow]];
     } else {
-        [sections addObjectsFromArray:[TSCartViewModel congifgsGoods:model.carts]];
+        [sections addObjectsFromArray:[TSCartViewModel configGoods:model.carts]];
     }
     
-    TSCartGoodsRow *recomendRow = [TSCartGoodsRow new];
-    recomendRow.cellIdentifier = @"TSCartRecomendCell";
-    
-    TSCartGoodsSection *recomendSection =  [TSCartGoodsSection new];
-    recomendSection.heightForHeader = KRateW(62.0);
-    recomendSection.headerIdentifier = @"TSCartRecomendHeader";
-    recomendSection.heightForFooter = 0.1f;
-    recomendSection.rows = @[recomendRow];
-    [sections addObject:recomendSection];
-    
+    [sections addObject:[TSCartViewModel configInvalidGoods:nil]];
+    [sections addObject:[TSCartViewModel configRecomendGoods:nil]];
+
     return sections;
 }
 
@@ -50,12 +43,13 @@
     return section;
 }
 
-+ (NSArray<TSCartGoodsSection *> *)congifgsGoods:(NSArray<TSCart *> *)carts{
++ (NSArray<TSCartGoodsSection *> *)configGoods:(NSArray<TSCart *> *)carts{
     NSMutableArray *sections = [NSMutableArray array];
     for (NSInteger i=0; i<carts.count; i++) {
         TSCartGoodsRow *row = [TSCartGoodsRow new];
         row.cellIdentifier = @"TSCartCell";
         row.obj = carts[i];
+        row.canScrollEdit = YES;
 
         TSCartGoodsSection *section = [TSCartGoodsSection new];
         section.heightForFooter = KRateW(10.0);
@@ -66,7 +60,7 @@
     return sections;
 }
 
-+ (TSCartGoodsSection *)congifgInvalidGoods:(id)obj{
++ (TSCartGoodsSection *)configInvalidGoods:(id)obj{
     NSMutableArray *invalidRow = [NSMutableArray array];
     for (NSInteger i=0; i<2; i++) {
         TSCartGoodsRow *row = [TSCartGoodsRow new];
@@ -78,6 +72,19 @@
     section.headerIdentifier = @"TSCartInvalidHeader";
     section.heightForFooter = KRateW(10.0);
     section.rows = invalidRow;
+    
+    return section;
+}
+
++ (TSCartGoodsSection *)configRecomendGoods:(id)obj{
+    TSCartGoodsRow *recomendRow = [TSCartGoodsRow new];
+    recomendRow.cellIdentifier = @"TSCartRecomendCell";
+    
+    TSCartGoodsSection *section =  [TSCartGoodsSection new];
+    section.heightForHeader = KRateW(62.0);
+    section.headerIdentifier = @"TSCartRecomendHeader";
+    section.heightForFooter = 0.1f;
+    section.rows = @[recomendRow];
     
     return section;
 }
