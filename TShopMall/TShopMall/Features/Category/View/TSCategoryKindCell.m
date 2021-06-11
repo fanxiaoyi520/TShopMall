@@ -22,6 +22,10 @@
     [super awakeFromNib];
 }
 
+-(void)bindKindModel:(TSCategoryKindModel *)model{
+    self.kindLabel.text = model.kind;
+}
+
 - (void)fillCustomContentView{
     [self.contentView addSubview:self.kindLabel];
     [self.contentView addSubview:self.seperateView];
@@ -45,8 +49,10 @@
     
     if (selected) {
         self.seperateView.backgroundColor = KMainColor;
+        self.kindLabel.textColor = KMainColor;
     }else{
         self.seperateView.backgroundColor = UIColor.whiteColor;
+        self.kindLabel.textColor = KTextColor;
     }
 }
 
@@ -55,7 +61,7 @@
     if (!_kindLabel) {
         _kindLabel = [[UILabel alloc] init];
         _kindLabel.font = KFont(PingFangSCMedium, 14);
-        _kindLabel.textColor = KTextColor;
+        _kindLabel.textAlignment = NSTextAlignmentCenter;
         _kindLabel.highlightedTextColor = KMainColor;
     }
     return _kindLabel;

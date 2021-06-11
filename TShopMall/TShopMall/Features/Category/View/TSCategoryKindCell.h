@@ -6,10 +6,13 @@
 //
 
 #import "TSUniversalTableViewCell.h"
+#import "TSCategoryKindModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TSCategoryKindCell : TSUniversalTableViewCell
+
+-(void)bindKindModel:(TSCategoryKindModel *)model;
 
 @end
 
