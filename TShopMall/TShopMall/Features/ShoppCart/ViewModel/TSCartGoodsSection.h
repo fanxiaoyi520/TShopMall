@@ -25,5 +25,6 @@
 @property (nonatomic, strong) id obj;
 @property (nonatomic, assign) BOOL isAutoHeight;
 @property (nonatomic, assign) CGFloat rowHeight;
+@property (nonatomic, assign) BOOL canScrollEdit;
 @end
 
