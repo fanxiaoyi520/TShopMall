@@ -32,21 +32,7 @@
 @implementation TSCartCell
 
 - (void)dealloc{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
-    if (self == [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cartCellShouldUpdateSelectedStatus:) name:@"CartCellShouldUpdateSelectedStatus" object:nil];
-    }
-    return self;
-}
-
-- (void)cartCellShouldUpdateSelectedStatus:(NSNotification *)noti{
-    TSCart *cartModel = noti.userInfo[@"obj"];
-    if (cartModel == _cartModel) {
-        self.obj = cartModel;
-    }
+    [self.obj removeObserver:self];
 }
 
 - (void)setObj:(id)obj{
@@ -54,6 +40,15 @@
     [self configGiftView];
     
     self.selBtn.selected = self.cartModel.isSelected;
+    
+    [self.cartModel addObserver:self forKeyPath:@"isSelected" options:(NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld) context:nil];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
+    if ([keyPath isEqualToString:@"isSelected"]) {
+        self.cartModel = (TSCart *)object;
+        self.selBtn.selected = self.cartModel.isSelected;
+    }
 }
 
 - (void)testUI{

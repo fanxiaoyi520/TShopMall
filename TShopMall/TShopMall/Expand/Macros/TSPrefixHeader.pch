@@ -14,6 +14,7 @@
 #import "TSH5InterfacedConst.h"
 #import "TSInterfacedConst.h"
 #import "UIView+Extension.h"
+#import "UIView+General.h"
 #import "UIColor+General.h"
 #import "UIFont+General.h"
 #import "UIView+TSSafeArea.h"
