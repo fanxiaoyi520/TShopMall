@@ -6,18 +6,19 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TSCategoryContentModel.h"
 #import "TSCategoryContentCellViewModel.h"
-#import "TSCategoryKindModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TSCategoryContentViewModel : NSObject
 
+@property(nonatomic, strong) TSCategoryContentCellViewModel *currentCellViewModel;
+
 @property (nonatomic, strong, nonnull) NSArray<TSCategoryContentCellViewModel *> *cellViewModels;
 
-@property (nonatomic, strong, nonnull) UIColor *backgroundColor;
-
-+ (nonnull TSCategoryContentViewModel *)viewModelWithSubjects:(nonnull NSArray<TSCategoryKindModel *> *)subjects;
+-(void)viewModelWithSubjects:(nonnull NSArray<TSCategoryContentModel *> *)subjects selectedRow:(NSUInteger)selectedRow;
+-(void)viewModelExchangeSelectedRow:(NSUInteger)selectedRow;
 
 @end
 

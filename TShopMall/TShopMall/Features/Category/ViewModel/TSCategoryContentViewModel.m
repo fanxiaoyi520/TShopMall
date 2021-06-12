@@ -9,4 +9,22 @@
 
 @implementation TSCategoryContentViewModel
 
+-(void)viewModelWithSubjects:(nonnull NSArray<TSCategoryContentModel *> *)subjects selectedRow:(NSUInteger)selectedRow{
+    
+    NSMutableArray *cellViewModels = [NSMutableArray array];
+    
+    for (int i = 0; i < subjects.count; i++) {
+        TSCategoryContentCellViewModel *cellViewModel = [TSCategoryContentCellViewModel viewModelWithSubject:subjects[i]];
+        [cellViewModels addObject:cellViewModel];
+    }
+    
+    self.cellViewModels = cellViewModels;
+    self.currentCellViewModel = cellViewModels[selectedRow];
+      
+}
+
+-(void)viewModelExchangeSelectedRow:(NSUInteger)selectedRow{
+    self.currentCellViewModel = self.cellViewModels[selectedRow];
+}
+
 @end

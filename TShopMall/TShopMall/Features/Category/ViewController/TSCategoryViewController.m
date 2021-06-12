@@ -6,13 +6,16 @@
 //
 
 #import "TSCategoryViewController.h"
+#import "TSCategoryHeaderReusableView.h"
 #import "TSGeneralSearchButton.h"
 #import "TSCategoryDataController.h"
 #import "TSUniversalCollectionViewCell.h"
 #import "TSCategoryKindCell.h"
 #import "TSUniversalFlowLayout.h"
+#import "TSCategoryKindViewModel.h"
+#import "TSCategoryContentViewModel.h"
 
-@interface TSCategoryViewController ()<UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate>
+@interface TSCategoryViewController ()<UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate>
 
 /// 搜索按钮
 @property(nonatomic, strong) TSGeneralSearchButton *searchButton;
@@ -22,6 +25,10 @@
 @property(nonatomic, strong) UITableView *tableView;
 /// 右边商品列表
 @property(nonatomic, strong) UICollectionView *collectionView;
+/// 左边ViewModel
+@property(nonatomic, strong) TSCategoryKindViewModel *kindViewModel;
+/// 右边边ViewModel
+@property(nonatomic, strong) TSCategoryContentViewModel *contentViewModel;
 
 @property(nonatomic, strong) TSCategoryDataController *dataController;
 
@@ -36,13 +43,9 @@
     [self.dataController fetchKindsComplete:^(BOOL isSucess) {
         __strong __typeof(weakSelf)strongSelf = weakSelf;
         if (isSucess) {
+            [strongSelf.kindViewModel viewModelWithKinds:self.dataController.kinds selectedRow:0];
+            [strongSelf.contentViewModel viewModelWithSubjects:self.dataController.sections selectedRow:0];
             [strongSelf.tableView reloadData];
-        }
-    }];
-    
-    [self.dataController fetchContentsComplete:^(BOOL isSucess) {
-        __strong __typeof(weakSelf)strongSelf = weakSelf;
-        if (isSucess) {
             [strongSelf.collectionView reloadData];
         }
     }];
@@ -103,12 +106,20 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     TSCategoryKindCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([TSCategoryKindCell class])];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    [cell bindKindModel:self.dataController.kinds[indexPath.row]];
+    [cell bindKindViewModel:self.kindViewModel.cellViewModels[indexPath.row]];
     return cell;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 44;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self.kindViewModel viewModelExchangeSelectedRow:indexPath.row];
+    [self.contentViewModel viewModelExchangeSelectedRow:indexPath.row];
+    [tableView reloadData];
+    [self.collectionView reloadData];
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -118,20 +129,22 @@
 
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return self.dataController.sections.count;
+    return self.contentViewModel.currentCellViewModel.sections.count;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    TSCategorySectionModel *model = self.dataController.sections[section];
+    TSCategorySectionModel *model = self.contentViewModel.currentCellViewModel.sections[section];
     return model.items.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    TSCategorySectionModel *model = self.dataController.sections[indexPath.section];
+    TSCategorySectionModel *model = self.contentViewModel.currentCellViewModel.sections[indexPath.section];
     TSCategorySectionItemModel *item = model.items[indexPath.row];
     Class className = NSClassFromString(item.identify);
     [collectionView registerClass:[className class] forCellWithReuseIdentifier:item.identify];
     TSUniversalCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:item.identify forIndexPath:indexPath];
+    cell.indexPath = indexPath;
+    cell.delegate = self;
     return cell;
 }
 
@@ -142,7 +155,7 @@
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
            viewForSupplementaryElementOfKind:(NSString *)kind
                                  atIndexPath:(NSIndexPath *)indexPath{
-    TSCategorySectionModel *sectionModel = self.dataController.sections[indexPath.section];
+    TSCategorySectionModel *sectionModel = self.contentViewModel.currentCellViewModel.sections[indexPath.section];
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
         Class className = NSClassFromString(sectionModel.headerIdentify);
         [collectionView registerClass:[className class]
@@ -157,12 +170,18 @@
     return nil;
 }
 
+#pragma mark - UniversalCollectionViewCellDataDelegate
+-(id)universalCollectionViewCellModel:(NSIndexPath *)indexPath{
+    TSCategorySectionModel *section = self.contentViewModel.currentCellViewModel.sections[indexPath.section];
+    return section.items[indexPath.row];
+}
+
 #pragma mark - UniversalFlowLayoutDelegate
 - (CGFloat)collectionView:(UICollectionView *_Nullable)collectionView
                    layout:(TSUniversalFlowLayout *_Nullable)collectionViewLayout
   heightForRowAtIndexPath:(NSIndexPath *_Nullable)indexPath
                 itemWidth:(CGFloat)itemWidth{
-    TSCategorySectionModel *model = self.dataController.sections[indexPath.section];
+    TSCategorySectionModel *model = self.contentViewModel.currentCellViewModel.sections[indexPath.section];
     TSCategorySectionItemModel *item = model.items[indexPath.row];
     return item.cellHeight;
 }
@@ -170,82 +189,82 @@
 - (BOOL)collectionView:(UICollectionView *_Nullable)collectionView
                 layout:(TSUniversalFlowLayout *_Nullable)collectionViewLayout
  hasHeaderReusableView:(NSIndexPath *_Nullable)indexPath{
-    TSCategorySectionModel *model = self.dataController.sections[indexPath.section];
+    TSCategorySectionModel *model = self.contentViewModel.currentCellViewModel.sections[indexPath.section];
     return model.hasHeader;
 }
 
 -(BOOL)collectionView:(UICollectionView *)collectionView
                layout:(TSUniversalFlowLayout *)collectionViewLayout
 hasDecorateReusableView:(NSIndexPath *)indexPath{
-    TSCategorySectionModel *model = self.dataController.sections[indexPath.section];
+    TSCategorySectionModel *model = self.contentViewModel.currentCellViewModel.sections[indexPath.section];
     return model.hasDecorate;
 }
 
 -(NSString *)docorateViewIdentifier:(NSIndexPath *)section{
-    TSCategorySectionModel *model = self.dataController.sections[section.section];
+    TSCategorySectionModel *model = self.contentViewModel.currentCellViewModel.sections[section.section];
     return model.docorateIdentify;
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *_Nullable)collectionView
                         layout:(TSUniversalFlowLayout *_Nullable)collectionViewLayout
 insetForDecorateReusableViewAtSection:(NSInteger)section{
-    TSCategorySectionModel *model = self.dataController.sections[section];
+    TSCategorySectionModel *model = self.contentViewModel.currentCellViewModel.sections[section];
     return model.decorateInset;
 }
 
 - (CGSize)collectionView:(UICollectionView *_Nullable)collectionView
                   layout:(TSUniversalFlowLayout *_Nullable)collectionViewLayout
 referenceSizeForHeaderInSection:(NSInteger)section{
-    TSCategorySectionModel *model = self.dataController.sections[section];
+    TSCategorySectionModel *model = self.contentViewModel.currentCellViewModel.sections[section];
     return model.headerSize;
 }
 
 - (BOOL)collectionView:(UICollectionView *_Nullable)collectionView
                 layout:(TSUniversalFlowLayout *_Nullable)collectionViewLayout
  hasFooterReusableView:(NSIndexPath *_Nullable)indexPath{
-    TSCategorySectionModel *model = self.dataController.sections[indexPath.section];
+    TSCategorySectionModel *model = self.contentViewModel.currentCellViewModel.sections[indexPath.section];
     return model.hasFooter;
 }
 
 - (CGSize)collectionView:(UICollectionView *_Nullable)collectionView
                   layout:(TSUniversalFlowLayout *_Nullable)collectionViewLayout
 referenceSizeForFooterInSection:(NSInteger)section{
-    TSCategorySectionModel *model = self.dataController.sections[section];
+    TSCategorySectionModel *model = self.contentViewModel.currentCellViewModel.sections[section];
     return model.footerSize;
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *_Nullable)collectionView
                         layout:(TSUniversalFlowLayout *_Nullable)collectionViewLayout
         insetForSectionAtIndex:(NSInteger)section{
-    TSCategorySectionModel *model = self.dataController.sections[section];
+    TSCategorySectionModel *model = self.contentViewModel.currentCellViewModel.sections[section];
     return model.sectionInset;
 }
 
 - (NSInteger)collectionView:(UICollectionView *_Nullable)collectionView
                      layout:(TSUniversalFlowLayout *_Nullable)collectionViewLayout
       columnNumberAtSection:(NSInteger )section{
-    TSCategorySectionModel *model = self.dataController.sections[section];
+    TSCategorySectionModel *model = self.contentViewModel.currentCellViewModel.sections[section];
     return model.column;
 }
 
 - (NSInteger)collectionView:(UICollectionView *_Nullable)collectionView
                      layout:(TSUniversalFlowLayout *_Nullable)collectionViewLayout
 lineSpacingForSectionAtIndex:(NSInteger)section{
-    TSCategorySectionModel *model = self.dataController.sections[section];
+    TSCategorySectionModel *model = self.contentViewModel.currentCellViewModel.sections[section];
     return model.lineSpacing;
 }
 
 - (CGFloat)collectionView:(UICollectionView *_Nullable)collectionView
                    layout:(TSUniversalFlowLayout*_Nullable)collectionViewLayout
 interitemSpacingForSectionAtIndex:(NSInteger)section{
-    TSCategorySectionModel *model = self.dataController.sections[section];
+    TSCategorySectionModel *model = self.contentViewModel.currentCellViewModel.sections[section];
     return model.interitemSpacing;
 }
 
 - (CGFloat)collectionView:(UICollectionView *_Nullable)collectionView
                    layout:(TSUniversalFlowLayout*_Nullable)collectionViewLayout
 spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
-    TSCategorySectionModel *model = self.dataController.sections[section];
+    TSCategorySectionModel *model = self.contentViewModel.currentCellViewModel.sections[section];
     return model.spacingWithLastSection;
 }
 
@@ -304,6 +323,20 @@ spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
         _dataController = [[TSCategoryDataController alloc] init];
     }
     return _dataController;
+}
+
+-(TSCategoryKindViewModel *)kindViewModel{
+    if (!_kindViewModel) {
+        _kindViewModel = [[TSCategoryKindViewModel alloc] init];
+    }
+    return _kindViewModel;
+}
+
+-(TSCategoryContentViewModel *)contentViewModel{
+    if (!_contentViewModel) {
+        _contentViewModel = [[TSCategoryContentViewModel alloc] init];
+    }
+    return _contentViewModel;
 }
 
 @end
