@@ -15,6 +15,7 @@ UIKIT_EXTERN NSString *const kApiPrefix;
 #pragma mark - 首页
 
 #pragma mark - 分类
+UIKIT_EXTERN NSString *const kShopContentUrl;
 
 #pragma mark - 排行
 
