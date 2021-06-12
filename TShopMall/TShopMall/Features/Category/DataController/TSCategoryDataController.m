@@ -19,21 +19,25 @@
 -(void)fetchKindsComplete:(void(^)(BOOL isSucess))complete{
 
     NSMutableDictionary *body = [NSMutableDictionary dictionary];
-    [body setValue:@"productList_page" forKey:@"pageType"];
+    [body setValue:@"productGroup_page" forKey:@"pageType"];
     [body setValue:@"APP" forKey:@"uiType"];
-    
+
     SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kShopContentUrl
                                                                requestMethod:YTKRequestMethodPOST
                                                        requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON
                                                                requestHeader:NSMutableDictionary.dictionary
                                                                  requestBody:body
                                                               needErrorToast:NO];
-    [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
-        NSLog(@"------");
+    [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+        
+        if (request.responseModel.isSucceed) {
+            NSString *content = request.responseModel.data[@"content"];
+            NSArray *contentArr = [content jsonValueDecoded];
+        }
+        
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-        NSLog(@"------");
+
     }];
-    
     
     NSArray *titles = @[@"智屏",@"冰箱",@"洗衣机",@"空调",@"厨卫大电",@"全屋智能",@"美妆个护",@"附近商品"];
     

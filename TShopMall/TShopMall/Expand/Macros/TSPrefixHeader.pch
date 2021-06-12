@@ -23,6 +23,7 @@
 #import "UIImage+TSColor.h"
 #import "SSGenaralRequest.h"
 #import "TSGlobalManager.h"
+#import "SSResponseModel.h"
 
 #import <YYKit/YYKit.h>
 #import <YTKNetwork/YTKNetwork.h>
