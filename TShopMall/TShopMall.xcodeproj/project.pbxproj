@@ -51,6 +51,16 @@
 		DC3440AD26720D9200F5B0DA /* TSCollectionViewLineWrapLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3440A926720D9200F5B0DA /* TSCollectionViewLineWrapLayout.m */; };
 		DC3440B226720E4C00F5B0DA /* TSGridButtonCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3440B026720E4C00F5B0DA /* TSGridButtonCollectionView.m */; };
 		DC3440B326720E4C00F5B0DA /* TSGridButtonCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3440B126720E4C00F5B0DA /* TSGridButtonCollectionViewCell.m */; };
+		DC3440BB26722DB600F5B0DA /* TSHomePageViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3440BA26722DB600F5B0DA /* TSHomePageViewModel.m */; };
+		DC3440BE267238F600F5B0DA /* TSHomePageCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3440BD267238F600F5B0DA /* TSHomePageCellViewModel.m */; };
+		DC3440C1267239CD00F5B0DA /* TSHomePageCellTemplateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3440C0267239CD00F5B0DA /* TSHomePageCellTemplateModel.m */; };
+		DC3440C426723D4D00F5B0DA /* TSHomePageBannerViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3440C326723D4D00F5B0DA /* TSHomePageBannerViewModel.m */; };
+		DC3440C72672600600F5B0DA /* TSHomePageCategoryViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3440C62672600600F5B0DA /* TSHomePageCategoryViewModel.m */; };
+		DC3440CA2672601F00F5B0DA /* TSHomePageReleaseViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3440C92672601F00F5B0DA /* TSHomePageReleaseViewModel.m */; };
+		DC3440CD2672604400F5B0DA /* TSHomePageContainerViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3440CC2672604400F5B0DA /* TSHomePageContainerViewModel.m */; };
+		DC3440D32672F62C00F5B0DA /* TSHomePageBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3440D22672F62C00F5B0DA /* TSHomePageBaseCell.m */; };
+		DC3440DF2672FC3900F5B0DA /* TSHomePageBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3440DE2672FC3900F5B0DA /* TSHomePageBaseModel.m */; };
+		DC3440E82673621000F5B0DA /* TSHomePageContainerHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3440E72673621000F5B0DA /* TSHomePageContainerHeaderView.m */; };
 		E2BE996F8804E0C3E7D5AE61 /* libPods-TShopMall-TShopMallUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD1ABBE857D307088E9BF2DC /* libPods-TShopMall-TShopMallUITests.a */; };
 		F54972FE2668842500181E3F /* TShopMallTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F54972FD2668842500181E3F /* TShopMallTests.m */; };
 		F54973092668842500181E3F /* TShopMallUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F54973082668842500181E3F /* TShopMallUITests.m */; };
@@ -85,16 +95,11 @@
 		F54973D22668CF3300181E3F /* AppDelegate+RootController.m in Sources */ = {isa = PBXBuildFile; fileRef = F54973D12668CF3300181E3F /* AppDelegate+RootController.m */; };
 		F54973D62668DBF500181E3F /* TSGeneralSearchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F54973D52668DBF500181E3F /* TSGeneralSearchButton.m */; };
 		F55D2ABE266E0C6B006BACCF /* UIView+TSSafeArea.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2ABD266E0C6B006BACCF /* UIView+TSSafeArea.m */; };
-		F55D2AC1266F110D006BACCF /* TSHomePageBackgroundReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2AC0266F110D006BACCF /* TSHomePageBackgroundReusableView.m */; };
 		F55D2AC4266F15C5006BACCF /* TSHomePageCategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2AC3266F15C5006BACCF /* TSHomePageCategoryCell.m */; };
-		F55D2ACA266F5B6E006BACCF /* TSHomePageReleaseHeaderReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2AC9266F5B6E006BACCF /* TSHomePageReleaseHeaderReusableView.m */; };
 		F55D2ACD266F5C95006BACCF /* TSHomePageReleaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2ACC266F5C95006BACCF /* TSHomePageReleaseCell.m */; };
 		F55D2AD0266F5F53006BACCF /* TSHomePageBannerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2ACE266F5F53006BACCF /* TSHomePageBannerCell.m */; };
-		F55D2AD3266F66A4006BACCF /* TSHomePageCategoryHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2AD2266F66A4006BACCF /* TSHomePageCategoryHeaderView.m */; };
 		F55D2AD6266F67EF006BACCF /* TSHomePageContainerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2AD5266F67EF006BACCF /* TSHomePageContainerCell.m */; };
 		F55D2AD9266F777B006BACCF /* TSBaseDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2AD8266F777B006BACCF /* TSBaseDataController.m */; };
-		F55D2ADC266F779A006BACCF /* TSHomePageDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2ADB266F779A006BACCF /* TSHomePageDataController.m */; };
-		F55D2AE2266F7866006BACCF /* TSHomePageLayoutModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2AE1266F7866006BACCF /* TSHomePageLayoutModel.m */; };
 		F55D2AE6266F983E006BACCF /* TSUniverseCollectionBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2AE5266F983E006BACCF /* TSUniverseCollectionBackgroundView.m */; };
 		F55D2AEA266F9CEC006BACCF /* TSUniverseBackgroundHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2AE9266F9CEC006BACCF /* TSUniverseBackgroundHeaderView.m */; };
 		F55D2C352671E14B006BACCF /* TSUniversalFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2C242671E14B006BACCF /* TSUniversalFlowLayout.m */; };
@@ -205,6 +210,26 @@
 		DC3440AF26720E4C00F5B0DA /* TSGridButtonCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSGridButtonCollectionView.h; sourceTree = "<group>"; };
 		DC3440B026720E4C00F5B0DA /* TSGridButtonCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSGridButtonCollectionView.m; sourceTree = "<group>"; };
 		DC3440B126720E4C00F5B0DA /* TSGridButtonCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSGridButtonCollectionViewCell.m; sourceTree = "<group>"; };
+		DC3440B926722DB600F5B0DA /* TSHomePageViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSHomePageViewModel.h; sourceTree = "<group>"; };
+		DC3440BA26722DB600F5B0DA /* TSHomePageViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSHomePageViewModel.m; sourceTree = "<group>"; };
+		DC3440BC267238F600F5B0DA /* TSHomePageCellViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSHomePageCellViewModel.h; sourceTree = "<group>"; };
+		DC3440BD267238F600F5B0DA /* TSHomePageCellViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSHomePageCellViewModel.m; sourceTree = "<group>"; };
+		DC3440BF267239CD00F5B0DA /* TSHomePageCellTemplateModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSHomePageCellTemplateModel.h; sourceTree = "<group>"; };
+		DC3440C0267239CD00F5B0DA /* TSHomePageCellTemplateModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSHomePageCellTemplateModel.m; sourceTree = "<group>"; };
+		DC3440C226723D4D00F5B0DA /* TSHomePageBannerViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSHomePageBannerViewModel.h; sourceTree = "<group>"; };
+		DC3440C326723D4D00F5B0DA /* TSHomePageBannerViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSHomePageBannerViewModel.m; sourceTree = "<group>"; };
+		DC3440C52672600600F5B0DA /* TSHomePageCategoryViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSHomePageCategoryViewModel.h; sourceTree = "<group>"; };
+		DC3440C62672600600F5B0DA /* TSHomePageCategoryViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSHomePageCategoryViewModel.m; sourceTree = "<group>"; };
+		DC3440C82672601F00F5B0DA /* TSHomePageReleaseViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSHomePageReleaseViewModel.h; sourceTree = "<group>"; };
+		DC3440C92672601F00F5B0DA /* TSHomePageReleaseViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSHomePageReleaseViewModel.m; sourceTree = "<group>"; };
+		DC3440CB2672604400F5B0DA /* TSHomePageContainerViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSHomePageContainerViewModel.h; sourceTree = "<group>"; };
+		DC3440CC2672604400F5B0DA /* TSHomePageContainerViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSHomePageContainerViewModel.m; sourceTree = "<group>"; };
+		DC3440D12672F62C00F5B0DA /* TSHomePageBaseCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSHomePageBaseCell.h; sourceTree = "<group>"; };
+		DC3440D22672F62C00F5B0DA /* TSHomePageBaseCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSHomePageBaseCell.m; sourceTree = "<group>"; };
+		DC3440DD2672FC3900F5B0DA /* TSHomePageBaseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSHomePageBaseModel.h; sourceTree = "<group>"; };
+		DC3440DE2672FC3900F5B0DA /* TSHomePageBaseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSHomePageBaseModel.m; sourceTree = "<group>"; };
+		DC3440E62673621000F5B0DA /* TSHomePageContainerHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSHomePageContainerHeaderView.h; sourceTree = "<group>"; };
+		DC3440E72673621000F5B0DA /* TSHomePageContainerHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSHomePageContainerHeaderView.m; sourceTree = "<group>"; };
 		ECCE8A564DF47B445E7905B1 /* Pods-TShopMall-TShopMallUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TShopMall-TShopMallUITests.release.xcconfig"; path = "Target Support Files/Pods-TShopMall-TShopMallUITests/Pods-TShopMall-TShopMallUITests.release.xcconfig"; sourceTree = "<group>"; };
 		F54972DE2668842200181E3F /* TShopMall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TShopMall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F54972F22668842400181E3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -273,26 +298,16 @@
 		F54973D52668DBF500181E3F /* TSGeneralSearchButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSGeneralSearchButton.m; sourceTree = "<group>"; };
 		F55D2ABC266E0C6B006BACCF /* UIView+TSSafeArea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+TSSafeArea.h"; sourceTree = "<group>"; };
 		F55D2ABD266E0C6B006BACCF /* UIView+TSSafeArea.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+TSSafeArea.m"; sourceTree = "<group>"; };
-		F55D2ABF266F110D006BACCF /* TSHomePageBackgroundReusableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSHomePageBackgroundReusableView.h; sourceTree = "<group>"; };
-		F55D2AC0266F110D006BACCF /* TSHomePageBackgroundReusableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSHomePageBackgroundReusableView.m; sourceTree = "<group>"; };
 		F55D2AC2266F15C5006BACCF /* TSHomePageCategoryCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSHomePageCategoryCell.h; sourceTree = "<group>"; };
 		F55D2AC3266F15C5006BACCF /* TSHomePageCategoryCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSHomePageCategoryCell.m; sourceTree = "<group>"; };
-		F55D2AC8266F5B6E006BACCF /* TSHomePageReleaseHeaderReusableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSHomePageReleaseHeaderReusableView.h; sourceTree = "<group>"; };
-		F55D2AC9266F5B6E006BACCF /* TSHomePageReleaseHeaderReusableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSHomePageReleaseHeaderReusableView.m; sourceTree = "<group>"; };
 		F55D2ACB266F5C95006BACCF /* TSHomePageReleaseCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSHomePageReleaseCell.h; sourceTree = "<group>"; };
 		F55D2ACC266F5C95006BACCF /* TSHomePageReleaseCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSHomePageReleaseCell.m; sourceTree = "<group>"; };
 		F55D2ACE266F5F53006BACCF /* TSHomePageBannerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSHomePageBannerCell.m; sourceTree = "<group>"; };
 		F55D2ACF266F5F53006BACCF /* TSHomePageBannerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSHomePageBannerCell.h; sourceTree = "<group>"; };
-		F55D2AD1266F66A4006BACCF /* TSHomePageCategoryHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSHomePageCategoryHeaderView.h; sourceTree = "<group>"; };
-		F55D2AD2266F66A4006BACCF /* TSHomePageCategoryHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSHomePageCategoryHeaderView.m; sourceTree = "<group>"; };
 		F55D2AD4266F67EF006BACCF /* TSHomePageContainerCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSHomePageContainerCell.h; sourceTree = "<group>"; };
 		F55D2AD5266F67EF006BACCF /* TSHomePageContainerCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSHomePageContainerCell.m; sourceTree = "<group>"; };
 		F55D2AD7266F777B006BACCF /* TSBaseDataController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSBaseDataController.h; sourceTree = "<group>"; };
 		F55D2AD8266F777B006BACCF /* TSBaseDataController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSBaseDataController.m; sourceTree = "<group>"; };
-		F55D2ADA266F779A006BACCF /* TSHomePageDataController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSHomePageDataController.h; sourceTree = "<group>"; };
-		F55D2ADB266F779A006BACCF /* TSHomePageDataController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSHomePageDataController.m; sourceTree = "<group>"; };
-		F55D2AE0266F7866006BACCF /* TSHomePageLayoutModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSHomePageLayoutModel.h; sourceTree = "<group>"; };
-		F55D2AE1266F7866006BACCF /* TSHomePageLayoutModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSHomePageLayoutModel.m; sourceTree = "<group>"; };
 		F55D2AE4266F983E006BACCF /* TSUniverseCollectionBackgroundView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSUniverseCollectionBackgroundView.h; sourceTree = "<group>"; };
 		F55D2AE5266F983E006BACCF /* TSUniverseCollectionBackgroundView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSUniverseCollectionBackgroundView.m; sourceTree = "<group>"; };
 		F55D2AE8266F9CEC006BACCF /* TSUniverseBackgroundHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSUniverseBackgroundHeaderView.h; sourceTree = "<group>"; };
@@ -752,6 +767,18 @@
 		F549737B2668A94600181E3F /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				DC3440B926722DB600F5B0DA /* TSHomePageViewModel.h */,
+				DC3440BA26722DB600F5B0DA /* TSHomePageViewModel.m */,
+				DC3440BC267238F600F5B0DA /* TSHomePageCellViewModel.h */,
+				DC3440BD267238F600F5B0DA /* TSHomePageCellViewModel.m */,
+				DC3440C226723D4D00F5B0DA /* TSHomePageBannerViewModel.h */,
+				DC3440C326723D4D00F5B0DA /* TSHomePageBannerViewModel.m */,
+				DC3440C52672600600F5B0DA /* TSHomePageCategoryViewModel.h */,
+				DC3440C62672600600F5B0DA /* TSHomePageCategoryViewModel.m */,
+				DC3440C82672601F00F5B0DA /* TSHomePageReleaseViewModel.h */,
+				DC3440C92672601F00F5B0DA /* TSHomePageReleaseViewModel.m */,
+				DC3440CB2672604400F5B0DA /* TSHomePageContainerViewModel.h */,
+				DC3440CC2672604400F5B0DA /* TSHomePageContainerViewModel.m */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -759,8 +786,6 @@
 		F549737C2668A94600181E3F /* DataController */ = {
 			isa = PBXGroup;
 			children = (
-				F55D2ADA266F779A006BACCF /* TSHomePageDataController.h */,
-				F55D2ADB266F779A006BACCF /* TSHomePageDataController.m */,
 			);
 			path = DataController;
 			sourceTree = "<group>";
@@ -768,8 +793,10 @@
 		F549737D2668A94600181E3F /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				F55D2AE0266F7866006BACCF /* TSHomePageLayoutModel.h */,
-				F55D2AE1266F7866006BACCF /* TSHomePageLayoutModel.m */,
+				DC3440BF267239CD00F5B0DA /* TSHomePageCellTemplateModel.h */,
+				DC3440C0267239CD00F5B0DA /* TSHomePageCellTemplateModel.m */,
+				DC3440DD2672FC3900F5B0DA /* TSHomePageBaseModel.h */,
+				DC3440DE2672FC3900F5B0DA /* TSHomePageBaseModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -777,12 +804,6 @@
 		F549737E2668A94600181E3F /* View */ = {
 			isa = PBXGroup;
 			children = (
-				F55D2ABF266F110D006BACCF /* TSHomePageBackgroundReusableView.h */,
-				F55D2AC0266F110D006BACCF /* TSHomePageBackgroundReusableView.m */,
-				F55D2AC8266F5B6E006BACCF /* TSHomePageReleaseHeaderReusableView.h */,
-				F55D2AC9266F5B6E006BACCF /* TSHomePageReleaseHeaderReusableView.m */,
-				F55D2AD1266F66A4006BACCF /* TSHomePageCategoryHeaderView.h */,
-				F55D2AD2266F66A4006BACCF /* TSHomePageCategoryHeaderView.m */,
 				F55D2ACF266F5F53006BACCF /* TSHomePageBannerCell.h */,
 				F55D2ACE266F5F53006BACCF /* TSHomePageBannerCell.m */,
 				F55D2AC2266F15C5006BACCF /* TSHomePageCategoryCell.h */,
@@ -791,6 +812,10 @@
 				F55D2ACC266F5C95006BACCF /* TSHomePageReleaseCell.m */,
 				F55D2AD4266F67EF006BACCF /* TSHomePageContainerCell.h */,
 				F55D2AD5266F67EF006BACCF /* TSHomePageContainerCell.m */,
+				DC3440E62673621000F5B0DA /* TSHomePageContainerHeaderView.h */,
+				DC3440E72673621000F5B0DA /* TSHomePageContainerHeaderView.m */,
+				DC3440D12672F62C00F5B0DA /* TSHomePageBaseCell.h */,
+				DC3440D22672F62C00F5B0DA /* TSHomePageBaseCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1501,13 +1526,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				C2EF88CA2670997100E7374A /* TSCartDataController.m in Sources */,
-				F55D2AC1266F110D006BACCF /* TSHomePageBackgroundReusableView.m in Sources */,
+				DC3440CA2672601F00F5B0DA /* TSHomePageReleaseViewModel.m in Sources */,
 				C2EF88C12670997100E7374A /* TSCartCell.m in Sources */,
-				F55D2ADC266F779A006BACCF /* TSHomePageDataController.m in Sources */,
 				F55D2C3A2671E14B006BACCF /* TSUniversalFooterView.m in Sources */,
-				F55D2AC1266F110D006BACCF /* TSHomePageBackgroundReusableView.m in Sources */,
 				F55D2C3B2671E14B006BACCF /* TSUniversalDecorationView.m in Sources */,
-				F55D2ACA266F5B6E006BACCF /* TSHomePageReleaseHeaderReusableView.m in Sources */,
 				F54973632668A22100181E3F /* YTKAnimatingRequestAccessory.m in Sources */,
 				F56D4B4C266DFB8900C1AD9E /* FMLayoutCrossCell.m in Sources */,
 				F56D4B3A266DFB8900C1AD9E /* FMLayoutBaseSection.m in Sources */,
@@ -1517,6 +1539,7 @@
 				F55D2AD6266F67EF006BACCF /* TSHomePageContainerCell.m in Sources */,
 				F56D4B63266E037600C1AD9E /* MyDimeScale.m in Sources */,
 				F55D2C382671E14B006BACCF /* TSUniversalCollectionViewCell.m in Sources */,
+				DC3440BB26722DB600F5B0DA /* TSHomePageViewModel.m in Sources */,
 				F54973B72668BBEE00181E3F /* TSCartViewController.m in Sources */,
 				F56D4B4D266DFB8900C1AD9E /* FMTeslaLayoutView.m in Sources */,
 				F56D4B4E266DFB8900C1AD9E /* FMKVOArrayObject.m in Sources */,
@@ -1527,15 +1550,17 @@
 				F54973CB2668C27300181E3F /* TSH5InterfacedConst.m in Sources */,
 				F55D2ABE266E0C6B006BACCF /* UIView+TSSafeArea.m in Sources */,
 				F56D4B62266E037600C1AD9E /* MyLayoutMath.m in Sources */,
-				F55D2AE2266F7866006BACCF /* TSHomePageLayoutModel.m in Sources */,
 				C2EF88D52670B8B900E7374A /* TSCartBaseCell.m in Sources */,
+				DC3440D32672F62C00F5B0DA /* TSHomePageBaseCell.m in Sources */,
 				F55D2C362671E14B006BACCF /* TSUniversalHeaderView.m in Sources */,
 				F54973672668A22100181E3F /* SSNetworkAlertUtil.m in Sources */,
+				DC3440CD2672604400F5B0DA /* TSHomePageContainerViewModel.m in Sources */,
 				F549739B2668AA7900181E3F /* TSBaseViewController.m in Sources */,
 				F55D2C422671E299006BACCF /* UIImage+TSColor.m in Sources */,
 				F55D2AD9266F777B006BACCF /* TSBaseDataController.m in Sources */,
 				F56D4B3F266DFB8900C1AD9E /* FMLayoutAbsoluteSection.m in Sources */,
 				F56D4B44266DFB8900C1AD9E /* FMCollectionLayoutAttributes.m in Sources */,
+				DC3440C72672600600F5B0DA /* TSHomePageCategoryViewModel.m in Sources */,
 				F55D2ACD266F5C95006BACCF /* TSHomePageReleaseCell.m in Sources */,
 				F55D2C4B2671F13B006BACCF /* TSCategoryKindModel.m in Sources */,
 				F54973BF2668C01F00181E3F /* TSTipsConst.m in Sources */,
@@ -1564,6 +1589,7 @@
 				F55D2AEA266F9CEC006BACCF /* TSUniverseBackgroundHeaderView.m in Sources */,
 				DC3440B226720E4C00F5B0DA /* TSGridButtonCollectionView.m in Sources */,
 				F54973612668A22100181E3F /* SSBaseRequest.m in Sources */,
+				DC3440DF2672FC3900F5B0DA /* TSHomePageBaseModel.m in Sources */,
 				C2EF88B82670997100E7374A /* TSCartModel.m in Sources */,
 				F54973662668A22100181E3F /* YTKBaseRequest+AnimatingAccessory.m in Sources */,
 				F54973622668A22100181E3F /* SSResponseModel.m in Sources */,
@@ -1582,20 +1608,23 @@
 				F55D2AC4266F15C5006BACCF /* TSHomePageCategoryCell.m in Sources */,
 				F549736B2668A2C700181E3F /* AppDelegate.m in Sources */,
 				C2EF88BE2670997100E7374A /* TSCartView.m in Sources */,
+				DC3440E82673621000F5B0DA /* TSHomePageContainerHeaderView.m in Sources */,
 				F55D2C3D2671E14B006BACCF /* TSUniversaItemModel.m in Sources */,
 				F56D4B46266DFB8900C1AD9E /* FMLayoutHeader.m in Sources */,
 				C2EF88DB2671E28100E7374A /* TSEmptyAlertView.m in Sources */,
 				C2EF88C42670997100E7374A /* TSCartInvalidCell.m in Sources */,
 				F56D4B45266DFB8900C1AD9E /* FMLayoutFooter.m in Sources */,
+				DC3440BE267238F600F5B0DA /* TSHomePageCellViewModel.m in Sources */,
+				DC3440C1267239CD00F5B0DA /* TSHomePageCellTemplateModel.m in Sources */,
 				F55D2AE6266F983E006BACCF /* TSUniverseCollectionBackgroundView.m in Sources */,
 				F56D4B5A266E02BA00C1AD9E /* UIColor+General.m in Sources */,
 				F54973642668A22100181E3F /* YTKBatchRequest+AnimatingAccessory.m in Sources */,
 				F54973A82668B98000181E3F /* TSTabBarController.m in Sources */,
 				F54973762668A31000181E3F /* main.m in Sources */,
+				DC3440C426723D4D00F5B0DA /* TSHomePageBannerViewModel.m in Sources */,
 				F56D4B43266DFB8900C1AD9E /* FMLayout.m in Sources */,
 				F54973AE2668BB8100181E3F /* TSHomeViewController.m in Sources */,
 				F56D4B40266DFB8900C1AD9E /* FMLayoutScaleSection.m in Sources */,
-				F55D2AD3266F66A4006BACCF /* TSHomePageCategoryHeaderView.m in Sources */,
 				F56D4B42266DFB8900C1AD9E /* FMLayoutView.m in Sources */,
 				F56D4B3E266DFB8900C1AD9E /* FMLayoutDynamicSection.m in Sources */,
 				F54973602668A22100181E3F /* SSGenaralRequest.m in Sources */,
@@ -1713,6 +1742,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				EXCLUDED_ARCHS = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1772,6 +1802,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXCLUDED_ARCHS = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

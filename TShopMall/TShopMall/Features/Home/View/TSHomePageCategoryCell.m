@@ -6,58 +6,80 @@
 //
 
 #import "TSHomePageCategoryCell.h"
-
+#import "TSGridButtonCollectionView.h"
+#import "TSHomePageCategoryViewModel.h"
+#import "TSHomePageBaseModel.h"
 @interface TSHomePageCategoryCell()
-
-@property(nonatomic, strong) UIImageView *iconImageView;
-@property(nonatomic, strong) UILabel *nameLabel;
-
+@property(nonatomic, strong) TSGridButtonCollectionView *collectionView;
 @end
 
 @implementation TSHomePageCategoryCell
 
--(instancetype)initWithFrame:(CGRect)frame{
-    if (self = [super initWithFrame:frame]) {
-        [self fillCustomView];
-    }
-    return self;
+-(void)setupUI{
+    self.contentView.backgroundColor = KGrayColor;
+    [self.contentView addSubview:self.collectionView];
+    [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.contentView).offset(12);
+        make.left.equalTo(self.contentView).offset(16);
+        make.right.equalTo(self.contentView).offset(-16);
+        make.bottom.equalTo(self.contentView).offset(-12);
+    }];
 }
 
--(void)fillCustomView{
+- (void)setViewModel:(TSHomePageCellViewModel *)viewModel{
+    [(TSHomePageCategoryViewModel *)viewModel getCategoryData];
+    __weak typeof(self) weakSelf = self;
+    [self.KVOController observe:viewModel keyPath:@"categoryDatas" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
+          NSArray *data = change[@"new"];
+          if (data.count > 0) {
+              weakSelf.datas  = data;
+          }
+      }];
+}
 
-    [self.contentView addSubview:self.iconImageView];
-    [self.contentView addSubview:self.nameLabel];
-    
-    [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.contentView).offset(13);
-        make.width.height.mas_equalTo(45);
-        make.centerX.equalTo(self.contentView);
-    }];
-    
-    [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.iconImageView.mas_bottom).offset(11);
-        make.bottom.left.right.equalTo(self.contentView);
-    }];
+- (void)setDatas:(NSArray<TSHomePageBaseModel *> *)datas{
+    [super setDatas:datas];
+    _collectionView.items = datas;
+    [_collectionView reloadData];
 }
 
 #pragma mark - Getter
--(UIImageView *)iconImageView{
-    if (!_iconImageView) {
-        _iconImageView = [[UIImageView alloc] init];
-        _iconImageView.backgroundColor = KGrayColor;
+- (TSGridButtonCollectionView *)collectionView {
+    if (!_collectionView) {
+        UIEdgeInsets padding = UIEdgeInsetsMake(13, 13, 16, 13);
+        _collectionView = [[TSGridButtonCollectionView alloc] initWithFrame:CGRectZero items:nil ColumnSpacing:23 rowSpacing:17 itemsHeight:68 rows:2 columns:5 padding:padding clickedBlock:^(id selectItem, NSInteger index) {
+            
+        }];
+        _collectionView.clipsToBounds = YES;
+        _collectionView.layer.cornerRadius = 8;
+        _collectionView.collectionView.backgroundColor = [UIColor whiteColor];
+        _collectionView.configCustomView = ^UIView *(TSHomePageBaseModel *model, NSIndexPath *indexPath) {
+            UIView *contetView = [UIView new];
+            UILabel *nameLabel = [UILabel new];
+            nameLabel.textAlignment = NSTextAlignmentCenter;
+            nameLabel.font = [UIFont systemFontOfSize:12];
+            nameLabel.textColor = KHexColor(@"#2D3132");
+            nameLabel.text = model.title;
+            [contetView addSubview:nameLabel];
+            
+            [nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.right.equalTo(contetView);
+                make.height.equalTo(@18);
+                make.bottom.equalTo(contetView);
+            }];
+            
+            UIImageView *imageView = [UIImageView new];
+            imageView.image = [UIImage imageNamed:model.imageUrl];
+            [contetView addSubview:imageView];
+            
+            [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.right.top.equalTo(contetView);
+                make.bottom.equalTo(nameLabel.mas_top).offset(-6);
+            }];
+            
+            return contetView;
+        };
     }
-    return _iconImageView;
+    return _collectionView;
 }
-
--(UILabel *)nameLabel{
-    if (!_nameLabel) {
-        _nameLabel = [[UILabel alloc] init];
-        _nameLabel.textAlignment = NSTextAlignmentCenter;
-        _nameLabel.font = KRegularFont(12);
-        _nameLabel.textColor = KTextColor;
-        _nameLabel.text = @"燃气灶";
-    }
-    return _nameLabel;
-}
-
 @end

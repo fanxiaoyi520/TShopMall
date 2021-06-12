@@ -6,10 +6,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "TSHomePageBaseCell.h"
 NS_ASSUME_NONNULL_BEGIN
-
-@interface TSHomePageBannerCell : UICollectionViewCell
+@interface TSHomePageBannerCell : TSHomePageBaseCell
 
 @end
 

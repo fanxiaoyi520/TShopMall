@@ -6,10 +6,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TSHomePageBaseCell.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TSHomePageReleaseCell : UICollectionViewCell
+@interface TSHomePageReleaseCell : TSHomePageBaseCell
 
 @end
 
