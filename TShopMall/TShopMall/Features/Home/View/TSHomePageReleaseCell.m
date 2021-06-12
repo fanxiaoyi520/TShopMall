@@ -6,32 +6,57 @@
 //
 
 #import "TSHomePageReleaseCell.h"
+#import "TSHomePageReleaseViewModel.h"
 
 @interface TSHomePageReleaseCell()
 
 @property(nonatomic, strong) UIImageView *iconImageView;
 @property(nonatomic, strong) UILabel *nameLabel;
-
 @end
 
 @implementation TSHomePageReleaseCell
 
--(instancetype)initWithFrame:(CGRect)frame{
-    if (self = [super initWithFrame:frame]) {
-        [self fillCustomView];
-    }
-    return self;
-}
+- (void)setViewModel:(TSHomePageCellViewModel *)viewModel{
+    [super setViewModel:viewModel];
+    TSHomePageReleaseViewModel *releaseViewModel = (TSHomePageReleaseViewModel *)viewModel;
 
--(void)fillCustomView{
-
-    [self.contentView addSubview:self.iconImageView];
-    [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.contentView addSubview:self.nameLabel];
+    [self.nameLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contentView).offset(16);
         make.right.equalTo(self.contentView).offset(-16);
-        make.top.bottom.equalTo(self.contentView);
+        make.top.equalTo(self.contentView);
+        make.height.equalTo(@34);
+
     }];
+    
+    [self.contentView addSubview:self.iconImageView];
+    [self.iconImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.contentView).offset(16);
+        make.right.equalTo(self.contentView).offset(-16);
+        make.top.equalTo(self.nameLabel.mas_bottom);
+        make.height.equalTo(@(releaseViewModel.imageViewHeight));
+        make.bottom.equalTo(self.contentView);
+
+    }];
+
+    if (releaseViewModel.imageViewHeight == 0) {
+        [releaseViewModel getReleaseData];
+    }
+    __weak typeof(self) weakSelf = self;
+    [self.KVOController observe:releaseViewModel keyPath:@"releaseModel" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
+          TSHomePageBaseModel *model = change[@"new"];
+          if (![change[@"new"] isKindOfClass:NSNull.class]) {
+              if (model && model.image) {
+                  weakSelf.iconImageView.image = model.image;
+                  weakSelf.nameLabel.text = model.title;
+                  releaseViewModel.imageViewHeight = model.image.size.height;
+                  [weakSelf tableviewReloadCell];
+              }
+          }
+      }];
 }
+
+
 
 #pragma mark - Getter
 -(UIImageView *)iconImageView{
@@ -42,5 +67,13 @@
     return _iconImageView;
 }
 
+- (UILabel *)nameLabel{
+    if (!_nameLabel) {
+        _nameLabel = [UILabel new];
+        _nameLabel.textColor = KHexColor(@"393939");
+        _nameLabel.font = KRegularFont(16);
+    }
+    return _nameLabel;
+}
 
 @end

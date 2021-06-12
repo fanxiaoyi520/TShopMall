@@ -7,32 +7,46 @@
 
 #import "TSHomePageBannerCell.h"
 #import <SDCycleScrollView.h>
+#import "TSHomePageBannerViewModel.h"
 
 @interface TSHomePageBannerCell()<SDCycleScrollViewDelegate>
-
 @property(nonatomic, strong) SDCycleScrollView *cycleScrollView;
-
 @end
 
-
 @implementation TSHomePageBannerCell
-
--(instancetype)initWithFrame:(CGRect)frame
-{
-    if (self = [super initWithFrame:frame]) {
-        [self fillCustomView];
-    }
-    return self;
+-(void)setupUI{
+    self.contentView.backgroundColor = [UIColor clearColor];
+    [self.contentView addSubview:self.cycleScrollView];
+    [self.cycleScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.contentView).offset(16);
+        make.right.equalTo(self.contentView).offset(-16);
+        make.top.equalTo(self.contentView).offset(10);
+        make.bottom.equalTo(self.contentView).offset(-10);
+        make.height.equalTo(@174);
+    }];
+    
 }
 
--(void)fillCustomView{
-    self.contentView.backgroundColor = [UIColor clearColor];
-    [self addSubview:self.cycleScrollView];
-    [self.cycleScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self).offset(16);
-        make.right.equalTo(self).offset(-16);
-        make.top.bottom.equalTo(self);
-    }];
+- (void)setViewModel:(TSHomePageCellViewModel *)viewModel{
+    [(TSHomePageBannerViewModel *)viewModel getBannerData];
+    __weak typeof(self) weakSelf = self;
+    [self.KVOController observe:viewModel keyPath:@"bannerDatas" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
+          NSArray *data = change[@"new"];
+          if (data.count > 0) {
+              weakSelf.datas  = data;
+          }
+      }];
+}
+
+- (void)setDatas:(NSArray<TSHomePageBaseModel *> *)datas{
+    [super setDatas:datas];
+    NSMutableArray *tempArr = @[].mutableCopy;
+    for (TSHomePageBaseModel *model in datas) {
+        [tempArr addObject:model.imageUrl];
+    }
+    
+    _cycleScrollView.localizationImageNamesGroup = tempArr;
+
 }
 
 #pragma mark - Getter
@@ -43,7 +57,6 @@
         _cycleScrollView.autoScroll  = NO;
         _cycleScrollView.autoScrollTimeInterval = 4;
         _cycleScrollView.backgroundColor = [UIColor clearColor];
-        _cycleScrollView.localizationImageNamesGroup = @[@"home_banner_placeImage"];
     }
     return _cycleScrollView;
 }

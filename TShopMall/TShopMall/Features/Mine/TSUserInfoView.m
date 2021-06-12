@@ -42,14 +42,18 @@
         make.width.height.mas_equalTo(60);
     }];
     
+    [self addSubview:self.loginButton];
+    [self.loginButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.iconImageView.mas_right).offset(10);
+        make.top.equalTo(self.iconImageView);
+        make.height.mas_equalTo(30);
+    }];
+    
     if (self.type == TSRoleTypeUnLogin) {
-        [self addSubview:self.loginButton];
-        [self.loginButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.iconImageView.mas_right).offset(10);
-            make.top.equalTo(self.iconImageView);
-            make.height.mas_equalTo(30);
-        }];
+        self.loginButton.userInteractionEnabled = YES;
     }else if (self.type == TSRoleTypePlatinum){
+        self.loginButton.userInteractionEnabled = NO;
+        
         [self addSubview:self.partnerImageView];
         [self addSubview:self.staffImageView];
         

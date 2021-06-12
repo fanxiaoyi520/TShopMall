@@ -18,6 +18,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// 此次请求的响应信息
 @property(nonatomic, strong) SSResponseModel *responseModel;
 
+
+-(NSMutableDictionary *)commonHeader;
+-(NSMutableDictionary *)commonBady;
+
 @end
 
 NS_ASSUME_NONNULL_END

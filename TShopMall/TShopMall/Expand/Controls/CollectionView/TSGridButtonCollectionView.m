@@ -96,10 +96,9 @@
         }
         UIView *customView = self.configCustomView(self.items[indexPath.row], indexPath);
         [cell.contentView addSubview:customView];
-        customView.frame = cell.contentView.bounds;
-//        [customView mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.edges.equalTo(cell.contentView);
-//        }];
+        [customView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(cell.contentView);
+        }];
         return cell;
     }else{
         TSGridButtonCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TSGridButtonCollectionViewCell" forIndexPath:indexPath];
