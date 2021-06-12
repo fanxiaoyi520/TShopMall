@@ -15,5 +15,6 @@
 - (void)allSelected:(BOOL)status;
 - (void)checkGift:(TSCart *)cartModel;
 - (void)goToShopping;
+- (void)goToSettle;
 @end
 

@@ -34,7 +34,6 @@
     }];
     
     [self.rightView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.equalTo(self.leftView.mas_right).offset(KRateW(8.0));
         make.right.equalTo(self.contentView.mas_right).offset(-KRateW(16.0));
         make.top.bottom.equalTo(self.leftView);
         make.width.equalTo(self.leftView.mas_width);
@@ -83,7 +82,6 @@
     [self.icon mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.equalTo(self);
         make.height.mas_equalTo(self.mas_width);
-        make.width.mas_equalTo(0);
     }];
     [self.name mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.icon.mas_bottom).offset(KRateW(8.0));
@@ -203,12 +201,12 @@
     [self.tipsBg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.equalTo(self);
         make.left.equalTo(self.mas_left);
-        make.width.mas_lessThanOrEqualTo(KRateW(30.0));
+        make.width.mas_equalTo(KRateW(30.0));
     }];
     
     [self.tips mas_makeConstraints:^(MASConstraintMaker *make) {
            make.left.equalTo(self.tipsBg.mas_left).offset(KRateW(4.0));
-           make.right.equalTo(self.tipsBg.mas_right).offset(KRateW(6.0));
+//           make.right.equalTo(self.tipsBg.mas_right).offset(KRateW(6.0));
            make.top.bottom.equalTo(self.tipsBg);
        }];
     

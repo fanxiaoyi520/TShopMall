@@ -27,7 +27,7 @@
 
 - (void)clearInvalideGoods{}
 - (void)goodsSelectedStatusChanged{}
-- (void)deleteGoods:(TSCart *)cart{};
+- (void)scrollDeleteCart:(TSCart *)cart indexPath:(NSIndexPath *)indexPath{}
 
 - (void)goodsSelected:(TSCart *)cartModel indexPath:(NSIndexPath *)indexPath{
     self.sections[indexPath.section].rows[indexPath.row].obj = cartModel;
@@ -40,6 +40,11 @@
 
 - (void)goToShopping{
     
+}
+
+- (void)setSections:(NSArray<TSCartGoodsSection *> *)sections{
+    _sections = sections;
+    [self.tableView reloadData];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -108,7 +113,7 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
     TSCartGoodsRow *row = self.sections[indexPath.section].rows[indexPath.row];
-    [self.controller performSelector:@selector(deleteGoods:) withObject:row.obj];
+    [self.controller performSelector:@selector(scrollDeleteCart:indexPath:) withObject:row.obj withObject:indexPath];
 }
 
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath{
