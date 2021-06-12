@@ -45,8 +45,8 @@
 
 -(void)fillCustomView{
     [self.view addSubview:self.bgImageView];
-    [self.bgImageView addSubview:self.setButton];
-    [self.bgImageView addSubview:self.infoView];
+//    [self.bgImageView addSubview:self.setButton];
+//    [self.bgImageView addSubview:self.infoView];
     [self.view addSubview:self.collectionView];
 }
 
@@ -60,29 +60,33 @@
     [super viewWillLayoutSubviews];
     
     CGFloat top = self.view.ts_safeAreaInsets.top + 6;
+    CGFloat height = kScreenHeight - 160 - GK_TABBAR_HEIGHT;
     
-    [self.bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.top.equalTo(self.view);
-        make.height.mas_equalTo(205);
-    }];
+    self.bgImageView.frame = CGRectMake(0, 0, kScreenWidth, 205);
+    self.collectionView.frame = CGRectMake(0, 205 - 45, kScreenWidth, height);
     
-    [self.setButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.bgImageView).offset(top);
-        make.right.equalTo(self.bgImageView).offset(-16);
-        make.width.height.mas_equalTo(32);
-    }];
+//    [self.bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.right.top.equalTo(self.view);
+//        make.height.mas_equalTo(205);
+//    }];
     
-    [self.infoView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.bgImageView);
-        make.bottom.equalTo(self.bgImageView.mas_bottom).offset(-73);
-        make.height.mas_equalTo(60);
-    }];
+//    [self.setButton mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.bgImageView).offset(top);
+//        make.right.equalTo(self.bgImageView).offset(-16);
+//        make.width.height.mas_equalTo(32);
+//    }];
+//
+//    [self.infoView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.right.equalTo(self.bgImageView);
+//        make.bottom.equalTo(self.bgImageView.mas_bottom).offset(-73);
+//        make.height.mas_equalTo(60);
+//    }];
     
-    [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.equalTo(self.view);
-        make.top.equalTo(self.bgImageView.mas_bottom).offset(-45);
-        make.bottom.equalTo(self.view).offset(- (GK_TABBAR_HEIGHT));
-    }];
+//    [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.right.bottom.equalTo(self.view);
+//        make.top.equalTo(self.bgImageView.mas_bottom).offset(-45);
+//        make.bottom.equalTo(self.view).offset(- (GK_TABBAR_HEIGHT));
+//    }];
 }
 
 #pragma mark - Action
@@ -92,7 +96,21 @@
 
 #pragma mark - UIScrollViewDelegate
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    self.bgImageView.frame = CGRectMake(0, -scrollView.contentOffset.y, kScreenWidth, 205);
+    CGFloat offsetY = ceil(scrollView.contentOffset.y);
+    if (offsetY <= 0) {
+        CGRect frame = self.bgImageView.frame;
+//        frame.origin.y += offsetY;
+        frame.size.height -= offsetY;
+        if (frame.size.height > 300) {
+            CGFloat diff = frame.size.height - 300;
+            frame.size.height -= diff;
+//            frame.origin.y += diff;
+        }
+        self.bgImageView.frame = frame;
+
+    } else {
+        
+    }
 }
 
 #pragma mark - UICollectionViewDataSource
