@@ -33,13 +33,13 @@ NS_ASSUME_NONNULL_BEGIN
 /// 网络请求是否成功
 @property(nonatomic, assign) BOOL isSucceed;
 /// Http请求状态码
-@property(nonatomic, copy) NSString *stateCode;
+@property(nonatomic, assign) NSInteger stateCode;
 /// 请求返回的状态码
 @property(nonatomic, copy) NSString *code;
 /// 响应信息
 @property(nonatomic, copy) NSString *responseMsg;
 /// 响应体（字典或者数组）
-@property(nonatomic, strong) id responseObject;
+@property(nonatomic, strong) id data;
 
 +(instancetype)responseWithRequest:(SSBaseRequest *)baseRequest;
 

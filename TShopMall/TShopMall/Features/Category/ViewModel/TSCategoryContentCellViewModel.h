@@ -6,10 +6,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TSCategoryContentModel.h"
+#import "TSCategorySectionModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TSCategoryContentCellViewModel : NSObject
+
+@property(nonatomic, strong) NSArray <TSCategorySectionModel *> *sections;
+
++ (nonnull TSCategoryContentCellViewModel *)viewModelWithSubject:(nonnull TSCategoryContentModel *)kindModel;
 
 @end
 

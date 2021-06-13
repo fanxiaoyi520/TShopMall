@@ -35,18 +35,23 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TSCategorySectionKindItemModel : TSCategorySectionItemModel
 
-@property(nonatomic, copy) NSString *imgUrl;
-@property(nonatomic, copy) NSString *name;
+@property(nonatomic, copy) NSString *TwoLevelImg;
+@property(nonatomic, copy) NSString *TwoLevelTitle;
 
 @end
 
 @interface TSCategorySectionRecommendItemModel : TSCategorySectionItemModel
 
-@property(nonatomic, copy) NSString *imgUrl;
-@property(nonatomic, copy) NSString *name;
-@property(nonatomic, copy) NSString *retailPrice;
-@property(nonatomic, copy) NSString *commission;
-@property(nonatomic, copy) NSString *goodsPrice;
+@property(nonatomic, copy) NSString *promotionPrice;
+@property(nonatomic, copy) NSString *buyState;
+@property(nonatomic, copy) NSString *recommend;
+@property(nonatomic, copy) NSString *baseRetailPrice;
+@property(nonatomic, copy) NSString *uuid;
+@property(nonatomic, copy) NSString *productName;
+@property(nonatomic, copy) NSString *sellingPrice;
+@property(nonatomic, copy) NSString *price;
+@property(nonatomic, copy) NSString *imageUrl;
+@property(nonatomic, copy) NSString *stock;
 
 @end
 

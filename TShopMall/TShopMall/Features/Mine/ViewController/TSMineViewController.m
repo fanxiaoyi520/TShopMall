@@ -41,6 +41,8 @@
             [strongSelf.collectionView reloadData];
         }
     }];
+    
+    
 }
 
 -(void)fillCustomView{
@@ -48,6 +50,8 @@
 //    [self.bgImageView addSubview:self.setButton];
 //    [self.bgImageView addSubview:self.infoView];
     [self.view addSubview:self.collectionView];
+    
+    self.bgImageView.frame = CGRectMake(0, 0, kScreenWidth, 205);
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -62,7 +66,7 @@
     CGFloat top = self.view.ts_safeAreaInsets.top + 6;
     CGFloat height = kScreenHeight - 160 - GK_TABBAR_HEIGHT;
     
-    self.bgImageView.frame = CGRectMake(0, 0, kScreenWidth, 205);
+    
     self.collectionView.frame = CGRectMake(0, 205 - 45, kScreenWidth, height);
     
 //    [self.bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {

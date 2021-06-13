@@ -7,18 +7,18 @@
 
 #import "TSBaseDataController.h"
 #import "TSCategoryKindModel.h"
-#import "TSCategorySectionModel.h"
-#import "TSCategoryHeaderReusableView.h"
+#import "TSCategoryContentModel.h"
+
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TSCategoryDataController : TSBaseDataController
 
 @property (nonatomic, strong, readonly) NSMutableArray <TSCategoryKindModel *> *kinds;
-@property (nonatomic, strong, readonly) NSMutableArray <TSCategorySectionModel *> *sections;
+@property (nonatomic, strong, readonly) NSMutableArray <TSCategoryContentModel *> *sections;
 
 -(void)fetchKindsComplete:(void(^)(BOOL isSucess))complete;
--(void)fetchContentsComplete:(void(^)(BOOL isSucess))complete;
+
 
 @end
 
