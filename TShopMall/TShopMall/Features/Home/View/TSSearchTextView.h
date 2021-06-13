@@ -8,8 +8,9 @@
 #import <UIKit/UIKit.h>
 
 
-@interface TSSearchTextView : UIView
+@interface TSSearchTextView : UIView<UITextFieldDelegate>
 @property (nonatomic, strong) UIImageView *indeImg;
 @property (nonatomic, strong) UITextField *textField;
+@property (nonatomic, copy) void(^startSearch)(NSString *);
 @end
 

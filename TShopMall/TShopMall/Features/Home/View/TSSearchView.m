@@ -84,7 +84,11 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     TSSearchBaseCell *cell = (TSSearchBaseCell *)[collectionView cellForItemAtIndexPath:indexPath];
     if ([cell.obj isKindOfClass:[NSString class]]) {
-        
+        NSString *key = cell.obj;
+        self.textView.textField.text = key;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self.controller performSelector:@selector(goToGoodsList:) withObject:key];
+        });
     } else {
         
     }
@@ -154,6 +158,10 @@
     }
     self.textView = [TSSearchTextView new];
     [self addSubview:self.textView];
+    __weak typeof(self) weakSelf = self;
+     self.textView.startSearch = ^(NSString *key) {
+         [weakSelf.controller performSelector:@selector(goToGoodsList:) withObject:key];
+    };
     
     return self.textView;
 }

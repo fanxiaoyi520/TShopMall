@@ -9,17 +9,21 @@
 
 @class TSSearchRow;
 
+@protocol TSSearchCollectionRowDelegate <NSObject>
+
+@end
+
 @interface TSSearchSection : NSObject
 @property (nonatomic, copy) NSString *headerIdentifier;
 @property (nonatomic, copy) NSString *footerIdentifier;
 @property (nonatomic, assign) CGFloat headerHeight;
 @property (nonatomic, assign) CGFloat footerHeight;
 @property (nonatomic, copy) NSString *headerTitle;
-@property (nonatomic, strong) NSArray<TSSearchRow *> *rows;
+@property (nonatomic, strong) NSArray<id<TSSearchCollectionRowDelegate>> *rows;
 @end
 
 
-@interface TSSearchRow : NSObject
+@interface TSSearchRow : NSObject<TSSearchCollectionRowDelegate>
 @property (nonatomic, copy) NSString *cellIdentifier;
 @property (nonatomic, strong) id obj;
 @end

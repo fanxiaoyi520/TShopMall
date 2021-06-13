@@ -9,7 +9,7 @@
 #import "TSBaseNavigationController.h"
 #import "TSSearchView.h"
 #import "TSSearchDataController.h"
-#import <Lottie/Lottie.h>
+#import "TSGoodsListController.h"
 
 @interface TSSearchController ()
 @property (nonatomic, strong) TSSearchView *searchView;
@@ -31,6 +31,12 @@
     [TSSearchDataController fetchData:^(NSArray<TSSearchSection *> *sections, NSError *error) {
         self.searchView.sections = sections;
     }];
+}
+
+- (void)goToGoodsList:(NSString *)key{
+    TSGoodsListController *con = [TSGoodsListController new];
+    con.searchKey = key;
+    [self.navigationController pushViewController:con animated:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated{

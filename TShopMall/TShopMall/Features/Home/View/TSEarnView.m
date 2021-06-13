@@ -18,6 +18,8 @@
 - (instancetype)init{
     if (self == [super init]) {
         self.backgroundColor = KHexColor(@"#FF4D49");
+        self.layer.cornerRadius = 2.0;
+        self.layer.masksToBounds = YES;
         [self  layoutView];
     }
     return self;

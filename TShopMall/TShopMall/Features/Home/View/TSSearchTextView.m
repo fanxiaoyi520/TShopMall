@@ -48,6 +48,8 @@
         return _textField;
     }
     self.textField = [UITextField new];
+    self.textField.delegate = self;
+    self.textField.returnKeyType = UIReturnKeySearch;
     self.textField.clearButtonMode = UITextFieldViewModeWhileEditing;
     [self.textField setPlaceholderColor:[KHexColor(@"#2D3132") colorWithAlphaComponent:0.6] fontType:PingFangSCRegular fontSize:12.0];
     [self.textField setTextColor:KHexColor(@"#2D3132") fontType:PingFangSCRegular fontSize:12.0];
@@ -55,6 +57,12 @@
     [self addSubview:self.textField];
     
     return self.textField;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField endEditing:YES];
+    self.startSearch(textField.text);
+    return self;
 }
 
 @end

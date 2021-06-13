@@ -14,6 +14,7 @@
 @implementation TSSearchMarkCell
 
 - (void)setObj:(id)obj{
+    [super setObj:obj];
     if ([obj isKindOfClass:[NSString class]]) {
         NSString *str = (NSString *)obj;
         self.markLabel.text = str;
