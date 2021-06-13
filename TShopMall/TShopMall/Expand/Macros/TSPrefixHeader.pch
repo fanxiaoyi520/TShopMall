@@ -18,6 +18,7 @@
 #import "UIColor+General.h"
 #import "UIFont+General.h"
 #import "UIView+TSSafeArea.h"
+#import "UITextField+General.h"
 #import "MyDimeScale.h"
 #import "FMLayoutKit.h"
 #import "UIImage+TSColor.h"

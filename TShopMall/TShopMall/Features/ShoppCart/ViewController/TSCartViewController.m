@@ -111,7 +111,6 @@
     if (carts.count != 0) {
         TSAlertView.new.alertInfo(nil, @"确认删除选中商品吗？").confirm(@"确定", ^{
             NSMutableArray *sections = [NSMutableArray arrayWithArray:self.cartView.sections];
-            NSMutableArray *selSections = [NSMutableArray array];
             for (TSCartGoodsSection *section in self.cartView.sections) {
                 TSCartGoodsRow *row = [section.rows lastObject];
                 if ([row.obj isKindOfClass:[TSCart class]]) {
@@ -121,7 +120,7 @@
                     }
                 }
             }
-            self.cartView.sections = selSections;
+            self.cartView.sections = sections;
         }).cancel(@"取消", ^{}).show();
     }
 }

@@ -7,11 +7,13 @@
 
 #import "TSCartView.h"
 #import "TSCartCell.h"
+#import "TSRefreshConfiger.h"
 
-@interface TSCartView()<UITableViewDelegate, UITableViewDataSource, TSCartProtocol>{
+@interface TSCartView()<UITableViewDelegate, UITableViewDataSource, TSCartProtocol, TSRefreshDelegate>{
     
 }
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) TSRefreshConfiger *refreshConfiger;
 @end
 
 @implementation TSCartView
@@ -130,6 +132,20 @@
     }];
 }
 
+- (BOOL)hasMoreData{
+    return YES;
+}
+
+- (void)headerRefresh{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.refreshConfiger endRefresh:YES];
+    });
+}
+
+- (void)footerRefresh{
+    
+}
+
 - (UITableView *)tableView{
     if (_tableView) {
         return _tableView;
@@ -143,6 +159,8 @@
     self.tableView.dataSource = self;
     self.tableView.showsVerticalScrollIndicator = NO;
     [self addSubview:self.tableView];
+    
+    self.refreshConfiger = [TSRefreshConfiger configScrollView:self.tableView isLight:YES response:self type:Both];
     
     return self.tableView;
 }

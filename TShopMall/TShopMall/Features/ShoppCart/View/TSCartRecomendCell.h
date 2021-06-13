@@ -6,9 +6,9 @@
 //
 
 #import "TSCartBaseCell.h"
+#import "TSEarnView.h"
 
 @class TSCartRecomendView;
-@class TSCartEarnView;
 
 @interface TSCartRecomendCell : TSCartBaseCell
 
@@ -19,12 +19,5 @@
 @property (nonatomic, strong) UILabel *name;
 @property (nonatomic, strong) UILabel *price;
 @property (nonatomic, strong) UILabel *thPrice;
-@property (nonatomic, strong) TSCartEarnView *earnView;
-@end
-
-@interface TSCartEarnView : UIView
-@property (nonatomic, strong) UILabel *price;
-@property (nonatomic, strong) UIView *tipsBg;
-@property (nonatomic, strong) UILabel *tips;
-- (void)updatePrice:(NSString *)price;
+@property (nonatomic, strong) TSEarnView *earnView;
 @end
