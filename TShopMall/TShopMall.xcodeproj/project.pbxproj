@@ -99,6 +99,7 @@
 		DC45FEC026783A6E00CE762E /* TSHomePageContainerCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DC45FEBF26783A6E00CE762E /* TSHomePageContainerCollectionViewCell.m */; };
 		DC45FEC32678425700CE762E /* TSHighPriceTagView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC45FEC22678425700CE762E /* TSHighPriceTagView.m */; };
 		DC45FECA2678898500CE762E /* UIView+TSFrameValueBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DC45FEC82678898500CE762E /* UIView+TSFrameValueBlock.m */; };
+		DC45FECD2678962B00CE762E /* NSTimer+TSBlcokTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = DC45FECC2678962B00CE762E /* NSTimer+TSBlcokTimer.m */; };
 		E2BE996F8804E0C3E7D5AE61 /* libPods-TShopMall-TShopMallUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD1ABBE857D307088E9BF2DC /* libPods-TShopMall-TShopMallUITests.a */; };
 		F54972FE2668842500181E3F /* TShopMallTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F54972FD2668842500181E3F /* TShopMallTests.m */; };
 		F54973092668842500181E3F /* TShopMallUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F54973082668842500181E3F /* TShopMallUITests.m */; };
@@ -374,6 +375,8 @@
 		DC45FEC22678425700CE762E /* TSHighPriceTagView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSHighPriceTagView.m; sourceTree = "<group>"; };
 		DC45FEC82678898500CE762E /* UIView+TSFrameValueBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+TSFrameValueBlock.m"; sourceTree = "<group>"; };
 		DC45FEC92678898500CE762E /* UIView+TSFrameValueBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+TSFrameValueBlock.h"; sourceTree = "<group>"; };
+		DC45FECB2678962B00CE762E /* NSTimer+TSBlcokTimer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSTimer+TSBlcokTimer.h"; sourceTree = "<group>"; };
+		DC45FECC2678962B00CE762E /* NSTimer+TSBlcokTimer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+TSBlcokTimer.m"; sourceTree = "<group>"; };
 		ECCE8A564DF47B445E7905B1 /* Pods-TShopMall-TShopMallUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TShopMall-TShopMallUITests.release.xcconfig"; path = "Target Support Files/Pods-TShopMall-TShopMallUITests/Pods-TShopMall-TShopMallUITests.release.xcconfig"; sourceTree = "<group>"; };
 		F54972DE2668842200181E3F /* TShopMall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TShopMall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F54972F22668842400181E3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1305,6 +1308,8 @@
 				C28757D4267360E2007C8AF5 /* UIView+General.m */,
 				C2A34C7E2674A64E0095497E /* UITextField+General.h */,
 				C2A34C7F2674A64E0095497E /* UITextField+General.m */,
+				DC45FECB2678962B00CE762E /* NSTimer+TSBlcokTimer.h */,
+				DC45FECC2678962B00CE762E /* NSTimer+TSBlcokTimer.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -1873,7 +1878,6 @@
 				F55D2C3A2671E14B006BACCF /* TSUniversalFooterView.m in Sources */,
 				F55D2CB02674A6A9006BACCF /* TSCategoryKindCellViewModel.m in Sources */,
 				F55D2C3B2671E14B006BACCF /* TSUniversalDecorationView.m in Sources */,
-				F55D2C87267312C5006BACCF /* TSMineImageTextCell.m in Sources */,
 				F55D2C6726722807006BACCF /* TSCategoryKindModel.m in Sources */,
 				C2A34C6A267449080095497E /* TSAlertView.m in Sources */,
 				F54973632668A22100181E3F /* YTKAnimatingRequestAccessory.m in Sources */,
@@ -1919,7 +1923,6 @@
 				F55D2ABE266E0C6B006BACCF /* UIView+TSSafeArea.m in Sources */,
 				F55D2CA726746BE1006BACCF /* TSCategoryContentViewModel.m in Sources */,
 				F56D4B62266E037600C1AD9E /* MyLayoutMath.m in Sources */,
-				F55D2C9326736557006BACCF /* TSMineEarningsCell.m in Sources */,
 				C2EF88D52670B8B900E7374A /* TSCartBaseCell.m in Sources */,
 				DC3440D32672F62C00F5B0DA /* TSHomePageBaseCell.m in Sources */,
 				DC45FEBD26783A1300CE762E /* TSHomePageContainerCollectionView.m in Sources */,
@@ -1975,6 +1978,7 @@
 				DC3440B226720E4C00F5B0DA /* TSGridButtonCollectionView.m in Sources */,
 				C2A34CA92675F19D0095497E /* TSGoodsListFittleView.m in Sources */,
 				F54973612668A22100181E3F /* SSBaseRequest.m in Sources */,
+				DC45FECD2678962B00CE762E /* NSTimer+TSBlcokTimer.m in Sources */,
 				F55D2C9A26745E2E006BACCF /* TSGlobalManager.m in Sources */,
 				C3B4CCF22674934E0001EE75 /* TSCheckedView.m in Sources */,
 				DC3440DF2672FC3900F5B0DA /* TSHomePageBaseModel.m in Sources */,

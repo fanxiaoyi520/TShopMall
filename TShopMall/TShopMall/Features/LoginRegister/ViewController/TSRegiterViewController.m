@@ -10,6 +10,7 @@
 #import "TSCheckedView.h"
 #import <Toast.h>
 #import "TSTools.h"
+#import "NSTimer+TSBlcokTimer.h"
 
 @interface TSRegiterViewController ()<TSRegisterTopViewDelegate, TSCheckedViewDelegate>
 /** 背景图 */
@@ -143,7 +144,10 @@
         [self.view makeToast:@"请输入正确的手机号" duration:3.0 position:CSToastPositionCenter];
         return;
     }
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(goToRun) userInfo:nil repeats:YES];
+    __weak typeof(self) weakSelf = self;
+    self.timer = [NSTimer ts_scheduledTimerWithTimeInterval:1 block:^{
+         [weakSelf goToRun];
+    } repeats:YES];
 }
 
 - (void)inputDoneAction {
