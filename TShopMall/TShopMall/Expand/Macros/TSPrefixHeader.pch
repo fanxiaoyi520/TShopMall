@@ -24,6 +24,7 @@
 #import "SSGenaralRequest.h"
 #import "TSGlobalManager.h"
 #import "SSResponseModel.h"
+#import "YTKBaseRequest+AnimatingAccessory.h"
 
 #import <YYKit/YYKit.h>
 #import <YTKNetwork/YTKNetwork.h>

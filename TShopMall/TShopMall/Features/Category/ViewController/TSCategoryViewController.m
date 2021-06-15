@@ -119,6 +119,7 @@
     [self.kindViewModel viewModelExchangeSelectedRow:indexPath.row];
     [self.contentViewModel viewModelExchangeSelectedRow:indexPath.row];
     [tableView reloadData];
+    [self.collectionView scrollToTop];
     [self.collectionView reloadData];
 }
 
