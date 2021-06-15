@@ -14,6 +14,7 @@
 #import "TSTools.h"
 #import <Toast.h>
 #import "TSRegiterViewController.h"
+#import "NSTimer+TSBlcokTimer.h"
 
 
 @interface TSLoginViewController ()<TSQuickLoginTopViewDelegate, TSLoginTopViewDelegate, TSLoginBottomViewDelegate, TSCheckedViewDelegate, TSQuickCheckViewDelegate>
@@ -203,7 +204,12 @@
         [self.view makeToast:@"请输入正确的手机号" duration:3.0 position:CSToastPositionCenter];
         return;
     }
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(goToRun) userInfo:nil repeats:YES];
+    
+    __weak typeof(self) weakSelf = self;
+    self.timer = [NSTimer ts_scheduledTimerWithTimeInterval:1 block:^{
+         [weakSelf goToRun];
+    } repeats:YES];
+    
 }
 
 - (void)goToRegister {
