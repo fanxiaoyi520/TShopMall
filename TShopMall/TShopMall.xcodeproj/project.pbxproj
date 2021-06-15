@@ -9,9 +9,6 @@
 /* Begin PBXBuildFile section */
 		00093A5046E7E3324EC8CBEB /* libPods-TShopMallTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1942D505D7004833F274B5D1 /* libPods-TShopMallTests.a */; };
 		AE4DC537B4A93FA6C04B9037 /* libPods-TShopMall.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 825A9D1C217F35DCFB651B21 /* libPods-TShopMall.a */; };
-		C206A4FA266F1DA400B69DED /* TSLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = C206A4F8266F1DA400B69DED /* TSLoginController.m */; };
-		C206A4FB266F1DA400B69DED /* TSLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = C206A4F8266F1DA400B69DED /* TSLoginController.m */; };
-		C206A4FC266F1DA400B69DED /* TSLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = C206A4F8266F1DA400B69DED /* TSLoginController.m */; };
 		C28757D5267360E2007C8AF5 /* UIView+General.m in Sources */ = {isa = PBXBuildFile; fileRef = C28757D4267360E2007C8AF5 /* UIView+General.m */; };
 		C2A34C6A267449080095497E /* TSAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2A34C69267449080095497E /* TSAlertView.m */; };
 		C2A34C702674831F0095497E /* TSRefreshConfiger.m in Sources */ = {isa = PBXBuildFile; fileRef = C2A34C6F2674831F0095497E /* TSRefreshConfiger.m */; };
@@ -225,8 +222,6 @@
 		825A9D1C217F35DCFB651B21 /* libPods-TShopMall.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TShopMall.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		847295D7102568B80FCAB72E /* Pods-TShopMallTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TShopMallTests.release.xcconfig"; path = "Target Support Files/Pods-TShopMallTests/Pods-TShopMallTests.release.xcconfig"; sourceTree = "<group>"; };
 		BBF16248DC0233F9DA291554 /* Pods-TShopMallTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TShopMallTests.debug.xcconfig"; path = "Target Support Files/Pods-TShopMallTests/Pods-TShopMallTests.debug.xcconfig"; sourceTree = "<group>"; };
-		C206A4F8266F1DA400B69DED /* TSLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSLoginController.m; sourceTree = "<group>"; };
-		C206A4F9266F1DA400B69DED /* TSLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSLoginController.h; sourceTree = "<group>"; };
 		C28757D3267360E2007C8AF5 /* UIView+General.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+General.h"; sourceTree = "<group>"; };
 		C28757D4267360E2007C8AF5 /* UIView+General.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+General.m"; sourceTree = "<group>"; };
 		C2A34C68267449060095497E /* TSAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSAlertView.h; sourceTree = "<group>"; };
@@ -628,8 +623,6 @@
 				C3B4CCDB2674932C0001EE75 /* TSLoginViewController.m */,
 				C3B4CCDD2674932D0001EE75 /* TSRegiterViewController.h */,
 				C3B4CCDE2674932D0001EE75 /* TSRegiterViewController.m */,
-				C206A4F9266F1DA400B69DED /* TSLoginController.h */,
-				C206A4F8266F1DA400B69DED /* TSLoginController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1900,7 +1893,6 @@
 				F55D2CC726784ACD006BACCF /* TSMineOrderHeaderView.m in Sources */,
 				F54973AB2668B9B500181E3F /* TSBaseNavigationController.m in Sources */,
 				F56D4B5B266E02BA00C1AD9E /* UIFont+General.m in Sources */,
-				C206A4FA266F1DA400B69DED /* TSLoginController.m in Sources */,
 				F54973B12668BBB200181E3F /* TSCategoryViewController.m in Sources */,
 				F55D2CA026745E7A006BACCF /* TSLastUserInfoManager.m in Sources */,
 				F55D2C372671E14B006BACCF /* TSUniversalTableViewCell.m in Sources */,
@@ -1984,7 +1976,6 @@
 				C2EF88B32670997100E7374A /* TSCartViewModel.m in Sources */,
 				C2EF88BF2670997100E7374A /* TSCartView.m in Sources */,
 				C2EF88CB2670997100E7374A /* TSCartDataController.m in Sources */,
-				C206A4FB266F1DA400B69DED /* TSLoginController.m in Sources */,
 				C2EF88D02670A3B200E7374A /* TSCartRecomendCell.m in Sources */,
 				C2EF88C22670997100E7374A /* TSCartCell.m in Sources */,
 				C2EF88C52670997100E7374A /* TSCartInvalidCell.m in Sources */,
@@ -2003,7 +1994,6 @@
 				C2EF88B42670997100E7374A /* TSCartViewModel.m in Sources */,
 				C2EF88C02670997100E7374A /* TSCartView.m in Sources */,
 				C2EF88CC2670997100E7374A /* TSCartDataController.m in Sources */,
-				C206A4FC266F1DA400B69DED /* TSLoginController.m in Sources */,
 				C2EF88D12670A3B200E7374A /* TSCartRecomendCell.m in Sources */,
 				C2EF88C32670997100E7374A /* TSCartCell.m in Sources */,
 				C2EF88C62670997100E7374A /* TSCartInvalidCell.m in Sources */,

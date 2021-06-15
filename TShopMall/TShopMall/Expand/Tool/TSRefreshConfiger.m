@@ -11,7 +11,7 @@
 @interface TSRefreshConfiger()
 @property (nonatomic, weak) id<TSRefreshDelegate> delegate;
 @property (nonatomic, weak) UIScrollView *scrollView;
-@property (nonatomic, strong) MJRefreshHeader *header;
+@property (nonatomic, strong) TSRefreshHeader *header;
 @property (nonatomic, strong) MJRefreshAutoStateFooter *footer;
 @property (nonatomic, assign) BOOL isLight;
 @end
@@ -35,6 +35,11 @@
     return configer;
 }
 
+- (void)changeRefreshType:(BOOL)isLight{
+    NSString *name = self.isLight==YES? @"refresh_header_light":@"refresh_header_dark";
+    [self.header.lotView setAnimationNamed:name];
+}
+
 - (void)configLotHeader{
     TSRefreshHeader *header = [TSRefreshHeader new];
     header.jsonName = self.isLight==YES? @"refresh_header_light":@"refresh_header_dark";
@@ -47,8 +52,8 @@
     self.footer.stateLabel.font = KFont(PingFangSCRegular, 12);
     self.footer.stateLabel.textColor = KHexColor(@"#4b5675");
     [self.footer setTitle:@"" forState:MJRefreshStateIdle];
-    [self.footer setTitle:@"已经全部加载完毕" forState:MJRefreshStateNoMoreData];
-    [self.footer setTitle:@"正在加载更多的数据..." forState:MJRefreshStateRefreshing];
+    [self.footer setTitle:@"——————  已加载全部  ——————" forState:MJRefreshStateNoMoreData];
+    [self.footer setTitle:@"——————  加载中  ——————" forState:MJRefreshStateRefreshing];
     self.scrollView.mj_footer = self.footer;
 }
 
@@ -62,8 +67,8 @@
 
 - (void)didReceiveFooterRefreshEvent{
     if ([self.delegate respondsToSelector:@selector(footerRefresh)]) {
-        [self.footer setTitle:@"已经全部加载完毕" forState:MJRefreshStateNoMoreData];
-        [self.footer setTitle:@"正在加载更多的数据..." forState:MJRefreshStateRefreshing];
+        [self.footer setTitle:@"——————  已加载全部  ——————" forState:MJRefreshStateNoMoreData];
+        [self.footer setTitle:@"——————  加载中  ——————" forState:MJRefreshStateRefreshing];
         [self.delegate footerRefresh];
     }
 }
@@ -75,7 +80,7 @@
 - (void)endRefresh:(BOOL)requestSuccess{
     NSString *message = @"";
     if (requestSuccess == NO) {
-        message = @"加载失败";
+        message = @"——————  加载不成功，点击重试  ——————";
     } else {
         message = @"";
     }
@@ -110,7 +115,7 @@
 - (void)placeSubviews{
     [super placeSubviews];
     [self addSubview:self.lotView];
-    self.lotView.frame = CGRectMake(kScreenWidth / 2.0 - KRateW(22.0), KRateW(10.0), KRateW(36.0), KRateW(24.0));
+    self.lotView.frame = CGRectMake(kScreenWidth / 2.0 - KRateW(22.0), KRateW(20.0), KRateW(36.0), KRateW(24.0));
     [self.lotView play];
 }
 

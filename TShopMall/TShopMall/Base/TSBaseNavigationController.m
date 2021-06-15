@@ -19,6 +19,10 @@
     if (self.interactivePopGestureRecognizer) {
         self.interactivePopGestureRecognizer.delegate = self;
     }
+    
+    [[UINavigationBar appearance] setBackIndicatorImage:[UIImage imageNamed:@"navi_back"]];
+    [[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:[UIImage imageNamed:@"navi_back"]];
+    [UINavigationBar appearance].tintColor = KHexColor(@"#030303");
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
