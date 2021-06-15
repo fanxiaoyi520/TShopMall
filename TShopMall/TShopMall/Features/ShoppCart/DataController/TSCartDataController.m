@@ -18,7 +18,7 @@
     NSError *error;
     NSData *data = [[NSData alloc] initWithContentsOfFile:path];
     NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
-    TSCartModel *cartModel = [TSCartModel  modelWithJSON:dic];
+    TSCartModel *cartModel = [TSCartModel  yy_modelWithJSON:dic];
     
     TSCartDataController *dataCon = TSCartDataController.new;
     finished(cartModel, nil);

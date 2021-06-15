@@ -7,7 +7,6 @@
 
 #import "AppDelegate+RootController.h"
 #import "TSTabBarController.h"
-
 @implementation AppDelegate (RootController)
 
 -(void)setupRootController{

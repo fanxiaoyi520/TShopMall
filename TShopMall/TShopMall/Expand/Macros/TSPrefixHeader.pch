@@ -21,8 +21,10 @@
 #import "MyDimeScale.h"
 #import "FMLayoutKit.h"
 #import "UIImage+TSColor.h"
+#import "EXTScope.h"
+#import "YYModel.h"
+#import "YYCategories.h"
 
-#import <YYKit/YYKit.h>
 #import <YTKNetwork/YTKNetwork.h>
 #import <Masonry/Masonry.h>
 #import <SDWebImage/SDWebImage.h>

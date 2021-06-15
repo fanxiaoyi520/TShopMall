@@ -16,13 +16,11 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
-    [self setUITemplateSize];
-    [self setupRequestFilters];
+//    [self setUITemplateSize];
+//    [self setupRequestFilters];
     [self setupRootController];
     return YES;
 }
-
-
 
 
 @end
