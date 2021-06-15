@@ -16,10 +16,8 @@
 
 @interface TSMineViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate>
 
-
 /// 自定义导航栏
 @property(nonatomic, strong) TSMineNavigationBar *navigationBar;
-
 /// 背景视图
 @property(nonatomic, strong) UIImageView *bgImageView;
 /// 设置按钮

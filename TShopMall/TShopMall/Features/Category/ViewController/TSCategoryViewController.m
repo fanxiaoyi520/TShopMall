@@ -15,6 +15,8 @@
 #import "TSCategoryKindViewModel.h"
 #import "TSCategoryContentViewModel.h"
 
+#import "TSProductDetailController.h"
+
 @interface TSCategoryViewController ()<UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate>
 
 /// 搜索按钮
@@ -150,7 +152,8 @@
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-
+    TSProductDetailController *detail = [[TSProductDetailController alloc] init];
+    [self.navigationController pushViewController:detail animated:YES];
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView

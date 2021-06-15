@@ -170,6 +170,11 @@
 		F55D2CD026784CF3006BACCF /* TSMineNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2CCF26784CF3006BACCF /* TSMineNavigationBar.m */; };
 		F55D2CD326785081006BACCF /* TSMinePlaceholderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2CD226785081006BACCF /* TSMinePlaceholderCell.m */; };
 		F55D2CD626785249006BACCF /* TSMineMoreButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2CD526785249006BACCF /* TSMineMoreButton.m */; };
+		F55D2CDB2678812E006BACCF /* TSProductDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2CDA2678812E006BACCF /* TSProductDetailController.m */; };
+		F55D2CDF26788193006BACCF /* TSProductDetailDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2CDE26788193006BACCF /* TSProductDetailDataController.m */; };
+		F55D2CE326788370006BACCF /* TSProductDetailNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2CE226788370006BACCF /* TSProductDetailNavigationBar.m */; };
+		F55D2CE626788721006BACCF /* TSProductDetailBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2CE526788721006BACCF /* TSProductDetailBottomView.m */; };
+		F55D2CE926788E27006BACCF /* TSDetailFunctionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2CE826788E27006BACCF /* TSDetailFunctionButton.m */; };
 		F56D4B3A266DFB8900C1AD9E /* FMLayoutBaseSection.m in Sources */ = {isa = PBXBuildFile; fileRef = F56D4B04266DFB8900C1AD9E /* FMLayoutBaseSection.m */; };
 		F56D4B3B266DFB8900C1AD9E /* FMLayoutCombineSection.m in Sources */ = {isa = PBXBuildFile; fileRef = F56D4B06266DFB8900C1AD9E /* FMLayoutCombineSection.m */; };
 		F56D4B3C266DFB8900C1AD9E /* FMLayoutLabelSection.m in Sources */ = {isa = PBXBuildFile; fileRef = F56D4B07266DFB8900C1AD9E /* FMLayoutLabelSection.m */; };
@@ -505,6 +510,16 @@
 		F55D2CD226785081006BACCF /* TSMinePlaceholderCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSMinePlaceholderCell.m; sourceTree = "<group>"; };
 		F55D2CD426785249006BACCF /* TSMineMoreButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSMineMoreButton.h; sourceTree = "<group>"; };
 		F55D2CD526785249006BACCF /* TSMineMoreButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSMineMoreButton.m; sourceTree = "<group>"; };
+		F55D2CD92678812E006BACCF /* TSProductDetailController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSProductDetailController.h; sourceTree = "<group>"; };
+		F55D2CDA2678812E006BACCF /* TSProductDetailController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSProductDetailController.m; sourceTree = "<group>"; };
+		F55D2CDD26788193006BACCF /* TSProductDetailDataController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSProductDetailDataController.h; sourceTree = "<group>"; };
+		F55D2CDE26788193006BACCF /* TSProductDetailDataController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSProductDetailDataController.m; sourceTree = "<group>"; };
+		F55D2CE126788370006BACCF /* TSProductDetailNavigationBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSProductDetailNavigationBar.h; sourceTree = "<group>"; };
+		F55D2CE226788370006BACCF /* TSProductDetailNavigationBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSProductDetailNavigationBar.m; sourceTree = "<group>"; };
+		F55D2CE426788721006BACCF /* TSProductDetailBottomView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSProductDetailBottomView.h; sourceTree = "<group>"; };
+		F55D2CE526788721006BACCF /* TSProductDetailBottomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSProductDetailBottomView.m; sourceTree = "<group>"; };
+		F55D2CE726788E27006BACCF /* TSDetailFunctionButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSDetailFunctionButton.h; sourceTree = "<group>"; };
+		F55D2CE826788E27006BACCF /* TSDetailFunctionButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSDetailFunctionButton.m; sourceTree = "<group>"; };
 		F56D4B04266DFB8900C1AD9E /* FMLayoutBaseSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLayoutBaseSection.m; sourceTree = "<group>"; };
 		F56D4B05266DFB8900C1AD9E /* FMLayoutFixedSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLayoutFixedSection.h; sourceTree = "<group>"; };
 		F56D4B06266DFB8900C1AD9E /* FMLayoutCombineSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLayoutCombineSection.m; sourceTree = "<group>"; };
@@ -935,6 +950,7 @@
 		F54973792668A94600181E3F /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				F55D2CD72678802D006BACCF /* ProductDetail */,
 				C206A4F1266F1D4700B69DED /* LoginRegister */,
 				F549737A2668A94600181E3F /* Home */,
 				F54973802668A94600181E3F /* Category */,
@@ -1421,6 +1437,47 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		F55D2CD72678802D006BACCF /* ProductDetail */ = {
+			isa = PBXGroup;
+			children = (
+				F55D2CDC26788170006BACCF /* DataController */,
+				F55D2CE0267881AB006BACCF /* View */,
+				F55D2CD8267880EA006BACCF /* Controller */,
+			);
+			path = ProductDetail;
+			sourceTree = "<group>";
+		};
+		F55D2CD8267880EA006BACCF /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				F55D2CD92678812E006BACCF /* TSProductDetailController.h */,
+				F55D2CDA2678812E006BACCF /* TSProductDetailController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		F55D2CDC26788170006BACCF /* DataController */ = {
+			isa = PBXGroup;
+			children = (
+				F55D2CDD26788193006BACCF /* TSProductDetailDataController.h */,
+				F55D2CDE26788193006BACCF /* TSProductDetailDataController.m */,
+			);
+			path = DataController;
+			sourceTree = "<group>";
+		};
+		F55D2CE0267881AB006BACCF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F55D2CE726788E27006BACCF /* TSDetailFunctionButton.h */,
+				F55D2CE826788E27006BACCF /* TSDetailFunctionButton.m */,
+				F55D2CE126788370006BACCF /* TSProductDetailNavigationBar.h */,
+				F55D2CE226788370006BACCF /* TSProductDetailNavigationBar.m */,
+				F55D2CE426788721006BACCF /* TSProductDetailBottomView.h */,
+				F55D2CE526788721006BACCF /* TSProductDetailBottomView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		F56D4B02266DFB8900C1AD9E /* LayoutKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -1827,6 +1884,7 @@
 				F55D2AD6266F67EF006BACCF /* TSHomePageContainerCell.m in Sources */,
 				F56D4B63266E037600C1AD9E /* MyDimeScale.m in Sources */,
 				C2A34C7726749E3E0095497E /* TSSearchController.m in Sources */,
+				F55D2CDB2678812E006BACCF /* TSProductDetailController.m in Sources */,
 				F55D2C6826722807006BACCF /* TSCategorySectionModel.m in Sources */,
 				C3B4CCDF2674932D0001EE75 /* TSLoginViewController.m in Sources */,
 				F55D2C7226725618006BACCF /* TSRankCoronalViewController.m in Sources */,
@@ -1835,6 +1893,7 @@
 				F55D2CCA26784ACD006BACCF /* TSMineTitleHeaderView.m in Sources */,
 				DC3440BB26722DB600F5B0DA /* TSHomePageViewModel.m in Sources */,
 				C3B4CCF02674934E0001EE75 /* TSQuickCheckView.m in Sources */,
+				F55D2CE626788721006BACCF /* TSProductDetailBottomView.m in Sources */,
 				C3B4CCEE2674934E0001EE75 /* TSLoginBottomView.m in Sources */,
 				F54973B72668BBEE00181E3F /* TSCartViewController.m in Sources */,
 				F56D4B4D266DFB8900C1AD9E /* FMTeslaLayoutView.m in Sources */,
@@ -1843,6 +1902,7 @@
 				C2A34C9C26759DD00095497E /* TSSearchRecomendCell.m in Sources */,
 				F54973C82668C1D600181E3F /* TSNotificationConst.m in Sources */,
 				DC3440AC26720D9200F5B0DA /* TSCollectionViewMeanWidthLayout.m in Sources */,
+				F55D2CE926788E27006BACCF /* TSDetailFunctionButton.m in Sources */,
 				F55D2CCD26784ACD006BACCF /* TSMineAdsCell.m in Sources */,
 				F54973D22668CF3300181E3F /* AppDelegate+RootController.m in Sources */,
 				F55D2C6C267231AA006BACCF /* TSCategoryHeaderReusableView.m in Sources */,
@@ -1858,6 +1918,7 @@
 				C2EF88D52670B8B900E7374A /* TSCartBaseCell.m in Sources */,
 				DC3440D32672F62C00F5B0DA /* TSHomePageBaseCell.m in Sources */,
 				F55D2CC826784ACD006BACCF /* TSMineImageTextCell.m in Sources */,
+				F55D2CE326788370006BACCF /* TSProductDetailNavigationBar.m in Sources */,
 				F55D2C362671E14B006BACCF /* TSUniversalHeaderView.m in Sources */,
 				F54973672668A22100181E3F /* SSNetworkAlertUtil.m in Sources */,
 				DC3440CD2672604400F5B0DA /* TSHomePageContainerViewModel.m in Sources */,
@@ -1921,6 +1982,7 @@
 				C2A34C932674B5530095497E /* TSSearchBaseCell.m in Sources */,
 				F549739E2668AABD00181E3F /* TSInterfacedConst.m in Sources */,
 				F55D2AD0266F5F53006BACCF /* TSHomePageBannerCell.m in Sources */,
+				F55D2CDF26788193006BACCF /* TSProductDetailDataController.m in Sources */,
 				C2A34CA62675E8A20095497E /* TSGoodsListController.m in Sources */,
 				F56D4B4A266DFB8900C1AD9E /* FMLayoutCrossSection.m in Sources */,
 				C2A34C8C2674AFEF0095497E /* TSSearchModel.m in Sources */,
