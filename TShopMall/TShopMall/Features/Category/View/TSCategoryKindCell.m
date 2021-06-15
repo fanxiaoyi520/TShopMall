@@ -22,8 +22,15 @@
     [super awakeFromNib];
 }
 
--(void)bindKindModel:(TSCategoryKindModel *)model{
-    self.kindLabel.text = model.kind;
+-(void)bindKindViewModel:(TSCategoryKindCellViewModel *)viewModel{
+    self.kindLabel.text = viewModel.kind;
+    if (viewModel.selected) {
+        self.seperateView.backgroundColor = KMainColor;
+        self.kindLabel.textColor = KMainColor;
+    }else{
+        self.seperateView.backgroundColor = UIColor.whiteColor;
+        self.kindLabel.textColor = KTextColor;
+    }
 }
 
 - (void)fillCustomContentView{
@@ -46,14 +53,6 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-    
-    if (selected) {
-        self.seperateView.backgroundColor = KMainColor;
-        self.kindLabel.textColor = KMainColor;
-    }else{
-        self.seperateView.backgroundColor = UIColor.whiteColor;
-        self.kindLabel.textColor = KTextColor;
-    }
 }
 
 #pragma mark - Getter

@@ -7,11 +7,13 @@
 
 #import "TSCartView.h"
 #import "TSCartCell.h"
+#import "TSRefreshConfiger.h"
 
-@interface TSCartView()<UITableViewDelegate, UITableViewDataSource, TSCartProtocol>{
+@interface TSCartView()<UITableViewDelegate, UITableViewDataSource, TSCartProtocol, TSRefreshDelegate>{
     
 }
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) TSRefreshConfiger *refreshConfiger;
 @end
 
 @implementation TSCartView
@@ -27,7 +29,7 @@
 
 - (void)clearInvalideGoods{}
 - (void)goodsSelectedStatusChanged{}
-- (void)deleteGoods:(TSCart *)cart{};
+- (void)scrollDeleteCart:(TSCart *)cart indexPath:(NSIndexPath *)indexPath{}
 
 - (void)goodsSelected:(TSCart *)cartModel indexPath:(NSIndexPath *)indexPath{
     self.sections[indexPath.section].rows[indexPath.row].obj = cartModel;
@@ -40,6 +42,11 @@
 
 - (void)goToShopping{
     
+}
+
+- (void)setSections:(NSArray<TSCartGoodsSection *> *)sections{
+    _sections = sections;
+    [self.tableView reloadData];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -108,7 +115,7 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
     TSCartGoodsRow *row = self.sections[indexPath.section].rows[indexPath.row];
-    [self.controller performSelector:@selector(deleteGoods:) withObject:row.obj];
+    [self.controller performSelector:@selector(scrollDeleteCart:indexPath:) withObject:row.obj withObject:indexPath];
 }
 
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -125,6 +132,22 @@
     }];
 }
 
+- (BOOL)hasMoreData{
+    return YES;
+}
+
+- (void)headerRefresh{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.refreshConfiger endRefresh:YES];
+    });
+}
+
+- (void)footerRefresh{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.refreshConfiger endRefresh:NO];
+    });
+}
+
 - (UITableView *)tableView{
     if (_tableView) {
         return _tableView;
@@ -138,6 +161,8 @@
     self.tableView.dataSource = self;
     self.tableView.showsVerticalScrollIndicator = NO;
     [self addSubview:self.tableView];
+    
+    self.refreshConfiger = [TSRefreshConfiger configScrollView:self.tableView isLight:YES response:self type:Both];
     
     return self.tableView;
 }

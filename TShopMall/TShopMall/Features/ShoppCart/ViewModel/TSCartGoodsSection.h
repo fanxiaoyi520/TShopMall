@@ -14,8 +14,8 @@
 @property (nonatomic, assign) CGFloat heightForFooter;
 @property (nonatomic, copy) NSString *headerIdentifier;
 @property (nonatomic, copy) NSString *footerIdentifier;
-@property (nonatomic, strong) UITableViewHeaderFooterView *viewForHeader;
-@property (nonatomic, strong) UITableViewHeaderFooterView *viewForFooter;
+//@property (nonatomic, strong) UITableViewHeaderFooterView *viewForHeader;
+//@property (nonatomic, strong) UITableViewHeaderFooterView *viewForFooter;
 @property (nonatomic, strong) NSArray<TSCartGoodsRow *> *rows;
 @end
 

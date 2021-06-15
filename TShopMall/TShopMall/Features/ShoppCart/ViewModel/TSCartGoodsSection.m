@@ -12,8 +12,6 @@
     if (self == [super init]) {
         self.heightForFooter = 0.1f;
         self.heightForHeader = 0.1;
-        self.viewForFooter = [UITableViewHeaderFooterView new];
-        self.viewForHeader = [UITableViewHeaderFooterView new];
         self.headerIdentifier = @"UITableViewHeaderFooterView";
         self.footerIdentifier = @"UITableViewHeaderFooterView";
     }

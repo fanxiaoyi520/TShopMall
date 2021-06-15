@@ -145,6 +145,20 @@
         [sections addObject:section];
     }
     
+    {
+        TSMineSectionParterItemModel *item = [[TSMineSectionParterItemModel alloc] init];
+        item.cellHeight = 62;
+        item.identify = @"TSMinePlaceholderCell";
+        
+        TSMineSectionModel *section = [[TSMineSectionModel alloc] init];
+        section.sectionInset = UIEdgeInsetsMake(0, 16, 0, 16);
+        section.column = 1;
+        section.spacingWithLastSection = 0;
+        section.items = @[item];
+        
+        [sections addObject:section];
+    }
+    
     self.sections = sections;
     
     if (complete) {

@@ -52,7 +52,7 @@
 }
 
 - (void)settlement{
-    NSLog(@"--");
+    [self.delegate goToSettle];
 }
 
 - (void)updateSettleViewStates:(BOOL)isEdit{
@@ -105,7 +105,7 @@
     }];
     
     [self.tips mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.price.mas_left).offset(-KRateW(20.0));
+        make.right.equalTo(self.price.mas_left).offset(-KRateW(6.0));
         make.top.bottom.equalTo(self.price);
     }];
 }

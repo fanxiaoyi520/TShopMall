@@ -11,16 +11,14 @@
 @implementation SSBaseRequest
 
 #pragma mark - 失败处理器（stateCode != 200）
--(void)requestFailedFilter
-{
+-(void)requestFailedFilter{
     SSResponseModel *reponseModel = [[SSResponseModel alloc] init];
     reponseModel.stateCode = @"500";
     self.responseModel = reponseModel;
 }
 
 #pragma mark - 请求成功过滤器（stateCode == 200）
--(void)requestCompleteFilter
-{
+-(void)requestCompleteFilter{
     SSResponseModel *reponseModel = [SSResponseModel responseWithRequest:self];
     self.responseModel = reponseModel;
     
@@ -32,41 +30,45 @@
 }
 
 #pragma mark - Super Method
--(NSString *)baseUrl
-{
+-(NSString *)baseUrl{
     return @"";
 }
 
--(NSString *)requestUrl
-{
+-(NSString *)requestUrl{
     return @"";
 }
 
--(YTKRequestSerializerType)requestSerializerType
-{
+-(YTKRequestSerializerType)requestSerializerType{
     return YTKRequestSerializerTypeJSON;
 }
 
--(YTKResponseSerializerType)responseSerializerType
-{
+-(YTKResponseSerializerType)responseSerializerType{
     return YTKResponseSerializerTypeJSON;
 }
 
--(YTKRequestMethod)requestMethod
-{
+-(YTKRequestMethod)requestMethod{
     return YTKRequestMethodPOST;
 }
 
--(NSDictionary<NSString *,NSString *> *)requestHeaderFieldValueDictionary
-{
+#pragma mark - Public
+-(NSMutableDictionary *)commonHeader{
     NSMutableDictionary *commonRequestHeader = [NSMutableDictionary dictionary];
+    [commonRequestHeader setValue:@"platform_tcl_shop" forKey:@"platform"];
+    [commonRequestHeader setValue:@"tclplus" forKey:@"storeUuid"];
+    [commonRequestHeader setValue:@"TCL" forKey:@"t-id"];
+    [commonRequestHeader setValue:@"02" forKey:@"terminalType"];
+    [commonRequestHeader setValue:[TSGlobalManager shareInstance].currentUserInfo.accessToken forKey:@"accessToken"];
+    [commonRequestHeader setValue:[TSGlobalManager shareInstance].userAgent forKey:@"User-Agent"];
+    [commonRequestHeader setValue:[TSGlobalManager shareInstance].appVersion forKey:@"appVersion"];
+    [commonRequestHeader setValue:@"app" forKey:@"source"];
+    [commonRequestHeader setValue:@"AppStore" forKey:@"pubChannel"];
+
     return commonRequestHeader;
 }
 
--(id)requestArgument
-{
-    NSMutableDictionary *commonRequestBody = [NSMutableDictionary dictionary];
-    return commonRequestBody;
+-(NSMutableDictionary *)commonBady{
+    NSMutableDictionary *commmonBody = [NSMutableDictionary dictionary];
+    return commmonBody;
 }
 
 @end

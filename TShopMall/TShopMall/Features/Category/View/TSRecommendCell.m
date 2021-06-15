@@ -6,6 +6,7 @@
 //
 
 #import "TSRecommendCell.h"
+#import "TSCategorySectionModel.h"
 
 @interface TSRecommendCell()
 
@@ -88,7 +89,7 @@
         _contentLabel.font = KRegularFont(14);
         _contentLabel.textAlignment = NSTextAlignmentLeft;
         _contentLabel.textColor = KTextColor;
-        _contentLabel.text = @"XESS 65寸家庭场景TV家庭场景TV家庭场景TV";
+        _contentLabel.text = @"";
         _contentLabel.numberOfLines = 2;
     }
     return _contentLabel;
@@ -111,7 +112,7 @@
         _retailPriceLabel.font = KFont(PingFangSCMedium, 20);
         _retailPriceLabel.textAlignment = NSTextAlignmentLeft;
         _retailPriceLabel.textColor = KMainColor;
-        _retailPriceLabel.text = @"18990";
+        _retailPriceLabel.text = @"";
     }
     return _retailPriceLabel;
 }
@@ -133,6 +134,16 @@
         _seperateView.backgroundColor = KlineColor;
     }
     return _seperateView;
+}
+
+-(void)setDelegate:(id<UniversalCollectionViewCellDataDelegate>)delegate{
+    TSCategorySectionRecommendItemModel *item = [delegate universalCollectionViewCellModel:self.indexPath];
+    [self.imgView sd_setImageWithURL:[NSURL URLWithString:item.imageUrl] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+            
+    }];
+    self.contentLabel.text = item.productName;
+    self.retailPriceLabel.text = [NSString stringWithFormat:@"%@",item.price];
+    self.goodsPriceLabel.text = [NSString stringWithFormat:@"提货价¥%@",item.baseRetailPrice];
 }
 
 @end

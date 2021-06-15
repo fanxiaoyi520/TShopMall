@@ -6,6 +6,7 @@
 //
 
 #import "TSMeasureCell.h"
+#import "TSCategorySectionModel.h"
 
 @interface TSMeasureCell()
 
@@ -49,9 +50,17 @@
         _kindLabel.font = KRegularFont(12);
         _kindLabel.textAlignment = NSTextAlignmentCenter;
         _kindLabel.textColor = KTextColor;
-        _kindLabel.text = @"60-65寸";
+        _kindLabel.text = @"";
     }
     return _kindLabel;
+}
+
+-(void)setDelegate:(id<UniversalCollectionViewCellDataDelegate>)delegate{
+    TSCategorySectionKindItemModel *item = [delegate universalCollectionViewCellModel:self.indexPath];
+    [self.imgView sd_setImageWithURL:[NSURL URLWithString:item.TwoLevelImg] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+            
+    }];
+    self.kindLabel.text = item.TwoLevelTitle;
 }
 
 @end

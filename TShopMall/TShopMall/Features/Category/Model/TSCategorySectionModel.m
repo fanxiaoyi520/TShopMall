@@ -13,20 +13,16 @@
 
 @implementation TSCategorySectionItemModel
 
-
 @end
 
 @implementation TSCategorySectionBannerItemModel
-
 
 @end
 
 @implementation TSCategorySectionKindItemModel
 
-
 @end
 
 @implementation TSCategorySectionRecommendItemModel
-
 
 @end
