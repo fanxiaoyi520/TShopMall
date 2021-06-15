@@ -31,8 +31,7 @@
     TSGoodsListSection *section = [TSGoodsListSection new];
     section.headerIdentifier = @"UICollectionReusableView";
     section.footerIdentifier = @"UICollectionReusableView";
-    section.headerTitle = @"";
-    section.headerHeight = KRateW(0.0);
+    section.headerHeight = KRateW(10.0);
     section.footerHeight = 0;
     section.rows = rows;
     return @[section];

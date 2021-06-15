@@ -42,7 +42,7 @@
 - (void)configInfo{
     [TSCartDataController getInfoFinished:^(TSCartModel *cartModel, NSError *error) {
         if (error) {
-            
+           
             return ;
         }
         self.cartView.sections = [TSCartViewModel congfigViewModelWithCartInfo:cartModel].sections;

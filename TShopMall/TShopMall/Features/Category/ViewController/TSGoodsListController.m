@@ -11,6 +11,7 @@
 #import "TSRefreshConfiger.h"
 #import "TSGoodsListDataController.h"
 #import "TSGoodsListCell.h"
+#import "TSSearchController.h"
 
 @interface TSGoodsListController ()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, TSRefreshDelegate>{
     NSArray<TSGoodsListSection *> *sections;
@@ -42,7 +43,18 @@
 }
 
 - (void)goToSearch{
-    
+    TSSearchController *searchCon = nil;
+    for (UIViewController *con in self.navigationController.viewControllers) {
+        if ([con isKindOfClass:[TSSearchController class]]) {
+            searchCon = (TSSearchController *)con;
+            break;
+        }
+    }
+    if (searchCon == nil) {
+        [self presentViewController:[TSSearchController new] animated:YES completion:nil];
+    } else {
+        [self.navigationController popViewControllerAnimated:NO];
+    }
 }
 
 - (void)showSytleChanged:(UIButton *)sender{
@@ -50,9 +62,11 @@
     if (sender.selected == YES) {
         sections = [TSGoodsListDataController sectionsWithModels:self.dataCon.model isGrid:NO];
         self.collectionView.backgroundColor = UIColor.whiteColor;
+        [self.refreshConfiger changeRefreshType:NO];
     } else {
         sections = [TSGoodsListDataController sectionsWithModels:self.dataCon.model isGrid:YES];
         self.collectionView.backgroundColor = KHexColor(@"#F4F4F5");
+        [self.refreshConfiger changeRefreshType:YES];
     }
     [self.collectionView reloadData];
 }
@@ -128,7 +142,7 @@
     
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.view);
-        make.top.equalTo(self.fittleView.mas_bottom).offset(KRateW(10.0));
+        make.top.equalTo(self.fittleView.mas_bottom);
         make.bottom.equalTo(self.view.mas_bottom);
     }];
 }

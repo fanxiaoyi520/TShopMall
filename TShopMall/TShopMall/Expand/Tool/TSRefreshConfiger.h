@@ -30,6 +30,7 @@ typedef NS_ENUM(NSInteger, RefreshType) {
 @interface TSRefreshConfiger : NSObject
 + (instancetype)configScrollView:(UIScrollView *)scrollView isLight:(BOOL)isLight response:(id<TSRefreshDelegate>)target type:(RefreshType)type;
 - (void)endRefresh:(BOOL)requestSuccess;
+- (void)changeRefreshType:(BOOL)isLight;
 @end
 
 
