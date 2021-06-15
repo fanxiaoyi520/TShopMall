@@ -13,6 +13,7 @@
 #import "KVOController.h"
 #import "TSHomePageBaseCell.h"
 #import "TSHomePageContainerHeaderView.h"
+#import "TSSearchController.h"
 
 @interface TSHomeViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -120,7 +121,7 @@
 }
 
 -(void)searchAction:(TSGeneralSearchButton *)sender{
-    
+    [TSSearchController show];
 }
 
 -(void)categoryAction:(UIButton *)sender{

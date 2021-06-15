@@ -10,6 +10,7 @@
 #import "TSCartDataController.h"
 #import "TSCartSettleView.h"
 #import "TSCartProtocol.h"
+#import "TSAlertView.h"
 
 @interface TSCartViewController ()<TSCartProtocol>
 @property (nonatomic, strong) UIButton *editBtn;
@@ -50,14 +51,23 @@
 
 //失效区清空按钮事件
 - (void)clearInvalideGoods{
+    TSAlertView.new.alertInfo(@"提示", @"您确定要清空失效商品吗?").confirm(@"确定", ^{
+        
+    }).cancel(@"取消", ^{}).show();
+}
 
+- (void)goToSettle{
+    if (self.editBtn.selected == YES) {//编辑
+        [self batchDelete];
+        
+    } else {
+        
+    }
 }
 
 //商品选中状态变更
 - (void)goodsSelectedStatusChanged{
-    
-    NSArray<TSCart *> *cartModels = [TSCartViewModel canOperationGoodsInSections:self.cartView.sections];
-    [self.settleView updateSelBtnStatus:[TSCartViewModel isAllGoodsSelected:cartModels]];
+    [self updateSettleView];
 }
 
 //全选
@@ -68,6 +78,16 @@
             [row.obj setValue:@(status) forKey:@"isSelected"];
         }
     }
+    [self updateSettleView];
+}
+
+- (void)updateSettleView{
+    NSArray<TSCart *> *cartModels = [TSCartViewModel canOperationGoodsInSections:self.cartView.sections];
+    [self.settleView updateSelBtnStatus:[TSCartViewModel isAllGoodsSelected:cartModels]];
+    NSArray<TSCart *> *selCarts = [TSCartViewModel selectedInfo:cartModels];
+    NSString *totalPrice = [TSCartViewModel totalPrice:selCarts];
+    [self.settleView updateSettleBtnText:selCarts.count];
+    [self.settleView updatePrice:totalPrice];
 }
 
 - (void)edit:(UIButton *)sender{
@@ -75,9 +95,34 @@
     [self.settleView updateSettleViewStates:sender.selected];
 }
 
-//删除商品
-- (void)deleteGoods:(TSCart *)cart{
-    
+//删除商品(侧滑删除)
+- (void)scrollDeleteCart:(TSCart *)cart indexPath:(NSIndexPath *)indexPath{
+    NSMutableArray *sections = [NSMutableArray arrayWithArray:self.cartView.sections];
+    [sections removeObjectAtIndex:indexPath.section];
+    self.cartView.sections = sections;
+    if (cart.isSelected == YES) {
+        [self updateSettleView];
+    }
+}
+
+- (void)batchDelete{
+    NSArray<TSCart *> *cartModels = [TSCartViewModel canOperationGoodsInSections:self.cartView.sections];
+    NSArray<TSCart *> *carts = [TSCartViewModel selectedInfo:cartModels];
+    if (carts.count != 0) {
+        TSAlertView.new.alertInfo(nil, @"确认删除选中商品吗？").confirm(@"确定", ^{
+            NSMutableArray *sections = [NSMutableArray arrayWithArray:self.cartView.sections];
+            for (TSCartGoodsSection *section in self.cartView.sections) {
+                TSCartGoodsRow *row = [section.rows lastObject];
+                if ([row.obj isKindOfClass:[TSCart class]]) {
+                    TSCart *cart = (TSCart *)row.obj;
+                    if (cart.isSelected == YES) {
+                        [sections removeObject:section];
+                    }
+                }
+            }
+            self.cartView.sections = sections;
+        }).cancel(@"取消", ^{}).show();
+    }
 }
 
 - (void)viewWillLayoutSubviews{
