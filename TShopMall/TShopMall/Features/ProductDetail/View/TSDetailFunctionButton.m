@@ -27,7 +27,7 @@
 
 -(CGRect)titleRectForContentRect:(CGRect)contentRect{
     CGFloat titleX = 0;
-    CGFloat titleY = 33;
+    CGFloat titleY = 22;
     CGFloat titleW = contentRect.size.width;
     CGFloat titleH = contentRect.size.height - titleY;
     return CGRectMake(titleX, titleY, titleW, titleH);
@@ -37,7 +37,7 @@
     CGFloat imageW = 20;
     CGFloat imageH = 20;
     CGFloat imageX = (contentRect.size.width - imageW) * 0.5;
-    CGFloat imageY = 11;
+    CGFloat imageY = 0;
 
     return CGRectMake(imageX, imageY, imageW, imageH);
 }

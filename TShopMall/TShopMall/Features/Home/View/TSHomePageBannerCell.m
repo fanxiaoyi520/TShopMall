@@ -15,8 +15,8 @@
 
 @implementation TSHomePageBannerCell
 -(void)setupUI{
-    self.contentView.backgroundColor = [UIColor clearColor];
     [self.contentView addSubview:self.cycleScrollView];
+  
     [self.cycleScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contentView).offset(16);
         make.right.equalTo(self.contentView).offset(-16);
@@ -28,7 +28,12 @@
 }
 
 - (void)setViewModel:(TSHomePageCellViewModel *)viewModel{
-    [(TSHomePageBannerViewModel *)viewModel getBannerData];
+    
+    TSHomePageBannerViewModel *bannerViewModel = (TSHomePageBannerViewModel *)viewModel;
+    if (!bannerViewModel.bannerDatas.count) {
+        [bannerViewModel getBannerData];
+    }
+   
     __weak typeof(self) weakSelf = self;
     [self.KVOController observe:viewModel keyPath:@"bannerDatas" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
           NSArray *data = change[@"new"];
@@ -45,8 +50,8 @@
         [tempArr addObject:model.imageUrl];
     }
     
-    _cycleScrollView.localizationImageNamesGroup = tempArr;
-
+//    _cycleScrollView.localizationImageNamesGroup = tempArr;
+    _cycleScrollView.imageURLStringsGroup = tempArr;
 }
 
 #pragma mark - Getter
@@ -57,6 +62,8 @@
         _cycleScrollView.autoScroll  = NO;
         _cycleScrollView.autoScrollTimeInterval = 4;
         _cycleScrollView.backgroundColor = [UIColor clearColor];
+        _cycleScrollView.clipsToBounds = YES;
+        _cycleScrollView.layer.cornerRadius = 6;
     }
     return _cycleScrollView;
 }

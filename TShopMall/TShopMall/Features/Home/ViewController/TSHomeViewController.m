@@ -23,6 +23,7 @@
 @property(nonatomic, strong) UIButton *categoryButton;
 
 @property(nonatomic, strong) UITableView *tableView;
+@property(nonatomic, strong) UIImageView *tableViewBackGroundView;
 
 @property (nonatomic, strong) TSHomePageViewModel *viewModel;
 
@@ -47,6 +48,20 @@
     [self.KVOController observe:self.viewModel keyPath:@"dataSource" options:(NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew) block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
         [weakSelf.tableView reloadData];
     }];
+    
+    [self.KVOController observe:self.viewModel.containerViewModel keyPath:@"allGroupDict" options:(NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew) block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
+        if (weakSelf.tableView.mj_footer.isRefreshing) {
+            [weakSelf.tableView.mj_footer endRefreshing];
+        }
+    }];
+    @weakify(self);
+    [self.KVOController observe:self.tableView keyPath:@"contentOffset" options:(NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew) block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
+        @strongify(self)
+        CGRect frame = self.tableViewBackGroundView.frame;
+        frame.origin.y = - self.tableView.contentOffset.y;
+        self.tableViewBackGroundView.frame = frame;
+    }];
+    
 }
 
 -(void)viewWillLayoutSubviews{
@@ -69,12 +84,25 @@
 }
 
 - (void)setupUI{
+    self.view.backgroundColor = KGrayColor;
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.searchButton.mas_bottom);
         make.left.right.equalTo(self.view);
         make.bottom.equalTo(self.view);
     }];
+    
+    [self.view addSubview:self.tableViewBackGroundView];
+    [self.view sendSubviewToBack:self.tableViewBackGroundView];
+
+//    [self loadFixedBackGroundView];
+}
+
+- (void)loadFixedBackGroundView{
+    UIView *fixedBackGroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 100)];
+    fixedBackGroundView.backgroundColor = KHexColor(@"#FF4D49");
+    [self.view addSubview:fixedBackGroundView];
+    [self.view sendSubviewToBack:fixedBackGroundView];
 }
 
 - (void)fillCustomView{
@@ -88,11 +116,11 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.viewModel.dataSource[section].count;
+    return self.viewModel.dataSource[section].rowDatas.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    TSHomePageCellViewModel *viewModel = self.viewModel.dataSource[indexPath.section][indexPath.row];
+    TSHomePageCellViewModel *viewModel = self.viewModel.dataSource[indexPath.section].rowDatas[indexPath.row];
 
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:viewModel.model.templateName forIndexPath:indexPath];
     if ([cell isKindOfClass:TSHomePageBaseCell.class]) {
@@ -107,17 +135,46 @@
     return cell;
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    TSTableViewSectionModel *sectionModel = self.viewModel.dataSource[section];
+    if (sectionModel.headerModel) {
+        TSHomePageCellViewModel *viewModel = sectionModel.headerModel;
+        UITableViewHeaderFooterView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:viewModel.model.templateName];
+        
+        if ([headerView isKindOfClass:TSHomePageContainerHeaderView.class]) {
+            TSHomePageContainerHeaderView *header = (TSHomePageContainerHeaderView *)headerView;
+            header.viewModel = viewModel;
+        }
+        return headerView;
+    }
+    
+    UIView *view = [UIView new];
+    UIView *tempView = [UIView new];
+    [view addSubview:tempView];
+    [tempView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(view);
+        make.height.equalTo(@.2);
+    }];
+    return view;
+}
+
+
 - (void)registCellInfo {
     [self.tableView registerClass:NSClassFromString(@"TSHomePageBannerCell") forCellReuseIdentifier:@"TSHomePageBanner"];
     [self.tableView registerClass:NSClassFromString(@"TSHomePageCategoryCell") forCellReuseIdentifier:@"TSHomePageCategory"];
     [self.tableView registerClass:NSClassFromString(@"TSHomePageReleaseCell") forCellReuseIdentifier:@"TSHomePageRelease"];
     [self.tableView registerClass:NSClassFromString(@"TSHomePageContainerCell") forCellReuseIdentifier:@"TSHomePageContainer"];
-
+    [self.tableView registerClass:NSClassFromString(@"TSHomePageContainerHeaderView") forHeaderFooterViewReuseIdentifier:@"TSHomePageContainerHeader"];
 }
 
 #pragma mark - Action
-- (void)refreshDataMehtod {
+- (void)refreshHeaderDataMehtod {
     [self.viewModel loadData];
+}
+
+- (void)loadFooterDataMehtod{
+//    TSHomePageContainerGroup *group = self.viewModel.containerViewModel.selectedGroup;
+    
 }
 
 -(void)searchAction:(TSGeneralSearchButton *)sender{
@@ -152,8 +209,8 @@
 - (UITableView *)tableView {
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-        MJRefreshHeader *header = [MJRefreshHeader headerWithRefreshingTarget:self refreshingAction:@selector(refreshDataMehtod)];
-        _tableView.backgroundColor = KGrayColor;
+        MJRefreshHeader *header = [MJRefreshHeader headerWithRefreshingTarget:self refreshingAction:@selector(refreshHeaderDataMehtod)];
+        _tableView.backgroundColor = [UIColor clearColor];
         _tableView.rowHeight = UITableViewAutomaticDimension;
         _tableView.delegate = self;
         _tableView.dataSource = self;
@@ -161,14 +218,11 @@
         
         if (@available(iOS 11.0, *)) {
             _tableView.estimatedRowHeight = 200;
-            _tableView.estimatedSectionHeaderHeight = 0;
-            _tableView.estimatedSectionFooterHeight = 0;
+            _tableView.estimatedSectionHeaderHeight = 20;
         }
         
-//        _tableView.mj_header = header;
-//        UIView *footerView = [UIView new];
-//        footerView.frame = CGRectMake(0, 0, self.view.width, 20);
-//        _tableView.tableFooterView = footerView;
+        MJRefreshBackNormalFooter *footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self.viewModel.containerViewModel refreshingAction:@selector(loadMoreData)];
+        _tableView.mj_footer = footer;
 
     }
     return _tableView;
@@ -181,4 +235,16 @@
     return _viewModel;
 }
 
+- (UIImageView *)tableViewBackGroundView{
+    if (!_tableViewBackGroundView) {
+        CGFloat height = kScreenWidth/375 * 205;
+        _tableViewBackGroundView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, height)];
+        _tableViewBackGroundView.image = [UIImage imageNamed:@"mall_home_bg"];
+    }
+    return _tableViewBackGroundView;
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    NSLog(@"home - DidScroll");
+}
 @end

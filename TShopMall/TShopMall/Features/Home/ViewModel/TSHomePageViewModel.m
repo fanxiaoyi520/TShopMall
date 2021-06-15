@@ -9,7 +9,9 @@
 #import "TSHomePageBannerViewModel.h"
 #import "TSHomePageCategoryViewModel.h"
 #import "TSHomePageReleaseViewModel.h"
-#import "TSHomePageContainerViewModel.h"
+
+#import "TSHomePageContainerHeaderViewModel.h"
+
 #import "TSHomePageCellTemplateModel.h"
 #import "TSHomePageBaseModel.h"
 
@@ -22,35 +24,51 @@
     templateModel.templateName = @"TSHomePageBanner";
     bannerViewModel.model = templateModel;
     
+    TSTableViewSectionModel *sectionModel1 = [TSTableViewSectionModel new];
+    sectionModel1.rowDatas = @[bannerViewModel];
+    
     TSHomePageCategoryViewModel *categoryViewModel = [TSHomePageCategoryViewModel new];
     templateModel = [TSHomePageCellTemplateModel new];
     templateModel.templateName = @"TSHomePageCategory";
     categoryViewModel.model = templateModel;
     
+    TSTableViewSectionModel *sectionModel2 = [TSTableViewSectionModel new];
+    sectionModel2.rowDatas = @[categoryViewModel];
+    
     TSHomePageReleaseViewModel *releaseViewModel = [TSHomePageReleaseViewModel new];
     templateModel = [TSHomePageCellTemplateModel new];
     templateModel.templateName = @"TSHomePageRelease";
     releaseViewModel.model = templateModel;
-        
+    
+    TSTableViewSectionModel *sectionModel3 = [TSTableViewSectionModel new];
+    sectionModel3.rowDatas = @[releaseViewModel];
+    
+    TSHomePageContainerHeaderViewModel *containerHeaderViewModel = [TSHomePageContainerHeaderViewModel new];
+    templateModel = [TSHomePageCellTemplateModel new];
+    templateModel.templateName = @"TSHomePageContainerHeader";
+    containerHeaderViewModel.model = templateModel;
+    
     TSHomePageContainerViewModel *containerViewModel = [TSHomePageContainerViewModel new];
     templateModel = [TSHomePageCellTemplateModel new];
     templateModel.templateName = @"TSHomePageContainer";
     containerViewModel.model = templateModel;
-        
-    self.dataSource = @[@[bannerViewModel], @[categoryViewModel], @[releaseViewModel], @[containerViewModel]];
+    containerViewModel.containerHeaderViewModel = containerHeaderViewModel;
+    _containerViewModel = containerViewModel;
+    
+    TSTableViewSectionModel *sectionModel4 = [TSTableViewSectionModel new];
+    sectionModel4.rowDatas = @[containerViewModel];
+    sectionModel4.headerModel = containerHeaderViewModel;
+    
+    self.dataSource = @[sectionModel1,sectionModel2, sectionModel3, sectionModel4];
+    
+    
+//    for (TSTableViewSectionModel *sectionModel in self.dataSource) {
+//        TSHomePageCellViewModel *viewModel = viewModels.firstObject;
+//        if ([viewModel.model.templateName isEqualToString:@"TSHomePageContainer"]) {
+//            [self getSegmentHeaderData];
+//            break;
+//        }
+//    }
 }
 
-- (void)getSegmentHeaderData{
-    NSMutableArray *marr = @[].mutableCopy;
-    for (int i = 0; i < 10; i ++) {
-        TSHomePageBaseModel *model = [TSHomePageBaseModel new];
-        model.title = [NSString stringWithFormat:@"标题%d",i];
-        if (i == 4) {
-            model.title = @"特别长的aaa";
-        }
-        [marr addObject:model];
-    }
-    self.segmentHeaderDatas = marr;
-    
-}
 @end

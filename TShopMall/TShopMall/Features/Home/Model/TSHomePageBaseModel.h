@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *content;
 @property (nonatomic, strong) UIImage *image;
-
+@property (nonatomic, assign) NSInteger index;
 @end
 
 NS_ASSUME_NONNULL_END
