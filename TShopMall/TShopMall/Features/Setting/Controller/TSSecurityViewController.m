@@ -13,6 +13,7 @@
 #import "TSBindMobileController.h"
 #import "TSWithdrawalPswSetController.h"
 #import "TSAccountCancelViewController.h"
+#import "TSSecurCenterViewController.h"
 
 @interface TSSecurityViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate>
 /// 数据中心
@@ -61,7 +62,7 @@
         UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero
                                              collectionViewLayout:flowLayout];
         _collectionView = collectionView;
-        _collectionView.backgroundColor = KHexColor(@"#E6E6E6");
+        _collectionView.backgroundColor = KGrayColor;//KHexColor(@"#E6E6E6");
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.showsVerticalScrollIndicator = NO;
@@ -111,8 +112,10 @@
     } else if (indexPath.section == 1 && indexPath.item == 0) {
         TSWithdrawalPswSetController *pswSetVC = [[TSWithdrawalPswSetController alloc] init];
         [self.navigationController pushViewController:pswSetVC animated:YES];
-//        TSPhoneNumVeriViewController *phoneNumVC = [[TSPhoneNumVeriViewController alloc] init];
-//        [self.navigationController pushViewController:phoneNumVC animated:YES];
+        return;
+    } else if (indexPath.section == 3 && indexPath.item == 0) {
+        TSSecurCenterViewController *secriCenterVC = [[TSSecurCenterViewController alloc] init];
+        [self.navigationController pushViewController:secriCenterVC animated:YES];
         return;
     }
 }
