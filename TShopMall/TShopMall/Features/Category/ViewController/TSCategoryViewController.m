@@ -92,6 +92,8 @@
 
 #pragma mark - Action
 -(void)searchAction:(TSGeneralSearchButton *)sender{
+    TSProductDetailController *category = [[TSProductDetailController alloc] init];
+    [self.navigationController pushViewController:category animated:YES];
     
 }
 

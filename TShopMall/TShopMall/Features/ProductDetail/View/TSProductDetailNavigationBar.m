@@ -7,8 +7,17 @@
 
 #import "TSProductDetailNavigationBar.h"
 
+@interface TSProductDetailNavigationBar()
+
+@end
+
 @implementation TSProductDetailNavigationBar
 
-
+-(instancetype)initWithFrame:(CGRect)frame{
+    if (self = [super initWithFrame:frame]) {
+        self.backgroundColor = [UIColor whiteColor];
+    }
+    return self;
+}
 
 @end

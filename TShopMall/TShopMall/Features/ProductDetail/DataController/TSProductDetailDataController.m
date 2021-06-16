@@ -22,12 +22,13 @@
     
     {
         TSGoodDetailItemBannerModel *item = [[TSGoodDetailItemBannerModel alloc] init];
-        item.urls = @[@"http://f0.testpc.tclo2o.cn/FmTYX2ZPTZV2twwVslMLjORyU2gP",@"http://f0.testpc.tclo2o.cn/FmTYX2ZPTZV2twwVslMLjORyU2gP"];
+        item.urls = @[@"http://f0.testpc.tclo2o.cn/FmTYX2ZPTZV2twwVslMLjORyU2gP"];
         item.cellHeight = 360;
         item.identify = @"TSGoodDetailBannerCell";
 
         TSGoodDetailSectionModel *section = [[TSGoodDetailSectionModel alloc] init];
         section.column = 1;
+        section.spacingWithLastSection = -GK_STATUSBAR_HEIGHT;
         section.items = @[item];
         
         [sections addObject:section];
