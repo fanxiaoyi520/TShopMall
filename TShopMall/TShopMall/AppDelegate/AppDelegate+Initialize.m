@@ -10,13 +10,11 @@
 
 @implementation AppDelegate (Initialize)
 
--(void)setUITemplateSize
-{
+-(void)setUITemplateSize{
     [MyDimeScale setUITemplateSize:CGSizeMake(375, 667)];
 }
 
--(void)setupRequestFilters
-{
+-(void)setupRequestFilters{
     YTKNetworkConfig *config = [YTKNetworkConfig sharedConfig];
     [config setBaseUrl:kApiPrefix];
 }

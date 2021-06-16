@@ -119,5 +119,20 @@
     self.frame = frame;
 }
 
+- (void)ts_removeAllSubviews
+{
+    while (self.subviews.count) {
+        [self.subviews.lastObject removeFromSuperview];
+    }
+}
 
+- (UIViewController *)ts_viewController {
+    UIResponder *responder = self;
+    while ((responder = responder.nextResponder)) {
+        if ([responder isKindOfClass:[UIViewController class]]) {
+            return (UIViewController *)responder;
+        }
+    }
+    return nil;
+}
 @end

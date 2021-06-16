@@ -10,18 +10,17 @@
 
 @implementation TSHomePageBannerViewModel
 - (void)getBannerData{
-    
-    self.bannerDatas = @[].mutableCopy;
+    NSMutableArray *marr = @[].mutableCopy;
     ///模拟数据 请求
     TSHomePageBaseModel *model = [TSHomePageBaseModel new];
-    model.imageUrl = @"mall_home_bg";
+    model.imageUrl = @"https://www.baidu.com/img/bdlogo.png";
     model.uri = @"http://www.baidu.com";
-    [self.bannerDatas addObject:model];
+    [marr addObject:model];
 
     model = [TSHomePageBaseModel new];
-    model.imageUrl = @"mall_home_bg";
+    model.imageUrl = @"https://www.baidu.com/img/bdlogo.png";
     model.uri = @"http://www.baidu.com";
-    [self.bannerDatas addObject:model];
-
+    [marr addObject:model];
+    self.bannerDatas = marr;
 }
 @end

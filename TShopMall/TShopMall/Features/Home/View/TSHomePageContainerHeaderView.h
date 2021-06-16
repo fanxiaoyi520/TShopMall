@@ -6,11 +6,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TSHomePageViewModel.h"
+#import "TSHomePageContainerHeaderViewModel.h"
+#import <JXCategoryView/JXCategoryView.h>
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TSHomePageContainerHeaderView : UITableViewHeaderFooterView
-@property (nonatomic, strong) TSHomePageViewModel *viewModel;
+@property (nonatomic, strong) TSHomePageCellViewModel *viewModel;
+@property (nonatomic, strong) JXCategoryTitleView *segmentHeader;
 
 @end
 

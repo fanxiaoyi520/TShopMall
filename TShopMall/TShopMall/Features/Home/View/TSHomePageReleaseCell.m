@@ -28,13 +28,13 @@
         make.height.equalTo(@34);
 
     }];
-    
+    CGFloat height = kScreenWidth/345 * 447;
     [self.contentView addSubview:self.iconImageView];
     [self.iconImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contentView).offset(16);
         make.right.equalTo(self.contentView).offset(-16);
         make.top.equalTo(self.nameLabel.mas_bottom);
-        make.height.equalTo(@(releaseViewModel.imageViewHeight));
+        make.height.equalTo(@(releaseViewModel.imageViewHeight?:height));
         make.bottom.equalTo(self.contentView);
 
     }];
@@ -62,7 +62,9 @@
 -(UIImageView *)iconImageView{
     if (!_iconImageView) {
         _iconImageView = [[UIImageView alloc] init];
-        _iconImageView.backgroundColor = [UIColor orangeColor];
+        _iconImageView.backgroundColor = KHexColor(@"EFEFEF");
+        _iconImageView.clipsToBounds = YES;
+        _iconImageView.layer.cornerRadius = 8;
     }
     return _iconImageView;
 }

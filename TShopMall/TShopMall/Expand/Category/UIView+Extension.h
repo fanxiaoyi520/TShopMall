@@ -23,4 +23,8 @@
 @property (nonatomic,assign) CGPoint origin;
 
 @property (nonatomic) CGFloat bottom;
+
+- (void)ts_removeAllSubviews;
+/// 获取当前视图所在的vc
+- (UIViewController *)ts_viewController;
 @end

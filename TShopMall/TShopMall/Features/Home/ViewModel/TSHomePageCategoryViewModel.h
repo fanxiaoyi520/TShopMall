@@ -10,7 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TSHomePageCategoryViewModel : TSHomePageCellViewModel
-@property (nonatomic, strong) NSMutableArray *categoryDatas;
+@property (nonatomic, strong) NSArray *categoryDatas;
 - (void)getCategoryData;
 @end
 

@@ -27,7 +27,12 @@
 }
 
 - (void)setViewModel:(TSHomePageCellViewModel *)viewModel{
-    [(TSHomePageCategoryViewModel *)viewModel getCategoryData];
+    
+    TSHomePageCategoryViewModel *categoryViewModel = (TSHomePageCategoryViewModel *)viewModel;
+    if (!categoryViewModel.categoryDatas.count) {
+        [categoryViewModel getCategoryData];
+    }
+    
     __weak typeof(self) weakSelf = self;
     [self.KVOController observe:viewModel keyPath:@"categoryDatas" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
           NSArray *data = change[@"new"];

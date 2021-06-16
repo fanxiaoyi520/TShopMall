@@ -6,58 +6,15 @@
 //
 
 #import "TSMineOrderHeaderView.h"
-
-@interface TSTextImageButton : UIButton
-
-@end
-
-@implementation TSTextImageButton
-
--(instancetype)initWithFrame:(CGRect)frame{
-    if (self = [super initWithFrame:frame]) {
-        [self setupBasic];
-    }
-    return self;
-}
-
--(void)setupBasic{
-    self.backgroundColor = [UIColor whiteColor];
-    self.titleLabel.font = KRegularFont(12);
-    [self setTitle:@"查看全部订单" forState:UIControlStateNormal];
-    [self setImage:KImageMake(@"mall_home_search") forState:UIControlStateNormal];
-    [self setTitleColor:KHexAlphaColor(@"#999999", 1.0) forState:UIControlStateNormal];
-    [self setTitleColor:KHexAlphaColor(@"#999999", 1.0) forState:UIControlStateHighlighted];
-    self.imageView.contentMode = UIViewContentModeScaleAspectFit;
-    self.titleLabel.textAlignment = NSTextAlignmentRight;
-}
-
--(CGRect)titleRectForContentRect:(CGRect)contentRect{
-    CGFloat titleX = 0;
-    CGFloat titleY = 0;
-    CGFloat titleW = contentRect.size.width - 12;
-    CGFloat titleH = contentRect.size.height;
-    return CGRectMake(titleX, titleY, titleW, titleH);
-}
-
--(CGRect)imageRectForContentRect:(CGRect)contentRect{
-    CGFloat imageW = 6;
-    CGFloat imageH = 11;
-    CGFloat imageX = contentRect.size.width - 6;
-    CGFloat imageY = (contentRect.size.height - imageH) * 0.5;
-
-    return CGRectMake(imageX, imageY, imageW, imageH);
-}
-
--(void)setHighlighted:(BOOL)highlighted{}
-
-@end
+#import "TSMineMoreButton.h"
 
 @interface TSMineOrderHeaderView ()
 
 /// 标题
 @property(nonatomic, strong) UILabel *titleLabel;
+@property(nonatomic, strong) UIButton *eyeButton;
 /// 查看更多
-@property(nonatomic, strong) TSTextImageButton *moreButton;
+@property(nonatomic, strong) TSMineMoreButton *moreButton;
 /// 分割线
 @property(nonatomic, strong) UIView *seperateView;
 
@@ -102,7 +59,7 @@
 }
 
 #pragma mark - Actions
--(void)moreAction:(TSTextImageButton *)sender{
+-(void)moreAction:(TSMineMoreButton *)sender{
     
 }
 
@@ -117,9 +74,20 @@
     return _titleLabel;
 }
 
--(TSTextImageButton *)moreButton{
+-(UIButton *)eyeButton{
+    if (!_eyeButton) {
+        _eyeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_eyeButton setImage:KImageMake(@"mall_mine_eye") forState:UIControlStateNormal];
+        [_eyeButton setImage:KImageMake(@"mall_mine_eye") forState:UIControlStateHighlighted];
+        [_eyeButton addTarget:self action:@selector(eyeAction:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _eyeButton;
+}
+
+-(TSMineMoreButton *)moreButton{
     if (!_moreButton) {
-        _moreButton = [TSTextImageButton buttonWithType:UIButtonTypeCustom];
+        _moreButton = [TSMineMoreButton buttonWithType:UIButtonTypeCustom];
+        [_moreButton setTitle:@"查看全部订单" forState:UIControlStateNormal];
         [_moreButton addTarget:self action:@selector(moreAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _moreButton;

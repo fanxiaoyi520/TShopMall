@@ -10,7 +10,7 @@
 @implementation TSSearchResult
 
 - (void)setList:(NSArray<TSSearchList *> *)list{
-    _list = [NSArray modelArrayWithClass:[TSSearchList class] json:list];
+    _list = [NSArray yy_modelArrayWithClass:[TSSearchList class] json:list];
 }
 
 @end

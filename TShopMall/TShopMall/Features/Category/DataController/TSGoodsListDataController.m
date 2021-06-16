@@ -81,7 +81,7 @@
 }
 
 - (void)handleRequestRes:(id)obj{
-    TSSearchResult *result = [TSSearchResult modelWithJSON:obj];
+    TSSearchResult *result = [TSSearchResult yy_modelWithJSON:obj];
     self.totalNum = result.totalNum;
     if (self.result == nil) {
         self.result = result;
@@ -89,7 +89,7 @@
         NSMutableArray *lists = [NSMutableArray array];
         [lists addObjectsFromArray:self.result.list==nil? @[]:self.result.list];
         [lists addObjectsFromArray:result.list==nil? @[]:result.list];
-        self.result.list = [lists modelToJSONObject];
+        self.result.list = [lists yy_modelToJSONObject];
     }
     
     TSGoodsListSection *section = [self defaultSection];

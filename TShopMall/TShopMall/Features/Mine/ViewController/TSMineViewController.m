@@ -12,9 +12,12 @@
 #import "TSMineOrderHeaderView.h"
 #import "TSUniversalCollectionViewCell.h"
 #import "TSUniversalFooterView.h"
+#import "TSMineNavigationBar.h"
 
 @interface TSMineViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate>
 
+/// 自定义导航栏
+@property(nonatomic, strong) TSMineNavigationBar *navigationBar;
 /// 背景视图
 @property(nonatomic, strong) UIImageView *bgImageView;
 /// 设置按钮
@@ -41,17 +44,23 @@
             [strongSelf.collectionView reloadData];
         }
     }];
-    
-    
 }
 
 -(void)fillCustomView{
+
     [self.view addSubview:self.bgImageView];
-//    [self.bgImageView addSubview:self.setButton];
-//    [self.bgImageView addSubview:self.infoView];
+    [self.bgImageView addSubview:self.setButton];
+    [self.bgImageView addSubview:self.infoView];
     [self.view addSubview:self.collectionView];
+    [self.view addSubview:self.navigationBar];
+    
+    CGFloat top = GK_STATUSBAR_HEIGHT + 6;
     
     self.bgImageView.frame = CGRectMake(0, 0, kScreenWidth, 205);
+    self.setButton.frame = CGRectMake(kScreenWidth - 48, top, 32, 32);
+    self.infoView.frame = CGRectMake(0, 72, kScreenWidth, 60);
+    self.navigationBar.frame = CGRectMake(0, 0, kScreenWidth, GK_STATUSBAR_NAVBAR_HEIGHT);
+    self.collectionView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight - GK_TABBAR_HEIGHT);
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -62,35 +71,6 @@
 
 -(void)viewWillLayoutSubviews{
     [super viewWillLayoutSubviews];
-    
-    CGFloat top = self.view.ts_safeAreaInsets.top + 6;
-    CGFloat height = kScreenHeight - 160 - GK_TABBAR_HEIGHT;
-    
-    
-    self.collectionView.frame = CGRectMake(0, 205 - 45, kScreenWidth, height);
-    
-//    [self.bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.right.top.equalTo(self.view);
-//        make.height.mas_equalTo(205);
-//    }];
-    
-//    [self.setButton mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(self.bgImageView).offset(top);
-//        make.right.equalTo(self.bgImageView).offset(-16);
-//        make.width.height.mas_equalTo(32);
-//    }];
-//
-//    [self.infoView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.right.equalTo(self.bgImageView);
-//        make.bottom.equalTo(self.bgImageView.mas_bottom).offset(-73);
-//        make.height.mas_equalTo(60);
-//    }];
-    
-//    [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.right.bottom.equalTo(self.view);
-//        make.top.equalTo(self.bgImageView.mas_bottom).offset(-45);
-//        make.bottom.equalTo(self.view).offset(- (GK_TABBAR_HEIGHT));
-//    }];
 }
 
 #pragma mark - Action
@@ -103,18 +83,16 @@
     CGFloat offsetY = ceil(scrollView.contentOffset.y);
     if (offsetY <= 0) {
         CGRect frame = self.bgImageView.frame;
-//        frame.origin.y += offsetY;
-        frame.size.height -= offsetY;
-        if (frame.size.height > 300) {
-            CGFloat diff = frame.size.height - 300;
-            frame.size.height -= diff;
-//            frame.origin.y += diff;
-        }
+        frame.size.height = 205 - offsetY;
         self.bgImageView.frame = frame;
-
-    } else {
         
+    } else {
+        CGRect frame = self.bgImageView.frame;
+        frame.origin.y = -offsetY;
+        self.bgImageView.frame = frame;
     }
+    
+    self.navigationBar.alpha = offsetY / 50.0;
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -264,6 +242,14 @@ spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
 
 
 #pragma mark - Getter
+-(TSMineNavigationBar *)navigationBar{
+    if (!_navigationBar) {
+        _navigationBar = [[TSMineNavigationBar alloc] init];
+        _navigationBar.alpha = 0;
+    }
+    return _navigationBar;
+}
+
 -(UIButton *)setButton{
     if (!_setButton) {
         _setButton = [UIButton buttonWithType:UIButtonTypeCustom];

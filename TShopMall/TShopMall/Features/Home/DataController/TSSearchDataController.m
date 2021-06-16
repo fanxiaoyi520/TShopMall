@@ -14,7 +14,7 @@
     [[self hotKeyRequest] startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
         if (request.responseModel.isSucceed) {
             NSArray *data = request.responseJSONObject[@"data"];
-            NSArray<TSSearchHotKeyModel *> *keywords = [NSArray modelArrayWithClass:TSSearchHotKeyModel.class json:data];
+            NSArray<TSSearchHotKeyModel *> *keywords = [NSArray yy_modelArrayWithClass:TSSearchHotKeyModel.class json:data];
             NSMutableArray *sections = [NSMutableArray array];
             NSArray *historyKeys = [TSSearchKeyViewModel readHistoryKeys];
             if (historyKeys.count != 0) {
