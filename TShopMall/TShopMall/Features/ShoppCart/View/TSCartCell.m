@@ -9,13 +9,6 @@
 #import "TSCartModel.h"
 #import "TSNumOperationView.h"
 
-@interface TSCartGiftButton : UIButton
-@property (nonatomic, strong) UILabel *tips;
-@property (nonatomic, strong) UIImageView *img;
-@property (nonatomic, strong) UILabel *name;
-@property (nonatomic, strong) UIImageView *indeImg;
-@end
-
 @interface TSCartCell()
 @property (nonatomic, strong) UIButton *selBtn;
 @property (nonatomic, strong) UIImageView *icon;

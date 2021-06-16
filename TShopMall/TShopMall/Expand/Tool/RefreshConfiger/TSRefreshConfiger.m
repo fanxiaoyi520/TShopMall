@@ -49,6 +49,7 @@
 
 - (void)configFooter{
     self.footer = [MJRefreshAutoStateFooter footerWithRefreshingTarget:self refreshingAction:@selector(didReceiveFooterRefreshEvent)];
+    self.footer.frame = CGRectMake(0, 0, kScreenWidth, KRateW(78.0));
     self.footer.stateLabel.font = KFont(PingFangSCRegular, 12);
     self.footer.stateLabel.textColor = KHexColor(@"#4b5675");
     [self.footer setTitle:@"" forState:MJRefreshStateIdle];
@@ -77,18 +78,25 @@
     [self.scrollView.mj_header beginRefreshing];
 }
 
+- (void)endRefreshWithDataEmpty{
+    [self.header endRefreshing];
+    [self.footer endRefreshing];
+    self.header.hidden = YES;
+    self.footer.hidden = YES;
+}
+
 - (void)endRefresh:(BOOL)requestSuccess{
-    NSString *message = @"";
+    NSString *footerMessage = @"";
     if (requestSuccess == NO) {
-        message = @"——————  加载不成功，点击重试  ——————";
+        footerMessage = @"——————  加载不成功，点击重试  ——————";
     } else {
-        message = @"";
+        footerMessage = @"";
     }
     if (self.scrollView.mj_header.isRefreshing == YES) {
         [self.scrollView.mj_header endRefreshing];
     }
     if (self.scrollView.mj_footer.isRefreshing == YES) {
-        [self.footer setTitle:message forState:MJRefreshStateIdle];
+        [self.footer setTitle:footerMessage forState:MJRefreshStateIdle];
         [self.scrollView.mj_footer endRefreshing];
     }
     
@@ -96,6 +104,11 @@
         [self.scrollView.mj_footer resetNoMoreData];
     } else {
         [self.scrollView.mj_footer endRefreshingWithNoMoreData];
+    }
+    
+    if ([self.delegate respondsToSelector:@selector(isShowFooter)] &&
+        self.delegate.isShowFooter == NO) {
+        [self.footer setTitle:@"" forState:MJRefreshStateNoMoreData];
     }
     
     if (self.scrollView.mj_footer != nil) {
@@ -124,27 +137,9 @@
         return;
     }
     self.lotView = [LOTAnimationView animationNamed:jsonName];
-    self.lotView.loopAnimation = YES;
     self.lotView.contentMode = UIViewContentModeScaleAspectFill;
     self.lotView.animationSpeed = 1.0;
     self.lotView.loopAnimation = YES;
-}
-
-- (void)setState:(MJRefreshState)state {
-    MJRefreshCheckState;
-    switch (state) {
-        case MJRefreshStateIdle:{//普通闲置状态
-            [self.lotView stop];
-        }break;
-        case MJRefreshStatePulling:{//松开就可以进行刷新的状态
-        } break;
-        case MJRefreshStateRefreshing:{//正在刷新中的状态
-            self.lotView.animationProgress = 0;
-            [self.lotView play];
-        }break;
-        default:
-            break;
-    }
 }
 
 @end

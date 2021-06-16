@@ -7,6 +7,7 @@
 
 #import "TSGoodsListCell.h"
 #import "TSEarnView.h"
+#import "TSGoodListViewModel.h"
 
 @interface TSGoodsListCell()
 @property (nonatomic, strong) UIImageView *icon;
@@ -20,13 +21,32 @@
 
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self == [super initWithFrame:frame]) {
+        self.backgroundColor = [UIColor whiteColor];
         [self layoutView];
     }
     return self;
 }
 
 - (void)setObj:(id)obj{
-    [self testUI];
+    if ([obj isKindOfClass:[TSGoodListViewModel class]]) {
+        TSGoodListViewModel *vm = (TSGoodListViewModel *)obj;
+        [self configUI:vm];
+    }
+}
+
+- (void)configUI:(TSGoodListViewModel *)vm{
+    NSURL *imgUrl = [NSURL URLWithString:vm.icon];
+    [self.icon sd_setImageWithURL:imgUrl placeholderImage:KImageMake(@"")];
+    self.name.text = vm.name;
+    self.price.text = [NSString stringWithFormat:@"¥ %@", vm.price];
+    self.thPrice.text = [NSString stringWithFormat:@"提货价: %@", vm.thPrice];
+    
+    [self.earnView updatePrice:vm.earnPrice];
+    if (vm.earnPrice.floatValue <= 0) {
+        self.earnView.hidden = YES;
+    } else {
+        self.earnView.hidden = NO;
+    }
 }
 
 - (void)setFrame:(CGRect)frame{
@@ -37,7 +57,7 @@
 }
 
 - (void)testUI{
-    self.backgroundColor = [UIColor whiteColor];
+    
     self.icon.image = KImageMake(@"");
     self.icon.backgroundColor = UIColor.cyanColor;
     self.name.text = @"XESS  55寸艺术电55寸艺术电55寸艺术…";

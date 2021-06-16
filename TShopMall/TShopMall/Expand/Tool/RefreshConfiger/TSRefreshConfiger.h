@@ -22,6 +22,7 @@ typedef NS_ENUM(NSInteger, RefreshType) {
 - (BOOL)hasMoreData;
 - (void)headerRefresh;
 - (void)footerRefresh;
+- (BOOL)isShowFooter;
 @end
 
 

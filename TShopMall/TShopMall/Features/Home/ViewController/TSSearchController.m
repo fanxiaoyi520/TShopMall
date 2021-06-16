@@ -10,9 +10,11 @@
 #import "TSSearchView.h"
 #import "TSSearchDataController.h"
 #import "TSGoodsListController.h"
+#import "TSSearchKeyViewModel.h"
 
 @interface TSSearchController ()
 @property (nonatomic, strong) TSSearchView *searchView;
+@property (nonatomic, strong) TSSearchDataController *dataCon;
 @end
 
 @implementation TSSearchController
@@ -28,15 +30,26 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = UIColor.whiteColor;
-    [TSSearchDataController fetchData:^(NSArray<TSSearchSection *> *sections, NSError *error) {
+    
+    self.dataCon = [TSSearchDataController new];
+    [self refreshData];
+}
+
+- (void)refreshData{
+    __weak typeof(self) weakSelf = self;
+    [self.dataCon fetchData:^(NSArray<TSSearchSection *> *sections, NSError *error) {
         self.searchView.sections = sections;
+        [weakSelf.searchView.refreshConfiger endRefresh:YES];
     }];
 }
 
 - (void)goToGoodsList:(NSString *)key{
+    [TSSearchKeyViewModel handleHistoryKeys:key];
     TSGoodsListController *con = [TSGoodsListController new];
     con.searchKey = key;
     [self.navigationController pushViewController:con animated:YES];
+    
+    self.searchView.sections = [TSSearchDataController updateHistorySections:self.dataCon.sections];
 }
 
 - (void)viewWillAppear:(BOOL)animated{

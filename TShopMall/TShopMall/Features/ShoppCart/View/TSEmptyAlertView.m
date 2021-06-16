@@ -12,6 +12,10 @@
 @property (nonatomic, strong) UILabel *tips;
 @property (nonatomic, strong) UIButton *alertBtn;
 
+@property (nonatomic, copy) NSString *messageStr;
+@property (nonatomic, copy) NSString *imgStr;
+@property (nonatomic, copy) UIColor *backColor;
+
 @property (nonatomic, copy) void(^click)(void);
 @end
 
@@ -26,16 +30,34 @@
     }
 }
 
+- (instancetype)init{
+    if (self == [super init]) {
+        self.imgStr = @"alert_empty";
+    }
+    return self;
+}
+
+- (BOOL)judgementHasExistInView:(UIView *)view{
+    for (UIView *obj in view.subviews) {
+        if ([obj.className isEqualToString:@"TSEmptyAlertView"]) {
+            TSEmptyAlertView *alertView = (TSEmptyAlertView *)obj;
+            [alertView configUI];
+            return YES;
+        }
+    }
+    return NO;
+}
+
 - (TSEmptyAlertView *(^)(UIColor *))alertBackColor{
     return ^(UIColor *bgColor){
-        self.backgroundColor = bgColor;
+        self.backColor = bgColor;
         return self;
     };
 }
 
 - (TSEmptyAlertView *(^)(NSString *))alertImage{
     return ^(NSString *alertImg){
-        self.icon.image = KImageMake(alertImg);
+        self.imgStr = alertImg;
         return self;
     };
 }
@@ -59,11 +81,17 @@
     };
 }
 
+- (void)configUI{
+    self.backgroundColor = self.backColor;
+    self.icon.image = KImageMake(self.imgStr);
+}
+
 - (void)showInView:(UIView *)inView{
+    [inView layoutIfNeeded];
+    BOOL isExist = [self judgementHasExistInView:inView];
+    if(isExist) return;
     [inView addSubview:self];
-    [self mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.top.bottom.equalTo(inView);
-    }];
+    self.frame = CGRectMake(0, 0, inView.frame.size.width, inView.frame.size.height);
 }
 
 - (void)alertBtnAction{

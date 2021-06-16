@@ -9,13 +9,12 @@
 #import "TSSearchTextView.h"
 #import "TSSearchBaseCell.h"
 #import "TSSearchHeaderView.h"
-#import "TSRefreshConfiger.h"
+#import "TSSearchKeyViewModel.h"
 
 @interface TSSearchView()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, TSRefreshDelegate>
 @property (nonatomic, strong) TSSearchTextView *textView;
 @property (nonatomic, strong) UIButton *cancelBtn;
 @property (nonatomic, strong) UICollectionView *collectionView;
-@property (nonatomic, strong) TSRefreshConfiger *refreshConfiger;
 @end
 
 @implementation TSSearchView
@@ -60,6 +59,7 @@
         
         __weak typeof(self) weakSelf = self;
         view.deleteAction = ^(NSString *title) {
+            [TSSearchKeyViewModel clearHistorySearchKeys];
             NSMutableArray *a = [NSMutableArray arrayWithArray:weakSelf.sections];
             [a removeObjectAtIndex:indexPath.section];
             weakSelf.sections = a;
@@ -83,11 +83,11 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     TSSearchBaseCell *cell = (TSSearchBaseCell *)[collectionView cellForItemAtIndexPath:indexPath];
-    if ([cell.obj isKindOfClass:[NSString class]]) {
-        NSString *key = cell.obj;
-        self.textView.textField.text = key;
+    if ([cell.obj isKindOfClass:[TSSearchKeyViewModel class]]) {
+        TSSearchKeyViewModel *vm = cell.obj;
+        self.textView.textField.text = vm.keywords;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self.controller performSelector:@selector(goToGoodsList:) withObject:key];
+            [self.controller performSelector:@selector(goToGoodsList:) withObject:vm.keywords];
         });
     } else {
         
@@ -99,9 +99,7 @@
 }
 
 - (void)headerRefresh{
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.refreshConfiger endRefresh:YES];
-    });
+    [self.controller performSelector:@selector(refreshData)];
 }
 
 - (void)footerRefresh{
@@ -146,10 +144,17 @@
     self.collectionView.showsVerticalScrollIndicator = NO;
     self.collectionView.showsHorizontalScrollIndicator = NO;
     [self addSubview:self.collectionView];
-    
-    self.refreshConfiger = [TSRefreshConfiger configScrollView:self.collectionView isLight:NO response:self type:Both];
+    [self forceItemAlignmentLeft];
+    self.refreshConfiger = [TSRefreshConfiger configScrollView:self.collectionView isLight:NO response:self type:Header];
     
     return self.collectionView;
+}
+
+- (void)forceItemAlignmentLeft{
+    SEL sel = NSSelectorFromString(@"_setRowAlignmentsOptions:");
+    if ([self.collectionView.collectionViewLayout respondsToSelector:sel]) {
+        ((void(*)(id,SEL,NSDictionary*)) objc_msgSend)(self.collectionView.collectionViewLayout,sel, @{@"UIFlowLayoutCommonRowHorizontalAlignmentKey":@(NSTextAlignmentLeft),@"UIFlowLayoutLastRowHorizontalAlignmentKey" : @(NSTextAlignmentLeft),@"UIFlowLayoutRowVerticalAlignmentKey" : @(NSTextAlignmentCenter)});
+    }
 }
 
 - (TSSearchTextView *)textView{
