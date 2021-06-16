@@ -46,6 +46,7 @@
         section.footerSize = CGSizeMake(0, 24);
         section.footerIdentify = @"TSUniversalBottomFooterView";
         section.sectionInset = UIEdgeInsetsMake(0, 16, 0, 16);
+        section.spacingWithLastSection = 130;
         section.column = 5;
         section.items = items;
         

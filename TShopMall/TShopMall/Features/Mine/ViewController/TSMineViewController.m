@@ -47,11 +47,12 @@
 }
 
 -(void)fillCustomView{
+
     [self.view addSubview:self.bgImageView];
     [self.bgImageView addSubview:self.setButton];
     [self.bgImageView addSubview:self.infoView];
-    [self.view addSubview:self.navigationBar];
     [self.view addSubview:self.collectionView];
+    [self.view addSubview:self.navigationBar];
     
     CGFloat top = GK_STATUSBAR_HEIGHT + 6;
     
@@ -59,7 +60,7 @@
     self.setButton.frame = CGRectMake(kScreenWidth - 48, top, 32, 32);
     self.infoView.frame = CGRectMake(0, 72, kScreenWidth, 60);
     self.navigationBar.frame = CGRectMake(0, 0, kScreenWidth, GK_STATUSBAR_NAVBAR_HEIGHT);
-    self.collectionView.frame = CGRectMake(0, 160, kScreenWidth, kScreenHeight - 160 - GK_TABBAR_HEIGHT);
+    self.collectionView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight - GK_TABBAR_HEIGHT);
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -91,7 +92,7 @@
         self.bgImageView.frame = frame;
     }
     
-    self.navigationBar.alpha = offsetY / 100.0;
+    self.navigationBar.alpha = offsetY / 50.0;
 }
 
 #pragma mark - UICollectionViewDataSource

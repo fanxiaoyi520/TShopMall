@@ -115,7 +115,7 @@
 -(UIView *)buyView{
     if (!_buyView) {
         _buyView = [[UIView alloc] init];
-        _buyView.backgroundColor = [UIColor orangeColor];
+        _buyView.backgroundColor = [UIColor clearColor];
     }
     return _buyView;
 }
@@ -161,9 +161,8 @@
         [_buyButton setTitleColor:KWhiteColor forState:UIControlStateNormal];
         [_buyButton setTitleColor:KWhiteColor forState:UIControlStateHighlighted];
         [_buyButton setBackgroundColor:[UIColor orangeColor]];
-//        [_buyButton setBackgroundImage:KImageMake(@"mall_detail_addCart") forState:UIControlStateNormal];
-//        [_buyButton setBackgroundImage:KImageMake(@"mall_detail_addCart") forState:UIControlStateHighlighted];
         [_buyButton addTarget:self action:@selector(addAction:) forControlEvents:UIControlEventTouchUpInside];
+        [_buyButton setCorners:(UIRectCornerTopLeft | UIRectCornerBottomLeft) radius:20];
     }
     return _buyButton;
 }
@@ -176,9 +175,8 @@
         [_sellButton setTitleColor:KWhiteColor forState:UIControlStateNormal];
         [_sellButton setTitleColor:KWhiteColor forState:UIControlStateHighlighted];
         [_sellButton setBackgroundColor:[UIColor redColor]];
-//        [_sellButton setBackgroundImage:KImageMake(@"mall_detail_addCart") forState:UIControlStateNormal];
-//        [_sellButton setBackgroundImage:KImageMake(@"mall_detail_addCart") forState:UIControlStateHighlighted];
         [_sellButton addTarget:self action:@selector(addAction:) forControlEvents:UIControlEventTouchUpInside];
+        [_sellButton setCorners:(UIRectCornerTopRight | UIRectCornerBottomRight) radius:20];
     }
     return _sellButton;
 }
