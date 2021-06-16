@@ -23,6 +23,7 @@
     [[UINavigationBar appearance] setBackIndicatorImage:[UIImage imageNamed:@"navi_back"]];
     [[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:[UIImage imageNamed:@"navi_back"]];
     [UINavigationBar appearance].tintColor = KHexColor(@"#030303");
+    [[UINavigationBar appearance] setShadowImage:UIImage.new];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {

@@ -12,8 +12,10 @@
 #import "TSGoodsListDataController.h"
 #import "TSGoodsListCell.h"
 #import "TSSearchController.h"
+#import "TSEmptyAlertView.h"
+#import "TSMakeOrderController.h"
 
-@interface TSGoodsListController ()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, TSRefreshDelegate>{
+@interface TSGoodsListController ()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, TSRefreshDelegate, TSGoodsListFittleDelegate>{
     NSArray<TSGoodsListSection *> *sections;
 }
 @property (nonatomic, strong) TSSearchTextView *searchView;
@@ -31,15 +33,50 @@
   
     [self setNaviBar];
     
-    self.dataCon = [TSGoodsListDataController fetchData:^(NSArray<TSGoodsListSection *> *sections, NSError *error) {
-        self->sections = sections;
-        [self.collectionView reloadData];
-    }];
+    self.dataCon = [TSGoodsListDataController new];
+    self.dataCon.keyword = self.searchKey;
+    [self refreshGoods];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
+
+- (void)refreshGoods{
+    __weak typeof(self) weakSelf = self;
+    [self.dataCon queryGoods:^(NSError *error) {
+        if (error) {
+            
+        } else {
+            self->sections = self.dataCon.lists;
+            [weakSelf.collectionView reloadData];
+        }
+        [weakSelf showRefreshUI];
+        [weakSelf showEmptyView];
+    }];
+}
+
+- (void)showRefreshUI{
+    if (self.dataCon.currentNum !=0) {//表明是加载更多
+        if (self.dataCon.currentNum == [sections lastObject].rows.count) {//数据加载失败
+            [self.refreshConfiger endRefresh:NO];
+        } else {
+            [self.refreshConfiger endRefresh:YES];
+        }
+    } else{
+        [self.refreshConfiger endRefresh:YES];
+    }
+}
+
+- (void)showEmptyView{
+    if (self.dataCon.currentNum != 0) {
+        [TSEmptyAlertView hideInView:self.collectionView];
+        return ;
+    }
+    TSEmptyAlertView.new.alertInfo(@"抱歉，没有找到商品哦～", @"重试").show(self.collectionView, ^{
+        [self refreshGoods];
+    });
 }
 
 - (void)goToSearch{
@@ -60,15 +97,25 @@
 - (void)showSytleChanged:(UIButton *)sender{
     sender.selected = !sender.selected;
     if (sender.selected == YES) {
-        sections = [TSGoodsListDataController sectionsWithModels:self.dataCon.model isGrid:NO];
+        self.dataCon.isGrid = NO;
+        sections = [self.dataCon sectionsForUIWithDatas:self.dataCon.result.list];
         self.collectionView.backgroundColor = UIColor.whiteColor;
         [self.refreshConfiger changeRefreshType:NO];
     } else {
-        sections = [TSGoodsListDataController sectionsWithModels:self.dataCon.model isGrid:YES];
+        self.dataCon.isGrid = YES;
+        sections = [self.dataCon sectionsForUIWithDatas:self.dataCon.result.list];
         self.collectionView.backgroundColor = KHexColor(@"#F4F4F5");
         [self.refreshConfiger changeRefreshType:YES];
+        
     }
     [self.collectionView reloadData];
+}
+
+- (void)operationType:(NSInteger)type sortType:(NSInteger)sortType{
+    self.dataCon.sortType = type;
+    self.dataCon.sort = sortType;
+    [self.dataCon defaultConfig];
+    [self refreshGoods];
 }
 
 - (void)setNaviBar{
@@ -117,20 +164,28 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    TSSearchRow *row = sections[indexPath.section].rows[indexPath.row];
+    TSGoodListViewModel *vm = (TSGoodListViewModel *)row.obj;
+    TSMakeOrderController *con = [TSMakeOrderController new];
+    [self.navigationController pushViewController:con animated:YES];
 }
 
 - (BOOL)hasMoreData{
-    return YES;
+    return self.dataCon.currentNum < self.dataCon.totalNum;
+}
+
+- (BOOL)isShowFooter{
+    return self.dataCon.currentNum;
 }
 
 - (void)headerRefresh{
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.refreshConfiger endRefresh:YES];
-    });
+    [self.dataCon defaultConfig];
+    [self refreshGoods];
 }
 
 - (void)footerRefresh{
-    
+    self.dataCon.currentPage ++;
+    [self refreshGoods];
 }
 
 - (void)viewWillLayoutSubviews{
@@ -191,11 +246,10 @@
         return _collectionView;
     }
     UICollectionViewFlowLayout *flowLayout = [UICollectionViewFlowLayout new];
-    flowLayout.estimatedItemSize = CGSizeMake(20, KRateW(24.0));
     flowLayout.minimumLineSpacing = KRateW(8.0);
     flowLayout.minimumInteritemSpacing  = KRateW(8.0);
     flowLayout.scrollDirection =  UICollectionViewScrollDirectionVertical;
-    flowLayout.sectionInset = UIEdgeInsetsMake(KRateW(10.0), KRateW(16.0), GK_SAFEAREA_BTM, KRateW(16.0));
+    flowLayout.sectionInset = UIEdgeInsetsMake(KRateW(10.0), KRateW(16.0), KRateW(8.0), KRateW(16.0));
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
     self.collectionView.backgroundColor = KHexColor(@"#F4F4F5");
     self.collectionView.delegate = self;

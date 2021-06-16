@@ -6,11 +6,17 @@
 //
 
 #import "TSBaseDataController.h"
-#import "TSSearchModel.h"
 #import "TSSearchSection.h"
+#import "TSSearchHotKeyModel.h"
+#import "TSSearchKeyViewModel.h"
 
 @interface TSSearchDataController : TSBaseDataController
-+ (void)fetchData:(void(^)(NSArray<TSSearchSection *> *sections,  NSError *error))finished;
+@property (nonatomic, strong) NSArray<TSSearchHotKeyModel *> *hotkeys;
+@property (nonatomic, strong) NSArray<TSSearchSection *> *sections;
+
+- (void)fetchData:(void(^)(NSArray<TSSearchSection *> *sections,  NSError *error))finished;
+
++ (NSArray<TSSearchSection *> *)updateHistorySections:(NSArray<TSSearchSection *> *)sections;
 @end
 
 

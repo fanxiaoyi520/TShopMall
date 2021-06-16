@@ -13,6 +13,7 @@
 #import "TSUniversalCollectionViewCell.h"
 #import "TSUniversalFooterView.h"
 #import "TSMineNavigationBar.h"
+#import "TSSettingViewController.h"
 
 @interface TSMineViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate>
 
@@ -75,7 +76,8 @@
 
 #pragma mark - Action
 -(void)setAction:(UIButton *)sender{
-    
+    TSSettingViewController *settingVC = [[TSSettingViewController alloc] init];
+    [self.navigationController pushViewController:settingVC animated:YES];
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -118,6 +120,8 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
+    TSSettingViewController *settingVC = [[TSSettingViewController alloc] init];
+    [self.navigationController pushViewController:settingVC animated:YES];
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView

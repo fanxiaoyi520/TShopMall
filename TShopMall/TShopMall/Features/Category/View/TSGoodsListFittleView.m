@@ -27,6 +27,7 @@
 - (void)itemTap:(TSGoodsListFittleButton *)sender{
     if (sender.selected == YES) {
         sender.selected = YES;
+        [self.delegate operationType:sender.tag sortType:sender.isUp];
         return;
     }
     for (UIView *view in self.subviews) {
@@ -39,6 +40,8 @@
             }
         }
     }
+    
+    [self.delegate operationType:sender.tag sortType:sender.isUp];
 }
 
 - (void)setFittleItems{
