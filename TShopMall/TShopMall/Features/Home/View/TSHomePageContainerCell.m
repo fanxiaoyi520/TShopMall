@@ -7,7 +7,6 @@
 
 #import "TSHomePageContainerCell.h"
 #import "TSHomePageContainerViewModel.h"
-#import "TSWeakObject.h"
 @interface TSHomePageContainerCell()<UIScrollViewDelegate>
 @property(nonatomic, strong) TSHomePageContainerViewModel *containerViewModel;
 
