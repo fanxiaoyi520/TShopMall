@@ -58,7 +58,7 @@
         UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero
                                              collectionViewLayout:flowLayout];
         _collectionView = collectionView;
-        _collectionView.backgroundColor = KHexColor(@"#E6E6E6");
+        _collectionView.backgroundColor = KGrayColor;//KHexColor(@"#E6E6E6");
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.showsVerticalScrollIndicator = NO;
