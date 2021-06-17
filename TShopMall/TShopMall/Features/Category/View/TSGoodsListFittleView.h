@@ -7,8 +7,12 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol TSGoodsListFittleDelegate <NSObject>
+- (void)operationType:(NSInteger)type sortType:(NSInteger)sortType;
+
+@end
 
 @interface TSGoodsListFittleView : UIView
-
+@property (nonatomic, weak) id<TSGoodsListFittleDelegate> delegate;
 @end
 

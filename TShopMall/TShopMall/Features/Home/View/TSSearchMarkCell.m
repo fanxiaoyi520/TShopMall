@@ -6,6 +6,7 @@
 //
 
 #import "TSSearchMarkCell.h"
+#import "TSSearchKeyViewModel.h"
 
 @interface TSSearchMarkCell ()
 @property (nonatomic, strong) UILabel *markLabel;
@@ -15,9 +16,9 @@
 
 - (void)setObj:(id)obj{
     [super setObj:obj];
-    if ([obj isKindOfClass:[NSString class]]) {
-        NSString *str = (NSString *)obj;
-        self.markLabel.text = str;
+    if ([obj isKindOfClass:[TSSearchKeyViewModel class]]) {
+        TSSearchKeyViewModel *vm = (TSSearchKeyViewModel *)obj;
+        self.markLabel.text = vm.keywords;
     }
 }
 

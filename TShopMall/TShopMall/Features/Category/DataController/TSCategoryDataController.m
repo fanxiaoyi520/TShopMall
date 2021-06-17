@@ -60,6 +60,7 @@
         
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
 
+        NSLog(@"----");
     }];
 
 }

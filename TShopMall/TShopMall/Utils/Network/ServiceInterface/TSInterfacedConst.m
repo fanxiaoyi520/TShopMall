@@ -13,11 +13,16 @@ NSString *const kApiPrefix = @"https://testpc.tclo2o.cn/rest";
 #pragma mark - 注册&登录
 
 #pragma mark - 首页
+
 NSString *const kHomePageInfoUrl = @"/rest/v2/front/shopContent/getIndexPageInfo";
 
-NSString *const kSearchProductsUrl = @"/rest/v2/product/category/groups/searchProducts";
+NSString * const kSearchKey = @"/rest/v2/front/product/queryKeyWord";
+NSString * const kSearchAssociateWord = @"/rest/v2/front/product/associateWord";
+NSString * const kSearchHotKey = @"/rest/v2/front/product/queryKeyWord";
+NSString * const kSearchResult = @"/rest/v2/itemsearch/toProductList";
 #pragma mark - 分类
 NSString *const kShopContentUrl = @"/rest/v2/front/shopContent/getPageManageByPageType";
+NSString * const kProducts = @"rest/v2/product/category/groups/searchProducts";
 
 #pragma mark - 排行
 

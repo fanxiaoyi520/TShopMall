@@ -13,13 +13,12 @@
 #import "TSUniversalCollectionViewCell.h"
 #import "TSUniversalFooterView.h"
 #import "TSMineNavigationBar.h"
+#import "TSSettingViewController.h"
 
 @interface TSMineViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate>
 
-
 /// 自定义导航栏
 @property(nonatomic, strong) TSMineNavigationBar *navigationBar;
-
 /// 背景视图
 @property(nonatomic, strong) UIImageView *bgImageView;
 /// 设置按钮
@@ -49,19 +48,21 @@
 }
 
 -(void)fillCustomView{
+
     [self.view addSubview:self.bgImageView];
-    [self.bgImageView addSubview:self.setButton];
-    [self.bgImageView addSubview:self.infoView];
-    [self.view addSubview:self.navigationBar];
     [self.view addSubview:self.collectionView];
+    [self.collectionView addSubview:self.infoView];
+    [self.collectionView addSubview:self.setButton];
+    [self.view addSubview:self.navigationBar];
     
-    CGFloat top = GK_STATUSBAR_HEIGHT + 6;
+    CGFloat top = 6;
     
     self.bgImageView.frame = CGRectMake(0, 0, kScreenWidth, 205);
+    self.collectionView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight - GK_TABBAR_HEIGHT);
+    self.infoView.frame = CGRectMake(0, 30, kScreenWidth, 60);
     self.setButton.frame = CGRectMake(kScreenWidth - 48, top, 32, 32);
-    self.infoView.frame = CGRectMake(0, 72, kScreenWidth, 60);
     self.navigationBar.frame = CGRectMake(0, 0, kScreenWidth, GK_STATUSBAR_NAVBAR_HEIGHT);
-    self.collectionView.frame = CGRectMake(0, 160, kScreenWidth, kScreenHeight - 160 - GK_TABBAR_HEIGHT);
+
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -76,7 +77,8 @@
 
 #pragma mark - Action
 -(void)setAction:(UIButton *)sender{
-    
+    TSSettingViewController *settingVC = [[TSSettingViewController alloc] init];
+    [self.navigationController pushViewController:settingVC animated:YES];
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -93,7 +95,7 @@
         self.bgImageView.frame = frame;
     }
     
-    self.navigationBar.alpha = offsetY / 100.0;
+    self.navigationBar.alpha = offsetY / 50.0;
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -119,6 +121,8 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
+    TSSettingViewController *settingVC = [[TSSettingViewController alloc] init];
+    [self.navigationController pushViewController:settingVC animated:YES];
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView

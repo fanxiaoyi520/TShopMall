@@ -42,7 +42,7 @@
     [body setValue:@"sortWeight" forKey:@"sortBy"];
     [body setValue:@"application/x-www-form-urlencoded" forKey:@"Content-Type"];
 
-    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kSearchProductsUrl
+    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kProducts
                                                                requestMethod:YTKRequestMethodPOST
                                                        requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON
                                                                requestHeader:NSMutableDictionary.dictionary
