@@ -8,6 +8,7 @@
 #import "TSHomePageBannerCell.h"
 #import <SDCycleScrollView.h>
 #import "TSHomePageBannerViewModel.h"
+#import "TSImageBaseModel.h"
 
 @interface TSHomePageBannerCell()<SDCycleScrollViewDelegate>
 @property(nonatomic, strong) SDCycleScrollView *cycleScrollView;
@@ -28,30 +29,18 @@
 }
 
 - (void)setViewModel:(TSHomePageCellViewModel *)viewModel{
-    
+    [super setViewModel:viewModel];
     TSHomePageBannerViewModel *bannerViewModel = (TSHomePageBannerViewModel *)viewModel;
-    if (!bannerViewModel.bannerDatas.count) {
-        [bannerViewModel getBannerData];
-    }
-   
-    __weak typeof(self) weakSelf = self;
-    [self.KVOController observe:viewModel keyPath:@"bannerDatas" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
-          NSArray *data = change[@"new"];
-          if (data.count > 0) {
-              weakSelf.datas  = data;
-          }
-      }];
-}
-
-- (void)setDatas:(NSArray<TSHomePageBaseModel *> *)datas{
-    [super setDatas:datas];
-    NSMutableArray *tempArr = @[].mutableCopy;
-    for (TSHomePageBaseModel *model in datas) {
-        [tempArr addObject:model.imageUrl];
-    }
+    NSArray *temp = [NSArray yy_modelArrayWithClass:TSImageBaseModel.class json:bannerViewModel.model.data[@"list"]];
+    bannerViewModel.bannerDatas = [NSMutableArray arrayWithArray:temp];
     
-//    _cycleScrollView.localizationImageNamesGroup = tempArr;
-    _cycleScrollView.imageURLStringsGroup = tempArr;
+    if (!_cycleScrollView.imageURLStringsGroup.count) {
+        NSMutableArray *tempArr = @[].mutableCopy;
+        for (TSImageBaseModel *model in temp) {
+            [tempArr addObject:model.imageData.url];
+        }
+        _cycleScrollView.imageURLStringsGroup = tempArr;
+    }
 }
 
 #pragma mark - Getter
@@ -59,9 +48,9 @@
     if (!_cycleScrollView) {
         _cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectZero delegate:self placeholderImage:nil];
         _cycleScrollView.showPageControl = NO;
-        _cycleScrollView.autoScroll  = NO;
+        _cycleScrollView.autoScroll  = YES;
         _cycleScrollView.autoScrollTimeInterval = 4;
-        _cycleScrollView.backgroundColor = [UIColor clearColor];
+//        _cycleScrollView.backgroundColor = KGrayColor;
         _cycleScrollView.clipsToBounds = YES;
         _cycleScrollView.layer.cornerRadius = 6;
     }
@@ -69,7 +58,11 @@
 }
 
 #pragma mark - SDCycleScrollViewDelegate
--(void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didScrollToIndex:(NSInteger)index{
+
+- (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index{
+    TSHomePageBannerViewModel *bannerViewModel = (TSHomePageBannerViewModel *)self.viewModel;
+
+    NSLog(@"uri:%@",bannerViewModel.bannerDatas[index].linkData.objectValue);
 
 }
 

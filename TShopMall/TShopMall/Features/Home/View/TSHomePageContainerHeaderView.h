@@ -6,8 +6,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TSHomePageContainerHeaderViewModel.h"
 #import <JXCategoryView/JXCategoryView.h>
+#import "TSHomePageContainerViewModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

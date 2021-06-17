@@ -8,5 +8,12 @@
 #import "TSHomePageContainerGroup.h"
 
 @implementation TSHomePageContainerGroup
-
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _list = @[].mutableCopy;
+    }
+    return self;
+}
 @end

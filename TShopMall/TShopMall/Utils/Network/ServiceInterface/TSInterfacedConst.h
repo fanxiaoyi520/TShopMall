@@ -13,6 +13,8 @@ UIKIT_EXTERN NSString *const kApiPrefix;
 #pragma mark - 注册&登录
 
 #pragma mark - 首页
+UIKIT_EXTERN NSString *const kHomePageInfoUrl;
+UIKIT_EXTERN NSString *const kSearchProductsUrl;
 
 #pragma mark - 分类
 UIKIT_EXTERN NSString *const kShopContentUrl;

@@ -6,25 +6,18 @@
 //
 
 #import "TSHomePageCellViewModel.h"
-#import "TSHomePageContainerHeaderViewModel.h"
 #import "TSHomePageContainerGroup.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TSHomePageContainerViewModel : TSHomePageCellViewModel
-@property (nonatomic, strong) TSHomePageContainerHeaderViewModel *containerHeaderViewModel;
-@property (nonatomic, strong) NSMutableDictionary <NSString *, NSArray <TSHomePageContainerModel *> *> *allGroupDict;
+@property (nonatomic, strong) NSArray <TSHomePageContainerGroup *> *segmentHeaderDatas;
+@property (nonatomic, strong) TSHomePageContainerGroup *currentGroup;
 
-- (void)getPageContainerDataWithStartIndex:(NSInteger)startIndex
-                                     count:(NSInteger)count
-                                     group:(TSHomePageContainerGroup *)group;
+- (void)getPageContainerDataWithStartPageIndex:(NSInteger)startIndex count:(NSInteger)count group:(TSHomePageContainerGroup *)group;
 
-- (void)getPageContainerDataWithStartIndex:(NSInteger)startIndex
-                                     count:(NSInteger)count
-                                     group:(TSHomePageContainerGroup *)group
-                                  callback:(void(^_Nullable)(NSMutableDictionary <NSString *, NSArray <TSHomePageContainerModel *> *> *allGroupDict))callback;
-
-- (void)loadMoreData;
+- (void)loadData:(TSHomePageContainerGroup *)group;
+- (void)getSegmentHeaderData;
 @end
 
 NS_ASSUME_NONNULL_END

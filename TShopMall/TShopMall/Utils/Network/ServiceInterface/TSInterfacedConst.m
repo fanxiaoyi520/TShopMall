@@ -13,7 +13,9 @@ NSString *const kApiPrefix = @"https://testpc.tclo2o.cn/rest";
 #pragma mark - 注册&登录
 
 #pragma mark - 首页
+NSString *const kHomePageInfoUrl = @"/rest/v2/front/shopContent/getIndexPageInfo";
 
+NSString *const kSearchProductsUrl = @"/rest/v2/product/category/groups/searchProducts";
 #pragma mark - 分类
 NSString *const kShopContentUrl = @"/rest/v2/front/shopContent/getPageManageByPageType";
 
