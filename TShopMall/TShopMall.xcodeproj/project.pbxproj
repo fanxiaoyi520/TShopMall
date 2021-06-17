@@ -267,6 +267,13 @@
 		F55D2D20267B1EE9006BACCF /* TSRankHotCellController.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2D1F267B1EE9006BACCF /* TSRankHotCellController.m */; };
 		F55D2D23267B2FB5006BACCF /* TSRankCurrentMonthController.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2D22267B2FB5006BACCF /* TSRankCurrentMonthController.m */; };
 		F55D2D26267B3015006BACCF /* TSRankLastMonthController.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2D25267B3015006BACCF /* TSRankLastMonthController.m */; };
+		F55D2D2A267B3B26006BACCF /* TSRankHonourCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2D29267B3B26006BACCF /* TSRankHonourCell.m */; };
+		F55D2D2E267B3CF4006BACCF /* TSRankDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2D2D267B3CF4006BACCF /* TSRankDataController.m */; };
+		F55D2D32267B3DB7006BACCF /* TSRankSectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2D31267B3DB7006BACCF /* TSRankSectionModel.m */; };
+		F55D2D35267B3F04006BACCF /* TSRankHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2D34267B3F04006BACCF /* TSRankHeaderView.m */; };
+		F55D2D38267B3F38006BACCF /* TSRankCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2D37267B3F38006BACCF /* TSRankCell.m */; };
+		F55D2D3B267B3F72006BACCF /* TSRankRecommendHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2D3A267B3F72006BACCF /* TSRankRecommendHeaderView.m */; };
+		F55D2D3E267B3F95006BACCF /* TSRankRecommendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2D3D267B3F95006BACCF /* TSRankRecommendCell.m */; };
 		F56D4B3A266DFB8900C1AD9E /* FMLayoutBaseSection.m in Sources */ = {isa = PBXBuildFile; fileRef = F56D4B04266DFB8900C1AD9E /* FMLayoutBaseSection.m */; };
 		F56D4B3B266DFB8900C1AD9E /* FMLayoutCombineSection.m in Sources */ = {isa = PBXBuildFile; fileRef = F56D4B06266DFB8900C1AD9E /* FMLayoutCombineSection.m */; };
 		F56D4B3C266DFB8900C1AD9E /* FMLayoutLabelSection.m in Sources */ = {isa = PBXBuildFile; fileRef = F56D4B07266DFB8900C1AD9E /* FMLayoutLabelSection.m */; };
@@ -797,6 +804,20 @@
 		F55D2D22267B2FB5006BACCF /* TSRankCurrentMonthController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSRankCurrentMonthController.m; sourceTree = "<group>"; };
 		F55D2D24267B3015006BACCF /* TSRankLastMonthController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSRankLastMonthController.h; sourceTree = "<group>"; };
 		F55D2D25267B3015006BACCF /* TSRankLastMonthController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSRankLastMonthController.m; sourceTree = "<group>"; };
+		F55D2D28267B3B26006BACCF /* TSRankHonourCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSRankHonourCell.h; sourceTree = "<group>"; };
+		F55D2D29267B3B26006BACCF /* TSRankHonourCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSRankHonourCell.m; sourceTree = "<group>"; };
+		F55D2D2C267B3CF4006BACCF /* TSRankDataController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSRankDataController.h; sourceTree = "<group>"; };
+		F55D2D2D267B3CF4006BACCF /* TSRankDataController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSRankDataController.m; sourceTree = "<group>"; };
+		F55D2D30267B3DB7006BACCF /* TSRankSectionModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSRankSectionModel.h; sourceTree = "<group>"; };
+		F55D2D31267B3DB7006BACCF /* TSRankSectionModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSRankSectionModel.m; sourceTree = "<group>"; };
+		F55D2D33267B3F04006BACCF /* TSRankHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSRankHeaderView.h; sourceTree = "<group>"; };
+		F55D2D34267B3F04006BACCF /* TSRankHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSRankHeaderView.m; sourceTree = "<group>"; };
+		F55D2D36267B3F38006BACCF /* TSRankCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSRankCell.h; sourceTree = "<group>"; };
+		F55D2D37267B3F38006BACCF /* TSRankCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSRankCell.m; sourceTree = "<group>"; };
+		F55D2D39267B3F72006BACCF /* TSRankRecommendHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSRankRecommendHeaderView.h; sourceTree = "<group>"; };
+		F55D2D3A267B3F72006BACCF /* TSRankRecommendHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSRankRecommendHeaderView.m; sourceTree = "<group>"; };
+		F55D2D3C267B3F95006BACCF /* TSRankRecommendCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSRankRecommendCell.h; sourceTree = "<group>"; };
+		F55D2D3D267B3F95006BACCF /* TSRankRecommendCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSRankRecommendCell.m; sourceTree = "<group>"; };
 		F56D4B04266DFB8900C1AD9E /* FMLayoutBaseSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLayoutBaseSection.m; sourceTree = "<group>"; };
 		F56D4B05266DFB8900C1AD9E /* FMLayoutFixedSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLayoutFixedSection.h; sourceTree = "<group>"; };
 		F56D4B06266DFB8900C1AD9E /* FMLayoutCombineSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLayoutCombineSection.m; sourceTree = "<group>"; };
@@ -1561,41 +1582,12 @@
 		F54973862668A94600181E3F /* Message */ = {
 			isa = PBXGroup;
 			children = (
-				F54973872668A94600181E3F /* ViewModel */,
-				F54973882668A94600181E3F /* DataController */,
-				F54973892668A94600181E3F /* Model */,
-				F549738A2668A94600181E3F /* View */,
+				F55D2D2B267B3CCF006BACCF /* DataController */,
+				F55D2D2F267B3D4A006BACCF /* Model */,
+				F55D2D27267B3ACA006BACCF /* View */,
 				F549738B2668A94600181E3F /* ViewController */,
 			);
 			path = Message;
-			sourceTree = "<group>";
-		};
-		F54973872668A94600181E3F /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		F54973882668A94600181E3F /* DataController */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = DataController;
-			sourceTree = "<group>";
-		};
-		F54973892668A94600181E3F /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		F549738A2668A94600181E3F /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		F549738B2668A94600181E3F /* ViewController */ = {
@@ -1906,8 +1898,8 @@
 		F55D2CB426784ACD006BACCF /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				F55D2CB526784ACD006BACCF /* TSMineSectionModel.m */,
 				F55D2CB626784ACD006BACCF /* TSMineSectionModel.h */,
+				F55D2CB526784ACD006BACCF /* TSMineSectionModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2008,6 +2000,41 @@
 				F55D2CEE2678A6B9006BACCF /* TSGoodDetailSectionModel.m */,
 				F55D2CF02678A6B9006BACCF /* TSGoodDetailItemModel.h */,
 				F55D2CF12678A6B9006BACCF /* TSGoodDetailItemModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F55D2D27267B3ACA006BACCF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F55D2D28267B3B26006BACCF /* TSRankHonourCell.h */,
+				F55D2D29267B3B26006BACCF /* TSRankHonourCell.m */,
+				F55D2D33267B3F04006BACCF /* TSRankHeaderView.h */,
+				F55D2D34267B3F04006BACCF /* TSRankHeaderView.m */,
+				F55D2D36267B3F38006BACCF /* TSRankCell.h */,
+				F55D2D37267B3F38006BACCF /* TSRankCell.m */,
+				F55D2D39267B3F72006BACCF /* TSRankRecommendHeaderView.h */,
+				F55D2D3A267B3F72006BACCF /* TSRankRecommendHeaderView.m */,
+				F55D2D3C267B3F95006BACCF /* TSRankRecommendCell.h */,
+				F55D2D3D267B3F95006BACCF /* TSRankRecommendCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F55D2D2B267B3CCF006BACCF /* DataController */ = {
+			isa = PBXGroup;
+			children = (
+				F55D2D2C267B3CF4006BACCF /* TSRankDataController.h */,
+				F55D2D2D267B3CF4006BACCF /* TSRankDataController.m */,
+			);
+			path = DataController;
+			sourceTree = "<group>";
+		};
+		F55D2D2F267B3D4A006BACCF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F55D2D30267B3DB7006BACCF /* TSRankSectionModel.h */,
+				F55D2D31267B3DB7006BACCF /* TSRankSectionModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2410,6 +2437,7 @@
 				F55D2D112679FDB8006BACCF /* TSMaterialImageCell.m in Sources */,
 				C3A6C4E4267A1CAF00FC71D6 /* TSSettingDataController.m in Sources */,
 				F55D2D20267B1EE9006BACCF /* TSRankHotCellController.m in Sources */,
+				F55D2D38267B3F38006BACCF /* TSRankCell.m in Sources */,
 				F54973632668A22100181E3F /* YTKAnimatingRequestAccessory.m in Sources */,
 				F56D4B4C266DFB8900C1AD9E /* FMLayoutCrossCell.m in Sources */,
 				F56D4B3A266DFB8900C1AD9E /* FMLayoutBaseSection.m in Sources */,
@@ -2419,6 +2447,7 @@
 				C2C765482679FCBA004757B9 /* TSMakeOrderGoodsCell.m in Sources */,
 				C3A6C4BA267A1C5700FC71D6 /* TSPersonalCommonCell.m in Sources */,
 				F54973BA2668BC0B00181E3F /* TSMineViewController.m in Sources */,
+				F55D2D3B267B3F72006BACCF /* TSRankRecommendHeaderView.m in Sources */,
 				F55D2CC926784ACD006BACCF /* TSUserInfoView.m in Sources */,
 				C2A34C7D2674A56C0095497E /* TSSearchTextView.m in Sources */,
 				C3A6C492267A1C1700FC71D6 /* TSWithdrawalPswSetSectionModel.m in Sources */,
@@ -2544,6 +2573,7 @@
 				F54973AB2668B9B500181E3F /* TSBaseNavigationController.m in Sources */,
 				F56D4B5B266E02BA00C1AD9E /* UIFont+General.m in Sources */,
 				F54973B12668BBB200181E3F /* TSCategoryViewController.m in Sources */,
+				F55D2D2A267B3B26006BACCF /* TSRankHonourCell.m in Sources */,
 				C3A6C4C8267A1C5700FC71D6 /* TSAccountCancelBottomCell.m in Sources */,
 				C2C7653C2679E6FA004757B9 /* TSMakeOrderCommitView.m in Sources */,
 				C2C765362679E2DA004757B9 /* TSMakeOrderController.m in Sources */,
@@ -2570,6 +2600,7 @@
 				DC45FECD2678962B00CE762E /* NSTimer+TSBlcokTimer.m in Sources */,
 				F55D2C9A26745E2E006BACCF /* TSGlobalManager.m in Sources */,
 				C3B4CCF22674934E0001EE75 /* TSCheckedView.m in Sources */,
+				F55D2D2E267B3CF4006BACCF /* TSRankDataController.m in Sources */,
 				C2C765392679E3C4004757B9 /* TSMakeOrderView.m in Sources */,
 				C3A6C4E6267A1CAF00FC71D6 /* TSWithdrawalPswSetDataController.m in Sources */,
 				C3A6C4C6267A1C5700FC71D6 /* TSAboutMeBottomCell.m in Sources */,
@@ -2627,6 +2658,7 @@
 				F55D2CF92678CDA0006BACCF /* TSGoodDetailIntroduceCell.m in Sources */,
 				F55D2AE6266F983E006BACCF /* TSUniverseCollectionBackgroundView.m in Sources */,
 				F56D4B5A266E02BA00C1AD9E /* UIColor+General.m in Sources */,
+				F55D2D3E267B3F95006BACCF /* TSRankRecommendCell.m in Sources */,
 				F54973642668A22100181E3F /* YTKBatchRequest+AnimatingAccessory.m in Sources */,
 				F54973A82668B98000181E3F /* TSTabBarController.m in Sources */,
 				C3A6C494267A1C1700FC71D6 /* TSAboutMeSectionModel.m in Sources */,
@@ -2653,6 +2685,8 @@
 				DC9911A6267AE43400EF9B26 /* TSImageBaseModel.m in Sources */,
 				DC45FEBA267742F700CE762E /* TSHomePageContainerGroup.m in Sources */,
 				C28757D5267360E2007C8AF5 /* UIView+General.m in Sources */,
+				F55D2D35267B3F04006BACCF /* TSRankHeaderView.m in Sources */,
+				F55D2D32267B3DB7006BACCF /* TSRankSectionModel.m in Sources */,
 				F54973602668A22100181E3F /* SSGenaralRequest.m in Sources */,
 				C2EF88D82671AB6B00E7374A /* TSNumOperationView.m in Sources */,
 			);
