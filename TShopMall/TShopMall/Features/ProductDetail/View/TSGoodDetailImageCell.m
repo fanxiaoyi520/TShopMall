@@ -82,7 +82,7 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 50;
+    return 8;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -153,6 +153,7 @@
         _collectionView.dataSource = self;
         _collectionView.delegate = self;
         [_collectionView registerClass:[TSMaterialImageCell class] forCellWithReuseIdentifier:@"TSMaterialImageCell"];
+        _collectionView.showsHorizontalScrollIndicator = NO;
     }
     return _collectionView;
 }

@@ -50,18 +50,19 @@
 -(void)fillCustomView{
 
     [self.view addSubview:self.bgImageView];
-    [self.bgImageView addSubview:self.setButton];
-    [self.bgImageView addSubview:self.infoView];
     [self.view addSubview:self.collectionView];
+    [self.collectionView addSubview:self.infoView];
+    [self.collectionView addSubview:self.setButton];
     [self.view addSubview:self.navigationBar];
     
-    CGFloat top = GK_STATUSBAR_HEIGHT + 6;
+    CGFloat top = 6;
     
     self.bgImageView.frame = CGRectMake(0, 0, kScreenWidth, 205);
-    self.setButton.frame = CGRectMake(kScreenWidth - 48, top, 32, 32);
-    self.infoView.frame = CGRectMake(0, 72, kScreenWidth, 60);
-    self.navigationBar.frame = CGRectMake(0, 0, kScreenWidth, GK_STATUSBAR_NAVBAR_HEIGHT);
     self.collectionView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight - GK_TABBAR_HEIGHT);
+    self.infoView.frame = CGRectMake(0, 30, kScreenWidth, 60);
+    self.setButton.frame = CGRectMake(kScreenWidth - 48, top, 32, 32);
+    self.navigationBar.frame = CGRectMake(0, 0, kScreenWidth, GK_STATUSBAR_NAVBAR_HEIGHT);
+
 }
 
 -(void)viewWillAppear:(BOOL)animated{

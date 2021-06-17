@@ -31,6 +31,10 @@
 @property(nonatomic, strong) UIView *seperateTwo;
 /// 配送
 @property(nonatomic, strong) UILabel *deliveryLabel;
+/// 配送值
+@property(nonatomic, strong) UILabel *deliveryValueLabel;
+/// 配送更多
+@property(nonatomic, strong) UIButton *deliveryButton;
 
 @end
 
@@ -50,6 +54,8 @@
     [self.bgView addSubview:self.selectButton];
     [self.bgView addSubview:self.seperateTwo];
     [self.bgView addSubview:self.deliveryLabel];
+    [self.bgView addSubview:self.deliveryValueLabel];
+    [self.bgView addSubview:self.deliveryButton];
 
     [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.contentView);
@@ -120,6 +126,19 @@
         make.height.mas_equalTo(18);
         make.width.mas_equalTo(24);
     }];
+    
+    [self.deliveryValueLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.deliveryLabel.mas_right).offset(16);
+        make.top.equalTo(self.seperateTwo.mas_bottom).offset(16);
+        make.right.equalTo(self.bgView.mas_right).offset(-60);
+        make.bottom.equalTo(self.bgView.mas_bottom).offset(-15);
+    }];
+    
+    [self.deliveryButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.bgView.mas_right).offset(-10);
+        make.width.height.mas_equalTo(40);
+        make.centerY.equalTo(self.deliveryValueLabel);
+    }];
 }
 
 #pragma mark - Actions
@@ -130,6 +149,11 @@
 -(void)selectMoreAction:(UIButton *)sender{
     
 }
+
+-(void)deliveryAction:(UIButton *)sender{
+    
+}
+
 
 #pragma mark - Getter
 -(UIView *)bgView{
@@ -240,6 +264,30 @@
         _deliveryLabel.text = @"配送";
     }
     return _deliveryLabel;
+}
+
+-(UILabel *)deliveryValueLabel{
+    if (!_deliveryValueLabel) {
+        _deliveryValueLabel = [[UILabel alloc] init];
+        _deliveryValueLabel.font = KFont(PingFangSCMedium, 12);
+        _deliveryValueLabel.textColor = KHexAlphaColor(@"#2D3132", 0.4);
+        _deliveryValueLabel.numberOfLines = 0;
+        _deliveryValueLabel.text = @"广东省深圳市南山区西丽街道西丽街道西丽街广东省深圳市南山区西丽街道西丽街道西丽街";
+    }
+    return _deliveryValueLabel;
+}
+
+-(UIButton *)deliveryButton{
+    if (!_deliveryButton) {
+        _deliveryButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _deliveryButton.titleLabel.font = KRegularFont(14);
+        [_deliveryButton setTitleColor:KWhiteColor forState:UIControlStateNormal];
+        [_deliveryButton setTitleColor:KWhiteColor forState:UIControlStateHighlighted];
+        [_deliveryButton setTitle:@"复制文案" forState:UIControlStateNormal];
+        [_deliveryButton setBackgroundColor:[UIColor orangeColor]];
+        [_deliveryButton addTarget:self action:@selector(deliveryAction:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _deliveryButton;
 }
 
 @end
