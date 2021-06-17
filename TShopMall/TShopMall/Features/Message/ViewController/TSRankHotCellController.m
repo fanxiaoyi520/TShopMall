@@ -1,21 +1,21 @@
 //
-//  TSRankCoronalViewController.m
+//  TSRankHotCellController.m
 //  TShopMall
 //
-//  Created by 陈结 on 2021/6/10.
+//  Created by 陈结 on 2021/6/17.
 //
 
-#import "TSRankCoronalViewController.h"
+#import "TSRankHotCellController.h"
 #import "TSRankCurrentMonthController.h"
 #import "TSRankLastMonthController.h"
 
-@interface TSRankCoronalViewController ()
+@interface TSRankHotCellController ()
 
 @property (nonatomic, strong) JXCategoryTitleView *myCategoryView;
 
 @end
 
-@implementation TSRankCoronalViewController
+@implementation TSRankHotCellController
 
 -(void)viewDidLoad{
     [super viewDidLoad];

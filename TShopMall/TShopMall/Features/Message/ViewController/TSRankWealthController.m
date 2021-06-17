@@ -1,21 +1,21 @@
 //
-//  TSRankCoronalViewController.m
+//  TSRankWealthController.m
 //  TShopMall
 //
-//  Created by 陈结 on 2021/6/10.
+//  Created by 陈结 on 2021/6/17.
 //
 
-#import "TSRankCoronalViewController.h"
+#import "TSRankWealthController.h"
 #import "TSRankCurrentMonthController.h"
 #import "TSRankLastMonthController.h"
 
-@interface TSRankCoronalViewController ()
+@interface TSRankWealthController ()
 
 @property (nonatomic, strong) JXCategoryTitleView *myCategoryView;
 
 @end
 
-@implementation TSRankCoronalViewController
+@implementation TSRankWealthController
 
 -(void)viewDidLoad{
     [super viewDidLoad];
@@ -65,5 +65,6 @@
 - (UIView *)listView {
     return self.view;
 }
+
 
 @end
