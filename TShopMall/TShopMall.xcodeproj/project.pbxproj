@@ -9,6 +9,18 @@
 /* Begin PBXBuildFile section */
 		00093A5046E7E3324EC8CBEB /* libPods-TShopMallTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1942D505D7004833F274B5D1 /* libPods-TShopMallTests.a */; };
 		AE4DC537B4A93FA6C04B9037 /* libPods-TShopMall.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 825A9D1C217F35DCFB651B21 /* libPods-TShopMall.a */; };
+		C21A4B6E267AF5AE00766F72 /* TSMakeOrderBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C21A4B6D267AF5AE00766F72 /* TSMakeOrderBaseCell.m */; };
+		C21A4B71267AF91F00766F72 /* TSMakeOrderPriceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C21A4B70267AF91F00766F72 /* TSMakeOrderPriceCell.m */; };
+		C21A4B77267B1C8900766F72 /* TSShippingAddressController.m in Sources */ = {isa = PBXBuildFile; fileRef = C21A4B76267B1C8900766F72 /* TSShippingAddressController.m */; };
+		C21A4B7B267B20E400766F72 /* TSShippingAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C21A4B7A267B20E400766F72 /* TSShippingAddressCell.m */; };
+		C21A4B7E267B333600766F72 /* TSShippingAddressDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = C21A4B7D267B333500766F72 /* TSShippingAddressDataController.m */; };
+		C21A4B81267B335D00766F72 /* TSAddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C21A4B80267B335D00766F72 /* TSAddressModel.m */; };
+		C21A4B84267B347500766F72 /* TSAddressEditController.m in Sources */ = {isa = PBXBuildFile; fileRef = C21A4B83267B347400766F72 /* TSAddressEditController.m */; };
+		C21A4B87267B3C2400766F72 /* TSAddressEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = C21A4B86267B3C2400766F72 /* TSAddressEditView.m */; };
+		C21A4B8A267B458D00766F72 /* TSAddressEditPastView.m in Sources */ = {isa = PBXBuildFile; fileRef = C21A4B89267B458D00766F72 /* TSAddressEditPastView.m */; };
+		C21A4B8D267B534A00766F72 /* TSAddressMarkView.m in Sources */ = {isa = PBXBuildFile; fileRef = C21A4B8C267B534A00766F72 /* TSAddressMarkView.m */; };
+		C21A4B90267C79D800766F72 /* TSAreaSelectedController.m in Sources */ = {isa = PBXBuildFile; fileRef = C21A4B8F267C79D800766F72 /* TSAreaSelectedController.m */; };
+		C21A4B93267C7E1000766F72 /* TSAreaCard.m in Sources */ = {isa = PBXBuildFile; fileRef = C21A4B92267C7E1000766F72 /* TSAreaCard.m */; };
 		C28757D5267360E2007C8AF5 /* UIView+General.m in Sources */ = {isa = PBXBuildFile; fileRef = C28757D4267360E2007C8AF5 /* UIView+General.m */; };
 		C2A34C6A267449080095497E /* TSAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2A34C69267449080095497E /* TSAlertView.m */; };
 		C2A34C702674831F0095497E /* TSRefreshConfiger.m in Sources */ = {isa = PBXBuildFile; fileRef = C2A34C6F2674831F0095497E /* TSRefreshConfiger.m */; };
@@ -311,6 +323,30 @@
 		825A9D1C217F35DCFB651B21 /* libPods-TShopMall.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TShopMall.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		847295D7102568B80FCAB72E /* Pods-TShopMallTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TShopMallTests.release.xcconfig"; path = "Target Support Files/Pods-TShopMallTests/Pods-TShopMallTests.release.xcconfig"; sourceTree = "<group>"; };
 		BBF16248DC0233F9DA291554 /* Pods-TShopMallTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TShopMallTests.debug.xcconfig"; path = "Target Support Files/Pods-TShopMallTests/Pods-TShopMallTests.debug.xcconfig"; sourceTree = "<group>"; };
+		C21A4B6C267AF5AE00766F72 /* TSMakeOrderBaseCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSMakeOrderBaseCell.h; sourceTree = "<group>"; };
+		C21A4B6D267AF5AE00766F72 /* TSMakeOrderBaseCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSMakeOrderBaseCell.m; sourceTree = "<group>"; };
+		C21A4B6F267AF91F00766F72 /* TSMakeOrderPriceCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSMakeOrderPriceCell.h; sourceTree = "<group>"; };
+		C21A4B70267AF91F00766F72 /* TSMakeOrderPriceCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSMakeOrderPriceCell.m; sourceTree = "<group>"; };
+		C21A4B75267B1C8900766F72 /* TSShippingAddressController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSShippingAddressController.h; sourceTree = "<group>"; };
+		C21A4B76267B1C8900766F72 /* TSShippingAddressController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSShippingAddressController.m; sourceTree = "<group>"; };
+		C21A4B79267B20E400766F72 /* TSShippingAddressCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSShippingAddressCell.h; sourceTree = "<group>"; };
+		C21A4B7A267B20E400766F72 /* TSShippingAddressCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSShippingAddressCell.m; sourceTree = "<group>"; };
+		C21A4B7C267B333500766F72 /* TSShippingAddressDataController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSShippingAddressDataController.h; sourceTree = "<group>"; };
+		C21A4B7D267B333500766F72 /* TSShippingAddressDataController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSShippingAddressDataController.m; sourceTree = "<group>"; };
+		C21A4B7F267B335D00766F72 /* TSAddressModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSAddressModel.h; sourceTree = "<group>"; };
+		C21A4B80267B335D00766F72 /* TSAddressModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSAddressModel.m; sourceTree = "<group>"; };
+		C21A4B82267B347400766F72 /* TSAddressEditController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSAddressEditController.h; sourceTree = "<group>"; };
+		C21A4B83267B347400766F72 /* TSAddressEditController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSAddressEditController.m; sourceTree = "<group>"; };
+		C21A4B85267B3C2300766F72 /* TSAddressEditView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSAddressEditView.h; sourceTree = "<group>"; };
+		C21A4B86267B3C2400766F72 /* TSAddressEditView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSAddressEditView.m; sourceTree = "<group>"; };
+		C21A4B88267B458D00766F72 /* TSAddressEditPastView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSAddressEditPastView.h; sourceTree = "<group>"; };
+		C21A4B89267B458D00766F72 /* TSAddressEditPastView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSAddressEditPastView.m; sourceTree = "<group>"; };
+		C21A4B8B267B534A00766F72 /* TSAddressMarkView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSAddressMarkView.h; sourceTree = "<group>"; };
+		C21A4B8C267B534A00766F72 /* TSAddressMarkView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSAddressMarkView.m; sourceTree = "<group>"; };
+		C21A4B8E267C79D700766F72 /* TSAreaSelectedController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSAreaSelectedController.h; sourceTree = "<group>"; };
+		C21A4B8F267C79D800766F72 /* TSAreaSelectedController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSAreaSelectedController.m; sourceTree = "<group>"; };
+		C21A4B91267C7E1000766F72 /* TSAreaCard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSAreaCard.h; sourceTree = "<group>"; };
+		C21A4B92267C7E1000766F72 /* TSAreaCard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSAreaCard.m; sourceTree = "<group>"; };
 		C28757D3267360E2007C8AF5 /* UIView+General.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+General.h"; sourceTree = "<group>"; };
 		C28757D4267360E2007C8AF5 /* UIView+General.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+General.m"; sourceTree = "<group>"; };
 		C2A34C68267449060095497E /* TSAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSAlertView.h; sourceTree = "<group>"; };
@@ -935,6 +971,81 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		C21A4B72267B1BB000766F72 /* Cart */ = {
+			isa = PBXGroup;
+			children = (
+				C2EF88A92670997100E7374A /* TSCartView.h */,
+				C2EF88A42670997100E7374A /* TSCartView.m */,
+				C2EF88A72670997100E7374A /* TSCartHeaderFooterView.h */,
+				C2EF88A22670997100E7374A /* TSCartHeaderFooterView.m */,
+				C2EF88A32670997100E7374A /* TSCartSettleView.h */,
+				C2EF88A82670997100E7374A /* TSCartSettleView.m */,
+				C2EF88AB2670997100E7374A /* TSCartCell.h */,
+				C2EF88A52670997100E7374A /* TSCartCell.m */,
+				C2EF88AA2670997100E7374A /* TSCartInvalidCell.h */,
+				C2EF88A62670997100E7374A /* TSCartInvalidCell.m */,
+				C2EF88CD2670A3B200E7374A /* TSCartRecomendCell.h */,
+				C2EF88CE2670A3B200E7374A /* TSCartRecomendCell.m */,
+				C2EF88DC2671E92400E7374A /* TSCartEmptyCell.h */,
+				C2EF88DD2671E92400E7374A /* TSCartEmptyCell.m */,
+				C2EF88D22670B75000E7374A /* TSCartProtocol.h */,
+				C2EF88D32670B8B900E7374A /* TSCartBaseCell.h */,
+				C2EF88D42670B8B900E7374A /* TSCartBaseCell.m */,
+			);
+			name = Cart;
+			sourceTree = "<group>";
+		};
+		C21A4B73267B1BD700766F72 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				C2EF88D62671AB6B00E7374A /* TSNumOperationView.h */,
+				C2EF88D72671AB6B00E7374A /* TSNumOperationView.m */,
+				C2EF88D92671E28100E7374A /* TSEmptyAlertView.h */,
+				C2EF88DA2671E28100E7374A /* TSEmptyAlertView.m */,
+				C2A34C68267449060095497E /* TSAlertView.h */,
+				C2A34C69267449080095497E /* TSAlertView.m */,
+			);
+			name = Other;
+			sourceTree = "<group>";
+		};
+		C21A4B74267B1C2A00766F72 /* MakeOrder */ = {
+			isa = PBXGroup;
+			children = (
+				C2C765372679E3C4004757B9 /* TSMakeOrderView.h */,
+				C2C765382679E3C4004757B9 /* TSMakeOrderView.m */,
+				C2C7653A2679E6F9004757B9 /* TSMakeOrderCommitView.h */,
+				C2C7653B2679E6FA004757B9 /* TSMakeOrderCommitView.m */,
+				C21A4B6C267AF5AE00766F72 /* TSMakeOrderBaseCell.h */,
+				C21A4B6D267AF5AE00766F72 /* TSMakeOrderBaseCell.m */,
+				C2C7653D2679EC58004757B9 /* TSMakeOrderAddressCell.h */,
+				C2C7653E2679EC58004757B9 /* TSMakeOrderAddressCell.m */,
+				C2C765462679FCBA004757B9 /* TSMakeOrderGoodsCell.h */,
+				C2C765472679FCBA004757B9 /* TSMakeOrderGoodsCell.m */,
+				C2C76549267A097D004757B9 /* TSMakeOrderOperationCell.h */,
+				C2C7654A267A097D004757B9 /* TSMakeOrderOperationCell.m */,
+				C21A4B6F267AF91F00766F72 /* TSMakeOrderPriceCell.h */,
+				C21A4B70267AF91F00766F72 /* TSMakeOrderPriceCell.m */,
+			);
+			name = MakeOrder;
+			sourceTree = "<group>";
+		};
+		C21A4B78267B20B200766F72 /* Address */ = {
+			isa = PBXGroup;
+			children = (
+				C21A4B79267B20E400766F72 /* TSShippingAddressCell.h */,
+				C21A4B7A267B20E400766F72 /* TSShippingAddressCell.m */,
+				C21A4B85267B3C2300766F72 /* TSAddressEditView.h */,
+				C21A4B86267B3C2400766F72 /* TSAddressEditView.m */,
+				C21A4B88267B458D00766F72 /* TSAddressEditPastView.h */,
+				C21A4B89267B458D00766F72 /* TSAddressEditPastView.m */,
+				C21A4B8B267B534A00766F72 /* TSAddressMarkView.h */,
+				C21A4B8C267B534A00766F72 /* TSAddressMarkView.m */,
+				C21A4B91267C7E1000766F72 /* TSAreaCard.h */,
+				C21A4B92267C7E1000766F72 /* TSAreaCard.m */,
+			);
+			name = Address;
+			sourceTree = "<group>";
+		};
 		C2A34C8D2674AFFC0095497E /* DataController */ = {
 			isa = PBXGroup;
 			children = (
@@ -974,6 +1085,8 @@
 				C2EF88A02670997100E7374A /* TSCartModel.h */,
 				C2EF889F2670997100E7374A /* TSCartModel.m */,
 				C2EF88DF2671F79700E7374A /* cart.json */,
+				C21A4B7F267B335D00766F72 /* TSAddressModel.h */,
+				C21A4B80267B335D00766F72 /* TSAddressModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -981,39 +1094,10 @@
 		C2EF88A12670997100E7374A /* View */ = {
 			isa = PBXGroup;
 			children = (
-				C2EF88A92670997100E7374A /* TSCartView.h */,
-				C2EF88A42670997100E7374A /* TSCartView.m */,
-				C2EF88A72670997100E7374A /* TSCartHeaderFooterView.h */,
-				C2EF88A22670997100E7374A /* TSCartHeaderFooterView.m */,
-				C2EF88A32670997100E7374A /* TSCartSettleView.h */,
-				C2EF88A82670997100E7374A /* TSCartSettleView.m */,
-				C2EF88AB2670997100E7374A /* TSCartCell.h */,
-				C2EF88A52670997100E7374A /* TSCartCell.m */,
-				C2EF88AA2670997100E7374A /* TSCartInvalidCell.h */,
-				C2EF88A62670997100E7374A /* TSCartInvalidCell.m */,
-				C2EF88CD2670A3B200E7374A /* TSCartRecomendCell.h */,
-				C2EF88CE2670A3B200E7374A /* TSCartRecomendCell.m */,
-				C2EF88DC2671E92400E7374A /* TSCartEmptyCell.h */,
-				C2EF88DD2671E92400E7374A /* TSCartEmptyCell.m */,
-				C2EF88D22670B75000E7374A /* TSCartProtocol.h */,
-				C2EF88D32670B8B900E7374A /* TSCartBaseCell.h */,
-				C2EF88D42670B8B900E7374A /* TSCartBaseCell.m */,
-				C2EF88D62671AB6B00E7374A /* TSNumOperationView.h */,
-				C2EF88D72671AB6B00E7374A /* TSNumOperationView.m */,
-				C2EF88D92671E28100E7374A /* TSEmptyAlertView.h */,
-				C2EF88DA2671E28100E7374A /* TSEmptyAlertView.m */,
-				C2A34C68267449060095497E /* TSAlertView.h */,
-				C2A34C69267449080095497E /* TSAlertView.m */,
-				C2C765372679E3C4004757B9 /* TSMakeOrderView.h */,
-				C2C765382679E3C4004757B9 /* TSMakeOrderView.m */,
-				C2C7653A2679E6F9004757B9 /* TSMakeOrderCommitView.h */,
-				C2C7653B2679E6FA004757B9 /* TSMakeOrderCommitView.m */,
-				C2C7653D2679EC58004757B9 /* TSMakeOrderAddressCell.h */,
-				C2C7653E2679EC58004757B9 /* TSMakeOrderAddressCell.m */,
-				C2C765462679FCBA004757B9 /* TSMakeOrderGoodsCell.h */,
-				C2C765472679FCBA004757B9 /* TSMakeOrderGoodsCell.m */,
-				C2C76549267A097D004757B9 /* TSMakeOrderOperationCell.h */,
-				C2C7654A267A097D004757B9 /* TSMakeOrderOperationCell.m */,
+				C21A4B78267B20B200766F72 /* Address */,
+				C21A4B74267B1C2A00766F72 /* MakeOrder */,
+				C21A4B73267B1BD700766F72 /* Other */,
+				C21A4B72267B1BB000766F72 /* Cart */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1025,6 +1109,8 @@
 				C2EF88AD2670997100E7374A /* TSCartDataController.m */,
 				C2C765432679ECF4004757B9 /* TSMakeOrderDataController.h */,
 				C2C765442679ECF4004757B9 /* TSMakeOrderDataController.m */,
+				C21A4B7C267B333500766F72 /* TSShippingAddressDataController.h */,
+				C21A4B7D267B333500766F72 /* TSShippingAddressDataController.m */,
 			);
 			path = DataController;
 			sourceTree = "<group>";
@@ -1593,6 +1679,12 @@
 				F54973B62668BBEE00181E3F /* TSCartViewController.m */,
 				C2C765342679E2DA004757B9 /* TSMakeOrderController.h */,
 				C2C765352679E2DA004757B9 /* TSMakeOrderController.m */,
+				C21A4B75267B1C8900766F72 /* TSShippingAddressController.h */,
+				C21A4B76267B1C8900766F72 /* TSShippingAddressController.m */,
+				C21A4B82267B347400766F72 /* TSAddressEditController.h */,
+				C21A4B83267B347400766F72 /* TSAddressEditController.m */,
+				C21A4B8E267C79D700766F72 /* TSAreaSelectedController.h */,
+				C21A4B8F267C79D800766F72 /* TSAreaSelectedController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -2360,11 +2452,13 @@
 				C3B4CCED2674934D0001EE75 /* TSRegisterTopView.m in Sources */,
 				C2EF88CA2670997100E7374A /* TSCartDataController.m in Sources */,
 				DC3440CA2672601F00F5B0DA /* TSHomePageReleaseViewModel.m in Sources */,
+				C21A4B6E267AF5AE00766F72 /* TSMakeOrderBaseCell.m in Sources */,
 				C2EF88C12670997100E7374A /* TSCartCell.m in Sources */,
 				F55D2C3A2671E14B006BACCF /* TSUniversalFooterView.m in Sources */,
 				F55D2CB02674A6A9006BACCF /* TSCategoryKindCellViewModel.m in Sources */,
 				F55D2C3B2671E14B006BACCF /* TSUniversalDecorationView.m in Sources */,
 				F55D2C6726722807006BACCF /* TSCategoryKindModel.m in Sources */,
+				C21A4B81267B335D00766F72 /* TSAddressModel.m in Sources */,
 				C2A34C6A267449080095497E /* TSAlertView.m in Sources */,
 				F55D2D112679FDB8006BACCF /* TSMaterialImageCell.m in Sources */,
 				C3A6C4E4267A1CAF00FC71D6 /* TSSettingDataController.m in Sources */,
@@ -2389,12 +2483,14 @@
 				C3A6C4EC267A1CFA00FC71D6 /* UIAlertController+Color.m in Sources */,
 				C2A34C7726749E3E0095497E /* TSSearchController.m in Sources */,
 				F55D2CDB2678812E006BACCF /* TSProductDetailController.m in Sources */,
+				C21A4B71267AF91F00766F72 /* TSMakeOrderPriceCell.m in Sources */,
 				F55D2C6826722807006BACCF /* TSCategorySectionModel.m in Sources */,
 				C3B4CCDF2674932D0001EE75 /* TSLoginViewController.m in Sources */,
 				F55D2D0E2679EEE2006BACCF /* TSTextImageButton.m in Sources */,
 				F55D2C7226725618006BACCF /* TSRankCoronalViewController.m in Sources */,
 				F55D2C382671E14B006BACCF /* TSUniversalCollectionViewCell.m in Sources */,
 				C3A6C490267A1C1700FC71D6 /* TSBindThirdSectionModel.m in Sources */,
+				C21A4B77267B1C8900766F72 /* TSShippingAddressController.m in Sources */,
 				C3A6C4E3267A1CAF00FC71D6 /* TSSecurityDataController.m in Sources */,
 				F55D2CB32674AE55006BACCF /* TSCategoryContentModel.m in Sources */,
 				F55D2CCA26784ACD006BACCF /* TSMineTitleHeaderView.m in Sources */,
@@ -2433,6 +2529,7 @@
 				F56D4B62266E037600C1AD9E /* MyLayoutMath.m in Sources */,
 				C2C765452679ECF4004757B9 /* TSMakeOrderDataController.m in Sources */,
 				C2C7653F2679EC58004757B9 /* TSMakeOrderAddressCell.m in Sources */,
+				C21A4B7B267B20E400766F72 /* TSShippingAddressCell.m in Sources */,
 				F55D2C9D26745E64006BACCF /* TSUserInfoManager.m in Sources */,
 				C2EF88D52670B8B900E7374A /* TSCartBaseCell.m in Sources */,
 				DC3440D32672F62C00F5B0DA /* TSHomePageBaseCell.m in Sources */,
@@ -2452,6 +2549,7 @@
 				F55D2AD9266F777B006BACCF /* TSBaseDataController.m in Sources */,
 				C3B4CCDA2674930C0001EE75 /* TSTools.m in Sources */,
 				F55D2CCB26784ACD006BACCF /* TSMinePartnerCenterCell.m in Sources */,
+				C21A4B87267B3C2400766F72 /* TSAddressEditView.m in Sources */,
 				C3A6C470267A1BEA00FC71D6 /* TSBindMobileController.m in Sources */,
 				F56D4B3F266DFB8900C1AD9E /* FMLayoutAbsoluteSection.m in Sources */,
 				C2C7652B26788F40004757B9 /* TSSearchHotKeyModel.m in Sources */,
@@ -2480,6 +2578,7 @@
 				F54973CF2668CABD00181E3F /* UIView+Extension.m in Sources */,
 				C2A34CB52675FDA50095497E /* TSGoodsListCell.m in Sources */,
 				C3A6C4EF267A1D0A00FC71D6 /* UIImage+ImageEffects.m in Sources */,
+				C21A4B8D267B534A00766F72 /* TSAddressMarkView.m in Sources */,
 				C2C7652E2678AD89004757B9 /* TSSearchResult.m in Sources */,
 				F56D4B3B266DFB8900C1AD9E /* FMLayoutCombineSection.m in Sources */,
 				C3A6C4BE267A1C5700FC71D6 /* TSAccountCancelContentCell.m in Sources */,
@@ -2503,10 +2602,12 @@
 				F55D2CA026745E7A006BACCF /* TSLastUserInfoManager.m in Sources */,
 				C3A6C4E7267A1CAF00FC71D6 /* TSAboutMeDataController.m in Sources */,
 				F55D2C372671E14B006BACCF /* TSUniversalTableViewCell.m in Sources */,
+				C21A4B8A267B458D00766F72 /* TSAddressEditPastView.m in Sources */,
 				F54973C22668C0BC00181E3F /* TSDeviceHelper.m in Sources */,
 				DC40F88E26747EBF003A277D /* TSHomePageContainerHeaderViewModel.m in Sources */,
 				C3A6C48F267A1C1700FC71D6 /* TSSettingSectionModel.m in Sources */,
 				F55D2C792672F4E2006BACCF /* TSMineDataController.m in Sources */,
+				C21A4B90267C79D800766F72 /* TSAreaSelectedController.m in Sources */,
 				C3A6C4E1267A1CAF00FC71D6 /* TSAccountCancelDataController.m in Sources */,
 				F55D2C352671E14B006BACCF /* TSUniversalFlowLayout.m in Sources */,
 				C2A34C7A26749FCD0095497E /* TSSearchView.m in Sources */,
@@ -2522,6 +2623,7 @@
 				DC45FECD2678962B00CE762E /* NSTimer+TSBlcokTimer.m in Sources */,
 				F55D2C9A26745E2E006BACCF /* TSGlobalManager.m in Sources */,
 				C3B4CCF22674934E0001EE75 /* TSCheckedView.m in Sources */,
+				C21A4B84267B347500766F72 /* TSAddressEditController.m in Sources */,
 				C2C765392679E3C4004757B9 /* TSMakeOrderView.m in Sources */,
 				C3A6C4E6267A1CAF00FC71D6 /* TSWithdrawalPswSetDataController.m in Sources */,
 				C3A6C4C6267A1C5700FC71D6 /* TSAboutMeBottomCell.m in Sources */,
@@ -2532,6 +2634,7 @@
 				C3A6C4BB267A1C5700FC71D6 /* TSWithdrawalPswSettingCell.m in Sources */,
 				C2A34C802674A64E0095497E /* UITextField+General.m in Sources */,
 				F55D2C6426722807006BACCF /* TSCategoryKindCell.m in Sources */,
+				C21A4B93267C7E1000766F72 /* TSAreaCard.m in Sources */,
 				C3B4CCEF2674934E0001EE75 /* TSLoginTopView.m in Sources */,
 				F55D2CC626784ACD006BACCF /* TSMineSectionModel.m in Sources */,
 				C3A6C4E2267A1CAF00FC71D6 /* TSBindMobileDataController.m in Sources */,
@@ -2596,6 +2699,7 @@
 				C3A6C4B9267A1C5700FC71D6 /* TSSettingCommonCell.m in Sources */,
 				F55D2C75267257DA006BACCF /* ListViewController.m in Sources */,
 				F55D2CF62678C8DE006BACCF /* TSGoodDetailPriceCell.m in Sources */,
+				C21A4B7E267B333600766F72 /* TSShippingAddressDataController.m in Sources */,
 				F55D2CD026784CF3006BACCF /* TSMineNavigationBar.m in Sources */,
 				F56D4B43266DFB8900C1AD9E /* FMLayout.m in Sources */,
 				F54973AE2668BB8100181E3F /* TSHomeViewController.m in Sources */,

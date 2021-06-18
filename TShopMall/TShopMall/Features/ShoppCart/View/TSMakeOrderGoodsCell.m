@@ -21,7 +21,7 @@
 @implementation TSMakeOrderGoodsCell
 
 
-- (void)testUI{
+- (void)configUI{
     self.icon.image = KImageMake(@"image_test");
     self.name.text = @"XESS 65寸 家庭浮窗场景TV标题标题 标题踢踢踢标题踢踢踢标…";
     self.specification.text = @"已选规格";
@@ -71,11 +71,11 @@
     
     [self.num mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.equalTo(self.specification);
-        make.right.equalTo(self.name.mas_right);
+        make.right.equalTo(self.price.mas_right);
     }];
     
     [self.giftBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.name.mas_right);
+        make.right.equalTo(self.price.mas_right);
         make.height.mas_equalTo(KRateW(20.0));
         make.left.equalTo(self.name.mas_left);
         make.top.mas_equalTo(self.specification.mas_bottom).offset(KRateW(26.0));

@@ -20,6 +20,7 @@
     [self configAddressSection];
     [self configGoodsSection];
     [self configOperationSection];
+    [self confitPriceSection];
     
     finished();
 }
@@ -59,6 +60,20 @@
     row.cellIdentifier = @"TSMakeOrderOperationCell";
     row.isAutoHeight = NO;
     row.rowHeight = KRateW(168.0);
+    
+    TSMakeOrderSection *section = [TSMakeOrderSection new];
+    section.heightForHeader = 0.1f;
+    section.heightForFooter = KRateW(10.0);
+    section.rows = @[row];
+    
+    [self.sections addObject:section];
+}
+
+- (void)confitPriceSection{
+    TSMakeOrderRow *row = [TSMakeOrderRow new];
+    row.cellIdentifier = @"TSMakeOrderPriceCell";
+    row.isAutoHeight = NO;
+    row.rowHeight = KRateW(82.0);
     
     TSMakeOrderSection *section = [TSMakeOrderSection new];
     section.heightForHeader = 0.1f;
