@@ -8,7 +8,9 @@
 #import "TSHomePageCategoryCell.h"
 #import "TSGridButtonCollectionView.h"
 #import "TSHomePageCategoryViewModel.h"
-#import "TSHomePageBaseModel.h"
+#import "UIImageView+WebCache.h"
+#import "TSImageBaseModel.h"
+
 @interface TSHomePageCategoryCell()
 @property(nonatomic, strong) TSGridButtonCollectionView *collectionView;
 @end
@@ -27,25 +29,15 @@
 }
 
 - (void)setViewModel:(TSHomePageCellViewModel *)viewModel{
-    
+    [super setViewModel:viewModel];
     TSHomePageCategoryViewModel *categoryViewModel = (TSHomePageCategoryViewModel *)viewModel;
-    if (!categoryViewModel.categoryDatas.count) {
-        [categoryViewModel getCategoryData];
-    }
+    NSArray *temp = [NSArray yy_modelArrayWithClass:TSImageBaseModel.class json:categoryViewModel.model.data[@"list"]];
+    categoryViewModel.categoryDatas = [NSMutableArray arrayWithArray:temp];
     
-    __weak typeof(self) weakSelf = self;
-    [self.KVOController observe:viewModel keyPath:@"categoryDatas" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
-          NSArray *data = change[@"new"];
-          if (data.count > 0) {
-              weakSelf.datas  = data;
-          }
-      }];
-}
-
-- (void)setDatas:(NSArray<TSHomePageBaseModel *> *)datas{
-    [super setDatas:datas];
-    _collectionView.items = datas;
-    [_collectionView reloadData];
+    if (categoryViewModel.categoryDatas.count) {
+        _collectionView.items = temp;
+        [_collectionView reloadData];
+    }
 }
 
 #pragma mark - Getter
@@ -53,12 +45,13 @@
     if (!_collectionView) {
         UIEdgeInsets padding = UIEdgeInsetsMake(13, 13, 16, 13);
         _collectionView = [[TSGridButtonCollectionView alloc] initWithFrame:CGRectZero items:nil ColumnSpacing:23 rowSpacing:17 itemsHeight:68 rows:2 columns:5 padding:padding clickedBlock:^(id selectItem, NSInteger index) {
-            
+            TSImageBaseModel *model = (TSImageBaseModel *)selectItem;
+            NSLog(@"uri:%@",model.linkData.objectValue);
         }];
         _collectionView.clipsToBounds = YES;
         _collectionView.layer.cornerRadius = 8;
         _collectionView.collectionView.backgroundColor = [UIColor whiteColor];
-        _collectionView.configCustomView = ^UIView *(TSHomePageBaseModel *model, NSIndexPath *indexPath) {
+        _collectionView.configCustomView = ^UIView *(TSImageBaseModel *model, NSIndexPath *indexPath) {
             UIView *contetView = [UIView new];
             UILabel *nameLabel = [UILabel new];
             nameLabel.textAlignment = NSTextAlignmentCenter;
@@ -74,7 +67,7 @@
             }];
             
             UIImageView *imageView = [UIImageView new];
-            imageView.image = [UIImage imageNamed:model.imageUrl];
+            [imageView sd_setImageWithURL:[NSURL URLWithString:model.imageData.url]];
             [contetView addSubview:imageView];
             
             [imageView mas_makeConstraints:^(MASConstraintMaker *make) {

@@ -76,16 +76,16 @@
     return self;
 }
 
-- (void)setItem:(TSHomePageContainerModel *)item{
+- (void)setItem:(TSProductBaseModel *)item{
     _item = item;
     
-    [self.imageView sd_setImageWithURL:[NSURL URLWithString:item.imageUrl]];
+    [self.imageView sd_setImageWithURL:[NSURL URLWithString:item.pic]];
     
-    self.titleLabel.text = item.title;
-    self.priceLabel.text = item.price;
+    self.titleLabel.text = item.name;
+    self.priceLabel.text = [NSString stringWithFormat:@"%.0f",item.price];
     self.highPriceView.leftLabel.text = @"最高赚";
-    self.highPriceView.rightLabel.text = item.highPrice;
-    self.getPriceLabel.text = item.getPrice;
+    self.highPriceView.rightLabel.text = [NSString stringWithFormat:@"¥%.0f",item.price];
+    self.getPriceLabel.text = [NSString stringWithFormat:@"提货价 ¥%.0f",item.price];
 
     [self layoutIfNeeded];
 }

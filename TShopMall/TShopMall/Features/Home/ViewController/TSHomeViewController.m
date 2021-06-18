@@ -14,6 +14,7 @@
 #import "TSHomePageBaseCell.h"
 #import "TSHomePageContainerHeaderView.h"
 #import "TSSearchController.h"
+#import "TSHomePageContainerCell.h"
 
 @interface TSHomeViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -27,6 +28,9 @@
 
 @property (nonatomic, strong) TSHomePageViewModel *viewModel;
 
+@property (nonatomic, strong) JXCategoryTitleView *segmentHeader;
+@property(nonatomic, strong)  TSHomePageContainerScrollView *containerScrollView;
+
 @end
 
 @implementation TSHomeViewController
@@ -39,43 +43,41 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.viewModel loadData];
-
+    [self.viewModel fetchData];
+    
+    @weakify(self);
+    [self.KVOController observe:self.viewModel keyPath:@"dataSource" options:(NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew) block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
+        @strongify(self)
+        [self.tableView reloadData];
+        self.tableViewBackGroundView.hidden = NO;
+        [self configObserve];
+    }];
+    
     [self setupUI];
     [self registCellInfo];
+   
+    
+}
 
-    __weak typeof(self) weakSelf = self;
-    [self.KVOController observe:self.viewModel keyPath:@"dataSource" options:(NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew) block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
-        [weakSelf.tableView reloadData];
-    }];
-    
-    [self.KVOController observe:self.viewModel.containerViewModel keyPath:@"allGroupDict" options:(NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew) block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
-        if (weakSelf.tableView.mj_footer.isRefreshing) {
-            [weakSelf.tableView.mj_footer endRefreshing];
-        }
-    }];
-    @weakify(self);
-    [self.KVOController observe:self.tableView keyPath:@"contentOffset" options:(NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew) block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
-        @strongify(self)
-        CGRect frame = self.tableViewBackGroundView.frame;
-        frame.origin.y = - self.tableView.contentOffset.y;
-        self.tableViewBackGroundView.frame = frame;
-    }];
-    
+- (void)reloadPageCantainer{
+    TSHomePageContainerGroup *group = self.viewModel.containerViewModel.segmentHeaderDatas[self.segmentHeader.selectedIndex];
+    if (group) {
+        [self.viewModel.containerViewModel loadData:group];
+    }
 }
 
 -(void)viewWillLayoutSubviews{
     [super viewWillLayoutSubviews];
     CGFloat bottom = self.view.ts_safeAreaInsets.bottom + 10;
     CGFloat top = self.view.ts_safeAreaInsets.top + 6;
-
+    
     [self.searchButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view).offset(16);
         make.right.equalTo(self.view).offset(-49);
         make.top.equalTo(self.view).offset(top);
         make.height.mas_equalTo(32);
     }];
-
+    
     [self.categoryButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.searchButton.mas_right).offset(8);
         make.centerY.equalTo(self.searchButton);
@@ -94,8 +96,8 @@
     
     [self.view addSubview:self.tableViewBackGroundView];
     [self.view sendSubviewToBack:self.tableViewBackGroundView];
-
-//    [self loadFixedBackGroundView];
+    
+    //    [self loadFixedBackGroundView];
 }
 
 - (void)loadFixedBackGroundView{
@@ -116,18 +118,23 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.viewModel.dataSource[section].rowDatas.count;
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    TSHomePageCellViewModel *viewModel = self.viewModel.dataSource[indexPath.section].rowDatas[indexPath.row];
-
+    TSHomePageCellViewModel *viewModel = self.viewModel.dataSource[indexPath.section];
+    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:viewModel.model.templateName forIndexPath:indexPath];
     if ([cell isKindOfClass:TSHomePageBaseCell.class]) {
         TSHomePageBaseCell *contentCell = (TSHomePageBaseCell *)cell;
         contentCell.indexPath = indexPath;
         contentCell.cellSuperViewTableView = self.tableView;
         contentCell.viewModel = viewModel;
+        
+        if ([cell isKindOfClass:TSHomePageContainerCell.class]) {
+            TSHomePageContainerCell *contentCell = (TSHomePageContainerCell *)cell;
+            self.containerScrollView = contentCell.containerScrollView;
+        }
         
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -136,13 +143,13 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    TSTableViewSectionModel *sectionModel = self.viewModel.dataSource[section];
-    if (sectionModel.headerModel) {
-        TSHomePageCellViewModel *viewModel = sectionModel.headerModel;
-        UITableViewHeaderFooterView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:viewModel.model.templateName];
+    TSHomePageCellViewModel *viewModel = self.viewModel.dataSource[section];
+    if (viewModel.model.headerTemplateName) {
+        UITableViewHeaderFooterView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:viewModel.model.headerTemplateName];
         
         if ([headerView isKindOfClass:TSHomePageContainerHeaderView.class]) {
             TSHomePageContainerHeaderView *header = (TSHomePageContainerHeaderView *)headerView;
+            self.segmentHeader = header.segmentHeader;
             header.viewModel = viewModel;
         }
         return headerView;
@@ -165,16 +172,73 @@
     [self.tableView registerClass:NSClassFromString(@"TSHomePageReleaseCell") forCellReuseIdentifier:@"TSHomePageRelease"];
     [self.tableView registerClass:NSClassFromString(@"TSHomePageContainerCell") forCellReuseIdentifier:@"TSHomePageContainer"];
     [self.tableView registerClass:NSClassFromString(@"TSHomePageContainerHeaderView") forHeaderFooterViewReuseIdentifier:@"TSHomePageContainerHeader"];
+    [self.tableView registerClass:NSClassFromString(@"TSHomePageReleaseTitleCell") forCellReuseIdentifier:@"TSHomePageReleaseTitle"];
+
+}
+
+#pragma mark - KVO
+- (void)configObserve{
+    @weakify(self);
+    [self.KVOController observe:self.viewModel.containerViewModel keyPath:@"currentGroup" options:(NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew) block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
+        TSHomePageContainerGroup *group = self.viewModel.containerViewModel.currentGroup;
+
+        if (group) {
+            @strongify(self)
+                if (self.tableView.mj_footer.isRefreshing) {
+                    [self.tableView.mj_footer endRefreshing];
+                }
+            if (group.list.count == group.totalNum) {
+                [self.tableView.mj_footer endRefreshingWithNoMoreData];
+            }
+            else
+                [self.tableView.mj_footer resetNoMoreData];
+            
+                if (self.tableView.visibleCells.count) {
+                    for (UITableViewCell *cell in self.tableView.visibleCells) {
+                        if ([cell isKindOfClass:TSHomePageContainerCell.class]) {
+                            TSHomePageContainerCell *cell1 = (TSHomePageContainerCell *)cell;
+    //                        cell1.viewModel = self.viewModel.containerViewModel;
+                            [cell1 tableviewReloadCell];
+                            break;
+                        }
+                    }
+                }
+        }
+        
+    }];
+    
+    [self.KVOController observe:self keyPath:@"segmentHeader.selectedIndex" options:( NSKeyValueObservingOptionNew) block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
+        @strongify(self)
+        NSLog(@"%ld",self.segmentHeader.selectedIndex);
+        [self reloadPageCantainer];
+        
+    }];
+    
+    [self.KVOController observe:self.tableView keyPath:@"contentOffset" options:(NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew) block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
+        @strongify(self)
+        CGRect frame = self.tableViewBackGroundView.frame;
+        frame.origin.y = - self.tableView.contentOffset.y;
+        self.tableViewBackGroundView.frame = frame;
+    }];
+    
+    [self.KVOController observe:self.containerScrollView keyPath:@"pageIndex" options:( NSKeyValueObservingOptionNew) block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
+        @strongify(self)
+        NSLog(@"%ld",self.containerScrollView.pageIndex);
+        if (self.segmentHeader.selectedIndex != self.containerScrollView.pageIndex) {
+            [self.segmentHeader selectItemAtIndex:self.containerScrollView.pageIndex];
+        }
+        
+    }];
+    
 }
 
 #pragma mark - Action
 - (void)refreshHeaderDataMehtod {
-    [self.viewModel loadData];
+    [self.viewModel fetchData];
 }
 
 - (void)loadFooterDataMehtod{
-//    TSHomePageContainerGroup *group = self.viewModel.containerViewModel.selectedGroup;
-    
+    [self.viewModel.containerViewModel loadData:self.viewModel.containerViewModel.currentGroup];
 }
 
 -(void)searchAction:(TSGeneralSearchButton *)sender{
@@ -221,9 +285,9 @@
             _tableView.estimatedSectionHeaderHeight = 20;
         }
         
-        MJRefreshBackNormalFooter *footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self.viewModel.containerViewModel refreshingAction:@selector(loadMoreData)];
+        MJRefreshBackNormalFooter *footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadFooterDataMehtod)];
         _tableView.mj_footer = footer;
-
+        
     }
     return _tableView;
 }
@@ -240,6 +304,7 @@
         CGFloat height = kScreenWidth/375 * 205;
         _tableViewBackGroundView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, height)];
         _tableViewBackGroundView.image = [UIImage imageNamed:@"mall_home_bg"];
+        _tableViewBackGroundView.hidden = YES;
     }
     return _tableViewBackGroundView;
 }

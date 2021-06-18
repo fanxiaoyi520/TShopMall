@@ -20,6 +20,12 @@
         self.interactivePopGestureRecognizer.delegate = self;
     }
     
+    NSMutableDictionary *attributes = [NSMutableDictionary dictionary];
+    [attributes setValue:KRegularFont(18) forKey:NSFontAttributeName];
+    [attributes setValue:KTextColor forKey:NSForegroundColorAttributeName];
+    
+    [[UINavigationBar appearance] setTitleTextAttributes:attributes];
+    
     [[UINavigationBar appearance] setBackIndicatorImage:[UIImage imageNamed:@"navi_back"]];
     [[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:[UIImage imageNamed:@"navi_back"]];
     [UINavigationBar appearance].tintColor = KHexColor(@"#030303");

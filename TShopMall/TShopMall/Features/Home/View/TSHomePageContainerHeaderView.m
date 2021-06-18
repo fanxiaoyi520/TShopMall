@@ -8,7 +8,6 @@
 #import "TSHomePageContainerHeaderView.h"
 #import "KVOController.h"
 #import "TSHomePageContainerGroup.h"
-#import "TSHomePageContainerHeaderViewModel.h"
 @interface TSHomePageContainerHeaderView ()<JXCategoryViewDelegate>
 
 @end
@@ -35,12 +34,11 @@
 
 - (void)setViewModel:(TSHomePageCellViewModel *)viewModel{
     _viewModel = viewModel;
-    TSHomePageContainerHeaderViewModel *headerViewModel = (TSHomePageContainerHeaderViewModel *)viewModel;
+    TSHomePageContainerViewModel *headerViewModel = (TSHomePageContainerViewModel *)viewModel;
     if (!headerViewModel.segmentHeaderDatas.count) {
         [headerViewModel getSegmentHeaderData];
     }
     @weakify(self);
-    [self.KVOController unobserveAll];
     [self.KVOController observe:headerViewModel keyPath:@"segmentHeaderDatas" options:(NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew) block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
         @strongify(self)
         NSMutableArray *titles = @[].mutableCopy;
@@ -50,23 +48,11 @@
         }
         self.segmentHeader.titles = titles;
     }];
-    
-//    [self.segmentHeader setDefaultSelectedIndex:0];
-    
-   
-    [self.KVOController observe:headerViewModel keyPath:@"currentIndex" options:(NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew) block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
-        @strongify(self)
-        TSHomePageContainerHeaderViewModel *headerViewModel = (TSHomePageContainerHeaderViewModel *)viewModel;
-        [self.segmentHeader selectItemAtIndex:headerViewModel.currentIndex];
-    }];
 
 }
 
-- (void)categoryView:(JXCategoryBaseView *)categoryView didSelectedItemAtIndex:(NSInteger)index{    TSHomePageContainerHeaderViewModel *headerViewModel = (TSHomePageContainerHeaderViewModel *)self.viewModel;
-    if (index == headerViewModel.currentIndex) {
-        return;
-    }
-    headerViewModel.currentIndex = index;
+- (void)categoryView:(JXCategoryBaseView *)categoryView didSelectedItemAtIndex:(NSInteger)index{
+    
 }
 
 - (JXCategoryTitleView *)segmentHeader{
