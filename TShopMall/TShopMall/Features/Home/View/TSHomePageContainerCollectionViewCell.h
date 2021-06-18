@@ -6,11 +6,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TSHomePageContainerModel.h"
+#import "TSProductBaseModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TSHomePageContainerCollectionViewCell : UICollectionViewCell
-@property (nonatomic, strong) TSHomePageContainerModel *item;
+@property (nonatomic, strong) TSProductBaseModel *item;
 @end
 
 NS_ASSUME_NONNULL_END

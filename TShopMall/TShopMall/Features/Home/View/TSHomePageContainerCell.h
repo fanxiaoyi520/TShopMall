@@ -7,10 +7,14 @@
 
 #import <UIKit/UIKit.h>
 #import "TSHomePageBaseCell.h"
+#import "TSHomePageContainerGroup.h"
+#import "TSHomePageContainerScrollView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TSHomePageContainerCell : TSHomePageBaseCell
+//@property (nonatomic, strong) TSHomePageContainerGroup *currentGroup;
+@property(nonatomic, strong) TSHomePageContainerScrollView *containerScrollView;
 
 @end
 

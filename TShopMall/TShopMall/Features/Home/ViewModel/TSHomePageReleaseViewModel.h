@@ -8,11 +8,9 @@
 #import "TSHomePageCellViewModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
-@class TSHomePageBaseModel;
+@class TSImageBaseModel;
 @interface TSHomePageReleaseViewModel : TSHomePageCellViewModel
-@property(nonatomic, assign) CGFloat imageViewHeight;
-@property (nonatomic, strong) TSHomePageBaseModel *releaseModel;
-- (void)getReleaseData;
+@property (nonatomic, strong) TSImageBaseModel *releaseModel;
 @end
 
 NS_ASSUME_NONNULL_END

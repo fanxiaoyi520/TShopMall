@@ -11,8 +11,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TSHomePageCellTemplateModel : NSObject
 @property (nonatomic, copy) NSString      *templateName;
+@property (nonatomic, copy) NSString      *headerTemplateName;
 //@property (nonatomic, strong) NSDictionary  *templateInfo;
-//@property (nonatomic, strong) NSDictionary  *data;
+@property (nonatomic, strong) NSDictionary  *data;
 @end
 
 NS_ASSUME_NONNULL_END

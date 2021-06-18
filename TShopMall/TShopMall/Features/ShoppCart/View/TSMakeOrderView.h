@@ -10,6 +10,7 @@
 
 @interface TSMakeOrderView : UIView
 @property (nonatomic, strong) NSMutableArray<TSMakeOrderSection *> *sections;
+@property (nonatomic, weak) id controller;
 @end
 
 

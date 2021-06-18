@@ -6,10 +6,13 @@
 //
 
 #import "TSBaseListController.h"
+#import "TSRankSectionModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TSRankLastMonthController : TSBaseListController<JXCategoryListContentViewDelegate>
+
+@property (nonatomic, strong) NSMutableArray <TSRankSectionModel *> *coronalSections;
 
 @end
 

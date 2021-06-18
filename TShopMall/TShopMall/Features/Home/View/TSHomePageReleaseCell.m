@@ -7,7 +7,8 @@
 
 #import "TSHomePageReleaseCell.h"
 #import "TSHomePageReleaseViewModel.h"
-
+#import "UIImageView+WebCache.h"
+#import "TSImageBaseModel.h"
 @interface TSHomePageReleaseCell()
 
 @property(nonatomic, strong) UIImageView *iconImageView;
@@ -20,40 +21,21 @@
     [super setViewModel:viewModel];
     TSHomePageReleaseViewModel *releaseViewModel = (TSHomePageReleaseViewModel *)viewModel;
 
-    [self.contentView addSubview:self.nameLabel];
-    [self.nameLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.contentView).offset(16);
-        make.right.equalTo(self.contentView).offset(-16);
-        make.top.equalTo(self.contentView);
-        make.height.equalTo(@34);
+    NSArray *temp = [NSArray yy_modelArrayWithClass:TSImageBaseModel.class json:releaseViewModel.model.data[@"list"]];
+    releaseViewModel.releaseModel = temp.firstObject;
 
-    }];
-    CGFloat height = kScreenWidth/345 * 447;
+    CGFloat height = kScreenWidth/releaseViewModel.releaseModel.imageData.width * releaseViewModel.releaseModel.imageData.height;
     [self.contentView addSubview:self.iconImageView];
     [self.iconImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contentView).offset(16);
         make.right.equalTo(self.contentView).offset(-16);
-        make.top.equalTo(self.nameLabel.mas_bottom);
-        make.height.equalTo(@(releaseViewModel.imageViewHeight?:height));
+        make.top.equalTo(self.contentView);
+        make.height.equalTo(@(height));
         make.bottom.equalTo(self.contentView);
-
     }];
+    
+    [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:releaseViewModel.releaseModel.imageData.url]];
 
-    if (releaseViewModel.imageViewHeight == 0) {
-        [releaseViewModel getReleaseData];
-    }
-    __weak typeof(self) weakSelf = self;
-    [self.KVOController observe:releaseViewModel keyPath:@"releaseModel" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
-          TSHomePageBaseModel *model = change[@"new"];
-          if (![change[@"new"] isKindOfClass:NSNull.class]) {
-              if (model && model.image) {
-                  weakSelf.iconImageView.image = model.image;
-                  weakSelf.nameLabel.text = model.title;
-                  releaseViewModel.imageViewHeight = model.image.size.height;
-                  [weakSelf tableviewReloadCell];
-              }
-          }
-      }];
 }
 
 

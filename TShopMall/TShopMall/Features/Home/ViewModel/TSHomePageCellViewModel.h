@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) TSHomePageCellTemplateModel *model;
 /// 更新当前cell内容
 - (void)refreshData;
+
 @end
 
 NS_ASSUME_NONNULL_END

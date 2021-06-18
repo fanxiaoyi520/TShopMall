@@ -8,10 +8,9 @@
 #import "TSHomePageCellViewModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
-
+@class TSImageBaseModel;
 @interface TSHomePageBannerViewModel : TSHomePageCellViewModel
-@property (nonatomic, strong) NSArray *bannerDatas;
-- (void)getBannerData;
+@property (nonatomic, strong) NSArray <TSImageBaseModel *> *bannerDatas;
 @end
 
 NS_ASSUME_NONNULL_END

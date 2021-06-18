@@ -8,7 +8,7 @@
 #import "TSHomePageContainerCollectionView.h"
 #import "TSCollectionViewMeanWidthLayout.h"
 #import "TSHomePageContainerCollectionViewCell.h"
-#import "TSHomePageContainerModel.h"
+#import "TSProductBaseModel.h"
 
 @interface TSHomePageContainerCollectionView()<UICollectionViewDelegate, UICollectionViewDataSource>
 @property (nonatomic, strong) TSCollectionViewMeanWidthLayout *layout;
@@ -47,6 +47,7 @@
     [self mas_updateConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@(_collectionView.contentSize.height));
     }];
+    NSLog(@"collectionView.contentSize.height1:%f",_collectionView.contentSize.height);
 }
 #pragma mark - UICollectionViewDelegate, UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -63,27 +64,27 @@
 {
     
     TSHomePageContainerCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TSHomePageContainerCollectionViewCell" forIndexPath:indexPath];
-        
-    TSHomePageContainerModel *item = self.items[indexPath.row];
+
+    TSProductBaseModel *item = self.items[indexPath.row];
     cell.item = item;
-        if (item.isSelected) {
-            [collectionView selectItemAtIndexPath:indexPath animated:NO scrollPosition:UICollectionViewScrollPositionNone];
-        }
+//        if (item.isSelected) {
+//            [collectionView selectItemAtIndexPath:indexPath animated:NO scrollPosition:UICollectionViewScrollPositionNone];
+//        }
         return cell;
     
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    TSHomePageContainerModel *item = self.items[indexPath.row];
-    if (item.isSelected) {
-        if(_clickedBlock) {
-            self.clickedBlock(item, indexPath.row);
-        }
-        return;
-    }
-  
-    item.isSelected = !item.isSelected;
+    TSProductBaseModel *item = self.items[indexPath.row];
+//    if (item.isSelected) {
+//        if(_clickedBlock) {
+//            self.clickedBlock(item, indexPath.row);
+//        }
+//        return;
+//    }
+//
+//    item.isSelected = !item.isSelected;
     
     if (_clickedBlock) {
         self.clickedBlock(item,indexPath.row);
@@ -92,8 +93,8 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    TSHomePageContainerModel *item = self.items[indexPath.row];
-    item.isSelected = !item.isSelected;
+//    TSProductBaseModel *item = self.items[indexPath.row];
+//    item.isSelected = !item.isSelected;
 }
 
 #pragma mark setter & getter
