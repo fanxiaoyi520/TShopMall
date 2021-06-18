@@ -75,6 +75,9 @@
 		C2EF88DB2671E28100E7374A /* TSEmptyAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EF88DA2671E28100E7374A /* TSEmptyAlertView.m */; };
 		C2EF88DE2671E92400E7374A /* TSCartEmptyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EF88DD2671E92400E7374A /* TSCartEmptyCell.m */; };
 		C2EF88E02671F79800E7374A /* cart.json in Resources */ = {isa = PBXBuildFile; fileRef = C2EF88DF2671F79700E7374A /* cart.json */; };
+		C35F1865267C7F8A00F65AF9 /* TSDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = C35F185F267C7F8800F65AF9 /* TSDatePickerView.m */; };
+		C35F1866267C7F8A00F65AF9 /* TSChangePictureActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = C35F1862267C7F8900F65AF9 /* TSChangePictureActionSheet.m */; };
+		C35F1867267C7F8A00F65AF9 /* TSSexSelectingView.m in Sources */ = {isa = PBXBuildFile; fileRef = C35F1864267C7F8A00F65AF9 /* TSSexSelectingView.m */; };
 		C3A6C470267A1BEA00FC71D6 /* TSBindMobileController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A6C45B267A1BDF00FC71D6 /* TSBindMobileController.m */; };
 		C3A6C471267A1BEA00FC71D6 /* TSBindThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A6C45D267A1BE000FC71D6 /* TSBindThirdViewController.m */; };
 		C3A6C472267A1BEA00FC71D6 /* TSPhoneNumVeriViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A6C45E267A1BE100FC71D6 /* TSPhoneNumVeriViewController.m */; };
@@ -417,6 +420,12 @@
 		C2EF88DC2671E92400E7374A /* TSCartEmptyCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSCartEmptyCell.h; sourceTree = "<group>"; };
 		C2EF88DD2671E92400E7374A /* TSCartEmptyCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSCartEmptyCell.m; sourceTree = "<group>"; };
 		C2EF88DF2671F79700E7374A /* cart.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = cart.json; sourceTree = "<group>"; };
+		C35F185F267C7F8800F65AF9 /* TSDatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSDatePickerView.m; sourceTree = "<group>"; };
+		C35F1860267C7F8800F65AF9 /* TSChangePictureActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSChangePictureActionSheet.h; sourceTree = "<group>"; };
+		C35F1861267C7F8900F65AF9 /* TSDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSDatePickerView.h; sourceTree = "<group>"; };
+		C35F1862267C7F8900F65AF9 /* TSChangePictureActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSChangePictureActionSheet.m; sourceTree = "<group>"; };
+		C35F1863267C7F8A00F65AF9 /* TSSexSelectingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSSexSelectingView.h; sourceTree = "<group>"; };
+		C35F1864267C7F8A00F65AF9 /* TSSexSelectingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSSexSelectingView.m; sourceTree = "<group>"; };
 		C3A6C45A267A1BDF00FC71D6 /* TSSecurCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSSecurCenterViewController.h; sourceTree = "<group>"; };
 		C3A6C45B267A1BDF00FC71D6 /* TSBindMobileController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSBindMobileController.m; sourceTree = "<group>"; };
 		C3A6C45C267A1BE000FC71D6 /* TSBindThirdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSBindThirdViewController.h; sourceTree = "<group>"; };
@@ -1213,6 +1222,12 @@
 				C3A6C4B0267A1C5300FC71D6 /* TSSettingUserCell.m */,
 				C3A6C499267A1C4600FC71D6 /* TSWithdrawalPswSettingCell.h */,
 				C3A6C49F267A1C4900FC71D6 /* TSWithdrawalPswSettingCell.m */,
+				C35F1860267C7F8800F65AF9 /* TSChangePictureActionSheet.h */,
+				C35F1862267C7F8900F65AF9 /* TSChangePictureActionSheet.m */,
+				C35F1861267C7F8900F65AF9 /* TSDatePickerView.h */,
+				C35F185F267C7F8800F65AF9 /* TSDatePickerView.m */,
+				C35F1863267C7F8A00F65AF9 /* TSSexSelectingView.h */,
+				C35F1864267C7F8A00F65AF9 /* TSSexSelectingView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2595,6 +2610,7 @@
 				DC3440B226720E4C00F5B0DA /* TSGridButtonCollectionView.m in Sources */,
 				C2A34CA92675F19D0095497E /* TSGoodsListFittleView.m in Sources */,
 				C2C765312678B654004757B9 /* TSGoodListViewModel.m in Sources */,
+				C35F1867267C7F8A00F65AF9 /* TSSexSelectingView.m in Sources */,
 				F54973612668A22100181E3F /* SSBaseRequest.m in Sources */,
 				C3A6C475267A1BEA00FC71D6 /* TSSettingViewController.m in Sources */,
 				DC45FECD2678962B00CE762E /* NSTimer+TSBlcokTimer.m in Sources */,
@@ -2615,6 +2631,7 @@
 				F55D2CC626784ACD006BACCF /* TSMineSectionModel.m in Sources */,
 				C3A6C4E2267A1CAF00FC71D6 /* TSBindMobileDataController.m in Sources */,
 				F54973622668A22100181E3F /* SSResponseModel.m in Sources */,
+				C35F1865267C7F8A00F65AF9 /* TSDatePickerView.m in Sources */,
 				F54973C52668C14F00181E3F /* TSConstant.m in Sources */,
 				C2EF88C72670997100E7374A /* TSCartSettleView.m in Sources */,
 				C2A34C932674B5530095497E /* TSSearchBaseCell.m in Sources */,
@@ -2678,6 +2695,7 @@
 				F55D2CF62678C8DE006BACCF /* TSGoodDetailPriceCell.m in Sources */,
 				F55D2CD026784CF3006BACCF /* TSMineNavigationBar.m in Sources */,
 				F56D4B43266DFB8900C1AD9E /* FMLayout.m in Sources */,
+				C35F1866267C7F8A00F65AF9 /* TSChangePictureActionSheet.m in Sources */,
 				F54973AE2668BB8100181E3F /* TSHomeViewController.m in Sources */,
 				F56D4B40266DFB8900C1AD9E /* FMLayoutScaleSection.m in Sources */,
 				F56D4B42266DFB8900C1AD9E /* FMLayoutView.m in Sources */,
