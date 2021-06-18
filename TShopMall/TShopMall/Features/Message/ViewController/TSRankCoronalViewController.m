@@ -8,10 +8,12 @@
 #import "TSRankCoronalViewController.h"
 #import "TSRankCurrentMonthController.h"
 #import "TSRankLastMonthController.h"
+#import "TSRankDataController.h"
 
 @interface TSRankCoronalViewController ()
 
-@property (nonatomic, strong) JXCategoryTitleView *myCategoryView;
+@property(nonatomic, strong) JXCategoryTitleView *myCategoryView;
+@property(nonatomic, strong) TSRankDataController *dataController;
 
 @end
 
@@ -32,6 +34,10 @@
     lineView.indicatorColor = [UIColor whiteColor];
     self.myCategoryView.indicators = @[lineView];
     self.myCategoryView.separatorLineShowEnabled = YES;
+    
+    [self.dataController fetchRankCoronalComplete:^(BOOL isSucess) {
+
+    }];
 }
 
 - (JXCategoryTitleView *)myCategoryView {
@@ -55,15 +61,25 @@
 - (id<JXCategoryListContentViewDelegate>)listContainerView:(JXCategoryListContainerView *)listContainerView initListForIndex:(NSInteger)index {
     if (index == 0) {
         TSRankCurrentMonthController *list = [[TSRankCurrentMonthController alloc] init];
+        list.coronalSections = self.dataController.coronalSections;
         return list;
     }else{
         TSRankLastMonthController *list = [[TSRankLastMonthController alloc] init];
+        list.coronalSections = self.dataController.coronalSections;
         return list;
     }
 }
 
 - (UIView *)listView {
     return self.view;
+}
+
+#pragma mark - Getter
+-(TSRankDataController *)dataController{
+    if (!_dataController) {
+        _dataController = [[TSRankDataController alloc] init];
+    }
+    return _dataController;
 }
 
 @end

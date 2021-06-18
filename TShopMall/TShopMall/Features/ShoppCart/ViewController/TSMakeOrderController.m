@@ -9,6 +9,7 @@
 #import "TSMakeOrderView.h"
 #import "TSMakeOrderCommitView.h"
 #import "TSMakeOrderDataController.h"
+#import "TSShippingAddressController.h"
 
 @interface TSMakeOrderController ()
 @property (nonatomic, strong) TSMakeOrderView *makeOrderView;
@@ -36,6 +37,11 @@
     self.makeOrderView.sections = self.dataCon.sections;
 }
 
+- (void)gotoSelectedAddress{
+    TSShippingAddressController *con = [TSShippingAddressController new];
+    [self.navigationController pushViewController:con animated:YES];
+}
+
 - (void)viewWillLayoutSubviews{
     
     [self.commitView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -56,6 +62,7 @@
         return _makeOrderView;
     }
     self.makeOrderView = [TSMakeOrderView new];
+    self.makeOrderView.controller = self;
     [self.view addSubview:self.makeOrderView];
     
     return self.makeOrderView;
