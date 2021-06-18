@@ -56,6 +56,7 @@
         @strongify(self)
         if (self.viewModel.dataSource) {
             [self.tableView reloadData];
+            [self.tableView.mj_header endRefreshing];
             self.tableViewBackGroundView.hidden = NO;
             [self configObserve];
         }
@@ -68,6 +69,7 @@
     };
 }
 
+#pragma mark - UI
 -(void)viewWillLayoutSubviews{
     [super viewWillLayoutSubviews];
 //    CGFloat bottom = self.view.ts_safeAreaInsets.bottom + 10;
@@ -112,6 +114,29 @@
 - (void)fillCustomView{
     [self.view addSubview:self.searchButton];
     [self.view addSubview:self.categoryButton];
+}
+
+- (void)showEmptyView:(UIView *)view{
+    if (self.viewModel.containerViewModel.currentGroup.list.count != 0) {
+        [TSEmptyAlertView hideInView:view];
+        return ;
+    }
+    
+    TSEmptyAlertView.new.alertInfo(@"抱歉，没有找到商品哦～", @"重试").show(view, ^{
+        
+    });
+}
+
+- (void)showErrorView:(UIView *)view{
+  
+    TSEmptyAlertView *alertView = [TSEmptyAlertView new];
+    alertView.alertInfo(@"服务器开小差了", @"刷新");
+    [view addSubview:alertView];
+    alertView.frame = view.bounds;
+    alertView.alertImage(@"homePage_container_error");
+    alertView.show(view, ^{
+        
+    });
 }
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource
@@ -159,8 +184,11 @@
         
         if ([headerView isKindOfClass:TSHomePageContainerHeaderView.class]) {
             TSHomePageContainerHeaderView *header = (TSHomePageContainerHeaderView *)headerView;
-            self.segmentHeader = header.segmentHeader;
-            self.segmentHeader.delegate = self;
+            if (!self.segmentHeader) {
+                self.segmentHeader = header.segmentHeader;
+                self.segmentHeader.delegate = self;
+            }
+            
             header.viewModel = viewModel;
         }
         return headerView;
@@ -285,6 +313,13 @@
     return _containerView;
 }
 
+- (TSHomePageLoginBarView *)loginBar{
+    if (!_loginBar) {
+        _loginBar = [[TSHomePageLoginBarView alloc] initWithFrame:CGRectMake(16, kScreenHeight - 12 - 44 - GK_TABBAR_HEIGHT, kScreenWidth - 32, 44)];
+    }
+    return _loginBar;
+}
+
 #pragma mark - <YBNestContainerViewDataSource>
 
 - (NSInteger)yb_numberOfContentsInNestContainerView:(YBNestContainerView *)view {
@@ -301,8 +336,18 @@
     @weakify(self);
     collectionView.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         @strongify(self)
-        TSHomePageContainerGroup *group = self.viewModel.containerViewModel.segmentHeaderDatas[self.segmentHeader.selectedIndex];
-        [self.viewModel.containerViewModel loadData:group callBack:^(NSArray * _Nonnull list) {
+        [self reloadContainerCollectionView:collectionView];
+
+    }];
+    [self reloadContainerCollectionView:collectionView];
+    
+    return collectionView;
+}
+
+- (void)reloadContainerCollectionView:(TSHomePageContainerCollectionView *)collectionView{
+    TSHomePageContainerGroup *group = self.viewModel.containerViewModel.segmentHeaderDatas[self.segmentHeader.selectedIndex];
+    [self.viewModel.containerViewModel loadData:group callBack:^(NSArray * _Nonnull list, NSError * _Nonnull error) {
+        if (error) {
             collectionView.items = list;
             [collectionView reloadData];
             if (list.count < group.totalNum) {
@@ -310,49 +355,27 @@
             } else {
                 [collectionView.collectionView.mj_footer endRefreshingWithNoMoreData];
             }
-
-        }];
+            [self showEmptyView:collectionView];
+        }
+        else{
+            [self showErrorView:collectionView];
+        }
     }];
-    [self.viewModel.containerViewModel loadData:self.viewModel.containerViewModel.segmentHeaderDatas[self.segmentHeader.selectedIndex] callBack:^(NSArray * _Nonnull list) {
-        collectionView.items = list;
-        [collectionView reloadData];
-        [self showEmptyView:collectionView];
-    }];
-    
-    return collectionView;
 }
 
+#pragma mark - ScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     [self.containerView mainScrollViewDidScroll:scrollView];
 }
 
+#pragma mark - nestContainerViewDelegate
 - (void)yb_nestContainerView:(YBNestContainerView *)view pageChanged:(NSInteger)page{
     self.viewModel.pageIndex = page;
 }
 
+#pragma mark - categoryViewDelegate
 - (void)categoryView:(JXCategoryBaseView *)categoryView didSelectedItemAtIndex:(NSInteger)index{
     self.viewModel.pageIndex = index;
 }
 
-- (void)showEmptyView:(UIView *)view{
-    if (self.viewModel.containerViewModel.currentGroup.list.count != 0) {
-        [TSEmptyAlertView hideInView:view];
-        return ;
-    }
-    TSEmptyAlertView *alertView = [TSEmptyAlertView new];
-    alertView.alertInfo(@"抱歉，没有找到商品哦～", @"重试");
-    [view addSubview:alertView];
-    alertView.frame = view.bounds;
-    alertView.alertImage(@"homePage_container_error");
-    alertView.show(view, ^{
-        
-    });
-}
-
-- (TSHomePageLoginBarView *)loginBar{
-    if (!_loginBar) {
-        _loginBar = [[TSHomePageLoginBarView alloc] initWithFrame:CGRectMake(16, kScreenHeight - 12 - 44 - GK_TABBAR_HEIGHT, kScreenWidth - 32, 44)];
-    }
-    return _loginBar;
-}
 @end
