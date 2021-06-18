@@ -15,22 +15,26 @@
 #import "TSHomePageContainerHeaderView.h"
 #import "TSSearchController.h"
 #import "TSHomePageContainerCell.h"
+#import "YBNestViews.h"
+#import "TSHomePageContainerCollectionView.h"
+#import "TSEmptyAlertView.h"
+#import "TSHomePageLoginBarView.h"
 
-@interface TSHomeViewController ()<UITableViewDelegate, UITableViewDataSource>
+@interface TSHomeViewController ()<UITableViewDelegate, UITableViewDataSource, JXCategoryViewDelegate, YBNestContainerViewDataSource, YBNestContainerViewDelegate>
 
 /// 搜索按钮
 @property(nonatomic, strong) TSGeneralSearchButton *searchButton;
 /// 分类按钮
 @property(nonatomic, strong) UIButton *categoryButton;
 
-@property(nonatomic, strong) UITableView *tableView;
+@property(nonatomic, strong) YBNestTableView *tableView;
 @property(nonatomic, strong) UIImageView *tableViewBackGroundView;
 
 @property (nonatomic, strong) TSHomePageViewModel *viewModel;
 
 @property (nonatomic, strong) JXCategoryTitleView *segmentHeader;
-@property(nonatomic, strong)  TSHomePageContainerScrollView *containerScrollView;
-
+@property (nonatomic, strong) YBNestContainerView *containerView;
+@property (nonatomic, strong) TSHomePageLoginBarView *loginBar;
 @end
 
 @implementation TSHomeViewController
@@ -44,31 +48,29 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.viewModel fetchData];
+    [self setupUI];
+    [self registCellInfo];
     
     @weakify(self);
     [self.KVOController observe:self.viewModel keyPath:@"dataSource" options:(NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew) block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
         @strongify(self)
-        [self.tableView reloadData];
-        self.tableViewBackGroundView.hidden = NO;
-        [self configObserve];
+        if (self.viewModel.dataSource) {
+            [self.tableView reloadData];
+            self.tableViewBackGroundView.hidden = NO;
+            [self configObserve];
+        }
     }];
     
-    [self setupUI];
-    [self registCellInfo];
-   
     
-}
-
-- (void)reloadPageCantainer{
-    TSHomePageContainerGroup *group = self.viewModel.containerViewModel.segmentHeaderDatas[self.segmentHeader.selectedIndex];
-    if (group) {
-        [self.viewModel.containerViewModel loadData:group];
-    }
+    [self.view addSubview:self.loginBar];
+    self.loginBar.clickBlock = ^{
+        
+    };
 }
 
 -(void)viewWillLayoutSubviews{
     [super viewWillLayoutSubviews];
-    CGFloat bottom = self.view.ts_safeAreaInsets.bottom + 10;
+//    CGFloat bottom = self.view.ts_safeAreaInsets.bottom + 10;
     CGFloat top = self.view.ts_safeAreaInsets.top + 6;
     
     [self.searchButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -96,7 +98,7 @@
     
     [self.view addSubview:self.tableViewBackGroundView];
     [self.view sendSubviewToBack:self.tableViewBackGroundView];
-    
+//    [self.view layoutIfNeeded];
     //    [self loadFixedBackGroundView];
 }
 
@@ -129,12 +131,20 @@
         TSHomePageBaseCell *contentCell = (TSHomePageBaseCell *)cell;
         contentCell.indexPath = indexPath;
         contentCell.cellSuperViewTableView = self.tableView;
-        contentCell.viewModel = viewModel;
-        
         if ([cell isKindOfClass:TSHomePageContainerCell.class]) {
             TSHomePageContainerCell *contentCell = (TSHomePageContainerCell *)cell;
-            self.containerScrollView = contentCell.containerScrollView;
+            if (!contentCell.containerView) {
+                contentCell.containerView = self.containerView;
+                [cell.contentView addSubview:contentCell.containerView];
+                [contentCell.containerView mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.edges.equalTo(contentCell.contentView);
+                    make.width.equalTo(@(kScreenWidth));
+                    make.height.equalTo(@(kScreenHeight - self.searchButton.bottom - self.segmentHeader.height));
+                   }];
+            }
         }
+        
+        contentCell.viewModel = viewModel;
         
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -150,6 +160,7 @@
         if ([headerView isKindOfClass:TSHomePageContainerHeaderView.class]) {
             TSHomePageContainerHeaderView *header = (TSHomePageContainerHeaderView *)headerView;
             self.segmentHeader = header.segmentHeader;
+            self.segmentHeader.delegate = self;
             header.viewModel = viewModel;
         }
         return headerView;
@@ -165,7 +176,6 @@
     return view;
 }
 
-
 - (void)registCellInfo {
     [self.tableView registerClass:NSClassFromString(@"TSHomePageBannerCell") forCellReuseIdentifier:@"TSHomePageBanner"];
     [self.tableView registerClass:NSClassFromString(@"TSHomePageCategoryCell") forCellReuseIdentifier:@"TSHomePageCategory"];
@@ -173,47 +183,11 @@
     [self.tableView registerClass:NSClassFromString(@"TSHomePageContainerCell") forCellReuseIdentifier:@"TSHomePageContainer"];
     [self.tableView registerClass:NSClassFromString(@"TSHomePageContainerHeaderView") forHeaderFooterViewReuseIdentifier:@"TSHomePageContainerHeader"];
     [self.tableView registerClass:NSClassFromString(@"TSHomePageReleaseTitleCell") forCellReuseIdentifier:@"TSHomePageReleaseTitle"];
-
 }
 
 #pragma mark - KVO
 - (void)configObserve{
     @weakify(self);
-    [self.KVOController observe:self.viewModel.containerViewModel keyPath:@"currentGroup" options:(NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew) block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
-        TSHomePageContainerGroup *group = self.viewModel.containerViewModel.currentGroup;
-
-        if (group) {
-            @strongify(self)
-                if (self.tableView.mj_footer.isRefreshing) {
-                    [self.tableView.mj_footer endRefreshing];
-                }
-            if (group.list.count == group.totalNum) {
-                [self.tableView.mj_footer endRefreshingWithNoMoreData];
-            }
-            else
-                [self.tableView.mj_footer resetNoMoreData];
-            
-                if (self.tableView.visibleCells.count) {
-                    for (UITableViewCell *cell in self.tableView.visibleCells) {
-                        if ([cell isKindOfClass:TSHomePageContainerCell.class]) {
-                            TSHomePageContainerCell *cell1 = (TSHomePageContainerCell *)cell;
-    //                        cell1.viewModel = self.viewModel.containerViewModel;
-                            [cell1 tableviewReloadCell];
-                            break;
-                        }
-                    }
-                }
-        }
-        
-    }];
-    
-    [self.KVOController observe:self keyPath:@"segmentHeader.selectedIndex" options:( NSKeyValueObservingOptionNew) block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
-        @strongify(self)
-        NSLog(@"%ld",self.segmentHeader.selectedIndex);
-        [self reloadPageCantainer];
-        
-    }];
-    
     [self.KVOController observe:self.tableView keyPath:@"contentOffset" options:(NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew) block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
         @strongify(self)
         CGRect frame = self.tableViewBackGroundView.frame;
@@ -221,13 +195,14 @@
         self.tableViewBackGroundView.frame = frame;
     }];
     
-    [self.KVOController observe:self.containerScrollView keyPath:@"pageIndex" options:( NSKeyValueObservingOptionNew) block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
+    [self.KVOController observe:self.viewModel keyPath:@"pageIndex" options:( NSKeyValueObservingOptionNew) block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
         @strongify(self)
-        NSLog(@"%ld",self.containerScrollView.pageIndex);
-        if (self.segmentHeader.selectedIndex != self.containerScrollView.pageIndex) {
-            [self.segmentHeader selectItemAtIndex:self.containerScrollView.pageIndex];
+        if (self.segmentHeader.selectedIndex != self.viewModel.pageIndex) {
+            [self.segmentHeader selectItemAtIndex:self.viewModel.pageIndex];
         }
-        
+        if (self.containerView.currentPage != self.viewModel.pageIndex) {
+            self.containerView.currentPage = self.viewModel.pageIndex;
+        }
     }];
     
 }
@@ -235,10 +210,6 @@
 #pragma mark - Action
 - (void)refreshHeaderDataMehtod {
     [self.viewModel fetchData];
-}
-
-- (void)loadFooterDataMehtod{
-    [self.viewModel.containerViewModel loadData:self.viewModel.containerViewModel.currentGroup];
 }
 
 -(void)searchAction:(TSGeneralSearchButton *)sender{
@@ -272,22 +243,19 @@
 
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+        _tableView = [[YBNestTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         MJRefreshHeader *header = [MJRefreshHeader headerWithRefreshingTarget:self refreshingAction:@selector(refreshHeaderDataMehtod)];
         _tableView.backgroundColor = [UIColor clearColor];
         _tableView.rowHeight = UITableViewAutomaticDimension;
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        
+        _tableView.mj_header = header;
         if (@available(iOS 11.0, *)) {
             _tableView.estimatedRowHeight = 200;
             _tableView.estimatedSectionHeaderHeight = 20;
+            _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
         }
-        
-        MJRefreshBackNormalFooter *footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadFooterDataMehtod)];
-        _tableView.mj_footer = footer;
-        
     }
     return _tableView;
 }
@@ -309,7 +277,82 @@
     return _tableViewBackGroundView;
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    NSLog(@"home - DidScroll");
+- (YBNestContainerView *)containerView {
+    if (!_containerView) {
+        _containerView = [YBNestContainerView viewWithDataSource:self];
+        _containerView.delegate = self;
+    }
+    return _containerView;
+}
+
+#pragma mark - <YBNestContainerViewDataSource>
+
+- (NSInteger)yb_numberOfContentsInNestContainerView:(YBNestContainerView *)view {
+    return self.viewModel.containerViewModel.segmentHeaderDatas.count;
+}
+
+- (id<YBNestContentProtocol>)yb_nestContainerView:(YBNestContainerView *)view contentAtPage:(NSInteger)page{
+    UIEdgeInsets padding = UIEdgeInsetsMake(0, 16, 16, 16);
+   
+    TSHomePageContainerCollectionView *collectionView =  [[TSHomePageContainerCollectionView alloc] initWithFrame:CGRectZero items:nil ColumnSpacing:8 rowSpacing:8 itemsHeight:282 rows:0 columns:2 padding:padding clickedBlock:^(TSProductBaseModel *selectItem, NSInteger index) {
+        NSLog(@"uri:%@", selectItem.uuid);
+    }];
+    collectionView.collectionView.backgroundColor = KGrayColor;
+    @weakify(self);
+    collectionView.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        @strongify(self)
+        TSHomePageContainerGroup *group = self.viewModel.containerViewModel.segmentHeaderDatas[self.segmentHeader.selectedIndex];
+        [self.viewModel.containerViewModel loadData:group callBack:^(NSArray * _Nonnull list) {
+            collectionView.items = list;
+            [collectionView reloadData];
+            if (list.count < group.totalNum) {
+                [collectionView.collectionView.mj_footer resetNoMoreData];
+            } else {
+                [collectionView.collectionView.mj_footer endRefreshingWithNoMoreData];
+            }
+
+        }];
+    }];
+    [self.viewModel.containerViewModel loadData:self.viewModel.containerViewModel.segmentHeaderDatas[self.segmentHeader.selectedIndex] callBack:^(NSArray * _Nonnull list) {
+        collectionView.items = list;
+        [collectionView reloadData];
+        [self showEmptyView:collectionView];
+    }];
+    
+    return collectionView;
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [self.containerView mainScrollViewDidScroll:scrollView];
+}
+
+- (void)yb_nestContainerView:(YBNestContainerView *)view pageChanged:(NSInteger)page{
+    self.viewModel.pageIndex = page;
+}
+
+- (void)categoryView:(JXCategoryBaseView *)categoryView didSelectedItemAtIndex:(NSInteger)index{
+    self.viewModel.pageIndex = index;
+}
+
+- (void)showEmptyView:(UIView *)view{
+    if (self.viewModel.containerViewModel.currentGroup.list.count != 0) {
+        [TSEmptyAlertView hideInView:view];
+        return ;
+    }
+    TSEmptyAlertView *alertView = [TSEmptyAlertView new];
+    alertView.alertInfo(@"抱歉，没有找到商品哦～", @"重试");
+    [view addSubview:alertView];
+    alertView.frame = view.bounds;
+    alertView.alertImage(@"homePage_container_error");
+    alertView.show(view, ^{
+        
+    });
+}
+
+- (TSHomePageLoginBarView *)loginBar{
+    if (!_loginBar) {
+        _loginBar = [[TSHomePageLoginBarView alloc] initWithFrame:CGRectMake(16, kScreenHeight - 12 - 44 - GK_TABBAR_HEIGHT, kScreenWidth - 32, 44)];
+    }
+    return _loginBar;
 }
 @end

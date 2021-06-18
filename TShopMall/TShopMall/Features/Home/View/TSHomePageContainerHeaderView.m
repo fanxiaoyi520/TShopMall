@@ -51,10 +51,6 @@
 
 }
 
-- (void)categoryView:(JXCategoryBaseView *)categoryView didSelectedItemAtIndex:(NSInteger)index{
-    
-}
-
 - (JXCategoryTitleView *)segmentHeader{
     if (!_segmentHeader) {
         _segmentHeader = [[JXCategoryTitleView alloc] init];

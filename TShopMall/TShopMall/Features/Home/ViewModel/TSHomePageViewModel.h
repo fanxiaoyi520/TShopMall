@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface TSHomePageViewModel : NSObject
 @property (nonatomic, strong) NSArray <TSHomePageCellViewModel *> *dataSource;
 @property (nonatomic, strong) TSHomePageContainerViewModel *containerViewModel;
+@property (nonatomic, assign) NSInteger pageIndex;
 - (void)fetchData;
 
 @end

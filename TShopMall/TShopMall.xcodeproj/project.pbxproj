@@ -148,7 +148,6 @@
 		DC3440D32672F62C00F5B0DA /* TSHomePageBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3440D22672F62C00F5B0DA /* TSHomePageBaseCell.m */; };
 		DC3440DF2672FC3900F5B0DA /* TSHomePageBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3440DE2672FC3900F5B0DA /* TSHomePageBaseModel.m */; };
 		DC3440E82673621000F5B0DA /* TSHomePageContainerHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3440E72673621000F5B0DA /* TSHomePageContainerHeaderView.m */; };
-		DC45FEB02677315100CE762E /* TSHomePageContainerScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC45FEAF2677315100CE762E /* TSHomePageContainerScrollView.m */; };
 		DC45FEB326773AE700CE762E /* EXTScope.m in Sources */ = {isa = PBXBuildFile; fileRef = DC45FEB126773AE700CE762E /* EXTScope.m */; };
 		DC45FEBA267742F700CE762E /* TSHomePageContainerGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = DC45FEB9267742F700CE762E /* TSHomePageContainerGroup.m */; };
 		DC45FEBD26783A1300CE762E /* TSHomePageContainerCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC45FEBC26783A1300CE762E /* TSHomePageContainerCollectionView.m */; };
@@ -164,6 +163,12 @@
 		DC9911A9267B0A4600EF9B26 /* TSProductBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DC9911A8267B0A4600EF9B26 /* TSProductBaseModel.m */; };
 		DC9911AD267B377000EF9B26 /* refresh_header_light.json in Resources */ = {isa = PBXBuildFile; fileRef = DC9911AA267B377000EF9B26 /* refresh_header_light.json */; };
 		DC9911AE267B377000EF9B26 /* TSRefreshConfiger.m in Sources */ = {isa = PBXBuildFile; fileRef = DC9911AB267B377000EF9B26 /* TSRefreshConfiger.m */; };
+		DC9911C2267C475000EF9B26 /* UIScrollView+YBNestViews.m in Sources */ = {isa = PBXBuildFile; fileRef = DC9911B6267C475000EF9B26 /* UIScrollView+YBNestViews.m */; };
+		DC9911C3267C475000EF9B26 /* YBNestContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC9911BA267C475000EF9B26 /* YBNestContainerView.m */; };
+		DC9911C4267C475000EF9B26 /* YBNestTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC9911BC267C475000EF9B26 /* YBNestTableView.m */; };
+		DC9911C5267C475000EF9B26 /* YBNestContainerLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = DC9911BD267C475000EF9B26 /* YBNestContainerLayout.m */; };
+		DC9911C6267C475000EF9B26 /* YBNestCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC9911BE267C475000EF9B26 /* YBNestCollectionView.m */; };
+		DC9911C9267C8B0E00EF9B26 /* TSHomePageLoginBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC9911C8267C8B0E00EF9B26 /* TSHomePageLoginBarView.m */; };
 		E2BE996F8804E0C3E7D5AE61 /* libPods-TShopMall-TShopMallUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD1ABBE857D307088E9BF2DC /* libPods-TShopMall-TShopMallUITests.a */; };
 		F54972FE2668842500181E3F /* TShopMallTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F54972FD2668842500181E3F /* TShopMallTests.m */; };
 		F54973092668842500181E3F /* TShopMallUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F54973082668842500181E3F /* TShopMallUITests.m */; };
@@ -559,8 +564,6 @@
 		DC3440DE2672FC3900F5B0DA /* TSHomePageBaseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSHomePageBaseModel.m; sourceTree = "<group>"; };
 		DC3440E62673621000F5B0DA /* TSHomePageContainerHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSHomePageContainerHeaderView.h; sourceTree = "<group>"; };
 		DC3440E72673621000F5B0DA /* TSHomePageContainerHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSHomePageContainerHeaderView.m; sourceTree = "<group>"; };
-		DC45FEAE2677315100CE762E /* TSHomePageContainerScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSHomePageContainerScrollView.h; sourceTree = "<group>"; };
-		DC45FEAF2677315100CE762E /* TSHomePageContainerScrollView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSHomePageContainerScrollView.m; sourceTree = "<group>"; };
 		DC45FEB126773AE700CE762E /* EXTScope.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EXTScope.m; sourceTree = "<group>"; };
 		DC45FEB226773AE700CE762E /* EXTScope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXTScope.h; sourceTree = "<group>"; };
 		DC45FEB426773B5C00CE762E /* metamacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = metamacros.h; sourceTree = "<group>"; };
@@ -591,6 +594,20 @@
 		DC9911AA267B377000EF9B26 /* refresh_header_light.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = refresh_header_light.json; sourceTree = "<group>"; };
 		DC9911AB267B377000EF9B26 /* TSRefreshConfiger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSRefreshConfiger.m; sourceTree = "<group>"; };
 		DC9911AC267B377000EF9B26 /* TSRefreshConfiger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSRefreshConfiger.h; sourceTree = "<group>"; };
+		DC9911B6267C475000EF9B26 /* UIScrollView+YBNestViews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+YBNestViews.m"; sourceTree = "<group>"; };
+		DC9911B7267C475000EF9B26 /* YBNestContainerLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBNestContainerLayout.h; sourceTree = "<group>"; };
+		DC9911B8267C475000EF9B26 /* YBNestTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBNestTableView.h; sourceTree = "<group>"; };
+		DC9911B9267C475000EF9B26 /* YBNestCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBNestCollectionView.h; sourceTree = "<group>"; };
+		DC9911BA267C475000EF9B26 /* YBNestContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBNestContainerView.m; sourceTree = "<group>"; };
+		DC9911BB267C475000EF9B26 /* UIScrollView+YBNestViews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+YBNestViews.h"; sourceTree = "<group>"; };
+		DC9911BC267C475000EF9B26 /* YBNestTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBNestTableView.m; sourceTree = "<group>"; };
+		DC9911BD267C475000EF9B26 /* YBNestContainerLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBNestContainerLayout.m; sourceTree = "<group>"; };
+		DC9911BE267C475000EF9B26 /* YBNestCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBNestCollectionView.m; sourceTree = "<group>"; };
+		DC9911BF267C475000EF9B26 /* YBNestContentProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBNestContentProtocol.h; sourceTree = "<group>"; };
+		DC9911C0267C475000EF9B26 /* YBNestContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBNestContainerView.h; sourceTree = "<group>"; };
+		DC9911C1267C475000EF9B26 /* YBNestViews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBNestViews.h; sourceTree = "<group>"; };
+		DC9911C7267C8B0E00EF9B26 /* TSHomePageLoginBarView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSHomePageLoginBarView.h; sourceTree = "<group>"; };
+		DC9911C8267C8B0E00EF9B26 /* TSHomePageLoginBarView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSHomePageLoginBarView.m; sourceTree = "<group>"; };
 		ECCE8A564DF47B445E7905B1 /* Pods-TShopMall-TShopMallUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TShopMall-TShopMallUITests.release.xcconfig"; path = "Target Support Files/Pods-TShopMall-TShopMallUITests/Pods-TShopMall-TShopMallUITests.release.xcconfig"; sourceTree = "<group>"; };
 		F54972DE2668842200181E3F /* TShopMall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TShopMall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F54972F22668842400181E3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1236,6 +1253,25 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		DC9911B5267C475000EF9B26 /* YBNestViews */ = {
+			isa = PBXGroup;
+			children = (
+				DC9911B6267C475000EF9B26 /* UIScrollView+YBNestViews.m */,
+				DC9911B7267C475000EF9B26 /* YBNestContainerLayout.h */,
+				DC9911B8267C475000EF9B26 /* YBNestTableView.h */,
+				DC9911B9267C475000EF9B26 /* YBNestCollectionView.h */,
+				DC9911BA267C475000EF9B26 /* YBNestContainerView.m */,
+				DC9911BB267C475000EF9B26 /* UIScrollView+YBNestViews.h */,
+				DC9911BC267C475000EF9B26 /* YBNestTableView.m */,
+				DC9911BD267C475000EF9B26 /* YBNestContainerLayout.m */,
+				DC9911BE267C475000EF9B26 /* YBNestCollectionView.m */,
+				DC9911BF267C475000EF9B26 /* YBNestContentProtocol.h */,
+				DC9911C0267C475000EF9B26 /* YBNestContainerView.h */,
+				DC9911C1267C475000EF9B26 /* YBNestViews.h */,
+			);
+			path = YBNestViews;
+			sourceTree = "<group>";
+		};
 		F54972D52668842200181E3F = {
 			isa = PBXGroup;
 			children = (
@@ -1444,6 +1480,8 @@
 			children = (
 				DC3440B926722DB600F5B0DA /* TSHomePageViewModel.h */,
 				DC3440BA26722DB600F5B0DA /* TSHomePageViewModel.m */,
+				DC3440CB2672604400F5B0DA /* TSHomePageContainerViewModel.h */,
+				DC3440CC2672604400F5B0DA /* TSHomePageContainerViewModel.m */,
 				DC3440BC267238F600F5B0DA /* TSHomePageCellViewModel.h */,
 				DC3440BD267238F600F5B0DA /* TSHomePageCellViewModel.m */,
 				DC3440C226723D4D00F5B0DA /* TSHomePageBannerViewModel.h */,
@@ -1454,8 +1492,6 @@
 				DC3440C92672601F00F5B0DA /* TSHomePageReleaseViewModel.m */,
 				DC99119A267A195400EF9B26 /* TSHomePageReleaseTitleViewModel.h */,
 				DC99119B267A195400EF9B26 /* TSHomePageReleaseTitleViewModel.m */,
-				DC3440CB2672604400F5B0DA /* TSHomePageContainerViewModel.h */,
-				DC3440CC2672604400F5B0DA /* TSHomePageContainerViewModel.m */,
 				C2C7652626788E29004757B9 /* TSSearchKeyViewModel.h */,
 				C2C7652726788E29004757B9 /* TSSearchKeyViewModel.m */,
 			);
@@ -1494,8 +1530,6 @@
 				DC991195267A158A00EF9B26 /* TSHomePageReleaseTitleCell.m */,
 				F55D2AD4266F67EF006BACCF /* TSHomePageContainerCell.h */,
 				F55D2AD5266F67EF006BACCF /* TSHomePageContainerCell.m */,
-				DC45FEAE2677315100CE762E /* TSHomePageContainerScrollView.h */,
-				DC45FEAF2677315100CE762E /* TSHomePageContainerScrollView.m */,
 				DC45FEBB26783A1300CE762E /* TSHomePageContainerCollectionView.h */,
 				DC45FEBC26783A1300CE762E /* TSHomePageContainerCollectionView.m */,
 				DC45FEBE26783A6E00CE762E /* TSHomePageContainerCollectionViewCell.h */,
@@ -1520,6 +1554,8 @@
 				C2A34C952674BC2E0095497E /* TSSearchHeaderView.m */,
 				C2A34C9D26759F140095497E /* TSEarnView.h */,
 				C2A34C9E26759F140095497E /* TSEarnView.m */,
+				DC9911C7267C8B0E00EF9B26 /* TSHomePageLoginBarView.h */,
+				DC9911C8267C8B0E00EF9B26 /* TSHomePageLoginBarView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1705,6 +1741,7 @@
 		F54973A22668AE1300181E3F /* Controls */ = {
 			isa = PBXGroup;
 			children = (
+				DC9911B5267C475000EF9B26 /* YBNestViews */,
 				DC3440A726720D9200F5B0DA /* CollectionView */,
 				F54973D32668DB9B00181E3F /* SearchButton */,
 			);
@@ -2407,11 +2444,14 @@
 				F55D2C3B2671E14B006BACCF /* TSUniversalDecorationView.m in Sources */,
 				F55D2C6726722807006BACCF /* TSCategoryKindModel.m in Sources */,
 				C2A34C6A267449080095497E /* TSAlertView.m in Sources */,
+				DC9911C3267C475000EF9B26 /* YBNestContainerView.m in Sources */,
 				F55D2D112679FDB8006BACCF /* TSMaterialImageCell.m in Sources */,
 				C3A6C4E4267A1CAF00FC71D6 /* TSSettingDataController.m in Sources */,
 				F55D2D20267B1EE9006BACCF /* TSRankHotCellController.m in Sources */,
 				F54973632668A22100181E3F /* YTKAnimatingRequestAccessory.m in Sources */,
 				F56D4B4C266DFB8900C1AD9E /* FMLayoutCrossCell.m in Sources */,
+				DC9911C2267C475000EF9B26 /* UIScrollView+YBNestViews.m in Sources */,
+				DC9911C6267C475000EF9B26 /* YBNestCollectionView.m in Sources */,
 				F56D4B3A266DFB8900C1AD9E /* FMLayoutBaseSection.m in Sources */,
 				C2EF88BB2670997100E7374A /* TSCartHeaderFooterView.m in Sources */,
 				C2EF88DE2671E92400E7374A /* TSCartEmptyCell.m in Sources */,
@@ -2460,7 +2500,6 @@
 				DC3440AC26720D9200F5B0DA /* TSCollectionViewMeanWidthLayout.m in Sources */,
 				C3A6C493267A1C1700FC71D6 /* TSChangePictureSectionModel.m in Sources */,
 				F55D2CE926788E27006BACCF /* TSDetailFunctionButton.m in Sources */,
-				DC45FEB02677315100CE762E /* TSHomePageContainerScrollView.m in Sources */,
 				F55D2CCD26784ACD006BACCF /* TSMineAdsCell.m in Sources */,
 				F54973D22668CF3300181E3F /* AppDelegate+RootController.m in Sources */,
 				DC9911A0267AE3B900EF9B26 /* TSImageDataModel.m in Sources */,
@@ -2473,6 +2512,7 @@
 				C3B4CCF12674934E0001EE75 /* TSQuickLoginTopView.m in Sources */,
 				C3A6C4C5267A1C5700FC71D6 /* TSBindThirdAppCell.m in Sources */,
 				F54973CB2668C27300181E3F /* TSH5InterfacedConst.m in Sources */,
+				DC9911C9267C8B0E00EF9B26 /* TSHomePageLoginBarView.m in Sources */,
 				F55D2ABE266E0C6B006BACCF /* UIView+TSSafeArea.m in Sources */,
 				F55D2CA726746BE1006BACCF /* TSCategoryContentViewModel.m in Sources */,
 				F56D4B62266E037600C1AD9E /* MyLayoutMath.m in Sources */,
@@ -2494,6 +2534,7 @@
 				DC3440CD2672604400F5B0DA /* TSHomePageContainerViewModel.m in Sources */,
 				F549739B2668AA7900181E3F /* TSBaseViewController.m in Sources */,
 				F55D2C422671E299006BACCF /* UIImage+TSColor.m in Sources */,
+				DC9911C5267C475000EF9B26 /* YBNestContainerLayout.m in Sources */,
 				F55D2CAA26746BFE006BACCF /* TSCategoryContentCellViewModel.m in Sources */,
 				C3B4CCE02674932D0001EE75 /* TSRegiterViewController.m in Sources */,
 				F55D2AD9266F777B006BACCF /* TSBaseDataController.m in Sources */,
@@ -2532,6 +2573,7 @@
 				F56D4B3B266DFB8900C1AD9E /* FMLayoutCombineSection.m in Sources */,
 				DC9911A3267AE40100EF9B26 /* TSLinkDataModel.m in Sources */,
 				C3A6C4BE267A1C5700FC71D6 /* TSAccountCancelContentCell.m in Sources */,
+				DC9911C4267C475000EF9B26 /* YBNestTableView.m in Sources */,
 				C3A6C472267A1BEA00FC71D6 /* TSPhoneNumVeriViewController.m in Sources */,
 				C3A6C4E5267A1CAF00FC71D6 /* TSPersonalDataController.m in Sources */,
 				C3A6C48D267A1C1700FC71D6 /* TSPersonalSectionModel.m in Sources */,

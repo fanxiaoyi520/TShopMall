@@ -8,14 +8,13 @@
 #import <UIKit/UIKit.h>
 #import "TSHomePageBaseCell.h"
 #import "TSHomePageContainerGroup.h"
-#import "TSHomePageContainerScrollView.h"
-
+#import "YBNestViews.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TSHomePageContainerCell : TSHomePageBaseCell
-//@property (nonatomic, strong) TSHomePageContainerGroup *currentGroup;
-@property(nonatomic, strong) TSHomePageContainerScrollView *containerScrollView;
+@property (nonatomic, strong) YBNestContainerView *containerView;
 
++ (CGFloat)getContainerHeight;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -14,9 +14,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSArray <TSHomePageContainerGroup *> *segmentHeaderDatas;
 @property (nonatomic, strong) TSHomePageContainerGroup *currentGroup;
 
-- (void)getPageContainerDataWithStartPageIndex:(NSInteger)startIndex count:(NSInteger)count group:(TSHomePageContainerGroup *)group;
 
-- (void)loadData:(TSHomePageContainerGroup *)group;
+- (void)getPageContainerDataWithStartPageIndex:(NSInteger)startIndex count:(NSInteger)count group:(TSHomePageContainerGroup *)group callBack:(void (^)(NSArray * _Nonnull))list;
+
+- (void)loadData:(TSHomePageContainerGroup *)group callBack:(void (^)(NSArray * _Nonnull))listCallBack;
 - (void)getSegmentHeaderData;
 @end
 
