@@ -6,6 +6,9 @@
 //
 
 #import "TSBindMobileCell.h"
+#import "NSTimer+TSBlcokTimer.h"
+#import "TSTools.h"
+#import <Toast.h>
 
 @interface TSBindMobileCell ()
 /** 已绑定的手机号文字显示 */
@@ -30,6 +33,10 @@
 @property(nonatomic, weak) UIView *verticalSplitView;
 /** 出错提示 */
 @property(nonatomic, weak) UILabel *errorTipsLabel;
+/** 验证码倒计时 */
+@property(nonatomic, assign) NSInteger count;
+/** 定时器 */
+@property (nonatomic, strong) NSTimer *timer;
 
 @end
 
@@ -38,9 +45,15 @@
 
 - (void)fillCustomContentView {
     [super fillCustomContentView];
+    self.count = 60;
     self.contentView.backgroundColor = KWhiteColor;
     ///添加约束
     [self addConstraints];
+}
+
+- (void)dealloc {
+    [self.timer invalidate];
+    self.timer = nil;
 }
 
 - (void)addConstraints {
@@ -179,8 +192,9 @@
     if (_codeButton == nil) {
         UIButton *codeButton = [[UIButton alloc] init];
         _codeButton = codeButton;
+        _codeButton.enabled = NO;
         _codeButton.titleLabel.font = KRegularFont(16);
-        [_codeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_codeButton setTitleColor:KHexAlphaColor(@"#2D3132", 0.2) forState:UIControlStateDisabled];
         [_codeButton setTitleColor:KHexColor(@"#FF4D49") forState:UIControlStateNormal];
         [_codeButton setTitle:@"获取验证码" forState:UIControlStateNormal];
         [_codeButton addTarget:self action:@selector(sendCode) forControlEvents:UIControlEventTouchUpInside];
@@ -250,11 +264,56 @@
 
 #pragma mark - Actions
 - (void)sendCode {
-    
+    NSString *phoneNumber = self.mobileTextField.text;
+    if (phoneNumber.length == 0) {
+        [self.contentView makeToast:@"请输入手机号" duration:3.0 position:CSToastPositionCenter];
+        return;
+    }
+    if (![TSTools isPhoneNumber: phoneNumber]) {
+        [self.contentView makeToast:@"请输入正确的手机号" duration:3.0 position:CSToastPositionCenter];
+        return;
+    }
+    self.codeButton.enabled = NO;
+    __weak typeof(self) weakSelf = self;
+    self.timer = [NSTimer ts_scheduledTimerWithTimeInterval:1 block:^{
+         [weakSelf goToRun];
+    } repeats:YES];
+}
+
+- (void)goToRun {
+    if (self.count <= 1) {
+        self.count = 60;
+        [self.timer invalidate];
+        self.codeButton.enabled = YES;
+        [self.codeButton setTitle:@"重发验证码" forState:UIControlStateNormal];
+    } else {
+        self.count--;
+        [self.codeButton setTitle:[NSString stringWithFormat:@"%lds", (long)self.count] forState:UIControlStateNormal];
+    }
+}
+
+- (void)enabledButton:(BOOL)enabled {
+    if ((self.commitButton.enabled && !enabled) || (!self.commitButton.enabled && enabled)) {
+        self.commitButton.enabled = enabled;
+        self.commitButton.backgroundColor = enabled ? KHexColor(@"#FF4D49") : KHexColor(@"#DDDDDD");
+    }
 }
 
 - (void)textFieldDidChangeValue:(UITextField *)textField {
     
+    if (self.mobileTextField.text.length && [TSTools isPhoneNumber: self.mobileTextField.text]) {
+        self.codeButton.enabled = YES;
+        if (self.codeTextField.text.length) {
+            [self enabledButton: YES];
+        } else {
+            [self enabledButton: NO];
+        }
+    } else {
+        if (self.codeButton.enabled) {
+            self.codeButton.enabled = NO;
+        }
+        [self enabledButton: NO];
+    }
 }
 
 - (void)commitAction {

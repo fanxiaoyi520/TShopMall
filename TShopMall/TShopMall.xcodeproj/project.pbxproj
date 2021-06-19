@@ -78,6 +78,9 @@
 		C35F1865267C7F8A00F65AF9 /* TSDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = C35F185F267C7F8800F65AF9 /* TSDatePickerView.m */; };
 		C35F1866267C7F8A00F65AF9 /* TSChangePictureActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = C35F1862267C7F8900F65AF9 /* TSChangePictureActionSheet.m */; };
 		C35F1867267C7F8A00F65AF9 /* TSSexSelectingView.m in Sources */ = {isa = PBXBuildFile; fileRef = C35F1864267C7F8A00F65AF9 /* TSSexSelectingView.m */; };
+		C35F186D267D954700F65AF9 /* TSAccountCancelNextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C35F186C267D954700F65AF9 /* TSAccountCancelNextViewController.m */; };
+		C35F1870267D963100F65AF9 /* TSAccountCancelConfirmViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C35F186F267D963100F65AF9 /* TSAccountCancelConfirmViewController.m */; };
+		C35F1873267D970800F65AF9 /* TSAccountCancelDropViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C35F1872267D970800F65AF9 /* TSAccountCancelDropViewController.m */; };
 		C3A6C470267A1BEA00FC71D6 /* TSBindMobileController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A6C45B267A1BDF00FC71D6 /* TSBindMobileController.m */; };
 		C3A6C471267A1BEA00FC71D6 /* TSBindThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A6C45D267A1BE000FC71D6 /* TSBindThirdViewController.m */; };
 		C3A6C472267A1BEA00FC71D6 /* TSPhoneNumVeriViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A6C45E267A1BE100FC71D6 /* TSPhoneNumVeriViewController.m */; };
@@ -426,6 +429,12 @@
 		C35F1862267C7F8900F65AF9 /* TSChangePictureActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSChangePictureActionSheet.m; sourceTree = "<group>"; };
 		C35F1863267C7F8A00F65AF9 /* TSSexSelectingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSSexSelectingView.h; sourceTree = "<group>"; };
 		C35F1864267C7F8A00F65AF9 /* TSSexSelectingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSSexSelectingView.m; sourceTree = "<group>"; };
+		C35F186B267D954700F65AF9 /* TSAccountCancelNextViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSAccountCancelNextViewController.h; sourceTree = "<group>"; };
+		C35F186C267D954700F65AF9 /* TSAccountCancelNextViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSAccountCancelNextViewController.m; sourceTree = "<group>"; };
+		C35F186E267D963100F65AF9 /* TSAccountCancelConfirmViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSAccountCancelConfirmViewController.h; sourceTree = "<group>"; };
+		C35F186F267D963100F65AF9 /* TSAccountCancelConfirmViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSAccountCancelConfirmViewController.m; sourceTree = "<group>"; };
+		C35F1871267D970800F65AF9 /* TSAccountCancelDropViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSAccountCancelDropViewController.h; sourceTree = "<group>"; };
+		C35F1872267D970800F65AF9 /* TSAccountCancelDropViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSAccountCancelDropViewController.m; sourceTree = "<group>"; };
 		C3A6C45A267A1BDF00FC71D6 /* TSSecurCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSSecurCenterViewController.h; sourceTree = "<group>"; };
 		C3A6C45B267A1BDF00FC71D6 /* TSBindMobileController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSBindMobileController.m; sourceTree = "<group>"; };
 		C3A6C45C267A1BE000FC71D6 /* TSBindThirdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSBindThirdViewController.h; sourceTree = "<group>"; };
@@ -1109,6 +1118,12 @@
 				C3A6C467267A1BE600FC71D6 /* TSAboutMeViewController.m */,
 				C3A6C465267A1BE500FC71D6 /* TSAccountCancelViewController.h */,
 				C3A6C46B267A1BE800FC71D6 /* TSAccountCancelViewController.m */,
+				C35F186B267D954700F65AF9 /* TSAccountCancelNextViewController.h */,
+				C35F186C267D954700F65AF9 /* TSAccountCancelNextViewController.m */,
+				C35F186E267D963100F65AF9 /* TSAccountCancelConfirmViewController.h */,
+				C35F186F267D963100F65AF9 /* TSAccountCancelConfirmViewController.m */,
+				C35F1871267D970800F65AF9 /* TSAccountCancelDropViewController.h */,
+				C35F1872267D970800F65AF9 /* TSAccountCancelDropViewController.m */,
 				C3A6C46C267A1BE800FC71D6 /* TSBindMobileController.h */,
 				C3A6C45B267A1BDF00FC71D6 /* TSBindMobileController.m */,
 				C3A6C45C267A1BE000FC71D6 /* TSBindThirdViewController.h */,
@@ -2515,6 +2530,7 @@
 				F55D2C6626722807006BACCF /* TSMeasureCell.m in Sources */,
 				F55D2C6F26723C2B006BACCF /* TSRecommendCell.m in Sources */,
 				C3B4CCF12674934E0001EE75 /* TSQuickLoginTopView.m in Sources */,
+				C35F1870267D963100F65AF9 /* TSAccountCancelConfirmViewController.m in Sources */,
 				C3A6C4C5267A1C5700FC71D6 /* TSBindThirdAppCell.m in Sources */,
 				F54973CB2668C27300181E3F /* TSH5InterfacedConst.m in Sources */,
 				F55D2ABE266E0C6B006BACCF /* UIView+TSSafeArea.m in Sources */,
@@ -2595,6 +2611,7 @@
 				F55D2CF32678A6B9006BACCF /* TSGoodDetailItemModel.m in Sources */,
 				C3A6C48E267A1C1700FC71D6 /* TSPhoneNumSectionModel.m in Sources */,
 				F55D2CA026745E7A006BACCF /* TSLastUserInfoManager.m in Sources */,
+				C35F1873267D970800F65AF9 /* TSAccountCancelDropViewController.m in Sources */,
 				C3A6C4E7267A1CAF00FC71D6 /* TSAboutMeDataController.m in Sources */,
 				F55D2C372671E14B006BACCF /* TSUniversalTableViewCell.m in Sources */,
 				F54973C22668C0BC00181E3F /* TSDeviceHelper.m in Sources */,
@@ -2666,6 +2683,7 @@
 				C3A6C4C1267A1C5700FC71D6 /* TSCommitCell.m in Sources */,
 				C3A6C47A267A1BEA00FC71D6 /* TSAccountCancelViewController.m in Sources */,
 				DC45FEC026783A6E00CE762E /* TSHomePageContainerCollectionViewCell.m in Sources */,
+				C35F186D267D954700F65AF9 /* TSAccountCancelNextViewController.m in Sources */,
 				C2EF88C42670997100E7374A /* TSCartInvalidCell.m in Sources */,
 				C3A6C474267A1BEA00FC71D6 /* TSSecurCenterViewController.m in Sources */,
 				F56D4B45266DFB8900C1AD9E /* FMLayoutFooter.m in Sources */,

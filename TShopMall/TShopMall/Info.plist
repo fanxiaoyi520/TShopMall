@@ -50,5 +50,9 @@
 	<string>Light</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>App将访问您的相册获取相片</string>
+	<key>NSCameraUsageDescription</key>
+	<string>App将访问您的相机</string>
 </dict>
 </plist>
