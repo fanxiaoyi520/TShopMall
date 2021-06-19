@@ -6,6 +6,7 @@
 //
 
 #import "TSCommitCell.h"
+#import "TSAccountCancelSectionModel.h"
 
 @interface TSCommitCell ()
 /** 取消 */
@@ -30,7 +31,6 @@
     }];
 }
 
-
 - (UIButton *)commitButton {
     if (_commitButton == nil) {
         UIButton *commitButton = [[UIButton alloc] init];
@@ -39,7 +39,7 @@
         _commitButton.layer.cornerRadius = 20;
         _commitButton.clipsToBounds = YES;
         _commitButton.titleLabel.font = KRegularFont(16);
-        [_commitButton setTitle:@"确认" forState:UIControlStateNormal];
+        //[_commitButton setTitle:@"确认" forState:UIControlStateNormal];
         [_commitButton addTarget:self action:@selector(commitAction) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:_commitButton];
     }
@@ -48,6 +48,11 @@
 
 - (void)commitAction {
     
+}
+
+- (void)setDelegate:(id<UniversalCollectionViewCellDataDelegate>)delegate {
+    TSAccountCancelSectionItemModel *item = [delegate universalCollectionViewCellModel:self.indexPath];
+    [self.commitButton setTitle:item.title forState:UIControlStateNormal];
 }
 
 @end

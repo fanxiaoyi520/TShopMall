@@ -16,6 +16,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)fetchContentsComplete:(void(^)(BOOL isSucess))complete;
 
+- (void)fetchCancelNextContentsComplete:(void(^)(BOOL isSucess))complete;
+
+- (void)fetchCancelLastConfirmContentsComplete:(void(^)(BOOL isSucess))complete;
+
+- (void)fetchDropConfirmContentsComplete:(void(^)(BOOL isSucess))complete;
+
 @end
 
 NS_ASSUME_NONNULL_END

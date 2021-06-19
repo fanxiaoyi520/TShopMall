@@ -7,6 +7,9 @@
 
 #import "TSPhoneNumVeriCell.h"
 #import "TSPhoneNumSectionModel.h"
+#import "NSTimer+TSBlcokTimer.h"
+#import "TSTools.h"
+#import <Toast.h>
 
 @interface TSPhoneNumVeriCell ()
 /** 手机号 */
@@ -27,6 +30,10 @@
 @property(nonatomic, weak) UILabel *tipsLabel;
 /** 垂直分割线 */
 @property(nonatomic, weak) UIView *verticalSplitView;
+/** 验证码倒计时 */
+@property(nonatomic, assign) NSInteger count;
+/** 定时器 */
+@property (nonatomic, strong) NSTimer *timer;
 
 @end
 
@@ -34,9 +41,15 @@
 
 - (void)fillCustomContentView {
     [super fillCustomContentView];
+    self.count = 60;
     self.contentView.backgroundColor = KWhiteColor;
     ///添加约束
     [self addConstraints];
+}
+
+- (void)dealloc {
+    [self.timer invalidate];
+    self.timer = nil;
 }
 
 - (void)addConstraints {
@@ -151,7 +164,7 @@
         UIButton *codeButton = [[UIButton alloc] init];
         _codeButton = codeButton;
         _codeButton.titleLabel.font = KRegularFont(16);
-        [_codeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_codeButton setTitleColor:KHexAlphaColor(@"#2D3132", 0.2) forState:UIControlStateDisabled];
         [_codeButton setTitleColor:KHexColor(@"#FF4D49") forState:UIControlStateNormal];
         [_codeButton setTitle:@"获取验证码" forState:UIControlStateNormal];
         [_codeButton addTarget:self action:@selector(sendCode) forControlEvents:UIControlEventTouchUpInside];
@@ -186,6 +199,8 @@
         _commitButton.clipsToBounds = YES;
         _commitButton.titleLabel.font = KRegularFont(16);
         _commitButton.enabled = NO;
+        [_commitButton setTitleColor:KWhiteColor forState:(UIControlStateNormal)];
+        [_commitButton setTitleColor:KHexAlphaColor(@"#2D3132", 0.4) forState:(UIControlStateDisabled)];
         [_commitButton setTitle:@"提交" forState:UIControlStateNormal];
         [_commitButton addTarget:self action:@selector(commitAction) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:_commitButton];
@@ -205,11 +220,46 @@
 
 #pragma mark - Actions
 - (void)sendCode {
-    
+    NSString *phoneNumber = self.phoneNumLabel.text;
+    if ([self.phoneNumLabel.text containsString:@"-"]) {
+        phoneNumber = [phoneNumber stringByReplacingOccurrencesOfString:@"-" withString:@""];
+    }
+    if (![TSTools isPhoneNumber: phoneNumber]) {
+        [self.contentView makeToast:@"不是正确的手机号" duration:3.0 position:CSToastPositionCenter];
+        return;
+    }
+    __weak typeof(self) weakSelf = self;
+    self.codeButton.enabled = NO;
+    self.timer = [NSTimer ts_scheduledTimerWithTimeInterval:1 block:^{
+         [weakSelf goToRun];
+    } repeats:YES];
+}
+
+- (void)goToRun {
+    if (self.count <= 1) {
+        self.count = 60;
+        [self.timer invalidate];
+        self.codeButton.enabled = YES;
+        [self.codeButton setTitle:@"重发验证码" forState:UIControlStateNormal];
+    } else {
+        self.count--;
+        [self.codeButton setTitle:[NSString stringWithFormat:@"%lds", (long)self.count] forState:UIControlStateNormal];
+    }
+}
+
+- (void)enabledButton:(BOOL)enabled {
+    if ((self.commitButton.enabled && !enabled) || (!self.commitButton.enabled && enabled)) {
+        self.commitButton.enabled = enabled;
+        self.commitButton.backgroundColor = enabled ? KHexColor(@"#FF4D49") : KHexColor(@"#DDDDDD");
+    }
 }
 
 - (void)textFieldDidChangeValue:(UITextField *)textField {
-    
+    if (self.codeTextField.text.length) {
+        [self enabledButton: YES];
+    } else {
+        [self enabledButton: NO];
+    }
 }
 
 - (void)commitAction {

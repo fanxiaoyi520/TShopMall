@@ -25,10 +25,9 @@
         [marr addObject:model];
     }
     self.segmentHeaderDatas = marr;
-//    self.currentGroup = marr.firstObject;
 }
 
-- (void)getPageContainerDataWithStartPageIndex:(NSInteger)startIndex count:(NSInteger)count group:(TSHomePageContainerGroup *)group{
+- (void)getPageContainerDataWithStartPageIndex:(NSInteger)startIndex count:(NSInteger)count group:(TSHomePageContainerGroup *)group callBack:(nonnull void (^)(NSArray * _Nonnull, NSError * _Nonnull))listCallBack{
     
     NSMutableDictionary *body = [NSMutableDictionary dictionary];
     [body setValue:@"platform_tcl_shop" forKey:@"platform"];
@@ -60,24 +59,20 @@
             NSMutableArray *marr = [NSMutableArray arrayWithArray:group.list];
             [marr addObjectsFromArray:temp];
             group.list = marr;
-            self.currentGroup = group;
-
+            listCallBack(group.list, nil);
         }
         
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-
+        listCallBack(nil, [NSError new]);
     }];
 }
 
-- (void)loadData:(TSHomePageContainerGroup *)group{
+- (void)loadData:(TSHomePageContainerGroup *)group callBack:(nonnull void (^)(NSArray * _Nonnull, NSError * _Nonnull))listCallBack{
     
-    if (group.list.count) {
-        self.currentGroup = group;
-    }
-    else{
-        NSInteger count = group.list.count?(group.totalNum/group.list.count + 1):1;
-        [self getPageContainerDataWithStartPageIndex:count count:10 group:group];
-    }
+    NSInteger count = group.list.count?(group.totalNum/group.list.count + 1):1;
+    [self getPageContainerDataWithStartPageIndex:count count:10 group:group callBack:listCallBack];
 }
+
+
 
 @end

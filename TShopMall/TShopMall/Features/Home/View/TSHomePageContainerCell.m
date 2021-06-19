@@ -7,98 +7,130 @@
 
 #import "TSHomePageContainerCell.h"
 #import "TSHomePageContainerViewModel.h"
-@interface TSHomePageContainerCell()<UIScrollViewDelegate>
+#import "TSHomePageContainerCollectionView.h"
+#import "YBNestViews.h"
+#import <MJRefresh/MJRefresh.h>
+#import "TSEmptyAlertView.h"
+
+@interface TSHomePageContainerCell()<YBNestContainerViewDataSource, YBNestContainerViewDelegate>
 @property(nonatomic, strong) TSHomePageContainerViewModel *containerViewModel;
 
 @end
 @implementation TSHomePageContainerCell
-- (void)dealloc
-{
-    
-}
+
 - (void)setupUI{
-    [self.contentView addSubview:self.containerScrollView];
-    [self.containerScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.contentView addSubview:self.containerView];
+    [self.containerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.contentView);
-    }];
+        make.width.equalTo(@(kScreenWidth));
+        make.height.equalTo(@(100));
+       }];
+}
+
+- (void)setContainerHeight:(CGFloat)containerHeight{
+    _containerHeight = containerHeight;
+    [self.containerView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.height.equalTo(@(containerHeight));
+       }];
+}
+
+- (void)showEmptyView:(TSHomePageContainerCollectionView *)view{
+    if (view.items.count != 0) {
+        [TSEmptyAlertView hideInView:view];
+        return ;
+    }
+    
+    TSEmptyAlertView.new.alertInfo(@"抱歉，没有找到商品哦～", @"重试").show(view, ^{
+        [self reloadContainerCollectionView:view];
+    });
+}
+
+- (void)showErrorView:(TSHomePageContainerCollectionView *)view{
+    @weakify(self);
+    TSEmptyAlertView *alertView = [TSEmptyAlertView new];
+    alertView.alertInfo(@"服务器开小差了", @"刷新");
+    [view addSubview:alertView];
+    alertView.frame = view.bounds;
+    alertView.alertImage(@"homePage_container_error");
+    alertView.show(view, ^{
+        @strongify(self);
+        [self reloadContainerCollectionView:view];
+    });
 }
 
 - (void)setViewModel:(TSHomePageCellViewModel *)viewModel{
+    
+    if (_containerViewModel != viewModel && _containerViewModel != nil) {
+        [self.containerView reloadData];
+    }
+    
     [super setViewModel:viewModel];
     self.containerViewModel = (TSHomePageContainerViewModel *)viewModel;
-    if (self.containerScrollView.collectionViewGroup.count == 0) {
-        [self.containerScrollView loadPageContainer:self.containerViewModel.segmentHeaderDatas.count];
-    }
-    
-    if (self.containerViewModel.currentGroup) {
-        NSInteger currentIndex = [self.containerViewModel.segmentHeaderDatas indexOfObject:self.containerViewModel.currentGroup];
-        
-        NSArray *items = self.containerViewModel.currentGroup.list;
-        if (items.count) {
-            [self.containerScrollView updatePageContainerWithItems:items pageIndex:currentIndex];
-            [self.containerScrollView layoutIfNeeded];
-            [self.containerScrollView mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.height.equalTo(@(self.containerScrollView.contentSize.height));
-            }];
-//            [self tableviewReloadCell];
-            
-            [self.containerScrollView setContentOffset:CGPointMake(kScreenWidth * currentIndex, 0)];
-            self.containerScrollView.currentPage = currentIndex;
+    @weakify(self);
+    [self.KVOController observe:self.containerViewModel keyPath:@"pageIndex" options:(NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew) block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
+        @strongify(self)
+        if (self.containerView.currentPage != self.containerViewModel.pageIndex) {
+            self.containerView.currentPage = self.containerViewModel.pageIndex;
         }
-    }
+        
+    }];
     
 }
 
-- (TSHomePageContainerScrollView *)containerScrollView{
-    if (!_containerScrollView) {
-        _containerScrollView = [[TSHomePageContainerScrollView alloc] init];
-        _containerScrollView.delegate = self;
+- (YBNestContainerView *)containerView {
+    if (!_containerView) {
+        _containerView = [YBNestContainerView viewWithDataSource:self];
+        _containerView.delegate = self;
     }
-    return _containerScrollView;
+    return _containerView;
 }
 
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    BOOL scrollToScrollStop = !scrollView.tracking && !scrollView.dragging && !scrollView.decelerating;
-    if (scrollToScrollStop) {
-        // 停止后要执行的代码
-        
-        int currentPage = floor((scrollView.contentOffset.x - kScreenWidth / 2) / kScreenWidth) + 1;
-        NSLog(@"currentPage %ld",currentPage);
-        if (scrollView == self.containerScrollView) {
-            if (currentPage != self.containerScrollView.currentPage) {
-                self.containerScrollView.pageIndex = currentPage;
-            }else{
-                NSLog(@"no currentPage");
-            }
-            
-            //        self.containerViewModel.currentGroup = self.containerViewModel.segmentHeaderDatas[currentPage];
-        }else{
-            NSLog(@"no ");
-        }
-    }
+#pragma mark - <YBNestContainerViewDataSource>
+
+- (NSInteger)yb_numberOfContentsInNestContainerView:(YBNestContainerView *)view {
+    return 1;
 }
 
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-    if (!decelerate) {
-        BOOL dragToDragStop = scrollView.tracking && !scrollView.dragging && !scrollView.decelerating;
-        if (dragToDragStop) {
-            // 停止后要执行的代码
-            
-            int currentPage = floor((scrollView.contentOffset.x - kScreenWidth / 2) / kScreenWidth) + 1;
-            NSLog(@"currentPage %ld",currentPage);
-            if (scrollView == self.containerScrollView) {
-                if (currentPage != self.containerScrollView.currentPage) {
-                    self.containerScrollView.currentPage = currentPage;
-                }else{
-                    NSLog(@"no currentPage");
-                }
-                
-                //        self.containerViewModel.currentGroup = self.containerViewModel.segmentHeaderDatas[currentPage];
-            }else{
-                NSLog(@"no ");
+- (id<YBNestContentProtocol>)yb_nestContainerView:(YBNestContainerView *)view contentAtPage:(NSInteger)page{
+    UIEdgeInsets padding = UIEdgeInsetsMake(0, 16, 16, 16);
+   
+    TSHomePageContainerCollectionView *collectionView =  [[TSHomePageContainerCollectionView alloc] initWithFrame:CGRectZero items:nil ColumnSpacing:8 rowSpacing:8 itemsHeight:282 rows:0 columns:2 padding:padding clickedBlock:^(TSProductBaseModel *selectItem, NSInteger index) {
+        NSLog(@"uri:%@", selectItem.uuid);
+    }];
+    collectionView.collectionView.backgroundColor = KGrayColor;
+    @weakify(self);
+    collectionView.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        @strongify(self)
+        [self reloadContainerCollectionView:collectionView];
+
+    }];
+    [self reloadContainerCollectionView:collectionView];
+    
+    return collectionView;
+}
+
+- (void)reloadContainerCollectionView:(TSHomePageContainerCollectionView *)collectionView{
+    TSHomePageContainerGroup *group = self.containerViewModel.segmentHeaderDatas[self.containerViewModel.pageIndex];
+    [self.containerViewModel loadData:group callBack:^(NSArray * _Nonnull list, NSError * _Nonnull error) {
+        if (!error) {
+            collectionView.items = list;
+            [collectionView reloadData];
+            if (list.count < group.totalNum) {
+                [collectionView.collectionView.mj_footer resetNoMoreData];
+            } else {
+                [collectionView.collectionView.mj_footer endRefreshingWithNoMoreData];
             }
+            [self showEmptyView:collectionView];
         }
-    }
+        else{
+            [self showErrorView:collectionView];
+        }
+    }];
+}
+
+#pragma mark - nestContainerViewDelegate
+- (void)yb_nestContainerView:(YBNestContainerView *)view pageChanged:(NSInteger)page{
+    self.containerViewModel.pageIndex = page;
 }
 
 @end

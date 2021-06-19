@@ -21,11 +21,6 @@
         _items = items;
         _layout = [[TSCollectionViewMeanWidthLayout alloc] initWithColumnSpacing:columnSpacing rowSpacing:rowSpacing itemsHeight:height rows:rows columns:columns padding:padding];
         self.clickedBlock = clickedBlock;
-//        self.delegate = self;
-//        self.dataSource = self;
-//        self.showsVerticalScrollIndicator = NO;
-//        self.showsHorizontalScrollIndicator = NO;
-//        [self registerClass:[TSHomePageContainerCollectionViewCell class] forCellWithReuseIdentifier:@"TSHomePageContainerCollectionViewCell"];
 
         [self setUI];
     }
@@ -43,11 +38,10 @@
 - (void)reloadData
 {
     [_collectionView reloadData];
-    [_collectionView layoutIfNeeded];
-    [self mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.height.equalTo(@(_collectionView.contentSize.height));
-    }];
-    NSLog(@"collectionView.contentSize.height1:%f",_collectionView.contentSize.height);
+//    [_collectionView layoutIfNeeded];
+//    [self mas_updateConstraints:^(MASConstraintMaker *make) {
+//        make.height.equalTo(@(_collectionView.contentSize.height));
+//    }];
 }
 #pragma mark - UICollectionViewDelegate, UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -67,24 +61,13 @@
 
     TSProductBaseModel *item = self.items[indexPath.row];
     cell.item = item;
-//        if (item.isSelected) {
-//            [collectionView selectItemAtIndexPath:indexPath animated:NO scrollPosition:UICollectionViewScrollPositionNone];
-//        }
-        return cell;
+    return cell;
     
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     TSProductBaseModel *item = self.items[indexPath.row];
-//    if (item.isSelected) {
-//        if(_clickedBlock) {
-//            self.clickedBlock(item, indexPath.row);
-//        }
-//        return;
-//    }
-//
-//    item.isSelected = !item.isSelected;
     
     if (_clickedBlock) {
         self.clickedBlock(item,indexPath.row);
@@ -93,8 +76,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-//    TSProductBaseModel *item = self.items[indexPath.row];
-//    item.isSelected = !item.isSelected;
+
 }
 
 #pragma mark setter & getter
@@ -109,5 +91,29 @@
         [_collectionView registerClass:[TSHomePageContainerCollectionViewCell class] forCellWithReuseIdentifier:@"TSHomePageContainerCollectionViewCell"];
     }
     return _collectionView;
+}
+
+#pragma mark - JXCategoryListContentViewDelegate
+
+#pragma mark - <YBNestContentProtocol>
+
+@synthesize yb_scrollViewDidScroll = _yb_scrollViewDidScroll;
+
+- (UIView *)yb_contentView {
+    return self;
+}
+
+- (UIScrollView *)yb_contentScrollView {
+    return self.collectionView;
+}
+
+- (void)yb_contentWillAppear {
+}
+
+- (void)yb_contentDidDisappear {
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    self.yb_scrollViewDidScroll(scrollView);
 }
 @end

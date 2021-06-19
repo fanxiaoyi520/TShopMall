@@ -14,6 +14,7 @@
 #import "TSWithdrawalPswSetController.h"
 #import "TSAccountCancelViewController.h"
 #import "TSSecurCenterViewController.h"
+#import "TSAlertView.h"
 
 @interface TSSecurityViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate>
 /// 数据中心
@@ -78,6 +79,19 @@
     }
     return _dataController;
 }
+/** 解绑微信 */
+- (void)showUnbindWechatAlert {
+    TSAlertView.new.alertInfo(@"确认解绑", @"解绑后需要重新绑定微信账号，才能用微信登录").confirm(@"继续解绑", ^{
+        
+    }).cancel(@"取消", ^{}).show();
+}
+
+/** 解绑Apple登录 */
+- (void)showUnbindAppleAlert {
+    TSAlertView.new.alertInfo(@"确认解绑", @"解绑后需要重新绑定Apple账号，才能用Apple账号登录").confirm(@"继续解绑", ^{
+        
+    }).cancel(@"取消", ^{}).show();
+}
 
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -100,9 +114,10 @@
     return cell;
 }
 
--(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0 && indexPath.item == 0) {
         TSBindMobileController *bindVC = [[TSBindMobileController alloc] init];
+//        TSPhoneNumVeriViewController *bindVC = [[TSPhoneNumVeriViewController alloc] init];
         [self.navigationController pushViewController:bindVC animated:YES];
         return;
     } else if (indexPath.section == 0 && indexPath.item == 1) {
