@@ -16,6 +16,18 @@
 @end
 
 @implementation TSHomePageReleaseCell
+-(void)setupUI{
+    [self.contentView addSubview:self.iconImageView];
+    CGFloat height = kScreenWidth/345 * 447;
+
+    [self.iconImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.contentView).offset(16);
+        make.right.equalTo(self.contentView).offset(-16);
+        make.top.equalTo(self.contentView);
+        make.height.equalTo(@(height));
+        make.bottom.equalTo(self.contentView);
+    }];
+}
 
 - (void)setViewModel:(TSHomePageCellViewModel *)viewModel{
     [super setViewModel:viewModel];
@@ -25,13 +37,8 @@
     releaseViewModel.releaseModel = temp.firstObject;
 
     CGFloat height = kScreenWidth/releaseViewModel.releaseModel.imageData.width * releaseViewModel.releaseModel.imageData.height;
-    [self.contentView addSubview:self.iconImageView];
-    [self.iconImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.contentView).offset(16);
-        make.right.equalTo(self.contentView).offset(-16);
-        make.top.equalTo(self.contentView);
+    [self.iconImageView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@(height));
-        make.bottom.equalTo(self.contentView);
     }];
     
     [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:releaseViewModel.releaseModel.imageData.url]];

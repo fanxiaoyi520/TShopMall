@@ -34,13 +34,12 @@
     NSArray *temp = [NSArray yy_modelArrayWithClass:TSImageBaseModel.class json:bannerViewModel.model.data[@"list"]];
     bannerViewModel.bannerDatas = [NSMutableArray arrayWithArray:temp];
     
-    if (!_cycleScrollView.imageURLStringsGroup.count) {
-        NSMutableArray *tempArr = @[].mutableCopy;
-        for (TSImageBaseModel *model in temp) {
-            [tempArr addObject:model.imageData.url];
-        }
-        _cycleScrollView.imageURLStringsGroup = tempArr;
+    NSMutableArray *tempArr = @[].mutableCopy;
+    for (TSImageBaseModel *model in temp) {
+        [tempArr addObject:model.imageData.url];
     }
+    _cycleScrollView.imageURLStringsGroup = tempArr;
+    
 }
 
 #pragma mark - Getter

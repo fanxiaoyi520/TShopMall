@@ -6,9 +6,9 @@
 //
 
 #import "TSMakeOrderView.h"
-#import "TSCartBaseCell.h"
+#import "TSMakeOrderBaseCell.h"
 
-@interface TSMakeOrderView()<UITableViewDelegate, UITableViewDataSource, TSCartProtocol>{
+@interface TSMakeOrderView()<UITableViewDelegate, UITableViewDataSource, TSMakeOrderCellDelegate>{
     
 }
 @property (nonatomic, strong) UITableView *tableView;
@@ -23,6 +23,16 @@
         }
     }
     return self;
+}
+
+//选择配送方式
+- (void)operationForChangeDelivery{
+    
+}
+
+//选择发票
+- (void)operationForChangeBill{
+    
 }
 
 - (void)setSections:(NSMutableArray<TSMakeOrderSection *> *)sections{
@@ -42,11 +52,17 @@
     TSCartGoodsRow *row = self.sections[indexPath.section].rows[indexPath.row];
     Class cla = NSClassFromString(row.cellIdentifier);
     [tableView registerClass:cla forCellReuseIdentifier:row.cellIdentifier];
-    TSCartBaseCell *cell = [tableView dequeueReusableCellWithIdentifier:row.cellIdentifier];
+    TSMakeOrderBaseCell *cell = [tableView dequeueReusableCellWithIdentifier:row.cellIdentifier];
     cell.obj = row.obj;
     cell.delegate = self;
     cell.indexPath = indexPath;
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 0) {
+        [self.controller performSelector:@selector(gotoSelectedAddress)];
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

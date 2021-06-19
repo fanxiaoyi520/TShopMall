@@ -11,6 +11,7 @@
 #import "TSCartSettleView.h"
 #import "TSCartProtocol.h"
 #import "TSAlertView.h"
+#import "TSMakeOrderController.h"
 
 @interface TSCartViewController ()<TSCartProtocol>
 @property (nonatomic, strong) UIButton *editBtn;
@@ -61,7 +62,8 @@
         [self batchDelete];
         
     } else {
-        
+        TSMakeOrderController *con  = [TSMakeOrderController new];
+        [self.navigationController pushViewController:con animated:YES];
     }
 }
 

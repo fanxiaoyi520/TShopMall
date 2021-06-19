@@ -12,11 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TSHomePageContainerViewModel : TSHomePageCellViewModel
 @property (nonatomic, strong) NSArray <TSHomePageContainerGroup *> *segmentHeaderDatas;
-@property (nonatomic, strong) TSHomePageContainerGroup *currentGroup;
+@property (nonatomic, assign) NSInteger pageIndex;
 
-- (void)getPageContainerDataWithStartPageIndex:(NSInteger)startIndex count:(NSInteger)count group:(TSHomePageContainerGroup *)group;
-
-- (void)loadData:(TSHomePageContainerGroup *)group;
+- (void)loadData:(TSHomePageContainerGroup *)group callBack:(void (^)(NSArray * _Nonnull list, NSError * _Nonnull error))listCallBack;
 - (void)getSegmentHeaderData;
 @end
 

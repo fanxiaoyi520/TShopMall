@@ -8,8 +8,9 @@
 #import "TSHomePageContainerHeaderView.h"
 #import "KVOController.h"
 #import "TSHomePageContainerGroup.h"
-@interface TSHomePageContainerHeaderView ()<JXCategoryViewDelegate>
 
+@interface TSHomePageContainerHeaderView ()<JXCategoryViewDelegate>
+@property (nonatomic, strong) JXCategoryTitleView *segmentHeader;
 @end
 
 @implementation TSHomePageContainerHeaderView
@@ -32,27 +33,30 @@
     }];
 }
 
-- (void)setViewModel:(TSHomePageCellViewModel *)viewModel{
+- (void)setViewModel:(TSHomePageContainerViewModel *)viewModel{
     _viewModel = viewModel;
-    TSHomePageContainerViewModel *headerViewModel = (TSHomePageContainerViewModel *)viewModel;
-    if (!headerViewModel.segmentHeaderDatas.count) {
-        [headerViewModel getSegmentHeaderData];
+    _viewModel = (TSHomePageContainerViewModel *)viewModel;
+    if (!_viewModel.segmentHeaderDatas.count) {
+        [_viewModel getSegmentHeaderData];
     }
     @weakify(self);
-    [self.KVOController observe:headerViewModel keyPath:@"segmentHeaderDatas" options:(NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew) block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
+    [self.KVOController observe:_viewModel keyPath:@"segmentHeaderDatas" options:(NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew) block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
         @strongify(self)
         NSMutableArray *titles = @[].mutableCopy;
-        for (int i = 0; i < headerViewModel.segmentHeaderDatas.count; i ++) {
-            TSHomePageContainerGroup *model = headerViewModel.segmentHeaderDatas[i];
+        for (int i = 0; i < self.viewModel.segmentHeaderDatas.count; i ++) {
+            TSHomePageContainerGroup *model = self.viewModel.segmentHeaderDatas[i];
             [titles addObject:model.name];
         }
         self.segmentHeader.titles = titles;
     }];
-
-}
-
-- (void)categoryView:(JXCategoryBaseView *)categoryView didSelectedItemAtIndex:(NSInteger)index{
     
+    [self.KVOController observe:_viewModel keyPath:@"pageIndex" options:(NSKeyValueObservingOptionInitial) block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
+        @strongify(self)
+        if (self.segmentHeader.selectedIndex != self.viewModel.pageIndex) {
+            [self.segmentHeader selectItemAtIndex:self.viewModel.pageIndex];
+        }
+    }];
+
 }
 
 - (JXCategoryTitleView *)segmentHeader{
@@ -64,8 +68,12 @@
         _segmentHeader.titleColor = KHexAlphaColor(@"#2D3132", .4);
         _segmentHeader.titleFont = KFont(PingFangSCRegular, 16.0);
         _segmentHeader.titleSelectedFont = KFont(PingFangSCRegular, 16.0);
-
     }
     return _segmentHeader;
+}
+
+#pragma mark - categoryViewDelegate
+- (void)categoryView:(JXCategoryBaseView *)categoryView didSelectedItemAtIndex:(NSInteger)index{
+    _viewModel.pageIndex = index;
 }
 @end
