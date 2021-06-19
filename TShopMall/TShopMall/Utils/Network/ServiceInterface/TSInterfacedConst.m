@@ -27,5 +27,11 @@ NSString * const kProducts = @"/rest/v2/product/category/groups/searchProducts";
 #pragma mark - 排行
 
 #pragma mark - 采购蓝
+NSString * const kProvice = @"/rest/v2/usercenter/region/getAllProvince";
+NSString * const kCities = @"/rest/v2/usercenter/region/getCitysByProvinceUuid";
+NSString * const kAreas = @"/rest/v2/usercenter/region/getRegionsByCityUuid";
+NSString * const kStreets = @"/rest/v2/usercenter/region/getStreetsByRegionUuid";
+
+
 
 #pragma mark - 我的

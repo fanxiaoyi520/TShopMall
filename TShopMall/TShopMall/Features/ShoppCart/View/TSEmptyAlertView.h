@@ -12,7 +12,7 @@
 @property (nonatomic, copy) TSEmptyAlertView *(^alertBackColor)(UIColor *bgColor);
 @property (nonatomic, copy) TSEmptyAlertView *(^alertImage)(NSString *alertImg);
 @property (nonatomic, copy) TSEmptyAlertView *(^alertInfo)(NSString *tips, NSString *btnStr);
-@property (nonatomic, copy) TSEmptyAlertView *(^show)(UIView *onView, void(^btnAction)(void));
+@property (nonatomic, copy) TSEmptyAlertView *(^show)(UIView *onView, NSString *position, void(^btnAction)(void));
 
 + (void)hideInView:(UIView *)inView;
 @end

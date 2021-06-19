@@ -21,6 +21,9 @@
 		C21A4B8D267B534A00766F72 /* TSAddressMarkView.m in Sources */ = {isa = PBXBuildFile; fileRef = C21A4B8C267B534A00766F72 /* TSAddressMarkView.m */; };
 		C21A4B90267C79D800766F72 /* TSAreaSelectedController.m in Sources */ = {isa = PBXBuildFile; fileRef = C21A4B8F267C79D800766F72 /* TSAreaSelectedController.m */; };
 		C21A4B93267C7E1000766F72 /* TSAreaCard.m in Sources */ = {isa = PBXBuildFile; fileRef = C21A4B92267C7E1000766F72 /* TSAreaCard.m */; };
+		C21A4B96267CA25200766F72 /* TSAreaDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = C21A4B95267CA25200766F72 /* TSAreaDataController.m */; };
+		C21A4B99267CAAC100766F72 /* TSAreaModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C21A4B98267CAAC100766F72 /* TSAreaModel.m */; };
+		C21A4B9C267D95A000766F72 /* TSLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C21A4B9B267D95A000766F72 /* TSLocationManager.m */; };
 		C28757D5267360E2007C8AF5 /* UIView+General.m in Sources */ = {isa = PBXBuildFile; fileRef = C28757D4267360E2007C8AF5 /* UIView+General.m */; };
 		C2A34C6A267449080095497E /* TSAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2A34C69267449080095497E /* TSAlertView.m */; };
 		C2A34C7726749E3E0095497E /* TSSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2A34C7626749E3D0095497E /* TSSearchController.m */; };
@@ -365,6 +368,12 @@
 		C21A4B8F267C79D800766F72 /* TSAreaSelectedController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSAreaSelectedController.m; sourceTree = "<group>"; };
 		C21A4B91267C7E1000766F72 /* TSAreaCard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSAreaCard.h; sourceTree = "<group>"; };
 		C21A4B92267C7E1000766F72 /* TSAreaCard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSAreaCard.m; sourceTree = "<group>"; };
+		C21A4B94267CA25100766F72 /* TSAreaDataController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSAreaDataController.h; sourceTree = "<group>"; };
+		C21A4B95267CA25200766F72 /* TSAreaDataController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSAreaDataController.m; sourceTree = "<group>"; };
+		C21A4B97267CAAC100766F72 /* TSAreaModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSAreaModel.h; sourceTree = "<group>"; };
+		C21A4B98267CAAC100766F72 /* TSAreaModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSAreaModel.m; sourceTree = "<group>"; };
+		C21A4B9A267D95A000766F72 /* TSLocationManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSLocationManager.h; sourceTree = "<group>"; };
+		C21A4B9B267D95A000766F72 /* TSLocationManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSLocationManager.m; sourceTree = "<group>"; };
 		C28757D3267360E2007C8AF5 /* UIView+General.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+General.h"; sourceTree = "<group>"; };
 		C28757D4267360E2007C8AF5 /* UIView+General.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+General.m"; sourceTree = "<group>"; };
 		C2A34C68267449060095497E /* TSAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSAlertView.h; sourceTree = "<group>"; };
@@ -1058,6 +1067,8 @@
 				C2EF88DA2671E28100E7374A /* TSEmptyAlertView.m */,
 				C2A34C68267449060095497E /* TSAlertView.h */,
 				C2A34C69267449080095497E /* TSAlertView.m */,
+				C21A4B9A267D95A000766F72 /* TSLocationManager.h */,
+				C21A4B9B267D95A000766F72 /* TSLocationManager.m */,
 			);
 			name = Other;
 			sourceTree = "<group>";
@@ -1141,6 +1152,8 @@
 				C2EF88DF2671F79700E7374A /* cart.json */,
 				C21A4B7F267B335D00766F72 /* TSAddressModel.h */,
 				C21A4B80267B335D00766F72 /* TSAddressModel.m */,
+				C21A4B97267CAAC100766F72 /* TSAreaModel.h */,
+				C21A4B98267CAAC100766F72 /* TSAreaModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1165,6 +1178,8 @@
 				C2C765442679ECF4004757B9 /* TSMakeOrderDataController.m */,
 				C21A4B7C267B333500766F72 /* TSShippingAddressDataController.h */,
 				C21A4B7D267B333500766F72 /* TSShippingAddressDataController.m */,
+				C21A4B94267CA25100766F72 /* TSAreaDataController.h */,
+				C21A4B95267CA25200766F72 /* TSAreaDataController.m */,
 			);
 			path = DataController;
 			sourceTree = "<group>";
@@ -2546,6 +2561,7 @@
 				F55D2D112679FDB8006BACCF /* TSMaterialImageCell.m in Sources */,
 				C3A6C4E4267A1CAF00FC71D6 /* TSSettingDataController.m in Sources */,
 				F55D2D20267B1EE9006BACCF /* TSRankHotCellController.m in Sources */,
+				C21A4B9C267D95A000766F72 /* TSLocationManager.m in Sources */,
 				F55D2D38267B3F38006BACCF /* TSRankCell.m in Sources */,
 				F54973632668A22100181E3F /* YTKAnimatingRequestAccessory.m in Sources */,
 				F56D4B4C266DFB8900C1AD9E /* FMLayoutCrossCell.m in Sources */,
@@ -2686,6 +2702,7 @@
 				C3A6C4C4267A1C5700FC71D6 /* TSPhoneNumVeriCell.m in Sources */,
 				F54973AB2668B9B500181E3F /* TSBaseNavigationController.m in Sources */,
 				F56D4B5B266E02BA00C1AD9E /* UIFont+General.m in Sources */,
+				C21A4B99267CAAC100766F72 /* TSAreaModel.m in Sources */,
 				F54973B12668BBB200181E3F /* TSCategoryViewController.m in Sources */,
 				F55D2D2A267B3B26006BACCF /* TSRankHonourCell.m in Sources */,
 				C3A6C4C8267A1C5700FC71D6 /* TSAccountCancelBottomCell.m in Sources */,
@@ -2720,6 +2737,7 @@
 				C21A4B84267B347500766F72 /* TSAddressEditController.m in Sources */,
 				F55D2D2E267B3CF4006BACCF /* TSRankDataController.m in Sources */,
 				C2C765392679E3C4004757B9 /* TSMakeOrderView.m in Sources */,
+				C21A4B96267CA25200766F72 /* TSAreaDataController.m in Sources */,
 				C3A6C4E6267A1CAF00FC71D6 /* TSWithdrawalPswSetDataController.m in Sources */,
 				C3A6C4C6267A1C5700FC71D6 /* TSAboutMeBottomCell.m in Sources */,
 				DC3440DF2672FC3900F5B0DA /* TSHomePageBaseModel.m in Sources */,
