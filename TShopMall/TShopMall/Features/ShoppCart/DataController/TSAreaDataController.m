@@ -15,7 +15,7 @@
 
 - (void)fetachAddressData:(void(^)(void))finished{
     [[self request] startWithCompletionBlockWithSuccess:^(__kindof SSGenaralRequest * _Nonnull request) {
-        NSLog(@"%@", request.responseJSONObject);
+//        NSLog(@"%@", request.responseJSONObject);
         if (request.responseModel.isSucceed == YES) {
             [self handleRes:request.responseJSONObject[@"data"]];
         }

@@ -715,6 +715,7 @@
         return _indeImg;
     }
     self.indeImg = [UIImageView new];
+    self.indeImg.hidden = YES;
     self.indeImg.image = KImageMake(@"address_index_bg");
     [self addSubview:self.indeImg];
     
