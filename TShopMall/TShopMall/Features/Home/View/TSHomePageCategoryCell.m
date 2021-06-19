@@ -18,7 +18,6 @@
 @implementation TSHomePageCategoryCell
 
 -(void)setupUI{
-    self.contentView.backgroundColor = KGrayColor;
     [self.contentView addSubview:self.collectionView];
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.contentView).offset(12);

@@ -59,7 +59,6 @@
             NSMutableArray *marr = [NSMutableArray arrayWithArray:group.list];
             [marr addObjectsFromArray:temp];
             group.list = marr;
-            self.currentGroup = group;
             listCallBack(group.list, nil);
         }
         

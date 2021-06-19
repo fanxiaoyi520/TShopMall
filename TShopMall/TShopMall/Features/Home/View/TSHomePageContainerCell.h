@@ -13,8 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TSHomePageContainerCell : TSHomePageBaseCell
 @property (nonatomic, strong) YBNestContainerView *containerView;
+@property (nonatomic, assign) CGFloat containerHeight;
 
-+ (CGFloat)getContainerHeight;
 @end
 
 NS_ASSUME_NONNULL_END

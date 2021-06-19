@@ -12,8 +12,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TSHomePageContainerHeaderView : UITableViewHeaderFooterView
-@property (nonatomic, strong) TSHomePageCellViewModel *viewModel;
-@property (nonatomic, strong) JXCategoryTitleView *segmentHeader;
+@property (nonatomic, strong) TSHomePageContainerViewModel *viewModel;
 
 @end
 

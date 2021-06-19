@@ -10,17 +10,14 @@
 #import "TSGeneralSearchButton.h"
 #import "TSHomePageViewModel.h"
 #import <MJRefresh/MJRefresh.h>
-#import "KVOController.h"
 #import "TSHomePageBaseCell.h"
 #import "TSHomePageContainerHeaderView.h"
 #import "TSSearchController.h"
 #import "TSHomePageContainerCell.h"
 #import "YBNestViews.h"
-#import "TSHomePageContainerCollectionView.h"
-#import "TSEmptyAlertView.h"
 #import "TSHomePageLoginBarView.h"
 
-@interface TSHomeViewController ()<UITableViewDelegate, UITableViewDataSource, JXCategoryViewDelegate, YBNestContainerViewDataSource, YBNestContainerViewDelegate>
+@interface TSHomeViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 /// 搜索按钮
 @property(nonatomic, strong) TSGeneralSearchButton *searchButton;
@@ -32,7 +29,6 @@
 
 @property (nonatomic, strong) TSHomePageViewModel *viewModel;
 
-@property (nonatomic, strong) JXCategoryTitleView *segmentHeader;
 @property (nonatomic, strong) YBNestContainerView *containerView;
 @property (nonatomic, strong) TSHomePageLoginBarView *loginBar;
 @end
@@ -116,28 +112,7 @@
     [self.view addSubview:self.categoryButton];
 }
 
-- (void)showEmptyView:(UIView *)view{
-    if (self.viewModel.containerViewModel.currentGroup.list.count != 0) {
-        [TSEmptyAlertView hideInView:view];
-        return ;
-    }
-    
-    TSEmptyAlertView.new.alertInfo(@"抱歉，没有找到商品哦～", @"重试").show(view, ^{
-        
-    });
-}
 
-- (void)showErrorView:(UIView *)view{
-  
-    TSEmptyAlertView *alertView = [TSEmptyAlertView new];
-    alertView.alertInfo(@"服务器开小差了", @"刷新");
-    [view addSubview:alertView];
-    alertView.frame = view.bounds;
-    alertView.alertImage(@"homePage_container_error");
-    alertView.show(view, ^{
-        
-    });
-}
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -158,15 +133,10 @@
         contentCell.cellSuperViewTableView = self.tableView;
         if ([cell isKindOfClass:TSHomePageContainerCell.class]) {
             TSHomePageContainerCell *contentCell = (TSHomePageContainerCell *)cell;
-            if (!contentCell.containerView) {
-                contentCell.containerView = self.containerView;
-                [cell.contentView addSubview:contentCell.containerView];
-                [contentCell.containerView mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.edges.equalTo(contentCell.contentView);
-                    make.width.equalTo(@(kScreenWidth));
-                    make.height.equalTo(@(kScreenHeight - self.searchButton.bottom - self.segmentHeader.height));
-                   }];
+            if (contentCell.containerHeight == 0) {
+                contentCell.containerHeight = kScreenHeight - self.searchButton.bottom - 48;
             }
+            self.containerView = contentCell.containerView;
         }
         
         contentCell.viewModel = viewModel;
@@ -184,12 +154,7 @@
         
         if ([headerView isKindOfClass:TSHomePageContainerHeaderView.class]) {
             TSHomePageContainerHeaderView *header = (TSHomePageContainerHeaderView *)headerView;
-            if (!self.segmentHeader) {
-                self.segmentHeader = header.segmentHeader;
-                self.segmentHeader.delegate = self;
-            }
-            
-            header.viewModel = viewModel;
+            header.viewModel = (TSHomePageContainerViewModel *)viewModel;
         }
         return headerView;
     }
@@ -221,16 +186,6 @@
         CGRect frame = self.tableViewBackGroundView.frame;
         frame.origin.y = - self.tableView.contentOffset.y;
         self.tableViewBackGroundView.frame = frame;
-    }];
-    
-    [self.KVOController observe:self.viewModel keyPath:@"pageIndex" options:( NSKeyValueObservingOptionNew) block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
-        @strongify(self)
-        if (self.segmentHeader.selectedIndex != self.viewModel.pageIndex) {
-            [self.segmentHeader selectItemAtIndex:self.viewModel.pageIndex];
-        }
-        if (self.containerView.currentPage != self.viewModel.pageIndex) {
-            self.containerView.currentPage = self.viewModel.pageIndex;
-        }
     }];
     
 }
@@ -305,77 +260,10 @@
     return _tableViewBackGroundView;
 }
 
-- (YBNestContainerView *)containerView {
-    if (!_containerView) {
-        _containerView = [YBNestContainerView viewWithDataSource:self];
-        _containerView.delegate = self;
-    }
-    return _containerView;
-}
-
-- (TSHomePageLoginBarView *)loginBar{
-    if (!_loginBar) {
-        _loginBar = [[TSHomePageLoginBarView alloc] initWithFrame:CGRectMake(16, kScreenHeight - 12 - 44 - GK_TABBAR_HEIGHT, kScreenWidth - 32, 44)];
-    }
-    return _loginBar;
-}
-
-#pragma mark - <YBNestContainerViewDataSource>
-
-- (NSInteger)yb_numberOfContentsInNestContainerView:(YBNestContainerView *)view {
-    return self.viewModel.containerViewModel.segmentHeaderDatas.count;
-}
-
-- (id<YBNestContentProtocol>)yb_nestContainerView:(YBNestContainerView *)view contentAtPage:(NSInteger)page{
-    UIEdgeInsets padding = UIEdgeInsetsMake(0, 16, 16, 16);
-   
-    TSHomePageContainerCollectionView *collectionView =  [[TSHomePageContainerCollectionView alloc] initWithFrame:CGRectZero items:nil ColumnSpacing:8 rowSpacing:8 itemsHeight:282 rows:0 columns:2 padding:padding clickedBlock:^(TSProductBaseModel *selectItem, NSInteger index) {
-        NSLog(@"uri:%@", selectItem.uuid);
-    }];
-    collectionView.collectionView.backgroundColor = KGrayColor;
-    @weakify(self);
-    collectionView.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-        @strongify(self)
-        [self reloadContainerCollectionView:collectionView];
-
-    }];
-    [self reloadContainerCollectionView:collectionView];
-    
-    return collectionView;
-}
-
-- (void)reloadContainerCollectionView:(TSHomePageContainerCollectionView *)collectionView{
-    TSHomePageContainerGroup *group = self.viewModel.containerViewModel.segmentHeaderDatas[self.segmentHeader.selectedIndex];
-    [self.viewModel.containerViewModel loadData:group callBack:^(NSArray * _Nonnull list, NSError * _Nonnull error) {
-        if (error) {
-            collectionView.items = list;
-            [collectionView reloadData];
-            if (list.count < group.totalNum) {
-                [collectionView.collectionView.mj_footer resetNoMoreData];
-            } else {
-                [collectionView.collectionView.mj_footer endRefreshingWithNoMoreData];
-            }
-            [self showEmptyView:collectionView];
-        }
-        else{
-            [self showErrorView:collectionView];
-        }
-    }];
-}
-
 #pragma mark - ScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     [self.containerView mainScrollViewDidScroll:scrollView];
 }
 
-#pragma mark - nestContainerViewDelegate
-- (void)yb_nestContainerView:(YBNestContainerView *)view pageChanged:(NSInteger)page{
-    self.viewModel.pageIndex = page;
-}
-
-#pragma mark - categoryViewDelegate
-- (void)categoryView:(JXCategoryBaseView *)categoryView didSelectedItemAtIndex:(NSInteger)index{
-    self.viewModel.pageIndex = index;
-}
 
 @end
