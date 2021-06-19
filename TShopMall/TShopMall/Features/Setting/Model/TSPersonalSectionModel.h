@@ -27,6 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy) NSString *head;
 /** 性别 */
 @property(nonatomic, assign) Sex sex;
+
 @end
 
 NS_ASSUME_NONNULL_END

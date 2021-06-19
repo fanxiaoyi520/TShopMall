@@ -127,7 +127,7 @@
         [_showPswButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_showPswButton setBackgroundImage:KImageMake(@"mall_setting_showpsw") forState:UIControlStateSelected];
         [_showPswButton setBackgroundImage:KImageMake(@"mall_setting_showpsw") forState:UIControlStateNormal];
-        [_showPswButton addTarget:self action:@selector(sendCode) forControlEvents:UIControlEventTouchUpInside];
+        [_showPswButton addTarget:self action:@selector(showOrHiddenPsw) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:_showPswButton];
     }
     return _showPswButton;
@@ -138,6 +138,7 @@
         UITextField *pswTextField = [[UITextField alloc] init];
         _pswTextField = pswTextField;
         _pswTextField.keyboardType = UIKeyboardTypeDefault;
+        _pswTextField.secureTextEntry = YES;
         _pswTextField.textColor = KHexColor(@"#2D3132");
         _pswTextField.font = KRegularFont(16);
         _pswTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"请输入密码" attributes:@{NSForegroundColorAttributeName : KHexAlphaColor(@"#2D3132", 0.2)}];
@@ -166,12 +167,25 @@
 }
 
 #pragma mark - Actions
-- (void)sendCode {
-    
+
+- (void)enabledButton:(BOOL)enabled {
+    if ((self.saveButton.enabled && !enabled) || (!self.saveButton.enabled && enabled)) {
+        self.saveButton.enabled = enabled;
+        self.saveButton.backgroundColor = enabled ? KHexColor(@"#FF4D49") : KHexColor(@"#DDDDDD");
+    }
+}
+
+- (void)showOrHiddenPsw {
+    self.showPswButton.selected = !self.showPswButton.selected;
+    self.pswTextField.secureTextEntry = !self.showPswButton.selected;
 }
 
 - (void)textFieldDidChangeValue:(UITextField *)textField {
-    
+    if (self.pswTextField.text.length >= 6) {
+        [self enabledButton:YES];
+    } else {
+        [self enabledButton:NO];
+    }
 }
 
 - (void)commitAction {
