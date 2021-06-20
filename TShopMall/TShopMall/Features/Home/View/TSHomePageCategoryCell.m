@@ -10,7 +10,6 @@
 #import "TSHomePageCategoryViewModel.h"
 #import "UIImageView+WebCache.h"
 #import "TSImageBaseModel.h"
-
 @interface TSHomePageCategoryCell()
 @property(nonatomic, strong) TSGridButtonCollectionView *collectionView;
 @end
@@ -18,6 +17,9 @@
 @implementation TSHomePageCategoryCell
 
 -(void)setupUI{
+    
+    [super setupUI];
+    
     [self.contentView addSubview:self.collectionView];
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.contentView).offset(12);
@@ -25,18 +27,24 @@
         make.right.equalTo(self.contentView).offset(-16);
         make.bottom.equalTo(self.contentView).offset(-12);
     }];
+    
 }
 
 - (void)setViewModel:(TSHomePageCellViewModel *)viewModel{
     [super setViewModel:viewModel];
     TSHomePageCategoryViewModel *categoryViewModel = (TSHomePageCategoryViewModel *)viewModel;
-    NSArray *temp = [NSArray yy_modelArrayWithClass:TSImageBaseModel.class json:categoryViewModel.model.data[@"list"]];
-    categoryViewModel.categoryDatas = [NSMutableArray arrayWithArray:temp];
-    
-    if (categoryViewModel.categoryDatas.count) {
-        _collectionView.items = temp;
-        [_collectionView reloadData];
+    if (!categoryViewModel.categoryDatas.count) {
+        [categoryViewModel getCategoryData];
     }
+    @weakify(self);
+    [self.KVOController observe:categoryViewModel keyPath:@"categoryDatas" options:(NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew) block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
+        @strongify(self)
+        if (categoryViewModel.categoryDatas) {
+            self.collectionView.items = categoryViewModel.categoryDatas;
+            [self.collectionView reloadData];
+        }
+    }];
+    
 }
 
 #pragma mark - Getter
@@ -79,4 +87,5 @@
     }
     return _collectionView;
 }
+
 @end

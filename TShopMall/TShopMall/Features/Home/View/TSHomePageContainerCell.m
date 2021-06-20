@@ -88,7 +88,7 @@
 #pragma mark - <YBNestContainerViewDataSource>
 
 - (NSInteger)yb_numberOfContentsInNestContainerView:(YBNestContainerView *)view {
-    return 1;
+    return self.containerViewModel.segmentHeaderDatas.count;
 }
 
 - (id<YBNestContentProtocol>)yb_nestContainerView:(YBNestContainerView *)view contentAtPage:(NSInteger)page{

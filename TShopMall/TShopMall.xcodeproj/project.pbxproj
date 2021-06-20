@@ -190,6 +190,7 @@
 		DC9911C5267C475000EF9B26 /* YBNestContainerLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = DC9911BD267C475000EF9B26 /* YBNestContainerLayout.m */; };
 		DC9911C6267C475000EF9B26 /* YBNestCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC9911BE267C475000EF9B26 /* YBNestCollectionView.m */; };
 		DC9911C9267C8B0E00EF9B26 /* TSHomePageLoginBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC9911C8267C8B0E00EF9B26 /* TSHomePageLoginBarView.m */; };
+		DC9911D8267E267400EF9B26 /* TSHomePagePerchView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC9911D7267E267400EF9B26 /* TSHomePagePerchView.m */; };
 		E2BE996F8804E0C3E7D5AE61 /* libPods-TShopMall-TShopMallUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD1ABBE857D307088E9BF2DC /* libPods-TShopMall-TShopMallUITests.a */; };
 		F54972FE2668842500181E3F /* TShopMallTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F54972FD2668842500181E3F /* TShopMallTests.m */; };
 		F54973092668842500181E3F /* TShopMallUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F54973082668842500181E3F /* TShopMallUITests.m */; };
@@ -678,6 +679,8 @@
 		DC9911C1267C475000EF9B26 /* YBNestViews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBNestViews.h; sourceTree = "<group>"; };
 		DC9911C7267C8B0E00EF9B26 /* TSHomePageLoginBarView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSHomePageLoginBarView.h; sourceTree = "<group>"; };
 		DC9911C8267C8B0E00EF9B26 /* TSHomePageLoginBarView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSHomePageLoginBarView.m; sourceTree = "<group>"; };
+		DC9911D6267E267400EF9B26 /* TSHomePagePerchView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSHomePagePerchView.h; sourceTree = "<group>"; };
+		DC9911D7267E267400EF9B26 /* TSHomePagePerchView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSHomePagePerchView.m; sourceTree = "<group>"; };
 		ECCE8A564DF47B445E7905B1 /* Pods-TShopMall-TShopMallUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TShopMall-TShopMallUITests.release.xcconfig"; path = "Target Support Files/Pods-TShopMall-TShopMallUITests/Pods-TShopMall-TShopMallUITests.release.xcconfig"; sourceTree = "<group>"; };
 		F54972DE2668842200181E3F /* TShopMall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TShopMall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F54972F22668842400181E3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1756,6 +1759,8 @@
 				C2A34C9E26759F140095497E /* TSEarnView.m */,
 				DC9911C7267C8B0E00EF9B26 /* TSHomePageLoginBarView.h */,
 				DC9911C8267C8B0E00EF9B26 /* TSHomePageLoginBarView.m */,
+				DC9911D6267E267400EF9B26 /* TSHomePagePerchView.h */,
+				DC9911D7267E267400EF9B26 /* TSHomePagePerchView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2773,6 +2778,7 @@
 				F54973BF2668C01F00181E3F /* TSTipsConst.m in Sources */,
 				C2EF88B22670997100E7374A /* TSCartViewModel.m in Sources */,
 				DC991196267A158A00EF9B26 /* TSHomePageReleaseTitleCell.m in Sources */,
+				DC9911D8267E267400EF9B26 /* TSHomePagePerchView.m in Sources */,
 				C3A6C491267A1C1700FC71D6 /* TSAccountCancelSectionModel.m in Sources */,
 				F55D2C392671E14B006BACCF /* TSCollectionViewLeftAlignedLayout.m in Sources */,
 				F56D4B47266DFB8900C1AD9E /* FMLayoutBackground.m in Sources */,
@@ -2794,9 +2800,7 @@
 				C21A4B8D267B534A00766F72 /* TSAddressMarkView.m in Sources */,
 				C2C7652E2678AD89004757B9 /* TSSearchResult.m in Sources */,
 				F56D4B3B266DFB8900C1AD9E /* FMLayoutCombineSection.m in Sources */,
-
 				04DAFB04267B5BE50098275A /* TSBePaidViewController.m in Sources */,
-
 				DC9911A3267AE40100EF9B26 /* TSLinkDataModel.m in Sources */,
 				C3A6C4BE267A1C5700FC71D6 /* TSAccountCancelContentCell.m in Sources */,
 				DC9911C4267C475000EF9B26 /* YBNestTableView.m in Sources */,
@@ -2934,8 +2938,6 @@
 				DC9911A6267AE43400EF9B26 /* TSImageBaseModel.m in Sources */,
 				DC45FEBA267742F700CE762E /* TSHomePageContainerGroup.m in Sources */,
 				04DAFB07267B5C0F0098275A /* TSBeDeliveredViewController.m in Sources */,
-				DC45FEB726773D9900CE762E /* TSHomePageContainerModel.m in Sources */,
-
 				C28757D5267360E2007C8AF5 /* UIView+General.m in Sources */,
 				F55D2D35267B3F04006BACCF /* TSRankHeaderView.m in Sources */,
 				F55D2D32267B3DB7006BACCF /* TSRankSectionModel.m in Sources */,

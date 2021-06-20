@@ -13,34 +13,33 @@
 #import "TSHomePageReleaseTitleViewModel.h"
 #import "TSHomePageBaseModel.h"
 #import "TSHomePageContentModel.h"
+
 @interface TSHomePageViewModel ()
 @end
 @implementation TSHomePageViewModel
 
-- (void)loadData{
+- (void)loadDefaultData{
 //    TSHomePageBannerViewModel *bannerViewModel = [TSHomePageBannerViewModel new];
 //    TSHomePageCellTemplateModel *templateModel = [TSHomePageCellTemplateModel new];
 //    templateModel.templateName = @"TSHomePageBanner";
 //    bannerViewModel.model = templateModel;
-//
-//    TSTableViewSectionModel *sectionModel1 = [TSTableViewSectionModel new];
-//    sectionModel1.rowDatas = @[bannerViewModel];
 //
 //    TSHomePageCategoryViewModel *categoryViewModel = [TSHomePageCategoryViewModel new];
 //    templateModel = [TSHomePageCellTemplateModel new];
 //    templateModel.templateName = @"TSHomePageCategory";
 //    categoryViewModel.model = templateModel;
 //
-//    TSTableViewSectionModel *sectionModel2 = [TSTableViewSectionModel new];
-//    sectionModel2.rowDatas = @[categoryViewModel];
+//    TSHomePageReleaseTitleViewModel *releaseTitleViewModel = [TSHomePageReleaseTitleViewModel new];
+//    templateModel = [TSHomePageCellTemplateModel new];
+//    templateModel.templateName = @"TSHomePageReleaseTitle";
+//    releaseTitleViewModel.model = templateModel;
+//
 //
 //    TSHomePageReleaseViewModel *releaseViewModel = [TSHomePageReleaseViewModel new];
 //    templateModel = [TSHomePageCellTemplateModel new];
 //    templateModel.templateName = @"TSHomePageRelease";
 //    releaseViewModel.model = templateModel;
 //
-//    TSTableViewSectionModel *sectionModel3 = [TSTableViewSectionModel new];
-//    sectionModel3.rowDatas = @[releaseViewModel];
 //
 //    TSHomePageContainerViewModel *containerViewModel = [TSHomePageContainerViewModel new];
 //    templateModel = [TSHomePageCellTemplateModel new];
@@ -49,17 +48,35 @@
 //
 //    containerViewModel.model = templateModel;
 //    _containerViewModel = containerViewModel;
+    
+    
+//    NSArray *temp = self.model.data[@"list"];
 //
-//    TSTableViewSectionModel *sectionModel4 = [TSTableViewSectionModel new];
-//    sectionModel4.rowDatas = @[containerViewModel];
-//    sectionModel4.headerModel = containerViewModel;
+//     NSMutableArray *marr = @[].mutableCopy;
 //
-//    self.dataSource = @[sectionModel1,sectionModel2, sectionModel3, sectionModel4];
+//     for (NSDictionary *dic in temp) {
+//         TSHomePageContainerGroup *model = [TSHomePageContainerGroup new];
+//         model.name = dic[@"groupName"];
+//         model.groupId = dic[@"goodsgroupUuid"];
+//         [marr addObject:model];
+//     }
+    
+
+//    NSMutableArray *sections = [NSMutableArray array];
+//
+//    for (TSHomePageContentModel *model in temp) {
+//        TSHomePageCellViewModel *viewModel = [self configSection:model];
+//        if(viewModel){
+//            [sections addObject:viewModel];
+//        }
+//    }
+//    
+//    self.dataSource = sections;
  
 }
 
 -(void)fetchData{
-
+   
     NSMutableDictionary *body = [NSMutableDictionary dictionary];
     [body setValue:@"platform_tcl_shop" forKey:@"platform"];
     [body setValue:@"tclplus" forKey:@"storeUuid"];
@@ -88,8 +105,10 @@
                     [sections addObject:viewModel];
                 }
             }
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                self.dataSource = sections;
+            });
             
-            self.dataSource = sections;
         }
         
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {

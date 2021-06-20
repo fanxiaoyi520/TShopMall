@@ -16,7 +16,7 @@
 #import "TSHomePageContainerCell.h"
 #import "YBNestViews.h"
 #import "TSHomePageLoginBarView.h"
-
+#import "TSHomePagePerchView.h"
 @interface TSHomeViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 /// 搜索按钮
@@ -31,6 +31,8 @@
 
 @property (nonatomic, strong) YBNestContainerView *containerView;
 @property (nonatomic, strong) TSHomePageLoginBarView *loginBar;
+@property (nonatomic, strong) TSHomePagePerchView *perchView;
+
 @end
 
 @implementation TSHomeViewController
@@ -43,25 +45,30 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
     [self.viewModel fetchData];
     [self setupUI];
     [self registCellInfo];
-    
+
     @weakify(self);
     [self.KVOController observe:self.viewModel keyPath:@"dataSource" options:(NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew) block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
         @strongify(self)
         if (self.viewModel.dataSource) {
+            self.view.backgroundColor = KGrayColor;
+            if (!self.perchView.hidden) {
+                self.perchView.hidden = YES;
+            }
             [self.tableView reloadData];
             [self.tableView.mj_header endRefreshing];
-            self.tableViewBackGroundView.hidden = NO;
             [self configObserve];
         }
     }];
-    
-    
+
+
     [self.view addSubview:self.loginBar];
     self.loginBar.clickBlock = ^{
-        
+
     };
 }
 
@@ -83,10 +90,17 @@
         make.centerY.equalTo(self.searchButton);
         make.width.height.mas_equalTo(24);
     }];
+    
+    [self.perchView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.searchButton.mas_bottom);
+        make.left.right.equalTo(self.view);
+        make.bottom.equalTo(self.view);
+    }];
 }
 
 - (void)setupUI{
-    self.view.backgroundColor = KGrayColor;
+
+    self.view.backgroundColor = KWhiteColor;
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.searchButton.mas_bottom);
@@ -94,10 +108,7 @@
         make.bottom.equalTo(self.view);
     }];
     
-    [self.view addSubview:self.tableViewBackGroundView];
-    [self.view sendSubviewToBack:self.tableViewBackGroundView];
-//    [self.view layoutIfNeeded];
-    //    [self loadFixedBackGroundView];
+    [self.perchView configPerch];
 }
 
 - (void)loadFixedBackGroundView{
@@ -108,8 +119,12 @@
 }
 
 - (void)fillCustomView{
+    
+    [self.view addSubview:self.tableViewBackGroundView];
+    [self.view sendSubviewToBack:self.tableViewBackGroundView];
     [self.view addSubview:self.searchButton];
     [self.view addSubview:self.categoryButton];
+    [self.view addSubview:self.perchView];
 }
 
 
@@ -205,6 +220,13 @@
 }
 
 #pragma mark - Getter
+- (TSHomePagePerchView *)perchView{
+    if (!_perchView) {
+        _perchView = [[TSHomePagePerchView alloc] initWithFrame:CGRectZero];
+    }
+    return _perchView;
+}
+
 -(TSGeneralSearchButton *)searchButton{
     if (!_searchButton) {
         _searchButton = [TSGeneralSearchButton buttonWithType:UIButtonTypeCustom];
@@ -254,8 +276,7 @@
     if (!_tableViewBackGroundView) {
         CGFloat height = kScreenWidth/375 * 205;
         _tableViewBackGroundView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, height)];
-        _tableViewBackGroundView.image = [UIImage imageNamed:@"mall_home_bg"];
-        _tableViewBackGroundView.hidden = YES;
+        _tableViewBackGroundView.image = [UIImage imageNamed:@"mall_home_bg1"];
     }
     return _tableViewBackGroundView;
 }

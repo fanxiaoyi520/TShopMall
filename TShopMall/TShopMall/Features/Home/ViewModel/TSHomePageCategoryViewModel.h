@@ -6,12 +6,11 @@
 //
 
 #import "TSHomePageCellViewModel.h"
-
+#import "TSImageBaseModel.h"
 NS_ASSUME_NONNULL_BEGIN
-@class TSImageBaseModel;
 @interface TSHomePageCategoryViewModel : TSHomePageCellViewModel
 @property (nonatomic, strong) NSArray <TSImageBaseModel *> *categoryDatas;
-
+- (void)getCategoryData;
 @end
 
 NS_ASSUME_NONNULL_END

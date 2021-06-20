@@ -9,36 +9,44 @@
 #import <SDCycleScrollView.h>
 #import "TSHomePageBannerViewModel.h"
 #import "TSImageBaseModel.h"
-
 @interface TSHomePageBannerCell()<SDCycleScrollViewDelegate>
 @property(nonatomic, strong) SDCycleScrollView *cycleScrollView;
+
 @end
 
 @implementation TSHomePageBannerCell
 -(void)setupUI{
+    
+    [super setupUI];
+    
     [self.contentView addSubview:self.cycleScrollView];
-  
     [self.cycleScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contentView).offset(16);
         make.right.equalTo(self.contentView).offset(-16);
-        make.top.equalTo(self.contentView).offset(10);
-        make.bottom.equalTo(self.contentView).offset(-10);
+        make.top.equalTo(self.contentView).offset(16);
+        make.bottom.equalTo(self.contentView).offset(-12);
         make.height.equalTo(@174);
     }];
-    
+  
 }
 
 - (void)setViewModel:(TSHomePageCellViewModel *)viewModel{
     [super setViewModel:viewModel];
     TSHomePageBannerViewModel *bannerViewModel = (TSHomePageBannerViewModel *)viewModel;
-    NSArray *temp = [NSArray yy_modelArrayWithClass:TSImageBaseModel.class json:bannerViewModel.model.data[@"list"]];
-    bannerViewModel.bannerDatas = [NSMutableArray arrayWithArray:temp];
-    
-    NSMutableArray *tempArr = @[].mutableCopy;
-    for (TSImageBaseModel *model in temp) {
-        [tempArr addObject:model.imageData.url];
+    if (!bannerViewModel.bannerDatas.count) {
+        [bannerViewModel getBannerData];
     }
-    _cycleScrollView.imageURLStringsGroup = tempArr;
+    @weakify(self);
+    [self.KVOController observe:bannerViewModel keyPath:@"bannerDatas" options:(NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew) block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
+        @strongify(self)
+        if (bannerViewModel.bannerDatas) {
+            NSMutableArray *tempArr = @[].mutableCopy;
+            for (TSImageBaseModel *model in bannerViewModel.bannerDatas) {
+                [tempArr addObject:model.imageData.url];
+            }
+            self.cycleScrollView.imageURLStringsGroup = tempArr;
+        }
+    }];
     
 }
 
@@ -64,5 +72,7 @@
     NSLog(@"uri:%@",bannerViewModel.bannerDatas[index].linkData.objectValue);
 
 }
+
+
 
 @end

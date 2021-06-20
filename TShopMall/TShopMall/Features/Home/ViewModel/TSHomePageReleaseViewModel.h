@@ -6,11 +6,11 @@
 //
 
 #import "TSHomePageCellViewModel.h"
-
+#import "TSImageBaseModel.h"
 NS_ASSUME_NONNULL_BEGIN
-@class TSImageBaseModel;
 @interface TSHomePageReleaseViewModel : TSHomePageCellViewModel
 @property (nonatomic, strong) TSImageBaseModel *releaseModel;
+- (void)getReleaseData;
 @end
 
 NS_ASSUME_NONNULL_END

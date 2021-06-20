@@ -33,15 +33,23 @@
     [super setViewModel:viewModel];
     TSHomePageReleaseViewModel *releaseViewModel = (TSHomePageReleaseViewModel *)viewModel;
 
-    NSArray *temp = [NSArray yy_modelArrayWithClass:TSImageBaseModel.class json:releaseViewModel.model.data[@"list"]];
-    releaseViewModel.releaseModel = temp.firstObject;
-
-    CGFloat height = kScreenWidth/releaseViewModel.releaseModel.imageData.width * releaseViewModel.releaseModel.imageData.height;
-    [self.iconImageView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.height.equalTo(@(height));
+    if (!releaseViewModel.releaseModel) {
+        [releaseViewModel getReleaseData];
+    }
+    @weakify(self);
+    [self.KVOController observe:releaseViewModel keyPath:@"releaseModel" options:(NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew) block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
+        @strongify(self)
+        if (releaseViewModel.releaseModel) {
+            CGFloat height = kScreenWidth/releaseViewModel.releaseModel.imageData.width * releaseViewModel.releaseModel.imageData.height;
+            [self.iconImageView mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.height.equalTo(@(height));
+            }];
+            
+            [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:releaseViewModel.releaseModel.imageData.url]];
+        }
     }];
+
     
-    [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:releaseViewModel.releaseModel.imageData.url]];
 
 }
 

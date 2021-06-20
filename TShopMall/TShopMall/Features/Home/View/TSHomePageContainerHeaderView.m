@@ -8,9 +8,9 @@
 #import "TSHomePageContainerHeaderView.h"
 #import "KVOController.h"
 #import "TSHomePageContainerGroup.h"
-
 @interface TSHomePageContainerHeaderView ()<JXCategoryViewDelegate>
 @property (nonatomic, strong) JXCategoryTitleView *segmentHeader;
+
 @end
 
 @implementation TSHomePageContainerHeaderView
@@ -76,4 +76,5 @@
 - (void)categoryView:(JXCategoryBaseView *)categoryView didSelectedItemAtIndex:(NSInteger)index{
     _viewModel.pageIndex = index;
 }
+
 @end

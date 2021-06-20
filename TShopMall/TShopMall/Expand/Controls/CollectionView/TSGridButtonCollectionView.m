@@ -179,6 +179,7 @@
     [_collectionView reloadData];
     if (self.viewHeight <= 0) {
         [_collectionView layoutIfNeeded];
+        NSLog(@"%f",_collectionView.contentSize.height);
         [self mas_updateConstraints:^(MASConstraintMaker *make) {
             make.height.equalTo(@(_collectionView.contentSize.height));
         }];

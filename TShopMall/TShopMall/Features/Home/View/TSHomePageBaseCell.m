@@ -14,6 +14,7 @@
     if (self) {
         self.backgroundColor = [UIColor clearColor];
         [self setupUI];
+       
     }
     return self;
 }
@@ -25,6 +26,7 @@
 }
 
 - (void)setupUI{
+    
 }
 
 - (void)setViewModel:(TSHomePageCellViewModel *)viewModel{

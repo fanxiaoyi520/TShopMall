@@ -13,6 +13,7 @@
 @end
 @implementation TSHomePageReleaseTitleCell
 - (void)setupUI{
+    [super setupUI];
     [self.contentView addSubview:self.nameLabel];
     [self.nameLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contentView).offset(16);
@@ -21,29 +22,28 @@
         make.height.equalTo(@34);
         make.bottom.equalTo(self.contentView);
     }];
+
 }
 
 - (void)setViewModel:(TSHomePageCellViewModel *)viewModel{
     [super setViewModel:viewModel];
     TSHomePageReleaseTitleViewModel *releaseViewModel = (TSHomePageReleaseTitleViewModel *)viewModel;
-    NSAttributedString *string = [self getAttributedStringFromHTMLString:releaseViewModel.model.data[@"content"]];
-    self.nameLabel.attributedText = string;
+    
+    if (!releaseViewModel.title) {
+        [releaseViewModel getReleaseTitleData];
+    }
+    
+    @weakify(self);
+    [self.KVOController observe:releaseViewModel keyPath:@"title" options:(NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew) block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
+        @strongify(self)
+        if (releaseViewModel.title) {
+            self.nameLabel.attributedText = releaseViewModel.title;
+        }
+    }];
+    
     
 }
 
-- (nullable NSAttributedString *)getAttributedStringFromHTMLString:(NSString *)string
-{
-    NSData *data = [string dataUsingEncoding:NSUTF8StringEncoding];
-    NSDictionary *options = @{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
-                              NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)};
-    
-    if (data)
-    {
-        return [[NSAttributedString alloc] initWithData:data options:options documentAttributes:nil error:nil];
-    }
-    
-    return nil;
-}
 
 - (UILabel *)nameLabel{
     if (!_nameLabel) {
