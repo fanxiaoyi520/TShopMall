@@ -7,10 +7,30 @@
 
 #import "TSProductDetailImageCell.h"
 
+@interface TSProductDetailImageCell()
+
+@property (nonatomic, strong) UIImageView *imgView;
+
+@end
+
 @implementation TSProductDetailImageCell
 
 -(void)fillCustomContentView{
-    self.contentView.backgroundColor = [UIColor orangeColor];
+    self.contentView.backgroundColor = UIColor.clearColor;
+    
+    [self.contentView addSubview:self.imgView];
+    [self.imgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.contentView);
+    }];
+}
+
+#pragma mark - Getter
+-(UIImageView *)imgView{
+    if (!_imgView) {
+        _imgView = [[UIImageView alloc] init];
+        _imgView.backgroundColor = KGrayColor;
+    }
+    return _imgView;
 }
 
 @end

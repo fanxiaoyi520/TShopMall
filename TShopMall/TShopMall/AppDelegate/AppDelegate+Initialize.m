@@ -7,6 +7,8 @@
 
 #import "AppDelegate+Initialize.h"
 #import "MyDimeScale.h"
+#import <IQKeyboardManager/IQKeyboardManager.h>
+#import <GKNavigationBarConfigure.h>
 
 @implementation AppDelegate (Initialize)
 
@@ -14,9 +16,33 @@
     [MyDimeScale setUITemplateSize:CGSizeMake(375, 667)];
 }
 
--(void)setupRequestFilters{
+-(void)initNetworkConfig{
     YTKNetworkConfig *config = [YTKNetworkConfig sharedConfig];
     [config setBaseUrl:kApiPrefix];
+}
+
+-(void)setKeywordAttribute{
+    IQKeyboardManager *maneger = [IQKeyboardManager sharedManager];
+    maneger.enable = YES;
+    //点击空白区域回收键盘
+    maneger.shouldResignOnTouchOutside = YES;
+    //关闭自带键盘工具条
+    maneger.enableAutoToolbar = NO;
+    //是否显示占位文字
+    maneger.shouldShowToolbarPlaceholder = NO;
+}
+
+-(void)setNavigationConfig{
+    GKNavigationBarConfigure *config = [GKNavigationBarConfigure sharedInstance];
+    [config setupCustomConfigure:^(GKNavigationBarConfigure *configure) {
+        configure.backgroundColor = [UIColor whiteColor];
+        configure.titleColor = [UIColor blackColor];
+        configure.titleFont = [UIFont systemFontOfSize:18.0f];
+        configure.backStyle = GKNavigationBarBackStyleBlack;
+        configure.gk_navItemLeftSpace = 12.0f;
+        configure.gk_navItemRightSpace = 12.0f;
+        configure.gk_openScrollViewGestureHandle = YES;
+    }];
 }
 
 @end

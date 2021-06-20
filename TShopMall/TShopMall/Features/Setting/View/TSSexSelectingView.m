@@ -63,6 +63,7 @@
     self.contentView.backgroundColor = KWhiteColor;
     self.frame = [[UIScreen mainScreen] bounds];
     self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
+
     self.contentView.frame = CGRectMake(0, kScreenHeight, kScreenWidth, 113 + GK_SAFEAREA_BTM);
     [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contentView.mas_left).with.offset(0);

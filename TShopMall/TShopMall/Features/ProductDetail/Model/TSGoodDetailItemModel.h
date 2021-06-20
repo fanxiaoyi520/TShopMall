@@ -22,6 +22,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TSGoodDetailItemPriceModel : TSGoodDetailItemModel
 
+/// 标题
+@property (nonatomic, copy) NSString *title;
+/// 内容
+@property (nonatomic, copy) NSString *content;
+
 @end
 
 

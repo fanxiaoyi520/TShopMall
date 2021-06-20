@@ -18,11 +18,14 @@ target 'TShopMall' do
     pod 'MJRefresh', '~> 3.5.0'
     pod 'Toast', '~> 4.0.0'
     pod 'SDCycleScrollView', '~> 1.82'
-    pod 'KMNavigationBarTransition', '~> 1.1.8'
     pod 'JXCategoryView', '~> 1.5.9'
     pod 'KVOController', '1.2.0'
     pod 'lottie-ios', '~> 2.5.3'
-
+    pod 'GKNavigationBarViewController', '~> 3.0.2'
+    pod 'WechatOpenSDK'
+    pod 'SAMKeychain', '~> 1.5.3'
+    pod 'MBProgressHUD', '~> 1.2.0'
+    
     
   target 'TShopMallTests' do
     inherit! :search_paths

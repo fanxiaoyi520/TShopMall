@@ -5,11 +5,11 @@
 //  Created by 陈结 on 2021/6/3.
 //
 
-#import <UIKit/UIKit.h>
+#import <GKNavigationBarViewController/GKNavigationBarViewController.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TSBaseViewController : UIViewController
+@interface TSBaseViewController : GKNavigationBarViewController
 
 /// 基本设置
 -(void)setupBasic;

@@ -75,7 +75,7 @@
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.font = KFont(PingFangSCMedium, 14);
         _titleLabel.textColor = KHexColor(@"#1E1C27");
-        _titleLabel.text = @"商品图片";
+        _titleLabel.text = @"商品文案";
     }
     return _titleLabel;
 }
@@ -84,11 +84,8 @@
 -(UIButton *)downloadBtn{
     if (!_downloadBtn) {
         _downloadBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _downloadBtn.titleLabel.font = KRegularFont(14);
-        [_downloadBtn setTitleColor:KWhiteColor forState:UIControlStateNormal];
-        [_downloadBtn setTitleColor:KWhiteColor forState:UIControlStateHighlighted];
-        [_downloadBtn setTitle:@"复制文案" forState:UIControlStateNormal];
-        [_downloadBtn setBackgroundColor:[UIColor orangeColor]];
+        [_downloadBtn setImage:KImageMake(@"mall_detail_ copy") forState:UIControlStateNormal];
+        [_downloadBtn setImage:KImageMake(@"mall_detail_ copy") forState:UIControlStateHighlighted];
         [_downloadBtn addTarget:self action:@selector(downloadAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _downloadBtn;
@@ -97,8 +94,10 @@
 -(UITextView *)textView{
     if (!_textView) {
         _textView = [[UITextView alloc] init];
-        _textView.backgroundColor = [UIColor lightGrayColor];
-        [_textView setCorners:UIRectCornerAllCorners radius:9];
+        _textView.backgroundColor = KHexColor(@"#DDDDDD");
+        _textView.font = KRegularFont(10);
+        _textView.text = @"V2D 超薄AI声控电视，体验未来，快人";
+        [_textView setCorners:UIRectCornerAllCorners radius:8];
     }
     return _textView;
 }

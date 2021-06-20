@@ -306,6 +306,7 @@
 		F55D2D38267B3F38006BACCF /* TSRankCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2D37267B3F38006BACCF /* TSRankCell.m */; };
 		F55D2D3B267B3F72006BACCF /* TSRankRecommendHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2D3A267B3F72006BACCF /* TSRankRecommendHeaderView.m */; };
 		F55D2D3E267B3F95006BACCF /* TSRankRecommendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2D3D267B3F95006BACCF /* TSRankRecommendCell.m */; };
+		F5686B05267F8F400023DAA6 /* WMDragView.m in Sources */ = {isa = PBXBuildFile; fileRef = F5686B03267F8F400023DAA6 /* WMDragView.m */; };
 		F56D4B3A266DFB8900C1AD9E /* FMLayoutBaseSection.m in Sources */ = {isa = PBXBuildFile; fileRef = F56D4B04266DFB8900C1AD9E /* FMLayoutBaseSection.m */; };
 		F56D4B3B266DFB8900C1AD9E /* FMLayoutCombineSection.m in Sources */ = {isa = PBXBuildFile; fileRef = F56D4B06266DFB8900C1AD9E /* FMLayoutCombineSection.m */; };
 		F56D4B3C266DFB8900C1AD9E /* FMLayoutLabelSection.m in Sources */ = {isa = PBXBuildFile; fileRef = F56D4B07266DFB8900C1AD9E /* FMLayoutLabelSection.m */; };
@@ -916,6 +917,8 @@
 		F55D2D3A267B3F72006BACCF /* TSRankRecommendHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSRankRecommendHeaderView.m; sourceTree = "<group>"; };
 		F55D2D3C267B3F95006BACCF /* TSRankRecommendCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSRankRecommendCell.h; sourceTree = "<group>"; };
 		F55D2D3D267B3F95006BACCF /* TSRankRecommendCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSRankRecommendCell.m; sourceTree = "<group>"; };
+		F5686B03267F8F400023DAA6 /* WMDragView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMDragView.m; sourceTree = "<group>"; };
+		F5686B04267F8F400023DAA6 /* WMDragView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMDragView.h; sourceTree = "<group>"; };
 		F56D4B04266DFB8900C1AD9E /* FMLayoutBaseSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLayoutBaseSection.m; sourceTree = "<group>"; };
 		F56D4B05266DFB8900C1AD9E /* FMLayoutFixedSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLayoutFixedSection.h; sourceTree = "<group>"; };
 		F56D4B06266DFB8900C1AD9E /* FMLayoutCombineSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLayoutCombineSection.m; sourceTree = "<group>"; };
@@ -1948,6 +1951,7 @@
 		F54973A22668AE1300181E3F /* Controls */ = {
 			isa = PBXGroup;
 			children = (
+				F5686B02267F8F400023DAA6 /* DragView */,
 				DC9911B5267C475000EF9B26 /* YBNestViews */,
 				DC3440A726720D9200F5B0DA /* CollectionView */,
 				F54973D32668DB9B00181E3F /* SearchButton */,
@@ -2289,6 +2293,15 @@
 				F55D2D31267B3DB7006BACCF /* TSRankSectionModel.m */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		F5686B02267F8F400023DAA6 /* DragView */ = {
+			isa = PBXGroup;
+			children = (
+				F5686B03267F8F400023DAA6 /* WMDragView.m */,
+				F5686B04267F8F400023DAA6 /* WMDragView.h */,
+			);
+			path = DragView;
 			sourceTree = "<group>";
 		};
 		F56D4B02266DFB8900C1AD9E /* LayoutKit */ = {
@@ -2750,6 +2763,7 @@
 				C3A6C493267A1C1700FC71D6 /* TSChangePictureSectionModel.m in Sources */,
 				F55D2CE926788E27006BACCF /* TSDetailFunctionButton.m in Sources */,
 				F55D2CCD26784ACD006BACCF /* TSMineAdsCell.m in Sources */,
+				F5686B05267F8F400023DAA6 /* WMDragView.m in Sources */,
 				F54973D22668CF3300181E3F /* AppDelegate+RootController.m in Sources */,
 				DC9911A0267AE3B900EF9B26 /* TSImageDataModel.m in Sources */,
 				F55D2C6C267231AA006BACCF /* TSCategoryHeaderReusableView.m in Sources */,
@@ -2826,9 +2840,7 @@
 				C21A4B8D267B534A00766F72 /* TSAddressMarkView.m in Sources */,
 				C2C7652E2678AD89004757B9 /* TSSearchResult.m in Sources */,
 				F56D4B3B266DFB8900C1AD9E /* FMLayoutCombineSection.m in Sources */,
-
 				04DAFB04267B5BE50098275A /* TSBePaidViewController.m in Sources */,
-
 				DC9911A3267AE40100EF9B26 /* TSLinkDataModel.m in Sources */,
 				C3A6C4BE267A1C5700FC71D6 /* TSAccountCancelContentCell.m in Sources */,
 				DC9911C4267C475000EF9B26 /* YBNestTableView.m in Sources */,
@@ -2970,8 +2982,6 @@
 				DC9911A6267AE43400EF9B26 /* TSImageBaseModel.m in Sources */,
 				DC45FEBA267742F700CE762E /* TSHomePageContainerGroup.m in Sources */,
 				04DAFB07267B5C0F0098275A /* TSBeDeliveredViewController.m in Sources */,
-				DC45FEB726773D9900CE762E /* TSHomePageContainerModel.m in Sources */,
-
 				C28757D5267360E2007C8AF5 /* UIView+General.m in Sources */,
 				F55D2D35267B3F04006BACCF /* TSRankHeaderView.m in Sources */,
 				F55D2D32267B3DB7006BACCF /* TSRankSectionModel.m in Sources */,

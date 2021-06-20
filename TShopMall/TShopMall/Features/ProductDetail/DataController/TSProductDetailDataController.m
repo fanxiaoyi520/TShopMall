@@ -22,13 +22,12 @@
     
     {
         TSGoodDetailItemBannerModel *item = [[TSGoodDetailItemBannerModel alloc] init];
-        item.urls = @[@"http://f0.testpc.tclo2o.cn/FmTYX2ZPTZV2twwVslMLjORyU2gP"];
-        item.cellHeight = 360;
+        item.urls = @[@"http://f0.testpc.tclo2o.cn",@"http://f0.testpc.tclo2o.cn"];
+        item.cellHeight = floor(kScreenWidth * 1.04);
         item.identify = @"TSGoodDetailBannerCell";
 
         TSGoodDetailSectionModel *section = [[TSGoodDetailSectionModel alloc] init];
         section.column = 1;
-        section.spacingWithLastSection = -GK_STATUSBAR_HEIGHT;
         section.items = @[item];
         
         [sections addObject:section];
@@ -42,25 +41,39 @@
         TSGoodDetailSectionModel *section = [[TSGoodDetailSectionModel alloc] init];
         section.column = 1;
         section.items = @[item];
-        
+
         [sections addObject:section];
     }
-    
+
     {
         TSGoodDetailItemPriceModel *item = [[TSGoodDetailItemPriceModel alloc] init];
-        item.cellHeight = 174;
         item.identify = @"TSGoodDetailIntroduceCell";
+        item.title = @"标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标";
+        item.content = @"卖点提炼，卖点介绍卖点介绍卖点介绍卖点介绍卖点介绍卖点介绍卖点介绍卖点介绍卖点介绍卖点介绍卖点标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标";
+        
+       CGFloat titleH = [item.title sizeForFont:KRegularFont(16)
+                                           size:CGSizeMake(kScreenWidth - 32, 1000)
+                                           mode:NSLineBreakByWordWrapping].height;
+        
+        if (titleH > 45) {
+            titleH = 45;
+        }
+        
+       CGFloat contentH = [item.content sizeForFont:KRegularFont(14)
+                                               size:CGSizeMake(kScreenWidth - 32, 1000)
+                                               mode:NSLineBreakByWordWrapping].height;
+        if (contentH > 40) {
+            contentH = 40;
+        }
+        item.cellHeight = 8 + titleH + 4 + contentH + 16;
 
         TSGoodDetailSectionModel *section = [[TSGoodDetailSectionModel alloc] init];
         section.column = 1;
         section.items = @[item];
-        section.spacingWithLastSection = 12;
-        section.hasDecorate = YES;
-        section.docorateIdentify = @"TSUniversalDecorationView";
-        
+
         [sections addObject:section];
     }
-    
+
     {
         TSGoodDetailItemPriceModel *item = [[TSGoodDetailItemPriceModel alloc] init];
         item.cellHeight = 189;
@@ -70,10 +83,10 @@
         section.column = 1;
         section.spacingWithLastSection = 12;
         section.items = @[item];
-        
+
         [sections addObject:section];
     }
-    
+
     {
         TSGoodDetailItemPriceModel *item = [[TSGoodDetailItemPriceModel alloc] init];
         item.cellHeight = 151;
@@ -83,10 +96,10 @@
         section.column = 1;
         section.spacingWithLastSection = 12;
         section.items = @[item];
-        
+
         [sections addObject:section];
     }
-    
+
     {
         TSGoodDetailItemPriceModel *item = [[TSGoodDetailItemPriceModel alloc] init];
         item.cellHeight = 227;
@@ -96,10 +109,10 @@
         section.column = 1;
         section.spacingWithLastSection = 12;
         section.items = @[item];
-        
+
         [sections addObject:section];
     }
-    
+
     {
         TSGoodDetailItemPriceModel *item = [[TSGoodDetailItemPriceModel alloc] init];
         item.cellHeight = 300;
@@ -112,7 +125,7 @@
         section.spacingWithLastSection = 12;
         section.column = 1;
         section.items = @[item];
-        
+
         [sections addObject:section];
     }
     

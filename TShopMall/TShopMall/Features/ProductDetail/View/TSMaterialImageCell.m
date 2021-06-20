@@ -10,6 +10,7 @@
 @interface TSMaterialImageCell()
 
 @property(nonatomic, strong) UIImageView *imgView;
+@property(nonatomic, strong) UIButton *flagButton;
 
 @end
 
@@ -17,9 +18,22 @@
 
 -(void)fillCustomContentView{
     [self.contentView addSubview:self.imgView];
+    [self.imgView addSubview:self.flagButton];
+    
     [self.imgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.contentView);
     }];
+    
+    [self.flagButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.imgView.mas_right).offset(-2);
+        make.top.equalTo(self.imgView).offset(2);
+        make.width.height.equalTo(@(30));
+    }];
+}
+
+#pragma mark - Actions
+-(void)selectAction:(UIButton *)sender{
+    
 }
 
 #pragma mark - Getter
@@ -28,9 +42,20 @@
         _imgView = [[UIImageView alloc] init];
         _imgView.layer.cornerRadius = 9;
         _imgView.clipsToBounds = YES;
-        _imgView.backgroundColor = [UIColor orangeColor];
+        _imgView.userInteractionEnabled = YES;
+        _imgView.backgroundColor = KHexColor(@"#F5EDED");
     }
     return _imgView;
+}
+
+-(UIButton *)flagButton{
+    if (!_flagButton) {
+        _flagButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_flagButton setImage:KImageMake(@"mall_detail_normal") forState:UIControlStateNormal];
+        [_flagButton setImage:KImageMake(@"mall_detail_selected") forState:UIControlStateSelected];
+        [_flagButton addTarget:self action:@selector(selectAction:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _flagButton;
 }
 
 @end

@@ -17,6 +17,8 @@
 @property (nonatomic, strong) UILabel *deliveryLable;
 /// 最高赚
 @property(nonatomic, strong) UILabel *earnLabel;
+/// 最高赚金额背景
+@property(nonatomic, strong) UIView *earnMoneyView;
 /// 最高赚金额
 @property(nonatomic, strong) UILabel *earnMoneyLabel;
 
@@ -30,7 +32,8 @@
     [self.contentView addSubview:self.deliveryLable];
     [self.contentView addSubview:self.unifiedLable];
     [self.contentView addSubview:self.unifiedPriceLable];
-    [self.contentView addSubview:self.earnMoneyLabel];
+    [self.contentView addSubview:self.earnMoneyView];
+    [self.earnMoneyView addSubview:self.earnMoneyLabel];
     [self.contentView addSubview:self.earnLabel];
     
     [self.unifiedLable mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -55,20 +58,26 @@
     [self.earnLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.unifiedPriceLable.mas_right).offset(21);
         make.centerY.equalTo(self.unifiedLable);
-        make.width.mas_equalTo(50);
+        make.width.mas_equalTo(60);
         make.height.mas_equalTo(20);
     }];
     
     [self.earnMoneyLabel sizeToFit];
     CGFloat width = self.earnMoneyLabel.size.width + 20;
     
-    [self.earnMoneyLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.earnMoneyView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.earnLabel.mas_right).offset(-10);
         make.centerY.equalTo(self.unifiedLable);
         make.width.mas_equalTo(width);
         make.height.mas_equalTo(20);
     }];
+    
+    [self.earnMoneyLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.earnMoneyView.mas_right).offset(-5);
+        make.centerY.equalTo(self.earnMoneyView);
+    }];
 }
+
 
 #pragma mark - Getter
 -(UILabel *)unifiedLable{
@@ -95,7 +104,7 @@
     if (!_deliveryLable) {
         _deliveryLable = [[UILabel alloc] init];
         _deliveryLable.font = KRegularFont(12);
-        _deliveryLable.textColor = KTextColor;
+        _deliveryLable.textColor = KHexAlphaColor(@"#2D3132", 0.4);
         _deliveryLable.text = @"提货价 ¥10800";
     }
     return _deliveryLable;
@@ -107,21 +116,32 @@
         _earnLabel.font = KRegularFont(14);
         _earnLabel.textColor = KWhiteColor;
         _earnLabel.backgroundColor = KHexColor(@"#F9AB50");
-        [_earnLabel setCorners:(UIRectCornerTopRight | UIRectCornerBottomRight) radius:5];
+        _earnLabel.textAlignment = NSTextAlignmentCenter;
+        [_earnLabel setCorners:(UIRectCornerTopRight | UIRectCornerBottomRight) radius:10];
+        _earnLabel.clipsToBounds = YES;
         _earnLabel.text = @"最高赚";
     }
     return _earnLabel;
 }
+
+-(UIView *)earnMoneyView{
+    if (!_earnMoneyView) {
+        _earnMoneyView = [[UIView alloc] init];
+        _earnMoneyView.backgroundColor = KHexColor(@"#FF4D49");
+        _earnMoneyView.clipsToBounds = YES;
+        [_earnMoneyView setCorners:(UIRectCornerTopRight | UIRectCornerBottomRight) radius:3];
+    }
+    return _earnMoneyView;
+}
+
 
 -(UILabel *)earnMoneyLabel{
     if (!_earnMoneyLabel) {
         _earnMoneyLabel = [[UILabel alloc] init];
         _earnMoneyLabel.font = KRegularFont(14);
         _earnMoneyLabel.textColor = KWhiteColor;
-        _earnMoneyLabel.backgroundColor = KHexColor(@"#FF4D49");
         _earnMoneyLabel.text = @"¥19999";
-        _earnMoneyLabel.textAlignment = NSTextAlignmentCenter;
-        [_earnMoneyLabel setCorners:(UIRectCornerTopRight | UIRectCornerBottomRight) radius:5];
+        _earnMoneyLabel.textAlignment = NSTextAlignmentRight;
     }
     return _earnMoneyLabel;
 }

@@ -23,7 +23,7 @@
 -(void)fillCustomContentView{
     [super fillCustomContentView];
     
-    self.contentView.backgroundColor = [UIColor clearColor];
+    self.contentView.backgroundColor = KGrayColor;
     
     [self.contentView addSubview:self.cycleScrollView];
     [self.contentView addSubview:self.numImgeLable];
@@ -79,8 +79,9 @@
         _cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectZero delegate:self placeholderImage:nil];
         _cycleScrollView.showPageControl = NO;
         _cycleScrollView.autoScroll  = NO;
-        _cycleScrollView.autoScrollTimeInterval = 4;
-        _cycleScrollView.backgroundColor = [UIColor clearColor];
+        _cycleScrollView.titleLabelBackgroundColor = [UIColor redColor];
+        _cycleScrollView.bannerImageViewContentMode = UIViewContentModeScaleAspectFill;
+        _cycleScrollView.backgroundColor = KGrayColor;
     }
     return _cycleScrollView;
 }
