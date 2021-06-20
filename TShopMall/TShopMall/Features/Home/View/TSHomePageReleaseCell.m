@@ -7,20 +7,20 @@
 
 #import "TSHomePageReleaseCell.h"
 #import "TSHomePageReleaseViewModel.h"
-#import "UIImageView+WebCache.h"
+#import "UIButton+WebCache.h"
 #import "TSImageBaseModel.h"
 @interface TSHomePageReleaseCell()
 
-@property(nonatomic, strong) UIImageView *iconImageView;
+@property(nonatomic, strong) UIButton *iconButton;
 @property(nonatomic, strong) UILabel *nameLabel;
 @end
 
 @implementation TSHomePageReleaseCell
 -(void)setupUI{
-    [self.contentView addSubview:self.iconImageView];
+    [self.contentView addSubview:self.iconButton];
     CGFloat height = kScreenWidth/345 * 447;
 
-    [self.iconImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+    [self.iconButton mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contentView).offset(16);
         make.right.equalTo(self.contentView).offset(-16);
         make.top.equalTo(self.contentView);
@@ -41,11 +41,10 @@
         @strongify(self)
         if (releaseViewModel.releaseModel) {
             CGFloat height = kScreenWidth/releaseViewModel.releaseModel.imageData.width * releaseViewModel.releaseModel.imageData.height;
-            [self.iconImageView mas_updateConstraints:^(MASConstraintMaker *make) {
+            [self.iconButton mas_updateConstraints:^(MASConstraintMaker *make) {
                 make.height.equalTo(@(height));
             }];
-            
-            [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:releaseViewModel.releaseModel.imageData.url]];
+            [self.iconButton sd_setImageWithURL:[NSURL URLWithString:releaseViewModel.releaseModel.imageData.url] forState:UIControlStateNormal];
         }
     }];
 
@@ -53,17 +52,22 @@
 
 }
 
-
+- (void)clickAction{
+    TSHomePageReleaseViewModel *releaseViewModel = (TSHomePageReleaseViewModel *)self.viewModel;
+    NSLog(@"uri:%@", releaseViewModel.releaseModel.linkData.objectValue);
+}
 
 #pragma mark - Getter
--(UIImageView *)iconImageView{
-    if (!_iconImageView) {
-        _iconImageView = [[UIImageView alloc] init];
-        _iconImageView.backgroundColor = KHexColor(@"EFEFEF");
-        _iconImageView.clipsToBounds = YES;
-        _iconImageView.layer.cornerRadius = 8;
+-(UIButton *)iconButton{
+    if (!_iconButton) {
+        _iconButton = [[UIButton alloc] init];
+        _iconButton.backgroundColor = [UIColor clearColor];
+        _iconButton.clipsToBounds = YES;
+        _iconButton.layer.cornerRadius = 8;
+        [_iconButton addTarget:self action:@selector(clickAction) forControlEvents:UIControlEventTouchUpInside];
+        _iconButton.adjustsImageWhenHighlighted = NO;
     }
-    return _iconImageView;
+    return _iconButton;
 }
 
 - (UILabel *)nameLabel{

@@ -97,6 +97,7 @@
     TSHomePageContainerCollectionView *collectionView =  [[TSHomePageContainerCollectionView alloc] initWithFrame:CGRectZero items:nil ColumnSpacing:8 rowSpacing:8 itemsHeight:282 rows:0 columns:2 padding:padding clickedBlock:^(TSProductBaseModel *selectItem, NSInteger index) {
         NSLog(@"uri:%@", selectItem.uuid);
     }];
+    collectionView.tag = page;
     collectionView.collectionView.backgroundColor = KGrayColor;
     @weakify(self);
     collectionView.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
@@ -110,7 +111,7 @@
 }
 
 - (void)reloadContainerCollectionView:(TSHomePageContainerCollectionView *)collectionView{
-    TSHomePageContainerGroup *group = self.containerViewModel.segmentHeaderDatas[self.containerViewModel.pageIndex];
+    TSHomePageContainerGroup *group = self.containerViewModel.segmentHeaderDatas[collectionView.tag];
     [self.containerViewModel loadData:group callBack:^(NSArray * _Nonnull list, NSError * _Nonnull error) {
         if (!error) {
             collectionView.items = list;

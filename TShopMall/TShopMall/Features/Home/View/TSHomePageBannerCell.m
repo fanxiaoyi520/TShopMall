@@ -23,7 +23,7 @@
     [self.cycleScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contentView).offset(16);
         make.right.equalTo(self.contentView).offset(-16);
-        make.top.equalTo(self.contentView).offset(16);
+        make.top.equalTo(self.contentView).offset(11);
         make.bottom.equalTo(self.contentView).offset(-12);
         make.height.equalTo(@174);
     }];

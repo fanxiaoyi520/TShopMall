@@ -17,6 +17,9 @@
 #import "YBNestViews.h"
 #import "TSHomePageLoginBarView.h"
 #import "TSHomePagePerchView.h"
+
+#define tableViewBackGroundViewHeight 204.0
+
 @interface TSHomeViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 /// 搜索按钮
@@ -25,12 +28,15 @@
 @property(nonatomic, strong) UIButton *categoryButton;
 
 @property(nonatomic, strong) YBNestTableView *tableView;
+//背景图
 @property(nonatomic, strong) UIImageView *tableViewBackGroundView;
-
+//导航栏背景图
+@property(nonatomic, strong) UIView * navBackgroundView;
 @property (nonatomic, strong) TSHomePageViewModel *viewModel;
 
 @property (nonatomic, strong) YBNestContainerView *containerView;
 @property (nonatomic, strong) TSHomePageLoginBarView *loginBar;
+//缺省图
 @property (nonatomic, strong) TSHomePagePerchView *perchView;
 
 @end
@@ -46,9 +52,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
     [self.viewModel fetchData];
-    [self setupUI];
     [self registCellInfo];
 
     @weakify(self);
@@ -64,7 +68,6 @@
             [self configObserve];
         }
     }];
-
 
     [self.view addSubview:self.loginBar];
     self.loginBar.clickBlock = ^{
@@ -96,38 +99,31 @@
         make.left.right.equalTo(self.view);
         make.bottom.equalTo(self.view);
     }];
-}
-
-- (void)setupUI{
-
-    self.view.backgroundColor = KWhiteColor;
-    [self.view addSubview:self.tableView];
+    
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.searchButton.mas_bottom);
+        make.top.equalTo(self.searchButton.mas_bottom).offset(11);
         make.left.right.equalTo(self.view);
         make.bottom.equalTo(self.view);
     }];
     
-    [self.perchView configPerch];
-}
+    [self.navBackgroundView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.equalTo(self.view);
+        make.bottom.equalTo(self.tableView.mas_top);
 
-- (void)loadFixedBackGroundView{
-    UIView *fixedBackGroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 100)];
-    fixedBackGroundView.backgroundColor = KHexColor(@"#FF4D49");
-    [self.view addSubview:fixedBackGroundView];
-    [self.view sendSubviewToBack:fixedBackGroundView];
+    }];
 }
 
 - (void)fillCustomView{
-    
+    self.view.backgroundColor = KWhiteColor;
+
     [self.view addSubview:self.tableViewBackGroundView];
-    [self.view sendSubviewToBack:self.tableViewBackGroundView];
+    [self.view addSubview:self.navBackgroundView];
     [self.view addSubview:self.searchButton];
     [self.view addSubview:self.categoryButton];
     [self.view addSubview:self.perchView];
+    [self.view addSubview:self.tableView];
+    [self.perchView configPerch];
 }
-
-
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -153,9 +149,7 @@
             }
             self.containerView = contentCell.containerView;
         }
-        
         contentCell.viewModel = viewModel;
-        
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
@@ -198,9 +192,12 @@
     @weakify(self);
     [self.KVOController observe:self.tableView keyPath:@"contentOffset" options:(NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew) block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
         @strongify(self)
-        CGRect frame = self.tableViewBackGroundView.frame;
-        frame.origin.y = - self.tableView.contentOffset.y;
+        UIImage *image = self.tableViewBackGroundView.image;
+        CGFloat height = kScreenWidth/image.size.width * image.size.height;
+        CGFloat y = -((image.size.height - tableViewBackGroundViewHeight)/image.size.height * height);
+        CGRect frame = CGRectMake(0, y - self.tableView.contentOffset.y, self.view.width, height);
         self.tableViewBackGroundView.frame = frame;
+        self.navBackgroundView.backgroundColor = self.tableView.contentOffset.y > 0?KHexColor(@"FF4D49"):[UIColor clearColor];
     }];
     
 }
@@ -254,6 +251,8 @@
         _tableView.rowHeight = UITableViewAutomaticDimension;
         _tableView.delegate = self;
         _tableView.dataSource = self;
+        _tableView.showsVerticalScrollIndicator = NO;
+        _tableView.showsHorizontalScrollIndicator = NO;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.mj_header = header;
         if (@available(iOS 11.0, *)) {
@@ -274,11 +273,17 @@
 
 - (UIImageView *)tableViewBackGroundView{
     if (!_tableViewBackGroundView) {
-        CGFloat height = kScreenWidth/375 * 205;
-        _tableViewBackGroundView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, height)];
+        _tableViewBackGroundView = [[UIImageView alloc] init];
         _tableViewBackGroundView.image = [UIImage imageNamed:@"mall_home_bg1"];
     }
     return _tableViewBackGroundView;
+}
+
+- (UIView *)navBackgroundView{
+    if (!_navBackgroundView) {
+        _navBackgroundView = [UIView new];
+    }
+    return _navBackgroundView;
 }
 
 #pragma mark - ScrollViewDelegate

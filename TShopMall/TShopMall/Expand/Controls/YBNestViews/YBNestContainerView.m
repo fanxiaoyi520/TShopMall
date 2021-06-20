@@ -99,7 +99,7 @@ static NSString * const kCellIdentifier = @"kCellIdentifier";
     BOOL beforeBottom = _mainScrollViewArriveBottom;
     _mainScrollViewArriveBottom = scrollView.contentOffset.y >= maxOffsetY - 0.5;
     
-    scrollView.showsVerticalScrollIndicator = !_mainScrollViewArriveBottom;
+    scrollView.showsVerticalScrollIndicator = NO;
     
     if (beforeBottom != _mainScrollViewArriveBottom && !_mainScrollViewArriveBottom) {
         // Reset 'contentOffset' of all the 'contentScrollView'.
@@ -120,7 +120,7 @@ static NSString * const kCellIdentifier = @"kCellIdentifier";
         scrollView.contentOffset = CGPointZero;
     }
     
-    scrollView.showsVerticalScrollIndicator = !scrollView.yb_nestContentArriveTop;
+    scrollView.showsVerticalScrollIndicator = NO;
 }
 
 #pragma mark - <UICollectionViewDelegate, UICollectionViewDataSource>
