@@ -7,11 +7,6 @@
 
 #import "TSOrderManageViewController.h"
 #import <JXCategoryView/JXCategoryView.h>
-#import "TSBePaidViewController.h"
-#import "TSBeDeliveredViewController.h"
-#import "TSBeReceivedViewController.h"
-#import "TSCompletedViewController.h"
-#import "TSAllOrderViewController.h"
 
 @interface TSOrderManageViewController ()<JXCategoryListContainerViewDelegate>
 
