@@ -18,7 +18,7 @@
 
 -(void)initNetworkConfig{
     YTKNetworkConfig *config = [YTKNetworkConfig sharedConfig];
-    [config setBaseUrl:kApiPrefix];
+    [config setBaseUrl:kMallApiPrefix];
 }
 
 -(void)setKeywordAttribute{

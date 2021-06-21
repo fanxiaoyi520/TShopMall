@@ -45,8 +45,8 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
-    
+
+    self.gk_navigationBar.hidden = YES;
 }
 
 - (void)viewDidLoad {
