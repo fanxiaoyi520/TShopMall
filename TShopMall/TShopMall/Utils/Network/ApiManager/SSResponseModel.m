@@ -28,6 +28,7 @@
     responseModel.code = response[@"code"];
     responseModel.responseMsg = response[@"responseMsg"];
     responseModel.data = response[@"data"];
+    responseModel.originalData = response;
     
     return responseModel;
 }

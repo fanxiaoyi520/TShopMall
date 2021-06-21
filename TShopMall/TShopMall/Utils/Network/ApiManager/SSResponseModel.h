@@ -40,6 +40,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy) NSString *responseMsg;
 /// 响应体（字典或者数组）
 @property(nonatomic, strong) id data;
+/// 后台返回原始数据
+@property(nonatomic, strong) NSDictionary *originalData;
 
 +(instancetype)responseWithRequest:(SSBaseRequest *)baseRequest;
 

@@ -12,6 +12,7 @@
 #import "TSRankViewController.h"
 #import "TSCartViewController.h"
 #import "TSMineViewController.h"
+#import <GKNavigationBarViewController/UINavigationController+GKCategory.h>
 
 @interface TSTabBarController ()
 
@@ -69,52 +70,63 @@
 - (NSArray *)viewControllersForTabBar{
     //首页
     TSHomeViewController *home = [[TSHomeViewController alloc] init];
-    TSBaseNavigationController *homeController = [[TSBaseNavigationController alloc] initWithRootViewController:home];
+    TSBaseNavigationController *homeController = [TSBaseNavigationController rootVC:home translationScale:NO];
+    homeController.gk_openScrollLeftPush = YES;
                                                    
     //品类
     TSCategoryViewController *goods = [[TSCategoryViewController alloc] init];
-    TSBaseNavigationController *goodsController = [[TSBaseNavigationController alloc] initWithRootViewController:goods];
+    TSBaseNavigationController *goodsController = [TSBaseNavigationController rootVC:goods translationScale:NO];
+    goodsController.gk_openScrollLeftPush = YES;
 
     //排行
     TSRankViewController *rank = [[TSRankViewController alloc] init];
-    TSBaseNavigationController *rankController = [[TSBaseNavigationController alloc] initWithRootViewController:rank];
+    TSBaseNavigationController *rankController = [TSBaseNavigationController rootVC:rank translationScale:NO];
+    rankController.gk_openScrollLeftPush = YES;
     
     //购物车
     TSCartViewController *cart = [[TSCartViewController alloc] init];
-    TSBaseNavigationController *cartController = [[TSBaseNavigationController alloc] initWithRootViewController:cart];
+    TSBaseNavigationController *cartController = [TSBaseNavigationController rootVC:cart translationScale:NO];
+    cartController.gk_openScrollLeftPush = YES;
 
     //我的
     TSMineViewController *mine = [[TSMineViewController alloc] init];
-    TSBaseNavigationController *mineController = [[TSBaseNavigationController alloc] initWithRootViewController:mine];
+    TSBaseNavigationController *mineController = [TSBaseNavigationController rootVC:mine translationScale:NO];
+    mineController.gk_openScrollLeftPush = YES;
     
     return @[homeController,goodsController,rankController,cartController,mineController];
 }
 
 - (NSArray *)tabBarItemsAttributesForTabBar {
+    
     NSDictionary *home = @{
         CYLTabBarItemTitle : @"首页",
         CYLTabBarItemImage : @"mall_home_normal",
         CYLTabBarItemSelectedImage : @"mall_home_selected",
+        CYLTabBarLottieURL : [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"tabbar_home" ofType:@"json"]],
     };
     NSDictionary *category = @{
         CYLTabBarItemTitle : @"分类",
         CYLTabBarItemImage : @"mall_category_normal",
         CYLTabBarItemSelectedImage : @"mall_category_selected",
+        CYLTabBarLottieURL : [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"tabbar_category" ofType:@"json"]],
     };
     NSDictionary *rank = @{
         CYLTabBarItemTitle : @"排行",
         CYLTabBarItemImage : @"mall_rank_normal",
         CYLTabBarItemSelectedImage : @"mall_rank_selected",
+        CYLTabBarLottieURL : [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"tabbar_rank" ofType:@"json"]],
     };
     NSDictionary *cart = @{
         CYLTabBarItemTitle : @"购物车",
         CYLTabBarItemImage : @"mall_cart_normal",
         CYLTabBarItemSelectedImage : @"mall_cart_selected",
+        CYLTabBarLottieURL : [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"tabbar_cart" ofType:@"json"]],
     };
     NSDictionary *mine = @{
         CYLTabBarItemTitle : @"我的",
         CYLTabBarItemImage : @"mall_mine_normal",
         CYLTabBarItemSelectedImage : @"mall_mine_selected",
+        CYLTabBarLottieURL : [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"tabbar_mine" ofType:@"json"]],
     };
     
     return @[home,category,rank,cart,mine];

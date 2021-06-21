@@ -160,7 +160,8 @@
             strongSelf.timer = [NSTimer ts_scheduledTimerWithTimeInterval:1 block:^{
                  [weakSelf goToRun];
             } repeats:YES];
-            [strongSelf.view makeToast:@"获取验证码成功" duration:2.0 position:CSToastPositionBottom];
+            
+            [Popover popToastOnWindowWithText:@"获取验证码成功"];
             
         }else{
             [strongSelf.view makeToast:self.dataController.smsModel.failCause duration:2.0 position:CSToastPositionBottom];
@@ -200,9 +201,9 @@
     NSString *inputCode = [self.topView getCode];
     NSString *rightCode = self.dataController.smsModel.text;
     
-//    if ([inputCode isEqualToString:rightCode]) {//验证码输入错误
-//        [self.view makeToast:@"验证码输入有误" duration:2 position:CSToastPositionBottom];
-//    }
+    if (![inputCode isEqualToString:rightCode]) {//验证码输入错误
+        [Popover popToastOnWindowWithText:@"验证码输入有误"];
+    }
     
     [self.dataController fetchQuickLoginUsername:[self.topView getPhoneNumber]
                                        validCode:[self.topView getCode]
