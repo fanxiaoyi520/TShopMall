@@ -18,15 +18,21 @@
     return instance;
 }
 
-- (void)saveCurrentUserInfo:(NSDictionary *)dit{
-    
+-(instancetype)init{
+    if (self = [super init]) {
+        self.currentUserInfo = [TSUserInfoManager userInfo];
+    }
+    return self;
 }
 
-- (void)setLoginType:(NSString*)loginTyppe{
-    
+- (void)saveCurrentUserInfo{
+    [self.currentUserInfo saveUserInfo];
 }
 
 - (void)clearUserInfo{
+    self.isLogin = NO;
+    [self.currentUserInfo clearUserInfo];
+    self.currentUserInfo = nil;
     
 }
 @end

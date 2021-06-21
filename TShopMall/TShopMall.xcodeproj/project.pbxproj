@@ -258,6 +258,7 @@
 		F530CCFA26804167009DC29A /* TSWKAppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CCE226804167009DC29A /* TSWKAppManager.m */; };
 		F530CCFB26804167009DC29A /* TSWKMessageHandlerHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CCE326804167009DC29A /* TSWKMessageHandlerHelper.m */; };
 		F530CCFC26804167009DC29A /* TSWebViewNetworkInterceptor.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CCE726804167009DC29A /* TSWebViewNetworkInterceptor.m */; };
+		F530CCFF26806BDD009DC29A /* TSSaveLocalConst.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CCFE26806BDD009DC29A /* TSSaveLocalConst.m */; };
 		F54972FE2668842500181E3F /* TShopMallTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F54972FD2668842500181E3F /* TShopMallTests.m */; };
 		F54973092668842500181E3F /* TShopMallUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F54973082668842500181E3F /* TShopMallUITests.m */; };
 		F54973602668A22100181E3F /* SSGenaralRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F54973402668A22100181E3F /* SSGenaralRequest.m */; };
@@ -871,6 +872,8 @@
 		F530CCE526804167009DC29A /* TSWKMessageHandlerHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSWKMessageHandlerHelper.h; sourceTree = "<group>"; };
 		F530CCE726804167009DC29A /* TSWebViewNetworkInterceptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSWebViewNetworkInterceptor.m; sourceTree = "<group>"; };
 		F530CCE826804167009DC29A /* TSWebViewNetworkInterceptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSWebViewNetworkInterceptor.h; sourceTree = "<group>"; };
+		F530CCFD26806BDD009DC29A /* TSSaveLocalConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSSaveLocalConst.h; sourceTree = "<group>"; };
+		F530CCFE26806BDD009DC29A /* TSSaveLocalConst.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSSaveLocalConst.m; sourceTree = "<group>"; };
 		F54972DE2668842200181E3F /* TShopMall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TShopMall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F54972F22668842400181E3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F54972F92668842500181E3F /* TShopMallTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TShopMallTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1648,12 +1651,12 @@
 		F530C6CB26802E5D009DC29A /* DataController */ = {
 			isa = PBXGroup;
 			children = (
+				F530C6CE26802E5D009DC29A /* TSLoginRegisterDataController.h */,
+				F530C6D126802E5D009DC29A /* TSLoginRegisterDataController.m */,
+				F530C6D026802E5D009DC29A /* TSSMSCodeRequest.h */,
 				F530C6CC26802E5D009DC29A /* TSSMSCodeRequest.m */,
 				F530C6CD26802E5D009DC29A /* TSQuickLoginRequest.h */,
-				F530C6CE26802E5D009DC29A /* TSLoginRegisterDataController.h */,
 				F530C6CF26802E5D009DC29A /* TSQuickLoginRequest.m */,
-				F530C6D026802E5D009DC29A /* TSSMSCodeRequest.h */,
-				F530C6D126802E5D009DC29A /* TSLoginRegisterDataController.m */,
 			);
 			path = DataController;
 			sourceTree = "<group>";
@@ -2358,6 +2361,8 @@
 				F54973C72668C1D600181E3F /* TSNotificationConst.m */,
 				F54973C32668C14F00181E3F /* TSConstant.h */,
 				F54973C42668C14F00181E3F /* TSConstant.m */,
+				F530CCFD26806BDD009DC29A /* TSSaveLocalConst.h */,
+				F530CCFE26806BDD009DC29A /* TSSaveLocalConst.m */,
 			);
 			path = Const;
 			sourceTree = "<group>";
@@ -3371,6 +3376,7 @@
 				F530CCF826804167009DC29A /* WKWebView+TSExternalNavigationDelegates.m in Sources */,
 				C2EF88CF2670A3B200E7374A /* TSCartRecomendCell.m in Sources */,
 				C2A34CAC2675FB550095497E /* TSGoodsListSection.m in Sources */,
+				F530CCFF26806BDD009DC29A /* TSSaveLocalConst.m in Sources */,
 				F54973652668A22100181E3F /* YTKChainRequest+AnimatingAccessory.m in Sources */,
 				F56D4B41266DFB8900C1AD9E /* FMLayoutFixedSection.m in Sources */,
 				DC3440AD26720D9200F5B0DA /* TSCollectionViewLineWrapLayout.m in Sources */,
