@@ -36,7 +36,7 @@
 -(UILabel *)hotLabel{
     if (!_hotLabel) {
         _hotLabel = [[UILabel alloc] init];
-        _hotLabel.font = KFont(PingFangSCMedium, 16);
+        _hotLabel.font = KRegularFont(16);
         _hotLabel.textAlignment = NSTextAlignmentCenter;
         _hotLabel.textColor = KTextColor;
         _hotLabel.text = @"热销推荐";
