@@ -63,16 +63,18 @@
             self.collectionView.sections = self.dataCon.lists;
             [weakSelf.collectionView reloadData];
         }
-        [weakSelf endRefresh];
         [weakSelf showEmptyView];
+        [weakSelf endRefresh];
     }];
 }
 
 - (void)showEmptyView{
+    self.refreshFooter.hidden = NO;
     if (self.dataCon.currentNum != 0) {
         [TSEmptyAlertView hideInView:self.collectionView];
         return ;
     }
+    self.refreshFooter.hidden = YES;
     TSEmptyAlertView.new.alertInfo(@"抱歉，没有找到商品哦～", @"重试").show(self.collectionView, @"center",^{
         [self refreshGoods];
     });

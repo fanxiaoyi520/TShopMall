@@ -162,7 +162,7 @@
     if (_cartView) {
         return _cartView;
     }
-    self.cartView = [TSCartView new];
+    self.cartView = [[TSCartView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
     self.cartView.controller = self;
     [self.view addSubview:self.cartView];
     

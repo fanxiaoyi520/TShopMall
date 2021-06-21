@@ -12,6 +12,8 @@
     if (self == [super init]) {
         self.isGrid = YES;
         self.lists = [NSMutableArray array];
+        self.sort = SortWeight;
+        self.sort = 1;
         [self defaultConfig];
     }
     return self;
@@ -35,8 +37,6 @@
 - (void)defaultConfig{
     self.currentPage  = 1;
     self.currentNum = 0;
-    self.sort = SortWeight;
-    self.sort = 1;
     self.totalNum = 10000;
     self.result = nil;
     [self.lists removeAllObjects];

@@ -15,8 +15,8 @@
 
 @implementation TSCartView
 
-- (instancetype)init{
-    if (self == [super init]) {
+- (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style{
+    if (self == [super initWithFrame:frame style:style]) {
         self.delegate = self;
         self.dataSource = self;
         [self configTable];
