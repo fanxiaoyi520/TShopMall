@@ -7,7 +7,7 @@
 //
 
 #import "YTKAnimatingRequestAccessory.h"
-#import "SSNetworkAlertUtil.h"
+#import "Popover.h"
 
 @implementation YTKAnimatingRequestAccessory
 
@@ -38,20 +38,23 @@
 
 - (void)requestWillStart:(id)request {
     if (_animatingView) {
-        __weak __typeof(self)weakSelf = self;
         dispatch_async(dispatch_get_main_queue(), ^{
-            __strong __typeof(weakSelf)strongSelf = weakSelf;
-            [SSNetworkAlertUtil showLoadingAlertViewInView:strongSelf.animatingView];
+            ProgressModel *model = [[ProgressModel alloc] init];
+            model.text = @"加载中";
+            model.inProgress = YES;
+            model.showMaskView = YES;
+            
+            [Popover popProgressOnWindowWithProgressModel:model appearBlock:^(id frontView) {
+                
+            }];
         });
     }
 }
 
 - (void)requestWillStop:(id)request {
     if (_animatingView) {
-        __weak __typeof(self)weakSelf = self;
         dispatch_async(dispatch_get_main_queue(), ^{
-            __strong __typeof(weakSelf)strongSelf = weakSelf;
-            [SSNetworkAlertUtil hideLoadingAlertView:strongSelf.animatingView];
+            [Popover removePopoverOnWindow];
         });
     }
 }

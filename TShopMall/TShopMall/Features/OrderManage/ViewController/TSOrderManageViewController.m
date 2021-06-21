@@ -76,34 +76,4 @@
 
 }
 
-#pragma mark - JXCategoryListContainerViewDelegate
-- (NSInteger)numberOfListsInlistContainerView:(JXCategoryListContainerView *)listContainerView {
-    return 5;
-}
-
-- (id<JXCategoryListContentViewDelegate>)listContainerView:(JXCategoryListContainerView *)listContainerView initListForIndex:(NSInteger)index {
-    if (index == 0) {//待付款
-        TSBePaidViewController *vc = [[TSBePaidViewController alloc] init];
-        return vc;
-    }else if(index == 1){//待发货
-        TSBeDeliveredViewController *vc = [[TSBeDeliveredViewController alloc] init];
-        return vc;
-    }else if (index == 2){//待收货
-        TSBeReceivedViewController *vc = [[TSBeReceivedViewController alloc] init];
-        return vc;
-    }else if (index == 3){//已完成
-        TSCompletedViewController *vc = [[TSCompletedViewController alloc] init];
-        return vc;
-    }else {//所有订单
-        TSAllOrderViewController *vc = [[TSAllOrderViewController alloc] init];
-        return vc;
-    }
-   
-
-}
-
-
-
-
-
 @end

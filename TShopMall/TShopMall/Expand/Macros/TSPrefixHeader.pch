@@ -29,6 +29,8 @@
 #import "TSGlobalManager.h"
 #import "SSResponseModel.h"
 #import "YTKBaseRequest+AnimatingAccessory.h"
+#import "RefreshGifHeader.h"
+#import "RefreshGifFooter.h"
 #import <Toast.h>
 
 #import <YTKNetwork/YTKNetwork.h>
