@@ -32,7 +32,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.gk_navigationBar.hidden = YES;
+
 }
 
 - (void)fillCustomView {
@@ -192,6 +193,11 @@
 - (void)checkedAction:(BOOL)isChecked {
     [self.topView setRegisterBtnEnable:isChecked];
 }
+
+- (UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleDefault;
+}
+
 
 @end
 
