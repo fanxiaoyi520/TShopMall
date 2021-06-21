@@ -254,6 +254,11 @@
 		F530CCFB26804167009DC29A /* TSWKMessageHandlerHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CCE326804167009DC29A /* TSWKMessageHandlerHelper.m */; };
 		F530CCFC26804167009DC29A /* TSWebViewNetworkInterceptor.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CCE726804167009DC29A /* TSWebViewNetworkInterceptor.m */; };
 		F530CCFF26806BDD009DC29A /* TSSaveLocalConst.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CCFE26806BDD009DC29A /* TSSaveLocalConst.m */; };
+		F530CD10268085BA009DC29A /* tabbar_mine.json in Resources */ = {isa = PBXBuildFile; fileRef = F530CD0B268085BA009DC29A /* tabbar_mine.json */; };
+		F530CD11268085BA009DC29A /* tabbar_rank.json in Resources */ = {isa = PBXBuildFile; fileRef = F530CD0C268085BA009DC29A /* tabbar_rank.json */; };
+		F530CD12268085BA009DC29A /* tabbar_category.json in Resources */ = {isa = PBXBuildFile; fileRef = F530CD0D268085BA009DC29A /* tabbar_category.json */; };
+		F530CD13268085BA009DC29A /* tabbar_home.json in Resources */ = {isa = PBXBuildFile; fileRef = F530CD0E268085BA009DC29A /* tabbar_home.json */; };
+		F530CD14268085BA009DC29A /* tabbar_cart.json in Resources */ = {isa = PBXBuildFile; fileRef = F530CD0F268085BA009DC29A /* tabbar_cart.json */; };
 		F54972FE2668842500181E3F /* TShopMallTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F54972FD2668842500181E3F /* TShopMallTests.m */; };
 		F54973092668842500181E3F /* TShopMallUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F54973082668842500181E3F /* TShopMallUITests.m */; };
 		F54973602668A22100181E3F /* SSGenaralRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F54973402668A22100181E3F /* SSGenaralRequest.m */; };
@@ -859,6 +864,11 @@
 		F530CCE826804167009DC29A /* TSWebViewNetworkInterceptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSWebViewNetworkInterceptor.h; sourceTree = "<group>"; };
 		F530CCFD26806BDD009DC29A /* TSSaveLocalConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSSaveLocalConst.h; sourceTree = "<group>"; };
 		F530CCFE26806BDD009DC29A /* TSSaveLocalConst.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSSaveLocalConst.m; sourceTree = "<group>"; };
+		F530CD0B268085BA009DC29A /* tabbar_mine.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tabbar_mine.json; sourceTree = "<group>"; };
+		F530CD0C268085BA009DC29A /* tabbar_rank.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tabbar_rank.json; sourceTree = "<group>"; };
+		F530CD0D268085BA009DC29A /* tabbar_category.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tabbar_category.json; sourceTree = "<group>"; };
+		F530CD0E268085BA009DC29A /* tabbar_home.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tabbar_home.json; sourceTree = "<group>"; };
+		F530CD0F268085BA009DC29A /* tabbar_cart.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tabbar_cart.json; sourceTree = "<group>"; };
 		F54972DE2668842200181E3F /* TShopMall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TShopMall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F54972F22668842400181E3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F54972F92668842500181E3F /* TShopMallTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TShopMallTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1905,6 +1915,18 @@
 			path = Interceptor;
 			sourceTree = "<group>";
 		};
+		F530CD00268083A2009DC29A /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				F530CD0F268085BA009DC29A /* tabbar_cart.json */,
+				F530CD0D268085BA009DC29A /* tabbar_category.json */,
+				F530CD0E268085BA009DC29A /* tabbar_home.json */,
+				F530CD0B268085BA009DC29A /* tabbar_mine.json */,
+				F530CD0C268085BA009DC29A /* tabbar_rank.json */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
 		F54972D52668842200181E3F = {
 			isa = PBXGroup;
 			children = (
@@ -2039,6 +2061,7 @@
 		F549736C2668A31000181E3F /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				F530CD00268083A2009DC29A /* Resource */,
 				F549736D2668A31000181E3F /* Assets.xcassets */,
 				F549736E2668A31000181E3F /* LaunchScreen.storyboard */,
 				F54973702668A31000181E3F /* Main.storyboard */,
@@ -2929,6 +2952,7 @@
 				F530CC4926803B1C009DC29A /* PulldownRefreshStyleBlack.json in Resources */,
 				F530CC6726803E43009DC29A /* Toast_Info.png in Resources */,
 				F530CC4A26803B1C009DC29A /* PulldownRefreshStyleRed.json in Resources */,
+				F530CD10268085BA009DC29A /* tabbar_mine.json in Resources */,
 				F530CC4726803B1C009DC29A /* PulldownRefreshStyleWhite.json in Resources */,
 				F530CCF226804167009DC29A /* TXKJSBridge.js in Resources */,
 				F530CC6A26803E43009DC29A /* ProgressAnimation.json in Resources */,
@@ -2937,9 +2961,13 @@
 				F54973732668A31000181E3F /* Assets.xcassets in Resources */,
 				F54973742668A31000181E3F /* LaunchScreen.storyboard in Resources */,
 				DC9911AD267B377000EF9B26 /* refresh_header_light.json in Resources */,
+				F530CD14268085BA009DC29A /* tabbar_cart.json in Resources */,
+				F530CD13268085BA009DC29A /* tabbar_home.json in Resources */,
+				F530CD12268085BA009DC29A /* tabbar_category.json in Resources */,
 				C2EF88E02671F79800E7374A /* cart.json in Resources */,
 				F530CC6926803E43009DC29A /* Toast_Failure.png in Resources */,
 				C2C765332679A825004757B9 /* refresh_header_dark.json in Resources */,
+				F530CD11268085BA009DC29A /* tabbar_rank.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3167,7 +3195,6 @@
 				C3A6C4BD267A1C5700FC71D6 /* TSSecurityCenterTitleCell.m in Sources */,
 				F55D2C6926722807006BACCF /* TSCategoryDataController.m in Sources */,
 				F530CCED26804167009DC29A /* TSBridgeHandler.m in Sources */,
-				04DAFB0A267B5C3C0098275A /* TSBeReceivedViewController.m in Sources */,
 				F55D2C6626722807006BACCF /* TSMeasureCell.m in Sources */,
 				F55D2C6F26723C2B006BACCF /* TSRecommendCell.m in Sources */,
 				C3B4CCF12674934E0001EE75 /* TSQuickLoginTopView.m in Sources */,
@@ -3264,7 +3291,6 @@
 				F54973B12668BBB200181E3F /* TSCategoryViewController.m in Sources */,
 				F55D2D2A267B3B26006BACCF /* TSRankHonourCell.m in Sources */,
 				C3A6C4C8267A1C5700FC71D6 /* TSAccountCancelBottomCell.m in Sources */,
-				04DAFB01267B441D0098275A /* TSAllOrderViewController.m in Sources */,
 				F530CCB226803FCD009DC29A /* UIView+Plugin.m in Sources */,
 				C2C7653C2679E6FA004757B9 /* TSMakeOrderCommitView.m in Sources */,
 				C2C765362679E2DA004757B9 /* TSMakeOrderController.m in Sources */,
@@ -3331,7 +3357,6 @@
 				F55D2CDF26788193006BACCF /* TSProductDetailDataController.m in Sources */,
 				C2A34CA62675E8A20095497E /* TSGoodsListController.m in Sources */,
 				F56D4B4A266DFB8900C1AD9E /* FMLayoutCrossSection.m in Sources */,
-				04DAFB0D267B5C510098275A /* TSCompletedViewController.m in Sources */,
 				F530CC4826803B1C009DC29A /* RefreshGifHeader.m in Sources */,
 				DC9911AE267B377000EF9B26 /* TSRefreshConfiger.m in Sources */,
 				F56D4B4F266DFB8900C1AD9E /* FMLayoutDebugLog.m in Sources */,
@@ -3407,8 +3432,6 @@
 				DC9911A6267AE43400EF9B26 /* TSImageBaseModel.m in Sources */,
 				F530CC6626803E43009DC29A /* Progress.m in Sources */,
 				DC45FEBA267742F700CE762E /* TSHomePageContainerGroup.m in Sources */,
-				C28757D5267360E2007C8AF5 /* UIView+General.m in Sources */,
-				04DAFB07267B5C0F0098275A /* TSBeDeliveredViewController.m in Sources */,
 				F55D2D35267B3F04006BACCF /* TSRankHeaderView.m in Sources */,
 				F55D2D32267B3DB7006BACCF /* TSRankSectionModel.m in Sources */,
 				F54973602668A22100181E3F /* SSGenaralRequest.m in Sources */,
