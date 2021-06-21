@@ -23,14 +23,14 @@
     [self.containerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.contentView);
         make.width.equalTo(@(kScreenWidth));
-        make.height.equalTo(@(100));
+        make.height.equalTo(@(100)).priorityLow();
        }];
 }
 
 - (void)setContainerHeight:(CGFloat)containerHeight{
     _containerHeight = containerHeight;
     [self.containerView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.height.equalTo(@(containerHeight));
+        make.height.equalTo(@(containerHeight)).priorityLow();;
        }];
 }
 

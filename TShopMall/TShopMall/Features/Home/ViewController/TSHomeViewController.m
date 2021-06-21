@@ -145,7 +145,7 @@
         if ([cell isKindOfClass:TSHomePageContainerCell.class]) {
             TSHomePageContainerCell *contentCell = (TSHomePageContainerCell *)cell;
             if (contentCell.containerHeight == 0) {
-                contentCell.containerHeight = kScreenHeight - self.searchButton.bottom - 48;
+                contentCell.containerHeight = kScreenHeight - self.navBackgroundView.bottom - 48;
             }
             self.containerView = contentCell.containerView;
         }
@@ -173,7 +173,7 @@
     [view addSubview:tempView];
     [tempView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(view);
-        make.height.equalTo(@.2);
+        make.height.equalTo(@.2).priorityLow();
     }];
     return view;
 }

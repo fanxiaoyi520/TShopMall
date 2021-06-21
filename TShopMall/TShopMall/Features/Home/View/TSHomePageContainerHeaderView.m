@@ -29,7 +29,7 @@
     [self.contentView addSubview:self.segmentHeader];
     [self.segmentHeader mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.contentView);
-        make.height.equalTo(@48);
+        make.height.equalTo(@48).priorityLow();;
     }];
 }
 

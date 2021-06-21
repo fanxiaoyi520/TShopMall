@@ -35,10 +35,10 @@
         
         [self addSubview: self.titleLabel];
         [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.imageView.mas_bottom).offset(0);
+            make.top.equalTo(self.imageView.mas_bottom).offset(8);
             make.left.equalTo(self).offset(8);
             make.right.equalTo(self).offset(-8);
-            make.height.equalTo(@44);
+            make.height.equalTo(@44).priorityLow();;
         }];
         
         [self addSubview: self.highPriceView];
@@ -53,14 +53,14 @@
         [self.rmbLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(self.highPriceView);
             make.left.equalTo(self).offset(8);
-            make.height.equalTo(@30);
+            make.height.equalTo(@30).priorityLow();;
         }];
         
         [self addSubview: self.priceLabel];
         [self.priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(self.highPriceView);
             make.left.equalTo(self.rmbLabel.mas_right).offset(2);
-            make.height.equalTo(@30);
+            make.height.equalTo(@30).priorityLow();;
         }];
         
         
@@ -70,7 +70,7 @@
             make.top.equalTo(self.priceLabel.mas_bottom);
             make.left.equalTo(self).offset(8);
             make.height.equalTo(@16);
-            make.bottom.equalTo(self).offset(-8);
+            make.bottom.equalTo(self).offset(-8).priorityLow();;
         }];
     }
     return self;
