@@ -71,6 +71,10 @@
 
     [self.view addSubview:self.loginBar];
     self.loginBar.clickBlock = ^{
+        [[TSUserLoginManager shareInstance] startLogin:^(BOOL success) {
+            @strongify(self);
+            [self.viewModel fetchData];
+        }];
 
     };
 }
@@ -217,6 +221,13 @@
 }
 
 #pragma mark - Getter
+- (TSHomePageLoginBarView *)loginBar{
+    if (!_loginBar) {
+        _loginBar = [[TSHomePageLoginBarView alloc] initWithFrame:CGRectMake(16, kScreenHeight - 12 - 44 - GK_TABBAR_HEIGHT, kScreenWidth - 32, 44)];
+    }
+    return _loginBar;
+}
+
 - (TSHomePagePerchView *)perchView{
     if (!_perchView) {
         _perchView = [[TSHomePagePerchView alloc] initWithFrame:CGRectZero];

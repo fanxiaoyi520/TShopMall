@@ -46,7 +46,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.gk_navigationBar.hidden = YES;
 }
 
 - (void)dealloc {
@@ -57,6 +57,8 @@
     ///添加约束
     [self addConstraints];
 }
+
+
 
 - (void)setupBasic {
     self.count = 60;
@@ -211,6 +213,7 @@
 
 - (void)closePage {
     NSLog(@"----");
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - TSLoginBottomViewDelegate
@@ -333,6 +336,10 @@
         _dataController = [[TSLoginRegisterDataController alloc] init];
     }
     return _dataController;
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleDefault;
 }
 
 @end

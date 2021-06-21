@@ -26,6 +26,7 @@
 #import "YYModel.h"
 #import "YYCategories.h"
 #import "SSGenaralRequest.h"
+#import "TSUserLoginManager.h"
 #import "TSGlobalManager.h"
 #import "SSResponseModel.h"
 #import "YTKBaseRequest+AnimatingAccessory.h"
