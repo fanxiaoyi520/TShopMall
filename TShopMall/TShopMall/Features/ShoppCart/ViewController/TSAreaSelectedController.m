@@ -7,36 +7,70 @@
 
 #import "TSAreaSelectedController.h"
 #import "TSAreaCard.h"
+#import "TSAreaDataController.h"
 
-@interface TSAreaSelectedController ()
+@interface TSAreaSelectedController ()<TSAreaDelegate>
 @property (nonatomic, strong) TSAreaCard *card;
+@property (nonatomic, strong) TSAreaDataController *dataCon;
+
+@property (nonatomic, copy) void(^areaSelected)(TSAreaModel *, TSAreaModel *, TSAreaModel *, TSAreaModel *);
 @end
 
 @implementation TSAreaSelectedController
 
 
-+ (void)showAreaSelectedOnController:(UIViewController *)controller{
++ (void)showAreaSelected:(void (^)(TSAreaModel *, TSAreaModel *, TSAreaModel *, TSAreaModel *))selected OnController:(UIViewController *)controller{
     TSAreaSelectedController *con = [TSAreaSelectedController new];
+    con.areaSelected = selected;
     con.modalPresentationStyle = UIModalPresentationOverCurrentContext | UIModalPresentationFullScreen;
     [controller presentViewController:con animated:NO completion:^{
         
     }];
 }
 
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    UIView *view = [touches anyObject].view;
+    if (view == self.card) {
+        return;
+    }
+    [self hideCard];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [KHexColor(@"#333333") colorWithAlphaComponent:0.5];
+    self.dataCon = [TSAreaDataController new];
     [self layouView];
     
     [self performSelector:@selector(showCard) afterDelay:0.1];
+    [self reloadDataWiteType:0 uuid:@""];
+}
+
+- (void)reloadDataWiteType:(NSInteger)type uuid:(NSString *)uuid{
+    if (type == 4) return;
+    self.dataCon.requestType = type;
+    self.dataCon.uuid = uuid;
+    __weak typeof(self) weakSelf = self;
+    [self.dataCon fetachAddressData:^{
+        weakSelf.card.datas = weakSelf.dataCon.currentDatas;
+    }];
+}
+
+- (void)reloadData{
+    __weak typeof(self) weakSelf = self;
+    [self.dataCon fetachAddressData:^{
+        weakSelf.card.datas = weakSelf.dataCon.currentDatas;
+    }];
 }
 
 - (void)showCard{
     [self.card layoutIfNeeded];
     [UIView animateWithDuration:0.5 animations:^{
-        CGRect frame = self.card.frame;
-        frame.origin.y = KRateW(118);
-        self.card.frame = frame;
+        [self.card mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.view.mas_bottom).offset(-(kScreenHeight - KRateW(118.0)));
+        }];
+        
+        [self.view layoutIfNeeded];
     }];
 }
 
@@ -61,10 +95,13 @@
 }
 
 - (void)dismiss{
+    self.areaSelected(self.card.provice, self.card.city, self.card.area, self.card.street);
     [self dismissViewControllerAnimated:NO completion:^{
         
     }];
 }
+
+
 
 - (TSAreaCard *)card{
     if (_card) {
@@ -72,6 +109,7 @@
     }
     self.card = [TSAreaCard new];
     self.card.controller = self;
+    self.card.delegate = self;
     [self.view addSubview:self.card];
     
     return self.card;

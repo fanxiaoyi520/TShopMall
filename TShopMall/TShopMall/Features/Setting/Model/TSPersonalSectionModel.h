@@ -10,12 +10,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef enum {
-    none = 0,
-    male = 1,
-    female = 2,
-} Sex;
-
 @class TSPersonalSectionItemModel;
 
 @interface TSPersonalSectionModel : TSUniversalSectionModel
@@ -33,6 +27,7 @@ typedef enum {
 @property(nonatomic, copy) NSString *head;
 /** 性别 */
 @property(nonatomic, assign) Sex sex;
+
 @end
 
 NS_ASSUME_NONNULL_END

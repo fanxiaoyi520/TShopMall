@@ -13,7 +13,7 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self == [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
-        TSEmptyAlertView.new.alertBackColor(KHexColor(@"#F4F4F5")).alertInfo(@"购物车是空的", @"去购物").show(self.contentView, ^{
+        TSEmptyAlertView.new.alertBackColor(KHexColor(@"#F4F4F5")).alertInfo(@"购物车是空的", @"去购物").show(self.contentView, @"center", ^{
             [self.delegate goToShopping];
         });
     }

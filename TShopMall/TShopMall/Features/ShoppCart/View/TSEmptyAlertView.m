@@ -15,6 +15,7 @@
 @property (nonatomic, copy) NSString *messageStr;
 @property (nonatomic, copy) NSString *imgStr;
 @property (nonatomic, copy) UIColor *backColor;
+@property (nonatomic, copy) NSString *position;
 
 @property (nonatomic, copy) void(^click)(void);
 @end
@@ -58,6 +59,7 @@
 - (TSEmptyAlertView *(^)(NSString *))alertImage{
     return ^(NSString *alertImg){
         self.imgStr = alertImg;
+        self.icon.image = KImageMake(alertImg);
         return self;
     };
 }
@@ -73,8 +75,9 @@
     };
 }
 
-- (TSEmptyAlertView *(^)(UIView *, void (^)(void)))show{
-    return ^(UIView *inView, void(^click)(void)){
+- (TSEmptyAlertView *(^)(UIView *, NSString *, void (^)(void)))show{
+    return ^(UIView *inView, NSString *position, void(^click)(void)){
+        self.position = position;
         self.click = click;
         [self showInView:inView];
         return self;
@@ -101,8 +104,12 @@
 }
 
 - (void)layoutSubviews{
+    CGFloat top = KRateW(114.0);
+    if([self.position isEqualToString:@"top"]) {
+        top = KRateW(50.0);
+    }
     [self.icon mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.mas_top).offset(KRateW(114.0));
+        make.top.equalTo(self.mas_top).offset(top);
         make.width.mas_equalTo(KRateW(199.0));
         make.height.mas_equalTo(KRateW(168.0));
         make.centerX.equalTo(self);

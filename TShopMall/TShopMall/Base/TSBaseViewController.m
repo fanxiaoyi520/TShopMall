@@ -33,13 +33,12 @@
 
 #pragma mark - 设置导航栏为白色
 -(void)setupNavigationBar{
-    UIImage *whiteImage = [UIImage imageWithColor:UIColor.whiteColor];
-    [self.navigationController.navigationBar setBackgroundImage:whiteImage forBarMetrics:UIBarMetricsDefault];
+
 }
 
 #pragma mark - 隐藏导航栏
 -(void)hiddenNavigationBar{
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    self.gk_navigationBar.hidden = YES;
 }
 
 #pragma mark - 添加子控件

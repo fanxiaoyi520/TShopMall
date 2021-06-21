@@ -27,6 +27,9 @@
 		C21A4B8D267B534A00766F72 /* TSAddressMarkView.m in Sources */ = {isa = PBXBuildFile; fileRef = C21A4B8C267B534A00766F72 /* TSAddressMarkView.m */; };
 		C21A4B90267C79D800766F72 /* TSAreaSelectedController.m in Sources */ = {isa = PBXBuildFile; fileRef = C21A4B8F267C79D800766F72 /* TSAreaSelectedController.m */; };
 		C21A4B93267C7E1000766F72 /* TSAreaCard.m in Sources */ = {isa = PBXBuildFile; fileRef = C21A4B92267C7E1000766F72 /* TSAreaCard.m */; };
+		C21A4B96267CA25200766F72 /* TSAreaDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = C21A4B95267CA25200766F72 /* TSAreaDataController.m */; };
+		C21A4B99267CAAC100766F72 /* TSAreaModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C21A4B98267CAAC100766F72 /* TSAreaModel.m */; };
+		C21A4B9C267D95A000766F72 /* TSLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C21A4B9B267D95A000766F72 /* TSLocationManager.m */; };
 		C28757D5267360E2007C8AF5 /* UIView+General.m in Sources */ = {isa = PBXBuildFile; fileRef = C28757D4267360E2007C8AF5 /* UIView+General.m */; };
 		C2A34C6A267449080095497E /* TSAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2A34C69267449080095497E /* TSAlertView.m */; };
 		C2A34C7726749E3E0095497E /* TSSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2A34C7626749E3D0095497E /* TSSearchController.m */; };
@@ -96,6 +99,9 @@
 		C35F1865267C7F8A00F65AF9 /* TSDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = C35F185F267C7F8800F65AF9 /* TSDatePickerView.m */; };
 		C35F1866267C7F8A00F65AF9 /* TSChangePictureActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = C35F1862267C7F8900F65AF9 /* TSChangePictureActionSheet.m */; };
 		C35F1867267C7F8A00F65AF9 /* TSSexSelectingView.m in Sources */ = {isa = PBXBuildFile; fileRef = C35F1864267C7F8A00F65AF9 /* TSSexSelectingView.m */; };
+		C35F186D267D954700F65AF9 /* TSAccountCancelNextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C35F186C267D954700F65AF9 /* TSAccountCancelNextViewController.m */; };
+		C35F1870267D963100F65AF9 /* TSAccountCancelConfirmViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C35F186F267D963100F65AF9 /* TSAccountCancelConfirmViewController.m */; };
+		C35F1873267D970800F65AF9 /* TSAccountCancelDropViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C35F1872267D970800F65AF9 /* TSAccountCancelDropViewController.m */; };
 		C3A6C470267A1BEA00FC71D6 /* TSBindMobileController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A6C45B267A1BDF00FC71D6 /* TSBindMobileController.m */; };
 		C3A6C471267A1BEA00FC71D6 /* TSBindThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A6C45D267A1BE000FC71D6 /* TSBindThirdViewController.m */; };
 		C3A6C472267A1BEA00FC71D6 /* TSPhoneNumVeriViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A6C45E267A1BE100FC71D6 /* TSPhoneNumVeriViewController.m */; };
@@ -301,6 +307,7 @@
 		F55D2D38267B3F38006BACCF /* TSRankCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2D37267B3F38006BACCF /* TSRankCell.m */; };
 		F55D2D3B267B3F72006BACCF /* TSRankRecommendHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2D3A267B3F72006BACCF /* TSRankRecommendHeaderView.m */; };
 		F55D2D3E267B3F95006BACCF /* TSRankRecommendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2D3D267B3F95006BACCF /* TSRankRecommendCell.m */; };
+		F5686B05267F8F400023DAA6 /* WMDragView.m in Sources */ = {isa = PBXBuildFile; fileRef = F5686B03267F8F400023DAA6 /* WMDragView.m */; };
 		F56D4B3A266DFB8900C1AD9E /* FMLayoutBaseSection.m in Sources */ = {isa = PBXBuildFile; fileRef = F56D4B04266DFB8900C1AD9E /* FMLayoutBaseSection.m */; };
 		F56D4B3B266DFB8900C1AD9E /* FMLayoutCombineSection.m in Sources */ = {isa = PBXBuildFile; fileRef = F56D4B06266DFB8900C1AD9E /* FMLayoutCombineSection.m */; };
 		F56D4B3C266DFB8900C1AD9E /* FMLayoutLabelSection.m in Sources */ = {isa = PBXBuildFile; fileRef = F56D4B07266DFB8900C1AD9E /* FMLayoutLabelSection.m */; };
@@ -389,6 +396,12 @@
 		C21A4B8F267C79D800766F72 /* TSAreaSelectedController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSAreaSelectedController.m; sourceTree = "<group>"; };
 		C21A4B91267C7E1000766F72 /* TSAreaCard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSAreaCard.h; sourceTree = "<group>"; };
 		C21A4B92267C7E1000766F72 /* TSAreaCard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSAreaCard.m; sourceTree = "<group>"; };
+		C21A4B94267CA25100766F72 /* TSAreaDataController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSAreaDataController.h; sourceTree = "<group>"; };
+		C21A4B95267CA25200766F72 /* TSAreaDataController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSAreaDataController.m; sourceTree = "<group>"; };
+		C21A4B97267CAAC100766F72 /* TSAreaModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSAreaModel.h; sourceTree = "<group>"; };
+		C21A4B98267CAAC100766F72 /* TSAreaModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSAreaModel.m; sourceTree = "<group>"; };
+		C21A4B9A267D95A000766F72 /* TSLocationManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSLocationManager.h; sourceTree = "<group>"; };
+		C21A4B9B267D95A000766F72 /* TSLocationManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSLocationManager.m; sourceTree = "<group>"; };
 		C28757D3267360E2007C8AF5 /* UIView+General.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+General.h"; sourceTree = "<group>"; };
 		C28757D4267360E2007C8AF5 /* UIView+General.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+General.m"; sourceTree = "<group>"; };
 		C2A34C68267449060095497E /* TSAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSAlertView.h; sourceTree = "<group>"; };
@@ -486,6 +499,12 @@
 		C35F1862267C7F8900F65AF9 /* TSChangePictureActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSChangePictureActionSheet.m; sourceTree = "<group>"; };
 		C35F1863267C7F8A00F65AF9 /* TSSexSelectingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSSexSelectingView.h; sourceTree = "<group>"; };
 		C35F1864267C7F8A00F65AF9 /* TSSexSelectingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSSexSelectingView.m; sourceTree = "<group>"; };
+		C35F186B267D954700F65AF9 /* TSAccountCancelNextViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSAccountCancelNextViewController.h; sourceTree = "<group>"; };
+		C35F186C267D954700F65AF9 /* TSAccountCancelNextViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSAccountCancelNextViewController.m; sourceTree = "<group>"; };
+		C35F186E267D963100F65AF9 /* TSAccountCancelConfirmViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSAccountCancelConfirmViewController.h; sourceTree = "<group>"; };
+		C35F186F267D963100F65AF9 /* TSAccountCancelConfirmViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSAccountCancelConfirmViewController.m; sourceTree = "<group>"; };
+		C35F1871267D970800F65AF9 /* TSAccountCancelDropViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSAccountCancelDropViewController.h; sourceTree = "<group>"; };
+		C35F1872267D970800F65AF9 /* TSAccountCancelDropViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSAccountCancelDropViewController.m; sourceTree = "<group>"; };
 		C3A6C45A267A1BDF00FC71D6 /* TSSecurCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSSecurCenterViewController.h; sourceTree = "<group>"; };
 		C3A6C45B267A1BDF00FC71D6 /* TSBindMobileController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSBindMobileController.m; sourceTree = "<group>"; };
 		C3A6C45C267A1BE000FC71D6 /* TSBindThirdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSBindThirdViewController.h; sourceTree = "<group>"; };
@@ -901,6 +920,8 @@
 		F55D2D3A267B3F72006BACCF /* TSRankRecommendHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSRankRecommendHeaderView.m; sourceTree = "<group>"; };
 		F55D2D3C267B3F95006BACCF /* TSRankRecommendCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSRankRecommendCell.h; sourceTree = "<group>"; };
 		F55D2D3D267B3F95006BACCF /* TSRankRecommendCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSRankRecommendCell.m; sourceTree = "<group>"; };
+		F5686B03267F8F400023DAA6 /* WMDragView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMDragView.m; sourceTree = "<group>"; };
+		F5686B04267F8F400023DAA6 /* WMDragView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMDragView.h; sourceTree = "<group>"; };
 		F56D4B04266DFB8900C1AD9E /* FMLayoutBaseSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLayoutBaseSection.m; sourceTree = "<group>"; };
 		F56D4B05266DFB8900C1AD9E /* FMLayoutFixedSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLayoutFixedSection.h; sourceTree = "<group>"; };
 		F56D4B06266DFB8900C1AD9E /* FMLayoutCombineSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLayoutCombineSection.m; sourceTree = "<group>"; };
@@ -1155,6 +1176,8 @@
 				C2EF88DA2671E28100E7374A /* TSEmptyAlertView.m */,
 				C2A34C68267449060095497E /* TSAlertView.h */,
 				C2A34C69267449080095497E /* TSAlertView.m */,
+				C21A4B9A267D95A000766F72 /* TSLocationManager.h */,
+				C21A4B9B267D95A000766F72 /* TSLocationManager.m */,
 			);
 			name = Other;
 			sourceTree = "<group>";
@@ -1238,6 +1261,8 @@
 				C2EF88DF2671F79700E7374A /* cart.json */,
 				C21A4B7F267B335D00766F72 /* TSAddressModel.h */,
 				C21A4B80267B335D00766F72 /* TSAddressModel.m */,
+				C21A4B97267CAAC100766F72 /* TSAreaModel.h */,
+				C21A4B98267CAAC100766F72 /* TSAreaModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1262,6 +1287,8 @@
 				C2C765442679ECF4004757B9 /* TSMakeOrderDataController.m */,
 				C21A4B7C267B333500766F72 /* TSShippingAddressDataController.h */,
 				C21A4B7D267B333500766F72 /* TSShippingAddressDataController.m */,
+				C21A4B94267CA25100766F72 /* TSAreaDataController.h */,
+				C21A4B95267CA25200766F72 /* TSAreaDataController.m */,
 			);
 			path = DataController;
 			sourceTree = "<group>";
@@ -1292,6 +1319,12 @@
 				C3A6C467267A1BE600FC71D6 /* TSAboutMeViewController.m */,
 				C3A6C465267A1BE500FC71D6 /* TSAccountCancelViewController.h */,
 				C3A6C46B267A1BE800FC71D6 /* TSAccountCancelViewController.m */,
+				C35F186B267D954700F65AF9 /* TSAccountCancelNextViewController.h */,
+				C35F186C267D954700F65AF9 /* TSAccountCancelNextViewController.m */,
+				C35F186E267D963100F65AF9 /* TSAccountCancelConfirmViewController.h */,
+				C35F186F267D963100F65AF9 /* TSAccountCancelConfirmViewController.m */,
+				C35F1871267D970800F65AF9 /* TSAccountCancelDropViewController.h */,
+				C35F1872267D970800F65AF9 /* TSAccountCancelDropViewController.m */,
 				C3A6C46C267A1BE800FC71D6 /* TSBindMobileController.h */,
 				C3A6C45B267A1BDF00FC71D6 /* TSBindMobileController.m */,
 				C3A6C45C267A1BE000FC71D6 /* TSBindThirdViewController.h */,
@@ -1923,6 +1956,7 @@
 		F54973A22668AE1300181E3F /* Controls */ = {
 			isa = PBXGroup;
 			children = (
+				F5686B02267F8F400023DAA6 /* DragView */,
 				DC9911B5267C475000EF9B26 /* YBNestViews */,
 				DC3440A726720D9200F5B0DA /* CollectionView */,
 				F54973D32668DB9B00181E3F /* SearchButton */,
@@ -2264,6 +2298,15 @@
 				F55D2D31267B3DB7006BACCF /* TSRankSectionModel.m */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		F5686B02267F8F400023DAA6 /* DragView */ = {
+			isa = PBXGroup;
+			children = (
+				F5686B03267F8F400023DAA6 /* WMDragView.m */,
+				F5686B04267F8F400023DAA6 /* WMDragView.h */,
+			);
+			path = DragView;
 			sourceTree = "<group>";
 		};
 		F56D4B02266DFB8900C1AD9E /* LayoutKit */ = {
@@ -2667,6 +2710,7 @@
 				F55D2D112679FDB8006BACCF /* TSMaterialImageCell.m in Sources */,
 				C3A6C4E4267A1CAF00FC71D6 /* TSSettingDataController.m in Sources */,
 				F55D2D20267B1EE9006BACCF /* TSRankHotCellController.m in Sources */,
+				C21A4B9C267D95A000766F72 /* TSLocationManager.m in Sources */,
 				F55D2D38267B3F38006BACCF /* TSRankCell.m in Sources */,
 				F54973632668A22100181E3F /* YTKAnimatingRequestAccessory.m in Sources */,
 				F56D4B4C266DFB8900C1AD9E /* FMLayoutCrossCell.m in Sources */,
@@ -2724,6 +2768,7 @@
 				C3A6C493267A1C1700FC71D6 /* TSChangePictureSectionModel.m in Sources */,
 				F55D2CE926788E27006BACCF /* TSDetailFunctionButton.m in Sources */,
 				F55D2CCD26784ACD006BACCF /* TSMineAdsCell.m in Sources */,
+				F5686B05267F8F400023DAA6 /* WMDragView.m in Sources */,
 				F54973D22668CF3300181E3F /* AppDelegate+RootController.m in Sources */,
 				DC9911A0267AE3B900EF9B26 /* TSImageDataModel.m in Sources */,
 				F55D2C6C267231AA006BACCF /* TSCategoryHeaderReusableView.m in Sources */,
@@ -2734,6 +2779,7 @@
 				F55D2C6626722807006BACCF /* TSMeasureCell.m in Sources */,
 				F55D2C6F26723C2B006BACCF /* TSRecommendCell.m in Sources */,
 				C3B4CCF12674934E0001EE75 /* TSQuickLoginTopView.m in Sources */,
+				C35F1870267D963100F65AF9 /* TSAccountCancelConfirmViewController.m in Sources */,
 				C3A6C4C5267A1C5700FC71D6 /* TSBindThirdAppCell.m in Sources */,
 				F54973CB2668C27300181E3F /* TSH5InterfacedConst.m in Sources */,
 				DC9911C9267C8B0E00EF9B26 /* TSHomePageLoginBarView.m in Sources */,
@@ -2815,6 +2861,7 @@
 				C3A6C4C4267A1C5700FC71D6 /* TSPhoneNumVeriCell.m in Sources */,
 				F54973AB2668B9B500181E3F /* TSBaseNavigationController.m in Sources */,
 				F56D4B5B266E02BA00C1AD9E /* UIFont+General.m in Sources */,
+				C21A4B99267CAAC100766F72 /* TSAreaModel.m in Sources */,
 				F54973B12668BBB200181E3F /* TSCategoryViewController.m in Sources */,
 				F55D2D2A267B3B26006BACCF /* TSRankHonourCell.m in Sources */,
 				C3A6C4C8267A1C5700FC71D6 /* TSAccountCancelBottomCell.m in Sources */,
@@ -2824,6 +2871,7 @@
 				F55D2CF32678A6B9006BACCF /* TSGoodDetailItemModel.m in Sources */,
 				C3A6C48E267A1C1700FC71D6 /* TSPhoneNumSectionModel.m in Sources */,
 				F55D2CA026745E7A006BACCF /* TSLastUserInfoManager.m in Sources */,
+				C35F1873267D970800F65AF9 /* TSAccountCancelDropViewController.m in Sources */,
 				C3A6C4E7267A1CAF00FC71D6 /* TSAboutMeDataController.m in Sources */,
 				F55D2C372671E14B006BACCF /* TSUniversalTableViewCell.m in Sources */,
 				C21A4B8A267B458D00766F72 /* TSAddressEditPastView.m in Sources */,
@@ -2850,6 +2898,7 @@
 				C21A4B84267B347500766F72 /* TSAddressEditController.m in Sources */,
 				F55D2D2E267B3CF4006BACCF /* TSRankDataController.m in Sources */,
 				C2C765392679E3C4004757B9 /* TSMakeOrderView.m in Sources */,
+				C21A4B96267CA25200766F72 /* TSAreaDataController.m in Sources */,
 				C3A6C4E6267A1CAF00FC71D6 /* TSWithdrawalPswSetDataController.m in Sources */,
 				C3A6C4C6267A1C5700FC71D6 /* TSAboutMeBottomCell.m in Sources */,
 				DC3440DF2672FC3900F5B0DA /* TSHomePageBaseModel.m in Sources */,
@@ -2900,6 +2949,7 @@
 				C3A6C4C1267A1C5700FC71D6 /* TSCommitCell.m in Sources */,
 				C3A6C47A267A1BEA00FC71D6 /* TSAccountCancelViewController.m in Sources */,
 				DC45FEC026783A6E00CE762E /* TSHomePageContainerCollectionViewCell.m in Sources */,
+				C35F186D267D954700F65AF9 /* TSAccountCancelNextViewController.m in Sources */,
 				C2EF88C42670997100E7374A /* TSCartInvalidCell.m in Sources */,
 				C3A6C474267A1BEA00FC71D6 /* TSSecurCenterViewController.m in Sources */,
 				F56D4B45266DFB8900C1AD9E /* FMLayoutFooter.m in Sources */,

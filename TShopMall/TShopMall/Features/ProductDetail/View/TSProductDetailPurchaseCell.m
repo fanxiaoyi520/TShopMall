@@ -35,6 +35,10 @@
 @property(nonatomic, strong) UILabel *deliveryValueLabel;
 /// 配送更多
 @property(nonatomic, strong) UIButton *deliveryButton;
+/// 有货
+@property(nonatomic, strong) UILabel *flagLabel;
+/// 运费
+@property(nonatomic, strong) UIButton *feeButton;
 
 @end
 
@@ -56,6 +60,8 @@
     [self.bgView addSubview:self.deliveryLabel];
     [self.bgView addSubview:self.deliveryValueLabel];
     [self.bgView addSubview:self.deliveryButton];
+    [self.bgView addSubview:self.flagLabel];
+    [self.bgView addSubview:self.feeButton];
 
     [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.contentView);
@@ -90,7 +96,7 @@
         make.left.equalTo(self.bgView).offset(50);
         make.top.equalTo(self.bgView).offset(55);
         make.right.equalTo(self.bgView);
-        make.height.mas_equalTo(1);
+        make.height.mas_equalTo(0.3);
     }];
     
     [self.selectLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -102,9 +108,8 @@
     
     [self.selectValueLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.selectLabel.mas_right).offset(16);
-        make.top.equalTo(self.selectLabel).offset(-7);
+        make.top.equalTo(self.selectLabel);
         make.right.equalTo(self.bgView.mas_right).offset(-60);
-        make.bottom.equalTo(self.seperateTwo.mas_bottom).offset(-15);
     }];
     
     [self.selectButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -117,7 +122,7 @@
         make.left.equalTo(self.bgView).offset(50);
         make.top.equalTo(self.seperateOne.mas_bottom).offset(75);
         make.right.equalTo(self.bgView);
-        make.height.mas_equalTo(1);
+        make.height.mas_equalTo(0.3);
     }];
     
     [self.deliveryLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -131,13 +136,24 @@
         make.left.equalTo(self.deliveryLabel.mas_right).offset(16);
         make.top.equalTo(self.seperateTwo.mas_bottom).offset(16);
         make.right.equalTo(self.bgView.mas_right).offset(-60);
-        make.bottom.equalTo(self.bgView.mas_bottom).offset(-15);
     }];
     
     [self.deliveryButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.bgView.mas_right).offset(-10);
         make.width.height.mas_equalTo(40);
         make.centerY.equalTo(self.deliveryValueLabel);
+    }];
+    
+    [self.flagLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.deliveryValueLabel);
+        make.width.height.mas_equalTo(28);
+        make.bottom.equalTo(self.bgView).offset(-5);
+    }];
+    
+    [self.feeButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.flagLabel.mas_right).offset(16);
+        make.height.mas_equalTo(30);
+        make.centerY.equalTo(self.flagLabel);
     }];
 }
 
@@ -151,6 +167,10 @@
 }
 
 -(void)deliveryAction:(UIButton *)sender{
+    
+}
+
+-(void)feeAction:(UIButton *)sender{
     
 }
 
@@ -168,7 +188,7 @@
 -(UILabel *)giftLabel{
     if (!_giftLabel) {
         _giftLabel = [[UILabel alloc] init];
-        _giftLabel.font = KFont(PingFangSCMedium, 12);
+        _giftLabel.font = KRegularFont(12);
         _giftLabel.textColor = KHexAlphaColor(@"#2D3132", 0.4);
         _giftLabel.text = @"赠品";
     }
@@ -178,7 +198,7 @@
 -(UIImageView *)giftImageView{
     if (!_giftImageView) {
         _giftImageView = [[UIImageView alloc] init];
-        _giftImageView.backgroundColor = UIColor.orangeColor;
+        _giftImageView.backgroundColor = KHexColor(@"#F5EDED");
     }
     return _giftImageView;
 }
@@ -196,11 +216,8 @@
 -(UIButton *)giftButton{
     if (!_giftButton) {
         _giftButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _giftButton.titleLabel.font = KRegularFont(14);
-        [_giftButton setTitleColor:KWhiteColor forState:UIControlStateNormal];
-        [_giftButton setTitleColor:KWhiteColor forState:UIControlStateHighlighted];
-        [_giftButton setTitle:@"复制文案" forState:UIControlStateNormal];
-        [_giftButton setBackgroundColor:[UIColor orangeColor]];
+        [_giftButton setImage:KImageMake(@"mall_detail_more") forState:UIControlStateNormal];
+        [_giftButton setImage:KImageMake(@"mall_detail_more") forState:UIControlStateHighlighted];
         [_giftButton addTarget:self action:@selector(giftMoreAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _giftButton;
@@ -217,7 +234,7 @@
 -(UILabel *)selectLabel{
     if (!_selectLabel) {
         _selectLabel = [[UILabel alloc] init];
-        _selectLabel.font = KFont(PingFangSCMedium, 12);
+        _selectLabel.font = KRegularFont(12);
         _selectLabel.textColor = KHexAlphaColor(@"#2D3132", 0.4);
         _selectLabel.text = @"已选";
     }
@@ -227,10 +244,10 @@
 -(UILabel *)selectValueLabel{
     if (!_selectValueLabel) {
         _selectValueLabel = [[UILabel alloc] init];
-        _selectValueLabel.font = KFont(PingFangSCMedium, 14);
-        _selectValueLabel.textColor = KHexAlphaColor(@"#2D3132", 0.4);
+        _selectValueLabel.font = KRegularFont(14);
+        _selectValueLabel.textColor = KTextColor;
         _selectValueLabel.text = @"已选：珠光黑/一体包/3200，彩电-5已选：珠光黑/一体包/3200，彩电-5已选：珠光黑/一体包/3200，彩电-5";
-        _selectValueLabel.numberOfLines = 0;
+        _selectValueLabel.numberOfLines = 2;
     }
     return _selectValueLabel;
 }
@@ -238,11 +255,8 @@
 -(UIButton *)selectButton{
     if (!_selectButton) {
         _selectButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _selectButton.titleLabel.font = KRegularFont(14);
-        [_selectButton setTitleColor:KWhiteColor forState:UIControlStateNormal];
-        [_selectButton setTitleColor:KWhiteColor forState:UIControlStateHighlighted];
-        [_selectButton setTitle:@"复制文案" forState:UIControlStateNormal];
-        [_selectButton setBackgroundColor:[UIColor orangeColor]];
+        [_selectButton setImage:KImageMake(@"mall_detail_more") forState:UIControlStateNormal];
+        [_selectButton setImage:KImageMake(@"mall_detail_more") forState:UIControlStateHighlighted];
         [_selectButton addTarget:self action:@selector(selectMoreAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _selectButton;
@@ -259,7 +273,7 @@
 -(UILabel *)deliveryLabel{
     if (!_deliveryLabel) {
         _deliveryLabel = [[UILabel alloc] init];
-        _deliveryLabel.font = KFont(PingFangSCMedium, 12);
+        _deliveryLabel.font = KRegularFont(12);
         _deliveryLabel.textColor = KHexAlphaColor(@"#2D3132", 0.4);
         _deliveryLabel.text = @"配送";
     }
@@ -269,9 +283,9 @@
 -(UILabel *)deliveryValueLabel{
     if (!_deliveryValueLabel) {
         _deliveryValueLabel = [[UILabel alloc] init];
-        _deliveryValueLabel.font = KFont(PingFangSCMedium, 12);
-        _deliveryValueLabel.textColor = KHexAlphaColor(@"#2D3132", 0.4);
-        _deliveryValueLabel.numberOfLines = 0;
+        _deliveryValueLabel.font = KRegularFont(14);
+        _deliveryValueLabel.textColor = KTextColor;
+        _deliveryValueLabel.numberOfLines = 2;
         _deliveryValueLabel.text = @"广东省深圳市南山区西丽街道西丽街道西丽街广东省深圳市南山区西丽街道西丽街道西丽街";
     }
     return _deliveryValueLabel;
@@ -280,14 +294,33 @@
 -(UIButton *)deliveryButton{
     if (!_deliveryButton) {
         _deliveryButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _deliveryButton.titleLabel.font = KRegularFont(14);
-        [_deliveryButton setTitleColor:KWhiteColor forState:UIControlStateNormal];
-        [_deliveryButton setTitleColor:KWhiteColor forState:UIControlStateHighlighted];
-        [_deliveryButton setTitle:@"复制文案" forState:UIControlStateNormal];
-        [_deliveryButton setBackgroundColor:[UIColor orangeColor]];
+        [_deliveryButton setImage:KImageMake(@"mall_detail_more") forState:UIControlStateNormal];
+        [_deliveryButton setImage:KImageMake(@"mall_detail_more") forState:UIControlStateHighlighted];
         [_deliveryButton addTarget:self action:@selector(deliveryAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _deliveryButton;
+}
+
+-(UILabel *)flagLabel{
+    if (!_flagLabel) {
+        _flagLabel = [[UILabel alloc] init];
+        _flagLabel.font = KRegularFont(14);
+        _flagLabel.textColor = KMainColor;
+        _flagLabel.text = @"有货";
+    }
+    return _flagLabel;
+}
+
+-(UIButton *)feeButton{
+    if (!_feeButton) {
+        _feeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_feeButton setTitleColor:KHexAlphaColor(@"#2D3132", 0.4) forState:UIControlStateNormal];
+        [_feeButton setTitleColor:KHexAlphaColor(@"#2D3132", 0.4) forState:UIControlStateHighlighted];
+        _feeButton.titleLabel.font = KRegularFont(14);
+        [_feeButton setTitle:@"运费:￥0.00" forState:UIControlStateNormal];
+        [_feeButton addTarget:self action:@selector(feeAction:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _feeButton;
 }
 
 @end

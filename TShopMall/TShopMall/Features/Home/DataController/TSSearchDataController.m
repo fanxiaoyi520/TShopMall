@@ -111,7 +111,7 @@
     section.footerIdentifier = @"UICollectionReusableView";
     section.headerTitle = @"热门推荐";
     section.headerHeight = KRateW(40.0);
-    section.footerHeight = GK_SAFEAREA_BTM;
+    section.footerHeight = (CGFloat)GK_SAFEAREA_BTM;
     section.rows = @[row, row, row];
     
     return section;

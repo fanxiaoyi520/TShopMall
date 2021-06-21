@@ -26,5 +26,9 @@ UIKIT_EXTERN NSString *const kProducts;//商品列表
 #pragma mark - 排行
 
 #pragma mark - 采购蓝
+UIKIT_EXTERN NSString * const kProvice;
+UIKIT_EXTERN NSString * const kCities;
+UIKIT_EXTERN NSString * const kAreas;
+UIKIT_EXTERN NSString * const kStreets;
 
 #pragma mark - 我的

@@ -9,6 +9,8 @@
 
 @interface TSGoodDetailIntroduceCell()
 
+@property(nonatomic, strong) UIView *bgView;
+
 /// 标题
 @property(nonatomic, strong) UILabel *titleLabel;
 /// 内容
@@ -19,31 +21,47 @@
 @implementation TSGoodDetailIntroduceCell
 
 -(void)fillCustomContentView{
-    self.contentView.backgroundColor = [UIColor whiteColor];
+    self.contentView.backgroundColor = [UIColor clearColor];
     
-    [self.contentView addSubview:self.titleLabel];
-    [self.contentView addSubview:self.contentLabel];
+    [self.contentView addSubview:self.bgView];
+    [self.bgView addSubview:self.titleLabel];
+    [self.bgView addSubview:self.contentLabel];
+    
+    [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.contentView);
+    }];
     
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.contentView).offset(23);
-        make.left.equalTo(self.contentView).offset(16);
-        make.right.equalTo(self.contentView).offset(-15);
+        make.top.equalTo(self.bgView).offset(8);
+        make.left.equalTo(self.bgView).offset(16);
+        make.right.equalTo(self.bgView).offset(-15);
     }];
     
     [self.contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.titleLabel.mas_bottom).offset(4);
-        make.left.equalTo(self.contentView).offset(16);
-        make.right.equalTo(self.contentView).offset(-15);
+        make.left.equalTo(self.bgView).offset(16);
+        make.right.equalTo(self.bgView).offset(-15);
     }];
 }
 
 #pragma mark - Getter
+-(UIView *)bgView{
+    if (!_bgView) {
+        _bgView = [[UIView alloc] init];
+        _bgView.backgroundColor = UIColor.whiteColor;
+        [_bgView setCorners:UIRectCornerBottomLeft | UIRectCornerBottomRight radius:9];
+        _bgView.clipsToBounds = YES;
+    }
+    return _bgView;
+}
+
 -(UILabel *)titleLabel{
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.font = KRegularFont(16);
         _titleLabel.textColor = KTextColor;
-        _titleLabel.text = @"标题标题标题标题标题";
+        _titleLabel.numberOfLines = 2;
+        _titleLabel.text = @"标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标";
     }
     return _titleLabel;
 }
@@ -53,7 +71,8 @@
         _contentLabel = [[UILabel alloc] init];
         _contentLabel.font = KRegularFont(14);
         _contentLabel.textColor = KHexAlphaColor(@"#2D3132", 0.4);
-        _contentLabel.text = @"卖点提炼，卖点介绍卖";
+        _contentLabel.numberOfLines = 2;
+        _contentLabel.text = @"卖点提炼，卖点介绍卖点介绍卖点介绍卖点介绍卖点介绍卖点介绍卖点介绍卖点介绍卖点介绍卖点介绍卖点标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标";
     }
     return _contentLabel;
 }

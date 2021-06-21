@@ -21,7 +21,8 @@
     self.titleLabel.font = KRegularFont(10);
     [self setTitleColor:KHexColor(@"#747474") forState:UIControlStateNormal];
     [self setTitleColor:KHexColor(@"#747474") forState:UIControlStateHighlighted];
-    self.imageView.contentMode = UIViewContentModeCenter;
+    [self setImage:KImageMake(@"mall_detail_more") forState:UIControlStateNormal];
+    [self setImage:KImageMake(@"mall_detail_more") forState:UIControlStateHighlighted];
     self.titleLabel.textAlignment = NSTextAlignmentRight;
 }
 
@@ -34,10 +35,10 @@
 }
 
 -(CGRect)imageRectForContentRect:(CGRect)contentRect{
-    CGFloat imageW = 16;
-    CGFloat imageH = contentRect.size.height;
+    CGFloat imageW = 12;
+    CGFloat imageH = 12;
     CGFloat imageX = contentRect.size.width - imageW;
-    CGFloat imageY = 0;
+    CGFloat imageY = (contentRect.size.height - imageH) * 0.5;
 
     return CGRectMake(imageX, imageY, imageW, imageH);
 }

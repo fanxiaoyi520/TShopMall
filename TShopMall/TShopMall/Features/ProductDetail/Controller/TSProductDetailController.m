@@ -13,6 +13,7 @@
 #import "TSUniversalCollectionViewCell.h"
 #import "TSProductDetailHeaderView.h"
 #import "TSUniversalFooterView.h"
+#import "WMDragView.h"
 
 @interface TSProductDetailController ()<UICollectionViewDelegate,UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate>
 
@@ -22,12 +23,12 @@
 @property(nonatomic, strong) UIButton *shareButton;
 /// 购物车按钮
 @property(nonatomic, strong) UIButton *cartButton;
-/// 自定义导航栏
-@property(nonatomic, strong) TSProductDetailNavigationBar *navigationBar;
 /// CollectionView
 @property(nonatomic, strong) UICollectionView *collectionView;
 /// 底部视图
 @property(nonatomic, strong) TSProductDetailBottomView *bottomView;
+/// 热卖
+@property(nonatomic,strong)WMDragView *dragView;
 
 /// 数据中心
 @property(nonatomic, strong) TSProductDetailDataController *dataController;
@@ -46,33 +47,50 @@
             [strongSelf.collectionView reloadData];
         }
     }];
+    
+    self.dragView.clickDragViewBlock = ^(WMDragView *dragView){
+        NSLog(@"clickDragViewBlock");
+    };
+}
+
+-(void)setupNavigationBar{
+    // 设置导航栏透明
+    self.gk_navigationBar.alpha = 0;
+    self.gk_navTitle = @"商品详情页";
+    
+    UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [shareBtn setImage:KImageMake(@"mall_detail_navigation_share") forState:UIControlStateNormal];
+    [shareBtn setImage:KImageMake(@"mall_detail_navigation_share") forState:UIControlStateHighlighted];
+    [shareBtn addTarget:self action:@selector(shareAction:) forControlEvents:UIControlEventTouchUpInside];
+    shareBtn.frame = CGRectMake(0, 0, 30, 30);
+    
+    UIButton *cartBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [cartBtn setImage:KImageMake(@"mall_detail_navigation_cart") forState:UIControlStateNormal];
+    [cartBtn setImage:KImageMake(@"mall_detail_navigation_cart") forState:UIControlStateHighlighted];
+    [cartBtn addTarget:self action:@selector(cartAction:) forControlEvents:UIControlEventTouchUpInside];
+    cartBtn.frame = CGRectMake(0, 0, 30, 30);
+    
+    UIBarButtonItem *share = [[UIBarButtonItem alloc] initWithCustomView:shareBtn];
+    UIBarButtonItem *cart = [[UIBarButtonItem alloc] initWithCustomView:cartBtn];
+    self.gk_navRightBarButtonItems = @[share,cart];
 }
 
 -(void)fillCustomView{
     [self.view addSubview:self.collectionView];
-    [self.view addSubview:self.navigationBar];
     [self.view addSubview:self.bottomView];
     [self.view addSubview:self.backButton];
     [self.view addSubview:self.shareButton];
     [self.view addSubview:self.cartButton];
-}
-
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
+    [self.view addSubview:self.dragView];
     
-    [self hiddenNavigationBar];
+    [self addCollectionCoverView];
 }
 
 -(void)viewWillLayoutSubviews{
     [super viewWillLayoutSubviews];
     
-    CGFloat top = self.view.ts_safeAreaInsets.top + 6;
-    CGFloat bottom = self.view.ts_safeAreaInsets.bottom + 54;
-    
-    [self.navigationBar mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.top.equalTo(self.view);
-        make.height.mas_equalTo(GK_STATUSBAR_NAVBAR_HEIGHT);
-    }];
+    CGFloat top = self.view.ts_safeAreaInsets.top + KRateH(6);
+    CGFloat bottom = self.view.ts_safeAreaInsets.bottom + KRateH(54);
     
     [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.equalTo(self.view);
@@ -85,19 +103,19 @@
     }];
 
     [self.backButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.view).offset(16);
+        make.left.equalTo(self.view).offset(KRateW(16));
         make.top.equalTo(self.view).offset(top);
         make.width.height.mas_equalTo(32);
     }];
     
     [self.shareButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.view.mas_right).offset(-16);
+        make.right.equalTo(self.view.mas_right).offset(-KRateW(16));
         make.top.equalTo(self.view).offset(top);
         make.width.height.mas_equalTo(32);
     }];
 
     [self.cartButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.shareButton.mas_left).offset(-6);
+        make.right.equalTo(self.shareButton.mas_left).offset(-KRateW(6));
         make.top.equalTo(self.view).offset(top);
         make.width.height.mas_equalTo(32);
     }];
@@ -105,6 +123,19 @@
 
 -(UIStatusBarStyle)preferredStatusBarStyle{
     return UIStatusBarStyleDefault;
+}
+
+- (void)addCollectionCoverView{
+    
+    CGFloat coverViewX = 0;
+    CGFloat coverViewY = -kScreenHeight;
+    CGFloat coverViewW = kScreenWidth;
+    CGFloat coverViewH = kScreenHeight;
+    
+    UIView *coverView = [[UIView alloc] initWithFrame:CGRectMake(coverViewX, coverViewY, coverViewW, coverViewH)];
+    coverView.backgroundColor = KGrayColor;
+    [self.collectionView addSubview:coverView];
+    [self.collectionView sendSubviewToBack:coverView];
 }
 
 #pragma mark - Actions
@@ -122,12 +153,19 @@
 
 #pragma mark - UIScrollViewDelegate
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    CGFloat offsetY = scrollView.contentOffset.y + GK_STATUSBAR_HEIGHT;
-    CGFloat progress = offsetY / 60.0;
-    self.backButton.alpha = 1 - progress;
-    self.shareButton.alpha = 1 - progress;
-    self.cartButton.alpha = 1 - progress;
-    self.navigationBar.alpha = progress;
+    CGFloat offsetY = scrollView.contentOffset.y;
+    CGFloat progress = offsetY / GK_STATUSBAR_NAVBAR_HEIGHT;
+    CGFloat diff = 0.5 - progress;
+    if (diff < 0) {
+        self.backButton.alpha = 0;
+        self.shareButton.alpha = 0;
+        self.cartButton.alpha = 0;
+    }else{
+        self.backButton.alpha = diff;
+        self.shareButton.alpha = diff;
+        self.cartButton.alpha = diff;
+    }
+    self.gk_navigationBar.alpha = progress;
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -180,6 +218,20 @@
 -(id)universalCollectionViewCellModel:(NSIndexPath *)indexPath{
     TSGoodDetailSectionModel *sectionModel = self.dataController.sections[indexPath.section];
     return sectionModel.items[indexPath.row];
+}
+
+-(void)universalCollectionViewCellClick:(NSIndexPath *)indexPath
+                                 params:(NSDictionary *)params{
+    
+    if ([@"TSGoodDetailImageCell" isEqualToString:params[@"cellType"]]) {
+        
+        if ([params[@"downloadType"] intValue] == 0) {//下载更多素材
+            
+        } else {// 直接下载素材
+            
+        }
+    }
+ 
 }
 
 #pragma mark - UniversalFlowLayoutDelegate
@@ -305,21 +357,13 @@ spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
     return _cartButton;
 }
 
--(TSProductDetailNavigationBar *)navigationBar{
-    if (!_navigationBar) {
-        _navigationBar = [[TSProductDetailNavigationBar alloc] init];
-        _navigationBar.alpha = 0;
-    }
-    return _navigationBar;
-}
-
 -(UICollectionView *)collectionView{
     if (!_collectionView) {
         TSUniversalFlowLayout *flowLayout = [[TSUniversalFlowLayout alloc]init];
         flowLayout.delegate = self;
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero
                                              collectionViewLayout:flowLayout];
-        _collectionView.backgroundColor = UIColor.clearColor;
+        _collectionView.backgroundColor = KGrayColor;
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.showsVerticalScrollIndicator = NO;
@@ -333,6 +377,18 @@ spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
         _bottomView = [[TSProductDetailBottomView alloc] init];
     }
     return _bottomView;
+}
+
+-(WMDragView *)dragView{
+    if (!_dragView) {
+        _dragView = [[WMDragView alloc] initWithFrame:CGRectMake(kScreenWidth - 94, 230, 80, 77)];
+        _dragView.backgroundColor = UIColor.clearColor;
+        _dragView.dragEnable = YES;
+        _dragView.isKeepBounds = YES;
+        [_dragView.button setImage:KImageMake(@"mall_detail_ hover_sell") forState:UIControlStateNormal];
+        [_dragView.button setImage:KImageMake(@"mall_detail_ hover_sell") forState:UIControlStateHighlighted];
+    }
+    return _dragView;
 }
 
 -(TSProductDetailDataController *)dataController{

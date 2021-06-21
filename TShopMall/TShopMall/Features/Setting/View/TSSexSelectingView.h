@@ -7,12 +7,6 @@
 
 #import <UIKit/UIKit.h>
 
-typedef enum {
-    none = 0,
-    male = 1,
-    female = 2,
-} Sex;
-
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol TSSexSelectingViewDelegate <NSObject>

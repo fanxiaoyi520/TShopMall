@@ -7,12 +7,11 @@
 
 #import <UIKit/UIKit.h>
 
-NS_ASSUME_NONNULL_BEGIN
+@class TSAreaModel;
 
 @interface TSAreaSelectedController : UIViewController
 
-+ (void)showAreaSelectedOnController:(UIViewController *)controller;
++ (void)showAreaSelected:(void(^)(TSAreaModel *provice, TSAreaModel *city, TSAreaModel *eare, TSAreaModel *street))selected OnController:(UIViewController *)controller;
 
 @end
 
-NS_ASSUME_NONNULL_END

@@ -40,7 +40,7 @@
         return ;
     }
     
-    TSEmptyAlertView.new.alertInfo(@"抱歉，没有找到商品哦～", @"重试").show(view, ^{
+    TSEmptyAlertView.new.alertInfo(@"抱歉，没有找到商品哦～", @"重试").show(view, @"center", ^{
         [self reloadContainerCollectionView:view];
     });
 }
@@ -52,7 +52,7 @@
     [view addSubview:alertView];
     alertView.frame = view.bounds;
     alertView.alertImage(@"homePage_container_error");
-    alertView.show(view, ^{
+    alertView.show(view, @"center", ^{
         @strongify(self);
         [self reloadContainerCollectionView:view];
     });

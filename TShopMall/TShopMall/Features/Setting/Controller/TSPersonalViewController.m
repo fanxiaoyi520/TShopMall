@@ -10,9 +10,16 @@
 #import "TSUniversalCollectionViewCell.h"
 #import "TSPersonalDataController.h"
 #import "TSChangePictureViewController.h"
+#import "TSChangePictureActionSheet.h"
+#import <Photos/Photos.h>
+#import <AVFoundation/AVCaptureDevice.h>
+#import <AVFoundation/AVMediaFormat.h>
+#import "TSAlertView.h"
+#import "TSChangePictureViewController.h"
+#import "TSSexSelectingView.h"
+#import "TSDatePickerView.h"
 
-
-@interface TSPersonalViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate>
+@interface TSPersonalViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate, TSSexSelectingViewDelegate, TSDatePickerViewDelegate>
 /// 数据中心
 @property(nonatomic, strong) TSPersonalDataController *dataController;
 /// CollectionView
@@ -52,6 +59,101 @@
     }];
 }
 
+#pragma mark - Actions
+/** 相册权限 */
+- (void)photoAuthorized {
+    PHAuthorizationStatus status = [PHPhotoLibrary authorizationStatus];
+    if (status == PHAuthorizationStatusRestricted) {
+        //无权限
+        [self showOpenSettingAlert];
+        return;
+    }
+    if (status == PHAuthorizationStatusDenied) {
+        [self showOpenSettingAlert];
+        return;
+    }
+    if (status == PHAuthorizationStatusNotDetermined) {
+        //请求授权
+        [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
+            if (status == PHAuthorizationStatusAuthorized) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                });
+            }
+        }];
+        return;
+    }
+    if (status == PHAuthorizationStatusAuthorized) {///已授权
+        
+        return;
+    }
+}
+
+- (void)showOpenSettingAlert {
+    TSAlertView.new.alertInfo(nil, @"请打开相机/相册权限").confirm(@"去打开", ^{
+        [self openSetting];
+    }).cancel(@"取消", ^{}).show();
+}
+
+- (void)showSexAlert {
+    TSSexSelectingView *sexSelectedView = [TSSexSelectingView sexSelectingView];
+    sexSelectedView.delegate = self;
+    [sexSelectedView show];
+}
+
+- (void)showDatePickerView {
+    TSDatePickerView *datePickerView = [TSDatePickerView datePickerView];
+    datePickerView.delegate = self;
+    [datePickerView show];
+}
+
+/** 相机权限 */
+- (void)captureAuthorized {
+    AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+    if (authStatus == AVAuthorizationStatusRestricted) {
+        //无权限
+        [self showOpenSettingAlert];
+        return;
+    }
+    if (authStatus  == AVAuthorizationStatusDenied) {
+        [self showOpenSettingAlert];
+        return;
+    }
+    if (authStatus  == AVAuthorizationStatusNotDetermined) {
+        [AVCaptureDevice requestAccessForMediaType: AVMediaTypeVideo completionHandler:^(BOOL granted) {
+            if (granted) {///成功授权
+                
+            }
+        }];
+        return;
+    }
+    if (authStatus == AVAuthorizationStatusAuthorized) {
+        
+        return;
+    }
+}
+
+- (void)openSetting {
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]]) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+    }
+}
+
+- (void)showPictureSheet {
+    TSChangePictureActionSheet *actionSheet = [TSChangePictureActionSheet actionSheetWithTitles:@[@"拍照", @"从相册中选择", @"系统默认头像"] actionHandler:^(NSInteger index, NSString * _Nonnull title) {
+        if (index == 0) {///拍照
+            [self captureAuthorized];
+        } else if (index == 1) {///从相册中选择
+            [self photoAuthorized];
+        } else if (index == 2) {///系统默认头像
+            TSChangePictureViewController *changePictureVC = [[TSChangePictureViewController alloc] init];
+            [self.navigationController pushViewController:changePictureVC animated:YES];
+        }
+    }];
+    [actionSheet show];
+}
+
+
 #pragma mark - Lazy Method
 - (UICollectionView *)collectionView{
     if (!_collectionView) {
@@ -77,6 +179,16 @@
     return _dataController;
 }
 
+#pragma mark - TSSexSelectingViewDelegate(性别选择)
+- (void)selectedSex:(Sex)sex {
+    
+}
+
+#pragma mark - TSDatePickerViewDelegate(日期选择器）
+- (void)selectedDateString:(NSString *)dateString {
+    
+}
+
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return self.dataController.sections.count;
@@ -99,6 +211,15 @@
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.item == 0) {
+        [self showPictureSheet];
+        return;
+    } else if (indexPath.item == 3) {
+        [self showSexAlert];
+        return;
+    } else if (indexPath.item == 4) {
+        
+    }
     TSChangePictureViewController *changePicVC = [[TSChangePictureViewController alloc] init];
     [self.navigationController pushViewController:changePicVC animated:YES];
 }

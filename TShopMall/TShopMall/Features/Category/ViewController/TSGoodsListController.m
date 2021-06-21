@@ -74,7 +74,7 @@
         [TSEmptyAlertView hideInView:self.collectionView];
         return ;
     }
-    TSEmptyAlertView.new.alertInfo(@"抱歉，没有找到商品哦～", @"重试").show(self.collectionView, ^{
+    TSEmptyAlertView.new.alertInfo(@"抱歉，没有找到商品哦～", @"重试").show(self.collectionView, @"center",^{
         [self refreshGoods];
     });
 }

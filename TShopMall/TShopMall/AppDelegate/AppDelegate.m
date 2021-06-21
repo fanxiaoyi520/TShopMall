@@ -16,8 +16,11 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
+    
+    [self initNetworkConfig];
     [self setUITemplateSize];
-    [self setupRequestFilters];
+    [self setKeywordAttribute];
+    [self setNavigationConfig];
     [self setupRootController];
     return YES;
 }

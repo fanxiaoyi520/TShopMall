@@ -9,6 +9,7 @@
 #import "TSTextImageButton.h"
 #import "TSMaterialImageCell.h"
 
+
 @interface TSGoodDetailImageCell()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
 /// 背景视图
@@ -22,6 +23,8 @@
 
 @property(nonatomic, strong) UICollectionView *collectionView;
 
+@property(nonatomic, strong) UILabel *promtLabel;
+
 @end
 
 @implementation TSGoodDetailImageCell
@@ -34,6 +37,7 @@
     [self.bgView addSubview:self.downloadBtn];
     [self.bgView addSubview:self.downloadImageBtn];
     [self.bgView addSubview:self.collectionView];
+    [self.bgView addSubview:self.promtLabel];
 
     [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.contentView);
@@ -61,19 +65,37 @@
     
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.bgView).offset(16);
-        make.right.equalTo(self.bgView);
+        make.right.equalTo(self.bgView).offset(-19);
         make.top.equalTo(self.bgView).offset(48);
         make.bottom.equalTo(self.bgView).offset(-51);
+    }];
+    
+    [self.promtLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.bottom.equalTo(self.collectionView);
+        make.right.equalTo(self.collectionView.mas_right).offset(19);
+        make.width.mas_equalTo(19);
     }];
 }
 
 #pragma mark - Actions
 -(void)downloadAction:(TSTextImageButton *)sender{
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setValue:@"TSGoodDetailImageCell" forKey:@"cellType"];
+    [params setValue:@(DownloadMaterialTypeMore) forKey:@"downloadType"];
     
+    if (self.delegate && [self.delegate respondsToSelector:@selector(universalCollectionViewCellClick:params:)]) {
+        [self.delegate universalCollectionViewCellClick:self.indexPath params:params];
+    }
 }
 
 -(void)downloadImageAction:(UIButton *)sender{
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setValue:@"TSGoodDetailImageCell" forKey:@"cellType"];
+    [params setValue:@(DownloadMaterialTypeDirect) forKey:@"downloadType"];
     
+    if (self.delegate && [self.delegate respondsToSelector:@selector(universalCollectionViewCellClick:params:)]) {
+        [self.delegate universalCollectionViewCellClick:self.indexPath params:params];
+    }
 }
 
 #pragma mark - UICollectionViewDelegate & UICollectionViewDataSource
@@ -122,9 +144,6 @@
 -(TSTextImageButton *)downloadBtn{
     if (!_downloadBtn) {
         _downloadBtn = [TSTextImageButton buttonWithType:UIButtonTypeCustom];
-        _downloadBtn.titleLabel.font = KRegularFont(14);
-        [_downloadBtn setTitleColor:KHexColor(@"#747474") forState:UIControlStateNormal];
-        [_downloadBtn setTitleColor:KHexColor(@"#747474") forState:UIControlStateHighlighted];
         [_downloadBtn setTitle:@"下载更多素材" forState:UIControlStateNormal];
         [_downloadBtn addTarget:self action:@selector(downloadAction:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -134,11 +153,8 @@
 -(UIButton *)downloadImageBtn{
     if (!_downloadImageBtn) {
         _downloadImageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _downloadImageBtn.titleLabel.font = KRegularFont(14);
-        [_downloadImageBtn setTitleColor:KWhiteColor forState:UIControlStateNormal];
-        [_downloadImageBtn setTitleColor:KWhiteColor forState:UIControlStateHighlighted];
-        [_downloadImageBtn setTitle:@"下载图片" forState:UIControlStateNormal];
-        [_downloadImageBtn setBackgroundColor:[UIColor orangeColor]];
+        [_downloadImageBtn setImage:KImageMake(@"mall_detail_ download_image") forState:UIControlStateNormal];
+        [_downloadImageBtn setImage:KImageMake(@"mall_detail_ download_image") forState:UIControlStateHighlighted];
         [_downloadImageBtn addTarget:self action:@selector(downloadImageAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _downloadImageBtn;
@@ -156,6 +172,21 @@
         _collectionView.showsHorizontalScrollIndicator = NO;
     }
     return _collectionView;
+}
+
+-(UILabel *)promtLabel{
+    if (!_promtLabel) {
+        _promtLabel = [[UILabel alloc] init];
+        _promtLabel.font = KRegularFont(10);
+        _promtLabel.textColor = KTextColor;
+        _promtLabel.text = @"左 滑 更 多 <";
+        _promtLabel.textAlignment = NSTextAlignmentCenter;
+        _promtLabel.numberOfLines = 0;
+        _promtLabel.backgroundColor = KHexColor(@"#DDDDDD");
+        [_promtLabel setCorners:(UIRectCornerTopLeft | UIRectCornerBottomLeft) radius:8];
+        _promtLabel.clipsToBounds = YES;
+    }
+    return _promtLabel;
 }
 
 @end

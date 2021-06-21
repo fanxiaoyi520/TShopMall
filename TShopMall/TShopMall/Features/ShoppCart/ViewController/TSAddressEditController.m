@@ -64,7 +64,9 @@
 
 //选择地区
 - (void)gotoSelectedAddress{
-    [TSAreaSelectedController showAreaSelectedOnController:self];
+    [TSAreaSelectedController showAreaSelected:^(TSAreaModel *provice, TSAreaModel *city, TSAreaModel *eare, TSAreaModel *street) {
+        
+    } OnController:self];
 }
 
 - (void)viewWillLayoutSubviews{
