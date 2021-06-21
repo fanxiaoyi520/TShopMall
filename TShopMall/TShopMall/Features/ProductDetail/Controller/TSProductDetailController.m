@@ -155,7 +155,7 @@
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     CGFloat offsetY = scrollView.contentOffset.y;
     CGFloat progress = offsetY / GK_STATUSBAR_NAVBAR_HEIGHT;
-    CGFloat diff = 0.5 - progress;
+    CGFloat diff = 0.2 - progress;
     if (diff < 0) {
         self.backButton.alpha = 0;
         self.shareButton.alpha = 0;
