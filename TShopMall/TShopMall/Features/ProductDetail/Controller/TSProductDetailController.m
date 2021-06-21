@@ -14,6 +14,7 @@
 #import "TSProductDetailHeaderView.h"
 #import "TSUniversalFooterView.h"
 #import "WMDragView.h"
+#import <MJRefresh/MJRefresh.h>
 
 @interface TSProductDetailController ()<UICollectionViewDelegate,UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate>
 
@@ -51,6 +52,8 @@
     self.dragView.clickDragViewBlock = ^(WMDragView *dragView){
         NSLog(@"clickDragViewBlock");
     };
+    
+    [self addMJHeaderAndFooter];
 }
 
 -(void)setupNavigationBar{
@@ -83,7 +86,7 @@
     [self.view addSubview:self.cartButton];
     [self.view addSubview:self.dragView];
     
-    [self addCollectionCoverView];
+//    [self addCollectionCoverView];
 }
 
 -(void)viewWillLayoutSubviews{
@@ -138,6 +141,17 @@
     [self.collectionView sendSubviewToBack:coverView];
 }
 
+/// 添加MJ刷新控件
+- (void)addMJHeaderAndFooter {
+    //默认【下拉刷新】
+    RefreshGifHeader *mj_header = [RefreshGifHeader headerWithRefreshingTarget:self refreshingAction:@selector(mjHeadreRefresh:)];
+    self.collectionView.mj_header = mj_header;
+
+    RefreshGifFooter *footer = [RefreshGifFooter footerWithRefreshingTarget:self refreshingAction:@selector(mjFooterRefresh:)];
+    self.collectionView.mj_footer = footer;
+    self.collectionView.mj_footer.hidden = NO;
+}
+
 #pragma mark - Actions
 -(void)backAction:(UIButton *)sender{
     [self.navigationController popViewControllerAnimated:YES];
@@ -149,6 +163,16 @@
 
 -(void)cartAction:(UIButton *)sender{
     
+}
+
+/// 下拉刷新
+- (void)mjHeadreRefresh:(MJRefreshNormalHeader *)mj_header {
+//    [self loadDataIsNew:YES];
+}
+
+/// 上拉加载
+- (void)mjFooterRefresh:(MJRefreshAutoNormalFooter *)mj_footer {
+//    [self loadDataIsNew:NO];
 }
 
 #pragma mark - UIScrollViewDelegate

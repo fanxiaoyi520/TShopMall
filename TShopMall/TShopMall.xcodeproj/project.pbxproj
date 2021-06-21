@@ -2033,10 +2033,10 @@
 			isa = PBXGroup;
 			children = (
 				F54973472668A22100181E3F /* YTKAnimatingRequestAccessory.h */,
+				F549734B2668A22100181E3F /* YTKAnimatingRequestAccessory.m */,
 				F54973482668A22100181E3F /* YTKBatchRequest+AnimatingAccessory.h */,
 				F54973492668A22100181E3F /* YTKChainRequest+AnimatingAccessory.h */,
 				F549734A2668A22100181E3F /* YTKBaseRequest+AnimatingAccessory.h */,
-				F549734B2668A22100181E3F /* YTKAnimatingRequestAccessory.m */,
 				F549734C2668A22100181E3F /* YTKBatchRequest+AnimatingAccessory.m */,
 				F549734D2668A22100181E3F /* YTKChainRequest+AnimatingAccessory.m */,
 				F549734E2668A22100181E3F /* YTKBaseRequest+AnimatingAccessory.m */,

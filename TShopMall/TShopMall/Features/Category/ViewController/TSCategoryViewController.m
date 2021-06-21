@@ -327,6 +327,7 @@ spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
 -(TSCategoryDataController *)dataController{
     if (!_dataController) {
         _dataController = [[TSCategoryDataController alloc] init];
+        _dataController.context = self;
     }
     return _dataController;
 }

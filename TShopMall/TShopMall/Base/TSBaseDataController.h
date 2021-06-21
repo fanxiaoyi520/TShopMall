@@ -11,6 +11,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TSBaseDataController : NSObject
 
+@property(nonatomic, weak) UIViewController *context;
+
 @end
 
 NS_ASSUME_NONNULL_END
