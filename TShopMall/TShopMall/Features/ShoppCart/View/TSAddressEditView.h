@@ -13,6 +13,8 @@
 @interface TSAddressEditView : UIScrollView
 @property (nonatomic, weak) id controller;
 @property (nonatomic, strong) TSAddressModel *addressModel;
+
+- (void)updateAddress:(NSString *)address;
 @end
 
 

@@ -95,7 +95,7 @@
 }
 
 - (void)dismiss{
-    self.areaSelected(self.card.provice, self.card.city, self.card.area, self.card.street, self.card.lo);
+    self.areaSelected(self.card.provice, self.card.city, self.card.area, self.card.street, self.card.location);
     [self dismissViewControllerAnimated:NO completion:^{
         
     }];

@@ -185,7 +185,8 @@
     [self.locationAddress mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.locationBtn);
         make.left.equalTo(self.locationBtn.mas_right).offset(KRateW(8.0));
-        make.height.mas_equalTo(KRateW(22.0));
+        make.right.equalTo(self.mas_right).offset(-KRateW(8.0));
+//        make.height.mas_equalTo(KRateW(22.0));
     }];
     
     [self.areaView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -266,6 +267,7 @@
     self.locationAddress = [UILabel new];
     self.locationAddress.font = KRegularFont(14.0);
     self.locationAddress.textColor = KHexColor(@"#2D3132");
+    self.locationAddress.numberOfLines = 0;
     [self addSubview:self.locationAddress];
     
     return self.locationAddress;

@@ -51,6 +51,7 @@
 
 - (void)gotoEditAddress:(TSAddressModel *)obj{
     TSAddressEditController *con = [TSAddressEditController new];
+    con.addressModel = [TSAddressModel new];
     [self.navigationController pushViewController:con animated:YES];
 }
 

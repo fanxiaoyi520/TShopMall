@@ -62,6 +62,10 @@
     }
 }
 
+- (void)updateAddress:(NSString *)address{
+    self.addressItem.textField.text = address;
+}
+
 //- (void)textFieldEditingEnd:(UITextField *)textField{
 //
 //}

@@ -1,14 +1,14 @@
 //
-//  TSGoodListViewModel.h
+//  TSSearchResultViewModel.h
 //  TShopMall
 //
-//  Created by 橙子 on 2021/6/15.
+//  Created by 橙子 on 2021/6/21.
 //
 
 #import <Foundation/Foundation.h>
 #import "TSSearchResult.h"
 
-@interface TSGoodListViewModel : NSObject
+@interface TSSearchResultViewModel : NSObject
 @property (nonatomic, copy) NSString *icon;
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *price;

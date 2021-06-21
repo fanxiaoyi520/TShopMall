@@ -26,4 +26,5 @@
 @interface TSSearchRow : NSObject<TSSearchCollectionRowDelegate>
 @property (nonatomic, copy) NSString *cellIdentifier;
 @property (nonatomic, strong) id obj;
+@property (nonatomic, assign) CGSize rowSize;
 @end

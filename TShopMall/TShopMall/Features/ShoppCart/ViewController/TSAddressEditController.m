@@ -8,6 +8,7 @@
 #import "TSAddressEditController.h"
 #import "TSAddressEditView.h"
 #import "TSAreaSelectedController.h"
+#import "TSAreaModel.h"
 
 @interface TSAddressEditController (){
     BOOL isAllInfoInput;
@@ -35,6 +36,8 @@
     }
     
     [self updateSaveStatus];
+    
+    self.editView.addressModel = self.addressModel;
 }
 
 - (void)shouldUpdateSaveStatus:(id)status{
@@ -69,8 +72,16 @@
 
 //选择地区
 - (void)gotoSelectedAddress{
+    
+    __weak typeof(self) weakSelf = self;
     [TSAreaSelectedController showAreaSelected:^(TSAreaModel *provice, TSAreaModel *city, TSAreaModel *eare, TSAreaModel *street, NSString *location) {
-        
+        if (provice == nil) {
+            weakSelf.addressModel.address = location;
+        } else {
+            NSString *address = [NSString stringWithFormat:@"%@%@%@%@", provice.provinceName, city.cityName, eare.regionName, street.streetName];
+            weakSelf.addressModel.address = address;
+        }
+        [weakSelf.editView updateAddress:weakSelf.addressModel.address];
     } OnController:self];
 }
 

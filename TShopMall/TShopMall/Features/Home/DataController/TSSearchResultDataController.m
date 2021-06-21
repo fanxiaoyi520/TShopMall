@@ -1,14 +1,13 @@
 //
-//  TSGoodsListDataController.m
+//  TSSearchResultDataController.m
 //  TShopMall
 //
-//  Created by 橙子 on 2021/6/13.
+//  Created by 橙子 on 2021/6/21.
 //
 
-#import "TSGoodsListDataController.h"
+#import "TSSearchResultDataController.h"
 
-@implementation TSGoodsListDataController
-
+@implementation TSSearchResultDataController
 - (instancetype)init{
     if (self == [super init]) {
         self.isGrid = YES;
@@ -20,6 +19,7 @@
 
 - (void)queryGoods:(void(^)(NSError *))finished{
     [[self goodsListRequest] startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+//        NSLog(@"%@", request.responseObject);
         if (request.responseModel.isSucceed == YES) {
             [self handleRequestRes:request.responseJSONObject[@"data"]];
         } else {
@@ -92,8 +92,8 @@
         self.result.list = [lists yy_modelToJSONObject];
     }
     
-    TSGoodsListSection *section = [self defaultSection];
-    NSArray<TSGoodsListRow *> *rows = [self rowsWithDatas:result.list];
+    TSSearchSection *section = [self defaultSection];
+    NSArray<TSSearchRow *> *rows = [self rowsWithDatas:result.list];
     NSMutableArray *row = [NSMutableArray arrayWithArray:section.rows];
     [row addObjectsFromArray:rows];
     section.rows = row;
@@ -101,16 +101,16 @@
     self.currentNum = self.lists.count==0? 0:[self.lists lastObject].rows.count;
 }
 
-- (NSArray<TSGoodsListRow *> *)rowsWithDatas:(NSArray<TSSearchList *> *)lists{
+- (NSArray<TSSearchRow *> *)rowsWithDatas:(NSArray<TSSearchList *> *)lists{
     if (lists.count == 0) {
         return nil;
     }
     NSMutableArray *rows = [NSMutableArray array];
     for (TSSearchList *list in lists) {
-        TSGoodListViewModel *vm = [[TSGoodListViewModel alloc] initWithList:list];
+        TSSearchResultViewModel *vm = [[TSSearchResultViewModel alloc] initWithList:list];
 
-        TSGoodsListRow *row = [TSGoodsListRow new];
-        row.cellIdentifier = self.isGrid==YES? @"TSGoodsListCell":@"TSGoodsListRailCell";
+        TSSearchRow *row = [TSSearchRow new];
+        row.cellIdentifier = self.isGrid==YES? @"TSSearchResultCell":@"TSSearchResultRailCell";
         row.rowSize = self.isGrid==YES? CGSizeMake((kScreenWidth - KRateW(40.0))/2.0, KRateW(282.0)):CGSizeMake(kScreenWidth-KRateW(32.0), KRateW(120.0));
         row.obj = vm;
         [rows addObject:row];
@@ -118,11 +118,11 @@
     return rows;
 }
 
-- (TSGoodsListSection *)defaultSection{
+- (TSSearchSection *)defaultSection{
     if (self.lists.count != 0) {
         return [self.lists lastObject];
     }
-    TSGoodsListSection *section = [TSGoodsListSection new];
+    TSSearchSection *section = [TSSearchSection new];
     section.headerIdentifier = @"UICollectionReusableView";
     section.footerIdentifier = @"UICollectionReusableView";
     section.headerHeight = KRateW(10.0);
@@ -131,28 +131,22 @@
     return section;
 }
 
-
-
-
-
-
-
-- (NSArray<TSGoodsListSection *> *)sectionsForUIWithDatas:(NSArray<TSSearchList *> *)lists{
+- (NSArray<TSSearchSection *> *)sectionsForUIWithDatas:(NSArray<TSSearchList *> *)lists{
     if (lists.count == 0) {
         return nil;
     }
     NSMutableArray *rows = [NSMutableArray array];
     for (TSSearchList *list in lists) {
-        TSGoodListViewModel *vm = [[TSGoodListViewModel alloc] initWithList:list];
+        TSSearchResultViewModel *vm = [[TSSearchResultViewModel alloc] initWithList:list];
 
-        TSGoodsListRow *row = [TSGoodsListRow new];
+        TSSearchRow *row = [TSSearchRow new];
         row.cellIdentifier = self.isGrid==YES? @"TSGoodsListCell":@"TSGoodsListRailCell";
         row.rowSize = self.isGrid==YES? CGSizeMake((kScreenWidth - KRateW(40.0))/2.0, KRateW(282.0)):CGSizeMake(kScreenWidth-KRateW(32.0), KRateW(120.0));
         row.obj = vm;
         [rows addObject:row];
     }
     
-    TSGoodsListSection *section = [TSGoodsListSection new];
+    TSSearchSection *section = [TSSearchSection new];
     section.headerIdentifier = @"UICollectionReusableView";
     section.footerIdentifier = @"UICollectionReusableView";
     section.headerHeight = KRateW(10.0);

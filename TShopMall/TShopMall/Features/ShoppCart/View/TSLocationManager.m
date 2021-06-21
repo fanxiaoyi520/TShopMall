@@ -32,6 +32,7 @@
     if ([CLLocationManager locationServicesEnabled] == NO) return;
     if (@available(iOS 8.0, *)) {
         [ma.locMan requestWhenInUseAuthorization];
+        [ma.locMan requestAlwaysAuthorization];
     }
     [ma.locMan startUpdatingLocation];
 }
@@ -45,6 +46,7 @@
         NSString *street = placemark.thoroughfare;
         NSString *subStreet = placemark.subThoroughfare;
         NSString *address = [NSString stringWithFormat:@"%@%@%@%@%@", provice, city, area, street,subStreet];
+        address = [address stringByReplacingOccurrencesOfString:@"(null)" withString:@""];
         NSLog(@"定位位置: \n>>>>> %@ <<<<<\n", address);
         if (address.length == 0) {
             address = self.lastLocatedAddress;

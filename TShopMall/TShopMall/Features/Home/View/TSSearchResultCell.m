@@ -1,15 +1,15 @@
 //
-//  TSGoodsListCell.m
+//  TSSearchResultCell.m
 //  TShopMall
 //
-//  Created by 橙子 on 2021/6/13.
+//  Created by 橙子 on 2021/6/21.
 //
 
-#import "TSGoodsListCell.h"
+#import "TSSearchResultCell.h"
 #import "TSEarnView.h"
-#import "TSGoodListViewModel.h"
+#import "TSSearchResultViewModel.h"
 
-@interface TSGoodsListCell()
+@interface TSSearchResultCell()
 @property (nonatomic, strong) UIImageView *icon;
 @property (nonatomic, strong) UILabel *name;
 @property (nonatomic, strong) UILabel *price;
@@ -17,8 +17,7 @@
 @property (nonatomic, strong) TSEarnView *earnView;
 @end
 
-@implementation TSGoodsListCell
-
+@implementation TSSearchResultCell
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self == [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor whiteColor];
@@ -28,13 +27,13 @@
 }
 
 - (void)setObj:(id)obj{
-    if ([obj isKindOfClass:[TSGoodListViewModel class]]) {
-        TSGoodListViewModel *vm = (TSGoodListViewModel *)obj;
+    if ([obj isKindOfClass:[TSSearchResultViewModel class]]) {
+        TSSearchResultViewModel *vm = (TSSearchResultViewModel *)obj;
         [self configUI:vm];
     }
 }
 
-- (void)configUI:(TSGoodListViewModel *)vm{
+- (void)configUI:(TSSearchResultViewModel *)vm{
     NSURL *imgUrl = [NSURL URLWithString:vm.icon];
     [self.icon sd_setImageWithURL:imgUrl placeholderImage:KImageMake(@"")];
     self.name.text = vm.name;
@@ -159,9 +158,7 @@
 }
 @end
 
-
-@implementation TSGoodsListRailCell
-
+@implementation TSSearchResultRailCell
 - (void)layoutView{
     [self.icon mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contentView.mas_left);
@@ -212,4 +209,5 @@
     
     return self.line;
 }
+
 @end
