@@ -29,7 +29,7 @@
             [[WKWebsiteDataStore defaultDataStore] removeDataOfTypes:websiteDataTypes
                                                        modifiedSince:dateFrom
                                                    completionHandler:^{
-                                                       TSLog(@"WKWebView (ClearWebCache) Clear All Cache Done");
+
                                                    }];
         }
 #endif
@@ -76,7 +76,7 @@ FOUNDATION_STATIC_INLINE void clearWebViewCacheFolderByType(NSString *cacheType)
             NSError *error = nil;
             [[NSFileManager defaultManager] removeItemAtPath:filePath error:&error];
             if (error) {
-                TSLog(@"removed file fail: %@ ,error %@", [filePath lastPathComponent], error);
+
             }
         }
     }

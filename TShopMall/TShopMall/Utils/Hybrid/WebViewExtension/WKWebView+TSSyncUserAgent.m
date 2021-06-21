@@ -31,7 +31,6 @@
             }
         }];
     }else{
-        TSLog(@"WKWebView (SyncConfigUA) config with invalid type :%@", @(type));
     
     }
 }

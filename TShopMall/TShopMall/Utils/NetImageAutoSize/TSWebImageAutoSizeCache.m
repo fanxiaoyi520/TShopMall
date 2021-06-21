@@ -166,7 +166,6 @@
     NSError *error;
     NSData *data =[NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:&error];
     if (error) {
-        TSLog(@"ERROR, faild to get json data");
         return nil;
     }
     return data;
@@ -222,7 +221,6 @@
     [self.fileManager createDirectoryAtPath:path withIntermediateDirectories:YES
                                                attributes:nil error:&error];
     if (error) {
-        TSLog(@"create cache directory failed, error = %@", error);
     } else {
         [self addDoNotBackupAttribute:path];
     }
@@ -232,7 +230,7 @@
     NSError *error = nil;
     [url setResourceValue:[NSNumber numberWithBool:YES] forKey:NSURLIsExcludedFromBackupKey error:&error];
     if (error) {
-        TSLog(@"error to set do not backup attribute, error = %@", error);
+
     }
 }
 

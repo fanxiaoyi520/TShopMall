@@ -10,7 +10,6 @@
 #import "TSWKMessageHandlerHelper.h"
 #import "UIProgressView+TSWKWebView.h"
 #import "TSHybridRightButton.h"
-#import "FTPopOverMenu.h"
 
 typedef enum : NSUInteger {
     TSWebViewLoadTypeNetRequest,    //网络请求
@@ -97,12 +96,12 @@ typedef enum : NSUInteger {
     if (self.isHiddenNavigationBar) {
         
         CGFloat webViewY = 0;
-        CGRect webViewRect = CGRectMake(0, webViewY, SCREEN_WIDTH, CGRectGetHeight(self.view.frame) - webViewY);
+        CGRect webViewRect = CGRectMake(0, webViewY, kScreenWidth, CGRectGetHeight(self.view.frame) - webViewY);
         _webView.frame = webViewRect;
         
     }else{
         CGFloat webViewY = CGRectGetHeight(self.gk_navigationBar.frame);
-        CGRect webViewRect = CGRectMake(0, webViewY, SCREEN_WIDTH, CGRectGetHeight(self.view.frame) - webViewY);
+        CGRect webViewRect = CGRectMake(0, webViewY, kScreenWidth, CGRectGetHeight(self.view.frame) - webViewY);
         _webView.frame = webViewRect;
     }
 
@@ -174,8 +173,6 @@ typedef enum : NSUInteger {
             [rightButton setImage:KImageMake(self.rightParams[@"selectedImage"]) forState:UIControlStateSelected];
         }
 
-        [rightButton setString:self.rightButtonTitle textColor:KTextColor font:KRegularFont(15.0) forState:UIControlStateNormal];
-        [rightButton addTarget:self action:@selector(rightAction:) forControlEvents:UIControlEventTouchUpInside];
         self.gk_navRightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
         self.gk_navItemRightSpace = 12;
     }
@@ -187,7 +184,7 @@ typedef enum : NSUInteger {
 - (void)fetchData {
     if(!_request) return;
     
-    NSString *cookieStr = [NSString stringWithFormat:@"document.cookie ='%@=%@';",@"TXKSID",[TSCookiesManager defaultManager].H5Cookies];
+    NSString *cookieStr = [NSString stringWithFormat:@"document.cookie ='%@=%@';",@"TXKSID",@""];
     WKUserScript * cookieScript = [[WKUserScript alloc] initWithSource: cookieStr injectionTime:WKUserScriptInjectionTimeAtDocumentStart forMainFrameOnly:NO];
     [self.webView.configuration.userContentController addUserScript:cookieScript];
     
@@ -207,36 +204,6 @@ typedef enum : NSUInteger {
 #pragma mark - Actions
 - (void)rightButtonOnClick:(UIButton *)item event:(UIEvent *)event{
     
-    NSDictionary *callback = self.menuParams[@"callback"];
-    NSDictionary *params = self.menuParams[@"params"];
-    NSArray *titles = params[@"title"];
-    
-    FTPopOverMenuConfiguration *config = [FTPopOverMenuConfiguration defaultConfiguration];
-    config.tintColor = [UIColor whiteColor];
-    config.borderColor = [UIColor whiteColor];
-    config.textColor = KTextColor;
-    config.textFont = KRegularFont(14);
-    config.borderColor = [UIColor clearColor];
-    config.menuRowHeight = 40;
-    config.menuWidth = 90;
-    [FTPopOverMenu showFromEvent:event
-                   withMenuArray:titles
-                       doneBlock:^(NSInteger selectedIndex) {
-            switch (selectedIndex) {
-                case 0: {
-                    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-                    [params setValue:@"0" forKey:@"index"];
-                    [TSWKMessageHandlerHelper callbackWithMethodName:callback[@"success"] callBackParams:[params jsonStringEncoded] webView:self.webView];
-                }
-                    break;
-                case 1: {
-                    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-                    [params setValue:@"1" forKey:@"index"];
-                    [TSWKMessageHandlerHelper callbackWithMethodName:callback[@"success"] callBackParams:[params jsonStringEncoded] webView:self.webView];
-        }
-            break;
-    }
-    } dismissBlock:nil];
 }
 
 - (void)rightAction:(TSHybridRightButton *)sender{
@@ -284,7 +251,7 @@ typedef enum : NSUInteger {
 #pragma mark - NavigationBar
 - (void)_updateFrameOfProgressView {
     CGFloat progressBarHeight = 2.0f;
-    CGRect barFrame = CGRectMake(0, 0, SCREEN_WIDTH, progressBarHeight);
+    CGRect barFrame = CGRectMake(0, 0, kScreenWidth, progressBarHeight);
     _progressView.frame = barFrame;
 }
 
@@ -293,16 +260,6 @@ typedef enum : NSUInteger {
     NSString *title = self.title;
     title = title.length > 0 ? title : [self.webView title];
     self.gk_navTitle = title;
-    if ([title isEqual:@"我的券包"]) { //浏览优惠券埋点
-        NSDictionary *dic = @{@"page_title":title,
-                              @"page_type":@"列表页",
-                              @"coupon_name":@"",
-                              @"coupon_type":@"单品券",
-                              @"coupon_search_area":@"我的提货券",
-                              @"coupon_type":@"发券",
-                              @"pre_source ":@"我的券包"};
-        [[TSSensorsAnalyticsManager shareSensorsManager]appCouponPageViewEvent:dic];
-    }
 }
 
 - (void)handleNavigation {
