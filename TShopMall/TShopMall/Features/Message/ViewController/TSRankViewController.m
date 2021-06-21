@@ -29,7 +29,7 @@
     self.myCategoryView.titleFont = KRegularFont(16);
     self.myCategoryView.titleSelectedFont = KRegularFont(16);
     self.myCategoryView.titleColor = KHexAlphaColor(@"#2D3132", 0.4);
-    self.myCategoryView.titleSelectedColor = KHexAlphaColor(@"#E64C3D", 0.4);
+    self.myCategoryView.titleSelectedColor = KHexColor(@"#E64C3D");
     self.myCategoryView.backgroundColor = [UIColor whiteColor];
 
     JXCategoryIndicatorLineView *backgroundView = [[JXCategoryIndicatorLineView alloc] init];
