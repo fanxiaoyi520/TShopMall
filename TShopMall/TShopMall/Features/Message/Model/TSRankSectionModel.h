@@ -22,6 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface TSRankSectionItemModel : TSUniversaItemModel
+/** 排名  */
+@property(nonatomic, assign) int rank;
 
 @end
 

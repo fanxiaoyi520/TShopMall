@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		00093A5046E7E3324EC8CBEB /* libPods-TShopMallTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1942D505D7004833F274B5D1 /* libPods-TShopMallTests.a */; };
+		04113171268021CC000B5BAF /* TSCustomLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0411316F268021CC000B5BAF /* TSCustomLabel.m */; };
 		04DAFAFE267B37450098275A /* TSOrderManageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DAFAFD267B37450098275A /* TSOrderManageViewController.m */; };
 		04DAFB01267B441D0098275A /* TSAllOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DAFB00267B441D0098275A /* TSAllOrderViewController.m */; };
 		04DAFB04267B5BE50098275A /* TSBePaidViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DAFB03267B5BE50098275A /* TSBePaidViewController.m */; };
@@ -355,6 +356,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0411316F268021CC000B5BAF /* TSCustomLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSCustomLabel.m; sourceTree = "<group>"; };
+		04113170268021CC000B5BAF /* TSCustomLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSCustomLabel.h; sourceTree = "<group>"; };
 		04DAFAFC267B37450098275A /* TSOrderManageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSOrderManageViewController.h; sourceTree = "<group>"; };
 		04DAFAFD267B37450098275A /* TSOrderManageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSOrderManageViewController.m; sourceTree = "<group>"; };
 		04DAFAFF267B441D0098275A /* TSAllOrderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSAllOrderViewController.h; sourceTree = "<group>"; };
@@ -2278,6 +2281,8 @@
 				F55D2D3A267B3F72006BACCF /* TSRankRecommendHeaderView.m */,
 				F55D2D3C267B3F95006BACCF /* TSRankRecommendCell.h */,
 				F55D2D3D267B3F95006BACCF /* TSRankRecommendCell.m */,
+				04113170268021CC000B5BAF /* TSCustomLabel.h */,
+				0411316F268021CC000B5BAF /* TSCustomLabel.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2726,6 +2731,7 @@
 				F55D2D3B267B3F72006BACCF /* TSRankRecommendHeaderView.m in Sources */,
 				F55D2CC926784ACD006BACCF /* TSUserInfoView.m in Sources */,
 				C2A34C7D2674A56C0095497E /* TSSearchTextView.m in Sources */,
+				04113171268021CC000B5BAF /* TSCustomLabel.m in Sources */,
 				C3A6C492267A1C1700FC71D6 /* TSWithdrawalPswSetSectionModel.m in Sources */,
 				F55D2AD6266F67EF006BACCF /* TSHomePageContainerCell.m in Sources */,
 				DC45FEB326773AE700CE762E /* EXTScope.m in Sources */,
