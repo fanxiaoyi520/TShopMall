@@ -73,14 +73,14 @@
     }];
     
     [self.closeButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.view).with.offset(10);
+        make.left.equalTo(self.view).with.offset(20);
         make.top.equalTo(self.view).offset(GK_STATUSBAR_HEIGHT + 4);
         make.width.height.mas_equalTo(30);
     }];
     
     [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.view).with.offset(0);
-        make.top.equalTo(self.closeButton.mas_bottom).with.offset(KRateH(66));
+        make.top.equalTo(self.closeButton.mas_bottom).with.offset(KRateH(46));
         make.bottom.equalTo(self.bottomView.mas_top).with.offset(0);
     }];
     [self.quickView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -89,17 +89,17 @@
         make.bottom.equalTo(self.bottomView.mas_top).with.offset(0);
     }];
     [self.checkedView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.view.mas_bottom).with.offset(-56);
+        make.bottom.equalTo(self.view.mas_bottom).with.offset(-KRateH(30));
         make.left.right.equalTo(self.view).with.offset(0);
-        make.height.mas_equalTo(50);
+        make.height.mas_equalTo(56);
     }];
     [self.quickCheckView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.view.mas_bottom).with.offset(-56);
+        make.bottom.equalTo(self.view.mas_bottom).with.offset(-KRateH(30));
         make.left.right.equalTo(self.view).with.offset(0);
-        make.height.mas_equalTo(50);
+        make.height.mas_equalTo(56);
     }];
     [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.checkedView.mas_top).with.offset(-30);
+        make.bottom.equalTo(self.checkedView.mas_top).with.offset(-KRateW(20));
         make.left.right.equalTo(self.view).with.offset(0);
         make.height.mas_equalTo(KRateW(35));
     }];

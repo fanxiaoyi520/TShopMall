@@ -30,9 +30,11 @@
     maneger.enableAutoToolbar = NO;
     //是否显示占位文字
     maneger.shouldShowToolbarPlaceholder = NO;
+    //设置键盘textField的距离，不能小于零，默认是10.0
+    maneger.keyboardDistanceFromTextField = 60.0f;
 }
 
--(void)setNavigationConfig{
+-(void)setNavigationConfig {
     GKNavigationBarConfigure *config = [GKNavigationBarConfigure sharedInstance];
     [config setupCustomConfigure:^(GKNavigationBarConfigure *configure) {
         configure.backgroundColor = [UIColor whiteColor];

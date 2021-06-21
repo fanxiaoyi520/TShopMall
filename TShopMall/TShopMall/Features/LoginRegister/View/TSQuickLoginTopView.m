@@ -31,8 +31,8 @@
     [self.logoImgV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.mas_centerX).with.offset(0);
         make.top.equalTo(self.mas_top).with.offset(0);
-        make.height.mas_equalTo(KRateH(96));
-        make.width.mas_equalTo(KRateH(96));
+        make.height.mas_equalTo(KRateW(96));
+        make.width.mas_equalTo(KRateW(96));
     }];
     [self.phoneNumberLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.mas_centerX).with.offset(0);
@@ -42,7 +42,7 @@
         make.left.equalTo(self.mas_left).with.offset(25);
         make.right.equalTo(self.mas_right).with.offset(-25);
         make.top.equalTo(self.phoneNumberLabel.mas_bottom).with.offset(KRateH(80));
-        make.height.mas_equalTo(KRateH(40));
+        make.height.mas_equalTo(KRateW(40));
     }];
     [self.otherLoginButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.mas_centerX).with.offset(0);
@@ -77,7 +77,7 @@
         UIButton *quickLoginButton = [[UIButton alloc] init];
         _quickLoginButton = quickLoginButton;
         _quickLoginButton.backgroundColor = KHexColor(@"#FF4D49");
-        _quickLoginButton.layer.cornerRadius = KRateH(20);
+        _quickLoginButton.layer.cornerRadius = KRateW(20);
         _quickLoginButton.clipsToBounds = YES;
         _quickLoginButton.titleLabel.font = KRegularFont(16);
         [_quickLoginButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
