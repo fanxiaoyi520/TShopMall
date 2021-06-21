@@ -1,18 +1,21 @@
 //
-//  TSRankRecommendCell.m
+//  TSGoodsHotRankCell.m
 //  TShopMall
 //
-//  Created by 陈结 on 2021/6/17.
+//  Created by edy on 2021/6/20.
 //
 
-#import "TSRankRecommendCell.h"
+#import "TSGoodsHotRankCell.h"
 #import "TSCustomLabel.h"
+#import "TSHotSectionModel.h"
 
-@interface TSRankRecommendCell ()
+@interface TSGoodsHotRankCell ()
 /** 冠军背景视图  */
 @property(nonatomic, weak) UIView *championView;
 /** 商品图  */
 @property(nonatomic, weak) UIImageView *goodsImgV;
+/** 排名的图标  */
+@property(nonatomic, weak) UIImageView *rankImgV;
 /** 商品标题  */
 @property(nonatomic, weak) UILabel *titleLabel;
 /** 商品价格  */
@@ -27,9 +30,13 @@
 @property(nonatomic, weak) TSCustomLabel *bestNumLabel;
 /** 最高赚父视图  */
 @property(nonatomic, weak) UIView *bestView;
+/** 分割线  */
+@property(nonatomic, weak) UIView *splitView;
+
 @end
 
-@implementation TSRankRecommendCell
+@implementation TSGoodsHotRankCell
+
 
 - (void)fillCustomContentView {
     [super fillCustomContentView];
@@ -38,13 +45,11 @@
     [self addConstraints];
 }
 
-
 - (void)addConstraints {
     [self.championView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.contentView.mas_left).with.offset(0);
-        make.right.equalTo(self.contentView.mas_right).with.offset(0);
+        make.left.equalTo(self.contentView.mas_left).with.offset(16);
         make.top.equalTo(self.contentView.mas_top).with.offset(0);
-        make.height.mas_equalTo(168);
+        make.width.height.mas_equalTo(120);
     }];
     [self.goodsImgV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.championView.mas_left).with.offset(8);
@@ -52,13 +57,19 @@
         make.top.equalTo(self.championView.mas_top).with.offset(8);
         make.bottom.equalTo(self.championView.mas_bottom).with.offset(-8);
     }];
+    [self.rankImgV mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.championView.mas_left).with.offset(0);
+        make.right.equalTo(self.championView.mas_right).with.offset(0);
+        make.bottom.equalTo(self.goodsImgV.mas_bottom).with.offset(0);
+        make.height.mas_equalTo(33);
+    }];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.championView.mas_left).with.offset(8);
-        make.right.equalTo(self.championView.mas_right).with.offset(-8);
-        make.top.equalTo(self.championView.mas_bottom).with.offset(10);
+        make.left.equalTo(self.championView.mas_right).with.offset(8);
+        make.right.equalTo(self.contentView.mas_right).with.offset(-16);
+        make.top.equalTo(self.contentView.mas_top).with.offset(10);
     }];
     [self.rmbLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.championView.mas_left).with.offset(8);
+        make.left.equalTo(self.titleLabel.mas_left).with.offset(0);
         make.centerY.equalTo(self.priceLabel.mas_centerY).with.offset(1);
         make.width.mas_equalTo(15);
     }];
@@ -72,7 +83,7 @@
         make.top.equalTo(self.priceLabel.mas_bottom).with.offset(5);
     }];
     [self.bestView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.championView.mas_right).with.offset(-8);
+        make.centerX.equalTo(self.titleLabel.mas_centerX).with.offset(0);
         make.top.equalTo(self.titleLabel.mas_bottom).with.offset(14);
         make.width.mas_equalTo(70);
         make.height.mas_equalTo(18);
@@ -89,17 +100,34 @@
         make.width.mas_equalTo(37);
         make.height.mas_equalTo(18);
     }];
+    [self.splitView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.contentView.mas_right).with.offset(0);
+        make.left.equalTo(self.titleLabel.mas_left).with.offset(0);
+        make.bottom.equalTo(self.contentView.mas_bottom).with.offset(0);
+        make.height.mas_equalTo(0.5);
+    }];
 }
 
 - (UIImageView *)goodsImgV {
     if (_goodsImgV == nil) {
         UIImageView *goodsImgV = [[UIImageView alloc] init];
         _goodsImgV = goodsImgV;
-        _goodsImgV.image = KImageMake(@"mall_rank_honor");
+        _goodsImgV.image = KImageMake(@"image_test");
         _goodsImgV.contentMode = UIViewContentModeScaleAspectFit;
         [self.contentView addSubview: _goodsImgV];
     }
     return _goodsImgV;
+}
+
+- (UIImageView *)rankImgV {
+    if (_rankImgV == nil) {
+        UIImageView *rankImgV = [[UIImageView alloc] init];
+        _rankImgV = rankImgV;
+        _rankImgV.image = KImageMake(@"mall_hot_no1");
+        _rankImgV.contentMode = UIViewContentModeScaleAspectFit;
+        [self.contentView addSubview: _rankImgV];
+    }
+    return _rankImgV;
 }
 
 - (UIView *)championView {
@@ -120,7 +148,7 @@
         _titleLabel.textColor = KTextColor;
         _titleLabel.font = KRegularFont(14);
         _titleLabel.numberOfLines = 2;
-        _titleLabel.text = @"XESS  55寸艺术电55寸艺术电55寸艺术";
+        _titleLabel.text = @"XESS 65寸 家庭浮窗场景TV标题TV标题TV标题TV标题TV标题";
         [self.contentView addSubview: _titleLabel];
     }
     return _titleLabel;
@@ -199,7 +227,6 @@
         UIView *bestView = [[UIView alloc] init];
         _bestView = bestView;
         _bestView.backgroundColor = UIColor.brownColor;
-        //_bestView.layer.cornerRadius = 3.0;
         _bestView.clipsToBounds = YES;
         [_bestView setCorners:UIRectCornerAllCorners radius:3.0];
         [self.contentView addSubview: _bestView];
@@ -207,5 +234,30 @@
     return _bestView;
 }
 
+- (UIView *)splitView {
+    if (_splitView == nil) {
+        UIView *splitView = [[UIView alloc] init];
+        _splitView = splitView;
+        _splitView.backgroundColor = KHexColor(@"#EEEEEE");
+        [self.contentView addSubview: _splitView];
+    }
+    return _splitView;
+}
+
+- (void)setDelegate:(id<UniversalCollectionViewCellDataDelegate>)delegate {
+    TSHotSectionItemModel *item = [delegate universalCollectionViewCellModel:self.indexPath];
+    if (item.rank == 1) {
+        self.rankImgV.hidden = NO;
+        self.rankImgV.image = KImageMake(@"mall_hot_no1");
+    } else if (item.rank == 2) {
+        self.rankImgV.hidden = NO;
+        self.rankImgV.image = KImageMake(@"mall_hot_no2");
+    } else if (item.rank == 3) {
+        self.rankImgV.hidden = NO;
+        self.rankImgV.image = KImageMake(@"mall_hot_no3");
+    } else {
+        self.rankImgV.hidden = YES;
+    }
+}
 
 @end

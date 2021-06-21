@@ -23,27 +23,30 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     self.myCategoryView.titles = @[@"冲冠榜", @"财富榜", @"热销榜"];
     self.myCategoryView.cellSpacing = 0;
     self.myCategoryView.titleFont = KRegularFont(16);
     self.myCategoryView.titleSelectedFont = KRegularFont(16);
     self.myCategoryView.titleColor = KHexAlphaColor(@"#2D3132", 0.4);
     self.myCategoryView.titleSelectedColor = KHexColor(@"#E64C3D");
-    self.myCategoryView.backgroundColor = [UIColor redColor];
+    self.myCategoryView.backgroundColor = KWhiteColor;
 
     JXCategoryIndicatorLineView *backgroundView = [[JXCategoryIndicatorLineView alloc] init];
     backgroundView.indicatorColor = [UIColor whiteColor];
     self.myCategoryView.indicators = @[backgroundView];
     self.myCategoryView.separatorLineShowEnabled = YES;
 
-
     [self.view addSubview:self.categoryView];
     [self.view addSubview:self.seperateView];
     [self.view addSubview:self.listContainerView];
 }
 
--(void)setupBasic{
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleDefault;
+}
+
+- (void)setupBasic{
     [super setupBasic];
     self.gk_navTitle = @"排行版";
 }
@@ -57,9 +60,9 @@
     CGFloat containViewY = categoryViewHeight + 1;
     CGFloat bottom = self.view.ts_safeAreaInsets.bottom;
 
-    self.myCategoryView.frame = CGRectMake(0, categoryY,kScreenWidth, categoryViewHeight);
+    self.myCategoryView.frame = CGRectMake(0, categoryY, kScreenWidth, categoryViewHeight);
     self.seperateView.frame = CGRectMake(0, categoryY + categoryViewHeight, kScreenWidth, 1);
-    self.listContainerView.frame = CGRectMake(0,categoryY + containViewY + 1, kScreenWidth ,kScreenHeight - categoryViewHeight - containViewY - bottom);
+    self.listContainerView.frame = CGRectMake(0, categoryY + containViewY + 1, kScreenWidth ,kScreenHeight - categoryViewHeight - containViewY - bottom);
 }
 
 - (JXCategoryTitleView *)myCategoryView {
@@ -91,7 +94,7 @@
         return list;
     }else{
         TSRankHotCellController *list = [[TSRankHotCellController alloc] init];
-        list.titles = titles;
+        //list.titles = titles;
         return list;
     }
 }
