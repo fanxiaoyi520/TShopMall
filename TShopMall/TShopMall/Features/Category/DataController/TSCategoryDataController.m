@@ -28,6 +28,7 @@
                                                                requestHeader:NSMutableDictionary.dictionary
                                                                  requestBody:body
                                                               needErrorToast:NO];
+    request.animatingView = self.context.view;
     [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
         
         if (request.responseModel.isSucceed) {

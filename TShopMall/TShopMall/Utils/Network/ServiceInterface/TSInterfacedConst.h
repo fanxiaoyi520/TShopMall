@@ -7,10 +7,23 @@
 
 #import <UIKit/UIKit.h>
 
-#pragma mark - 接口前缀-开发服务器
-UIKIT_EXTERN NSString *const kApiPrefix;
+#pragma mark - AppId账号信息
+/// AppId
+UIKIT_EXTERN NSString *const kAppId;
+/// AppSecret
+UIKIT_EXTERN NSString *const kAppSecret;
+
+#pragma mark - 接口前缀
+/// 账号中心接口前缀
+UIKIT_EXTERN NSString *const kAccountCenterApiPrefix;
+/// 商城接口前缀
+UIKIT_EXTERN NSString *const kMallApiPrefix;
 
 #pragma mark - 注册&登录
+/// 登录获取验证码
+UIKIT_EXTERN NSString *const kLoginSmsCaptchaUrl;
+/// 快速登录
+UIKIT_EXTERN NSString *const kLoginQuickLoginUrl;
 
 #pragma mark - 首页
 UIKIT_EXTERN NSString *const kHomePageInfoUrl;

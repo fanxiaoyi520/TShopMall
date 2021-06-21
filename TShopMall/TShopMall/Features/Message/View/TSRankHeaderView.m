@@ -55,7 +55,7 @@
 -(UILabel *)rankLabel{
     if (!_rankLabel) {
         _rankLabel = [[UILabel alloc] init];
-        _rankLabel.font = KFont(PingFangSCMedium, 14);
+        _rankLabel.font = KRegularFont(14);
         _rankLabel.textAlignment = NSTextAlignmentCenter;
         _rankLabel.textColor = KTextColor;
         _rankLabel.text = @"排名";
@@ -66,7 +66,7 @@
 -(UILabel *)userLabel{
     if (!_userLabel) {
         _userLabel = [[UILabel alloc] init];
-        _userLabel.font = KFont(PingFangSCMedium, 14);
+        _userLabel.font = KRegularFont(14);
         _userLabel.textAlignment = NSTextAlignmentCenter;
         _userLabel.textColor = KTextColor;
         _userLabel.text = @"用户";
@@ -77,7 +77,7 @@
 -(UILabel *)earnLabel{
     if (!_earnLabel) {
         _earnLabel = [[UILabel alloc] init];
-        _earnLabel.font = KFont(PingFangSCMedium, 14);
+        _earnLabel.font = KRegularFont(14);
         _earnLabel.textAlignment = NSTextAlignmentCenter;
         _earnLabel.textColor = KTextColor;
         _earnLabel.text = @"销售收益";

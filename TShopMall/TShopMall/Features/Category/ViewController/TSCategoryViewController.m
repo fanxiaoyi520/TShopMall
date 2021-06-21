@@ -56,8 +56,8 @@
 -(void)setupNavigationBar{
     [super setupNavigationBar];
     
-    self.navigationItem.titleView = self.searchButton;
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.categoryButton];
+    self.gk_navigationItem.titleView = self.searchButton;
+    self.gk_navRightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.categoryButton];
 }
 
 - (void)fillCustomView{
@@ -327,6 +327,7 @@ spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
 -(TSCategoryDataController *)dataController{
     if (!_dataController) {
         _dataController = [[TSCategoryDataController alloc] init];
+        _dataController.context = self;
     }
     return _dataController;
 }

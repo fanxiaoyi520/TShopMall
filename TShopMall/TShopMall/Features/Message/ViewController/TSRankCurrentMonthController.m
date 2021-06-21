@@ -61,6 +61,7 @@
     [collectionView registerClass:[className class] forCellWithReuseIdentifier:item.identify];
     TSUniversalCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:item.identify forIndexPath:indexPath];
     cell.indexPath = indexPath;
+    cell.delegate = self;
     return cell;
 }
 

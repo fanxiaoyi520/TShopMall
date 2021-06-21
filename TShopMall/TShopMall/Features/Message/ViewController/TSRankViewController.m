@@ -29,8 +29,8 @@
     self.myCategoryView.titleFont = KRegularFont(16);
     self.myCategoryView.titleSelectedFont = KRegularFont(16);
     self.myCategoryView.titleColor = KHexAlphaColor(@"#2D3132", 0.4);
-    self.myCategoryView.titleSelectedColor = KHexAlphaColor(@"#E64C3D", 0.4);
-    self.myCategoryView.backgroundColor = [UIColor whiteColor];
+    self.myCategoryView.titleSelectedColor = KHexColor(@"#E64C3D");
+    self.myCategoryView.backgroundColor = [UIColor redColor];
 
     JXCategoryIndicatorLineView *backgroundView = [[JXCategoryIndicatorLineView alloc] init];
     backgroundView.indicatorColor = [UIColor whiteColor];
@@ -45,19 +45,21 @@
 
 -(void)setupBasic{
     [super setupBasic];
-    self.navigationItem.title = @"排行版";
+    self.gk_navTitle = @"排行版";
 }
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     
+    CGFloat categoryY = CGRectGetHeight(self.gk_navigationBar.frame);
     CGFloat categoryViewHeight = [self preferredCategoryViewHeight];
+    
     CGFloat containViewY = categoryViewHeight + 1;
     CGFloat bottom = self.view.ts_safeAreaInsets.bottom;
 
-    self.myCategoryView.frame = CGRectMake(0, 0,kScreenWidth, categoryViewHeight);
-    self.seperateView.frame = CGRectMake(0, categoryViewHeight, kScreenWidth, 1);
-    self.listContainerView.frame = CGRectMake(0, containViewY, kScreenWidth ,kScreenHeight - containViewY - bottom);
+    self.myCategoryView.frame = CGRectMake(0, categoryY,kScreenWidth, categoryViewHeight);
+    self.seperateView.frame = CGRectMake(0, categoryY + categoryViewHeight, kScreenWidth, 1);
+    self.listContainerView.frame = CGRectMake(0,categoryY + containViewY + 1, kScreenWidth ,kScreenHeight - categoryViewHeight - containViewY - bottom);
 }
 
 - (JXCategoryTitleView *)myCategoryView {

@@ -15,6 +15,7 @@
 #import <Toast.h>
 #import "TSRegiterViewController.h"
 #import "NSTimer+TSBlcokTimer.h"
+#import "TSLoginRegisterDataController.h"
 
 
 @interface TSLoginViewController ()<TSQuickLoginTopViewDelegate, TSLoginTopViewDelegate, TSLoginBottomViewDelegate, TSCheckedViewDelegate, TSQuickCheckViewDelegate>
@@ -36,6 +37,8 @@
 @property(nonatomic, assign) NSInteger count;
 /** 定时器 */
 @property (nonatomic, strong) NSTimer *timer;
+
+@property(nonatomic, strong) TSLoginRegisterDataController *dataController;
 
 @end
 
@@ -62,17 +65,17 @@
 }
 
 - (void)addConstraints {
-    CGRect rectNav = self.navigationController.navigationBar.frame;
-    int top = rectNav.size.height - 10;
+    
     [self.bgImgV mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.top.bottom.equalTo(self.view).with.offset(0);
+        make.edges.equalTo(self.view);
     }];
+    
     [self.closeButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.view).with.offset(25);
-        make.top.equalTo(self.view.mas_top).with.offset(top);
-        make.width.mas_equalTo(15.56 * 2);
-        make.height.mas_equalTo(15.14 * 2);
+        make.left.equalTo(self.view).with.offset(10);
+        make.top.equalTo(self.view).offset(GK_STATUSBAR_HEIGHT + 4);
+        make.width.height.mas_equalTo(30);
     }];
+    
     [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.view).with.offset(0);
         make.top.equalTo(self.closeButton.mas_bottom).with.offset(KRateH(66));
@@ -100,7 +103,157 @@
     }];
 }
 
-#pragma mark - Lazy MethodΩ
+#pragma mark - Actions
+- (void)goToRun {
+    if (self.count <= 1) {
+        self.count = 60;
+        [self.timer invalidate];
+        [self.topView setCodeButtonTitleAndColor:@"重新验证码" isResend:YES];
+    } else {
+        self.count--;
+        [self.topView setCodeButtonTitleAndColor:[NSString stringWithFormat:@"重发 %ld", (long)self.count] isResend:NO];
+    }
+}
+
+#pragma mark - TSQuickLoginTopViewDelegate
+/** 一键登录 */
+- (void)quickLogin {
+    if (!self.quickCheckView.isChecked) {
+        [self.view makeToast:@"请阅读并同意以下协议" duration:3.0 position:CSToastPositionCenter];
+        return;
+    }
+}
+
+/** 其它登录方式 */
+- (void)otherLogin {
+    self.quickView.hidden = YES;
+    self.quickCheckView.hidden = YES;
+    self.checkedView.hidden = NO;
+    self.topView.hidden = NO;
+}
+
+#pragma mark - TSLoginTopViewDelegate
+/** 发送验证码 */
+- (void)sendCode {
+    
+    NSString *phoneNumber = [self.topView getPhoneNumber];
+    if (phoneNumber.length == 0) {
+        [self.view makeToast:@"请输入手机号" duration:3.0 position:CSToastPositionCenter];
+        return;
+    }
+    if (![TSTools isPhoneNumber: phoneNumber]) {
+        [self.view makeToast:@"请输入正确的手机号" duration:3.0 position:CSToastPositionCenter];
+        return;
+    }
+    
+    [self.view endEditing:YES];
+    
+    NSString *mobile = [self.topView getPhoneNumber];
+    
+    __weak typeof(self) weakSelf = self;
+    [self.dataController fetchLoginSMSCodeMobile:mobile complete:^(BOOL isSucess) {
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
+        if (isSucess) {
+            
+            strongSelf.timer = [NSTimer ts_scheduledTimerWithTimeInterval:1 block:^{
+                 [weakSelf goToRun];
+            } repeats:YES];
+            [strongSelf.view makeToast:@"获取验证码成功" duration:2.0 position:CSToastPositionBottom];
+            
+        }else{
+            [strongSelf.view makeToast:self.dataController.smsModel.failCause duration:2.0 position:CSToastPositionBottom];
+        }
+    }];
+    
+}
+
+- (void)goToRegister {
+    if (self.navigationController) {
+        TSRegiterViewController *registerVC = [[TSRegiterViewController alloc] init];
+        [self.navigationController pushViewController:registerVC animated:YES];
+    } else {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
+- (void)login {
+    NSString *phoneNumber = [self.topView getPhoneNumber];
+    if (phoneNumber.length == 0) {
+        [self.view makeToast:@"请输入手机号" duration:3.0 position:CSToastPositionCenter];
+        return;
+    }
+    if (![TSTools isPhoneNumber: phoneNumber]) {
+        [self.view makeToast:@"请输入正确的手机号" duration:3.0 position:CSToastPositionCenter];
+        return;
+    }
+    if ([self.topView getCode].length == 0) {
+        [self.view makeToast:@"请输入验证码" duration:3.0 position:CSToastPositionCenter];
+        return;
+    }
+    if (!self.checkedView.isChecked) {
+        [self.view makeToast:@"请阅读并同意以下协议" duration:3.0 position:CSToastPositionCenter];
+        return;
+    }
+    
+    NSString *inputCode = [self.topView getCode];
+    NSString *rightCode = self.dataController.smsModel.text;
+    
+//    if ([inputCode isEqualToString:rightCode]) {//验证码输入错误
+//        [self.view makeToast:@"验证码输入有误" duration:2 position:CSToastPositionBottom];
+//    }
+    
+    [self.dataController fetchQuickLoginUsername:[self.topView getPhoneNumber]
+                                       validCode:[self.topView getCode]
+                                        complete:^(BOOL isSucess) {
+            
+    }];
+}
+
+- (void)closePage {
+    NSLog(@"----");
+}
+
+#pragma mark - TSLoginBottomViewDelegate
+- (void)goToWechat {
+    
+}
+
+- (void)goToApple {
+    
+}
+
+#pragma mark - TSCheckedViewDelegate
+- (void)goToServiceProtocol {
+    
+}
+
+- (void)goToPrivatePolicy {
+    
+}
+
+- (void)goToRegisterProtocol {
+    
+}
+
+- (void)checkedAction:(BOOL)isChecked{
+    
+}
+
+#pragma mark - TSQuickCheckViewDelegate
+/** 认证信息 */
+- (void)openAuthenticationProtocol {
+    
+}
+/** 服务协议 */
+- (void)openServiceProtocol {
+    
+}
+/** 隐私政策 */
+- (void)openPrivateProtocol {
+    
+}
+
+#pragma mark - Lazy Method
 - (UIView *)topView {
     if (_topView == nil) {
         TSLoginTopView *topView = [[TSLoginTopView alloc] init];
@@ -175,122 +328,11 @@
     return _bgImgV;
 }
 
-#pragma mark - TSQuickLoginTopViewDelegate
-/** 一键登录 */
-- (void)quickLogin {
-    if (!self.quickCheckView.isChecked) {
-        [self.view makeToast:@"请阅读并同意以下协议" duration:3.0 position:CSToastPositionCenter];
-        return;
+-(TSLoginRegisterDataController *)dataController{
+    if (!_dataController) {
+        _dataController = [[TSLoginRegisterDataController alloc] init];
     }
-}
-
-/** 其它登录方式 */
-- (void)otherLogin {
-    self.quickView.hidden = YES;
-    self.quickCheckView.hidden = YES;
-    self.checkedView.hidden = NO;
-    self.topView.hidden = NO;
-}
-
-#pragma mark - TSLoginTopViewDelegate
-/** 发送验证码 */
-- (void)sendCode {
-    NSString *phoneNumber = [self.topView getPhoneNumber];
-    if (phoneNumber.length == 0) {
-        [self.view makeToast:@"请输入手机号" duration:3.0 position:CSToastPositionCenter];
-        return;
-    }
-    if (![TSTools isPhoneNumber: phoneNumber]) {
-        [self.view makeToast:@"请输入正确的手机号" duration:3.0 position:CSToastPositionCenter];
-        return;
-    }
-    
-    __weak typeof(self) weakSelf = self;
-    self.timer = [NSTimer ts_scheduledTimerWithTimeInterval:1 block:^{
-         [weakSelf goToRun];
-    } repeats:YES];
-    
-}
-
-- (void)goToRegister {
-    if (self.navigationController) {
-        TSRegiterViewController *registerVC = [[TSRegiterViewController alloc] init];
-        [self.navigationController pushViewController:registerVC animated:YES];
-    } else {
-        [self dismissViewControllerAnimated:YES completion:nil];
-    }
-}
-
-- (void)login {
-    NSString *phoneNumber = [self.topView getPhoneNumber];
-    if (phoneNumber.length == 0) {
-        [self.view makeToast:@"请输入手机号" duration:3.0 position:CSToastPositionCenter];
-        return;
-    }
-    if (![TSTools isPhoneNumber: phoneNumber]) {
-        [self.view makeToast:@"请输入正确的手机号" duration:3.0 position:CSToastPositionCenter];
-        return;
-    }
-    if ([self.topView getCode].length == 0) {
-        [self.view makeToast:@"请输入验证码" duration:3.0 position:CSToastPositionCenter];
-        return;
-    }
-    if (!self.checkedView.isChecked) {
-        [self.view makeToast:@"请阅读并同意以下协议" duration:3.0 position:CSToastPositionCenter];
-        return;
-    }
-}
-
-#pragma mark - Actions
-- (void)goToRun {
-    if (self.count <= 1) {
-        self.count = 60;
-        [self.timer invalidate];
-        [self.topView setCodeButtonTitleAndColor:@"重新验证码" isResend:YES];
-    } else {
-        self.count--;
-        [self.topView setCodeButtonTitleAndColor:[NSString stringWithFormat:@"重发 %ld", (long)self.count] isResend:NO];
-    }
-}
-
-- (void)closePage {
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-}
-
-#pragma mark - TSLoginBottomViewDelegate
-- (void)goToWechat {
-    
-}
-
-- (void)goToApple {
-    
-}
-
-#pragma mark - TSCheckedViewDelegate
-- (void)goToServiceProtocol {
-    
-}
-
-- (void)goToPrivatePolicy {
-    
-}
-
-- (void)goToRegisterProtocol {
-    
-}
-
-#pragma mark - TSQuickCheckViewDelegate
-/** 认证信息 */
-- (void)openAuthenticationProtocol {
-    
-}
-/** 服务协议 */
-- (void)openServiceProtocol {
-    
-}
-/** 隐私政策 */
-- (void)openPrivateProtocol {
-    
+    return _dataController;
 }
 
 @end
