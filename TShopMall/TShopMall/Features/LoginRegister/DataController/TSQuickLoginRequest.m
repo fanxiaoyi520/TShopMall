@@ -31,7 +31,8 @@
 }
 
 -(NSString *)requestUrl{
-    return kLoginQuickLoginUrl;
+    NSString *requestUrl = [NSString stringWithFormat:@"%@?appId=%@&tenantId=%@&appSecret=%@",kLoginQuickLoginUrl,kAppId,@"tcl",kAppSecret];
+    return requestUrl;
 }
 
 -(YTKRequestSerializerType)requestSerializerType{
@@ -54,9 +55,6 @@
 -(id)requestArgument{
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setValue:kAppId forKey:@"appId"];
-    [params setValue:@"tcl" forKey:@"tenantId"];
-    [params setValue:kAppSecret forKey:@"appSecret"];
     [params setValue:self.username forKey:@"username"];
     [params setValue:self.validCode forKey:@"validCode"];
     [params setValue:@"LOGIN" forKey:@"bType"];

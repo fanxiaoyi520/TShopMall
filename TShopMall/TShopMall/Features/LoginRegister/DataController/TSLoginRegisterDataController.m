@@ -45,14 +45,20 @@
                       complete:(void(^)(BOOL isSucess))complete{
     TSQuickLoginRequest *login = [[TSQuickLoginRequest alloc] initWithUsername:username
                                                                      validCode:validCode];
-    [login startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
+    [login startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
         
-        NSLog(@"------");
+        TSUserInfoManager *userInfo = [[TSUserInfoManager alloc] init];
+        userInfo.accessToken = request.responseModel.originalData[@"accessToken"];
+        userInfo.refreshToken = request.responseModel.originalData[@"refreshToken"];
+        userInfo.userName = request.responseModel.originalData[@"username"];
+        
+        TSGlobalManager *manager = [TSGlobalManager shareInstance];
+        manager.isLogin = YES;
+        manager.currentUserInfo = userInfo;
+        [manager saveCurrentUserInfo];
         
         } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-            
-            NSLog(@"------");
-            
+     
     }];
     
 }

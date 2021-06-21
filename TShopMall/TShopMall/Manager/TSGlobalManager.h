@@ -16,28 +16,20 @@ NS_ASSUME_NONNULL_BEGIN
 @interface TSGlobalManager : NSObject
 
 /// 用户是否已经登录
-@property (nonatomic, readonly) BOOL isLogin;
+@property (nonatomic, assign) BOOL isLogin;
 /// 当前登录的用户的信息
-@property (nonatomic, readonly) TSUserInfoManager *currentUserInfo;
-/// 上次登录的用户信息
-@property (nonatomic, strong) TSLastUserInfoManager *lastUserInfo;
-/// 用户设备信息
-@property (nonatomic, copy, readonly) NSString *userAgent;
+@property (nonatomic, strong) TSUserInfoManager *currentUserInfo;
+/// 用户唯一标识（设备唯一标识）
+@property (nonatomic, copy) NSString *clientID;
 /// app版本号
 @property(nonatomic, copy) NSString *appVersion;
-/// 默认的官网搜索关键字
-@property (nonatomic, copy) NSArray *defaultSearchWords;
 
 /// 单利
 + (instancetype)shareInstance;
 
 /// 保存用户登录数据
 /// @param dit 用户信息
-- (void)saveCurrentUserInfo:(NSDictionary *)dit;
-
-/// 设置登录类型
-/// @param loginTyppe currentUserInfo中用户的loginType
-- (void)setLoginType:(NSString*)loginTyppe;
+- (void)saveCurrentUserInfo;
 
 /// 清空用户信息
 - (void)clearUserInfo;

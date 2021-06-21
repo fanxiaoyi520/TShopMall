@@ -10,6 +10,7 @@ target 'TShopMall' do
     pod 'AFNetworking','~> 4.0'
     pod 'YTKNetwork','~> 3.0.6'
     pod 'CYLTabBarController', '~> 1.29.0'
+    pod 'CYLTabBarController/Lottie', '~> 1.29.0'  # 依赖Lottie库
     pod 'SDWebImage', '~> 5.11.1'
     pod 'Masonry','~>1.1.0'
     pod 'IQKeyboardManager', '~> 6.5.6'
