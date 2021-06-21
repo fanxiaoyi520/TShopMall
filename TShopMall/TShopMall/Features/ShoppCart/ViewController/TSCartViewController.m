@@ -24,13 +24,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"购物车";
+    self.gk_navTitle = @"购物车";
     if (@available(iOS 11.0, *)) {
-        
+        self.cartView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     } else {
-        self.automaticallyAdjustsScrollViewInsets = NO;
+        self.automaticallyAdjustsScrollViewInsets = YES;
     }
-    
     [self configInfo];
 }
 
@@ -140,7 +139,7 @@
     
     [self.cartView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.view);
-        make.top.equalTo(self.view.mas_top);
+        make.top.equalTo(self.view.mas_top).offset(GK_SAFEAREA_TOP + GK_NAVBAR_HEIGHT);
         make.bottom.equalTo(self.settleView.mas_top);
     }];
 }

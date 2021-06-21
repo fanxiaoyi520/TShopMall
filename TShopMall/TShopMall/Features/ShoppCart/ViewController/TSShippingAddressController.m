@@ -22,7 +22,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title = @"我的收货地址";
+    self.gk_navTitle = @"我的收货地址";
     
     self.view.backgroundColor = UIColor.whiteColor;
     if (@available(iOS 11.0, *)) {
@@ -118,7 +118,8 @@
     }];
     
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.equalTo(self.view);
+        make.left.right.equalTo(self.view);
+        make.top.equalTo(self.view.mas_top).offset(GK_STATUSBAR_NAVBAR_HEIGHT);
         make.bottom.equalTo(self.addBtn.mas_top).offset(-KRateW(8.0));
     }];
 }

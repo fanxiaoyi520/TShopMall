@@ -24,9 +24,14 @@
     [super viewDidLoad];
     self.view.backgroundColor = UIColor.whiteColor;
     if (self.addressModel == nil) {
-        self.navigationItem.title = @"新增收货地址";
+        self.gk_navTitle = @"新增收货地址";
     } else {
-        self.navigationItem.title = @"编辑收货地址";
+        self.gk_navTitle = @"编辑收货地址";
+    }
+    if (@available(iOS 11.0, *)) {
+        self.editView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    } else {
+        self.automaticallyAdjustsScrollViewInsets = YES;
     }
     
     [self updateSaveStatus];
@@ -64,7 +69,7 @@
 
 //选择地区
 - (void)gotoSelectedAddress{
-    [TSAreaSelectedController showAreaSelected:^(TSAreaModel *provice, TSAreaModel *city, TSAreaModel *eare, TSAreaModel *street) {
+    [TSAreaSelectedController showAreaSelected:^(TSAreaModel *provice, TSAreaModel *city, TSAreaModel *eare, TSAreaModel *street, NSString *location) {
         
     } OnController:self];
 }
@@ -89,7 +94,8 @@
     }];
     
     [self.editView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.top.equalTo(self.view);
+        make.left.right.equalTo(self.view);
+        make.top.equalTo(self.view.mas_top).offset(GK_STATUSBAR_NAVBAR_HEIGHT);
         make.bottom.equalTo(self.selBtn.mas_top).offset(-KRateW(16.0));
     }];
 }

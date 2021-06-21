@@ -40,19 +40,15 @@
 - (void)updateLocationAddress{
     self.title.text = @"请选择所在地区";
     self.locationTips.text = @"定位到的地址";
-    
-    [TSLocationManager defaultManager].startLocation(^(CLPlacemark *placemark, NSError *error) {
+    [TSLocationManager startLocation:^(NSString *address, NSError *error) {
         if (error) {
             self.locationAddress.text = @"定位失败";
             return;
         } else {
-            NSString *city = placemark.locality.length==0? placemark.administrativeArea:placemark.locality;
-            NSString *area = placemark.subLocality;
-            NSString *street = placemark.thoroughfare;
-            NSString *subStreet = placemark.subThoroughfare;
-            self.locationAddress.text = [NSString stringWithFormat:@"%@%@%@%@", city, area, street, subStreet];
+            self.location = address;
+            self.locationAddress.text = address;
         }
-    });
+    }];
 }
 
 - (void)areaViewItemTapped:(UITapGestureRecognizer *)tapGes{

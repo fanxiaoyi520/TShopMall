@@ -12,7 +12,7 @@
 @interface TSCartView()<UITableViewDelegate, UITableViewDataSource, TSCartProtocol, TSRefreshDelegate>{
     
 }
-@property (nonatomic, strong) UITableView *tableView;
+//@property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) TSRefreshConfiger *refreshConfiger;
 @end
 
@@ -20,9 +20,10 @@
 
 - (instancetype)init{
     if (self == [super init]) {
-        if (@available(iOS 11.0, *)) {
-            self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-        }
+        self.delegate = self;
+        self.dataSource = self;
+        [self configTable];
+        self.refreshConfiger = [TSRefreshConfiger configScrollView:self isLight:YES response:self type:Both];
     }
     return self;
 }
@@ -46,7 +47,7 @@
 
 - (void)setSections:(NSArray<TSCartGoodsSection *> *)sections{
     _sections = sections;
-    [self.tableView reloadData];
+    [self reloadData];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -126,11 +127,11 @@
     return @"删除";
 }
 
-- (void)layoutSubviews{
-    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self);
-    }];
-}
+//- (void)layoutSubviews{
+//    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.edges.equalTo(self);
+//    }];
+//}
 
 - (BOOL)hasMoreData{
     return YES;
@@ -148,23 +149,33 @@
     });
 }
 
-- (UITableView *)tableView{
-    if (_tableView) {
-        return _tableView;
-    }
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
-    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 0.1)];
-    self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, KRateW(10.0))];
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.backgroundColor = KHexColor(@"#F4F4F4");
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    self.tableView.showsVerticalScrollIndicator = NO;
-    [self addSubview:self.tableView];
-    
-    self.refreshConfiger = [TSRefreshConfiger configScrollView:self.tableView isLight:YES response:self type:Both];
-    
-    return self.tableView;
+- (void)configTable{
+    self.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 0.1)];
+    self.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, KRateW(10.0))];
+    self.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.backgroundColor = KHexColor(@"#F4F4F4");
+    self.delegate = self;
+    self.dataSource = self;
+    self.showsVerticalScrollIndicator = NO;
 }
+
+//- (UITableView *)tableView{
+//    if (_tableView) {
+//        return _tableView;
+//    }
+//    self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+//    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 0.1)];
+//    self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, KRateW(10.0))];
+//    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//    self.tableView.backgroundColor = KHexColor(@"#F4F4F4");
+//    self.tableView.delegate = self;
+//    self.tableView.dataSource = self;
+//    self.tableView.showsVerticalScrollIndicator = NO;
+//    [self addSubview:self.tableView];
+//
+//    self.refreshConfiger = [TSRefreshConfiger configScrollView:self.tableView isLight:YES response:self type:Both];
+//
+//    return self.tableView;
+//}
 
 @end
