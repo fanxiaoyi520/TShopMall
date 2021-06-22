@@ -14,7 +14,10 @@
 #import "TSProductDetailHeaderView.h"
 #import "TSUniversalFooterView.h"
 #import "WMDragView.h"
+#import "TSGoodDetailSkuView.h"
+#import "SnailQuickMaskPopups.h"
 #import <MJRefresh/MJRefresh.h>
+
 
 @interface TSProductDetailController ()<UICollectionViewDelegate,UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate>
 
@@ -30,6 +33,8 @@
 @property(nonatomic, strong) TSProductDetailBottomView *bottomView;
 /// 热卖
 @property(nonatomic,strong)WMDragView *dragView;
+
+@property (nonatomic, strong) SnailQuickMaskPopups *popups;
 
 /// 数据中心
 @property(nonatomic, strong) TSProductDetailDataController *dataController;
@@ -53,7 +58,7 @@
         NSLog(@"clickDragViewBlock");
     };
     
-    [self addMJHeaderAndFooter];
+//    [self addMJHeaderAndFooter];
 }
 
 -(void)setupNavigationBar{
@@ -254,8 +259,30 @@
         } else {// 直接下载素材
             
         }
+    }else if ([@"TSProductDetailPurchaseCell" isEqualToString:params[@"cellType"]]){
+        if ([params[@"purchaseType"] intValue] == 0) {//赠品
+            
+        } else if ([params[@"purchaseType"] intValue] == 1){//已选
+            
+            TSGoodDetailSkuView *skuView = [[TSGoodDetailSkuView alloc] init];
+            skuView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight * 0.68);
+            [skuView setCorners:(UIRectCornerTopLeft | UIRectCornerTopRight) radius:8.0];
+            skuView.clipsToBounds = YES;
+            
+            _popups = [SnailQuickMaskPopups popupsWithMaskStyle:MaskStyleBlackTranslucent aView:skuView];
+            _popups.presentationStyle = PresentationStyleBottom;
+            _popups.transitionStyle = TransitionStyleFromRight;
+            _popups.isAllowPopupsDrag = YES;
+            _popups.maskAlpha = 0.8;
+            [_popups presentAnimated:YES completion:NULL];
+            
+        } else if ([params[@"purchaseType"] intValue] == 2){//配送
+            
+        }else{//运费
+            
+        }
     }
- 
+    
 }
 
 #pragma mark - UniversalFlowLayoutDelegate
