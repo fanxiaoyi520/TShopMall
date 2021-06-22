@@ -15,10 +15,12 @@
 #import "TSUniversalFooterView.h"
 #import "WMDragView.h"
 #import "TSTopFunctionView.h"
+#import "TSGoodDetailMaterialView.h"
 #import "TSChangePriceView.h"
 #import "TSDetailShareView.h"
 #import "TSGoodDetailSkuView.h"
 #import "SnailQuickMaskPopups.h"
+#import "TSGoodDetailMaterialView.h"
 #import <MJRefresh/MJRefresh.h>
 
 
@@ -43,8 +45,10 @@
 @property (nonatomic, strong) SnailQuickMaskPopups *changePopups;
 /// 分享
 @property (nonatomic, strong) SnailQuickMaskPopups *sharePopups;
-/// sku
-@property (nonatomic, strong) SnailQuickMaskPopups *popups;
+/// skuview
+@property (nonatomic, strong) SnailQuickMaskPopups *skuPpopups;
+/// 下载更多
+@property (nonatomic, strong) SnailQuickMaskPopups *materialPopups;
 
 /// 数据中心
 @property(nonatomic, strong) TSProductDetailDataController *dataController;
@@ -298,7 +302,7 @@
     if ([@"TSGoodDetailImageCell" isEqualToString:params[@"cellType"]]) {
         
         if ([params[@"downloadType"] intValue] == 0) {//下载更多素材
-            
+            [self.materialPopups presentAnimated:YES completion:nil];
         } else {// 直接下载素材
             
         }
@@ -306,19 +310,7 @@
         if ([params[@"purchaseType"] intValue] == 0) {//赠品
             
         } else if ([params[@"purchaseType"] intValue] == 1){//已选
-            
-            TSGoodDetailSkuView *skuView = [[TSGoodDetailSkuView alloc] init];
-            skuView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight * 0.68);
-            [skuView setCorners:(UIRectCornerTopLeft | UIRectCornerTopRight) radius:8.0];
-            skuView.clipsToBounds = YES;
-            
-            _popups = [SnailQuickMaskPopups popupsWithMaskStyle:MaskStyleBlackTranslucent aView:skuView];
-            _popups.presentationStyle = PresentationStyleBottom;
-            _popups.transitionStyle = TransitionStyleFromRight;
-            _popups.isAllowPopupsDrag = YES;
-            _popups.maskAlpha = 0.8;
-            [_popups presentAnimated:YES completion:NULL];
-            
+            [self.skuPpopups presentAnimated:YES completion:NULL];
         } else if ([params[@"purchaseType"] intValue] == 2){//配送
             
         }else{//运费
@@ -540,6 +532,38 @@ spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
         _sharePopups.maskAlpha = 0.8;
     }
     return  _sharePopups;
+}
+
+-(SnailQuickMaskPopups *)skuPpopups{
+    if (!_skuPpopups) {
+        TSGoodDetailSkuView *skuView = [[TSGoodDetailSkuView alloc] init];
+        skuView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight * 0.68);
+        [skuView setCorners:(UIRectCornerTopLeft | UIRectCornerTopRight) radius:8.0];
+        skuView.clipsToBounds = YES;
+        
+        _skuPpopups = [SnailQuickMaskPopups popupsWithMaskStyle:MaskStyleBlackTranslucent aView:skuView];
+        _skuPpopups.presentationStyle = PresentationStyleBottom;
+        _skuPpopups.transitionStyle = TransitionStyleFromRight;
+        _skuPpopups.isAllowPopupsDrag = YES;
+        _skuPpopups.maskAlpha = 0.8;
+    }
+    return _skuPpopups;
+}
+
+-(SnailQuickMaskPopups *)materialPopups{
+    if (!_materialPopups) {
+        TSGoodDetailMaterialView *materialView = [[TSGoodDetailMaterialView alloc] init];
+        materialView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight * 0.6);
+        [materialView setCorners:(UIRectCornerTopLeft | UIRectCornerTopRight) radius:8.0];
+        materialView.clipsToBounds = YES;
+        
+        _materialPopups = [SnailQuickMaskPopups popupsWithMaskStyle:MaskStyleBlackTranslucent aView:materialView];
+        _materialPopups.presentationStyle = PresentationStyleBottom;
+        _materialPopups.transitionStyle = TransitionStyleFromRight;
+        _materialPopups.isAllowPopupsDrag = YES;
+        _materialPopups.maskAlpha = 0.8;
+    }
+    return _materialPopups;
 }
 
 @end
