@@ -13,6 +13,7 @@
 		041131D2268096DA000B5BAF /* TSHotSectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 041131D0268096D9000B5BAF /* TSHotSectionModel.m */; };
 		041131D7268096F6000B5BAF /* TSGoodsShowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041131D4268096F6000B5BAF /* TSGoodsShowCell.m */; };
 		041131D8268096F6000B5BAF /* TSGoodsHotRankCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041131D5268096F6000B5BAF /* TSGoodsHotRankCell.m */; };
+		042F423A2681A05C00555F5D /* TSRecommendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042F42382681A05B00555F5D /* TSRecommendCell.m */; };
 		04DAFAFE267B37450098275A /* TSOrderManageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DAFAFD267B37450098275A /* TSOrderManageViewController.m */; };
 		AE4DC537B4A93FA6C04B9037 /* libPods-TShopMall.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 825A9D1C217F35DCFB651B21 /* libPods-TShopMall.a */; };
 		C21A4B6E267AF5AE00766F72 /* TSMakeOrderBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C21A4B6D267AF5AE00766F72 /* TSMakeOrderBaseCell.m */; };
@@ -191,6 +192,7 @@
 		DC9911C9267C8B0E00EF9B26 /* TSHomePageLoginBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC9911C8267C8B0E00EF9B26 /* TSHomePageLoginBarView.m */; };
 		DC9911D8267E267400EF9B26 /* TSHomePagePerchView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC9911D7267E267400EF9B26 /* TSHomePagePerchView.m */; };
 		DCA035D72680765B003DE5F7 /* TSUserLoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA035D62680765B003DE5F7 /* TSUserLoginManager.m */; };
+		DCA035DD2681ACC8003DE5F7 /* TSLogoutRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA035DC2681ACC8003DE5F7 /* TSLogoutRequest.m */; };
 		E2BE996F8804E0C3E7D5AE61 /* libPods-TShopMall-TShopMallUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD1ABBE857D307088E9BF2DC /* libPods-TShopMall-TShopMallUITests.a */; };
 		F530C6D526802E5D009DC29A /* TSSMSCodeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F530C6CC26802E5D009DC29A /* TSSMSCodeRequest.m */; };
 		F530C6D626802E5D009DC29A /* TSQuickLoginRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F530C6CF26802E5D009DC29A /* TSQuickLoginRequest.m */; };
@@ -444,6 +446,8 @@
 		041131D4268096F6000B5BAF /* TSGoodsShowCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSGoodsShowCell.m; sourceTree = "<group>"; };
 		041131D5268096F6000B5BAF /* TSGoodsHotRankCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSGoodsHotRankCell.m; sourceTree = "<group>"; };
 		041131D6268096F6000B5BAF /* TSGoodsHotRankCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSGoodsHotRankCell.h; sourceTree = "<group>"; };
+		042F42382681A05B00555F5D /* TSRecommendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSRecommendCell.m; sourceTree = "<group>"; };
+		042F42392681A05C00555F5D /* TSRecommendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSRecommendCell.h; sourceTree = "<group>"; };
 		04DAFAFC267B37450098275A /* TSOrderManageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSOrderManageViewController.h; sourceTree = "<group>"; };
 		04DAFAFD267B37450098275A /* TSOrderManageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSOrderManageViewController.m; sourceTree = "<group>"; };
 		1942D505D7004833F274B5D1 /* libPods-TShopMallTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TShopMallTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -769,6 +773,8 @@
 		DC9911D7267E267400EF9B26 /* TSHomePagePerchView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSHomePagePerchView.m; sourceTree = "<group>"; };
 		DCA035D52680765B003DE5F7 /* TSUserLoginManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSUserLoginManager.h; sourceTree = "<group>"; };
 		DCA035D62680765B003DE5F7 /* TSUserLoginManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSUserLoginManager.m; sourceTree = "<group>"; };
+		DCA035DB2681ACC8003DE5F7 /* TSLogoutRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSLogoutRequest.h; sourceTree = "<group>"; };
+		DCA035DC2681ACC8003DE5F7 /* TSLogoutRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSLogoutRequest.m; sourceTree = "<group>"; };
 		ECCE8A564DF47B445E7905B1 /* Pods-TShopMall-TShopMallUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TShopMall-TShopMallUITests.release.xcconfig"; path = "Target Support Files/Pods-TShopMall-TShopMallUITests/Pods-TShopMall-TShopMallUITests.release.xcconfig"; sourceTree = "<group>"; };
 		F530C6CC26802E5D009DC29A /* TSSMSCodeRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSSMSCodeRequest.m; sourceTree = "<group>"; };
 		F530C6CD26802E5D009DC29A /* TSQuickLoginRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSQuickLoginRequest.h; sourceTree = "<group>"; };
@@ -1740,6 +1746,8 @@
 				F530C6CC26802E5D009DC29A /* TSSMSCodeRequest.m */,
 				F530C6CD26802E5D009DC29A /* TSQuickLoginRequest.h */,
 				F530C6CF26802E5D009DC29A /* TSQuickLoginRequest.m */,
+				DCA035DB2681ACC8003DE5F7 /* TSLogoutRequest.h */,
+				DCA035DC2681ACC8003DE5F7 /* TSLogoutRequest.m */,
 			);
 			path = DataController;
 			sourceTree = "<group>";
@@ -2632,6 +2640,8 @@
 		F55D2C5526722807006BACCF /* View */ = {
 			isa = PBXGroup;
 			children = (
+				042F42392681A05C00555F5D /* TSRecommendCell.h */,
+				042F42382681A05B00555F5D /* TSRecommendCell.m */,
 				F55D2C6A267231AA006BACCF /* TSCategoryHeaderReusableView.h */,
 				F55D2C6B267231AA006BACCF /* TSCategoryHeaderReusableView.m */,
 				F55D2C5626722807006BACCF /* TSCategoryKindCell.h */,
@@ -3146,11 +3156,7 @@
 				F54973742668A31000181E3F /* LaunchScreen.storyboard in Resources */,
 				C2EF88E02671F79800E7374A /* cart.json in Resources */,
 				F530CC6926803E43009DC29A /* Toast_Failure.png in Resources */,
-				F530CD14268085BA009DC29A /* tabbar_cart.json in Resources */,
-				F530CD13268085BA009DC29A /* tabbar_home.json in Resources */,
-				F530CD12268085BA009DC29A /* tabbar_category.json in Resources */,
 				F530CD422680CD6A009DC29A /* tabbar_mine.json in Resources */,
-				DC9911AD267B377000EF9B26 /* refresh_header_light.json in Resources */,
 				F530CD432680CD6A009DC29A /* tabbar_cart.json in Resources */,
 				C2EF88E02671F79800E7374A /* cart.json in Resources */,
 				F530CD3F2680CD6A009DC29A /* tabbar_rank.json in Resources */,
@@ -3158,6 +3164,7 @@
 				F530CD5F26819449009DC29A /* mall_goods@2x.png in Resources */,
 				F530CD5E26819449009DC29A /* mall_goods@3x.png in Resources */,
 				F530CC6926803E43009DC29A /* Toast_Failure.png in Resources */,
+
 				F530CD5B26819449009DC29A /* mall_launch_bottom@2x.png in Resources */,
 				F530CD11268085BA009DC29A /* tabbar_rank.json in Resources */,
 				C2C765332679A825004757B9 /* refresh_header_dark.json in Resources */,
@@ -3386,6 +3393,7 @@
 				F530CCA126803FCD009DC29A /* UIDevice+Additions.m in Sources */,
 				C22EE26A2680747000E59C86 /* TSSearchResultCollectionView.m in Sources */,
 				F54973D22668CF3300181E3F /* AppDelegate+RootController.m in Sources */,
+				DCA035DD2681ACC8003DE5F7 /* TSLogoutRequest.m in Sources */,
 				DC9911A0267AE3B900EF9B26 /* TSImageDataModel.m in Sources */,
 				F55D2C6C267231AA006BACCF /* TSCategoryHeaderReusableView.m in Sources */,
 				F530CCA826803FCD009DC29A /* UITextView+Holder.m in Sources */,
@@ -3412,6 +3420,7 @@
 				C21A4B7B267B20E400766F72 /* TSShippingAddressCell.m in Sources */,
 				F55D2C9D26745E64006BACCF /* TSUserInfoManager.m in Sources */,
 				C2EF88D52670B8B900E7374A /* TSCartBaseCell.m in Sources */,
+				042F423A2681A05C00555F5D /* TSRecommendCell.m in Sources */,
 				F55D2D1A267B1AC5006BACCF /* TSBaseListController.m in Sources */,
 				DC3440D32672F62C00F5B0DA /* TSHomePageBaseCell.m in Sources */,
 				DC45FEBD26783A1300CE762E /* TSHomePageContainerCollectionView.m in Sources */,

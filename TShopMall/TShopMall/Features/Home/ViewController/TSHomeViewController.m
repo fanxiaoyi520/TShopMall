@@ -71,13 +71,16 @@
         }
     }];
 
-    [self.view addSubview:self.loginBar];
-    self.loginBar.clickBlock = ^{
-        [[TSUserLoginManager shareInstance] startLogin:^(BOOL success) {
-            @strongify(self);
-            [self.viewModel fetchData];
-        }];
+    if ([TSUserLoginManager shareInstance].state == None) {
+        [self.view addSubview:self.loginBar];
+        self.loginBar.clickBlock = ^{
+            [[TSUserLoginManager shareInstance] startLogin];
+        };
+    }
 
+    [TSUserLoginManager shareInstance].loginStateDidChanged = ^(TSLoginState state) {
+        @strongify(self)
+        [self.viewModel fetchData];
     };
 }
 

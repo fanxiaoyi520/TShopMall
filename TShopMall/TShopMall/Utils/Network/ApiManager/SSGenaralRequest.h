@@ -19,6 +19,14 @@ NS_ASSUME_NONNULL_BEGIN
                       requestBody:(NSDictionary *)requestBody
                    needErrorToast:(BOOL)needErrorToast;
 
+-(instancetype)initWithBaseUrl:(NSString *)baseUrl
+                    RequestUrl:(NSString *)requestUrl
+                    requestMethod:(YTKRequestMethod)requestMethod
+            requestSerializerType:(YTKRequestSerializerType)requestserializerType
+           responseSerializerType:(YTKResponseSerializerType)responseSerializerType
+                    requestHeader:(NSDictionary *)requestHeader
+                      requestBody:(NSDictionary *)requestBody
+                   needErrorToast:(BOOL)needErrorToast;
 @end
 
 NS_ASSUME_NONNULL_END
