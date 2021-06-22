@@ -79,6 +79,7 @@
 #pragma mark - 注册&登录
 NSString *const kLoginSmsCaptchaUrl = @"/captcha/captcha/smsCaptcha";
 NSString *const kLoginQuickLoginUrl = @"/auth/auth/quickLogin";
+NSString *const kRegisterUrl = @"/rest/sysback/salesman/registered/distributor";
 
 #pragma mark - 首页
 

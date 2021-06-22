@@ -26,6 +26,7 @@
 /** 定时器 */
 @property (nonatomic, strong) NSTimer *timer;
 
+
 @end
 
 @implementation TSRegiterViewController
@@ -114,6 +115,13 @@
     return _bgImgV;
 }
 
+-(TSLoginRegisterDataController *)dataController{
+    if (!_dataController) {
+        _dataController = [[TSLoginRegisterDataController alloc] init];
+    }
+    return _dataController;
+}
+
 #pragma mark - TSRegisterTopViewDelegate
 - (void)registerAction {
     NSString *phoneNumber = [self.topView getPhoneNumber];
@@ -129,10 +137,21 @@
         [self.view makeToast:@"请输入验证码" duration:3.0 position:CSToastPositionCenter];
         return;
     }
+    
+    if ([self.topView getInvitationCode].length == 0) {
+        [self.view makeToast:@"请输入邀请码" duration:3.0 position:CSToastPositionCenter];
+        return;
+    }
+    
     if (!self.checkedView.isChecked) {
         [self.view makeToast:@"请阅读并同意以下协议" duration:3.0 position:CSToastPositionCenter];
         return;
     }
+    [self.dataController fetchRegisterMobile:phoneNumber validCode:[self.topView getCode] invitationCode:[self.topView getInvitationCode] complete:^(BOOL isSucess) {
+        if (isSucess) {
+            
+        }
+    }];
 }
 
 - (void)sendCode {
@@ -149,6 +168,17 @@
     self.timer = [NSTimer ts_scheduledTimerWithTimeInterval:1 block:^{
          [weakSelf goToRun];
     } repeats:YES];
+    
+    [self.dataController fetchRegisterSMSCodeMobile:phoneNumber complete:^(BOOL isSucess) {
+        if (isSucess) {
+            [Popover popToastOnWindowWithText:@"验证码已成功发送"];
+        }else{
+            [Popover popToastOnWindowWithText:@"验证码请求失败"];
+            weakSelf.count = 60;
+            [weakSelf.timer invalidate];
+            [weakSelf.topView setCodeButtonTitleAndColor:@"重新验证码" isResend:YES];
+        }
+    }];
 }
 
 - (void)inputDoneAction {

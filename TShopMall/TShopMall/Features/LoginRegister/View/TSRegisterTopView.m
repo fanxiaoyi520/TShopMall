@@ -265,6 +265,10 @@
     }
 }
 
+- (NSString *)getInvitationCode{
+    return self.invitedCodeInput.text;
+}
+
 #pragma mark - Actions
 - (void)registerAction {
     if ([self.delegate respondsToSelector:@selector(registerAction)]) {

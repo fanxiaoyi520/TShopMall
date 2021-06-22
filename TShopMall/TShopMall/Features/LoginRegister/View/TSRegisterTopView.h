@@ -31,6 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 /** 注册按钮的可点击与不可点击的设置 */
 - (void)setRegisterBtnEnable: (BOOL)isEnable;
 
+- (NSString *)getInvitationCode;
 @end
 
 NS_ASSUME_NONNULL_END

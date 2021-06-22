@@ -6,10 +6,12 @@
 //
 
 #import "TSBaseViewController.h"
+#import "TSLoginRegisterDataController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TSRegiterViewController : TSBaseViewController
+@property(nonatomic, strong) TSLoginRegisterDataController *dataController;
 
 @end
 
