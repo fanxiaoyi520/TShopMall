@@ -7,7 +7,7 @@
 
 #import "TSRegisterTopView.h"
 
-@interface TSRegisterTopView ()
+@interface TSRegisterTopView ()<UITextFieldDelegate>
 /** 标题 */
 @property(nonatomic, weak) UILabel *titleLabel;
 /** 副标题 */
@@ -53,7 +53,7 @@
         make.left.equalTo(self.mas_left).with.offset(25);
         make.top.equalTo(self.subtitleLabel.mas_bottom).with.offset(KRateH(40));
         make.right.equalTo(self.mas_right).with.offset(-25);
-        make.height.mas_equalTo(KRateH(53));
+        make.height.mas_equalTo(KRateW(53));
     }];
     [self.splitPhoneView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.mas_left).with.offset(25);
@@ -65,12 +65,12 @@
         make.left.equalTo(self.mas_left).with.offset(25);
         make.top.equalTo(self.splitPhoneView.mas_bottom).with.offset(0);
         make.right.equalTo(self.codeButton.mas_left).with.offset(0);
-        make.height.mas_equalTo(KRateH(53));
+        make.height.mas_equalTo(KRateW(53));
     }];
     [self.codeButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.mas_right).with.offset(-25);
         make.width.mas_equalTo(KRateW(67));
-        make.height.mas_equalTo(KRateH(23));
+        make.height.mas_equalTo(KRateW(23));
         make.centerY.equalTo(self.codeInput.mas_centerY).with.offset(0);
     }];
     [self.splitCodeView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -83,7 +83,7 @@
         make.left.equalTo(self.mas_left).with.offset(25);
         make.top.equalTo(self.splitCodeView.mas_bottom).with.offset(0);
         make.right.equalTo(self.mas_right).with.offset(-25);
-        make.height.mas_equalTo(KRateH(53));
+        make.height.mas_equalTo(KRateW(53));
     }];
     [self.splitInvitedCodeView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.mas_left).with.offset(25);
@@ -95,7 +95,7 @@
         make.left.equalTo(self.mas_left).with.offset(25);
         make.right.equalTo(self.mas_right).with.offset(-25);
         make.top.equalTo(self.splitInvitedCodeView.mas_bottom).with.offset(20);
-        make.height.mas_equalTo(KRateH(40));
+        make.height.mas_equalTo(KRateW(40));
     }];
 }
 
@@ -161,10 +161,12 @@
         _invitedCodeInput = invitedCodeInput;
         _invitedCodeInput.textColor = KHexColor(@"#2D3132");
         _invitedCodeInput.font = KRegularFont(16);
+        _invitedCodeInput.returnKeyType = UIReturnKeyDone;
         _invitedCodeInput.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"请输入邀请码" attributes:@{NSForegroundColorAttributeName : KHexAlphaColor(@"#2D3132", 0.2)}];
         [_invitedCodeInput addTarget:self
                            action:@selector(textFieldDidChangeValue:)
                  forControlEvents:UIControlEventEditingChanged];
+        _invitedCodeInput.delegate = self;
         [self addSubview:_invitedCodeInput];
     }
     return _invitedCodeInput;
@@ -177,9 +179,9 @@
         _codeButton.titleLabel.font = KRegularFont(11);
         [_codeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_codeButton setBackgroundColor:KHexColor(@"#41A98F")];
-        [self.codeButton setTitleColor:KHexColor(@"#2D3132") forState:UIControlStateDisabled];
+        [_codeButton setTitleColor:KHexColor(@"#2D3132") forState:UIControlStateDisabled];
         [_codeButton setTitle:@"获取验证码" forState:UIControlStateNormal];
-        _codeButton.layer.cornerRadius = 5;
+        [_codeButton setCorners:UIRectCornerAllCorners radius:2.5];
         _codeButton.clipsToBounds = YES;
         [_codeButton addTarget:self action:@selector(sendCode) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_codeButton];
@@ -222,7 +224,7 @@
         UIButton *registerButton = [[UIButton alloc] init];
         _registerButton = registerButton;
         _registerButton.backgroundColor = KHexColor(@"#DDDDDD");
-        _registerButton.layer.cornerRadius = KRateH(20);
+        _registerButton.layer.cornerRadius = KRateW(20);
         _registerButton.clipsToBounds = YES;
         _registerButton.titleLabel.font = KRegularFont(16);
         _registerButton.enabled = NO;
@@ -263,6 +265,12 @@
     } else {
         self.registerButton.backgroundColor = KHexColor(@"#DDDDDD");
     }
+}
+
+#pragma mark - UITextFieldDelegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    
+    return [textField resignFirstResponder];
 }
 
 #pragma mark - Actions

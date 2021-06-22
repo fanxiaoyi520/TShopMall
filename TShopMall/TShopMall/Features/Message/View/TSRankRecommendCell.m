@@ -106,7 +106,7 @@
     if (_championView == nil) {
         UIView *championView = [[UIView alloc] init];
         _championView = championView;
-        _championView.backgroundColor = KHexColor(@"#FADBD8");
+        _championView.backgroundColor = KWhiteColor;
         [_championView setCorners:(UIRectCornerTopLeft|UIRectCornerTopRight) radius:9.0];
         [self.contentView addSubview: _championView];
     }
