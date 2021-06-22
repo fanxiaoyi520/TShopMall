@@ -57,9 +57,15 @@
     [commonRequestHeader setValue:@"tclplus" forKey:@"storeUuid"];
     [commonRequestHeader setValue:@"TCL" forKey:@"t-id"];
     [commonRequestHeader setValue:@"02" forKey:@"terminalType"];
-    [commonRequestHeader setValue:[TSGlobalManager shareInstance].currentUserInfo.accessToken forKey:@"accessToken"];
-    [commonRequestHeader setValue:[TSGlobalManager shareInstance].clientID forKey:@"User-Agent"];
-    [commonRequestHeader setValue:[TSGlobalManager shareInstance].appVersion forKey:@"appVersion"];
+    
+//    if ([TSGlobalManager shareInstance].currentUserInfo) {
+//        [commonRequestHeader setValue:[TSGlobalManager shareInstance].currentUserInfo.accessToken forKey:@"accessToken"];
+//    }
+//    if ([TSGlobalManager shareInstance].clientID) {
+//        [commonRequestHeader setValue:[TSGlobalManager shareInstance].clientID forKey:@"User-Agent"];
+//    }
+    
+//    [commonRequestHeader setValue:[TSGlobalManager shareInstance].appVersion forKey:@"appVersion"];
     [commonRequestHeader setValue:@"app" forKey:@"source"];
     [commonRequestHeader setValue:@"AppStore" forKey:@"pubChannel"];
 

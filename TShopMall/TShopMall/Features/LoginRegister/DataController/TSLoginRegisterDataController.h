@@ -21,6 +21,13 @@ NS_ASSUME_NONNULL_BEGIN
                      validCode:(NSString *)validCode
                       complete:(void(^)(BOOL isSucess))complete;
 
+-(void)fetchRegisterSMSCodeMobile:(NSString *)mobile
+                      complete:(void(^)(BOOL isSucess))complete;
+
+-(void)fetchRegisterMobile:(NSString *)mobile
+                     validCode:(NSString *)validCode
+                invitationCode:(NSString *)invitationCode
+                  complete:(void(^)(BOOL isSucess))complete;
 @end
 
 NS_ASSUME_NONNULL_END

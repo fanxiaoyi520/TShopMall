@@ -8,7 +8,7 @@
 #import "SSGenaralRequest.h"
 
 @interface SSGenaralRequest()
-
+@property(nonatomic, copy) NSString *url;
 /// 请求路径
 @property(nonatomic, copy) NSString *path;
 /// 请求方法
@@ -26,14 +26,9 @@
 
 @implementation SSGenaralRequest
 
--(instancetype)initWithRequestUrl:(NSString *)requestUrl
-                    requestMethod:(YTKRequestMethod)requestMethod
-            requestSerializerType:(YTKRequestSerializerType)requestserializerType
-           responseSerializerType:(YTKResponseSerializerType)responseSerializerType
-                    requestHeader:(NSDictionary *)requestHeader
-                      requestBody:(NSDictionary *)requestBody
-                   needErrorToast:(BOOL)needErrorToast{
+- (instancetype)initWithBaseUrl:(NSString *)baseUrl RequestUrl:(NSString *)requestUrl requestMethod:(YTKRequestMethod)requestMethod requestSerializerType:(YTKRequestSerializerType)requestserializerType responseSerializerType:(YTKResponseSerializerType)responseSerializerType requestHeader:(NSDictionary *)requestHeader requestBody:(NSDictionary *)requestBody needErrorToast:(BOOL)needErrorToast{
     if (self = [super init]) {
+        self.url = baseUrl;
         self.path = requestUrl;
         self.method = requestMethod;
         self.requestType = requestserializerType;
@@ -45,7 +40,24 @@
     return self;
 }
 
+-(instancetype)initWithRequestUrl:(NSString *)requestUrl
+                    requestMethod:(YTKRequestMethod)requestMethod
+            requestSerializerType:(YTKRequestSerializerType)requestserializerType
+           responseSerializerType:(YTKResponseSerializerType)responseSerializerType
+                    requestHeader:(NSDictionary *)requestHeader
+                      requestBody:(NSDictionary *)requestBody
+                   needErrorToast:(BOOL)needErrorToast{
+    return  [self initWithBaseUrl:@"" RequestUrl:requestUrl requestMethod:requestMethod requestSerializerType:requestserializerType responseSerializerType:responseSerializerType requestHeader:requestHeader requestBody:requestBody needErrorToast:needErrorToast];
+}
+
 #pragma mark - Super Method
+- (NSString *)baseUrl{
+    if ([self.url isEqualToString:@""]) {
+        return kMallApiPrefix;
+    }
+    return self.url;
+}
+
 -(NSString *)requestUrl{
     return self.path;
 }
