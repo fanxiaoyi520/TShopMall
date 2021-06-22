@@ -272,6 +272,7 @@
 		F530CD422680CD6A009DC29A /* tabbar_mine.json in Resources */ = {isa = PBXBuildFile; fileRef = F530CD3D2680CD6A009DC29A /* tabbar_mine.json */; };
 		F530CD432680CD6A009DC29A /* tabbar_cart.json in Resources */ = {isa = PBXBuildFile; fileRef = F530CD3E2680CD6A009DC29A /* tabbar_cart.json */; };
 		F530CD462680CDF5009DC29A /* TSGoodDetailMaterialView.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CD452680CDF5009DC29A /* TSGoodDetailMaterialView.m */; };
+		F530CD4A2681750A009DC29A /* TSTopFunctionView.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CD492681750A009DC29A /* TSTopFunctionView.m */; };
 		F54972FE2668842500181E3F /* TShopMallTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F54972FD2668842500181E3F /* TShopMallTests.m */; };
 		F54973092668842500181E3F /* TShopMallUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F54973082668842500181E3F /* TShopMallUITests.m */; };
 		F54973602668A22100181E3F /* SSGenaralRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F54973402668A22100181E3F /* SSGenaralRequest.m */; };
@@ -906,6 +907,8 @@
 		F530CD3E2680CD6A009DC29A /* tabbar_cart.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tabbar_cart.json; sourceTree = "<group>"; };
 		F530CD442680CDF5009DC29A /* TSGoodDetailMaterialView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSGoodDetailMaterialView.h; sourceTree = "<group>"; };
 		F530CD452680CDF5009DC29A /* TSGoodDetailMaterialView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSGoodDetailMaterialView.m; sourceTree = "<group>"; };
+		F530CD482681750A009DC29A /* TSTopFunctionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSTopFunctionView.h; sourceTree = "<group>"; };
+		F530CD492681750A009DC29A /* TSTopFunctionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSTopFunctionView.m; sourceTree = "<group>"; };
 		F54972DE2668842200181E3F /* TShopMall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TShopMall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F54972F22668842400181E3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F54972F92668842500181E3F /* TShopMallTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TShopMallTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2063,6 +2066,15 @@
 			path = Tabbar;
 			sourceTree = "<group>";
 		};
+		F530CD47268174EE009DC29A /* TopFunctionView */ = {
+			isa = PBXGroup;
+			children = (
+				F530CD482681750A009DC29A /* TSTopFunctionView.h */,
+				F530CD492681750A009DC29A /* TSTopFunctionView.m */,
+			);
+			path = TopFunctionView;
+			sourceTree = "<group>";
+		};
 		F54972D52668842200181E3F = {
 			isa = PBXGroup;
 			children = (
@@ -2722,6 +2734,7 @@
 		F55D2CE0267881AB006BACCF /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F530CD47268174EE009DC29A /* TopFunctionView */,
 				F530CD312680C5E5009DC29A /* MaterialView */,
 				F530CD1E2680B8A0009DC29A /* SkuView */,
 				F55D2CE726788E27006BACCF /* TSDetailFunctionButton.h */,
@@ -3502,6 +3515,7 @@
 				F530CC4826803B1C009DC29A /* RefreshGifHeader.m in Sources */,
 				F56D4B4F266DFB8900C1AD9E /* FMLayoutDebugLog.m in Sources */,
 				C2C7654B267A097D004757B9 /* TSMakeOrderOperationCell.m in Sources */,
+				F530CD4A2681750A009DC29A /* TSTopFunctionView.m in Sources */,
 				F530C6D826802E5D009DC29A /* TSLoginSMSModel.m in Sources */,
 				F56D4B66266E053800C1AD9E /* AppDelegate+Initialize.m in Sources */,
 				F530CD302680BB57009DC29A /* TSProductFooterView.m in Sources */,
