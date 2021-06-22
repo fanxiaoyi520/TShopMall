@@ -52,4 +52,13 @@
     [userDefaults removeObjectForKey:UserInfo_Save_Key];
 }
 
+- (NSString *)accessToken{
+    if ([_accessToken isKindOfClass:[NSNull class]] ||
+        _accessToken.length == 0 ||
+        [_accessToken containsString:@"null"]) {
+        return @"";
+    }
+    return _accessToken;
+}
+
 @end
