@@ -38,8 +38,8 @@
     return userInfo;
 }
 
--(void)saveUserInfo{
-    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self];
+-(void)saveUserInfo:(TSUserInfoManager *)info{
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:info];
     dispatch_async(dispatch_get_main_queue(), ^{
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         [userDefaults setObject:data forKey:UserInfo_Save_Key];
