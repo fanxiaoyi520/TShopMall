@@ -11,6 +11,7 @@
 #import "YBNestViews.h"
 #import <MJRefresh/MJRefresh.h>
 #import "TSEmptyAlertView.h"
+#import "RefreshGifFooter.h"
 
 @interface TSHomePageContainerCell()<YBNestContainerViewDataSource, YBNestContainerViewDelegate>
 @property(nonatomic, strong) TSHomePageContainerViewModel *containerViewModel;
@@ -100,7 +101,7 @@
     collectionView.tag = page;
     collectionView.collectionView.backgroundColor = KGrayColor;
     @weakify(self);
-    collectionView.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+    collectionView.collectionView.mj_footer = [RefreshGifFooter footerWithRefreshingBlock:^{
         @strongify(self)
         [self reloadContainerCollectionView:collectionView];
 

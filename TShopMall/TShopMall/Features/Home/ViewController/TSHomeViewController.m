@@ -19,6 +19,8 @@
 #import "TSHomePagePerchView.h"
 
 #import "TSProductDetailController.h"
+#import "RefreshGifHeader.h"
+
 
 #define tableViewBackGroundViewHeight 204.0
 
@@ -268,7 +270,8 @@
 - (UITableView *)tableView {
     if (!_tableView) {
         _tableView = [[YBNestTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-        MJRefreshHeader *header = [MJRefreshHeader headerWithRefreshingTarget:self refreshingAction:@selector(refreshHeaderDataMehtod)];
+        RefreshGifHeader *header = [RefreshGifHeader headerWithRefreshingTarget:self refreshingAction:@selector(refreshHeaderDataMehtod)];
+        header.indicatorStyle = IndicatorStyleWhite;
         _tableView.backgroundColor = [UIColor clearColor];
         _tableView.rowHeight = UITableViewAutomaticDimension;
         _tableView.delegate = self;
