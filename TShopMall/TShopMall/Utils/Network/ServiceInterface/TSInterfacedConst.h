@@ -26,8 +26,8 @@ UIKIT_EXTERN NSString *const kLoginSmsCaptchaUrl;
 UIKIT_EXTERN NSString *const kLoginQuickLoginUrl;
 ///  注册
 UIKIT_EXTERN NSString *const kRegisterUrl;
-
-
+///  登出
+UIKIT_EXTERN NSString *const kLogoutUrl;
 
 #pragma mark - 首页
 UIKIT_EXTERN NSString *const kHomePageInfoUrl;

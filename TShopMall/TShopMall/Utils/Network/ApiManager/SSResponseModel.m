@@ -18,7 +18,7 @@
     NSDictionary *response = baseRequest.responseJSONObject;
     
     BOOL isSucess = NO;
-    if ([@"200" isEqualToString:response[@"code"]] || [@"SUCCESS" isEqualToString:response[@"status"]]) {
+    if ([@"200" isEqualToString:response[@"code"]] || [@"SUCCESS" isEqualToString:response[@"status"]] ||[response[@"code"] intValue] == 1) {
         isSucess = YES;
     }
     

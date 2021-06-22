@@ -77,11 +77,7 @@
             [[TSUserLoginManager shareInstance] startLogin];
         };
     }
-
-    [TSUserLoginManager shareInstance].loginStateDidChanged = ^(TSLoginState state) {
-        @strongify(self)
-        [self.viewModel fetchData];
-    };
+    
 }
 
 #pragma mark - UI

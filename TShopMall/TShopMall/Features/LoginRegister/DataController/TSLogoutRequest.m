@@ -14,7 +14,7 @@
 }
 
 -(NSString *)requestUrl{
-    NSString *requestUrl = [NSString stringWithFormat:@"%@?appId=%@&tenantId=%@&appSecret=%@",kLoginQuickLoginUrl,kAppId,@"tcl",kAppSecret];
+    NSString *requestUrl = [NSString stringWithFormat:@"%@?appId=%@&tenantId=%@&appSecret=%@",kLogoutUrl,kAppId,@"tcl",kAppSecret];
     return requestUrl;
 }
 
@@ -38,7 +38,7 @@
 -(id)requestArgument{
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setValue:[TSUserInfoManager userInfo].userName forKey:@"userName"];
+    [params setValue:[TSUserInfoManager userInfo].userName forKey:@"username"];
     [params setValue:[TSUserInfoManager userInfo].accessToken forKey:@"accessToken"];
     
     NSMutableDictionary *comBody = [self commonBady];
