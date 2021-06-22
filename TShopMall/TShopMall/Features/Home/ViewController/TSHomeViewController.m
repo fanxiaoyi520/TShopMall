@@ -78,7 +78,6 @@
         };
     }
     
-    [[TSUserLoginManager shareInstance] logout];
 }
 
 #pragma mark - UI
