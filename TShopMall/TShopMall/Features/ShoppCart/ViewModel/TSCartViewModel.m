@@ -70,7 +70,7 @@
     TSCartGoodsSection *section = [TSCartGoodsSection new];
     section.heightForHeader = KRateW(54.0);
     section.headerIdentifier = @"TSCartInvalidHeader";
-    section.heightForFooter = KRateW(10.0);
+//    section.heightForFooter = KRateW(10.0);
     section.rows = invalidRow;
     
     return section;

@@ -11,7 +11,7 @@
 #import "TSSearchHeaderView.h"
 #import "TSSearchKeyViewModel.h"
 
-@interface TSSearchView()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, TSRefreshDelegate>
+@interface TSSearchView()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 @property (nonatomic, strong) TSSearchTextView *textView;
 @property (nonatomic, strong) UIButton *cancelBtn;
 @property (nonatomic, strong) UICollectionView *collectionView;
@@ -145,7 +145,6 @@
     self.collectionView.showsHorizontalScrollIndicator = NO;
     [self addSubview:self.collectionView];
     [self forceItemAlignmentLeft];
-    self.refreshConfiger = [TSRefreshConfiger configScrollView:self.collectionView isLight:NO response:self type:Header];
     
     return self.collectionView;
 }

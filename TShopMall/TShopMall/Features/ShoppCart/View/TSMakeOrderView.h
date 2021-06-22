@@ -8,7 +8,7 @@
 #import <UIKit/UIKit.h>
 #import "TSMakeOrderSection.h"
 
-@interface TSMakeOrderView : UIView
+@interface TSMakeOrderView : UITableView
 @property (nonatomic, strong) NSMutableArray<TSMakeOrderSection *> *sections;
 @property (nonatomic, weak) id controller;
 @end

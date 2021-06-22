@@ -29,7 +29,6 @@
         }else{
             self.smsModel = [[TSLoginSMSModel alloc] init];
 
-            
             if (complete) {
                 complete(NO);
             }

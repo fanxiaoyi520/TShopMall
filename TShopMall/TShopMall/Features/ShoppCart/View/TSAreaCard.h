@@ -28,6 +28,7 @@
 @property (nonatomic, strong) TSAreaModel *city;
 @property (nonatomic, strong) TSAreaModel *area;
 @property (nonatomic, strong) TSAreaModel *street;
+@property (nonatomic, copy) NSString *location;
 @end
 
 

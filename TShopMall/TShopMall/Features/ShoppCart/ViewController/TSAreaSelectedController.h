@@ -11,7 +11,7 @@
 
 @interface TSAreaSelectedController : UIViewController
 
-+ (void)showAreaSelected:(void(^)(TSAreaModel *provice, TSAreaModel *city, TSAreaModel *eare, TSAreaModel *street))selected OnController:(UIViewController *)controller;
++ (void)showAreaSelected:(void(^)(TSAreaModel *provice, TSAreaModel *city, TSAreaModel *eare, TSAreaModel *street, NSString *location))selected OnController:(UIViewController *)controller;
 
 @end
 

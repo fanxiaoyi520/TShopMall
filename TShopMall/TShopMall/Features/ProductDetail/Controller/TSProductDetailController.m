@@ -14,6 +14,8 @@
 #import "TSProductDetailHeaderView.h"
 #import "TSUniversalFooterView.h"
 #import "WMDragView.h"
+#import "TSTopFunctionView.h"
+#import "TSChangePriceView.h"
 #import "TSGoodDetailSkuView.h"
 #import "SnailQuickMaskPopups.h"
 #import <MJRefresh/MJRefresh.h>
@@ -34,6 +36,11 @@
 /// 热卖
 @property(nonatomic,strong)WMDragView *dragView;
 
+/// 更多功能
+@property (nonatomic, strong) SnailQuickMaskPopups *functionPopups;
+/// 改价
+@property (nonatomic, strong) SnailQuickMaskPopups *changePopups;
+/// sku
 @property (nonatomic, strong) SnailQuickMaskPopups *popups;
 
 /// 数据中心
@@ -163,11 +170,11 @@
 }
 
 -(void)shareAction:(UIButton *)sender{
-    
+    [self.functionPopups presentAnimated:YES completion:NULL];
 }
 
 -(void)cartAction:(UIButton *)sender{
-    
+    [self.changePopups presentAnimated:YES completion:NULL];
 }
 
 /// 下拉刷新
@@ -448,5 +455,38 @@ spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
     }
     return _dataController;
 }
+
+- (SnailQuickMaskPopups *)functionPopups{
+    if (!_functionPopups) {
+        TSTopFunctionView *functionView = [[TSTopFunctionView alloc] init];
+        functionView.frame = CGRectMake(0, 0, kScreenWidth, 168);
+        [functionView setCorners:(UIRectCornerBottomLeft | UIRectCornerBottomRight) radius:8.0];
+        functionView.clipsToBounds = YES;
+        
+        _functionPopups = [SnailQuickMaskPopups popupsWithMaskStyle:MaskStyleBlackTranslucent aView:functionView];
+        _functionPopups.presentationStyle = PresentationStyleTop;
+        _functionPopups.transitionStyle = TransitionStyleFromTop;
+        _functionPopups.isAllowPopupsDrag = YES;
+        _functionPopups.maskAlpha = 0.8;
+    }
+    return  _functionPopups;
+}
+
+- (SnailQuickMaskPopups *)changePopups{
+    if (!_changePopups) {
+        TSChangePriceView *changeView = [[TSChangePriceView alloc] init];
+        changeView.frame = CGRectMake(0, 0, kScreenWidth, 422);
+        [changeView setCorners:(UIRectCornerTopLeft | UIRectCornerTopRight) radius:8.0];
+        changeView.clipsToBounds = YES;
+        
+        _changePopups = [SnailQuickMaskPopups popupsWithMaskStyle:MaskStyleBlackTranslucent aView:changeView];
+        _changePopups.presentationStyle = PresentationStyleBottom;
+        _changePopups.transitionStyle = TransitionStyleFromBottom;
+        _changePopups.isAllowPopupsDrag = YES;
+        _changePopups.maskAlpha = 0.8;
+    }
+    return  _changePopups;
+}
+
 
 @end

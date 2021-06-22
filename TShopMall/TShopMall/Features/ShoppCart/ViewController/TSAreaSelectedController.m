@@ -13,13 +13,13 @@
 @property (nonatomic, strong) TSAreaCard *card;
 @property (nonatomic, strong) TSAreaDataController *dataCon;
 
-@property (nonatomic, copy) void(^areaSelected)(TSAreaModel *, TSAreaModel *, TSAreaModel *, TSAreaModel *);
+@property (nonatomic, copy) void(^areaSelected)(TSAreaModel *, TSAreaModel *, TSAreaModel *, TSAreaModel *, NSString *);
 @end
 
 @implementation TSAreaSelectedController
 
 
-+ (void)showAreaSelected:(void (^)(TSAreaModel *, TSAreaModel *, TSAreaModel *, TSAreaModel *))selected OnController:(UIViewController *)controller{
++ (void)showAreaSelected:(void (^)(TSAreaModel *, TSAreaModel *, TSAreaModel *, TSAreaModel *, NSString *))selected OnController:(UIViewController *)controller{
     TSAreaSelectedController *con = [TSAreaSelectedController new];
     con.areaSelected = selected;
     con.modalPresentationStyle = UIModalPresentationOverCurrentContext | UIModalPresentationFullScreen;
@@ -95,7 +95,7 @@
 }
 
 - (void)dismiss{
-    self.areaSelected(self.card.provice, self.card.city, self.card.area, self.card.street);
+    self.areaSelected(self.card.provice, self.card.city, self.card.area, self.card.street, self.card.location);
     [self dismissViewControllerAnimated:NO completion:^{
         
     }];

@@ -16,26 +16,49 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch.png" translatesAutoresizingMaskIntoConstraints="NO" id="BHA-Fm-h2p">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" image="launch.png" translatesAutoresizingMaskIntoConstraints="NO" id="BHA-Fm-h2p">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mall_launch_bottom.png" translatesAutoresizingMaskIntoConstraints="NO" id="9HC-yc-1kU">
+                                <rect key="frame" x="0.0" y="779" width="414" height="117"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="117" id="mqb-Lj-N1u"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mall_logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="vWk-TI-qcP">
+                                <rect key="frame" x="139.5" y="223" width="135" height="42"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mall_goods.png" translatesAutoresizingMaskIntoConstraints="NO" id="Zxe-pe-qjk">
+                                <rect key="frame" x="0.0" y="612" width="414" height="67"/>
                             </imageView>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <viewLayoutGuide key="safeArea" id="CJD-68-nhe"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="BHA-Fm-h2p" secondAttribute="bottom" id="LbJ-3j-YDL"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="BHA-Fm-h2p" secondAttribute="trailing" id="YgK-WS-L3M"/>
-                            <constraint firstItem="BHA-Fm-h2p" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="a42-fI-nYt"/>
-                            <constraint firstItem="BHA-Fm-h2p" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="aPB-Xm-gPD"/>
+                            <constraint firstItem="BHA-Fm-h2p" firstAttribute="trailing" secondItem="CJD-68-nhe" secondAttribute="trailing" id="47b-FQ-KQX"/>
+                            <constraint firstItem="BHA-Fm-h2p" firstAttribute="leading" secondItem="CJD-68-nhe" secondAttribute="leading" id="5nK-DN-VJe"/>
+                            <constraint firstItem="BHA-Fm-h2p" firstAttribute="top" secondItem="CJD-68-nhe" secondAttribute="top" constant="-44" id="84i-6i-PQV"/>
+                            <constraint firstItem="Zxe-pe-qjk" firstAttribute="leading" secondItem="CJD-68-nhe" secondAttribute="leading" id="ChH-63-cpU"/>
+                            <constraint firstItem="vWk-TI-qcP" firstAttribute="top" secondItem="CJD-68-nhe" secondAttribute="top" constant="179" id="GlM-T6-EJ9"/>
+                            <constraint firstItem="9HC-yc-1kU" firstAttribute="top" secondItem="Zxe-pe-qjk" secondAttribute="bottom" constant="100" id="Zoy-eA-v4W"/>
+                            <constraint firstItem="vWk-TI-qcP" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="hTr-WZ-X8H"/>
+                            <constraint firstItem="BHA-Fm-h2p" firstAttribute="bottom" secondItem="CJD-68-nhe" secondAttribute="bottom" constant="34" id="mwh-wE-moG"/>
+                            <constraint firstItem="9HC-yc-1kU" firstAttribute="leading" secondItem="CJD-68-nhe" secondAttribute="leading" id="ohr-UY-gtI"/>
+                            <constraint firstAttribute="bottom" secondItem="9HC-yc-1kU" secondAttribute="bottom" id="s9N-c8-egD"/>
+                            <constraint firstItem="CJD-68-nhe" firstAttribute="trailing" secondItem="Zxe-pe-qjk" secondAttribute="trailing" id="vRq-H6-GAP"/>
+                            <constraint firstItem="9HC-yc-1kU" firstAttribute="trailing" secondItem="CJD-68-nhe" secondAttribute="trailing" id="vwt-2J-lia"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1025" y="414"/>
+            <point key="canvasLocation" x="-2062.3188405797105" y="436.60714285714283"/>
         </scene>
     </scenes>
     <resources>
         <image name="launch.png" width="375" height="677"/>
+        <image name="mall_goods.png" width="375" height="67"/>
+        <image name="mall_launch_bottom.png" width="375" height="117"/>
+        <image name="mall_logo.png" width="135" height="42"/>
     </resources>
 </document>

@@ -40,19 +40,15 @@
 - (void)updateLocationAddress{
     self.title.text = @"请选择所在地区";
     self.locationTips.text = @"定位到的地址";
-    
-    [TSLocationManager defaultManager].startLocation(^(CLPlacemark *placemark, NSError *error) {
+    [TSLocationManager startLocation:^(NSString *address, NSError *error) {
         if (error) {
             self.locationAddress.text = @"定位失败";
             return;
         } else {
-            NSString *city = placemark.locality.length==0? placemark.administrativeArea:placemark.locality;
-            NSString *area = placemark.subLocality;
-            NSString *street = placemark.thoroughfare;
-            NSString *subStreet = placemark.subThoroughfare;
-            self.locationAddress.text = [NSString stringWithFormat:@"%@%@%@%@", city, area, street, subStreet];
+            self.location = address;
+            self.locationAddress.text = address;
         }
-    });
+    }];
 }
 
 - (void)areaViewItemTapped:(UITapGestureRecognizer *)tapGes{
@@ -189,7 +185,8 @@
     [self.locationAddress mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.locationBtn);
         make.left.equalTo(self.locationBtn.mas_right).offset(KRateW(8.0));
-        make.height.mas_equalTo(KRateW(22.0));
+        make.right.equalTo(self.mas_right).offset(-KRateW(8.0));
+//        make.height.mas_equalTo(KRateW(22.0));
     }];
     
     [self.areaView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -270,6 +267,7 @@
     self.locationAddress = [UILabel new];
     self.locationAddress.font = KRegularFont(14.0);
     self.locationAddress.textColor = KHexColor(@"#2D3132");
+    self.locationAddress.numberOfLines = 0;
     [self addSubview:self.locationAddress];
     
     return self.locationAddress;

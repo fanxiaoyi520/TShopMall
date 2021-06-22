@@ -1,20 +1,20 @@
 //
-//  TSGoodsListFittleView.m
+//  TSSearchResultFittleView.m
 //  TShopMall
 //
 //  Created by 橙子 on 2021/6/13.
 //
 
-#import "TSGoodsListFittleView.h"
+#import "TSSearchResultFittleView.h"
 
-@interface TSGoodsListFittleButton : UIButton
+@interface TSSearchResultFittleButton : UIButton
 @property (nonatomic, strong) UILabel *name;
 @property (nonatomic, strong) UIImageView *indeImg;
 @property (nonatomic, strong) UIView *line;
 @property (nonatomic, assign) BOOL isUp;
 @end
 
-@implementation TSGoodsListFittleView
+@implementation TSSearchResultFittleView
 
 - (instancetype)init{
     if (self == [super init]) {
@@ -24,15 +24,15 @@
     return self;
 }
 
-- (void)itemTap:(TSGoodsListFittleButton *)sender{
+- (void)itemTap:(TSSearchResultFittleButton *)sender{
     if (sender.selected == YES) {
         sender.selected = YES;
         [self.delegate operationType:sender.tag sortType:sender.isUp];
         return;
     }
     for (UIView *view in self.subviews) {
-        if ([view isKindOfClass:[TSGoodsListFittleButton class]]) {
-            TSGoodsListFittleButton *btn = (TSGoodsListFittleButton *)view;
+        if ([view isKindOfClass:[TSSearchResultFittleButton class]]) {
+            TSSearchResultFittleButton *btn = (TSSearchResultFittleButton *)view;
             if (btn.tag == sender.tag) {
                 btn.selected = YES;
             } else {
@@ -48,7 +48,7 @@
     NSArray *items = @[@"综合", @"佣金", @"销量", @"价格"];
     CGFloat btnWidth = kScreenWidth / items.count;
     for (NSInteger i=0; i<items.count; i++) {
-        TSGoodsListFittleButton *btn = [TSGoodsListFittleButton new];
+        TSSearchResultFittleButton *btn = [TSSearchResultFittleButton new];
         btn.selected = i==0? YES:NO;
         btn.indeImg.hidden = i==0? YES:NO;
         btn.name.text = items[i];
@@ -66,7 +66,7 @@
 @end
 
 
-@implementation TSGoodsListFittleButton
+@implementation TSSearchResultFittleButton
 
 - (void)setSelected:(BOOL)selected{
     [super setSelected:selected];

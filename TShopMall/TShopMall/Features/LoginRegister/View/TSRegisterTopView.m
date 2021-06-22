@@ -290,6 +290,13 @@
     }
 }
 
+/** 关闭键盘 */
+- (void)closeKeyboard {
+    [self.codeInput resignFirstResponder];
+    [self.phoneInput resignFirstResponder];
+    [self.invitedCodeInput resignFirstResponder];
+}
+
 #pragma mark - UIControlEventEditingChanged
 - (void)textFieldDidChangeValue:(UITextField *)textfield {
     if (self.phoneInput.text.length && self.codeInput.text.length && self.invitedCodeInput.text.length) {

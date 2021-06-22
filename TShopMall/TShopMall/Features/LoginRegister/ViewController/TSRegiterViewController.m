@@ -12,7 +12,7 @@
 #import "TSTools.h"
 #import "NSTimer+TSBlcokTimer.h"
 
-@interface TSRegiterViewController ()<TSRegisterTopViewDelegate, TSCheckedViewDelegate>
+@interface TSRegiterViewController ()<TSRegisterTopViewDelegate, TSCheckedViewDelegate, UIGestureRecognizerDelegate>
 /** 背景图 */
 @property(nonatomic, weak) UIImageView *bgImgV;
 /** 关闭 */
@@ -45,6 +45,19 @@
 - (void)setupBasic {
     self.count = 60;
     self.view.backgroundColor = UIColor.whiteColor;
+    UISwipeGestureRecognizer *swipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeAction:)];
+    swipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionUp | UISwipeGestureRecognizerDirectionDown | UISwipeGestureRecognizerDirectionLeft | UISwipeGestureRecognizerDirectionRight;
+    swipeGestureRecognizer.delegate = self;
+    [self.view addGestureRecognizer:swipeGestureRecognizer];
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    [self.topView closeKeyboard];
+    return YES;
+}
+
+- (void)swipeAction: (UISwipeGestureRecognizer *)recognizer {
+    //NSLog(@"recognizer === %@", recognizer);
 }
 
 - (void)addConstraints {

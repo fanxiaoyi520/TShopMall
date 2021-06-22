@@ -51,7 +51,24 @@
             [self.controller performSelector:@selector(shouldUpdateSaveStatus:) withObject:@(NO)];
         }
     }
+    if (object == self.nameItem.textField) {
+        self.addressModel.name = self.nameItem.textField.text;
+    } else if (object == self.phoneItem.textField) {
+        self.addressModel.phone = self.addressItem.textField.text;
+    } else if (object == self.addressItem.textField) {
+        self.addressModel.address = self.addressItem.textField.text;
+    } else if (object == self.detailItem.textField) {
+        self.addressModel.detailAddress = self.detailItem.textField.text;
+    }
 }
+
+- (void)updateAddress:(NSString *)address{
+    self.addressItem.textField.text = address;
+}
+
+//- (void)textFieldEditingEnd:(UITextField *)textField{
+//
+//}
 
 - (void)configUI{
     self.nameItem.title.text = @"姓名";
@@ -62,6 +79,10 @@
     self.addressItem.textField.placeholder = @"选择所在地区";
     self.detailItem.title.text = @"详细地址";
     self.detailItem.textField.placeholder = @"填写小区、门牌号等";
+    self.nameItem.textField.text = self.addressModel.name;
+    self.phoneItem.textField.text = self.addressModel.phone;
+    self.addressItem.textField.text = self.addressModel.address;
+    self.detailItem.textField.text = self.addressModel.detailAddress;
 }
 
 - (void)layouView{
@@ -106,6 +127,7 @@
     }
     self.nameItem = [TSAddressEditItem new];
     [self addSubview:self.nameItem];
+//    [self.nameItem.textField addTarget:self action:@selector(textFieldEditingEnd:) forControlEvents:UIControlEventEditingDidEnd];
     
     return self.nameItem;
 }
@@ -117,6 +139,7 @@
     self.phoneItem = [TSAddressEditItem new];
     self.phoneItem.textField.keyboardType = UIKeyboardTypePhonePad;
     [self addSubview:self.phoneItem];
+//    [self.phoneItem.textField addTarget:self action:@selector(textFieldEditingEnd:) forControlEvents:UIControlEventEditingDidEnd];
     
     return self.phoneItem;
 }
@@ -133,6 +156,7 @@
     self.addressItem.touchAction = ^{
         [weakSelf.controller performSelector:@selector(gotoSelectedAddress)];
     };
+//    [self.addressItem.textField addTarget:self action:@selector(textFieldEditingEnd:) forControlEvents:UIControlEventEditingDidEnd];
     
     return self.addressItem;
 }
@@ -143,6 +167,7 @@
     }
     self.detailItem = [TSAddressEditItem new];
     [self addSubview:self.detailItem];
+//    [self.detailItem.textField addTarget:self action:@selector(textFieldEditingEnd:) forControlEvents:UIControlEventEditingDidEnd];
     
     return self.detailItem;
 }

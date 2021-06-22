@@ -7,10 +7,13 @@
 
 #import <Foundation/Foundation.h>
 
-NS_ASSUME_NONNULL_BEGIN
 
 @interface TSAddressModel : NSObject
-
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSString *phone;
+@property (nonatomic, copy) NSString *address;
+@property (nonatomic, copy) NSString *detailAddress;
+@property (nonatomic, copy) NSString *mark;
+@property (nonatomic, assign) BOOL isDefault;
 @end
 
-NS_ASSUME_NONNULL_END
