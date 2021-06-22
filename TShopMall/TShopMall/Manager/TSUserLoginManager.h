@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) void(^ _Nonnull loginStateDidChanged)(TSLoginState state);
 @property (nonatomic, assign, readonly) TSLoginState state;
 -(void)startLogin;
--(void)startLogout;
+-(void)logout;
 
 @end
 

@@ -228,7 +228,9 @@
     [self.dataController fetchQuickLoginUsername:[self.topView getPhoneNumber]
                                        validCode:[self.topView getCode]
                                         complete:^(BOOL isSucess) {
-            
+        [self dismissViewControllerAnimated:YES completion:^{
+            self.loginBlock();
+        }];
     }];
 }
 

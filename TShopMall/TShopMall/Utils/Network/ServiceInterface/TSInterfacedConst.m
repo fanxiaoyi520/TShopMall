@@ -80,6 +80,7 @@
 NSString *const kLoginSmsCaptchaUrl = @"/captcha/captcha/smsCaptcha";
 NSString *const kLoginQuickLoginUrl = @"/auth/auth/quickLogin";
 NSString *const kRegisterUrl = @"/rest/sysback/salesman/registered/distributor";
+NSString *const kLogoutUrl = @"/auth/auth/signOut";
 
 #pragma mark - 首页
 

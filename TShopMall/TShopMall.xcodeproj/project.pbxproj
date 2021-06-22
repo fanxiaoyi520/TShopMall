@@ -3164,10 +3164,7 @@
 				F530CD5F26819449009DC29A /* mall_goods@2x.png in Resources */,
 				F530CD5E26819449009DC29A /* mall_goods@3x.png in Resources */,
 				F530CC6926803E43009DC29A /* Toast_Failure.png in Resources */,
-
 				F530CD5B26819449009DC29A /* mall_launch_bottom@2x.png in Resources */,
-				F530CD11268085BA009DC29A /* tabbar_rank.json in Resources */,
-				C2C765332679A825004757B9 /* refresh_header_dark.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

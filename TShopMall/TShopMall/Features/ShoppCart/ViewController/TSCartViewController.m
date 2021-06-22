@@ -31,6 +31,10 @@
         self.automaticallyAdjustsScrollViewInsets = YES;
     }
     [self configInfo];
+    
+    [TSUserLoginManager shareInstance].loginStateDidChanged = ^(TSLoginState state) {
+        
+    };
 }
 
 - (void)viewWillAppear:(BOOL)animated{
