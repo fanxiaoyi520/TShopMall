@@ -16,7 +16,7 @@
 #import "TSRegiterViewController.h"
 #import "NSTimer+TSBlcokTimer.h"
 #import "TSLoginRegisterDataController.h"
-
+#import <NTESQuickPass/NTESQuickPass.h>
 
 @interface TSLoginViewController ()<TSQuickLoginTopViewDelegate, TSLoginTopViewDelegate, TSLoginBottomViewDelegate, TSCheckedViewDelegate, TSQuickCheckViewDelegate>
 /** 背景图 */
@@ -40,6 +40,8 @@
 
 @property(nonatomic, strong) TSLoginRegisterDataController *dataController;
 
+@property(nonatomic, strong) NTESQuickLoginManager *manager;
+
 @end
 
 @implementation TSLoginViewController
@@ -47,6 +49,25 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.gk_navigationBar.hidden = YES;
+    
+    self.manager = [NTESQuickLoginManager sharedInstance];
+    [self.manager registerWithBusinessID:@"7de91dbe2b424320a849fddac6545c0a"];
+    BOOL shouldQL = [self.manager shouldQuickLogin];
+    
+    [[NTESQuickLoginManager sharedInstance] getPhoneNumberCompletion:^(NSDictionary * _Nonnull resultDic) {
+             NSNumber *boolNum = [resultDic objectForKey:@"success"];
+            BOOL success = [boolNum boolValue];
+            if (success) {
+//                [[NTESQuickLoginManager sharedInstance] setupModel:]
+                // 设置授权登录界面model。注意：必须调用，此方法需嵌套在getPhoneNumberCompletion的回调中使用，且在CUCMAuthorizeLoginCompletion:之前调用。
+                // 电信获取脱敏手机号成功 需在此回调中拉去授权登录页面
+                // 移动、联通无脱敏手机号，需在此回调中拉去授权登录页面
+            } else {
+                 // 电信获取脱敏手机号失败
+                 // 移动、联通预取号失败
+            }
+        }];
+    
 }
 
 - (void)dealloc {
