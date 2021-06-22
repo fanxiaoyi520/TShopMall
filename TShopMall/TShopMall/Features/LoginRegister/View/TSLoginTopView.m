@@ -38,6 +38,7 @@
     return self;
 }
 
+
 - (void)addConstraints {
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.mas_left).with.offset(25);
@@ -225,12 +226,6 @@
 
 - (NSString *)getCode {
     return self.codeInput.text;
-}
-
-/** 关闭键盘 */
-- (void)closeKeyboard {
-    [self.codeInput resignFirstResponder];
-    [self.phoneInput resignFirstResponder];
 }
 
 #pragma mark - Action
