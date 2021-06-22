@@ -34,7 +34,7 @@
 
 - (void)setupBasic {
     [super setupBasic];
-    self.title = @"个人设置";
+    self.gk_navTitle = @"个人设置";
     [self.navigationController setNavigationBarHidden:NO];
     __weak __typeof(self)weakSelf = self;
     [self.dataController fetchSettingContentsComplete:^(BOOL isSucess) {
@@ -53,7 +53,7 @@
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view.mas_left).with.offset(0);
         make.right.equalTo(self.view.mas_right).with.offset(0);
-        make.top.equalTo(self.view.mas_top).with.offset(1);
+        make.top.equalTo(self.view.mas_top).with.offset(GK_STATUSBAR_NAVBAR_HEIGHT + 1);
         make.bottom.equalTo(self.view.mas_bottom).with.offset(0);
     }];
 }

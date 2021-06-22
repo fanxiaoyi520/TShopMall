@@ -12,7 +12,7 @@
 #import "TSTools.h"
 #import "NSTimer+TSBlcokTimer.h"
 
-@interface TSRegiterViewController ()<TSRegisterTopViewDelegate, TSCheckedViewDelegate, UIGestureRecognizerDelegate>
+@interface TSRegiterViewController ()<TSRegisterTopViewDelegate, TSCheckedViewDelegate>
 /** 背景图 */
 @property(nonatomic, weak) UIImageView *bgImgV;
 /** 关闭 */
@@ -45,19 +45,12 @@
 - (void)setupBasic {
     self.count = 60;
     self.view.backgroundColor = UIColor.whiteColor;
-    UISwipeGestureRecognizer *swipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeAction:)];
-    swipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionUp | UISwipeGestureRecognizerDirectionDown | UISwipeGestureRecognizerDirectionLeft | UISwipeGestureRecognizerDirectionRight;
-    swipeGestureRecognizer.delegate = self;
-    [self.view addGestureRecognizer:swipeGestureRecognizer];
+    UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panAction:)];
+    [self.view addGestureRecognizer:panGestureRecognizer];
 }
 
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
-    [self.topView closeKeyboard];
-    return YES;
-}
-
-- (void)swipeAction: (UISwipeGestureRecognizer *)recognizer {
-    //NSLog(@"recognizer === %@", recognizer);
+- (void)panAction: (UIPanGestureRecognizer *)recognizer {
+    [self.view endEditing:YES];
 }
 
 - (void)addConstraints {

@@ -17,10 +17,21 @@
 @property(nonatomic, strong) UIView *retailView;
 /// 统一零售价label
 @property(nonatomic, strong) UILabel *retailLabel;
+
 /// 代理特惠价
 @property(nonatomic, strong) UIView *preferenceView;
+@property(nonatomic, strong) UIButton *preferenceButton;
+@property(nonatomic, strong) UILabel *preferenceLabel;
+@property(nonatomic, strong) UILabel *adjustLabel;
+@property(nonatomic, strong) UIButton *reduceButton;
+@property(nonatomic, strong) UIButton *addButton;
+@property(nonatomic, strong) UITextField *inputTF;
+
 /// 提货价
 @property(nonatomic, strong) UIView *pickupView;
+@property(nonatomic, strong) UILabel *guidePriceLabel;
+@property(nonatomic, strong) UILabel *guidePriceValueLabel;
+
 /// 提示语
 @property(nonatomic, strong) UIView *promptView;
 @property(nonatomic, strong) UILabel *promptLabel;
@@ -46,8 +57,19 @@
     [self addSubview:self.titleLabel];
     [self addSubview:self.retailView];
     [self.retailView addSubview:self.retailLabel];
+    
     [self addSubview:self.preferenceView];
+    [self.preferenceView addSubview:self.preferenceButton];
+    [self.preferenceView addSubview:self.preferenceLabel];
+    [self.preferenceView addSubview:self.adjustLabel];
+    [self.preferenceView addSubview:self.addButton];
+    [self.preferenceView addSubview:self.inputTF];
+    [self.preferenceView addSubview:self.reduceButton];
+    
     [self addSubview:self.pickupView];
+    [self.pickupView addSubview:self.guidePriceLabel];
+    [self.pickupView addSubview:self.guidePriceValueLabel];
+
     [self addSubview:self.promptView];
     [self.promptView addSubview:self.promptLabel];
     [self addSubview:self.shareButton];
@@ -83,10 +105,62 @@
         make.height.mas_equalTo(60);
     }];
     
+    [self.preferenceButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self).offset(10);
+        make.width.height.mas_equalTo(30);
+        make.centerY.equalTo(self.preferenceView);
+    }];
+    
+    [self.preferenceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.preferenceButton.mas_right).offset(1);
+        make.centerY.equalTo(self.preferenceView);
+    }];
+    
+    [self.adjustLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.preferenceView.mas_right).offset(-39);
+        make.bottom.equalTo(self.preferenceView.mas_bottom).offset(-2);
+        make.height.mas_equalTo(18);
+    }];
+    
+    [self.addButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.preferenceView.mas_top).offset(5);
+        make.right.equalTo(self.preferenceView.mas_right).offset(-15);
+        make.width.mas_equalTo(48);
+        make.height.mas_equalTo(32);
+    }];
+    
+    [self.inputTF mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.addButton);
+        make.right.equalTo(self.addButton.mas_left).offset(-1);
+        make.width.mas_equalTo(65);
+        make.height.mas_equalTo(32);
+    }];
+    
+    [self.reduceButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.addButton);
+        make.right.equalTo(self.inputTF.mas_left).offset(-1);
+        make.width.mas_equalTo(48);
+        make.height.mas_equalTo(32);
+    }];
+    
+    //提货价
     [self.pickupView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.preferenceView.mas_bottom).offset(0);
         make.left.right.equalTo(self);
         make.height.mas_equalTo(60);
+        make.width.mas_equalTo(42);
+    }];
+    
+    [self.guidePriceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.pickupView.mas_left).offset(16);
+        make.height.mas_equalTo(22);
+        make.centerY.equalTo(self.pickupView);
+    }];
+    
+    [self.guidePriceValueLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.guidePriceLabel.mas_right).offset(6);
+        make.height.mas_equalTo(22);
+        make.centerY.equalTo(self.pickupView);
     }];
     
     [self.promptView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -119,10 +193,24 @@
 
 #pragma mark - Actions
 -(void)closeAction:(UIButton *)sender{
-    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(changePriceView:closeClick:)]) {
+        [self.delegate changePriceView:self closeClick:sender];
+    }
 }
 
 -(void)shareAction:(UIButton *)sender{
+    
+}
+
+-(void)preferenceAction:(UIButton *)sender{
+    
+}
+
+-(void)reduceAction:(UIButton *)sender{
+    
+}
+
+-(void)addAction:(UIButton *)sender{
     
 }
 
@@ -130,8 +218,9 @@
 -(UIButton *)closeButton{
     if (!_closeButton) {
         _closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_closeButton setImage:KImageMake(@"mall_detail_close") forState:UIControlStateNormal];
+        [_closeButton setImage:KImageMake(@"mall_detail_close") forState:UIControlStateHighlighted];
         [_closeButton addTarget:self action:@selector(closeAction:) forControlEvents:UIControlEventTouchUpInside];
-        [_closeButton setBackgroundColor:UIColor.redColor];
     }
     return _closeButton;
 }
@@ -174,12 +263,97 @@
     return _preferenceView;
 }
 
+-(UIButton *)preferenceButton{
+    if (!_preferenceButton) {
+        _preferenceButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_preferenceButton setImage:KImageMake(@"mall_detail_normal") forState:UIControlStateNormal];
+        [_preferenceButton setImage:KImageMake(@"mall_detail_selected") forState:UIControlStateSelected];
+        [_preferenceButton addTarget:self action:@selector(preferenceAction:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _preferenceButton;
+}
+
+-(UILabel *)preferenceLabel{
+    if (!_preferenceLabel) {
+        _preferenceLabel = [[UILabel alloc] init];
+        _preferenceLabel.textColor = KTextColor;
+        _preferenceLabel.font = KRegularFont(14);
+        _preferenceLabel.text = @"代理特惠价";
+        _preferenceLabel.textAlignment = NSTextAlignmentLeft;
+    }
+    return _preferenceLabel;
+}
+
+-(UILabel *)adjustLabel{
+    if (!_adjustLabel) {
+        _adjustLabel = [[UILabel alloc] init];
+        _adjustLabel.textColor = KHexAlphaColor(@"#2D3132", 0.4);
+        _adjustLabel.font = KRegularFont(9);
+        _adjustLabel.text = @"可调整区间 ￥9000-10000";
+        _adjustLabel.textAlignment = NSTextAlignmentRight;
+    }
+    return _adjustLabel;
+}
+
+-(UIButton *)reduceButton{
+    if (!_reduceButton) {
+        _reduceButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_reduceButton setImage:KImageMake(@"mall_detail_reduce_able") forState:UIControlStateNormal];
+        [_reduceButton setImage:KImageMake(@"mall_detail_add_disable") forState:UIControlStateDisabled];
+        [_reduceButton addTarget:self action:@selector(reduceAction:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _reduceButton;
+}
+
+-(UITextField *)inputTF{
+    if (!_inputTF) {
+        _inputTF = [[UITextField alloc] init];
+        _inputTF.textColor = KTextColor;
+        _inputTF.font = KRegularFont(14);
+        _inputTF.backgroundColor = KHexColor(@"#F4F4F4");
+    }
+    return _inputTF;
+}
+
+-(UIButton *)addButton{
+    if (!_addButton) {
+        _addButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_addButton setImage:KImageMake(@"mall_detail_add") forState:UIControlStateNormal];
+        [_addButton setImage:KImageMake(@"mall_detail_add") forState:UIControlStateDisabled];
+        [_addButton addTarget:self action:@selector(addAction:) forControlEvents:UIControlEventTouchUpInside];
+        [_addButton setBackgroundColor:UIColor.redColor];
+    }
+    return _addButton;
+}
+
 -(UIView *)pickupView{
     if (!_pickupView) {
         _pickupView = [[UIView alloc] init];
         _pickupView.backgroundColor = KHexAlphaColor(@"#F9AB50", 0.2);
     }
     return _pickupView;
+}
+
+-(UILabel *)guidePriceLabel{
+    if (!_guidePriceLabel) {
+        _guidePriceLabel = [[UILabel alloc] init];
+        _guidePriceLabel.textColor = KTextColor;
+        _guidePriceLabel.font = KRegularFont(14);
+        _guidePriceLabel.text = @"提货价";
+        _guidePriceLabel.textAlignment = NSTextAlignmentLeft;
+    }
+    return _guidePriceLabel;
+}
+
+-(UILabel *)guidePriceValueLabel{
+    if (!_guidePriceValueLabel) {
+        _guidePriceValueLabel = [[UILabel alloc] init];
+        _guidePriceValueLabel.textColor = KMainColor;
+        _guidePriceValueLabel.font = KRegularFont(14);
+        _guidePriceValueLabel.text = @"¥688888";
+        _guidePriceValueLabel.textAlignment = NSTextAlignmentLeft;
+    }
+    return _guidePriceValueLabel;
 }
 
 -(UIView *)promptView{

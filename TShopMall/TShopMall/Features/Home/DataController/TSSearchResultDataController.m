@@ -141,7 +141,7 @@
         TSSearchResultViewModel *vm = [[TSSearchResultViewModel alloc] initWithList:list];
 
         TSSearchRow *row = [TSSearchRow new];
-        row.cellIdentifier = self.isGrid==YES? @"TSGoodsListCell":@"TSGoodsListRailCell";
+        row.cellIdentifier = self.isGrid==YES? @"TSSearchResultCell":@"TSSearchResultRailCell";
         row.rowSize = self.isGrid==YES? CGSizeMake((kScreenWidth - KRateW(40.0))/2.0, KRateW(282.0)):CGSizeMake(kScreenWidth-KRateW(32.0), KRateW(120.0));
         row.obj = vm;
         [rows addObject:row];

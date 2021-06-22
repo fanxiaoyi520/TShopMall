@@ -21,6 +21,14 @@
 @property (nonatomic, strong) UILabel *selectedCount;
 /// 库存状态
 @property (nonatomic, strong) UILabel *statusLable;
+/// 数量
+@property(nonatomic, strong) UILabel *numLabel;
+/// 减
+@property(nonatomic, strong) UIButton *reduceButton;
+/// 加
+@property(nonatomic, strong) UIButton *addButton;
+/// 输入
+@property(nonatomic, strong) UITextField *inputTF;
 
 @end
 
@@ -39,8 +47,12 @@
     [self addSubview:self.iconImge];
     [self addSubview:self.closeBtn];
     [self addSubview:self.statusLable];
-    [self addSubview:self.selectedCount];
+//    [self addSubview:self.selectedCount];
     [self addSubview:self.priceLable];
+    [self addSubview:self.numLabel];
+    [self addSubview:self.addButton];
+    [self addSubview:self.inputTF];
+    [self addSubview:self.reduceButton];
     
     [self.iconImge mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(88, 88));
@@ -49,7 +61,7 @@
     }];
     
     [self.closeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(20, 20));
+        make.size.mas_equalTo(CGSizeMake(30, 30));
         make.right.equalTo(self.mas_right).offset(-18);
         make.top.equalTo(self.mas_top).offset(18);
     }];
@@ -60,18 +72,48 @@
         make.left.equalTo(self.iconImge.mas_right).offset(8);
     }];
     
-    [self.selectedCount mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.priceLable);
-        make.right.equalTo(self.mas_right).offset(-10);
-        make.top.equalTo(self.priceLable.mas_bottom).offset(4);
-        make.height.equalTo(@(22));
-    }];
+//    [self.selectedCount mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(self.priceLable);
+//        make.right.equalTo(self.mas_right).offset(-10);
+//        make.top.equalTo(self.priceLable.mas_bottom).offset(4);
+//        make.height.equalTo(@(22));
+//    }];
 
     [self.statusLable mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.priceLable);
         make.bottom.equalTo(self.iconImge);
         make.height.equalTo(@(22));
     }];
+    
+    [self.addButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.iconImge.mas_bottom).offset(50);
+        make.right.equalTo(self).offset(1);
+        make.width.mas_equalTo(48);
+        make.height.mas_equalTo(32);
+    }];
+    
+    [self.inputTF mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.addButton);
+        make.right.equalTo(self.addButton.mas_left).offset(-1);
+        make.width.mas_equalTo(65);
+        make.height.mas_equalTo(32);
+    }];
+    
+    [self.reduceButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.addButton);
+        make.right.equalTo(self.inputTF.mas_left).offset(-1);
+        make.width.mas_equalTo(48);
+        make.height.mas_equalTo(32);
+    }];
+    
+    [self.numLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self).offset(15);
+        make.centerY.equalTo(self.addButton);
+    }];
+    
+
+    
+
 }
 
 #pragma mark - Actions
@@ -93,7 +135,8 @@
 -(UIButton *)closeBtn{
     if (!_closeBtn) {
         _closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_closeBtn setBackgroundImage:KImageMake(@"cancel") forState:UIControlStateNormal];
+        [_closeBtn setBackgroundImage:KImageMake(@"mall_detail_close") forState:UIControlStateNormal];
+        [_closeBtn setBackgroundImage:KImageMake(@"mall_detail_close") forState:UIControlStateHighlighted];
         [_closeBtn addTarget:self action:@selector(closePopupEvent:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _closeBtn;
@@ -102,6 +145,7 @@
 -(UILabel *)priceLable{
     if (!_priceLable) {
         _priceLable = [UILabel new];
+        _priceLable.textColor = KMainColor;
         _priceLable.textAlignment = NSTextAlignmentCenter;
         _priceLable.text = @"¥8999";
     }
@@ -123,10 +167,54 @@
         _statusLable = [UILabel new];
         _statusLable.textColor = KMainColor;
         _statusLable.font = KRegularFont(14.0);
-        _statusLable.text = @"库存紧张";
+        _statusLable.textColor = KHexAlphaColor(@"#2D3132", 0.4);
+        _statusLable.text = @"尺寸";
+        _statusLable.backgroundColor = [UIColor clearColor];
     }
     return _statusLable;;
 }
 
+
+-(UILabel *)numLabel{
+    if (!_numLabel) {
+        _numLabel = [UILabel new];
+        _numLabel.textAlignment  = NSTextAlignmentLeft;
+        _numLabel.textColor = KMainColor;
+        _numLabel.font = KRegularFont(14.0);
+        _numLabel.text = @"库存紧张";
+    }
+    return _numLabel;;
+}
+
+-(UIButton *)reduceButton{
+    if (!_reduceButton) {
+        _reduceButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_reduceButton setImage:KImageMake(@"mall_detail_reduce_able") forState:UIControlStateNormal];
+        [_reduceButton setImage:KImageMake(@"mall_detail_add_disable") forState:UIControlStateDisabled];
+        [_reduceButton addTarget:self action:@selector(reduceAction:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _reduceButton;
+}
+
+-(UITextField *)inputTF{
+    if (!_inputTF) {
+        _inputTF = [[UITextField alloc] init];
+        _inputTF.textColor = KTextColor;
+        _inputTF.font = KRegularFont(14);
+        _inputTF.backgroundColor = KHexColor(@"#F4F4F4");
+    }
+    return _inputTF;
+}
+
+-(UIButton *)addButton{
+    if (!_addButton) {
+        _addButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_addButton setImage:KImageMake(@"mall_detail_add") forState:UIControlStateNormal];
+        [_addButton setImage:KImageMake(@"mall_detail_add") forState:UIControlStateDisabled];
+        [_addButton addTarget:self action:@selector(addAction:) forControlEvents:UIControlEventTouchUpInside];
+        [_addButton setBackgroundColor:UIColor.redColor];
+    }
+    return _addButton;
+}
 
 @end
