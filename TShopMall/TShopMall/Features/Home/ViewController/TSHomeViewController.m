@@ -18,6 +18,8 @@
 #import "TSHomePageLoginBarView.h"
 #import "TSHomePagePerchView.h"
 
+#import "TSProductDetailController.h"
+
 #define tableViewBackGroundViewHeight 204.0
 
 @interface TSHomeViewController ()<UITableViewDelegate, UITableViewDataSource>
@@ -216,8 +218,9 @@
 }
 
 -(void)categoryAction:(UIButton *)sender{
-    TSCategoryViewController *category = [[TSCategoryViewController alloc] init];
-    [self.navigationController pushViewController:category animated:YES];
+    TSProductDetailController *con = [[TSProductDetailController alloc] init];
+//    TSCategoryViewController *category = [[TSCategoryViewController alloc] init];
+    [self.navigationController pushViewController:con animated:YES];
 }
 
 #pragma mark - Getter
