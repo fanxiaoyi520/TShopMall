@@ -207,6 +207,12 @@
     
 }
 
+#pragma mark - Noti
+- (void)loginStateDidChanged:(NSNotification *)noti{
+    self.loginBar.hidden = ![noti.object intValue];
+    [self.viewModel fetchData];
+}
+
 #pragma mark - Action
 - (void)refreshHeaderDataMehtod {
     [self.viewModel fetchData];
@@ -217,6 +223,9 @@
 }
 
 -(void)categoryAction:(UIButton *)sender{
+    [[TSUserInfoManager userInfo] clearUserInfo];
+    return;
+    
     TSProductDetailController *con = [[TSProductDetailController alloc] init];
 //    TSCategoryViewController *category = [[TSCategoryViewController alloc] init];
     [self.navigationController pushViewController:con animated:YES];
