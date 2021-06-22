@@ -76,6 +76,17 @@
     [super viewWillLayoutSubviews];
 }
 
+#pragma mark - Noti
+- (void)loginStateDidChanged:(NSNotification *)noti{
+    __weak __typeof(self)weakSelf = self;
+    [self.dataController fetchMineContentsComplete:^(BOOL isSucess) {
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
+        if (isSucess) {
+            [strongSelf.collectionView reloadData];
+        }
+    }];
+}
+
 #pragma mark - Action
 -(void)setAction:(UIButton *)sender{
     TSSettingViewController *settingVC = [[TSSettingViewController alloc] init];

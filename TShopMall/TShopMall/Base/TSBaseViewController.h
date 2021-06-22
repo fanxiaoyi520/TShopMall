@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)setupNavigationBar;
 /// 添加子控件
 -(void)fillCustomView;
-
+- (void)loginStateDidChanged:(NSNotification *)noti;
 @end
 
 NS_ASSUME_NONNULL_END

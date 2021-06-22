@@ -42,6 +42,11 @@
     }];
 }
 
+#pragma mark - Noti
+- (void)loginStateDidChanged:(NSNotification *)noti{
+   
+}
+
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     

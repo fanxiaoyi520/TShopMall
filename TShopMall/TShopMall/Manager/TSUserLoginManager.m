@@ -36,26 +36,11 @@
 - (void)logout{
     TSLogoutRequest *request = [TSLogoutRequest new];
     [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
-        if (request.responseModel.isSucceed) {
-            
-        }
-        NSString *dataString = request.responseObject[@"data"];
-        if (dataString) {
-            NSDictionary *dic = [dataString jsonValueDecoded];
-            if ([dic[@"code"] intValue] == 1) {
-                
-                [[TSUserInfoManager userInfo] clearUserInfo];
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"TS_LoginUpdateNotification" object:@1];
-
-               
-            }
-            else{
-                
-            }
-        }
-        } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-           
-        }];
+        [[TSUserInfoManager userInfo] clearUserInfo];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"TS_LoginUpdateNotification" object:@1];
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        
+    }];
 }
 
 - (TSLoginState)state{
@@ -65,7 +50,4 @@
         return None;
 }
 
-- (void)setLoginStateDidChanged:(void (^)(TSLoginState))loginStateDidChanged{
-    
-}
 @end
