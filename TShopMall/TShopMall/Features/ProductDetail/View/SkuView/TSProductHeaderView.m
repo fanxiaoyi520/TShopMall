@@ -110,14 +110,18 @@
         make.left.equalTo(self).offset(15);
         make.centerY.equalTo(self.addButton);
     }];
-    
-
-    
-
 }
 
 #pragma mark - Actions
 -(void)closePopupEvent:(UIButton *)sender{
+    
+}
+
+-(void)reduceAction:(UIButton *)sender{
+    
+}
+
+-(void)addAction:(UIButton *)sender{
     
 }
 
@@ -179,9 +183,9 @@
     if (!_numLabel) {
         _numLabel = [UILabel new];
         _numLabel.textAlignment  = NSTextAlignmentLeft;
-        _numLabel.textColor = KMainColor;
+        _numLabel.textColor = KHexAlphaColor(@"#2D3132", 0.4);
         _numLabel.font = KRegularFont(14.0);
-        _numLabel.text = @"库存紧张";
+        _numLabel.text = @"数量";
     }
     return _numLabel;;
 }
@@ -202,6 +206,8 @@
         _inputTF.textColor = KTextColor;
         _inputTF.font = KRegularFont(14);
         _inputTF.backgroundColor = KHexColor(@"#F4F4F4");
+        _inputTF.textAlignment = NSTextAlignmentCenter;
+        _inputTF.text = @"1";
     }
     return _inputTF;
 }
