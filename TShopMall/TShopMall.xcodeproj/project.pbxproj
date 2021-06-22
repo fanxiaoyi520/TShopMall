@@ -285,6 +285,7 @@
 		F530CD5E26819449009DC29A /* mall_goods@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F530CD5526819448009DC29A /* mall_goods@3x.png */; };
 		F530CD5F26819449009DC29A /* mall_goods@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F530CD5626819449009DC29A /* mall_goods@2x.png */; };
 		F530CD6026819449009DC29A /* mall_logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F530CD5726819449009DC29A /* mall_logo@2x.png */; };
+		F530CD642681E11C009DC29A /* TSDetailShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CD632681E11C009DC29A /* TSDetailShareView.m */; };
 		F54972FE2668842500181E3F /* TShopMallTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F54972FD2668842500181E3F /* TShopMallTests.m */; };
 		F54973092668842500181E3F /* TShopMallUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F54973082668842500181E3F /* TShopMallUITests.m */; };
 		F54973602668A22100181E3F /* SSGenaralRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F54973402668A22100181E3F /* SSGenaralRequest.m */; };
@@ -936,6 +937,8 @@
 		F530CD5526819448009DC29A /* mall_goods@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mall_goods@3x.png"; sourceTree = "<group>"; };
 		F530CD5626819449009DC29A /* mall_goods@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mall_goods@2x.png"; sourceTree = "<group>"; };
 		F530CD5726819449009DC29A /* mall_logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mall_logo@2x.png"; sourceTree = "<group>"; };
+		F530CD622681E11C009DC29A /* TSDetailShareView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSDetailShareView.h; sourceTree = "<group>"; };
+		F530CD632681E11C009DC29A /* TSDetailShareView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSDetailShareView.m; sourceTree = "<group>"; };
 		F54972DE2668842200181E3F /* TShopMall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TShopMall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F54972F22668842400181E3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F54972F92668842500181E3F /* TShopMallTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TShopMallTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2122,6 +2125,15 @@
 			path = PriceView;
 			sourceTree = "<group>";
 		};
+		F530CD612681E105009DC29A /* ShareView */ = {
+			isa = PBXGroup;
+			children = (
+				F530CD622681E11C009DC29A /* TSDetailShareView.h */,
+				F530CD632681E11C009DC29A /* TSDetailShareView.m */,
+			);
+			path = ShareView;
+			sourceTree = "<group>";
+		};
 		F54972D52668842200181E3F = {
 			isa = PBXGroup;
 			children = (
@@ -2783,6 +2795,7 @@
 		F55D2CE0267881AB006BACCF /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F530CD612681E105009DC29A /* ShareView */,
 				F530CD4B26818FDF009DC29A /* PriceView */,
 				F530CD47268174EE009DC29A /* TopFunctionView */,
 				F530CD312680C5E5009DC29A /* MaterialView */,
@@ -3164,10 +3177,7 @@
 				F530CD5F26819449009DC29A /* mall_goods@2x.png in Resources */,
 				F530CD5E26819449009DC29A /* mall_goods@3x.png in Resources */,
 				F530CC6926803E43009DC29A /* Toast_Failure.png in Resources */,
-
 				F530CD5B26819449009DC29A /* mall_launch_bottom@2x.png in Resources */,
-				F530CD11268085BA009DC29A /* tabbar_rank.json in Resources */,
-				C2C765332679A825004757B9 /* refresh_header_dark.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3361,6 +3371,7 @@
 				F530C6D626802E5D009DC29A /* TSQuickLoginRequest.m in Sources */,
 				F530CCF126804167009DC29A /* TSWKWebView.m in Sources */,
 				C3A6C4E3267A1CAF00FC71D6 /* TSSecurityDataController.m in Sources */,
+				F530CD642681E11C009DC29A /* TSDetailShareView.m in Sources */,
 				F55D2CB32674AE55006BACCF /* TSCategoryContentModel.m in Sources */,
 				F55D2CCA26784ACD006BACCF /* TSMineTitleHeaderView.m in Sources */,
 				DC3440BB26722DB600F5B0DA /* TSHomePageViewModel.m in Sources */,

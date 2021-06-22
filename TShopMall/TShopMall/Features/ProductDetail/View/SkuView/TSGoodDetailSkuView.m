@@ -36,12 +36,12 @@
 -(void)setupViews{
     
     [self addSubview:self.headerView];
-    [self addSubview:self.collectionView];
+//    [self addSubview:self.collectionView];
     [self addSubview:self.footerView];
     
     [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.equalTo(self);
-        make.height.mas_equalTo(120);
+        make.height.mas_equalTo(300);
     }];
     
     [self.footerView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -49,16 +49,16 @@
         make.height.mas_equalTo(136);
     }];
     
-    [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self);
-        make.top.equalTo(self.headerView.mas_bottom).offset(0);
-        make.bottom.equalTo(self.footerView.mas_top).offset(0);
-    }];
+//    [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.right.equalTo(self);
+//        make.top.equalTo(self.headerView.mas_bottom).offset(0);
+//        make.bottom.equalTo(self.footerView.mas_top).offset(0);
+//    }];
 }
 
 #pragma mark - UICollectionViewDataSource
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
-    return 10;
+    return 3;
 }
 
 - (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {

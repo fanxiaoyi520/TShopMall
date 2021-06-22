@@ -16,12 +16,13 @@
 #import "WMDragView.h"
 #import "TSTopFunctionView.h"
 #import "TSChangePriceView.h"
+#import "TSDetailShareView.h"
 #import "TSGoodDetailSkuView.h"
 #import "SnailQuickMaskPopups.h"
 #import <MJRefresh/MJRefresh.h>
 
 
-@interface TSProductDetailController ()<UICollectionViewDelegate,UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate,TSTopFunctionViewDelegate>
+@interface TSProductDetailController ()<UICollectionViewDelegate,UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate,TSTopFunctionViewDelegate,TSChangePriceViewDelegate>
 
 /// 返回按钮
 @property(nonatomic, strong) UIButton *backButton;
@@ -40,6 +41,8 @@
 @property (nonatomic, strong) SnailQuickMaskPopups *functionPopups;
 /// 改价
 @property (nonatomic, strong) SnailQuickMaskPopups *changePopups;
+/// 分享
+@property (nonatomic, strong) SnailQuickMaskPopups *sharePopups;
 /// sku
 @property (nonatomic, strong) SnailQuickMaskPopups *popups;
 
@@ -202,13 +205,22 @@
     __weak __typeof(self)weakSelf = self;
     [self.functionPopups dismissAnimated:YES completion:^(SnailQuickMaskPopups * _Nonnull popups) {
         __strong __typeof(weakSelf)strongSelf = weakSelf;
-        
+        [strongSelf.sharePopups presentAnimated:YES completion:nil];
     }];
 }
 -(void)topFunctionView:(TSTopFunctionView *_Nullable)topFunctionView downloadClick:(TSFuncButton *_Nonnull)sender{
     [self.functionPopups dismissAnimated:YES completion:^(SnailQuickMaskPopups * _Nonnull popups) {
         
     }];
+}
+     
+-(void)topFunctionView:(TSTopFunctionView *_Nullable)topFunctionView sharePosterClick:(TSFuncButton *_Nonnull)sender{
+        
+}
+
+#pragma mark - TSChangePriceViewDelegate
+-(void)changePriceView:(TSChangePriceView *_Nullable)changePriceView closeClick:(UIButton *_Nonnull)sender{
+    [self.changePopups dismissAnimated:YES completion:nil];
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -503,6 +515,7 @@ spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
         changeView.frame = CGRectMake(0, 0, kScreenWidth, 422);
         [changeView setCorners:(UIRectCornerTopLeft | UIRectCornerTopRight) radius:8.0];
         changeView.clipsToBounds = YES;
+        changeView.delegate = self;
         
         _changePopups = [SnailQuickMaskPopups popupsWithMaskStyle:MaskStyleBlackTranslucent aView:changeView];
         _changePopups.presentationStyle = PresentationStyleBottom;
@@ -513,5 +526,20 @@ spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
     return  _changePopups;
 }
 
+-(SnailQuickMaskPopups *)sharePopups{
+    if (!_sharePopups) {
+        TSDetailShareView *shareView = [[TSDetailShareView alloc] init];
+        shareView.frame = CGRectMake(0, 0, kScreenWidth, 180);
+        [shareView setCorners:(UIRectCornerTopLeft | UIRectCornerTopRight) radius:8.0];
+        shareView.clipsToBounds = YES;
+        
+        _sharePopups = [SnailQuickMaskPopups popupsWithMaskStyle:MaskStyleBlackTranslucent aView:shareView];
+        _sharePopups.presentationStyle = PresentationStyleBottom;
+        _sharePopups.transitionStyle = TransitionStyleFromBottom;
+        _sharePopups.isAllowPopupsDrag = YES;
+        _sharePopups.maskAlpha = 0.8;
+    }
+    return  _sharePopups;
+}
 
 @end

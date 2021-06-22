@@ -59,6 +59,8 @@
 @property(nonatomic, strong) TSFuncButton *shareButton;
 /// 下载素材
 @property(nonatomic, strong) TSFuncButton *downloadButton;
+/// 分享海报
+@property(nonatomic, strong) TSFuncButton *sharePosterButton;
 
 @end
 
@@ -78,6 +80,7 @@
     [self addSubview:self.changeButton];
     [self addSubview:self.shareButton];
     [self addSubview:self.downloadButton];
+    [self addSubview:self.sharePosterButton];
     
     [self.closeButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self).offset(40);
@@ -85,24 +88,35 @@
         make.width.height.mas_equalTo(30);
     }];
     
+    //11 * 2 - 30
+    CGFloat width = (kScreenWidth - 52)/4.0;
+     
+    
     [self.changeButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self).offset(-31);
         make.left.equalTo(self).offset(11);
-        make.width.mas_equalTo(75);
+        make.width.mas_equalTo(width);
         make.height.mas_equalTo(66);
     }];
     
     [self.shareButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self).offset(-31);
-        make.left.equalTo(self.changeButton.mas_right).offset(18);
-        make.width.mas_equalTo(75);
+        make.left.equalTo(self.changeButton.mas_right).offset(10);
+        make.width.mas_equalTo(width);
         make.height.mas_equalTo(66);
     }];
 
     [self.downloadButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self).offset(-31);
-        make.left.equalTo(self.shareButton.mas_right).offset(18);
-        make.width.mas_equalTo(75);
+        make.left.equalTo(self.shareButton.mas_right).offset(10);
+        make.width.mas_equalTo(width);
+        make.height.mas_equalTo(66);
+    }];
+    
+    [self.sharePosterButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self).offset(-31);
+        make.left.equalTo(self.downloadButton.mas_right).offset(10);
+        make.width.mas_equalTo(width);
         make.height.mas_equalTo(66);
     }];
 }
@@ -132,12 +146,18 @@
     }
 }
 
+-(void)sharePosterAction:(TSFuncButton *)sender{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(topFunctionView:downloadClick:)]) {
+        [self.delegate topFunctionView:self sharePosterClick:sender];
+    }
+}
+
 #pragma mark - Getter
 -(UIButton *)closeButton{
     if (!_closeButton) {
         _closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_closeButton addTarget:self action:@selector(closeAction:) forControlEvents:UIControlEventTouchUpInside];
-        [_closeButton setBackgroundColor:UIColor.redColor];
+        [_closeButton setImage:KImageMake(@"mall_detail_close") forState:UIControlStateNormal];
+        [_closeButton addTarget:self action:@selector(closeAction:) forControlEvents:UIControlEventTouchUpInside]; 
     }
     return _closeButton;
 }
@@ -170,6 +190,16 @@
         [_downloadButton addTarget:self action:@selector(downloadAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _downloadButton;
+}
+
+-(TSFuncButton *)sharePosterButton{
+    if (!_sharePosterButton) {
+        _sharePosterButton = [TSFuncButton buttonWithType:UIButtonTypeCustom];
+        [_sharePosterButton setTitle:@"分享海报" forState:UIControlStateNormal];
+        [_sharePosterButton setImage:KImageMake(@"mall_detail_share_ poster") forState:UIControlStateNormal];
+        [_sharePosterButton addTarget:self action:@selector(sharePosterAction:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _sharePosterButton;
 }
 
 @end
