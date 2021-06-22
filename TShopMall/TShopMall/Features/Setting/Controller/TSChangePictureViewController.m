@@ -40,14 +40,13 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [self.navigationController setNavigationBarHidden:NO];
 }
 
 - (void)setupBasic {
     [super setupBasic];
     __weak __typeof(self)weakSelf = self;
     self.view.backgroundColor = KWhiteColor;
-    [self.navigationController setNavigationBarHidden:YES];
+    self.gk_navigationBar.hidden = YES;
     [self.dataController fetchChangePictureContentsComplete:^(BOOL isSucess) {
         __strong __typeof(weakSelf)strongSelf = weakSelf;
         if (isSucess) {
@@ -70,7 +69,7 @@
         make.height.mas_equalTo(235);
     }];
     [self.backButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.topView.mas_top).with.offset(GK_STATUSBAR_NAVBAR_HEIGHT - 34 - 30);
+        make.top.equalTo(self.topView.mas_top).with.offset(GK_STATUSBAR_NAVBAR_HEIGHT - 34);
         make.left.equalTo(self.topView.mas_left).with.offset(20);
         make.height.mas_equalTo(24);
         make.width.mas_equalTo(28);
@@ -166,6 +165,7 @@
     if (_picButton == nil) {
         UIButton *picButton = [[UIButton alloc] init];
         _picButton = picButton;
+        _picButton.userInteractionEnabled = NO;
         [_picButton setBackgroundImage:KImageMake(@"mall_setting_scenery") forState:UIControlStateNormal];
         [self.topView addSubview:_picButton];
     }

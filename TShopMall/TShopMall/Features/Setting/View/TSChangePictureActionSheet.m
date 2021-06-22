@@ -128,11 +128,6 @@
         self.frame = [[UIScreen mainScreen] bounds];
         self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
         self.contentView.frame = CGRectMake(0, kScreenHeight, kScreenWidth, (self.titles.count + 1) * 56 + 10);
-//        CAShapeLayer *maskLayer = [CAShapeLayer layer];
-//        maskLayer.path = [UIBezierPath bezierPathWithRoundedRect:self.contentView.frame byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii:(CGSize){5.0f}].CGPath;
-//        maskLayer.frame = self.contentView.frame;
-//        self.contentView.layer.masksToBounds = YES;
-//        self.contentView.layer.mask = maskLayer;
         [self addConstraints];
         __weak __typeof(self)weakSelf = self;
         [self.dataController fetchContentsWithTitle:titles Complete:^(BOOL isSucess) {
@@ -204,6 +199,8 @@
     if (_contentView == nil) {
         UIView *contentView = [[UIView alloc] init];
         _contentView = contentView;
+        _contentView.clipsToBounds = YES;
+        [_contentView setCorners:UIRectCornerAllCorners radius:12.0];
         [self addSubview:_contentView];
     }
     return _contentView;

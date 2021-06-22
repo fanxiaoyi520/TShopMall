@@ -89,8 +89,8 @@
 - (void)configUI{
     
     [self.card mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.mas_left).offset(KRateW(16.0));
-        make.right.equalTo(self.mas_right).offset(-KRateW(16.0));
+        make.left.equalTo(self.mas_left).offset(KRateW(50.0));
+        make.right.equalTo(self.mas_right).offset(-KRateW(50.0));
         make.center.equalTo(self);
     }];
     
@@ -130,14 +130,16 @@
         make.right.equalTo(self.card.mas_right);
         make.bottom.equalTo(self.card.mas_bottom);
         make.top.equalTo(lineB.mas_bottom);
+        make.left.equalTo(self.card.mas_centerX);
         make.height.mas_equalTo(KRateW(55.0));
-        make.width.mas_offset(btnWidth);
+        //make.width.mas_offset(btnWidth);
     }];
     
     [self.cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.card.mas_left);
         make.top.bottom.equalTo(self.confirmBtn);
-        make.width.mas_equalTo(btnWidth);
+        make.right.equalTo(self.card.mas_centerX);
+        //make.width.mas_equalTo(btnWidth);
     }];
     
     if (self.confirmBtn.hidden == NO ||
@@ -179,8 +181,8 @@
         return _title;
     }
     self.title = [UILabel new];
-    self.title.textColor = KHexColor(@"#2D3132");
-    self.title.font = KRegularFont(18.0);
+    self.title.textColor = KHexColor(@"#333333");
+    self.title.font = KRegularFont(16.0);
     self.title.textAlignment = NSTextAlignmentCenter;
     [self.card addSubview:self.title];
     
@@ -194,7 +196,7 @@
     self.message = [UILabel new];
     self.message.numberOfLines = 0;
     self.message.textColor = KHexColor(@"#2D3132");
-    self.message.font = KRegularFont(16.0);
+    self.message.font = KRegularFont(14.0);
     self.message.textAlignment = NSTextAlignmentCenter;
     [self.card addSubview:self.message];
     
@@ -206,8 +208,9 @@
         return _confirmBtn;
     }
     self.confirmBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.confirmBtn setTitleColor:KHexColor(@"#2D3132") forState:UIControlStateNormal];
-    self.confirmBtn.titleLabel.font = KRegularFont(18.0);
+    //[self.confirmBtn setBackgroundColor:UIColor.redColor];
+    [self.confirmBtn setTitleColor:KHexColor(@"#E64C3D") forState:UIControlStateNormal];
+    self.confirmBtn.titleLabel.font = KRegularFont(16.0);
     [self.confirmBtn addTarget:self action:@selector(confirmBtnAction) forControlEvents:UIControlEventTouchUpInside];
     [self.card addSubview:self.confirmBtn];
     
@@ -220,7 +223,7 @@
     }
     self.cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.cancelBtn setTitleColor:KHexColor(@"#2D3132") forState:UIControlStateNormal];
-    self.cancelBtn.titleLabel.font = KRegularFont(18.0);
+    self.cancelBtn.titleLabel.font = KRegularFont(16.0);
     [self.cancelBtn addTarget:self action:@selector(cancelBtnAction) forControlEvents:UIControlEventTouchUpInside];
     [self.card addSubview:self.cancelBtn];
     
