@@ -48,16 +48,14 @@
 }
 
 - (void)addConstraints {
-    CGRect rectNav = self.navigationController.navigationBar.frame;
-    int top = rectNav.size.height - 10;
     [self.bgImgV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.bottom.equalTo(self.view).with.offset(0);
     }];
+    
     [self.closeButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.view).with.offset(25);
-        make.top.equalTo(self.view.mas_top).with.offset(top);
-        make.width.mas_equalTo(15.56 * 2);
-        make.height.mas_equalTo(15.14 * 2);
+        make.left.equalTo(self.view).with.offset(20);
+        make.top.equalTo(self.view).offset(GK_STATUSBAR_HEIGHT + 4);
+        make.width.height.mas_equalTo(30);
     }];
     [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.view).with.offset(0);

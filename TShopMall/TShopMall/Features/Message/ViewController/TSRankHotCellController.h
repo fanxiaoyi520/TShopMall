@@ -5,11 +5,11 @@
 //  Created by 陈结 on 2021/6/17.
 //
 
-#import "TSContentBaseViewController.h"
+#import "TSBaseViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TSRankHotCellController : TSContentBaseViewController<JXCategoryListContentViewDelegate>
+@interface TSRankHotCellController : TSBaseViewController
 
 @end
 

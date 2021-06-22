@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		00093A5046E7E3324EC8CBEB /* libPods-TShopMallTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1942D505D7004833F274B5D1 /* libPods-TShopMallTests.a */; };
 		04113171268021CC000B5BAF /* TSCustomLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0411316F268021CC000B5BAF /* TSCustomLabel.m */; };
+		041131CF268096CB000B5BAF /* TSHotDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 041131CD268096CB000B5BAF /* TSHotDataController.m */; };
+		041131D2268096DA000B5BAF /* TSHotSectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 041131D0268096D9000B5BAF /* TSHotSectionModel.m */; };
+		041131D7268096F6000B5BAF /* TSGoodsShowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041131D4268096F6000B5BAF /* TSGoodsShowCell.m */; };
+		041131D8268096F6000B5BAF /* TSGoodsHotRankCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041131D5268096F6000B5BAF /* TSGoodsHotRankCell.m */; };
 		04DAFAFE267B37450098275A /* TSOrderManageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DAFAFD267B37450098275A /* TSOrderManageViewController.m */; };
 		AE4DC537B4A93FA6C04B9037 /* libPods-TShopMall.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 825A9D1C217F35DCFB651B21 /* libPods-TShopMall.a */; };
 		C21A4B6E267AF5AE00766F72 /* TSMakeOrderBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C21A4B6D267AF5AE00766F72 /* TSMakeOrderBaseCell.m */; };
@@ -256,11 +260,21 @@
 		F530CCFB26804167009DC29A /* TSWKMessageHandlerHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CCE326804167009DC29A /* TSWKMessageHandlerHelper.m */; };
 		F530CCFC26804167009DC29A /* TSWebViewNetworkInterceptor.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CCE726804167009DC29A /* TSWebViewNetworkInterceptor.m */; };
 		F530CCFF26806BDD009DC29A /* TSSaveLocalConst.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CCFE26806BDD009DC29A /* TSSaveLocalConst.m */; };
-		F530CD10268085BA009DC29A /* tabbar_mine.json in Resources */ = {isa = PBXBuildFile; fileRef = F530CD0B268085BA009DC29A /* tabbar_mine.json */; };
-		F530CD11268085BA009DC29A /* tabbar_rank.json in Resources */ = {isa = PBXBuildFile; fileRef = F530CD0C268085BA009DC29A /* tabbar_rank.json */; };
-		F530CD12268085BA009DC29A /* tabbar_category.json in Resources */ = {isa = PBXBuildFile; fileRef = F530CD0D268085BA009DC29A /* tabbar_category.json */; };
-		F530CD13268085BA009DC29A /* tabbar_home.json in Resources */ = {isa = PBXBuildFile; fileRef = F530CD0E268085BA009DC29A /* tabbar_home.json */; };
-		F530CD14268085BA009DC29A /* tabbar_cart.json in Resources */ = {isa = PBXBuildFile; fileRef = F530CD0F268085BA009DC29A /* tabbar_cart.json */; };
+		F530CD1A26809B62009DC29A /* SnailQuickMaskPopups.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CD1826809B62009DC29A /* SnailQuickMaskPopups.m */; };
+		F530CD232680B8A0009DC29A /* TSProductHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CD1F2680B8A0009DC29A /* TSProductHeaderView.m */; };
+		F530CD242680B8A0009DC29A /* TSGoodDetailSkuView.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CD222680B8A0009DC29A /* TSGoodDetailSkuView.m */; };
+		F530CD2B2680B912009DC29A /* TSGoodDetailReusableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CD252680B911009DC29A /* TSGoodDetailReusableHeaderView.m */; };
+		F530CD2D2680B912009DC29A /* TSProductCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CD292680B912009DC29A /* TSProductCollectionViewCell.m */; };
+		F530CD302680BB57009DC29A /* TSProductFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CD2F2680BB57009DC29A /* TSProductFooterView.m */; };
+		F530CD362680CCC5009DC29A /* launch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F530CD332680CCC5009DC29A /* launch@2x.png */; };
+		F530CD372680CCC5009DC29A /* launch@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F530CD342680CCC5009DC29A /* launch@3x.png */; };
+		F530CD382680CCC5009DC29A /* launch.png in Resources */ = {isa = PBXBuildFile; fileRef = F530CD352680CCC5009DC29A /* launch.png */; };
+		F530CD3F2680CD6A009DC29A /* tabbar_rank.json in Resources */ = {isa = PBXBuildFile; fileRef = F530CD3A2680CD6A009DC29A /* tabbar_rank.json */; };
+		F530CD402680CD6A009DC29A /* tabbar_home.json in Resources */ = {isa = PBXBuildFile; fileRef = F530CD3B2680CD6A009DC29A /* tabbar_home.json */; };
+		F530CD412680CD6A009DC29A /* tabbar_category.json in Resources */ = {isa = PBXBuildFile; fileRef = F530CD3C2680CD6A009DC29A /* tabbar_category.json */; };
+		F530CD422680CD6A009DC29A /* tabbar_mine.json in Resources */ = {isa = PBXBuildFile; fileRef = F530CD3D2680CD6A009DC29A /* tabbar_mine.json */; };
+		F530CD432680CD6A009DC29A /* tabbar_cart.json in Resources */ = {isa = PBXBuildFile; fileRef = F530CD3E2680CD6A009DC29A /* tabbar_cart.json */; };
+		F530CD462680CDF5009DC29A /* TSGoodDetailMaterialView.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CD452680CDF5009DC29A /* TSGoodDetailMaterialView.m */; };
 		F54972FE2668842500181E3F /* TShopMallTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F54972FD2668842500181E3F /* TShopMallTests.m */; };
 		F54973092668842500181E3F /* TShopMallUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F54973082668842500181E3F /* TShopMallUITests.m */; };
 		F54973602668A22100181E3F /* SSGenaralRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F54973402668A22100181E3F /* SSGenaralRequest.m */; };
@@ -415,6 +429,14 @@
 /* Begin PBXFileReference section */
 		0411316F268021CC000B5BAF /* TSCustomLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSCustomLabel.m; sourceTree = "<group>"; };
 		04113170268021CC000B5BAF /* TSCustomLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSCustomLabel.h; sourceTree = "<group>"; };
+		041131CD268096CB000B5BAF /* TSHotDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSHotDataController.m; sourceTree = "<group>"; };
+		041131CE268096CB000B5BAF /* TSHotDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSHotDataController.h; sourceTree = "<group>"; };
+		041131D0268096D9000B5BAF /* TSHotSectionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSHotSectionModel.m; sourceTree = "<group>"; };
+		041131D1268096DA000B5BAF /* TSHotSectionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSHotSectionModel.h; sourceTree = "<group>"; };
+		041131D3268096F5000B5BAF /* TSGoodsShowCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSGoodsShowCell.h; sourceTree = "<group>"; };
+		041131D4268096F6000B5BAF /* TSGoodsShowCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSGoodsShowCell.m; sourceTree = "<group>"; };
+		041131D5268096F6000B5BAF /* TSGoodsHotRankCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSGoodsHotRankCell.m; sourceTree = "<group>"; };
+		041131D6268096F6000B5BAF /* TSGoodsHotRankCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSGoodsHotRankCell.h; sourceTree = "<group>"; };
 		04DAFAFC267B37450098275A /* TSOrderManageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSOrderManageViewController.h; sourceTree = "<group>"; };
 		04DAFAFD267B37450098275A /* TSOrderManageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSOrderManageViewController.m; sourceTree = "<group>"; };
 		1942D505D7004833F274B5D1 /* libPods-TShopMallTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TShopMallTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -870,11 +892,28 @@
 		F530CCE826804167009DC29A /* TSWebViewNetworkInterceptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSWebViewNetworkInterceptor.h; sourceTree = "<group>"; };
 		F530CCFD26806BDD009DC29A /* TSSaveLocalConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSSaveLocalConst.h; sourceTree = "<group>"; };
 		F530CCFE26806BDD009DC29A /* TSSaveLocalConst.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSSaveLocalConst.m; sourceTree = "<group>"; };
-		F530CD0B268085BA009DC29A /* tabbar_mine.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tabbar_mine.json; sourceTree = "<group>"; };
-		F530CD0C268085BA009DC29A /* tabbar_rank.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tabbar_rank.json; sourceTree = "<group>"; };
-		F530CD0D268085BA009DC29A /* tabbar_category.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tabbar_category.json; sourceTree = "<group>"; };
-		F530CD0E268085BA009DC29A /* tabbar_home.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tabbar_home.json; sourceTree = "<group>"; };
-		F530CD0F268085BA009DC29A /* tabbar_cart.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tabbar_cart.json; sourceTree = "<group>"; };
+		F530CD1826809B62009DC29A /* SnailQuickMaskPopups.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SnailQuickMaskPopups.m; sourceTree = "<group>"; };
+		F530CD1926809B62009DC29A /* SnailQuickMaskPopups.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SnailQuickMaskPopups.h; sourceTree = "<group>"; };
+		F530CD1F2680B8A0009DC29A /* TSProductHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSProductHeaderView.m; sourceTree = "<group>"; };
+		F530CD202680B8A0009DC29A /* TSGoodDetailSkuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSGoodDetailSkuView.h; sourceTree = "<group>"; };
+		F530CD212680B8A0009DC29A /* TSProductHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSProductHeaderView.h; sourceTree = "<group>"; };
+		F530CD222680B8A0009DC29A /* TSGoodDetailSkuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSGoodDetailSkuView.m; sourceTree = "<group>"; };
+		F530CD252680B911009DC29A /* TSGoodDetailReusableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSGoodDetailReusableHeaderView.m; sourceTree = "<group>"; };
+		F530CD272680B912009DC29A /* TSGoodDetailReusableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSGoodDetailReusableHeaderView.h; sourceTree = "<group>"; };
+		F530CD282680B912009DC29A /* TSProductCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSProductCollectionViewCell.h; sourceTree = "<group>"; };
+		F530CD292680B912009DC29A /* TSProductCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSProductCollectionViewCell.m; sourceTree = "<group>"; };
+		F530CD2E2680BB57009DC29A /* TSProductFooterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSProductFooterView.h; sourceTree = "<group>"; };
+		F530CD2F2680BB57009DC29A /* TSProductFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSProductFooterView.m; sourceTree = "<group>"; };
+		F530CD332680CCC5009DC29A /* launch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "launch@2x.png"; sourceTree = "<group>"; };
+		F530CD342680CCC5009DC29A /* launch@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "launch@3x.png"; sourceTree = "<group>"; };
+		F530CD352680CCC5009DC29A /* launch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch.png; sourceTree = "<group>"; };
+		F530CD3A2680CD6A009DC29A /* tabbar_rank.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tabbar_rank.json; sourceTree = "<group>"; };
+		F530CD3B2680CD6A009DC29A /* tabbar_home.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tabbar_home.json; sourceTree = "<group>"; };
+		F530CD3C2680CD6A009DC29A /* tabbar_category.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tabbar_category.json; sourceTree = "<group>"; };
+		F530CD3D2680CD6A009DC29A /* tabbar_mine.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tabbar_mine.json; sourceTree = "<group>"; };
+		F530CD3E2680CD6A009DC29A /* tabbar_cart.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tabbar_cart.json; sourceTree = "<group>"; };
+		F530CD442680CDF5009DC29A /* TSGoodDetailMaterialView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSGoodDetailMaterialView.h; sourceTree = "<group>"; };
+		F530CD452680CDF5009DC29A /* TSGoodDetailMaterialView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSGoodDetailMaterialView.m; sourceTree = "<group>"; };
 		F54972DE2668842200181E3F /* TShopMall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TShopMall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F54972F22668842400181E3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F54972F92668842500181E3F /* TShopMallTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TShopMallTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1926,13 +1965,67 @@
 		F530CD00268083A2009DC29A /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				F530CD0F268085BA009DC29A /* tabbar_cart.json */,
-				F530CD0D268085BA009DC29A /* tabbar_category.json */,
-				F530CD0E268085BA009DC29A /* tabbar_home.json */,
-				F530CD0B268085BA009DC29A /* tabbar_mine.json */,
-				F530CD0C268085BA009DC29A /* tabbar_rank.json */,
+				F530CD392680CD6A009DC29A /* Tabbar */,
+				F530CD322680CCC5009DC29A /* Lanuch */,
 			);
 			path = Resource;
+			sourceTree = "<group>";
+		};
+		F530CD1726809B62009DC29A /* MaskPopups */ = {
+			isa = PBXGroup;
+			children = (
+				F530CD1926809B62009DC29A /* SnailQuickMaskPopups.h */,
+				F530CD1826809B62009DC29A /* SnailQuickMaskPopups.m */,
+			);
+			path = MaskPopups;
+			sourceTree = "<group>";
+		};
+		F530CD1E2680B8A0009DC29A /* SkuView */ = {
+			isa = PBXGroup;
+			children = (
+				F530CD202680B8A0009DC29A /* TSGoodDetailSkuView.h */,
+				F530CD222680B8A0009DC29A /* TSGoodDetailSkuView.m */,
+				F530CD212680B8A0009DC29A /* TSProductHeaderView.h */,
+				F530CD1F2680B8A0009DC29A /* TSProductHeaderView.m */,
+				F530CD272680B912009DC29A /* TSGoodDetailReusableHeaderView.h */,
+				F530CD252680B911009DC29A /* TSGoodDetailReusableHeaderView.m */,
+				F530CD282680B912009DC29A /* TSProductCollectionViewCell.h */,
+				F530CD292680B912009DC29A /* TSProductCollectionViewCell.m */,
+				F530CD2E2680BB57009DC29A /* TSProductFooterView.h */,
+				F530CD2F2680BB57009DC29A /* TSProductFooterView.m */,
+			);
+			path = SkuView;
+			sourceTree = "<group>";
+		};
+		F530CD312680C5E5009DC29A /* MaterialView */ = {
+			isa = PBXGroup;
+			children = (
+				F530CD442680CDF5009DC29A /* TSGoodDetailMaterialView.h */,
+				F530CD452680CDF5009DC29A /* TSGoodDetailMaterialView.m */,
+			);
+			path = MaterialView;
+			sourceTree = "<group>";
+		};
+		F530CD322680CCC5009DC29A /* Lanuch */ = {
+			isa = PBXGroup;
+			children = (
+				F530CD332680CCC5009DC29A /* launch@2x.png */,
+				F530CD342680CCC5009DC29A /* launch@3x.png */,
+				F530CD352680CCC5009DC29A /* launch.png */,
+			);
+			path = Lanuch;
+			sourceTree = "<group>";
+		};
+		F530CD392680CD6A009DC29A /* Tabbar */ = {
+			isa = PBXGroup;
+			children = (
+				F530CD3A2680CD6A009DC29A /* tabbar_rank.json */,
+				F530CD3B2680CD6A009DC29A /* tabbar_home.json */,
+				F530CD3C2680CD6A009DC29A /* tabbar_category.json */,
+				F530CD3D2680CD6A009DC29A /* tabbar_mine.json */,
+				F530CD3E2680CD6A009DC29A /* tabbar_cart.json */,
+			);
+			path = Tabbar;
 			sourceTree = "<group>";
 		};
 		F54972D52668842200181E3F = {
@@ -1994,6 +2087,7 @@
 		F54973162668A22100181E3F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				F530CD1726809B62009DC29A /* MaskPopups */,
 				F530CCBE26804167009DC29A /* Hybrid */,
 				F530CCB526804167009DC29A /* NetImageAutoSize */,
 				F530CC5226803E43009DC29A /* Popover */,
@@ -2620,6 +2714,8 @@
 		F55D2CE0267881AB006BACCF /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F530CD312680C5E5009DC29A /* MaterialView */,
+				F530CD1E2680B8A0009DC29A /* SkuView */,
 				F55D2CE726788E27006BACCF /* TSDetailFunctionButton.h */,
 				F55D2CE826788E27006BACCF /* TSDetailFunctionButton.m */,
 				F55D2D0C2679EEE2006BACCF /* TSTextImageButton.h */,
@@ -2664,6 +2760,10 @@
 		F55D2D27267B3ACA006BACCF /* View */ = {
 			isa = PBXGroup;
 			children = (
+				041131D6268096F6000B5BAF /* TSGoodsHotRankCell.h */,
+				041131D5268096F6000B5BAF /* TSGoodsHotRankCell.m */,
+				041131D3268096F5000B5BAF /* TSGoodsShowCell.h */,
+				041131D4268096F6000B5BAF /* TSGoodsShowCell.m */,
 				F55D2D28267B3B26006BACCF /* TSRankHonourCell.h */,
 				F55D2D29267B3B26006BACCF /* TSRankHonourCell.m */,
 				F55D2D33267B3F04006BACCF /* TSRankHeaderView.h */,
@@ -2685,6 +2785,8 @@
 			children = (
 				F55D2D2C267B3CF4006BACCF /* TSRankDataController.h */,
 				F55D2D2D267B3CF4006BACCF /* TSRankDataController.m */,
+				041131CE268096CB000B5BAF /* TSHotDataController.h */,
+				041131CD268096CB000B5BAF /* TSHotDataController.m */,
 			);
 			path = DataController;
 			sourceTree = "<group>";
@@ -2694,6 +2796,8 @@
 			children = (
 				F55D2D30267B3DB7006BACCF /* TSRankSectionModel.h */,
 				F55D2D31267B3DB7006BACCF /* TSRankSectionModel.m */,
+				041131D1268096DA000B5BAF /* TSHotSectionModel.h */,
+				041131D0268096D9000B5BAF /* TSHotSectionModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2960,24 +3064,27 @@
 			buildActionMask = 2147483647;
 			files = (
 				F530CC4926803B1C009DC29A /* PulldownRefreshStyleBlack.json in Resources */,
+				F530CD412680CD6A009DC29A /* tabbar_category.json in Resources */,
 				F530CC6726803E43009DC29A /* Toast_Info.png in Resources */,
 				F530CC4A26803B1C009DC29A /* PulldownRefreshStyleRed.json in Resources */,
-				F530CD10268085BA009DC29A /* tabbar_mine.json in Resources */,
+				F530CD402680CD6A009DC29A /* tabbar_home.json in Resources */,
 				F530CC4726803B1C009DC29A /* PulldownRefreshStyleWhite.json in Resources */,
 				F530CCF226804167009DC29A /* TXKJSBridge.js in Resources */,
+				F530CD382680CCC5009DC29A /* launch.png in Resources */,
 				F530CC6A26803E43009DC29A /* ProgressAnimation.json in Resources */,
 				F530CC6826803E43009DC29A /* Toast_Success.png in Resources */,
+				F530CD372680CCC5009DC29A /* launch@3x.png in Resources */,
 				F54973752668A31000181E3F /* Main.storyboard in Resources */,
+				F530CD362680CCC5009DC29A /* launch@2x.png in Resources */,
 				F54973732668A31000181E3F /* Assets.xcassets in Resources */,
 				F54973742668A31000181E3F /* LaunchScreen.storyboard in Resources */,
+				F530CD422680CD6A009DC29A /* tabbar_mine.json in Resources */,
 				DC9911AD267B377000EF9B26 /* refresh_header_light.json in Resources */,
-				F530CD14268085BA009DC29A /* tabbar_cart.json in Resources */,
-				F530CD13268085BA009DC29A /* tabbar_home.json in Resources */,
-				F530CD12268085BA009DC29A /* tabbar_category.json in Resources */,
+				F530CD432680CD6A009DC29A /* tabbar_cart.json in Resources */,
 				C2EF88E02671F79800E7374A /* cart.json in Resources */,
+				F530CD3F2680CD6A009DC29A /* tabbar_rank.json in Resources */,
 				F530CC6926803E43009DC29A /* Toast_Failure.png in Resources */,
 				C2C765332679A825004757B9 /* refresh_header_dark.json in Resources */,
-				F530CD11268085BA009DC29A /* tabbar_rank.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3153,6 +3260,7 @@
 				F55D2D052678D139006BACCF /* TSProductDetailHeaderView.m in Sources */,
 				F55D2D23267B2FB5006BACCF /* TSRankCurrentMonthController.m in Sources */,
 				C2A34C7726749E3E0095497E /* TSSearchController.m in Sources */,
+				041131D8268096F6000B5BAF /* TSGoodsHotRankCell.m in Sources */,
 				F55D2CDB2678812E006BACCF /* TSProductDetailController.m in Sources */,
 				C21A4B71267AF91F00766F72 /* TSMakeOrderPriceCell.m in Sources */,
 				F55D2C6826722807006BACCF /* TSCategorySectionModel.m in Sources */,
@@ -3161,6 +3269,7 @@
 				F55D2D0E2679EEE2006BACCF /* TSTextImageButton.m in Sources */,
 				F530CCF326804167009DC29A /* TSWKCallNativeMethodMessageHandler.m in Sources */,
 				F55D2C7226725618006BACCF /* TSRankCoronalViewController.m in Sources */,
+				F530CD462680CDF5009DC29A /* TSGoodDetailMaterialView.m in Sources */,
 				F55D2C382671E14B006BACCF /* TSUniversalCollectionViewCell.m in Sources */,
 				C3A6C490267A1C1700FC71D6 /* TSBindThirdSectionModel.m in Sources */,
 				C21A4B77267B1C8900766F72 /* TSShippingAddressController.m in Sources */,
@@ -3187,6 +3296,7 @@
 				DC45FEC32678425700CE762E /* TSHighPriceTagView.m in Sources */,
 				F530CCF426804167009DC29A /* TSWKMessageHandlerDispatch.m in Sources */,
 				C3A6C4C2267A1C5700FC71D6 /* TSAboutMeTopCell.m in Sources */,
+				F530CD232680B8A0009DC29A /* TSProductHeaderView.m in Sources */,
 				F55D2D14267AF01E006BACCF /* TSContentBaseViewController.m in Sources */,
 				DC3440AC26720D9200F5B0DA /* TSCollectionViewMeanWidthLayout.m in Sources */,
 				C3A6C493267A1C1700FC71D6 /* TSChangePictureSectionModel.m in Sources */,
@@ -3211,6 +3321,7 @@
 				C35F1870267D963100F65AF9 /* TSAccountCancelConfirmViewController.m in Sources */,
 				C3A6C4C5267A1C5700FC71D6 /* TSBindThirdAppCell.m in Sources */,
 				F54973CB2668C27300181E3F /* TSH5InterfacedConst.m in Sources */,
+				041131D7268096F6000B5BAF /* TSGoodsShowCell.m in Sources */,
 				DC9911C9267C8B0E00EF9B26 /* TSHomePageLoginBarView.m in Sources */,
 				F55D2CA726746BE1006BACCF /* TSCategoryContentViewModel.m in Sources */,
 				F530CCFB26804167009DC29A /* TSWKMessageHandlerHelper.m in Sources */,
@@ -3243,12 +3354,14 @@
 				04DAFAFE267B37450098275A /* TSOrderManageViewController.m in Sources */,
 				C3B4CCDA2674930C0001EE75 /* TSTools.m in Sources */,
 				F55D2CCB26784ACD006BACCF /* TSMinePartnerCenterCell.m in Sources */,
+				F530CD2B2680B912009DC29A /* TSGoodDetailReusableHeaderView.m in Sources */,
 				C21A4B87267B3C2400766F72 /* TSAddressEditView.m in Sources */,
 				C3A6C470267A1BEA00FC71D6 /* TSBindMobileController.m in Sources */,
 				F56D4B3F266DFB8900C1AD9E /* FMLayoutAbsoluteSection.m in Sources */,
 				C2C7652B26788F40004757B9 /* TSSearchHotKeyModel.m in Sources */,
 				C2A34CAF2675FC8C0095497E /* TSGoodsListDataController.m in Sources */,
 				F56D4B44266DFB8900C1AD9E /* FMCollectionLayoutAttributes.m in Sources */,
+				041131CF268096CB000B5BAF /* TSHotDataController.m in Sources */,
 				DC3440C72672600600F5B0DA /* TSHomePageCategoryViewModel.m in Sources */,
 				F55D2ACD266F5C95006BACCF /* TSHomePageReleaseCell.m in Sources */,
 				C3A6C4E9267A1CAF00FC71D6 /* TSBindThirdDataController.m in Sources */,
@@ -3266,6 +3379,7 @@
 				F530CCEA26804167009DC29A /* UITableView+TSWebImageAutoSize.m in Sources */,
 				C3A6C477267A1BEA00FC71D6 /* TSAboutMeViewController.m in Sources */,
 				C3A6C476267A1BEA00FC71D6 /* TSChangePictureViewController.m in Sources */,
+				F530CD2D2680B912009DC29A /* TSProductCollectionViewCell.m in Sources */,
 				F56D4B49266DFB8900C1AD9E /* FMSupplementary.m in Sources */,
 				F54973B42668BBCE00181E3F /* TSRankViewController.m in Sources */,
 				C2EF88B52670997100E7374A /* TSCartGoodsSection.m in Sources */,
@@ -3273,6 +3387,7 @@
 				F56D4B4B266DFB8900C1AD9E /* FMLayoutCrossTransformSection.m in Sources */,
 				C3A6C4DF267A1CAF00FC71D6 /* TSSecurityCenterDataController.m in Sources */,
 				F55D2CD626785249006BACCF /* TSMineMoreButton.m in Sources */,
+				F530CD1A26809B62009DC29A /* SnailQuickMaskPopups.m in Sources */,
 				F56D4B48266DFB8900C1AD9E /* FMLayoutElement.m in Sources */,
 				DC9911902679FB3800EF9B26 /* TSHomePageContentModel.m in Sources */,
 				F56D4B3D266DFB8900C1AD9E /* FMLayoutFillSection.m in Sources */,
@@ -3320,6 +3435,7 @@
 				F55D2C352671E14B006BACCF /* TSUniversalFlowLayout.m in Sources */,
 				C2A34C7A26749FCD0095497E /* TSSearchView.m in Sources */,
 				F56D4B3C266DFB8900C1AD9E /* FMLayoutLabelSection.m in Sources */,
+				041131D2268096DA000B5BAF /* TSHotSectionModel.m in Sources */,
 				C3A6C473267A1BEA00FC71D6 /* TSPersonalViewController.m in Sources */,
 				F55D2AEA266F9CEC006BACCF /* TSUniverseBackgroundHeaderView.m in Sources */,
 				F55D2CAD2674A4AF006BACCF /* TSCategoryKindViewModel.m in Sources */,
@@ -3356,6 +3472,7 @@
 				F54973622668A22100181E3F /* SSResponseModel.m in Sources */,
 				C35F1865267C7F8A00F65AF9 /* TSDatePickerView.m in Sources */,
 				F54973C52668C14F00181E3F /* TSConstant.m in Sources */,
+				F530CD242680B8A0009DC29A /* TSGoodDetailSkuView.m in Sources */,
 				F530CCB026803FCD009DC29A /* UIView+Extension.m in Sources */,
 				C2EF88C72670997100E7374A /* TSCartSettleView.m in Sources */,
 				F530CC3A26803862009DC29A /* NSString+Plugin.m in Sources */,
@@ -3374,6 +3491,7 @@
 				C2C7654B267A097D004757B9 /* TSMakeOrderOperationCell.m in Sources */,
 				F530C6D826802E5D009DC29A /* TSLoginSMSModel.m in Sources */,
 				F56D4B66266E053800C1AD9E /* AppDelegate+Initialize.m in Sources */,
+				F530CD302680BB57009DC29A /* TSProductFooterView.m in Sources */,
 				F55D2C3C2671E14B006BACCF /* TSUniversalSectionModel.m in Sources */,
 				F530CCF826804167009DC29A /* WKWebView+TSExternalNavigationDelegates.m in Sources */,
 				C2EF88CF2670A3B200E7374A /* TSCartRecomendCell.m in Sources */,

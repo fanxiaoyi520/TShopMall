@@ -22,6 +22,7 @@
 -(void)viewDidLoad{
     [super viewDidLoad];
     
+    self.gk_navigationBar.hidden = YES;
     self.myCategoryView.titles = self.titles;
     self.myCategoryView.cellSpacing = 0;
     self.myCategoryView.titleFont = KRegularFont(16);

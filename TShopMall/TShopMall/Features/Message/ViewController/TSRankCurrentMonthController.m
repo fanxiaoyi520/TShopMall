@@ -22,6 +22,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.gk_navigationBar.hidden = YES;
 }
 
 -(void)fillCustomView{
@@ -200,7 +201,7 @@ spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
         flowLayout.delegate = self;
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero
                                              collectionViewLayout:flowLayout];
-        _collectionView.backgroundColor = UIColor.clearColor;
+        _collectionView.backgroundColor = KWhiteColor;
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.showsVerticalScrollIndicator = NO;

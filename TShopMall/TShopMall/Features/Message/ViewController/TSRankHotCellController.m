@@ -6,68 +6,45 @@
 //
 
 #import "TSRankHotCellController.h"
-#import "TSRankCurrentMonthController.h"
-#import "TSRankLastMonthController.h"
-#import "TSRankDataController.h"
+#import "TSHotDataController.h"
+#import "TSUniversalFlowLayout.h"
+#import "TSUniversalCollectionViewCell.h"
 
-@interface TSRankHotCellController ()
+@interface TSRankHotCellController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate>
 
-@property(nonatomic, strong) JXCategoryTitleView *myCategoryView;
-@property(nonatomic, strong) TSRankDataController *dataController;
+/// 数据中心
+@property(nonatomic, strong) TSHotDataController *dataController;
+/// CollectionView
+@property(nonatomic, weak) UICollectionView *collectionView;
 
 @end
 
 @implementation TSRankHotCellController
 
--(void)viewDidLoad{
+- (void)viewDidLoad{
     [super viewDidLoad];
     
-    self.myCategoryView.titles = self.titles;
-    self.myCategoryView.cellSpacing = 0;
-    self.myCategoryView.titleFont = KRegularFont(16);
-    self.myCategoryView.titleSelectedFont = KRegularFont(16);
-    self.myCategoryView.titleColor = KHexAlphaColor(@"#2D3132", 0.4);
-    self.myCategoryView.titleSelectedColor = KHexColor(@"#E64C3D");
-    self.myCategoryView.backgroundColor = [UIColor whiteColor];
-    
-    JXCategoryIndicatorLineView *lineView = [[JXCategoryIndicatorLineView alloc ]init];
-    lineView.indicatorColor = [UIColor whiteColor];
-    self.myCategoryView.indicators = @[lineView];
-    self.myCategoryView.separatorLineShowEnabled = YES;
-    
-    [self.dataController fetchRankCoronalComplete:^(BOOL isSucess) {
-
+    self.gk_navigationBar.hidden = YES;
+    __weak __typeof(self)weakSelf = self;
+    [self.dataController fetchHotGoodsComplete:^(BOOL isSucess) {
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
+        if (isSucess) {
+            [strongSelf.collectionView reloadData];
+        }
     }];
 }
 
-- (JXCategoryTitleView *)myCategoryView {
-    return (JXCategoryTitleView *)self.categoryView;
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleDefault;
 }
 
-- (JXCategoryBaseView *)preferredCategoryView {
-    return [[JXCategoryTitleView alloc] init];
-}
-
-#pragma mark - JXCategoryViewDelegate
-- (void)categoryView:(JXCategoryBaseView *)categoryView didSelectedItemAtIndex:(NSInteger)index {
-
-}
-
-#pragma mark - JXCategoryListContentViewDelegate
-- (NSInteger)numberOfListsInlistContainerView:(JXCategoryListContainerView *)listContainerView {
-    return 2;
-}
-
-- (id<JXCategoryListContentViewDelegate>)listContainerView:(JXCategoryListContainerView *)listContainerView initListForIndex:(NSInteger)index {
-    if (index == 0) {
-        TSRankCurrentMonthController *list = [[TSRankCurrentMonthController alloc] init];
-        list.coronalSections = self.dataController.coronalSections;
-        return list;
-    }else{
-        TSRankLastMonthController *list = [[TSRankLastMonthController alloc] init];
-        list.coronalSections = self.dataController.coronalSections;
-        return list;
-    }
+- (void)fillCustomView {
+    [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view.mas_left).with.offset(0);
+        make.right.equalTo(self.view.mas_right).with.offset(0);
+        make.top.equalTo(self.view.mas_top).with.offset(0.5);
+        make.bottom.equalTo(self.view.mas_bottom).with.offset(-93);
+    }];
 }
 
 - (UIView *)listView {
@@ -75,11 +52,98 @@
 }
 
 #pragma mark - Getter
--(TSRankDataController *)dataController{
+
+- (TSHotDataController *)dataController{
     if (!_dataController) {
-        _dataController = [[TSRankDataController alloc] init];
+        _dataController = [[TSHotDataController alloc] init];
     }
     return _dataController;
+}
+
+- (UICollectionView *)collectionView{
+    if (!_collectionView) {
+        TSUniversalFlowLayout *flowLayout = [[TSUniversalFlowLayout alloc]init];
+        flowLayout.delegate = self;
+        UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero
+                                             collectionViewLayout:flowLayout];
+        _collectionView = collectionView;
+        _collectionView.backgroundColor = KWhiteColor;
+        _collectionView.delegate = self;
+        _collectionView.dataSource = self;
+        _collectionView.showsVerticalScrollIndicator = NO;
+        _collectionView.showsHorizontalScrollIndicator = NO;
+        [self.view addSubview:_collectionView];
+    }
+    return _collectionView;
+}
+
+#pragma mark - UICollectionViewDataSource
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    return self.dataController.sections.count;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    TSHotSectionModel *model = self.dataController.sections[section];
+    return model.items.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    TSHotSectionModel *model = self.dataController.sections[indexPath.section];
+    TSHotSectionItemModel *item = model.items[indexPath.row];
+    Class className = NSClassFromString(item.identify);
+    [collectionView registerClass:[className class] forCellWithReuseIdentifier:item.identify];
+    TSUniversalCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:item.identify forIndexPath:indexPath];
+    cell.indexPath = indexPath;
+    cell.delegate = self;
+    return cell;
+}
+
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+}
+
+#pragma mark - UniversalCollectionViewCellDataDelegate
+- (id)universalCollectionViewCellModel:(NSIndexPath *)indexPath{
+    TSHotSectionModel *sectionModel = self.dataController.sections[indexPath.section];
+    return sectionModel.items[indexPath.row];
+}
+
+#pragma mark - UniversalFlowLayoutDelegate
+- (CGFloat)collectionView:(UICollectionView *_Nullable)collectionView
+                   layout:(TSUniversalFlowLayout *_Nullable)collectionViewLayout
+  heightForRowAtIndexPath:(NSIndexPath *_Nullable)indexPath
+                itemWidth:(CGFloat)itemWidth{
+    TSHotSectionModel *model = self.dataController.sections[indexPath.section];
+    TSHotSectionItemModel *item = model.items[indexPath.row];
+    return item.cellHeight;
+}
+
+- (NSInteger)collectionView:(UICollectionView *_Nullable)collectionView
+                     layout:(TSUniversalFlowLayout *_Nullable)collectionViewLayout
+      columnNumberAtSection:(NSInteger )section{
+    TSHotSectionModel *model = self.dataController.sections[section];
+    return model.column;
+}
+
+- (NSInteger)collectionView:(UICollectionView *_Nullable)collectionView
+                     layout:(TSUniversalFlowLayout *_Nullable)collectionViewLayout
+lineSpacingForSectionAtIndex:(NSInteger)section{
+    TSHotSectionModel *model = self.dataController.sections[section];
+    return model.lineSpacing;
+}
+
+- (CGFloat)collectionView:(UICollectionView *_Nullable)collectionView
+                   layout:(TSUniversalFlowLayout*_Nullable)collectionViewLayout
+interitemSpacingForSectionAtIndex:(NSInteger)section{
+    TSHotSectionModel *model = self.dataController.sections[section];
+    return model.interitemSpacing;
+}
+
+- (CGFloat)collectionView:(UICollectionView *_Nullable)collectionView
+                   layout:(TSUniversalFlowLayout*_Nullable)collectionViewLayout
+spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
+    TSHotSectionModel *model = self.dataController.sections[section];
+    return model.spacingWithLastSection;
 }
 
 @end
