@@ -10,11 +10,13 @@
 #import "TSSearchBaseCell.h"
 #import "TSSearchHeaderView.h"
 #import "TSSearchKeyViewModel.h"
+#import "TSRecomendView.h"
 
 @interface TSSearchView()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 @property (nonatomic, strong) TSSearchTextView *textView;
 @property (nonatomic, strong) UIButton *cancelBtn;
 @property (nonatomic, strong) UICollectionView *collectionView;
+@property (nonatomic, strong) TSRecomendView *recomendView;
 @end
 
 @implementation TSSearchView
@@ -68,6 +70,9 @@
     }
     [collectionView registerClass:NSClassFromString(section.footerIdentifier) forSupplementaryViewOfKind:kind withReuseIdentifier:section.footerIdentifier];
     UICollectionReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:section.footerIdentifier forIndexPath:indexPath];
+    if ([view isKindOfClass:[TSRecomendView class]]) {
+
+    }
     return view;
 }
 
