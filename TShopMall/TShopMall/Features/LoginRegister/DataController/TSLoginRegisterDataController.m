@@ -108,11 +108,12 @@
         if (dataString) {
             NSDictionary *dic = [dataString jsonValueDecoded];
             if ([dic[@"code"] intValue] == 1) {
-                [TSUserInfoManager userInfo].accessToken = dic[@"accessToken"];
-                [TSUserInfoManager userInfo].refreshToken = dic[@"refreshToken"];
-                [TSUserInfoManager userInfo].userName = dic[@"userName"];
-                [TSUserInfoManager userInfo].accountId = dic[@"accountId"];
-                [[TSUserInfoManager userInfo] saveUserInfo];
+                TSUserInfoManager *userInfo = [[TSUserInfoManager alloc] init];
+                userInfo.accessToken = dic[@"accessToken"];
+                userInfo.refreshToken = dic[@"refreshToken"];
+                userInfo.userName = dic[@"userName"];
+                userInfo.accountId = dic[@"accountId"];
+                [[TSUserInfoManager userInfo] saveUserInfo:userInfo];
                 if ([TSUserLoginManager shareInstance].loginStateDidChanged) {
                     [TSUserLoginManager shareInstance].loginStateDidChanged(Login);
                 }
