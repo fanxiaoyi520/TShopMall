@@ -11,6 +11,7 @@
 #import "TSSearchResultCollectionView.h"
 #import "TSSearchResultDataController.h"
 #import "TSEmptyAlertView.h"
+#import "TSRecomendDataController.h"
 
 @interface TSSearchResultController ()<TSSearchResultFittleDelegate>
 @property (nonatomic, strong) TSSearchResultNaviView *naviView;
@@ -39,11 +40,18 @@
 }
 
 - (void)showSearchResultView{
+    self.dataCon.isGrid = YES;
+    self.naviView.typeBtn.selected = NO;
+    [self.dataCon defaultConfig];
     [UIView animateWithDuration:0.5 animations:^{
         self.view.alpha = 1;
     } completion:^(BOOL finished) {
         self.naviView.searchView.textField.text = self.searchKey;
         [self refreshGoods];
+    }];
+    
+    [[TSRecomendDataController new] fetchRecomentDatas:^{
+            
     }];
 }
 

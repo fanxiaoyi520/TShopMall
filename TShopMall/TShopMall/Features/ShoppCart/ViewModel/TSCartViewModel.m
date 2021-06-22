@@ -25,7 +25,6 @@
     }
     
     [sections addObject:[TSCartViewModel configInvalidGoods:nil]];
-    [sections addObject:[TSCartViewModel configRecomendGoods:nil]];
 
     return sections;
 }
@@ -72,19 +71,6 @@
     section.headerIdentifier = @"TSCartInvalidHeader";
 //    section.heightForFooter = KRateW(10.0);
     section.rows = invalidRow;
-    
-    return section;
-}
-
-+ (TSCartGoodsSection *)configRecomendGoods:(id)obj{
-    TSCartGoodsRow *recomendRow = [TSCartGoodsRow new];
-    recomendRow.cellIdentifier = @"TSCartRecomendCell";
-    
-    TSCartGoodsSection *section =  [TSCartGoodsSection new];
-    section.heightForHeader = KRateW(62.0);
-    section.headerIdentifier = @"TSCartRecomendHeader";
-    section.heightForFooter = 0.1f;
-    section.rows = @[recomendRow];
     
     return section;
 }

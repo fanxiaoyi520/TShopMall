@@ -12,11 +12,13 @@
 #import "TSCartProtocol.h"
 #import "TSAlertView.h"
 #import "TSMakeOrderController.h"
+#import "TSRecomendView.h"
 
 @interface TSCartViewController ()<TSCartProtocol>
 @property (nonatomic, strong) UIButton *editBtn;
 @property (nonatomic, strong) TSCartView *cartView;
 @property (nonatomic, strong) TSCartSettleView *settleView;
+@property (nonatomic, strong) TSRecomendView *footerView;
 @end
 
 @implementation TSCartViewController
@@ -31,6 +33,13 @@
         self.automaticallyAdjustsScrollViewInsets = YES;
     }
     [self configInfo];
+    
+    __weak typeof(self) weakSelf = self;
+    self.footerView = [TSRecomendView configRecomendViewWithType:Cart layoutFinished:^{
+        self.cartView.tableFooterView = weakSelf.footerView;
+    } goodsSelected:^(NSString *goodsId) {
+        
+    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated{

@@ -26,7 +26,7 @@
 
 - (void)setupBasic {
     [super setupBasic];
-    self.title = @"个人资料";
+    self.gk_navTitle = @"个人资料";
     __weak __typeof(self)weakSelf = self;
     [self.dataController fetchSecurityCenterContentsComplete:^(BOOL isSucess) {
         __strong __typeof(weakSelf)strongSelf = weakSelf;
@@ -44,7 +44,7 @@
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view.mas_left).with.offset(0);
         make.right.equalTo(self.view.mas_right).with.offset(0);
-        make.top.equalTo(self.view.mas_top).with.offset(1);
+        make.top.equalTo(self.view.mas_top).with.offset(GK_STATUSBAR_NAVBAR_HEIGHT + 1);
         make.bottom.equalTo(self.view.mas_bottom).with.offset(0);
     }];
 }

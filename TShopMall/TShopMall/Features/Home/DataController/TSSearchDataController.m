@@ -101,22 +101,6 @@
     return section;
 }
 
-
-+ (TSSearchSection *)configRecomendSection:(id)obj{
-    TSSearchRow *row = [TSSearchRow new];
-    row.cellIdentifier = @"TSSearchRecomendCell";
-    
-    TSSearchSection *section = [TSSearchSection new];
-    section.headerIdentifier = @"TSSearchHeaderView";
-    section.footerIdentifier = @"UICollectionReusableView";
-    section.headerTitle = @"热门推荐";
-    section.headerHeight = KRateW(40.0);
-    section.footerHeight = (CGFloat)GK_SAFEAREA_BTM;
-    section.rows = @[row, row, row];
-    
-    return section;
-}
-
 + (NSArray<TSSearchSection *> *)updateHistorySections:(NSArray<TSSearchSection *> *)sections{
     BOOL isContainHistory = NO;
     for (TSSearchSection *section in sections) {
@@ -138,6 +122,28 @@
         [temSections insertObject:historySection atIndex:0];
     }
     return temSections;
+}
+
+- (NSArray<TSSearchSection *> *)configRecomendSection:(UICollectionReusableView *)recomendView{
+    TSSearchRow *row = [TSSearchRow new];
+    row.cellIdentifier = @"TSSearchRecomendCell";
+    row.rowSize = CGSizeMake(kScreenWidth, recomendView.frame.size.height);
+    row.obj = recomendView;
+    
+    TSSearchSection *section = [TSSearchSection new];
+    section.headerIdentifier = @"TSSearchHeaderView";
+    section.footerIdentifier = @"TSRecomendView";
+    section.viewForFooter = recomendView;
+    section.headerTitle = @"";
+    section.headerHeight = 0;
+    section.footerHeight = 0.1f;
+    section.rows = @[row];
+    
+    NSMutableArray *arr = [NSMutableArray arrayWithArray:self.sections];
+    [arr addObject:section];
+    self.sections = arr;
+    
+    return self.sections;
 }
 
 @end
