@@ -275,6 +275,16 @@
 		F530CD432680CD6A009DC29A /* tabbar_cart.json in Resources */ = {isa = PBXBuildFile; fileRef = F530CD3E2680CD6A009DC29A /* tabbar_cart.json */; };
 		F530CD462680CDF5009DC29A /* TSGoodDetailMaterialView.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CD452680CDF5009DC29A /* TSGoodDetailMaterialView.m */; };
 		F530CD4A2681750A009DC29A /* TSTopFunctionView.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CD492681750A009DC29A /* TSTopFunctionView.m */; };
+		F530CD4E26819012009DC29A /* TSChangePriceView.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CD4D26819012009DC29A /* TSChangePriceView.m */; };
+		F530CD5826819449009DC29A /* mall_launch_bottom@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F530CD4F26819448009DC29A /* mall_launch_bottom@3x.png */; };
+		F530CD5926819449009DC29A /* mall_logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F530CD5026819448009DC29A /* mall_logo@3x.png */; };
+		F530CD5A26819449009DC29A /* mall_launch_bottom.png in Resources */ = {isa = PBXBuildFile; fileRef = F530CD5126819448009DC29A /* mall_launch_bottom.png */; };
+		F530CD5B26819449009DC29A /* mall_launch_bottom@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F530CD5226819448009DC29A /* mall_launch_bottom@2x.png */; };
+		F530CD5C26819449009DC29A /* mall_goods.png in Resources */ = {isa = PBXBuildFile; fileRef = F530CD5326819448009DC29A /* mall_goods.png */; };
+		F530CD5D26819449009DC29A /* mall_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = F530CD5426819448009DC29A /* mall_logo.png */; };
+		F530CD5E26819449009DC29A /* mall_goods@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F530CD5526819448009DC29A /* mall_goods@3x.png */; };
+		F530CD5F26819449009DC29A /* mall_goods@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F530CD5626819449009DC29A /* mall_goods@2x.png */; };
+		F530CD6026819449009DC29A /* mall_logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F530CD5726819449009DC29A /* mall_logo@2x.png */; };
 		F54972FE2668842500181E3F /* TShopMallTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F54972FD2668842500181E3F /* TShopMallTests.m */; };
 		F54973092668842500181E3F /* TShopMallUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F54973082668842500181E3F /* TShopMallUITests.m */; };
 		F54973602668A22100181E3F /* SSGenaralRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F54973402668A22100181E3F /* SSGenaralRequest.m */; };
@@ -914,6 +924,17 @@
 		F530CD452680CDF5009DC29A /* TSGoodDetailMaterialView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSGoodDetailMaterialView.m; sourceTree = "<group>"; };
 		F530CD482681750A009DC29A /* TSTopFunctionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSTopFunctionView.h; sourceTree = "<group>"; };
 		F530CD492681750A009DC29A /* TSTopFunctionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSTopFunctionView.m; sourceTree = "<group>"; };
+		F530CD4C26819012009DC29A /* TSChangePriceView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSChangePriceView.h; sourceTree = "<group>"; };
+		F530CD4D26819012009DC29A /* TSChangePriceView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSChangePriceView.m; sourceTree = "<group>"; };
+		F530CD4F26819448009DC29A /* mall_launch_bottom@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mall_launch_bottom@3x.png"; sourceTree = "<group>"; };
+		F530CD5026819448009DC29A /* mall_logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mall_logo@3x.png"; sourceTree = "<group>"; };
+		F530CD5126819448009DC29A /* mall_launch_bottom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mall_launch_bottom.png; sourceTree = "<group>"; };
+		F530CD5226819448009DC29A /* mall_launch_bottom@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mall_launch_bottom@2x.png"; sourceTree = "<group>"; };
+		F530CD5326819448009DC29A /* mall_goods.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mall_goods.png; sourceTree = "<group>"; };
+		F530CD5426819448009DC29A /* mall_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mall_logo.png; sourceTree = "<group>"; };
+		F530CD5526819448009DC29A /* mall_goods@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mall_goods@3x.png"; sourceTree = "<group>"; };
+		F530CD5626819449009DC29A /* mall_goods@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mall_goods@2x.png"; sourceTree = "<group>"; };
+		F530CD5726819449009DC29A /* mall_logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mall_logo@2x.png"; sourceTree = "<group>"; };
 		F54972DE2668842200181E3F /* TShopMall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TShopMall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F54972F22668842400181E3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F54972F92668842500181E3F /* TShopMallTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TShopMallTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2010,6 +2031,15 @@
 				F530CD332680CCC5009DC29A /* launch@2x.png */,
 				F530CD342680CCC5009DC29A /* launch@3x.png */,
 				F530CD352680CCC5009DC29A /* launch.png */,
+				F530CD5326819448009DC29A /* mall_goods.png */,
+				F530CD5626819449009DC29A /* mall_goods@2x.png */,
+				F530CD5526819448009DC29A /* mall_goods@3x.png */,
+				F530CD5126819448009DC29A /* mall_launch_bottom.png */,
+				F530CD5226819448009DC29A /* mall_launch_bottom@2x.png */,
+				F530CD4F26819448009DC29A /* mall_launch_bottom@3x.png */,
+				F530CD5426819448009DC29A /* mall_logo.png */,
+				F530CD5726819449009DC29A /* mall_logo@2x.png */,
+				F530CD5026819448009DC29A /* mall_logo@3x.png */,
 			);
 			path = Lanuch;
 			sourceTree = "<group>";
@@ -2033,6 +2063,15 @@
 				F530CD492681750A009DC29A /* TSTopFunctionView.m */,
 			);
 			path = TopFunctionView;
+			sourceTree = "<group>";
+		};
+		F530CD4B26818FDF009DC29A /* PriceView */ = {
+			isa = PBXGroup;
+			children = (
+				F530CD4C26819012009DC29A /* TSChangePriceView.h */,
+				F530CD4D26819012009DC29A /* TSChangePriceView.m */,
+			);
+			path = PriceView;
 			sourceTree = "<group>";
 		};
 		F54972D52668842200181E3F = {
@@ -2721,6 +2760,7 @@
 		F55D2CE0267881AB006BACCF /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F530CD4B26818FDF009DC29A /* PriceView */,
 				F530CD47268174EE009DC29A /* TopFunctionView */,
 				F530CD312680C5E5009DC29A /* MaterialView */,
 				F530CD1E2680B8A0009DC29A /* SkuView */,
@@ -3075,23 +3115,32 @@
 				F530CD412680CD6A009DC29A /* tabbar_category.json in Resources */,
 				F530CC6726803E43009DC29A /* Toast_Info.png in Resources */,
 				F530CC4A26803B1C009DC29A /* PulldownRefreshStyleRed.json in Resources */,
+				F530CD5926819449009DC29A /* mall_logo@3x.png in Resources */,
 				F530CD402680CD6A009DC29A /* tabbar_home.json in Resources */,
 				F530CC4726803B1C009DC29A /* PulldownRefreshStyleWhite.json in Resources */,
 				F530CCF226804167009DC29A /* TXKJSBridge.js in Resources */,
 				F530CD382680CCC5009DC29A /* launch.png in Resources */,
 				F530CC6A26803E43009DC29A /* ProgressAnimation.json in Resources */,
+				F530CD5A26819449009DC29A /* mall_launch_bottom.png in Resources */,
 				F530CC6826803E43009DC29A /* Toast_Success.png in Resources */,
 				F530CD372680CCC5009DC29A /* launch@3x.png in Resources */,
 				F54973752668A31000181E3F /* Main.storyboard in Resources */,
+				F530CD5D26819449009DC29A /* mall_logo.png in Resources */,
+				F530CD5C26819449009DC29A /* mall_goods.png in Resources */,
 				F530CD362680CCC5009DC29A /* launch@2x.png in Resources */,
 				F54973732668A31000181E3F /* Assets.xcassets in Resources */,
+				F530CD6026819449009DC29A /* mall_logo@2x.png in Resources */,
 				F54973742668A31000181E3F /* LaunchScreen.storyboard in Resources */,
 				F530CD422680CD6A009DC29A /* tabbar_mine.json in Resources */,
 				DC9911AD267B377000EF9B26 /* refresh_header_light.json in Resources */,
 				F530CD432680CD6A009DC29A /* tabbar_cart.json in Resources */,
 				C2EF88E02671F79800E7374A /* cart.json in Resources */,
 				F530CD3F2680CD6A009DC29A /* tabbar_rank.json in Resources */,
+				F530CD5826819449009DC29A /* mall_launch_bottom@3x.png in Resources */,
+				F530CD5F26819449009DC29A /* mall_goods@2x.png in Resources */,
+				F530CD5E26819449009DC29A /* mall_goods@3x.png in Resources */,
 				F530CC6926803E43009DC29A /* Toast_Failure.png in Resources */,
+				F530CD5B26819449009DC29A /* mall_launch_bottom@2x.png in Resources */,
 				C2C765332679A825004757B9 /* refresh_header_dark.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3473,6 +3522,7 @@
 				F55D2C6426722807006BACCF /* TSCategoryKindCell.m in Sources */,
 				C21A4B93267C7E1000766F72 /* TSAreaCard.m in Sources */,
 				C3B4CCEF2674934E0001EE75 /* TSLoginTopView.m in Sources */,
+				F530CD4E26819012009DC29A /* TSChangePriceView.m in Sources */,
 				F530CCF526804167009DC29A /* WKWebView+TSClearWebCache.m in Sources */,
 				F55D2CC626784ACD006BACCF /* TSMineSectionModel.m in Sources */,
 				F530CC6526803E43009DC29A /* Toasty.m in Sources */,
@@ -3770,9 +3820,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = XVAZU5V3Q7;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 2GM7ZL62GN;
 				EXCLUDED_ARCHS = "";
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PREFIX_HEADER = TShopMall/Expand/Macros/TSPrefixHeader.pch;
@@ -3783,9 +3833,9 @@
 					"@executable_path/Frameworks",
 				);
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.chenjie.UICollectionView.TShopMall;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tcl.TSalesDev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "T销客_开发";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -3796,9 +3846,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = XVAZU5V3Q7;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 2GM7ZL62GN;
 				EXCLUDED_ARCHS = "";
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PREFIX_HEADER = TShopMall/Expand/Macros/TSPrefixHeader.pch;
@@ -3809,9 +3859,9 @@
 					"@executable_path/Frameworks",
 				);
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.chenjie.UICollectionView.TShopMall;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tcl.TSalesDev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "T销客_开发";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
