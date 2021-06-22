@@ -1,15 +1,15 @@
 //
-//  TSGoodListViewModel.m
+//  TSSearchResultViewModel.m
 //  TShopMall
 //
-//  Created by 橙子 on 2021/6/15.
+//  Created by 橙子 on 2021/6/21.
 //
 
-#import "TSGoodListViewModel.h"
+#import "TSSearchResultViewModel.h"
 
-@implementation TSGoodListViewModel
+@implementation TSSearchResultViewModel
 - (instancetype)initWithList:(TSSearchList *)list{
-    TSGoodListViewModel *vm = [TSGoodListViewModel new];
+    TSSearchResultViewModel *vm = [TSSearchResultViewModel new];
     vm.icon = list.pic;
     vm.name = list.name;
     vm.price = list.promotionPrice;

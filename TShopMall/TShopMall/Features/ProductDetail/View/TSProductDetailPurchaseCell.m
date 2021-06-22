@@ -159,21 +159,44 @@
 
 #pragma mark - Actions
 -(void)giftMoreAction:(UIButton *)sender{
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setValue:@"TSProductDetailPurchaseCell" forKey:@"cellType"];
+    [params setValue:@(PurchaseCellMoreTypeGift) forKey:@"purchaseType"];
     
+    if (self.delegate && [self.delegate respondsToSelector:@selector(universalCollectionViewCellClick:params:)]) {
+        [self.delegate universalCollectionViewCellClick:self.indexPath params:params];
+    }
 }
 
 -(void)selectMoreAction:(UIButton *)sender{
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setValue:@"TSProductDetailPurchaseCell" forKey:@"cellType"];
+    [params setValue:@(PurchaseCellMoreTypeSelected) forKey:@"purchaseType"];
     
+    if (self.delegate && [self.delegate respondsToSelector:@selector(universalCollectionViewCellClick:params:)]) {
+        [self.delegate universalCollectionViewCellClick:self.indexPath params:params];
+    }
 }
 
 -(void)deliveryAction:(UIButton *)sender{
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setValue:@"TSProductDetailPurchaseCell" forKey:@"cellType"];
+    [params setValue:@(PurchaseCellMoreTypeDelivery) forKey:@"purchaseType"];
     
+    if (self.delegate && [self.delegate respondsToSelector:@selector(universalCollectionViewCellClick:params:)]) {
+        [self.delegate universalCollectionViewCellClick:self.indexPath params:params];
+    }
 }
 
 -(void)feeAction:(UIButton *)sender{
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setValue:@"TSProductDetailPurchaseCell" forKey:@"cellType"];
+    [params setValue:@(PurchaseCellMoreTypeFee) forKey:@"purchaseType"];
     
+    if (self.delegate && [self.delegate respondsToSelector:@selector(universalCollectionViewCellClick:params:)]) {
+        [self.delegate universalCollectionViewCellClick:self.indexPath params:params];
+    }
 }
-
 
 #pragma mark - Getter
 -(UIView *)bgView{

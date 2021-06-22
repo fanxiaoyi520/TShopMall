@@ -11,4 +11,3 @@
 @interface TSAddressEditController : TSBaseViewController
 @property (nonatomic, strong) TSAddressModel *addressModel;
 @end
-

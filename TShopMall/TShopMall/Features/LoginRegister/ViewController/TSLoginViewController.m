@@ -169,7 +169,6 @@
     [self.dataController fetchLoginSMSCodeMobile:mobile complete:^(BOOL isSucess) {
         __strong __typeof(weakSelf)strongSelf = weakSelf;
         if (isSucess) {
-            
             strongSelf.timer = [NSTimer ts_scheduledTimerWithTimeInterval:1 block:^{
                  [weakSelf goToRun];
             } repeats:YES];

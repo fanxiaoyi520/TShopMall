@@ -26,7 +26,7 @@
 }
 
 - (void)saveCurrentUserInfo{
-    [self.currentUserInfo saveUserInfo];
+    [self.currentUserInfo saveUserInfo:self.currentUserInfo];
 }
 
 - (void)clearUserInfo{
