@@ -11,6 +11,7 @@
 #import "YBNestViews.h"
 #import <MJRefresh/MJRefresh.h>
 #import "TSEmptyAlertView.h"
+#import "TSProductDetailController.h"
 
 @interface TSHomePageContainerCell()<YBNestContainerViewDataSource, YBNestContainerViewDelegate>
 @property(nonatomic, strong) TSHomePageContainerViewModel *containerViewModel;
@@ -95,6 +96,11 @@
     UIEdgeInsets padding = UIEdgeInsetsMake(0, 16, 16, 16);
    
     TSHomePageContainerCollectionView *collectionView =  [[TSHomePageContainerCollectionView alloc] initWithFrame:CGRectZero items:nil ColumnSpacing:8 rowSpacing:8 itemsHeight:282 rows:0 columns:2 padding:padding clickedBlock:^(TSProductBaseModel *selectItem, NSInteger index) {
+        
+        TSProductDetailController *detail = [[TSProductDetailController alloc] init];
+        detail.uuid = selectItem.uuid;
+        
+        
         NSLog(@"uri:%@", selectItem.uuid);
     }];
     collectionView.tag = page;
