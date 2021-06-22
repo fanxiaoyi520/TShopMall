@@ -24,6 +24,10 @@ UIKIT_EXTERN NSString *const kMallApiPrefix;
 UIKIT_EXTERN NSString *const kLoginSmsCaptchaUrl;
 /// 快速登录
 UIKIT_EXTERN NSString *const kLoginQuickLoginUrl;
+///  注册
+UIKIT_EXTERN NSString *const kRegisterUrl;
+
+
 
 #pragma mark - 首页
 UIKIT_EXTERN NSString *const kHomePageInfoUrl;

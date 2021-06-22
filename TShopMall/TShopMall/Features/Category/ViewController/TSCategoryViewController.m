@@ -75,13 +75,14 @@
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view);
         make.width.mas_equalTo(88);
-        make.top.equalTo(self.view).offset(0);
+        make.top.equalTo(self.view).offset(GK_STATUSBAR_NAVBAR_HEIGHT);
         make.bottom.equalTo(self.view).offset(GK_TABBAR_HEIGHT);
     }];
     
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.tableView.mas_right).offset(1);
-        make.top.right.equalTo(self.view).offset(0);
+        make.right.equalTo(self.view.mas_right).offset(0);
+        make.top.equalTo(self.view).offset(GK_STATUSBAR_NAVBAR_HEIGHT);
         make.bottom.equalTo(self.view).offset(-GK_TABBAR_HEIGHT);
     }];
 }

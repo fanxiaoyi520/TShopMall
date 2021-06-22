@@ -38,6 +38,7 @@
     return self;
 }
 
+
 - (void)addConstraints {
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.mas_left).with.offset(25);

@@ -83,7 +83,7 @@
         make.top.equalTo(self.priceLabel.mas_bottom).with.offset(5);
     }];
     [self.bestView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.titleLabel.mas_centerX).with.offset(0);
+        make.left.equalTo(self.titleLabel.mas_centerX).with.offset(0);
         make.top.equalTo(self.titleLabel.mas_bottom).with.offset(14);
         make.width.mas_equalTo(70);
         make.height.mas_equalTo(18);

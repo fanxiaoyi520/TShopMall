@@ -267,6 +267,10 @@
     }
 }
 
+- (NSString *)getInvitationCode{
+    return self.invitedCodeInput.text;
+}
+
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     

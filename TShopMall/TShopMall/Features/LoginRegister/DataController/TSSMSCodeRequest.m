@@ -10,14 +10,16 @@
 @interface TSSMSCodeRequest()
 
 @property(nonatomic, copy) NSString *mobile;
+@property(nonatomic, copy) NSString *type;
 
 @end
 
 @implementation TSSMSCodeRequest
 
--(instancetype)initWithMobile:(NSString *)mobile{
+-(instancetype)initWithMobile:(NSString *)mobile type:(NSString *)type{
     if (self = [super init]) {
         self.mobile = mobile;
+        self.type = type;
     }
     return self;
 }
@@ -56,7 +58,7 @@
     [params setValue:kAppSecret forKey:@"appSecret"];
     [params setValue:self.mobile forKey:@"mobile"];
     [params setValue:@"zh" forKey:@"language"];
-    [params setValue:@"LOGIN" forKey:@"bType"];
+    [params setValue:self.type forKey:@"bType"];
     
     NSMutableDictionary *comBody = [self commonBady];
     [comBody setValuesForKeysWithDictionary:params];

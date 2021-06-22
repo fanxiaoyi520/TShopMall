@@ -58,12 +58,15 @@
     [self addConstraints];
 }
 
-
-
 - (void)setupBasic {
     self.count = 60;
     self.view.backgroundColor = UIColor.whiteColor;
-    [self.navigationController setNavigationBarHidden:YES];
+    UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panAction:)];
+    [self.view addGestureRecognizer:panGestureRecognizer];
+}
+
+- (void)panAction: (UIPanGestureRecognizer *)recognizer {
+    [self.view endEditing:YES];
 }
 
 - (void)addConstraints {
@@ -172,6 +175,14 @@
 - (void)goToRegister {
     if (self.navigationController) {
         TSRegiterViewController *registerVC = [[TSRegiterViewController alloc] init];
+        registerVC.regiterBlock = ^{
+            [self dismissViewControllerAnimated:YES completion:^{
+                if (self.loginBlock) {
+                    self.loginBlock();
+                }
+            }];
+        };
+        registerVC.dataController = self.dataController;
         [self.navigationController pushViewController:registerVC animated:YES];
     } else {
         [self dismissViewControllerAnimated:YES completion:nil];

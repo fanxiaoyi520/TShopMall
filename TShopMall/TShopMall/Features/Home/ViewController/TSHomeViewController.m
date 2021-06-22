@@ -18,6 +18,8 @@
 #import "TSHomePageLoginBarView.h"
 #import "TSHomePagePerchView.h"
 
+#import "TSProductDetailController.h"
+
 #define tableViewBackGroundViewHeight 204.0
 
 @interface TSHomeViewController ()<UITableViewDelegate, UITableViewDataSource>
@@ -69,13 +71,16 @@
         }
     }];
 
-    [self.view addSubview:self.loginBar];
-    self.loginBar.clickBlock = ^{
-        [[TSUserLoginManager shareInstance] startLogin:^(BOOL success) {
-            @strongify(self);
-            [self.viewModel fetchData];
-        }];
+    if ([TSUserLoginManager shareInstance].state == None) {
+        [self.view addSubview:self.loginBar];
+        self.loginBar.clickBlock = ^{
+            [[TSUserLoginManager shareInstance] startLogin];
+        };
+    }
 
+    [TSUserLoginManager shareInstance].loginStateDidChanged = ^(TSLoginState state) {
+        @strongify(self)
+        [self.viewModel fetchData];
     };
 }
 
@@ -216,8 +221,9 @@
 }
 
 -(void)categoryAction:(UIButton *)sender{
-    TSCategoryViewController *category = [[TSCategoryViewController alloc] init];
-    [self.navigationController pushViewController:category animated:YES];
+    TSProductDetailController *con = [[TSProductDetailController alloc] init];
+//    TSCategoryViewController *category = [[TSCategoryViewController alloc] init];
+    [self.navigationController pushViewController:con animated:YES];
 }
 
 #pragma mark - Getter

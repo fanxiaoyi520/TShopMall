@@ -62,7 +62,10 @@
 
     self.myCategoryView.frame = CGRectMake(0, categoryY, kScreenWidth, categoryViewHeight);
     self.seperateView.frame = CGRectMake(0, categoryY + categoryViewHeight, kScreenWidth, 1);
-    self.listContainerView.frame = CGRectMake(0, categoryY + containViewY + 1, kScreenWidth ,kScreenHeight - categoryViewHeight - containViewY - bottom);
+    CGFloat listContainerY = categoryY + containViewY + 1;
+    self.listContainerView.frame = CGRectMake(0, listContainerY, kScreenWidth ,kScreenHeight - listContainerY - bottom);
+    //self.listContainerView.backgroundColor = UIColor.redColor;
+    //NSLog(@" screenHeight == %f, self.listContainerView == %f", kScreenHeight, CGRectGetHeight(self.listContainerView.frame));
 }
 
 - (JXCategoryTitleView *)myCategoryView {

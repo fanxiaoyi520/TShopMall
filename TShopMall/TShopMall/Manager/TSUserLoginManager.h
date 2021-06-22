@@ -6,13 +6,19 @@
 //
 
 #import <Foundation/Foundation.h>
+typedef NS_ENUM(NSUInteger, TSLoginState) {
+    Login,
+    None
+};
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TSUserLoginManager : NSObject
 + (instancetype)shareInstance;
-
--(void)startLogin:(void(^)(BOOL success))callBack;
+@property (nonatomic, copy) void(^ _Nonnull loginStateDidChanged)(TSLoginState state);
+@property (nonatomic, assign, readonly) TSLoginState state;
+-(void)startLogin;
+-(void)startLogout;
 
 @end
 

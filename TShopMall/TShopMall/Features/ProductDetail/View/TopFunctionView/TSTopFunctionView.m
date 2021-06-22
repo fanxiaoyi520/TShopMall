@@ -79,31 +79,97 @@
     [self addSubview:self.shareButton];
     [self addSubview:self.downloadButton];
     
-//    [self.numLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.equalTo(self).offset(15);
-//        make.top.equalTo(self).offset(13);
-//        make.height.mas_equalTo(20);
-//    }];
-//    
-//    [self.downloadButton mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.right.equalTo(self).offset(-15);
-//        make.bottom.equalTo(self).offset(-31);
-//        make.width.mas_equalTo(28);
-//        make.height.mas_equalTo(88);
-//    }];
-//    
-//    [self.selectedButton mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.equalTo(self).offset(18);
-//        make.centerY.equalTo(self.downloadButton);
-//        make.height.mas_equalTo(20);
-//        make.width.mas_equalTo(70);
-//    }];
-//    
-//    [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.right.equalTo(self);
-//        make.top.equalTo(self.numLabel.mas_bottom).offset(13);
-//        make.bottom.equalTo(self.selectedButton.mas_top).offset(0);
-//    }];
+    [self.closeButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self).offset(40);
+        make.right.equalTo(self).offset(-15);
+        make.width.height.mas_equalTo(30);
+    }];
+    
+    [self.changeButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self).offset(-31);
+        make.left.equalTo(self).offset(11);
+        make.width.mas_equalTo(75);
+        make.height.mas_equalTo(66);
+    }];
+    
+    [self.shareButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self).offset(-31);
+        make.left.equalTo(self.changeButton.mas_right).offset(18);
+        make.width.mas_equalTo(75);
+        make.height.mas_equalTo(66);
+    }];
+
+    [self.downloadButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self).offset(-31);
+        make.left.equalTo(self.shareButton.mas_right).offset(18);
+        make.width.mas_equalTo(75);
+        make.height.mas_equalTo(66);
+    }];
+}
+
+#pragma mark - Actions
+-(void)closeAction:(UIButton *)sender{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(topFunctionView:closeClick:)]) {
+        [self.delegate topFunctionView:self closeClick:sender];
+    }
+}
+
+-(void)changeAction:(TSFuncButton *)sender{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(topFunctionView:changeClick:)]) {
+        [self.delegate topFunctionView:self changeClick:sender];
+    }
+}
+
+-(void)shareAction:(TSFuncButton *)sender{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(topFunctionView:shareClick:)]) {
+        [self.delegate topFunctionView:self shareClick:sender];
+    }
+}
+
+-(void)downloadAction:(TSFuncButton *)sender{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(topFunctionView:downloadClick:)]) {
+        [self.delegate topFunctionView:self downloadClick:sender];
+    }
+}
+
+#pragma mark - Getter
+-(UIButton *)closeButton{
+    if (!_closeButton) {
+        _closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_closeButton addTarget:self action:@selector(closeAction:) forControlEvents:UIControlEventTouchUpInside];
+        [_closeButton setBackgroundColor:UIColor.redColor];
+    }
+    return _closeButton;
+}
+
+-(TSFuncButton *)changeButton{
+    if (!_changeButton) {
+        _changeButton = [TSFuncButton buttonWithType:UIButtonTypeCustom];
+        [_changeButton setTitle:@"改价发券" forState:UIControlStateNormal];
+        [_changeButton setImage:KImageMake(@"mall_detail_change_price") forState:UIControlStateNormal];
+        [_changeButton addTarget:self action:@selector(changeAction:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _changeButton;
+}
+
+-(TSFuncButton *)shareButton{
+    if (!_shareButton) {
+        _shareButton = [TSFuncButton buttonWithType:UIButtonTypeCustom];
+        [_shareButton setTitle:@"分享商品" forState:UIControlStateNormal];
+        [_shareButton setImage:KImageMake(@"mall_detail_change_share") forState:UIControlStateNormal];
+        [_shareButton addTarget:self action:@selector(shareAction:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _shareButton;
+}
+
+-(TSFuncButton *)downloadButton{
+    if (!_downloadButton) {
+        _downloadButton = [TSFuncButton buttonWithType:UIButtonTypeCustom];
+        [_downloadButton setTitle:@"下载素材" forState:UIControlStateNormal];
+        [_downloadButton setImage:KImageMake(@"mall_detail_change_doanload") forState:UIControlStateNormal];
+        [_downloadButton addTarget:self action:@selector(downloadAction:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _downloadButton;
 }
 
 @end
