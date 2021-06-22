@@ -12,13 +12,35 @@
 @end
 
 @implementation TSUserInfoManager
+@synthesize accessToken = _accessToken;
+
+@synthesize refreshToken = _refreshToken;
+
+@synthesize userName = _userName;
+
+@synthesize accountId = _accountId;
+
+-(id)copyWithZone:(NSZone *)zone {
+    TSUserInfoManager *copy =[[[self class] allocWithZone:zone] init];
+    
+    copy.accessToken = [self.accessToken copyWithZone:zone];
+    
+    copy.accountId = [self.accountId copyWithZone:zone];
+    
+    copy.userName = [self.userName copyWithZone:zone];
+    
+    copy.refreshToken = [self.refreshToken copyWithZone:zone];
+    
+    return copy;
+    
+}
 
 -(instancetype)initWithCoder:(NSCoder *)coder{
     if (self = [super init]) {
-        self.accessToken = [coder decodeObjectForKey:@"accessToken"];
-        self.refreshToken = [coder decodeObjectForKey:@"refreshToken"];
-        self.userName = [coder decodeObjectForKey:@"userName"];
-        self.accountId = [coder decodeObjectForKey:@"accountId"];
+        _accessToken = [coder decodeObjectForKey:@"accessToken"];
+        _refreshToken = [coder decodeObjectForKey:@"refreshToken"];
+        _userName = [coder decodeObjectForKey:@"userName"];
+        _accountId = [coder decodeObjectForKey:@"accountId"];
 
     }
     return self;

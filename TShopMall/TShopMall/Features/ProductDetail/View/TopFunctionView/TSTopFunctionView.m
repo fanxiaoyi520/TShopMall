@@ -109,19 +109,27 @@
 
 #pragma mark - Actions
 -(void)closeAction:(UIButton *)sender{
-    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(topFunctionView:closeClick:)]) {
+        [self.delegate topFunctionView:self closeClick:sender];
+    }
 }
 
--(void)changeAction:(UIButton *)sender{
-    
+-(void)changeAction:(TSFuncButton *)sender{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(topFunctionView:changeClick:)]) {
+        [self.delegate topFunctionView:self changeClick:sender];
+    }
 }
 
--(void)shareAction:(UIButton *)sender{
-    
+-(void)shareAction:(TSFuncButton *)sender{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(topFunctionView:shareClick:)]) {
+        [self.delegate topFunctionView:self shareClick:sender];
+    }
 }
 
--(void)downloadAction:(UIButton *)sender{
-    
+-(void)downloadAction:(TSFuncButton *)sender{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(topFunctionView:downloadClick:)]) {
+        [self.delegate topFunctionView:self downloadClick:sender];
+    }
 }
 
 #pragma mark - Getter
