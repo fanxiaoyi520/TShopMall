@@ -337,6 +337,10 @@
     if (_personalView == nil) {
         UIView *personalView = [[UIView alloc] init];
         _personalView = personalView;
+        _personalView.layer.shadowColor = KHexColor(@"#000000").CGColor;
+        _personalView.layer.shadowOffset = CGSizeMake(0, 1);
+        _personalView.layer.shadowRadius = 3;
+        _personalView.layer.shadowOpacity = 0.2;
         [self.contentView addSubview: _personalView];
     }
     return _personalView;
@@ -347,7 +351,7 @@
         UIImageView *personalImgV = [[UIImageView alloc] init];
         _personalImgV = personalImgV;
         _personalImgV.image = KImageMake(@"mall_rank_personalbg");
-        [self.contentView addSubview: _personalImgV];
+        [self.personalView addSubview: _personalImgV];
     }
     return _personalImgV;
 }
@@ -357,7 +361,7 @@
         UIImageView *headImgV = [[UIImageView alloc] init];
         _headImgV = headImgV;
         _headImgV.image = KImageMake(@"mall_setting_defautlhead");
-        [self.contentView addSubview: _headImgV];
+        [self.personalView addSubview: _headImgV];
     }
     return _headImgV;
 }
@@ -369,7 +373,7 @@
         _usernameLabel.text = @"JERRYJUICE";
         _usernameLabel.font = KRegularFont(16);
         _usernameLabel.textColor = KTextColor;
-        [self.contentView addSubview: _usernameLabel];
+        [self.personalView addSubview: _usernameLabel];
     }
     return _usernameLabel;
 }
@@ -381,7 +385,7 @@
         _rankShowLabel.text = @"排名";
         _rankShowLabel.font = KRegularFont(12);
         _rankShowLabel.textColor = KHexAlphaColor(@"#2D3132", 0.4);
-        [self.contentView addSubview: _rankShowLabel];
+        [self.personalView addSubview: _rankShowLabel];
     }
     return _rankShowLabel;
 }
@@ -393,7 +397,7 @@
         _rankNumLabel.text = @"6";
         _rankNumLabel.font = KRegularFont(12);
         _rankNumLabel.textColor = KHexColor(@"#2D3132");
-        [self.contentView addSubview: _rankNumLabel];
+        [self.personalView addSubview: _rankNumLabel];
     }
     return _rankNumLabel;
 }
@@ -405,7 +409,7 @@
         _salesShowLabel.text = @"销售收益";
         _salesShowLabel.font = KRegularFont(12);
         _salesShowLabel.textColor = KHexAlphaColor(@"#2D3132", 0.4);
-        [self.contentView addSubview: _salesShowLabel];
+        [self.personalView addSubview: _salesShowLabel];
     }
     return _salesShowLabel;
 }
@@ -417,7 +421,7 @@
         _salesNumLabel.text = @"￥89000";
         _salesNumLabel.font = KRegularFont(12);
         _salesNumLabel.textColor = KHexColor(@"#2D3132");
-        [self.contentView addSubview: _salesNumLabel];
+        [self.personalView addSubview: _salesNumLabel];
     }
     return _salesNumLabel;
 }
@@ -427,7 +431,7 @@
         UIView *splitView = [[UIView alloc] init];
         _splitView = splitView;
         _splitView.backgroundColor = KHexAlphaColor(@"#2D3132", 0.4);
-        [self.contentView addSubview: _splitView];
+        [self.personalView addSubview: _splitView];
     }
     return _splitView;
 }

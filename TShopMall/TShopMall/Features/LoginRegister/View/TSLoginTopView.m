@@ -53,26 +53,26 @@
     }];
     [self.phoneInput mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.mas_left).with.offset(25);
-        make.top.equalTo(self.subtitleLabel.mas_bottom).with.offset(KRateH(40));
+        make.top.equalTo(self.subtitleLabel.mas_bottom).with.offset(KRateW(40));
         make.right.equalTo(self.mas_right).with.offset(-25);
-        make.height.mas_equalTo(KRateH(53));
+        make.height.mas_equalTo(KRateW(53));
     }];
     [self.splitPhoneView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.mas_left).with.offset(25);
         make.top.equalTo(self.phoneInput.mas_bottom).with.offset(0);
         make.right.equalTo(self.mas_right).with.offset(-25);
-        make.height.mas_equalTo(KRateH(0.33));
+        make.height.mas_equalTo(KRateW(0.33));
     }];
     [self.codeInput mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.mas_left).with.offset(25);
         make.top.equalTo(self.splitPhoneView.mas_bottom).with.offset(0);
         make.right.equalTo(self.codeButton.mas_left).with.offset(0);
-        make.height.mas_equalTo(KRateH(53));
+        make.height.mas_equalTo(KRateW(53));
     }];
     [self.codeButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.mas_right).with.offset(-25);
         make.width.mas_equalTo(KRateW(67));
-        make.height.mas_equalTo(KRateH(23));
+        make.height.mas_equalTo(KRateW(23));
         make.centerY.equalTo(self.codeInput.mas_centerY).with.offset(0);
     }];
     [self.splitCodeView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -84,8 +84,8 @@
     [self.loginButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.mas_left).with.offset(25);
         make.right.equalTo(self.mas_right).with.offset(-25);
-        make.top.equalTo(self.splitCodeView.mas_bottom).with.offset(100);
-        make.height.mas_equalTo(KRateH(40));
+        make.top.equalTo(self.splitCodeView.mas_bottom).with.offset(KRateH(60));
+        make.height.mas_equalTo(KRateW(40));
     }];
 }
 
@@ -156,9 +156,9 @@
     if (_codeButton == nil) {
         UIButton *codeButton = [[UIButton alloc] init];
         _codeButton = codeButton;
-        _codeButton.layer.cornerRadius = 5;
         _codeButton.clipsToBounds = YES;
         _codeButton.titleLabel.font = KRegularFont(11);
+        [_codeButton setCorners:UIRectCornerAllCorners radius:2.5];
         [_codeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_codeButton setBackgroundColor:KHexColor(@"#41A98F")];
         [_codeButton setTitleColor:KHexColor(@"#2D3132") forState:UIControlStateDisabled];
@@ -194,7 +194,8 @@
         UIButton *loginButton = [[UIButton alloc] init];
         _loginButton = loginButton;
         _loginButton.backgroundColor = KHexColor(@"#FF4D49");
-        _loginButton.layer.cornerRadius = KRateH(20);
+        //_loginButton.layer.cornerRadius = KRateW(20);
+        [_loginButton setCorners:(UIRectCornerAllCorners) radius:KRateW(20)];
         _loginButton.clipsToBounds = YES;
         _loginButton.titleLabel.font = KRegularFont(16);
         [_loginButton setTitle:@"登录" forState:UIControlStateNormal];

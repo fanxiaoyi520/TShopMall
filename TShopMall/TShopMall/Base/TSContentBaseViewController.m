@@ -16,7 +16,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
     [self.view addSubview:self.categoryView];
     [self.view addSubview:self.listContainerView];
 }
@@ -46,7 +45,7 @@
 }
 
 - (CGFloat)preferredCategoryViewHeight {
-    return 50;
+    return 56;
 }
 
 #pragma mark - JXCategoryViewDelegate

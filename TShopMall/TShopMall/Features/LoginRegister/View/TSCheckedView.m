@@ -33,7 +33,7 @@
 - (void)addConstraints {
     [self.protocolButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.mas_centerX).with.offset(20);
-        make.top.equalTo(self.mas_top).with.offset(10);
+        make.top.equalTo(self.mas_top).with.offset(0);
     }];
     [self.checkButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.protocolButton.mas_centerY).with.offset(0);
