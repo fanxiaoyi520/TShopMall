@@ -9,12 +9,14 @@
 #import "TSBaseNavigationController.h"
 #import "TSSearchView.h"
 #import "TSSearchDataController.h"
-#import "TSGoodsListController.h"
+#import "TSSearchResultController.h"
 #import "TSSearchKeyViewModel.h"
+#import "TSSearchResultController.h"
 
 @interface TSSearchController ()
 @property (nonatomic, strong) TSSearchView *searchView;
 @property (nonatomic, strong) TSSearchDataController *dataCon;
+@property (nonatomic, strong) TSSearchResultController *searchResultCon;
 @end
 
 @implementation TSSearchController
@@ -39,17 +41,20 @@
     __weak typeof(self) weakSelf = self;
     [self.dataCon fetchData:^(NSArray<TSSearchSection *> *sections, NSError *error) {
         self.searchView.sections = sections;
-        [weakSelf.searchView.refreshConfiger endRefresh:YES];
+        
     }];
 }
 
 - (void)goToGoodsList:(NSString *)key{
-    [TSSearchKeyViewModel handleHistoryKeys:key];
-    TSGoodsListController *con = [TSGoodsListController new];
-    con.searchKey = key;
-    [self.navigationController pushViewController:con animated:YES];
+//    [TSSearchKeyViewModel handleHistoryKeys:key];
+//    TSGoodsListController *con = [TSGoodsListController new];
+//    con.searchKey = key;
+//    [self.navigationController pushViewController:con animated:YES];
+//
+//    self.searchView.sections = [TSSearchDataController updateHistorySections:self.dataCon.sections];
     
-    self.searchView.sections = [TSSearchDataController updateHistorySections:self.dataCon.sections];
+    self.searchResultCon.searchKey = key;
+    [self.searchResultCon showSearchResultView];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -75,4 +80,15 @@
     return self.searchView;
 }
 
+- (TSSearchResultController *)searchResultCon{
+    if (_searchResultCon) {
+        return _searchResultCon;
+    }
+    self.searchResultCon = [TSSearchResultController new];
+    self.searchResultCon.view.frame = self.view.frame;
+    [self.view addSubview:self.searchResultCon.view];
+    [self addChildViewController:self.searchResultCon];
+    
+    return self.searchResultCon;
+}
 @end

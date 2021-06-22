@@ -25,19 +25,29 @@
     self.gk_navigationBar.hidden = YES;
 }
 
--(void)fillCustomView{
+-(void)fillCustomView {
+    self.view.backgroundColor = UIColor.whiteColor;
     [self.view addSubview:self.collectionView];
+    CGFloat bottom = self.view.ts_safeAreaInsets.bottom + 56 + GK_TABBAR_HEIGHT + GK_STATUSBAR_NAVBAR_HEIGHT + 5;
+    [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view.mas_left).with.offset(0);
+        make.right.equalTo(self.view.mas_right).with.offset(0);
+        make.top.equalTo(self.view.mas_top).with.offset(0.5);
+        make.bottom.equalTo(self.view.mas_bottom).with.offset(-bottom);
+    }];
 }
 
 -(void)viewWillLayoutSubviews{
     [super viewWillLayoutSubviews];
     
-    CGFloat viewX = 0;
-    CGFloat viewY = 0;
-    CGFloat viewW = self.view.bounds.size.width;
-    CGFloat viewH = kScreenHeight - GK_NAVBAR_HEIGHT - 126 - self.view.ts_safeAreaInsets.bottom - 80;
+//    CGFloat viewX = 0;
+//    CGFloat viewY = 0;
+//    CGFloat viewW = self.view.bounds.size.width;
+//    CGFloat viewH = kScreenHeight - GK_NAVBAR_HEIGHT - 126 - self.view.ts_safeAreaInsets.bottom ;
+//
+//    self.collectionView.frame = CGRectMake(viewX, viewY, viewW, viewH);
     
-    self.collectionView.frame = CGRectMake(viewX, viewY, viewW, viewH);
+//    NSLog(@" screenHeight == %f, self.view == %f", kScreenHeight, CGRectGetHeight(self.view.frame));
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -201,7 +211,7 @@ spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
         flowLayout.delegate = self;
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero
                                              collectionViewLayout:flowLayout];
-        _collectionView.backgroundColor = KWhiteColor;
+        _collectionView.backgroundColor = UIColor.whiteColor;
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.showsVerticalScrollIndicator = NO;

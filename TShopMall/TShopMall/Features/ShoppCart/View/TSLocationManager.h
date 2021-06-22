@@ -11,6 +11,5 @@
 
 @interface TSLocationManager : NSObject
 + (instancetype)defaultManager;
-//+ (void)startLocation:(void(^)(TSLocation *location, NSError *error))finished;
-@property (nonatomic, copy) void(^startLocation)(void(^)(CLPlacemark *location, NSError *error));
++ (void)startLocation:(void(^)(NSString *address, NSError *error))finished;
 @end

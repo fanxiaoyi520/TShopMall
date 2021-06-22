@@ -18,7 +18,7 @@
 #import "TSLoginRegisterDataController.h"
 
 
-@interface TSLoginViewController ()<TSQuickLoginTopViewDelegate, TSLoginTopViewDelegate, TSLoginBottomViewDelegate, TSCheckedViewDelegate, TSQuickCheckViewDelegate>
+@interface TSLoginViewController ()<TSQuickLoginTopViewDelegate, TSLoginTopViewDelegate, TSLoginBottomViewDelegate, TSCheckedViewDelegate, TSQuickCheckViewDelegate, UIGestureRecognizerDelegate>
 /** 背景图 */
 @property(nonatomic, weak) UIImageView *bgImgV;
 /** 关闭 */
@@ -64,6 +64,19 @@
     self.count = 60;
     self.view.backgroundColor = UIColor.whiteColor;
     [self.navigationController setNavigationBarHidden:YES];
+    UISwipeGestureRecognizer *swipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeAction:)];
+    swipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionUp | UISwipeGestureRecognizerDirectionDown | UISwipeGestureRecognizerDirectionLeft | UISwipeGestureRecognizerDirectionRight;
+    swipeGestureRecognizer.delegate = self;
+    [self.view addGestureRecognizer:swipeGestureRecognizer];
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    [self.topView closeKeyboard];
+    return YES;
+}
+
+- (void)swipeAction: (UISwipeGestureRecognizer *)recognizer {
+    //NSLog(@"recognizer === %@", recognizer);
 }
 
 - (void)addConstraints {

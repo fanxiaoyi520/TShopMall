@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 +(TSUserInfoManager *)userInfo;
 
 /// 保存用户信息到本地
--(void)saveUserInfo;
+-(void)saveUserInfo:(TSUserInfoManager *)info;
 
 /// 清除用户信息到本地
 -(void)clearUserInfo;

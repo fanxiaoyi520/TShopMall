@@ -7,22 +7,19 @@
 
 #import "TSCartView.h"
 #import "TSCartCell.h"
-#import "TSRefreshConfiger.h"
 
-@interface TSCartView()<UITableViewDelegate, UITableViewDataSource, TSCartProtocol, TSRefreshDelegate>{
+@interface TSCartView()<UITableViewDelegate, UITableViewDataSource, TSCartProtocol>{
     
 }
-@property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) TSRefreshConfiger *refreshConfiger;
 @end
 
 @implementation TSCartView
 
-- (instancetype)init{
-    if (self == [super init]) {
-        if (@available(iOS 11.0, *)) {
-            self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-        }
+- (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style{
+    if (self == [super initWithFrame:frame style:style]) {
+        self.delegate = self;
+        self.dataSource = self;
+        [self configTable];
     }
     return self;
 }
@@ -46,7 +43,7 @@
 
 - (void)setSections:(NSArray<TSCartGoodsSection *> *)sections{
     _sections = sections;
-    [self.tableView reloadData];
+    [self reloadData];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -126,45 +123,14 @@
     return @"删除";
 }
 
-- (void)layoutSubviews{
-    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self);
-    }];
-}
-
-- (BOOL)hasMoreData{
-    return YES;
-}
-
-- (void)headerRefresh{
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.refreshConfiger endRefresh:YES];
-    });
-}
-
-- (void)footerRefresh{
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.refreshConfiger endRefresh:NO];
-    });
-}
-
-- (UITableView *)tableView{
-    if (_tableView) {
-        return _tableView;
-    }
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
-    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 0.1)];
-    self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, KRateW(10.0))];
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.backgroundColor = KHexColor(@"#F4F4F4");
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    self.tableView.showsVerticalScrollIndicator = NO;
-    [self addSubview:self.tableView];
-    
-    self.refreshConfiger = [TSRefreshConfiger configScrollView:self.tableView isLight:YES response:self type:Both];
-    
-    return self.tableView;
+- (void)configTable{
+    self.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 0.1)];
+    self.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, KRateW(10.0))];
+    self.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.backgroundColor = KHexColor(@"#F4F4F4");
+    self.delegate = self;
+    self.dataSource = self;
+    self.showsVerticalScrollIndicator = NO;
 }
 
 @end

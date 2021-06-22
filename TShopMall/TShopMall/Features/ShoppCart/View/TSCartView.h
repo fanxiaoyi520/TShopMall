@@ -8,7 +8,7 @@
 #import <UIKit/UIKit.h>
 #import "TSCartViewModel.h"
 
-@interface TSCartView : UIView
+@interface TSCartView : UITableView
 @property (nonatomic, strong) NSArray<TSCartGoodsSection *> *sections;
 @property (nonatomic, weak) id controller;
 @end
