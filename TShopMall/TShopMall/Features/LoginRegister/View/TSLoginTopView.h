@@ -29,7 +29,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString *)getPhoneNumber;
 /** 获取输入的验证码 */
 - (NSString *)getCode;
-
+/** 关闭键盘 */
+- (void)closeKeyboard;
 @end
 
 NS_ASSUME_NONNULL_END

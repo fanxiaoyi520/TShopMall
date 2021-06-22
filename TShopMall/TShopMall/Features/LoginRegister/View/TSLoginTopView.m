@@ -227,6 +227,12 @@
     return self.codeInput.text;
 }
 
+/** 关闭键盘 */
+- (void)closeKeyboard {
+    [self.codeInput resignFirstResponder];
+    [self.phoneInput resignFirstResponder];
+}
+
 #pragma mark - Action
 - (void)goToRegister {
     if ([self.delegate respondsToSelector:@selector(goToRegister)]) {

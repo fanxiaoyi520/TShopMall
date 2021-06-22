@@ -30,6 +30,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString *)getCode;
 /** 注册按钮的可点击与不可点击的设置 */
 - (void)setRegisterBtnEnable: (BOOL)isEnable;
+/** 关闭键盘 */
+- (void)closeKeyboard;
 
 @end
 
