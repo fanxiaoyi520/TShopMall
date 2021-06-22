@@ -145,9 +145,12 @@
         [self.view makeToast:@"请阅读并同意以下协议" duration:3.0 position:CSToastPositionCenter];
         return;
     }
+    [self.view endEditing:YES];
     [self.dataController fetchRegisterMobile:phoneNumber validCode:[self.topView getCode] invitationCode:[self.topView getInvitationCode] complete:^(BOOL isSucess) {
         if (isSucess) {
-            
+            if (self.regiterBlock) {
+                self.regiterBlock();
+            }
         }
     }];
 }

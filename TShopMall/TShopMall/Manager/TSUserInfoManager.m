@@ -18,6 +18,8 @@
         self.accessToken = [coder decodeObjectForKey:@"accessToken"];
         self.refreshToken = [coder decodeObjectForKey:@"refreshToken"];
         self.userName = [coder decodeObjectForKey:@"userName"];
+        self.accountId = [coder decodeObjectForKey:@"accountId"];
+
     }
     return self;
 }
@@ -26,6 +28,8 @@
     [coder encodeObject:self.accessToken forKey:@"accessToken"];
     [coder encodeObject:self.refreshToken forKey:@"refreshToken"];
     [coder encodeObject:self.userName forKey:@"userName"];
+    [coder encodeObject:self.accountId forKey:@"accountId"];
+
 }
 
 +(TSUserInfoManager *)userInfo{

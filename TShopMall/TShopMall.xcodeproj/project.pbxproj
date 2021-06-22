@@ -193,7 +193,7 @@
 		DC9911C9267C8B0E00EF9B26 /* TSHomePageLoginBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC9911C8267C8B0E00EF9B26 /* TSHomePageLoginBarView.m */; };
 		DC9911D8267E267400EF9B26 /* TSHomePagePerchView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC9911D7267E267400EF9B26 /* TSHomePagePerchView.m */; };
 		DCA035D72680765B003DE5F7 /* TSUserLoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA035D62680765B003DE5F7 /* TSUserLoginManager.m */; };
-		DCA035DA2680B7C5003DE5F7 /* TSRegisterRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA035D92680B7C5003DE5F7 /* TSRegisterRequest.m */; };
+		DCA035DD2681ACC8003DE5F7 /* TSLogoutRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA035DC2681ACC8003DE5F7 /* TSLogoutRequest.m */; };
 		E2BE996F8804E0C3E7D5AE61 /* libPods-TShopMall-TShopMallUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD1ABBE857D307088E9BF2DC /* libPods-TShopMall-TShopMallUITests.a */; };
 		F530C6D526802E5D009DC29A /* TSSMSCodeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F530C6CC26802E5D009DC29A /* TSSMSCodeRequest.m */; };
 		F530C6D626802E5D009DC29A /* TSQuickLoginRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F530C6CF26802E5D009DC29A /* TSQuickLoginRequest.m */; };
@@ -764,8 +764,8 @@
 		DC9911D7267E267400EF9B26 /* TSHomePagePerchView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSHomePagePerchView.m; sourceTree = "<group>"; };
 		DCA035D52680765B003DE5F7 /* TSUserLoginManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSUserLoginManager.h; sourceTree = "<group>"; };
 		DCA035D62680765B003DE5F7 /* TSUserLoginManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSUserLoginManager.m; sourceTree = "<group>"; };
-		DCA035D82680B7C5003DE5F7 /* TSRegisterRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSRegisterRequest.h; sourceTree = "<group>"; };
-		DCA035D92680B7C5003DE5F7 /* TSRegisterRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSRegisterRequest.m; sourceTree = "<group>"; };
+		DCA035DB2681ACC8003DE5F7 /* TSLogoutRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSLogoutRequest.h; sourceTree = "<group>"; };
+		DCA035DC2681ACC8003DE5F7 /* TSLogoutRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSLogoutRequest.m; sourceTree = "<group>"; };
 		ECCE8A564DF47B445E7905B1 /* Pods-TShopMall-TShopMallUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TShopMall-TShopMallUITests.release.xcconfig"; path = "Target Support Files/Pods-TShopMall-TShopMallUITests/Pods-TShopMall-TShopMallUITests.release.xcconfig"; sourceTree = "<group>"; };
 		F530C6CC26802E5D009DC29A /* TSSMSCodeRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSSMSCodeRequest.m; sourceTree = "<group>"; };
 		F530C6CD26802E5D009DC29A /* TSQuickLoginRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSQuickLoginRequest.h; sourceTree = "<group>"; };
@@ -1679,8 +1679,8 @@
 				F530C6CC26802E5D009DC29A /* TSSMSCodeRequest.m */,
 				F530C6CD26802E5D009DC29A /* TSQuickLoginRequest.h */,
 				F530C6CF26802E5D009DC29A /* TSQuickLoginRequest.m */,
-				DCA035D82680B7C5003DE5F7 /* TSRegisterRequest.h */,
-				DCA035D92680B7C5003DE5F7 /* TSRegisterRequest.m */,
+				DCA035DB2681ACC8003DE5F7 /* TSLogoutRequest.h */,
+				DCA035DC2681ACC8003DE5F7 /* TSLogoutRequest.m */,
 			);
 			path = DataController;
 			sourceTree = "<group>";
@@ -3307,6 +3307,7 @@
 				F5686B05267F8F400023DAA6 /* WMDragView.m in Sources */,
 				F530CCA126803FCD009DC29A /* UIDevice+Additions.m in Sources */,
 				F54973D22668CF3300181E3F /* AppDelegate+RootController.m in Sources */,
+				DCA035DD2681ACC8003DE5F7 /* TSLogoutRequest.m in Sources */,
 				DC9911A0267AE3B900EF9B26 /* TSImageDataModel.m in Sources */,
 				F55D2C6C267231AA006BACCF /* TSCategoryHeaderReusableView.m in Sources */,
 				F530CCA826803FCD009DC29A /* UITextView+Holder.m in Sources */,
@@ -3498,7 +3499,6 @@
 				C2A34CAC2675FB550095497E /* TSGoodsListSection.m in Sources */,
 				F530CCFF26806BDD009DC29A /* TSSaveLocalConst.m in Sources */,
 				F54973652668A22100181E3F /* YTKChainRequest+AnimatingAccessory.m in Sources */,
-				DCA035DA2680B7C5003DE5F7 /* TSRegisterRequest.m in Sources */,
 				F56D4B41266DFB8900C1AD9E /* FMLayoutFixedSection.m in Sources */,
 				DC3440AD26720D9200F5B0DA /* TSCollectionViewLineWrapLayout.m in Sources */,
 				F530C6D726802E5D009DC29A /* TSLoginRegisterDataController.m in Sources */,

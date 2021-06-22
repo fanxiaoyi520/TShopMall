@@ -8,7 +8,6 @@
 #import "TSLoginRegisterDataController.h"
 #import "TSSMSCodeRequest.h"
 #import "TSQuickLoginRequest.h"
-#import "TSRegisterRequest.h"
 
 #import "TSUserInfoManager.h"
 @implementation TSLoginRegisterDataController
@@ -100,54 +99,33 @@
                       complete:(nonnull void (^)(BOOL))complete{
     
     NSMutableDictionary *body = [NSMutableDictionary dictionary];
-//    [body setValue:@"thome" forKey:@"storeUuid"];
-//    [body setValue:@"tcl" forKey:@"t-id"];
     [body setValue:mobile forKey:@"mobile"];
     [body setValue:validCode forKey:@"code"];
     [body setValue:invitationCode forKey:@"invitationCode"];
-
-//    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kRegisterUrl
-//                                                               requestMethod:YTKRequestMethodPOST
-//                                                       requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON
-//                                                               requestHeader:NSMutableDictionary.dictionary
-//                                                                 requestBody:body
-//                                                              needErrorToast:YES];
-//    [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
-//
-//        if (request.responseModel.isSucceed) {
-////            [TSUserInfoManager userInfo].accessToken =
-//
-//        }
-//
-//    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-//        complete(NO);
-//    }];
     
-    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithBaseUrl:@"" RequestUrl:kRegisterUrl requestMethod:YTKRequestMethodPOST requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON requestHeader:@{@"storeUuid":@"thome", @"t-id":@"tcl"} requestBody:body needErrorToast:YES];
+    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kRegisterUrl requestMethod:YTKRequestMethodPOST requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON requestHeader:@{@"storeUuid":@"thome", @"t-id":@"tcl"} requestBody:body needErrorToast:YES];
     [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
-        if (request.responseModel.isSucceed) {
-       //            [TSUserInfoManager userInfo].accessToken =
-       
-               }
+        NSString *dataString = request.responseObject[@"data"];
+        if (dataString) {
+            NSDictionary *dic = [dataString jsonValueDecoded];
+            if ([dic[@"code"] intValue] == 1) {
+                [TSUserInfoManager userInfo].accessToken = dic[@"accessToken"];
+                [TSUserInfoManager userInfo].refreshToken = dic[@"refreshToken"];
+                [TSUserInfoManager userInfo].userName = dic[@"userName"];
+                [TSUserInfoManager userInfo].accountId = dic[@"accountId"];
+                [[TSUserInfoManager userInfo] saveUserInfo];
+                if ([TSUserLoginManager shareInstance].loginStateDidChanged) {
+                    [TSUserLoginManager shareInstance].loginStateDidChanged(Login);
+                }
+                complete(YES);
+            }
+            else{
+                complete(NO);
+                [Popover popToastOnWindowWithText:dic[@"msg"]];
+            }
+        }
         } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-            
+            complete(NO);
         }];
-    
-//    TSRegisterRequest *codeRequest = [[TSRegisterRequest alloc] initWithMobile:mobile validCode:validCode invitationCode:invitationCode];
-//    [codeRequest startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
-//        if (request.responseModel.isSucceed) {
-//
-//        }else{
-//
-//            if (complete) {
-//                complete(NO);
-//            }
-//        }
-//
-//    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-//        if (complete) {
-//            complete(NO);
-//        }
-//    }];
 }
 @end

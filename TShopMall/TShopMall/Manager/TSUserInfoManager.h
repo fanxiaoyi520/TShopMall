@@ -17,7 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy) NSString *refreshToken;
 /// 用户名
 @property(nonatomic, copy) NSString *userName;
-
+/// accountId
+@property(nonatomic, copy) NSString *accountId;
 /// 初始化并加载本地的用户信息
 +(TSUserInfoManager *)userInfo;
 
