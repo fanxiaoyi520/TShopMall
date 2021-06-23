@@ -6,6 +6,7 @@
 //
 
 #import "TSProductDetailDataController.h"
+#import "SSGenaralRequest.h"
 
 
 @interface TSProductDetailDataController()
@@ -15,6 +16,11 @@
 @end
 
 @implementation TSProductDetailDataController
+
+-(void)fetchProductDetailWithUuid:(NSString *)uuid
+                         complete:(void(^)(BOOL isSucess))complete{
+
+}
 
 -(void)fetchProductDetailComplete:(void(^)(BOOL isSucess))complete{
     

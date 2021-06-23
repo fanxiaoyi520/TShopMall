@@ -90,6 +90,11 @@ NSString * const kSearchKey = @"/rest/v2/front/product/queryKeyWord";
 NSString * const kSearchAssociateWord = @"/rest/v2/front/product/associateWord";
 NSString * const kSearchHotKey = @"/rest/v2/front/product/queryKeyWord";
 NSString * const kSearchResult = @"/rest/v2/itemsearch/toProductList";
+
+#pragma mark - 商品详情
+NSString *const kGoodDetailUrl = @"/rest/v2/front/product/toProduct";
+
+
 #pragma mark - 分类
 NSString *const kShopContentUrl = @"/rest/v2/front/shopContent/getPageManageByPageType";
 NSString * const kProducts = @"/rest/v2/product/category/groups/searchProducts";

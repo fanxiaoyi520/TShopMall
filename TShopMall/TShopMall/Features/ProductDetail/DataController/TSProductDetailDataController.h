@@ -15,6 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong, readonly) NSMutableArray <TSGoodDetailSectionModel *> *sections;
 
+-(void)fetchProductDetailWithUuid:(NSString *)uuid
+                         complete:(void(^)(BOOL isSucess))complete;
+
 -(void)fetchProductDetailComplete:(void(^)(BOOL isSucess))complete;
 
 @end

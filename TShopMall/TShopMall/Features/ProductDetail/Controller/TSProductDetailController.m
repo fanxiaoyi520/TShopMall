@@ -60,6 +60,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.uuid = @"15f2440266524c3f85383b1e656851d9";
+    
+    [self.dataController fetchProductDetailWithUuid:self.uuid
+                                           complete:^(BOOL isSucess) {
+            
+    }];
+    
     __weak __typeof(self)weakSelf = self;
     [self.dataController fetchProductDetailComplete:^(BOOL isSucess) {
         __strong __typeof(weakSelf)strongSelf = weakSelf;
