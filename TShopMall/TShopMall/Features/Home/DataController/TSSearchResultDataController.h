@@ -25,6 +25,8 @@ typedef NS_ENUM(NSInteger, TSGoodsListSortType) {
 @property (nonatomic, copy) NSString *keyword;//关键字
 @property (nonatomic, assign) NSInteger sort;//排序   1-降序，2-升序
 
+@property (nonatomic, assign) BOOL isEmptyView;
+
 @property (nonatomic, assign) BOOL isGrid;
 @property (nonatomic, strong) TSSearchResult *result;
 @property (nonatomic, strong) NSMutableArray<TSSearchSection *> *lists;

@@ -102,11 +102,18 @@ NSString * const kProducts = @"/rest/v2/product/category/groups/searchProducts";
 #pragma mark - 排行
 
 #pragma mark - 采购蓝
+NSString * const kCartShow = @"/rest/v2/cart/show";
+NSString * const kCartChangeChoose = @"/rest/v2/cart/changeChoose";
+NSString * const kCartChangeNums = @"/rest/v2/cart/changeNums";
+NSString * const kCartRemove = @"/rest/v2/cart/remove";
+NSString * const kCartCount = @"/rest/v2/cart/count";
+
+#pragma mark - 地址
 NSString * const kProvice = @"/rest/v2/usercenter/region/getAllProvince";
 NSString * const kCities = @"/rest/v2/usercenter/region/getCitysByProvinceUuid";
 NSString * const kAreas = @"/rest/v2/usercenter/region/getRegionsByCityUuid";
 NSString * const kStreets = @"/rest/v2/usercenter/region/getStreetsByRegionUuid";
-
+NSString * const kAddAddress = @"/rest/v2/usercenter/customeraddress/addAddress";
 
 
 #pragma mark - 我的

@@ -18,8 +18,9 @@
 @property (nonatomic, strong) UILabel *price;
 @property (nonatomic, strong) TSNumOperationView *numView;
 @property (nonatomic, strong) TSCartGiftButton *giftBtn;
+@property (nonatomic, strong) UILabel *notEnough;
 
-@property (nonatomic, strong) TSCart *cartModel;
+@property (nonatomic, strong) TSCart *cart;
 @end
 
 @implementation TSCartCell
@@ -29,18 +30,28 @@
 }
 
 - (void)setObj:(id)obj{
-     self.cartModel = (TSCart *)obj;
-    [self configGiftView];
+     self.cart = (TSCart *)obj;
+//    [self configGiftView];
     
-    self.selBtn.selected = self.cartModel.isSelected;
+    self.selBtn.selected = self.cart.checked;
+    [self.icon sd_setImageWithURL:[NSURL URLWithString:self.cart.productImgUrl]];
+    self.name.text = self.cart.productName;
+    self.specification.text = self.cart.parentSkuNo;
+    self.numView.hidden  = NO;
+    self.numView.number.text = [NSString stringWithFormat:@"%ld", self.cart.buyNum];
+    self.priceTitle.text = @"提货价";
+    self.price.text = [NSString stringWithFormat:@"¥ %@", self.cart.singleMarketPrice];
     
-    [self.cartModel addObserver:self forKeyPath:@"isSelected" options:(NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld) context:nil];
+    [self.cart addObserver:self forKeyPath:@"checked" options:(NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld) context:nil];
+    
+    self.notEnough.hidden = self.cart.isEnough;
+    self.notEnough.text = @"库存紧张";
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
-    if ([keyPath isEqualToString:@"isSelected"]) {
-        self.cartModel = (TSCart *)object;
-        self.selBtn.selected = self.cartModel.isSelected;
+    if ([keyPath isEqualToString:@"checked"]) {
+        self.cart = (TSCart *)object;
+        self.selBtn.selected = self.cart.checked;
     }
 }
 
@@ -55,28 +66,28 @@
 }
 
 - (void)configGiftView{
-    if (self.cartModel.hasGift) {
-        self.giftBtn.hidden = NO;
-        self.giftBtn.tips.text = @"赠品: ";
-        self.giftBtn.img.image = KImageMake(@"image_test");
-        self.giftBtn.name.text = @"产品信息和标题标题产品信息和标题标题…";
-        self.giftBtn.indeImg.image = KImageMake(@"inde_right_small");
-    } else {
-        self.giftBtn.hidden = YES;
-    }
-    [self.price mas_updateConstraints:^(MASConstraintMaker *make) {
-           make.bottom.equalTo(self.contentView.mas_bottom).offset(-KRateW(self.cartModel.hasGift? 52:16));
-       }];
+//    if (self.cartModel.hasGift) {
+//        self.giftBtn.hidden = NO;
+//        self.giftBtn.tips.text = @"赠品: ";
+//        self.giftBtn.img.image = KImageMake(@"image_test");
+//        self.giftBtn.name.text = @"产品信息和标题标题产品信息和标题标题…";
+//        self.giftBtn.indeImg.image = KImageMake(@"inde_right_small");
+//    } else {
+//        self.giftBtn.hidden = YES;
+//    }
+//    [self.price mas_updateConstraints:^(MASConstraintMaker *make) {
+//           make.bottom.equalTo(self.contentView.mas_bottom).offset(-KRateW(self.cartModel.hasGift? 52:16));
+//       }];
 }
 
 - (void)selBtnAction:(UIButton *)sender{
     sender.selected = !sender.selected;
-    self.cartModel.isSelected = sender.selected;
-    [self.delegate goodsSelected:self.cartModel indexPath:self.indexPath];
+    self.cart.checked = sender.selected;
+    [self.delegate goodsSelected:self.cart indexPath:self.indexPath];
 }
 
 - (void)checkGift{
-    [self.delegate checkGift:self.cartModel];
+    [self.delegate checkGift:self.cart];
 }
 
 - (void)layoutView{
@@ -130,6 +141,12 @@
         make.height.mas_equalTo(KRateW(20.0));
         make.left.equalTo(self.name.mas_left);
         make.top.mas_equalTo(self.price.mas_bottom).offset(KRateW(16.0));
+    }];
+    
+    [self.notEnough mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(self.icon);
+        make.bottom.equalTo(self.icon.mas_bottom);
+        make.height.mas_equalTo(KRateW(18.0));
     }];
 }
 
@@ -198,9 +215,12 @@
         return _numView;
     }
     self.numView = [TSNumOperationView new];
+    self.numView.min = 1;
     [self.contentView addSubview:self.numView];
-    self.numView.numberOperationDone = ^(NSString *currentNumber, NumOperationType type) {
-        
+    __weak typeof(self) weakSelf = self;
+    self.numView.numberOperationDone = ^(NSInteger currentNumber, NumOperationType type) {
+        weakSelf.cart.buyNum = currentNumber;
+        [weakSelf.delegate changeGoodsBuyNumberOfCart:weakSelf.cart];
     };
     
     return self.numView;
@@ -227,6 +247,20 @@
     [self.contentView addSubview:self.giftBtn];
     
     return self.giftBtn;
+}
+
+- (UILabel *)notEnough{
+    if (_notEnough) {
+        return _notEnough;
+    }
+    self.notEnough = [UILabel new];
+    self.notEnough.backgroundColor = KHexColor(@"ffffff");
+    self.notEnough.font = KRegularFont(12.0);
+    self.notEnough.textColor = KHexColor(@"#E64C3D");
+    self.notEnough.textAlignment = NSTextAlignmentCenter;
+    [self.contentView addSubview:self.notEnough];
+    
+    return self.notEnough;
 }
 
 @end

@@ -11,9 +11,10 @@
 @protocol TSCartProtocol <NSObject>
 
 @optional
-- (void)goodsSelected:(TSCart *)cartModel indexPath:(NSIndexPath *)indexPath;
+- (void)goodsSelected:(TSCart *)cart indexPath:(NSIndexPath *)indexPath;
+- (void)changeGoodsBuyNumberOfCart:(TSCart *)cart;
 - (void)allSelected:(BOOL)status;
-- (void)checkGift:(TSCart *)cartModel;
+- (void)checkGift:(TSCart *)cart;
 - (void)goToShopping;
 - (void)goToSettle;
 @end

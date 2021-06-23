@@ -9,6 +9,7 @@
 #import "TSAddressEditView.h"
 #import "TSAreaSelectedController.h"
 #import "TSAreaModel.h"
+#import "TSAddressEditDataController.h"
 
 @interface TSAddressEditController (){
     BOOL isAllInfoInput;
@@ -17,6 +18,10 @@
 @property (nonatomic, strong) UIButton *saveBtn;
 @property (nonatomic, strong) UIButton *selBtn;
 @property (nonatomic, strong) UILabel *selTips;
+@property (nonatomic, strong) TSAreaModel *provice;
+@property (nonatomic, strong) TSAreaModel *city;
+@property (nonatomic, strong) TSAreaModel *area;
+@property (nonatomic, strong) TSAreaModel *street;
 @end
 
 @implementation TSAddressEditController
@@ -85,6 +90,42 @@
     } OnController:self];
 }
 
+- (void)saveAddress{
+    NSString *name = self.editView.addressModel.name;
+    NSString *phone = self.editView.addressModel.phone;
+    NSString *address = self.editView.addressModel.address;
+    NSString *detail = self.editView.addressModel.detailAddress;
+//    NSDictionary *params = @{
+//        @"province" : self.provice==nil? @"":self.provice.currentUUid,
+//        @"city" : self.city==nil? @"":self.city.currentUUid,
+//        @"region" : self.area==nil? @"":self.area.currentUUid,
+//        @"street" : self.street==nil? @"":self.street.currentUUid,
+//        @"area" : self.editView.addressModel.detailAddress,
+//        @"address" : self.editView.addressModel.address,
+//        @"consignee" : name,
+//        @"mobile" : phone,
+//        @"isDefault" : @(self.selBtn.selected),
+//        @"zipcode" : self.provice.postCode,
+//        @"tag" : @"",
+//    };
+    NSDictionary *params = @{
+        @"province" : @"02",
+        @"city" : @"116",
+        @"region" : @"1105",
+        @"street" : @"11643",
+        @"area" : @"北京北京市昌平区城北街道",
+        @"address" : @"天天路11号",
+        @"consignee" : @"橙子",
+        @"mobile" : @"15678767890",
+        @"isDefault" : @(self.selBtn.selected),
+        @"zipcode" : @"",
+        @"tag" : @"学校",
+    };
+    [TSAddressEditDataController editAddress:params finished:^(BOOL isSuccess) {
+        
+    } controller:self];
+}
+
 - (void)viewWillLayoutSubviews{
     [self.saveBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view.mas_left).offset(KRateW(24.0));
@@ -121,6 +162,7 @@
     [self.saveBtn setTitle:@"保存" forState:UIControlStateNormal];
     self.saveBtn.layer.cornerRadius = KRateW(20.0);
     self.saveBtn.layer.masksToBounds = YES;
+    [self.saveBtn addTarget:self action:@selector(saveAddress) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.saveBtn];
     
     return self.saveBtn;

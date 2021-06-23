@@ -25,13 +25,7 @@
 }
 
 - (void)clearInvalideGoods{}
-- (void)goodsSelectedStatusChanged{}
-- (void)scrollDeleteCart:(TSCart *)cart indexPath:(NSIndexPath *)indexPath{}
-
-- (void)goodsSelected:(TSCart *)cartModel indexPath:(NSIndexPath *)indexPath{
-    self.sections[indexPath.section].rows[indexPath.row].obj = cartModel;
-    [self.controller performSelector:@selector(goodsSelectedStatusChanged)];
-}
+- (void)scrollDeleteCart:(TSCart *)cart{}
 
 - (void)checkGift:(TSCart *)cartModel{
     
@@ -60,7 +54,7 @@
     [tableView registerClass:cla forCellReuseIdentifier:row.cellIdentifier];
     TSCartBaseCell *cell = [tableView dequeueReusableCellWithIdentifier:row.cellIdentifier];
     cell.obj = row.obj;
-    cell.delegate = self;
+    cell.delegate = self.controller;
     cell.indexPath = indexPath;
     return cell;
 }
@@ -106,13 +100,16 @@
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (self.sections.count <= 0) {
+        return NO;
+    }
     TSCartGoodsRow *row = self.sections[indexPath.section].rows[indexPath.row];
     return row.canScrollEdit;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
     TSCartGoodsRow *row = self.sections[indexPath.section].rows[indexPath.row];
-    [self.controller performSelector:@selector(scrollDeleteCart:indexPath:) withObject:row.obj withObject:indexPath];
+    [self.controller performSelector:@selector(scrollDeleteCart:) withObject:row.obj];
 }
 
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath{

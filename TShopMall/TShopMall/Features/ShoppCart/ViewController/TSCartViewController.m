@@ -8,6 +8,7 @@
 #import "TSCartViewController.h"
 #import "TSCartView.h"
 #import "TSCartDataController.h"
+#import "TSCartOperationDataController.h"
 #import "TSCartSettleView.h"
 #import "TSCartProtocol.h"
 #import "TSAlertView.h"
@@ -19,6 +20,8 @@
 @property (nonatomic, strong) TSCartView *cartView;
 @property (nonatomic, strong) TSCartSettleView *settleView;
 @property (nonatomic, strong) TSRecomendView *footerView;
+@property (nonatomic, strong) TSCartDataController *dataCon;
+@property (nonatomic, strong) RefreshGifHeader *refreshHeader;
 @end
 
 @implementation TSCartViewController
@@ -33,13 +36,6 @@
         self.automaticallyAdjustsScrollViewInsets = YES;
     }
     [self configInfo];
-    
-    __weak typeof(self) weakSelf = self;
-    self.footerView = [TSRecomendView configRecomendViewWithType:Cart layoutFinished:^{
-        self.cartView.tableFooterView = weakSelf.footerView;
-    } goodsSelected:^(NSString *goodsId) {
-        
-    }];
 }
 
 #pragma mark - Noti
@@ -49,18 +45,35 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.editBtn];
+    self.gk_navRightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.editBtn];
 }
 
 - (void)configInfo{
-    [TSCartDataController getInfoFinished:^(TSCartModel *cartModel, NSError *error) {
-        if (error) {
-           
-            return ;
-        }
-        self.cartView.sections = [TSCartViewModel congfigViewModelWithCartInfo:cartModel].sections;
+    __weak typeof(self) weakSelf = self;
+    [self.dataCon viewCart:^{
+        [weakSelf endRefresh];
+        weakSelf.cartView.sections = weakSelf.dataCon.sections;
+        [weakSelf updateSettleView];
+        [weakSelf configRecomendView];
     }];
+}
+
+- (void)configRecomendView{
+    if (self.footerView != nil) {
+        return;
+    }
+    __weak typeof(self) weakSelf = self;
+    self.footerView = [TSRecomendView configRecomendViewWithType:Cart layoutFinished:^{
+        self.cartView.tableFooterView = weakSelf.footerView;
+    } goodsSelected:^(NSString *goodsId) {
+
+    }];
+}
+
+- (void)edit:(UIButton *)sender{
+    sender.selected = !sender.selected;
+    
+    [self.settleView updateSettleViewStates:sender.selected];
 }
 
 //失效区清空按钮事件
@@ -72,72 +85,56 @@
 
 - (void)goToSettle{
     if (self.editBtn.selected == YES) {//编辑
-        [self batchDelete];
-        
+        NSArray *carts = [self.dataCon selectedGoods];
+        TSAlertView.new.alertInfo(nil, @"确认删除选中商品吗？").confirm(@"确定", ^{
+            [self deleteSelectedCarts:carts];
+        }).cancel(@"取消", ^{}).show();
     } else {
         TSMakeOrderController *con  = [TSMakeOrderController new];
         [self.navigationController pushViewController:con animated:YES];
     }
 }
 
-//商品选中状态变更
-- (void)goodsSelectedStatusChanged{
-    [self updateSettleView];
+//改变选中状态
+- (void)goodsSelected:(TSCart *)cart indexPath:(NSIndexPath *)indexPath{
+    [TSCartOperationDataController updateGoodsChooseStatus:cart status:cart.checked finished:^{
+        [self configInfo];
+    }];
+}
+
+//修改数量
+- (void)changeGoodsBuyNumberOfCart:(TSCart *)cart{
+    [TSCartOperationDataController updateGoodsNumber:cart finished:^{
+        [self configInfo];
+    }];
 }
 
 //全选
 - (void)allSelected:(BOOL)status{
-    for (TSCartGoodsSection *section in self.cartView.sections) {
-        TSCartGoodsRow *row = section.rows.lastObject;
-        if ([row.cellIdentifier isEqualToString:@"TSCartCell"]) {
-            [row.obj setValue:@(status) forKey:@"isSelected"];
-        }
-    }
-    [self updateSettleView];
+    [TSCartOperationDataController updateGoodsChooseStatus:nil status:status finished:^{
+        [self configInfo];
+    }];
+}
+
+- (void)checkGift:(TSCart *)cart{}
+
+///删除商品(侧滑删除)
+- (void)scrollDeleteCart:(TSCart *)cart{
+    [TSCartOperationDataController deleteCarts:@[cart] finished:^{
+        [self configInfo];
+    }];
+}
+
+- (void)deleteSelectedCarts:(NSArray<TSCart *> *)carts{
+    [TSCartOperationDataController deleteCarts:carts finished:^{
+        [self configInfo];
+    }];
 }
 
 - (void)updateSettleView{
-    NSArray<TSCart *> *cartModels = [TSCartViewModel canOperationGoodsInSections:self.cartView.sections];
-    [self.settleView updateSelBtnStatus:[TSCartViewModel isAllGoodsSelected:cartModels]];
-    NSArray<TSCart *> *selCarts = [TSCartViewModel selectedInfo:cartModels];
-    NSString *totalPrice = [TSCartViewModel totalPrice:selCarts];
-    [self.settleView updateSettleBtnText:selCarts.count];
-    [self.settleView updatePrice:totalPrice];
-}
-
-- (void)edit:(UIButton *)sender{
-    sender.selected = !sender.selected;
-    [self.settleView updateSettleViewStates:sender.selected];
-}
-
-//删除商品(侧滑删除)
-- (void)scrollDeleteCart:(TSCart *)cart indexPath:(NSIndexPath *)indexPath{
-    NSMutableArray *sections = [NSMutableArray arrayWithArray:self.cartView.sections];
-    [sections removeObjectAtIndex:indexPath.section];
-    self.cartView.sections = sections;
-    if (cart.isSelected == YES) {
-        [self updateSettleView];
-    }
-}
-
-- (void)batchDelete{
-    NSArray<TSCart *> *cartModels = [TSCartViewModel canOperationGoodsInSections:self.cartView.sections];
-    NSArray<TSCart *> *carts = [TSCartViewModel selectedInfo:cartModels];
-    if (carts.count != 0) {
-        TSAlertView.new.alertInfo(nil, @"确认删除选中商品吗？").confirm(@"确定", ^{
-            NSMutableArray *sections = [NSMutableArray arrayWithArray:self.cartView.sections];
-            for (TSCartGoodsSection *section in self.cartView.sections) {
-                TSCartGoodsRow *row = [section.rows lastObject];
-                if ([row.obj isKindOfClass:[TSCart class]]) {
-                    TSCart *cart = (TSCart *)row.obj;
-                    if (cart.isSelected == YES) {
-                        [sections removeObject:section];
-                    }
-                }
-            }
-            self.cartView.sections = sections;
-        }).cancel(@"取消", ^{}).show();
-    }
+    [self.settleView updateSelBtnStatus:self.dataCon.isAllSelected];
+    [self.settleView updatePrice:self.dataCon.cartModel.cartsTotalMount];
+    [self.settleView updateSettleBtnText:self.dataCon.selectedCount];
 }
 
 - (void)viewWillLayoutSubviews{
@@ -180,7 +177,24 @@
     self.cartView.controller = self;
     [self.view addSubview:self.cartView];
     
+    [self addMJHeaderAndFooter];
+    
     return self.cartView;
+}
+
+- (void)addMJHeaderAndFooter {
+    //默认【下拉刷新】
+    RefreshGifHeader *header = [RefreshGifHeader headerWithRefreshingTarget:self refreshingAction:@selector(mjHeadreRefresh:)];
+    self.cartView.mj_header = header;
+    self.refreshHeader = header;
+}
+
+- (void)mjHeadreRefresh:(RefreshGifHeader *)mj_header {
+    [self configInfo];
+}
+
+- (void)endRefresh{
+    [self.refreshHeader endRefreshing];
 }
 
 - (TSCartSettleView *)settleView{
@@ -192,6 +206,16 @@
     [self.view addSubview:self.settleView];
     
     return self.settleView;
+}
+
+- (TSCartDataController *)dataCon{
+    if (_dataCon) {
+        return _dataCon;
+    }
+    self.dataCon = [TSCartDataController new];
+    self.dataCon.context = self;
+    
+    return self.dataCon;
 }
 
 - (BOOL)isRootControllerInNivagationController{

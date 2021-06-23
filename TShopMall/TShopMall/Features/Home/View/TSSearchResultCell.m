@@ -41,11 +41,11 @@
     self.thPrice.text = [NSString stringWithFormat:@"提货价: %@", vm.thPrice];
     
     [self.earnView updatePrice:vm.earnPrice];
-    if (vm.earnPrice.floatValue <= 0) {
-        self.earnView.hidden = YES;
-    } else {
-        self.earnView.hidden = NO;
-    }
+//    if (vm.earnPrice.floatValue <= 0) {
+//        self.earnView.hidden = YES;
+//    } else {
+//        self.earnView.hidden = NO;
+//    }
 }
 
 - (void)setFrame:(CGRect)frame{
@@ -53,16 +53,6 @@
     aFrame.size.height = frame.size.height - KRateW(8.0);
     
     [super setFrame:aFrame];
-}
-
-- (void)testUI{
-    
-    self.icon.image = KImageMake(@"");
-    self.icon.backgroundColor = UIColor.cyanColor;
-    self.name.text = @"XESS  55寸艺术电55寸艺术电55寸艺术…";
-    self.price.text = @"¥ 18990";
-    self.thPrice.text = @"提货价: ¥29999";
-    [self.earnView updatePrice:@"1999"];
 }
 
 - (void)layoutView{
