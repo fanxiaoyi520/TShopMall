@@ -205,10 +205,10 @@
     if (self.count <= 1) {
         self.count = 60;
         [self.timer invalidate];
-        [self.topView setCodeButtonTitleAndColor:@"重新验证码" isResend:YES];
+        [self.topView setCodeButtonTitleAndColor:@"重新验证码" isResend:YES enabled:YES];
     } else {
         self.count--;
-        [self.topView setCodeButtonTitleAndColor:[NSString stringWithFormat:@"重发 %ld", (long)self.count] isResend:NO];
+        [self.topView setCodeButtonTitleAndColor:[NSString stringWithFormat:@"重发 %ld", (long)self.count] isResend:NO enabled:NO];
     }
 }
 
@@ -324,8 +324,13 @@
     }];
 }
 
+- (void)inputDoneAction {
+    if (self.checkedView.isChecked) {
+        [self.topView setLoginButtonEnable:YES];
+    }
+}
+
 - (void)closePage {
-    NSLog(@"----");
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -352,7 +357,7 @@
 }
 
 - (void)checkedAction:(BOOL)isChecked{
-    
+    [self.topView setLoginButtonEnable:isChecked];
 }
 
 #pragma mark - TSQuickCheckViewDelegate

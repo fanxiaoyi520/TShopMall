@@ -23,6 +23,7 @@
 		04F1EFB62682DF1000FF007D /* TSRealNameAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F1EFB52682DF1000FF007D /* TSRealNameAuthViewController.m */; };
 		04F1EFB92682DF8900FF007D /* TSRealNameAuthSectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F1EFB82682DF8900FF007D /* TSRealNameAuthSectionModel.m */; };
 		04F1EFBC2682E33600FF007D /* TSRealNameAuthDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F1EFBB2682E33600FF007D /* TSRealNameAuthDataController.m */; };
+		04F1EFBF2683287D00FF007D /* TSPayOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F1EFBE2683287D00FF007D /* TSPayOrderViewController.m */; };
 		AE4DC537B4A93FA6C04B9037 /* libPods-TShopMall.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 825A9D1C217F35DCFB651B21 /* libPods-TShopMall.a */; };
 		C21A4B6E267AF5AE00766F72 /* TSMakeOrderBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C21A4B6D267AF5AE00766F72 /* TSMakeOrderBaseCell.m */; };
 		C21A4B71267AF91F00766F72 /* TSMakeOrderPriceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C21A4B70267AF91F00766F72 /* TSMakeOrderPriceCell.m */; };
@@ -486,6 +487,8 @@
 		04F1EFB82682DF8900FF007D /* TSRealNameAuthSectionModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSRealNameAuthSectionModel.m; sourceTree = "<group>"; };
 		04F1EFBA2682E33600FF007D /* TSRealNameAuthDataController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSRealNameAuthDataController.h; sourceTree = "<group>"; };
 		04F1EFBB2682E33600FF007D /* TSRealNameAuthDataController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSRealNameAuthDataController.m; sourceTree = "<group>"; };
+		04F1EFBD2683287D00FF007D /* TSPayOrderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSPayOrderViewController.h; sourceTree = "<group>"; };
+		04F1EFBE2683287D00FF007D /* TSPayOrderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSPayOrderViewController.m; sourceTree = "<group>"; };
 		1942D505D7004833F274B5D1 /* libPods-TShopMallTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TShopMallTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		27EC567AA21935502889F6EB /* Pods-TShopMall.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TShopMall.debug.xcconfig"; path = "Target Support Files/Pods-TShopMall/Pods-TShopMall.debug.xcconfig"; sourceTree = "<group>"; };
 		825A9D1C217F35DCFB651B21 /* libPods-TShopMall.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TShopMall.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1313,6 +1316,8 @@
 			children = (
 				04DAFAFC267B37450098275A /* TSOrderManageViewController.h */,
 				04DAFAFD267B37450098275A /* TSOrderManageViewController.m */,
+				04F1EFBD2683287D00FF007D /* TSPayOrderViewController.h */,
+				04F1EFBE2683287D00FF007D /* TSPayOrderViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -2067,11 +2072,11 @@
 		F530CCC726804167009DC29A /* ReusePool */ = {
 			isa = PBXGroup;
 			children = (
-				F530CCC826804167009DC29A /* TSWKWebViewPool.m */,
-				F530CCC926804167009DC29A /* TSWKWebView.m */,
-				F530CCCA26804167009DC29A /* TXKJSBridge.js */,
-				F530CCCB26804167009DC29A /* TSWKWebViewPool.h */,
 				F530CCCC26804167009DC29A /* TSWKWebView.h */,
+				F530CCC926804167009DC29A /* TSWKWebView.m */,
+				F530CCCB26804167009DC29A /* TSWKWebViewPool.h */,
+				F530CCC826804167009DC29A /* TSWKWebViewPool.m */,
+				F530CCCA26804167009DC29A /* TXKJSBridge.js */,
 			);
 			path = ReusePool;
 			sourceTree = "<group>";
@@ -2098,15 +2103,15 @@
 		F530CCD426804167009DC29A /* WebViewExtension */ = {
 			isa = PBXGroup;
 			children = (
+				F530CCDC26804167009DC29A /* WKWebView+TSClearWebCache.h */,
 				F530CCD526804167009DC29A /* WKWebView+TSClearWebCache.m */,
 				F530CCD626804167009DC29A /* WKWebView+TSCookiesManager.h */,
-				F530CCD726804167009DC29A /* WKWebView+TSSyncUserAgent.m */,
-				F530CCD826804167009DC29A /* WKWebView+TSExternalNavigationDelegates.h */,
-				F530CCD926804167009DC29A /* WKWebViewExtension.h */,
-				F530CCDA26804167009DC29A /* WKWebView+TSSyncUserAgent.h */,
 				F530CCDB26804167009DC29A /* WKWebView+TSCookiesManager.m */,
-				F530CCDC26804167009DC29A /* WKWebView+TSClearWebCache.h */,
+				F530CCD826804167009DC29A /* WKWebView+TSExternalNavigationDelegates.h */,
 				F530CCDD26804167009DC29A /* WKWebView+TSExternalNavigationDelegates.m */,
+				F530CCDA26804167009DC29A /* WKWebView+TSSyncUserAgent.h */,
+				F530CCD726804167009DC29A /* WKWebView+TSSyncUserAgent.m */,
+				F530CCD926804167009DC29A /* WKWebViewExtension.h */,
 			);
 			path = WebViewExtension;
 			sourceTree = "<group>";
@@ -3625,6 +3630,7 @@
 				F55D2CD326785081006BACCF /* TSMinePlaceholderCell.m in Sources */,
 				C22EE26726806F3F00E59C86 /* TSSearchResultNaviView.m in Sources */,
 				C3A6C495267A1C1700FC71D6 /* TSBindMobileSectionModel.m in Sources */,
+				04F1EFBF2683287D00FF007D /* TSPayOrderViewController.m in Sources */,
 				F55D2CC726784ACD006BACCF /* TSMineOrderHeaderView.m in Sources */,
 				F55D2D0B2679DB2C006BACCF /* TSGoodDetailImageCell.m in Sources */,
 				CE5674AE26831F0400252F5D /* TSMineMerchantUserInformationModel.m in Sources */,

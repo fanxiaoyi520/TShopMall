@@ -6,6 +6,7 @@
 //
 
 #import "TSRegisterTopView.h"
+#import "TSTools.h"
 
 @interface TSRegisterTopView ()<UITextFieldDelegate>
 /** 标题 */
@@ -178,8 +179,8 @@
         _codeButton = codeButton;
         _codeButton.titleLabel.font = KRegularFont(11);
         [_codeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [_codeButton setBackgroundColor:KHexColor(@"#41A98F")];
-        [_codeButton setTitleColor:KHexColor(@"#2D3132") forState:UIControlStateDisabled];
+        [_codeButton setBackgroundColor:KHexColor(@"#D7D8D8")];
+        [_codeButton setTitleColor:KWhiteColor forState:UIControlStateDisabled];
         [_codeButton setTitle:@"获取验证码" forState:UIControlStateNormal];
         [_codeButton setCorners:UIRectCornerAllCorners radius:2.5];
         _codeButton.clipsToBounds = YES;
@@ -224,7 +225,8 @@
         UIButton *registerButton = [[UIButton alloc] init];
         _registerButton = registerButton;
         _registerButton.backgroundColor = KHexColor(@"#DDDDDD");
-        _registerButton.layer.cornerRadius = KRateW(20);
+        [_registerButton setTitleColor:KWhiteColor forState:UIControlStateNormal];
+        [_registerButton setCorners:(UIRectCornerAllCorners) radius:KRateW(20)];
         _registerButton.clipsToBounds = YES;
         _registerButton.titleLabel.font = KRegularFont(16);
         _registerButton.enabled = NO;
@@ -236,17 +238,18 @@
 }
 
 #pragma mark - Public Method
-- (void)setCodeButtonTitleAndColor:(NSString *)codeTitle isResend:(BOOL)isResend {
+- (void)setCodeButtonTitleAndColor:(NSString *)codeTitle isResend:(BOOL)isResend enabled:(BOOL)enabled {
     if (isResend) {
         self.codeButton.enabled = YES;
         self.codeButton.backgroundColor = KHexColor(@"#F9AB50");
+        [self.codeButton setTitle:codeTitle forState:UIControlStateNormal];
     } else {
-        if (self.codeButton.isEnabled) {
-            self.codeButton.backgroundColor = KHexColor(@"#D7D8D8");
-            self.codeButton.enabled = NO;
+        if ((self.codeButton.isEnabled && !enabled) || (!self.codeButton.isEnabled && enabled)) {
+            self.codeButton.backgroundColor = enabled ? KHexColor(@"#41A98F") : KHexColor(@"#D7D8D8");
+            self.codeButton.enabled = enabled;
+            [self.codeButton setTitle:codeTitle forState:UIControlStateNormal];
         }
     }
-    [self.codeButton setTitle:codeTitle forState:UIControlStateNormal];
 }
 
 - (NSString *)getPhoneNumber {
@@ -258,7 +261,7 @@
 }
 
 - (void)setRegisterBtnEnable: (BOOL)isEnable {
-    BOOL enable = isEnable && self.phoneInput.text.length && self.codeInput.text.length && self.invitedCodeInput.text.length;
+    BOOL enable = isEnable && [TSTools isPhoneNumber:self.phoneInput.text] && self.codeInput.text.length && self.invitedCodeInput.text.length;
     self.registerButton.enabled = enable;
     if (enable) {
         self.registerButton.backgroundColor = KHexColor(@"#FF4D49");
@@ -267,7 +270,7 @@
     }
 }
 
-- (NSString *)getInvitationCode{
+- (NSString *)getInvitationCode {
     return self.invitedCodeInput.text;
 }
 
@@ -292,15 +295,22 @@
 
 #pragma mark - UIControlEventEditingChanged
 - (void)textFieldDidChangeValue:(UITextField *)textfield {
-    if (self.phoneInput.text.length && self.codeInput.text.length && self.invitedCodeInput.text.length) {
-        if ([self.delegate respondsToSelector:@selector(inputDoneAction)] && !self.registerButton.isEnabled) {
-            [self.delegate inputDoneAction];
+    if ([TSTools isPhoneNumber:self.phoneInput.text]) {
+        [self setCodeButtonTitleAndColor:@"获取验证码" isResend:NO enabled:YES];
+        if (self.codeInput.text.length && self.invitedCodeInput.text.length && [self.delegate respondsToSelector:@selector(inputDoneAction)]) {
+            if (!self.registerButton.isEnabled) {
+                [self.delegate inputDoneAction];
+            }
+        } else {
+            if (self.registerButton.isEnabled) {
+                [self setRegisterBtnEnable:NO];
+            }
         }
     } else {
-        if (self.registerButton.isEnabled) {
-            [self setRegisterBtnEnable:NO];
-        }
+        [self setCodeButtonTitleAndColor:@"获取验证码" isResend:NO enabled:NO];
+        [self setRegisterBtnEnable:NO];
     }
+    
 }
 
 @end
