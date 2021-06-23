@@ -6,6 +6,7 @@
 //
 
 #import "TSCartBaseCell.h"
+#import "TSCartModel.h"
 
 @class TSCartInvalideGoodView;
 @class TSCartInvalidTaoCanCell;
@@ -27,4 +28,5 @@
 @property (nonatomic, strong) UILabel *mark;
 @property (nonatomic, strong) UIView *line;
 @property (nonatomic, assign) BOOL isTaoCan;
+- (void)updateUIWithCart:(TSCart *)cart;
 @end

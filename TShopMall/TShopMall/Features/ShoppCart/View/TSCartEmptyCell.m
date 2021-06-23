@@ -8,16 +8,27 @@
 #import "TSCartEmptyCell.h"
 #import "TSEmptyAlertView.h"
 
+@interface TSCartEmptyCell()
+@property (nonatomic, strong) TSEmptyAlertView *emptyView;
+@end
+
 @implementation TSCartEmptyCell
 
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
-    if (self == [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        
-        TSEmptyAlertView.new.alertBackColor(KHexColor(@"#F4F4F5")).alertInfo(@"购物车是空的", @"去购物").show(self.contentView, @"center", ^{
-            [self.delegate goToShopping];
-        });
+
+- (void)layoutSubviews{
+    self.backgroundColor = UIColor.clearColor;
+    self.emptyView.hidden = NO;
+}
+
+- (TSEmptyAlertView *)emptyView{
+    if (_emptyView) {
+        return _emptyView;
     }
-    return self;
+    self.emptyView = TSEmptyAlertView.new.alertBackColor(KHexColor(@"#F4F4F5")).alertInfo(@"购物车是空的", @"去购物").show(self.contentView, @"center", ^{
+        [self.delegate goToShopping];
+    });
+    
+    return self.emptyView;
 }
 
 @end

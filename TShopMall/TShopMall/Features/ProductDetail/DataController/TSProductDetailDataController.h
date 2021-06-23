@@ -13,6 +13,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TSProductDetailDataController : TSBaseDataController
 
+/// 商品sku
+@property(nonatomic, copy) NSString *attrId;
+
 @property (nonatomic, strong, readonly) NSMutableArray <TSGoodDetailSectionModel *> *sections;
 
 
@@ -27,6 +30,17 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param complete 请求完成block
 -(void)fetchProductDetailCartNumber:(void(^)(BOOL isSucess))complete;
 
+
+
+/// 加购
+/// @param productUuid 商品UUID
+/// @param buyNum 数量
+/// @param attrId 商品SKU
+/// @param complete 请求完成block
+-(void)fetchProductDetailAddProductToCart:(NSString *)productUuid
+                                   buyNum:(NSString *)buyNum
+                                   attrId:(NSString *)attrId
+                                 complete:(void(^)(BOOL isSucess))complete;
 
 @end
 
