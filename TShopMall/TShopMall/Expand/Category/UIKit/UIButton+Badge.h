@@ -38,5 +38,9 @@
                                    image:(UIImage *)image
                           highlightImage:(UIImage *)highlightImage;
 
-
+//扩大按钮的点击范围
+- (void)jaf_setEnlargeEdgeWithTop:(CGFloat)top
+                            right:(CGFloat)right
+                           bottom:(CGFloat) bottom
+                             left:(CGFloat) left;
 @end
