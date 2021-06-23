@@ -9,11 +9,15 @@
 #import "TSMineSectionModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
+@protocol TSMineOrderHeaderViewDelegate <NSObject>
+
+@optional
+-(void)moreAction:(id _Nullable)sender;
+@end
 
 @interface TSMineOrderHeaderView : TSUniversalTopHeaderView
 
-@property(nonatomic, copy) void (^clickBlock)(void);
-
+@property (nonatomic ,assign) id<TSMineOrderHeaderViewDelegate> mineOrderDelegate;
 -(void)bindMineSectionModel:(TSMineSectionModel *)model;
 
 @end

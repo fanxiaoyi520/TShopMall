@@ -10,7 +10,8 @@
 @interface TSMineDataController()
 
 @property (nonatomic, strong) NSMutableArray <TSMineSectionModel *> *sections;
-
+@property (nonatomic, strong) TSMineMerchantUserInformationModel *merchantUserInformationModel;
+@property (nonatomic, strong) TSPartnerCenterData *partnerCenterDataModel;
 @end
 
 @implementation TSMineDataController
@@ -165,6 +166,84 @@
     if (complete) {
         complete(YES);
     }
+}
+
+-(void)fetchDataComplete:(void(^)(BOOL isSucess))complete {
+    dispatch_group_t group = dispatch_group_create();
+
+    dispatch_group_enter(group);
+    dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self requestMethodWithGroup:group withIndex:1];
+    });
+
+    dispatch_group_enter(group);
+    dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self requestMethodWithGroup:group withIndex:2];
+    });
+
+    dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+        if (complete) {
+            complete(YES);
+        }
+    });
+}
+
+- (void)requestMethodWithGroup:(dispatch_group_t)thegroup withIndex:(NSInteger)aIndex
+{
+    NSString *request = [NSString stringWithFormat:@"request%ld",aIndex];
+    SEL requestSel = NSSelectorFromString(request);
+    
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+     [(SSGenaralRequest *)[self performSelector:requestSel] startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+         if (request.responseModel.isSucceed) {
+             NSDictionary *data = request.responseModel.data;
+             if (aIndex == 1) {
+                 TSMineMerchantUserInformationModel *model = [TSMineMerchantUserInformationModel yy_modelWithDictionary:data];
+                 self.merchantUserInformationModel = model;
+             } else {
+                 TSPartnerCenterData *model = [TSPartnerCenterData yy_modelWithDictionary:data];
+                 self.partnerCenterDataModel = model;
+             }
+         }
+         dispatch_group_leave(thegroup);
+     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+         dispatch_group_leave(thegroup);
+     }];
+#pragma clang diagnostic pop
+}
+
+- (SSGenaralRequest *)request1{
+    
+    NSMutableDictionary *header = [NSMutableDictionary dictionary];
+    if ([TSGlobalManager shareInstance].currentUserInfo) {
+        [header setValue:[TSGlobalManager shareInstance].currentUserInfo.accessToken forKey:@"accessToken"];
+    }
+    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kMineMerchantUserInformation
+                                                               requestMethod:YTKRequestMethodGET
+                                                       requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON
+                                                               requestHeader:header
+                                                                 requestBody:NSMutableDictionary.dictionary
+                                                              needErrorToast:YES];
+    
+    return request;
+}
+
+- (SSGenaralRequest *)request2{
+    
+    NSMutableDictionary *header = [NSMutableDictionary dictionary];
+    if ([TSGlobalManager shareInstance].currentUserInfo) {
+        [header setValue:[TSGlobalManager shareInstance].currentUserInfo.accessToken forKey:@"accessToken"];
+    }
+    
+    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kMinePartnerCenterData
+                                                               requestMethod:YTKRequestMethodPOST
+                                                       requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON
+                                                               requestHeader:header
+                                                                 requestBody:NSMutableDictionary.dictionary
+                                                              needErrorToast:YES];
+    
+    return request;
 }
 
 @end

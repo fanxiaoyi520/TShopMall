@@ -60,10 +60,9 @@
 
 #pragma mark - Actions
 -(void)moreAction:(TSMineMoreButton *)sender{
-    if (self.clickBlock) {
-        self.clickBlock();
+    if ([self.mineOrderDelegate respondsToSelector:@selector(moreAction:)]) {
+        [self.mineOrderDelegate moreAction:sender];
     }
-        
 }
 
 #pragma mark - Getter
@@ -105,3 +104,4 @@
 }
 
 @end
+
