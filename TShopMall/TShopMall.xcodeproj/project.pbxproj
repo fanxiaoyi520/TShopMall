@@ -169,6 +169,8 @@
 		C3B4CCF02674934E0001EE75 /* TSQuickCheckView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B4CCE62674934B0001EE75 /* TSQuickCheckView.m */; };
 		C3B4CCF12674934E0001EE75 /* TSQuickLoginTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B4CCE82674934C0001EE75 /* TSQuickLoginTopView.m */; };
 		C3B4CCF22674934E0001EE75 /* TSCheckedView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B4CCEA2674934D0001EE75 /* TSCheckedView.m */; };
+		CE5674AE26831F0400252F5D /* TSMineMerchantUserInformationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5674AA26831F0300252F5D /* TSMineMerchantUserInformationModel.m */; };
+		CE5674AF26831F0400252F5D /* TSPartnerCenterData.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5674AC26831F0300252F5D /* TSPartnerCenterData.m */; };
 		DC3440AC26720D9200F5B0DA /* TSCollectionViewMeanWidthLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3440A826720D9200F5B0DA /* TSCollectionViewMeanWidthLayout.m */; };
 		DC3440AD26720D9200F5B0DA /* TSCollectionViewLineWrapLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3440A926720D9200F5B0DA /* TSCollectionViewLineWrapLayout.m */; };
 		DC3440B226720E4C00F5B0DA /* TSGridButtonCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3440B026720E4C00F5B0DA /* TSGridButtonCollectionView.m */; };
@@ -739,6 +741,10 @@
 		C3B4CCEC2674934D0001EE75 /* TSRegisterTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSRegisterTopView.h; sourceTree = "<group>"; };
 		C4B53CFE051CAFD3DA82AB3F /* Pods-TShopMall-TShopMallUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TShopMall-TShopMallUITests.debug.xcconfig"; path = "Target Support Files/Pods-TShopMall-TShopMallUITests/Pods-TShopMall-TShopMallUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		CD1ABBE857D307088E9BF2DC /* libPods-TShopMall-TShopMallUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TShopMall-TShopMallUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE5674AA26831F0300252F5D /* TSMineMerchantUserInformationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSMineMerchantUserInformationModel.m; sourceTree = "<group>"; };
+		CE5674AB26831F0300252F5D /* TSPartnerCenterData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSPartnerCenterData.h; sourceTree = "<group>"; };
+		CE5674AC26831F0300252F5D /* TSPartnerCenterData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSPartnerCenterData.m; sourceTree = "<group>"; };
+		CE5674AD26831F0400252F5D /* TSMineMerchantUserInformationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSMineMerchantUserInformationModel.h; sourceTree = "<group>"; };
 		D5195F8AB1644614CD0BA09C /* Pods-TShopMall.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TShopMall.release.xcconfig"; path = "Target Support Files/Pods-TShopMall/Pods-TShopMall.release.xcconfig"; sourceTree = "<group>"; };
 		DC3440A826720D9200F5B0DA /* TSCollectionViewMeanWidthLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSCollectionViewMeanWidthLayout.m; sourceTree = "<group>"; };
 		DC3440A926720D9200F5B0DA /* TSCollectionViewLineWrapLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSCollectionViewLineWrapLayout.m; sourceTree = "<group>"; };
@@ -2801,6 +2807,10 @@
 		F55D2CB426784ACD006BACCF /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CE5674AD26831F0400252F5D /* TSMineMerchantUserInformationModel.h */,
+				CE5674AA26831F0300252F5D /* TSMineMerchantUserInformationModel.m */,
+				CE5674AB26831F0300252F5D /* TSPartnerCenterData.h */,
+				CE5674AC26831F0300252F5D /* TSPartnerCenterData.m */,
 				F55D2CB626784ACD006BACCF /* TSMineSectionModel.h */,
 				F55D2CB526784ACD006BACCF /* TSMineSectionModel.m */,
 			);
@@ -3583,6 +3593,7 @@
 				C3A6C495267A1C1700FC71D6 /* TSBindMobileSectionModel.m in Sources */,
 				F55D2CC726784ACD006BACCF /* TSMineOrderHeaderView.m in Sources */,
 				F55D2D0B2679DB2C006BACCF /* TSGoodDetailImageCell.m in Sources */,
+				CE5674AE26831F0400252F5D /* TSMineMerchantUserInformationModel.m in Sources */,
 				F530CCEB26804167009DC29A /* UICollectionView+TSWebImageAutoSize.m in Sources */,
 				F530CC3D26803862009DC29A /* NSString+Time.m in Sources */,
 				C3A6C4C4267A1C5700FC71D6 /* TSPhoneNumVeriCell.m in Sources */,
@@ -3738,6 +3749,7 @@
 				F54973AE2668BB8100181E3F /* TSHomeViewController.m in Sources */,
 				F56D4B40266DFB8900C1AD9E /* FMLayoutScaleSection.m in Sources */,
 				F56D4B42266DFB8900C1AD9E /* FMLayoutView.m in Sources */,
+				CE5674AF26831F0400252F5D /* TSPartnerCenterData.m in Sources */,
 				F56D4B3E266DFB8900C1AD9E /* FMLayoutDynamicSection.m in Sources */,
 				DC9911A6267AE43400EF9B26 /* TSImageBaseModel.m in Sources */,
 				F530CC6626803E43009DC29A /* Progress.m in Sources */,

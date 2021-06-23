@@ -16,7 +16,7 @@
 #import "TSSettingViewController.h"
 #import "TSOrderManageViewController.h"
 
-@interface TSMineViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate>
+@interface TSMineViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate,TSUserInfoViewDelegate,TSMineOrderHeaderViewDelegate>
 
 /// 自定义导航栏
 @property(nonatomic, strong) TSMineNavigationBar *navigationBar;
@@ -46,6 +46,17 @@
             [strongSelf.collectionView reloadData];
         }
     }];
+    
+    if ([TSGlobalManager shareInstance].currentUserInfo) {
+        __weak __typeof(self)weakSelf = self;
+        [self.dataController fetchDataComplete:^(BOOL isSucess) {
+            __strong __typeof(weakSelf)strongSelf = weakSelf;
+            if (isSucess) {
+                [self.infoView setModel:self.dataController.merchantUserInformationModel];
+                [strongSelf.collectionView reloadData];
+            }
+        }];
+    }
 }
 
 -(void)fillCustomView{
@@ -68,7 +79,6 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
     [self hiddenNavigationBar];
 }
 
@@ -153,12 +163,8 @@
            forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
                   withReuseIdentifier:sectionModel.headerIdentify];
         TSMineOrderHeaderView *header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:sectionModel.headerIdentify forIndexPath:indexPath];
-        if ([sectionModel.headerIdentify isEqualToString:@"TSMineOrderHeaderView"]) {
-            header.clickBlock = ^{
-                NSLog(@"----");
-            };
-        }
         [header bindMineSectionModel:sectionModel];
+        header.mineOrderDelegate = self;
         return header;
     }else{
         Class className = NSClassFromString(sectionModel.footerIdentify);
@@ -268,6 +274,27 @@ spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
     return model.spacingWithLastSection;
 }
 
+#pragma mark - TSUserInfoViewDelegate
+-(void)loginAction:(id _Nullable)sender {
+    
+}
+-(void)seeCodeAction:(id _Nullable)sender {
+    
+}
+
+- (void)kCopyCodeAction:(id _Nullable)sender {
+    UIPasteboard *pab = (UIPasteboard *)sender;
+    if (pab) {
+        [self.collectionView makeToast:@"复制成功" duration:2.0 position:CSToastPositionBottom];
+    } else {
+        [self.collectionView makeToast:@"复制失败" duration:2.0 position:CSToastPositionBottom];
+    }
+}
+
+#pragma mark - TSMineOrderHeaderViewDelegate
+- (void)moreAction:(id)sender {
+    NSLog(@"1");
+}
 
 #pragma mark - Getter
 -(TSMineNavigationBar *)navigationBar{
@@ -300,6 +327,7 @@ spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
 -(TSUserInfoView *)infoView{
     if (!_infoView) {
         _infoView = [[TSUserInfoView alloc] initWithRoleType:TSRoleTypePlatinum];
+        _infoView.userInfoDelegate = self;
     }
     return _infoView;
 }
