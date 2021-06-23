@@ -110,3 +110,5 @@ NSString * const kStreets = @"/rest/v2/usercenter/region/getStreetsByRegionUuid"
 
 
 #pragma mark - 我的
+NSString * const kMineMerchantUserInformation = @"/rest/v2/tclcustomer/userInfo";
+NSString * const kMinePartnerCenterData = @"/sysback/v2/salesman/dataCenter";

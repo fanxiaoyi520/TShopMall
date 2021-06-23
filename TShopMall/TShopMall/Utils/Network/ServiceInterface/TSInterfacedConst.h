@@ -53,3 +53,5 @@ UIKIT_EXTERN NSString * const kAreas;
 UIKIT_EXTERN NSString * const kStreets;
 
 #pragma mark - 我的
+UIKIT_EXTERN NSString * const kMineMerchantUserInformation;
+UIKIT_EXTERN NSString * const kMinePartnerCenterData;
