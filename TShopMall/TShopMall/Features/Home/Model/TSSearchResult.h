@@ -93,5 +93,6 @@
 @property (nonatomic, copy) NSString *updateTime;
 @property (nonatomic, copy) NSString *uuid;
 @property (nonatomic, copy) NSString *visitorVolume;
+@property (nonatomic, copy) NSString *earnMost;
 @end
 

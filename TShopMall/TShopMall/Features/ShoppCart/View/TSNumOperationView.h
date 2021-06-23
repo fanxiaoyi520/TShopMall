@@ -20,7 +20,7 @@ typedef NS_ENUM(NSInteger, NumOperationType) {
 @property (nonatomic, assign) NSInteger min;
 @property (nonatomic, strong) UITextField *number;
 
-@property (nonatomic, copy) void(^numberOperationDone)(NSString *currentNumber, NumOperationType type);
+@property (nonatomic, copy) void(^numberOperationDone)(NSInteger currentNumber, NumOperationType type);
 //@property (nonatomic, copy) void(^maxOperationDone)(NSString *currentNumber);
 //@property (nonatomic, copy) void(^minberOperationDone)(NSString *currentNumber);
 @end

@@ -13,7 +13,7 @@
     vm.icon = list.pic;
     vm.name = list.name;
     vm.price = list.promotionPrice;
-    vm.earnPrice = [NSString stringWithFormat:@"%.2f", list.promotionPrice.floatValue - list.baseRetailPrice.floatValue];
+    vm.earnPrice = list.earnMost;
     vm.thPrice = list.baseRetailPrice;
     return vm;
 }

@@ -12,6 +12,7 @@
 #import "TSSearchResultDataController.h"
 #import "TSEmptyAlertView.h"
 #import "TSRecomendDataController.h"
+#import "TSSearchKeyViewModel.h"
 
 @interface TSSearchResultController ()<TSSearchResultFittleDelegate>
 @property (nonatomic, strong) TSSearchResultNaviView *naviView;
@@ -71,21 +72,8 @@
             self.collectionView.sections = self.dataCon.lists;
             [weakSelf.collectionView reloadData];
         }
-        [weakSelf showEmptyView];
         [weakSelf endRefresh];
     }];
-}
-
-- (void)showEmptyView{
-    self.refreshFooter.hidden = NO;
-    if (self.dataCon.currentNum != 0) {
-        [TSEmptyAlertView hideInView:self.collectionView];
-        return ;
-    }
-    self.refreshFooter.hidden = YES;
-    TSEmptyAlertView.new.alertInfo(@"抱歉，没有找到商品哦～", @"重试").show(self.collectionView, @"center",^{
-        [self refreshGoods];
-    });
 }
 
 - (void)showSytleChanged:(UIButton *)sender{
@@ -145,6 +133,7 @@
     if (self.dataCon.totalNum == self.dataCon.currentNum) {
         [self.refreshFooter endRefreshingWithNoMoreData];
     }
+    self.refreshFooter.hidden = self.dataCon.isEmptyView;
 }
 
 
@@ -175,6 +164,7 @@
     [self.view addSubview:self.naviView];
     __weak typeof(self) weakSelf = self;
     self.naviView.searchView.startSearch = ^(NSString *key) {
+        [TSSearchKeyViewModel handleHistoryKeys:key];
         [weakSelf.dataCon defaultConfig];
         weakSelf.searchKey = key;
         [weakSelf refreshGoods];
