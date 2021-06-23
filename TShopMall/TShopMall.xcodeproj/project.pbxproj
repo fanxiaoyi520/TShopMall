@@ -2029,11 +2029,11 @@
 		F530CCC726804167009DC29A /* ReusePool */ = {
 			isa = PBXGroup;
 			children = (
-				F530CCC826804167009DC29A /* TSWKWebViewPool.m */,
-				F530CCC926804167009DC29A /* TSWKWebView.m */,
-				F530CCCA26804167009DC29A /* TXKJSBridge.js */,
-				F530CCCB26804167009DC29A /* TSWKWebViewPool.h */,
 				F530CCCC26804167009DC29A /* TSWKWebView.h */,
+				F530CCC926804167009DC29A /* TSWKWebView.m */,
+				F530CCCB26804167009DC29A /* TSWKWebViewPool.h */,
+				F530CCC826804167009DC29A /* TSWKWebViewPool.m */,
+				F530CCCA26804167009DC29A /* TXKJSBridge.js */,
 			);
 			path = ReusePool;
 			sourceTree = "<group>";
@@ -2060,15 +2060,15 @@
 		F530CCD426804167009DC29A /* WebViewExtension */ = {
 			isa = PBXGroup;
 			children = (
+				F530CCDC26804167009DC29A /* WKWebView+TSClearWebCache.h */,
 				F530CCD526804167009DC29A /* WKWebView+TSClearWebCache.m */,
 				F530CCD626804167009DC29A /* WKWebView+TSCookiesManager.h */,
-				F530CCD726804167009DC29A /* WKWebView+TSSyncUserAgent.m */,
-				F530CCD826804167009DC29A /* WKWebView+TSExternalNavigationDelegates.h */,
-				F530CCD926804167009DC29A /* WKWebViewExtension.h */,
-				F530CCDA26804167009DC29A /* WKWebView+TSSyncUserAgent.h */,
 				F530CCDB26804167009DC29A /* WKWebView+TSCookiesManager.m */,
-				F530CCDC26804167009DC29A /* WKWebView+TSClearWebCache.h */,
+				F530CCD826804167009DC29A /* WKWebView+TSExternalNavigationDelegates.h */,
 				F530CCDD26804167009DC29A /* WKWebView+TSExternalNavigationDelegates.m */,
+				F530CCDA26804167009DC29A /* WKWebView+TSSyncUserAgent.h */,
+				F530CCD726804167009DC29A /* WKWebView+TSSyncUserAgent.m */,
+				F530CCD926804167009DC29A /* WKWebViewExtension.h */,
 			);
 			path = WebViewExtension;
 			sourceTree = "<group>";
