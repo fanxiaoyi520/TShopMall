@@ -9,8 +9,6 @@
 
 @interface TSUserInfoCell()
 
-
-
 @end
 
 @implementation TSUserInfoCell

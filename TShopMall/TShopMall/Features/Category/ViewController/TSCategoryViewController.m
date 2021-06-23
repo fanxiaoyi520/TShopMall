@@ -16,7 +16,7 @@
 #import "TSCategoryContentViewModel.h"
 
 #import "TSProductDetailController.h"
-#import "TSHybridViewController.h"
+#import "TSSearchController.h"
 
 @interface TSCategoryViewController ()<UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate>
 
@@ -64,27 +64,26 @@
 - (void)fillCustomView{
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.collectionView];
-}
-
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-}
-
--(void)viewWillLayoutSubviews{
-    [super viewWillLayoutSubviews];
+    
+    NSArray *childArr = self.navigationController.childViewControllers;
+    
+    CGFloat bottom = -GK_TABBAR_HEIGHT;
+    if (childArr.count > 1) {
+        bottom = 0;
+    }
 
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view);
         make.width.mas_equalTo(88);
-        make.top.equalTo(self.view).offset(GK_STATUSBAR_NAVBAR_HEIGHT);
-        make.bottom.equalTo(self.view).offset(GK_TABBAR_HEIGHT);
+        make.top.equalTo(self.gk_navigationBar.mas_bottom).offset(0);
+        make.bottom.equalTo(self.view).offset(bottom);
     }];
     
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.tableView.mas_right).offset(1);
         make.right.equalTo(self.view.mas_right).offset(0);
-        make.top.equalTo(self.view).offset(GK_STATUSBAR_NAVBAR_HEIGHT);
-        make.bottom.equalTo(self.view).offset(-GK_TABBAR_HEIGHT);
+        make.top.equalTo(self.gk_navigationBar.mas_bottom).offset(0);
+        make.bottom.equalTo(self.view).offset(bottom);
     }];
 }
 
@@ -94,15 +93,11 @@
 
 #pragma mark - Action
 -(void)searchAction:(TSGeneralSearchButton *)sender{
-    
-    TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:@"https://testwap.tclo2o.cn/seller-app-h5/"];
-    [self.navigationController pushViewController:hybrid animated:YES];
-    
+    [TSSearchController show];
 }
 
 -(void)categoryAction:(UIButton *)sender{
-    TSCategoryViewController *category = [[TSCategoryViewController alloc] init];
-    [self.navigationController pushViewController:category animated:YES];
+
 }
 
 #pragma mark - UITableViewDataSource

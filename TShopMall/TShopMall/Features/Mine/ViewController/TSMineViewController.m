@@ -19,7 +19,7 @@
 #import "TSMineWalletViewController.h"
 #import "TSSettingViewController.h"
 #import "TSOrderManageViewController.h"
-#import "TSSettingViewController.h"
+#import "TSHybridViewController.h"
 
 @interface TSMineViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate,TSUserInfoViewDelegate,TSMineOrderHeaderViewDelegate>
 
@@ -190,6 +190,12 @@
         TSUniversalBottomFooterView *footer = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:sectionModel.footerIdentify forIndexPath:indexPath];
         return footer;
     }
+}
+
+#pragma mark - mineOrderHeaderMoreAction
+-(void)mineOrderHeaderMoreAction:(id _Nullable)sender{
+    TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:@"https://testwap.tclo2o.cn/seller-app-h5/"];
+    [self.navigationController pushViewController:hybrid animated:YES];
 }
 
 #pragma mark - UniversalCollectionViewCellDataDelegate

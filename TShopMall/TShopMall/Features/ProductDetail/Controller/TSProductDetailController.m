@@ -60,8 +60,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.uuid = @"3b104da87998485699209f7f4bbf52f1";
-    
     __weak __typeof(self)weakSelf = self;
     NSMutableArray *sections = [self.dataController fetchProductDetailWithUuid:self.uuid
                                                                       complete:^(BOOL isSucess) {

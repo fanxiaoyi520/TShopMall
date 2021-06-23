@@ -133,7 +133,7 @@
         _earnMoneyLabel.textAlignment = NSTextAlignmentCenter;
         _earnMoneyLabel.textColor = KHexColor(@"#333333");
         _earnMoneyLabel.text = @"¥999";
-        _earnMoneyLabel.hidden = YES;
+        _earnMoneyLabel.hidden = NO;
     }
     return _earnMoneyLabel;
 }
@@ -141,7 +141,7 @@
 -(UIButton *)eyeButton{
     if (!_eyeButton) {
         _eyeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_eyeButton setImage:KImageMake(@"mall_mine_eye") forState:UIControlStateNormal];
+        [_eyeButton setImage:KImageMake(@"mall_mine_invisiable") forState:UIControlStateNormal];
         [_eyeButton setImage:KImageMake(@"mall_mine_eye") forState:UIControlStateSelected];
         [_eyeButton addTarget:self action:@selector(eyeAction:) forControlEvents:UIControlEventTouchUpInside];
         _eyeButton.selected = YES;
