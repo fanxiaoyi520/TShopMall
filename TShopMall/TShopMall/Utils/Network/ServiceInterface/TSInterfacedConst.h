@@ -26,8 +26,8 @@ UIKIT_EXTERN NSString *const kLoginSmsCaptchaUrl;
 UIKIT_EXTERN NSString *const kLoginQuickLoginUrl;
 ///  注册
 UIKIT_EXTERN NSString *const kRegisterUrl;
-
-
+///  登出
+UIKIT_EXTERN NSString *const kLogoutUrl;
 
 #pragma mark - 首页
 UIKIT_EXTERN NSString *const kHomePageInfoUrl;
@@ -35,6 +35,10 @@ UIKIT_EXTERN NSString *const kSearchKey;//搜索关键词
 UIKIT_EXTERN NSString *const kSearchAssociateWord;//搜索联想关键词
 UIKIT_EXTERN NSString *const kSearchHotKey;//搜索热门关键词
 UIKIT_EXTERN NSString *const kSearchResult;//搜索结果
+
+#pragma mark - 商品详情
+UIKIT_EXTERN NSString *const kGoodDetailUrl;
+UIKIT_EXTERN NSString *const kGoodDetailCartNumberUrl;
 
 #pragma mark - 分类
 UIKIT_EXTERN NSString *const kShopContentUrl;

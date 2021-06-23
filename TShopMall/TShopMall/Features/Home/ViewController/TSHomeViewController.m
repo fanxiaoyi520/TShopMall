@@ -19,6 +19,8 @@
 #import "TSHomePagePerchView.h"
 
 #import "TSProductDetailController.h"
+#import "RefreshGifHeader.h"
+
 
 #define tableViewBackGroundViewHeight 204.0
 
@@ -77,11 +79,7 @@
             [[TSUserLoginManager shareInstance] startLogin];
         };
     }
-
-    [TSUserLoginManager shareInstance].loginStateDidChanged = ^(TSLoginState state) {
-        @strongify(self)
-        [self.viewModel fetchData];
-    };
+    
 }
 
 #pragma mark - UI
@@ -187,6 +185,19 @@
     return view;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    TSHomePageCellViewModel *viewModel = self.viewModel.dataSource[section];
+    if (viewModel.model.headerTemplateName) {
+        UITableViewHeaderFooterView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:viewModel.model.headerTemplateName];
+        
+        if ([headerView isKindOfClass:TSHomePageContainerHeaderView.class]) {
+            return 48;
+        }
+       
+    }
+    return 0;
+}
+
 - (void)registCellInfo {
     [self.tableView registerClass:NSClassFromString(@"TSHomePageBannerCell") forCellReuseIdentifier:@"TSHomePageBanner"];
     [self.tableView registerClass:NSClassFromString(@"TSHomePageCategoryCell") forCellReuseIdentifier:@"TSHomePageCategory"];
@@ -211,6 +222,12 @@
     
 }
 
+#pragma mark - Noti
+- (void)loginStateDidChanged:(NSNotification *)noti{
+    self.loginBar.hidden = ![noti.object intValue];
+    [self.viewModel fetchData];
+}
+
 #pragma mark - Action
 - (void)refreshHeaderDataMehtod {
     [self.viewModel fetchData];
@@ -221,6 +238,9 @@
 }
 
 -(void)categoryAction:(UIButton *)sender{
+    [[TSUserInfoManager userInfo] clearUserInfo];
+    return;
+    
     TSProductDetailController *con = [[TSProductDetailController alloc] init];
 //    TSCategoryViewController *category = [[TSCategoryViewController alloc] init];
     [self.navigationController pushViewController:con animated:YES];
@@ -263,7 +283,8 @@
 - (UITableView *)tableView {
     if (!_tableView) {
         _tableView = [[YBNestTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-        MJRefreshHeader *header = [MJRefreshHeader headerWithRefreshingTarget:self refreshingAction:@selector(refreshHeaderDataMehtod)];
+        RefreshGifHeader *header = [RefreshGifHeader headerWithRefreshingTarget:self refreshingAction:@selector(refreshHeaderDataMehtod)];
+        header.indicatorStyle = IndicatorStyleWhite;
         _tableView.backgroundColor = [UIColor clearColor];
         _tableView.rowHeight = UITableViewAutomaticDimension;
         _tableView.delegate = self;

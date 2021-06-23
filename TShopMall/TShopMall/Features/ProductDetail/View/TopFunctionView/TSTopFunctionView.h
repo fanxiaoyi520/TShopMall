@@ -16,6 +16,7 @@
 -(void)topFunctionView:(TSTopFunctionView *_Nullable)topFunctionView changeClick:(TSFuncButton *_Nonnull)sender;
 -(void)topFunctionView:(TSTopFunctionView *_Nullable)topFunctionView shareClick:(TSFuncButton *_Nonnull)sender;
 -(void)topFunctionView:(TSTopFunctionView *_Nullable)topFunctionView downloadClick:(TSFuncButton *_Nonnull)sender;
+-(void)topFunctionView:(TSTopFunctionView *_Nullable)topFunctionView sharePosterClick:(TSFuncButton *_Nonnull)sender;
 
 @end
 

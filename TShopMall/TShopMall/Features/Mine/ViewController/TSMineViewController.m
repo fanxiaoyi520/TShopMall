@@ -76,6 +76,17 @@
     [super viewWillLayoutSubviews];
 }
 
+#pragma mark - Noti
+- (void)loginStateDidChanged:(NSNotification *)noti{
+    __weak __typeof(self)weakSelf = self;
+    [self.dataController fetchMineContentsComplete:^(BOOL isSucess) {
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
+        if (isSucess) {
+            [strongSelf.collectionView reloadData];
+        }
+    }];
+}
+
 #pragma mark - Action
 -(void)setAction:(UIButton *)sender{
     TSSettingViewController *settingVC = [[TSSettingViewController alloc] init];
@@ -142,6 +153,11 @@
            forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
                   withReuseIdentifier:sectionModel.headerIdentify];
         TSMineOrderHeaderView *header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:sectionModel.headerIdentify forIndexPath:indexPath];
+        if ([sectionModel.headerIdentify isEqualToString:@"TSMineOrderHeaderView"]) {
+            header.clickBlock = ^{
+                NSLog(@"----");
+            };
+        }
         [header bindMineSectionModel:sectionModel];
         return header;
     }else{

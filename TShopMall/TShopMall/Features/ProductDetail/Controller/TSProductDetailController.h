@@ -11,6 +11,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TSProductDetailController : TSBaseViewController
 
+/// 商品uuid
+@property(nonatomic, copy) NSString *uuid;
+
 @end
 
 NS_ASSUME_NONNULL_END

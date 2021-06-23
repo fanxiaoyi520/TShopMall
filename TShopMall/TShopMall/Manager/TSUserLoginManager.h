@@ -15,10 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TSUserLoginManager : NSObject
 + (instancetype)shareInstance;
-@property (nonatomic, copy) void(^ _Nonnull loginStateDidChanged)(TSLoginState state);
 @property (nonatomic, assign, readonly) TSLoginState state;
 -(void)startLogin;
--(void)startLogout;
+-(void)logout;
 
 @end
 

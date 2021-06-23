@@ -58,14 +58,15 @@
     [commonRequestHeader setValue:@"TCL" forKey:@"t-id"];
     [commonRequestHeader setValue:@"02" forKey:@"terminalType"];
     
-//    if ([TSGlobalManager shareInstance].currentUserInfo) {
-//        [commonRequestHeader setValue:[TSGlobalManager shareInstance].currentUserInfo.accessToken forKey:@"accessToken"];
-//    }
-//    if ([TSGlobalManager shareInstance].clientID) {
-//        [commonRequestHeader setValue:[TSGlobalManager shareInstance].clientID forKey:@"User-Agent"];
-//    }
-    
-//    [commonRequestHeader setValue:[TSGlobalManager shareInstance].appVersion forKey:@"appVersion"];
+    if ([TSGlobalManager shareInstance].currentUserInfo.accessToken.length > 0) {
+        [commonRequestHeader setValue:[TSGlobalManager shareInstance].currentUserInfo.accessToken forKey:@"accessToken"];
+    }else{
+        [commonRequestHeader setValue:@"" forKey:@"accessToken"];
+    }
+    if ([TSGlobalManager shareInstance].clientID.length > 0) {
+        [commonRequestHeader setValue:[TSGlobalManager shareInstance].clientID forKey:@"User-Agent"];
+    }
+    [commonRequestHeader setValue:[TSGlobalManager shareInstance].appVersion forKey:@"appVersion"];
     [commonRequestHeader setValue:@"app" forKey:@"source"];
     [commonRequestHeader setValue:@"AppStore" forKey:@"pubChannel"];
 

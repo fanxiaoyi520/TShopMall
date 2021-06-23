@@ -60,7 +60,10 @@
 
 #pragma mark - Actions
 -(void)moreAction:(TSMineMoreButton *)sender{
-    
+    if (self.clickBlock) {
+        self.clickBlock();
+    }
+        
 }
 
 #pragma mark - Getter

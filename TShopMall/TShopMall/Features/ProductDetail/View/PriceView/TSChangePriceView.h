@@ -7,9 +7,19 @@
 
 #import <UIKit/UIKit.h>
 
+@class TSChangePriceView;
+
+@protocol TSChangePriceViewDelegate <NSObject>
+
+-(void)changePriceView:(TSChangePriceView *_Nullable)changePriceView closeClick:(UIButton *_Nonnull)sender;
+
+@end
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TSChangePriceView : UIView
+
+@property(nonatomic, weak) id<TSChangePriceViewDelegate> delegate;
 
 @end
 

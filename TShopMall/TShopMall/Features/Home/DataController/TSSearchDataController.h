@@ -17,6 +17,8 @@
 - (void)fetchData:(void(^)(NSArray<TSSearchSection *> *sections,  NSError *error))finished;
 
 + (NSArray<TSSearchSection *> *)updateHistorySections:(NSArray<TSSearchSection *> *)sections;
+
+- (NSArray<TSSearchSection *> *)configRecomendSection:(UICollectionReusableView *)recomendView;
 @end
 
 

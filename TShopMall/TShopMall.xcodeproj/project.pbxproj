@@ -47,6 +47,12 @@
 		C22EE27426807AB900E59C86 /* TSSearchResultViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C22EE27326807AB900E59C86 /* TSSearchResultViewModel.m */; };
 		C22EE27726807E4C00E59C86 /* TSSearchResultFittleView.m in Sources */ = {isa = PBXBuildFile; fileRef = C22EE27626807E4C00E59C86 /* TSSearchResultFittleView.m */; };
 		C22EE27A26807EF000E59C86 /* TSSearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = C22EE27826807EF000E59C86 /* TSSearchResult.m */; };
+		C22EE2812681862400E59C86 /* TSRecomendDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = C22EE2802681862400E59C86 /* TSRecomendDataController.m */; };
+		C22EE2852681B16500E59C86 /* TSRecomendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C22EE2842681B16500E59C86 /* TSRecomendModel.m */; };
+		C22EE2882681B4A300E59C86 /* TSRecomendView.m in Sources */ = {isa = PBXBuildFile; fileRef = C22EE2872681B4A300E59C86 /* TSRecomendView.m */; };
+		C22EE28B2681BBF000E59C86 /* TSRecomendSection.m in Sources */ = {isa = PBXBuildFile; fileRef = C22EE28A2681BBF000E59C86 /* TSRecomendSection.m */; };
+		C22EE28E2681BC6200E59C86 /* TSRecomendViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C22EE28D2681BC6200E59C86 /* TSRecomendViewModel.m */; };
+		C22EE2912681BCDF00E59C86 /* TSRecomendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C22EE2902681BCDF00E59C86 /* TSRecomendCell.m */; };
 		C2A34C6A267449080095497E /* TSAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2A34C69267449080095497E /* TSAlertView.m */; };
 		C2A34C7726749E3E0095497E /* TSSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2A34C7626749E3D0095497E /* TSSearchController.m */; };
 		C2A34C7A26749FCD0095497E /* TSSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2A34C7926749FCD0095497E /* TSSearchView.m */; };
@@ -95,9 +101,6 @@
 		C2EF88CA2670997100E7374A /* TSCartDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EF88AD2670997100E7374A /* TSCartDataController.m */; };
 		C2EF88CB2670997100E7374A /* TSCartDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EF88AD2670997100E7374A /* TSCartDataController.m */; };
 		C2EF88CC2670997100E7374A /* TSCartDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EF88AD2670997100E7374A /* TSCartDataController.m */; };
-		C2EF88CF2670A3B200E7374A /* TSCartRecomendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EF88CE2670A3B200E7374A /* TSCartRecomendCell.m */; };
-		C2EF88D02670A3B200E7374A /* TSCartRecomendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EF88CE2670A3B200E7374A /* TSCartRecomendCell.m */; };
-		C2EF88D12670A3B200E7374A /* TSCartRecomendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EF88CE2670A3B200E7374A /* TSCartRecomendCell.m */; };
 		C2EF88D52670B8B900E7374A /* TSCartBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EF88D42670B8B900E7374A /* TSCartBaseCell.m */; };
 		C2EF88D82671AB6B00E7374A /* TSNumOperationView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EF88D72671AB6B00E7374A /* TSNumOperationView.m */; };
 		C2EF88DB2671E28100E7374A /* TSEmptyAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EF88DA2671E28100E7374A /* TSEmptyAlertView.m */; };
@@ -293,6 +296,7 @@
 		F530CD5E26819449009DC29A /* mall_goods@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F530CD5526819448009DC29A /* mall_goods@3x.png */; };
 		F530CD5F26819449009DC29A /* mall_goods@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F530CD5626819449009DC29A /* mall_goods@2x.png */; };
 		F530CD6026819449009DC29A /* mall_logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F530CD5726819449009DC29A /* mall_logo@2x.png */; };
+		F530CD642681E11C009DC29A /* TSDetailShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CD632681E11C009DC29A /* TSDetailShareView.m */; };
 		F54972FE2668842500181E3F /* TShopMallTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F54972FD2668842500181E3F /* TShopMallTests.m */; };
 		F54973092668842500181E3F /* TShopMallUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F54973082668842500181E3F /* TShopMallUITests.m */; };
 		F54973602668A22100181E3F /* SSGenaralRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F54973402668A22100181E3F /* SSGenaralRequest.m */; };
@@ -525,6 +529,18 @@
 		C22EE27626807E4C00E59C86 /* TSSearchResultFittleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSSearchResultFittleView.m; sourceTree = "<group>"; };
 		C22EE27826807EF000E59C86 /* TSSearchResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSSearchResult.m; sourceTree = "<group>"; };
 		C22EE27926807EF000E59C86 /* TSSearchResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSSearchResult.h; sourceTree = "<group>"; };
+		C22EE27F2681862400E59C86 /* TSRecomendDataController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSRecomendDataController.h; sourceTree = "<group>"; };
+		C22EE2802681862400E59C86 /* TSRecomendDataController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSRecomendDataController.m; sourceTree = "<group>"; };
+		C22EE2832681B16500E59C86 /* TSRecomendModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSRecomendModel.h; sourceTree = "<group>"; };
+		C22EE2842681B16500E59C86 /* TSRecomendModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSRecomendModel.m; sourceTree = "<group>"; };
+		C22EE2862681B4A300E59C86 /* TSRecomendView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSRecomendView.h; sourceTree = "<group>"; };
+		C22EE2872681B4A300E59C86 /* TSRecomendView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSRecomendView.m; sourceTree = "<group>"; };
+		C22EE2892681BBF000E59C86 /* TSRecomendSection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSRecomendSection.h; sourceTree = "<group>"; };
+		C22EE28A2681BBF000E59C86 /* TSRecomendSection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSRecomendSection.m; sourceTree = "<group>"; };
+		C22EE28C2681BC6200E59C86 /* TSRecomendViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSRecomendViewModel.h; sourceTree = "<group>"; };
+		C22EE28D2681BC6200E59C86 /* TSRecomendViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSRecomendViewModel.m; sourceTree = "<group>"; };
+		C22EE28F2681BCDF00E59C86 /* TSRecomendCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSRecomendCell.h; sourceTree = "<group>"; };
+		C22EE2902681BCDF00E59C86 /* TSRecomendCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSRecomendCell.m; sourceTree = "<group>"; };
 		C2A34C68267449060095497E /* TSAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSAlertView.h; sourceTree = "<group>"; };
 		C2A34C69267449080095497E /* TSAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSAlertView.m; sourceTree = "<group>"; };
 		C2A34C7526749E3D0095497E /* TSSearchController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSSearchController.h; sourceTree = "<group>"; };
@@ -585,8 +601,6 @@
 		C2EF88AB2670997100E7374A /* TSCartCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSCartCell.h; sourceTree = "<group>"; };
 		C2EF88AD2670997100E7374A /* TSCartDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSCartDataController.m; sourceTree = "<group>"; };
 		C2EF88AE2670997100E7374A /* TSCartDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSCartDataController.h; sourceTree = "<group>"; };
-		C2EF88CD2670A3B200E7374A /* TSCartRecomendCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSCartRecomendCell.h; sourceTree = "<group>"; };
-		C2EF88CE2670A3B200E7374A /* TSCartRecomendCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSCartRecomendCell.m; sourceTree = "<group>"; };
 		C2EF88D22670B75000E7374A /* TSCartProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSCartProtocol.h; sourceTree = "<group>"; };
 		C2EF88D32670B8B900E7374A /* TSCartBaseCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSCartBaseCell.h; sourceTree = "<group>"; };
 		C2EF88D42670B8B900E7374A /* TSCartBaseCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSCartBaseCell.m; sourceTree = "<group>"; };
@@ -960,6 +974,8 @@
 		F530CD5526819448009DC29A /* mall_goods@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mall_goods@3x.png"; sourceTree = "<group>"; };
 		F530CD5626819449009DC29A /* mall_goods@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mall_goods@2x.png"; sourceTree = "<group>"; };
 		F530CD5726819449009DC29A /* mall_logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mall_logo@2x.png"; sourceTree = "<group>"; };
+		F530CD622681E11C009DC29A /* TSDetailShareView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSDetailShareView.h; sourceTree = "<group>"; };
+		F530CD632681E11C009DC29A /* TSDetailShareView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSDetailShareView.m; sourceTree = "<group>"; };
 		F54972DE2668842200181E3F /* TShopMall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TShopMall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F54972F22668842400181E3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F54972F92668842500181E3F /* TShopMallTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TShopMallTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1342,8 +1358,6 @@
 				C2EF88A52670997100E7374A /* TSCartCell.m */,
 				C2EF88AA2670997100E7374A /* TSCartInvalidCell.h */,
 				C2EF88A62670997100E7374A /* TSCartInvalidCell.m */,
-				C2EF88CD2670A3B200E7374A /* TSCartRecomendCell.h */,
-				C2EF88CE2670A3B200E7374A /* TSCartRecomendCell.m */,
 				C2EF88DC2671E92400E7374A /* TSCartEmptyCell.h */,
 				C2EF88DD2671E92400E7374A /* TSCartEmptyCell.m */,
 				C2EF88D22670B75000E7374A /* TSCartProtocol.h */,
@@ -1460,6 +1474,25 @@
 				C22EE27826807EF000E59C86 /* TSSearchResult.m */,
 			);
 			name = SearchResult;
+			sourceTree = "<group>";
+		};
+		C22EE28226818F3500E59C86 /* Recomend */ = {
+			isa = PBXGroup;
+			children = (
+				C22EE27F2681862400E59C86 /* TSRecomendDataController.h */,
+				C22EE2802681862400E59C86 /* TSRecomendDataController.m */,
+				C22EE2832681B16500E59C86 /* TSRecomendModel.h */,
+				C22EE2842681B16500E59C86 /* TSRecomendModel.m */,
+				C22EE2862681B4A300E59C86 /* TSRecomendView.h */,
+				C22EE2872681B4A300E59C86 /* TSRecomendView.m */,
+				C22EE2892681BBF000E59C86 /* TSRecomendSection.h */,
+				C22EE28A2681BBF000E59C86 /* TSRecomendSection.m */,
+				C22EE28C2681BC6200E59C86 /* TSRecomendViewModel.h */,
+				C22EE28D2681BC6200E59C86 /* TSRecomendViewModel.m */,
+				C22EE28F2681BCDF00E59C86 /* TSRecomendCell.h */,
+				C22EE2902681BCDF00E59C86 /* TSRecomendCell.m */,
+			);
+			path = Recomend;
 			sourceTree = "<group>";
 		};
 		C2A34C8D2674AFFC0095497E /* DataController */ = {
@@ -1976,8 +2009,8 @@
 		F530CCBF26804167009DC29A /* Handler */ = {
 			isa = PBXGroup;
 			children = (
-				F530CCC026804167009DC29A /* TSBridgeHandler.m */,
 				F530CCC126804167009DC29A /* TSBridgeHandler.h */,
+				F530CCC026804167009DC29A /* TSBridgeHandler.m */,
 			);
 			path = Handler;
 			sourceTree = "<group>";
@@ -2162,6 +2195,15 @@
 			path = PriceView;
 			sourceTree = "<group>";
 		};
+		F530CD612681E105009DC29A /* ShareView */ = {
+			isa = PBXGroup;
+			children = (
+				F530CD622681E11C009DC29A /* TSDetailShareView.h */,
+				F530CD632681E11C009DC29A /* TSDetailShareView.m */,
+			);
+			path = ShareView;
+			sourceTree = "<group>";
+		};
 		F54972D52668842200181E3F = {
 			isa = PBXGroup;
 			children = (
@@ -2331,6 +2373,7 @@
 		F54973792668A94600181E3F /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				C22EE28226818F3500E59C86 /* Recomend */,
 				04DAFAF6267B36A50098275A /* OrderManage */,
 				F55D2CD72678802D006BACCF /* ProductDetail */,
 				C206A4F1266F1D4700B69DED /* LoginRegister */,
@@ -2823,6 +2866,7 @@
 		F55D2CE0267881AB006BACCF /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F530CD612681E105009DC29A /* ShareView */,
 				F530CD4B26818FDF009DC29A /* PriceView */,
 				F530CD47268174EE009DC29A /* TopFunctionView */,
 				F530CD312680C5E5009DC29A /* MaterialView */,
@@ -3344,8 +3388,10 @@
 				F530CCAF26803FCD009DC29A /* UITextField+General.m in Sources */,
 				F530CCB426803FCD009DC29A /* UIFont+Plugin.m in Sources */,
 				F55D2C3B2671E14B006BACCF /* TSUniversalDecorationView.m in Sources */,
+				C22EE2882681B4A300E59C86 /* TSRecomendView.m in Sources */,
 				F530CC4626803B1C009DC29A /* RefreshGifFooter.m in Sources */,
 				F55D2C6726722807006BACCF /* TSCategoryKindModel.m in Sources */,
+				C22EE2912681BCDF00E59C86 /* TSRecomendCell.m in Sources */,
 				C21A4B81267B335D00766F72 /* TSAddressModel.m in Sources */,
 				C2A34C6A267449080095497E /* TSAlertView.m in Sources */,
 				DC9911C3267C475000EF9B26 /* YBNestContainerView.m in Sources */,
@@ -3371,6 +3417,7 @@
 				F55D2CC926784ACD006BACCF /* TSUserInfoView.m in Sources */,
 				C2A34C7D2674A56C0095497E /* TSSearchTextView.m in Sources */,
 				04113171268021CC000B5BAF /* TSCustomLabel.m in Sources */,
+				C22EE2852681B16500E59C86 /* TSRecomendModel.m in Sources */,
 				C3A6C492267A1C1700FC71D6 /* TSWithdrawalPswSetSectionModel.m in Sources */,
 				F530CC9E26803FCD009DC29A /* UIView+TSSafeArea.m in Sources */,
 				F55D2AD6266F67EF006BACCF /* TSHomePageContainerCell.m in Sources */,
@@ -3401,6 +3448,7 @@
 				F530C6D626802E5D009DC29A /* TSQuickLoginRequest.m in Sources */,
 				F530CCF126804167009DC29A /* TSWKWebView.m in Sources */,
 				C3A6C4E3267A1CAF00FC71D6 /* TSSecurityDataController.m in Sources */,
+				F530CD642681E11C009DC29A /* TSDetailShareView.m in Sources */,
 				F55D2CB32674AE55006BACCF /* TSCategoryContentModel.m in Sources */,
 				F55D2CCA26784ACD006BACCF /* TSMineTitleHeaderView.m in Sources */,
 				DC3440BB26722DB600F5B0DA /* TSHomePageViewModel.m in Sources */,
@@ -3440,6 +3488,7 @@
 				C2C765422679ECBF004757B9 /* TSMakeOrderSection.m in Sources */,
 				F530CCAB26803FCD009DC29A /* UIAlertController+Color.m in Sources */,
 				C3A6C4BD267A1C5700FC71D6 /* TSSecurityCenterTitleCell.m in Sources */,
+				C22EE28E2681BC6200E59C86 /* TSRecomendViewModel.m in Sources */,
 				F55D2C6926722807006BACCF /* TSCategoryDataController.m in Sources */,
 				F530CCED26804167009DC29A /* TSBridgeHandler.m in Sources */,
 				F55D2C6626722807006BACCF /* TSMeasureCell.m in Sources */,
@@ -3551,8 +3600,10 @@
 				C3A6C48E267A1C1700FC71D6 /* TSPhoneNumSectionModel.m in Sources */,
 				F55D2CA026745E7A006BACCF /* TSLastUserInfoManager.m in Sources */,
 				042F423D2681FDB000555F5D /* TSRealNameAuthCell.m in Sources */,
+				C22EE28B2681BBF000E59C86 /* TSRecomendSection.m in Sources */,
 				C35F1873267D970800F65AF9 /* TSAccountCancelDropViewController.m in Sources */,
 				C3A6C4E7267A1CAF00FC71D6 /* TSAboutMeDataController.m in Sources */,
+				C22EE2812681862400E59C86 /* TSRecomendDataController.m in Sources */,
 				F55D2C372671E14B006BACCF /* TSUniversalTableViewCell.m in Sources */,
 				C21A4B8A267B458D00766F72 /* TSAddressEditPastView.m in Sources */,
 				F54973C22668C0BC00181E3F /* TSDeviceHelper.m in Sources */,
@@ -3625,7 +3676,6 @@
 				F530CD302680BB57009DC29A /* TSProductFooterView.m in Sources */,
 				F55D2C3C2671E14B006BACCF /* TSUniversalSectionModel.m in Sources */,
 				F530CCF826804167009DC29A /* WKWebView+TSExternalNavigationDelegates.m in Sources */,
-				C2EF88CF2670A3B200E7374A /* TSCartRecomendCell.m in Sources */,
 				F530CCFF26806BDD009DC29A /* TSSaveLocalConst.m in Sources */,
 				F54973652668A22100181E3F /* YTKChainRequest+AnimatingAccessory.m in Sources */,
 				F56D4B41266DFB8900C1AD9E /* FMLayoutFixedSection.m in Sources */,
@@ -3708,7 +3758,6 @@
 				C2EF88B32670997100E7374A /* TSCartViewModel.m in Sources */,
 				C2EF88BF2670997100E7374A /* TSCartView.m in Sources */,
 				C2EF88CB2670997100E7374A /* TSCartDataController.m in Sources */,
-				C2EF88D02670A3B200E7374A /* TSCartRecomendCell.m in Sources */,
 				C2EF88C22670997100E7374A /* TSCartCell.m in Sources */,
 				C2EF88C52670997100E7374A /* TSCartInvalidCell.m in Sources */,
 				C2EF88B92670997100E7374A /* TSCartModel.m in Sources */,
@@ -3726,7 +3775,6 @@
 				C2EF88B42670997100E7374A /* TSCartViewModel.m in Sources */,
 				C2EF88C02670997100E7374A /* TSCartView.m in Sources */,
 				C2EF88CC2670997100E7374A /* TSCartDataController.m in Sources */,
-				C2EF88D12670A3B200E7374A /* TSCartRecomendCell.m in Sources */,
 				C2EF88C32670997100E7374A /* TSCartCell.m in Sources */,
 				C2EF88C62670997100E7374A /* TSCartInvalidCell.m in Sources */,
 				C2EF88BA2670997100E7374A /* TSCartModel.m in Sources */,
@@ -3892,7 +3940,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 2GM7ZL62GN;
 				EXCLUDED_ARCHS = "";
@@ -3905,9 +3953,9 @@
 					"@executable_path/Frameworks",
 				);
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.tcl.TSalesDev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tcl.TSalesSit1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "T销客_开发";
+				PROVISIONING_PROFILE_SPECIFIER = "T销客_SIT1";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -3918,7 +3966,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 2GM7ZL62GN;
 				EXCLUDED_ARCHS = "";
@@ -3931,9 +3979,9 @@
 					"@executable_path/Frameworks",
 				);
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.tcl.TSalesDev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tcl.TSalesSit1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "T销客_开发";
+				PROVISIONING_PROFILE_SPECIFIER = "T销客_SIT1";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

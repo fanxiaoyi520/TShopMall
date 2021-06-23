@@ -12,11 +12,13 @@
 #import "TSSearchResultController.h"
 #import "TSSearchKeyViewModel.h"
 #import "TSSearchResultController.h"
+#import "TSRecomendView.h"
 
 @interface TSSearchController ()
 @property (nonatomic, strong) TSSearchView *searchView;
 @property (nonatomic, strong) TSSearchDataController *dataCon;
 @property (nonatomic, strong) TSSearchResultController *searchResultCon;
+@property (nonatomic, strong) TSRecomendView *recomendView;
 @end
 
 @implementation TSSearchController
@@ -35,23 +37,19 @@
     
     self.dataCon = [TSSearchDataController new];
     [self refreshData];
+    [self configRecomendView];
 }
 
 - (void)refreshData{
     __weak typeof(self) weakSelf = self;
     [self.dataCon fetchData:^(NSArray<TSSearchSection *> *sections, NSError *error) {
-        self.searchView.sections = sections;
-        
+        weakSelf.searchView.sections = sections;
     }];
 }
 
 - (void)goToGoodsList:(NSString *)key{
-//    [TSSearchKeyViewModel handleHistoryKeys:key];
-//    TSGoodsListController *con = [TSGoodsListController new];
-//    con.searchKey = key;
-//    [self.navigationController pushViewController:con animated:YES];
-//
-//    self.searchView.sections = [TSSearchDataController updateHistorySections:self.dataCon.sections];
+    [TSSearchKeyViewModel handleHistoryKeys:key];
+    self.searchView.sections = [TSSearchDataController updateHistorySections:self.dataCon.sections];
     
     self.searchResultCon.searchKey = key;
     [self.searchResultCon showSearchResultView];
@@ -60,6 +58,15 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super view];
     [self hiddenNavigationBar];
+}
+
+- (void)configRecomendView{
+    __weak typeof(self) weakSelf = self;
+    self.recomendView = [TSRecomendView configRecomendViewWithType:Search layoutFinished:^{
+        weakSelf.searchView.sections = [weakSelf.dataCon configRecomendSection:weakSelf.recomendView];
+    } goodsSelected:^(NSString *goodsId) {
+        
+    }];
 }
 
 - (void)viewWillLayoutSubviews{

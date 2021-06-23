@@ -28,7 +28,7 @@
             }
         }else{
             self.smsModel = [[TSLoginSMSModel alloc] init];
-
+            
             if (complete) {
                 complete(NO);
             }
@@ -47,19 +47,22 @@
     TSQuickLoginRequest *login = [[TSQuickLoginRequest alloc] initWithUsername:username
                                                                      validCode:validCode];
     [login startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
-        
-        TSUserInfoManager *userInfo = [[TSUserInfoManager alloc] init];
-        userInfo.accessToken = request.responseModel.originalData[@"accessToken"];
-        userInfo.refreshToken = request.responseModel.originalData[@"refreshToken"];
-        userInfo.userName = request.responseModel.originalData[@"username"];
-        
-        TSGlobalManager *manager = [TSGlobalManager shareInstance];
-        manager.isLogin = YES;
-        manager.currentUserInfo = userInfo;
-        [manager saveCurrentUserInfo];
-        
-        } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-     
+        if (request.responseModel.isSucceed) {
+            TSUserInfoManager *userInfo = [[TSUserInfoManager alloc] init];
+            userInfo.accessToken = request.responseModel.originalData[@"accessToken"];
+            userInfo.refreshToken = request.responseModel.originalData[@"refreshToken"];
+            userInfo.userName = request.responseModel.originalData[@"username"];
+            [[TSUserInfoManager userInfo] saveUserInfo:userInfo];
+            TSGlobalManager *manager = [TSGlobalManager shareInstance];
+            manager.isLogin = YES;
+            manager.currentUserInfo = userInfo;
+            [manager saveCurrentUserInfo];
+            complete(YES);
+        }
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        complete(NO);
+//        [Popover popToastOnWindowWithText:request.responseModel.originalData[@"message"]];
+
     }];
     
 }
@@ -79,7 +82,7 @@
             }
         }else{
             self.smsModel = [[TSLoginSMSModel alloc] init];
-
+            
             if (complete) {
                 complete(NO);
             }
@@ -93,9 +96,9 @@
 }
 
 -(void)fetchRegisterMobile:(NSString *)mobile
-                     validCode:(NSString *)validCode
-                invitationCode:(NSString *)invitationCode
-                      complete:(nonnull void (^)(BOOL))complete{
+                 validCode:(NSString *)validCode
+            invitationCode:(NSString *)invitationCode
+                  complete:(nonnull void (^)(BOOL))complete{
     
     NSMutableDictionary *body = [NSMutableDictionary dictionary];
     [body setValue:mobile forKey:@"mobile"];
@@ -104,28 +107,28 @@
     
     SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kRegisterUrl requestMethod:YTKRequestMethodPOST requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON requestHeader:@{@"storeUuid":@"thome", @"t-id":@"tcl"} requestBody:body needErrorToast:YES];
     [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
-        NSString *dataString = request.responseObject[@"data"];
-        if (dataString) {
-            NSDictionary *dic = [dataString jsonValueDecoded];
-            if ([dic[@"code"] intValue] == 1) {
+        
+        if (request.responseModel.isSucceed) {
+            if (request.responseModel.data) {
+                NSDictionary *dic = request.responseModel.data;
                 TSUserInfoManager *userInfo = [[TSUserInfoManager alloc] init];
                 userInfo.accessToken = dic[@"accessToken"];
                 userInfo.refreshToken = dic[@"refreshToken"];
-                userInfo.userName = dic[@"userName"];
+                userInfo.userName = dic[@"username"];
                 userInfo.accountId = dic[@"accountId"];
                 [[TSUserInfoManager userInfo] saveUserInfo:userInfo];
-                if ([TSUserLoginManager shareInstance].loginStateDidChanged) {
-                    [TSUserLoginManager shareInstance].loginStateDidChanged(Login);
-                }
                 complete(YES);
             }
-            else{
-                complete(NO);
-                [Popover popToastOnWindowWithText:dic[@"msg"]];
-            }
-        }
-        } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+            
+        }else
+        {
             complete(NO);
-        }];
+            
+            [Popover popToastOnWindowWithText:request.responseModel.originalData[@"message"]];
+            
+        }
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        complete(NO);
+    }];
 }
 @end

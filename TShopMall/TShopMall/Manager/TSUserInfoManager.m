@@ -22,13 +22,9 @@
 
 -(id)copyWithZone:(NSZone *)zone {
     TSUserInfoManager *copy =[[[self class] allocWithZone:zone] init];
-    
     copy.accessToken = [self.accessToken copyWithZone:zone];
-    
     copy.accountId = [self.accountId copyWithZone:zone];
-    
     copy.userName = [self.userName copyWithZone:zone];
-    
     copy.refreshToken = [self.refreshToken copyWithZone:zone];
     
     return copy;

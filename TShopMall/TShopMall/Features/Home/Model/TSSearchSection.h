@@ -18,6 +18,7 @@
 @property (nonatomic, copy) NSString *footerIdentifier;
 @property (nonatomic, assign) CGFloat headerHeight;
 @property (nonatomic, assign) CGFloat footerHeight;
+@property (nonatomic, strong) UICollectionReusableView *viewForFooter;
 @property (nonatomic, copy) NSString *headerTitle;
 @property (nonatomic, strong) NSArray<id<TSSearchCollectionRowDelegate>> *rows;
 @end

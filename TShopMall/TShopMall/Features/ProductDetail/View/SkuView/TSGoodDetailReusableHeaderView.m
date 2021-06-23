@@ -40,6 +40,7 @@
         _nameLable.textAlignment  = NSTextAlignmentLeft;
         _nameLable.textColor = KHexAlphaColor(@"#2D3132", 0.4);
         _nameLable.font = KRegularFont(14.0);
+        _nameLable.text = @"尺寸";
         _nameLable.backgroundColor = [UIColor clearColor];
     }
     return _nameLable;

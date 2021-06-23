@@ -15,13 +15,16 @@
 #import "TSUniversalFooterView.h"
 #import "WMDragView.h"
 #import "TSTopFunctionView.h"
+#import "TSGoodDetailMaterialView.h"
 #import "TSChangePriceView.h"
+#import "TSDetailShareView.h"
 #import "TSGoodDetailSkuView.h"
 #import "SnailQuickMaskPopups.h"
+#import "TSGoodDetailMaterialView.h"
 #import <MJRefresh/MJRefresh.h>
 
 
-@interface TSProductDetailController ()<UICollectionViewDelegate,UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate,TSTopFunctionViewDelegate>
+@interface TSProductDetailController ()<UICollectionViewDelegate,UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate,TSTopFunctionViewDelegate,TSChangePriceViewDelegate>
 
 /// 返回按钮
 @property(nonatomic, strong) UIButton *backButton;
@@ -40,8 +43,12 @@
 @property (nonatomic, strong) SnailQuickMaskPopups *functionPopups;
 /// 改价
 @property (nonatomic, strong) SnailQuickMaskPopups *changePopups;
-/// sku
-@property (nonatomic, strong) SnailQuickMaskPopups *popups;
+/// 分享
+@property (nonatomic, strong) SnailQuickMaskPopups *sharePopups;
+/// skuview
+@property (nonatomic, strong) SnailQuickMaskPopups *skuPpopups;
+/// 下载更多
+@property (nonatomic, strong) SnailQuickMaskPopups *materialPopups;
 
 /// 数据中心
 @property(nonatomic, strong) TSProductDetailDataController *dataController;
@@ -53,19 +60,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.uuid = @"3b104da87998485699209f7f4bbf52f1";
+    
     __weak __typeof(self)weakSelf = self;
-    [self.dataController fetchProductDetailComplete:^(BOOL isSucess) {
+    NSMutableArray *sections = [self.dataController fetchProductDetailWithUuid:self.uuid
+                                                                      complete:^(BOOL isSucess) {
         __strong __typeof(weakSelf)strongSelf = weakSelf;
         if (isSucess) {
             [strongSelf.collectionView reloadData];
         }
     }];
     
+    if (sections.count > 0) {
+        [self.collectionView reloadData];
+    }
+    
     self.dragView.clickDragViewBlock = ^(WMDragView *dragView){
         NSLog(@"clickDragViewBlock");
     };
-    
-//    [self addMJHeaderAndFooter];
 }
 
 -(void)setupNavigationBar{
@@ -99,6 +111,7 @@
     [self.view addSubview:self.dragView];
     
 //    [self addCollectionCoverView];
+    //    [self addMJHeaderAndFooter];
 }
 
 -(void)viewWillLayoutSubviews{
@@ -202,13 +215,22 @@
     __weak __typeof(self)weakSelf = self;
     [self.functionPopups dismissAnimated:YES completion:^(SnailQuickMaskPopups * _Nonnull popups) {
         __strong __typeof(weakSelf)strongSelf = weakSelf;
-        
+        [strongSelf.sharePopups presentAnimated:YES completion:nil];
     }];
 }
 -(void)topFunctionView:(TSTopFunctionView *_Nullable)topFunctionView downloadClick:(TSFuncButton *_Nonnull)sender{
     [self.functionPopups dismissAnimated:YES completion:^(SnailQuickMaskPopups * _Nonnull popups) {
         
     }];
+}
+     
+-(void)topFunctionView:(TSTopFunctionView *_Nullable)topFunctionView sharePosterClick:(TSFuncButton *_Nonnull)sender{
+        
+}
+
+#pragma mark - TSChangePriceViewDelegate
+-(void)changePriceView:(TSChangePriceView *_Nullable)changePriceView closeClick:(UIButton *_Nonnull)sender{
+    [self.changePopups dismissAnimated:YES completion:nil];
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -286,7 +308,7 @@
     if ([@"TSGoodDetailImageCell" isEqualToString:params[@"cellType"]]) {
         
         if ([params[@"downloadType"] intValue] == 0) {//下载更多素材
-            
+            [self.materialPopups presentAnimated:YES completion:nil];
         } else {// 直接下载素材
             
         }
@@ -294,19 +316,7 @@
         if ([params[@"purchaseType"] intValue] == 0) {//赠品
             
         } else if ([params[@"purchaseType"] intValue] == 1){//已选
-            
-            TSGoodDetailSkuView *skuView = [[TSGoodDetailSkuView alloc] init];
-            skuView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight * 0.68);
-            [skuView setCorners:(UIRectCornerTopLeft | UIRectCornerTopRight) radius:8.0];
-            skuView.clipsToBounds = YES;
-            
-            _popups = [SnailQuickMaskPopups popupsWithMaskStyle:MaskStyleBlackTranslucent aView:skuView];
-            _popups.presentationStyle = PresentationStyleBottom;
-            _popups.transitionStyle = TransitionStyleFromRight;
-            _popups.isAllowPopupsDrag = YES;
-            _popups.maskAlpha = 0.8;
-            [_popups presentAnimated:YES completion:NULL];
-            
+            [self.skuPpopups presentAnimated:YES completion:NULL];
         } else if ([params[@"purchaseType"] intValue] == 2){//配送
             
         }else{//运费
@@ -503,6 +513,7 @@ spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
         changeView.frame = CGRectMake(0, 0, kScreenWidth, 422);
         [changeView setCorners:(UIRectCornerTopLeft | UIRectCornerTopRight) radius:8.0];
         changeView.clipsToBounds = YES;
+        changeView.delegate = self;
         
         _changePopups = [SnailQuickMaskPopups popupsWithMaskStyle:MaskStyleBlackTranslucent aView:changeView];
         _changePopups.presentationStyle = PresentationStyleBottom;
@@ -513,5 +524,52 @@ spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
     return  _changePopups;
 }
 
+-(SnailQuickMaskPopups *)sharePopups{
+    if (!_sharePopups) {
+        TSDetailShareView *shareView = [[TSDetailShareView alloc] init];
+        shareView.frame = CGRectMake(0, 0, kScreenWidth, 180);
+        [shareView setCorners:(UIRectCornerTopLeft | UIRectCornerTopRight) radius:8.0];
+        shareView.clipsToBounds = YES;
+        
+        _sharePopups = [SnailQuickMaskPopups popupsWithMaskStyle:MaskStyleBlackTranslucent aView:shareView];
+        _sharePopups.presentationStyle = PresentationStyleBottom;
+        _sharePopups.transitionStyle = TransitionStyleFromBottom;
+        _sharePopups.isAllowPopupsDrag = YES;
+        _sharePopups.maskAlpha = 0.8;
+    }
+    return  _sharePopups;
+}
+
+-(SnailQuickMaskPopups *)skuPpopups{
+    if (!_skuPpopups) {
+        TSGoodDetailSkuView *skuView = [[TSGoodDetailSkuView alloc] init];
+        skuView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight * 0.68);
+        [skuView setCorners:(UIRectCornerTopLeft | UIRectCornerTopRight) radius:8.0];
+        skuView.clipsToBounds = YES;
+        
+        _skuPpopups = [SnailQuickMaskPopups popupsWithMaskStyle:MaskStyleBlackTranslucent aView:skuView];
+        _skuPpopups.presentationStyle = PresentationStyleBottom;
+        _skuPpopups.transitionStyle = TransitionStyleFromRight;
+        _skuPpopups.isAllowPopupsDrag = YES;
+        _skuPpopups.maskAlpha = 0.8;
+    }
+    return _skuPpopups;
+}
+
+-(SnailQuickMaskPopups *)materialPopups{
+    if (!_materialPopups) {
+        TSGoodDetailMaterialView *materialView = [[TSGoodDetailMaterialView alloc] init];
+        materialView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight * 0.6);
+        [materialView setCorners:(UIRectCornerTopLeft | UIRectCornerTopRight) radius:8.0];
+        materialView.clipsToBounds = YES;
+        
+        _materialPopups = [SnailQuickMaskPopups popupsWithMaskStyle:MaskStyleBlackTranslucent aView:materialView];
+        _materialPopups.presentationStyle = PresentationStyleBottom;
+        _materialPopups.transitionStyle = TransitionStyleFromRight;
+        _materialPopups.isAllowPopupsDrag = YES;
+        _materialPopups.maskAlpha = 0.8;
+    }
+    return _materialPopups;
+}
 
 @end

@@ -102,7 +102,14 @@
 //    }];
     TSAlertView.new.alertInfo(nil, @"退出后不会删除任何历史资料,\n下次登录依然可以使用本账号").confirm(@"退出", ^{
         NSLog(@"退出=========");
+        [[TSUserLoginManager shareInstance] logout];
+        
     }).cancel(@"取消", ^{}).show();
+}
+
+#pragma mark - Noti
+- (void)loginStateDidChanged:(NSNotification *)noti{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - UICollectionViewDataSource

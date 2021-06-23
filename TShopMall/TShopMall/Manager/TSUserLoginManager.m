@@ -26,36 +26,21 @@
     TSLoginViewController *login = [TSLoginViewController new];
     TSBaseNavigationController *homeController = [[TSBaseNavigationController alloc] initWithRootViewController:login];
     login.loginBlock = ^{
-        if (self.loginStateDidChanged) {
-            self.loginStateDidChanged(Login);
-        }
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"TS_LoginUpdateNotification" object:@0];
     };
     UIViewController *vc = [UIApplication sharedApplication].delegate.window.rootViewController;
     homeController.modalPresentationStyle = UIModalPresentationFullScreen;
     [vc presentViewController:homeController animated:YES completion:nil];
 }
 
-- (void)startLogout{
+- (void)logout{
     TSLogoutRequest *request = [TSLogoutRequest new];
     [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
-        NSString *dataString = request.responseObject[@"data"];
-        if (dataString) {
-            NSDictionary *dic = [dataString jsonValueDecoded];
-            if ([dic[@"code"] intValue] == 1) {
-                
-                [[TSUserInfoManager userInfo] clearUserInfo];
-                if ([TSUserLoginManager shareInstance].loginStateDidChanged) {
-                    [TSUserLoginManager shareInstance].loginStateDidChanged(None);
-                }
-               
-            }
-            else{
-                
-            }
-        }
-        } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-           
-        }];
+        [[TSUserInfoManager userInfo] clearUserInfo];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"TS_LoginUpdateNotification" object:@1];
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        
+    }];
 }
 
 - (TSLoginState)state{
@@ -64,4 +49,5 @@
     }else
         return None;
 }
+
 @end
