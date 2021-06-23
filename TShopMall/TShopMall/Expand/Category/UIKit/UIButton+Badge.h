@@ -43,4 +43,11 @@
                             right:(CGFloat)right
                            bottom:(CGFloat) bottom
                              left:(CGFloat) left;
+/**
+ * 自定义切圆角
+ * corners : 需要切的方向
+ * cornerRadiiSize : 切割的大小
+ */
+- (void)jaf_customFilletRectCorner:(UIRectCorner)corners
+                       cornerRadii:(CGSize)cornerRadiiSize;
 @end

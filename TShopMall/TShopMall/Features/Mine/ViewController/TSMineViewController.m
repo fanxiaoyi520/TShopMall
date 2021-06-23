@@ -7,13 +7,19 @@
 
 #import "TSMineViewController.h"
 #import "TSMineDataController.h"
+
 #import "TSUserInfoView.h"
 #import "TSUniversalFlowLayout.h"
 #import "TSMineOrderHeaderView.h"
-#import "TSUniversalCollectionViewCell.h"
 #import "TSUniversalFooterView.h"
+#import "TSMineNavigationBar.h"
+#import "TSUniversalCollectionViewCell.h"
+#import "TSMineEarningsCell.h"
+
+#import "TSMineWalletViewController.h"
 #import "TSSettingViewController.h"
 #import "TSOrderManageViewController.h"
+#import "TSSettingViewController.h"
 
 @interface TSMineViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate,TSUserInfoViewDelegate,TSMineOrderHeaderViewDelegate>
 
@@ -141,14 +147,23 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    if (indexPath.item == 0) {//测试我的订单
+//    if (indexPath.item == 0) {//测试我的订单
+//        TSOrderManageViewController *orderVc = [[TSOrderManageViewController alloc] init];
+//        [self.navigationController pushViewController:orderVc animated:YES];
+//        return;
+//    }
+//
+//    TSSettingViewController *settingVC = [[TSSettingViewController alloc] init];
+//    [self.navigationController pushViewController:settingVC animated:YES];
+    if (indexPath.section == 0) {
         TSOrderManageViewController *orderVc = [[TSOrderManageViewController alloc] init];
         [self.navigationController pushViewController:orderVc animated:YES];
-        return;
+    } else if (indexPath.section == 1) {
+        TSMineWalletViewController *vc = [TSMineWalletViewController new];
+        [self.navigationController pushViewController:vc animated:YES];
+    } else if (indexPath.section == 2) {
+        
     }
-    
-    TSSettingViewController *settingVC = [[TSSettingViewController alloc] init];
-    [self.navigationController pushViewController:settingVC animated:YES];
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
@@ -163,9 +178,8 @@
         TSMineOrderHeaderView *header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:sectionModel.headerIdentify forIndexPath:indexPath];
         [header bindMineSectionModel:sectionModel];
         if ([sectionModel.headerIdentify isEqualToString:@"TSMineOrderHeaderView"]) {
-            header.mineOrderDelegate = self;
+            header.kDelegate = self;
         }
-        
         return header;
     }else{
         Class className = NSClassFromString(sectionModel.footerIdentify);
@@ -181,6 +195,17 @@
 -(id)universalCollectionViewCellModel:(NSIndexPath *)indexPath{
     TSMineSectionModel *sectionModel = self.dataController.sections[indexPath.section];
     return sectionModel.items[indexPath.row];
+}
+
+- (void)universalCollectionViewCellClick:(NSIndexPath *)indexPath params:(NSDictionary *)params {
+    NSString *cellType = (NSString *)[params objectForKey:@"cellType"];
+    if ([@"TSMineEarningsCell" isEqualToString:cellType]) {
+        NSInteger clickType = (NSInteger)[params objectForKey:@"clickType"];
+        switch (clickType) {
+            case 0:
+                break;
+        }
+    }
 }
 
 #pragma mark - UniversalFlowLayoutDelegate
@@ -276,14 +301,14 @@ spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
 }
 
 #pragma mark - TSUserInfoViewDelegate
--(void)loginAction:(id _Nullable)sender {
+-(void)userInfoLoginAction:(id _Nullable)sender {
     
 }
--(void)seeCodeAction:(id _Nullable)sender {
+-(void)userInfoSeeCodeAction:(id _Nullable)sender {
     
 }
 
-- (void)kCopyCodeAction:(id _Nullable)sender {
+- (void)userInfoKCopyCodeAction:(id _Nullable)sender {
     UIPasteboard *pab = (UIPasteboard *)sender;
     if (pab) {
         [self.collectionView makeToast:@"复制成功" duration:2.0 position:CSToastPositionBottom];
@@ -294,7 +319,7 @@ spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
 
 #pragma mark - TSMineOrderHeaderViewDelegate
 - (void)moreAction:(id)sender {
-    NSLog(@"1");
+    NSLog(@"查看全部订单");
 }
 
 #pragma mark - Getter
@@ -320,7 +345,7 @@ spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
 -(TSUserInfoView *)infoView{
     if (!_infoView) {
         _infoView = [[TSUserInfoView alloc] initWithRoleType:TSRoleTypePlatinum];
-        _infoView.userInfoDelegate = self;
+        _infoView.kDelegate = self;
     }
     return _infoView;
 }

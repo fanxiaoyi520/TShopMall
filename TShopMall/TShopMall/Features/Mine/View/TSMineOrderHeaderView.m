@@ -60,8 +60,8 @@
 
 #pragma mark - Actions
 -(void)moreAction:(TSMineMoreButton *)sender{
-    if ([self.mineOrderDelegate respondsToSelector:@selector(moreAction:)]) {
-        [self.mineOrderDelegate moreAction:sender];
+    if ([self.kDelegate respondsToSelector:@selector(mineOrderHeaderMoreAction:)]) {
+        [self.kDelegate mineOrderHeaderMoreAction:sender];
     }
 }
 

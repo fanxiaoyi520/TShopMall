@@ -139,8 +139,8 @@
     if (self.type == TSRoleTypeUnLogin) {
         
     }
-    if ([self.userInfoDelegate respondsToSelector:@selector(loginAction:)]) {
-        [self.userInfoDelegate loginAction:sender];
+    if ([self.kDelegate respondsToSelector:@selector(userInfoLoginAction:)]) {
+        [self.kDelegate userInfoLoginAction:sender];
     }
 }
 
@@ -152,8 +152,8 @@
         self.invitationCodeLab.hidden = NO;
         sender.selected = YES;
     }
-    if ([self.userInfoDelegate respondsToSelector:@selector(seeCodeAction:)]) {
-        [self.userInfoDelegate kCopyCodeAction:sender];
+    if ([self.kDelegate respondsToSelector:@selector(userInfoSeeCodeAction:)]) {
+        [self.kDelegate userInfoSeeCodeAction:sender];
     }
 }
 
@@ -161,8 +161,8 @@
     UIPasteboard *pab = [UIPasteboard generalPasteboard];
     NSString *string = self.invitationCodeLab.text;
     [pab setString:string];
-    if ([self.userInfoDelegate respondsToSelector:@selector(kCopyCodeAction:)]) {
-        [self.userInfoDelegate kCopyCodeAction:pab];
+    if ([self.kDelegate respondsToSelector:@selector(userInfoKCopyCodeAction:)]) {
+        [self.kDelegate userInfoKCopyCodeAction:pab];
     }
 }
 
