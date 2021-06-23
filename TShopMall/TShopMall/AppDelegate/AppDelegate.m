@@ -10,8 +10,9 @@
 #import "AppDelegate+Initialize.h"
 #import "NSObject+TSProperty.h"
 #import "NSString+Plugin.h"
+#import "TSServicesManager.h"
 
-@interface AppDelegate ()
+@interface AppDelegate ()<TSUriHandler>
 
 @end
 
@@ -24,6 +25,8 @@
     [self setKeywordAttribute];
     [self setNavigationConfig];
     [self setupRootController];
+    
+    [TSServicesManager sharedInstance].uriHandler = self;
     return YES;
 }
 
@@ -87,8 +90,7 @@
 
 - (NSDictionary *)getClassDict {
     return @{
-        @"page://quote/detailList": @"CMSQuoteDetailListViewController",
-        @"page://quote/config": @"CMSQuotesConfigViewController",
+        @"page://quote/productDetail": @"TSProductDetailController",
     };
 }
 @end
