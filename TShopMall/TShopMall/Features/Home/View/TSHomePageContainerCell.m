@@ -37,11 +37,12 @@
 }
 
 - (void)showEmptyView:(TSHomePageContainerCollectionView *)view{
+    view.collectionView.mj_footer.hidden = !view.items.count;
+
     if (view.items.count != 0) {
         [TSEmptyAlertView hideInView:view];
         return ;
     }
-    
     TSEmptyAlertView.new.alertInfo(@"抱歉，没有找到商品哦～", @"重试").show(view, @"center", ^{
         [self reloadContainerCollectionView:view];
     });
@@ -77,6 +78,13 @@
         
     }];
     
+    [self.KVOController observe:self.containerViewModel keyPath:@"segmentHeaderDatas" options:(NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew) block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
+        @strongify(self)
+        if (self.containerViewModel.segmentHeaderDatas.count) {
+            [self.containerView reloadData];
+        }
+    }];
+    
 }
 
 - (YBNestContainerView *)containerView {
@@ -98,8 +106,6 @@
    
     TSHomePageContainerCollectionView *collectionView =  [[TSHomePageContainerCollectionView alloc] initWithFrame:CGRectZero items:nil ColumnSpacing:8 rowSpacing:8 itemsHeight:282 rows:0 columns:2 padding:padding clickedBlock:^(TSProductBaseModel *selectItem, NSInteger index) {
         
-//        TSProductDetailController *detail = [[TSProductDetailController alloc] init];
-//        detail.uuid = selectItem.uuid;
         [[TSServicesManager sharedInstance].uriHandler openURI:[NSString stringWithFormat:@"page://quote/productDetail?uuid=%@", selectItem.uuid]];
         
         NSLog(@"uri:%@", selectItem.uuid);
@@ -112,6 +118,7 @@
         [self reloadContainerCollectionView:collectionView];
 
     }];
+    collectionView.collectionView.mj_footer.hidden = YES;
     [self reloadContainerCollectionView:collectionView];
     
     return collectionView;

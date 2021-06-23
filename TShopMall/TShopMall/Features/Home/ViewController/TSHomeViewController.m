@@ -239,6 +239,7 @@
 }
 
 -(void)categoryAction:(UIButton *)sender{
+    
     [[TSUserInfoManager userInfo] clearUserInfo];
     return;
     
