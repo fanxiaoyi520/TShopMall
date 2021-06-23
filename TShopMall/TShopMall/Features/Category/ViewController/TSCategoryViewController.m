@@ -16,6 +16,7 @@
 #import "TSCategoryContentViewModel.h"
 
 #import "TSProductDetailController.h"
+#import "TSHybridViewController.h"
 
 @interface TSCategoryViewController ()<UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate>
 
@@ -93,8 +94,9 @@
 
 #pragma mark - Action
 -(void)searchAction:(TSGeneralSearchButton *)sender{
-    TSProductDetailController *category = [[TSProductDetailController alloc] init];
-    [self.navigationController pushViewController:category animated:YES];
+    
+    TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:@"https://testwap.tclo2o.cn/seller-app-h5/"];
+    [self.navigationController pushViewController:hybrid animated:YES];
     
 }
 
