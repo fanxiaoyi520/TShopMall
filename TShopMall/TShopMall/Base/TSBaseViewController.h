@@ -20,7 +20,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// 添加子控件
 -(void)fillCustomView;
 
+/// 监听登录状态
+/// @param noti 通知
 - (void)loginStateDidChanged:(NSNotification *)noti;
+
 @end
 
 NS_ASSUME_NONNULL_END

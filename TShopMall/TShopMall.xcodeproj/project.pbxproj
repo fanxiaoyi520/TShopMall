@@ -1969,8 +1969,8 @@
 		F530CCBF26804167009DC29A /* Handler */ = {
 			isa = PBXGroup;
 			children = (
-				F530CCC026804167009DC29A /* TSBridgeHandler.m */,
 				F530CCC126804167009DC29A /* TSBridgeHandler.h */,
+				F530CCC026804167009DC29A /* TSBridgeHandler.m */,
 			);
 			path = Handler;
 			sourceTree = "<group>";
@@ -3892,7 +3892,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 2GM7ZL62GN;
 				EXCLUDED_ARCHS = "";
@@ -3905,9 +3905,9 @@
 					"@executable_path/Frameworks",
 				);
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.tcl.TSalesDev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tcl.TSalesSit1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "T销客_开发";
+				PROVISIONING_PROFILE_SPECIFIER = "T销客_SIT1";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -3918,7 +3918,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 2GM7ZL62GN;
 				EXCLUDED_ARCHS = "";
@@ -3931,9 +3931,9 @@
 					"@executable_path/Frameworks",
 				);
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.tcl.TSalesDev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tcl.TSalesSit1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "T销客_开发";
+				PROVISIONING_PROFILE_SPECIFIER = "T销客_SIT1";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

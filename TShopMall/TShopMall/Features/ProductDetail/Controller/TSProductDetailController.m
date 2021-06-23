@@ -60,30 +60,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.uuid = @"15f2440266524c3f85383b1e656851d9";
-    
-    [self.dataController fetchProductDetailCartNumber:^(BOOL isSucess) {
-            
-    }];
-    
-    [self.dataController fetchProductDetailWithUuid:self.uuid
-                                           complete:^(BOOL isSucess) {
-            
-    }];
+    self.uuid = @"3b104da87998485699209f7f4bbf52f1";
     
     __weak __typeof(self)weakSelf = self;
-    [self.dataController fetchProductDetailComplete:^(BOOL isSucess) {
+    NSMutableArray *sections = [self.dataController fetchProductDetailWithUuid:self.uuid
+                                                                      complete:^(BOOL isSucess) {
         __strong __typeof(weakSelf)strongSelf = weakSelf;
         if (isSucess) {
             [strongSelf.collectionView reloadData];
         }
     }];
     
+    if (sections.count > 0) {
+        [self.collectionView reloadData];
+    }
+    
     self.dragView.clickDragViewBlock = ^(WMDragView *dragView){
         NSLog(@"clickDragViewBlock");
     };
-    
-//    [self addMJHeaderAndFooter];
 }
 
 -(void)setupNavigationBar{
@@ -117,6 +111,7 @@
     [self.view addSubview:self.dragView];
     
 //    [self addCollectionCoverView];
+    //    [self addMJHeaderAndFooter];
 }
 
 -(void)viewWillLayoutSubviews{
