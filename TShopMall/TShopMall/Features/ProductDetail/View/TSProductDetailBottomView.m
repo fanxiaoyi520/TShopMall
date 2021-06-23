@@ -6,7 +6,7 @@
 //
 
 #import "TSProductDetailBottomView.h"
-#import "TSDetailFunctionButton.h"
+
 
 @interface TSProductDetailBottomView()
 
@@ -92,15 +92,21 @@
 
 #pragma mark - Actions
 -(void)mallAction:(TSDetailFunctionButton *)sender{
-    
+    if ([self.delegate respondsToSelector:@selector(productDetailBottomView:mallClick:)]) {
+        [self.delegate productDetailBottomView:self mallClick:sender];
+    }
 }
 
 -(void)customAction:(TSDetailFunctionButton *)sender{
-    
+    if ([self.delegate respondsToSelector:@selector(productDetailBottomView:customClick:)]) {
+        [self.delegate productDetailBottomView:self customClick:sender];
+    }
 }
 
 -(void)addAction:(TSDetailFunctionButton *)sender{
-    
+    if ([self.delegate respondsToSelector:@selector(productDetailBottomView:addClick:)]) {
+        [self.delegate productDetailBottomView:self addClick:sender];
+    }
 }
 
 #pragma mark - Getter

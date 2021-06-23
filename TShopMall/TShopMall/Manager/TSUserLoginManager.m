@@ -10,6 +10,11 @@
 #import "TSBaseNavigationController.h"
 #import "TSUserInfoManager.h"
 #import "TSLogoutRequest.h"
+#import <NTESQuickPass/NTESQuickPass.h>
+#import "NTESQLHomePageCustomUIModel.h"
+@interface TSUserLoginManager ()
+
+@end
 
 @implementation TSUserLoginManager
 + (instancetype)shareInstance{
@@ -22,15 +27,17 @@
 }
 
 - (void)startLogin{
-
-    TSLoginViewController *login = [TSLoginViewController new];
-    TSBaseNavigationController *homeController = [[TSBaseNavigationController alloc] initWithRootViewController:login];
-    login.loginBlock = ^{
+    
+    TSLoginViewController *loginViewController = [TSLoginViewController new];
+    TSBaseNavigationController *homeController = [[TSBaseNavigationController alloc] initWithRootViewController:loginViewController];
+    loginViewController.loginBlock = ^{
         [[NSNotificationCenter defaultCenter] postNotificationName:@"TS_LoginUpdateNotification" object:@0];
     };
     UIViewController *vc = [UIApplication sharedApplication].delegate.window.rootViewController;
     homeController.modalPresentationStyle = UIModalPresentationFullScreen;
-    [vc presentViewController:homeController animated:YES completion:nil];
+    [vc presentViewController:homeController animated:YES completion:^{
+    }];
+    
 }
 
 - (void)logout{

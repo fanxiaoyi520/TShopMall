@@ -6,6 +6,7 @@
 //
 
 #import "TSProductDetailImageCell.h"
+#import "TSGoodDetailItemModel.h"
 
 @interface TSProductDetailImageCell()
 
@@ -31,6 +32,12 @@
         _imgView.backgroundColor = KGrayColor;
     }
     return _imgView;
+}
+
+-(void)setDelegate:(id<UniversalCollectionViewCellDataDelegate>)delegate{
+    TSGoodDetailItemImageModel *item = (TSGoodDetailItemImageModel *)[delegate universalCollectionViewCellModel:self.indexPath];
+    [self.imgView sd_setImageWithURL:[NSURL URLWithString:item.imgUrl]];
+    
 }
 
 @end

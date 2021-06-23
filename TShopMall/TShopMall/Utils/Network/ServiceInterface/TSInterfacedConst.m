@@ -81,6 +81,7 @@ NSString *const kLoginSmsCaptchaUrl = @"/captcha/captcha/smsCaptcha";
 NSString *const kLoginQuickLoginUrl = @"/auth/auth/quickLogin";
 NSString *const kRegisterUrl = @"/rest/sysback/salesman/registered/distributor";
 NSString *const kLogoutUrl = @"/auth/auth/signOut";
+NSString *const kOneStepLoginUrl = @"/auth/auth/oneClickLogin";
 
 #pragma mark - 首页
 
@@ -94,6 +95,7 @@ NSString * const kSearchResult = @"/rest/v2/itemsearch/toProductList";
 #pragma mark - 商品详情
 NSString *const kGoodDetailUrl = @"/rest/v2/front/product/toProduct";
 NSString *const kGoodDetailCartNumberUrl = @"/rest/v2/cart/count";
+NSString *const kGoodDetailAddProductToCartUrl = @"/rest/v2/front/product/addProductToCart";
 
 #pragma mark - 分类
 NSString *const kShopContentUrl = @"/rest/v2/front/shopContent/getPageManageByPageType";
