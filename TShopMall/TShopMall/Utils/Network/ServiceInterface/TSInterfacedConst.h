@@ -28,6 +28,8 @@ UIKIT_EXTERN NSString *const kLoginQuickLoginUrl;
 UIKIT_EXTERN NSString *const kRegisterUrl;
 ///  登出
 UIKIT_EXTERN NSString *const kLogoutUrl;
+///  一键登录
+UIKIT_EXTERN NSString *const kOneStepLoginUrl;
 
 #pragma mark - 首页
 UIKIT_EXTERN NSString *const kHomePageInfoUrl;
