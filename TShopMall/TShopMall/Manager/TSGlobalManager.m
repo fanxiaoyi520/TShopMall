@@ -25,6 +25,10 @@
     return self;
 }
 
+-(NSString *)appVersion{
+    return [UIApplication sharedApplication].appVersion;
+}
+
 - (void)saveCurrentUserInfo{
     [self.currentUserInfo saveUserInfo:self.currentUserInfo];
 }

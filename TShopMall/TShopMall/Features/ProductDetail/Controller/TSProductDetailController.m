@@ -62,6 +62,10 @@
     
     self.uuid = @"15f2440266524c3f85383b1e656851d9";
     
+    [self.dataController fetchProductDetailCartNumber:^(BOOL isSucess) {
+            
+    }];
+    
     [self.dataController fetchProductDetailWithUuid:self.uuid
                                            complete:^(BOOL isSucess) {
             
