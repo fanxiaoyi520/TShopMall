@@ -83,8 +83,6 @@ typedef enum : NSUInteger {
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    
     [self sutupUI];
     
     [self fetchData];
@@ -93,18 +91,23 @@ typedef enum : NSUInteger {
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     
+    CGFloat webViewX = 0;
+    CGFloat webViewY = 0;
+    CGFloat webViewW = kScreenWidth;
+    CGFloat webViewH = 0;
+    
     if (self.isHiddenNavigationBar) {
-        
-        CGFloat webViewY = 0;
-        CGRect webViewRect = CGRectMake(0, webViewY, kScreenWidth, CGRectGetHeight(self.view.frame) - webViewY);
-        _webView.frame = webViewRect;
-        
+        webViewX = 0;
+        webViewY = 0;
+        webViewH = kScreenHeight;
+       
     }else{
-        CGFloat webViewY = CGRectGetHeight(self.gk_navigationBar.frame);
-        CGRect webViewRect = CGRectMake(0, webViewY, kScreenWidth, CGRectGetHeight(self.view.frame) - webViewY);
-        _webView.frame = webViewRect;
+        webViewX = 0;
+        webViewY = CGRectGetHeight(self.gk_navigationBar.frame);
+        webViewH = kScreenHeight - webViewY;
     }
 
+    _webView.frame = CGRectMake(webViewX, webViewY, webViewW, webViewH);
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -131,21 +134,9 @@ typedef enum : NSUInteger {
             if ([paramData isKindOfClass:[NSDictionary class]] && paramData.count > 0) {
                 json = [paramData jsonStringEncoded];
             }
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [TSWKMessageHandlerHelper callbackWithMethodName:method callBackParams:json webView:self.webView];
-            });
+            
+            [TSWKMessageHandlerHelper callbackWithMethodName:method callBackParams:json webView:self.webView];
         }
-    }
-}
-
--(void)cancelRightActive{
-    
-    if (!self.rightButton.isSelected) {
-        return;
-    }
-    
-    if (self.rightButton) {
-        self.rightButton.selected = !self.rightButton.selected;
     }
 }
 
@@ -173,6 +164,9 @@ typedef enum : NSUInteger {
             [rightButton setImage:KImageMake(self.rightParams[@"selectedImage"]) forState:UIControlStateSelected];
         }
 
+        [rightButton setTitleColor:KTextColor forState:UIControlStateNormal];
+        rightButton.titleLabel.font = KRegularFont(15.0);
+        [rightButton addTarget:self action:@selector(rightAction:) forControlEvents:UIControlEventTouchUpInside];
         self.gk_navRightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
         self.gk_navItemRightSpace = 12;
     }
@@ -184,7 +178,12 @@ typedef enum : NSUInteger {
 - (void)fetchData {
     if(!_request) return;
     
-    NSString *cookieStr = [NSString stringWithFormat:@"document.cookie ='%@=%@';",@"TXKSID",@""];
+    NSString *accessToken = [TSGlobalManager shareInstance].currentUserInfo.accessToken;
+    if (accessToken.length <= 0) {
+        accessToken = @"";
+    }
+    
+    NSString *cookieStr = [NSString stringWithFormat:@"document.cookie ='%@=%@';",@"accessToken",accessToken];
     WKUserScript * cookieScript = [[WKUserScript alloc] initWithSource: cookieStr injectionTime:WKUserScriptInjectionTimeAtDocumentStart forMainFrameOnly:NO];
     [self.webView.configuration.userContentController addUserScript:cookieScript];
     

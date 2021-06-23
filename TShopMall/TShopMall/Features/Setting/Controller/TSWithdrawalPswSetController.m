@@ -16,8 +16,6 @@
 /// CollectionView
 @property(nonatomic, weak) UICollectionView *collectionView;
 
-
-
 @end
 
 @implementation TSWithdrawalPswSetController

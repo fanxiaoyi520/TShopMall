@@ -46,13 +46,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL                              isRootController;
 @property (nonatomic, readonly, getter=isLoading)    BOOL       loading;
 
+
+
 /// 开启新页面的时候，h5传过来的参数
 @property (nonatomic, strong) NSDictionary *jsDataParams;
 
-
 /// 右侧控制字典
 @property (nonatomic, strong) NSDictionary *rightParams;
-
 /// 右侧按钮标题
 @property (nonatomic, copy) NSString *rightButtonTitle;
 /// 右侧按钮点击事件（调h5）
@@ -62,8 +62,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// 菜单数据
 @property (nonatomic, strong) NSDictionary *menuParams;
 
+/// 调用js方法
 -(void)evaluateWebViewInitData;
--(void)cancelRightActive;
 
 //初始化方法栈
 - (instancetype)initWithURLString:(NSString *)urlString;

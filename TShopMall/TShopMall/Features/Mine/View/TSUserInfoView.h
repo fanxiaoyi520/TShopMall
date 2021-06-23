@@ -6,6 +6,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TSMineMerchantUserInformationModel.h"
 
 typedef NS_ENUM(NSUInteger,TSRoleType){
     TSRoleTypeUnLogin,  //未登录
@@ -15,10 +16,19 @@ typedef NS_ENUM(NSUInteger,TSRoleType){
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol TSUserInfoViewDelegate <NSObject>
+
+@optional
+-(void)loginAction:(id _Nullable)sender;
+-(void)seeCodeAction:(id _Nullable)sender;
+- (void)kCopyCodeAction:(id _Nullable)sender;
+@end
+
 @interface TSUserInfoView : UIView
 
+@property (nonatomic ,assign)id <TSUserInfoViewDelegate> userInfoDelegate;
 -(instancetype)initWithRoleType:(TSRoleType)type;
-
+-(void)setModel:(TSMineMerchantUserInformationModel *)model;
 @end
 
 NS_ASSUME_NONNULL_END

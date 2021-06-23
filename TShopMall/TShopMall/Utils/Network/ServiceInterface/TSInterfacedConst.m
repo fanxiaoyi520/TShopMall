@@ -19,13 +19,13 @@
 
 #else
     //集团账号中心 0生产 1预发布 2测试 3开发
-    #define kAccountCenterFlag 0
+    #define kAccountCenterFlag 3
     //是否打开调试模式，<<Release包记得改为0！>>1:是，0：否，打开后影响微信分享、百度地图、极光推送、debug包修改配置
-    #define kEnableDebug 0
+    #define kEnableDebug 1
     //服务器地址标志 0生产 1预发布 2 测试
-    #define kServerFlag 0
+    #define kServerFlag 2
     //账户中心服务器地址标志 0生产 1预发布 2 测试 3开发环境
-    #define kAccountCenterServerFlag 0
+    #define kAccountCenterServerFlag 2
 
 #endif
 
@@ -94,7 +94,7 @@ NSString * const kSearchResult = @"/rest/v2/itemsearch/toProductList";
 
 #pragma mark - 商品详情
 NSString *const kGoodDetailUrl = @"/rest/v2/front/product/toProduct";
-
+NSString *const kGoodDetailCartNumberUrl = @"/rest/v2/cart/count";
 
 #pragma mark - 分类
 NSString *const kShopContentUrl = @"/rest/v2/front/shopContent/getPageManageByPageType";
@@ -111,3 +111,5 @@ NSString * const kStreets = @"/rest/v2/usercenter/region/getStreetsByRegionUuid"
 
 
 #pragma mark - 我的
+NSString * const kMineMerchantUserInformation = @"/rest/v2/tclcustomer/userInfo";
+NSString * const kMinePartnerCenterData = @"/sysback/v2/salesman/dataCenter";

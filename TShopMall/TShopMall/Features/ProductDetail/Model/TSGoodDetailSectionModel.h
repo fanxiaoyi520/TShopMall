@@ -9,6 +9,11 @@
 #import "TSUniversalSectionModel.h"
 #import "TSGoodDetailItemModel.h"
 
+typedef NS_ENUM(NSUInteger, ProductCellType) {
+    ProductCellTypeBanner,
+    ProductCellTypeDetailImage,
+};
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TSGoodDetailSectionModel : TSUniversalSectionModel

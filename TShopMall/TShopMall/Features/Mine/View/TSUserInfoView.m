@@ -19,7 +19,12 @@
 @property(nonatomic, strong) UIImageView *partnerImageView;
 /// 员工头像
 @property(nonatomic, strong) UIImageView *staffImageView;
-
+/// 邀请码
+@property(nonatomic, strong) UILabel *invitationCodeLab;
+/// 查看邀请码
+@property(nonatomic, strong) UIButton *seeCodeBtn;
+/// 复制邀请码
+@property(nonatomic, strong) UIButton *kCopyCodeBtn;
 @end
 
 @implementation TSUserInfoView
@@ -71,12 +76,93 @@
             make.height.mas_equalTo(22);
         }];
     }
+    
+    [self addSubview:self.seeCodeBtn];
+    [self.seeCodeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self).offset(-24);
+        make.top.equalTo(self.iconImageView).offset(10.5);
+        make.height.mas_equalTo(10);
+        make.width.mas_equalTo(15);
+    }];
+    
+    [self addSubview:self.invitationCodeLab];
+    [self.invitationCodeLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.seeCodeBtn).offset(-16);
+        make.top.equalTo(self.iconImageView).offset(7);
+        make.height.mas_equalTo(17);
+    }];
+    
+    [self addSubview:self.kCopyCodeBtn];
+    [self.kCopyCodeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self).offset(-24);
+        make.top.equalTo(self.iconImageView).offset(30);
+        make.height.mas_equalTo(18);
+        make.width.mas_equalTo(45);
+    }];
+}
+
+#pragma mark - data
+- (void)setModel:(TSMineMerchantUserInformationModel *)model {
+    if (!model) return;
+    [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:model.customerImgUrl] placeholderImage:nil];
+    
+    if (model.customerName) {
+        [self.loginButton setTitle:model.customerName forState:UIControlStateNormal];
+    } else {
+        [self.loginButton setTitle:@"" forState:UIControlStateNormal];
+    }
+    
+    if ([model.staff isEqualToString:@"staff"]) {
+        self.staffImageView.image = KImageMake(@"mall_mine_staff");
+    } else {
+        self.staffImageView.hidden = YES;
+    }
+    
+    if ([model.privilege isEqualToString:@"privilege"]) {
+        self.partnerImageView.hidden = YES;
+    } else {
+        self.partnerImageView.image = KImageMake(@"mall_mine_partner");
+    }
+    
+    if ([model.salesmanRankName isEqualToString:@"铂金合伙人"]) {
+        
+    } else {
+        self.seeCodeBtn.hidden = NO;
+        self.kCopyCodeBtn.hidden = NO;
+        self.invitationCodeLab.hidden = NO;
+        self.invitationCodeLab.text = [NSString stringWithFormat:@"邀请码 %@",model.invitationCode];
+    }
 }
 
 #pragma mark - Action
 -(void)loginAction:(UIButton *)sender{
     if (self.type == TSRoleTypeUnLogin) {
         
+    }
+    if ([self.userInfoDelegate respondsToSelector:@selector(loginAction:)]) {
+        [self.userInfoDelegate loginAction:sender];
+    }
+}
+
+-(void)seeCodeAction:(UIButton *)sender {
+    if (sender.selected) {
+        self.invitationCodeLab.hidden = YES;
+        sender.selected = NO;
+    } else {
+        self.invitationCodeLab.hidden = NO;
+        sender.selected = YES;
+    }
+    if ([self.userInfoDelegate respondsToSelector:@selector(seeCodeAction:)]) {
+        [self.userInfoDelegate kCopyCodeAction:sender];
+    }
+}
+
+- (void)kCopyCodeAction:(UIButton *)sender {
+    UIPasteboard *pab = [UIPasteboard generalPasteboard];
+    NSString *string = self.invitationCodeLab.text;
+    [pab setString:string];
+    if ([self.userInfoDelegate respondsToSelector:@selector(kCopyCodeAction:)]) {
+        [self.userInfoDelegate kCopyCodeAction:pab];
     }
 }
 
@@ -116,6 +202,46 @@
         _staffImageView.image = KImageMake(@"mall_mine_staff");
     }
     return _staffImageView;
+}
+
+-(UILabel *)invitationCodeLab {
+    if (!_invitationCodeLab) {
+        _invitationCodeLab = [[UILabel alloc] init];
+        _invitationCodeLab.text = @"邀请码 RWRTNA";
+        _invitationCodeLab.textAlignment = NSTextAlignmentLeft;
+        _invitationCodeLab.textColor = KWhiteColor;
+        _invitationCodeLab.font = KRegularFont(12);
+        self.invitationCodeLab.hidden = YES;
+    }
+    return _invitationCodeLab;
+}
+
+-(UIButton *)seeCodeBtn {
+    if (!_seeCodeBtn) {
+        _seeCodeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_seeCodeBtn setImage:KImageMake(@"mall_mine_staff") forState:UIControlStateNormal];
+        [_seeCodeBtn setImage:KImageMake(@"mall_mine_partner") forState:UIControlStateSelected];
+        [_seeCodeBtn addTarget:self action:@selector(seeCodeAction:) forControlEvents:UIControlEventTouchUpInside];
+        [_seeCodeBtn jaf_setEnlargeEdgeWithTop:10 right:10 bottom:10 left:10];
+        self.seeCodeBtn.hidden = YES;
+        _seeCodeBtn.selected = YES;
+    }
+    return _seeCodeBtn;
+}
+
+-(UIButton *)kCopyCodeBtn {
+    if (!_kCopyCodeBtn) {
+        _kCopyCodeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_kCopyCodeBtn setTitle:@"复制" forState:UIControlStateNormal];
+        _kCopyCodeBtn.titleLabel.font = KRegularFont(12);
+        [_kCopyCodeBtn addTarget:self action:@selector(kCopyCodeAction:) forControlEvents:UIControlEventTouchUpInside];
+        _kCopyCodeBtn.layer.cornerRadius = 9.0;
+        _kCopyCodeBtn.layer.borderColor = KWhiteColor.CGColor;
+        _kCopyCodeBtn.layer.borderWidth = 0.5f;
+        [_kCopyCodeBtn jaf_setEnlargeEdgeWithTop:2 right:10 bottom:2 left:10];
+        self.kCopyCodeBtn.hidden = YES;
+    }
+    return _kCopyCodeBtn;
 }
 
 @end
