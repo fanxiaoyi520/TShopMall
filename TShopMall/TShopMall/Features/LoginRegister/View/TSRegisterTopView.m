@@ -26,7 +26,7 @@
 @property(nonatomic, weak) UIView *splitCodeView;
 /** 分割线 */
 @property(nonatomic, weak) UIView *splitInvitedCodeView;
-/** 登录按钮 */
+/** 注册按钮 */
 @property(nonatomic, weak) UIButton *registerButton;
 
 @end

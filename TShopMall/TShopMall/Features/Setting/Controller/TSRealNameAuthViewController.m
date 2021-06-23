@@ -1,35 +1,35 @@
 //
-//  TSWithdrawalPswSetController.m
+//  TSRealNameAuthViewController.m
 //  TShopMall
 //
-//  Created by 谭朝辉 on 2021/6/15.
+//  Created by edy on 2021/6/23.
 //
 
-#import "TSWithdrawalPswSetController.h"
-#import "TSWithdrawalPswSetDataController.h"
+#import "TSRealNameAuthViewController.h"
 #import "TSUniversalFlowLayout.h"
 #import "TSUniversalCollectionViewCell.h"
+#import "TSRealNameAuthDataController.h"
 
-@interface TSWithdrawalPswSetController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate>
+@interface TSRealNameAuthViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate>
 /// 数据中心
-@property(nonatomic, strong) TSWithdrawalPswSetDataController *dataController;
+@property(nonatomic, strong) TSRealNameAuthDataController *dataController;
 /// CollectionView
 @property(nonatomic, weak) UICollectionView *collectionView;
 
 @end
 
-@implementation TSWithdrawalPswSetController
+@implementation TSRealNameAuthViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    // Do any additional setup after loading the view.
 }
 
 - (void)setupBasic {
     [super setupBasic];
-    self.gk_navTitle = @"提现密码设置";
+    self.gk_navTitle = @"实名认证";
     __weak __typeof(self)weakSelf = self;
-    [self.dataController fetchWithdrawalPswSetContentsComplete:^(BOOL isSucess) {
+    [self.dataController fetchRealNameAuthContentsComplete:^(BOOL isSucess) {
         __strong __typeof(weakSelf)strongSelf = weakSelf;
         if (isSucess) {
             [strongSelf.collectionView reloadData];
@@ -58,7 +58,7 @@
         UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero
                                              collectionViewLayout:flowLayout];
         _collectionView = collectionView;
-        _collectionView.backgroundColor = KGrayColor;//KHexColor(@"#E6E6E6");
+        _collectionView.backgroundColor = KWhiteColor;//KHexColor(@"#E6E6E6");
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.showsVerticalScrollIndicator = NO;
@@ -68,11 +68,15 @@
     return _collectionView;
 }
 
-- (TSWithdrawalPswSetDataController *)dataController{
+- (TSRealNameAuthDataController *)dataController{
     if (!_dataController) {
-        _dataController = [[TSWithdrawalPswSetDataController alloc] init];
+        _dataController = [[TSRealNameAuthDataController alloc] init];
     }
     return _dataController;
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [self.view endEditing:YES];
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -81,13 +85,13 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    TSWithdrawalPswSetSectionModel *model = self.dataController.sections[section];
+    TSRealNameAuthSectionModel *model = self.dataController.sections[section];
     return model.items.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    TSWithdrawalPswSetSectionModel *model = self.dataController.sections[indexPath.section];
-    TSWithdrawalPswSetSectionItemModel *item = model.items[indexPath.row];
+    TSRealNameAuthSectionModel *model = self.dataController.sections[indexPath.section];
+    TSRealNameAuthSectionItemModel *item = model.items[indexPath.row];
     Class className = NSClassFromString(item.identify);
     [collectionView registerClass:[className class] forCellWithReuseIdentifier:item.identify];
     TSUniversalCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:item.identify forIndexPath:indexPath];
@@ -102,7 +106,7 @@
 
 #pragma mark - UniversalCollectionViewCellDataDelegate
 - (id)universalCollectionViewCellModel:(NSIndexPath *)indexPath{
-    TSWithdrawalPswSetSectionModel *sectionModel = self.dataController.sections[indexPath.section];
+    TSRealNameAuthSectionModel *sectionModel = self.dataController.sections[indexPath.section];
     return sectionModel.items[indexPath.row];
 }
 
@@ -111,28 +115,24 @@
                    layout:(TSUniversalFlowLayout *_Nullable)collectionViewLayout
   heightForRowAtIndexPath:(NSIndexPath *_Nullable)indexPath
                 itemWidth:(CGFloat)itemWidth{
-    TSWithdrawalPswSetSectionModel *model = self.dataController.sections[indexPath.section];
-    TSWithdrawalPswSetSectionItemModel *item = model.items[indexPath.row];
+    TSRealNameAuthSectionModel *model = self.dataController.sections[indexPath.section];
+    TSRealNameAuthSectionItemModel *item = model.items[indexPath.row];
     return item.cellHeight;
 }
 
 - (NSInteger)collectionView:(UICollectionView *_Nullable)collectionView
                      layout:(TSUniversalFlowLayout *_Nullable)collectionViewLayout
       columnNumberAtSection:(NSInteger )section{
-    TSWithdrawalPswSetSectionModel *model = self.dataController.sections[section];
+    TSRealNameAuthSectionModel *model = self.dataController.sections[section];
     return model.column;
 }
 
 - (NSInteger)collectionView:(UICollectionView *_Nullable)collectionView
                      layout:(TSUniversalFlowLayout *_Nullable)collectionViewLayout
 lineSpacingForSectionAtIndex:(NSInteger)section{
-    TSWithdrawalPswSetSectionModel *model = self.dataController.sections[section];
+    TSRealNameAuthSectionModel *model = self.dataController.sections[section];
     return model.lineSpacing;
 }
 
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(TSUniversalFlowLayout *)collectionViewLayout spacingWithLastSectionForSectionAtIndex:(NSInteger)section {
-    TSWithdrawalPswSetSectionModel *model = self.dataController.sections[section];
-    return model.spacingWithLastSection;
-}
 
 @end

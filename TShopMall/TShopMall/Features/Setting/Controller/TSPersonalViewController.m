@@ -18,6 +18,8 @@
 #import "TSChangePictureViewController.h"
 #import "TSSexSelectingView.h"
 #import "TSDatePickerView.h"
+#import "TSRealnameInfoViewController.h"
+#import "TSRealNameAuthViewController.h"
 
 @interface TSPersonalViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate, TSSexSelectingViewDelegate, TSDatePickerViewDelegate>
 /// 数据中心
@@ -213,6 +215,12 @@
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.item == 0) {
         [self showPictureSheet];
+        return;
+    } else if (indexPath.item == 2) {
+//        TSRealnameInfoViewController *realnameInfoVC = [[TSRealnameInfoViewController alloc] init];
+//        [self.navigationController pushViewController:realnameInfoVC animated:YES];
+        TSRealNameAuthViewController *realnameAuthVC = [[TSRealNameAuthViewController alloc] init];
+        [self.navigationController pushViewController:realnameAuthVC animated:YES];
         return;
     } else if (indexPath.item == 3) {
         [self showSexAlert];
