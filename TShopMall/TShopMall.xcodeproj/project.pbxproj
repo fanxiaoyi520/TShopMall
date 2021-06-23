@@ -206,6 +206,8 @@
 		DC9911D8267E267400EF9B26 /* TSHomePagePerchView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC9911D7267E267400EF9B26 /* TSHomePagePerchView.m */; };
 		DCA035D72680765B003DE5F7 /* TSUserLoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA035D62680765B003DE5F7 /* TSUserLoginManager.m */; };
 		DCA035DD2681ACC8003DE5F7 /* TSLogoutRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA035DC2681ACC8003DE5F7 /* TSLogoutRequest.m */; };
+		DCA035F8268355D2003DE5F7 /* TSServicesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA035F7268355D2003DE5F7 /* TSServicesManager.m */; };
+		DCA035FB2683578C003DE5F7 /* NSObject+TSProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA035FA2683578C003DE5F7 /* NSObject+TSProperty.m */; };
 		DFB3FFB42682E4B300FC8FF9 /* NTESQLHomePageCustomUIModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB3FFB22682E4B300FC8FF9 /* NTESQLHomePageCustomUIModel.m */; };
 		DFB3FFB82683205600FC8FF9 /* TSOneStepLoginRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB3FFB72683205600FC8FF9 /* TSOneStepLoginRequest.m */; };
 		E2BE996F8804E0C3E7D5AE61 /* libPods-TShopMall-TShopMallUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD1ABBE857D307088E9BF2DC /* libPods-TShopMall-TShopMallUITests.a */; };
@@ -821,6 +823,10 @@
 		DCA035D62680765B003DE5F7 /* TSUserLoginManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSUserLoginManager.m; sourceTree = "<group>"; };
 		DCA035DB2681ACC8003DE5F7 /* TSLogoutRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSLogoutRequest.h; sourceTree = "<group>"; };
 		DCA035DC2681ACC8003DE5F7 /* TSLogoutRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSLogoutRequest.m; sourceTree = "<group>"; };
+		DCA035F6268355D2003DE5F7 /* TSServicesManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSServicesManager.h; sourceTree = "<group>"; };
+		DCA035F7268355D2003DE5F7 /* TSServicesManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSServicesManager.m; sourceTree = "<group>"; };
+		DCA035F92683578C003DE5F7 /* NSObject+TSProperty.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+TSProperty.h"; sourceTree = "<group>"; };
+		DCA035FA2683578C003DE5F7 /* NSObject+TSProperty.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+TSProperty.m"; sourceTree = "<group>"; };
 		DFB3FFB22682E4B300FC8FF9 /* NTESQLHomePageCustomUIModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTESQLHomePageCustomUIModel.m; sourceTree = "<group>"; };
 		DFB3FFB32682E4B300FC8FF9 /* NTESQLHomePageCustomUIModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESQLHomePageCustomUIModel.h; sourceTree = "<group>"; };
 		DFB3FFB52682E54900FC8FF9 /* NTESQPDemoDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESQPDemoDefines.h; sourceTree = "<group>"; };
@@ -1863,6 +1869,8 @@
 				F530CC3026803862009DC29A /* NSString+Time.m */,
 				F530CC2A26803862009DC29A /* NSTimer+TSBlcokTimer.h */,
 				F530CC2E26803862009DC29A /* NSTimer+TSBlcokTimer.m */,
+				DCA035F92683578C003DE5F7 /* NSObject+TSProperty.h */,
+				DCA035FA2683578C003DE5F7 /* NSObject+TSProperty.m */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -2797,6 +2805,8 @@
 				F55D2C9C26745E64006BACCF /* TSUserInfoManager.m */,
 				F55D2C9E26745E7A006BACCF /* TSLastUserInfoManager.h */,
 				F55D2C9F26745E7A006BACCF /* TSLastUserInfoManager.m */,
+				DCA035F6268355D2003DE5F7 /* TSServicesManager.h */,
+				DCA035F7268355D2003DE5F7 /* TSServicesManager.m */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -3536,6 +3546,7 @@
 				DC3440D32672F62C00F5B0DA /* TSHomePageBaseCell.m in Sources */,
 				DC45FEBD26783A1300CE762E /* TSHomePageContainerCollectionView.m in Sources */,
 				F55D2C9D26745E64006BACCF /* TSUserInfoManager.m in Sources */,
+				DCA035FB2683578C003DE5F7 /* NSObject+TSProperty.m in Sources */,
 				C2EF88D52670B8B900E7374A /* TSCartBaseCell.m in Sources */,
 				F55D2CEC2678A379006BACCF /* TSGoodDetailBannerCell.m in Sources */,
 				F55D2CC826784ACD006BACCF /* TSMineImageTextCell.m in Sources */,
@@ -3674,6 +3685,7 @@
 				F55D2CC626784ACD006BACCF /* TSMineSectionModel.m in Sources */,
 				F530CC6526803E43009DC29A /* Toasty.m in Sources */,
 				C3A6C4E2267A1CAF00FC71D6 /* TSBindMobileDataController.m in Sources */,
+				DCA035F8268355D2003DE5F7 /* TSServicesManager.m in Sources */,
 				F54973622668A22100181E3F /* SSResponseModel.m in Sources */,
 				C35F1865267C7F8A00F65AF9 /* TSDatePickerView.m in Sources */,
 				F54973C52668C14F00181E3F /* TSConstant.m in Sources */,
