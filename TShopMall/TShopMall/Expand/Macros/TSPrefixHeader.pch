@@ -43,4 +43,5 @@
 #import <GKCommon.h>
 #import <GKNavigationBarConfigure.h>
 
+#import "UIButton+Badge.h"
 #endif /* TSPrefixHeader_pch */
