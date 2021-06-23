@@ -153,6 +153,11 @@
            forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
                   withReuseIdentifier:sectionModel.headerIdentify];
         TSMineOrderHeaderView *header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:sectionModel.headerIdentify forIndexPath:indexPath];
+        if ([sectionModel.headerIdentify isEqualToString:@"TSMineOrderHeaderView"]) {
+            header.clickBlock = ^{
+                NSLog(@"----");
+            };
+        }
         [header bindMineSectionModel:sectionModel];
         return header;
     }else{

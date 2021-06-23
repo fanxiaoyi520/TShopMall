@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TSMineOrderHeaderView : TSUniversalTopHeaderView
 
+@property(nonatomic, copy) void (^clickBlock)(void);
+
 -(void)bindMineSectionModel:(TSMineSectionModel *)model;
 
 @end
