@@ -6,10 +6,11 @@
 //
 
 #import "TSBaseViewController.h"
+#import "TSCartProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TSCartViewController : TSBaseViewController
+@interface TSCartViewController : TSBaseViewController<TSCartProtocol>
 
 @end
 

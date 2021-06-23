@@ -119,7 +119,7 @@
     return _bgImgV;
 }
 
--(TSLoginRegisterDataController *)dataController{
+- (TSLoginRegisterDataController *)dataController{
     if (!_dataController) {
         _dataController = [[TSLoginRegisterDataController alloc] init];
     }
@@ -183,7 +183,7 @@
             [Popover popToastOnWindowWithText:@"验证码请求失败"];
             weakSelf.count = 60;
             [weakSelf.timer invalidate];
-            [weakSelf.topView setCodeButtonTitleAndColor:@"重新验证码" isResend:YES];
+            [weakSelf.topView setCodeButtonTitleAndColor:@"重发验证码" isResend:YES enabled:YES];
         }
     }];
 }
@@ -199,10 +199,10 @@
     if (self.count <= 1) {
         self.count = 60;
         [self.timer invalidate];
-        [self.topView setCodeButtonTitleAndColor:@"重新验证码" isResend:YES];
+        [self.topView setCodeButtonTitleAndColor:@"重发验证码" isResend:YES enabled:YES];
     } else {
         self.count--;
-        [self.topView setCodeButtonTitleAndColor:[NSString stringWithFormat:@"重发 %ld", (long)self.count] isResend:NO];
+        [self.topView setCodeButtonTitleAndColor:[NSString stringWithFormat:@"重发 %ld", (long)self.count] isResend:NO enabled:NO];
     }
 }
 

@@ -22,10 +22,28 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TSGoodDetailItemPriceModel : TSGoodDetailItemModel
 
+/// 挂牌价
+@property (nonatomic, copy) NSString *marketPrice;
+/// 提货价
+@property (nonatomic, copy) NSString *staffPrice;
+/// 最高赚
+@property (nonatomic, copy) NSString *earnMost;
+
+
+
 /// 标题
 @property (nonatomic, copy) NSString *title;
 /// 内容
 @property (nonatomic, copy) NSString *content;
+
+@end
+
+
+@interface TSGoodDetailItemImageModel : TSGoodDetailItemModel
+
+@property(nonatomic, copy) NSString *imgUrl;
+@property(nonatomic, assign) CGFloat imageWidth;
+@property(nonatomic, assign) CGFloat imageHeight;
 
 @end
 

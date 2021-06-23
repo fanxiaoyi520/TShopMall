@@ -24,7 +24,7 @@
 #import <MJRefresh/MJRefresh.h>
 
 
-@interface TSProductDetailController ()<UICollectionViewDelegate,UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate,TSTopFunctionViewDelegate,TSChangePriceViewDelegate>
+@interface TSProductDetailController ()<UICollectionViewDelegate,UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate,TSTopFunctionViewDelegate,TSChangePriceViewDelegate,ProductDetailBottomViewDelegate>
 
 /// 返回按钮
 @property(nonatomic, strong) UIButton *backButton;
@@ -226,6 +226,22 @@
      
 -(void)topFunctionView:(TSTopFunctionView *_Nullable)topFunctionView sharePosterClick:(TSFuncButton *_Nonnull)sender{
         
+}
+
+#pragma mark - ProductDetailBottomViewDelegate
+-(void)productDetailBottomView:(TSProductDetailBottomView *_Nullable)bottomView mallClick:(TSDetailFunctionButton *_Nullable)sender{
+    
+}
+-(void)productDetailBottomView:(TSProductDetailBottomView *_Nullable)bottomView customClick:(TSDetailFunctionButton *_Nullable)sender{
+    
+}
+-(void)productDetailBottomView:(TSProductDetailBottomView *_Nullable)bottomView addClick:(TSDetailFunctionButton *_Nullable)sender{
+    [self.dataController fetchProductDetailAddProductToCart:self.uuid
+                                                     buyNum:@"1"
+                                                     attrId:self.dataController.attrId
+                                                   complete:^(BOOL isSucess) {
+            
+    }];
 }
 
 #pragma mark - TSChangePriceViewDelegate
@@ -467,6 +483,7 @@ spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
 -(TSProductDetailBottomView *)bottomView{
     if (!_bottomView) {
         _bottomView = [[TSProductDetailBottomView alloc] init];
+        _bottomView.delegate = self;
     }
     return _bottomView;
 }

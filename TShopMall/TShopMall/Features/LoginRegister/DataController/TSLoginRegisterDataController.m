@@ -8,6 +8,7 @@
 #import "TSLoginRegisterDataController.h"
 #import "TSSMSCodeRequest.h"
 #import "TSQuickLoginRequest.h"
+#import "TSOneStepLoginRequest.h"
 
 #import "TSUserInfoManager.h"
 @implementation TSLoginRegisterDataController
@@ -28,7 +29,8 @@
             }
         }else{
             self.smsModel = [[TSLoginSMSModel alloc] init];
-            
+            [Popover popToastOnWindowWithText:request.responseModel.originalData[@"failCause"]];
+
             if (complete) {
                 complete(NO);
             }
@@ -46,6 +48,7 @@
                       complete:(void(^)(BOOL isSucess))complete{
     TSQuickLoginRequest *login = [[TSQuickLoginRequest alloc] initWithUsername:username
                                                                      validCode:validCode];
+    login.animatingView = self.context.view;
     [login startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
         if (request.responseModel.isSucceed) {
             TSUserInfoManager *userInfo = [[TSUserInfoManager alloc] init];
@@ -59,9 +62,13 @@
             [manager saveCurrentUserInfo];
             complete(YES);
         }
+        else{
+            complete(NO);
+            [Popover popToastOnWindowWithText:request.responseModel.originalData[@"msg"]];
+        }
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
         complete(NO);
-//        [Popover popToastOnWindowWithText:request.responseModel.originalData[@"message"]];
+
 
     }];
     
@@ -82,10 +89,11 @@
             }
         }else{
             self.smsModel = [[TSLoginSMSModel alloc] init];
-            
             if (complete) {
                 complete(NO);
             }
+            [Popover popToastOnWindowWithText:request.responseModel.originalData[@"msg"]];
+
         }
         
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
@@ -130,5 +138,33 @@
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
         complete(NO);
     }];
+}
+
+-(void)fetchOneStepLoginToken:(NSString *)token
+                     accessToken:(NSString *)accessToken
+                        complete:(void(^)(BOOL isSucess))complete{
+    TSOneStepLoginRequest *request = [[TSOneStepLoginRequest alloc] initWithToken:token accessToken:accessToken];
+    request.animatingView = self.context.view;
+    [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+        if (request.responseModel.isSucceed) {
+            TSUserInfoManager *userInfo = [[TSUserInfoManager alloc] init];
+            userInfo.accessToken = request.responseModel.originalData[@"accessToken"];
+            userInfo.refreshToken = request.responseModel.originalData[@"refreshToken"];
+            userInfo.userName = request.responseModel.originalData[@"username"];
+            [[TSUserInfoManager userInfo] saveUserInfo:userInfo];
+            TSGlobalManager *manager = [TSGlobalManager shareInstance];
+            manager.isLogin = YES;
+            manager.currentUserInfo = userInfo;
+            [manager saveCurrentUserInfo];
+            complete(YES);
+        }
+        else{
+            complete(NO);
+            [Popover popToastOnWindowWithText:request.responseModel.originalData[@"msg"]];
+        }
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        complete(NO);
+    }];
+    
 }
 @end

@@ -17,8 +17,12 @@
 #import "NSTimer+TSBlcokTimer.h"
 #import "TSLoginRegisterDataController.h"
 #import <NTESQuickPass/NTESQuickPass.h>
+#import "NTESQLHomePageCustomUIModel.h"
+#import "TSHybridViewController.h"
+#import "TSBaseNavigationController.h"
 
-@interface TSLoginViewController ()<TSQuickLoginTopViewDelegate, TSLoginTopViewDelegate, TSLoginBottomViewDelegate, TSCheckedViewDelegate, TSQuickCheckViewDelegate>
+
+@interface TSLoginViewController ()<TSQuickLoginTopViewDelegate, TSLoginTopViewDelegate, TSLoginBottomViewDelegate, TSCheckedViewDelegate, TSQuickCheckViewDelegate, NTESQuickLoginManagerDelegate, TSHybridViewControllerDelegate>
 /** 背景图 */
 @property(nonatomic, weak) UIImageView *bgImgV;
 /** 关闭 */
@@ -40,7 +44,7 @@
 
 @property(nonatomic, strong) TSLoginRegisterDataController *dataController;
 
-@property(nonatomic, strong) NTESQuickLoginManager *manager;
+@property (nonatomic, strong) NTESQuickLoginModel *customModel;
 
 @end
 
@@ -49,25 +53,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.gk_navigationBar.hidden = YES;
-    
-    self.manager = [NTESQuickLoginManager sharedInstance];
-    [self.manager registerWithBusinessID:@"7de91dbe2b424320a849fddac6545c0a"];
-    BOOL shouldQL = [self.manager shouldQuickLogin];
-    
-    [[NTESQuickLoginManager sharedInstance] getPhoneNumberCompletion:^(NSDictionary * _Nonnull resultDic) {
-             NSNumber *boolNum = [resultDic objectForKey:@"success"];
-            BOOL success = [boolNum boolValue];
-            if (success) {
-//                [[NTESQuickLoginManager sharedInstance] setupModel:]
-                // 设置授权登录界面model。注意：必须调用，此方法需嵌套在getPhoneNumberCompletion的回调中使用，且在CUCMAuthorizeLoginCompletion:之前调用。
-                // 电信获取脱敏手机号成功 需在此回调中拉去授权登录页面
-                // 移动、联通无脱敏手机号，需在此回调中拉去授权登录页面
-            } else {
-                 // 电信获取脱敏手机号失败
-                 // 移动、联通预取号失败
-            }
-        }];
-    
+    [self registerQuickLogin];
+    [self getPhoneNumber];
 }
 
 - (void)dealloc {
@@ -76,7 +63,8 @@
 
 - (void)fillCustomView {
     ///添加约束
-    [self addConstraints];
+//    [self addConstraints];
+    
 }
 
 - (void)setupBasic {
@@ -129,15 +117,98 @@
     }];
 }
 
+#pragma mark - 使用易盾
+- (void)registerQuickLogin {
+    [NTESQuickLoginManager sharedInstance].delegate = self;
+    [[NTESQuickLoginManager sharedInstance] registerWithBusinessID:@"639f7862dc1842dabe8720e6a7a26468"];
+}
+
+- (void)getPhoneNumber{
+    
+    @weakify(self);
+    [[NTESQuickLoginManager sharedInstance] getPhoneNumberCompletion:^(NSDictionary * _Nonnull resultDic1) {
+        @strongify(self)
+        NSNumber *boolNum = [resultDic1 objectForKey:@"success"];
+        BOOL success = [boolNum boolValue];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (success) {
+                [self setCustomUI];
+                
+                [[NTESQuickLoginManager sharedInstance] CUCMCTAuthorizeLoginCompletion:^(NSDictionary * _Nonnull resultDic2) {
+                        NSNumber *boolNum = [resultDic2 objectForKey:@"success"];
+                        BOOL success = [boolNum boolValue];
+                        if (success) {
+                            [self.dataController fetchOneStepLoginToken:[resultDic1 objectForKey:@"token"] accessToken:[resultDic2 objectForKey:@"accessToken"] complete:^(BOOL isSucess) {
+                                if (isSucess) {
+                                    [[NTESQuickLoginManager sharedInstance] closeAuthController:^{
+                                        [self dismissViewControllerAnimated:YES completion:^{
+                                            if (self.loginBlock) {
+                                                self.loginBlock();
+                                            }
+                                        }];
+                                    }];
+                                }
+                                
+                            }];
+                        } else {
+                             // 取号失败
+                        }
+                      }];
+            } else {
+                [self addConstraints];
+                [self otherLogin];
+            }
+          });
+      }];
+}
+
+/// 授权页面自定义
+- (void)setCustomUI {
+    @weakify(self);
+    NTESQLHomePageCustomUIModel *uiModel = [NTESQLHomePageCustomUIModel getInstance];
+    self.customModel = [uiModel configCustomUIModel:NTESPresentDirectionPush withType:0 faceOrientation:UIInterfaceOrientationPortrait];
+    self.customModel.currentVC = self;
+    uiModel.otherLoginBlock = ^{
+        @strongify(self)
+        [self addConstraints];
+        [self otherLogin];
+    };
+    uiModel.appleLoginBlock = ^{
+        
+    };
+    uiModel.weChatLoginBlock = ^{
+        
+    };
+    self.customModel.backActionBlock = ^{
+        @strongify(self)
+        [self dismissViewControllerAnimated:NO completion:nil];
+    };
+    self.customModel.pageCustomBlock = ^(int privacyType) {
+        NSLog(@"privacyType:%d", privacyType);
+        @strongify(self)
+        TSHybridViewController *web = [[TSHybridViewController alloc] initWithURLString:@"https://www.baidu.com"];
+        web.delegate = self;
+        [self.navigationController pushViewController:web animated:YES];
+        [[NTESQuickLoginManager sharedInstance] closeAuthController:^{
+            
+
+        }];
+        
+    };
+    
+    [[NTESQuickLoginManager sharedInstance] setupModel:self.customModel];
+}
+
+
 #pragma mark - Actions
 - (void)goToRun {
     if (self.count <= 1) {
         self.count = 60;
         [self.timer invalidate];
-        [self.topView setCodeButtonTitleAndColor:@"重新验证码" isResend:YES];
+        [self.topView setCodeButtonTitleAndColor:@"重新验证码" isResend:YES enabled:YES];
     } else {
         self.count--;
-        [self.topView setCodeButtonTitleAndColor:[NSString stringWithFormat:@"重发 %ld", (long)self.count] isResend:NO];
+        [self.topView setCodeButtonTitleAndColor:[NSString stringWithFormat:@"重发 %ld", (long)self.count] isResend:NO enabled:NO];
     }
 }
 
@@ -232,21 +303,34 @@
     NSString *inputCode = [self.topView getCode];
     NSString *rightCode = self.dataController.smsModel.text;
     
-    if (![inputCode isEqualToString:rightCode]) {//验证码输入错误
-        [Popover popToastOnWindowWithText:@"验证码输入有误"];
-    }
-    
+//    if (![inputCode isEqualToString:rightCode]) {//验证码输入错误
+//        [Popover popToastOnWindowWithText:@"验证码输入有误"];
+//    }
+    [self.view endEditing:YES];
+    @weakify(self);
     [self.dataController fetchQuickLoginUsername:[self.topView getPhoneNumber]
                                        validCode:[self.topView getCode]
                                         complete:^(BOOL isSucess) {
-        [self dismissViewControllerAnimated:YES completion:^{
-            self.loginBlock();
-        }];
+        @strongify(self)
+        if (isSucess) {
+            [self dismissViewControllerAnimated:YES completion:^{
+                if (self.loginBlock) {
+                    self.loginBlock();
+                }
+                
+            }];
+        }
+        
     }];
 }
 
+- (void)inputDoneAction {
+    if (self.checkedView.isChecked) {
+        [self.topView setLoginButtonEnable:YES];
+    }
+}
+
 - (void)closePage {
-    NSLog(@"----");
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -273,7 +357,7 @@
 }
 
 - (void)checkedAction:(BOOL)isChecked{
-    
+    [self.topView setLoginButtonEnable:isChecked];
 }
 
 #pragma mark - TSQuickCheckViewDelegate
@@ -288,6 +372,11 @@
 /** 隐私政策 */
 - (void)openPrivateProtocol {
     
+}
+
+#pragma mark - TSHybridViewControllerDelegate
+-(void)hybridViewControllerWillDidDisappear:(TSHybridViewController *)hybridViewController params:(NSDictionary *)param{
+    [self getPhoneNumber];
 }
 
 #pragma mark - Lazy Method
@@ -348,7 +437,8 @@
         UIButton *closeButton = [[UIButton alloc] init];
         _closeButton = closeButton;
         [_closeButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [_closeButton setBackgroundImage:KImageMake(@"mall_login_close") forState:UIControlStateNormal];
+        [_closeButton setImage:KImageMake(@"mall_login_close") forState:UIControlStateNormal];
+
         [_closeButton addTarget:self action:@selector(closePage) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_closeButton];
     }
@@ -376,4 +466,13 @@
     return UIStatusBarStyleDefault;
 }
 
+//-(void)sendAuthRequest
+//{
+//    //构造SendAuthReq结构体
+//    SendAuthReq* req =[[[SendAuthReq alloc]init]autorelease];
+//    req.scope = @"snsapi_userinfo";
+//    req.state = @"123";
+//    //第三方向微信终端发送一个SendAuthReq消息结构
+//    [WXApi sendReq:req];
+//}
 @end
