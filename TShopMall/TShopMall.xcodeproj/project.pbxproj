@@ -171,6 +171,9 @@
 		C3B4CCF22674934E0001EE75 /* TSCheckedView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B4CCEA2674934D0001EE75 /* TSCheckedView.m */; };
 		CE5674AE26831F0400252F5D /* TSMineMerchantUserInformationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5674AA26831F0300252F5D /* TSMineMerchantUserInformationModel.m */; };
 		CE5674AF26831F0400252F5D /* TSPartnerCenterData.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5674AC26831F0300252F5D /* TSPartnerCenterData.m */; };
+		CE5674B32683333400252F5D /* TSMineWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5674B22683333400252F5D /* TSMineWalletViewController.m */; };
+		CE5674B726833A5000252F5D /* TSWalletHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5674B626833A5000252F5D /* TSWalletHeaderView.m */; };
+		CE5674BB2683570300252F5D /* TSWalletModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5674BA2683570300252F5D /* TSWalletModel.m */; };
 		DC3440AC26720D9200F5B0DA /* TSCollectionViewMeanWidthLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3440A826720D9200F5B0DA /* TSCollectionViewMeanWidthLayout.m */; };
 		DC3440AD26720D9200F5B0DA /* TSCollectionViewLineWrapLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3440A926720D9200F5B0DA /* TSCollectionViewLineWrapLayout.m */; };
 		DC3440B226720E4C00F5B0DA /* TSGridButtonCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3440B026720E4C00F5B0DA /* TSGridButtonCollectionView.m */; };
@@ -745,6 +748,12 @@
 		CE5674AB26831F0300252F5D /* TSPartnerCenterData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSPartnerCenterData.h; sourceTree = "<group>"; };
 		CE5674AC26831F0300252F5D /* TSPartnerCenterData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSPartnerCenterData.m; sourceTree = "<group>"; };
 		CE5674AD26831F0400252F5D /* TSMineMerchantUserInformationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSMineMerchantUserInformationModel.h; sourceTree = "<group>"; };
+		CE5674B12683333400252F5D /* TSMineWalletViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSMineWalletViewController.h; sourceTree = "<group>"; };
+		CE5674B22683333400252F5D /* TSMineWalletViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSMineWalletViewController.m; sourceTree = "<group>"; };
+		CE5674B526833A5000252F5D /* TSWalletHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSWalletHeaderView.h; sourceTree = "<group>"; };
+		CE5674B626833A5000252F5D /* TSWalletHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSWalletHeaderView.m; sourceTree = "<group>"; };
+		CE5674B92683570300252F5D /* TSWalletModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSWalletModel.h; sourceTree = "<group>"; };
+		CE5674BA2683570300252F5D /* TSWalletModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSWalletModel.m; sourceTree = "<group>"; };
 		D5195F8AB1644614CD0BA09C /* Pods-TShopMall.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TShopMall.release.xcconfig"; path = "Target Support Files/Pods-TShopMall/Pods-TShopMall.release.xcconfig"; sourceTree = "<group>"; };
 		DC3440A826720D9200F5B0DA /* TSCollectionViewMeanWidthLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSCollectionViewMeanWidthLayout.m; sourceTree = "<group>"; };
 		DC3440A926720D9200F5B0DA /* TSCollectionViewLineWrapLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSCollectionViewLineWrapLayout.m; sourceTree = "<group>"; };
@@ -1746,6 +1755,33 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		CE5674B0268332FE00252F5D /* Wallet */ = {
+			isa = PBXGroup;
+			children = (
+				CE5674B12683333400252F5D /* TSMineWalletViewController.h */,
+				CE5674B22683333400252F5D /* TSMineWalletViewController.m */,
+			);
+			path = Wallet;
+			sourceTree = "<group>";
+		};
+		CE5674B426833A0E00252F5D /* Wallet */ = {
+			isa = PBXGroup;
+			children = (
+				CE5674B526833A5000252F5D /* TSWalletHeaderView.h */,
+				CE5674B626833A5000252F5D /* TSWalletHeaderView.m */,
+			);
+			path = Wallet;
+			sourceTree = "<group>";
+		};
+		CE5674B8268356EF00252F5D /* Wallet */ = {
+			isa = PBXGroup;
+			children = (
+				CE5674B92683570300252F5D /* TSWalletModel.h */,
+				CE5674BA2683570300252F5D /* TSWalletModel.m */,
+			);
+			path = Wallet;
+			sourceTree = "<group>";
+		};
 		DC3440A726720D9200F5B0DA /* CollectionView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2587,6 +2623,7 @@
 		F54973972668A94600181E3F /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				CE5674B0268332FE00252F5D /* Wallet */,
 				F54973B82668BC0B00181E3F /* TSMineViewController.h */,
 				F54973B92668BC0B00181E3F /* TSMineViewController.m */,
 			);
@@ -2807,6 +2844,7 @@
 		F55D2CB426784ACD006BACCF /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CE5674B8268356EF00252F5D /* Wallet */,
 				CE5674AD26831F0400252F5D /* TSMineMerchantUserInformationModel.h */,
 				CE5674AA26831F0300252F5D /* TSMineMerchantUserInformationModel.m */,
 				CE5674AB26831F0300252F5D /* TSPartnerCenterData.h */,
@@ -2820,6 +2858,7 @@
 		F55D2CB726784ACD006BACCF /* View */ = {
 			isa = PBXGroup;
 			children = (
+				CE5674B426833A0E00252F5D /* Wallet */,
 				F55D2CD426785249006BACCF /* TSMineMoreButton.h */,
 				F55D2CD526785249006BACCF /* TSMineMoreButton.m */,
 				F55D2CC126784ACD006BACCF /* TSMineImageTextCell.h */,
@@ -3389,6 +3428,7 @@
 				C3B4CCED2674934D0001EE75 /* TSRegisterTopView.m in Sources */,
 				F55D2D26267B3015006BACCF /* TSRankLastMonthController.m in Sources */,
 				C2EF88CA2670997100E7374A /* TSCartDataController.m in Sources */,
+				CE5674BB2683570300252F5D /* TSWalletModel.m in Sources */,
 				DC3440CA2672601F00F5B0DA /* TSHomePageReleaseViewModel.m in Sources */,
 				C22EE27726807E4C00E59C86 /* TSSearchResultFittleView.m in Sources */,
 				C21A4B6E267AF5AE00766F72 /* TSMakeOrderBaseCell.m in Sources */,
@@ -3587,6 +3627,7 @@
 				C3A6C472267A1BEA00FC71D6 /* TSPhoneNumVeriViewController.m in Sources */,
 				C3A6C4E5267A1CAF00FC71D6 /* TSPersonalDataController.m in Sources */,
 				C3A6C48D267A1C1700FC71D6 /* TSPersonalSectionModel.m in Sources */,
+				CE5674B726833A5000252F5D /* TSWalletHeaderView.m in Sources */,
 				DC3440B326720E4C00F5B0DA /* TSGridButtonCollectionViewCell.m in Sources */,
 				F55D2CD326785081006BACCF /* TSMinePlaceholderCell.m in Sources */,
 				C22EE26726806F3F00E59C86 /* TSSearchResultNaviView.m in Sources */,
@@ -3711,6 +3752,7 @@
 				C3A6C47A267A1BEA00FC71D6 /* TSAccountCancelViewController.m in Sources */,
 				DC45FEC026783A6E00CE762E /* TSHomePageContainerCollectionViewCell.m in Sources */,
 				C35F186D267D954700F65AF9 /* TSAccountCancelNextViewController.m in Sources */,
+				CE5674B32683333400252F5D /* TSMineWalletViewController.m in Sources */,
 				C2EF88C42670997100E7374A /* TSCartInvalidCell.m in Sources */,
 				C3A6C474267A1BEA00FC71D6 /* TSSecurCenterViewController.m in Sources */,
 				F56D4B45266DFB8900C1AD9E /* FMLayoutFooter.m in Sources */,
