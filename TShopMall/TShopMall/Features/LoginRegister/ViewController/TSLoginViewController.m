@@ -303,19 +303,24 @@
     NSString *inputCode = [self.topView getCode];
     NSString *rightCode = self.dataController.smsModel.text;
     
-    if (![inputCode isEqualToString:rightCode]) {//验证码输入错误
-        [Popover popToastOnWindowWithText:@"验证码输入有误"];
-    }
-    
+//    if (![inputCode isEqualToString:rightCode]) {//验证码输入错误
+//        [Popover popToastOnWindowWithText:@"验证码输入有误"];
+//    }
+    [self.view endEditing:YES];
+    @weakify(self);
     [self.dataController fetchQuickLoginUsername:[self.topView getPhoneNumber]
                                        validCode:[self.topView getCode]
                                         complete:^(BOOL isSucess) {
-        [self dismissViewControllerAnimated:YES completion:^{
-            if (self.loginBlock) {
-                self.loginBlock();
-            }
-            
-        }];
+        @strongify(self)
+        if (isSucess) {
+            [self dismissViewControllerAnimated:YES completion:^{
+                if (self.loginBlock) {
+                    self.loginBlock();
+                }
+                
+            }];
+        }
+        
     }];
 }
 
