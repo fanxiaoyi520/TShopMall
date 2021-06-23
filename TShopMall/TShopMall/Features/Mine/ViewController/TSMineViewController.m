@@ -61,7 +61,7 @@
     [self.view addSubview:self.bgImageView];
     [self.view addSubview:self.collectionView];
     [self.collectionView addSubview:self.infoView];
-    [self.collectionView addSubview:self.setButton];
+    [self.view addSubview:self.setButton];
     
     CGFloat top = 6;
     
