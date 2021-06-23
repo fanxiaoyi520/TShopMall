@@ -185,6 +185,19 @@
     return view;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    TSHomePageCellViewModel *viewModel = self.viewModel.dataSource[section];
+    if (viewModel.model.headerTemplateName) {
+        UITableViewHeaderFooterView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:viewModel.model.headerTemplateName];
+        
+        if ([headerView isKindOfClass:TSHomePageContainerHeaderView.class]) {
+            return 48;
+        }
+       
+    }
+    return 0;
+}
+
 - (void)registCellInfo {
     [self.tableView registerClass:NSClassFromString(@"TSHomePageBannerCell") forCellReuseIdentifier:@"TSHomePageBanner"];
     [self.tableView registerClass:NSClassFromString(@"TSHomePageCategoryCell") forCellReuseIdentifier:@"TSHomePageCategory"];
