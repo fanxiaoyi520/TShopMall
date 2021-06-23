@@ -19,7 +19,7 @@
 
 - (void)executeOperationDone:(NumOperationType)type{
     if (self.numberOperationDone) {
-        self.numberOperationDone(self.number.text, type);
+        self.numberOperationDone(self.number.text.integerValue, type);
     }
 }
 

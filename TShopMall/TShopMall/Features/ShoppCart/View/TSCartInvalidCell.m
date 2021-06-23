@@ -13,6 +13,10 @@
 
 @implementation TSCartInvalidCell
 
+- (void)setObj:(id)obj{
+    [self.goodView updateUIWithCart:(TSCart *)obj];
+}
+
 - (void)layoutView{
     [self.goodView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.contentView);
@@ -106,11 +110,11 @@
 @implementation TSCartInvalideGoodView
 
 
-- (void)testUI{
+- (void)updateUIWithCart:(TSCart *)cart{
     self.tips.text = @"失效";
-    self.icon.image = KImageMake(@"image_test");
-    self.name.text = @"XESS 65寸 家庭浮窗场景TV标题标题 标题踢踢踢";
-    self.mark.text = @"缺货";
+    [self.icon sd_setImageWithURL:[NSURL URLWithString:cart.productImgUrl]];
+    self.name.text = cart.productName;
+    self.mark.text = cart.invalidReson;
 }
 
 - (void)layoutSubviews{

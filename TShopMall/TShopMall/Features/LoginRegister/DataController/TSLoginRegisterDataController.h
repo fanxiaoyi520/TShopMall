@@ -28,6 +28,10 @@ NS_ASSUME_NONNULL_BEGIN
                      validCode:(NSString *)validCode
                 invitationCode:(NSString *)invitationCode
                   complete:(void(^)(BOOL isSucess))complete;
+
+-(void)fetchOneStepLoginToken:(NSString *)token
+                     accessToken:(NSString *)accessToken
+                        complete:(void(^)(BOOL isSucess))complete;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -31,11 +31,12 @@
     self.tips.text = @"最高赚";
     
     CGFloat width = [price widthForFont:KRegularFont(9.0)];
+    CGFloat tipsWidth = [@"最高赚" widthForFont:KRegularFont(10.0)];
     [self.price mas_updateConstraints:^(MASConstraintMaker *make) {
         make.width.mas_equalTo(width);
     }];
     [self.tipsBg mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(width + KRateW(10.0));
+        make.width.mas_equalTo(tipsWidth + KRateW(10.0));
     }];
     [self.tipsBg layoutIfNeeded];
     [self layoutIfNeeded];

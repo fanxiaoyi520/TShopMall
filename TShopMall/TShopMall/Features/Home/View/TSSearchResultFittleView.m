@@ -27,7 +27,7 @@
 - (void)itemTap:(TSSearchResultFittleButton *)sender{
     if (sender.selected == YES) {
         sender.selected = YES;
-        [self.delegate operationType:sender.tag sortType:sender.isUp];
+        [self.delegate operationType:sender.tag sortType:sender.isUp==YES? 2:1];
         return;
     }
     for (UIView *view in self.subviews) {

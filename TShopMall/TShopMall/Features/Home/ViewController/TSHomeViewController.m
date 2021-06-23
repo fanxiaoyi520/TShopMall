@@ -21,7 +21,6 @@
 #import "TSProductDetailController.h"
 #import "RefreshGifHeader.h"
 
-
 #define tableViewBackGroundViewHeight 204.0
 
 @interface TSHomeViewController ()<UITableViewDelegate, UITableViewDataSource>
@@ -58,6 +57,7 @@
     
     [self.viewModel fetchData];
     [self registCellInfo];
+//    [self registerQuickLogin];
 
     @weakify(self);
     [self.KVOController observe:self.viewModel keyPath:@"dataSource" options:(NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew) block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
@@ -77,6 +77,7 @@
         [self.view addSubview:self.loginBar];
         self.loginBar.clickBlock = ^{
             [[TSUserLoginManager shareInstance] startLogin];
+            
         };
     }
     

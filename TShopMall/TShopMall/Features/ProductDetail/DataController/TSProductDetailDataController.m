@@ -6,6 +6,7 @@
 //
 
 #import "TSProductDetailDataController.h"
+#import "NSString+Plugin.h"
 
 
 @interface TSProductDetailDataController()
@@ -102,8 +103,6 @@
 
     {
         TSGoodDetailItemPriceModel *item = [[TSGoodDetailItemPriceModel alloc] init];
-        // 默认给图片的高度为500
-        item.cellHeight = 500;
         item.identify = @"TSProductDetailImageCell";
 
         TSGoodDetailSectionModel *section = [[TSGoodDetailSectionModel alloc] init];
@@ -112,8 +111,6 @@
         section.headerIdentify = @"TSProductDetailHeaderView";
         section.spacingWithLastSection = 12;
         section.column = 1;
-        section.items = @[item];
-
         [sections addObject:section];
     }
     
@@ -131,22 +128,93 @@
                                                               needErrorToast:NO];
     [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
         
+        NSMutableArray *urls = [NSMutableArray array];
+        
         NSDictionary *data = request.responseJSONObject[@"data"];
         NSDictionary *productModel = data[@"productModel"];
-        NSDictionary *productDescription = productModel[@"productDescription"];
-        NSString *descriptionJson = productDescription[@"descriptionJson"];
+
+        {
+            
+            NSDictionary *productImage = productModel[@"productImage"];
+            NSArray *productMultiImage = productModel[@"productMultiImage"];
+            
+            [urls addObject:productImage[@"bigImageUrl"]];
+            
+            for (NSDictionary *dic in productMultiImage) {
+                NSString *basicImageUrl = dic[@"basicImageUrl"];
+                [urls addObject:basicImageUrl];
+            }
+            
+            TSGoodDetailSectionModel *section = self.sections[0];
+            TSGoodDetailItemBannerModel *item = (TSGoodDetailItemBannerModel *)[section.items firstObject];
+            item.urls = urls;
+        }
+        
+        {
+            NSDictionary *font = data[@"front"];
+            NSDictionary *priceAndPromotion = font[@"priceAndPromotion"];
+            NSDictionary *promotionInteactiveModel = priceAndPromotion[@"promotionInteactiveModel"];
+            NSArray *productSku = productModel[@"productSku"];
+            NSDictionary *productSkuDic = [productSku firstObject];
+            
+            self.attrId = font[@"skuNo"];
+            
+            TSGoodDetailSectionModel *section = self.sections[1];
+            TSGoodDetailItemPriceModel *item = (TSGoodDetailItemPriceModel *)[section.items firstObject];
+            item.marketPrice = promotionInteactiveModel[@"marketPrice"];
+            item.staffPrice = promotionInteactiveModel[@"staffPrice"];
+            item.earnMost = productSkuDic[@"earnMost"];
+
+        }
+        
+        {
+            TSGoodDetailSectionModel *section = [self.sections lastObject];
+            NSDictionary *productDescription = productModel[@"productDescription"];
+            NSString *descriptionJson = productDescription[@"descriptionJson"];
+            NSMutableArray *items = [self detailImageModelsWithJsonString:descriptionJson];
+            section.items = items;
+        }
+        
+        if (complete) {
+            complete(YES);
+        }
         
         
-        
-        
-        [self detailImageModelsWithJsonString:descriptionJson];
-        NSLog(@"-----");
+
+
         
         } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
             
     }];
     
     return sections;
+}
+
+-(void)fetchProductDetailAddProductToCart:(NSString *)productUuid
+                                   buyNum:(NSString *)buyNum
+                                   attrId:(NSString *)attrId
+                                 complete:(void(^)(BOOL isSucess))complete{
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setValue:productUuid forKey:@"productUuid"];
+    [params setValue:buyNum forKey:@"buyNum"];
+    [params setValue:attrId forKey:@"attrId"];
+    
+    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kGoodDetailAddProductToCartUrl
+                                                               requestMethod:YTKRequestMethodGET
+                                                       requestSerializerType:YTKRequestSerializerTypeJSON
+                                                      responseSerializerType:YTKResponseSerializerTypeJSON
+                                                               requestHeader:@{}
+                                                                 requestBody:params
+                                                              needErrorToast:NO];
+    [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+        
+        if (request.responseModel.isSucceed) {
+            [Popover popToastOnWindowWithText:@"加入购物车成功"];
+        }
+        
+        } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+            NSLog(@"-----");
+    }];
 }
 
 -(void)fetchProductDetailCartNumber:(void(^)(BOOL isSucess))complete{
@@ -166,9 +234,8 @@
     }];
 }
 
-
 #pragma mark - private method
-- (NSMutableArray *)detailImageModelsWithJsonString:(NSString *)oSrting {
+- (NSMutableArray *)detailImageModelsWithJsonString:(NSString *)oSrting{
     NSMutableArray *detailImageModels = [NSMutableArray array];
     if (oSrting.length == 0) {
         return nil;
@@ -191,16 +258,25 @@
         for (NSDictionary *imgDict in jsonObject) {
             if ([imgDict isKindOfClass:[NSDictionary class]]) {
                 
-                NSLog(@"-----");
+                CGFloat imageW = [imgDict[@"width"] floatValue];
+                CGFloat imageH = [imgDict[@"height"] floatValue];
+                CGFloat adjustHeight = 500.0;
+                if (imageW > 0) {
+                    adjustHeight = floor(kScreenWidth * imageH / imageW);
+                }
                 
-//                ProductBasicModel *model = [[ProductBasicModel alloc] init];
-//                model.cellType = ProductDetailImage;
-//                model.imgUrl = imgDict[@"url"];
-//                model.imageWidth = [imgDict[@"width"] floatValue];
-//                model.imageHeight = [imgDict[@"height"] floatValue];
-//                if (model.imgUrl && [urlTest evaluateWithObject:model.imgUrl]) {
-//                    [detailImageModels addObject:model];
-//                }
+                TSGoodDetailItemImageModel *item = [[TSGoodDetailItemImageModel alloc] init];
+                item.identify = @"TSProductDetailImageCell";
+                item.imgUrl = imgDict[@"url"];
+                item.imageWidth = imageW;
+                item.imageHeight = adjustHeight;
+                item.cellHeight = adjustHeight;
+                if (item.imgUrl && [urlTest evaluateWithObject:item.imgUrl]) {
+                    [detailImageModels addObject:item];
+                    
+                    [[SDWebImageManager sharedManager] loadImageWithURL:[NSURL URLWithString:[item.imgUrl urlEncode]] options:0 progress:NULL completed:^(UIImage *_Nullable image, NSData *_Nullable data, NSError *_Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL *_Nullable imageURL){}];
+                    
+                }
             }
         }
     }

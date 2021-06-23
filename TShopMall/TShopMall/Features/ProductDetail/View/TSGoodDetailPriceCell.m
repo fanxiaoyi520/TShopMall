@@ -6,6 +6,7 @@
 //
 
 #import "TSGoodDetailPriceCell.h"
+#import "TSGoodDetailItemModel.h"
 
 @interface TSGoodDetailPriceCell()
 
@@ -64,6 +65,9 @@
     
     [self.earnMoneyLabel sizeToFit];
     CGFloat width = self.earnMoneyLabel.size.width + 20;
+    if (width < 30) {
+        width = 30;
+    }
     
     [self.earnMoneyView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.earnLabel.mas_right).offset(-10);
@@ -95,7 +99,7 @@
         _unifiedPriceLable = [[UILabel alloc] init];
         _unifiedPriceLable.font = KFont(PingFangSCMedium, 24);
         _unifiedPriceLable.textColor = KMainColor;
-        _unifiedPriceLable.text = @"899999";
+        _unifiedPriceLable.text = @"";
     }
     return _unifiedPriceLable;
 }
@@ -105,7 +109,7 @@
         _deliveryLable = [[UILabel alloc] init];
         _deliveryLable.font = KRegularFont(12);
         _deliveryLable.textColor = KHexAlphaColor(@"#2D3132", 0.4);
-        _deliveryLable.text = @"提货价 ¥10800";
+        _deliveryLable.text = @"提货价 ¥";
     }
     return _deliveryLable;
 }
@@ -140,10 +144,18 @@
         _earnMoneyLabel = [[UILabel alloc] init];
         _earnMoneyLabel.font = KRegularFont(14);
         _earnMoneyLabel.textColor = KWhiteColor;
-        _earnMoneyLabel.text = @"¥19999";
+        _earnMoneyLabel.text = @"";
         _earnMoneyLabel.textAlignment = NSTextAlignmentRight;
     }
     return _earnMoneyLabel;
+}
+
+-(void)setDelegate:(id<UniversalCollectionViewCellDataDelegate>)delegate{
+    TSGoodDetailItemPriceModel *item = [delegate universalCollectionViewCellModel:self.indexPath];
+    
+    self.unifiedPriceLable.text = [NSString stringWithFormat:@"%@",item.marketPrice];
+    self.deliveryLable.text = [NSString stringWithFormat:@"提货价 ¥%@",item.staffPrice];
+    self.earnMoneyLabel.text = [NSString stringWithFormat:@"%@",item.earnMost];
 }
 
 @end
