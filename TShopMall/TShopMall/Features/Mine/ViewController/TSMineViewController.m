@@ -12,14 +12,11 @@
 #import "TSMineOrderHeaderView.h"
 #import "TSUniversalCollectionViewCell.h"
 #import "TSUniversalFooterView.h"
-#import "TSMineNavigationBar.h"
 #import "TSSettingViewController.h"
 #import "TSOrderManageViewController.h"
 
 @interface TSMineViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate,TSUserInfoViewDelegate,TSMineOrderHeaderViewDelegate>
 
-/// 自定义导航栏
-@property(nonatomic, strong) TSMineNavigationBar *navigationBar;
 /// 背景视图
 @property(nonatomic, strong) UIImageView *bgImageView;
 /// 设置按钮
@@ -65,7 +62,6 @@
     [self.view addSubview:self.collectionView];
     [self.collectionView addSubview:self.infoView];
     [self.collectionView addSubview:self.setButton];
-    [self.view addSubview:self.navigationBar];
     
     CGFloat top = 6;
     
@@ -73,17 +69,19 @@
     self.collectionView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight - GK_TABBAR_HEIGHT);
     self.infoView.frame = CGRectMake(0, 30, kScreenWidth, 60);
     self.setButton.frame = CGRectMake(kScreenWidth - 48, top, 32, 32);
-    self.navigationBar.frame = CGRectMake(0, 0, kScreenWidth, GK_STATUSBAR_NAVBAR_HEIGHT);
-
 }
 
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    [self hiddenNavigationBar];
-}
-
--(void)viewWillLayoutSubviews{
-    [super viewWillLayoutSubviews];
+-(void)setupNavigationBar{
+    [super setupNavigationBar];
+    
+    self.gk_navigationBar.alpha = 0;
+    
+    UIButton *setButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [setButton setTitle:@"设置" forState:UIControlStateNormal];
+    [setButton setTitleColor:KTextColor forState:UIControlStateNormal];
+    setButton.titleLabel.font = KRegularFont(14);
+    [setButton addTarget:self action:@selector(setAction:) forControlEvents:UIControlEventTouchUpInside];
+    self.gk_navRightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:setButton];
 }
 
 #pragma mark - Noti
@@ -106,6 +104,8 @@
 #pragma mark - UIScrollViewDelegate
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     CGFloat offsetY = ceil(scrollView.contentOffset.y);
+    CGFloat progress = offsetY / GK_STATUSBAR_NAVBAR_HEIGHT;
+    self.gk_navigationBar.alpha = progress;
     if (offsetY <= 0) {
         CGRect frame = self.bgImageView.frame;
         frame.size.height = 205 - offsetY;
@@ -116,8 +116,6 @@
         frame.origin.y = -offsetY;
         self.bgImageView.frame = frame;
     }
-    
-    self.navigationBar.alpha = offsetY / 50.0;
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -164,7 +162,10 @@
                   withReuseIdentifier:sectionModel.headerIdentify];
         TSMineOrderHeaderView *header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:sectionModel.headerIdentify forIndexPath:indexPath];
         [header bindMineSectionModel:sectionModel];
-        header.mineOrderDelegate = self;
+        if ([sectionModel.headerIdentify isEqualToString:@"TSMineOrderHeaderView"]) {
+            header.mineOrderDelegate = self;
+        }
+        
         return header;
     }else{
         Class className = NSClassFromString(sectionModel.footerIdentify);
@@ -297,14 +298,6 @@ spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
 }
 
 #pragma mark - Getter
--(TSMineNavigationBar *)navigationBar{
-    if (!_navigationBar) {
-        _navigationBar = [[TSMineNavigationBar alloc] init];
-        _navigationBar.alpha = 0;
-    }
-    return _navigationBar;
-}
-
 -(UIButton *)setButton{
     if (!_setButton) {
         _setButton = [UIButton buttonWithType:UIButtonTypeCustom];
