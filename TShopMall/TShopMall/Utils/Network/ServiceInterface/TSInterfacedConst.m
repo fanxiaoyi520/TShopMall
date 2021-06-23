@@ -94,6 +94,7 @@ NSString * const kSearchResult = @"/rest/v2/itemsearch/toProductList";
 #pragma mark - 商品详情
 NSString *const kGoodDetailUrl = @"/rest/v2/front/product/toProduct";
 NSString *const kGoodDetailCartNumberUrl = @"/rest/v2/cart/count";
+NSString *const kGoodDetailAddProductToCartUrl = @"/rest/v2/front/product/addProductToCart";
 
 #pragma mark - 分类
 NSString *const kShopContentUrl = @"/rest/v2/front/shopContent/getPageManageByPageType";
