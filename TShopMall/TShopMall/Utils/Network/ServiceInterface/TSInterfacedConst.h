@@ -53,10 +53,19 @@ UIKIT_EXTERN NSString *const kProducts;//商品列表
 #pragma mark - 排行
 
 #pragma mark - 采购蓝
+UIKIT_EXTERN NSString * const kCartShow;
+UIKIT_EXTERN NSString * const kCartChangeChoose;
+UIKIT_EXTERN NSString * const kCartChangeNums;
+UIKIT_EXTERN NSString * const kCartRemove;
+UIKIT_EXTERN NSString * const kCartCount;
+
+#pragma mark - 地址
 UIKIT_EXTERN NSString * const kProvice;
 UIKIT_EXTERN NSString * const kCities;
 UIKIT_EXTERN NSString * const kAreas;
 UIKIT_EXTERN NSString * const kStreets;
+UIKIT_EXTERN NSString * const kAddAddress;
+
 
 #pragma mark - 我的
 UIKIT_EXTERN NSString * const kMineMerchantUserInformation;

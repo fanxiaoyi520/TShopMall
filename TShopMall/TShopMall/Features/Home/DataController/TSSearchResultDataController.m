@@ -50,7 +50,7 @@
             sortBy = @"sortWeight";
             break;
         case YongJing:
-            sortBy = @"yongJing";
+            sortBy = @"commission";
             break;
         case SalsNum:
             sortBy = @"salsnum";
@@ -93,8 +93,15 @@
         self.result.list = [lists yy_modelToJSONObject];
     }
     
+    self.isEmptyView = NO;
     TSSearchSection *section = [self defaultSection];
     NSArray<TSSearchRow *> *rows = [self rowsWithDatas:result.list];
+    if (rows.count == 0) {
+        self.isEmptyView = YES;
+        self.lists = [NSMutableArray arrayWithArray:[self configEmptySection]];
+        self.currentNum = 0;
+        return;
+    }
     NSMutableArray *row = [NSMutableArray arrayWithArray:section.rows];
     [row addObjectsFromArray:rows];
     section.rows = row;
@@ -156,4 +163,19 @@
     return @[section];
 }
 
+
+- (NSArray<TSSearchSection *> *)configEmptySection{
+    TSSearchRow *row = [TSSearchRow new];
+    row.cellIdentifier = @"TSSearchResultEmptyCell";
+    row.rowSize = CGSizeMake(kScreenWidth, KRateW(320.0));
+    
+    TSSearchSection *section = [TSSearchSection new];
+    section.headerIdentifier = @"UICollectionReusableView";
+    section.footerIdentifier = @"UICollectionReusableView";
+    section.headerHeight = KRateW(10.0);
+    section.footerHeight = 0;
+    section.rows = @[row];
+    
+    return @[section];
+}
 @end

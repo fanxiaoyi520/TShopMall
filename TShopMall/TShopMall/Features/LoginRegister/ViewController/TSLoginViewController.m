@@ -205,10 +205,10 @@
     if (self.count <= 1) {
         self.count = 60;
         [self.timer invalidate];
-        [self.topView setCodeButtonTitleAndColor:@"重新验证码" isResend:YES];
+        [self.topView setCodeButtonTitleAndColor:@"重新验证码" isResend:YES enabled:YES];
     } else {
         self.count--;
-        [self.topView setCodeButtonTitleAndColor:[NSString stringWithFormat:@"重发 %ld", (long)self.count] isResend:NO];
+        [self.topView setCodeButtonTitleAndColor:[NSString stringWithFormat:@"重发 %ld", (long)self.count] isResend:NO enabled:NO];
     }
 }
 
@@ -303,24 +303,34 @@
     NSString *inputCode = [self.topView getCode];
     NSString *rightCode = self.dataController.smsModel.text;
     
-    if (![inputCode isEqualToString:rightCode]) {//验证码输入错误
-        [Popover popToastOnWindowWithText:@"验证码输入有误"];
-    }
-    
+//    if (![inputCode isEqualToString:rightCode]) {//验证码输入错误
+//        [Popover popToastOnWindowWithText:@"验证码输入有误"];
+//    }
+    [self.view endEditing:YES];
+    @weakify(self);
     [self.dataController fetchQuickLoginUsername:[self.topView getPhoneNumber]
                                        validCode:[self.topView getCode]
                                         complete:^(BOOL isSucess) {
-        [self dismissViewControllerAnimated:YES completion:^{
-            if (self.loginBlock) {
-                self.loginBlock();
-            }
-            
-        }];
+        @strongify(self)
+        if (isSucess) {
+            [self dismissViewControllerAnimated:YES completion:^{
+                if (self.loginBlock) {
+                    self.loginBlock();
+                }
+                
+            }];
+        }
+        
     }];
 }
 
+- (void)inputDoneAction {
+    if (self.checkedView.isChecked) {
+        [self.topView setLoginButtonEnable:YES];
+    }
+}
+
 - (void)closePage {
-    NSLog(@"----");
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -347,7 +357,7 @@
 }
 
 - (void)checkedAction:(BOOL)isChecked{
-    
+    [self.topView setLoginButtonEnable:isChecked];
 }
 
 #pragma mark - TSQuickCheckViewDelegate

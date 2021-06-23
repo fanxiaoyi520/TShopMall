@@ -11,7 +11,6 @@
 #import "YBNestViews.h"
 #import <MJRefresh/MJRefresh.h>
 #import "TSEmptyAlertView.h"
-#import "TSProductDetailController.h"
 #import "RefreshGifFooter.h"
 
 
@@ -99,9 +98,9 @@
    
     TSHomePageContainerCollectionView *collectionView =  [[TSHomePageContainerCollectionView alloc] initWithFrame:CGRectZero items:nil ColumnSpacing:8 rowSpacing:8 itemsHeight:282 rows:0 columns:2 padding:padding clickedBlock:^(TSProductBaseModel *selectItem, NSInteger index) {
         
-        TSProductDetailController *detail = [[TSProductDetailController alloc] init];
-        detail.uuid = selectItem.uuid;
-        
+//        TSProductDetailController *detail = [[TSProductDetailController alloc] init];
+//        detail.uuid = selectItem.uuid;
+        [[TSServicesManager sharedInstance].uriHandler openURI:[NSString stringWithFormat:@"page://quote/productDetail?uuid=%@", selectItem.uuid]];
         
         NSLog(@"uri:%@", selectItem.uuid);
     }];

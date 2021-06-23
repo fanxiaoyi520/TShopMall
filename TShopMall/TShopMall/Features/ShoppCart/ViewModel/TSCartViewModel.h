@@ -11,17 +11,12 @@
 #import "TSCartModel.h"
 
 @interface TSCartViewModel : NSObject
-@property (nonatomic, strong) NSArray<TSCartGoodsSection *> *sections;
+@property (nonatomic, assign) BOOL checked;
+@property (nonatomic, copy) NSString *imgUrl;
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSString *guige;
+@property (nonatomic, assign) NSInteger buyNum;
+@property (nonatomic, copy) NSString *thPrice;
 
-+ (instancetype)congfigViewModelWithCartInfo:(TSCartModel *)cartModel;
-//+ (NSArray<TSCartGoodsSection *> *)viewModel:(TSCartModel *)model;
-
-+ (NSArray<TSCart *> *)canOperationGoodsInSections:(NSArray<TSCartGoodsSection *> *)sections;
-
-//是否全选
-+ (BOOL)isAllGoodsSelected:(NSArray<TSCart *> *)goods;
-
-
-+ (NSArray<TSCart *> *)selectedInfo:(NSArray<TSCart *> *)cartModels;
-+ (NSString *)totalPrice:(NSArray<TSCart *> *)cartModels;
+- (instancetype)initWith:(TSCart *)goods;
 @end

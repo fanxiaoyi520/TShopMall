@@ -14,6 +14,8 @@
 #import "TSMineViewController.h"
 #import <GKNavigationBarViewController/UINavigationController+GKCategory.h>
 
+#import "TSCartDataController.h"
+
 @interface TSTabBarController ()
 
 @end
@@ -32,12 +34,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    [TSCartDataController checkCartNumber:^(NSInteger num) {
+        [self updateCartsBadge:num];
+    }];
 }
 
 #pragma mark - CYLTabBarControllerDelegate
 -(void)tabBarController:(UITabBarController *)tabBarController
        didSelectControl:(UIControl *)control{
+    UITabBarItem *item = [tabBarController.tabBar.items objectAtIndex:tabBarController.selectedIndex];
+    item.badgeValue = nil;
 }
 
 #pragma mark - Private
@@ -56,6 +62,9 @@
     UITabBarItem *tabBar = [UITabBarItem appearance];
     [tabBar setTitleTextAttributes:normalAttrs forState:UIControlStateNormal];
     [tabBar setTitleTextAttributes:selectedAttrs forState:UIControlStateSelected];
+    if (@available(iOS 10.0, *)) {
+        [[UITabBar appearance] setUnselectedItemTintColor:KTextColor];
+    }
     
     [[UITabBar appearance] setBackgroundColor:[UIColor whiteColor]];
     [[UITabBar appearance] setBackgroundImage:[[UIImage alloc] init]];
@@ -131,5 +140,14 @@
     
     return @[home,category,rank,cart,mine];
 }
+
+
+
+
+- (void)updateCartsBadge:(NSInteger)number{
+    UITabBarItem *item = [[[self tabBar] items] objectAtIndex:3];
+    item.badgeValue = [NSString stringWithFormat:@"%ld", number];
+}
+                                
 
 @end
