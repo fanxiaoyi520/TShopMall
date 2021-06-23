@@ -19,7 +19,7 @@
 -(void)setupBasic{
     self.backgroundColor = [UIColor whiteColor];
     self.titleLabel.font = KRegularFont(12);
-    [self setImage:KImageMake(@"mall_mine_more") forState:UIControlStateNormal];
+    [self setImage:KImageMake(@"mall_detail_more") forState:UIControlStateNormal];
     [self setTitleColor:KHexAlphaColor(@"#999999", 1.0) forState:UIControlStateNormal];
     [self setTitleColor:KHexAlphaColor(@"#999999", 1.0) forState:UIControlStateHighlighted];
     self.imageView.contentMode = UIViewContentModeScaleAspectFit;

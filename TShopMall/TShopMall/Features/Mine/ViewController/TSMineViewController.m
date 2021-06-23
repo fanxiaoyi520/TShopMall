@@ -69,7 +69,7 @@
     [self.collectionView addSubview:self.infoView];
     [self.view addSubview:self.setButton];
     
-    CGFloat top = 6;
+    CGFloat top = 6 + GK_STATUSBAR_HEIGHT;
     
     self.bgImageView.frame = CGRectMake(0, 0, kScreenWidth, 205);
     self.collectionView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight - GK_TABBAR_HEIGHT);
@@ -122,6 +122,7 @@
         frame.origin.y = -offsetY;
         self.bgImageView.frame = frame;
     }
+    self.setButton.alpha = 0.2 - progress;
 }
 
 #pragma mark - UICollectionViewDataSource

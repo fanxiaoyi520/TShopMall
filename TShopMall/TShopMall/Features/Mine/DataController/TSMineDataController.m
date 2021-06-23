@@ -17,42 +17,8 @@
 @implementation TSMineDataController
 
 -(void)fetchMineContentsComplete:(void(^)(BOOL isSucess))complete{
-    NSMutableArray *sections = [NSMutableArray array];
     
-    {
-        NSMutableArray *items = [NSMutableArray array];
-        
-        NSArray *titles = @[@"待付款",@"待发货",@"待收货",@"已完成",@"退款/退货"];
-        NSArray *images = @[@"mall_mine_ payment",@"mall_mine_deliver",@"mall_mine_takedelivery",@"mall_mine_complete",@"mall_mine_refund"];
-        
-        for (int i = 0; i < titles.count; i++) {
-            NSString *title = titles[i];
-            NSString *image = images[i];
-            
-            TSMineSectionOrderItemModel *item = [[TSMineSectionOrderItemModel alloc] init];
-            item.title = title;
-            item.imageName = image;
-            item.cellHeight = 75;
-            item.identify = @"TSMineImageTextCell";
-            
-            [items addObject:item];
-        }
-
-        TSMineSectionModel *section = [[TSMineSectionModel alloc] init];
-        section.hasHeader = YES;
-        section.headerName = @"订单";
-        section.headerSize = CGSizeMake(0, 45);
-        section.headerIdentify = @"TSMineOrderHeaderView";
-        section.hasFooter = YES;
-        section.footerSize = CGSizeMake(0, 24);
-        section.footerIdentify = @"TSUniversalBottomFooterView";
-        section.sectionInset = UIEdgeInsetsMake(0, 16, 0, 16);
-        section.spacingWithLastSection = 130;
-        section.column = 5;
-        section.items = items;
-        
-        [sections addObject:section];
-    }
+    NSMutableArray *sections = [NSMutableArray array];
     
     {
         NSMutableArray *items = [NSMutableArray array];
