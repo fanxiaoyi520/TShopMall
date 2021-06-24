@@ -119,14 +119,23 @@
 
     }];
     collectionView.collectionView.mj_footer.hidden = YES;
+    
     [self reloadContainerCollectionView:collectionView];
     
     return collectionView;
 }
 
 - (void)reloadContainerCollectionView:(TSHomePageContainerCollectionView *)collectionView{
+    
+    [Popover popProgressOnWindowWithProgressModel:[Popover defaultConfig] appearBlock:^(id frontView) {
+        
+    }];
+    
     TSHomePageContainerGroup *group = self.containerViewModel.segmentHeaderDatas[collectionView.tag];
     [self.containerViewModel loadData:group callBack:^(NSArray * _Nonnull list, NSError * _Nonnull error) {
+        
+        [Popover removePopoverOnWindow];
+        
         if (!error) {
             collectionView.items = list;
             [collectionView reloadData];

@@ -30,10 +30,10 @@
 - (void)getPageContainerDataWithStartPageIndex:(NSInteger)startIndex count:(NSInteger)count group:(TSHomePageContainerGroup *)group callBack:(nonnull void (^)(NSArray * _Nonnull, NSError * _Nonnull))listCallBack{
     
     NSMutableDictionary *body = [NSMutableDictionary dictionary];
-    [body setValue:@"platform_tcl_shop" forKey:@"platform"];
-    [body setValue:@"tclplus" forKey:@"storeUuid"];
-    [body setValue:@"TCL" forKey:@"t-id"];
-    [body setValue:@"02" forKey:@"terminalType"];
+//    [body setValue:@"platform_tcl_shop" forKey:@"platform"];
+//    [body setValue:@"tclplus" forKey:@"storeUuid"];
+//    [body setValue:@"TCL" forKey:@"t-id"];
+//    [body setValue:@"02" forKey:@"terminalType"];
     [body setValue:[NSString stringWithFormat:@"%ld",startIndex] forKey:@"nowPage"];
     [body setValue:[NSString stringWithFormat:@"%ld",count] forKey:@"pageShow"];
     [body setValue:group.groupId forKey:@"cateGroupUuid"];
@@ -47,6 +47,7 @@
                                                                requestHeader:NSMutableDictionary.dictionary
                                                                  requestBody:body
                                                               needErrorToast:NO];
+//    request.animatingView = self.context.view;
     [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
         
         if (request.responseModel.isSucceed) {

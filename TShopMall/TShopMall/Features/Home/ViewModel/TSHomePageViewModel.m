@@ -78,11 +78,7 @@
 -(void)fetchData{
    
     NSMutableDictionary *body = [NSMutableDictionary dictionary];
-    [body setValue:@"platform_tcl_shop" forKey:@"platform"];
-    [body setValue:@"tclplus" forKey:@"storeUuid"];
-    [body setValue:@"TCL" forKey:@"t-id"];
-    [body setValue:@"02" forKey:@"terminalType"];
-    [body setValue:@"APP" forKey:@"uiType"];
+        [body setValue:@"APP" forKey:@"uiType"];
 
     SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kHomePageInfoUrl
                                                                requestMethod:YTKRequestMethodPOST
