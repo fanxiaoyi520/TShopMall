@@ -68,6 +68,16 @@
     return UIStatusBarStyleDefault;
 }
 
+#pragma mark - Actions
+/** 返回首页 */
+- (void)backHome {
+    NSLog(@"返回首页 === ");
+}
+/** 查看订单 */
+- (void)lookOrder {
+    NSLog(@"查看订单 === ");
+}
+
 #pragma mark - Getter
 
 - (TSPaySuccessDataController *)dataController{
@@ -123,6 +133,17 @@
 - (id)universalCollectionViewCellModel:(NSIndexPath *)indexPath{
     TSPaySuccessSectionModel *sectionModel = self.dataController.sections[indexPath.section];
     return sectionModel.items[indexPath.row];
+}
+
+- (void)universalCollectionViewCellClick:(NSIndexPath *)indexPath params:(NSDictionary *)params {
+    NSString *cellType = params[@"cellType"];
+    if ([cellType isEqualToString:@"TSPaySuccessCell"] && [params[@"backType"] integerValue] == 1) {
+        ///返回商城首页
+        [self backHome];
+    } else if ([cellType isEqualToString:@"TSPaySuccessCell"] && [params[@"backType"] integerValue] == 2) {
+        ///查看订单
+        [self lookOrder];
+    }
 }
 
 #pragma mark - UniversalFlowLayoutDelegate
