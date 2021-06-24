@@ -101,7 +101,11 @@
     [cartBtn setImage:KImageMake(@"mall_detail_navigation_cart") forState:UIControlStateHighlighted];
     [cartBtn addTarget:self action:@selector(cartAction:) forControlEvents:UIControlEventTouchUpInside];
     cartBtn.frame = CGRectMake(0, 0, 30, 30);
+    [cartBtn setBadgeBGColor:UIColor.redColor];
+    [cartBtn setBadgeOriginX:15];
     [cartBtn setBadgeValue:@"3"];
+    [cartBtn setBadgeTextColor:UIColor.whiteColor];
+    [cartBtn setShouldAnimateBadge:YES];
     
     UIBarButtonItem *share = [[UIBarButtonItem alloc] initWithCustomView:shareBtn];
     UIBarButtonItem *cart = [[UIBarButtonItem alloc] initWithCustomView:cartBtn];
@@ -117,7 +121,7 @@
     [self.view addSubview:self.dragView];
     
 //    [self addCollectionCoverView];
-    //    [self addMJHeaderAndFooter];
+    [self addMJHeaderAndFooter];
 }
 
 -(void)viewWillLayoutSubviews{
@@ -177,10 +181,6 @@
     //默认【下拉刷新】
     RefreshGifHeader *mj_header = [RefreshGifHeader headerWithRefreshingTarget:self refreshingAction:@selector(mjHeadreRefresh:)];
     self.collectionView.mj_header = mj_header;
-
-    RefreshGifFooter *footer = [RefreshGifFooter footerWithRefreshingTarget:self refreshingAction:@selector(mjFooterRefresh:)];
-    self.collectionView.mj_footer = footer;
-    self.collectionView.mj_footer.hidden = NO;
 }
 
 #pragma mark - Actions
@@ -198,12 +198,9 @@
 
 /// 下拉刷新
 - (void)mjHeadreRefresh:(MJRefreshNormalHeader *)mj_header {
-//    [self loadDataIsNew:YES];
-}
-
-/// 上拉加载
-- (void)mjFooterRefresh:(MJRefreshAutoNormalFooter *)mj_footer {
-//    [self loadDataIsNew:NO];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+         [self.collectionView.mj_header endRefreshing];
+     });
 }
 
 #pragma mark - SnailQuickMaskPopupsDelegate
