@@ -35,17 +35,21 @@
     } else {
         self.automaticallyAdjustsScrollViewInsets = YES;
     }
-    [self configInfo];
-}
-
-#pragma mark - Noti
-- (void)loginStateDidChanged:(NSNotification *)noti{
-   
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.gk_navRightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.editBtn];
+    [self configInfo];
+}
+
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+#pragma mark - Noti
+- (void)loginStateDidChanged:(NSNotification *)noti{
+   
 }
 
 - (void)configInfo{
