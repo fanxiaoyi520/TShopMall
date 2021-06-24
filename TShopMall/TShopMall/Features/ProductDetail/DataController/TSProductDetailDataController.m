@@ -46,7 +46,7 @@
     }
 
     {//介绍 2
-        TSGoodDetailItemPriceModel *item = [[TSGoodDetailItemPriceModel alloc] init];
+        TSGoodDetailItemHotModel *item = [[TSGoodDetailItemHotModel alloc] init];
         item.identify = @"TSGoodDetailIntroduceCell";
         item.title = @"";
         item.content = @"";
@@ -164,6 +164,36 @@
             item.marketPrice = promotionInteactiveModel[@"marketPrice"];
             item.staffPrice = promotionInteactiveModel[@"staffPrice"];
             item.earnMost = productSkuDic[@"earnMost"];
+
+        }
+        
+        {//卖点
+            
+            NSDictionary *productMain = productModel[@"productMain"];
+            NSString *productName = productMain[@"productName"];
+            NSString *adviceNote = productMain[@"adviceNote"];
+            
+            CGFloat titleH = [productName sizeForFont:KRegularFont(16)
+                                                 size:CGSizeMake(kScreenWidth - 32, 1000)
+                                                 mode:NSLineBreakByWordWrapping].height;
+
+           CGFloat contentH = [adviceNote sizeForFont:KRegularFont(14)
+                                                 size:CGSizeMake(kScreenWidth - 32, 1000)
+                                                 mode:NSLineBreakByWordWrapping].height;
+            if (titleH > 45) {
+                titleH = 45;
+            }
+            
+            if (contentH > 40) {
+                contentH = 40;
+            }
+            
+            TSGoodDetailSectionModel *section = self.sections[2];
+            TSGoodDetailItemHotModel *item = (TSGoodDetailItemHotModel *)[section.items firstObject];
+            item.title = productName;
+            item.content = adviceNote;
+            
+            item.cellHeight = 8 + titleH + 4 + contentH + 16;
 
         }
         

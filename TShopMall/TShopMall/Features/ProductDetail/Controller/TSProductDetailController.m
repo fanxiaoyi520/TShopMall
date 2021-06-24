@@ -27,7 +27,7 @@
 #import <MJRefresh/MJRefresh.h>
 #import <Photos/Photos.h>
 
-@interface TSProductDetailController ()<UICollectionViewDelegate,UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate,TSTopFunctionViewDelegate,TSChangePriceViewDelegate,ProductDetailBottomViewDelegate,SnailQuickMaskPopupsDelegate>
+@interface TSProductDetailController ()<UICollectionViewDelegate,UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate,TSTopFunctionViewDelegate,TSChangePriceViewDelegate,ProductDetailBottomViewDelegate,SnailQuickMaskPopupsDelegate,GoodDetailMaterialViewDelegate>
 
 /// 返回按钮
 @property(nonatomic, strong) UIButton *backButton;
@@ -207,21 +207,10 @@
 }
 
 #pragma mark - SnailQuickMaskPopupsDelegate
-- (void)snailQuickMaskPopupsWillPresent:(SnailQuickMaskPopups *)popups{
-    if (self.materialPopups == popups) {
-        [self.materialView reloadMaterialView];
-    }
-}
 - (void)snailQuickMaskPopupsWillDismiss:(SnailQuickMaskPopups *)popups{
     if (self.materialPopups == popups) {
         [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:3]];
     }
-}
-- (void)snailQuickMaskPopupsDidPresent:(SnailQuickMaskPopups *)popups{
-    
-}
-- (void)snailQuickMaskPopupsDidDismiss:(SnailQuickMaskPopups *)popups{
-    
 }
 
 #pragma mark - TSTopFunctionViewDelegate
@@ -274,6 +263,15 @@
                                                    complete:^(BOOL isSucess) {
             
     }];
+}
+
+#pragma mark - GoodDetailMaterialViewDelegate
+-(void)goodDetailMaterialView:(TSGoodDetailMaterialView *_Nullable)materialView downloadClick:(UIButton *_Nullable)sender{
+    for (TSMaterialImageModel *model in self.materials) {
+        if (model.selected && model.materialImage) {
+            UIImageWriteToSavedPhotosAlbum(model.materialImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+        }
+    }
 }
 
 #pragma mark - TSChangePriceViewDelegate
@@ -636,6 +634,7 @@ spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
         materialView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight * 0.6);
         [materialView setCorners:(UIRectCornerTopLeft | UIRectCornerTopRight) radius:8.0];
         materialView.clipsToBounds = YES;
+        materialView.delegate = self;
         
         _materialPopups = [SnailQuickMaskPopups popupsWithMaskStyle:MaskStyleBlackTranslucent aView:materialView];
         _materialPopups.presentationStyle = PresentationStyleBottom;
