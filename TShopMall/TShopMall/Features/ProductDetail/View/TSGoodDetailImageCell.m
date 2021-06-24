@@ -13,7 +13,7 @@
 
 @interface TSGoodDetailImageCell()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
-@property(nonatomic, strong) NSArray *urls;
+@property(nonatomic, strong) NSArray *models;
 
 /// 背景视图
 @property(nonatomic, strong) UIView *bgView;
@@ -31,6 +31,8 @@
 @end
 
 @implementation TSGoodDetailImageCell
+
+@synthesize delegate = _delegate;
 
 -(void)fillCustomContentView{
     self.contentView.backgroundColor = [UIColor clearColor];
@@ -85,6 +87,7 @@
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setValue:@"TSGoodDetailImageCell" forKey:@"cellType"];
     [params setValue:@(DownloadMaterialTypeMore) forKey:@"downloadType"];
+    [params setValue:self.models forKey:@"models"];
     
     if (self.delegate && [self.delegate respondsToSelector:@selector(universalCollectionViewCellClick:params:)]) {
         [self.delegate universalCollectionViewCellClick:self.indexPath params:params];
@@ -107,12 +110,12 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.urls.count;
+    return self.models.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     TSMaterialImageCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TSMaterialImageCell" forIndexPath:indexPath];
-    cell.url = self.urls[indexPath.row];
+    cell.model = self.models[indexPath.row];
     return cell;
 }
 
@@ -194,8 +197,9 @@
 }
 
 -(void)setDelegate:(id<UniversalCollectionViewCellDataDelegate>)delegate{
+    _delegate = delegate;
     TSGoodDetailItemDownloadImageModel *item = (TSGoodDetailItemDownloadImageModel *)[delegate universalCollectionViewCellModel:self.indexPath];
-    self.urls = item.urls;
+    self.models = item.materialModels;
     [self.collectionView reloadData];
 }
 

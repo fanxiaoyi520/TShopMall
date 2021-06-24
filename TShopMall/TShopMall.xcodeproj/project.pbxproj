@@ -310,6 +310,10 @@
 		F530CD6026819449009DC29A /* mall_logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F530CD5726819449009DC29A /* mall_logo@2x.png */; };
 		F530CD642681E11C009DC29A /* TSDetailShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CD632681E11C009DC29A /* TSDetailShareView.m */; };
 		F530CE7C26836CFB009DC29A /* TSUserInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CE7B26836CFB009DC29A /* TSUserInfoCell.m */; };
+		F530CE8A26846B1F009DC29A /* TSConventionAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CE8826846B1E009DC29A /* TSConventionAlertView.m */; };
+		F530CE8D26846BE0009DC29A /* TSToolsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CE8C26846BE0009DC29A /* TSToolsManager.m */; };
+		F530CE9026846D3E009DC29A /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CE8E26846D3E009DC29A /* UIView+Frame.m */; };
+		F530CE9326846E9C009DC29A /* NSString+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CE9126846E9C009DC29A /* NSString+Frame.m */; };
 		F54972FE2668842500181E3F /* TShopMallTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F54972FD2668842500181E3F /* TShopMallTests.m */; };
 		F54973092668842500181E3F /* TShopMallUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F54973082668842500181E3F /* TShopMallUITests.m */; };
 		F54973602668A22100181E3F /* SSGenaralRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F54973402668A22100181E3F /* SSGenaralRequest.m */; };
@@ -1017,6 +1021,14 @@
 		F530CD632681E11C009DC29A /* TSDetailShareView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSDetailShareView.m; sourceTree = "<group>"; };
 		F530CE7A26836CFA009DC29A /* TSUserInfoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSUserInfoCell.h; sourceTree = "<group>"; };
 		F530CE7B26836CFB009DC29A /* TSUserInfoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSUserInfoCell.m; sourceTree = "<group>"; };
+		F530CE8826846B1E009DC29A /* TSConventionAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSConventionAlertView.m; sourceTree = "<group>"; };
+		F530CE8926846B1E009DC29A /* TSConventionAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSConventionAlertView.h; sourceTree = "<group>"; };
+		F530CE8B26846BE0009DC29A /* TSToolsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSToolsManager.h; sourceTree = "<group>"; };
+		F530CE8C26846BE0009DC29A /* TSToolsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSToolsManager.m; sourceTree = "<group>"; };
+		F530CE8E26846D3E009DC29A /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Frame.m"; sourceTree = "<group>"; };
+		F530CE8F26846D3E009DC29A /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
+		F530CE9126846E9C009DC29A /* NSString+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Frame.m"; sourceTree = "<group>"; };
+		F530CE9226846E9C009DC29A /* NSString+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Frame.h"; sourceTree = "<group>"; };
 		F54972DE2668842200181E3F /* TShopMall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TShopMall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F54972F22668842400181E3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F54972F92668842500181E3F /* TShopMallTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TShopMallTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1927,6 +1939,8 @@
 				F530CC2E26803862009DC29A /* NSTimer+TSBlcokTimer.m */,
 				DCA035F92683578C003DE5F7 /* NSObject+TSProperty.h */,
 				DCA035FA2683578C003DE5F7 /* NSObject+TSProperty.m */,
+				F530CE9226846E9C009DC29A /* NSString+Frame.h */,
+				F530CE9126846E9C009DC29A /* NSString+Frame.m */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -2053,6 +2067,8 @@
 				F530CC7126803FCD009DC29A /* UIView+TSSafeArea.m */,
 				F530CC8426803FCD009DC29A /* UIView+UIKit.h */,
 				F530CC9826803FCD009DC29A /* UIView+UIKit.m */,
+				F530CE8F26846D3E009DC29A /* UIView+Frame.h */,
+				F530CE8E26846D3E009DC29A /* UIView+Frame.m */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -2286,6 +2302,15 @@
 			path = ShareView;
 			sourceTree = "<group>";
 		};
+		F530CE8726846B1E009DC29A /* AlertView */ = {
+			isa = PBXGroup;
+			children = (
+				F530CE8826846B1E009DC29A /* TSConventionAlertView.m */,
+				F530CE8926846B1E009DC29A /* TSConventionAlertView.h */,
+			);
+			path = AlertView;
+			sourceTree = "<group>";
+		};
 		F54972D52668842200181E3F = {
 			isa = PBXGroup;
 			children = (
@@ -2345,6 +2370,7 @@
 		F54973162668A22100181E3F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				F530CE8726846B1E009DC29A /* AlertView */,
 				F530CD1726809B62009DC29A /* MaskPopups */,
 				F530CCBE26804167009DC29A /* Hybrid */,
 				F530CCB526804167009DC29A /* NetImageAutoSize */,
@@ -2738,6 +2764,8 @@
 				C3B4CCD82674930C0001EE75 /* TSTools.m */,
 				F54973C02668C0BC00181E3F /* TSDeviceHelper.h */,
 				F54973C12668C0BC00181E3F /* TSDeviceHelper.m */,
+				F530CE8B26846BE0009DC29A /* TSToolsManager.h */,
+				F530CE8C26846BE0009DC29A /* TSToolsManager.m */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -3483,6 +3511,7 @@
 				C22EE2882681B4A300E59C86 /* TSRecomendView.m in Sources */,
 				F530CC4626803B1C009DC29A /* RefreshGifFooter.m in Sources */,
 				F55D2C6726722807006BACCF /* TSCategoryKindModel.m in Sources */,
+				F530CE9026846D3E009DC29A /* UIView+Frame.m in Sources */,
 				C22EE2912681BCDF00E59C86 /* TSRecomendCell.m in Sources */,
 				C21A4B81267B335D00766F72 /* TSAddressModel.m in Sources */,
 				C2A34C6A267449080095497E /* TSAlertView.m in Sources */,
@@ -3559,6 +3588,7 @@
 				C2A34C9C26759DD00095497E /* TSSearchRecomendCell.m in Sources */,
 				F54973C82668C1D600181E3F /* TSNotificationConst.m in Sources */,
 				DC45FEC32678425700CE762E /* TSHighPriceTagView.m in Sources */,
+				F530CE9326846E9C009DC29A /* NSString+Frame.m in Sources */,
 				F530CCF426804167009DC29A /* TSWKMessageHandlerDispatch.m in Sources */,
 				C3A6C4C2267A1C5700FC71D6 /* TSAboutMeTopCell.m in Sources */,
 				F530CD232680B8A0009DC29A /* TSProductHeaderView.m in Sources */,
@@ -3606,6 +3636,7 @@
 				DC3440D32672F62C00F5B0DA /* TSHomePageBaseCell.m in Sources */,
 				DC45FEBD26783A1300CE762E /* TSHomePageContainerCollectionView.m in Sources */,
 				F55D2C9D26745E64006BACCF /* TSUserInfoManager.m in Sources */,
+				F530CE8A26846B1F009DC29A /* TSConventionAlertView.m in Sources */,
 				DCA035FB2683578C003DE5F7 /* NSObject+TSProperty.m in Sources */,
 				C2EF88D52670B8B900E7374A /* TSCartBaseCell.m in Sources */,
 				F55D2CEC2678A379006BACCF /* TSGoodDetailBannerCell.m in Sources */,
@@ -3722,6 +3753,7 @@
 				F530CC3C26803862009DC29A /* NSTimer+TSBlcokTimer.m in Sources */,
 				C35F1867267C7F8A00F65AF9 /* TSSexSelectingView.m in Sources */,
 				F530CCA726803FCD009DC29A /* UIControl+RepeatClick.m in Sources */,
+				F530CE8D26846BE0009DC29A /* TSToolsManager.m in Sources */,
 				F54973612668A22100181E3F /* SSBaseRequest.m in Sources */,
 				04F1EFAD2682D22100FF007D /* TSRealnameInfoSectionModel.m in Sources */,
 				DCA035D72680765B003DE5F7 /* TSUserLoginManager.m in Sources */,
