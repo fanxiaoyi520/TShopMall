@@ -1,0 +1,23 @@
+//
+//  TSWalletCenterView.h
+//  TShopMall
+//
+//  Created by xiaoyi.fan on 2021/6/24.
+//
+
+#import <UIKit/UIKit.h>
+
+NS_ASSUME_NONNULL_BEGIN
+@protocol TSWalletCenterViewDelegate <NSObject>
+@optional
+- (void)walletCenterMineIncomeAction:(id _Nullable)sender;
+- (void)walletBindingCardAction:(id _Nullable)sender;
+@end
+
+@interface TSWalletCenterView : UIImageView
+@property (nonatomic ,assign) id <TSWalletCenterViewDelegate> kDelegate;
+
+//- (void)setModel:(TSWalletModel *)model;
+@end
+
+NS_ASSUME_NONNULL_END

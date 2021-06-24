@@ -12,10 +12,13 @@
 @property (nonatomic, strong) NSMutableArray <TSMineSectionModel *> *sections;
 @property (nonatomic, strong) TSMineMerchantUserInformationModel *merchantUserInformationModel;
 @property (nonatomic, strong) TSPartnerCenterData *partnerCenterDataModel;
+@property (nonatomic, strong) TSWithdrawalRecordModel *withdrawalRecordModel;
 @end
 
 @implementation TSMineDataController
 
+
+// MARK: fetch
 -(void)fetchMineContentsComplete:(void(^)(BOOL isSucess))complete{
     NSMutableArray *sections = [NSMutableArray array];
     
@@ -213,6 +216,13 @@
 #pragma clang diagnostic pop
 }
 
+- (void)fetchWithdrawalRecordDataComplete:(void(^)(BOOL isSucess))complete {
+    if (complete) {
+        complete(YES);
+    }
+}
+
+// MARK: request
 - (SSGenaralRequest *)request1{
     
     NSMutableDictionary *header = [NSMutableDictionary dictionary];

@@ -16,7 +16,7 @@
 #import "TSUniversalCollectionViewCell.h"
 #import "TSMineEarningsCell.h"
 
-#import "TSMineWalletViewController.h"
+#import "TSMineWalletCenterViewController.h"
 #import "TSSettingViewController.h"
 #import "TSOrderManageViewController.h"
 #import "TSSettingViewController.h"
@@ -159,7 +159,7 @@
         TSOrderManageViewController *orderVc = [[TSOrderManageViewController alloc] init];
         [self.navigationController pushViewController:orderVc animated:YES];
     } else if (indexPath.section == 1) {
-        TSMineWalletViewController *vc = [TSMineWalletViewController new];
+        TSMineWalletCenterViewController *vc = [TSMineWalletCenterViewController new];
         [self.navigationController pushViewController:vc animated:YES];
     } else if (indexPath.section == 2) {
         
