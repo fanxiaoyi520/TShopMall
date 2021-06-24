@@ -94,33 +94,34 @@
         make.center.equalTo(self);
     }];
     
-    CGFloat titleHeight = self.title.text.length==0? 0:KRateW(44.0);
+    CGFloat titleHeight = self.title.text.length==0? 0:KRateW(20.0);
     [self.title mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.equalTo(self.card);
+        make.top.equalTo(self.card.mas_top).offset(20);
+        make.left.right.equalTo(self.card);
         make.height.mas_equalTo(titleHeight);
     }];
-    UIView *lineA = [self line];
-    CGFloat lineHeight = self.title.text.length==0? 0:1;
-    [lineA mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.card);
-        make.top.equalTo(self.title.mas_bottom);
-        make.height.mas_equalTo(lineHeight);
-    }];
-    
+//    UIView *lineA = [self line];
+//    CGFloat lineHeight = self.title.text.length==0? 0:1;
+//    [lineA mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.right.equalTo(self.card);
+//        make.top.equalTo(self.title.mas_bottom);
+//        make.height.mas_equalTo(lineHeight);
+//    }];
+    CGFloat msgTop = self.title.text.length == 0 ? KRateW(15.0) : KRateW(25.0);
     [self.message mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.card.mas_left).offset(KRateW(16.0));
-        make.right.equalTo(self.card.mas_right).offset(-KRateW(16.0));
-        make.top.equalTo(lineA.mas_bottom).offset(KRateW(40.0));
+        make.left.equalTo(self.card.mas_left).offset(KRateW(24.0));
+        make.right.equalTo(self.card.mas_right).offset(-KRateW(24.0));
+        make.top.equalTo(self.title.mas_bottom).offset(msgTop);
     }];
     
     UIView *lineB = [self line];
     [lineB mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.card);
-        make.top.equalTo(self.message.mas_bottom).offset(KRateW(40.0));
+        make.top.equalTo(self.message.mas_bottom).offset(KRateW(25.0));
         make.height.mas_equalTo(1);
     }];
     
-    CGFloat btnWidth = (kScreenWidth - KRateW(16.0) * 2) / 2.0;
+    CGFloat btnWidth = (kScreenWidth - KRateW(50.0) * 2) / 2.0;
     if (self.confirmBtn.hidden == YES ||
         self.cancelBtn.hidden == YES ) {
         btnWidth = btnWidth * 2.0;
@@ -130,19 +131,19 @@
         make.right.equalTo(self.card.mas_right);
         make.bottom.equalTo(self.card.mas_bottom);
         make.top.equalTo(lineB.mas_bottom);
-        make.left.equalTo(self.card.mas_centerX);
+        //make.left.equalTo(self.card.mas_centerX);
         make.height.mas_equalTo(KRateW(55.0));
-        //make.width.mas_offset(btnWidth);
+        make.width.mas_offset(btnWidth);
     }];
     
     [self.cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.card.mas_left);
         make.top.bottom.equalTo(self.confirmBtn);
-        make.right.equalTo(self.card.mas_centerX);
-        //make.width.mas_equalTo(btnWidth);
+        //make.right.equalTo(self.card.mas_centerX);
+        make.width.mas_equalTo(btnWidth);
     }];
     
-    if (self.confirmBtn.hidden == NO ||
+    if (self.confirmBtn.hidden == NO &&
         self.cancelBtn.hidden == NO ) {
         UIView *lineC = [self line];
         [lineC mas_makeConstraints:^(MASConstraintMaker *make) {

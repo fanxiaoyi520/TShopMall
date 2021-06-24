@@ -15,9 +15,9 @@
 
 @interface TSAddressMarkView()
 @property (nonatomic, strong) UILabel *title;
-@property (nonatomic, strong) UIButton *showMoreBtn;
-@property (nonatomic, strong) TSAddressMarkEditView *editView;
-@property (nonatomic, strong) UIView *lastMarkView;
+//@property (nonatomic, strong) UIButton *showMoreBtn;
+//@property (nonatomic, strong) TSAddressMarkEditView *editView;
+//@property (nonatomic, strong) UIView *lastMarkView;
 @end
 
 @implementation TSAddressMarkView
@@ -30,92 +30,153 @@
     return self;
 }
 
-- (NSString *)newMark{
-    if (self.editView.textField.text.length != 0 &&
-        [self.editView.btn.titleLabel.text isEqualToString:@"编辑"]) {
-        return self.editView.textField.text;
-    }
-    return @"";
-}
-
 - (void)configMarks{
-    self.marks = @[@"家", @"公司", @"学校", @"测试标签", @"测试标签"];
-    for (NSInteger i=0; i<self.marks.count; i++) {
-        [self creatMark:self.marks[i]];
+    NSArray *marks = @[@"家", @"公司", @"学校"];
+    for (NSInteger i=0; i<marks.count; i++) {
+        CGFloat edgX = KRateW(10.0);
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [btn setTitleColor:KHexColor(@"ffffff") forState:UIControlStateSelected];
+        [btn setTitleColor:KHexColor(@"#1E1C27") forState:UIControlStateNormal];
+        btn.titleLabel.font = KRegularFont(12.0);
+        btn.layer.cornerRadius = KRateW(11.0);
+        btn.layer.masksToBounds = YES;
+        btn.backgroundColor = KHexColor(@"#F1F1F1");
+        [btn setTitle:marks[i] forState:UIControlStateNormal];
+        [self addSubview:btn];
+//        btn.frame = CGRectMake(KRateW(22.0) + (KRateW(46.0) + edgX) * i, KRateW(40.0), KRateW(46.0), KRateW(22.0));
+        [btn addTarget:self action:@selector(markSelected:) forControlEvents:UIControlEventTouchUpInside];
+        btn.tag = i;
+        [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.mas_left).offset(KRateW(22.0) + (KRateW(46.0) + edgX) * i);
+            make.top.equalTo(self.mas_top).offset(KRateW(40.0));
+            make.height.mas_equalTo(KRateW(22.0));
+            make.width.mas_equalTo(KRateW(46.0));
+            make.bottom.equalTo(self.mas_bottom).offset(-KRateW(16.0));
+        }];
     }
-    
-    [self updateEditView];
 }
 
-- (void)creatMark:(NSString *)str{
-    CGFloat markHeight = KRateW(22.0);
-    CGFloat edgX = KRateW(10.0);
-    UILabel *la = [UILabel new];
-    la.font = KRegularFont(12.0);
-    la.text = str;
-    la.layer.cornerRadius = KRateW(11.0);
-    la.layer.masksToBounds = YES;
-    la.backgroundColor = KHexColor(@"#F1F1F1");
-    la.textAlignment = NSTextAlignmentCenter;
-    [self addSubview:la];
-    
-    CGFloat strWidth = [str widthForFont:KRegularFont(12.0)];
-    CGFloat laWidth = strWidth + KRateW(24.0);
-    CGRect frame;
-    frame.size = CGSizeMake(laWidth, markHeight);
-    if (self.lastMarkView.frame.size.width <= 2) {
-        frame.origin = CGPointMake(KRateW(22.0), KRateW(40.0) + KRateW(6.0));
-    } else {
-        frame.origin = CGPointMake(self.lastMarkView.x + self.lastMarkView.width + edgX, self.lastMarkView.y);
-    }
-    if (frame.origin.x + frame.size.width > kScreenWidth - KRateW(16.0 + 12.0 + 16.0)) {
-        frame.origin = CGPointMake(KRateW(22.0), frame.origin.y + frame.size.height + KRateW(6.0));
+- (void)markSelected:(UIButton *)sender{
+    for (UIView *view in self.subviews) {
+        if ([view isKindOfClass:[UIButton class]]) {
+            UIButton *btn = (UIButton *)view;
+            if (btn.tag == sender.tag){
+                btn.selected = YES;
+                btn.backgroundColor = KHexColor(@"#FF4D49");
+            } else {
+                btn.selected = NO;
+                btn.backgroundColor = KHexColor(@"#F1F1F1");
+            }
+        }
     }
     
-    la.frame = frame;
-    self.lastMarkView = la;
+    if (self.markChanged) {
+        self.markChanged(sender.titleLabel.text);
+    }
 }
 
-- (void)showMore:(UIButton *)sender{
-    sender.selected = !sender.selected;
+- (void)setCurrentMark:(NSString *)currentMark{
+    _currentMark = currentMark;
+    for (UIView *view in self.subviews) {
+        if ([view isKindOfClass:[UIButton class]]) {
+            UIButton *btn = (UIButton *)view;
+            if ([btn.titleLabel.text isEqualToString:currentMark]){
+                btn.selected = YES;
+                btn.backgroundColor = KHexColor(@"#FF4D49");
+            } else {
+                btn.selected = NO;
+                btn.backgroundColor = KHexColor(@"#F1F1F1");
+            }
+        }
+    }
 }
 
+//- (NSString *)newMark{
+//    if (self.editView.textField.text.length != 0 &&
+//        [self.editView.btn.titleLabel.text isEqualToString:@"编辑"]) {
+//        return self.editView.textField.text;
+//    }
+//    return @"";
+//}
+
+//- (void)configMarks{
+//    self.marks = @[@"家", @"公司", @"学校"];
+//    for (NSInteger i=0; i<self.marks.count; i++) {
+//        [self creatMark:self.marks[i]];
+//    }
+//
+//    [self updateEditView];
+//}
+//
+//- (void)creatMark:(NSString *)str{
+//    CGFloat markHeight = KRateW(22.0);
+//    CGFloat edgX = KRateW(10.0);
+//    UILabel *la = [UILabel new];
+//    la.font = KRegularFont(12.0);
+//    la.text = str;
+//    la.layer.cornerRadius = KRateW(11.0);
+//    la.layer.masksToBounds = YES;
+//    la.backgroundColor = KHexColor(@"#F1F1F1");
+//    la.textAlignment = NSTextAlignmentCenter;
+//    [self addSubview:la];
+//
+//    CGFloat strWidth = [str widthForFont:KRegularFont(12.0)];
+//    CGFloat laWidth = strWidth + KRateW(24.0);
+//    CGRect frame;
+//    frame.size = CGSizeMake(laWidth, markHeight);
+//    if (self.lastMarkView.frame.size.width <= 2) {
+//        frame.origin = CGPointMake(KRateW(22.0), KRateW(40.0) + KRateW(6.0));
+//    } else {
+//        frame.origin = CGPointMake(self.lastMarkView.x + self.lastMarkView.width + edgX, self.lastMarkView.y);
+//    }
+//    if (frame.origin.x + frame.size.width > kScreenWidth - KRateW(16.0 + 12.0 + 16.0)) {
+//        frame.origin = CGPointMake(KRateW(22.0), frame.origin.y + frame.size.height + KRateW(6.0));
+//    }
+//
+//    la.frame = frame;
+//    self.lastMarkView = la;
+//}
+//
+//- (void)showMore:(UIButton *)sender{
+//    sender.selected = !sender.selected;
+//}
+//
 - (void)layoutView{
     [self.title mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.mas_left).offset(KRateW(16.0));
         make.top.equalTo(self.mas_top).offset(KRateW(14.0));
         make.height.mas_offset(KRateW(20.0));
     }];
-    
-    [self.showMoreBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.mas_right).offset(-KRateW(16.0));
-        make.width.height.mas_equalTo(KRateW(12.0));
-        make.top.equalTo(self.title.mas_bottom).offset(KRateW(12.0));
-    }];
-    
-    [self.editView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.mas_left).offset(KRateW(22.0));
-        make.top.equalTo(self.title.mas_bottom).offset(KRateW(6.0));
-        make.height.mas_equalTo(KRateW(24.0));
-        make.bottom.equalTo(self.mas_bottom).offset(-KRateW(12.0)).priorityHigh();
-    }];
-}
 
-- (void)updateEditView{
-    if (self.lastMarkView == nil) {
-        return;
-    }
-    CGFloat y = self.lastMarkView.y + self.lastMarkView.height + KRateW(12.0) - KRateW(34.0);
-    [self.editView layoutIfNeeded];
-    [UIView animateWithDuration:0.3 animations:^{
-        [self.editView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.title.mas_bottom).offset(y);
-        }];
-    } completion:^(BOOL finished) {
-        [self layoutSubviews];
-    }];
+//    [self.showMoreBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.right.equalTo(self.mas_right).offset(-KRateW(16.0));
+//        make.width.height.mas_equalTo(KRateW(12.0));
+//        make.top.equalTo(self.title.mas_bottom).offset(KRateW(12.0));
+//    }];
+//
+//    [self.editView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(self.mas_left).offset(KRateW(22.0));
+//        make.top.equalTo(self.title.mas_bottom).offset(KRateW(6.0));
+//        make.height.mas_equalTo(KRateW(24.0));
+//        make.bottom.equalTo(self.mas_bottom).offset(-KRateW(12.0)).priorityHigh();
+//    }];
 }
-
+//
+//- (void)updateEditView{
+//    if (self.lastMarkView == nil) {
+//        return;
+//    }
+//    CGFloat y = self.lastMarkView.y + self.lastMarkView.height + KRateW(12.0) - KRateW(34.0);
+//    [self.editView layoutIfNeeded];
+//    [UIView animateWithDuration:0.3 animations:^{
+//        [self.editView mas_updateConstraints:^(MASConstraintMaker *make) {
+//            make.top.equalTo(self.title.mas_bottom).offset(y);
+//        }];
+//    } completion:^(BOOL finished) {
+//        [self layoutSubviews];
+//    }];
+//}
+//
 - (UILabel *)title{
     if (_title) {
         return _title;
@@ -125,33 +186,33 @@
     self.title.textColor = KHexColor(@"#2F2F2F");
     self.title.text = @"标签";
     [self addSubview:self.title];
-    
+
     return self.title;
 }
-
-- (UIButton *)showMoreBtn{
-    if (_showMoreBtn) {
-        return _showMoreBtn;
-    }
-    self.showMoreBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.showMoreBtn.hidden = YES;
-    [self.showMoreBtn setBackgroundImage:KImageMake(@"inde_down") forState:UIControlStateNormal];
-    [self.showMoreBtn setBackgroundImage:KImageMake(@"inde_up") forState:UIControlStateSelected];
-    [self.showMoreBtn addTarget:self action:@selector(showMore:) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:self.showMoreBtn];
-    
-    return self.showMoreBtn;
-}
-
-- (TSAddressMarkEditView *)editView{
-    if (_editView) {
-        return _editView;
-    }
-    self.editView = [TSAddressMarkEditView new];
-    [self addSubview:self.editView];
-    
-    return self.editView;
-}
+//
+//- (UIButton *)showMoreBtn{
+//    if (_showMoreBtn) {
+//        return _showMoreBtn;
+//    }
+//    self.showMoreBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    self.showMoreBtn.hidden = YES;
+//    [self.showMoreBtn setBackgroundImage:KImageMake(@"inde_down") forState:UIControlStateNormal];
+//    [self.showMoreBtn setBackgroundImage:KImageMake(@"inde_up") forState:UIControlStateSelected];
+//    [self.showMoreBtn addTarget:self action:@selector(showMore:) forControlEvents:UIControlEventTouchUpInside];
+//    [self addSubview:self.showMoreBtn];
+//
+//    return self.showMoreBtn;
+//}
+//
+//- (TSAddressMarkEditView *)editView{
+//    if (_editView) {
+//        return _editView;
+//    }
+//    self.editView = [TSAddressMarkEditView new];
+//    [self addSubview:self.editView];
+//
+//    return self.editView;
+//}
 
 @end
 

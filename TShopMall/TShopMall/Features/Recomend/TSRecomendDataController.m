@@ -86,7 +86,7 @@
     section.interitemSpacing = KRateW(8.0);
     if (self.recomend.listStyle != 2) {
         section.column = 1;
-        section.sectionInset = UIEdgeInsetsMake(0, KRateW(16.0), 0, KRateW(16.0));
+        section.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
     } else {
         section.column = 2;
         section.sectionInset = UIEdgeInsetsMake(0, KRateW(16.0), KRateW(16.0), KRateW(16.0));

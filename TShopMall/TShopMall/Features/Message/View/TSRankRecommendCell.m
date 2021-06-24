@@ -36,6 +36,7 @@
     self.contentView.backgroundColor = KWhiteColor;
     ///添加约束
     [self addConstraints];
+    [self.contentView setCorners:UIRectCornerAllCorners radius:9.0];
 }
 
 

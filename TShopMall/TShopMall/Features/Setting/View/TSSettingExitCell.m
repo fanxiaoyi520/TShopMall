@@ -34,6 +34,7 @@
     if (_exitButton == nil) {
         UIButton *exitButton = [[UIButton alloc] init];
         _exitButton = exitButton;
+        _exitButton.enabled = NO;
         _exitButton.titleLabel.font = KRegularFont(16);
         [_exitButton setTitleColor:KHexColor(@"#E64C3D") forState:UIControlStateNormal];
         [_exitButton setTitle:@"退出登录" forState:UIControlStateNormal];

@@ -19,7 +19,9 @@
 #import "TSMineWalletCenterViewController.h"
 #import "TSSettingViewController.h"
 #import "TSOrderManageViewController.h"
-#import "TSSettingViewController.h"
+#import "TSPayOrderViewController.h"
+#import "TSPaySuccessViewController.h"
+#import "TSHybridViewController.h"
 
 @interface TSMineViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate,TSUserInfoViewDelegate,TSMineOrderHeaderViewDelegate>
 
@@ -67,9 +69,9 @@
     [self.view addSubview:self.bgImageView];
     [self.view addSubview:self.collectionView];
     [self.collectionView addSubview:self.infoView];
-    [self.collectionView addSubview:self.setButton];
+    [self.view addSubview:self.setButton];
     
-    CGFloat top = 6;
+    CGFloat top = 6 + GK_STATUSBAR_HEIGHT;
     
     self.bgImageView.frame = CGRectMake(0, 0, kScreenWidth, 205);
     self.collectionView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight - GK_TABBAR_HEIGHT);
@@ -122,6 +124,7 @@
         frame.origin.y = -offsetY;
         self.bgImageView.frame = frame;
     }
+    self.setButton.alpha = 0.2 - progress;
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -146,17 +149,9 @@
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    
-//    if (indexPath.item == 0) {//测试我的订单
-//        TSOrderManageViewController *orderVc = [[TSOrderManageViewController alloc] init];
-//        [self.navigationController pushViewController:orderVc animated:YES];
-//        return;
-//    }
-//
-//    TSSettingViewController *settingVC = [[TSSettingViewController alloc] init];
-//    [self.navigationController pushViewController:settingVC animated:YES];
-    if (indexPath.section == 0) {
-        TSOrderManageViewController *orderVc = [[TSOrderManageViewController alloc] init];
+    if (indexPath.item == 0) {//测试我的订单
+        TSPaySuccessViewController *orderVc = [[TSPaySuccessViewController alloc] init];
+        //TSOrderManageViewController *orderVc = [[TSOrderManageViewController alloc] init];
         [self.navigationController pushViewController:orderVc animated:YES];
     } else if (indexPath.section == 1) {
         TSMineWalletCenterViewController *vc = [TSMineWalletCenterViewController new];
@@ -189,6 +184,12 @@
         TSUniversalBottomFooterView *footer = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:sectionModel.footerIdentify forIndexPath:indexPath];
         return footer;
     }
+}
+
+#pragma mark - mineOrderHeaderMoreAction
+-(void)mineOrderHeaderMoreAction:(id _Nullable)sender{
+    TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:@"https://testwap.tclo2o.cn/seller-app-h5/"];
+    [self.navigationController pushViewController:hybrid animated:YES];
 }
 
 #pragma mark - UniversalCollectionViewCellDataDelegate

@@ -6,6 +6,7 @@
 //
 
 #import "TSGoodDetailIntroduceCell.h"
+#import "TSGoodDetailItemModel.h"
 
 @interface TSGoodDetailIntroduceCell()
 
@@ -17,6 +18,8 @@
 @property(nonatomic, strong) UILabel *contentLabel;
 
 @end
+
+
 
 @implementation TSGoodDetailIntroduceCell
 
@@ -61,7 +64,7 @@
         _titleLabel.font = KRegularFont(16);
         _titleLabel.textColor = KTextColor;
         _titleLabel.numberOfLines = 2;
-        _titleLabel.text = @"标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标";
+        _titleLabel.text = @"";
     }
     return _titleLabel;
 }
@@ -72,9 +75,15 @@
         _contentLabel.font = KRegularFont(14);
         _contentLabel.textColor = KHexAlphaColor(@"#2D3132", 0.4);
         _contentLabel.numberOfLines = 2;
-        _contentLabel.text = @"卖点提炼，卖点介绍卖点介绍卖点介绍卖点介绍卖点介绍卖点介绍卖点介绍卖点介绍卖点介绍卖点介绍卖点标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标";
+        _contentLabel.text = @"";
     }
     return _contentLabel;
+}
+
+-(void)setDelegate:(id<UniversalCollectionViewCellDataDelegate>)delegate{
+    TSGoodDetailItemHotModel *item = [delegate universalCollectionViewCellModel:self.indexPath];
+    self.titleLabel.text = item.title;
+    self.contentLabel.text = item.content;
 }
 
 @end
