@@ -1,0 +1,338 @@
+//
+//  TSWalletHeaderView.m
+//  TShopMall
+//
+//  Created by xiaoyi.fan on 2021/6/23.
+//
+
+#import "TSWalletHeaderView.h"
+
+@interface TSWalletHeaderView ()
+
+@property (nonatomic ,strong) UILabel *revenueAmountLab;
+@property (nonatomic ,strong) UIButton *eyeBtn;
+@property (nonatomic ,strong) UILabel *amountNumLab;
+@property (nonatomic ,strong) UILabel *amountReceivedLab;
+@property (nonatomic ,strong) UILabel *amountReceivedNumLab;
+@property (nonatomic ,strong) UILabel *amountNotReceivedLab;
+@property (nonatomic ,strong) UILabel *amountNotReceivedNumLab;
+@property (nonatomic ,strong) UIView *lineView;
+@property (nonatomic ,strong) UIButton *withdrawalRecordBtn;
+
+@end
+
+@implementation TSWalletHeaderView
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        [self jaf_layoutSubview];
+    }
+    return self;
+}
+
+- (void)jaf_layoutSubview {
+    [self addSubview:self.revenueAmountLab];
+    [self.revenueAmountLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self).offset(50);
+        make.height.mas_equalTo(17);
+        make.centerX.equalTo(self);
+    }];
+    
+    [self addSubview:self.eyeBtn];
+    [self.eyeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.revenueAmountLab).offset(3.5);
+        make.right.equalTo(self.revenueAmountLab).offset(25);
+        make.width.mas_equalTo(15);
+        make.height.mas_equalTo(10);
+    }];
+    
+    [self addSubview:self.amountNumLab];
+    [self.amountNumLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self).offset(75);
+        make.centerX.equalTo(self);
+    }];
+    
+    [self addSubview:self.amountReceivedLab];
+    [self.amountReceivedLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self).offset(109);
+        make.left.equalTo(self).offset(62);
+        make.height.mas_equalTo(15);
+    }];
+    
+    [self addSubview:self.amountReceivedNumLab];
+    [self.amountReceivedNumLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self).offset(126);
+        make.centerX.equalTo(self.amountReceivedLab);
+        make.height.mas_equalTo(20);
+    }];
+    
+    [self addSubview:self.amountNotReceivedLab];
+    [self.amountNotReceivedLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self).offset(109);
+        make.right.equalTo(self).offset(-62);
+        make.height.mas_equalTo(15);
+    }];
+    
+    [self addSubview:self.amountNotReceivedNumLab];
+    [self.amountNotReceivedNumLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self).offset(126);
+        make.centerX.equalTo(self.amountNotReceivedLab);
+        make.height.mas_equalTo(20);
+    }];
+    
+    [self addSubview:self.lineView];
+    [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self).offset(120);
+        make.centerX.equalTo(self);
+        make.height.mas_equalTo(14);
+        make.width.mas_equalTo(1);
+    }];
+
+    [self addSubview:self.withdrawalRecordBtn];
+    [self.withdrawalRecordBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self).offset(-61);
+        make.right.equalTo(self).offset(-16);
+        make.height.mas_equalTo(24);
+        make.width.mas_equalTo(77);
+    }];
+    [_withdrawalRecordBtn jaf_customFilletRectCorner:UIRectCornerTopLeft|UIRectCornerBottomLeft  cornerRadii:CGSizeMake(12, 12)];
+
+}
+
+// MARK: model
+- (void)setModel:(TSWalletModel *)model {
+    //设置数据
+}
+
+// MARK: actions
+- (void)eyeAction:(UIButton *)sender {
+    if (sender.selected) {
+        _amountNumLab.hidden = YES;
+        sender.selected = NO;
+    } else {
+        _amountNumLab.hidden = NO;
+        sender.selected = YES;
+    }
+    if ([self.kDelegate respondsToSelector:@selector(walletHeaderEyeAction:)]) {
+        [self.kDelegate walletHeaderEyeAction:sender];
+    }
+}
+
+- (void)withdrawalRecordAction:(UIButton *)sender {
+    NSLog(@"提现记录");
+    if ([self.kDelegate respondsToSelector:@selector(walletHeaderWithdrawalRecordAction:)]) {
+        [self.kDelegate walletHeaderWithdrawalRecordAction:sender];
+    }
+}
+
+// MARK: get
+- (UILabel *)revenueAmountLab {
+    if (!_revenueAmountLab) {
+        _revenueAmountLab = [UILabel new];
+        _revenueAmountLab.textColor = KWhiteColor;
+        _revenueAmountLab.text = @"创收金额(元)";
+        _revenueAmountLab.font = KRegularFont(12);
+    }
+    return _revenueAmountLab;
+}
+
+- (UIButton *)eyeBtn {
+    if (!_eyeBtn) {
+        _eyeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_eyeBtn setImage:KImageMake(@"mall_mine_eye") forState:UIControlStateNormal];
+        [_eyeBtn setImage:KImageMake(@"mall_mine_eye") forState:UIControlStateSelected];
+        [_eyeBtn addTarget:self action:@selector(eyeAction:) forControlEvents:UIControlEventTouchUpInside];
+        [_eyeBtn jaf_setEnlargeEdgeWithTop:10 right:10 bottom:10 left:10];
+        _eyeBtn.selected = YES;
+    }
+    return _eyeBtn;
+}
+
+- (UILabel *)amountNumLab {
+    if (!_amountNumLab) {
+        _amountNumLab = [UILabel new];
+        _amountNumLab.textColor = KWhiteColor;
+        _amountNumLab.text = @"¥2380";
+        _amountNumLab.font = KRegularFont(20);
+    }
+    return _amountNumLab;
+}
+
+- (UILabel *)amountReceivedLab {
+    if (!_amountReceivedLab) {
+        _amountReceivedLab = [UILabel new];
+        _amountReceivedLab.textColor = KWhiteColor;
+        _amountReceivedLab.text = @"已到账金额";
+        _amountReceivedLab.font = KRegularFont(10);
+    }
+    return _amountReceivedLab;
+}
+
+- (UILabel *)amountReceivedNumLab {
+    if (!_amountReceivedNumLab) {
+        _amountReceivedNumLab = [UILabel new];
+        _amountReceivedNumLab.textColor = KWhiteColor;
+        _amountReceivedNumLab.text = @"¥2380";
+        _amountReceivedNumLab.font = KRegularFont(14);
+    }
+    return _amountReceivedNumLab;
+}
+
+- (UILabel *)amountNotReceivedLab {
+    if (!_amountNotReceivedLab) {
+        _amountNotReceivedLab = [UILabel new];
+        _amountNotReceivedLab.textColor = KWhiteColor;
+        _amountNotReceivedLab.text = @"未到账金额";
+        _amountNotReceivedLab.font = KRegularFont(10);
+    }
+    return _amountNotReceivedLab;
+}
+
+- (UILabel *)amountNotReceivedNumLab {
+    if (!_amountNotReceivedNumLab) {
+        _amountNotReceivedNumLab = [UILabel new];
+        _amountNotReceivedNumLab.textColor = KWhiteColor;
+        _amountNotReceivedNumLab.text = @"¥3380";
+        _amountNotReceivedNumLab.font = KRegularFont(14);
+    }
+    return _amountNotReceivedNumLab;
+}
+
+- (UIView *)lineView {
+    if (!_lineView) {
+        _lineView = [UIView new];
+        _lineView.backgroundColor = KWhiteColor;
+    }
+    return _lineView;
+}
+
+- (UIButton *)withdrawalRecordBtn {
+    if (!_withdrawalRecordBtn) {
+        _withdrawalRecordBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_withdrawalRecordBtn setTitle:@"提现记录 >>" forState:UIControlStateNormal];
+        [_withdrawalRecordBtn setTitleColor:KHexColor(@"#FFFFFF") forState:UIControlStateNormal];
+        _withdrawalRecordBtn.backgroundColor = KYellowTipColor;
+        [_withdrawalRecordBtn addTarget:self action:@selector(withdrawalRecordAction:) forControlEvents:UIControlEventTouchUpInside];
+        _withdrawalRecordBtn.titleLabel.font = KRegularFont(13);
+    }
+    return _withdrawalRecordBtn;
+}
+@end
+
+
+@interface TSWalletCellView ()
+
+@property (nonatomic ,strong) UIImageView *bankImageView;
+@property (nonatomic ,strong) UILabel *titleLab;
+@property (nonatomic ,strong) UILabel *cardNumberLab;
+@property (nonatomic ,strong) UIButton *isBindingLab;
+@property (nonatomic ,strong) UIImageView *instrucImgView;
+@end
+
+@implementation TSWalletCellView
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        [self jaf_layoutSubview];
+    }
+    return self;
+}
+
+- (void)jaf_layoutSubview {
+    
+    [self addSubview:self.bankImageView];
+    [self.bankImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self).offset(8);
+        make.height.mas_offset(25);
+        make.left.equalTo(self).offset(16);
+    }];
+    
+    [self addSubview:self.titleLab];
+    [self.titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.bankImageView).offset(2);
+        make.height.mas_offset(21);
+        make.left.equalTo(self).offset(46);
+    }];
+    
+    [self addSubview:self.cardNumberLab];
+    [self.cardNumberLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self).offset(33);
+        make.height.mas_offset(24);
+        make.left.equalTo(self).offset(16);
+    }];
+    
+    [self addSubview:self.isBindingLab];
+    [self.isBindingLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self).offset(21);
+        make.height.mas_offset(22);
+        make.right.equalTo(self).offset(-41);
+    }];
+    
+    [self addSubview:self.instrucImgView];
+    [self.instrucImgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self).offset(27);
+        make.height.mas_offset(11.3);
+        make.width.mas_offset(5.21);
+        make.right.equalTo(self).offset(-19);
+    }];
+}
+
+// MARK: actions
+- (void)isBindingAction:(UIButton *)sender {
+    if ([self.kDelegate respondsToSelector:@selector(walletCellViewIsBindingAction:)]) {
+        [self.kDelegate walletCellViewIsBindingAction:sender];
+    }
+}
+
+// MARK: get
+- (UIImageView *)bankImageView {
+    if (!_bankImageView) {
+        _bankImageView = [UIImageView new];
+        _bankImageView.image = KImageMake(@"mall_mine_wallet_bank");
+    }
+    return _bankImageView;
+}
+
+- (UILabel *)titleLab {
+    if (!_titleLab) {
+        _titleLab = [UILabel new];
+        _titleLab.textColor = KHexColor(@"#333333");
+        _titleLab.font = KRegularFont(16);
+        _titleLab.text = @"银行卡提现";
+    }
+    return _titleLab;
+}
+
+- (UILabel *)cardNumberLab {
+    if (!_cardNumberLab) {
+        _cardNumberLab = [UILabel new];
+        _cardNumberLab.textColor = KHexColor(@"#2D3132");
+        _cardNumberLab.font = KRegularFont(10);
+        _cardNumberLab.text = @"提现到银行卡账号：6444*******6667";
+    }
+    return _cardNumberLab;
+}
+
+- (UIButton *)isBindingLab {
+    if (!_isBindingLab) {
+        _isBindingLab = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_isBindingLab setTitleColor:KHexColor(@"#2D3132") forState:UIControlStateNormal];
+        _isBindingLab.titleLabel.font = KRegularFont(14);
+        [_isBindingLab setTitle:@"已绑定" forState:UIControlStateNormal];
+        [_isBindingLab addTarget:self action:@selector(isBindingAction:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _isBindingLab;
+}
+
+- (UIImageView *)instrucImgView {
+    if (!_instrucImgView) {
+        _instrucImgView = [UIImageView new];
+        _instrucImgView.image = KImageMake(@"mall_mine_wallet_bank");
+    }
+    return _instrucImgView;
+}
+@end

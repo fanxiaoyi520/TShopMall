@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 /** 代理 */
 @property (nonatomic, weak) id<TSRegisterTopViewDelegate> delegate;
 
-- (void)setCodeButtonTitleAndColor:(NSString *)codeTitle isResend:(BOOL)isResend;
+- (void)setCodeButtonTitleAndColor:(NSString *)codeTitle isResend:(BOOL)isResend enabled:(BOOL)enabled;
 /** 获取输入的手机号 */
 - (NSString *)getPhoneNumber;
 /** 获取输入的验证码 */

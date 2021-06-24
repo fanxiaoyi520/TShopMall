@@ -7,9 +7,9 @@
 
 #import "TSProductDetailDataController.h"
 #import "NSString+Plugin.h"
+#import "TSMaterialImageCell.h"
 
-
-@interface TSProductDetailDataController()
+@interface TSProductDetailDataController()<YTKChainRequestDelegate>
 
 @property (nonatomic, strong) NSMutableArray <TSGoodDetailSectionModel *> *sections;
 
@@ -22,7 +22,7 @@
     
     NSMutableArray *sections = [NSMutableArray array];
     
-    {
+    {//banner 0
         TSGoodDetailItemBannerModel *item = [[TSGoodDetailItemBannerModel alloc] init];
         item.cellHeight = floor(kScreenWidth * 1.04);
         item.identify = @"TSGoodDetailBannerCell";
@@ -33,7 +33,7 @@
         [sections addObject:section];
     }
     
-    {
+    {//价格 1
         TSGoodDetailItemPriceModel *item = [[TSGoodDetailItemPriceModel alloc] init];
         item.cellHeight = 78;
         item.identify = @"TSGoodDetailPriceCell";
@@ -45,7 +45,7 @@
         [sections addObject:section];
     }
 
-    {
+    {//介绍 2
         TSGoodDetailItemPriceModel *item = [[TSGoodDetailItemPriceModel alloc] init];
         item.identify = @"TSGoodDetailIntroduceCell";
         item.title = @"";
@@ -62,8 +62,8 @@
         [sections addObject:section];
     }
 
-    {
-        TSGoodDetailItemPriceModel *item = [[TSGoodDetailItemPriceModel alloc] init];
+    {//下载图片 3
+        TSGoodDetailItemDownloadImageModel *item = [[TSGoodDetailItemDownloadImageModel alloc] init];
         item.cellHeight = 189;
         item.identify = @"TSGoodDetailImageCell";
 
@@ -75,7 +75,7 @@
         [sections addObject:section];
     }
 
-    {
+    {//复制文案 4
         TSGoodDetailItemPriceModel *item = [[TSGoodDetailItemPriceModel alloc] init];
         item.cellHeight = 151;
         item.identify = @"TSGoodDetailCopyWriterCell";
@@ -88,9 +88,9 @@
         [sections addObject:section];
     }
 
-    {
+    {//所选商品规格参数等 5
         TSGoodDetailItemPriceModel *item = [[TSGoodDetailItemPriceModel alloc] init];
-        item.cellHeight = 227;
+        item.cellHeight = 172;
         item.identify = @"TSProductDetailPurchaseCell";
 
         TSGoodDetailSectionModel *section = [[TSGoodDetailSectionModel alloc] init];
@@ -101,7 +101,7 @@
         [sections addObject:section];
     }
 
-    {
+    {//图文 6
         TSGoodDetailItemPriceModel *item = [[TSGoodDetailItemPriceModel alloc] init];
         item.identify = @"TSProductDetailImageCell";
 
@@ -133,7 +133,7 @@
         NSDictionary *data = request.responseJSONObject[@"data"];
         NSDictionary *productModel = data[@"productModel"];
 
-        {
+        {//banner
             
             NSDictionary *productImage = productModel[@"productImage"];
             NSArray *productMultiImage = productModel[@"productMultiImage"];
@@ -150,7 +150,7 @@
             item.urls = urls;
         }
         
-        {
+        {//价格
             NSDictionary *font = data[@"front"];
             NSDictionary *priceAndPromotion = font[@"priceAndPromotion"];
             NSDictionary *promotionInteactiveModel = priceAndPromotion[@"promotionInteactiveModel"];
@@ -167,7 +167,24 @@
 
         }
         
-        {
+        {//素材下载
+            TSGoodDetailSectionModel *section = self.sections[3];
+            TSGoodDetailItemDownloadImageModel *item = (TSGoodDetailItemDownloadImageModel *)[section.items firstObject];
+            
+            NSMutableArray *models = [NSMutableArray array];
+            for (NSString *url in urls) {
+                
+                TSMaterialImageModel *model = [[TSMaterialImageModel alloc] init];
+                model.url = url;
+                model.selected = NO;
+                
+                [models addObject:model];
+            }
+            
+            item.materialModels = models;
+        }
+        
+        {//详情
             TSGoodDetailSectionModel *section = [self.sections lastObject];
             NSDictionary *productDescription = productModel[@"productDescription"];
             NSString *descriptionJson = productDescription[@"descriptionJson"];
@@ -206,6 +223,7 @@
                                                                requestHeader:@{}
                                                                  requestBody:params
                                                               needErrorToast:NO];
+    request.animatingView = self.context.view;
     [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
         
         if (request.responseModel.isSucceed) {
@@ -232,6 +250,86 @@
         } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
             NSLog(@"-----");
     }];
+}
+
+-(void)fetchProductDetailHasProduct:(NSString *)skuNo
+                           areaUuid:(NSString *)areaUuid
+                        parentSkuNo:(NSString *)parentSkuNo
+                             buyNum:(NSString *)buyNum
+                             region:(NSString *)region
+                           complete:(void(^)(BOOL isSucess))complete{
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setValue:skuNo forKey:@"skuNo"];
+    [params setValue:areaUuid forKey:@"areaUuid"];
+    [params setValue:parentSkuNo forKey:@"parentSkuNo"];
+    [params setValue:buyNum forKey:@"buyNum"];
+    [params setValue:region forKey:@"region"];
+    
+    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kGoodDetailAddProductToCartUrl
+                                                               requestMethod:YTKRequestMethodGET
+                                                       requestSerializerType:YTKRequestSerializerTypeJSON
+                                                      responseSerializerType:YTKResponseSerializerTypeJSON
+                                                               requestHeader:@{}
+                                                                 requestBody:params
+                                                              needErrorToast:NO];
+    request.animatingView = self.context.view;
+    [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+        
+        if (request.responseModel.isSucceed) {
+            [Popover popToastOnWindowWithText:@"加入购物车成功"];
+        }
+        
+        } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+            NSLog(@"-----");
+    }];
+    
+}
+
+-(void)fetchProductDetailCustomBuy:(NSString *)suitUuid
+                          complete:(void(^)(BOOL isSucess))complete{
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setValue:@"allRecords" forKey:@"productIdAndAttrId"];
+    [params setValue:@"false" forKey:@"chooseState"];
+    [params setValue:suitUuid forKey:@"suitUuid"];
+    
+    SSGenaralRequest *update = [[SSGenaralRequest alloc] initWithRequestUrl:kGoodDetailChangeChooseUrl
+                                                              requestMethod:YTKRequestMethodPOST
+                                                      requestSerializerType:YTKRequestSerializerTypeHTTP
+                                                     responseSerializerType:YTKResponseSerializerTypeJSON
+                                                              requestHeader:@{}
+                                                                requestBody:params
+                                                             needErrorToast:YES];
+    
+    SSGenaralRequest *fastBuy = [[SSGenaralRequest alloc] initWithRequestUrl:kGoodDetailChangeChooseUrl
+                                                               requestMethod:YTKRequestMethodPOST
+                                                       requestSerializerType:YTKRequestSerializerTypeHTTP
+                                                      responseSerializerType:YTKResponseSerializerTypeJSON
+                                                               requestHeader:@{}
+                                                                 requestBody:params
+                                                              needErrorToast:YES];
+    
+    
+    YTKChainRequest *chainReq = [[YTKChainRequest alloc] init];
+    [chainReq addRequest:update callback:^(YTKChainRequest * _Nonnull chainRequest, YTKBaseRequest * _Nonnull baseRequest) {
+        SSGenaralRequest *update = (SSGenaralRequest *)baseRequest;
+  
+        [chainRequest addRequest:fastBuy callback:nil];
+    }];
+    
+    chainReq.delegate = self;
+    [chainReq start];
+    
+}
+
+#pragma mark - YTKChainRequestDelegate
+- (void)chainRequestFinished:(YTKChainRequest *)chainRequest{
+    
+}
+
+- (void)chainRequestFailed:(YTKChainRequest *)chainRequest failedBaseRequest:(YTKBaseRequest*)request{
+    
 }
 
 #pragma mark - private method
@@ -282,5 +380,7 @@
     }
     return detailImageModels;
 }
+
+
 
 @end

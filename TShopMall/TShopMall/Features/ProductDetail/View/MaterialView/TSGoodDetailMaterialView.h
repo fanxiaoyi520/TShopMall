@@ -6,10 +6,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TSMaterialImageCell.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TSGoodDetailMaterialView : UIView
+
+@property(nonatomic, strong) NSArray <TSMaterialImageModel *> *models;
+
+-(instancetype)initWithMaterialModels:(NSArray <TSMaterialImageModel *> *)model;
+
+-(void)reloadMaterialView;
 
 @end
 

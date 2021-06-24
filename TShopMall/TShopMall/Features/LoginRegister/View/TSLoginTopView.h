@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)sendCode;
 
+- (void)inputDoneAction;
+
 @end
 
 @interface TSLoginTopView : UIView
@@ -24,11 +26,13 @@ NS_ASSUME_NONNULL_BEGIN
 /** 代理 */
 @property (nonatomic, weak) id<TSLoginTopViewDelegate> delegate;
 
-- (void)setCodeButtonTitleAndColor:(NSString *)codeTitle isResend:(BOOL)isResend;
+- (void)setCodeButtonTitleAndColor:(NSString *)codeTitle isResend:(BOOL)isResend enabled:(BOOL)enabled;
 /** 获取输入的手机号 */
 - (NSString *)getPhoneNumber;
 /** 获取输入的验证码 */
 - (NSString *)getCode;
+
+- (void)setLoginButtonEnable:(BOOL)isEnable;
 
 @end
 

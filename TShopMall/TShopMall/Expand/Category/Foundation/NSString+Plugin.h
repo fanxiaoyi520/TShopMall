@@ -162,6 +162,9 @@ static inline NSString *TStringToString(NSString *str) { return TStringIsEmpty(s
 ///去掉小数点后面无效的0
 + (NSString *)removeSuffix:(NSString *)numberStr;
 
+/// url解析获取其中的参数
+- (NSDictionary *)ts_urlParsing;
+
 @end
 
 

@@ -23,6 +23,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// 导航栏统一配置
 -(void)setNavigationConfig;
 
+/// 初始化微信sdk
+-(void)initWechatConfig;
+
+/// 初始化路由
+-(void)initRouteConfig;
+
 @end
 
 NS_ASSUME_NONNULL_END

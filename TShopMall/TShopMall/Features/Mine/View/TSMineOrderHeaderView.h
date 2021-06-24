@@ -12,12 +12,12 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol TSMineOrderHeaderViewDelegate <NSObject>
 
 @optional
--(void)moreAction:(id _Nullable)sender;
+-(void)mineOrderHeaderMoreAction:(id _Nullable)sender;
 @end
 
 @interface TSMineOrderHeaderView : TSUniversalTopHeaderView
 
-@property (nonatomic ,assign) id<TSMineOrderHeaderViewDelegate> mineOrderDelegate;
+@property (nonatomic ,assign) id<TSMineOrderHeaderViewDelegate> kDelegate;
 -(void)bindMineSectionModel:(TSMineSectionModel *)model;
 
 @end

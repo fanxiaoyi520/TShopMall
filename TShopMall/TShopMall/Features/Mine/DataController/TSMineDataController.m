@@ -17,6 +17,7 @@
 @implementation TSMineDataController
 
 -(void)fetchMineContentsComplete:(void(^)(BOOL isSucess))complete{
+    
     NSMutableArray *sections = [NSMutableArray array];
     
     {

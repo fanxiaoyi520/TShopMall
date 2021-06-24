@@ -12,7 +12,6 @@
 
 /// 标题
 @property(nonatomic, strong) UILabel *titleLabel;
-@property(nonatomic, strong) UIButton *eyeButton;
 /// 查看更多
 @property(nonatomic, strong) TSMineMoreButton *moreButton;
 /// 分割线
@@ -60,8 +59,8 @@
 
 #pragma mark - Actions
 -(void)moreAction:(TSMineMoreButton *)sender{
-    if ([self.mineOrderDelegate respondsToSelector:@selector(moreAction:)]) {
-        [self.mineOrderDelegate moreAction:sender];
+    if ([self.kDelegate respondsToSelector:@selector(mineOrderHeaderMoreAction:)]) {
+        [self.kDelegate mineOrderHeaderMoreAction:sender];
     }
 }
 
@@ -74,16 +73,6 @@
         _titleLabel.textColor = KHexColor(@"#333333");
     }
     return _titleLabel;
-}
-
--(UIButton *)eyeButton{
-    if (!_eyeButton) {
-        _eyeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_eyeButton setImage:KImageMake(@"mall_mine_eye") forState:UIControlStateNormal];
-        [_eyeButton setImage:KImageMake(@"mall_mine_eye") forState:UIControlStateHighlighted];
-        [_eyeButton addTarget:self action:@selector(eyeAction:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    return _eyeButton;
 }
 
 -(TSMineMoreButton *)moreButton{

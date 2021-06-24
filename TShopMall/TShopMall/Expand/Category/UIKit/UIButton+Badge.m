@@ -310,4 +310,14 @@ NSString const *UIButton_badgeValueKey = @"UIButton_badgeValueKey";
     }
     return CGRectContainsPoint(rect, point) ? YES : NO;
 }
+
+// MARK: 切圆角
+- (void)jaf_customFilletRectCorner:(UIRectCorner)corners cornerRadii:(CGSize)cornerRadiiSize {
+    [self layoutIfNeeded];
+    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds byRoundingCorners:corners cornerRadii:CGSizeMake(cornerRadiiSize.width, cornerRadiiSize.height)];
+    CAShapeLayer *maskLayer = [CAShapeLayer layer];
+    maskLayer.frame = self.bounds;
+    maskLayer.path = maskPath.CGPath;
+    self.layer.mask = maskLayer;
+}
 @end

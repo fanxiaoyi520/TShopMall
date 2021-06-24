@@ -686,4 +686,22 @@
     }
 }
 
+- (NSDictionary *)ts_urlParsing {
+    if (self == nil || self.length <= 0) {
+        return @{};
+    }
+    NSString *text = [self stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];;
+    if (![text containsString:@"?"] && ![text containsString:@"//"]) {
+        text = [@"?" stringByAppendingString:text];
+    }
+    NSMutableDictionary *muDict = [NSMutableDictionary dictionary];
+    NSURLComponents *components = [[NSURLComponents alloc] initWithString:text];
+    for (NSURLQueryItem *item in components.queryItems) {
+        if (item.name && item.name.length > 0 && item.value) {
+            [muDict setObject:item.value forKey:item.name];
+        }
+    }
+    return muDict.copy;
+}
+
 @end

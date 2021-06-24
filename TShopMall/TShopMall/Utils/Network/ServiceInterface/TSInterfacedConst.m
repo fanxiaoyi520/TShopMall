@@ -96,6 +96,9 @@ NSString * const kSearchResult = @"/rest/v2/itemsearch/toProductList";
 NSString *const kGoodDetailUrl = @"/rest/v2/front/product/toProduct";
 NSString *const kGoodDetailCartNumberUrl = @"/rest/v2/cart/count";
 NSString *const kGoodDetailAddProductToCartUrl = @"/rest/v2/front/product/addProductToCart";
+NSString *const kGoodDetailHasProductUrl = @"/rest/v2/front/product/hasProduct";
+NSString *const kGoodDetailChangeChooseUrl = @"/v2/cart/changeChoose";
+NSString *const kGoodDetailFastBuyUrl = @"/v2/front/product/fastBuy";
 
 #pragma mark - 分类
 NSString *const kShopContentUrl = @"/rest/v2/front/shopContent/getPageManageByPageType";

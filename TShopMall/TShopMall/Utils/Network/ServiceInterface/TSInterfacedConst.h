@@ -42,6 +42,9 @@ UIKIT_EXTERN NSString *const kSearchResult;//搜索结果
 UIKIT_EXTERN NSString *const kGoodDetailUrl;
 UIKIT_EXTERN NSString *const kGoodDetailCartNumberUrl;
 UIKIT_EXTERN NSString *const kGoodDetailAddProductToCartUrl;
+UIKIT_EXTERN NSString *const kGoodDetailHasProductUrl;
+UIKIT_EXTERN NSString *const kGoodDetailChangeChooseUrl;
+UIKIT_EXTERN NSString *const kGoodDetailFastBuyUrl;
 
 
 #pragma mark - 分类

@@ -42,6 +42,29 @@ NS_ASSUME_NONNULL_BEGIN
                                    attrId:(NSString *)attrId
                                  complete:(void(^)(BOOL isSucess))complete;
 
+
+/// 商品检查库存
+/// @param skuNo 商品SKU
+/// @param areaUuid 街道UUID
+/// @param parentSkuNo 父类SKU
+/// @param buyNum 数量
+/// @param region 区县UUID
+/// @param complete 请求完成block
+-(void)fetchProductDetailHasProduct:(NSString *)skuNo
+                           areaUuid:(NSString *)areaUuid
+                        parentSkuNo:(NSString *)parentSkuNo
+                             buyNum:(NSString *)buyNum
+                             region:(NSString *)region
+                           complete:(void(^)(BOOL isSucess))complete;
+
+
+/// 自己买 先清空购物车中的其他商品，注意两个入参固定：productIdAndAttrId: allRecords，chooseState: false
+/// @param suitUuid 套装UUID
+/// @param complete 请求完成block
+-(void)fetchProductDetailCustomBuy:(NSString *)suitUuid
+                          complete:(void(^)(BOOL isSucess))complete;
+
+
 @end
 
 NS_ASSUME_NONNULL_END
