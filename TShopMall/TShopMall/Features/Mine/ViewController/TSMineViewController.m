@@ -15,6 +15,8 @@
 #import "TSMineNavigationBar.h"
 #import "TSSettingViewController.h"
 #import "TSOrderManageViewController.h"
+#import "TSPayOrderViewController.h"
+#import "TSPaySuccessViewController.h"
 
 @interface TSMineViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate,TSUserInfoViewDelegate,TSMineOrderHeaderViewDelegate>
 
@@ -144,7 +146,8 @@
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
     if (indexPath.item == 0) {//测试我的订单
-        TSOrderManageViewController *orderVc = [[TSOrderManageViewController alloc] init];
+        TSPaySuccessViewController *orderVc = [[TSPaySuccessViewController alloc] init];
+        //TSOrderManageViewController *orderVc = [[TSOrderManageViewController alloc] init];
         [self.navigationController pushViewController:orderVc animated:YES];
         return;
     }

@@ -16,6 +16,9 @@
 		042F423A2681A05C00555F5D /* TSRecommendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042F42382681A05B00555F5D /* TSRecommendCell.m */; };
 		042F423D2681FDB000555F5D /* TSRealNameAuthCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042F423C2681FDB000555F5D /* TSRealNameAuthCell.m */; };
 		042F42402681FDFE00555F5D /* TSRealNameInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042F423F2681FDFE00555F5D /* TSRealNameInfoCell.m */; };
+		0479AEE3268424F300F0E05B /* TSPaySuccessCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0479AEE2268424F300F0E05B /* TSPaySuccessCell.m */; };
+		0479AEE726842E9800F0E05B /* TSPaySuccessDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0479AEE626842E9700F0E05B /* TSPaySuccessDataController.m */; };
+		0479AEEA26842ECD00F0E05B /* TSPaySuccessSectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0479AEE926842ECD00F0E05B /* TSPaySuccessSectionModel.m */; };
 		04DAFAFE267B37450098275A /* TSOrderManageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DAFAFD267B37450098275A /* TSOrderManageViewController.m */; };
 		04F1EFAD2682D22100FF007D /* TSRealnameInfoSectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F1EFAC2682D22100FF007D /* TSRealnameInfoSectionModel.m */; };
 		04F1EFB02682D3AC00FF007D /* TSRealnameInfoDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F1EFAF2682D3AC00FF007D /* TSRealnameInfoDataController.m */; };
@@ -24,6 +27,7 @@
 		04F1EFB92682DF8900FF007D /* TSRealNameAuthSectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F1EFB82682DF8900FF007D /* TSRealNameAuthSectionModel.m */; };
 		04F1EFBC2682E33600FF007D /* TSRealNameAuthDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F1EFBB2682E33600FF007D /* TSRealNameAuthDataController.m */; };
 		04F1EFBF2683287D00FF007D /* TSPayOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F1EFBE2683287D00FF007D /* TSPayOrderViewController.m */; };
+		04F1EFC226835DDE00FF007D /* TSPaySuccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F1EFC126835DDE00FF007D /* TSPaySuccessViewController.m */; };
 		AE4DC537B4A93FA6C04B9037 /* libPods-TShopMall.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 825A9D1C217F35DCFB651B21 /* libPods-TShopMall.a */; };
 		C21A4B6E267AF5AE00766F72 /* TSMakeOrderBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C21A4B6D267AF5AE00766F72 /* TSMakeOrderBaseCell.m */; };
 		C21A4B71267AF91F00766F72 /* TSMakeOrderPriceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C21A4B70267AF91F00766F72 /* TSMakeOrderPriceCell.m */; };
@@ -473,6 +477,12 @@
 		042F423C2681FDB000555F5D /* TSRealNameAuthCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSRealNameAuthCell.m; sourceTree = "<group>"; };
 		042F423E2681FDFE00555F5D /* TSRealNameInfoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSRealNameInfoCell.h; sourceTree = "<group>"; };
 		042F423F2681FDFE00555F5D /* TSRealNameInfoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSRealNameInfoCell.m; sourceTree = "<group>"; };
+		0479AEE1268424F300F0E05B /* TSPaySuccessCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TSPaySuccessCell.h; path = TShopMall/Features/OrderManage/View/TSPaySuccessCell.h; sourceTree = SOURCE_ROOT; };
+		0479AEE2268424F300F0E05B /* TSPaySuccessCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = TSPaySuccessCell.m; path = TShopMall/Features/OrderManage/View/TSPaySuccessCell.m; sourceTree = SOURCE_ROOT; };
+		0479AEE526842E9700F0E05B /* TSPaySuccessDataController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSPaySuccessDataController.h; sourceTree = "<group>"; };
+		0479AEE626842E9700F0E05B /* TSPaySuccessDataController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSPaySuccessDataController.m; sourceTree = "<group>"; };
+		0479AEE826842ECD00F0E05B /* TSPaySuccessSectionModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TSPaySuccessSectionModel.h; path = TShopMall/Features/OrderManage/Model/TSPaySuccessSectionModel.h; sourceTree = SOURCE_ROOT; };
+		0479AEE926842ECD00F0E05B /* TSPaySuccessSectionModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = TSPaySuccessSectionModel.m; path = TShopMall/Features/OrderManage/Model/TSPaySuccessSectionModel.m; sourceTree = SOURCE_ROOT; };
 		04DAFAFC267B37450098275A /* TSOrderManageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSOrderManageViewController.h; sourceTree = "<group>"; };
 		04DAFAFD267B37450098275A /* TSOrderManageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSOrderManageViewController.m; sourceTree = "<group>"; };
 		04F1EFAB2682D22100FF007D /* TSRealnameInfoSectionModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSRealnameInfoSectionModel.h; sourceTree = "<group>"; };
@@ -489,6 +499,8 @@
 		04F1EFBB2682E33600FF007D /* TSRealNameAuthDataController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSRealNameAuthDataController.m; sourceTree = "<group>"; };
 		04F1EFBD2683287D00FF007D /* TSPayOrderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSPayOrderViewController.h; sourceTree = "<group>"; };
 		04F1EFBE2683287D00FF007D /* TSPayOrderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSPayOrderViewController.m; sourceTree = "<group>"; };
+		04F1EFC026835DDE00FF007D /* TSPaySuccessViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSPaySuccessViewController.h; sourceTree = "<group>"; };
+		04F1EFC126835DDE00FF007D /* TSPaySuccessViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSPaySuccessViewController.m; sourceTree = "<group>"; };
 		1942D505D7004833F274B5D1 /* libPods-TShopMallTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TShopMallTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		27EC567AA21935502889F6EB /* Pods-TShopMall.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TShopMall.debug.xcconfig"; path = "Target Support Files/Pods-TShopMall/Pods-TShopMall.debug.xcconfig"; sourceTree = "<group>"; };
 		825A9D1C217F35DCFB651B21 /* libPods-TShopMall.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TShopMall.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1300,12 +1312,47 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0479AEE426842E6900F0E05B /* DataController */ = {
+			isa = PBXGroup;
+			children = (
+				0479AEE526842E9700F0E05B /* TSPaySuccessDataController.h */,
+				0479AEE626842E9700F0E05B /* TSPaySuccessDataController.m */,
+			);
+			path = DataController;
+			sourceTree = "<group>";
+		};
+		0479AEEB2684308D00F0E05B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0479AEE826842ECD00F0E05B /* TSPaySuccessSectionModel.h */,
+				0479AEE926842ECD00F0E05B /* TSPaySuccessSectionModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0479AEEC2684309D00F0E05B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0479AEE1268424F300F0E05B /* TSPaySuccessCell.h */,
+				0479AEE2268424F300F0E05B /* TSPaySuccessCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0479AEED268430AC00F0E05B /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		04DAFAF6267B36A50098275A /* OrderManage */ = {
 			isa = PBXGroup;
 			children = (
-				DCA035CB26803E91003DE5F7 /* Model */,
-				DCA035CA26803E86003DE5F7 /* ViewModel */,
-				DCA035C926803E7D003DE5F7 /* View */,
+				0479AEED268430AC00F0E05B /* ViewModel */,
+				0479AEEC2684309D00F0E05B /* View */,
+				0479AEEB2684308D00F0E05B /* Model */,
+				0479AEE426842E6900F0E05B /* DataController */,
 				04DAFAF7267B36C00098275A /* ViewController */,
 			);
 			path = OrderManage;
@@ -1318,6 +1365,8 @@
 				04DAFAFD267B37450098275A /* TSOrderManageViewController.m */,
 				04F1EFBD2683287D00FF007D /* TSPayOrderViewController.h */,
 				04F1EFBE2683287D00FF007D /* TSPayOrderViewController.m */,
+				04F1EFC026835DDE00FF007D /* TSPaySuccessViewController.h */,
+				04F1EFC126835DDE00FF007D /* TSPaySuccessViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1823,27 +1872,6 @@
 				DC9911C1267C475000EF9B26 /* YBNestViews.h */,
 			);
 			path = YBNestViews;
-			sourceTree = "<group>";
-		};
-		DCA035C926803E7D003DE5F7 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		DCA035CA26803E86003DE5F7 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		DCA035CB26803E91003DE5F7 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		F530C6CB26802E5D009DC29A /* DataController */ = {
@@ -3425,6 +3453,7 @@
 			files = (
 				C3B4CCED2674934D0001EE75 /* TSRegisterTopView.m in Sources */,
 				F55D2D26267B3015006BACCF /* TSRankLastMonthController.m in Sources */,
+				0479AEE726842E9800F0E05B /* TSPaySuccessDataController.m in Sources */,
 				C2EF88CA2670997100E7374A /* TSCartDataController.m in Sources */,
 				DC3440CA2672601F00F5B0DA /* TSHomePageReleaseViewModel.m in Sources */,
 				C22EE27726807E4C00E59C86 /* TSSearchResultFittleView.m in Sources */,
@@ -3637,6 +3666,7 @@
 				F530CCEB26804167009DC29A /* UICollectionView+TSWebImageAutoSize.m in Sources */,
 				F530CC3D26803862009DC29A /* NSString+Time.m in Sources */,
 				C3A6C4C4267A1C5700FC71D6 /* TSPhoneNumVeriCell.m in Sources */,
+				0479AEE3268424F300F0E05B /* TSPaySuccessCell.m in Sources */,
 				F530CCF726804167009DC29A /* WKWebView+TSCookiesManager.m in Sources */,
 				F54973AB2668B9B500181E3F /* TSBaseNavigationController.m in Sources */,
 				C21A4B99267CAAC100766F72 /* TSAreaModel.m in Sources */,
@@ -3687,6 +3717,7 @@
 				C2C765392679E3C4004757B9 /* TSMakeOrderView.m in Sources */,
 				C25A7F792682C7140006C6AF /* TSSearchResultEmptyCell.m in Sources */,
 				C21A4B96267CA25200766F72 /* TSAreaDataController.m in Sources */,
+				04F1EFC226835DDE00FF007D /* TSPaySuccessViewController.m in Sources */,
 				C3A6C4E6267A1CAF00FC71D6 /* TSWithdrawalPswSetDataController.m in Sources */,
 				C3A6C4C6267A1C5700FC71D6 /* TSAboutMeBottomCell.m in Sources */,
 				DC3440DF2672FC3900F5B0DA /* TSHomePageBaseModel.m in Sources */,
@@ -3784,6 +3815,7 @@
 				C3A6C479267A1BEA00FC71D6 /* TSWithdrawalPswSetController.m in Sources */,
 				F55D2D022678D096006BACCF /* TSProductDetailPurchaseCell.m in Sources */,
 				C3A6C4B9267A1C5700FC71D6 /* TSSettingCommonCell.m in Sources */,
+				0479AEEA26842ECD00F0E05B /* TSPaySuccessSectionModel.m in Sources */,
 				F55D2CF62678C8DE006BACCF /* TSGoodDetailPriceCell.m in Sources */,
 				F530CCF926804167009DC29A /* TSHybridViewController.m in Sources */,
 				C21A4B7E267B333600766F72 /* TSShippingAddressDataController.m in Sources */,

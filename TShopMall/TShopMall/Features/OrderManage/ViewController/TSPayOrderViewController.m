@@ -14,10 +14,6 @@
 @property(nonatomic, weak) UIImageView *bgImgV;
 /** 提交按钮 */
 @property(nonatomic, weak) UIButton *commitButton;
-/** back按钮 */
-@property(nonatomic, weak) UIButton *backButton;
-/** 标题 */
-@property(nonatomic, weak) UILabel *titleLabel;
 /** 倒计时图标  */
 @property(nonatomic, weak) UIImageView *timerImgV;
 /** 支付金额  */
@@ -49,7 +45,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.gk_navTitle = @"支付订单";
+    self.gk_backImage = KImageMake(@"mall_white_naviback");
+    self.gk_navTitleFont = KRegularFont(18);
+    self.gk_navTitleColor = KWhiteColor;
+    self.gk_navigationBar.gk_navBarBackgroundAlpha = 0;
 }
 
 - (void)fillCustomView {
@@ -65,16 +65,6 @@
         make.right.equalTo(self.view.mas_right).with.offset(0);
         make.height.mas_equalTo(197 + self.view.ts_safeAreaInsets.top);
     }];
-    [self.backButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.topView.mas_top).with.offset(GK_STATUSBAR_NAVBAR_HEIGHT - 34);
-        make.left.equalTo(self.topView.mas_left).with.offset(20);
-        make.height.mas_equalTo(24);
-        make.width.mas_equalTo(28);
-    }];
-    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.backButton.mas_centerY).with.offset(0);
-        make.centerX.equalTo(self.topView.mas_centerX).with.offset(0);
-    }];
     [self.bgImgV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.topView.mas_left).with.offset(0);
         make.top.equalTo(self.topView.mas_top).with.offset(0);
@@ -88,8 +78,8 @@
         make.height.mas_equalTo(24);
     }];
     [self.payAmountLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.showTimeButton.mas_bottom).with.offset(-17);
-        make.centerX.equalTo(self.showTimeButton.mas_centerX).with.offset(0);
+        make.bottom.equalTo(self.showTimeButton.mas_top).with.offset(-10);
+        make.centerX.equalTo(self.showTimeButton.mas_centerX).with.offset(10);
     }];
     [self.timerImgV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.payAmountLabel.mas_left).with.offset(-8);
@@ -111,14 +101,14 @@
     [self.aliImgV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.alipayView.mas_left).with.offset(30);
         make.centerY.equalTo(self.alipayView.mas_centerY).with.offset(0);
-        make.width.height.mas_equalTo(20);
+        make.width.height.mas_equalTo(24);
     }];
     [self.aliLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.aliImgV.mas_right).with.offset(10);
         make.centerY.equalTo(self.alipayView.mas_centerY).with.offset(0);
     }];
     [self.alipayButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.alipayView.mas_right).with.offset(30);
+        make.right.equalTo(self.alipayView.mas_right).with.offset(-30);
         make.centerY.equalTo(self.alipayView.mas_centerY).with.offset(0);
         make.width.height.mas_equalTo(24);
     }];
@@ -131,15 +121,15 @@
     [self.wechatImgV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.wechatView.mas_left).with.offset(30);
         make.centerY.equalTo(self.wechatView.mas_centerY).with.offset(0);
-        make.width.mas_equalTo(20);
-        make.height.mas_equalTo(17.5);
+        make.width.mas_equalTo(24);
+        make.height.mas_equalTo(24);
     }];
     [self.wechatLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.wechatImgV.mas_right).with.offset(10);
         make.centerY.equalTo(self.wechatView.mas_centerY).with.offset(0);
     }];
     [self.wechatButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.wechatView.mas_right).with.offset(30);
+        make.right.equalTo(self.wechatView.mas_right).with.offset(-30);
         make.centerY.equalTo(self.wechatView.mas_centerY).with.offset(0);
         make.width.height.mas_equalTo(24);
     }];
@@ -159,29 +149,6 @@
         [self.view addSubview:_topView];
     }
     return _topView;
-}
-
-- (UIButton *)backButton {
-    if (_backButton == nil) {
-        UIButton *backButton = [[UIButton alloc] init];
-        _backButton = backButton;
-        [_backButton setBackgroundImage:KImageMake(@"mall_white_naviback") forState:UIControlStateNormal];
-        [_backButton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
-        [self.topView addSubview:_backButton];
-    }
-    return _backButton;
-}
-
-- (UILabel *)titleLabel {
-    if (_titleLabel == nil) {
-        UILabel *titleLabel = [[UILabel alloc] init];
-        _titleLabel = titleLabel;
-        _titleLabel.textColor = KWhiteColor;
-        _titleLabel.font = KRegularFont(18);
-        _titleLabel.text = @"支付订单";
-        [self.topView addSubview:_titleLabel];
-    }
-    return _titleLabel;
 }
 
 
@@ -253,6 +220,7 @@
         UIView *payView = [[UIView alloc] init];
         _payView = payView;
         _payView.clipsToBounds = YES;
+        _payView.backgroundColor = KWhiteColor;
         [_payView setCorners:(UIRectCornerTopLeft | UIRectCornerTopRight) radius:12];
         [self.view insertSubview:_payView aboveSubview:self.topView];
     }
@@ -273,7 +241,7 @@
         UIImageView *aliImgV = [[UIImageView alloc] init];
         _aliImgV = aliImgV;
         _aliImgV.image = KImageMake(@"mall_pay_alipay");
-        [self.aliImgV addSubview: _aliImgV];
+        [self.alipayView addSubview: _aliImgV];
     }
     return _aliImgV;
 }
@@ -294,6 +262,7 @@
     if (_alipayButton == nil) {
         UIButton *alipayButton = [[UIButton alloc] init];
         _alipayButton = alipayButton;
+        _alipayButton.selected = YES;
         [_alipayButton setBackgroundImage:KImageMake(@"mall_pay_uncheck") forState:(UIControlStateNormal)];
         [_alipayButton setBackgroundImage:KImageMake(@"mall_pay_checked") forState:(UIControlStateSelected)];
         [_alipayButton addTarget:self action:@selector(alipay) forControlEvents:(UIControlEventTouchUpInside)];
@@ -351,7 +320,11 @@
 }
 /** 确定付款 */
 - (void)commitAction {
-    
+    if (self.alipayButton.selected) {///选中的是支付宝
+        
+    } else if (self.wechatButton.selected) {///选中的是微信支付
+        
+    }
 }
 /** 选中支付宝支付 */
 - (void)alipay {
