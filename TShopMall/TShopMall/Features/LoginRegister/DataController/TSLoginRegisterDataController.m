@@ -29,7 +29,8 @@
             }
         }else{
             self.smsModel = [[TSLoginSMSModel alloc] init];
-            
+            [Popover popToastOnWindowWithText:request.responseModel.originalData[@"failCause"]];
+
             if (complete) {
                 complete(NO);
             }
@@ -61,9 +62,13 @@
             [manager saveCurrentUserInfo];
             complete(YES);
         }
+        else{
+            complete(NO);
+            [Popover popToastOnWindowWithText:request.responseModel.originalData[@"msg"]];
+        }
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
         complete(NO);
-//        [Popover popToastOnWindowWithText:request.responseModel.originalData[@"message"]];
+
 
     }];
     
@@ -84,10 +89,11 @@
             }
         }else{
             self.smsModel = [[TSLoginSMSModel alloc] init];
-            
             if (complete) {
                 complete(NO);
             }
+            [Popover popToastOnWindowWithText:request.responseModel.originalData[@"msg"]];
+
         }
         
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
