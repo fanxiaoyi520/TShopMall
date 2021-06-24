@@ -7,6 +7,7 @@
 
 #import "TSMakeOrderGoodsCell.h"
 #import "TSCartCell.h"
+#import "TSMakeOrderGoodsViewModel.h"
 
 @interface TSMakeOrderGoodsCell()
 @property (nonatomic, strong) UIImageView *icon;
@@ -21,14 +22,25 @@
 @implementation TSMakeOrderGoodsCell
 
 
+- (void)setObj:(id)obj{
+    if ([obj isKindOfClass:[TSMakeOrderGoodsViewModel class]]) {
+        TSMakeOrderGoodsViewModel *vm = (TSMakeOrderGoodsViewModel *)obj;
+        [self.icon  sd_setImageWithURL:[NSURL URLWithString:vm.productImgUrl]];
+        self.name.text = vm.productName;
+        self.specification.text = vm.attr;
+        self.price.text = [@"¥ " stringByAppendingString:vm.price];
+        self.num.text = [NSString stringWithFormat:@"x%ld", vm.buyNum];
+    }
+}
+
 - (void)configUI{
-    self.icon.image = KImageMake(@"image_test");
-    self.name.text = @"XESS 65寸 家庭浮窗场景TV标题标题 标题踢踢踢标题踢踢踢标…";
-    self.specification.text = @"已选规格";
-    self.price.text = @"¥ 4999";
-    self.num.text = @"x1";
+//    self.icon.image = KImageMake(@"image_test");
+//    self.name.text = @"XESS 65寸 家庭浮窗场景TV标题标题 标题踢踢踢标题踢踢踢标…";
+//    self.specification.text = @"已选规格";
+//    self.price.text = @"¥ 4999";
+//    self.num.text = @"x1";
     
-    [self configGiftView];
+//    [self configGiftView];
 }
 
 - (void)configGiftView{
@@ -37,9 +49,10 @@
         self.giftBtn.img.image = KImageMake(@"image_test");
         self.giftBtn.name.text = @"产品信息和标题标题产品信息和标题标题…";
         self.giftBtn.indeImg.image = KImageMake(@"inde_right_small");
-    [self.specification mas_updateConstraints:^(MASConstraintMaker *make) {
-           make.bottom.equalTo(self.contentView.mas_bottom).offset(-KRateW(1==1? 64.0:34.0));
-       }];
+
+    [self.giftBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_offset(KRateW(20.0));
+    }];
 }
 
 
@@ -64,9 +77,8 @@
     
     [self.specification mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.name);
-        make.top.equalTo(self.name.mas_bottom).offset(KRateW(8.0));
         make.height.mas_equalTo(KRateW(18.0));
-        make.bottom.equalTo(self.contentView.mas_bottom).offset(-KRateW(64.0));
+        make.bottom.mas_equalTo(self.icon.mas_bottom).offset(-KRateW(18.0));
     }];
     
     [self.num mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -76,9 +88,10 @@
     
     [self.giftBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.price.mas_right);
-        make.height.mas_equalTo(KRateW(20.0));
         make.left.equalTo(self.name.mas_left);
         make.top.mas_equalTo(self.specification.mas_bottom).offset(KRateW(26.0));
+        make.bottom.equalTo(self.contentView.mas_bottom).offset(-KRateW(16.0)).priorityHigh();
+        make.height.mas_equalTo(0);
     }];
     
     [self.line mas_makeConstraints:^(MASConstraintMaker *make) {

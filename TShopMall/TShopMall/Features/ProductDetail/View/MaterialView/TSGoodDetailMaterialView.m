@@ -6,7 +6,6 @@
 //
 
 #import "TSGoodDetailMaterialView.h"
-#import "TSMaterialImageCell.h"
 
 @interface TSDetailSelectButton : UIButton
 
@@ -69,9 +68,10 @@
 
 @implementation TSGoodDetailMaterialView
 
--(instancetype)initWithFrame:(CGRect)frame{
-    if (self = [super initWithFrame:frame]) {
+-(instancetype)initWithMaterialModels:(NSArray <TSMaterialImageModel *> *)model{
+    if (self = [super init]) {
         self.backgroundColor = [UIColor whiteColor];
+        self.models = model;
         [self setupViews];
     }
     return self;
@@ -111,18 +111,34 @@
     }];
 }
 
+-(void)reloadMaterialView{
+    [self.collectionView reloadData];
+}
+
 #pragma mark - Actions
 -(void)downloadAction:(UIButton *)sender{
     
 }
 
 -(void)selectedAction:(TSDetailSelectButton *)sender{
+    sender.selected = !sender.selected;
     
+    if (sender.selected) {
+        for (TSMaterialImageModel *model in self.models) {
+            model.selected = YES;
+        }
+    }else{
+        for (TSMaterialImageModel *model in self.models) {
+            model.selected = NO;
+        }
+    }
+    
+    [self.collectionView reloadData];
 }
 
 #pragma mark - UICollectionViewDelegate & UICollectionViewDataSource
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return 9;
+    return self.models.count;
 }
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -131,6 +147,7 @@
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     TSMaterialImageCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TSMaterialImageCell" forIndexPath:indexPath];
+    cell.model = self.models[indexPath.row];
     return cell;
 }
 
@@ -140,7 +157,7 @@
         _numLabel = [[UILabel alloc] init];
         _numLabel.textColor = KHexAlphaColor(@"#1E1C27", 1.0);
         _numLabel.font = KRegularFont(14);
-        _numLabel.text = @"共9张素材";
+        _numLabel.text = [NSString stringWithFormat:@"共%lu张素材",(unsigned long)self.models.count];
         _numLabel.textAlignment = NSTextAlignmentLeft;
     }
     return _numLabel;

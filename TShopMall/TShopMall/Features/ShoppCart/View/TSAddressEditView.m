@@ -52,13 +52,13 @@
         }
     }
     if (object == self.nameItem.textField) {
-        self.addressModel.name = self.nameItem.textField.text;
+        self.vm.name = self.nameItem.textField.text;
     } else if (object == self.phoneItem.textField) {
-        self.addressModel.phone = self.addressItem.textField.text;
+        self.vm.phone = self.phoneItem.textField.text;
     } else if (object == self.addressItem.textField) {
-        self.addressModel.address = self.addressItem.textField.text;
+        self.vm.address = self.addressItem.textField.text;
     } else if (object == self.detailItem.textField) {
-        self.addressModel.detailAddress = self.detailItem.textField.text;
+        self.vm.detailAddress = self.detailItem.textField.text;
     }
 }
 
@@ -79,10 +79,15 @@
     self.addressItem.textField.placeholder = @"选择所在地区";
     self.detailItem.title.text = @"详细地址";
     self.detailItem.textField.placeholder = @"填写小区、门牌号等";
-    self.nameItem.textField.text = self.addressModel.name;
-    self.phoneItem.textField.text = self.addressModel.phone;
-    self.addressItem.textField.text = self.addressModel.address;
-    self.detailItem.textField.text = self.addressModel.detailAddress;
+}
+
+- (void)setVm:(TSAddressViewModel *)vm{
+    _vm = vm;
+    self.nameItem.textField.text = self.vm.name;
+    self.phoneItem.textField.text = self.vm.phone;
+    self.addressItem.textField.text = self.vm.address;
+    self.detailItem.textField.text = self.vm.detailAddress;
+    self.markView.currentMark = self.vm.mark;
 }
 
 - (void)layouView{
@@ -188,6 +193,10 @@
     }
     self.markView = [TSAddressMarkView new];
     [self addSubview:self.markView];
+    __weak typeof(self) weakSelf = self;
+    self.markView.markChanged = ^(NSString * _Nonnull mark) {
+        weakSelf.vm.mark = mark;
+    };
     
     return self.markView;
 }

@@ -11,7 +11,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TSShippingAddressCell : UITableViewCell
-@property (nonatomic, copy) NSString *addressStr;
 @property (nonatomic, copy) void(^addressEdit)(TSAddressModel *address);
 @property (nonatomic, strong) TSAddressModel *addressModel;
 @end

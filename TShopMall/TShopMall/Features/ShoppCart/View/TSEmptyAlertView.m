@@ -151,6 +151,11 @@
     self.tips.textColor = KHexColor(@"#2D3132");
     [self addSubview:self.tips];
     
+    self.tips.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(alertBtnAction)];
+    tapGes.numberOfTapsRequired = 1;
+    [self.tips addGestureRecognizer:tapGes];
+    
     return self.tips;
 }
 
