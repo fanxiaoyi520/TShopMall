@@ -337,16 +337,6 @@
 		F530CE8D26846BE0009DC29A /* TSToolsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CE8C26846BE0009DC29A /* TSToolsManager.m */; };
 		F530CE9026846D3E009DC29A /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CE8E26846D3E009DC29A /* UIView+Frame.m */; };
 		F530CE9326846E9C009DC29A /* NSString+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CE9126846E9C009DC29A /* NSString+Frame.m */; };
-		F530CEAA26848E8B009DC29A /* AddressPickerIndexView.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CE9A26848E8B009DC29A /* AddressPickerIndexView.m */; };
-		F530CEAB26848E8B009DC29A /* hotCity.json in Resources */ = {isa = PBXBuildFile; fileRef = F530CE9B26848E8B009DC29A /* hotCity.json */; };
-		F530CEAC26848E8B009DC29A /* AddressPickerMdoel.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CE9D26848E8B009DC29A /* AddressPickerMdoel.m */; };
-		F530CEAD26848E8B009DC29A /* AddressHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CEA126848E8B009DC29A /* AddressHeaderView.m */; };
-		F530CEAE26848E8B009DC29A /* AddressPickerHotCityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CEA226848E8B009DC29A /* AddressPickerHotCityModel.m */; };
-		F530CEAF26848E8B009DC29A /* AddressPickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CEA426848E8B009DC29A /* AddressPickerCell.m */; };
-		F530CEB026848E8B009DC29A /* addressIndicator@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F530CEA526848E8B009DC29A /* addressIndicator@2x.png */; };
-		F530CEB126848E8B009DC29A /* AddressPickerHotCityHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CEA626848E8B009DC29A /* AddressPickerHotCityHeaderView.m */; };
-		F530CEB226848E8B009DC29A /* AddressPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CEA826848E8B009DC29A /* AddressPicker.m */; };
-		F530CEB326848E8B009DC29A /* addressIndicator@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F530CEA926848E8B009DC29A /* addressIndicator@3x.png */; };
 		F54972FE2668842500181E3F /* TShopMallTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F54972FD2668842500181E3F /* TShopMallTests.m */; };
 		F54973092668842500181E3F /* TShopMallUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F54973082668842500181E3F /* TShopMallUITests.m */; };
 		F54973602668A22100181E3F /* SSGenaralRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F54973402668A22100181E3F /* SSGenaralRequest.m */; };
@@ -1110,23 +1100,6 @@
 		F530CE8F26846D3E009DC29A /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
 		F530CE9126846E9C009DC29A /* NSString+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Frame.m"; sourceTree = "<group>"; };
 		F530CE9226846E9C009DC29A /* NSString+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Frame.h"; sourceTree = "<group>"; };
-		F530CE9926848E8B009DC29A /* AddressPickerHotCityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressPickerHotCityModel.h; sourceTree = "<group>"; };
-		F530CE9A26848E8B009DC29A /* AddressPickerIndexView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressPickerIndexView.m; sourceTree = "<group>"; };
-		F530CE9B26848E8B009DC29A /* hotCity.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = hotCity.json; sourceTree = "<group>"; };
-		F530CE9C26848E8B009DC29A /* AddressPickerHotCityHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressPickerHotCityHeaderView.h; sourceTree = "<group>"; };
-		F530CE9D26848E8B009DC29A /* AddressPickerMdoel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressPickerMdoel.m; sourceTree = "<group>"; };
-		F530CE9E26848E8B009DC29A /* AddressPickerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressPickerCell.h; sourceTree = "<group>"; };
-		F530CE9F26848E8B009DC29A /* AddressPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressPicker.h; sourceTree = "<group>"; };
-		F530CEA026848E8B009DC29A /* AddressPickerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressPickerModel.h; sourceTree = "<group>"; };
-		F530CEA126848E8B009DC29A /* AddressHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressHeaderView.m; sourceTree = "<group>"; };
-		F530CEA226848E8B009DC29A /* AddressPickerHotCityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressPickerHotCityModel.m; sourceTree = "<group>"; };
-		F530CEA326848E8B009DC29A /* AddressPickerIndexView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressPickerIndexView.h; sourceTree = "<group>"; };
-		F530CEA426848E8B009DC29A /* AddressPickerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressPickerCell.m; sourceTree = "<group>"; };
-		F530CEA526848E8B009DC29A /* addressIndicator@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "addressIndicator@2x.png"; sourceTree = "<group>"; };
-		F530CEA626848E8B009DC29A /* AddressPickerHotCityHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressPickerHotCityHeaderView.m; sourceTree = "<group>"; };
-		F530CEA726848E8B009DC29A /* AddressHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressHeaderView.h; sourceTree = "<group>"; };
-		F530CEA826848E8B009DC29A /* AddressPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressPicker.m; sourceTree = "<group>"; };
-		F530CEA926848E8B009DC29A /* addressIndicator@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "addressIndicator@3x.png"; sourceTree = "<group>"; };
 		F54972DE2668842200181E3F /* TShopMall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TShopMall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F54972F22668842400181E3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F54972F92668842500181E3F /* TShopMallTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TShopMallTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2470,30 +2443,6 @@
 			path = AlertView;
 			sourceTree = "<group>";
 		};
-		F530CE9826848E8B009DC29A /* AddressPicker */ = {
-			isa = PBXGroup;
-			children = (
-				F530CEA726848E8B009DC29A /* AddressHeaderView.h */,
-				F530CEA126848E8B009DC29A /* AddressHeaderView.m */,
-				F530CEA326848E8B009DC29A /* AddressPickerIndexView.h */,
-				F530CE9A26848E8B009DC29A /* AddressPickerIndexView.m */,
-				F530CE9C26848E8B009DC29A /* AddressPickerHotCityHeaderView.h */,
-				F530CEA626848E8B009DC29A /* AddressPickerHotCityHeaderView.m */,
-				F530CE9926848E8B009DC29A /* AddressPickerHotCityModel.h */,
-				F530CEA226848E8B009DC29A /* AddressPickerHotCityModel.m */,
-				F530CEA026848E8B009DC29A /* AddressPickerModel.h */,
-				F530CE9D26848E8B009DC29A /* AddressPickerMdoel.m */,
-				F530CE9E26848E8B009DC29A /* AddressPickerCell.h */,
-				F530CEA426848E8B009DC29A /* AddressPickerCell.m */,
-				F530CE9F26848E8B009DC29A /* AddressPicker.h */,
-				F530CEA826848E8B009DC29A /* AddressPicker.m */,
-				F530CE9B26848E8B009DC29A /* hotCity.json */,
-				F530CEA526848E8B009DC29A /* addressIndicator@2x.png */,
-				F530CEA926848E8B009DC29A /* addressIndicator@3x.png */,
-			);
-			path = AddressPicker;
-			sourceTree = "<group>";
-		};
 		F54972D52668842200181E3F = {
 			isa = PBXGroup;
 			children = (
@@ -2554,7 +2503,6 @@
 		F54973162668A22100181E3F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				F530CE9826848E8B009DC29A /* AddressPicker */,
 				F530CE8726846B1E009DC29A /* AlertView */,
 				F530CD1726809B62009DC29A /* MaskPopups */,
 				F530CCBE26804167009DC29A /* Hybrid */,
@@ -3528,7 +3476,6 @@
 			files = (
 				F530CC4926803B1C009DC29A /* PulldownRefreshStyleBlack.json in Resources */,
 				F530CD412680CD6A009DC29A /* tabbar_category.json in Resources */,
-				F530CEAB26848E8B009DC29A /* hotCity.json in Resources */,
 				F530CC6726803E43009DC29A /* Toast_Info.png in Resources */,
 				F530CC4A26803B1C009DC29A /* PulldownRefreshStyleRed.json in Resources */,
 				F530CD5926819449009DC29A /* mall_logo@3x.png in Resources */,
@@ -3539,7 +3486,6 @@
 				F530CC6A26803E43009DC29A /* ProgressAnimation.json in Resources */,
 				F530CD5A26819449009DC29A /* mall_launch_bottom.png in Resources */,
 				F530CC6826803E43009DC29A /* Toast_Success.png in Resources */,
-				F530CEB026848E8B009DC29A /* addressIndicator@2x.png in Resources */,
 				F530CD372680CCC5009DC29A /* launch@3x.png in Resources */,
 				F54973752668A31000181E3F /* Main.storyboard in Resources */,
 				F530CD5D26819449009DC29A /* mall_logo.png in Resources */,
@@ -3550,7 +3496,6 @@
 				F54973742668A31000181E3F /* LaunchScreen.storyboard in Resources */,
 				F530CC6926803E43009DC29A /* Toast_Failure.png in Resources */,
 				F530CD422680CD6A009DC29A /* tabbar_mine.json in Resources */,
-				F530CEB326848E8B009DC29A /* addressIndicator@3x.png in Resources */,
 				F530CD432680CD6A009DC29A /* tabbar_cart.json in Resources */,
 				F530CD3F2680CD6A009DC29A /* tabbar_rank.json in Resources */,
 				F530CD5826819449009DC29A /* mall_launch_bottom@3x.png in Resources */,
@@ -3738,7 +3683,6 @@
 				DC45FEB326773AE700CE762E /* EXTScope.m in Sources */,
 				F56D4B63266E037600C1AD9E /* MyDimeScale.m in Sources */,
 				F530CC3B26803862009DC29A /* NSDate+Plugin.m in Sources */,
-				F530CEB226848E8B009DC29A /* AddressPicker.m in Sources */,
 				C3A6C4BF267A1C5700FC71D6 /* TSSecurityCell.m in Sources */,
 				F55D2D1D267B1E90006BACCF /* TSRankWealthController.m in Sources */,
 				C3A6C4BC267A1C5700FC71D6 /* TSSettingExitCell.m in Sources */,
@@ -3844,7 +3788,6 @@
 				F55D2CE326788370006BACCF /* TSProductDetailNavigationBar.m in Sources */,
 				CE66DB0A2684AA7C00E8D433 /* TSBankCardCell.m in Sources */,
 				F55D2C362671E14B006BACCF /* TSUniversalHeaderView.m in Sources */,
-				F530CEAF26848E8B009DC29A /* AddressPickerCell.m in Sources */,
 				F54973672668A22100181E3F /* SSNetworkAlertUtil.m in Sources */,
 				04F1EFB62682DF1000FF007D /* TSRealNameAuthViewController.m in Sources */,
 				DC3440CD2672604400F5B0DA /* TSHomePageContainerViewModel.m in Sources */,
@@ -3915,7 +3858,6 @@
 				C22EE26726806F3F00E59C86 /* TSSearchResultNaviView.m in Sources */,
 				C3A6C495267A1C1700FC71D6 /* TSBindMobileSectionModel.m in Sources */,
 				04F1EFBF2683287D00FF007D /* TSPayOrderViewController.m in Sources */,
-				F530CEAE26848E8B009DC29A /* AddressPickerHotCityModel.m in Sources */,
 				F55D2CC726784ACD006BACCF /* TSMineOrderHeaderView.m in Sources */,
 				F55D2D0B2679DB2C006BACCF /* TSGoodDetailImageCell.m in Sources */,
 				CE5674AE26831F0400252F5D /* TSMineMerchantUserInformationModel.m in Sources */,
@@ -3996,7 +3938,6 @@
 				F54973622668A22100181E3F /* SSResponseModel.m in Sources */,
 				C35F1865267C7F8A00F65AF9 /* TSDatePickerView.m in Sources */,
 				F54973C52668C14F00181E3F /* TSConstant.m in Sources */,
-				F530CEAD26848E8B009DC29A /* AddressHeaderView.m in Sources */,
 				F530CD242680B8A0009DC29A /* TSGoodDetailSkuView.m in Sources */,
 				F530CCB026803FCD009DC29A /* UIView+Extension.m in Sources */,
 				DFB3FFD62684834D00FC8FF9 /* TSPaySuccessSectionModel.m in Sources */,
@@ -4046,7 +3987,6 @@
 				F55D2CF22678A6B9006BACCF /* TSGoodDetailSectionModel.m in Sources */,
 				C2EF88DB2671E28100E7374A /* TSEmptyAlertView.m in Sources */,
 				C3A6C4C1267A1C5700FC71D6 /* TSCommitCell.m in Sources */,
-				F530CEAC26848E8B009DC29A /* AddressPickerMdoel.m in Sources */,
 				C3A6C47A267A1BEA00FC71D6 /* TSAccountCancelViewController.m in Sources */,
 				DC45FEC026783A6E00CE762E /* TSHomePageContainerCollectionViewCell.m in Sources */,
 				C35F186D267D954700F65AF9 /* TSAccountCancelNextViewController.m in Sources */,
@@ -4059,7 +3999,6 @@
 				DC3440C1267239CD00F5B0DA /* TSHomePageCellTemplateModel.m in Sources */,
 				F55D2CF92678CDA0006BACCF /* TSGoodDetailIntroduceCell.m in Sources */,
 				F55D2AE6266F983E006BACCF /* TSUniverseCollectionBackgroundView.m in Sources */,
-				F530CEAA26848E8B009DC29A /* AddressPickerIndexView.m in Sources */,
 				F55D2D3E267B3F95006BACCF /* TSRankRecommendCell.m in Sources */,
 				F54973642668A22100181E3F /* YTKBatchRequest+AnimatingAccessory.m in Sources */,
 				F530C6D526802E5D009DC29A /* TSSMSCodeRequest.m in Sources */,
@@ -4079,7 +4018,6 @@
 				C2A34C902674B0160095497E /* TSSearchDataController.m in Sources */,
 				DC9911A9267B0A4600EF9B26 /* TSProductBaseModel.m in Sources */,
 				C3A6C479267A1BEA00FC71D6 /* TSWithdrawalPswSetController.m in Sources */,
-				F530CEB126848E8B009DC29A /* AddressPickerHotCityHeaderView.m in Sources */,
 				F55D2D022678D096006BACCF /* TSProductDetailPurchaseCell.m in Sources */,
 				C3A6C4B9267A1C5700FC71D6 /* TSSettingCommonCell.m in Sources */,
 				F55D2CF62678C8DE006BACCF /* TSGoodDetailPriceCell.m in Sources */,

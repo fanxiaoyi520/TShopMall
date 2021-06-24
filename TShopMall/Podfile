@@ -26,7 +26,6 @@ target 'TShopMall' do
     pod 'WechatOpenSDK'
     pod 'SAMKeychain', '~> 1.5.3'
     pod 'MBProgressHUD', '~> 1.2.0'
-    pod 'MJExtension', '~> 3.3.0'
     pod 'NTESQuickPass'
     
   target 'TShopMallTests' do
