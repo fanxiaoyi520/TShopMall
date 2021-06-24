@@ -7,6 +7,11 @@
 
 #import "TSPaySuccessCell.h"
 
+typedef NS_ENUM(NSUInteger, PaySuccessBackType){
+    PaySuccessBackTypeBackHome = 1,///回到首页
+    PaySuccessBackTypeLookOrder = 2,///查看订单
+};
+
 @interface TSPaySuccessCell ()
 /** top视图 */
 @property(nonatomic, weak) UIView *topView;
@@ -160,6 +165,7 @@
         _backHomeButton.layer.borderColor = KHexColor(@"#E64C3D").CGColor;
         _backHomeButton.layer.borderWidth = 1;
         [_backHomeButton setCorners:UIRectCornerAllCorners radius:16];
+        [_backHomeButton addTarget:self action:@selector(backHome) forControlEvents:(UIControlEventTouchUpInside)];
         [self.transferView addSubview: _backHomeButton];
     }
     return _backHomeButton;
@@ -176,9 +182,28 @@
         _gotoOrderButton.layer.borderColor = KHexColor(@"#E64C3D").CGColor;
         _gotoOrderButton.layer.borderWidth = 1;
         [_gotoOrderButton setCorners:UIRectCornerAllCorners radius:16];
+        [_gotoOrderButton addTarget:self action:@selector(gotoOrderList) forControlEvents:(UIControlEventTouchUpInside)];
         [self.transferView addSubview: _gotoOrderButton];
     }
     return _gotoOrderButton;
+}
+/** 返回首页 */
+- (void)backHome {
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setValue:NSStringFromClass([self class]) forKey:@"cellType"];
+    [params setValue:@(PaySuccessBackTypeBackHome) forKey:@"backType"];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(universalCollectionViewCellClick:params:)]) {
+        [self.delegate universalCollectionViewCellClick:self.indexPath params:params];
+    }
+}
+/** 返回首页 */
+- (void)gotoOrderList {
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setValue:NSStringFromClass([self class]) forKey:@"cellType"];
+    [params setValue:@(PaySuccessBackTypeLookOrder) forKey:@"backType"];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(universalCollectionViewCellClick:params:)]) {
+        [self.delegate universalCollectionViewCellClick:self.indexPath params:params];
+    }
 }
 
 @end
