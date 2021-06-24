@@ -7,10 +7,11 @@
 
 #import "TSBaseDataController.h"
 
-NS_ASSUME_NONNULL_BEGIN
-
 @interface TSAddressEditDataController : TSBaseDataController
++ (void)addAddress:(NSDictionary *)address finished:(void(^)(BOOL isSuccess))finished controller:(UIViewController *)controller;
+
 + (void)editAddress:(NSDictionary *)address finished:(void(^)(BOOL isSuccess))finished controller:(UIViewController *)controller;
+
++ (void)addressTags:(void(^)(void))finished controller:(UIViewController *)controller;
 @end
 
-NS_ASSUME_NONNULL_END

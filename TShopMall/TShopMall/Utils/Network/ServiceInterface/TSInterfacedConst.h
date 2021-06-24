@@ -57,13 +57,20 @@ UIKIT_EXTERN NSString * const kCartChangeNums;
 UIKIT_EXTERN NSString * const kCartRemove;
 UIKIT_EXTERN NSString * const kCartCount;
 
+#pragma mark - 下单
+UIKIT_EXTERN NSString * const kToBalance;
+UIKIT_EXTERN NSString * const kSaveOrder;
+
 #pragma mark - 地址
 UIKIT_EXTERN NSString * const kProvice;
 UIKIT_EXTERN NSString * const kCities;
 UIKIT_EXTERN NSString * const kAreas;
 UIKIT_EXTERN NSString * const kStreets;
 UIKIT_EXTERN NSString * const kAddAddress;
-
+UIKIT_EXTERN NSString * const kEditAddress;
+UIKIT_EXTERN NSString * const kDeleteAddress;
+UIKIT_EXTERN NSString * const kCustomerAddress;
+UIKIT_EXTERN NSString * const kAddressTag;
 
 #pragma mark - 我的
 UIKIT_EXTERN NSString * const kMineMerchantUserInformation;

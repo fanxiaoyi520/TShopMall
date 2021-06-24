@@ -6,8 +6,9 @@
 //
 
 #import "TSBaseViewController.h"
-#import "TSAddressModel.h"
+#import "TSAddressViewModel.h"
 
 @interface TSAddressEditController : TSBaseViewController
-@property (nonatomic, strong) TSAddressModel *addressModel;
+@property (nonatomic, strong) TSAddressViewModel *vm;
+@property (nonatomic, copy) void(^addressChanged)(void);
 @end

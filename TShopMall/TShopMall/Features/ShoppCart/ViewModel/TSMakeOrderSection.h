@@ -13,5 +13,5 @@
 @end
 
 
-@interface TSMakeOrderRow : TSCartGoodsRow
+@interface TSMakeOrderRow : TSCartGoodsRow<TSCartRowProtocol>
 @end

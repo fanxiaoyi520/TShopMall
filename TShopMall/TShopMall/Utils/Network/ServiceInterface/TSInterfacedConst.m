@@ -110,12 +110,20 @@ NSString * const kCartChangeNums = @"/rest/v2/cart/changeNums";
 NSString * const kCartRemove = @"/rest/v2/cart/remove";
 NSString * const kCartCount = @"/rest/v2/cart/count";
 
+#pragma  mark - 下单
+NSString * const kToBalance = @"/rest/v2/order/toBalance";
+NSString * const kSaveOrder = @"/rest/v2/cart/saveOrder";
+
 #pragma mark - 地址
 NSString * const kProvice = @"/rest/v2/usercenter/region/getAllProvince";
 NSString * const kCities = @"/rest/v2/usercenter/region/getCitysByProvinceUuid";
 NSString * const kAreas = @"/rest/v2/usercenter/region/getRegionsByCityUuid";
 NSString * const kStreets = @"/rest/v2/usercenter/region/getStreetsByRegionUuid";
 NSString * const kAddAddress = @"/rest/v2/usercenter/customeraddress/addAddress";
+NSString * const kEditAddress = @"/rest/v2/usercenter/customeraddress/doEdit";
+NSString * const kDeleteAddress = @"/rest/v2/usercenter/customeraddress/delDeliveryAddress";
+NSString * const kCustomerAddress = @"/rest/v2/usercenter/customeraddress/toCustomerAddress";
+NSString * const kAddressTag = @"/v2/usercenter/customerAddressTag/list";
 
 
 #pragma mark - 我的
