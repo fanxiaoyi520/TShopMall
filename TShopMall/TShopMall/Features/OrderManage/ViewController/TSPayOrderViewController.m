@@ -321,11 +321,23 @@
 /** 确定付款 */
 - (void)commitAction {
     if (self.alipayButton.selected) {///选中的是支付宝
-        
+        [self gotoAlipay];
     } else if (self.wechatButton.selected) {///选中的是微信支付
-        
+        [self gotoWechatPay];
     }
 }
+
+/** 去调用支付宝 */
+- (void)gotoAlipay {
+    
+}
+
+/** 去调用微信支付 */
+- (void)gotoWechatPay {
+    
+}
+
+
 /** 选中支付宝支付 */
 - (void)alipay {
     if (!self.alipayButton.selected) {
