@@ -7,6 +7,9 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol TSCartRowProtocol <NSObject>
+@end
+
 @class TSCartGoodsRow;
 
 @interface TSCartGoodsSection : NSObject
@@ -16,11 +19,11 @@
 @property (nonatomic, copy) NSString *footerIdentifier;
 //@property (nonatomic, strong) UITableViewHeaderFooterView *viewForHeader;
 //@property (nonatomic, strong) UITableViewHeaderFooterView *viewForFooter;
-@property (nonatomic, strong) NSArray<TSCartGoodsRow *> *rows;
+@property (nonatomic, strong) NSArray<id<TSCartRowProtocol>> *rows;
 @end
 
 
-@interface TSCartGoodsRow : NSObject
+@interface TSCartGoodsRow : NSObject<TSCartRowProtocol>
 @property (nonatomic, copy) NSString *cellIdentifier;
 @property (nonatomic, strong) id obj;
 @property (nonatomic, assign) BOOL isAutoHeight;

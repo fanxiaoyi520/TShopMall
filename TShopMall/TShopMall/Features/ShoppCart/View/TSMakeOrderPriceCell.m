@@ -6,6 +6,7 @@
 //
 
 #import "TSMakeOrderPriceCell.h"
+#import "TSMakeOrderPriceViewModel.h"
 
 @interface TSMakeOrderPriceView : UIView
 @property (nonatomic, strong) UILabel *title;
@@ -19,12 +20,17 @@
 
 @implementation TSMakeOrderPriceCell
 
+- (void)setObj:(id)obj{
+    if ([obj isKindOfClass: [TSMakeOrderPriceViewModel class]]) {
+        TSMakeOrderPriceViewModel *vm = (TSMakeOrderPriceViewModel *)obj;
+        self.thPriceView.des.text  = [NSString stringWithFormat:@"¥ %@", vm.thPrice];
+        self.deliveryView.des.text = [NSString stringWithFormat:@"¥ %@", vm.deliveryPrice];
+    }
+}
+
 - (void)configUI{
     self.thPriceView.title.text = @"提货价";
     self.deliveryView.title.text = @"配送费";
-    
-    self.thPriceView.des.text  = @"¥ 1999";
-    self.deliveryView.des.text = @"¥0.00";
 }
 
 - (void)layoutSubviews{

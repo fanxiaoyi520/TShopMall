@@ -6,6 +6,7 @@
 //
 
 #import "TSMakeOrderOperationCell.h"
+#import "TSMakeOrderInvoiceViewModel.h"
 
 @interface TSMakeOrderOperationView : UIView<UITextFieldDelegate>
 @property (nonatomic, strong) UILabel *title;
@@ -25,6 +26,12 @@
 
 @implementation TSMakeOrderOperationCell
 
+- (void)setObj:(id)obj{
+    if ([obj isKindOfClass:[TSMakeOrderInvoiceViewModel class]]) {
+        TSMakeOrderInvoiceViewModel *vm = (TSMakeOrderInvoiceViewModel *)obj;
+        self.messageView.textField.text = vm.message;
+    }
+}
 
 //选择配送
 - (void)toChoiceDelivery{
@@ -37,7 +44,7 @@
 }
 
 - (void)messageEditingEnd:(UITextField *)textField{
-    
+    [self.delegate operationForMessageEditEnd:textField.text];
 }
 
 - (void)messageEditingChange:(UITextField *)textField{

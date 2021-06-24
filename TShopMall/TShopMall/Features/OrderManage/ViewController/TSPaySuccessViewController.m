@@ -18,6 +18,8 @@
 @property(nonatomic, weak) UICollectionView *collectionView;
 /** 释放需要导航栏和状态栏  */
 @property(nonatomic, assign) BOOL updateDefaultStatus;
+/** 背景  */
+@property(nonatomic, weak) UIImageView *bgImgV;
 
 @end
 
@@ -50,6 +52,13 @@
         make.top.equalTo(self.view.mas_top).with.offset(0);
         make.bottom.equalTo(self.view.mas_bottom).with.offset(self.view.ts_safeAreaInsets.bottom);
     }];
+    self.bgImgV.frame = CGRectMake(0, 0, kScreenWidth, 133 + GK_STATUSBAR_NAVBAR_HEIGHT);
+//    [self.bgImgV mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(self.view.mas_left).with.offset(0);
+//        make.right.equalTo(self.view.mas_right).with.offset(0);
+//        make.top.equalTo(self.view.mas_top).with.offset(0);
+//        make.height.mas_equalTo(197);
+//    }];
 }
 
 - (UIView *)listView {
@@ -94,7 +103,7 @@
         UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero
                                              collectionViewLayout:flowLayout];
         _collectionView = collectionView;
-        _collectionView.backgroundColor = KGrayColor;
+        _collectionView.backgroundColor = UIColor.clearColor;
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.showsVerticalScrollIndicator = NO;
@@ -102,6 +111,16 @@
         [self.view addSubview:_collectionView];
     }
     return _collectionView;
+}
+
+- (UIImageView *)bgImgV {
+    if (_bgImgV == nil) {
+        UIImageView *bgImgV = [[UIImageView alloc] init];
+        _bgImgV = bgImgV;
+        _bgImgV.image = KImageMake(@"mall_pay_bg");
+        [self.view insertSubview:_bgImgV atIndex:0];
+    }
+    return _bgImgV;
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -192,9 +211,22 @@ spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    CGFloat maxAlphaOffset = 176 - GK_STATUSBAR_NAVBAR_HEIGHT;
-    CGFloat offset = scrollView.contentOffset.y;
-    CGFloat alpha = offset / maxAlphaOffset;
+    CGFloat maxAlphaOffset = 156 - GK_STATUSBAR_NAVBAR_HEIGHT;
+    CGFloat offsetY = ceil(scrollView.contentOffset.y);
+    if (offsetY <= 0) {
+        CGRect frame = self.bgImgV.frame;
+        frame.size.height = 133 + GK_STATUSBAR_NAVBAR_HEIGHT - offsetY;
+        self.bgImgV.frame = frame;
+        
+    } else {
+        CGRect frame = self.bgImgV.frame;
+        frame.origin.y = -offsetY;
+        self.bgImgV.frame = frame;
+    }
+    CGFloat alpha = offsetY / maxAlphaOffset;
+    if (offsetY < 0) {
+        return;
+    }
     if (alpha < 0) {
         alpha = -alpha;
     }
@@ -202,11 +234,13 @@ spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
         alpha = 1.0;
         if (self.updateDefaultStatus == NO) {
             self.updateDefaultStatus = YES;
+            self.collectionView.backgroundColor = KGrayColor;
             [self setNeedsStatusBarAppearanceUpdate];
         }
     } else {
         if (self.updateDefaultStatus) {
             self.updateDefaultStatus = NO;
+            self.collectionView.backgroundColor = UIColor.clearColor;
             [self setNeedsStatusBarAppearanceUpdate];
         }
     }

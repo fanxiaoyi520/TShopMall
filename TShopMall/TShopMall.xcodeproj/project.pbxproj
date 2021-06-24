@@ -57,6 +57,12 @@
 		C25A7F792682C7140006C6AF /* TSSearchResultEmptyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C25A7F782682C7140006C6AF /* TSSearchResultEmptyCell.m */; };
 		C25A7F7C268308BC0006C6AF /* TSCartOperationDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = C25A7F7B268308BC0006C6AF /* TSCartOperationDataController.m */; };
 		C25A7F7F26834B0C0006C6AF /* TSAddressEditDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = C25A7F7E26834B0C0006C6AF /* TSAddressEditDataController.m */; };
+		C25A7F8226841B1F0006C6AF /* TSAddressViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C25A7F8126841B1E0006C6AF /* TSAddressViewModel.m */; };
+		C25A7F8526845FB20006C6AF /* TSBalanceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C25A7F8426845FB10006C6AF /* TSBalanceModel.m */; };
+		C25A7F88268467430006C6AF /* TSMakeOrderGoodsViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C25A7F87268467420006C6AF /* TSMakeOrderGoodsViewModel.m */; };
+		C25A7F8B26846AB00006C6AF /* TSMakeOrderPriceViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C25A7F8A26846AB00006C6AF /* TSMakeOrderPriceViewModel.m */; };
+		C25A7F8E268474200006C6AF /* TSMakeOrderCommitOrderDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = C25A7F8D2684741F0006C6AF /* TSMakeOrderCommitOrderDataController.m */; };
+		C25A7F91268480FD0006C6AF /* TSMakeOrderInvoiceViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C25A7F90268480FD0006C6AF /* TSMakeOrderInvoiceViewModel.m */; };
 		C2A34C6A267449080095497E /* TSAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2A34C69267449080095497E /* TSAlertView.m */; };
 		C2A34C7726749E3E0095497E /* TSSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2A34C7626749E3D0095497E /* TSSearchController.m */; };
 		C2A34C7A26749FCD0095497E /* TSSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2A34C7926749FCD0095497E /* TSSearchView.m */; };
@@ -584,6 +590,18 @@
 		C25A7F7B268308BC0006C6AF /* TSCartOperationDataController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSCartOperationDataController.m; sourceTree = "<group>"; };
 		C25A7F7D26834B0C0006C6AF /* TSAddressEditDataController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSAddressEditDataController.h; sourceTree = "<group>"; };
 		C25A7F7E26834B0C0006C6AF /* TSAddressEditDataController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSAddressEditDataController.m; sourceTree = "<group>"; };
+		C25A7F8026841B1E0006C6AF /* TSAddressViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSAddressViewModel.h; sourceTree = "<group>"; };
+		C25A7F8126841B1E0006C6AF /* TSAddressViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSAddressViewModel.m; sourceTree = "<group>"; };
+		C25A7F8326845FB10006C6AF /* TSBalanceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSBalanceModel.h; sourceTree = "<group>"; };
+		C25A7F8426845FB10006C6AF /* TSBalanceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSBalanceModel.m; sourceTree = "<group>"; };
+		C25A7F86268467420006C6AF /* TSMakeOrderGoodsViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSMakeOrderGoodsViewModel.h; sourceTree = "<group>"; };
+		C25A7F87268467420006C6AF /* TSMakeOrderGoodsViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSMakeOrderGoodsViewModel.m; sourceTree = "<group>"; };
+		C25A7F8926846AB00006C6AF /* TSMakeOrderPriceViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSMakeOrderPriceViewModel.h; sourceTree = "<group>"; };
+		C25A7F8A26846AB00006C6AF /* TSMakeOrderPriceViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSMakeOrderPriceViewModel.m; sourceTree = "<group>"; };
+		C25A7F8C2684741F0006C6AF /* TSMakeOrderCommitOrderDataController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSMakeOrderCommitOrderDataController.h; sourceTree = "<group>"; };
+		C25A7F8D2684741F0006C6AF /* TSMakeOrderCommitOrderDataController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSMakeOrderCommitOrderDataController.m; sourceTree = "<group>"; };
+		C25A7F8F268480FD0006C6AF /* TSMakeOrderInvoiceViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSMakeOrderInvoiceViewModel.h; sourceTree = "<group>"; };
+		C25A7F90268480FD0006C6AF /* TSMakeOrderInvoiceViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSMakeOrderInvoiceViewModel.m; sourceTree = "<group>"; };
 		C2A34C68267449060095497E /* TSAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSAlertView.h; sourceTree = "<group>"; };
 		C2A34C69267449080095497E /* TSAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSAlertView.m; sourceTree = "<group>"; };
 		C2A34C7526749E3D0095497E /* TSSearchController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSSearchController.h; sourceTree = "<group>"; };
@@ -1628,6 +1646,14 @@
 				C2EF889C2670997100E7374A /* TSCartGoodsSection.m */,
 				C2C765402679ECBF004757B9 /* TSMakeOrderSection.h */,
 				C2C765412679ECBF004757B9 /* TSMakeOrderSection.m */,
+				C25A7F8026841B1E0006C6AF /* TSAddressViewModel.h */,
+				C25A7F8126841B1E0006C6AF /* TSAddressViewModel.m */,
+				C25A7F86268467420006C6AF /* TSMakeOrderGoodsViewModel.h */,
+				C25A7F87268467420006C6AF /* TSMakeOrderGoodsViewModel.m */,
+				C25A7F8926846AB00006C6AF /* TSMakeOrderPriceViewModel.h */,
+				C25A7F8A26846AB00006C6AF /* TSMakeOrderPriceViewModel.m */,
+				C25A7F8F268480FD0006C6AF /* TSMakeOrderInvoiceViewModel.h */,
+				C25A7F90268480FD0006C6AF /* TSMakeOrderInvoiceViewModel.m */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1641,6 +1667,8 @@
 				C21A4B80267B335D00766F72 /* TSAddressModel.m */,
 				C21A4B97267CAAC100766F72 /* TSAreaModel.h */,
 				C21A4B98267CAAC100766F72 /* TSAreaModel.m */,
+				C25A7F8326845FB10006C6AF /* TSBalanceModel.h */,
+				C25A7F8426845FB10006C6AF /* TSBalanceModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1665,6 +1693,8 @@
 				C25A7F7B268308BC0006C6AF /* TSCartOperationDataController.m */,
 				C2C765432679ECF4004757B9 /* TSMakeOrderDataController.h */,
 				C2C765442679ECF4004757B9 /* TSMakeOrderDataController.m */,
+				C25A7F8C2684741F0006C6AF /* TSMakeOrderCommitOrderDataController.h */,
+				C25A7F8D2684741F0006C6AF /* TSMakeOrderCommitOrderDataController.m */,
 				C21A4B7C267B333500766F72 /* TSShippingAddressDataController.h */,
 				C21A4B7D267B333500766F72 /* TSShippingAddressDataController.m */,
 				C21A4B94267CA25100766F72 /* TSAreaDataController.h */,
@@ -1973,8 +2003,8 @@
 		DFB3FFD02684833800FC8FF9 /* DataController */ = {
 			isa = PBXGroup;
 			children = (
-				DFB3FFD12684833800FC8FF9 /* TSPaySuccessDataController.m */,
 				DFB3FFD22684833800FC8FF9 /* TSPaySuccessDataController.h */,
+				DFB3FFD12684833800FC8FF9 /* TSPaySuccessDataController.m */,
 			);
 			path = DataController;
 			sourceTree = "<group>";
@@ -3611,6 +3641,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C3B4CCED2674934D0001EE75 /* TSRegisterTopView.m in Sources */,
+				C25A7F88268467430006C6AF /* TSMakeOrderGoodsViewModel.m in Sources */,
 				F55D2D26267B3015006BACCF /* TSRankLastMonthController.m in Sources */,
 				C2EF88CA2670997100E7374A /* TSCartDataController.m in Sources */,
 				CE5674BB2683570300252F5D /* TSWalletModel.m in Sources */,
@@ -3641,6 +3672,7 @@
 				04F1EFB92682DF8900FF007D /* TSRealNameAuthSectionModel.m in Sources */,
 				F56D4B4C266DFB8900C1AD9E /* FMLayoutCrossCell.m in Sources */,
 				DC9911C2267C475000EF9B26 /* UIScrollView+YBNestViews.m in Sources */,
+				C25A7F8526845FB20006C6AF /* TSBalanceModel.m in Sources */,
 				DC9911C6267C475000EF9B26 /* YBNestCollectionView.m in Sources */,
 				F56D4B3A266DFB8900C1AD9E /* FMLayoutBaseSection.m in Sources */,
 				C2EF88BB2670997100E7374A /* TSCartHeaderFooterView.m in Sources */,
@@ -3750,6 +3782,7 @@
 				F55D2C9D26745E64006BACCF /* TSUserInfoManager.m in Sources */,
 				C2EF88D52670B8B900E7374A /* TSCartBaseCell.m in Sources */,
 				042F423A2681A05C00555F5D /* TSRecommendCell.m in Sources */,
+				C25A7F8B26846AB00006C6AF /* TSMakeOrderPriceViewModel.m in Sources */,
 				F55D2D1A267B1AC5006BACCF /* TSBaseListController.m in Sources */,
 				DC3440D32672F62C00F5B0DA /* TSHomePageBaseCell.m in Sources */,
 				DC45FEBD26783A1300CE762E /* TSHomePageContainerCollectionView.m in Sources */,
@@ -3795,6 +3828,7 @@
 				C3A6C491267A1C1700FC71D6 /* TSAccountCancelSectionModel.m in Sources */,
 				F530CC9F26803FCD009DC29A /* UIBarButtonItem+Additions.m in Sources */,
 				F55D2C392671E14B006BACCF /* TSCollectionViewLeftAlignedLayout.m in Sources */,
+				C25A7F91268480FD0006C6AF /* TSMakeOrderInvoiceViewModel.m in Sources */,
 				F530CC9D26803FCD009DC29A /* UIColor+General.m in Sources */,
 				F56D4B47266DFB8900C1AD9E /* FMLayoutBackground.m in Sources */,
 				F530CCEA26804167009DC29A /* UITableView+TSWebImageAutoSize.m in Sources */,
@@ -3807,6 +3841,7 @@
 				C3A6C4B8267A1C5700FC71D6 /* TSChangePictureCell.m in Sources */,
 				F56D4B4B266DFB8900C1AD9E /* FMLayoutCrossTransformSection.m in Sources */,
 				C3A6C4DF267A1CAF00FC71D6 /* TSSecurityCenterDataController.m in Sources */,
+				C25A7F8226841B1F0006C6AF /* TSAddressViewModel.m in Sources */,
 				F55D2CD626785249006BACCF /* TSMineMoreButton.m in Sources */,
 				F530CD1A26809B62009DC29A /* SnailQuickMaskPopups.m in Sources */,
 				F56D4B48266DFB8900C1AD9E /* FMLayoutElement.m in Sources */,
@@ -4003,6 +4038,7 @@
 				F56D4B40266DFB8900C1AD9E /* FMLayoutScaleSection.m in Sources */,
 				F56D4B42266DFB8900C1AD9E /* FMLayoutView.m in Sources */,
 				CE5674AF26831F0400252F5D /* TSPartnerCenterData.m in Sources */,
+				C25A7F8E268474200006C6AF /* TSMakeOrderCommitOrderDataController.m in Sources */,
 				F56D4B3E266DFB8900C1AD9E /* FMLayoutDynamicSection.m in Sources */,
 				DC9911A6267AE43400EF9B26 /* TSImageBaseModel.m in Sources */,
 				F530CC6626803E43009DC29A /* Progress.m in Sources */,

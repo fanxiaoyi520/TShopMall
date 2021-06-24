@@ -11,7 +11,7 @@
 #import <Toast.h>
 #import "TSTools.h"
 #import "NSTimer+TSBlcokTimer.h"
-
+#import "TSHybridViewController.h"
 @interface TSRegiterViewController ()<TSRegisterTopViewDelegate, TSCheckedViewDelegate>
 /** 背景图 */
 @property(nonatomic, weak) UIImageView *bgImgV;
@@ -82,7 +82,8 @@
         UIButton *closeButton = [[UIButton alloc] init];
         _closeButton = closeButton;
         [_closeButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [_closeButton setBackgroundImage:KImageMake(@"mall_login_close") forState:UIControlStateNormal];
+        [_closeButton setImage:KImageMake(@"mall_login_close") forState:UIControlStateNormal];
+//        [_closeButton setBackgroundImage:KImageMake(@"mall_login_close") forState:UIControlStateNormal];
         [_closeButton addTarget:self action:@selector(closePage) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_closeButton];
     }
@@ -216,15 +217,21 @@
 
 #pragma mark - TSCheckedViewDelegate
 - (void)goToServiceProtocol {
-    
+    TSHybridViewController *web = [[TSHybridViewController alloc] initWithURLString:@"https://www.baidu.com"];
+    web.delegate = self;
+    [self.navigationController pushViewController:web animated:YES];
 }
 
 - (void)goToPrivatePolicy {
-    
+    TSHybridViewController *web = [[TSHybridViewController alloc] initWithURLString:@"https://www.baidu.com"];
+    web.delegate = self;
+    [self.navigationController pushViewController:web animated:YES];
 }
 
 - (void)goToRegisterProtocol {
-    
+    TSHybridViewController *web = [[TSHybridViewController alloc] initWithURLString:@"https://www.baidu.com"];
+    web.delegate = self;
+    [self.navigationController pushViewController:web animated:YES];
 }
 
 - (void)checkedAction:(BOOL)isChecked {

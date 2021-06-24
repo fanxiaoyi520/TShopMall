@@ -104,6 +104,7 @@ typedef NS_ENUM(NSUInteger, PaySuccessBackType){
         UIImageView *bgImgV = [[UIImageView alloc] init];
         _bgImgV = bgImgV;
         _bgImgV.image = KImageMake(@"mall_pay_bg");
+        _bgImgV.hidden = YES;
         [self.topView insertSubview:_bgImgV atIndex:0];
     }
     return _bgImgV;
