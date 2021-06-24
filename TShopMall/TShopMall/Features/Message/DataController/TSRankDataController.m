@@ -75,6 +75,7 @@
         section.interitemSpacing = 8;
         section.lineSpacing = 10;
         section.items = items;
+        section.sectionInset = UIEdgeInsetsMake(0, 16, 0, 16);
         
         [sections addObject:section];
     }

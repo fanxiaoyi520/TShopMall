@@ -22,7 +22,7 @@
     
     NSMutableArray *sections = [NSMutableArray array];
     
-    {
+    {//banner 0
         TSGoodDetailItemBannerModel *item = [[TSGoodDetailItemBannerModel alloc] init];
         item.cellHeight = floor(kScreenWidth * 1.04);
         item.identify = @"TSGoodDetailBannerCell";
@@ -33,7 +33,7 @@
         [sections addObject:section];
     }
     
-    {
+    {//价格 1
         TSGoodDetailItemPriceModel *item = [[TSGoodDetailItemPriceModel alloc] init];
         item.cellHeight = 78;
         item.identify = @"TSGoodDetailPriceCell";
@@ -45,7 +45,7 @@
         [sections addObject:section];
     }
 
-    {
+    {//介绍 2
         TSGoodDetailItemPriceModel *item = [[TSGoodDetailItemPriceModel alloc] init];
         item.identify = @"TSGoodDetailIntroduceCell";
         item.title = @"";
@@ -62,8 +62,8 @@
         [sections addObject:section];
     }
 
-    {
-        TSGoodDetailItemPriceModel *item = [[TSGoodDetailItemPriceModel alloc] init];
+    {//下载图片 3
+        TSGoodDetailItemDownloadImageModel *item = [[TSGoodDetailItemDownloadImageModel alloc] init];
         item.cellHeight = 189;
         item.identify = @"TSGoodDetailImageCell";
 
@@ -75,7 +75,7 @@
         [sections addObject:section];
     }
 
-    {
+    {//复制文案 4
         TSGoodDetailItemPriceModel *item = [[TSGoodDetailItemPriceModel alloc] init];
         item.cellHeight = 151;
         item.identify = @"TSGoodDetailCopyWriterCell";
@@ -88,7 +88,7 @@
         [sections addObject:section];
     }
 
-    {
+    {//所选商品规格参数等 5
         TSGoodDetailItemPriceModel *item = [[TSGoodDetailItemPriceModel alloc] init];
         item.cellHeight = 227;
         item.identify = @"TSProductDetailPurchaseCell";
@@ -101,7 +101,7 @@
         [sections addObject:section];
     }
 
-    {
+    {//图文 6
         TSGoodDetailItemPriceModel *item = [[TSGoodDetailItemPriceModel alloc] init];
         item.identify = @"TSProductDetailImageCell";
 
@@ -133,7 +133,7 @@
         NSDictionary *data = request.responseJSONObject[@"data"];
         NSDictionary *productModel = data[@"productModel"];
 
-        {
+        {//banner
             
             NSDictionary *productImage = productModel[@"productImage"];
             NSArray *productMultiImage = productModel[@"productMultiImage"];
@@ -150,7 +150,7 @@
             item.urls = urls;
         }
         
-        {
+        {//价格
             NSDictionary *font = data[@"front"];
             NSDictionary *priceAndPromotion = font[@"priceAndPromotion"];
             NSDictionary *promotionInteactiveModel = priceAndPromotion[@"promotionInteactiveModel"];
@@ -168,6 +168,12 @@
         }
         
         {
+            TSGoodDetailSectionModel *section = self.sections[3];
+            TSGoodDetailItemDownloadImageModel *item = (TSGoodDetailItemDownloadImageModel *)[section.items firstObject];
+            item.urls = urls;
+        }
+        
+        {//详情
             TSGoodDetailSectionModel *section = [self.sections lastObject];
             NSDictionary *productDescription = productModel[@"productDescription"];
             NSString *descriptionJson = productDescription[@"descriptionJson"];

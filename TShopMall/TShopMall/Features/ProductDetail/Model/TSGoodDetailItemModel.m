@@ -20,6 +20,10 @@
 
 @end
 
+@implementation TSGoodDetailItemDownloadImageModel
+
+@end
+
 @implementation TSGoodDetailItemImageModel
 
 @end

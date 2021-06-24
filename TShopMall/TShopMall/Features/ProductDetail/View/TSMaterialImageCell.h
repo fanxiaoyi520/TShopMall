@@ -11,6 +11,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TSMaterialImageCell : TSUniversalCollectionViewCell
 
+@property(nonatomic, copy) NSString *url;
+
 @end
 
 NS_ASSUME_NONNULL_END

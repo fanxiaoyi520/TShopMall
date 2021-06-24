@@ -38,6 +38,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface TSGoodDetailItemDownloadImageModel : TSGoodDetailItemModel
+
+/// images
+@property (nonatomic, strong) NSArray *urls;
+
+@end
+
 
 @interface TSGoodDetailItemImageModel : TSGoodDetailItemModel
 
