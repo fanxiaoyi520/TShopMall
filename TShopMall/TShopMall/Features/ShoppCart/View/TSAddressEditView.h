@@ -6,13 +6,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TSAddressModel.h"
+#import "TSAddressViewModel.h"
 
 @class TSAddressEditItem;
 
 @interface TSAddressEditView : UIScrollView
 @property (nonatomic, weak) id controller;
-@property (nonatomic, strong) TSAddressModel *addressModel;
+@property (nonatomic, strong) TSAddressViewModel *vm;
 
 - (void)updateAddress:(NSString *)address;
 @end

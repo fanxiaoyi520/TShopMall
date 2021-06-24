@@ -11,9 +11,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TSAddressMarkView : UIView
 @property (nonatomic, strong) NSArray *marks;
+@property (nonatomic, copy) NSString *currentMark;
+@property (nonatomic, copy) void(^markChanged)(NSString *mark);
 
 //新添加的标签
-@property (nonatomic, copy) NSString *newMark;
+//@property (nonatomic, copy) NSString *newMark;
 @end
 
 NS_ASSUME_NONNULL_END

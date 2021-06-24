@@ -20,6 +20,7 @@
 
 - (instancetype)init{
     if (self == [super init]) {
+        self.userInteractionEnabled = YES;
         [self layoutView];
     }
     return self;

@@ -8,6 +8,8 @@
 
 #import "TSUniversaItemModel.h"
 
+@class TSMaterialImageModel;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TSGoodDetailItemModel : TSUniversaItemModel
@@ -41,7 +43,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface TSGoodDetailItemDownloadImageModel : TSGoodDetailItemModel
 
 /// images
-@property (nonatomic, strong) NSArray *urls;
+@property (nonatomic, strong) NSArray <TSMaterialImageModel *> *materialModels;
 
 @end
 

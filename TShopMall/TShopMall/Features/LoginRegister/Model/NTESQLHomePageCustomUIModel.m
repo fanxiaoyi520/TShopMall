@@ -94,6 +94,9 @@
     model.logBtnOffsetTopY = 293;
     
     model.loadingViewBlock = ^(UIView * _Nullable customLoadingView) {
+        [Popover popProgressOnWindowWithProgressModel:[Popover defaultConfig] appearBlock:^(id frontView) {
+            
+        }];
     };
     
         /// 隐私协议

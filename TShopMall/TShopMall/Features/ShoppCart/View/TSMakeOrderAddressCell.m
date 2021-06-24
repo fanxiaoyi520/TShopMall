@@ -6,6 +6,7 @@
 //
 
 #import "TSMakeOrderAddressCell.h"
+#import "TSAddressModel.h"
 
 @interface TSMakeOrderAddressCell()
 @property (nonatomic, strong) UILabel *name;
@@ -16,11 +17,13 @@
 
 @implementation TSMakeOrderAddressCell
 
-
-- (void)testUI{
-    self.name.text = @"狗狗币";
-    self.phone.text = @"1234567890";
-    self.address.text = @"广东省深圳市南山区西丽街道TCL国际e城D4栋";
+- (void)setObj:(id)obj{
+    if ([obj isKindOfClass:[TSAddressModel class]]) {
+        TSAddressModel *address = (TSAddressModel *)obj;
+        self.name.text = address.consignee;
+        self.phone.text = address.mobile;
+        self.address.text = [NSString stringWithFormat:@"%@%@", address.area, address.address];
+    }
 }
 
 - (void)layoutView{
@@ -39,7 +42,7 @@
     [self.indeImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.contentView.mas_right).offset(-KRateW(16.0));
         make.centerY.equalTo(self.name);
-        make.width.height.mas_equalTo(KRateW(24.0));
+        make.width.height.mas_equalTo(KRateW(16.0));
     }];
     
     [self.address mas_makeConstraints:^(MASConstraintMaker *make) {

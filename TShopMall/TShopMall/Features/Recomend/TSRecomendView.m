@@ -28,6 +28,7 @@
     view.type = type;
     view.finished = layoutFinished;
     view.goodsSelected = goodsSelected;
+    view.backgroundColor = [UIColor clearColor];
     [view startFetchDatas];
     return view;
 }
@@ -54,8 +55,8 @@
 }
 
 - (void)updateFrame{
-    self.backgroundColor = KHexColor(self.dataCon.pageInfo.backgroundColor);
-    self.title.textAlignment = NSTextAlignmentLeft;
+//    self.backgroundColor = KHexColor(self.dataCon.pageInfo.backgroundColor);
+    self.title.textAlignment = self.dataCon.recomend.listStyle==2? NSTextAlignmentCenter:NSTextAlignmentLeft;
     self.title.frame = CGRectMake(KRateW(16.0), 0, kScreenWidth - KRateW(32.0), KRateW(56.0));
     CGFloat heigt = self.dataCon.rowSize.height * [sections lastObject].rows.count;
     if (self.dataCon.recomend.listStyle == 5) {

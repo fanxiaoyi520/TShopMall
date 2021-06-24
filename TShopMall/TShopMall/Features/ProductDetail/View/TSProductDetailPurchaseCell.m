@@ -48,11 +48,11 @@
     self.contentView.backgroundColor = [UIColor clearColor];
     
     [self.contentView addSubview:self.bgView];
-    [self.bgView addSubview:self.giftLabel];
-    [self.bgView addSubview:self.giftImageView];
-    [self.bgView addSubview:self.giftNameLabel];
-    [self.bgView addSubview:self.giftButton];
-    [self.bgView addSubview:self.seperateOne];
+//    [self.bgView addSubview:self.giftLabel];
+//    [self.bgView addSubview:self.giftImageView];
+//    [self.bgView addSubview:self.giftNameLabel];
+//    [self.bgView addSubview:self.giftButton];
+//    [self.bgView addSubview:self.seperateOne];
     [self.bgView addSubview:self.selectLabel];
     [self.bgView addSubview:self.selectValueLabel];
     [self.bgView addSubview:self.selectButton];
@@ -67,41 +67,41 @@
         make.edges.equalTo(self.contentView);
     }];
     
-    [self.giftLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.bgView).offset(16);
-        make.top.equalTo(self.bgView).offset(18);
-        make.height.mas_equalTo(18);
-        make.width.mas_equalTo(24);
-    }];
+//    [self.giftLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(self.bgView).offset(16);
+//        make.top.equalTo(self.bgView).offset(18);
+//        make.height.mas_equalTo(18);
+//        make.width.mas_equalTo(24);
+//    }];
+//
+//    [self.giftImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(self.giftLabel.mas_right).offset(11);
+//        make.centerY.equalTo(self.giftLabel);
+//        make.width.height.mas_equalTo(40);
+//    }];
+//
+//    [self.giftNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(self.giftImageView.mas_right).offset(8);
+//        make.centerY.equalTo(self.giftLabel);
+//        make.height.mas_equalTo(22);
+//    }];
+//
+//    [self.giftButton mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.right.equalTo(self.bgView.mas_right).offset(-10);
+//        make.width.height.mas_equalTo(40);
+//        make.centerY.equalTo(self.giftLabel);
+//    }];
     
-    [self.giftImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.giftLabel.mas_right).offset(11);
-        make.centerY.equalTo(self.giftLabel);
-        make.width.height.mas_equalTo(40);
-    }];
-    
-    [self.giftNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.giftImageView.mas_right).offset(8);
-        make.centerY.equalTo(self.giftLabel);
-        make.height.mas_equalTo(22);
-    }];
-    
-    [self.giftButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.bgView.mas_right).offset(-10);
-        make.width.height.mas_equalTo(40);
-        make.centerY.equalTo(self.giftLabel);
-    }];
-    
-    [self.seperateOne mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.bgView).offset(50);
-        make.top.equalTo(self.bgView).offset(55);
-        make.right.equalTo(self.bgView);
-        make.height.mas_equalTo(0.3);
-    }];
+//    [self.seperateOne mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(self.bgView).offset(50);
+//        make.top.equalTo(self.bgView).offset(55);
+//        make.right.equalTo(self.bgView);
+//        make.height.mas_equalTo(0.3);
+//    }];
     
     [self.selectLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.bgView).offset(16);
-        make.top.equalTo(self.seperateOne.mas_bottom).offset(16);
+        make.top.equalTo(self.bgView.mas_top).offset(16);
         make.height.mas_equalTo(18);
         make.width.mas_equalTo(24);
     }];
@@ -111,45 +111,45 @@
         make.top.equalTo(self.selectLabel);
         make.right.equalTo(self.bgView.mas_right).offset(-60);
     }];
-    
+
     [self.selectButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.bgView.mas_right).offset(-10);
         make.width.height.mas_equalTo(40);
         make.centerY.equalTo(self.selectValueLabel);
     }];
-    
+
     [self.seperateTwo mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.bgView).offset(50);
-        make.top.equalTo(self.seperateOne.mas_bottom).offset(75);
+        make.left.equalTo(self.bgView.mas_left).offset(50);
+        make.top.equalTo(self.bgView).offset(75);
         make.right.equalTo(self.bgView);
         make.height.mas_equalTo(0.3);
     }];
-    
+
     [self.deliveryLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.bgView).offset(16);
         make.top.equalTo(self.seperateTwo.mas_bottom).offset(18);
         make.height.mas_equalTo(18);
         make.width.mas_equalTo(24);
     }];
-    
+
     [self.deliveryValueLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.deliveryLabel.mas_right).offset(16);
         make.top.equalTo(self.seperateTwo.mas_bottom).offset(16);
         make.right.equalTo(self.bgView.mas_right).offset(-60);
     }];
-    
+
     [self.deliveryButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.bgView.mas_right).offset(-10);
         make.width.height.mas_equalTo(40);
         make.centerY.equalTo(self.deliveryValueLabel);
     }];
-    
+
     [self.flagLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.deliveryValueLabel);
         make.width.height.mas_equalTo(28);
         make.bottom.equalTo(self.bgView).offset(-5);
     }];
-    
+
     [self.feeButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.flagLabel.mas_right).offset(16);
         make.height.mas_equalTo(30);

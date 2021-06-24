@@ -34,6 +34,7 @@
 #import "RefreshGifHeader.h"
 #import "RefreshGifFooter.h"
 #import "Popover.h"
+#import "Popover+TSDefaultConfig.h"
 #import "TSServicesManager.h"
 
 #import <Toast.h>
