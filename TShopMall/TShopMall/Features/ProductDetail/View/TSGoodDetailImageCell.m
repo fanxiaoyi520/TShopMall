@@ -8,9 +8,12 @@
 #import "TSGoodDetailImageCell.h"
 #import "TSTextImageButton.h"
 #import "TSMaterialImageCell.h"
+#import "TSGoodDetailItemModel.h"
 
 
 @interface TSGoodDetailImageCell()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
+
+@property(nonatomic, strong) NSArray *urls;
 
 /// 背景视图
 @property(nonatomic, strong) UIView *bgView;
@@ -104,11 +107,12 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 8;
+    return self.urls.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     TSMaterialImageCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TSMaterialImageCell" forIndexPath:indexPath];
+    cell.url = self.urls[indexPath.row];
     return cell;
 }
 
@@ -187,6 +191,12 @@
         _promtLabel.clipsToBounds = YES;
     }
     return _promtLabel;
+}
+
+-(void)setDelegate:(id<UniversalCollectionViewCellDataDelegate>)delegate{
+    TSGoodDetailItemDownloadImageModel *item = (TSGoodDetailItemDownloadImageModel *)[delegate universalCollectionViewCellModel:self.indexPath];
+    self.urls = item.urls;
+    [self.collectionView reloadData];
 }
 
 @end

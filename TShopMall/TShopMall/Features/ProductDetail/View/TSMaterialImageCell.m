@@ -33,7 +33,7 @@
 
 #pragma mark - Actions
 -(void)selectAction:(UIButton *)sender{
-    
+    sender.selected = !sender.selected;
 }
 
 #pragma mark - Getter
@@ -56,6 +56,12 @@
         [_flagButton addTarget:self action:@selector(selectAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _flagButton;
+}
+
+-(void)setUrl:(NSString *)url{
+    [self.imgView sd_setImageWithURL:[NSURL URLWithString:url] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+            
+    }];
 }
 
 @end
