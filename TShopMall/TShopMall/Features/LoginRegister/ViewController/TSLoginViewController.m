@@ -208,7 +208,6 @@
     self.customModel.pageCustomBlock = ^(int privacyType) {
         NSLog(@"privacyType:%d", privacyType);
         @strongify(self)
-      
         TSHybridViewController *web = [[TSHybridViewController alloc] initWithURLString:@"https://www.baidu.com"];
         web.delegate = self;
         [self.navigationController pushViewController:web animated:YES];
@@ -365,24 +364,30 @@
 
 #pragma mark - TSLoginBottomViewDelegate
 - (void)goToWechat {
-    
+    [self sendWXAuthReq];
 }
 
 - (void)goToApple {
-    
+    [self authorizationAppleID];
 }
 
 #pragma mark - TSCheckedViewDelegate
 - (void)goToServiceProtocol {
-    
+    TSHybridViewController *web = [[TSHybridViewController alloc] initWithURLString:@"https://www.baidu.com"];
+    web.delegate = self;
+    [self.navigationController pushViewController:web animated:YES];
 }
 
 - (void)goToPrivatePolicy {
-    
+    TSHybridViewController *web = [[TSHybridViewController alloc] initWithURLString:@"https://www.baidu.com"];
+    web.delegate = self;
+    [self.navigationController pushViewController:web animated:YES];
 }
 
 - (void)goToRegisterProtocol {
-    
+    TSHybridViewController *web = [[TSHybridViewController alloc] initWithURLString:@"https://www.baidu.com"];
+    web.delegate = self;
+    [self.navigationController pushViewController:web animated:YES];
 }
 
 - (void)checkedAction:(BOOL)isChecked{
@@ -405,6 +410,10 @@
 
 #pragma mark - TSHybridViewControllerDelegate
 -(void)hybridViewControllerWillDidDisappear:(TSHybridViewController *)hybridViewController params:(NSDictionary *)param{
+    
+    if (self.topView.hidden == NO && self.checkedView.hidden == NO) {
+        return;
+    }
     [Popover popProgressOnWindowWithProgressModel:[Popover defaultConfig] appearBlock:^(id frontView) {
         
     }];
@@ -499,6 +508,7 @@
     return UIStatusBarStyleDefault;
 }
 
+#pragma mark- 微信登录
 - (void)sendWXAuthReq{
     @weakify(self);
     WechatManager * payManager =[WechatManager shareInstance];
