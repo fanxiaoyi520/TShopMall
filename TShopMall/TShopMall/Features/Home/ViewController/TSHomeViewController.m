@@ -225,8 +225,8 @@
 
 #pragma mark - Noti
 - (void)loginStateDidChanged:(NSNotification *)noti{
-    self.loginBar.hidden = ![noti.object intValue];
-    [self.viewModel fetchData];
+//    self.loginBar.hidden = ![noti.object intValue];
+//    [self.viewModel fetchData];
 }
 
 #pragma mark - Action

@@ -230,6 +230,10 @@
 		DFB3FFD32684833800FC8FF9 /* TSPaySuccessDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB3FFD12684833800FC8FF9 /* TSPaySuccessDataController.m */; };
 		DFB3FFD62684834D00FC8FF9 /* TSPaySuccessSectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB3FFD42684834D00FC8FF9 /* TSPaySuccessSectionModel.m */; };
 		DFB3FFD92684837300FC8FF9 /* TSPaySuccessCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB3FFD72684837200FC8FF9 /* TSPaySuccessCell.m */; };
+		DFB3FFDC2685685300FC8FF9 /* TSOneClickLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB3FFDB2685685300FC8FF9 /* TSOneClickLoginViewController.m */; };
+		DFB3FFDF268571B100FC8FF9 /* AuthAppleIDManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB3FFDE268571B100FC8FF9 /* AuthAppleIDManager.m */; };
+		DFB3FFE22685B76200FC8FF9 /* TSLoginByTokenRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB3FFE12685B76200FC8FF9 /* TSLoginByTokenRequest.m */; };
+		DFB3FFE52685C19700FC8FF9 /* TSLoginByAuthCodeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB3FFE42685C19700FC8FF9 /* TSLoginByAuthCodeRequest.m */; };
 		E2BE996F8804E0C3E7D5AE61 /* libPods-TShopMall-TShopMallUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD1ABBE857D307088E9BF2DC /* libPods-TShopMall-TShopMallUITests.a */; };
 		F530C6D526802E5D009DC29A /* TSSMSCodeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F530C6CC26802E5D009DC29A /* TSSMSCodeRequest.m */; };
 		F530C6D626802E5D009DC29A /* TSQuickLoginRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F530C6CF26802E5D009DC29A /* TSQuickLoginRequest.m */; };
@@ -900,6 +904,14 @@
 		DFB3FFD52684834D00FC8FF9 /* TSPaySuccessSectionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSPaySuccessSectionModel.h; sourceTree = "<group>"; };
 		DFB3FFD72684837200FC8FF9 /* TSPaySuccessCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSPaySuccessCell.m; sourceTree = "<group>"; };
 		DFB3FFD82684837200FC8FF9 /* TSPaySuccessCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSPaySuccessCell.h; sourceTree = "<group>"; };
+		DFB3FFDA2685685300FC8FF9 /* TSOneClickLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSOneClickLoginViewController.h; sourceTree = "<group>"; };
+		DFB3FFDB2685685300FC8FF9 /* TSOneClickLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSOneClickLoginViewController.m; sourceTree = "<group>"; };
+		DFB3FFDD268571B100FC8FF9 /* AuthAppleIDManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuthAppleIDManager.h; sourceTree = "<group>"; };
+		DFB3FFDE268571B100FC8FF9 /* AuthAppleIDManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AuthAppleIDManager.m; sourceTree = "<group>"; };
+		DFB3FFE02685B76200FC8FF9 /* TSLoginByTokenRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSLoginByTokenRequest.h; sourceTree = "<group>"; };
+		DFB3FFE12685B76200FC8FF9 /* TSLoginByTokenRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSLoginByTokenRequest.m; sourceTree = "<group>"; };
+		DFB3FFE32685C19700FC8FF9 /* TSLoginByAuthCodeRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSLoginByAuthCodeRequest.h; sourceTree = "<group>"; };
+		DFB3FFE42685C19700FC8FF9 /* TSLoginByAuthCodeRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSLoginByAuthCodeRequest.m; sourceTree = "<group>"; };
 		ECCE8A564DF47B445E7905B1 /* Pods-TShopMall-TShopMallUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TShopMall-TShopMallUITests.release.xcconfig"; path = "Target Support Files/Pods-TShopMall-TShopMallUITests/Pods-TShopMall-TShopMallUITests.release.xcconfig"; sourceTree = "<group>"; };
 		F530C6CC26802E5D009DC29A /* TSSMSCodeRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSSMSCodeRequest.m; sourceTree = "<group>"; };
 		F530C6CD26802E5D009DC29A /* TSQuickLoginRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSQuickLoginRequest.h; sourceTree = "<group>"; };
@@ -1422,6 +1434,8 @@
 			children = (
 				C3B4CCDC2674932C0001EE75 /* TSLoginViewController.h */,
 				C3B4CCDB2674932C0001EE75 /* TSLoginViewController.m */,
+				DFB3FFDA2685685300FC8FF9 /* TSOneClickLoginViewController.h */,
+				DFB3FFDB2685685300FC8FF9 /* TSOneClickLoginViewController.m */,
 				C3B4CCDD2674932D0001EE75 /* TSRegiterViewController.h */,
 				C3B4CCDE2674932D0001EE75 /* TSRegiterViewController.m */,
 			);
@@ -1995,6 +2009,10 @@
 				DFB3FFB72683205600FC8FF9 /* TSOneStepLoginRequest.m */,
 				DCA035DB2681ACC8003DE5F7 /* TSLogoutRequest.h */,
 				DCA035DC2681ACC8003DE5F7 /* TSLogoutRequest.m */,
+				DFB3FFE02685B76200FC8FF9 /* TSLoginByTokenRequest.h */,
+				DFB3FFE12685B76200FC8FF9 /* TSLoginByTokenRequest.m */,
+				DFB3FFE32685C19700FC8FF9 /* TSLoginByAuthCodeRequest.h */,
+				DFB3FFE42685C19700FC8FF9 /* TSLoginByAuthCodeRequest.m */,
 			);
 			path = DataController;
 			sourceTree = "<group>";
@@ -2982,6 +3000,8 @@
 				F55D2C9F26745E7A006BACCF /* TSLastUserInfoManager.m */,
 				DCA035F6268355D2003DE5F7 /* TSServicesManager.h */,
 				DCA035F7268355D2003DE5F7 /* TSServicesManager.m */,
+				DFB3FFDD268571B100FC8FF9 /* AuthAppleIDManager.h */,
+				DFB3FFDE268571B100FC8FF9 /* AuthAppleIDManager.m */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -3618,6 +3638,7 @@
 				F56D4B4C266DFB8900C1AD9E /* FMLayoutCrossCell.m in Sources */,
 				DC9911C2267C475000EF9B26 /* UIScrollView+YBNestViews.m in Sources */,
 				C25A7F8526845FB20006C6AF /* TSBalanceModel.m in Sources */,
+				DFB3FFE22685B76200FC8FF9 /* TSLoginByTokenRequest.m in Sources */,
 				DC9911C6267C475000EF9B26 /* YBNestCollectionView.m in Sources */,
 				F56D4B3A266DFB8900C1AD9E /* FMLayoutBaseSection.m in Sources */,
 				C2EF88BB2670997100E7374A /* TSCartHeaderFooterView.m in Sources */,
@@ -3702,6 +3723,7 @@
 				F55D2C6C267231AA006BACCF /* TSCategoryHeaderReusableView.m in Sources */,
 				F530CCA826803FCD009DC29A /* UITextView+Holder.m in Sources */,
 				C2C765422679ECBF004757B9 /* TSMakeOrderSection.m in Sources */,
+				DFB3FFDF268571B100FC8FF9 /* AuthAppleIDManager.m in Sources */,
 				F530CCAB26803FCD009DC29A /* UIAlertController+Color.m in Sources */,
 				C3A6C4BD267A1C5700FC71D6 /* TSSecurityCenterTitleCell.m in Sources */,
 				C22EE28E2681BC6200E59C86 /* TSRecomendViewModel.m in Sources */,
@@ -3797,6 +3819,7 @@
 				DC9911A3267AE40100EF9B26 /* TSLinkDataModel.m in Sources */,
 				C3A6C4BE267A1C5700FC71D6 /* TSAccountCancelContentCell.m in Sources */,
 				DC9911C4267C475000EF9B26 /* YBNestTableView.m in Sources */,
+				DFB3FFE52685C19700FC8FF9 /* TSLoginByAuthCodeRequest.m in Sources */,
 				C3A6C472267A1BEA00FC71D6 /* TSPhoneNumVeriViewController.m in Sources */,
 				C3A6C4E5267A1CAF00FC71D6 /* TSPersonalDataController.m in Sources */,
 				C3A6C48D267A1C1700FC71D6 /* TSPersonalSectionModel.m in Sources */,
@@ -3974,6 +3997,7 @@
 				C35F1866267C7F8A00F65AF9 /* TSChangePictureActionSheet.m in Sources */,
 				F54973AE2668BB8100181E3F /* TSHomeViewController.m in Sources */,
 				F56D4B40266DFB8900C1AD9E /* FMLayoutScaleSection.m in Sources */,
+				DFB3FFDC2685685300FC8FF9 /* TSOneClickLoginViewController.m in Sources */,
 				F56D4B42266DFB8900C1AD9E /* FMLayoutView.m in Sources */,
 				CE5674AF26831F0400252F5D /* TSPartnerCenterData.m in Sources */,
 				C25A7F8E268474200006C6AF /* TSMakeOrderCommitOrderDataController.m in Sources */,
@@ -4184,7 +4208,7 @@
 				CODE_SIGN_ENTITLEMENTS = TShopMall/TShopMall.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = W9DQQKZPB3;
+				DEVELOPMENT_TEAM = 2GM7ZL62GN;
 				EXCLUDED_ARCHS = "";
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PREFIX_HEADER = TShopMall/Expand/Macros/TSPrefixHeader.pch;
@@ -4195,9 +4219,9 @@
 					"@executable_path/Frameworks",
 				);
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.test.TSalesSit;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tcl.TSalesDev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = testTSalesSit;
+				PROVISIONING_PROFILE_SPECIFIER = "T销客_开发";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -4211,7 +4235,7 @@
 				CODE_SIGN_ENTITLEMENTS = TShopMall/TShopMall.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = W9DQQKZPB3;
+				DEVELOPMENT_TEAM = 2GM7ZL62GN;
 				EXCLUDED_ARCHS = "";
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PREFIX_HEADER = TShopMall/Expand/Macros/TSPrefixHeader.pch;
@@ -4222,9 +4246,9 @@
 					"@executable_path/Frameworks",
 				);
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.test.TSalesSit;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tcl.TSalesDev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = testTSalesSit;
+				PROVISIONING_PROFILE_SPECIFIER = "T销客_开发";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
