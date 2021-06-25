@@ -202,6 +202,7 @@ spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
     self.collectionView.dataSource = self;
     self.collectionView.showsVerticalScrollIndicator = NO;
     self.collectionView.showsHorizontalScrollIndicator = NO;
+    self.collectionView.scrollEnabled = NO;
     [self addSubview:self.collectionView];
     
     return self.collectionView;

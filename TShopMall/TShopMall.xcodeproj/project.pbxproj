@@ -1976,8 +1976,8 @@
 		DFB3FFD02684833800FC8FF9 /* DataController */ = {
 			isa = PBXGroup;
 			children = (
-				DFB3FFD12684833800FC8FF9 /* TSPaySuccessDataController.m */,
 				DFB3FFD22684833800FC8FF9 /* TSPaySuccessDataController.h */,
+				DFB3FFD12684833800FC8FF9 /* TSPaySuccessDataController.m */,
 			);
 			path = DataController;
 			sourceTree = "<group>";

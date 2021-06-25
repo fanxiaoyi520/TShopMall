@@ -8,7 +8,7 @@
 #import "TSMakeOrderCommitOrderDataController.h"
 
 @implementation TSMakeOrderCommitOrderDataController
-+ (void)commitOrderWithAddress:(TSAddressModel *)address balanceInfo:(TSBalanceModel *)balanceInfo invoice:(TSMakeOrderInvoiceViewModel *)invoice finished:(void(^)(BOOL))finished OnController:(UIViewController *)controller{
++ (void)commitOrderWithAddress:(TSAddressModel *)address balanceInfo:(TSBalanceModel *)balanceInfo invoice:(TSMakeOrderInvoiceViewModel *)invoice finished:(void(^)(BOOL, NSString *, NSString *))finished OnController:(UIViewController *)controller{
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"checkArea"] = address.uuid;
     params[@"area"] = address.area;
@@ -48,19 +48,23 @@
                                                                needErrorToast:YES];
     request.animatingView = controller.view;
     [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+        NSLog(@"%@", request.responseModel);
         if (request.responseModel.isSucceed) {
-            finished(YES);
+            NSDictionary *data = request.responseObject[@"data"];
+            NSString *payOrderId  = data[@"payOrderId"];
+            NSString *isGroup = data[@"isGroup"];
+            finished(YES, payOrderId, isGroup);
         } else {
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [Popover popToastOnWindowWithText:request.responseObject[@"message"]];
             });
-            finished(NO);
+            finished(NO, @"", @"");
         }
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [Popover popToastOnWindowWithText:request.responseObject[@"message"]];
         });
-        finished(NO);
+        finished(NO, @"", @"");
     }];
 }
 @end

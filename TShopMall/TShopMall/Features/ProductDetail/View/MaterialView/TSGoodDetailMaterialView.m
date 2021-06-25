@@ -117,7 +117,9 @@
 
 #pragma mark - Actions
 -(void)downloadAction:(UIButton *)sender{
-    
+    if ([self.delegate respondsToSelector:@selector(goodDetailMaterialView:downloadClick:)]) {
+        [self.delegate goodDetailMaterialView:self downloadClick:sender];
+    }
 }
 
 -(void)selectedAction:(TSDetailSelectButton *)sender{

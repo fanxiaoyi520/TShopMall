@@ -86,7 +86,7 @@
     TSMakeOrderRow *invoiceRow = (TSMakeOrderRow *)[self.makeOrderView.sections[2].rows lastObject];
     TSMakeOrderInvoiceViewModel *invoce = invoiceRow.obj;
    
-    [TSMakeOrderCommitOrderDataController commitOrderWithAddress:address balanceInfo:self.dataCon.balanceModel invoice:invoce finished:^(BOOL finished) {
+    [TSMakeOrderCommitOrderDataController commitOrderWithAddress:address balanceInfo:self.dataCon.balanceModel invoice:invoce finished:^(BOOL finished, NSString *payOrderId, NSString *isGroup) {
         if (finished == YES) {
             [self.navigationController popViewControllerAnimated:YES];
         }

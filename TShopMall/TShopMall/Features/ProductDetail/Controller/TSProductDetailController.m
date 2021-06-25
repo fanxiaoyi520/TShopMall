@@ -28,7 +28,8 @@
 #import <Photos/Photos.h>
 #import "WechatShareManager.h"
 
-@interface TSProductDetailController ()<UICollectionViewDelegate,UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate,TSTopFunctionViewDelegate,TSChangePriceViewDelegate,ProductDetailBottomViewDelegate,SnailQuickMaskPopupsDelegate, TSDetailShareViewDelegate>
+
+@interface TSProductDetailController ()<UICollectionViewDelegate,UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate,TSTopFunctionViewDelegate,TSChangePriceViewDelegate,ProductDetailBottomViewDelegate,SnailQuickMaskPopupsDelegate,GoodDetailMaterialViewDelegate, TSDetailShareViewDelegate>
 
 /// 返回按钮
 @property(nonatomic, strong) UIButton *backButton;
@@ -111,7 +112,11 @@
     [cartBtn setImage:KImageMake(@"mall_detail_navigation_cart") forState:UIControlStateHighlighted];
     [cartBtn addTarget:self action:@selector(cartAction:) forControlEvents:UIControlEventTouchUpInside];
     cartBtn.frame = CGRectMake(0, 0, 30, 30);
+    [cartBtn setBadgeBGColor:UIColor.redColor];
+    [cartBtn setBadgeOriginX:15];
     [cartBtn setBadgeValue:@"3"];
+    [cartBtn setBadgeTextColor:UIColor.whiteColor];
+    [cartBtn setShouldAnimateBadge:YES];
     
     UIBarButtonItem *share = [[UIBarButtonItem alloc] initWithCustomView:shareBtn];
     UIBarButtonItem *cart = [[UIBarButtonItem alloc] initWithCustomView:cartBtn];
@@ -127,7 +132,7 @@
     [self.view addSubview:self.dragView];
     
 //    [self addCollectionCoverView];
-    //    [self addMJHeaderAndFooter];
+    [self addMJHeaderAndFooter];
 }
 
 -(void)viewWillLayoutSubviews{
@@ -187,10 +192,6 @@
     //默认【下拉刷新】
     RefreshGifHeader *mj_header = [RefreshGifHeader headerWithRefreshingTarget:self refreshingAction:@selector(mjHeadreRefresh:)];
     self.collectionView.mj_header = mj_header;
-
-    RefreshGifFooter *footer = [RefreshGifFooter footerWithRefreshingTarget:self refreshingAction:@selector(mjFooterRefresh:)];
-    self.collectionView.mj_footer = footer;
-    self.collectionView.mj_footer.hidden = NO;
 }
 
 #pragma mark - Actions
@@ -208,30 +209,16 @@
 
 /// 下拉刷新
 - (void)mjHeadreRefresh:(MJRefreshNormalHeader *)mj_header {
-//    [self loadDataIsNew:YES];
-}
-
-/// 上拉加载
-- (void)mjFooterRefresh:(MJRefreshAutoNormalFooter *)mj_footer {
-//    [self loadDataIsNew:NO];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+         [self.collectionView.mj_header endRefreshing];
+     });
 }
 
 #pragma mark - SnailQuickMaskPopupsDelegate
-- (void)snailQuickMaskPopupsWillPresent:(SnailQuickMaskPopups *)popups{
-    if (self.materialPopups == popups) {
-        [self.materialView reloadMaterialView];
-    }
-}
 - (void)snailQuickMaskPopupsWillDismiss:(SnailQuickMaskPopups *)popups{
     if (self.materialPopups == popups) {
         [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:3]];
     }
-}
-- (void)snailQuickMaskPopupsDidPresent:(SnailQuickMaskPopups *)popups{
-    
-}
-- (void)snailQuickMaskPopupsDidDismiss:(SnailQuickMaskPopups *)popups{
-    
 }
 
 #pragma mark - TSTopFunctionViewDelegate
@@ -284,6 +271,15 @@
                                                    complete:^(BOOL isSucess) {
             
     }];
+}
+
+#pragma mark - GoodDetailMaterialViewDelegate
+-(void)goodDetailMaterialView:(TSGoodDetailMaterialView *_Nullable)materialView downloadClick:(UIButton *_Nullable)sender{
+    for (TSMaterialImageModel *model in self.materials) {
+        if (model.selected && model.materialImage) {
+            UIImageWriteToSavedPhotosAlbum(model.materialImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+        }
+    }
 }
 
 #pragma mark - TSChangePriceViewDelegate
@@ -666,6 +662,7 @@ spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
         materialView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight * 0.6);
         [materialView setCorners:(UIRectCornerTopLeft | UIRectCornerTopRight) radius:8.0];
         materialView.clipsToBounds = YES;
+        materialView.delegate = self;
         
         _materialPopups = [SnailQuickMaskPopups popupsWithMaskStyle:MaskStyleBlackTranslucent aView:materialView];
         _materialPopups.presentationStyle = PresentationStyleBottom;

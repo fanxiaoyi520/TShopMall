@@ -36,6 +36,7 @@
 
 
 - (void)layoutSubviews{
+    self.contentView.backgroundColor = [UIColor whiteColor];
     [self.icon mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contentView.mas_left);
         make.width.height.mas_equalTo(KRateW(120.0)).priorityHigh();
