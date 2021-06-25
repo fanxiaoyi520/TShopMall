@@ -37,9 +37,8 @@
     [body setValue:[NSString stringWithFormat:@"%ld",startIndex] forKey:@"nowPage"];
     [body setValue:[NSString stringWithFormat:@"%ld",count] forKey:@"pageShow"];
     [body setValue:group.groupId forKey:@"cateGroupUuid"];
-    [body setValue:@"1" forKey:@"sortType"];
-    [body setValue:@"sortWeight" forKey:@"sortBy"];
-    [body setValue:@"application/x-www-form-urlencoded" forKey:@"Content-Type"];
+//    [body setValue:@"1" forKey:@"sortType"];
+//    [body setValue:@"sortWeight" forKey:@"sortBy"];
 
     SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kProducts
                                                                requestMethod:YTKRequestMethodPOST

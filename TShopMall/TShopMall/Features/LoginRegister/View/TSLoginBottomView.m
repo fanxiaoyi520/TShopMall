@@ -53,7 +53,7 @@
         UIButton *appleButton = [[UIButton alloc] init];
         _appleButton = appleButton;
         [_appleButton setBackgroundImage:KImageMake(@"mall_login_apple") forState:UIControlStateNormal];
-        [_wechatButton addTarget:self action:@selector(goToApple) forControlEvents:UIControlEventTouchUpInside];
+        [_appleButton addTarget:self action:@selector(goToApple) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_appleButton];
     }
     return _appleButton;

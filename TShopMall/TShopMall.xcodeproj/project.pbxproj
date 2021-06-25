@@ -1963,10 +1963,10 @@
 		DFB3FFC026844A0A00FC8FF9 /* WechatShare */ = {
 			isa = PBXGroup;
 			children = (
-				DFB3FFC126844A0A00FC8FF9 /* WechatManager.h */,
 				DFB3FFC226844A0A00FC8FF9 /* TSShareView.h */,
-				DFB3FFC326844A0A00FC8FF9 /* WechatShareManager.h */,
+				DFB3FFC126844A0A00FC8FF9 /* WechatManager.h */,
 				DFB3FFC426844A0A00FC8FF9 /* WechatManager.m */,
+				DFB3FFC326844A0A00FC8FF9 /* WechatShareManager.h */,
 				DFB3FFC526844A0A00FC8FF9 /* WechatShareManager.m */,
 				DFB3FFC626844A0A00FC8FF9 /* TSShareView.m */,
 			);
@@ -4184,7 +4184,7 @@
 				CODE_SIGN_ENTITLEMENTS = TShopMall/TShopMall.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = 2GM7ZL62GN;
+				DEVELOPMENT_TEAM = W9DQQKZPB3;
 				EXCLUDED_ARCHS = "";
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PREFIX_HEADER = TShopMall/Expand/Macros/TSPrefixHeader.pch;
@@ -4195,9 +4195,9 @@
 					"@executable_path/Frameworks",
 				);
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.tcl.TSalesDev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.test.TSalesSit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "T销客_开发";
+				PROVISIONING_PROFILE_SPECIFIER = testTSalesSit;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -4211,7 +4211,7 @@
 				CODE_SIGN_ENTITLEMENTS = TShopMall/TShopMall.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = 2GM7ZL62GN;
+				DEVELOPMENT_TEAM = W9DQQKZPB3;
 				EXCLUDED_ARCHS = "";
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PREFIX_HEADER = TShopMall/Expand/Macros/TSPrefixHeader.pch;
@@ -4222,9 +4222,9 @@
 					"@executable_path/Frameworks",
 				);
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.tcl.TSalesDev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.test.TSalesSit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "T销客_开发";
+				PROVISIONING_PROFILE_SPECIFIER = testTSalesSit;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
