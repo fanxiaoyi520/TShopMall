@@ -22,6 +22,9 @@
 #import "TSPayOrderViewController.h"
 #import "TSPaySuccessViewController.h"
 #import "TSHybridViewController.h"
+#import "TSBindMobileController.h"
+#import "TSChangeMobileViewController.h"
+//#import "TSBindThirdViewController.h"
 
 @interface TSMineViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate,TSUserInfoViewDelegate,TSMineOrderHeaderViewDelegate>
 
@@ -150,7 +153,8 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.item == 0) {//测试我的订单
-        TSPaySuccessViewController *orderVc = [[TSPaySuccessViewController alloc] init];
+        TSChangeMobileViewController *orderVc = [[TSChangeMobileViewController alloc] init];
+        //TSPaySuccessViewController *orderVc = [[TSPaySuccessViewController alloc] init];
         //TSOrderManageViewController *orderVc = [[TSOrderManageViewController alloc] init];
         [self.navigationController pushViewController:orderVc animated:YES];
     } else if (indexPath.section == 1) {

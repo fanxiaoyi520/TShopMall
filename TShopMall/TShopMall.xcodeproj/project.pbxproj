@@ -17,6 +17,8 @@
 		042F423D2681FDB000555F5D /* TSRealNameAuthCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042F423C2681FDB000555F5D /* TSRealNameAuthCell.m */; };
 		042F42402681FDFE00555F5D /* TSRealNameInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042F423F2681FDFE00555F5D /* TSRealNameInfoCell.m */; };
 		046DEA8626856ADF009CE557 /* TSAgreementView.m in Sources */ = {isa = PBXBuildFile; fileRef = 046DEA8526856ADF009CE557 /* TSAgreementView.m */; };
+		046DEA892685BD97009CE557 /* TSChangeMobileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 046DEA882685BD97009CE557 /* TSChangeMobileCell.m */; };
+		046DEA8C2685C5BA009CE557 /* TSChangeMobileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 046DEA8B2685C5BA009CE557 /* TSChangeMobileViewController.m */; };
 		04DAFAFE267B37450098275A /* TSOrderManageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DAFAFD267B37450098275A /* TSOrderManageViewController.m */; };
 		04F1EFAD2682D22100FF007D /* TSRealnameInfoSectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F1EFAC2682D22100FF007D /* TSRealnameInfoSectionModel.m */; };
 		04F1EFB02682D3AC00FF007D /* TSRealnameInfoDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F1EFAF2682D3AC00FF007D /* TSRealnameInfoDataController.m */; };
@@ -498,6 +500,10 @@
 		042F423F2681FDFE00555F5D /* TSRealNameInfoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSRealNameInfoCell.m; sourceTree = "<group>"; };
 		046DEA8426856ADF009CE557 /* TSAgreementView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSAgreementView.h; sourceTree = "<group>"; };
 		046DEA8526856ADF009CE557 /* TSAgreementView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSAgreementView.m; sourceTree = "<group>"; };
+		046DEA872685BD96009CE557 /* TSChangeMobileCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSChangeMobileCell.h; sourceTree = "<group>"; };
+		046DEA882685BD97009CE557 /* TSChangeMobileCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSChangeMobileCell.m; sourceTree = "<group>"; };
+		046DEA8A2685C5BA009CE557 /* TSChangeMobileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSChangeMobileViewController.h; sourceTree = "<group>"; };
+		046DEA8B2685C5BA009CE557 /* TSChangeMobileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSChangeMobileViewController.m; sourceTree = "<group>"; };
 		04DAFAFC267B37450098275A /* TSOrderManageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSOrderManageViewController.h; sourceTree = "<group>"; };
 		04DAFAFD267B37450098275A /* TSOrderManageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSOrderManageViewController.m; sourceTree = "<group>"; };
 		04F1EFAB2682D22100FF007D /* TSRealnameInfoSectionModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSRealnameInfoSectionModel.h; sourceTree = "<group>"; };
@@ -1717,6 +1723,8 @@
 				C35F1872267D970800F65AF9 /* TSAccountCancelDropViewController.m */,
 				C3A6C46C267A1BE800FC71D6 /* TSBindMobileController.h */,
 				C3A6C45B267A1BDF00FC71D6 /* TSBindMobileController.m */,
+				046DEA8A2685C5BA009CE557 /* TSChangeMobileViewController.h */,
+				046DEA8B2685C5BA009CE557 /* TSChangeMobileViewController.m */,
 				C3A6C45C267A1BE000FC71D6 /* TSBindThirdViewController.h */,
 				C3A6C45D267A1BE000FC71D6 /* TSBindThirdViewController.m */,
 				C3A6C46F267A1BEA00FC71D6 /* TSChangePictureViewController.h */,
@@ -1818,6 +1826,8 @@
 				C3A6C4A9267A1C4E00FC71D6 /* TSAccountCancelTopCell.m */,
 				C3A6C4B5267A1C5600FC71D6 /* TSBindMobileCell.h */,
 				C3A6C4A5267A1C4D00FC71D6 /* TSBindMobileCell.m */,
+				046DEA872685BD96009CE557 /* TSChangeMobileCell.h */,
+				046DEA882685BD97009CE557 /* TSChangeMobileCell.m */,
 				C3A6C4B7267A1C5700FC71D6 /* TSBindThirdAppCell.h */,
 				C3A6C4AC267A1C5000FC71D6 /* TSBindThirdAppCell.m */,
 				C3A6C4B4267A1C5600FC71D6 /* TSChangePictureCell.h */,
@@ -3671,6 +3681,7 @@
 				F530CD642681E11C009DC29A /* TSDetailShareView.m in Sources */,
 				F55D2CB32674AE55006BACCF /* TSCategoryContentModel.m in Sources */,
 				F55D2CCA26784ACD006BACCF /* TSMineTitleHeaderView.m in Sources */,
+				046DEA892685BD97009CE557 /* TSChangeMobileCell.m in Sources */,
 				DC3440BB26722DB600F5B0DA /* TSHomePageViewModel.m in Sources */,
 				C3B4CCF02674934E0001EE75 /* TSQuickCheckView.m in Sources */,
 				F55D2CE626788721006BACCF /* TSProductDetailBottomView.m in Sources */,
@@ -3772,6 +3783,7 @@
 				F54973BF2668C01F00181E3F /* TSTipsConst.m in Sources */,
 				C2EF88B22670997100E7374A /* TSCartViewModel.m in Sources */,
 				DC991196267A158A00EF9B26 /* TSHomePageReleaseTitleCell.m in Sources */,
+				046DEA8C2685C5BA009CE557 /* TSChangeMobileViewController.m in Sources */,
 				DC9911D8267E267400EF9B26 /* TSHomePagePerchView.m in Sources */,
 				F530CCF626804167009DC29A /* WKWebView+TSSyncUserAgent.m in Sources */,
 				C3A6C491267A1C1700FC71D6 /* TSAccountCancelSectionModel.m in Sources */,

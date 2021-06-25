@@ -19,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface TSBindMobileSectionItemModel : TSUniversaItemModel
+/** 已绑定的手机号  */
+@property(nonatomic, copy) NSString *oldMobile;
 
 @end
 
