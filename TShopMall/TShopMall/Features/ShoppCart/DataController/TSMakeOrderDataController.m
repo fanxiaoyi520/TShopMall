@@ -22,6 +22,7 @@
 }
 
 - (void)checkBalance:(void(^)(BOOL))finished{
+    [self.sections removeAllObjects];
     self.finished = finished;
     SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kToBalance
                                                                 requestMethod:YTKRequestMethodGET
@@ -35,12 +36,18 @@
             NSDictionary *data = request.responseObject[@"data"];
             NSLog(@"%@", request.responseJSONObject);
             self.balanceModel = [TSBalanceModel yy_modelWithDictionary:data];
+            if (self.balanceModel.cartManager.detailModelList.count == 0) {
+                [self configEmptySection];
+                return;
+            }
             self.finished = finished;
             [self configSections];
         } else{
+            [self configEmptySection];
             finished(NO);
         }
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        [self configEmptySection];
         finished(NO);
     }];
 }
@@ -155,4 +162,20 @@
     [self.sections addObject:section];
 }
 
+
+- (void)configEmptySection{
+    [self.sections removeAllObjects];
+    
+    TSMakeOrderRow *row = [TSMakeOrderRow new];
+    row.cellIdentifier = @"TSMakeOrderEmptyCell";
+    row.isAutoHeight = NO;
+    row.rowHeight = KRateW(340.0);
+    
+    TSMakeOrderSection *section = [TSMakeOrderSection new];
+    section.heightForHeader = 0.1f;
+    section.heightForFooter = 0.1f;
+    section.rows = @[row];
+    
+    [self.sections addObject:section];
+}
 @end

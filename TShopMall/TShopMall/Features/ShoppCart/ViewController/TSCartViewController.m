@@ -13,13 +13,12 @@
 #import "TSCartProtocol.h"
 #import "TSAlertView.h"
 #import "TSMakeOrderController.h"
-#import "TSRecomendView.h"
+#import "TSRecomendDataController.h"
 
 @interface TSCartViewController ()<TSCartProtocol>
 @property (nonatomic, strong) UIButton *editBtn;
 @property (nonatomic, strong) TSCartView *cartView;
 @property (nonatomic, strong) TSCartSettleView *settleView;
-@property (nonatomic, strong) TSRecomendView *footerView;
 @property (nonatomic, strong) TSCartDataController *dataCon;
 @property (nonatomic, strong) RefreshGifHeader *refreshHeader;
 @end
@@ -43,9 +42,6 @@
     [self configInfo];
 }
 
-- (void)dealloc{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
 
 #pragma mark - Noti
 - (void)loginStateDidChanged:(NSNotification *)noti{
@@ -56,6 +52,8 @@
     __weak typeof(self) weakSelf = self;
     [self.dataCon viewCart:^{
         [weakSelf endRefresh];
+        weakSelf.settleView.hidden = !weakSelf.dataCon.cartModel.carts.count;
+        weakSelf.editBtn.hidden  = !weakSelf.dataCon.cartModel.carts.count;
         weakSelf.cartView.sections = weakSelf.dataCon.sections;
         [weakSelf updateSettleView];
         [weakSelf configRecomendView];
@@ -63,14 +61,11 @@
 }
 
 - (void)configRecomendView{
-    if (self.footerView != nil) {
-        return;
-    }
-    __weak typeof(self) weakSelf = self;
-    self.footerView = [TSRecomendView configRecomendViewWithType:Cart layoutFinished:^{
-        self.cartView.tableFooterView = weakSelf.footerView;
-    } goodsSelected:^(NSString *goodsId) {
-
+    [TSRecomendDataController checkCurrentRecomendPage:RecomendCartPage finished:^(TSRecomendModel *recomendInfo, TSRecomendPageInfo *pageInfo) {
+        if (recomendInfo.goodsList.count != 0) {
+            [self.dataCon configRecomendSectons:recomendInfo.goodsList isGrid:YES];
+            self.cartView.sections = self.dataCon.sections;
+        }
     }];
 }
 
@@ -135,6 +130,11 @@
     }];
 }
 
+//去购物
+- (void)goToShopping{
+    
+}
+
 - (void)updateSettleView{
     [self.settleView updateSelBtnStatus:self.dataCon.isAllSelected];
     [self.settleView updatePrice:self.dataCon.cartModel.cartsTotalMount];
@@ -155,7 +155,7 @@
     [self.cartView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.view);
         make.top.equalTo(self.view.mas_top).offset(GK_SAFEAREA_TOP + GK_NAVBAR_HEIGHT);
-        make.bottom.equalTo(self.settleView.mas_top);
+        make.bottom.equalTo(self.settleView.mas_bottom);
     }];
 }
 

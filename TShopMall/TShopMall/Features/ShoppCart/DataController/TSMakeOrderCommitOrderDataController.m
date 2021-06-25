@@ -53,6 +53,7 @@
             NSDictionary *data = request.responseObject[@"data"];
             NSString *payOrderId  = data[@"payOrderId"];
             NSString *isGroup = data[@"isGroup"];
+            NSString *indentOrderId = data[@"indentOrderId"];
             finished(YES, payOrderId, isGroup);
         } else {
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{

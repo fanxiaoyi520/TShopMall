@@ -10,23 +10,24 @@
 @implementation TSSearchDataController
 
 - (void)fetchData:(void (^)(NSArray<TSSearchSection *> *, NSError *))finished{
+    [self.sections removeAllObjects];
     __weak typeof(self) weakSelf = self;
     [[self hotKeyRequest] startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
         if (request.responseModel.isSucceed) {
             NSArray *data = request.responseJSONObject[@"data"];
             NSArray<TSSearchHotKeyModel *> *keywords = [NSArray yy_modelArrayWithClass:TSSearchHotKeyModel.class json:data];
-            NSMutableArray *sections = [NSMutableArray array];
             NSArray *historyKeys = [TSSearchKeyViewModel readHistoryKeys];
             if (historyKeys.count != 0) {
-                [sections addObject:[TSSearchDataController configHistorySection:historyKeys]];
+                [self.sections addObject:[TSSearchDataController configHistorySection:historyKeys]];
             }
             if (keywords.count != 0) {
-                [sections addObject:[TSSearchDataController configHotSection:keywords]];
+                [self.sections addObject:[TSSearchDataController configHotSection:keywords]];
             }
             weakSelf.hotkeys = keywords;
-            weakSelf.sections = sections;
-            
-            finished(sections, nil);
+            if (self.sections.count == 0) {
+                [self configEmptySection];
+            }
+            finished(self.sections, nil);
         }
         } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
             finished(nil, request.error);
@@ -124,6 +125,44 @@
     return temSections;
 }
 
+- (void)configEmptySection{
+    TSSearchRow *row = [TSSearchRow new];
+    row.cellIdentifier = @"TSSearchEmptyCell";
+//    row.rowSize = CGSizeMake(kScreenWidth, KRateW(320.0));
+    
+    TSSearchSection *section = [TSSearchSection new];
+    section.headerIdentifier = @"TSSearchHeaderView";
+    section.footerIdentifier = @"TSSearchHeaderView";
+    section.headerHeight = KRateW(10.0);
+    section.footerHeight = 0;
+    section.rows = @[row];
+    
+    [self.sections addObject:section];
+}
+
+
+- (void)configRecomendSection:(NSArray<TSRecomendGoods *> *)goods isGrid:(BOOL)isGrid{
+    
+    NSMutableArray *rows = [NSMutableArray array];
+    for (TSRecomendGoods *good in goods) {
+        TSSearchRow *row = [TSSearchRow new];
+        row.cellIdentifier = isGrid==NO? @"TSSearchRecomendCell":@"TSSearchRecomendSlimCell";
+        row.obj = good;
+        
+        [rows addObject:row];
+    }
+    
+    TSSearchSection *section = [TSSearchSection new];
+    section.headerIdentifier = @"TSSearchHeaderView";
+    section.footerIdentifier = @"TSSearchHeaderView";
+    section.headerTitle = @"热门推荐";
+    section.headerHeight = KRateW(56);
+    section.footerHeight = 0.1f;
+    section.rows = rows;
+    
+    [self.sections addObject:section];
+}
+
 - (NSArray<TSSearchSection *> *)configRecomendSection:(UICollectionReusableView *)recomendView{
     TSSearchRow *row = [TSSearchRow new];
     row.cellIdentifier = @"TSSearchRecomendCell";
@@ -146,4 +185,13 @@
     return self.sections;
 }
 
+    
+    - (NSMutableArray<TSSearchSection *> *)sections{
+        if (_sections) {
+            return _sections;
+        }
+        self.sections = [NSMutableArray array];
+        
+        return self.sections;
+    }
 @end

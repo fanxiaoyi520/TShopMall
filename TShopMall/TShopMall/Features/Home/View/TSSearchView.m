@@ -10,13 +10,12 @@
 #import "TSSearchBaseCell.h"
 #import "TSSearchHeaderView.h"
 #import "TSSearchKeyViewModel.h"
-#import "TSRecomendView.h"
+#import "TSRecomendModel.h"
 
 @interface TSSearchView()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 @property (nonatomic, strong) TSSearchTextView *textView;
 @property (nonatomic, strong) UIButton *cancelBtn;
 @property (nonatomic, strong) UICollectionView *collectionView;
-@property (nonatomic, strong) TSRecomendView *recomendView;
 @end
 
 @implementation TSSearchView
@@ -70,9 +69,6 @@
     }
     [collectionView registerClass:NSClassFromString(section.footerIdentifier) forSupplementaryViewOfKind:kind withReuseIdentifier:section.footerIdentifier];
     UICollectionReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:section.footerIdentifier forIndexPath:indexPath];
-    if ([view isKindOfClass:[TSRecomendView class]]) {
-
-    }
     return view;
 }
 
@@ -94,21 +90,10 @@
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self.controller performSelector:@selector(goToGoodsList:) withObject:vm.keywords];
         });
-    } else {
-        
     }
-}
-
-- (BOOL)hasMoreData{
-    return YES;
-}
-
-- (void)headerRefresh{
-    [self.controller performSelector:@selector(refreshData)];
-}
-
-- (void)footerRefresh{
-    
+    if ([cell.obj isKindOfClass:[TSRecomendModel class]]) {
+        [self.controller performSelector:@selector(recomentGoodsSelected:) withObject:cell.obj];
+    }
 }
 
 - (void)layoutSubviews{
@@ -189,5 +174,7 @@
     return self.cancelBtn;
 }
 
+- (void)goToGoodsList:(id)list{}
+- (void)recomentGoodsSelected:(TSRecomendModel *)recomend{}
 
 @end

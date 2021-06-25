@@ -127,6 +127,7 @@ NSString * const kEditAddress = @"/rest/v2/usercenter/customeraddress/doEdit";
 NSString * const kDeleteAddress = @"/rest/v2/usercenter/customeraddress/delDeliveryAddress";
 NSString * const kCustomerAddress = @"/rest/v2/usercenter/customeraddress/toCustomerAddress";
 NSString * const kAddressTag = @"/v2/usercenter/customerAddressTag/list";
+NSString * const kSmartAddress = @"/rest/v2/usercenter/customeraddress/getSmartAddress";
 
 
 #pragma mark - 我的

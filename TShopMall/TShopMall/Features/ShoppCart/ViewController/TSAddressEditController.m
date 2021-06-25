@@ -78,45 +78,45 @@
     __weak typeof(self) weakSelf = self;
     [TSAreaSelectedController showAreaSelected:^(TSAreaModel *provice, TSAreaModel *city, TSAreaModel *eare, TSAreaModel *street, NSString *location) {
         if (provice) {
-            weakSelf.vm.provice = provice.provinceName;
-            weakSelf.vm.proviceUUid = provice.currentUUid;
+            weakSelf.editView.vm.provinceName = provice.provinceName;
+            weakSelf.editView.vm.province = provice.currentUUid;
         }
         if (city) {
-            weakSelf.vm.city = city.cityName;
-            weakSelf.vm.cityUUid = city.currentUUid;
+            weakSelf.editView.vm.cityName = city.cityName;
+            weakSelf.editView.vm.city = city.currentUUid;
         }
         if (eare) {
-            weakSelf.vm.area = eare.regionName;
-            weakSelf.vm.areaUUid = eare.currentUUid;
+            weakSelf.editView.vm.regionName = eare.regionName;
+            weakSelf.editView.vm.region = eare.currentUUid;
         }
         if (street) {
-            weakSelf.vm.street = street.streetName;
-            weakSelf.vm.streetUUid = street.currentUUid;
+            weakSelf.editView.vm.streetName = street.streetName;
+            weakSelf.editView.vm.street = street.currentUUid;
         }
         if (provice == nil) {
-            weakSelf.vm.address = location;
+            weakSelf.editView.vm.address = location;
         } else {
             NSString *address = [NSString stringWithFormat:@"%@%@%@%@", provice.provinceName, city.cityName, eare.regionName, street.streetName];
-            weakSelf.vm.address = address;
+            weakSelf.editView.vm.address = address;
         }
-        [weakSelf.editView updateAddress:weakSelf.vm.address];
+        [weakSelf.editView updateAddress:weakSelf.editView.vm.address];
     } OnController:self];
 }
 
 - (void)saveAddress{
     TSAddressViewModel *vm = self.editView.vm;
     NSDictionary *params = @{
-        @"province" : vm.proviceUUid.length==0? @"":vm.proviceUUid,
-        @"city" : vm.cityUUid.length==0? @"":vm.cityUUid,
-        @"region" : vm.area.length==0? @"":vm.areaUUid,
-        @"street" : vm.street.length==0? @"":vm.streetUUid,
-        @"area" : vm.detailAddress.length==0? @"":vm.detailAddress,
+        @"province" : vm.province.length==0? @"":vm.province,
+        @"city" : vm.city.length==0? @"":vm.city,
+        @"region" : vm.region.length==0? @"":vm.region,
+        @"street" : vm.street.length==0? @"":vm.street,
+        @"area" : vm.area.length==0? @"":vm.area,
         @"address" : vm.address.length==0? @"":vm.address,
-        @"consignee" : vm.name.length==0? @"":vm.name,
-        @"mobile" : vm.phone.length==0? @"":vm.phone,
+        @"consignee" : vm.consignee.length==0? @"":vm.consignee,
+        @"mobile" : vm.mobile.length==0? @"":vm.mobile,
         @"isDefault" : vm.isDefault==YES? @"1":@"0",
         @"zipcode" : vm.zipcode.length==0? @"":vm.zipcode,
-        @"tag" : vm.mark.length==0? @"":vm.mark,
+        @"tag" : vm.tag.length==0? @"":vm.tag,
         @"uuid" : vm.uuid.length==0? @"":vm.uuid
     };
     if (self.vm == nil) {
@@ -188,6 +188,7 @@
         return _selBtn;
     }
     self.selBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.selBtn.selected = self.vm.isDefault;
     [self.selBtn setBackgroundImage:KImageMake(@"btn_normal") forState:UIControlStateNormal];
     [self.selBtn setBackgroundImage:KImageMake(@"btn_sel") forState:UIControlStateSelected];
     [self.selBtn addTarget:self action:@selector(setDefaultAddress:) forControlEvents:UIControlEventTouchUpInside];

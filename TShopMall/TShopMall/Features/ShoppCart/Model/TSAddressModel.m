@@ -8,5 +8,12 @@
 #import "TSAddressModel.h"
 
 @implementation TSAddressModel
-
+- (BOOL)isValid{
+    NSString *str = [NSString stringWithFormat:@"%@\n%@\n%@\n%@\n%@", _provinceName,_cityName, _regionName, _streetName,_address];
+    str = [str stringByReplacingOccurrencesOfString:@"(null)" withString:@""];
+    if (str.length == 0) {
+        return NO;
+    }
+    return YES;
+}
 @end

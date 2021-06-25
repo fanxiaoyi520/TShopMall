@@ -20,5 +20,6 @@
 
 - (void)updateAddressSection:(TSAddressModel *)address;
 - (void)updateMessage:(NSString *)messgae;
+- (void)configEmptySection;
 @end
 

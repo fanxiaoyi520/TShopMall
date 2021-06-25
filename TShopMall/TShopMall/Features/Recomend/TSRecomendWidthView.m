@@ -1,31 +1,19 @@
 //
-//  TSRecomendCell.m
+//  TSRecomendWidthView.m
 //  TShopMall
 //
-//  Created by 橙子 on 2021/6/22.
+//  Created by 橙子 on 2021/6/25.
 //
 
-#import "TSRecomendCell.h"
-#import "TSEarnView.h"
-#import "TSRecomendViewModel.h"
+#import "TSRecomendWidthView.h"
 
-@interface TSRecomendCell()
-@property (nonatomic, strong) UIImageView *icon;
-@property (nonatomic, strong) UILabel *name;
-@property (nonatomic, strong) UILabel *price;
-@property (nonatomic, strong) TSEarnView *earnView;
-@property (nonatomic, strong) UILabel *thPrice;
-@property (nonatomic, strong) UIView *line;
+@interface TSRecomendWidthView()
 @end
 
-@implementation TSRecomendCell
-- (void)setObj:(id)obj{
-    if ([obj isKindOfClass:[TSRecomendViewModel class]]) {
-        [self configUIWithViewModel:obj];
-    }
-}
+@implementation TSRecomendWidthView
 
-- (void)configUIWithViewModel:(TSRecomendViewModel *)vm{
+- (void)setVm:(TSRecomendViewModel *)vm{
+    _vm = vm;
     NSURL *url = [NSURL URLWithString:vm.img];
     [self.icon sd_setImageWithURL:url];
     self.name.text = vm.name;
@@ -34,21 +22,19 @@
     [self.earnView updatePrice:vm.earn];
 }
 
-
 - (void)layoutSubviews{
-    self.contentView.backgroundColor = [UIColor whiteColor];
+    self.backgroundColor = UIColor.whiteColor;
     [self.icon mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.contentView.mas_left);
+        make.left.equalTo(self.mas_left);
         make.width.height.mas_equalTo(KRateW(120.0)).priorityHigh();
-        make.top.equalTo(self.contentView.mas_top);
-        make.bottom.mas_equalTo(self.contentView.mas_bottom);
-//        make.right.mas_equalTo(self.contentView.mas_right).offset(-KRateW(239 - 16));
+        make.top.equalTo(self.mas_top);
+        make.bottom.mas_equalTo(self.mas_bottom);
     }];
     
     [self.name mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.icon.mas_right).offset(KRateW(8.0));
         make.width.mas_equalTo(KRateW(215.0));
-        make.right.mas_equalTo(self.contentView.mas_right).priorityHigh();
+        make.right.mas_equalTo(self.mas_right).priorityHigh();
         make.top.equalTo(self.icon.mas_top).offset(KRateW(11.0));
     }];
     
@@ -72,7 +58,7 @@
     
     [self.line mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.name);
-        make.right.equalTo(self.contentView.mas_right);
+        make.right.equalTo(self.mas_right);
         make.bottom.equalTo(self.icon.mas_bottom);
         make.height.mas_equalTo(1);
     }];
@@ -86,7 +72,7 @@
     self.icon.contentMode  = UIViewContentModeScaleAspectFit;
     self.icon.layer.cornerRadius = KRateW(8.0);
     self.icon.layer.masksToBounds = YES;
-    [self.contentView addSubview:self.icon];
+    [self addSubview:self.icon];
     
     return self.icon;
 }
@@ -99,7 +85,7 @@
     self.name.font = KRegularFont(14.0);
     self.name.textColor = KHexColor(@"#2D3132");
     self.name.numberOfLines = 2;
-    [self.contentView addSubview:self.name];
+    [self addSubview:self.name];
     
     return self.name;
 }
@@ -111,7 +97,7 @@
     self.price = [UILabel new];
     self.price.textColor = KMainColor;
     self.price.font = KFont(PingFangSCMedium, 20.0);
-    [self.contentView addSubview:self.price];
+    [self addSubview:self.price];
     
     return self.price;
 }
@@ -121,7 +107,7 @@
         return _earnView;
     }
     self.earnView = [TSEarnView new];
-    [self.contentView addSubview:self.earnView];
+    [self addSubview:self.earnView];
     
     return self.earnView;
 }
@@ -133,7 +119,7 @@
     self.thPrice = [UILabel new];
     self.thPrice.font = KRegularFont(8.0);
     self.thPrice.textColor = KHexAlphaColor(@"#333333", 0.6);
-    [self.contentView addSubview:self.thPrice];
+    [self addSubview:self.thPrice];
     
     return self.thPrice;
 }
@@ -144,47 +130,9 @@
     }
     self.line = [UILabel new];
     self.line.backgroundColor = KHexColor(@"#E6E6E6");
-    [self.contentView addSubview:self.line];
+    [self addSubview:self.line];
     
     return self.line;
 }
-@end
 
-
-@implementation TSRecomendSlimCell
-
-- (void)layoutSubviews{
-    self.contentView.backgroundColor = [UIColor whiteColor];
-    self.layer.cornerRadius = KRateW(8.0);
-    self.layer.masksToBounds = YES;
-    [self.icon mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.right.equalTo(self.contentView);
-        make.height.mas_equalTo(self.mas_width);
-    }];
-    [self.name mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.icon.mas_bottom).offset(KRateW(8.0));
-        make.left.equalTo(self.mas_left).offset(KRateW(8.0));
-        make.right.equalTo(self.mas_right).offset(-KRateW(8.0));
-        make.height.mas_lessThanOrEqualTo(KRateW(44.0));
-    }];
-    
-    [self.price mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.mas_left).offset(KRateW(8.0));
-        make.top.equalTo(self.icon.mas_bottom).offset(KRateW(60.0)).priorityHigh();
-        make.height.mas_equalTo(KRateW(30.0));
-        make.right.mas_equalTo(self.mas_centerX);
-    }];
-    
-    [self.thPrice mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.name.mas_left);
-        make.top.equalTo(self.price.mas_bottom).offset(KRateW(0));
-        make.height.mas_equalTo(KRateW(16.0));
-    }];
-    
-    [self.earnView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.name.mas_right);
-        make.centerY.equalTo(self.price);
-        make.height.mas_equalTo(KRateW(18.0));
-    }];
-}
 @end

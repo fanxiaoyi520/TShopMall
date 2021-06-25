@@ -74,6 +74,7 @@ UIKIT_EXTERN NSString * const kEditAddress;
 UIKIT_EXTERN NSString * const kDeleteAddress;
 UIKIT_EXTERN NSString * const kCustomerAddress;
 UIKIT_EXTERN NSString * const kAddressTag;
+UIKIT_EXTERN NSString * const kSmartAddress;
 
 #pragma mark - 我的
 UIKIT_EXTERN NSString * const kMineMerchantUserInformation;
