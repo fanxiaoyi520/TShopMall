@@ -7,6 +7,8 @@
 
 #import "TSBankCardViewController.h"
 #import "TSBankCardCell.h"
+#import "TSUnbundlingCardViewController.h"
+#import "TSAddCardViewController.h"
 
 @interface TSBankCardViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,TSBankCardFooterDelegate> {
     ///开始滑动时的 Y 值
@@ -35,6 +37,8 @@
     _firstRun=YES;
     _upSliding=YES;
     _bankNameArray=@[@"中国银行",@"建设银行",@"中信银行",@"中国农业银行"];
+    //_bankNameArray=@[@"中国银行",@"建设银行"];
+    //_bankNameArray = @[];
 }
 
 - (void)fillCustomView {
@@ -42,10 +46,13 @@
     
     UICollectionViewFlowLayout *flatout = [[UICollectionViewFlowLayout alloc] init];
     CGFloat width = kScreenWidth-32;
-    flatout.itemSize = CGSizeMake(width, 83);
-    //负值 折叠效果
-    flatout.minimumLineSpacing = -11;
-    
+    if (_bankNameArray.count < 3) {
+        flatout.itemSize = CGSizeMake(width, 120);
+        flatout.minimumLineSpacing = 11;
+    } else {
+        flatout.itemSize = CGSizeMake(width, 83);
+        flatout.minimumLineSpacing = -11;
+    }
     UICollectionView * collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0,GK_STATUSBAR_NAVBAR_HEIGHT, kScreenWidth, kScreenHeight-GK_STATUSBAR_NAVBAR_HEIGHT) collectionViewLayout:flatout];
     collectionView.dataSource=self;
     collectionView.delegate=self;
@@ -57,6 +64,7 @@
     [self.view addSubview:collectionView];
     [collectionView registerClass:[TSBankCardCell class] forCellWithReuseIdentifier:@"cellIdentifier"];
     [collectionView registerClass:[TSBankCardFooter class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"FooterView"];
+    [collectionView registerClass:[TSBankCardHeader class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView"];
 }
 
 // MARK: UICollectionViewDataSource
@@ -65,9 +73,7 @@
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     TSBankCardCell * cell =[collectionView dequeueReusableCellWithReuseIdentifier:@"cellIdentifier" forIndexPath:indexPath];
-    
-    cell.backgroundColor= [UIColor colorWithRed: arc4random_uniform(256)/255.0f green: arc4random_uniform(256)/255.0f blue: arc4random_uniform(256)/255.0f alpha:1];
-    cell.userName=@"高富帅";
+    [cell setModel:nil];
     cell.bankName=_bankNameArray[indexPath.row];
     cell.account=@"****  ****  ****  8888";
     return cell;
@@ -78,16 +84,29 @@
     return CGSizeMake(kScreenWidth, 67);
 }
 
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
+    if (!_bankNameArray || _bankNameArray.count == 0)
+        return CGSizeMake(kScreenWidth, 314);
+    return CGSizeMake(0, 0);
+}
+
+
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionReusableView *footerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"FooterView" forIndexPath:indexPath];
-    footerView.backgroundColor = KWhiteColor;
-
-    if ([footerView isKindOfClass:TSBankCardFooter.class]) {
-        TSBankCardFooter *kFooterView = (TSBankCardFooter *)footerView;
-        kFooterView.kDelegate = self;
+    UICollectionReusableView *reusableview = nil;
+    if (kind == UICollectionElementKindSectionHeader) {
+        UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView" forIndexPath:indexPath];
+        reusableview = headerView;
+    } else {
+        UICollectionReusableView *footerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"FooterView" forIndexPath:indexPath];
+        footerView.backgroundColor = KWhiteColor;
+        if ([footerView isKindOfClass:TSBankCardFooter.class]) {
+            TSBankCardFooter *kFooterView = (TSBankCardFooter *)footerView;
+            kFooterView.kDelegate = self;
+        }
+        reusableview = footerView;
     }
-    return footerView;
+    return reusableview;
 }
 
 // MARK: UICollectionViewDelegate
@@ -110,6 +129,12 @@
     }
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+
+    TSUnbundlingCardViewController *vc = [TSUnbundlingCardViewController new];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 // MARK: UIScrollViewDelegate
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     _startSlidingY = scrollView.contentOffset.y;
@@ -128,9 +153,8 @@
 
 // MARK: TSBankCardFooterDelegate
 - (void)bankCardFooterAddBankCardAction:(id)sender {
-    NSLog(@"添加银行卡");
+    TSAddCardViewController *vc = [TSAddCardViewController new];
+    [self.navigationController pushViewController:vc animated:YES];
 }
-
-// MARK: get
 
 @end

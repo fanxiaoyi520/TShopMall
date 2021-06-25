@@ -178,6 +178,12 @@
 		C3B4CCF02674934E0001EE75 /* TSQuickCheckView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B4CCE62674934B0001EE75 /* TSQuickCheckView.m */; };
 		C3B4CCF12674934E0001EE75 /* TSQuickLoginTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B4CCE82674934C0001EE75 /* TSQuickLoginTopView.m */; };
 		C3B4CCF22674934E0001EE75 /* TSCheckedView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B4CCEA2674934D0001EE75 /* TSCheckedView.m */; };
+		CE4F6BC826857AA400812275 /* TSUnbundlingCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4F6BC726857AA400812275 /* TSUnbundlingCardViewController.m */; };
+		CE4F6BCB268586BF00812275 /* TSOperationBankTipsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4F6BCA268586BF00812275 /* TSOperationBankTipsViewController.m */; };
+		CE4F6BCE26859D2600812275 /* TSAddCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4F6BCD26859D2600812275 /* TSAddCardViewController.m */; };
+		CE4F6BD126859ED300812275 /* TSAddBankCardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4F6BD026859ED300812275 /* TSAddBankCardCell.m */; };
+		CE4F6BD42685CEF200812275 /* TSSelectorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4F6BD32685CEF200812275 /* TSSelectorViewController.m */; };
+		CE4F6BD72685D30A00812275 /* TSSelectorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4F6BD62685D30A00812275 /* TSSelectorCell.m */; };
 		CE5674AE26831F0400252F5D /* TSMineMerchantUserInformationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5674AA26831F0300252F5D /* TSMineMerchantUserInformationModel.m */; };
 		CE5674AF26831F0400252F5D /* TSPartnerCenterData.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5674AC26831F0300252F5D /* TSPartnerCenterData.m */; };
 		CE5674B32683333400252F5D /* TSMineWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5674B22683333400252F5D /* TSMineWalletViewController.m */; };
@@ -798,6 +804,18 @@
 		C3B4CCEC2674934D0001EE75 /* TSRegisterTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSRegisterTopView.h; sourceTree = "<group>"; };
 		C4B53CFE051CAFD3DA82AB3F /* Pods-TShopMall-TShopMallUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TShopMall-TShopMallUITests.debug.xcconfig"; path = "Target Support Files/Pods-TShopMall-TShopMallUITests/Pods-TShopMall-TShopMallUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		CD1ABBE857D307088E9BF2DC /* libPods-TShopMall-TShopMallUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TShopMall-TShopMallUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE4F6BC626857AA400812275 /* TSUnbundlingCardViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSUnbundlingCardViewController.h; sourceTree = "<group>"; };
+		CE4F6BC726857AA400812275 /* TSUnbundlingCardViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSUnbundlingCardViewController.m; sourceTree = "<group>"; };
+		CE4F6BC9268586BF00812275 /* TSOperationBankTipsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSOperationBankTipsViewController.h; sourceTree = "<group>"; };
+		CE4F6BCA268586BF00812275 /* TSOperationBankTipsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSOperationBankTipsViewController.m; sourceTree = "<group>"; };
+		CE4F6BCC26859D2600812275 /* TSAddCardViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSAddCardViewController.h; sourceTree = "<group>"; };
+		CE4F6BCD26859D2600812275 /* TSAddCardViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSAddCardViewController.m; sourceTree = "<group>"; };
+		CE4F6BCF26859ED300812275 /* TSAddBankCardCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSAddBankCardCell.h; sourceTree = "<group>"; };
+		CE4F6BD026859ED300812275 /* TSAddBankCardCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSAddBankCardCell.m; sourceTree = "<group>"; };
+		CE4F6BD22685CEF200812275 /* TSSelectorViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSSelectorViewController.h; sourceTree = "<group>"; };
+		CE4F6BD32685CEF200812275 /* TSSelectorViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSSelectorViewController.m; sourceTree = "<group>"; };
+		CE4F6BD52685D30A00812275 /* TSSelectorCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSSelectorCell.h; sourceTree = "<group>"; };
+		CE4F6BD62685D30A00812275 /* TSSelectorCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSSelectorCell.m; sourceTree = "<group>"; };
 		CE5674AA26831F0300252F5D /* TSMineMerchantUserInformationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSMineMerchantUserInformationModel.m; sourceTree = "<group>"; };
 		CE5674AB26831F0300252F5D /* TSPartnerCenterData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSPartnerCenterData.h; sourceTree = "<group>"; };
 		CE5674AC26831F0300252F5D /* TSPartnerCenterData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSPartnerCenterData.m; sourceTree = "<group>"; };
@@ -1901,6 +1919,16 @@
 				CE66DAFA2684729600E8D433 /* TSPresentationController.m */,
 				CE66DB052684A50000E8D433 /* TSBankCardViewController.h */,
 				CE66DB062684A50000E8D433 /* TSBankCardViewController.m */,
+				CE4F6BC626857AA400812275 /* TSUnbundlingCardViewController.h */,
+				CE4F6BC726857AA400812275 /* TSUnbundlingCardViewController.m */,
+				CE4F6BC9268586BF00812275 /* TSOperationBankTipsViewController.h */,
+				CE4F6BCA268586BF00812275 /* TSOperationBankTipsViewController.m */,
+				CE4F6BCC26859D2600812275 /* TSAddCardViewController.h */,
+				CE4F6BCD26859D2600812275 /* TSAddCardViewController.m */,
+				CE4F6BD22685CEF200812275 /* TSSelectorViewController.h */,
+				CE4F6BD32685CEF200812275 /* TSSelectorViewController.m */,
+				CE4F6BD52685D30A00812275 /* TSSelectorCell.h */,
+				CE4F6BD62685D30A00812275 /* TSSelectorCell.m */,
 			);
 			path = Wallet;
 			sourceTree = "<group>";
@@ -1916,6 +1944,8 @@
 				CE66DAF12684222F00E8D433 /* TSWithdrawalRecordCell.m */,
 				CE66DB082684AA7C00E8D433 /* TSBankCardCell.h */,
 				CE66DB092684AA7C00E8D433 /* TSBankCardCell.m */,
+				CE4F6BCF26859ED300812275 /* TSAddBankCardCell.h */,
+				CE4F6BD026859ED300812275 /* TSAddBankCardCell.m */,
 			);
 			path = Wallet;
 			sourceTree = "<group>";
@@ -3728,6 +3758,7 @@
 				F54973C82668C1D600181E3F /* TSNotificationConst.m in Sources */,
 				DC45FEC32678425700CE762E /* TSHighPriceTagView.m in Sources */,
 				F530CE9326846E9C009DC29A /* NSString+Frame.m in Sources */,
+				CE4F6BD42685CEF200812275 /* TSSelectorViewController.m in Sources */,
 				F530CCF426804167009DC29A /* TSWKMessageHandlerDispatch.m in Sources */,
 				C3A6C4C2267A1C5700FC71D6 /* TSAboutMeTopCell.m in Sources */,
 				F530CD232680B8A0009DC29A /* TSProductHeaderView.m in Sources */,
@@ -3775,12 +3806,12 @@
 				042F423A2681A05C00555F5D /* TSRecommendCell.m in Sources */,
 				CE66DAF52684267B00E8D433 /* TSWithdrawalRecordModel.m in Sources */,
 				C25A7F8B26846AB00006C6AF /* TSMakeOrderPriceViewModel.m in Sources */,
-
 				F55D2D1A267B1AC5006BACCF /* TSBaseListController.m in Sources */,
 				DC3440D32672F62C00F5B0DA /* TSHomePageBaseCell.m in Sources */,
 				DC45FEBD26783A1300CE762E /* TSHomePageContainerCollectionView.m in Sources */,
 				F55D2C9D26745E64006BACCF /* TSUserInfoManager.m in Sources */,
 				F530CE8A26846B1F009DC29A /* TSConventionAlertView.m in Sources */,
+				CE4F6BD72685D30A00812275 /* TSSelectorCell.m in Sources */,
 				DCA035FB2683578C003DE5F7 /* NSObject+TSProperty.m in Sources */,
 				C2EF88D52670B8B900E7374A /* TSCartBaseCell.m in Sources */,
 				F55D2CEC2678A379006BACCF /* TSGoodDetailBannerCell.m in Sources */,
@@ -3811,6 +3842,7 @@
 				041131CF268096CB000B5BAF /* TSHotDataController.m in Sources */,
 				DFB3FFCF2684831200FC8FF9 /* TSPaySuccessViewController.m in Sources */,
 				DC3440C72672600600F5B0DA /* TSHomePageCategoryViewModel.m in Sources */,
+				CE4F6BD126859ED300812275 /* TSAddBankCardCell.m in Sources */,
 				F55D2ACD266F5C95006BACCF /* TSHomePageReleaseCell.m in Sources */,
 				C3A6C4E9267A1CAF00FC71D6 /* TSBindThirdDataController.m in Sources */,
 				F530CC6426803E43009DC29A /* Popover.m in Sources */,
@@ -3886,8 +3918,10 @@
 				F530CE7C26836CFB009DC29A /* TSUserInfoCell.m in Sources */,
 				C21A4B8A267B458D00766F72 /* TSAddressEditPastView.m in Sources */,
 				F54973C22668C0BC00181E3F /* TSDeviceHelper.m in Sources */,
+				CE4F6BCB268586BF00812275 /* TSOperationBankTipsViewController.m in Sources */,
 				042F42402681FDFE00555F5D /* TSRealNameInfoCell.m in Sources */,
 				C3A6C48F267A1C1700FC71D6 /* TSSettingSectionModel.m in Sources */,
+				CE4F6BCE26859D2600812275 /* TSAddCardViewController.m in Sources */,
 				F530CCB326803FCD009DC29A /* UIImage+TSColor.m in Sources */,
 				F55D2C792672F4E2006BACCF /* TSMineDataController.m in Sources */,
 				C21A4B90267C79D800766F72 /* TSAreaSelectedController.m in Sources */,
@@ -4009,6 +4043,7 @@
 				C2A34C962674BC2E0095497E /* TSSearchHeaderView.m in Sources */,
 				C3A6C4E0267A1CAF00FC71D6 /* TSPhoneNumDataController.m in Sources */,
 				F54973762668A31000181E3F /* main.m in Sources */,
+				CE4F6BC826857AA400812275 /* TSUnbundlingCardViewController.m in Sources */,
 				C22EE27A26807EF000E59C86 /* TSSearchResult.m in Sources */,
 				F55D2CCC26784ACD006BACCF /* TSMineEarningsCell.m in Sources */,
 				DC3440C426723D4D00F5B0DA /* TSHomePageBannerViewModel.m in Sources */,

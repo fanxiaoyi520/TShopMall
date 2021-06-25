@@ -150,12 +150,14 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.item == 0) {//测试我的订单
-        TSPaySuccessViewController *orderVc = [[TSPaySuccessViewController alloc] init];
-        //TSOrderManageViewController *orderVc = [[TSOrderManageViewController alloc] init];
-        [self.navigationController pushViewController:orderVc animated:YES];
-    } else if (indexPath.section == 1) {
+//        TSPaySuccessViewController *orderVc = [[TSPaySuccessViewController alloc] init];
+//        //TSOrderManageViewController *orderVc = [[TSOrderManageViewController alloc] init];
+//        [self.navigationController pushViewController:orderVc animated:YES];
         TSMineWalletCenterViewController *vc = [TSMineWalletCenterViewController new];
         [self.navigationController pushViewController:vc animated:YES];
+    } else if (indexPath.section == 1) {
+//        TSMineWalletCenterViewController *vc = [TSMineWalletCenterViewController new];
+//        [self.navigationController pushViewController:vc animated:YES];
     } else if (indexPath.section == 2) {
         
     }

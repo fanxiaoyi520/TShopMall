@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,retain)NSString * userName;
 @property(nonatomic,retain)NSString * bankName;
 @property(nonatomic,retain)NSString * account;
+
+- (void)setModel:(id _Nullable)model;
 @end
 
 @interface TSBankCardHeader : UICollectionReusableView
@@ -22,12 +24,21 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 @protocol TSBankCardFooterDelegate <NSObject>
-
 - (void)bankCardFooterAddBankCardAction:(id _Nullable)sender;
-
 @end
+
 @interface TSBankCardFooter : UICollectionReusableView
 
 @property (nonatomic ,assign)id <TSBankCardFooterDelegate> kDelegate;
+@end
+
+
+
+@protocol TSBankCardUnbundlingFooterDelegate <NSObject>
+- (void)bankCardFooterBankCardUnbundlingAction:(id _Nullable)sender;
+@end
+@interface TSBankCardUnbundlingFooter : UICollectionReusableView
+
+@property (nonatomic ,assign)id <TSBankCardUnbundlingFooterDelegate> kDelegate;
 @end
 NS_ASSUME_NONNULL_END
