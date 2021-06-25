@@ -75,6 +75,12 @@
     return _dataController;
 }
 
+#pragma mark - Actions
+/** 绑定手机号的操作 */
+- (void)bindMobile:(NSString *)phoneNumber code:(NSString *)code {
+    
+}
+
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return self.dataController.sections.count;
@@ -104,6 +110,15 @@
 - (id)universalCollectionViewCellModel:(NSIndexPath *)indexPath{
     TSBindMobileSectionModel *sectionModel = self.dataController.sections[indexPath.section];
     return sectionModel.items[indexPath.row];
+}
+
+- (void)universalCollectionViewCellClick:(NSIndexPath *)indexPath params:(NSDictionary *)params {
+    NSString *cellType = params[@"cellType"];
+    if ([cellType isEqualToString:@"TSBindMobileCell"] && [params[@"commitType"] integerValue] == 1) {///提交按钮
+        NSString *mobileNumber = params[@"MobileNumber"];///手机号
+        NSString *code = params[@"CodeNumber"];///验证码
+        [self bindMobile:mobileNumber code:code];
+    }
 }
 
 #pragma mark - UniversalFlowLayoutDelegate

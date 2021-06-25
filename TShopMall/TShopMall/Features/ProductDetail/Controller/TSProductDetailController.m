@@ -83,6 +83,16 @@
         __strong __typeof(weakSelf)strongSelf = weakSelf;
         if (isSucess) {
             [strongSelf.collectionView reloadData];
+            
+            //检查商品库存
+            [strongSelf.dataController fetchProductDetailHasProduct:self.dataController.skuNo
+                                                     areaUuid:@"15845"
+                                                  parentSkuNo:self.dataController.parentSkuNo
+                                                       buyNum:@"1"
+                                                       region:@"1385"
+                                                     complete:^(BOOL isSucess) {
+                    
+            }];
         }
     }];
     
@@ -97,15 +107,7 @@
         }
     }];
     
-    //检查商品库存
-    [self.dataController fetchProductDetailHasProduct:@""
-                                             areaUuid:@""
-                                          parentSkuNo:@""
-                                               buyNum:@""
-                                               region:@""
-                                             complete:^(BOOL isSucess) {
-            
-    }];
+
     
     self.dragView.clickDragViewBlock = ^(WMDragView *dragView){
         NSLog(@"clickDragViewBlock");
@@ -326,11 +328,14 @@
         return;
     }
     
-    [self.dataController fetchProductDetailAddProductToCart:self.uuid
-                                                     buyNum:@"1"
-                                                     attrId:self.dataController.attrId
-                                                   complete:^(BOOL isSucess) {
+    [self.dataController fetchProductDetailCustomBuy:@""
+                                            complete:^(BOOL isSucess) {
+        
+        if (isSucess) {
             
+            NSLog(@"-------");
+        }
+        
     }];
 }
 

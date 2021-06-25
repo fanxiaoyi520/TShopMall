@@ -33,5 +33,25 @@
         complete(YES);
     }
 }
+/** 获取更换手机号的数据 */
+- (void)fetchChangeMobileContentsComplete:(void (^)(BOOL))complete {
+    NSMutableArray *sections = [NSMutableArray array];
+    {
+        NSMutableArray *items = [NSMutableArray array];
+        TSBindMobileSectionItemModel *item = [[TSBindMobileSectionItemModel alloc] init];
+        item.cellHeight = kScreenHeight;
+        item.oldMobile = @"18175753790";///获取旧手机号
+        item.identify = @"TSChangeMobileCell";
+        [items addObject:item];
+        TSBindMobileSectionModel *section = [[TSBindMobileSectionModel alloc] init];
+        section.column = 1;
+        section.items = items;
+        [sections addObject:section];
+    }
+    self.sections = sections;
+    if (complete) {
+        complete(YES);
+    }
+}
 
 @end

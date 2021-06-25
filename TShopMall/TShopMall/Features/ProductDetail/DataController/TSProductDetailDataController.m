@@ -11,6 +11,8 @@
 
 @interface TSProductDetailDataController()<YTKChainRequestDelegate>
 
+@property(nonatomic, copy) void (^customBuyBlock) (BOOL isScuess);
+
 @property (nonatomic, strong) NSMutableArray <TSGoodDetailSectionModel *> *sections;
 
 @end
@@ -132,6 +134,11 @@
         
         NSDictionary *data = request.responseJSONObject[@"data"];
         NSDictionary *productModel = data[@"productModel"];
+        NSDictionary *productSku = data[@"productSku"];
+        self.skuNo = productSku[@"skuNo"];
+        self.parentSkuNo = productSku[@"parentSkuNo"];
+        self.productUuid = productSku[@"productUuid"];
+        
 
         {//banner
             
@@ -309,7 +316,7 @@
     [params setValue:buyNum forKey:@"buyNum"];
     [params setValue:region forKey:@"region"];
     
-    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kGoodDetailAddProductToCartUrl
+    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kGoodDetailHasProductUrl
                                                                requestMethod:YTKRequestMethodGET
                                                        requestSerializerType:YTKRequestSerializerTypeJSON
                                                       responseSerializerType:YTKResponseSerializerTypeJSON
@@ -332,10 +339,11 @@
 -(void)fetchProductDetailCustomBuy:(NSString *)suitUuid
                           complete:(void(^)(BOOL isSucess))complete{
     
+    self.customBuyBlock = complete;
+    
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setValue:@"allRecords" forKey:@"productIdAndAttrId"];
     [params setValue:@"false" forKey:@"chooseState"];
-    [params setValue:suitUuid forKey:@"suitUuid"];
     
     SSGenaralRequest *update = [[SSGenaralRequest alloc] initWithRequestUrl:kGoodDetailChangeChooseUrl
                                                               requestMethod:YTKRequestMethodPOST
@@ -345,22 +353,28 @@
                                                                 requestBody:params
                                                              needErrorToast:YES];
     
-    SSGenaralRequest *fastBuy = [[SSGenaralRequest alloc] initWithRequestUrl:kGoodDetailChangeChooseUrl
-                                                               requestMethod:YTKRequestMethodPOST
-                                                       requestSerializerType:YTKRequestSerializerTypeHTTP
+    NSMutableDictionary *fast = [NSMutableDictionary dictionary];
+    [fast setValue:self.productUuid forKey:@"productUuid"];
+    [fast setValue:self.skuNo forKey:@"attrId"];
+    [fast setValue:@"true" forKey:@"noCart"];
+    
+    SSGenaralRequest *fastBuy = [[SSGenaralRequest alloc] initWithRequestUrl:kGoodDetailFastBuyUrl
+                                                               requestMethod:YTKRequestMethodGET
+                                                       requestSerializerType:YTKRequestSerializerTypeJSON
                                                       responseSerializerType:YTKResponseSerializerTypeJSON
                                                                requestHeader:@{}
-                                                                 requestBody:params
+                                                                 requestBody:fast
                                                               needErrorToast:YES];
-    
-    
+
+
     YTKChainRequest *chainReq = [[YTKChainRequest alloc] init];
     [chainReq addRequest:update callback:^(YTKChainRequest * _Nonnull chainRequest, YTKBaseRequest * _Nonnull baseRequest) {
+
         SSGenaralRequest *update = (SSGenaralRequest *)baseRequest;
-  
+
         [chainRequest addRequest:fastBuy callback:nil];
     }];
-    
+
     chainReq.delegate = self;
     [chainReq start];
     
@@ -368,7 +382,11 @@
 
 #pragma mark - YTKChainRequestDelegate
 - (void)chainRequestFinished:(YTKChainRequest *)chainRequest{
+    NSArray *chain = chainRequest.requestArray;
+    SSGenaralRequest *update = [chain firstObject];
+    SSGenaralRequest *fast = [chain lastObject];
     
+    self.customBuyBlock(YES);
 }
 
 - (void)chainRequestFailed:(YTKChainRequest *)chainRequest failedBaseRequest:(YTKBaseRequest*)request{

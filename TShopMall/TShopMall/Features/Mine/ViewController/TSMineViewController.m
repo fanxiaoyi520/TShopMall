@@ -18,9 +18,6 @@
 
 #import "TSMineWalletViewController.h"
 #import "TSSettingViewController.h"
-#import "TSOrderManageViewController.h"
-#import "TSPayOrderViewController.h"
-#import "TSPaySuccessViewController.h"
 #import "TSHybridViewController.h"
 
 @interface TSMineViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate,TSUserInfoViewDelegate,TSMineOrderHeaderViewDelegate>
@@ -149,7 +146,6 @@
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    
     //我的订单
     if (indexPath.section == 0 && indexPath.row == 0) {//待付款
         NSString *path = [NSString stringWithFormat:@"%@%@?&orderType=%@&orderState=%@rightbutoon=show",kMallH5ApiPrefix,kMallH5OrderManageUrl,@"1",@"1"];
