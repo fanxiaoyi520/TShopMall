@@ -247,8 +247,8 @@
         if ((self.codeButton.isEnabled && !enabled) || (!self.codeButton.isEnabled && enabled)) {
             self.codeButton.backgroundColor = enabled ? KHexColor(@"#41A98F") : KHexColor(@"#D7D8D8");
             self.codeButton.enabled = enabled;
-            [self.codeButton setTitle:codeTitle forState:UIControlStateNormal];
         }
+        [self.codeButton setTitle:codeTitle forState:UIControlStateNormal];
     }
 }
 
@@ -295,8 +295,10 @@
 
 #pragma mark - UIControlEventEditingChanged
 - (void)textFieldDidChangeValue:(UITextField *)textfield {
-    if ([TSTools isPhoneNumber:self.phoneInput.text]) {
+    if ([TSTools isPhoneNumber:self.phoneInput.text] && textfield == self.phoneInput) {
         [self setCodeButtonTitleAndColor:@"获取验证码" isResend:NO enabled:YES];
+        
+    } else if ([TSTools isPhoneNumber:self.phoneInput.text])  {
         if (self.codeInput.text.length && self.invitedCodeInput.text.length && [self.delegate respondsToSelector:@selector(inputDoneAction)]) {
             if (!self.registerButton.isEnabled) {
                 [self.delegate inputDoneAction];
