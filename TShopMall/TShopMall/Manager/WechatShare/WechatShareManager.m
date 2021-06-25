@@ -50,25 +50,43 @@
         switch (response.errCode) {
             case WXSuccess: {
                 NSLog(@"微信分享成功");
+                if (self.WXSuccess) {
+                    self.WXSuccess();
+                }
                 break;
             }
             case WXErrCodeCommon: {
                 NSLog(@"微信分享异常");
+                if (self.WXFail) {
+                    self.WXFail(@"微信分享异常");
+                }
                 break;
             }
             case WXErrCodeUserCancel: {
                 NSLog(@"微信分享取消");
+                if (self.WXFail) {
+                    self.WXFail(@"微信分享取消");
+                }
                 break;
             }
             case WXErrCodeSentFail: {
+                if (self.WXFail) {
+                    self.WXFail(@"微信分享失败");
+                }
                 NSLog(@"微信分享失败");
                 break;
             }
             case WXErrCodeAuthDeny: {
+                if (self.WXFail) {
+                    self.WXFail(@"微信分享授权失败");
+                }
                 NSLog(@"微信分享授权失败");
                 break;
             }
             case WXErrCodeUnsupport: {
+                if (self.WXFail) {
+                    self.WXFail(@"微信分享版本暂不支持");
+                }
                 NSLog(@"微信分享版本暂不支持");
                 break;
             }

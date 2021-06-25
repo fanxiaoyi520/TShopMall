@@ -28,8 +28,11 @@
 #import <MJRefresh/MJRefresh.h>
 #import <Photos/Photos.h>
 #import <IQKeyboardManager/IQKeyboardManager.h>
+#import "WechatShareManager.h"
 
-@interface TSProductDetailController ()<UICollectionViewDelegate,UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate,TSTopFunctionViewDelegate,TSChangePriceViewDelegate,ProductDetailBottomViewDelegate,SnailQuickMaskPopupsDelegate,GoodDetailMaterialViewDelegate>
+
+
+@interface TSProductDetailController ()<UICollectionViewDelegate,UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate,TSTopFunctionViewDelegate,TSChangePriceViewDelegate,ProductDetailBottomViewDelegate,SnailQuickMaskPopupsDelegate,GoodDetailMaterialViewDelegate, TSDetailShareViewDelegate>
 
 @property(nonatomic, strong) UIButton *topCartBtn;;
 
@@ -107,6 +110,15 @@
     self.dragView.clickDragViewBlock = ^(WMDragView *dragView){
         NSLog(@"clickDragViewBlock");
     };
+    
+//    WechatShareManager * shareManager = [WechatShareManager shareInstance];
+//    shareManager.WXSuccess = ^{
+//        [self.sharePopups dismissAnimated:YES completion:nil];
+//
+//    };
+//    shareManager.WXFail = ^(NSString *msg) {
+//        [Popover popToastOnWindowWithText:msg];
+//    };
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -533,6 +545,25 @@ spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
     return model.spacingWithLastSection;
 }
 
+#pragma mark - TSDetailShareViewDelegate
+
+- (void)shareViewView:(UIView *)view closeClick:(UIButton *)sender{
+}
+
+- (void)shareViewView:(UIView *)view shareFriendsAction:(UIButton *)sender{
+    [[WechatShareManager shareInstance] shareWXWithTitle:@"标题" andDescription:@"描述" andShareURL:@"http://www.baidu.com" andThumbImage:nil andWXScene:WechatShareTypeFriends];
+   
+}
+
+- (void)shareViewView:(UIView *)view sharePYQAction:(UIButton *)sender{
+    [[WechatShareManager shareInstance] shareWXWithTitle:@"标题" andDescription:@"描述" andShareURL:@"http://www.baidu.com" andThumbImage:nil andWXScene:WechatShareTypeTimeline];
+
+}
+
+- (void)shareViewView:(UIView *)view downloadAction:(UIButton *)sender{
+    
+}
+
 #pragma mark - Private
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error  contextInfo:(void *)contextInfo{
     PHAuthorizationStatus status = [PHPhotoLibrary authorizationStatus];
@@ -658,6 +689,7 @@ spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
 -(SnailQuickMaskPopups *)sharePopups{
     if (!_sharePopups) {
         TSDetailShareView *shareView = [[TSDetailShareView alloc] init];
+        shareView.delegate = self;
         shareView.frame = CGRectMake(0, 0, kScreenWidth, 180);
         [shareView setCorners:(UIRectCornerTopLeft | UIRectCornerTopRight) radius:8.0];
         shareView.clipsToBounds = YES;

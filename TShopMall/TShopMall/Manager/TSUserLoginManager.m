@@ -13,7 +13,7 @@
 #import <NTESQuickPass/NTESQuickPass.h>
 #import "NTESQLHomePageCustomUIModel.h"
 @interface TSUserLoginManager ()
-
+@property (nonatomic, strong) UIViewController *loginVC;
 @end
 
 @implementation TSUserLoginManager
