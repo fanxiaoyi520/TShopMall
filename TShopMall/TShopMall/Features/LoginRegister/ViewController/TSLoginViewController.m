@@ -201,13 +201,6 @@
 - (void)goToRegister {
     if (self.navigationController) {
         TSRegiterViewController *registerVC = [[TSRegiterViewController alloc] init];
-        registerVC.regiterBlock = ^{
-            [self dismissViewControllerAnimated:YES completion:^{
-                if (self.loginBlock) {
-                    self.loginBlock();
-                }
-            }];
-        };
         registerVC.dataController = self.dataController;
         [self.navigationController pushViewController:registerVC animated:YES];
     } else {
@@ -291,9 +284,12 @@
         [self.dataController fetchLoginByToken:token platformId:@"15" sucess:^(BOOL isHaveMobile, NSString * _Nonnull token) {
             if (isHaveMobile) {
                 /// 完成登录
-                if (self.loginBlock) {
-                    self.loginBlock();
-                }
+                [self dismissViewControllerAnimated:YES completion:^{
+                    if (self.loginBlock) {
+                        self.loginBlock();
+                    }
+                    
+                }];
             }
             else{
                 [[NTESQuickLoginManager sharedInstance] closeAuthController:^{
@@ -452,14 +448,14 @@
             [self.dataController fetchLoginByAuthCode:code platformId:@"3" sucess:^(BOOL isHaveMobile, NSString * _Nonnull token) {
                 if (isHaveMobile) {
                     /// 完成登录
-                    if (self.loginBlock) {
-                        self.loginBlock();
-                    }
+                    [self dismissViewControllerAnimated:YES completion:^{
+                        if (self.loginBlock) {
+                            self.loginBlock();
+                        }
+                        
+                    }];
                 }
                 else{
-                    [[NTESQuickLoginManager sharedInstance] closeAuthController:^{
-
-                     }];
                     /// 跳转绑定手机号
                     [self dismissViewControllerAnimated:NO completion:^{
                         if (self.bindBlock) {

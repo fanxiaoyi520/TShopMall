@@ -67,7 +67,16 @@
                         NSNumber *boolNum = [resultDic2 objectForKey:@"success"];
                         BOOL success = [boolNum boolValue];
                         if (success) {
-                        
+                            [self.dataController fetchOneStepLoginToken:[resultDic1 objectForKey:@"token"] accessToken:[resultDic2 objectForKey:@"accessToken"] complete:^(BOOL isSucess) {
+                                if (isSucess) {
+                                    [self dismissViewControllerAnimated:YES completion:^{
+                                        if (self.loginBlock) {
+                                            self.loginBlock();
+                                        }
+                                        
+                                    }];
+                                }
+                            }];
                             
                         } else {
                              // 取号失败
@@ -107,16 +116,19 @@
         [manager authorizationAppleID];
         manager.loginByTokenBlock = ^(NSString * _Nonnull token) {
             [self.dataController fetchLoginByToken:token platformId:@"15" sucess:^(BOOL isHaveMobile, NSString * _Nonnull token) {
+                [[NTESQuickLoginManager sharedInstance] closeAuthController:^{
+
+                 }];
                 if (isHaveMobile) {
                     /// 完成登录
-                    if (self.loginBlock) {
-                        self.loginBlock();
-                    }
+                    [self dismissViewControllerAnimated:YES completion:^{
+                        if (self.loginBlock) {
+                            self.loginBlock();
+                        }
+                        
+                    }];
                 }
                 else{
-                    [[NTESQuickLoginManager sharedInstance] closeAuthController:^{
-
-                     }];
                     [self dismissViewControllerAnimated:NO completion:^{
                         if (self.bindBlock) {
                             self.bindBlock();
@@ -161,16 +173,19 @@
         @strongify(self)
         if (code) {
             [self.dataController fetchLoginByAuthCode:code platformId:@"3" sucess:^(BOOL isHaveMobile, NSString * _Nonnull token) {
+                [[NTESQuickLoginManager sharedInstance] closeAuthController:^{
+
+                 }];
                 if (isHaveMobile) {
                     /// 完成登录
-                    if (self.loginBlock) {
-                        self.loginBlock();
-                    }
+                    [self dismissViewControllerAnimated:YES completion:^{
+                        if (self.loginBlock) {
+                            self.loginBlock();
+                        }
+                        
+                    }];
                 }
                 else{
-                    [[NTESQuickLoginManager sharedInstance] closeAuthController:^{
-
-                     }];
                     /// 跳转绑定手机号
                     [self dismissViewControllerAnimated:NO completion:^{
                         if (self.bindBlock) {
