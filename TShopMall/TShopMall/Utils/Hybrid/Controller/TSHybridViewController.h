@@ -62,6 +62,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 菜单数据
 @property (nonatomic, strong) NSDictionary *menuParams;
 
+/// 是否是发票页面
+@property(nonatomic, assign) BOOL isInvoice;
+
 /// 调用js方法
 -(void)evaluateWebViewInitData;
 

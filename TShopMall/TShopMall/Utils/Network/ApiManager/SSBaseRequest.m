@@ -13,7 +13,7 @@
 #pragma mark - 失败处理器（stateCode != 200）
 -(void)requestFailedFilter{
     SSResponseModel *reponseModel = [[SSResponseModel alloc] init];
-    reponseModel.stateCode = @"500";
+    reponseModel.stateCode = 500;
     self.responseModel = reponseModel;
 }
 

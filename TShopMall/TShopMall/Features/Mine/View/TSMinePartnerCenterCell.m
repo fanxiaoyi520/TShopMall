@@ -137,7 +137,11 @@
 
 #pragma mark - Actions
 -(void)moreAction:(TSMineMoreButton *)sender{
-    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setValue:@"TSMinePartnerCenterCell" forKey:@"cellType"];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(universalCollectionViewCellClick:params:)]) {
+        [self.delegate universalCollectionViewCellClick:self.indexPath params:params];
+    }
 }
 
 #pragma mark - Getter
