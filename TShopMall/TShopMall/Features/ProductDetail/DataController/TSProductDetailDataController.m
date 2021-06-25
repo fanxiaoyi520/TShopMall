@@ -11,6 +11,8 @@
 
 @interface TSProductDetailDataController()<YTKChainRequestDelegate>
 
+@property(nonatomic, copy) void (^customBuyBlock) (BOOL isScuess);
+
 @property (nonatomic, strong) NSMutableArray <TSGoodDetailSectionModel *> *sections;
 
 @end
@@ -76,7 +78,7 @@
     }
 
     {//复制文案 4
-        TSGoodDetailItemPriceModel *item = [[TSGoodDetailItemPriceModel alloc] init];
+        TSGoodDetailItemCopyModel *item = [[TSGoodDetailItemCopyModel alloc] init];
         item.cellHeight = 151;
         item.identify = @"TSGoodDetailCopyWriterCell";
 
@@ -132,6 +134,11 @@
         
         NSDictionary *data = request.responseJSONObject[@"data"];
         NSDictionary *productModel = data[@"productModel"];
+        NSDictionary *productSku = data[@"productSku"];
+        self.skuNo = productSku[@"skuNo"];
+        self.parentSkuNo = productSku[@"parentSkuNo"];
+        self.productUuid = productSku[@"productUuid"];
+        
 
         {//banner
             
@@ -214,6 +221,17 @@
             item.materialModels = models;
         }
         
+        {//商品文案
+            
+            NSDictionary *productInfo = productModel[@"productInfo"];
+            
+            TSGoodDetailSectionModel *section = self.sections[4];
+            TSGoodDetailItemCopyModel *item = (TSGoodDetailItemCopyModel *)[section.items firstObject];
+            item.writeStr = productInfo[@"productShareContent"];
+            item.writeStr = @"dfdfs";
+            
+        }
+        
         {//详情
             TSGoodDetailSectionModel *section = [self.sections lastObject];
             NSDictionary *productDescription = productModel[@"productDescription"];
@@ -273,12 +291,14 @@
                                                                requestHeader:@{}
                                                                  requestBody:@{}
                                                               needErrorToast:NO];
-    [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
-        
-
+    [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+        if (request.responseModel.isSucceed) {
+            self.cartNumber = [NSString stringWithFormat:@"%@",request.responseModel.originalData[@"data"]];
+            complete(YES);
+        }
         
         } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-            NSLog(@"-----");
+            complete(NO);
     }];
 }
 
@@ -296,7 +316,7 @@
     [params setValue:buyNum forKey:@"buyNum"];
     [params setValue:region forKey:@"region"];
     
-    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kGoodDetailAddProductToCartUrl
+    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kGoodDetailHasProductUrl
                                                                requestMethod:YTKRequestMethodGET
                                                        requestSerializerType:YTKRequestSerializerTypeJSON
                                                       responseSerializerType:YTKResponseSerializerTypeJSON
@@ -319,10 +339,11 @@
 -(void)fetchProductDetailCustomBuy:(NSString *)suitUuid
                           complete:(void(^)(BOOL isSucess))complete{
     
+    self.customBuyBlock = complete;
+    
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setValue:@"allRecords" forKey:@"productIdAndAttrId"];
     [params setValue:@"false" forKey:@"chooseState"];
-    [params setValue:suitUuid forKey:@"suitUuid"];
     
     SSGenaralRequest *update = [[SSGenaralRequest alloc] initWithRequestUrl:kGoodDetailChangeChooseUrl
                                                               requestMethod:YTKRequestMethodPOST
@@ -332,22 +353,28 @@
                                                                 requestBody:params
                                                              needErrorToast:YES];
     
-    SSGenaralRequest *fastBuy = [[SSGenaralRequest alloc] initWithRequestUrl:kGoodDetailChangeChooseUrl
-                                                               requestMethod:YTKRequestMethodPOST
-                                                       requestSerializerType:YTKRequestSerializerTypeHTTP
+    NSMutableDictionary *fast = [NSMutableDictionary dictionary];
+    [fast setValue:self.productUuid forKey:@"productUuid"];
+    [fast setValue:self.skuNo forKey:@"attrId"];
+    [fast setValue:@"true" forKey:@"noCart"];
+    
+    SSGenaralRequest *fastBuy = [[SSGenaralRequest alloc] initWithRequestUrl:kGoodDetailFastBuyUrl
+                                                               requestMethod:YTKRequestMethodGET
+                                                       requestSerializerType:YTKRequestSerializerTypeJSON
                                                       responseSerializerType:YTKResponseSerializerTypeJSON
                                                                requestHeader:@{}
-                                                                 requestBody:params
+                                                                 requestBody:fast
                                                               needErrorToast:YES];
-    
-    
+
+
     YTKChainRequest *chainReq = [[YTKChainRequest alloc] init];
     [chainReq addRequest:update callback:^(YTKChainRequest * _Nonnull chainRequest, YTKBaseRequest * _Nonnull baseRequest) {
+
         SSGenaralRequest *update = (SSGenaralRequest *)baseRequest;
-  
+
         [chainRequest addRequest:fastBuy callback:nil];
     }];
-    
+
     chainReq.delegate = self;
     [chainReq start];
     
@@ -355,7 +382,11 @@
 
 #pragma mark - YTKChainRequestDelegate
 - (void)chainRequestFinished:(YTKChainRequest *)chainRequest{
+    NSArray *chain = chainRequest.requestArray;
+    SSGenaralRequest *update = [chain firstObject];
+    SSGenaralRequest *fast = [chain lastObject];
     
+    self.customBuyBlock(YES);
 }
 
 - (void)chainRequestFailed:(YTKChainRequest *)chainRequest failedBaseRequest:(YTKBaseRequest*)request{

@@ -17,6 +17,7 @@
 #import "YBNestViews.h"
 #import "TSHomePageLoginBarView.h"
 #import "TSHomePagePerchView.h"
+#import "TSBindMobileController.h"
 
 #import "TSProductDetailController.h"
 #import "RefreshGifHeader.h"
@@ -243,8 +244,12 @@
 //    [[TSUserInfoManager userInfo] clearUserInfo];
 //    return;
     
-    TSCategoryViewController *category = [[TSCategoryViewController alloc] init];
-    [self.navigationController pushViewController:category animated:YES];
+    //调试用，到时删除
+    TSBindMobileController *bind = [TSBindMobileController new];
+    [self.navigationController pushViewController:bind animated:YES];
+    
+//    TSCategoryViewController *category = [[TSCategoryViewController alloc] init];
+//    [self.navigationController pushViewController:category animated:YES];
 }
 
 #pragma mark - Getter

@@ -311,6 +311,7 @@
         _inputTF.textColor = KTextColor;
         _inputTF.font = KRegularFont(14);
         _inputTF.backgroundColor = KHexColor(@"#F4F4F4");
+        _inputTF.keyboardType = UIKeyboardTypeNumberPad;
     }
     return _inputTF;
 }

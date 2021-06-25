@@ -30,6 +30,10 @@ UIKIT_EXTERN NSString *const kRegisterUrl;
 UIKIT_EXTERN NSString *const kLogoutUrl;
 ///  一键登录
 UIKIT_EXTERN NSString *const kOneStepLoginUrl;
+///  第三方Token登录接口
+UIKIT_EXTERN NSString *const kLoginByTokenUrl;
+/// 将第三方应用如微信小程序通过授权码登录
+UIKIT_EXTERN NSString *const kLoginByAuthCode;
 
 #pragma mark - 首页
 UIKIT_EXTERN NSString *const kHomePageInfoUrl;
