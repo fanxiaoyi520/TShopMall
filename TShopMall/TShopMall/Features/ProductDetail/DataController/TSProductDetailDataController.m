@@ -390,7 +390,7 @@
 }
 
 - (void)chainRequestFailed:(YTKChainRequest *)chainRequest failedBaseRequest:(YTKBaseRequest*)request{
-    
+    NSLog(@"---");
 }
 
 #pragma mark - private method
