@@ -14,6 +14,7 @@
 #import "AuthAppleIDManager.h"
 #import <AuthenticationServices/AuthenticationServices.h>
 #import "TSLoginRegisterDataController.h"
+#import "TSBindMobileController.h"
 
 @interface TSOneClickLoginViewController ()<TSHybridViewControllerDelegate, NTESQuickLoginManagerDelegate>
 @property (nonatomic, strong) NTESQuickLoginModel  *customModel;
@@ -96,7 +97,24 @@
         }];
     };
     uiModel.appleLoginBlock = ^{
-        [[AuthAppleIDManager sharedInstance] authorizationAppleID];
+        @strongify(self)
+        AuthAppleIDManager *manager = [AuthAppleIDManager sharedInstance];
+        [manager authorizationAppleID];
+        manager.loginByTokenBlock = ^(NSString * _Nonnull token) {
+            [self.dataController fetchLoginByToken:token platformId:@"15" sucess:^(BOOL isHaveMobile, NSString * _Nonnull token) {
+                if (isHaveMobile) {
+                    /// 完成登录
+                    if (self.loginBlock) {
+                        self.loginBlock();
+                    }
+                }
+                else{
+                    /// 跳转绑定手机号
+                    TSBindMobileController *vc = [TSBindMobileController new];
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
+            }];
+        };
     };
     uiModel.weChatLoginBlock = ^{
         @strongify(self)
@@ -130,6 +148,7 @@
 
     };
     payManager.WXSuccess = ^(NSString *code){
+        @strongify(self)
         if (code) {
             [self.dataController fetchLoginByAuthCode:code platformId:@"3" sucess:^(BOOL isHaveMobile, NSString * _Nonnull token) {
                 if (isHaveMobile) {
@@ -140,7 +159,8 @@
                 }
                 else{
                     /// 跳转绑定手机号
-                    
+                    TSBindMobileController *vc = [TSBindMobileController new];
+                    [self.navigationController pushViewController:vc animated:YES];
                 }
             }];
         }

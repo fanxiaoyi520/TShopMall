@@ -10,6 +10,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface AuthAppleIDManager : NSObject
+@property (nonatomic, copy) void(^ loginByTokenBlock)(NSString *token);
+
 + (id)sharedInstance;
 - (void)authorizationAppleID;
 

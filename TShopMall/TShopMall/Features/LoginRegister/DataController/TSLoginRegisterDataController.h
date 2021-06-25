@@ -40,6 +40,10 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)fetchLoginByAuthCode:(NSString *)code
                     platformId:(NSString *)platformId
                      sucess:(void(^)(BOOL isHaveMobile, NSString *token))complete;
+
+- (void)fetchLoginByToken:(NSString *)token
+                    platformId:(NSString *)platformId
+                   sucess:(void(^)(BOOL isHaveMobile, NSString *token))complete;
 @end
 
 NS_ASSUME_NONNULL_END

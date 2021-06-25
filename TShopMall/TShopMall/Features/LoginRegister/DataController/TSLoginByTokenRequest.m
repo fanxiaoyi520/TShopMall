@@ -43,18 +43,18 @@
     return YTKRequestMethodPOST;
 }
 
--(NSDictionary<NSString *,NSString *> *)requestHeaderFieldValueDictionary{
-    NSMutableDictionary *comHeader = [self commonHeader];
-    return comHeader;
-}
-
--(id)requestArgument{
-    
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    
-    NSMutableDictionary *comBody = [self commonBady];
-    [comBody setValuesForKeysWithDictionary:params];
-    return comBody;
-}
+//-(NSDictionary<NSString *,NSString *> *)requestHeaderFieldValueDictionary{
+//    NSMutableDictionary *comHeader = [self commonHeader];
+//    return comHeader;
+//}
+//
+//-(id)requestArgument{
+//    
+//    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+//    
+//    NSMutableDictionary *comBody = [self commonBady];
+//    [comBody setValuesForKeysWithDictionary:params];
+//    return comBody;
+//}
 
 @end

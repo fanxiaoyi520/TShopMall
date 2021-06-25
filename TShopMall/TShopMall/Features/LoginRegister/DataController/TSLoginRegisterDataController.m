@@ -12,6 +12,7 @@
 
 #import "TSUserInfoManager.h"
 #import "TSLoginByAuthCodeRequest.h"
+#import "TSLoginByTokenRequest.h"
 
 @implementation TSLoginRegisterDataController
 
@@ -177,9 +178,9 @@
     [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
         if (request.responseModel.isSucceed) {
             NSDictionary *dic = request.responseModel.data;
-            if ([dic[@"flag"] intValue] == 0) {
+            if ([dic[@"flag"] intValue] == 1) {
                 complete(NO, dic[@"token"]);
-            }else{
+            }else if([dic[@"flag"] intValue] == 3){
                 complete(YES, dic[@"token"]);
             }
            
@@ -189,6 +190,34 @@
         }
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
     
+    }];
+}
+
+- (void)fetchLoginByToken:(NSString *)token
+                    platformId:(NSString *)platformId
+                     sucess:(void(^)(BOOL isHaveMobile, NSString *token))complete{
+
+    TSLoginByTokenRequest *request = [[TSLoginByTokenRequest alloc] initWithToken:token platformId:platformId];
+
+    [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+        
+        if (request.responseModel.isSucceed) {
+            if (request.responseModel.data) {
+                NSDictionary *dic = request.responseModel.data;
+                if ([dic[@"flag"] intValue] == 1) {
+                    complete(NO, dic[@"token"]);
+                }else if([dic[@"flag"] intValue] == 3){
+                    complete(YES, dic[@"token"]);
+                }
+                
+            }
+            
+        }else
+        {
+            [Popover popToastOnWindowWithText:request.responseModel.originalData[@"message"]];
+        }
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        
     }];
 }
 @end

@@ -82,8 +82,9 @@
         NSLog(@"identityToken: %@", identityToken);
         NSLog(@"realUserStatus: %@", @(realUserStatus));
         
-        [self getLoginByToken:identityToken];
-        
+        if (self.loginByTokenBlock) {
+            self.loginByTokenBlock(identityToken);
+        }
         
     }
     else if ([authorization.credential isKindOfClass:[ASPasswordCredential class]]) {
@@ -134,35 +135,4 @@
     return [UIApplication sharedApplication].delegate.window;
 }
 
-- (void)getLoginByToken:(NSString *)token{
-    
-    
-
-    TSLoginByTokenRequest *request = [[TSLoginByTokenRequest alloc] initWithToken:token platformId:@"15"];
-
-    [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
-        
-        if (request.responseModel.isSucceed) {
-            if (request.responseModel.data) {
-//                NSDictionary *dic = request.responseModel.data;
-//                TSUserInfoManager *userInfo = [[TSUserInfoManager alloc] init];
-//                userInfo.accessToken = dic[@"accessToken"];
-//                userInfo.refreshToken = dic[@"refreshToken"];
-//                userInfo.userName = dic[@"username"];
-//                userInfo.accountId = dic[@"accountId"];
-//                [[TSUserInfoManager userInfo] saveUserInfo:userInfo];
-                
-            }
-            
-        }else
-        {
-           
-            
-            [Popover popToastOnWindowWithText:request.responseModel.originalData[@"message"]];
-            
-        }
-    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-        
-    }];
-}
 @end
