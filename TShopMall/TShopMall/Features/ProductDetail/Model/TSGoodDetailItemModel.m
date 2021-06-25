@@ -28,6 +28,10 @@
 
 @end
 
+@implementation TSGoodDetailItemCopyModel
+
+@end
+
 @implementation TSGoodDetailItemImageModel
 
 @end

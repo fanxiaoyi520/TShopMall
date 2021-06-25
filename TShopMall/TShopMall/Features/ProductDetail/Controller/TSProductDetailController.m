@@ -24,10 +24,14 @@
 #import "TSGoodDetailMaterialView.h"
 #import "TSConventionAlertView.h"
 #import "TSHybridViewController.h"
+#import "TSCartViewController.h"
 #import <MJRefresh/MJRefresh.h>
 #import <Photos/Photos.h>
+#import <IQKeyboardManager/IQKeyboardManager.h>
 
 @interface TSProductDetailController ()<UICollectionViewDelegate,UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate,TSTopFunctionViewDelegate,TSChangePriceViewDelegate,ProductDetailBottomViewDelegate,SnailQuickMaskPopupsDelegate,GoodDetailMaterialViewDelegate>
+
+@property(nonatomic, strong) UIButton *topCartBtn;;
 
 /// 返回按钮
 @property(nonatomic, strong) UIButton *backButton;
@@ -62,7 +66,10 @@
 
 @end
 
-@implementation TSProductDetailController
+@implementation TSProductDetailController{
+    TSChangePriceView *changeView;
+    
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -80,9 +87,43 @@
         [self.collectionView reloadData];
     }
     
+    [self.dataController fetchProductDetailCartNumber:^(BOOL isSucess) {
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
+        if (isSucess) {
+            [strongSelf.topCartBtn setBadgeValue:strongSelf.dataController.cartNumber];
+        }
+    }];
+    
+    //检查商品库存
+    [self.dataController fetchProductDetailHasProduct:@""
+                                             areaUuid:@""
+                                          parentSkuNo:@""
+                                               buyNum:@""
+                                               region:@""
+                                             complete:^(BOOL isSucess) {
+            
+    }];
+    
     self.dragView.clickDragViewBlock = ^(WMDragView *dragView){
         NSLog(@"clickDragViewBlock");
     };
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    [[IQKeyboardManager sharedManager] setEnable:NO];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    
+    [[IQKeyboardManager sharedManager] setEnable:YES];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 -(void)setupNavigationBar{
@@ -103,9 +144,9 @@
     cartBtn.frame = CGRectMake(0, 0, 30, 30);
     [cartBtn setBadgeBGColor:UIColor.redColor];
     [cartBtn setBadgeOriginX:15];
-    [cartBtn setBadgeValue:@"3"];
     [cartBtn setBadgeTextColor:UIColor.whiteColor];
     [cartBtn setShouldAnimateBadge:YES];
+    self.topCartBtn = cartBtn;
     
     UIBarButtonItem *share = [[UIBarButtonItem alloc] initWithCustomView:shareBtn];
     UIBarButtonItem *cart = [[UIBarButtonItem alloc] initWithCustomView:cartBtn];
@@ -193,7 +234,8 @@
 }
 
 -(void)cartAction:(UIButton *)sender{
-    [self.changePopups presentAnimated:YES completion:NULL];
+    TSCartViewController *cart = [[TSCartViewController alloc] init];
+    [self.navigationController pushViewController:cart animated:YES];
 }
 
 /// 下拉刷新
@@ -201,6 +243,22 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
          [self.collectionView.mj_header endRefreshing];
      });
+}
+
+- (void)keyboardWillChangeFrame:(NSNotification *)notification{
+    CGRect keyboredBeginFrame = [notification.userInfo[@"UIKeyboardFrameBeginUserInfoKey"] CGRectValue];
+    CGRect keyboredEndFrame = [notification.userInfo[@"UIKeyboardFrameEndUserInfoKey"] CGRectValue];
+    CGFloat yDistance = fabs(keyboredBeginFrame.origin.y - keyboredEndFrame.origin.y);
+    if (!floor(yDistance)) {
+        return;
+    }
+    
+    if (keyboredBeginFrame.origin.y > keyboredEndFrame.origin.y || (keyboredBeginFrame.size.height != yDistance)) {//键盘弹出或变化
+        changeView.frame = CGRectMake(0, -500, kScreenWidth, 422);
+        [changeView removeFromSuperview];
+    }else{//键盘收起
+       changeView.frame = CGRectMake(0, 0, kScreenWidth, 422);
+    }
 }
 
 #pragma mark - SnailQuickMaskPopupsDelegate
@@ -218,7 +276,9 @@
     __weak __typeof(self)weakSelf = self;
     [self.functionPopups dismissAnimated:YES completion:^(SnailQuickMaskPopups * _Nonnull popups) {
         __strong __typeof(weakSelf)strongSelf = weakSelf;
-        [strongSelf.changePopups presentAnimated:YES completion:nil];
+        [strongSelf.changePopups presentInView:strongSelf.view animated:YES completion:^(SnailQuickMaskPopups * _Nonnull popups) {
+            
+        }];
     }];
 }
 -(void)topFunctionView:(TSTopFunctionView *_Nullable)topFunctionView shareClick:(TSFuncButton *_Nonnull)sender{
@@ -358,6 +418,7 @@
         if ([params[@"downloadType"] intValue] == 0) {//下载更多素材
             self.materialPopups = [self materialPopupsModels:models];
             [self.materialPopups presentAnimated:YES completion:nil];
+            [self.materialView reloadMaterialView];
         } else {// 直接下载素材,保存图片到相册
             
             for (TSMaterialImageModel *model in self.materials) {
@@ -583,6 +644,7 @@ spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
         [changeView setCorners:(UIRectCornerTopLeft | UIRectCornerTopRight) radius:8.0];
         changeView.clipsToBounds = YES;
         changeView.delegate = self;
+        changeView = changeView;
         
         _changePopups = [SnailQuickMaskPopups popupsWithMaskStyle:MaskStyleBlackTranslucent aView:changeView];
         _changePopups.presentationStyle = PresentationStyleBottom;
@@ -632,6 +694,7 @@ spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
         [materialView setCorners:(UIRectCornerTopLeft | UIRectCornerTopRight) radius:8.0];
         materialView.clipsToBounds = YES;
         materialView.delegate = self;
+        _materialView = materialView;
         
         _materialPopups = [SnailQuickMaskPopups popupsWithMaskStyle:MaskStyleBlackTranslucent aView:materialView];
         _materialPopups.presentationStyle = PresentationStyleBottom;

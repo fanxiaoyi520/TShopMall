@@ -76,7 +76,7 @@
     }
 
     {//复制文案 4
-        TSGoodDetailItemPriceModel *item = [[TSGoodDetailItemPriceModel alloc] init];
+        TSGoodDetailItemCopyModel *item = [[TSGoodDetailItemCopyModel alloc] init];
         item.cellHeight = 151;
         item.identify = @"TSGoodDetailCopyWriterCell";
 
@@ -214,6 +214,17 @@
             item.materialModels = models;
         }
         
+        {//商品文案
+            
+            NSDictionary *productInfo = productModel[@"productInfo"];
+            
+            TSGoodDetailSectionModel *section = self.sections[4];
+            TSGoodDetailItemCopyModel *item = (TSGoodDetailItemCopyModel *)[section.items firstObject];
+            item.writeStr = productInfo[@"productShareContent"];
+            item.writeStr = @"dfdfs";
+            
+        }
+        
         {//详情
             TSGoodDetailSectionModel *section = [self.sections lastObject];
             NSDictionary *productDescription = productModel[@"productDescription"];
@@ -273,12 +284,14 @@
                                                                requestHeader:@{}
                                                                  requestBody:@{}
                                                               needErrorToast:NO];
-    [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
-        
-
+    [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+        if (request.responseModel.isSucceed) {
+            self.cartNumber = [NSString stringWithFormat:@"%@",request.responseModel.originalData[@"data"]];
+            complete(YES);
+        }
         
         } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-            NSLog(@"-----");
+            complete(NO);
     }];
 }
 
