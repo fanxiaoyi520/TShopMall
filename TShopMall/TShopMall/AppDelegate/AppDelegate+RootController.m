@@ -7,7 +7,6 @@
 
 #import "AppDelegate+RootController.h"
 #import "TSTabBarController.h"
-#import "TSLoginViewController.h"
 
 @implementation AppDelegate (RootController)
 

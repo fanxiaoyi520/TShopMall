@@ -35,3 +35,5 @@ UIKIT_EXTERN NSString *const kMallH5RefundDetailUrl;
 UIKIT_EXTERN NSString *const kMallH5RefundSelectUrl;
 ///申请退换货
 UIKIT_EXTERN NSString *const kMallH5RefundApplyUrl;
+///合伙人中心
+UIKIT_EXTERN NSString *const kMallH5CopartnerUrl;

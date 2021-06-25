@@ -11,6 +11,8 @@
 #import "TSOneStepLoginRequest.h"
 
 #import "TSUserInfoManager.h"
+#import "TSLoginByAuthCodeRequest.h"
+
 @implementation TSLoginRegisterDataController
 
 -(void)fetchLoginSMSCodeMobile:(NSString *)mobile
@@ -166,5 +168,27 @@
         complete(NO);
     }];
     
+}
+
+-(void)fetchLoginByAuthCode:(NSString *)code
+                    platformId:(NSString *)platformId
+                     sucess:(void(^)(BOOL isHaveMobile, NSString *token))complete{
+    TSLoginByAuthCodeRequest *request = [[TSLoginByAuthCodeRequest alloc] initWithCode:code platformId:platformId];
+    [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+        if (request.responseModel.isSucceed) {
+            NSDictionary *dic = request.responseModel.data;
+            if ([dic[@"flag"] intValue] == 0) {
+                complete(NO, dic[@"token"]);
+            }else{
+                complete(YES, dic[@"token"]);
+            }
+           
+        }
+        else{
+            [Popover popToastOnWindowWithText:request.responseModel.originalData[@"msg"]];
+        }
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+    
+    }];
 }
 @end

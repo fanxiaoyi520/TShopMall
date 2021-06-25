@@ -18,13 +18,7 @@
 
 #import "TSMineWalletViewController.h"
 #import "TSSettingViewController.h"
-#import "TSOrderManageViewController.h"
-#import "TSPayOrderViewController.h"
-#import "TSPaySuccessViewController.h"
 #import "TSHybridViewController.h"
-#import "TSBindMobileController.h"
-#import "TSChangeMobileViewController.h"
-//#import "TSBindThirdViewController.h"
 
 @interface TSMineViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate,TSUserInfoViewDelegate,TSMineOrderHeaderViewDelegate>
 
@@ -152,16 +146,35 @@
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.item == 0) {//测试我的订单
-        TSChangeMobileViewController *orderVc = [[TSChangeMobileViewController alloc] init];
-        //TSPaySuccessViewController *orderVc = [[TSPaySuccessViewController alloc] init];
-        //TSOrderManageViewController *orderVc = [[TSOrderManageViewController alloc] init];
-        [self.navigationController pushViewController:orderVc animated:YES];
-    } else if (indexPath.section == 1) {
-        TSMineWalletViewController *vc = [TSMineWalletViewController new];
-        [self.navigationController pushViewController:vc animated:YES];
-    } else if (indexPath.section == 2) {
-        
+    //我的订单
+    if (indexPath.section == 0 && indexPath.row == 0) {//待付款
+        NSString *path = [NSString stringWithFormat:@"%@%@?&orderType=%@&orderState=%@rightbutoon=show",kMallH5ApiPrefix,kMallH5OrderManageUrl,@"1",@"1"];
+        TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:path];
+        [self.navigationController pushViewController:hybrid animated:YES];
+    }else if (indexPath.section == 0 && indexPath.row == 1){//待发货
+        NSString *path = [NSString stringWithFormat:@"%@%@?&orderType=%@&orderState=%@",kMallH5ApiPrefix,kMallH5OrderManageUrl,@"1",@"4"];
+        TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:path];
+        [self.navigationController pushViewController:hybrid animated:YES];
+    }else if (indexPath.section == 0 && indexPath.row == 2){//待收货
+        NSString *path = [NSString stringWithFormat:@"%@%@?&orderType=%@&orderState=%@",kMallH5ApiPrefix,kMallH5OrderManageUrl,@"1",@"6"];
+        TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:path];
+        [self.navigationController pushViewController:hybrid animated:YES];
+    }else if (indexPath.section == 0 && indexPath.row == 3){//已完成
+        NSString *path = [NSString stringWithFormat:@"%@%@?&orderType=%@&orderState=%@",kMallH5ApiPrefix,kMallH5OrderManageUrl,@"1",@"6"];
+        TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:path];
+        [self.navigationController pushViewController:hybrid animated:YES];
+    }else if (indexPath.section == 0 && indexPath.row == 4){//退款退货
+        NSString *path = [NSString stringWithFormat:@"%@%@",kMallH5ApiPrefix,kMallH5RefundManageUrl];
+        TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:path];
+        [self.navigationController pushViewController:hybrid animated:YES];
+    }
+    
+    //发票中心
+    if (indexPath.section == 4 && indexPath.row == 1) {
+        NSString *path = [NSString stringWithFormat:@"%@%@",kMallH5ApiPrefix,kMallH5InvoiceListUrl];
+        TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:path];
+        hybrid.isInvoice = YES;
+        [self.navigationController pushViewController:hybrid animated:YES];
     }
 }
 
@@ -192,7 +205,8 @@
 
 #pragma mark - mineOrderHeaderMoreAction
 -(void)mineOrderHeaderMoreAction:(id _Nullable)sender{
-    TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:@"https://testwap.tclo2o.cn/seller-app-h5/"];
+    NSString *path = [NSString stringWithFormat:@"%@%@?orderType=1",kMallH5ApiPrefix,kMallH5OrderManageUrl];
+    TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:path];
     [self.navigationController pushViewController:hybrid animated:YES];
 }
 
@@ -210,6 +224,10 @@
             case 0:
                 break;
         }
+    }else if ([@"TSMinePartnerCenterCell" isEqualToString:cellType]){
+        NSString *path = [NSString stringWithFormat:@"%@%@",kMallH5ApiPrefix,kMallH5CopartnerUrl];
+        TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:path];
+        [self.navigationController pushViewController:hybrid animated:YES];
     }
 }
 

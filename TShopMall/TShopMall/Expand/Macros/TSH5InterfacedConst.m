@@ -18,11 +18,11 @@
 #endif
 
 /*集团账户中心账号信息，不要手动修改*/
-#if (kServerFlag == 0)
+#if (kH5ServerFlag == 0)
     NSString *const kMallH5ApiPrefix = @"https://m.tcl.com/seller-app-h5/";
-#elif (kServerFlag == 1)
+#elif (kH5ServerFlag == 1)
     NSString *const kMallH5ApiPrefix = @"https://prewap.tclo2o.cn/seller-app-h5/";
-#elif (kServerFlag == 2)
+#elif (kH5ServerFlag == 2)
     NSString *const kMallH5ApiPrefix = @"https://testwap.tclo2o.cn/seller-app-h5/";
 #endif
 
@@ -52,3 +52,5 @@ NSString *const kMallH5RefundDetailUrl = @"pages/refund/refund";
 NSString *const kMallH5RefundSelectUrl = @"pages/refund/select";
 ///申请退换货
 NSString *const kMallH5RefundApplyUrl = @"pages/refund/apply";
+///合伙人中心
+NSString *const kMallH5CopartnerUrl = @"pages/copartner/index";

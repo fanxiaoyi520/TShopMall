@@ -82,7 +82,8 @@ NSString *const kLoginQuickLoginUrl = @"/auth/auth/quickLogin";
 NSString *const kRegisterUrl = @"/rest/sysback/salesman/registered/distributor";
 NSString *const kLogoutUrl = @"/auth/auth/signOut";
 NSString *const kOneStepLoginUrl = @"/auth/auth/oneClickLogin";
-
+NSString *const kLoginByTokenUrl = @"/auth/thirdParty/loginByToken";
+NSString *const kLoginByAuthCode = @"/auth/thirdParty/loginByAuthCode";
 #pragma mark - 首页
 
 NSString *const kHomePageInfoUrl = @"/rest/v2/front/shopContent/getIndexPageInfo";
