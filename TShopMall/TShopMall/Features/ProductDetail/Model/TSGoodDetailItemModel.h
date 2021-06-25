@@ -49,6 +49,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface TSGoodDetailItemCopyModel : TSGoodDetailItemModel
+
+@property(nonatomic, copy) NSString *writeStr;
+
+@end
+
 
 @interface TSGoodDetailItemImageModel : TSGoodDetailItemModel
 

@@ -11,6 +11,9 @@
 #import "TSOneStepLoginRequest.h"
 
 #import "TSUserInfoManager.h"
+#import "TSLoginByAuthCodeRequest.h"
+#import "TSLoginByTokenRequest.h"
+
 @implementation TSLoginRegisterDataController
 
 -(void)fetchLoginSMSCodeMobile:(NSString *)mobile
@@ -166,5 +169,55 @@
         complete(NO);
     }];
     
+}
+
+-(void)fetchLoginByAuthCode:(NSString *)code
+                    platformId:(NSString *)platformId
+                     sucess:(void(^)(BOOL isHaveMobile, NSString *token))complete{
+    TSLoginByAuthCodeRequest *request = [[TSLoginByAuthCodeRequest alloc] initWithCode:code platformId:platformId];
+    [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+        if (request.responseModel.isSucceed) {
+            NSDictionary *dic = request.responseModel.data;
+            if ([dic[@"flag"] intValue] == 1) {
+                complete(NO, dic[@"token"]);
+            }else if([dic[@"flag"] intValue] == 3){
+                complete(YES, dic[@"token"]);
+            }
+           
+        }
+        else{
+            [Popover popToastOnWindowWithText:request.responseModel.originalData[@"msg"]];
+        }
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+    
+    }];
+}
+
+- (void)fetchLoginByToken:(NSString *)token
+                    platformId:(NSString *)platformId
+                     sucess:(void(^)(BOOL isHaveMobile, NSString *token))complete{
+
+    TSLoginByTokenRequest *request = [[TSLoginByTokenRequest alloc] initWithToken:token platformId:platformId];
+
+    [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+        
+        if (request.responseModel.isSucceed) {
+            if (request.responseModel.data) {
+                NSDictionary *dic = request.responseModel.data;
+                if ([dic[@"flag"] intValue] == 1) {
+                    complete(NO, dic[@"token"]);
+                }else if([dic[@"flag"] intValue] == 3){
+                    complete(YES, dic[@"token"]);
+                }
+                
+            }
+            
+        }else
+        {
+            [Popover popToastOnWindowWithText:request.responseModel.originalData[@"message"]];
+        }
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        
+    }];
 }
 @end

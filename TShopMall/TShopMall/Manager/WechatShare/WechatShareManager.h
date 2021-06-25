@@ -25,7 +25,8 @@ typedef NS_ENUM(int, WechatShareStatusCode){
 @interface WechatShareManager : NSObject
 
 // WechatShareManager是微信分享管理类
-
+@property (nonatomic, copy) void(^WXSuccess)(void);
+@property (nonatomic, copy) void(^WXFail)(NSString *msg);
 
 + (id)shareInstance;
 

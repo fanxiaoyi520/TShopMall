@@ -22,10 +22,10 @@
 #import "TSBaseNavigationController.h"
 #import "WechatManager.h"
 #import "TSAccountConst.h"
+#import "AuthAppleIDManager.h"
 #import <AuthenticationServices/AuthenticationServices.h>
 
-
-@interface TSLoginViewController ()<TSQuickLoginTopViewDelegate, TSLoginTopViewDelegate, TSLoginBottomViewDelegate, TSCheckedViewDelegate, TSQuickCheckViewDelegate, NTESQuickLoginManagerDelegate, TSHybridViewControllerDelegate, ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding>
+@interface TSLoginViewController ()<TSQuickLoginTopViewDelegate, TSLoginTopViewDelegate, TSLoginBottomViewDelegate, TSCheckedViewDelegate, TSQuickCheckViewDelegate, TSHybridViewControllerDelegate>
 /** 背景图 */
 @property(nonatomic, weak) UIImageView *bgImgV;
 /** 关闭 */
@@ -47,8 +47,6 @@
 
 @property(nonatomic, strong) TSLoginRegisterDataController *dataController;
 
-@property (nonatomic, strong) NTESQuickLoginModel *customModel;
-
 @end
 
 @implementation TSLoginViewController
@@ -57,10 +55,7 @@
     [super viewDidLoad];
     self.gk_navigationBar.hidden = YES;
     
-    [self registerQuickLogin];
-    [self getPhoneNumber];
     
-    // 注册通知
     if (@available(iOS 13.0, *)) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleSignInWithAppleStateChanged:) name:ASAuthorizationAppleIDProviderCredentialRevokedNotification object:nil];
     } else {
@@ -80,7 +75,8 @@
 
 - (void)fillCustomView {
     ///添加约束
-//    [self addConstraints];
+    [self addConstraints];
+    [self otherLogin];
     
 }
 
@@ -134,99 +130,12 @@
     }];
 }
 
-#pragma mark - 使用易盾
-- (void)registerQuickLogin {
-    [NTESQuickLoginManager sharedInstance].delegate = self;
-    [[NTESQuickLoginManager sharedInstance] registerWithBusinessID:QuickLoginBusinessID];
-}
-
-- (void)getPhoneNumber{
-   
-    
-    @weakify(self);
-    [[NTESQuickLoginManager sharedInstance] getPhoneNumberCompletion:^(NSDictionary * _Nonnull resultDic1) {
-        @strongify(self)
-        NSNumber *boolNum = [resultDic1 objectForKey:@"success"];
-        BOOL success = [boolNum boolValue];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (success) {
-                [self setCustomUI];
-                
-                [[NTESQuickLoginManager sharedInstance] CUCMCTAuthorizeLoginCompletion:^(NSDictionary * _Nonnull resultDic2) {
-                        NSNumber *boolNum = [resultDic2 objectForKey:@"success"];
-                        BOOL success = [boolNum boolValue];
-                        if (success) {
-                            [self.dataController fetchOneStepLoginToken:[resultDic1 objectForKey:@"token"] accessToken:[resultDic2 objectForKey:@"accessToken"] complete:^(BOOL isSucess) {
-                                [Popover removePopoverOnWindow];
-                                if (isSucess) {
-                                    [[NTESQuickLoginManager sharedInstance] closeAuthController:^{
-                                        [self dismissViewControllerAnimated:YES completion:^{
-                                            if (self.loginBlock) {
-                                                self.loginBlock();
-                                            }
-                                        }];
-                                    }];
-                                }
-                                
-                            }];
-                        } else {
-                             // 取号失败
-                        }
-                      }];
-            } else {
-                [self addConstraints];
-                [self otherLogin];
-            }
-          });
-      }];
-}
-
-/// 授权页面自定义
-- (void)setCustomUI {
-    @weakify(self);
-    NTESQLHomePageCustomUIModel *uiModel = [NTESQLHomePageCustomUIModel getInstance];
-    self.customModel = [uiModel configCustomUIModel:NTESPresentDirectionPush withType:0 faceOrientation:UIInterfaceOrientationPortrait];
-    self.customModel.currentVC = self;
-    uiModel.otherLoginBlock = ^{
-        @strongify(self)
-        [self addConstraints];
-        [self otherLogin];
-    };
-    uiModel.appleLoginBlock = ^{
-        @strongify(self)
-        [self authorizationAppleID];
-    };
-    uiModel.weChatLoginBlock = ^{
-        @strongify(self)
-        [self sendWXAuthReq];
-    };
-    self.customModel.backActionBlock = ^{
-        @strongify(self)
-        [Popover removePopoverOnWindow];
-        [self dismissViewControllerAnimated:NO completion:nil];
-    };
-    self.customModel.pageCustomBlock = ^(int privacyType) {
-        NSLog(@"privacyType:%d", privacyType);
-        @strongify(self)
-        TSHybridViewController *web = [[TSHybridViewController alloc] initWithURLString:@"https://www.baidu.com"];
-        web.delegate = self;
-        [self.navigationController pushViewController:web animated:YES];
-        [[NTESQuickLoginManager sharedInstance] closeAuthController:^{
-            
-
-        }];
-    };
-    
-    [[NTESQuickLoginManager sharedInstance] setupModel:self.customModel];
-}
-
-
 #pragma mark - Actions
 - (void)goToRun {
     if (self.count <= 1) {
         self.count = 60;
         [self.timer invalidate];
-        [self.topView setCodeButtonTitleAndColor:@"重新验证码" isResend:YES enabled:YES];
+        [self.topView setCodeButtonTitleAndColor:@"重发验证码" isResend:YES enabled:YES];
     } else {
         self.count--;
         [self.topView setCodeButtonTitleAndColor:[NSString stringWithFormat:@"重发 %ld", (long)self.count] isResend:NO enabled:NO];
@@ -269,6 +178,10 @@
     NSString *mobile = [self.topView getPhoneNumber];
     
     __weak typeof(self) weakSelf = self;
+    if (self.timer) {
+        [self.timer invalidate];
+        self.timer = nil;
+    }
     [self.dataController fetchLoginSMSCodeMobile:mobile complete:^(BOOL isSucess) {
         __strong __typeof(weakSelf)strongSelf = weakSelf;
         if (isSucess) {
@@ -364,11 +277,13 @@
 
 #pragma mark - TSLoginBottomViewDelegate
 - (void)goToWechat {
+   
     [self sendWXAuthReq];
 }
 
 - (void)goToApple {
-    [self authorizationAppleID];
+    
+    [[AuthAppleIDManager sharedInstance] authorizationAppleID];
 }
 
 #pragma mark - TSCheckedViewDelegate
@@ -411,14 +326,7 @@
 #pragma mark - TSHybridViewControllerDelegate
 -(void)hybridViewControllerWillDidDisappear:(TSHybridViewController *)hybridViewController params:(NSDictionary *)param{
     
-    if (self.topView.hidden == NO && self.checkedView.hidden == NO) {
-        return;
-    }
-    [Popover popProgressOnWindowWithProgressModel:[Popover defaultConfig] appearBlock:^(id frontView) {
-        
-    }];
     
-    [self getPhoneNumber];
 }
 
 #pragma mark - Lazy Method
@@ -510,17 +418,12 @@
 
 #pragma mark- 微信登录
 - (void)sendWXAuthReq{
-    @weakify(self);
-    WechatManager * payManager =[WechatManager shareInstance];
+    WechatManager * payManager = [WechatManager shareInstance];
     payManager.WXFail = ^{
-//        @strongify(self)
-        //失败回调
-        
+
     };
-    payManager.WXSuccess = ^{
-//        @strongify(self)
-        //成功回调;
-        
+    payManager.WXSuccess = ^(NSString *code){
+
     };
     
     if([WXApi isWXAppInstalled]){//判断用户是否已安装微信App
@@ -533,114 +436,6 @@
     }else{
         [Popover popToastOnWindowWithText:@"未安装微信应用或版本过低"];
     }
-}
-
-#pragma mark- 授权苹果ID
-- (void)authorizationAppleID {
-    
-    if (@available(iOS 13.0, *)) {
-        
-        ASAuthorizationAppleIDProvider * appleIDProvider = [[ASAuthorizationAppleIDProvider alloc] init];
-        ASAuthorizationAppleIDRequest * authAppleIDRequest = [appleIDProvider createRequest];
-        ASAuthorizationPasswordRequest * passwordRequest = [[[ASAuthorizationPasswordProvider alloc] init] createRequest];
-
-        NSMutableArray <ASAuthorizationRequest *> * array = [NSMutableArray arrayWithCapacity:2];
-        if (authAppleIDRequest) {
-            [array addObject:authAppleIDRequest];
-        }
-//        if (passwordRequest) {
-//            [array addObject:passwordRequest];
-//        }
-        NSArray <ASAuthorizationRequest *> * requests = [array copy];
-        
-        ASAuthorizationController * authorizationController = [[ASAuthorizationController alloc] initWithAuthorizationRequests:requests];
-        authorizationController.delegate = self;
-        authorizationController.presentationContextProvider = self;
-        [authorizationController performRequests];
-        
-    } else {
-        // 处理不支持系统版本
-        NSLog(@"系统不支持Apple登录");
-    }
-}
-
-#pragma mark- ASAuthorizationControllerDelegate
-// 授权成功
-- (void)authorizationController:(ASAuthorizationController *)controller didCompleteWithAuthorization:(ASAuthorization *)authorization API_AVAILABLE(ios(13.0)) {
-    
-    if ([authorization.credential isKindOfClass:[ASAuthorizationAppleIDCredential class]]) {
-        
-        ASAuthorizationAppleIDCredential * credential = authorization.credential;
-        
-        // 苹果用户唯一标识符，该值在同一个开发者账号下的所有 App 下是一样的，开发者可以用该唯一标识符与自己后台系统的账号体系绑定起来。
-        NSString * userID = credential.user;
-        
-        // 苹果用户信息 如果授权过，可能无法再次获取该信息
-        NSPersonNameComponents * fullName = credential.fullName;
-        NSString * email = credential.email;
-        
-        // 服务器验证需要使用的参数
-        NSString * authorizationCode = [[NSString alloc] initWithData:credential.authorizationCode encoding:NSUTF8StringEncoding];
-        NSString * identityToken = [[NSString alloc] initWithData:credential.identityToken encoding:NSUTF8StringEncoding];
-        
-        // 用于判断当前登录的苹果账号是否是一个真实用户，取值有：unsupported、unknown、likelyReal
-        ASUserDetectionStatus realUserStatus = credential.realUserStatus;
-        
-        [[NSUserDefaults standardUserDefaults] setObject:userID forKey:@"appleID"];
-        
-        NSLog(@"userID: %@", userID);
-        NSLog(@"fullName: %@", fullName);
-        NSLog(@"email: %@", email);
-        NSLog(@"authorizationCode: %@", authorizationCode);
-        NSLog(@"identityToken: %@", identityToken);
-        NSLog(@"realUserStatus: %@", @(realUserStatus));
-    }
-    else if ([authorization.credential isKindOfClass:[ASPasswordCredential class]]) {
-        
-        // 用户登录使用现有的密码凭证
-        ASPasswordCredential * passwordCredential = authorization.credential;
-        // 密码凭证对象的用户标识 用户的唯一标识
-        NSString * user = passwordCredential.user;
-        // 密码凭证对象的密码
-        NSString * password = passwordCredential.password;
-        
-        NSLog(@"userID: %@", user);
-        NSLog(@"password: %@", password);
-        
-    } else {
-        
-    }
-}
-
-// 授权失败
-- (void)authorizationController:(ASAuthorizationController *)controller didCompleteWithError:(NSError *)error API_AVAILABLE(ios(13.0)) {
-    
-    NSString *errorMsg = nil;
-    
-    switch (error.code) {
-        case ASAuthorizationErrorCanceled:
-            errorMsg = @"用户取消了授权请求";
-            break;
-        case ASAuthorizationErrorFailed:
-            errorMsg = @"授权请求失败";
-            break;
-        case ASAuthorizationErrorInvalidResponse:
-            errorMsg = @"授权请求响应无效";
-            break;
-        case ASAuthorizationErrorNotHandled:
-            errorMsg = @"未能处理授权请求";
-            break;
-        case ASAuthorizationErrorUnknown:
-            errorMsg = @"授权请求失败未知原因";
-            break;
-    }
-    NSLog(@"%@", errorMsg);
-}
-
-#pragma mark- ASAuthorizationControllerPresentationContextProviding
-- (ASPresentationAnchor)presentationAnchorForAuthorizationController:(ASAuthorizationController *)controller  API_AVAILABLE(ios(13.0)){
-    
-    return self.view.window;
 }
 
 #pragma mark- apple授权状态 更改通知

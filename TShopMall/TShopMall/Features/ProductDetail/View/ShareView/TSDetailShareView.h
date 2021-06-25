@@ -8,8 +8,16 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
+@protocol TSDetailShareViewDelegate <NSObject>
+- (void)shareViewView:(UIView *)view closeClick:(UIButton *)sender;
+- (void)shareViewView:(UIView *)view shareFriendsAction:(UIButton *)sender;
+- (void)shareViewView:(UIView *)view sharePYQAction:(UIButton *)sender;
+- (void)shareViewView:(UIView *)view downloadAction:(UIButton *)sender;
 
+
+@end
 @interface TSDetailShareView : UIView
+@property (nonatomic, weak) id<TSDetailShareViewDelegate> delegate;
 
 @end
 

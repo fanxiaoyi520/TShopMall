@@ -9,6 +9,7 @@
 #import "TSUniversalFlowLayout.h"
 #import "TSUniversalCollectionViewCell.h"
 #import "TSRealNameAuthDataController.h"
+#import "TSAgreementView.h"
 
 @interface TSRealNameAuthViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate>
 /// 数据中心
@@ -23,6 +24,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    TSAgreementView *agreementView = [TSAgreementView agreementViewWithTitle:@"TCL App实名认证服务协议"];
+    [agreementView show];
 }
 
 - (void)setupBasic {

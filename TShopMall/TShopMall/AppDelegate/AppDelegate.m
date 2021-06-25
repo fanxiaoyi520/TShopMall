@@ -70,6 +70,10 @@
     if ([url.host isEqualToString:@"oauth"]) {
         return [WechatManager handleOpenUrl:url];
     }
+    else{
+        //微信分享
+        [WechatShareManager handleOpenUrl:url];
+    }
     return YES;
     
 }

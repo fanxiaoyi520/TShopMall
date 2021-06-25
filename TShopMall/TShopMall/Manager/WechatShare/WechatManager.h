@@ -10,7 +10,7 @@
 #import <WXApi.h>
 
 @interface WechatManager : NSObject
-@property (nonatomic, copy) void(^WXSuccess)(void);
+@property (nonatomic, copy) void(^WXSuccess)(NSString *code);
 @property (nonatomic, copy) void(^WXFail)(void);
 
 + (id)shareInstance;
