@@ -20,7 +20,15 @@
 
 @end
 
+@implementation TSGoodDetailItemHotModel
+
+@end
+
 @implementation TSGoodDetailItemDownloadImageModel
+
+@end
+
+@implementation TSGoodDetailItemCopyModel
 
 @end
 

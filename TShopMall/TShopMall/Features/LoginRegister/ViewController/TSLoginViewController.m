@@ -368,10 +368,12 @@
 
 #pragma mark - TSLoginBottomViewDelegate
 - (void)goToWechat {
+   
     [self sendWXAuthReq];
 }
 
 - (void)goToApple {
+    
     [self authorizationAppleID];
 }
 
@@ -515,7 +517,7 @@
 #pragma mark- 微信登录
 - (void)sendWXAuthReq{
     @weakify(self);
-    WechatManager * payManager =[WechatManager shareInstance];
+    WechatManager * payManager = [WechatManager shareInstance];
     payManager.WXFail = ^{
 //        @strongify(self)
         //失败回调

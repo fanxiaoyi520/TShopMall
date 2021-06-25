@@ -31,7 +31,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 最高赚
 @property (nonatomic, copy) NSString *earnMost;
 
+@end
 
+@interface TSGoodDetailItemHotModel : TSGoodDetailItemModel
 
 /// 标题
 @property (nonatomic, copy) NSString *title;
@@ -44,6 +46,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// images
 @property (nonatomic, strong) NSArray <TSMaterialImageModel *> *materialModels;
+
+@end
+
+@interface TSGoodDetailItemCopyModel : TSGoodDetailItemModel
+
+@property(nonatomic, copy) NSString *writeStr;
 
 @end
 

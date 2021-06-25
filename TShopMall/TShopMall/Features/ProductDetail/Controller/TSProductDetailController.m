@@ -24,10 +24,17 @@
 #import "TSGoodDetailMaterialView.h"
 #import "TSConventionAlertView.h"
 #import "TSHybridViewController.h"
+#import "TSCartViewController.h"
 #import <MJRefresh/MJRefresh.h>
 #import <Photos/Photos.h>
+#import <IQKeyboardManager/IQKeyboardManager.h>
+#import "WechatShareManager.h"
 
-@interface TSProductDetailController ()<UICollectionViewDelegate,UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate,TSTopFunctionViewDelegate,TSChangePriceViewDelegate,ProductDetailBottomViewDelegate,SnailQuickMaskPopupsDelegate>
+
+
+@interface TSProductDetailController ()<UICollectionViewDelegate,UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate,TSTopFunctionViewDelegate,TSChangePriceViewDelegate,ProductDetailBottomViewDelegate,SnailQuickMaskPopupsDelegate,GoodDetailMaterialViewDelegate, TSDetailShareViewDelegate>
+
+@property(nonatomic, strong) UIButton *topCartBtn;;
 
 /// 返回按钮
 @property(nonatomic, strong) UIButton *backButton;
@@ -62,7 +69,10 @@
 
 @end
 
-@implementation TSProductDetailController
+@implementation TSProductDetailController{
+    TSChangePriceView *changeView;
+    
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -80,9 +90,52 @@
         [self.collectionView reloadData];
     }
     
+    [self.dataController fetchProductDetailCartNumber:^(BOOL isSucess) {
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
+        if (isSucess) {
+            [strongSelf.topCartBtn setBadgeValue:strongSelf.dataController.cartNumber];
+        }
+    }];
+    
+    //检查商品库存
+    [self.dataController fetchProductDetailHasProduct:@""
+                                             areaUuid:@""
+                                          parentSkuNo:@""
+                                               buyNum:@""
+                                               region:@""
+                                             complete:^(BOOL isSucess) {
+            
+    }];
+    
     self.dragView.clickDragViewBlock = ^(WMDragView *dragView){
         NSLog(@"clickDragViewBlock");
     };
+    
+//    WechatShareManager * shareManager = [WechatShareManager shareInstance];
+//    shareManager.WXSuccess = ^{
+//        [self.sharePopups dismissAnimated:YES completion:nil];
+//
+//    };
+//    shareManager.WXFail = ^(NSString *msg) {
+//        [Popover popToastOnWindowWithText:msg];
+//    };
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    [[IQKeyboardManager sharedManager] setEnable:NO];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    
+    [[IQKeyboardManager sharedManager] setEnable:YES];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 -(void)setupNavigationBar{
@@ -101,7 +154,11 @@
     [cartBtn setImage:KImageMake(@"mall_detail_navigation_cart") forState:UIControlStateHighlighted];
     [cartBtn addTarget:self action:@selector(cartAction:) forControlEvents:UIControlEventTouchUpInside];
     cartBtn.frame = CGRectMake(0, 0, 30, 30);
-    [cartBtn setBadgeValue:@"3"];
+    [cartBtn setBadgeBGColor:UIColor.redColor];
+    [cartBtn setBadgeOriginX:15];
+    [cartBtn setBadgeTextColor:UIColor.whiteColor];
+    [cartBtn setShouldAnimateBadge:YES];
+    self.topCartBtn = cartBtn;
     
     UIBarButtonItem *share = [[UIBarButtonItem alloc] initWithCustomView:shareBtn];
     UIBarButtonItem *cart = [[UIBarButtonItem alloc] initWithCustomView:cartBtn];
@@ -117,7 +174,7 @@
     [self.view addSubview:self.dragView];
     
 //    [self addCollectionCoverView];
-    //    [self addMJHeaderAndFooter];
+    [self addMJHeaderAndFooter];
 }
 
 -(void)viewWillLayoutSubviews{
@@ -177,10 +234,6 @@
     //默认【下拉刷新】
     RefreshGifHeader *mj_header = [RefreshGifHeader headerWithRefreshingTarget:self refreshingAction:@selector(mjHeadreRefresh:)];
     self.collectionView.mj_header = mj_header;
-
-    RefreshGifFooter *footer = [RefreshGifFooter footerWithRefreshingTarget:self refreshingAction:@selector(mjFooterRefresh:)];
-    self.collectionView.mj_footer = footer;
-    self.collectionView.mj_footer.hidden = NO;
 }
 
 #pragma mark - Actions
@@ -193,35 +246,38 @@
 }
 
 -(void)cartAction:(UIButton *)sender{
-    [self.changePopups presentAnimated:YES completion:NULL];
+    TSCartViewController *cart = [[TSCartViewController alloc] init];
+    [self.navigationController pushViewController:cart animated:YES];
 }
 
 /// 下拉刷新
 - (void)mjHeadreRefresh:(MJRefreshNormalHeader *)mj_header {
-//    [self loadDataIsNew:YES];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+         [self.collectionView.mj_header endRefreshing];
+     });
 }
 
-/// 上拉加载
-- (void)mjFooterRefresh:(MJRefreshAutoNormalFooter *)mj_footer {
-//    [self loadDataIsNew:NO];
+- (void)keyboardWillChangeFrame:(NSNotification *)notification{
+    CGRect keyboredBeginFrame = [notification.userInfo[@"UIKeyboardFrameBeginUserInfoKey"] CGRectValue];
+    CGRect keyboredEndFrame = [notification.userInfo[@"UIKeyboardFrameEndUserInfoKey"] CGRectValue];
+    CGFloat yDistance = fabs(keyboredBeginFrame.origin.y - keyboredEndFrame.origin.y);
+    if (!floor(yDistance)) {
+        return;
+    }
+    
+    if (keyboredBeginFrame.origin.y > keyboredEndFrame.origin.y || (keyboredBeginFrame.size.height != yDistance)) {//键盘弹出或变化
+        changeView.frame = CGRectMake(0, -500, kScreenWidth, 422);
+        [changeView removeFromSuperview];
+    }else{//键盘收起
+       changeView.frame = CGRectMake(0, 0, kScreenWidth, 422);
+    }
 }
 
 #pragma mark - SnailQuickMaskPopupsDelegate
-- (void)snailQuickMaskPopupsWillPresent:(SnailQuickMaskPopups *)popups{
-    if (self.materialPopups == popups) {
-        [self.materialView reloadMaterialView];
-    }
-}
 - (void)snailQuickMaskPopupsWillDismiss:(SnailQuickMaskPopups *)popups{
     if (self.materialPopups == popups) {
         [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:3]];
     }
-}
-- (void)snailQuickMaskPopupsDidPresent:(SnailQuickMaskPopups *)popups{
-    
-}
-- (void)snailQuickMaskPopupsDidDismiss:(SnailQuickMaskPopups *)popups{
-    
 }
 
 #pragma mark - TSTopFunctionViewDelegate
@@ -232,7 +288,9 @@
     __weak __typeof(self)weakSelf = self;
     [self.functionPopups dismissAnimated:YES completion:^(SnailQuickMaskPopups * _Nonnull popups) {
         __strong __typeof(weakSelf)strongSelf = weakSelf;
-        [strongSelf.changePopups presentAnimated:YES completion:nil];
+        [strongSelf.changePopups presentInView:strongSelf.view animated:YES completion:^(SnailQuickMaskPopups * _Nonnull popups) {
+            
+        }];
     }];
 }
 -(void)topFunctionView:(TSTopFunctionView *_Nullable)topFunctionView shareClick:(TSFuncButton *_Nonnull)sender{
@@ -274,6 +332,15 @@
                                                    complete:^(BOOL isSucess) {
             
     }];
+}
+
+#pragma mark - GoodDetailMaterialViewDelegate
+-(void)goodDetailMaterialView:(TSGoodDetailMaterialView *_Nullable)materialView downloadClick:(UIButton *_Nullable)sender{
+    for (TSMaterialImageModel *model in self.materials) {
+        if (model.selected && model.materialImage) {
+            UIImageWriteToSavedPhotosAlbum(model.materialImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+        }
+    }
 }
 
 #pragma mark - TSChangePriceViewDelegate
@@ -363,6 +430,7 @@
         if ([params[@"downloadType"] intValue] == 0) {//下载更多素材
             self.materialPopups = [self materialPopupsModels:models];
             [self.materialPopups presentAnimated:YES completion:nil];
+            [self.materialView reloadMaterialView];
         } else {// 直接下载素材,保存图片到相册
             
             for (TSMaterialImageModel *model in self.materials) {
@@ -477,6 +545,25 @@ spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
     return model.spacingWithLastSection;
 }
 
+#pragma mark - TSDetailShareViewDelegate
+
+- (void)shareViewView:(UIView *)view closeClick:(UIButton *)sender{
+}
+
+- (void)shareViewView:(UIView *)view shareFriendsAction:(UIButton *)sender{
+    [[WechatShareManager shareInstance] shareWXWithTitle:@"标题" andDescription:@"描述" andShareURL:@"http://www.baidu.com" andThumbImage:nil andWXScene:WechatShareTypeFriends];
+   
+}
+
+- (void)shareViewView:(UIView *)view sharePYQAction:(UIButton *)sender{
+    [[WechatShareManager shareInstance] shareWXWithTitle:@"标题" andDescription:@"描述" andShareURL:@"http://www.baidu.com" andThumbImage:nil andWXScene:WechatShareTypeTimeline];
+
+}
+
+- (void)shareViewView:(UIView *)view downloadAction:(UIButton *)sender{
+    
+}
+
 #pragma mark - Private
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error  contextInfo:(void *)contextInfo{
     PHAuthorizationStatus status = [PHPhotoLibrary authorizationStatus];
@@ -588,6 +675,7 @@ spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
         [changeView setCorners:(UIRectCornerTopLeft | UIRectCornerTopRight) radius:8.0];
         changeView.clipsToBounds = YES;
         changeView.delegate = self;
+        changeView = changeView;
         
         _changePopups = [SnailQuickMaskPopups popupsWithMaskStyle:MaskStyleBlackTranslucent aView:changeView];
         _changePopups.presentationStyle = PresentationStyleBottom;
@@ -601,6 +689,7 @@ spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
 -(SnailQuickMaskPopups *)sharePopups{
     if (!_sharePopups) {
         TSDetailShareView *shareView = [[TSDetailShareView alloc] init];
+        shareView.delegate = self;
         shareView.frame = CGRectMake(0, 0, kScreenWidth, 180);
         [shareView setCorners:(UIRectCornerTopLeft | UIRectCornerTopRight) radius:8.0];
         shareView.clipsToBounds = YES;
@@ -636,6 +725,8 @@ spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
         materialView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight * 0.6);
         [materialView setCorners:(UIRectCornerTopLeft | UIRectCornerTopRight) radius:8.0];
         materialView.clipsToBounds = YES;
+        materialView.delegate = self;
+        _materialView = materialView;
         
         _materialPopups = [SnailQuickMaskPopups popupsWithMaskStyle:MaskStyleBlackTranslucent aView:materialView];
         _materialPopups.presentationStyle = PresentationStyleBottom;

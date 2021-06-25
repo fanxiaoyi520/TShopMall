@@ -55,6 +55,7 @@
     NSMutableDictionary *commonRequestHeader = [NSMutableDictionary dictionary];
     [commonRequestHeader setValue:@"platform_tcl_shop" forKey:@"platform"];
     [commonRequestHeader setValue:@"thome" forKey:@"storeUuid"];
+//    [commonRequestHeader setValue:@"tclplus" forKey:@"storeUuid"];
     [commonRequestHeader setValue:@"TCL" forKey:@"t-id"];
     [commonRequestHeader setValue:@"02" forKey:@"terminalType"];
     
