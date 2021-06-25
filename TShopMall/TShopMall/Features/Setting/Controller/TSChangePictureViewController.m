@@ -92,14 +92,14 @@
     [self.commitButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view.mas_left).with.offset(25);
         make.right.equalTo(self.view.mas_right).with.offset(-25);
-        make.bottom.equalTo(self.view.mas_bottom).with.offset(-48);
+        make.bottom.equalTo(self.view.mas_bottom).with.offset(-30);
         make.height.mas_equalTo(41);
     }];
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view.mas_left).with.offset(0);
         make.right.equalTo(self.view.mas_right).with.offset(0);
         make.top.equalTo(self.topView.mas_bottom).with.offset(0);
-        make.bottom.equalTo(self.commitButton.mas_top).with.offset(-30);
+        make.bottom.equalTo(self.commitButton.mas_top).with.offset(0);
     }];
 }
 
@@ -199,6 +199,7 @@
 }
 
 #pragma mark - Actions
+/** 立即设置 */
 - (void)commitAction {
     
 }

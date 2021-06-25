@@ -1,34 +1,30 @@
 //
-//  TSBindThirdViewController.m
+//  TSChangeMobileViewController.m
 //  TShopMall
 //
-//  Created by 谭朝辉 on 2021/6/15.
+//  Created by edy on 2021/6/25.
 //
 
-#import "TSBindThirdViewController.h"
-#import "TSBindThirdDataController.h"
+#import "TSChangeMobileViewController.h"
+#import "TSBindMobileDataController.h"
 #import "TSUniversalFlowLayout.h"
 #import "TSUniversalCollectionViewCell.h"
 
-@interface TSBindThirdViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate>
+@interface TSChangeMobileViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate>
 /// 数据中心
-@property(nonatomic, strong) TSBindThirdDataController *dataController;
+@property(nonatomic, strong) TSBindMobileDataController *dataController;
 /// CollectionView
 @property(nonatomic, weak) UICollectionView *collectionView;
 
 @end
 
-@implementation TSBindThirdViewController
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-}
+@implementation TSChangeMobileViewController
 
 - (void)setupBasic {
     [super setupBasic];
-    self.gk_navTitle = @"微信绑定";
+    self.gk_navTitle = @"更换手机号码";
     __weak __typeof(self)weakSelf = self;
-    [self.dataController fetchBindThirdContentsComplete:^(BOOL isSucess) {
+    [self.dataController fetchChangeMobileContentsComplete:^(BOOL isSucess) {
         __strong __typeof(weakSelf)strongSelf = weakSelf;
         if (isSucess) {
             [strongSelf.collectionView reloadData];
@@ -57,7 +53,7 @@
         UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero
                                              collectionViewLayout:flowLayout];
         _collectionView = collectionView;
-        _collectionView.backgroundColor = KWhiteColor;//KGrayColor;//KHexColor(@"#E6E6E6");
+        _collectionView.backgroundColor = KGrayColor;//KHexColor(@"#E6E6E6");
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.showsVerticalScrollIndicator = NO;
@@ -67,11 +63,17 @@
     return _collectionView;
 }
 
-- (TSBindThirdDataController *)dataController{
+- (TSBindMobileDataController *)dataController{
     if (!_dataController) {
-        _dataController = [[TSBindThirdDataController alloc] init];
+        _dataController = [[TSBindMobileDataController alloc] init];
     }
     return _dataController;
+}
+
+#pragma mark - Actions
+/** 更换手机号的操作 */
+- (void)changeMobile:(NSString *)phoneNumber oldMobile:(NSString *)oldPhoneNumber code:(NSString *)code {
+    NSLog(@"新手机号 === %@ 旧手机号 === %@ 验证码 === %@", phoneNumber, oldPhoneNumber, code);
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -80,13 +82,13 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    TSBindThirdSectionModel *model = self.dataController.sections[section];
+    TSBindMobileSectionModel *model = self.dataController.sections[section];
     return model.items.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    TSBindThirdSectionModel *model = self.dataController.sections[indexPath.section];
-    TSBindThirdSectionItemModel *item = model.items[indexPath.row];
+    TSBindMobileSectionModel *model = self.dataController.sections[indexPath.section];
+    TSBindMobileSectionItemModel *item = model.items[indexPath.row];
     Class className = NSClassFromString(item.identify);
     [collectionView registerClass:[className class] forCellWithReuseIdentifier:item.identify];
     TSUniversalCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:item.identify forIndexPath:indexPath];
@@ -101,8 +103,18 @@
 
 #pragma mark - UniversalCollectionViewCellDataDelegate
 - (id)universalCollectionViewCellModel:(NSIndexPath *)indexPath{
-    TSBindThirdSectionModel *sectionModel = self.dataController.sections[indexPath.section];
+    TSBindMobileSectionModel *sectionModel = self.dataController.sections[indexPath.section];
     return sectionModel.items[indexPath.row];
+}
+
+- (void)universalCollectionViewCellClick:(NSIndexPath *)indexPath params:(NSDictionary *)params {
+    NSString *cellType = params[@"cellType"];
+    if ([cellType isEqualToString:@"TSChangeMobileCell"] && [params[@"commitType"] integerValue] == 1) {///提交按钮
+        NSString *mobileNumber = params[@"MobileNumber"];///手机号
+        NSString *code = params[@"CodeNumber"];///验证码
+        NSString *oldMobileNumber = params[@"OldMobileNumber"];///旧手机号
+        [self changeMobile:mobileNumber oldMobile:oldMobileNumber code:code];
+    }
 }
 
 #pragma mark - UniversalFlowLayoutDelegate
@@ -110,17 +122,30 @@
                    layout:(TSUniversalFlowLayout *_Nullable)collectionViewLayout
   heightForRowAtIndexPath:(NSIndexPath *_Nullable)indexPath
                 itemWidth:(CGFloat)itemWidth{
-    TSBindThirdSectionModel *model = self.dataController.sections[indexPath.section];
-    TSBindThirdSectionItemModel *item = model.items[indexPath.row];
+    TSBindMobileSectionModel *model = self.dataController.sections[indexPath.section];
+    TSBindMobileSectionItemModel *item = model.items[indexPath.row];
     return item.cellHeight;
 }
 
 - (NSInteger)collectionView:(UICollectionView *_Nullable)collectionView
                      layout:(TSUniversalFlowLayout *_Nullable)collectionViewLayout
       columnNumberAtSection:(NSInteger )section{
-    TSBindThirdSectionModel *model = self.dataController.sections[section];
+    TSBindMobileSectionModel *model = self.dataController.sections[section];
     return model.column;
 }
+
+- (NSInteger)collectionView:(UICollectionView *_Nullable)collectionView
+                     layout:(TSUniversalFlowLayout *_Nullable)collectionViewLayout
+lineSpacingForSectionAtIndex:(NSInteger)section{
+    TSBindMobileSectionModel *model = self.dataController.sections[section];
+    return model.lineSpacing;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(TSUniversalFlowLayout *)collectionViewLayout spacingWithLastSectionForSectionAtIndex:(NSInteger)section {
+    TSBindMobileSectionModel *model = self.dataController.sections[section];
+    return model.spacingWithLastSection;
+}
+
 
 
 @end

@@ -8,7 +8,8 @@
 
 #import "NTESQLHomePageCustomUIModel.h"
 #import "NTESQPDemoDefines.h"
-
+#import "WXApi.h"
+#import "WechatManager.h"
 @implementation NTESQLHomePageCustomUIModel
 
 + (instancetype)getInstance {
@@ -162,11 +163,15 @@
 }
 
 - (void)labelTapped {
-    [[NTESQuickLoginManager sharedInstance] closeAuthController:^{
-        if (self.otherLoginBlock) {
-            self.otherLoginBlock();
-        }
-    }];;
+//    [[NTESQuickLoginManager sharedInstance] closeAuthController:^{
+//        if (self.otherLoginBlock) {
+//            self.otherLoginBlock();
+//        }
+//    }];
+    
+    if (self.otherLoginBlock) {
+        self.otherLoginBlock();
+    }
 }
 
 - (void)goToWechat{

@@ -1,23 +1,31 @@
 //
-//  TSBindMobileCell.m
+//  TSChangeMobileCell.m
 //  TShopMall
 //
-//  Created by 谭朝辉 on 2021/6/15.
+//  Created by edy on 2021/6/25.
 //
 
-#import "TSBindMobileCell.h"
+#import "TSChangeMobileCell.h"
 #import "NSTimer+TSBlcokTimer.h"
 #import "TSTools.h"
 #import <Toast.h>
+#import "TSBindMobileSectionModel.h"
 
 
-typedef NS_ENUM(NSUInteger, BindMobileValueType){
-    BindMobileValueTypeCommit = 1,///提交按钮
+typedef NS_ENUM(NSUInteger, ChangeMobileValueType){
+    ChangeMobileValueTypeCommit = 1,///提交按钮
 };
 
-@interface TSBindMobileCell ()
+@interface TSChangeMobileCell ()
+{
+    id<UniversalCollectionViewCellDataDelegate> _delegate;
+}
+/** 已绑定的手机号文字显示 */
+@property(nonatomic, weak) UILabel *phoneLabel;
 /** 分割线 */
 @property(nonatomic, weak) UIView *splitTopView;
+/** 手机号显示 */
+@property(nonatomic, weak) UILabel *phoneNumLabel;
 /** 分割线 */
 @property(nonatomic, weak) UIView *splitBottomView;
 /** 新手机号输入框 */
@@ -41,8 +49,7 @@ typedef NS_ENUM(NSUInteger, BindMobileValueType){
 
 @end
 
-
-@implementation TSBindMobileCell
+@implementation TSChangeMobileCell
 
 - (void)fillCustomContentView {
     [super fillCustomContentView];
@@ -58,9 +65,17 @@ typedef NS_ENUM(NSUInteger, BindMobileValueType){
 }
 
 - (void)addConstraints {
+    [self.phoneLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.contentView.mas_centerX).with.offset(0);
+        make.top.equalTo(self.contentView.mas_top).with.offset(48);
+    }];
+    [self.phoneNumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.contentView.mas_centerX).with.offset(0);
+        make.top.equalTo(self.phoneLabel.mas_bottom).with.offset(8);
+    }];
     [self.mobileTextField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contentView.mas_left).with.offset(16);
-        make.top.equalTo(self.contentView.mas_top).with.offset(138);
+        make.top.equalTo(self.phoneNumLabel.mas_bottom).with.offset(24);
         make.right.equalTo(self.contentView.mas_right).with.offset(-16);
         make.height.mas_equalTo(56);
     }];
@@ -109,6 +124,30 @@ typedef NS_ENUM(NSUInteger, BindMobileValueType){
         make.height.mas_equalTo(24);
         make.width.mas_equalTo(0.5);
     }];
+}
+
+- (UILabel *)phoneNumLabel {
+    if (_phoneNumLabel == nil) {
+        UILabel *phoneNumLabel = [[UILabel alloc] init];
+        _phoneNumLabel = phoneNumLabel;
+        _phoneNumLabel.text = @"133-7869-2380";
+        _phoneNumLabel.textColor = KTextColor;
+        _phoneNumLabel.font = KRegularFont(24);
+        [self.contentView addSubview:_phoneNumLabel];
+    }
+    return _phoneNumLabel;
+}
+
+- (UILabel *)phoneLabel {
+    if (_phoneLabel == nil) {
+        UILabel *phoneLabel = [[UILabel alloc] init];
+        _phoneLabel = phoneLabel;
+        _phoneLabel.text = @"已绑定手机号";
+        _phoneLabel.textColor = KHexAlphaColor(@"#2D3132", 0.6);
+        _phoneLabel.font = KRegularFont(14);
+        [self.contentView addSubview:_phoneLabel];
+    }
+    return _phoneLabel;
 }
 
 - (UILabel *)tipsLabel {
@@ -295,14 +334,23 @@ typedef NS_ENUM(NSUInteger, BindMobileValueType){
     }
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setValue:NSStringFromClass([self class]) forKey:@"cellType"];
-    [params setValue:@(BindMobileValueTypeCommit) forKey:@"commitType"];
+    [params setValue:@(ChangeMobileValueTypeCommit) forKey:@"commitType"];
     ///手机号
     [params setValue:self.mobileTextField.text forKey:@"MobileNumber"];
+    ///旧手机号
+    [params setValue:self.phoneNumLabel.text forKey:@"OldMobileNumber"];
     ///验证码
     [params setValue:self.codeTextField.text forKey:@"CodeNumber"];
-    if (self.delegate && [self.delegate respondsToSelector:@selector(universalCollectionViewCellClick:params:)]) {
-        [self.delegate universalCollectionViewCellClick:self.indexPath params:params];
+    if (_delegate && [_delegate respondsToSelector:@selector(universalCollectionViewCellClick:params:)]) {
+        [_delegate universalCollectionViewCellClick:self.indexPath params:params];
     }
 }
+
+- (void)setDelegate:(id<UniversalCollectionViewCellDataDelegate>)delegate {
+    _delegate = delegate;
+    TSBindMobileSectionItemModel *item = [delegate universalCollectionViewCellModel:self.indexPath];
+    self.phoneNumLabel.text = item.oldMobile;
+}
+
 
 @end

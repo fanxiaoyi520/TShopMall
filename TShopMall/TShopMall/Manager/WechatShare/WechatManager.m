@@ -68,7 +68,7 @@
             case WXSuccess: {
                 NSLog(@"微信回调支付成功");
                 if (self.WXSuccess) {
-                    self.WXSuccess();
+                    self.WXSuccess(@"");
                 }
             break;
             }
@@ -128,10 +128,10 @@
         switch (response.errCode) {
             case WXSuccess: {
                 NSLog(@"用户同意");
-                [self getAccessTokenWithCode:response.code];
-//                if (self.WXSuccess) {
-//                    self.WXSuccess();
-//                }
+//                [self getAccessTokenWithCode:response.code];
+                if (self.WXSuccess) {
+                    self.WXSuccess(response.code);
+                }
             break;
             }
             case WXErrCodeAuthDeny: {
@@ -195,14 +195,14 @@
     if ([resultDic[@"resultStatus"] isEqual:@"9000"] ) {
         NSLog(@"订单支付成功");
         if (self.WXSuccess) {
-            self.WXSuccess();
+            self.WXSuccess(@"");
         }
     }
     if ([resultDic[@"resultStatus"] isEqual:@"8000"] ) {
         NSLog(@"订单支付成功");
 //        正在处理中，支付结果未知（有可能已经支付成功），请查询商户订单列表中订单的支付状态
         if (self.WXSuccess) {
-            self.WXSuccess();
+            self.WXSuccess(@"");
         }
     }
     if ([resultDic[@"resultStatus"] isEqual:@"4000"] ) {
@@ -234,22 +234,23 @@
         NSLog(@"支付结果未知（有可能已经支付成功）");
 //        正在处理中，支付结果未知（有可能已经支付成功），请查询商户订单列表中订单的支付状态
         if (self.WXSuccess) {
-            self.WXSuccess();
+            self.WXSuccess(@"");
         }
     }
 }
 
 - (void)getAccessTokenWithCode:(NSString *)code{
     NSString *urlStr = [NSString stringWithFormat:@"https://api.weixin.qq.com/sns/oauth2/access_token?appid=%@&secret=%@&code=%@&grant_type=authorization_code", WXAPPId, WXAPPSecret, code];
-    NSString *newStr = [urlStr stringByAddingPercentEncodingWithAllowedCharacters:[[NSCharacterSet characterSetWithCharactersInString:@"?!@#$^&%*+,:;='\"`<>()[]{}/\\| "] invertedSet]];
-
-    NSURL *url = [NSURL URLWithString:newStr];
-    NSURLRequest *requst = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10];
-//    [[NSURLSession sharedSession] dataTaskWithRequest:requst completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-//
-//    }];
+    NSURL *url = [NSURL URLWithString:urlStr];
     NSURLSession *session = [NSURLSession sharedSession];
-    NSURLSessionDataTask *firsttask = [session dataTaskWithRequest:requst completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    NSURLSessionDataTask *firsttask = [session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if(error == nil){
+            id objc = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+            NSLog(@"%@",objc);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+            });
+        }
         
     }];
     [firsttask resume];
