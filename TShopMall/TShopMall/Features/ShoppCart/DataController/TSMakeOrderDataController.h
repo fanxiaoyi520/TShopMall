@@ -14,6 +14,7 @@
 
 @interface TSMakeOrderDataController : TSBaseDataController
 @property (nonatomic, strong) TSBalanceModel *balanceModel;
+@property (nonatomic, assign) BOOL paramsISFromCart;//YES-从购物车过来的，NO-非购物车过来的
 @property (nonatomic, strong) NSMutableArray<TSMakeOrderSection *> *sections;
 
 - (void)checkBalance:(void(^)(BOOL))finished;

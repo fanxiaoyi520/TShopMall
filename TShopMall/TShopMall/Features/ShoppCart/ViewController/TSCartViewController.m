@@ -90,6 +90,7 @@
         }).cancel(@"取消", ^{}).show();
     } else {
         TSMakeOrderController *con  = [TSMakeOrderController new];
+        con.isFromCart = YES;
         [self.navigationController pushViewController:con animated:YES];
     }
 }

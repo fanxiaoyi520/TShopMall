@@ -28,7 +28,7 @@
                                                                 requestMethod:YTKRequestMethodGET
                                                         requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON
                                                                 requestHeader:NSMutableDictionary.dictionary
-                                                                 requestBody:@{}
+                                                                 requestBody:@{@"noCart": @(!self.paramsISFromCart)}
                                                                needErrorToast:YES];
     request.animatingView = self.context.view;
     [request startWithCompletionBlockWithSuccess:^(__kindof SSGenaralRequest * _Nonnull request) {

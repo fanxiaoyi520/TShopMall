@@ -29,6 +29,7 @@
         self.automaticallyAdjustsScrollViewInsets = YES;
     }
     self.dataCon = [TSMakeOrderDataController new];
+    self.dataCon.paramsISFromCart = self.isFromCart;
     self.dataCon.context = self;
     [self refreshData];
 }

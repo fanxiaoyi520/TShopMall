@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TSMakeOrderController : TSBaseViewController<TSMakeOrderCellDelegate>
-
+@property (nonatomic, assign) BOOL isFromCart;
 @end
 
 NS_ASSUME_NONNULL_END
