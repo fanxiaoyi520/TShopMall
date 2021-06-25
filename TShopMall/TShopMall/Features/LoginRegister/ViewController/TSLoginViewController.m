@@ -226,7 +226,7 @@
     if (self.count <= 1) {
         self.count = 60;
         [self.timer invalidate];
-        [self.topView setCodeButtonTitleAndColor:@"重新验证码" isResend:YES enabled:YES];
+        [self.topView setCodeButtonTitleAndColor:@"重发验证码" isResend:YES enabled:YES];
     } else {
         self.count--;
         [self.topView setCodeButtonTitleAndColor:[NSString stringWithFormat:@"重发 %ld", (long)self.count] isResend:NO enabled:NO];
@@ -269,6 +269,10 @@
     NSString *mobile = [self.topView getPhoneNumber];
     
     __weak typeof(self) weakSelf = self;
+    if (self.timer) {
+        [self.timer invalidate];
+        self.timer = nil;
+    }
     [self.dataController fetchLoginSMSCodeMobile:mobile complete:^(BOOL isSucess) {
         __strong __typeof(weakSelf)strongSelf = weakSelf;
         if (isSucess) {
