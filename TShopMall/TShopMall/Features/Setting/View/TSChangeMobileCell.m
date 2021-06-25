@@ -11,11 +11,6 @@
 #import <Toast.h>
 #import "TSBindMobileSectionModel.h"
 
-
-typedef NS_ENUM(NSUInteger, ChangeMobileValueType){
-    ChangeMobileValueTypeCommit = 1,///提交按钮
-};
-
 @interface TSChangeMobileCell ()
 {
     id<UniversalCollectionViewCellDataDelegate> _delegate;
@@ -130,7 +125,6 @@ typedef NS_ENUM(NSUInteger, ChangeMobileValueType){
     if (_phoneNumLabel == nil) {
         UILabel *phoneNumLabel = [[UILabel alloc] init];
         _phoneNumLabel = phoneNumLabel;
-        _phoneNumLabel.text = @"133-7869-2380";
         _phoneNumLabel.textColor = KTextColor;
         _phoneNumLabel.font = KRegularFont(24);
         [self.contentView addSubview:_phoneNumLabel];
@@ -298,6 +292,12 @@ typedef NS_ENUM(NSUInteger, ChangeMobileValueType){
         self.count--;
         [self.codeButton setTitle:[NSString stringWithFormat:@"%lds", (long)self.count] forState:UIControlStateNormal];
     }
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setValue:NSStringFromClass([self class]) forKey:@"cellType"];
+    [params setValue:@(ChangeMobileValueTypeSendCode) forKey:@"ChangeMobileButtonClickType"];
+    if (_delegate && [_delegate respondsToSelector:@selector(universalCollectionViewCellClick:params:)]) {
+        [_delegate universalCollectionViewCellClick:self.indexPath params:params];
+    }
 }
 
 - (void)enabledButton:(BOOL)enabled {
@@ -334,7 +334,7 @@ typedef NS_ENUM(NSUInteger, ChangeMobileValueType){
     }
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setValue:NSStringFromClass([self class]) forKey:@"cellType"];
-    [params setValue:@(ChangeMobileValueTypeCommit) forKey:@"commitType"];
+    [params setValue:@(ChangeMobileValueTypeCommit) forKey:@"ChangeMobileButtonClickType"];
     ///手机号
     [params setValue:self.mobileTextField.text forKey:@"MobileNumber"];
     ///旧手机号

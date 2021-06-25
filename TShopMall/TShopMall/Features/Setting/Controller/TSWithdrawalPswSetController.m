@@ -75,6 +75,12 @@
     return _dataController;
 }
 
+#pragma mark - Actions
+/** 提交提现密码的设置 */
+- (void)commitWithWithdrawalpsw:(NSString *)psw {
+    
+}
+
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return self.dataController.sections.count;
@@ -104,6 +110,15 @@
 - (id)universalCollectionViewCellModel:(NSIndexPath *)indexPath{
     TSWithdrawalPswSetSectionModel *sectionModel = self.dataController.sections[indexPath.section];
     return sectionModel.items[indexPath.row];
+}
+
+- (void)universalCollectionViewCellClick:(NSIndexPath *)indexPath params:(NSDictionary *)params {
+    NSString *cellType = params[@"cellType"];
+    if ([cellType isEqualToString:@"TSWithdrawalPswSettingCell"] && [params[@"WithdrawalPswSetClickType"] integerValue] == 1) {///提交按钮
+        ///获取密码
+        NSString *psw = params[@"WithdrawalPsw"];
+        [self commitWithWithdrawalpsw:psw];
+    }
 }
 
 #pragma mark - UniversalFlowLayoutDelegate
