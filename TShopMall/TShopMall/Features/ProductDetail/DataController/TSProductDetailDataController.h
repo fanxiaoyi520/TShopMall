@@ -15,6 +15,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 商品sku
 @property(nonatomic, copy) NSString *attrId;
+/// 商品skuNo
+@property(nonatomic, copy) NSString *skuNo;
+/// 父类sku
+@property(nonatomic, copy) NSString *parentSkuNo;
+/// productUuid
+@property(nonatomic, copy) NSString *productUuid;
+
 
 @property (nonatomic, strong, readonly) NSMutableArray <TSGoodDetailSectionModel *> *sections;
 @property(nonatomic, copy) NSString *cartNumber;
