@@ -32,6 +32,11 @@
     }
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self getPhoneNumber];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -44,7 +49,7 @@
 //    [NTESQuickLoginManager sharedInstance].delegate = self;
     self.gk_navigationBar.hidden = YES;
     self.view.backgroundColor = KWhiteColor;
-    [self getPhoneNumber];
+    
 }
 
 - (void)getPhoneNumber{
@@ -109,9 +114,14 @@
                     }
                 }
                 else{
-                    /// 跳转绑定手机号
-                    TSBindMobileController *vc = [TSBindMobileController new];
-                    [self.navigationController pushViewController:vc animated:YES];
+                    [[NTESQuickLoginManager sharedInstance] closeAuthController:^{
+
+                     }];
+                    [self dismissViewControllerAnimated:NO completion:^{
+                        if (self.bindBlock) {
+                            self.bindBlock();
+                        }
+                    }];
                 }
             }];
         };
@@ -158,9 +168,15 @@
                     }
                 }
                 else{
+                    [[NTESQuickLoginManager sharedInstance] closeAuthController:^{
+
+                     }];
                     /// 跳转绑定手机号
-                    TSBindMobileController *vc = [TSBindMobileController new];
-                    [self.navigationController pushViewController:vc animated:YES];
+                    [self dismissViewControllerAnimated:NO completion:^{
+                        if (self.bindBlock) {
+                            self.bindBlock();
+                        }
+                    }];
                 }
             }];
         }

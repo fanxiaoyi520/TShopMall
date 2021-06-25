@@ -10,7 +10,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TSBindMobileController : TSBaseViewController
-
+@property (nonatomic, copy) NSString *token;
+@property (nonatomic, copy) void(^ bindedBlock)(void);
 @end
 
 NS_ASSUME_NONNULL_END

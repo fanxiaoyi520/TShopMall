@@ -282,8 +282,31 @@
 }
 
 - (void)goToApple {
-    
-    [[AuthAppleIDManager sharedInstance] authorizationAppleID];
+    @weakify(self);
+   
+    AuthAppleIDManager *manager = [AuthAppleIDManager sharedInstance];
+    [manager authorizationAppleID];
+    manager.loginByTokenBlock = ^(NSString * _Nonnull token) {
+        @strongify(self)
+        [self.dataController fetchLoginByToken:token platformId:@"15" sucess:^(BOOL isHaveMobile, NSString * _Nonnull token) {
+            if (isHaveMobile) {
+                /// 完成登录
+                if (self.loginBlock) {
+                    self.loginBlock();
+                }
+            }
+            else{
+                [[NTESQuickLoginManager sharedInstance] closeAuthController:^{
+
+                 }];
+                [self dismissViewControllerAnimated:NO completion:^{
+                    if (self.bindBlock) {
+                        self.bindBlock();
+                    }
+                }];
+            }
+        }];
+    };
 }
 
 #pragma mark - TSCheckedViewDelegate
@@ -418,12 +441,34 @@
 
 #pragma mark- 微信登录
 - (void)sendWXAuthReq{
+    @weakify(self);
     WechatManager * payManager = [WechatManager shareInstance];
     payManager.WXFail = ^{
 
     };
     payManager.WXSuccess = ^(NSString *code){
+        @strongify(self)
+        if (code) {
+            [self.dataController fetchLoginByAuthCode:code platformId:@"3" sucess:^(BOOL isHaveMobile, NSString * _Nonnull token) {
+                if (isHaveMobile) {
+                    /// 完成登录
+                    if (self.loginBlock) {
+                        self.loginBlock();
+                    }
+                }
+                else{
+                    [[NTESQuickLoginManager sharedInstance] closeAuthController:^{
 
+                     }];
+                    /// 跳转绑定手机号
+                    [self dismissViewControllerAnimated:NO completion:^{
+                        if (self.bindBlock) {
+                            self.bindBlock();
+                        }
+                    }];
+                }
+            }];
+        }
     };
     
     if([WXApi isWXAppInstalled]){//判断用户是否已安装微信App

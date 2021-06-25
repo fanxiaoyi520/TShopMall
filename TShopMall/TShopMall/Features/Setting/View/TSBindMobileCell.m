@@ -247,6 +247,10 @@ typedef NS_ENUM(NSUInteger, BindMobileValueType){
     self.timer = [NSTimer ts_scheduledTimerWithTimeInterval:1 block:^{
          [weakSelf goToRun];
     } repeats:YES];
+    
+    if (self.codeButtonClickBlock) {
+        self.codeButtonClickBlock(phoneNumber);
+    }
 }
 
 - (void)goToRun {

@@ -14,6 +14,7 @@
 #import "TSAccountConst.h"
 #import "TSOneClickLoginViewController.h"
 #import "TSLoginRegisterDataController.h"
+#import "TSBindMobileController.h"
 @interface TSUserLoginManager ()
 
 @end
@@ -38,6 +39,18 @@
         oneClickLoginVC.otherLoginBlock = ^{
             @strongify(self)
             [self otherLoginWithAnimation:YES];
+        };
+        oneClickLoginVC.bindBlock = ^{
+            TSBindMobileController *vc = [TSBindMobileController new];
+            TSBaseNavigationController *nav = [[TSBaseNavigationController alloc] initWithRootViewController:vc];
+
+            vc.bindedBlock = ^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"TS_LoginUpdateNotification" object:@1];
+
+            };
+            nav.modalPresentationStyle = UIModalPresentationFullScreen;
+            [[UIApplication sharedApplication].delegate.window.rootViewController presentViewController:nav animated:YES completion:^{
+            }];
         };
         UIViewController *vc = [UIApplication sharedApplication].delegate.window.rootViewController;
         nav.modalPresentationStyle = UIModalPresentationFullScreen;
