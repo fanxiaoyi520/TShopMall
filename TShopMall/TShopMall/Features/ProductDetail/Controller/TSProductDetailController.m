@@ -177,6 +177,7 @@
     [self addConstraints];
 //    [self addCollectionCoverView];
     [self addMJHeaderAndFooter];
+    
 }
 
 - (void)addConstraints {
