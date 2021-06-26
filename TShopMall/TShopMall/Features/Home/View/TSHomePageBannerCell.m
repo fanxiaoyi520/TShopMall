@@ -71,9 +71,8 @@
 
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index{
     TSHomePageBannerViewModel *bannerViewModel = (TSHomePageBannerViewModel *)self.viewModel;
-
-    NSLog(@"uri:%@",bannerViewModel.bannerDatas[index].linkData.objectValue);
-
+    [[TSServicesManager sharedInstance].uriHandler openURI:bannerViewModel.bannerDatas[index].uri];
+    NSLog(@"uri:%@",bannerViewModel.bannerDatas[index].uri);
 }
 
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didScrollToIndex:(NSInteger)index{
