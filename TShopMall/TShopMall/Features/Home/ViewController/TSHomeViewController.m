@@ -244,12 +244,9 @@
 //    [[TSUserInfoManager userInfo] clearUserInfo];
 //    return;
     
-    //调试用，到时删除
-    TSBindMobileController *bind = [TSBindMobileController new];
-    [self.navigationController pushViewController:bind animated:YES];
     
-//    TSCategoryViewController *category = [[TSCategoryViewController alloc] init];
-//    [self.navigationController pushViewController:category animated:YES];
+    TSCategoryViewController *category = [[TSCategoryViewController alloc] init];
+    [self.navigationController pushViewController:category animated:YES];
 }
 
 #pragma mark - Getter

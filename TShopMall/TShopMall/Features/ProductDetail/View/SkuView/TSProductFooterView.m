@@ -51,6 +51,19 @@
     }];
 }
 
+#pragma mark - Action
+-(void)addAction:(UIButton *)sender{
+    if (self.cartBlock) {
+        self.cartBlock();
+    }
+}
+
+-(void)buyAction:(UIButton *)sender{
+    if (self.buyBlock) {
+        self.buyBlock();
+    }
+}
+
 #pragma mark - Getter
 -(UIButton *)buyButton{
     if (!_buyButton) {
@@ -74,7 +87,7 @@
         [_sellButton setTitleColor:KWhiteColor forState:UIControlStateNormal];
         [_sellButton setTitleColor:KWhiteColor forState:UIControlStateHighlighted];
         [_sellButton setBackgroundColor:[UIColor redColor]];
-        [_sellButton addTarget:self action:@selector(addAction:) forControlEvents:UIControlEventTouchUpInside];
+        [_sellButton addTarget:self action:@selector(buyAction:) forControlEvents:UIControlEventTouchUpInside];
         [_sellButton setCorners:(UIRectCornerTopRight | UIRectCornerBottomRight) radius:20];
     }
     return _sellButton;

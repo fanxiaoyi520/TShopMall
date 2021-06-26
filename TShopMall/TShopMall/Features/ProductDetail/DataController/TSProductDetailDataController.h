@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy) NSString *parentSkuNo;
 /// productUuid
 @property(nonatomic, copy) NSString *productUuid;
-
+/// 购物车角标
 @property(nonatomic, copy) NSString *cartNumber;
 
 @property (nonatomic, strong, readonly) NSMutableArray <TSGoodDetailSectionModel *> *sections;

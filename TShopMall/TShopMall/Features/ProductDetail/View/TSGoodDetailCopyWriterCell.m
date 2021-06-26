@@ -112,7 +112,9 @@
 
 -(void)setDelegate:(id<UniversalCollectionViewCellDataDelegate>)delegate{
     TSGoodDetailItemCopyModel *item = [delegate universalCollectionViewCellModel:self.indexPath];
-    self.textView.text = item.writeStr;
+    if (![item.writeStr isKindOfClass:[NSNull class]]) {
+        self.textView.text = item.writeStr;
+    }
 }
 
 @end

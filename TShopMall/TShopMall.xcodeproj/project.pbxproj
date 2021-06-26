@@ -258,6 +258,7 @@
 		DFB3FFE52685C19700FC8FF9 /* TSLoginByAuthCodeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB3FFE42685C19700FC8FF9 /* TSLoginByAuthCodeRequest.m */; };
 		DFB3FFE82685E43D00FC8FF9 /* TSBindUserByAuthCodeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB3FFE72685E43D00FC8FF9 /* TSBindUserByAuthCodeRequest.m */; };
 		DFB3FFEC2686BDEC00FC8FF9 /* TSCustomPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB3FFEB2686BDEB00FC8FF9 /* TSCustomPageControl.m */; };
+		DFB3FFEF2686E60C00FC8FF9 /* TSURLRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB3FFEE2686E60C00FC8FF9 /* TSURLRouter.m */; };
 		E2BE996F8804E0C3E7D5AE61 /* libPods-TShopMall-TShopMallUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD1ABBE857D307088E9BF2DC /* libPods-TShopMall-TShopMallUITests.a */; };
 		F530C6D526802E5D009DC29A /* TSSMSCodeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F530C6CC26802E5D009DC29A /* TSSMSCodeRequest.m */; };
 		F530C6D626802E5D009DC29A /* TSQuickLoginRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F530C6CF26802E5D009DC29A /* TSQuickLoginRequest.m */; };
@@ -984,6 +985,8 @@
 		DFB3FFE72685E43D00FC8FF9 /* TSBindUserByAuthCodeRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSBindUserByAuthCodeRequest.m; sourceTree = "<group>"; };
 		DFB3FFEA2686BDEB00FC8FF9 /* TSCustomPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSCustomPageControl.h; sourceTree = "<group>"; };
 		DFB3FFEB2686BDEB00FC8FF9 /* TSCustomPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSCustomPageControl.m; sourceTree = "<group>"; };
+		DFB3FFED2686E60C00FC8FF9 /* TSURLRouter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSURLRouter.h; sourceTree = "<group>"; };
+		DFB3FFEE2686E60C00FC8FF9 /* TSURLRouter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSURLRouter.m; sourceTree = "<group>"; };
 		ECCE8A564DF47B445E7905B1 /* Pods-TShopMall-TShopMallUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TShopMall-TShopMallUITests.release.xcconfig"; path = "Target Support Files/Pods-TShopMall-TShopMallUITests/Pods-TShopMall-TShopMallUITests.release.xcconfig"; sourceTree = "<group>"; };
 		F530C6CC26802E5D009DC29A /* TSSMSCodeRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSSMSCodeRequest.m; sourceTree = "<group>"; };
 		F530C6CD26802E5D009DC29A /* TSQuickLoginRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSQuickLoginRequest.h; sourceTree = "<group>"; };
@@ -3138,6 +3141,8 @@
 				DCA035F7268355D2003DE5F7 /* TSServicesManager.m */,
 				DFB3FFDD268571B100FC8FF9 /* AuthAppleIDManager.h */,
 				DFB3FFDE268571B100FC8FF9 /* AuthAppleIDManager.m */,
+				DFB3FFED2686E60C00FC8FF9 /* TSURLRouter.h */,
+				DFB3FFEE2686E60C00FC8FF9 /* TSURLRouter.m */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -3888,6 +3893,7 @@
 				C21A4B7B267B20E400766F72 /* TSShippingAddressCell.m in Sources */,
 				F55D2C9D26745E64006BACCF /* TSUserInfoManager.m in Sources */,
 				C2EF88D52670B8B900E7374A /* TSCartBaseCell.m in Sources */,
+				DFB3FFEF2686E60C00FC8FF9 /* TSURLRouter.m in Sources */,
 				042F423A2681A05C00555F5D /* TSRecommendCell.m in Sources */,
 				CE66DAF52684267B00E8D433 /* TSWithdrawalRecordModel.m in Sources */,
 				C25A7F8B26846AB00006C6AF /* TSMakeOrderPriceViewModel.m in Sources */,
