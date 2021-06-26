@@ -9,7 +9,7 @@
 #import "TSProductHeaderView.h"
 
 
-@interface TSProductHeaderView()
+@interface TSProductHeaderView()<UITextFieldDelegate>
 
 /// 商品图片
 @property (nonatomic, strong) UIImageView *iconImge;
@@ -125,13 +125,17 @@
     
 }
 
+#pragma mark - UITextFieldDelegate
+-(void)textFieldDidEndEditing:(UITextField *)textField{
+    
+}
+
 #pragma mark - Getter
 -(UIImageView *)iconImge{
     if (!_iconImge) {
         _iconImge = [UIImageView new];
         _iconImge.layer.cornerRadius = 8;
         _iconImge.clipsToBounds = YES;
-        _iconImge.backgroundColor = [UIColor redColor];
     }
     return _iconImge;
 }
@@ -151,7 +155,7 @@
         _priceLable = [UILabel new];
         _priceLable.textColor = KMainColor;
         _priceLable.textAlignment = NSTextAlignmentCenter;
-        _priceLable.text = @"¥8999";
+        _priceLable.text = @"¥";
     }
     return _priceLable;
 }
@@ -194,6 +198,7 @@
     if (!_reduceButton) {
         _reduceButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_reduceButton setImage:KImageMake(@"mall_detail_reduce_able") forState:UIControlStateNormal];
+        [_reduceButton setImage:KImageMake(@"mall_detail_reduce_able") forState:UIControlStateHighlighted];
         [_reduceButton setImage:KImageMake(@"mall_detail_add_disable") forState:UIControlStateDisabled];
         [_reduceButton addTarget:self action:@selector(reduceAction:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -207,6 +212,7 @@
         _inputTF.font = KRegularFont(14);
         _inputTF.backgroundColor = KHexColor(@"#F4F4F4");
         _inputTF.textAlignment = NSTextAlignmentCenter;
+        _inputTF.delegate = self;
         _inputTF.text = @"1";
     }
     return _inputTF;
@@ -216,11 +222,19 @@
     if (!_addButton) {
         _addButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_addButton setImage:KImageMake(@"mall_detail_add") forState:UIControlStateNormal];
+        [_addButton setImage:KImageMake(@"mall_detail_add") forState:UIControlStateHighlighted];
         [_addButton setImage:KImageMake(@"mall_detail_add") forState:UIControlStateDisabled];
         [_addButton addTarget:self action:@selector(addAction:) forControlEvents:UIControlEventTouchUpInside];
         [_addButton setBackgroundColor:UIColor.redColor];
     }
     return _addButton;
+}
+
+-(void)setPurchaseModel:(TSGoodDetailItemPurchaseModel *)purchaseModel{
+    _purchaseModel = purchaseModel;
+    [_iconImge sd_setImageWithURL:[NSURL URLWithString:purchaseModel.iconUrl]];
+    _priceLable.text = [NSString stringWithFormat:@"¥%@",purchaseModel.price];
+    
 }
 
 @end

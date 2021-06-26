@@ -49,6 +49,14 @@
         make.height.mas_equalTo(136);
     }];
     
+    self.footerView.cartBlock = ^{
+        
+    };
+    
+    self.footerView.buyBlock = ^{
+        
+    };
+    
 //    [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
 //        make.left.right.equalTo(self);
 //        make.top.equalTo(self.headerView.mas_bottom).offset(0);
@@ -124,6 +132,11 @@
         _footerView = [[TSProductFooterView alloc] init];
     }
     return _footerView;
+}
+
+-(void)setPurchaseModel:(TSGoodDetailItemPurchaseModel *)purchaseModel{
+    _purchaseModel = purchaseModel;
+    _headerView.purchaseModel = purchaseModel;
 }
 
 @end

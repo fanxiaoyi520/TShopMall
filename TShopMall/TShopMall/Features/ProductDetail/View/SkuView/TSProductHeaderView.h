@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TSGoodDetailItemModel.h"
 
 @interface TSProductHeaderView : UIView
 
+@property(nonatomic, strong) TSGoodDetailItemPurchaseModel *purchaseModel;
 
 @end
 
