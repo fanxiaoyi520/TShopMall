@@ -27,7 +27,7 @@
         make.right.equalTo(self.contentView).offset(-16);
         make.top.equalTo(self.contentView).offset(11);
         make.bottom.equalTo(self.contentView).offset(-12);
-        make.height.equalTo(@174);
+        make.height.equalTo(@174).priorityLow();;
     }];
   
 }
@@ -60,7 +60,6 @@
         _cycleScrollView.showPageControl = NO;
         _cycleScrollView.autoScroll  = YES;
         _cycleScrollView.autoScrollTimeInterval = 4;
-//        _cycleScrollView.backgroundColor = KGrayColor;
         _cycleScrollView.clipsToBounds = YES;
         _cycleScrollView.layer.cornerRadius = 6;
     }

@@ -35,9 +35,12 @@
     lineView.indicatorColor = [UIColor whiteColor];
     self.myCategoryView.indicators = @[lineView];
     self.myCategoryView.separatorLineShowEnabled = YES;
-    
+    @weakify(self);
     [self.dataController fetchRankCoronalComplete:^(BOOL isSucess) {
-
+        @strongify(self)
+        [self.dataController fetchRankRecommendComplete:^(BOOL isSucess) {
+            [self.myCategoryView reloadData];
+        }];
     }];
 }
 

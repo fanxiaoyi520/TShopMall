@@ -9,15 +9,14 @@
 @interface TSHighPriceTagView()
 @property (nonatomic, strong) UIImageView *redTagImageView;
 @property (nonatomic, strong) UIImageView *yellowTagImageView;
-
+@property (nonatomic, strong) UILabel *leftLabel;
+@property (nonatomic, strong) UILabel *rightLabel;
 @end
 @implementation TSHighPriceTagView
 
-- (instancetype)initWithFrame:(CGRect)frame leftText:(NSString *)leftText rightText:(NSString *)rightText{
+- (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
-//        self.layer.cornerRadius = 3;
-//        self.layer.masksToBounds = YES;
-//        self.backgroundColor = KHexColor(@"#FF4D49");
+
         [self addSubview:self.redTagImageView];
         [self addSubview:self.yellowTagImageView];
 
@@ -40,12 +39,17 @@
             make.top.bottom.equalTo(self);
             make.right.equalTo(self).offset(-2);
         }];
-        
-        self.leftLabel.text = leftText;
-        self.rightLabel.text = rightText;
 
     }
     return self;
+}
+
+- (void)setLeftText:(NSString *)leftText rightText:(NSString *)rightText{
+    self.leftLabel.text = leftText;
+    self.rightLabel.text = rightText;
+    self.redTagImageView.hidden = NO;
+    self.yellowTagImageView.hidden = NO;
+
 }
 
 - (UILabel *)leftLabel{
@@ -70,6 +74,7 @@
 - (UIImageView *)redTagImageView{
     if (!_redTagImageView) {
         _redTagImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"homePage_container_tag_red"]];
+        _redTagImageView.hidden = YES;
     }
     return _redTagImageView;
 }
@@ -77,6 +82,7 @@
 - (UIImageView *)yellowTagImageView{
     if (!_yellowTagImageView) {
         _yellowTagImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"homePage_container_tag_yellow"]];
+        _yellowTagImageView.hidden = YES;
     }
     return _yellowTagImageView;
 }

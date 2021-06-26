@@ -10,9 +10,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TSHighPriceTagView : UIView
-- (instancetype)initWithFrame:(CGRect)frame leftText:(NSString *)leftText rightText:(NSString *)rightText;
-@property (nonatomic, strong) UILabel *leftLabel;
-@property (nonatomic, strong) UILabel *rightLabel;
+
+- (void)setLeftText:(NSString *)leftText rightText:(NSString *)rightText;
 @end
 
 NS_ASSUME_NONNULL_END

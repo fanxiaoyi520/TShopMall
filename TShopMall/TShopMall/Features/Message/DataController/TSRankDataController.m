@@ -6,7 +6,7 @@
 //
 
 #import "TSRankDataController.h"
-
+#import "TSProductBaseModel.h"
 @interface TSRankDataController()
 
 @property (nonatomic, strong) NSMutableArray <TSRankSectionModel *> *coronalSections;
@@ -56,17 +56,25 @@
         [sections addObject:section];
     }
     
+    self.coronalSections = sections;
+    if (complete) {
+        complete(YES);
+    }
+    
+}
+
+-(void)fetchRankRecommendComplete:(void(^)(BOOL isSucess))complete{
     {
         NSMutableArray *items = [NSMutableArray array];
-        
+
         for (int i = 0; i < 10; i++) {
-            TSRankSectionItemModel *item = [[TSRankSectionItemModel alloc] init];
+            TSProductBaseModel *item = [[TSProductBaseModel alloc] init];
             item.cellHeight = 282;
-            item.identify = @"TSRankRecommendCell";
-            
+            item.identify = @"TSHomePageContainerCollectionViewCell";
+
             [items addObject:item];
         }
-        
+
         TSRankSectionModel *section = [[TSRankSectionModel alloc] init];
         section.hasHeader = YES;
         section.headerSize = CGSizeMake(0, 64);
@@ -76,15 +84,16 @@
         section.lineSpacing = 10;
         section.items = items;
         section.sectionInset = UIEdgeInsetsMake(0, 16, 0, 16);
-        
-        [sections addObject:section];
-    }
-    
-    self.coronalSections = sections;
-    
-    if (complete) {
-        complete(YES);
-    }
-}
 
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self.coronalSections addObject:section];
+            if (complete) {
+                complete(YES);
+            }
+        });
+    }
+    
+    
+   
+}
 @end
