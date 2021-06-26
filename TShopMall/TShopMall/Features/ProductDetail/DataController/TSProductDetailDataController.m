@@ -91,7 +91,7 @@
     }
 
     {//所选商品规格参数等 5
-        TSGoodDetailItemPriceModel *item = [[TSGoodDetailItemPriceModel alloc] init];
+        TSGoodDetailItemPurchaseModel *item = [[TSGoodDetailItemPurchaseModel alloc] init];
         item.cellHeight = 172;
         item.identify = @"TSProductDetailPurchaseCell";
 
@@ -232,6 +232,22 @@
             
         }
         
+        {//已选等
+            
+            NSDictionary *front = data[@"front"];
+            NSArray *selectNameArr = front[@"selectName"];
+            NSString *selected = [selectNameArr componentsJoinedByString:@","];
+
+            TSGoodDetailSectionModel *section = self.sections[5];
+            TSGoodDetailItemPurchaseModel *item = (TSGoodDetailItemPurchaseModel *)[section.items firstObject];
+            item.selectedStr = selected;
+            item.localaddress = @"广东省 深圳市 南山区 西丽街道";
+            item.provinceId = @"05";
+            item.cityId = @"154";
+            item.areaUuid = @"15845";
+            item.regionUuid = @"1385";
+        }
+        
         {//详情
             TSGoodDetailSectionModel *section = [self.sections lastObject];
             NSDictionary *productDescription = productModel[@"productDescription"];
@@ -243,10 +259,6 @@
         if (complete) {
             complete(YES);
         }
-        
-        
-
-
         
         } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
             

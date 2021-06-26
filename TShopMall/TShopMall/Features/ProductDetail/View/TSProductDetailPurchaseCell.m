@@ -6,6 +6,7 @@
 //
 
 #import "TSProductDetailPurchaseCell.h"
+#import "TSGoodDetailItemModel.h"
 
 @interface TSProductDetailPurchaseCell()
 
@@ -269,7 +270,7 @@
         _selectValueLabel = [[UILabel alloc] init];
         _selectValueLabel.font = KRegularFont(14);
         _selectValueLabel.textColor = KTextColor;
-        _selectValueLabel.text = @"已选：珠光黑/一体包/3200，彩电-5已选：珠光黑/一体包/3200，彩电-5已选：珠光黑/一体包/3200，彩电-5";
+        _selectValueLabel.text = @"";
         _selectValueLabel.numberOfLines = 2;
     }
     return _selectValueLabel;
@@ -309,7 +310,7 @@
         _deliveryValueLabel.font = KRegularFont(14);
         _deliveryValueLabel.textColor = KTextColor;
         _deliveryValueLabel.numberOfLines = 2;
-        _deliveryValueLabel.text = @"广东省深圳市南山区西丽街道西丽街道西丽街广东省深圳市南山区西丽街道西丽街道西丽街";
+        _deliveryValueLabel.text = @"";
     }
     return _deliveryValueLabel;
 }
@@ -344,6 +345,12 @@
         [_feeButton addTarget:self action:@selector(feeAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _feeButton;
+}
+
+-(void)setDelegate:(id<UniversalCollectionViewCellDataDelegate>)delegate{
+    TSGoodDetailItemPurchaseModel *item = (TSGoodDetailItemPurchaseModel *)[delegate universalCollectionViewCellModel:self.indexPath];
+    self.selectValueLabel.text = item.selectedStr;
+    self.deliveryValueLabel.text = item.localaddress;
 }
 
 @end
