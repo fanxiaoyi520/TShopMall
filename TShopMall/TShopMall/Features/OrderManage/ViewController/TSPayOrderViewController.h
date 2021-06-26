@@ -10,7 +10,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TSPayOrderViewController : TSBaseViewController
-
+@property (nonatomic, copy) NSString *payOrderId;
+@property (nonatomic, copy) NSString *isGroup;
 @end
 
 NS_ASSUME_NONNULL_END
