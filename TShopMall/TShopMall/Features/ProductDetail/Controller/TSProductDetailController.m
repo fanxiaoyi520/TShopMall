@@ -174,17 +174,14 @@
     [self.view addSubview:self.shareButton];
     [self.view addSubview:self.cartButton];
     [self.view addSubview:self.dragView];
-    
+    [self addConstraints];
 //    [self addCollectionCoverView];
     [self addMJHeaderAndFooter];
 }
 
--(void)viewWillLayoutSubviews{
-    [super viewWillLayoutSubviews];
-    
-    CGFloat top = self.view.ts_safeAreaInsets.top + KRateH(6);
+- (void)addConstraints {
+    CGFloat top = GK_STATUSBAR_HEIGHT + 6;//self.view.ts_safeAreaInsets.top + KRateH(6);
     CGFloat bottom = self.view.ts_safeAreaInsets.bottom + KRateH(54);
-    
     [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.equalTo(self.view);
         make.height.mas_equalTo(bottom);
@@ -212,6 +209,12 @@
         make.top.equalTo(self.view).offset(top);
         make.width.height.mas_equalTo(32);
     }];
+    ///解决collectionView 往下滑的问题
+    if (@available(iOS 11.0, *)) {
+        self.collectionView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    } else {
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle{
