@@ -258,7 +258,7 @@
 
 /// 下拉刷新
 - (void)mjHeadreRefresh:(MJRefreshNormalHeader *)mj_header {
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
          [self.collectionView.mj_header endRefreshing];
      });
 }
@@ -361,7 +361,7 @@
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     CGFloat offsetY = scrollView.contentOffset.y;
     CGFloat progress = offsetY / GK_STATUSBAR_NAVBAR_HEIGHT;
-    CGFloat diff = 0.2 - progress;
+    CGFloat diff = 1.0 - progress;
     if (diff < 0) {
         self.backButton.alpha = 0;
         self.shareButton.alpha = 0;

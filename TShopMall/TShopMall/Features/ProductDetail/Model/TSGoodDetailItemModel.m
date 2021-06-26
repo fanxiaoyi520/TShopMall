@@ -32,6 +32,10 @@
 
 @end
 
+@implementation TSGoodDetailItemPurchaseModel
+
+@end
+
 @implementation TSGoodDetailItemImageModel
 
 @end

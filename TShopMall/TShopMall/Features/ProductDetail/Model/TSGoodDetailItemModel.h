@@ -55,6 +55,23 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface TSGoodDetailItemPurchaseModel : TSGoodDetailItemModel
+
+/// 已选
+@property(nonatomic, copy) NSString *selectedStr;
+/// 配送
+@property(nonatomic, copy) NSString *localaddress;
+/// 省id
+@property(nonatomic, copy) NSString *provinceId;
+/// 市id
+@property(nonatomic, copy) NSString *cityId;
+/// 省id
+@property(nonatomic, copy) NSString *regionUuid;
+/// 市id
+@property(nonatomic, copy) NSString *areaUuid;
+
+@end
+
 
 @interface TSGoodDetailItemImageModel : TSGoodDetailItemModel
 
