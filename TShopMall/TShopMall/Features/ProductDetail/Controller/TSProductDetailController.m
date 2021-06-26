@@ -321,7 +321,7 @@
     self.tabBarController.selectedIndex = 0;
 }
 -(void)productDetailBottomView:(TSProductDetailBottomView *_Nullable)bottomView customClick:(TSDetailFunctionButton *_Nullable)sender{
-    TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:@"www.baidu.com"];
+    TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:@"http://www.baidu.com"];
     [self.navigationController pushViewController:hybrid animated:YES];
 }
 -(void)productDetailBottomView:(TSProductDetailBottomView *_Nullable)bottomView addClick:(TSDetailFunctionButton *_Nullable)sender{

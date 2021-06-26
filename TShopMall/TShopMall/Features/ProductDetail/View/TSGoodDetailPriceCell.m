@@ -16,6 +16,8 @@
 @property (nonatomic, strong) UILabel *unifiedPriceLable;
 /// 提货价
 @property (nonatomic, strong) UILabel *deliveryLable;
+/// 提货价值
+@property (nonatomic, strong) UILabel *deliveryValueLable;
 /// 最高赚
 @property(nonatomic, strong) UILabel *earnLabel;
 /// 最高赚金额背景
@@ -31,6 +33,7 @@
     self.contentView.backgroundColor = UIColor.whiteColor;
     
     [self.contentView addSubview:self.deliveryLable];
+    [self.contentView addSubview:self.deliveryValueLable];
     [self.contentView addSubview:self.unifiedLable];
     [self.contentView addSubview:self.unifiedPriceLable];
     [self.contentView addSubview:self.earnMoneyView];
@@ -45,7 +48,7 @@
     }];
     
     [self.unifiedPriceLable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.unifiedLable.mas_right).offset(2);
+        make.left.equalTo(self.unifiedLable.mas_right).offset(0);
         make.centerY.equalTo(self.unifiedLable);
         make.height.mas_equalTo(36);
     }];
@@ -56,10 +59,16 @@
         make.height.mas_equalTo(18);
     }];
     
+    [self.deliveryValueLable mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.deliveryLable.mas_right).offset(5);
+        make.bottom.equalTo(self.contentView).offset(-11);
+        make.height.mas_equalTo(18);
+    }];
+    
     [self.earnLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.unifiedPriceLable.mas_right).offset(21);
         make.centerY.equalTo(self.unifiedLable);
-        make.width.mas_equalTo(60);
+        make.width.mas_equalTo(50);
         make.height.mas_equalTo(20);
     }];
     
@@ -109,9 +118,19 @@
         _deliveryLable = [[UILabel alloc] init];
         _deliveryLable.font = KRegularFont(12);
         _deliveryLable.textColor = KHexAlphaColor(@"#2D3132", 0.4);
-        _deliveryLable.text = @"提货价 ¥";
+        _deliveryLable.text = @"提货价";
     }
     return _deliveryLable;
+}
+
+-(UILabel *)deliveryValueLable{
+    if (!_deliveryValueLable) {
+        _deliveryValueLable = [[UILabel alloc] init];
+        _deliveryValueLable.font = KRegularFont(12);
+        _deliveryValueLable.textColor = KHexAlphaColor(@"#2D3132", 0.4);
+        _deliveryValueLable.text = @"";
+    }
+    return _deliveryValueLable;
 }
 
 -(UILabel *)earnLabel{
@@ -153,9 +172,15 @@
 -(void)setDelegate:(id<UniversalCollectionViewCellDataDelegate>)delegate{
     TSGoodDetailItemPriceModel *item = [delegate universalCollectionViewCellModel:self.indexPath];
     
-    self.unifiedPriceLable.text = [NSString stringWithFormat:@"%@",item.marketPrice];
-    self.deliveryLable.text = [NSString stringWithFormat:@"提货价 ¥%@",item.staffPrice];
-    self.earnMoneyLabel.text = [NSString stringWithFormat:@"%@",item.earnMost];
+    if (!item.marketPrice) {
+        self.unifiedPriceLable.text = @"";
+        self.deliveryValueLable.text = @"";
+        self.earnMoneyLabel.text = @"";
+    }else{
+        self.unifiedPriceLable.text = [NSString stringWithFormat:@"%@",item.marketPrice];
+        self.deliveryValueLable.text = [NSString stringWithFormat:@"¥ %@",item.staffPrice];
+        self.earnMoneyLabel.text = [NSString stringWithFormat:@"%@",item.earnMost];
+    }
 }
 
 @end
