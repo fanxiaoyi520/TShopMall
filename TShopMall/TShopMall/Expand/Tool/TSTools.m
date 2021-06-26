@@ -21,6 +21,13 @@
     return isMatch;
 }
 
+/** 提现密码的校验 */
++ (BOOL)isWithdrawalPsw:(NSString *)psw {
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", @"^\\d{6}$"];
+    BOOL isMatch = [pred evaluateWithObject:psw];
+    return isMatch;
+}
+
 /*
 + (BOOL)isPhoneNumber:(NSString *)phoneNumber {
     ///移动号段正则表达式

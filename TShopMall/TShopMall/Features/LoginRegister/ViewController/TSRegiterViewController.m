@@ -12,7 +12,7 @@
 #import "TSTools.h"
 #import "NSTimer+TSBlcokTimer.h"
 #import "TSHybridViewController.h"
-@interface TSRegiterViewController ()<TSRegisterTopViewDelegate, TSCheckedViewDelegate>
+@interface TSRegiterViewController ()<TSRegisterTopViewDelegate, TSCheckedViewDelegate, TSHybridViewControllerDelegate>
 /** 背景图 */
 @property(nonatomic, weak) UIImageView *bgImgV;
 /** 关闭 */
@@ -40,6 +40,8 @@
 - (void)fillCustomView {
     ///添加约束
     [self addConstraints];
+    
+    
 }
 
 - (void)setupBasic {
@@ -153,11 +155,12 @@
         return;
     }
     [self.view endEditing:YES];
+    @weakify(self);
     [self.dataController fetchRegisterMobile:phoneNumber validCode:[self.topView getCode] invitationCode:[self.topView getInvitationCode] complete:^(BOOL isSucess) {
         if (isSucess) {
-            if (self.regiterBlock) {
-                self.regiterBlock();
-            }
+            @strongify(self)
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"TS_LoginUpdateNotification" object:@0];
+            [self dismissViewControllerAnimated:YES completion:nil];
         }
     }];
 }
