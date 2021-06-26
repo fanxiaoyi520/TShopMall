@@ -84,8 +84,8 @@
     self.titleLabel.text = item.name;
     self.priceLabel.text = [NSString stringWithFormat:@"%.0f",item.price];
     self.highPriceView.leftLabel.text = @"最高赚";
-    self.highPriceView.rightLabel.text = [NSString stringWithFormat:@"¥%.0f",item.price];
-    self.getPriceLabel.text = [NSString stringWithFormat:@"提货价 ¥%.0f",item.price];
+    self.highPriceView.rightLabel.text = [NSString stringWithFormat:@"¥%.0f",item.earnMost];
+    self.getPriceLabel.text = [NSString stringWithFormat:@"提货价 ¥%.0f",item.staffPrice];
 
     [self layoutIfNeeded];
 }
@@ -101,7 +101,7 @@
     if (!_titleLabel) {
         _titleLabel = [UILabel new];
         _titleLabel.numberOfLines = 2;
-        _titleLabel.font = KFont(PingFangSCMedium, 15.0);
+        _titleLabel.font = KFont(PingFangSCRegular, 15.0);
         _titleLabel.textColor = KHexColor(@"#2D3132");
     }
     return _titleLabel;
