@@ -49,12 +49,15 @@
         make.height.mas_equalTo(136);
     }];
     
+    __weak __typeof(self)weakSelf = self;
     self.footerView.cartBlock = ^{
-        
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
+        [strongSelf.delegate goodDetailSkuView:strongSelf addShoppingCart:nil buyNum:@"1"];
     };
     
     self.footerView.buyBlock = ^{
-        
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
+        [strongSelf.delegate goodDetailSkuView:strongSelf buyImmediately:nil buyNum:@"1"];
     };
     
 //    [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {

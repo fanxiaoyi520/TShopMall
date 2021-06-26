@@ -30,7 +30,7 @@
 #import <IQKeyboardManager/IQKeyboardManager.h>
 #import "WechatShareManager.h"
 #import "TSAreaSelectedController.h"
-
+#import "TSMakeOrderController.h"
 
 @interface TSProductDetailController ()<UICollectionViewDelegate,UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate,TSTopFunctionViewDelegate,TSChangePriceViewDelegate,ProductDetailBottomViewDelegate,SnailQuickMaskPopupsDelegate,GoodDetailMaterialViewDelegate, TSDetailShareViewDelegate,GoodDetailSkuViewDelegate>
 
@@ -278,7 +278,12 @@
 
 #pragma mark - GoodDetailSkuViewDelegate
 -(void)goodDetailSkuView:(TSGoodDetailSkuView *)skuView addShoppingCart:(UIButton *)addButton buyNum:(NSString *)buyNum{
-    NSLog(@"----");
+    [self.dataController fetchProductDetailAddProductToCart:self.dataController.productUuid
+                                                     buyNum:@"1"
+                                                     attrId:self.dataController.attrId
+                                                   complete:^(BOOL isSucess) {
+            
+    }];
 }
 -(void)goodDetailSkuView:(TSGoodDetailSkuView *)skuView buyImmediately:(UIButton *)buyButton buyNum:(NSString *)buyNum{
     NSLog(@"----");
@@ -343,14 +348,14 @@
         return;
     }
     
+    __weak __typeof(self)weakSelf = self;
     [self.dataController fetchProductDetailCustomBuy:@""
                                             complete:^(BOOL isSucess) {
-        
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
         if (isSucess) {
-            
-            NSLog(@"-------");
+            TSMakeOrderController *order = [[TSMakeOrderController alloc] init];
+            [strongSelf.navigationController pushViewController:order animated:YES];
         }
-        
     }];
 }
 
@@ -464,8 +469,8 @@
             
         } else if ([params[@"purchaseType"] intValue] == 1){//已选
             TSGoodDetailSectionModel *section = self.dataController.sections[5];
-            self.skuView.purchaseModel = (TSGoodDetailItemPurchaseModel *)[section.items firstObject];
             [self.skuPpopups presentAnimated:YES completion:NULL];
+            self.skuView.purchaseModel = (TSGoodDetailItemPurchaseModel *)[section.items firstObject];
         } else if ([params[@"purchaseType"] intValue] == 2){//配送
             [TSAreaSelectedController showAreaSelected:^(TSAreaModel *provice, TSAreaModel *city, TSAreaModel *eare, TSAreaModel *street, NSString *location) {
                 
@@ -742,6 +747,7 @@ spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
         skuView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight * 0.68);
         [skuView setCorners:(UIRectCornerTopLeft | UIRectCornerTopRight) radius:8.0];
         skuView.clipsToBounds = YES;
+        skuView.delegate = self;
         self.skuView = skuView;
         
         _skuPpopups = [SnailQuickMaskPopups popupsWithMaskStyle:MaskStyleBlackTranslucent aView:skuView];

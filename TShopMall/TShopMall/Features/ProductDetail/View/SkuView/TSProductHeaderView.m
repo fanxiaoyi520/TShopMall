@@ -118,16 +118,32 @@
 }
 
 -(void)reduceAction:(UIButton *)sender{
-    
+    NSUInteger current = [self.inputTF.text integerValue];
+    if (current <= 1) {
+        sender.enabled = NO;
+        [Popover popToastOnWindowWithText:@"不能在少了"];
+        return;
+    }
+    sender.enabled = YES;
+    current = current - 1;
+    self.inputTF.text = [NSString stringWithFormat:@"%ld",current];
 }
 
 -(void)addAction:(UIButton *)sender{
+    if ([self.inputTF.text integerValue] >= self.purchaseModel.totalNum) {
+        sender.enabled = NO;
+        return;
+    }
+    sender.enabled = YES;
+    NSUInteger current = [self.inputTF.text integerValue];
+    current = current + 1;
+    self.inputTF.text = [NSString stringWithFormat:@"%ld",current];
     
 }
 
 #pragma mark - UITextFieldDelegate
 -(void)textFieldDidEndEditing:(UITextField *)textField{
-    
+
 }
 
 #pragma mark - Getter
@@ -199,7 +215,7 @@
         _reduceButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_reduceButton setImage:KImageMake(@"mall_detail_reduce_able") forState:UIControlStateNormal];
         [_reduceButton setImage:KImageMake(@"mall_detail_reduce_able") forState:UIControlStateHighlighted];
-        [_reduceButton setImage:KImageMake(@"mall_detail_add_disable") forState:UIControlStateDisabled];
+        [_reduceButton setImage:KImageMake(@"mall_detail_reduce_disable") forState:UIControlStateDisabled];
         [_reduceButton addTarget:self action:@selector(reduceAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _reduceButton;
@@ -223,7 +239,7 @@
         _addButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_addButton setImage:KImageMake(@"mall_detail_add") forState:UIControlStateNormal];
         [_addButton setImage:KImageMake(@"mall_detail_add") forState:UIControlStateHighlighted];
-        [_addButton setImage:KImageMake(@"mall_detail_add") forState:UIControlStateDisabled];
+        [_addButton setImage:KImageMake(@"mall_detail_add_disable") forState:UIControlStateDisabled];
         [_addButton addTarget:self action:@selector(addAction:) forControlEvents:UIControlEventTouchUpInside];
         [_addButton setBackgroundColor:UIColor.redColor];
     }
