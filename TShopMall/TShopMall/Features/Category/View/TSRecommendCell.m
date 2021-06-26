@@ -77,8 +77,8 @@
 -(UIImageView *)imgView{
     if (!_imgView) {
         _imgView = [[UIImageView alloc] init];
-        _imgView.backgroundColor = KGrayColor;
-        _imgView.contentMode = UIViewContentModeScaleAspectFit;
+        _imgView.backgroundColor = [UIColor clearColor];
+        _imgView.contentMode = UIViewContentModeScaleAspectFill;
     }
     return _imgView;
 }
@@ -123,7 +123,7 @@
         _goodsPriceLabel.font = KRegularFont(8);
         _goodsPriceLabel.textAlignment = NSTextAlignmentLeft;
         _goodsPriceLabel.textColor = KHexAlphaColor(@"#333333", 0.6);
-        _goodsPriceLabel.text = @"提货价¥23990";
+        _goodsPriceLabel.text = @"提货价¥";
     }
     return _goodsPriceLabel;
 }
