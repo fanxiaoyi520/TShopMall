@@ -22,9 +22,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// productUuid
 @property(nonatomic, copy) NSString *productUuid;
 
+@property(nonatomic, copy) NSString *cartNumber;
 
 @property (nonatomic, strong, readonly) NSMutableArray <TSGoodDetailSectionModel *> *sections;
-@property(nonatomic, copy) NSString *cartNumber;
 
 
 /// 商品详情数据
