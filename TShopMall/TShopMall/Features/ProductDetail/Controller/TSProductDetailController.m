@@ -29,7 +29,7 @@
 #import <Photos/Photos.h>
 #import <IQKeyboardManager/IQKeyboardManager.h>
 #import "WechatShareManager.h"
-
+#import "TSAreaSelectedController.h"
 
 
 @interface TSProductDetailController ()<UICollectionViewDelegate,UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate,TSTopFunctionViewDelegate,TSChangePriceViewDelegate,ProductDetailBottomViewDelegate,SnailQuickMaskPopupsDelegate,GoodDetailMaterialViewDelegate, TSDetailShareViewDelegate>
@@ -454,9 +454,18 @@
         } else if ([params[@"purchaseType"] intValue] == 1){//已选
             [self.skuPpopups presentAnimated:YES completion:NULL];
         } else if ([params[@"purchaseType"] intValue] == 2){//配送
+            [TSAreaSelectedController showAreaSelected:^(TSAreaModel *provice, TSAreaModel *city, TSAreaModel *eare, TSAreaModel *street, NSString *location) {
+                
+                NSLog(@"-----");
+                
+            } OnController:self];
             
         }else{//运费
-            
+            [TSAreaSelectedController showAreaSelected:^(TSAreaModel *provice, TSAreaModel *city, TSAreaModel *eare, TSAreaModel *street, NSString *location) {
+                
+                NSLog(@"-----");
+                
+            } OnController:self];
         }
     }
     

@@ -256,6 +256,7 @@
 		DFB3FFE22685B76200FC8FF9 /* TSLoginByTokenRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB3FFE12685B76200FC8FF9 /* TSLoginByTokenRequest.m */; };
 		DFB3FFE52685C19700FC8FF9 /* TSLoginByAuthCodeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB3FFE42685C19700FC8FF9 /* TSLoginByAuthCodeRequest.m */; };
 		DFB3FFE82685E43D00FC8FF9 /* TSBindUserByAuthCodeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB3FFE72685E43D00FC8FF9 /* TSBindUserByAuthCodeRequest.m */; };
+		DFB3FFEC2686BDEC00FC8FF9 /* TSCustomPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB3FFEB2686BDEB00FC8FF9 /* TSCustomPageControl.m */; };
 		E2BE996F8804E0C3E7D5AE61 /* libPods-TShopMall-TShopMallUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD1ABBE857D307088E9BF2DC /* libPods-TShopMall-TShopMallUITests.a */; };
 		F530C6D526802E5D009DC29A /* TSSMSCodeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F530C6CC26802E5D009DC29A /* TSSMSCodeRequest.m */; };
 		F530C6D626802E5D009DC29A /* TSQuickLoginRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F530C6CF26802E5D009DC29A /* TSQuickLoginRequest.m */; };
@@ -978,6 +979,8 @@
 		DFB3FFE42685C19700FC8FF9 /* TSLoginByAuthCodeRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSLoginByAuthCodeRequest.m; sourceTree = "<group>"; };
 		DFB3FFE62685E43D00FC8FF9 /* TSBindUserByAuthCodeRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSBindUserByAuthCodeRequest.h; sourceTree = "<group>"; };
 		DFB3FFE72685E43D00FC8FF9 /* TSBindUserByAuthCodeRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSBindUserByAuthCodeRequest.m; sourceTree = "<group>"; };
+		DFB3FFEA2686BDEB00FC8FF9 /* TSCustomPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSCustomPageControl.h; sourceTree = "<group>"; };
+		DFB3FFEB2686BDEB00FC8FF9 /* TSCustomPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSCustomPageControl.m; sourceTree = "<group>"; };
 		ECCE8A564DF47B445E7905B1 /* Pods-TShopMall-TShopMallUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TShopMall-TShopMallUITests.release.xcconfig"; path = "Target Support Files/Pods-TShopMall-TShopMallUITests/Pods-TShopMall-TShopMallUITests.release.xcconfig"; sourceTree = "<group>"; };
 		F530C6CC26802E5D009DC29A /* TSSMSCodeRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSSMSCodeRequest.m; sourceTree = "<group>"; };
 		F530C6CD26802E5D009DC29A /* TSQuickLoginRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSQuickLoginRequest.h; sourceTree = "<group>"; };
@@ -2135,6 +2138,15 @@
 			path = DataController;
 			sourceTree = "<group>";
 		};
+		DFB3FFE92686BDEB00FC8FF9 /* PageControl */ = {
+			isa = PBXGroup;
+			children = (
+				DFB3FFEA2686BDEB00FC8FF9 /* TSCustomPageControl.h */,
+				DFB3FFEB2686BDEB00FC8FF9 /* TSCustomPageControl.m */,
+			);
+			path = PageControl;
+			sourceTree = "<group>";
+		};
 		F530C6CB26802E5D009DC29A /* DataController */ = {
 			isa = PBXGroup;
 			children = (
@@ -2961,6 +2973,7 @@
 		F54973A22668AE1300181E3F /* Controls */ = {
 			isa = PBXGroup;
 			children = (
+				DFB3FFE92686BDEB00FC8FF9 /* PageControl */,
 				F5686B02267F8F400023DAA6 /* DragView */,
 				DC9911B5267C475000EF9B26 /* YBNestViews */,
 				DC3440A726720D9200F5B0DA /* CollectionView */,
@@ -4064,6 +4077,7 @@
 				F530CC4826803B1C009DC29A /* RefreshGifHeader.m in Sources */,
 				F56D4B4F266DFB8900C1AD9E /* FMLayoutDebugLog.m in Sources */,
 				C2C7654B267A097D004757B9 /* TSMakeOrderOperationCell.m in Sources */,
+				DFB3FFEC2686BDEC00FC8FF9 /* TSCustomPageControl.m in Sources */,
 				F530CD4A2681750A009DC29A /* TSTopFunctionView.m in Sources */,
 				F530C6D826802E5D009DC29A /* TSLoginSMSModel.m in Sources */,
 				F56D4B66266E053800C1AD9E /* AppDelegate+Initialize.m in Sources */,
