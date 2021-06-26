@@ -71,7 +71,7 @@
             item.price = itemDic[@"price"];
             item.imageUrl = itemDic[@"imageUrl"];
             item.stock = itemDic[@"stock"];
-            
+            item.staffPrice = itemDic[@"staffPrice"];
             [items addObject:item];
         }
 

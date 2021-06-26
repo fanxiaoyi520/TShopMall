@@ -16,6 +16,7 @@
 		042F423A2681A05C00555F5D /* TSRecommendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042F42382681A05B00555F5D /* TSRecommendCell.m */; };
 		042F423D2681FDB000555F5D /* TSRealNameAuthCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042F423C2681FDB000555F5D /* TSRealNameAuthCell.m */; };
 		042F42402681FDFE00555F5D /* TSRealNameInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042F423F2681FDFE00555F5D /* TSRealNameInfoCell.m */; };
+		044AAEAF26871A89000DB09F /* TSAgreementModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 044AAEAE26871A89000DB09F /* TSAgreementModel.m */; };
 		046DEA8626856ADF009CE557 /* TSAgreementView.m in Sources */ = {isa = PBXBuildFile; fileRef = 046DEA8526856ADF009CE557 /* TSAgreementView.m */; };
 		046DEA892685BD97009CE557 /* TSChangeMobileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 046DEA882685BD97009CE557 /* TSChangeMobileCell.m */; };
 		046DEA8C2685C5BA009CE557 /* TSChangeMobileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 046DEA8B2685C5BA009CE557 /* TSChangeMobileViewController.m */; };
@@ -522,6 +523,8 @@
 		042F423C2681FDB000555F5D /* TSRealNameAuthCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSRealNameAuthCell.m; sourceTree = "<group>"; };
 		042F423E2681FDFE00555F5D /* TSRealNameInfoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSRealNameInfoCell.h; sourceTree = "<group>"; };
 		042F423F2681FDFE00555F5D /* TSRealNameInfoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSRealNameInfoCell.m; sourceTree = "<group>"; };
+		044AAEAD26871A89000DB09F /* TSAgreementModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSAgreementModel.h; sourceTree = "<group>"; };
+		044AAEAE26871A89000DB09F /* TSAgreementModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSAgreementModel.m; sourceTree = "<group>"; };
 		046DEA8426856ADF009CE557 /* TSAgreementView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSAgreementView.h; sourceTree = "<group>"; };
 		046DEA8526856ADF009CE557 /* TSAgreementView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSAgreementView.m; sourceTree = "<group>"; };
 		046DEA872685BD96009CE557 /* TSChangeMobileCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSChangeMobileCell.h; sourceTree = "<group>"; };
@@ -2178,6 +2181,8 @@
 				DFB3FFB22682E4B300FC8FF9 /* NTESQLHomePageCustomUIModel.m */,
 				F530C6D326802E5D009DC29A /* TSLoginSMSModel.h */,
 				F530C6D426802E5D009DC29A /* TSLoginSMSModel.m */,
+				044AAEAD26871A89000DB09F /* TSAgreementModel.h */,
+				044AAEAE26871A89000DB09F /* TSAgreementModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3951,6 +3956,7 @@
 				C3A6C4B8267A1C5700FC71D6 /* TSChangePictureCell.m in Sources */,
 				F56D4B4B266DFB8900C1AD9E /* FMLayoutCrossTransformSection.m in Sources */,
 				C3A6C4DF267A1CAF00FC71D6 /* TSSecurityCenterDataController.m in Sources */,
+				044AAEAF26871A89000DB09F /* TSAgreementModel.m in Sources */,
 				C25A7F8226841B1F0006C6AF /* TSAddressViewModel.m in Sources */,
 				F55D2CD626785249006BACCF /* TSMineMoreButton.m in Sources */,
 				C2F057452685D4D7003D1B2A /* TSSearchEmptyCell.m in Sources */,

@@ -6,8 +6,9 @@
 //
 
 #import "TSCheckedView.h"
+#import "TSAgreementModel.h"
 
-@interface TSCheckedView ()
+@interface TSCheckedView ()<UITextViewDelegate>
 
 /** 阅读并同意按钮 */
 @property(nonatomic, weak) UIButton *protocolButton;
@@ -19,6 +20,9 @@
 @property(nonatomic, weak) UIButton *privateButton;
 /** 注册协议 */
 @property(nonatomic, weak) UIButton *registerProtocolButton;
+/** 服务协议 */
+@property(nonatomic, weak) UITextView *textView;
+
 @end
 
 @implementation TSCheckedView
@@ -32,7 +36,7 @@
 
 - (void)addConstraints {
     [self.protocolButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.mas_centerX).with.offset(20);
+        make.centerX.equalTo(self.mas_centerX).with.offset(10);
         make.top.equalTo(self.mas_top).with.offset(0);
     }];
     [self.checkButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -41,17 +45,11 @@
         make.height.mas_equalTo(18);
         make.right.equalTo(self.protocolButton.mas_left).with.offset(-6);
     }];
-    [self.privateButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.mas_centerX).with.offset(20);
-        make.top.equalTo(self.protocolButton.mas_bottom).with.offset(-5);
-    }];
-    [self.seviceButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.privateButton.mas_centerY).with.offset(0);
-        make.right.equalTo(self.privateButton.mas_left).with.offset(0);
-    }];
-    [self.registerProtocolButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.privateButton.mas_centerY).with.offset(0);
-        make.left.equalTo(self.privateButton.mas_right).with.offset(0);
+    [self.textView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.mas_left).with.offset(25);
+        make.right.equalTo(self.mas_right).with.offset(-25);
+        make.bottom.equalTo(self.mas_bottom).offset(0);
+        make.top.equalTo(self.protocolButton.mas_bottom).with.offset(5);
     }];
 }
 
@@ -81,43 +79,19 @@
     return _protocolButton;
 }
 
-- (UIButton *)seviceButton {
-    if (_seviceButton == nil) {
-        UIButton *seviceButton = [[UIButton alloc] init];
-        _seviceButton = seviceButton;
-        _seviceButton.titleLabel.font = [UIFont font:PingFangSCMedium size:14];
-        [_seviceButton setTitleColor:KHexColor(@"#E64C3D") forState:UIControlStateNormal];
-        [_seviceButton setTitle:@"服务协议、" forState:UIControlStateNormal];
-        [_seviceButton addTarget:self action:@selector(goToServiceProtocol) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:_seviceButton];
+- (UITextView *)textView {
+    if (_textView == nil) {
+        UITextView *textView = [[UITextView alloc] init];
+        _textView = textView;
+        _textView.delegate = self;
+        _textView.editable = NO;
+        _textView.textAlignment = NSTextAlignmentCenter;
+        _textView.backgroundColor = UIColor.clearColor;
+        _textView.textColor = KTextColor;
+        _textView.linkTextAttributes = @{NSForegroundColorAttributeName:KHexColor(@"#E64C3D")};
+        [self addSubview:_textView];
     }
-    return _seviceButton;
-}
-
-- (UIButton *)privateButton {
-    if (_privateButton == nil) {
-        UIButton *privateButton = [[UIButton alloc] init];
-        _privateButton = privateButton;
-        _privateButton.titleLabel.font = [UIFont font:PingFangSCMedium size:14];
-        [_privateButton setTitleColor:KHexColor(@"#E64C3D") forState:UIControlStateNormal];
-        [_privateButton setTitle:@"隐私政策、" forState:UIControlStateNormal];
-        [_privateButton addTarget:self action:@selector(goToPrivatePolicy) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:_privateButton];
-    }
-    return _privateButton;
-}
-
-- (UIButton *)registerProtocolButton {
-    if (_registerProtocolButton == nil) {
-        UIButton *registerProtocolButton = [[UIButton alloc] init];
-        _registerProtocolButton = registerProtocolButton;
-        _registerProtocolButton.titleLabel.font = [UIFont font:PingFangSCMedium size:14];
-        [_registerProtocolButton setTitleColor:KHexColor(@"#E64C3D") forState:UIControlStateNormal];
-        [_registerProtocolButton setTitle:@"注册协议" forState:UIControlStateNormal];
-        [_registerProtocolButton addTarget:self action:@selector(goToRegisterProtocol) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:_registerProtocolButton];
-    }
-    return _registerProtocolButton;
+    return _textView;
 }
 
 - (void)setChecked:(BOOL)checked {
@@ -126,6 +100,42 @@
     if ([self.delegate respondsToSelector:@selector(checkedAction:)]) {
         [self.delegate checkedAction:checked];
     }
+}
+
+- (void)setAgreementModels:(NSArray<TSAgreementModel *> *)agreementModels {
+    _agreementModels = agreementModels;
+    NSMutableString *allString = [NSMutableString string];
+    for (int i = 0; i < agreementModels.count; i++) {
+        TSAgreementModel *agreementModel = agreementModels[i];
+        NSString *_str = nil;
+        if (i == agreementModels.count - 1) {
+            _str = [NSString stringWithFormat:@"%@", agreementModel.title];
+        } else {
+            _str = [NSString stringWithFormat:@"%@、", agreementModel.title];
+        }
+        [allString appendString:_str];
+    }
+    NSDictionary *attributes = @{
+        NSFontAttributeName: KRegularFont(14)
+    };
+    NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:allString attributes:attributes];
+    for (int i = 0; i < agreementModels.count; i++) {
+        TSAgreementModel *agreementModel = agreementModels[i];
+        NSString *_str = nil;
+        NSRange range;
+        if (i == agreementModels.count - 1) {
+            _str = [NSString stringWithFormat:@"%@", agreementModel.title];
+        } else {
+            _str = [NSString stringWithFormat:@"%@、", agreementModel.title];
+        }
+        range = [allString rangeOfString:_str];
+        NSString *value = [[NSString stringWithFormat:@"tranfer%d://%@", i, _str] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLFragmentAllowedCharacterSet]];
+        [attrString addAttribute:NSLinkAttributeName value:value range:range];
+    }
+    self.textView.attributedText = attrString;
+    CGFloat width = [allString widthForFont:KRegularFont(14)];
+    CGFloat left = (self.frame.size.width - 50 - width) / 2.0;
+    self.textView.contentInset = UIEdgeInsetsMake(-10, left, 0, 0);
 }
 
 #pragma mark - Public Method
@@ -158,4 +168,19 @@
         [self.delegate goToRegisterProtocol];
     }
 }
+
+#pragma mark - UITextViewDelegate
+- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange {
+    NSString *scheme = [URL scheme];
+    if ([scheme containsString:@"tranfer"]) {
+        NSString *indexString = [scheme substringFromIndex:scheme.length - 1];
+        int index = [indexString intValue];
+        if ([self.delegate respondsToSelector:@selector(goToH5WithAgreementModel:)]) {
+            [self.delegate goToH5WithAgreementModel:self.agreementModels[index]];
+        }
+    }
+    return YES;
+}
+
+
 @end

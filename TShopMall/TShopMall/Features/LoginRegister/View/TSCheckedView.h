@@ -7,6 +7,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class TSAgreementModel;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol TSCheckedViewDelegate <NSObject>
@@ -16,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)goToPrivatePolicy;
 /** 跳转到注册协议页面 */
 - (void)goToRegisterProtocol;
+
+- (void)goToH5WithAgreementModel:(TSAgreementModel *)agreementModel;
 /** 勾选按钮的事件 */
 - (void)checkedAction:(BOOL)isChecked;
 
@@ -26,6 +30,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) id<TSCheckedViewDelegate> delegate;
 /** 是否勾选并同意协议 */
 @property(nonatomic, assign, getter=isChecked) BOOL checked;
+/** 协议信息  */
+@property(nonatomic, strong) NSArray<TSAgreementModel *> *agreementModels;
 
 @end
 

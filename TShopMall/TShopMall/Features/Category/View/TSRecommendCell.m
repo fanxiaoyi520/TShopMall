@@ -143,7 +143,7 @@
     }];
     self.contentLabel.text = item.productName;
     self.retailPriceLabel.text = [NSString stringWithFormat:@"%@",item.price];
-    self.goodsPriceLabel.text = [NSString stringWithFormat:@"提货价¥%@",item.baseRetailPrice];
+    self.goodsPriceLabel.text = [NSString stringWithFormat:@"提货价¥%@",item.staffPrice];
 }
 
 @end

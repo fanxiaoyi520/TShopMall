@@ -12,6 +12,8 @@
 #import "TSTools.h"
 #import "NSTimer+TSBlcokTimer.h"
 #import "TSHybridViewController.h"
+#import "TSAgreementModel.h"
+
 @interface TSRegiterViewController ()<TSRegisterTopViewDelegate, TSCheckedViewDelegate, TSHybridViewControllerDelegate>
 /** 背景图 */
 @property(nonatomic, weak) UIImageView *bgImgV;
@@ -49,6 +51,7 @@
     self.view.backgroundColor = UIColor.whiteColor;
     UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panAction:)];
     [self.view addGestureRecognizer:panGestureRecognizer];
+    [self getAgreementInfo];
 }
 
 - (void)panAction: (UIPanGestureRecognizer *)recognizer {
@@ -73,7 +76,14 @@
     [self.checkedView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.view.mas_bottom).with.offset(-56);
         make.left.right.equalTo(self.view).with.offset(0);
-        make.height.mas_equalTo(50);
+        make.height.mas_equalTo(66);
+    }];
+}
+
+- (void)getAgreementInfo {
+    __weak __typeof(self)weakSelf = self;
+    [self.dataController fetchAgreementWithCompleted:^(NSArray<TSAgreementModel *> * _Nonnull agreementModels) {
+        weakSelf.checkedView.agreementModels = agreementModels;
     }];
 }
 
@@ -85,7 +95,6 @@
         _closeButton = closeButton;
         [_closeButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [_closeButton setImage:KImageMake(@"mall_login_close") forState:UIControlStateNormal];
-//        [_closeButton setBackgroundImage:KImageMake(@"mall_login_close") forState:UIControlStateNormal];
         [_closeButton addTarget:self action:@selector(closePage) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_closeButton];
     }
@@ -223,20 +232,9 @@
 }
 
 #pragma mark - TSCheckedViewDelegate
-- (void)goToServiceProtocol {
-    TSHybridViewController *web = [[TSHybridViewController alloc] initWithURLString:@"https://www.baidu.com"];
-    web.delegate = self;
-    [self.navigationController pushViewController:web animated:YES];
-}
-
-- (void)goToPrivatePolicy {
-    TSHybridViewController *web = [[TSHybridViewController alloc] initWithURLString:@"https://www.baidu.com"];
-    web.delegate = self;
-    [self.navigationController pushViewController:web animated:YES];
-}
-
-- (void)goToRegisterProtocol {
-    TSHybridViewController *web = [[TSHybridViewController alloc] initWithURLString:@"https://www.baidu.com"];
+/** 跳转查看协议 */
+- (void)goToH5WithAgreementModel:(TSAgreementModel *)agreementModel {
+    TSHybridViewController *web = [[TSHybridViewController alloc] initWithURLString:[agreementModel.serverUrl stringByAppendingString:@"&mode=webview"]];
     web.delegate = self;
     [self.navigationController pushViewController:web animated:YES];
 }
