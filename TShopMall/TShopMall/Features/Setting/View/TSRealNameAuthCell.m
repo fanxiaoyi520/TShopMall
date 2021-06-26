@@ -6,6 +6,12 @@
 //
 
 #import "TSRealNameAuthCell.h"
+#import "TSTools.h"
+
+typedef NS_ENUM(NSUInteger, RealNameAuthClickType){
+    RealNameAuthClickTypeCommit = 1,///提交按钮
+    RealNameAuthClickTypeAgreement = 2,///认证协议
+};
 
 @interface TSRealNameAuthCell ()<UITextFieldDelegate>
 /** 提示语的父视图  */
@@ -236,7 +242,6 @@
         [_nameTextField addTarget:self
                            action:@selector(textFieldDidChangeValue:)
                  forControlEvents:UIControlEventEditingChanged];
-        [self.contentView addSubview:_idNumTextField];
         [self.contentView addSubview:_nameTextField];
     }
     return _nameTextField;
@@ -347,11 +352,33 @@
 }
 
 - (void)agreementAction {
-    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setValue:NSStringFromClass([self class]) forKey:@"cellType"];
+    [params setValue:@(RealNameAuthClickTypeCommit) forKey:@"RealNameAuthClickType"];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(universalCollectionViewCellClick:params:)]) {
+        [self.delegate universalCollectionViewCellClick:self.indexPath params:params];
+    }
 }
 
 - (void)commitAction {
-    
+    if (self.nameTextField.text.length == 0) {
+        [self.contentView makeToast:@"请输入您的真实姓名" duration:3.0 position:CSToastPositionCenter];
+        return;
+    }
+    if (![TSTools isPhoneNumber: self.idNumTextField.text]) {
+        [self.contentView makeToast:@"请输入正确的身份证号" duration:3.0 position:CSToastPositionCenter];
+        return;
+    }
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setValue:NSStringFromClass([self class]) forKey:@"cellType"];
+    [params setValue:@(RealNameAuthClickTypeCommit) forKey:@"RealNameAuthClickType"];
+    ///真实姓名
+    [params setValue:self.nameTextField.text forKey:@"RealName"];
+    ///身份证号码
+    [params setValue:self.idNumTextField.text forKey:@"IdcardNum"];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(universalCollectionViewCellClick:params:)]) {
+        [self.delegate universalCollectionViewCellClick:self.indexPath params:params];
+    }
 }
 
 #pragma mark- <UITextFieldDelegate>
