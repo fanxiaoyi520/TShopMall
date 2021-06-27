@@ -1,21 +1,23 @@
 //
-//  TSHomePageContainerCollectionView.m
+//  TSGridGoodsCollectionView.m
 //  TShopMall
 //
-//  Created by sway on 2021/6/15.
+//  Created by sway on 2021/6/27.
 //
 
-#import "TSHomePageContainerCollectionView.h"
+#import "TSGridGoodsCollectionView.h"
 #import "TSCollectionViewMeanWidthLayout.h"
-#import "TSHomePageContainerCollectionViewCell.h"
-#import "TSProductBaseModel.h"
+#import "TSGridGoodsCollectionViewCell.h"
+#import "TSRecomendGoodsProtocol.h"
 
-@interface TSHomePageContainerCollectionView()<UICollectionViewDelegate, UICollectionViewDataSource>
+@interface TSGridGoodsCollectionView()<UICollectionViewDelegate, UICollectionViewDataSource>
 @property (nonatomic, strong) TSCollectionViewMeanWidthLayout *layout;
 
 @end
-@implementation TSHomePageContainerCollectionView
-- (instancetype)initWithFrame:(CGRect)frame items:(NSArray *)items ColumnSpacing:(CGFloat)columnSpacing rowSpacing:(CGFloat)rowSpacing  itemsHeight:(CGFloat)height rows:(int)rows columns:(int)columns padding:(UIEdgeInsets)padding clickedBlock:(TSHomePageContainerCollectionViewDidSelectedBlock)clickedBlock
+
+@implementation TSGridGoodsCollectionView
+
+- (instancetype)initWithFrame:(CGRect)frame items:(NSArray *)items ColumnSpacing:(CGFloat)columnSpacing rowSpacing:(CGFloat)rowSpacing  itemsHeight:(CGFloat)height rows:(int)rows columns:(int)columns padding:(UIEdgeInsets)padding clickedBlock:(nonnull TSGridGoodsCollectionViewDidSelectedBlock)clickedBlock
 {
     if (self = [super initWithFrame:frame]) {
         _items = items;
@@ -53,9 +55,9 @@
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    TSHomePageContainerCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TSHomePageContainerCollectionViewCell" forIndexPath:indexPath];
+    TSGridGoodsCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TSGridGoodsCollectionViewCell" forIndexPath:indexPath];
 
-    TSProductBaseModel *item = self.items[indexPath.row];
+    id<TSRecomendGoodsProtocol> item = self.items[indexPath.row];
     cell.item = item;
     return cell;
     
@@ -63,7 +65,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    TSProductBaseModel *item = self.items[indexPath.row];
+    id<TSRecomendGoodsProtocol> item = self.items[indexPath.row];
     
     if (_clickedBlock) {
         self.clickedBlock(item,indexPath.row);
@@ -84,31 +86,8 @@
         _collectionView.showsHorizontalScrollIndicator = NO;
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
-        [_collectionView registerClass:[TSHomePageContainerCollectionViewCell class] forCellWithReuseIdentifier:@"TSHomePageContainerCollectionViewCell"];
+        [_collectionView registerClass:[TSGridGoodsCollectionViewCell class] forCellWithReuseIdentifier:@"TSGridGoodsCollectionViewCell"];
     }
     return _collectionView;
-}
-
-
-#pragma mark - <YBNestContentProtocol>
-
-@synthesize yb_scrollViewDidScroll = _yb_scrollViewDidScroll;
-
-- (UIView *)yb_contentView {
-    return self;
-}
-
-- (UIScrollView *)yb_contentScrollView {
-    return self.collectionView;
-}
-
-- (void)yb_contentWillAppear {
-}
-
-- (void)yb_contentDidDisappear {
-}
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    self.yb_scrollViewDidScroll(scrollView);
 }
 @end

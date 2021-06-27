@@ -7,7 +7,7 @@
 
 #import "TSRankRecommendCell.h"
 #import "TSCustomLabel.h"
-
+#import "TSRankSectionModel.h"
 @interface TSRankRecommendCell ()
 /** 冠军背景视图  */
 @property(nonatomic, weak) UIView *championView;
@@ -207,5 +207,9 @@
     return _bestView;
 }
 
-
+- (void)setDelegate:(id<UniversalCollectionViewCellDataDelegate>)delegate{
+    TSRankSectionItemModel *item = [delegate universalCollectionViewCellModel:self.indexPath];
+    id<TSRecomendGoodsProtocol> goods = item.recomendGoods;
+    NSLog(@"%@", goods.goodsPrice);
+}
 @end

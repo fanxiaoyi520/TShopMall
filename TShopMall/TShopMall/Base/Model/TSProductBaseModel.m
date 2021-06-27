@@ -9,4 +9,16 @@
 
 @implementation TSProductBaseModel
 
+@synthesize earnMost = _earnMost;
+
+@synthesize goodsPrice;
+- (NSString *)goodsPrice{
+    return [NSString stringWithFormat:@"%.0f",self.price];;
+}
+@synthesize imageUrl;
+- (NSString *)imageUrl{
+    return self.pic;
+}
+@synthesize staffPrice = _staffPrice;
+
 @end

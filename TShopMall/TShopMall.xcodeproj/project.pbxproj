@@ -173,6 +173,10 @@
 		C3B4CCF22674934E0001EE75 /* TSCheckedView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B4CCEA2674934D0001EE75 /* TSCheckedView.m */; };
 		CE5674AE26831F0400252F5D /* TSMineMerchantUserInformationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5674AA26831F0300252F5D /* TSMineMerchantUserInformationModel.m */; };
 		CE5674AF26831F0400252F5D /* TSPartnerCenterData.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5674AC26831F0300252F5D /* TSPartnerCenterData.m */; };
+		DC06D6DF268761E20013633F /* TSBestSellingRecommendService.m in Sources */ = {isa = PBXBuildFile; fileRef = DC06D6DE268761E20013633F /* TSBestSellingRecommendService.m */; };
+		DC06D6E3268810C20013633F /* TSRecomendGoodsView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC06D6E2268810C20013633F /* TSRecomendGoodsView.m */; };
+		DC06D6E6268812CB0013633F /* TSGridGoodsCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC06D6E5268812CB0013633F /* TSGridGoodsCollectionView.m */; };
+		DC06D6E9268813500013633F /* TSGridGoodsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DC06D6E8268813500013633F /* TSGridGoodsCollectionViewCell.m */; };
 		DC3440AC26720D9200F5B0DA /* TSCollectionViewMeanWidthLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3440A826720D9200F5B0DA /* TSCollectionViewMeanWidthLayout.m */; };
 		DC3440AD26720D9200F5B0DA /* TSCollectionViewLineWrapLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3440A926720D9200F5B0DA /* TSCollectionViewLineWrapLayout.m */; };
 		DC3440B226720E4C00F5B0DA /* TSGridButtonCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3440B026720E4C00F5B0DA /* TSGridButtonCollectionView.m */; };
@@ -757,6 +761,15 @@
 		CE5674AC26831F0300252F5D /* TSPartnerCenterData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSPartnerCenterData.m; sourceTree = "<group>"; };
 		CE5674AD26831F0400252F5D /* TSMineMerchantUserInformationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSMineMerchantUserInformationModel.h; sourceTree = "<group>"; };
 		D5195F8AB1644614CD0BA09C /* Pods-TShopMall.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TShopMall.release.xcconfig"; path = "Target Support Files/Pods-TShopMall/Pods-TShopMall.release.xcconfig"; sourceTree = "<group>"; };
+		DC06D6DD268761E20013633F /* TSBestSellingRecommendService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSBestSellingRecommendService.h; sourceTree = "<group>"; };
+		DC06D6DE268761E20013633F /* TSBestSellingRecommendService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSBestSellingRecommendService.m; sourceTree = "<group>"; };
+		DC06D6E0268769760013633F /* TSRecomendGoodsProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSRecomendGoodsProtocol.h; sourceTree = "<group>"; };
+		DC06D6E1268810C20013633F /* TSRecomendGoodsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSRecomendGoodsView.h; sourceTree = "<group>"; };
+		DC06D6E2268810C20013633F /* TSRecomendGoodsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSRecomendGoodsView.m; sourceTree = "<group>"; };
+		DC06D6E4268812CB0013633F /* TSGridGoodsCollectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSGridGoodsCollectionView.h; sourceTree = "<group>"; };
+		DC06D6E5268812CB0013633F /* TSGridGoodsCollectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSGridGoodsCollectionView.m; sourceTree = "<group>"; };
+		DC06D6E7268813500013633F /* TSGridGoodsCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSGridGoodsCollectionViewCell.h; sourceTree = "<group>"; };
+		DC06D6E8268813500013633F /* TSGridGoodsCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSGridGoodsCollectionViewCell.m; sourceTree = "<group>"; };
 		DC3440A826720D9200F5B0DA /* TSCollectionViewMeanWidthLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSCollectionViewMeanWidthLayout.m; sourceTree = "<group>"; };
 		DC3440A926720D9200F5B0DA /* TSCollectionViewLineWrapLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSCollectionViewLineWrapLayout.m; sourceTree = "<group>"; };
 		DC3440AA26720D9200F5B0DA /* TSCollectionViewMeanWidthLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSCollectionViewMeanWidthLayout.h; sourceTree = "<group>"; };
@@ -1519,6 +1532,7 @@
 				C22EE28D2681BC6200E59C86 /* TSRecomendViewModel.m */,
 				C22EE28F2681BCDF00E59C86 /* TSRecomendCell.h */,
 				C22EE2902681BCDF00E59C86 /* TSRecomendCell.m */,
+				DC06D6E0268769760013633F /* TSRecomendGoodsProtocol.h */,
 			);
 			path = Recomend;
 			sourceTree = "<group>";
@@ -1782,6 +1796,10 @@
 				DC3440A926720D9200F5B0DA /* TSCollectionViewLineWrapLayout.m */,
 				DC3440AA26720D9200F5B0DA /* TSCollectionViewMeanWidthLayout.h */,
 				DC3440AB26720D9200F5B0DA /* TSCollectionViewLineWrapLayout.h */,
+				DC06D6E4268812CB0013633F /* TSGridGoodsCollectionView.h */,
+				DC06D6E5268812CB0013633F /* TSGridGoodsCollectionView.m */,
+				DC06D6E7268813500013633F /* TSGridGoodsCollectionViewCell.h */,
+				DC06D6E8268813500013633F /* TSGridGoodsCollectionViewCell.m */,
 			);
 			path = CollectionView;
 			sourceTree = "<group>";
@@ -2819,6 +2837,8 @@
 				F55D2C9F26745E7A006BACCF /* TSLastUserInfoManager.m */,
 				DCA035F6268355D2003DE5F7 /* TSServicesManager.h */,
 				DCA035F7268355D2003DE5F7 /* TSServicesManager.m */,
+				DC06D6DD268761E20013633F /* TSBestSellingRecommendService.h */,
+				DC06D6DE268761E20013633F /* TSBestSellingRecommendService.m */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -2975,6 +2995,8 @@
 				F55D2D3D267B3F95006BACCF /* TSRankRecommendCell.m */,
 				04113170268021CC000B5BAF /* TSCustomLabel.h */,
 				0411316F268021CC000B5BAF /* TSCustomLabel.m */,
+				DC06D6E1268810C20013633F /* TSRecomendGoodsView.h */,
+				DC06D6E2268810C20013633F /* TSRecomendGoodsView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3501,6 +3523,7 @@
 				C3A6C4C7267A1C5700FC71D6 /* TSSettingUserCell.m in Sources */,
 				F54973B72668BBEE00181E3F /* TSCartViewController.m in Sources */,
 				F56D4B4D266DFB8900C1AD9E /* FMTeslaLayoutView.m in Sources */,
+				DC06D6E3268810C20013633F /* TSRecomendGoodsView.m in Sources */,
 				F530CCAC26803FCD009DC29A /* UIButton+Badge.m in Sources */,
 				F55D2D082678D3F9006BACCF /* TSProductDetailImageCell.m in Sources */,
 				F56D4B4E266DFB8900C1AD9E /* FMKVOArrayObject.m in Sources */,
@@ -3555,6 +3578,7 @@
 				F55D2D1A267B1AC5006BACCF /* TSBaseListController.m in Sources */,
 				DC3440D32672F62C00F5B0DA /* TSHomePageBaseCell.m in Sources */,
 				DC45FEBD26783A1300CE762E /* TSHomePageContainerCollectionView.m in Sources */,
+				DC06D6E9268813500013633F /* TSGridGoodsCollectionViewCell.m in Sources */,
 				F55D2C9D26745E64006BACCF /* TSUserInfoManager.m in Sources */,
 				DCA035FB2683578C003DE5F7 /* NSObject+TSProperty.m in Sources */,
 				C2EF88D52670B8B900E7374A /* TSCartBaseCell.m in Sources */,
@@ -3613,6 +3637,7 @@
 				F56D4B3D266DFB8900C1AD9E /* FMLayoutFillSection.m in Sources */,
 				C21A4B8D267B534A00766F72 /* TSAddressMarkView.m in Sources */,
 				C25A7F7F26834B0C0006C6AF /* TSAddressEditDataController.m in Sources */,
+				DC06D6DF268761E20013633F /* TSBestSellingRecommendService.m in Sources */,
 				F530CCEE26804167009DC29A /* TSHybridRightButton.m in Sources */,
 				F56D4B3B266DFB8900C1AD9E /* FMLayoutCombineSection.m in Sources */,
 				DC9911A3267AE40100EF9B26 /* TSLinkDataModel.m in Sources */,
@@ -3792,6 +3817,7 @@
 				F56D4B3E266DFB8900C1AD9E /* FMLayoutDynamicSection.m in Sources */,
 				DC9911A6267AE43400EF9B26 /* TSImageBaseModel.m in Sources */,
 				F530CC6626803E43009DC29A /* Progress.m in Sources */,
+				DC06D6E6268812CB0013633F /* TSGridGoodsCollectionView.m in Sources */,
 				DC45FEBA267742F700CE762E /* TSHomePageContainerGroup.m in Sources */,
 				F55D2D35267B3F04006BACCF /* TSRankHeaderView.m in Sources */,
 				F55D2D32267B3DB7006BACCF /* TSRankSectionModel.m in Sources */,
@@ -3994,7 +4020,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XVAZU5V3Q7;
-				EXCLUDED_ARCHS = "";
+				EXCLUDED_ARCHS = arm64;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PREFIX_HEADER = TShopMall/Expand/Macros/TSPrefixHeader.pch;
 				INFOPLIST_FILE = TShopMall/Info.plist;
@@ -4020,7 +4046,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XVAZU5V3Q7;
-				EXCLUDED_ARCHS = "";
+				EXCLUDED_ARCHS = arm64;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PREFIX_HEADER = TShopMall/Expand/Macros/TSPrefixHeader.pch;
 				INFOPLIST_FILE = TShopMall/Info.plist;

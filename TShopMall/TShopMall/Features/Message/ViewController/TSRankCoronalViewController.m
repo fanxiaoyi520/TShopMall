@@ -9,7 +9,6 @@
 #import "TSRankCurrentMonthController.h"
 #import "TSRankLastMonthController.h"
 #import "TSRankDataController.h"
-
 @interface TSRankCoronalViewController ()
 
 @property(nonatomic, strong) JXCategoryTitleView *myCategoryView;
@@ -38,6 +37,9 @@
     
     [self.dataController fetchRankCoronalComplete:^(BOOL isSucess) {
 
+    }];
+    [self.dataController fetchRecomendComplete:^(BOOL isSucess) {
+        [self.myCategoryView reloadData];
     }];
 }
 

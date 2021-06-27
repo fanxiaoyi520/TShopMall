@@ -10,6 +10,7 @@
 #import "AppDelegate+Initialize.h"
 #import "NSObject+TSProperty.h"
 #import "NSString+Plugin.h"
+#import "TSBestSellingRecommendService.h"
 
 @interface AppDelegate ()
 
@@ -24,6 +25,9 @@
     [self setKeywordAttribute];
     [self setNavigationConfig];
     [self setupRootController];
+    
+    [TSServicesManager sharedInstance].bestSellingRecommendService = [TSBestSellingRecommendService new];
+    
     return YES;
 }
 
