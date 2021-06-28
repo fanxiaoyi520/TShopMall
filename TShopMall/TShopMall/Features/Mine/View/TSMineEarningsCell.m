@@ -72,10 +72,10 @@
 #pragma mark - Actions
 -(void)eyeAction:(UIButton *)sender{
     if (sender.selected) {
-        _earnMoneyLabel.hidden = YES;
+        _earnMoneyLabel.text = @"****";
         sender.selected = NO;
     } else {
-        _earnMoneyLabel.hidden = NO;
+        _earnMoneyLabel.text = @"¥999";
         sender.selected = YES;
     }
     

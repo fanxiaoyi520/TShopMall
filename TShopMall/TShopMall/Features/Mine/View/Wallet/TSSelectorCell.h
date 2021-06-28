@@ -11,7 +11,6 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol TSSelectorDelegate <NSObject>
 @optional
 - (void)selectorHeaderCloseAction:(id _Nullable)sender;
-- (void)selectorCellHeaderOneTitleAction:(id _Nullable)sender;
 @end
 @interface TSSelectorCell : UITableViewCell
 
@@ -22,7 +21,6 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface TSSelectorCellHeader : UIView
-@property (nonatomic ,assign) id<TSSelectorDelegate> kDelegate;
 @end
 
 NS_ASSUME_NONNULL_END

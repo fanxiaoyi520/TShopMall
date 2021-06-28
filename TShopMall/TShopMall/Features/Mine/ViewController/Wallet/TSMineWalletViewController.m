@@ -126,7 +126,7 @@
         [_problemBtn addTarget:self action:@selector(problemAction:) forControlEvents:UIControlEventTouchUpInside];
         [_problemBtn setTitle:@"提现遇到问题？" forState:UIControlStateNormal];
         _problemBtn.titleLabel.font = KRegularFont(10);
-        [_problemBtn setTitleColor:KHexColor(@"#2D3132") forState:UIControlStateNormal];
+        [_problemBtn setTitleColor:KHexAlphaColor(@"#2D3132", .5) forState:UIControlStateNormal];
     }
     return _problemBtn;
 }
@@ -138,7 +138,8 @@
         [_withdrawalBtn setTitle:@"去提现" forState:UIControlStateNormal];
         _withdrawalBtn.titleLabel.font = KRegularFont(16);
         [_withdrawalBtn setTitleColor:KWhiteColor forState:UIControlStateNormal];
-        _withdrawalBtn.backgroundColor = KHexColor(@"#FF4D49");
+        [_withdrawalBtn setBackgroundImage:KImageMake(@"btn_large_black_norm1") forState:UIControlStateNormal];
+        
     }
     return _withdrawalBtn;
 }
@@ -147,7 +148,7 @@
     if (!_tipsLab) {
         _tipsLab = [UILabel new];
         _tipsLab.font = KRegularFont(10);
-        _tipsLab.textColor = KHexColor(@"#2D3132");
+        _tipsLab.textColor = KHexAlphaColor(@"#2D3132", .5);
         _tipsLab.text = @"*最低提现门槛1元";
         _tipsLab.textAlignment = NSTextAlignmentCenter;
     }

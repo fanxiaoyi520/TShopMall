@@ -172,6 +172,7 @@
     }
 }
 
+// MARK: 个人中心
 -(void)fetchDataComplete:(void(^)(BOOL isSucess))complete {
     dispatch_group_t group = dispatch_group_create();
 
@@ -217,13 +218,6 @@
 #pragma clang diagnostic pop
 }
 
-- (void)fetchWithdrawalRecordDataComplete:(void(^)(BOOL isSucess))complete {
-    if (complete) {
-        complete(YES);
-    }
-}
-
-// MARK: request
 - (SSGenaralRequest *)request1{
     
     NSMutableDictionary *header = [NSMutableDictionary dictionary];
@@ -255,6 +249,70 @@
                                                               needErrorToast:YES];
     
     return request;
+}
+
+// MARK: 我的钱包
+- (void)fetchMineWalletDataComplete:(void(^)(BOOL isSucess))complete {
+    NSMutableDictionary *header = [NSMutableDictionary dictionary];
+    if ([TSGlobalManager shareInstance].currentUserInfo) {
+        [header setValue:[TSGlobalManager shareInstance].currentUserInfo.accessToken forKey:@"ihome-token"];
+    }
+    [header setValue:@"application/json" forKey:@"Content-Type"];
+    NSMutableDictionary *body = [NSMutableDictionary dictionary];
+    [body setValue:@"6226097804210467" forKey:@"bankCardNo"];
+    [body setValue:@"招商银行" forKey:@"accountBank"];
+    [body setValue:@"CMD" forKey:@"accountBankCode"];
+    [body setValue:@"招商银行北京支行" forKey:@"bankName"];
+    [body setValue:@"308551024051" forKey:@"bankBranchId"];
+    [body setValue:@"北京市" forKey:@"bankAddressProvince"];
+    [body setValue:@"110000" forKey:@"bankAddressProvinceCode"];
+    [body setValue:@"北京市" forKey:@"bankAddressCity"];
+    [body setValue:@"110000" forKey:@"bankAddressCityCode"];
+    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kMineWalletData
+                                                               requestMethod:YTKRequestMethodGET
+                                                       requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON
+                                                               requestHeader:header
+                                                                 requestBody:body
+                                                              needErrorToast:YES];
+    [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+        if (request.responseModel.isSucceed) {
+            NSDictionary *data = request.responseModel.data;
+        }
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        if (complete) {
+            complete(YES);
+        }
+    }];
+}
+
+// MARK: 提现记录
+- (void)fetchWithdrawalRecordDataComplete:(void(^)(BOOL isSucess))complete {
+    NSMutableDictionary *header = [NSMutableDictionary dictionary];
+//    if ([TSGlobalManager shareInstance].currentUserInfo) {
+//        [header setValue:[TSGlobalManager shareInstance].currentUserInfo.accessToken forKey:@"ihome-token"];
+//    }
+    [header setValue:@"111" forKey:@"ihome-token"];
+    NSMutableDictionary *body = [NSMutableDictionary dictionary];
+    [body setValue:@(1) forKey:@"pageNo"];
+    [body setValue:@(1) forKey:@"status"];
+    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kMineWithdrawalRecordListData
+                                                               requestMethod:YTKRequestMethodGET
+                                                       requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON
+                                                               requestHeader:header
+                                                                 requestBody:body
+                                                              needErrorToast:YES];
+    [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+        if (request.responseModel.isSucceed) {
+            NSDictionary *data = request.responseModel.data;
+        }
+        if (complete) {
+            complete(YES);
+        }
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        if (complete) {
+            complete(YES);
+        }
+    }];
 }
 
 @end

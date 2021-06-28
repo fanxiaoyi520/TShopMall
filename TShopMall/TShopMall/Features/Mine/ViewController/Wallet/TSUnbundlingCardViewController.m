@@ -8,6 +8,7 @@
 #import "TSUnbundlingCardViewController.h"
 #import "TSBankCardCell.h"
 #import "TSOperationBankTipsViewController.h"
+#import "TSAlertView.h"
 
 @interface TSUnbundlingCardViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,TSBankCardUnbundlingFooterDelegate>{
     NSArray * _bankNameArray;
@@ -93,22 +94,13 @@
 
 // MARK: TSBankCardUnbundlingFooterDelegate
 - (void)bankCardFooterBankCardUnbundlingAction:(id)sender {
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:@"" preferredStyle:UIAlertControllerStyleAlert];
-    NSMutableAttributedString *titleStr = [[NSMutableAttributedString alloc] initWithString:@"您是否确定解除银行卡"];
-     [titleStr addAttribute:NSForegroundColorAttributeName value:KHexColor(@"#2D3132") range:NSMakeRange(0, titleStr.length)];
-     [titleStr addAttribute:NSFontAttributeName value:KRegularFont(16) range:NSMakeRange(0, titleStr.length)];
-     [alertController setValue:titleStr forKey:@"attributedTitle"];
-    
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
-    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    TSAlertView.new.alertInfo(nil, @"您是否确定解除银行卡").confirm(@"确定", ^{
         TSOperationBankTipsViewController *vc = [TSOperationBankTipsViewController new];
         vc.kNavTitle = @"银行卡";
         [self.navigationController pushViewController:vc animated:YES];
-    }];
-    [cancelAction setValue:KHexColor(@"#2D3132") forKey:@"_titleTextColor"];
-    [okAction setValue:KHexColor(@"#E64C3D") forKey:@"_titleTextColor"];
-    [alertController addAction:cancelAction];
-    [alertController addAction:okAction];
-    [self presentViewController:alertController animated:YES completion:nil];
+
+        [[TSUserLoginManager shareInstance] logout];
+
+    }).cancel(@"取消", ^{}).show();
 }
 @end

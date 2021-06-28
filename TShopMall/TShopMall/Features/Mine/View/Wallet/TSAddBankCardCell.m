@@ -86,6 +86,7 @@
     if (indexPath.row == 1 || indexPath.row == 2){
         _funcBtn.hidden = NO;
         _tipsImgView.hidden = NO;
+        _funcBtn.tag = 10+indexPath.row;
     }
 }
 

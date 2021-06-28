@@ -84,7 +84,6 @@
     [allAmountBtn jaf_customFilletRectCorner:UIRectCornerTopRight | UIRectCornerBottomRight cornerRadii:CGSizeMake(4, 4)];
     
     UITextView *textView = [UITextView new];
-    textView.textColor = KHexAlphaColor(@"#2D3132", .5);
     textView.font = KRegularFont(10);
     [self.bgView addSubview:textView];
     textView.userInteractionEnabled = NO;
@@ -95,7 +94,8 @@
     paragraphStyle.lineSpacing = 5;
     NSDictionary *attributes = @{
                                  NSFontAttributeName:KRegularFont(10),
-                                 NSParagraphStyleAttributeName:paragraphStyle
+                                 NSForegroundColorAttributeName:KHexAlphaColor(@"#2D3132", .5),
+                                 NSParagraphStyleAttributeName:paragraphStyle,
                                  };
     textView.attributedText = [[NSAttributedString alloc] initWithString:textView.text attributes:attributes];
     
@@ -103,8 +103,8 @@
     UIButton *sureBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.bgView addSubview:sureBtn];
     [sureBtn addTarget:self action:@selector(sureAction:) forControlEvents:UIControlEventTouchUpInside];
-    //sureBtn.backgroundColor = KHexColor(@"#FF4D49");
-    sureBtn.backgroundColor = KHexColor(@"#DDDDDD");
+    [sureBtn setBackgroundImage:KImageMake(@"btn_large_black_norm") forState:UIControlStateNormal];
+    //mine_red_bg
     [sureBtn setTitleColor:KWhiteColor forState:UIControlStateNormal];
     sureBtn.titleLabel.font = KRegularFont(16);
     [sureBtn setTitle:@"提现申请" forState:UIControlStateNormal];

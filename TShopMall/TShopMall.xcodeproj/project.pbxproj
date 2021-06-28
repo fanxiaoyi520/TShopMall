@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		00093A5046E7E3324EC8CBEB /* libPods-TShopMallTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1942D505D7004833F274B5D1 /* libPods-TShopMallTests.a */; };
-		04113171268021CC000B5BAF /* TSCustomLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0411316F268021CC000B5BAF /* TSCustomLabel.m */; };
+		04113171268021CC000B5BAF /* TSEdgeInsetLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0411316F268021CC000B5BAF /* TSEdgeInsetLabel.m */; };
 		041131CF268096CB000B5BAF /* TSHotDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 041131CD268096CB000B5BAF /* TSHotDataController.m */; };
 		041131D2268096DA000B5BAF /* TSHotSectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 041131D0268096D9000B5BAF /* TSHotSectionModel.m */; };
 		041131D7268096F6000B5BAF /* TSGoodsShowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041131D4268096F6000B5BAF /* TSGoodsShowCell.m */; };
@@ -191,6 +191,13 @@
 		CE4F6BD126859ED300812275 /* TSAddBankCardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4F6BD026859ED300812275 /* TSAddBankCardCell.m */; };
 		CE4F6BD42685CEF200812275 /* TSSelectorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4F6BD32685CEF200812275 /* TSSelectorViewController.m */; };
 		CE4F6BD72685D30A00812275 /* TSSelectorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4F6BD62685D30A00812275 /* TSSelectorCell.m */; };
+		CE4F6BDA26867C0E00812275 /* TSGlobalNotifyServer.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4F6BD926867C0E00812275 /* TSGlobalNotifyServer.m */; };
+		CE4F6BDE268708E700812275 /* TSScoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4F6BDD268708E700812275 /* TSScoreViewController.m */; };
+		CE4F6BE226870DBF00812275 /* TSScoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4F6BE126870DBF00812275 /* TSScoreView.m */; };
+		CE4F6BE5268780F400812275 /* TSOfficialServicesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4F6BE4268780F400812275 /* TSOfficialServicesViewController.m */; };
+		CE4F6BE82687908200812275 /* TSOfficialServicesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4F6BE72687908200812275 /* TSOfficialServicesCell.m */; };
+		CE4F6BEB2687D36800812275 /* TSInviteFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4F6BEA2687D36800812275 /* TSInviteFriendsViewController.m */; };
+		CE4F6BEE2688544A00812275 /* TSInviteFriendsHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4F6BED2688544A00812275 /* TSInviteFriendsHeader.m */; };
 		CE5674AE26831F0400252F5D /* TSMineMerchantUserInformationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5674AA26831F0300252F5D /* TSMineMerchantUserInformationModel.m */; };
 		CE5674AF26831F0400252F5D /* TSPartnerCenterData.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5674AC26831F0300252F5D /* TSPartnerCenterData.m */; };
 		CE5674B32683333400252F5D /* TSMineWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5674B22683333400252F5D /* TSMineWalletViewController.m */; };
@@ -510,8 +517,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0411316F268021CC000B5BAF /* TSCustomLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSCustomLabel.m; sourceTree = "<group>"; };
-		04113170268021CC000B5BAF /* TSCustomLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSCustomLabel.h; sourceTree = "<group>"; };
+		0411316F268021CC000B5BAF /* TSEdgeInsetLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSEdgeInsetLabel.m; sourceTree = "<group>"; };
+		04113170268021CC000B5BAF /* TSEdgeInsetLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSEdgeInsetLabel.h; sourceTree = "<group>"; };
 		041131CD268096CB000B5BAF /* TSHotDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSHotDataController.m; sourceTree = "<group>"; };
 		041131CE268096CB000B5BAF /* TSHotDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSHotDataController.h; sourceTree = "<group>"; };
 		041131D0268096D9000B5BAF /* TSHotSectionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSHotSectionModel.m; sourceTree = "<group>"; };
@@ -846,6 +853,20 @@
 		CE4F6BD32685CEF200812275 /* TSSelectorViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSSelectorViewController.m; sourceTree = "<group>"; };
 		CE4F6BD52685D30A00812275 /* TSSelectorCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSSelectorCell.h; sourceTree = "<group>"; };
 		CE4F6BD62685D30A00812275 /* TSSelectorCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSSelectorCell.m; sourceTree = "<group>"; };
+		CE4F6BD826867C0E00812275 /* TSGlobalNotifyServer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSGlobalNotifyServer.h; sourceTree = "<group>"; };
+		CE4F6BD926867C0E00812275 /* TSGlobalNotifyServer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSGlobalNotifyServer.m; sourceTree = "<group>"; };
+		CE4F6BDC268708E700812275 /* TSScoreViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSScoreViewController.h; sourceTree = "<group>"; };
+		CE4F6BDD268708E700812275 /* TSScoreViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSScoreViewController.m; sourceTree = "<group>"; };
+		CE4F6BE026870DBF00812275 /* TSScoreView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSScoreView.h; sourceTree = "<group>"; };
+		CE4F6BE126870DBF00812275 /* TSScoreView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSScoreView.m; sourceTree = "<group>"; };
+		CE4F6BE3268780F400812275 /* TSOfficialServicesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSOfficialServicesViewController.h; sourceTree = "<group>"; };
+		CE4F6BE4268780F400812275 /* TSOfficialServicesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSOfficialServicesViewController.m; sourceTree = "<group>"; };
+		CE4F6BE62687908200812275 /* TSOfficialServicesCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSOfficialServicesCell.h; sourceTree = "<group>"; };
+		CE4F6BE72687908200812275 /* TSOfficialServicesCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSOfficialServicesCell.m; sourceTree = "<group>"; };
+		CE4F6BE92687D36800812275 /* TSInviteFriendsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSInviteFriendsViewController.h; sourceTree = "<group>"; };
+		CE4F6BEA2687D36800812275 /* TSInviteFriendsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSInviteFriendsViewController.m; sourceTree = "<group>"; };
+		CE4F6BEC2688544A00812275 /* TSInviteFriendsHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSInviteFriendsHeader.h; sourceTree = "<group>"; };
+		CE4F6BED2688544A00812275 /* TSInviteFriendsHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSInviteFriendsHeader.m; sourceTree = "<group>"; };
 		CE5674AA26831F0300252F5D /* TSMineMerchantUserInformationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSMineMerchantUserInformationModel.m; sourceTree = "<group>"; };
 		CE5674AB26831F0300252F5D /* TSPartnerCenterData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSPartnerCenterData.h; sourceTree = "<group>"; };
 		CE5674AC26831F0300252F5D /* TSPartnerCenterData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSPartnerCenterData.m; sourceTree = "<group>"; };
@@ -1487,6 +1508,15 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
+		04F8520F2689677F00B59910 /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				04113170268021CC000B5BAF /* TSEdgeInsetLabel.h */,
+				0411316F268021CC000B5BAF /* TSEdgeInsetLabel.m */,
+			);
+			path = CustomView;
+			sourceTree = "<group>";
+		};
 		6772200FA63842658DEB25AC /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1999,6 +2029,32 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		CE4F6BDB268708A800812275 /* Func */ = {
+			isa = PBXGroup;
+			children = (
+				CE4F6BDC268708E700812275 /* TSScoreViewController.h */,
+				CE4F6BDD268708E700812275 /* TSScoreViewController.m */,
+				CE4F6BE3268780F400812275 /* TSOfficialServicesViewController.h */,
+				CE4F6BE4268780F400812275 /* TSOfficialServicesViewController.m */,
+				CE4F6BE92687D36800812275 /* TSInviteFriendsViewController.h */,
+				CE4F6BEA2687D36800812275 /* TSInviteFriendsViewController.m */,
+			);
+			path = Func;
+			sourceTree = "<group>";
+		};
+		CE4F6BDF26870A9A00812275 /* Func */ = {
+			isa = PBXGroup;
+			children = (
+				CE4F6BE026870DBF00812275 /* TSScoreView.h */,
+				CE4F6BE126870DBF00812275 /* TSScoreView.m */,
+				CE4F6BE62687908200812275 /* TSOfficialServicesCell.h */,
+				CE4F6BE72687908200812275 /* TSOfficialServicesCell.m */,
+				CE4F6BEC2688544A00812275 /* TSInviteFriendsHeader.h */,
+				CE4F6BED2688544A00812275 /* TSInviteFriendsHeader.m */,
+			);
+			path = Func;
+			sourceTree = "<group>";
+		};
 		CE5674B0268332FE00252F5D /* Wallet */ = {
 			isa = PBXGroup;
 			children = (
@@ -2022,8 +2078,6 @@
 				CE4F6BCD26859D2600812275 /* TSAddCardViewController.m */,
 				CE4F6BD22685CEF200812275 /* TSSelectorViewController.h */,
 				CE4F6BD32685CEF200812275 /* TSSelectorViewController.m */,
-				CE4F6BD52685D30A00812275 /* TSSelectorCell.h */,
-				CE4F6BD62685D30A00812275 /* TSSelectorCell.m */,
 			);
 			path = Wallet;
 			sourceTree = "<group>";
@@ -2041,6 +2095,8 @@
 				CE66DB092684AA7C00E8D433 /* TSBankCardCell.m */,
 				CE4F6BCF26859ED300812275 /* TSAddBankCardCell.h */,
 				CE4F6BD026859ED300812275 /* TSAddBankCardCell.m */,
+				CE4F6BD52685D30A00812275 /* TSSelectorCell.h */,
+				CE4F6BD62685D30A00812275 /* TSSelectorCell.m */,
 			);
 			path = Wallet;
 			sourceTree = "<group>";
@@ -2943,6 +2999,7 @@
 		F54973972668A94600181E3F /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				CE4F6BDB268708A800812275 /* Func */,
 				CE5674B0268332FE00252F5D /* Wallet */,
 				F54973B82668BC0B00181E3F /* TSMineViewController.h */,
 				F54973B92668BC0B00181E3F /* TSMineViewController.m */,
@@ -2991,6 +3048,7 @@
 		F54973A22668AE1300181E3F /* Controls */ = {
 			isa = PBXGroup;
 			children = (
+				04F8520F2689677F00B59910 /* CustomView */,
 				DFB3FFE92686BDEB00FC8FF9 /* PageControl */,
 				F5686B02267F8F400023DAA6 /* DragView */,
 				DC9911B5267C475000EF9B26 /* YBNestViews */,
@@ -3022,6 +3080,8 @@
 				F54973C12668C0BC00181E3F /* TSDeviceHelper.m */,
 				F530CE8B26846BE0009DC29A /* TSToolsManager.h */,
 				F530CE8C26846BE0009DC29A /* TSToolsManager.m */,
+				CE4F6BD826867C0E00812275 /* TSGlobalNotifyServer.h */,
+				CE4F6BD926867C0E00812275 /* TSGlobalNotifyServer.m */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -3191,6 +3251,7 @@
 		F55D2CB726784ACD006BACCF /* View */ = {
 			isa = PBXGroup;
 			children = (
+				CE4F6BDF26870A9A00812275 /* Func */,
 				CE5674B426833A0E00252F5D /* Wallet */,
 				F55D2CD426785249006BACCF /* TSMineMoreButton.h */,
 				F55D2CD526785249006BACCF /* TSMineMoreButton.m */,
@@ -3768,7 +3829,9 @@
 				C21A4B6E267AF5AE00766F72 /* TSMakeOrderBaseCell.m in Sources */,
 				C2EF88C12670997100E7374A /* TSCartCell.m in Sources */,
 				F55D2C3A2671E14B006BACCF /* TSUniversalFooterView.m in Sources */,
+				CE4F6BDE268708E700812275 /* TSScoreViewController.m in Sources */,
 				F55D2CB02674A6A9006BACCF /* TSCategoryKindCellViewModel.m in Sources */,
+				CE4F6BDA26867C0E00812275 /* TSGlobalNotifyServer.m in Sources */,
 				F530CCAF26803FCD009DC29A /* UITextField+General.m in Sources */,
 				F530CCB426803FCD009DC29A /* UIFont+Plugin.m in Sources */,
 				F55D2C3B2671E14B006BACCF /* TSUniversalDecorationView.m in Sources */,
@@ -3803,7 +3866,7 @@
 				F55D2CC926784ACD006BACCF /* TSUserInfoView.m in Sources */,
 				CE66DAF82684709000E8D433 /* TSWithdrawalViewController.m in Sources */,
 				C2A34C7D2674A56C0095497E /* TSSearchTextView.m in Sources */,
-				04113171268021CC000B5BAF /* TSCustomLabel.m in Sources */,
+				04113171268021CC000B5BAF /* TSEdgeInsetLabel.m in Sources */,
 				C22EE2852681B16500E59C86 /* TSRecomendModel.m in Sources */,
 				C3A6C492267A1C1700FC71D6 /* TSWithdrawalPswSetSectionModel.m in Sources */,
 				F530CC9E26803FCD009DC29A /* UIView+TSSafeArea.m in Sources */,
@@ -3860,6 +3923,7 @@
 				F530CE9326846E9C009DC29A /* NSString+Frame.m in Sources */,
 				CE4F6BD42685CEF200812275 /* TSSelectorViewController.m in Sources */,
 				F530CCF426804167009DC29A /* TSWKMessageHandlerDispatch.m in Sources */,
+				CE4F6BEB2687D36800812275 /* TSInviteFriendsViewController.m in Sources */,
 				C3A6C4C2267A1C5700FC71D6 /* TSAboutMeTopCell.m in Sources */,
 				F530CD232680B8A0009DC29A /* TSProductHeaderView.m in Sources */,
 				DFB3FFC826844A0A00FC8FF9 /* WechatShareManager.m in Sources */,
@@ -3954,6 +4018,7 @@
 				F530CC6426803E43009DC29A /* Popover.m in Sources */,
 				F54973BF2668C01F00181E3F /* TSTipsConst.m in Sources */,
 				C2EF88B22670997100E7374A /* TSCartViewModel.m in Sources */,
+				CE4F6BE226870DBF00812275 /* TSScoreView.m in Sources */,
 				DC991196267A158A00EF9B26 /* TSHomePageReleaseTitleCell.m in Sources */,
 				046DEA8C2685C5BA009CE557 /* TSChangeMobileViewController.m in Sources */,
 				DC9911D8267E267400EF9B26 /* TSHomePagePerchView.m in Sources */,
@@ -4036,6 +4101,7 @@
 				F530CCB326803FCD009DC29A /* UIImage+TSColor.m in Sources */,
 				F55D2C792672F4E2006BACCF /* TSMineDataController.m in Sources */,
 				C21A4B90267C79D800766F72 /* TSAreaSelectedController.m in Sources */,
+				CE4F6BE5268780F400812275 /* TSOfficialServicesViewController.m in Sources */,
 				C3A6C4E1267A1CAF00FC71D6 /* TSAccountCancelDataController.m in Sources */,
 				F55D2C352671E14B006BACCF /* TSUniversalFlowLayout.m in Sources */,
 				C2A34C7A26749FCD0095497E /* TSSearchView.m in Sources */,
@@ -4066,6 +4132,7 @@
 				C3A6C4C6267A1C5700FC71D6 /* TSAboutMeBottomCell.m in Sources */,
 				DC3440DF2672FC3900F5B0DA /* TSHomePageBaseModel.m in Sources */,
 				C2EF88B82670997100E7374A /* TSCartModel.m in Sources */,
+				CE4F6BE82687908200812275 /* TSOfficialServicesCell.m in Sources */,
 				DFB3FFD92684837300FC8FF9 /* TSPaySuccessCell.m in Sources */,
 				C3A6C471267A1BEA00FC71D6 /* TSBindThirdViewController.m in Sources */,
 				F54973662668A22100181E3F /* YTKBaseRequest+AnimatingAccessory.m in Sources */,
@@ -4141,6 +4208,7 @@
 				C2EF88C42670997100E7374A /* TSCartInvalidCell.m in Sources */,
 				C3A6C474267A1BEA00FC71D6 /* TSSecurCenterViewController.m in Sources */,
 				F56D4B45266DFB8900C1AD9E /* FMLayoutFooter.m in Sources */,
+				CE4F6BEE2688544A00812275 /* TSInviteFriendsHeader.m in Sources */,
 				DC3440BE267238F600F5B0DA /* TSHomePageCellViewModel.m in Sources */,
 				F55D2CFF2678CFFA006BACCF /* TSGoodDetailCopyWriterCell.m in Sources */,
 				DC3440C1267239CD00F5B0DA /* TSHomePageCellTemplateModel.m in Sources */,
