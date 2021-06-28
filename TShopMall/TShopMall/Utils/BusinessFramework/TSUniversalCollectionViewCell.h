@@ -26,8 +26,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic) NSIndexPath *indexPath;
 
+@property (nonatomic, weak) UICollectionView *cellSuperViewCollectionView;
+
 /**< override by sub class*/
 - (void)fillCustomContentView;
+
+- (void)collectionViewReloadCell;
 
 
 + (void)displayImageView:(UIImageView *)view

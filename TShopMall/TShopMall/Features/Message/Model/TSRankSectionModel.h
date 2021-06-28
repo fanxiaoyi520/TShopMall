@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface TSRankSectionItemModel : TSUniversaItemModel
 /** 排名  */
 @property(nonatomic, assign) int rank;
-@property(nonatomic, strong) id<TSRecomendGoodsProtocol> recomendGoods;
+@property(nonatomic, strong) NSArray *datas;
 
 @end
 

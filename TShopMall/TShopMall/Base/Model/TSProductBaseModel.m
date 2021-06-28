@@ -11,7 +11,7 @@
 
 @synthesize earnMost = _earnMost;
 
-@synthesize goodsPrice;
+@synthesize goodsPrice = _goodsPrice;
 - (NSString *)goodsPrice{
     return [NSString stringWithFormat:@"%.0f",self.price];;
 }

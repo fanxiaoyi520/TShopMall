@@ -27,7 +27,10 @@
 - (NSString *)uuid{
     return self.goodsUuid;
 }
-
+@synthesize goodsPrice;
+- (NSString *)goodsPrice{
+    return self.price;
+}
 @end
 
 @implementation TSRecomendPageInfo

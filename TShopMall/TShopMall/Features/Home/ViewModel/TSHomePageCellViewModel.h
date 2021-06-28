@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface TSHomePageCellViewModel : NSObject
 /// cell当前配置信息
 @property (nonatomic, strong) TSHomePageCellTemplateModel *model;
+
 /// 更新当前cell内容
 - (void)refreshData;
 

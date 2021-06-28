@@ -8,6 +8,8 @@
 #import "TSRankRecommendCell.h"
 #import "TSCustomLabel.h"
 #import "TSRankSectionModel.h"
+#import "TSRecomendGoodsView.h"
+
 @interface TSRankRecommendCell ()
 /** 冠军背景视图  */
 @property(nonatomic, weak) UIView *championView;
@@ -27,6 +29,8 @@
 @property(nonatomic, weak) TSCustomLabel *bestNumLabel;
 /** 最高赚父视图  */
 @property(nonatomic, weak) UIView *bestView;
+@property(nonatomic, strong) TSRecomendGoodsView *goodsView;
+
 @end
 
 @implementation TSRankRecommendCell
@@ -35,7 +39,13 @@
     [super fillCustomContentView];
     self.contentView.backgroundColor = KWhiteColor;
     ///添加约束
-    [self addConstraints];
+//    [self addConstraints];
+    
+    [self.contentView addSubview:self.goodsView];
+    
+    [self.goodsView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.contentView);
+    }];
 }
 
 
@@ -209,7 +219,24 @@
 
 - (void)setDelegate:(id<UniversalCollectionViewCellDataDelegate>)delegate{
     TSRankSectionItemModel *item = [delegate universalCollectionViewCellModel:self.indexPath];
-    id<TSRecomendGoodsProtocol> goods = item.recomendGoods;
-    NSLog(@"%@", goods.goodsPrice);
+    @weakify(self);
+    if (!item.datas.count) {
+        [self.goodsView getRecommendListWithType:@"cart_page" success:^(NSArray * _Nullable list) {
+            @strongify(self)
+            item.datas = list;
+            item.cellHeight = self.goodsView.height;
+            [self collectionViewReloadCell];
+        }];
+        
+    }else{
+        self.goodsView.items = item.datas;
+    }
+}
+
+- (TSRecomendGoodsView *)goodsView{
+    if (!_goodsView) {
+        _goodsView = [TSRecomendGoodsView new];
+    }
+    return _goodsView;
 }
 @end

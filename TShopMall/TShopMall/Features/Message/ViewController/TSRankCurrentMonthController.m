@@ -10,12 +10,13 @@
 #import "TSUniversalCollectionViewCell.h"
 #import "TSUniversalFooterView.h"
 #import "TSUniversalHeaderView.h"
+#import "TSRecomendGoodsView.h"
 
 @interface TSRankCurrentMonthController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate>
 
 /// CollectionView
 @property(nonatomic, strong) UICollectionView *collectionView;
-
+@property(nonatomic, strong) TSRecomendGoodsView *goodsView;
 @end
 
 @implementation TSRankCurrentMonthController
@@ -23,17 +24,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.gk_navigationBar.hidden = YES;
+    
+    [_collectionView registerClass:UICollectionReusableView.class forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"footer"];
+   
 }
 
 -(void)fillCustomView {
     self.view.backgroundColor = UIColor.whiteColor;
     [self.view addSubview:self.collectionView];
     CGFloat bottom = self.view.ts_safeAreaInsets.bottom + 56 + GK_TABBAR_HEIGHT + GK_STATUSBAR_NAVBAR_HEIGHT + 5;
+//    [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(self.view.mas_left).with.offset(0);
+//        make.right.equalTo(self.view.mas_right).with.offset(0);
+//        make.top.equalTo(self.view.mas_top).with.offset(0.5);
+//        make.bottom.equalTo(self.view.mas_bottom).with.offset(-bottom);
+//    }];
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.view.mas_left).with.offset(0);
-        make.right.equalTo(self.view.mas_right).with.offset(0);
-        make.top.equalTo(self.view.mas_top).with.offset(0.5);
-        make.bottom.equalTo(self.view.mas_bottom).with.offset(-bottom);
+        make.edges.equalTo(self.view);
     }];
 }
 
@@ -48,6 +55,13 @@
 //    self.collectionView.frame = CGRectMake(viewX, viewY, viewW, viewH);
     
 //    NSLog(@" screenHeight == %f, self.view == %f", kScreenHeight, CGRectGetHeight(self.view.frame));
+}
+
+- (TSRecomendGoodsView *)goodsView{
+    if (!_goodsView) {
+        _goodsView = [TSRecomendGoodsView new];
+    }
+    return _goodsView;
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -73,6 +87,7 @@
     TSUniversalCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:item.identify forIndexPath:indexPath];
     cell.indexPath = indexPath;
     cell.delegate = self;
+    cell.cellSuperViewCollectionView = self.collectionView;
     return cell;
 }
 
