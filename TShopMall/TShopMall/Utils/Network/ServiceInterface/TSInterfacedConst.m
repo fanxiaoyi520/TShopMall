@@ -119,6 +119,10 @@ NSString * const kCartCount = @"/rest/v2/cart/count";
 #pragma  mark - 下单
 NSString * const kToBalance = @"/rest/v2/order/toBalance";
 NSString * const kSaveOrder = @"/rest/v2/cart/saveOrder";
+NSString * const kOrderPay = @"/rest/v2/orderpay/toOrderPay";
+NSString * const kPayChanne = @"/rest/v2/tcl_pay/getPayChannelList";
+NSString * const kSubmitOrder = @"/rest/v2/tcl_pay/submitOrder";
+NSString * const kMockPay = @"/rest/pay/submitorderKuyuTest";//模拟支付
 
 #pragma mark - 地址
 NSString * const kProvice = @"/rest/v2/usercenter/region/getAllProvince";

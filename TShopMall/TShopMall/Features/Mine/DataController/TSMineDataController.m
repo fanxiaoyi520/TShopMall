@@ -132,6 +132,16 @@
             [items addObject:item];
         }
         
+#if DEBUG
+        TSMineSectionOrderItemModel *item = [[TSMineSectionOrderItemModel alloc] init];
+        item.title = @"站点设置";
+        item.imageName = @"mall_mine_evaluate";
+        item.cellHeight = 75;
+        item.identify = @"TSMineImageTextCell";
+        
+        [items addObject:item];
+#endif
+        
         TSMineSectionModel *section = [[TSMineSectionModel alloc] init];
         section.hasHeader = YES;
         section.headerName = @"更多服务";

@@ -6,15 +6,16 @@
 //
 
 #import "TSBaseDataController.h"
-#import "TSPaySuccessSectionModel.h"
+#import "TSPaySuccessSection.h"
+#import "TSRecomendModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TSPaySuccessDataController : TSBaseDataController
-/** sections  */
-@property(nonatomic, strong, readonly) NSMutableArray<TSPaySuccessSectionModel *> *sections;
 
-- (void)fetchPaySuccessComplete:(void(^)(BOOL isSucess))complete;
+@property (nonatomic, strong) NSMutableArray<TSPaySuccessSection *> *sections;
+
+- (void)configRecomendSection:(NSArray<TSRecomendGoods *> *)goods isGrid:(BOOL)isGrid;
 
 @end
 
