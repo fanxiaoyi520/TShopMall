@@ -13,13 +13,17 @@
 #import "TSAgreementModel.h"
 
 @interface TSMainViewController ()<TSFirstEnterAgreementViewDelegate, TSHybridViewControllerDelegate>
-@property (nonatomic, strong) UIViewController *loginVC;
+
 @end
 
 @implementation TSMainViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self hiddenNavigationBar];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginStateDidChanged:) name:TS_Login_State object:nil];
+
     @weakify(self);
     // Do any additional setup after loading the view.
     if ([TSUserLoginManager shareInstance].state == TSLoginStateNone) {
@@ -82,5 +86,19 @@
     
 }
 
+- (void)loginStateDidChanged:(NSNotification *)noti{
+    TSLoginState state = ![noti.object intValue];
+    if (state == TSLoginStateNone) {
+        [self.view removeAllSubviews];
+        [self removeFromParentViewController];
+        @weakify(self);
+        [[TSUserLoginManager shareInstance] configLoginController:^(UIViewController * _Nonnull vc) {
+            @strongify(self)
+            [self addChildViewController:vc];
+            [self.view addSubview:vc.view];
+        }];
+    }
+   
+}
 
 @end

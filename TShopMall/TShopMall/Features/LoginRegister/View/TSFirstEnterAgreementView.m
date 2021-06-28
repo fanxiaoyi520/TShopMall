@@ -91,7 +91,7 @@
     }];
     [self.cancelButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contentView.mas_left).with.offset(16);
-        make.right.equalTo(self.confirmButton.mas_left).with.offset(-16);
+        //make.right.equalTo(self.confirmButton.mas_left).with.offset(-11);
         make.width.equalTo(self.confirmButton.mas_width).with.offset(0);
         make.bottom.equalTo(self.contentView.mas_bottom).with.offset(-25);
         make.height.mas_equalTo(40);
