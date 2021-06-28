@@ -2221,6 +2221,13 @@
 			path = PageControl;
 			sourceTree = "<group>";
 		};
+		DFB3FFF026899D8E00FC8FF9 /* TSHomePageBaseCell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = TSHomePageBaseCell;
+			sourceTree = "<group>";
+		};
 		F530C6CB26802E5D009DC29A /* DataController */ = {
 			isa = PBXGroup;
 			children = (
@@ -2794,6 +2801,7 @@
 		F54973782668A94600181E3F /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				DFB3FFF026899D8E00FC8FF9 /* TSHomePageBaseCell */,
 				DC99119D267AE34600EF9B26 /* Model */,
 				F55D2AE7266F9CC7006BACCF /* HeaderView */,
 				F55D2AE3266F97C2006BACCF /* DecorateView */,

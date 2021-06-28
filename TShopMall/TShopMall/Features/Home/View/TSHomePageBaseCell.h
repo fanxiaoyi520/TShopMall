@@ -16,7 +16,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) UITableView *cellSuperViewTableView;
 @property (nonatomic, strong) NSIndexPath *indexPath;
 @property (nonatomic, strong) TSHomePageCellViewModel *viewModel;
-@property (nonatomic, strong) NSArray <TSHomePageBaseModel *> *datas;
 - (void)setupUI;
 - (void)tableviewReloadCell;
 @end

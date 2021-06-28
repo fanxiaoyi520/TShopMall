@@ -7,7 +7,7 @@
 
 #import "TSGlobalManager.h"
 @interface TSGlobalManager ()
-@property (nonatomic, strong) TSUserInfoManager *currentUserInfo;
+//@property (nonatomic, strong) TSUserInfoManager *currentUserInfo;
 
 @end
 @implementation TSGlobalManager
@@ -22,7 +22,7 @@
 }
 
 - (void)setCurrentUserInfo:(TSUserInfoManager *)currentUserInfo{
-    self.currentUserInfo = currentUserInfo;
+    _currentUserInfo = currentUserInfo;
 }
 
 -(instancetype)init{
@@ -36,6 +36,6 @@
 }
 
 - (BOOL)isLogin{
-    return self.currentUserInfo;
+    return _currentUserInfo;
 }
 @end
