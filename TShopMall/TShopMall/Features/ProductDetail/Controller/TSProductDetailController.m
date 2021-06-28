@@ -106,7 +106,7 @@
                                                                complete:^(BOOL isSucess) {
                     
                     if (isSucess) {
-                        [strongSelf.collectionView reloadSections:[NSIndexSet indexSetWithIndex:5]];
+//                        [strongSelf.collectionView reloadSections:[NSIndexSet indexSetWithIndex:5]];
                     }
 
                 }];
@@ -349,6 +349,18 @@
     }
     
     __weak __typeof(self)weakSelf = self;
+    [self.dataController fetchProductDetailAddProductToCart:self.dataController.productUuid
+                                                     buyNum:@"1"
+                                                     attrId:self.dataController.attrId
+                                                   complete:^(BOOL isSucess) {
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
+        NSLog(@"---");
+        
+    }];
+}
+
+-(void)productDetailBottomView:(TSProductDetailBottomView *_Nullable)bottomView buyClick:(UIButton *_Nullable)sender{
+    __weak __typeof(self)weakSelf = self;
     [self.dataController fetchProductDetailCustomBuy:@""
                                             complete:^(BOOL isSucess) {
         __strong __typeof(weakSelf)strongSelf = weakSelf;
@@ -357,6 +369,9 @@
             [strongSelf.navigationController pushViewController:order animated:YES];
         }
     }];
+}
+-(void)productDetailBottomView:(TSProductDetailBottomView *_Nullable)bottomView sellClick:(UIButton *_Nullable)sender{
+    
 }
 
 #pragma mark - GoodDetailMaterialViewDelegate
