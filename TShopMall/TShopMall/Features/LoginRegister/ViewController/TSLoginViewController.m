@@ -272,12 +272,9 @@
         if (isSucess) {
             [Popover removePopoverOnWindow];
             
-            [self dismissViewControllerAnimated:YES completion:^{
-                if (self.loginBlock) {
-                    self.loginBlock();
-                }
-                
-            }];
+            if (self.loginBlock) {
+                self.loginBlock();
+            }
         }
         
     }];
@@ -309,12 +306,9 @@
         [self.dataController fetchLoginByToken:token platformId:@"15" sucess:^(BOOL isHaveMobile, NSString * _Nonnull token) {
             if (isHaveMobile) {
                 /// 完成登录
-                [self dismissViewControllerAnimated:YES completion:^{
-                    if (self.loginBlock) {
-                        self.loginBlock();
-                    }
-                    
-                }];
+                if (self.loginBlock) {
+                    self.loginBlock();
+                }
             }
             else{
                 [[NTESQuickLoginManager sharedInstance] closeAuthController:^{

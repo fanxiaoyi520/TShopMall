@@ -7,13 +7,15 @@
 
 #import "AppDelegate+RootController.h"
 #import "TSTabBarController.h"
+#import "TSMainViewController.h"
 
 @implementation AppDelegate (RootController)
 
 -(void)setupRootController{
     self.window = [[UIWindow alloc] init];
     self.window.frame = [UIScreen mainScreen].bounds;
-    self.window.rootViewController = [[TSTabBarController alloc] init];
+    
+    self.window.rootViewController = [TSMainViewController new];
     [self.window makeKeyAndVisible];
 }
 

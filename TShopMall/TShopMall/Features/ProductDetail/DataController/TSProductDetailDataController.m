@@ -19,101 +19,18 @@
 
 @implementation TSProductDetailDataController
 
+#pragma mark - 查询商品详情数据
 -(NSMutableArray <TSGoodDetailSectionModel *> *)fetchProductDetailWithUuid:(NSString *)uuid
+                                                       isRequireEnterGroup:(BOOL)isRequired
+                                                                     group:(dispatch_group_t)group
                                                                   complete:(void(^)(BOOL isSucess))complete{
+    if (isRequired) {
+        dispatch_group_enter(group);
+    }
     
     NSMutableArray *sections = [NSMutableArray array];
+    self.sections = [self productDetailPlaceholder:sections];
     
-    {   //banner 0
-        TSGoodDetailItemBannerModel *item = [[TSGoodDetailItemBannerModel alloc] init];
-        item.cellHeight = floor(kScreenWidth * 1.04);
-        item.identify = @"TSGoodDetailBannerCell";
-
-        TSGoodDetailSectionModel *section = [[TSGoodDetailSectionModel alloc] init];
-        section.column = 1;
-        section.items = @[item];
-        [sections addObject:section];
-    }
-    
-    {   //价格 1
-        TSGoodDetailItemPriceModel *item = [[TSGoodDetailItemPriceModel alloc] init];
-        item.cellHeight = 78;
-        item.identify = @"TSGoodDetailPriceCell";
-
-        TSGoodDetailSectionModel *section = [[TSGoodDetailSectionModel alloc] init];
-        section.column = 1;
-        section.items = @[item];
-        [sections addObject:section];
-    }
-
-    {   //介绍 2
-        TSGoodDetailItemHotModel *item = [[TSGoodDetailItemHotModel alloc] init];
-        item.identify = @"TSGoodDetailIntroduceCell";
-        item.title = @"";
-        item.content = @"";
-        
-        //默认45（标题二行的高）
-        CGFloat titleH = 45;
-        CGFloat contentH = 40;
-        item.cellHeight = 8 + titleH + 4 + contentH + 16;
-
-        TSGoodDetailSectionModel *section = [[TSGoodDetailSectionModel alloc] init];
-        section.column = 1;
-        section.items = @[item];
-        [sections addObject:section];
-    }
-
-    {   //下载图片 3
-        TSGoodDetailItemDownloadImageModel *item = [[TSGoodDetailItemDownloadImageModel alloc] init];
-        item.cellHeight = 189;
-        item.identify = @"TSGoodDetailImageCell";
-
-        TSGoodDetailSectionModel *section = [[TSGoodDetailSectionModel alloc] init];
-        section.column = 1;
-        section.spacingWithLastSection = 12;
-        section.items = @[item];
-        [sections addObject:section];
-    }
-
-    {   //复制文案 4
-        TSGoodDetailItemCopyModel *item = [[TSGoodDetailItemCopyModel alloc] init];
-        item.cellHeight = 151;
-        item.identify = @"TSGoodDetailCopyWriterCell";
-
-        TSGoodDetailSectionModel *section = [[TSGoodDetailSectionModel alloc] init];
-        section.column = 1;
-        section.spacingWithLastSection = 12;
-        section.items = @[item];
-        [sections addObject:section];
-    }
-
-    {   //所选商品规格参数等 5
-        TSGoodDetailItemPurchaseModel *item = [[TSGoodDetailItemPurchaseModel alloc] init];
-        item.cellHeight = 172;
-        item.identify = @"TSProductDetailPurchaseCell";
-
-        TSGoodDetailSectionModel *section = [[TSGoodDetailSectionModel alloc] init];
-        section.column = 1;
-        section.spacingWithLastSection = 12;
-        section.items = @[item];
-        [sections addObject:section];
-    }
-
-    {   //图文 6
-        TSGoodDetailItemPriceModel *item = [[TSGoodDetailItemPriceModel alloc] init];
-        item.identify = @"TSProductDetailImageCell";
-
-        TSGoodDetailSectionModel *section = [[TSGoodDetailSectionModel alloc] init];
-        section.hasHeader = YES;
-        section.headerSize = CGSizeMake(0, 46);
-        section.headerIdentify = @"TSProductDetailHeaderView";
-        section.spacingWithLastSection = 12;
-        section.column = 1;
-        [sections addObject:section];
-    }
-    
-    self.sections = sections;
-
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setValue:uuid forKey:@"uuid"];
     
@@ -208,7 +125,7 @@
                 
                 [models addObject:model];
             }
-            
+            self.materialModels = models;
             item.materialModels = models;
         }
         
@@ -226,8 +143,6 @@
             NSDictionary *front = data[@"front"];
             NSDictionary *priceAndPromotion = front[@"priceAndPromotion"];
             NSDictionary *promotionInteactiveModel = priceAndPromotion[@"promotionInteactiveModel"];
-            NSArray *productSku = productModel[@"productSku"];
-            NSDictionary *productSkuDic = [productSku firstObject];
 
             NSArray *selectNameArr = front[@"selectName"];
             NSString *selected = [selectNameArr componentsJoinedByString:@","];
@@ -252,18 +167,124 @@
             section.items = items;
         }
         
+        if (isRequired) {
+            dispatch_group_leave(group);
+        }
+        
         if (complete) {
             complete(YES);
+        }
+        
+        } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+            if (isRequired) {
+                dispatch_group_leave(group);
+            }
+    }];
+    
+    return sections;
+}
+
+#pragma mark - 查询购物车角标
+-(void)fetchProductDetailCartNumberIsRequireEnterGroup:(BOOL)isRequired
+                                                 group:(dispatch_group_t)group
+                                              complete:(void(^)(BOOL isSucess))complet{
+    if (isRequired) {
+        dispatch_group_enter(group);
+    }
+    
+    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kGoodDetailCartNumberUrl
+                                                               requestMethod:YTKRequestMethodPOST
+                                                       requestSerializerType:YTKRequestSerializerTypeJSON
+                                                      responseSerializerType:YTKResponseSerializerTypeJSON
+                                                               requestHeader:@{}
+                                                                 requestBody:@{}
+                                                              needErrorToast:NO];
+    [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+        if (request.responseModel.isSucceed) {
+            self.cartNumber = [NSString stringWithFormat:@"%@",request.responseModel.originalData[@"data"]];
+        }
+        
+        if (complet) {
+            complet(YES);
+        }
+        
+        if (isRequired) {
+            dispatch_group_leave(group);
+        }
+        
+        } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+            if (isRequired) {
+                dispatch_group_leave(group);
+            }
+    }];
+    
+}
+
+#pragma mark - 运费
+-(void)fetchProductDetailFreightWithSkuNo:(NSString *)skuNo
+                                   buyNum:(NSString *)buyNum
+                             provinceUuid:(NSString *)provinceUuid
+                                 cityUuid:(NSString *)cityUuid
+                               regionUuid:(NSString *)regionUuid
+                               streetUuid:(NSString *)streetUuid
+                      isRequireEnterGroup:(BOOL)isRequired
+                                    group:(dispatch_group_t)group
+                                 complete:(void(^)(BOOL isSucess))complete{
+    
+}
+
+#pragma mark - 商品库存
+-(void)fetchProductDetailHasProduct:(NSString *)skuNo
+                           areaUuid:(NSString *)areaUuid
+                        parentSkuNo:(NSString *)parentSkuNo
+                             buyNum:(NSString *)buyNum
+                             region:(NSString *)region
+                              group:(dispatch_group_t)group
+                           complete:(void(^)(BOOL isSucess))complete{
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setValue:skuNo forKey:@"skuNo"];
+    [params setValue:areaUuid forKey:@"areaUuid"];
+    [params setValue:parentSkuNo forKey:@"parentSkuNo"];
+    [params setValue:buyNum forKey:@"buyNum"];
+    [params setValue:region forKey:@"region"];
+    
+    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kGoodDetailHasProductUrl
+                                                               requestMethod:YTKRequestMethodGET
+                                                       requestSerializerType:YTKRequestSerializerTypeJSON
+                                                      responseSerializerType:YTKResponseSerializerTypeJSON
+                                                               requestHeader:@{}
+                                                                 requestBody:params
+                                                              needErrorToast:NO];
+    request.animatingView = self.context.view;
+    [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+        
+        if (request.responseModel.isSucceed) {
+
+            TSGoodDetailSectionModel *section = self.sections[5];
+            TSGoodDetailItemPurchaseModel *item = (TSGoodDetailItemPurchaseModel *)[section.items firstObject];
+            NSDictionary *data = request.responseJSONObject[@"data"];
+
+            item.canBuy = [data[@"canBuy"] boolValue];
+            item.hasProduct = [data[@"hasProduct"] boolValue];
+            item.totalNum = [data[@"totalNum"] integerValue];
+
+            if (![data[@"limitBuyNum"] isKindOfClass:[NSNull class]]) {
+                item.limitBuyNum = [data[@"limitBuyNum"] integerValue];
+            }
+
+            if (complete) {
+                complete(YES);
+            }
         }
         
         } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
             
     }];
     
-    return sections;
 }
 
-///加购
+#pragma mark - 加购
 -(void)fetchProductDetailAddProductToCart:(NSString *)productUuid
                                    buyNum:(NSString *)buyNum
                                    attrId:(NSString *)attrId
@@ -288,79 +309,11 @@
         }
         
         } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-            NSLog(@"-----");
+
     }];
 }
 
-///购物车角标
--(void)fetchProductDetailCartNumber:(void(^)(BOOL isSucess))complete{
-    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kGoodDetailCartNumberUrl
-                                                               requestMethod:YTKRequestMethodPOST
-                                                       requestSerializerType:YTKRequestSerializerTypeJSON
-                                                      responseSerializerType:YTKResponseSerializerTypeJSON
-                                                               requestHeader:@{}
-                                                                 requestBody:@{}
-                                                              needErrorToast:NO];
-    [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
-        if (request.responseModel.isSucceed) {
-            self.cartNumber = [NSString stringWithFormat:@"%@",request.responseModel.originalData[@"data"]];
-            complete(YES);
-        }
-        
-        } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-            complete(NO);
-    }];
-}
-///判断库存
--(void)fetchProductDetailHasProduct:(NSString *)skuNo
-                           areaUuid:(NSString *)areaUuid
-                        parentSkuNo:(NSString *)parentSkuNo
-                             buyNum:(NSString *)buyNum
-                             region:(NSString *)region
-                           complete:(void(^)(BOOL isSucess))complete{
-    
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setValue:skuNo forKey:@"skuNo"];
-    [params setValue:areaUuid forKey:@"areaUuid"];
-    [params setValue:parentSkuNo forKey:@"parentSkuNo"];
-    [params setValue:buyNum forKey:@"buyNum"];
-    [params setValue:region forKey:@"region"];
-    
-    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kGoodDetailHasProductUrl
-                                                               requestMethod:YTKRequestMethodGET
-                                                       requestSerializerType:YTKRequestSerializerTypeJSON
-                                                      responseSerializerType:YTKResponseSerializerTypeJSON
-                                                               requestHeader:@{}
-                                                                 requestBody:params
-                                                              needErrorToast:NO];
-    request.animatingView = self.context.view;
-    [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
-        
-        if (request.responseModel.isSucceed) {
-
-//            TSGoodDetailSectionModel *section = self.sections[5];
-//            TSGoodDetailItemPurchaseModel *item = (TSGoodDetailItemPurchaseModel *)[section.items firstObject];
-//            NSDictionary *data = request.responseJSONObject[@"data"];
-//
-//            item.canBuy = [data[@"canBuy"] boolValue];
-//            item.hasProduct = [data[@"hasProduct"] boolValue];
-//            item.totalNum = [data[@"totalNum"] integerValue];
-//
-//            if (![data[@"limitBuyNum"] isKindOfClass:[NSNull class]]) {
-//                item.limitBuyNum = [data[@"limitBuyNum"] integerValue];
-//            }
-//
-//            if (complete) {
-//                complete(YES);
-//            }
-        }
-        
-        } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-            
-    }];
-    
-}
-
+#pragma mark - 自己买
 -(void)fetchProductDetailCustomBuy:(NSString *)suitUuid
                           complete:(void(^)(BOOL isSucess))complete{
     
@@ -381,68 +334,105 @@
             complete(YES);
         }
         
-        NSLog(@"---");
-        
         } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
             
     }];
-    
-    
-//    self.customBuyBlock = complete;
-//
-//    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-//    [params setValue:@"allRecords" forKey:@"productIdAndAttrId"];
-//    [params setValue:@"false" forKey:@"chooseState"];
-//
-//    SSGenaralRequest *update = [[SSGenaralRequest alloc] initWithRequestUrl:kGoodDetailChangeChooseUrl
-//                                                              requestMethod:YTKRequestMethodPOST
-//                                                      requestSerializerType:YTKRequestSerializerTypeHTTP
-//                                                     responseSerializerType:YTKResponseSerializerTypeJSON
-//                                                              requestHeader:@{}
-//                                                                requestBody:params
-//                                                             needErrorToast:YES];
-//
-//    NSMutableDictionary *fast = [NSMutableDictionary dictionary];
-//    [fast setValue:self.productUuid forKey:@"productUuid"];
-//    [fast setValue:self.skuNo forKey:@"attrId"];
-//    [fast setValue:@"true" forKey:@"noCart"];
-//
-//    SSGenaralRequest *fastBuy = [[SSGenaralRequest alloc] initWithRequestUrl:kGoodDetailFastBuyUrl
-//                                                               requestMethod:YTKRequestMethodGET
-//                                                       requestSerializerType:YTKRequestSerializerTypeJSON
-//                                                      responseSerializerType:YTKResponseSerializerTypeJSON
-//                                                               requestHeader:@{}
-//                                                                 requestBody:fast
-//                                                              needErrorToast:YES];
-//
-//
-//    YTKChainRequest *chainReq = [[YTKChainRequest alloc] init];
-//    [chainReq addRequest:update callback:^(YTKChainRequest * _Nonnull chainRequest, YTKBaseRequest * _Nonnull baseRequest) {
-//
-//        SSGenaralRequest *update = (SSGenaralRequest *)baseRequest;
-//
-//        [chainRequest addRequest:fastBuy callback:nil];
-//    }];
-//
-//    chainReq.delegate = self;
-//    [chainReq start];
-    
-}
-
-#pragma mark - YTKChainRequestDelegate
-- (void)chainRequestFinished:(YTKChainRequest *)chainRequest{
-    NSArray *chain = chainRequest.requestArray;
-    SSGenaralRequest *update = [chain firstObject];
-    SSGenaralRequest *fast = [chain lastObject];
-    
-    self.customBuyBlock(YES);
-}
-
-- (void)chainRequestFailed:(YTKChainRequest *)chainRequest failedBaseRequest:(YTKBaseRequest*)request{
-    NSLog(@"---");
 }
 
 #pragma mark - private method
+-(NSMutableArray *)productDetailPlaceholder:(NSMutableArray *)arr{
+    {   //banner 0
+        TSGoodDetailItemBannerModel *item = [[TSGoodDetailItemBannerModel alloc] init];
+        item.cellHeight = floor(kScreenWidth * 1.04);
+        item.identify = @"TSGoodDetailBannerCell";
+
+        TSGoodDetailSectionModel *section = [[TSGoodDetailSectionModel alloc] init];
+        section.column = 1;
+        section.items = @[item];
+        [arr addObject:section];
+    }
+    
+    {   //价格 1
+        TSGoodDetailItemPriceModel *item = [[TSGoodDetailItemPriceModel alloc] init];
+        item.cellHeight = 78;
+        item.identify = @"TSGoodDetailPriceCell";
+
+        TSGoodDetailSectionModel *section = [[TSGoodDetailSectionModel alloc] init];
+        section.column = 1;
+        section.items = @[item];
+        [arr addObject:section];
+    }
+
+    {   //介绍 2
+        TSGoodDetailItemHotModel *item = [[TSGoodDetailItemHotModel alloc] init];
+        item.identify = @"TSGoodDetailIntroduceCell";
+        item.title = @"";
+        item.content = @"";
+        
+        //默认45（标题二行的高）
+        CGFloat titleH = 45;
+        CGFloat contentH = 40;
+        item.cellHeight = 8 + titleH + 4 + contentH + 16;
+
+        TSGoodDetailSectionModel *section = [[TSGoodDetailSectionModel alloc] init];
+        section.column = 1;
+        section.items = @[item];
+        [arr addObject:section];
+    }
+
+    {   //下载图片 3
+        TSGoodDetailItemDownloadImageModel *item = [[TSGoodDetailItemDownloadImageModel alloc] init];
+        item.cellHeight = 189;
+        item.identify = @"TSGoodDetailImageCell";
+
+        TSGoodDetailSectionModel *section = [[TSGoodDetailSectionModel alloc] init];
+        section.column = 1;
+        section.spacingWithLastSection = 12;
+        section.items = @[item];
+        [arr addObject:section];
+    }
+
+    {   //复制文案 4
+        TSGoodDetailItemCopyModel *item = [[TSGoodDetailItemCopyModel alloc] init];
+        item.cellHeight = 151;
+        item.identify = @"TSGoodDetailCopyWriterCell";
+
+        TSGoodDetailSectionModel *section = [[TSGoodDetailSectionModel alloc] init];
+        section.column = 1;
+        section.spacingWithLastSection = 12;
+        section.items = @[item];
+        [arr addObject:section];
+    }
+
+    {   //所选商品规格参数等 5
+        TSGoodDetailItemPurchaseModel *item = [[TSGoodDetailItemPurchaseModel alloc] init];
+        item.cellHeight = 172;
+        item.identify = @"TSProductDetailPurchaseCell";
+
+        TSGoodDetailSectionModel *section = [[TSGoodDetailSectionModel alloc] init];
+        section.column = 1;
+        section.spacingWithLastSection = 12;
+        section.items = @[item];
+        [arr addObject:section];
+    }
+
+    {   //图文 6
+        TSGoodDetailItemPriceModel *item = [[TSGoodDetailItemPriceModel alloc] init];
+        item.identify = @"TSProductDetailImageCell";
+
+        TSGoodDetailSectionModel *section = [[TSGoodDetailSectionModel alloc] init];
+        section.hasHeader = YES;
+        section.headerSize = CGSizeMake(0, 46);
+        section.headerIdentify = @"TSProductDetailHeaderView";
+        section.spacingWithLastSection = 12;
+        section.column = 1;
+        [arr addObject:section];
+    }
+    
+    return arr;
+}
+
+
 - (NSMutableArray *)detailImageModelsWithJsonString:(NSString *)oSrting{
     NSMutableArray *detailImageModels = [NSMutableArray array];
     if (oSrting.length == 0) {

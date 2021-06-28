@@ -79,8 +79,8 @@
     [self addSubview:self.titleLabel];
     [self addSubview:self.closeButton];
     [self addSubview:self.weixinButton];
-    [self addSubview:self.friendButton];
-    [self addSubview:self.downloadButton];
+//    [self addSubview:self.friendButton];
+//    [self addSubview:self.downloadButton];
     
     [self.closeButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self).offset(18);
@@ -101,27 +101,33 @@
         make.centerX.equalTo(self);
     }];
      
-    
     [self.weixinButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self).offset(-bottom);
-        make.left.equalTo(self).offset(50);
+        make.centerX.equalTo(self);
         make.width.mas_equalTo(width);
         make.height.mas_equalTo(82);
     }];
     
-    [self.friendButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self).offset(-bottom);
-        make.left.equalTo(self.weixinButton.mas_right).offset(26);
-        make.width.mas_equalTo(width);
-        make.height.mas_equalTo(82);
-    }];
-
-    [self.downloadButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self).offset(-bottom);
-        make.left.equalTo(self.friendButton.mas_right).offset(26);
-        make.width.mas_equalTo(width);
-        make.height.mas_equalTo(82);
-    }];
+//    [self.weixinButton mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.bottom.equalTo(self).offset(-bottom);
+//        make.left.equalTo(self).offset(50);
+//        make.width.mas_equalTo(width);
+//        make.height.mas_equalTo(82);
+//    }];
+//
+//    [self.friendButton mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.bottom.equalTo(self).offset(-bottom);
+//        make.left.equalTo(self.weixinButton.mas_right).offset(26);
+//        make.width.mas_equalTo(width);
+//        make.height.mas_equalTo(82);
+//    }];
+//
+//    [self.downloadButton mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.bottom.equalTo(self).offset(-bottom);
+//        make.left.equalTo(self.friendButton.mas_right).offset(26);
+//        make.width.mas_equalTo(width);
+//        make.height.mas_equalTo(82);
+//    }];
 }
 
 #pragma mark - Actions
