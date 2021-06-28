@@ -26,8 +26,7 @@
 
 @implementation TSRankCell
 
-- (void)fillCustomContentView {
-    [super fillCustomContentView];
+- (void)setupUI {
     self.contentView.backgroundColor = KWhiteColor;
     ///添加约束
     [self addConstraints];
@@ -132,25 +131,25 @@
     return _splitView;
 }
 
-- (void)setDelegate:(id<UniversalCollectionViewCellDataDelegate>)delegate {
-    TSRankSectionItemModel *item = [delegate universalCollectionViewCellModel:self.indexPath];
-    if (item.rank == 1) {
-        self.rankImgV.hidden = NO;
-        self.rankNumLabel.hidden = YES;
-        self.rankImgV.image = KImageMake(@"mall_rank_no1");
-    } else if (item.rank == 2) {
-        self.rankImgV.hidden = NO;
-        self.rankNumLabel.hidden = YES;
-        self.rankImgV.image = KImageMake(@"mall_rank_no2");
-    } else if (item.rank == 3) {
-        self.rankImgV.hidden = NO;
-        self.rankNumLabel.hidden = YES;
-        self.rankImgV.image = KImageMake(@"mall_rank_no3");
-    } else {
-        self.rankImgV.hidden = YES;
-        self.rankNumLabel.hidden = NO;
-        self.rankNumLabel.text = [NSString stringWithFormat:@"%d", item.rank];
-    }
-}
+//- (void)setDelegate:(id<UniversalCollectionViewCellDataDelegate>)delegate {
+//    TSRankSectionItemModel *item = [delegate universalCollectionViewCellModel:self.indexPath];
+//    if (item.rank == 1) {
+//        self.rankImgV.hidden = NO;
+//        self.rankNumLabel.hidden = YES;
+//        self.rankImgV.image = KImageMake(@"mall_rank_no1");
+//    } else if (item.rank == 2) {
+//        self.rankImgV.hidden = NO;
+//        self.rankNumLabel.hidden = YES;
+//        self.rankImgV.image = KImageMake(@"mall_rank_no2");
+//    } else if (item.rank == 3) {
+//        self.rankImgV.hidden = NO;
+//        self.rankNumLabel.hidden = YES;
+//        self.rankImgV.image = KImageMake(@"mall_rank_no3");
+//    } else {
+//        self.rankImgV.hidden = YES;
+//        self.rankNumLabel.hidden = NO;
+//        self.rankNumLabel.text = [NSString stringWithFormat:@"%d", item.rank];
+//    }
+//}
 
 @end

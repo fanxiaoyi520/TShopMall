@@ -21,8 +21,9 @@
     return instance;
 }
 
-- (void)setCurrentUserInfo:(TSUserInfoManager *)currentUserInfo{
-    _currentUserInfo = currentUserInfo;
+
+- (TSUserInfoManager *)currentUserInfo{
+    return [TSUserInfoManager userInfo];
 }
 
 -(instancetype)init{
@@ -36,6 +37,9 @@
 }
 
 - (BOOL)isLogin{
-    return _currentUserInfo;
+    if ([TSUserInfoManager userInfo].accessToken && [TSUserInfoManager userInfo].userName && [TSUserInfoManager userInfo].refreshToken) {
+        return YES;
+    }else
+        return NO;
 }
 @end
