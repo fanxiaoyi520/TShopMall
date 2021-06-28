@@ -23,6 +23,9 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)fetchMineContentsComplete:(void(^)(BOOL isSucess))complete;
 -(void)fetchDataComplete:(void(^)(BOOL isSucess))complete;
 
+//我的钱包
+- (void)fetchMineWalletDataComplete:(void(^)(BOOL isSucess))complete;
+
 //提现记录
 - (void)fetchWithdrawalRecordDataComplete:(void(^)(BOOL isSucess))complete;
 @end

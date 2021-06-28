@@ -2055,8 +2055,6 @@
 				CE4F6BCD26859D2600812275 /* TSAddCardViewController.m */,
 				CE4F6BD22685CEF200812275 /* TSSelectorViewController.h */,
 				CE4F6BD32685CEF200812275 /* TSSelectorViewController.m */,
-				CE4F6BD52685D30A00812275 /* TSSelectorCell.h */,
-				CE4F6BD62685D30A00812275 /* TSSelectorCell.m */,
 			);
 			path = Wallet;
 			sourceTree = "<group>";
@@ -2074,6 +2072,8 @@
 				CE66DB092684AA7C00E8D433 /* TSBankCardCell.m */,
 				CE4F6BCF26859ED300812275 /* TSAddBankCardCell.h */,
 				CE4F6BD026859ED300812275 /* TSAddBankCardCell.m */,
+				CE4F6BD52685D30A00812275 /* TSSelectorCell.h */,
+				CE4F6BD62685D30A00812275 /* TSSelectorCell.m */,
 			);
 			path = Wallet;
 			sourceTree = "<group>";

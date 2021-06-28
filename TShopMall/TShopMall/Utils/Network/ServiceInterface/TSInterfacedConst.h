@@ -86,3 +86,6 @@ UIKIT_EXTERN NSString * const kSmartAddress;
 #pragma mark - 我的
 UIKIT_EXTERN NSString * const kMineMerchantUserInformation;
 UIKIT_EXTERN NSString * const kMinePartnerCenterData;
+UIKIT_EXTERN NSString * const kMineWithdrawalRecordListData;//提现记录
+UIKIT_EXTERN NSString * const kMineWalletData;//我的钱包
+

@@ -26,16 +26,40 @@
 
 - (void)jaf_layoutSubview {
     [self addSubview:self.bankIconImageView];
+    [self.bankIconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self).offset(16);
+        make.centerY.equalTo(self);
+        make.width.height.mas_equalTo(35);
+    }];
+    
     [self addSubview:self.bankNameLab];
+    [self.bankNameLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(@[self.bankIconImageView.mas_right]).offset(10);
+        make.centerY.equalTo(self);
+        make.height.mas_equalTo(30);
+    }];
+    
     [self addSubview:self.tipsImageView];
+    [self.tipsImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self).offset(-16);
+        make.centerY.equalTo(self);
+        make.width.height.mas_equalTo(16);
+    }];
+    
     [self addSubview:self.lineView];
+    [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self);
+        make.height.mas_equalTo(1);
+        make.left.equalTo(self).offset(16);
+        make.right.equalTo(self).offset(-16);
+    }];
 }
 
 // MARK: get
 - (UIImageView *)bankIconImageView {
     if (!_bankIconImageView) {
         _bankIconImageView = [UIImageView new];
-        _bankIconImageView.image = KImageMake(@"");
+        _bankIconImageView.image = KImageMake(@"mine_gongshang_de");
     }
     return _bankIconImageView;
 }
@@ -61,7 +85,7 @@
 - (UIView *)lineView {
     if (!_lineView) {
         _lineView = [UIView new];
-        _lineView.backgroundColor = KHexColor(@"#E6E6E6");
+        _lineView.backgroundColor = KHexAlphaColor(@"#E6E6E6", .5);
     }
     return _lineView;
 }
@@ -139,7 +163,7 @@
 - (UIView *)lineView {
     if (!_lineView) {
         _lineView = [UIView new];
-        _lineView.backgroundColor = KHexColor(@"#E6E6E6");
+        _lineView.backgroundColor = KHexAlphaColor(@"#E6E6E6", .5);
     }
     return _lineView;
 }
@@ -152,9 +176,9 @@
 @property (nonatomic ,strong) UIView *lineView;
 @end
 @implementation TSSelectorCellHeader
-- (instancetype)init
+- (instancetype)initWithFrame:(CGRect)frame
 {
-    self = [super init];
+    self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = KWhiteColor;
         [self jaf_layoutSubViews];
@@ -180,11 +204,6 @@
 }
 
 // MARK: actions
-- (void)oneTitleAction:(UIButton *)sender {
-    if ([self.kDelegate respondsToSelector:@selector(selectorCellHeaderOneTitleAction:)]) {
-        [self.kDelegate selectorCellHeaderOneTitleAction:sender];
-    }
-}
 
 // MARK: get
 - (UIButton *)oneTitleBtn {
@@ -193,7 +212,6 @@
         [_oneTitleBtn setTitle:@"当前支持以下银行" forState:UIControlStateNormal];
         _oneTitleBtn.titleLabel.font = KRegularFont(14);
         [_oneTitleBtn setTitleColor:KHexColor(@"#2D3132") forState:UIControlStateNormal];
-        [_oneTitleBtn addTarget:self action:@selector(oneTitleAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _oneTitleBtn;
 }
@@ -201,7 +219,7 @@
 - (UIView *)lineView {
     if (!_lineView) {
         _lineView = [UIView new];
-        _lineView.backgroundColor = KHexColor(@"#E6E6E6");
+        _lineView.backgroundColor = KHexAlphaColor(@"#E6E6E6", .5);
     }
     return _lineView;
 }
