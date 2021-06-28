@@ -2480,9 +2480,9 @@
 		F530CCCD26804167009DC29A /* MessageHandler */ = {
 			isa = PBXGroup;
 			children = (
-				F530CCCE26804167009DC29A /* TSWKCallNativeMethodMessageHandler.m */,
 				F530CCCF26804167009DC29A /* TSWKMessageHandlerProtocol.h */,
 				F530CCD026804167009DC29A /* TSWKCallNativeMethodMessageHandler.h */,
+				F530CCCE26804167009DC29A /* TSWKCallNativeMethodMessageHandler.m */,
 			);
 			path = MessageHandler;
 			sourceTree = "<group>";
@@ -3380,8 +3380,6 @@
 				F55D2D37267B3F38006BACCF /* TSRankCell.m */,
 				F55D2D39267B3F72006BACCF /* TSRankRecommendHeaderView.h */,
 				F55D2D3A267B3F72006BACCF /* TSRankRecommendHeaderView.m */,
-				04113170268021CC000B5BAF /* TSCustomLabel.h */,
-				0411316F268021CC000B5BAF /* TSCustomLabel.m */,
 				DC06D6E1268810C20013633F /* TSRecomendGoodsView.h */,
 				DC06D6E2268810C20013633F /* TSRecomendGoodsView.m */,
 			);
