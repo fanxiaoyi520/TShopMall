@@ -2488,9 +2488,9 @@
 		F530CCCD26804167009DC29A /* MessageHandler */ = {
 			isa = PBXGroup;
 			children = (
-				F530CCCE26804167009DC29A /* TSWKCallNativeMethodMessageHandler.m */,
 				F530CCCF26804167009DC29A /* TSWKMessageHandlerProtocol.h */,
 				F530CCD026804167009DC29A /* TSWKCallNativeMethodMessageHandler.h */,
+				F530CCCE26804167009DC29A /* TSWKCallNativeMethodMessageHandler.m */,
 			);
 			path = MessageHandler;
 			sourceTree = "<group>";
