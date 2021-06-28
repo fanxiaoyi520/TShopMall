@@ -86,3 +86,4 @@ UIKIT_EXTERN NSString * const kSmartAddress;
 #pragma mark - 我的
 UIKIT_EXTERN NSString * const kMineMerchantUserInformation;
 UIKIT_EXTERN NSString * const kMinePartnerCenterData;
+UIKIT_EXTERN NSString * const kAboutMeAgreementUrl;

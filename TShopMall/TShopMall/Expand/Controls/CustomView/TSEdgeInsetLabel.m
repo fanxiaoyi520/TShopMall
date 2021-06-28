@@ -5,9 +5,9 @@
 //  Created by edy on 2021/6/20.
 //
 
-#import "TSCustomLabel.h"
+#import "TSEdgeInsetLabel.h"
 
-@implementation TSCustomLabel
+@implementation TSEdgeInsetLabel
 
 - (instancetype)init {
     if (self = [super init]) {

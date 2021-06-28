@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		00093A5046E7E3324EC8CBEB /* libPods-TShopMallTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1942D505D7004833F274B5D1 /* libPods-TShopMallTests.a */; };
-		04113171268021CC000B5BAF /* TSCustomLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0411316F268021CC000B5BAF /* TSCustomLabel.m */; };
+		04113171268021CC000B5BAF /* TSEdgeInsetLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0411316F268021CC000B5BAF /* TSEdgeInsetLabel.m */; };
 		041131CF268096CB000B5BAF /* TSHotDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 041131CD268096CB000B5BAF /* TSHotDataController.m */; };
 		041131D2268096DA000B5BAF /* TSHotSectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 041131D0268096D9000B5BAF /* TSHotSectionModel.m */; };
 		041131D7268096F6000B5BAF /* TSGoodsShowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041131D4268096F6000B5BAF /* TSGoodsShowCell.m */; };
@@ -506,8 +506,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0411316F268021CC000B5BAF /* TSCustomLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSCustomLabel.m; sourceTree = "<group>"; };
-		04113170268021CC000B5BAF /* TSCustomLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSCustomLabel.h; sourceTree = "<group>"; };
+		0411316F268021CC000B5BAF /* TSEdgeInsetLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSEdgeInsetLabel.m; sourceTree = "<group>"; };
+		04113170268021CC000B5BAF /* TSEdgeInsetLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSEdgeInsetLabel.h; sourceTree = "<group>"; };
 		041131CD268096CB000B5BAF /* TSHotDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSHotDataController.m; sourceTree = "<group>"; };
 		041131CE268096CB000B5BAF /* TSHotDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSHotDataController.h; sourceTree = "<group>"; };
 		041131D0268096D9000B5BAF /* TSHotSectionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSHotSectionModel.m; sourceTree = "<group>"; };
@@ -1472,6 +1472,15 @@
 				04F1EFBE2683287D00FF007D /* TSPayOrderViewController.m */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		04F8520F2689677F00B59910 /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				04113170268021CC000B5BAF /* TSEdgeInsetLabel.h */,
+				0411316F268021CC000B5BAF /* TSEdgeInsetLabel.m */,
+			);
+			path = CustomView;
 			sourceTree = "<group>";
 		};
 		6772200FA63842658DEB25AC /* Pods */ = {
@@ -2973,6 +2982,7 @@
 		F54973A22668AE1300181E3F /* Controls */ = {
 			isa = PBXGroup;
 			children = (
+				04F8520F2689677F00B59910 /* CustomView */,
 				DFB3FFE92686BDEB00FC8FF9 /* PageControl */,
 				F5686B02267F8F400023DAA6 /* DragView */,
 				DC9911B5267C475000EF9B26 /* YBNestViews */,
@@ -3291,8 +3301,6 @@
 				F55D2D37267B3F38006BACCF /* TSRankCell.m */,
 				F55D2D39267B3F72006BACCF /* TSRankRecommendHeaderView.h */,
 				F55D2D3A267B3F72006BACCF /* TSRankRecommendHeaderView.m */,
-				04113170268021CC000B5BAF /* TSCustomLabel.h */,
-				0411316F268021CC000B5BAF /* TSCustomLabel.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3781,7 +3789,7 @@
 				F55D2CC926784ACD006BACCF /* TSUserInfoView.m in Sources */,
 				CE66DAF82684709000E8D433 /* TSWithdrawalViewController.m in Sources */,
 				C2A34C7D2674A56C0095497E /* TSSearchTextView.m in Sources */,
-				04113171268021CC000B5BAF /* TSCustomLabel.m in Sources */,
+				04113171268021CC000B5BAF /* TSEdgeInsetLabel.m in Sources */,
 				C22EE2852681B16500E59C86 /* TSRecomendModel.m in Sources */,
 				C3A6C492267A1C1700FC71D6 /* TSWithdrawalPswSetSectionModel.m in Sources */,
 				F530CC9E26803FCD009DC29A /* UIView+TSSafeArea.m in Sources */,
