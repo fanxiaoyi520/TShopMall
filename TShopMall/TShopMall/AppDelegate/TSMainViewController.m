@@ -46,9 +46,12 @@
         @strongify(self)
         [self.view removeAllSubviews];
         [self removeFromParentViewController];
-        TSTabBarController *tab = [TSTabBarController new];
-        [self addChildViewController:tab];
-        [self.view addSubview:tab.view];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            TSTabBarController *tab = [TSTabBarController new];
+            [self addChildViewController:tab];
+            [self.view addSubview:tab.view];
+        });
+        
     };
     
     [TSUserLoginManager shareInstance].logoutBlock = ^{
