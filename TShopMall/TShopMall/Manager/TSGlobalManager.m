@@ -21,7 +21,6 @@
     return instance;
 }
 
-
 - (TSUserInfoManager *)currentUserInfo{
     return [TSUserInfoManager userInfo];
 }
@@ -32,8 +31,18 @@
     return self;
 }
 
--(NSString *)appVersion{
+- (NSString *)appVersion{
     return [UIApplication sharedApplication].appVersion;
+}
+
+- (BOOL)firstStartApp {
+    NSString *value = [[NSUserDefaults standardUserDefaults] valueForKey:KFirstEnterAppKey];
+    return value == nil;
+}
+
+- (void)setFirstStartApp:(BOOL)firstStartApp {
+    //firstStartApp = firstStartApp;
+    [[NSUserDefaults standardUserDefaults] setValue:KFirstEnterAppValue forKey:KFirstEnterAppKey];
 }
 
 - (BOOL)isLogin{

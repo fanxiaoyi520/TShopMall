@@ -31,6 +31,14 @@
 - (NSString *)goodsPrice{
     return self.price;
 }
+@synthesize goodsEarnMost;
+- (NSString *)goodsEarnMost{
+    return self.earnMost;
+}
+@synthesize goodsStaffPrice;
+- (NSString *)goodsStaffPrice{
+    return self.staffPrice;
+}
 @end
 
 @implementation TSRecomendPageInfo

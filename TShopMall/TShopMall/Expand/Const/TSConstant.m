@@ -9,5 +9,9 @@
 
 @implementation TSConstant
 
+NSString *const KFirstEnterAppKey = @"KFirstEnterAppKey";
+
+NSString *const KFirstEnterAppValue = @"KFirstEnterAppValue";
+
 
 @end

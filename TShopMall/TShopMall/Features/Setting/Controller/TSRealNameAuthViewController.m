@@ -10,8 +10,9 @@
 #import "TSUniversalCollectionViewCell.h"
 #import "TSRealNameAuthDataController.h"
 #import "TSAgreementView.h"
+#import "TSRealNameAuthCell.h"
 
-@interface TSRealNameAuthViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate>
+@interface TSRealNameAuthViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate,TSRealNameAuthCellDelegate>
 /// 数据中心
 @property(nonatomic, strong) TSRealNameAuthDataController *dataController;
 /// CollectionView
@@ -86,9 +87,14 @@
     [self.view endEditing:YES];
 }
 
-#pragma mark - Actions
+#pragma mark - TSRealNameAuthCellDelegate
 /** 开始实名认证 */
-- (void)startCertificationWithRealname:(NSString *)realname idcard:(NSString *)idcard {
+- (void)startAuthWithRealname:(NSString *)realname idcard:(NSString *)idcard authButton:(UIButton *)authButton {
+    NSLog(@"realname == %@, idcard = %@", realname, idcard);
+    
+}
+/** 打开协议页面 */
+- (void)openAgreement {
     
 }
 
@@ -110,6 +116,10 @@
     TSUniversalCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:item.identify forIndexPath:indexPath];
     cell.indexPath = indexPath;
     cell.delegate = self;
+    if ([cell isKindOfClass:[TSRealNameAuthCell class]]) {
+        TSRealNameAuthCell *_cell = (TSRealNameAuthCell *)cell;
+        _cell.actionDelegate = self;
+    }
     return cell;
 }
 
@@ -121,15 +131,6 @@
 - (id)universalCollectionViewCellModel:(NSIndexPath *)indexPath{
     TSRealNameAuthSectionModel *sectionModel = self.dataController.sections[indexPath.section];
     return sectionModel.items[indexPath.row];
-}
-
-- (void)universalCollectionViewCellClick:(NSIndexPath *)indexPath params:(NSDictionary *)params {
-    NSString *cellType = params[@"cellType"];
-    if ([cellType isEqualToString:@"TSRealNameAuthCell"] && [params[@"RealNameAuthClickType"] integerValue] == 1) {///提交按钮
-        NSString *realName = params[@"RealName"];///真实姓名
-        NSString *idcardNum = params[@"IdcardNum"];///身份证号
-        [self startCertificationWithRealname:realName idcard:idcardNum];
-    }
 }
 
 #pragma mark - UniversalFlowLayoutDelegate

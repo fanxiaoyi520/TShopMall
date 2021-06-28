@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (BOOL)isPhoneNumber:(NSString *)phoneNumber;
 /** 提现密码的校验 */
 + (BOOL)isWithdrawalPsw:(NSString *)psw;
+/** 身份证号校验 */
++ (BOOL)isIdcard:(NSString *)idcardNum;
 
 @end
 

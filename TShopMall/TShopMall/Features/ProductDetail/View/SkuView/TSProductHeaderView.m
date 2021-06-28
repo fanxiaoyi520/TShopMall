@@ -17,6 +17,8 @@
 @property (nonatomic, strong) UIButton *closeBtn;
 /// 价格
 @property (nonatomic, strong) UILabel *priceLable;
+/// 价格
+@property (nonatomic, strong) UILabel *priceValueLable;
 /// 已选参数
 @property (nonatomic, strong) UILabel *selectedCount;
 /// 库存状态
@@ -49,6 +51,7 @@
     [self addSubview:self.statusLable];
 //    [self addSubview:self.selectedCount];
     [self addSubview:self.priceLable];
+    [self addSubview:self.priceValueLable];
     [self addSubview:self.numLabel];
     [self addSubview:self.addButton];
     [self addSubview:self.inputTF];
@@ -67,9 +70,16 @@
     }];
 
     [self.priceLable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.iconImge);
-        make.height.equalTo(@(28));
+        make.top.equalTo(self.iconImge).offset(14);
+        make.width.equalTo(@(14));
+        make.height.equalTo(@(22));
         make.left.equalTo(self.iconImge.mas_right).offset(8);
+    }];
+    
+    [self.priceValueLable mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.priceLable);
+        make.height.equalTo(@(28));
+        make.left.equalTo(self.priceLable.mas_right).offset(0);
     }];
     
 //    [self.selectedCount mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -81,7 +91,7 @@
 
     [self.statusLable mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.priceLable);
-        make.bottom.equalTo(self.iconImge);
+        make.bottom.equalTo(self.iconImge.mas_bottom).offset(-11);
         make.height.equalTo(@(22));
     }];
     
@@ -170,10 +180,22 @@
     if (!_priceLable) {
         _priceLable = [UILabel new];
         _priceLable.textColor = KMainColor;
-        _priceLable.textAlignment = NSTextAlignmentCenter;
+        _priceLable.font = KRegularFont(14);
+        _priceLable.textAlignment = NSTextAlignmentLeft;
         _priceLable.text = @"¥";
     }
     return _priceLable;
+}
+
+-(UILabel *)priceValueLable{
+    if (!_priceValueLable) {
+        _priceValueLable = [UILabel new];
+        _priceValueLable.textColor = KMainColor;
+        _priceValueLable.font = KFont(PingFangSCMedium, 18);
+        _priceValueLable.textAlignment = NSTextAlignmentLeft;
+        _priceValueLable.text = @"";
+    }
+    return _priceValueLable;
 }
 
 -(UILabel *)selectedCount{
@@ -191,8 +213,8 @@
         _statusLable = [UILabel new];
         _statusLable.textColor = KMainColor;
         _statusLable.font = KRegularFont(14.0);
-        _statusLable.textColor = KHexAlphaColor(@"#2D3132", 0.4);
-        _statusLable.text = @"尺寸";
+        _statusLable.textColor = KMainColor;
+        _statusLable.text = @"";
         _statusLable.backgroundColor = [UIColor clearColor];
     }
     return _statusLable;;
@@ -230,6 +252,7 @@
         _inputTF.textAlignment = NSTextAlignmentCenter;
         _inputTF.delegate = self;
         _inputTF.text = @"1";
+        _inputTF.enabled = NO;
     }
     return _inputTF;
 }
@@ -249,8 +272,7 @@
 -(void)setPurchaseModel:(TSGoodDetailItemPurchaseModel *)purchaseModel{
     _purchaseModel = purchaseModel;
     [_iconImge sd_setImageWithURL:[NSURL URLWithString:purchaseModel.iconUrl]];
-    _priceLable.text = [NSString stringWithFormat:@"¥%@",purchaseModel.price];
-    
+    _priceValueLable.text = [NSString stringWithFormat:@"%@",purchaseModel.price];
 }
 
 @end

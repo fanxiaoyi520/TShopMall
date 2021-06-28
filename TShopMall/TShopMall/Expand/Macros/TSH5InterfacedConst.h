@@ -6,10 +6,13 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#if DEBUG
+/// H5基本地址
+UIKIT_EXTERN NSString * kMallH5ApiPrefix;
+#else
 /// H5基本地址
 UIKIT_EXTERN NSString *const kMallH5ApiPrefix;
-
+#endif
 #pragma mark - 各页面
 ///订单列表
 UIKIT_EXTERN NSString *const kMallH5OrderManageUrl;

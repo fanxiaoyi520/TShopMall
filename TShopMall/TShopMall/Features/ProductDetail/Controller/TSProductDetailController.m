@@ -88,49 +88,36 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    dispatch_group_t group = dispatch_group_create();
     
-    {//请求商品详情数据
-        __weak __typeof(self)weakSelf = self;
-        NSMutableArray *sections = [self.dataController fetchProductDetailWithUuid:self.uuid
-                                                                          complete:^(BOOL isSucess) {
-            __strong __typeof(weakSelf)strongSelf = weakSelf;
-            if (isSucess) {//刷新collectionView
-                [strongSelf.collectionView reloadData];
-                
-                //检查商品库存
-                [strongSelf.dataController fetchProductDetailHasProduct:strongSelf.dataController.skuNo
-                                                               areaUuid:@"15845"
-                                                            parentSkuNo:strongSelf.dataController.parentSkuNo
-                                                                 buyNum:@"1"
-                                                                 region:@"1385"
-                                                               complete:^(BOOL isSucess) {
-                    
-                    if (isSucess) {
-//                        [strongSelf.collectionView reloadSections:[NSIndexSet indexSetWithIndex:5]];
-                    }
-
-                }];
-                
-            }
-        }];
-        
-        if (sections.count > 0) {
-            [self.collectionView reloadData];
-        }
+    //商品详情
+    NSMutableArray *sections = [self.dataController fetchProductDetailWithUuid:self.uuid
+                                                           isRequireEnterGroup:YES
+                                                                         group:group
+                                                                      complete:^(BOOL isSucess) {
+            
+    }];
+    
+    if (sections.count > 0) {
+        [self.collectionView reloadData];
     }
-
-    {//购物车角标
-        __weak __typeof(self)weakSelf = self;
-        [self.dataController fetchProductDetailCartNumber:^(BOOL isSucess) {
-            __strong __typeof(weakSelf)strongSelf = weakSelf;
-            if (isSucess) {
-                [strongSelf.topCartBtn setBadgeValue:strongSelf.dataController.cartNumber];
-            }
-        }];
-    }
-
+    
+    //购物车角标
+    [self.dataController fetchProductDetailCartNumberIsRequireEnterGroup:YES
+                                                                   group:group
+                                                                complete:^(BOOL isSucess) {
+            
+    }];
+    
+    dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+        [self.collectionView reloadData];
+        [self.topCartBtn setBadgeValue:self.dataController.cartNumber];
+    });
+    
+    __weak __typeof(self)weakSelf = self;
     self.dragView.clickDragViewBlock = ^(WMDragView *dragView){
-        NSLog(@"clickDragViewBlock");
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
+        [strongSelf.changePopups presentAnimated:YES completion:nil];
     };
 }
 
@@ -144,7 +131,6 @@
     [super viewWillDisappear:animated];
     
     [[IQKeyboardManager sharedManager] setEnable:YES];
-
 }
 
 -(void)setupNavigationBar{
@@ -164,7 +150,7 @@
     [cartBtn addTarget:self action:@selector(cartAction:) forControlEvents:UIControlEventTouchUpInside];
     cartBtn.frame = CGRectMake(0, 0, 30, 30);
     [cartBtn setBadgeBGColor:UIColor.redColor];
-    [cartBtn setBadgeOriginX:15];
+    [cartBtn setBadgeOriginX:17];
     [cartBtn setBadgeTextColor:UIColor.whiteColor];
     [cartBtn setShouldAnimateBadge:YES];
     self.topCartBtn = cartBtn;
@@ -224,7 +210,7 @@
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle{
-    return UIStatusBarStyleLightContent;
+    return UIStatusBarStyleDefault;
 }
 
 - (void)addCollectionCoverView{
@@ -266,18 +252,21 @@
 
 /// 下拉刷新
 - (void)mjHeadreRefresh:(MJRefreshNormalHeader *)mj_header {
-    __weak __typeof(self)weakSelf = self;
-    [self.dataController fetchProductDetailWithUuid:self.uuid complete:^(BOOL isSucess) {
-        __strong __typeof(weakSelf)strongSelf = weakSelf;
-        if (isSucess) {
-            [strongSelf.collectionView.mj_header endRefreshing];
-            [strongSelf.collectionView reloadData];
-        }
-    }];
+//    __weak __typeof(self)weakSelf = self;
+//    [self.dataController fetchProductDetailWithUuid:self.uuid complete:^(BOOL isSucess) {
+//        __strong __typeof(weakSelf)strongSelf = weakSelf;
+//        if (isSucess) {
+//            [strongSelf.collectionView.mj_header endRefreshing];
+//            [strongSelf.collectionView reloadData];
+//        }
+//    }];
 }
 
 #pragma mark - GoodDetailSkuViewDelegate
 -(void)goodDetailSkuView:(TSGoodDetailSkuView *)skuView addShoppingCart:(UIButton *)addButton buyNum:(NSString *)buyNum{
+    
+    [self.skuPpopups dismissAnimated:YES completion:nil];
+    
     [self.dataController fetchProductDetailAddProductToCart:self.dataController.productUuid
                                                      buyNum:@"1"
                                                      attrId:self.dataController.attrId
@@ -286,13 +275,15 @@
     }];
 }
 -(void)goodDetailSkuView:(TSGoodDetailSkuView *)skuView buyImmediately:(UIButton *)buyButton buyNum:(NSString *)buyNum{
-    NSLog(@"----");
+    [self.skuPpopups dismissAnimated:YES completion:nil];
 }
+
 -(void)goodDetailSkuView:(TSGoodDetailSkuView *)skuView specificationExchange:(NSDictionary *)detail{
-    NSLog(@"----");
+    
 }
+
 -(void)goodDetailSkuView:(TSGoodDetailSkuView *)skuView numberChange:(NSString *)currentNumber{
-    NSLog(@"----");
+    
 }
 
 #pragma mark - SnailQuickMaskPopupsDelegate
@@ -323,8 +314,11 @@
     }];
 }
 -(void)topFunctionView:(TSTopFunctionView *_Nullable)topFunctionView downloadClick:(TSFuncButton *_Nonnull)sender{
+    __weak __typeof(self)weakSelf = self;
     [self.functionPopups dismissAnimated:YES completion:^(SnailQuickMaskPopups * _Nonnull popups) {
-        
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
+        strongSelf.materialPopups = [strongSelf materialPopupsModels:strongSelf.dataController.materialModels];
+        [strongSelf.materialPopups presentAnimated:YES completion:nil];
     }];
 }
      
@@ -385,6 +379,7 @@
 
 #pragma mark - TSChangePriceViewDelegate
 -(void)changePriceView:(TSChangePriceView *_Nullable)changePriceView closeClick:(UIButton *_Nonnull)sender{
+    [self.view endEditing:YES];
     [self.changePopups dismissAnimated:YES completion:nil];
 }
 
@@ -597,18 +592,15 @@ spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
 }
 
 #pragma mark - TSDetailShareViewDelegate
-
 - (void)shareViewView:(UIView *)view closeClick:(UIButton *)sender{
+    [self.sharePopups dismissAnimated:YES completion:nil];
 }
 
 - (void)shareViewView:(UIView *)view shareFriendsAction:(UIButton *)sender{
     [[WechatShareManager shareInstance] shareWXWithTitle:@"标题" andDescription:@"描述" andShareURL:@"http://www.baidu.com" andThumbImage:nil andWXScene:WechatShareTypeFriends];
-   
 }
 
 - (void)shareViewView:(UIView *)view sharePYQAction:(UIButton *)sender{
-    [[WechatShareManager shareInstance] shareWXWithTitle:@"标题" andDescription:@"描述" andShareURL:@"http://www.baidu.com" andThumbImage:nil andWXScene:WechatShareTypeTimeline];
-
 }
 
 - (void)shareViewView:(UIView *)view downloadAction:(UIButton *)sender{
@@ -723,7 +715,7 @@ spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
 - (SnailQuickMaskPopups *)changePopups{
     if (!_changePopups) {
         TSChangePriceView *changeView = [[TSChangePriceView alloc] init];
-        changeView.frame = CGRectMake(0, 0, kScreenWidth, 422);
+        changeView.frame = CGRectMake(0, 0, kScreenWidth, 450);
         [changeView setCorners:(UIRectCornerTopLeft | UIRectCornerTopRight) radius:8.0];
         changeView.clipsToBounds = YES;
         changeView.delegate = self;
@@ -745,6 +737,7 @@ spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
         shareView.frame = CGRectMake(0, 0, kScreenWidth, 180);
         [shareView setCorners:(UIRectCornerTopLeft | UIRectCornerTopRight) radius:8.0];
         shareView.clipsToBounds = YES;
+        shareView.delegate = self;
         self.shareView = shareView;
         
         _sharePopups = [SnailQuickMaskPopups popupsWithMaskStyle:MaskStyleBlackTranslucent aView:shareView];

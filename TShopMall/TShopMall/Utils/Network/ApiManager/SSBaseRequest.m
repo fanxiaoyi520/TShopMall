@@ -15,6 +15,12 @@
     SSResponseModel *reponseModel = [[SSResponseModel alloc] init];
     reponseModel.stateCode = 500;
     self.responseModel = reponseModel;
+    
+    /// token 失效
+    if ( reponseModel.stateCode == 999) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:TS_Login_State object:@(1)];
+    }
+   
 }
 
 #pragma mark - 请求成功过滤器（stateCode == 200）

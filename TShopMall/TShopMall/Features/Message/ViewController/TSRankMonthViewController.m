@@ -7,6 +7,7 @@
 
 #import "TSRankMonthViewController.h"
 #import "TSTableViewBaseCell.h"
+#import "TSRankHeaderView.h"
 @interface TSRankMonthViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property(nonatomic, strong) UITableView *tableView;
@@ -23,15 +24,17 @@
 
 -(void)fillCustomView{
     CGFloat bottom = self.view.ts_safeAreaInsets.bottom + 56 + GK_TABBAR_HEIGHT + GK_STATUSBAR_NAVBAR_HEIGHT + 5;
-//    [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.view addSubview:self.tableView];
+//    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
 //        make.left.equalTo(self.view.mas_left).with.offset(0);
 //        make.right.equalTo(self.view.mas_right).with.offset(0);
 //        make.top.equalTo(self.view.mas_top).with.offset(0.5);
 //        make.bottom.equalTo(self.view.mas_bottom).with.offset(-bottom);
 //    }];
-    [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.equalTo(self.view);
+        make.top.left.right.equalTo(self.view);
+        make.bottom.equalTo(self.view).offset(-56 - GK_TABBAR_HEIGHT - GK_STATUSBAR_HEIGHT - 5);
+
     }];
 }
 
@@ -41,15 +44,15 @@
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return self.coronalSections.count;
+    return self.dataController.coronalSections.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.coronalSections[section].items.count;
+    return self.dataController.coronalSections[section].items.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    TSRankSectionItemModel *item = self.coronalSections[indexPath.section].items[indexPath.row];
+    TSRankSectionItemModel *item = self.dataController.coronalSections[indexPath.section].items[indexPath.row];
     Class className = NSClassFromString(item.identify);
     [tableView registerClass:[className class] forCellReuseIdentifier:item.identify];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:item.identify forIndexPath:indexPath];
@@ -64,6 +67,40 @@
     return cell;
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    TSRankSectionModel *sectionModel = self.dataController.coronalSections[section];
+    if (sectionModel.hasHeader) {
+        Class className = NSClassFromString(sectionModel.headerIdentify);
+        [tableView registerClass:[className class] forHeaderFooterViewReuseIdentifier:sectionModel.headerIdentify];
+        UITableViewHeaderFooterView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:sectionModel.headerIdentify];
+        
+        return headerView;
+    }
+    
+    UIView *view = [UIView new];
+    UIView *tempView = [UIView new];
+    [view addSubview:tempView];
+    [tempView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(view);
+        make.height.equalTo(@.2).priorityLow();
+    }];
+    return view;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    TSRankSectionModel *sectionModel = self.dataController.coronalSections[section];
+    if (sectionModel.hasHeader) {
+        return sectionModel.headerSize.height;
+    }
+    return 0;
+}
+
+#pragma mark - Action
+- (void)refreshHeaderDataMehtod {
+    
+}
+
+
 #pragma mark - JXCategoryListContentViewDelegate
 - (UIView *)listView{
     return self.view;
@@ -72,7 +109,7 @@
 #pragma mark - Getter
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
         RefreshGifHeader *header = [RefreshGifHeader headerWithRefreshingTarget:self refreshingAction:@selector(refreshHeaderDataMehtod)];
         header.indicatorStyle = IndicatorStyleWhite;
         _tableView.backgroundColor = [UIColor clearColor];
@@ -92,10 +129,8 @@
     return _tableView;
 }
 
--(void)setCoronalSections:(NSMutableArray<TSRankSectionModel *> *)coronalSections{
-    _coronalSections = coronalSections;
+- (void)setDataController:(TSRankDataController *)dataController{
+    _dataController = dataController;
     [self.tableView reloadData];
 }
-
-
 @end

@@ -7,4 +7,4 @@
 
 #import <UIKit/UIKit.h>
 
-UIKIT_EXTERN NSString *const FXSC_Login_Sucess;
+UIKIT_EXTERN NSString *const TS_Login_State;

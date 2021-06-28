@@ -12,6 +12,7 @@
 //加载对应的数据
 - (void)reloadDataWiteType:(NSInteger)type uuid:(NSString *)uuid;
 - (void)reloadData;
+- (void)exit;
 @end
 
 @class TSAreaCell;

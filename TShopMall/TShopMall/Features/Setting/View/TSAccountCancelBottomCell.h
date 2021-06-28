@@ -9,7 +9,16 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol TSAccountCancelBottomCellDelegate <NSObject>
+/** 提交事件 */
+- (void)confirmAction;
+/** 取消事件 */
+- (void)cancelAction;
+@end
+
 @interface TSAccountCancelBottomCell : TSUniversalCollectionViewCell
+/** 代理  */
+@property(nonatomic, weak) id<TSAccountCancelBottomCellDelegate> actionDelegate;
 
 @end
 

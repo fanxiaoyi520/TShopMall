@@ -11,6 +11,7 @@
 #import "TSMakeOrderDataController.h"
 #import "TSShippingAddressController.h"
 #import "TSMakeOrderCommitOrderDataController.h"
+#import "TSPayController.h"
 
 @interface TSMakeOrderController ()
 @property (nonatomic, strong) TSMakeOrderView *makeOrderView;
@@ -81,9 +82,12 @@
     TSMakeOrderRow *invoiceRow = (TSMakeOrderRow *)[self.makeOrderView.sections[2].rows lastObject];
     TSMakeOrderInvoiceViewModel *invoce = invoiceRow.obj;
    
-    [TSMakeOrderCommitOrderDataController commitOrderWithAddress:address balanceInfo:self.dataCon.balanceModel invoice:invoce finished:^(BOOL finished, NSString *payOrderId, NSString *isGroup) {
+    [TSMakeOrderCommitOrderDataController commitOrderWithAddress:address balanceInfo:self.dataCon.balanceModel invoice:invoce isFromCart:self.isFromCart finished:^(BOOL finished, NSString *payOrderId, NSString *isGroup) {
         if (finished == YES) {
-            [self.navigationController popViewControllerAnimated:YES];
+            TSPayController *con = [TSPayController new];
+            con.payOrderId = payOrderId;
+            con.isGroup = isGroup;
+            [self.navigationController pushViewController:con animated:YES];
         }
     } OnController:self];
 }
