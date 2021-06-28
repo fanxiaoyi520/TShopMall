@@ -42,10 +42,9 @@
     
     [self addSubview:self.eyeBtn];
     [self.eyeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.revenueAmountLab).offset(3.5);
-        make.right.equalTo(self.revenueAmountLab).offset(25);
-        make.width.mas_equalTo(15);
-        make.height.mas_equalTo(10);
+        make.top.equalTo(self.revenueAmountLab).offset(-5);
+        make.left.equalTo(@[self.revenueAmountLab.mas_right]).offset(6);
+        make.height.mas_equalTo(30);
     }];
     
     [self addSubview:self.amountNumLab];
@@ -93,7 +92,7 @@
     [self addSubview:self.withdrawalRecordBtn];
     [self.withdrawalRecordBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self).offset(-61);
-        make.right.equalTo(self).offset(-16);
+        make.right.equalTo(self).offset(-17);
         make.height.mas_equalTo(24);
         make.width.mas_equalTo(77);
     }];
@@ -109,10 +108,10 @@
 // MARK: actions
 - (void)eyeAction:(UIButton *)sender {
     if (sender.selected) {
-        _amountNumLab.hidden = YES;
+        _amountNumLab.text = @"****";
         sender.selected = NO;
     } else {
-        _amountNumLab.hidden = NO;
+        _amountNumLab.text = @"¥2380";
         sender.selected = YES;
     }
     if ([self.kDelegate respondsToSelector:@selector(walletHeaderEyeAction:)]) {
@@ -141,7 +140,7 @@
 - (UIButton *)eyeBtn {
     if (!_eyeBtn) {
         _eyeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_eyeBtn setImage:KImageMake(@"mall_mine_eye") forState:UIControlStateNormal];
+        [_eyeBtn setImage:KImageMake(@"mall_mine_invisiable") forState:UIControlStateNormal];
         [_eyeBtn setImage:KImageMake(@"mall_mine_eye") forState:UIControlStateSelected];
         [_eyeBtn addTarget:self action:@selector(eyeAction:) forControlEvents:UIControlEventTouchUpInside];
         [_eyeBtn jaf_setEnlargeEdgeWithTop:10 right:10 bottom:10 left:10];
@@ -274,9 +273,9 @@
     
     [self addSubview:self.instrucImgView];
     [self.instrucImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self).offset(27);
-        make.height.mas_offset(11.3);
-        make.width.mas_offset(5.21);
+        make.top.equalTo(@[self.isBindingLab.mas_top]).offset(1.5);
+        make.height.mas_offset(19);
+        make.width.mas_offset(16);
         make.right.equalTo(self).offset(-19);
     }];
 }
@@ -320,7 +319,7 @@
 - (UIButton *)isBindingLab {
     if (!_isBindingLab) {
         _isBindingLab = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_isBindingLab setTitleColor:KHexColor(@"#2D3132") forState:UIControlStateNormal];
+        [_isBindingLab setTitleColor:KHexAlphaColor(@"#2D3132", .5) forState:UIControlStateNormal];
         _isBindingLab.titleLabel.font = KRegularFont(14);
         [_isBindingLab setTitle:@"已绑定" forState:UIControlStateNormal];
         [_isBindingLab addTarget:self action:@selector(isBindingAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -331,7 +330,7 @@
 - (UIImageView *)instrucImgView {
     if (!_instrucImgView) {
         _instrucImgView = [UIImageView new];
-        _instrucImgView.image = KImageMake(@"mall_mine_wallet_bank");
+        _instrucImgView.image = KImageMake(@"mine_tips_right");
     }
     return _instrucImgView;
 }

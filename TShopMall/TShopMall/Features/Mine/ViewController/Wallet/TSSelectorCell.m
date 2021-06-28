@@ -7,8 +7,64 @@
 
 #import "TSSelectorCell.h"
 
-@implementation TSSelectorCell
+@interface TSSelectorCell ()
 
+@property (nonatomic ,strong) UIImageView *bankIconImageView;
+@property (nonatomic ,strong) UILabel *bankNameLab;
+@property (nonatomic ,strong) UIImageView *tipsImageView;
+@property (nonatomic ,strong) UIView *lineView;
+@end
+@implementation TSSelectorCell
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+{
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        [self jaf_layoutSubview];
+    }
+    return self;
+}
+
+- (void)jaf_layoutSubview {
+    [self addSubview:self.bankIconImageView];
+    [self addSubview:self.bankNameLab];
+    [self addSubview:self.tipsImageView];
+    [self addSubview:self.lineView];
+}
+
+// MARK: get
+- (UIImageView *)bankIconImageView {
+    if (!_bankIconImageView) {
+        _bankIconImageView = [UIImageView new];
+        _bankIconImageView.image = KImageMake(@"");
+    }
+    return _bankIconImageView;
+}
+
+- (UILabel *)bankNameLab {
+    if (!_bankNameLab) {
+        _bankNameLab = [UILabel new];
+        _bankNameLab.textColor = KHexColor(@"#2D3132");
+        _bankNameLab.font = KRegularFont(16);
+        _bankNameLab.text = @"工商银行";
+    }
+    return _bankNameLab;
+}
+
+- (UIImageView *)tipsImageView {
+    if (!_tipsImageView) {
+        _tipsImageView = [UIImageView new];
+        _tipsImageView.image = KImageMake(@"mine_tips_right");
+    }
+    return _tipsImageView;
+}
+
+- (UIView *)lineView {
+    if (!_lineView) {
+        _lineView = [UIView new];
+        _lineView.backgroundColor = KHexColor(@"#E6E6E6");
+    }
+    return _lineView;
+}
 @end
 
 

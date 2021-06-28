@@ -59,6 +59,7 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     TSSelectorCellHeader *headerView = [TSSelectorCellHeader new];
+    headerView.kDelegate = self;
     return headerView;
 }
 
