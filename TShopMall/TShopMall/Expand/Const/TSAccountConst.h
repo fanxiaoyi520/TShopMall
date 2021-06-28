@@ -15,6 +15,7 @@
 
 //#define QuickLoginBusinessID @"639f7862dc1842dabe8720e6a7a26468"
 #define QuickLoginBusinessID @"7de91dbe2b424320a849fddac6545c0a"
+#define QuickLoginBundleID @"com.tcl.TSalesDev"
 
 
 #else

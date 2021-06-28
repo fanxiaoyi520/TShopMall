@@ -41,14 +41,14 @@
             [self otherLoginWithAnimation:YES];
         };
         oneClickLoginVC.loginBlock = ^{
-            [self postNotificationWithLoginState:TSLoginStateLogin];
+            self.loginBlock();
         };
         oneClickLoginVC.bindBlock = ^{
             TSBindMobileController *vc = [TSBindMobileController new];
             TSBaseNavigationController *nav = [[TSBaseNavigationController alloc] initWithRootViewController:vc];
             
             vc.bindedBlock = ^{
-                [self postNotificationWithLoginState:TSLoginStateLogin];
+                self.loginBlock();
                 
             };
             nav.modalPresentationStyle = UIModalPresentationFullScreen;
@@ -59,16 +59,20 @@
         nav.modalPresentationStyle = UIModalPresentationFullScreen;
         [vc presentViewController:nav animated:YES completion:^{
         }];
+       
     }else{
         [self otherLoginWithAnimation:YES];
     }
+   
 }
 
 - (void)logout{
     TSLogoutRequest *request = [TSLogoutRequest new];
     [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
         [[TSUserInfoManager userInfo] clearUserInfo];
-        [self postNotificationWithLoginState:TSLoginStateNone];
+        if (self.logoutBlock) {
+            self.logoutBlock();
+        }
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
         
     }];
@@ -87,9 +91,10 @@
 
 - (void)otherLoginWithAnimation:(BOOL)animation{
     TSLoginViewController *loginViewController = [TSLoginViewController new];
+    loginViewController.needClose = YES;
     TSBaseNavigationController *homeController = [[TSBaseNavigationController alloc] initWithRootViewController:loginViewController];
     loginViewController.loginBlock = ^{
-        [self postNotificationWithLoginState:TSLoginStateLogin];
+        self.loginBlock();
     };
     UIViewController *vc = [UIApplication sharedApplication].delegate.window.rootViewController;
     homeController.modalPresentationStyle = UIModalPresentationFullScreen;
@@ -99,6 +104,47 @@
 
 - (void)postNotificationWithLoginState:(TSLoginState)state{
     [[NSNotificationCenter defaultCenter] postNotificationName:@"TS_LoginUpdateNotification" object:@(state)];
+}
+
+-(void)configLoginController:(void(^)(UIViewController *))callBack{
+    
+    BOOL shouldQL = [[NTESQuickLoginManager sharedInstance] shouldQuickLogin];
+    if (shouldQL && [[UIApplication sharedApplication].appBundleID isEqualToString:QuickLoginBundleID]) {
+        TSOneClickLoginViewController *oneClickLoginVC = [TSOneClickLoginViewController new];
+        TSBaseNavigationController *nav = [[TSBaseNavigationController alloc] initWithRootViewController:oneClickLoginVC];
+        @weakify(self);
+        oneClickLoginVC.otherLoginBlock = ^{
+            @strongify(self)
+            [self otherLoginWithAnimation:YES];
+        };
+        oneClickLoginVC.loginBlock = ^{
+            if (self.loginBlock) {
+                self.loginBlock();
+            }
+        };
+        oneClickLoginVC.bindBlock = ^{
+            TSBindMobileController *vc = [TSBindMobileController new];
+            TSBaseNavigationController *nav = [[TSBaseNavigationController alloc] initWithRootViewController:vc];
+            
+            vc.bindedBlock = ^{
+                self.loginBlock();
+                
+            };
+            nav.modalPresentationStyle = UIModalPresentationFullScreen;
+            [[UIApplication sharedApplication].delegate.window.rootViewController presentViewController:nav animated:YES completion:^{
+            }];
+        };
+        callBack(nav);
+    }else{
+        TSLoginViewController *loginViewController = [TSLoginViewController new];
+        loginViewController.needClose = NO;
+        TSBaseNavigationController *homeController = [[TSBaseNavigationController alloc] initWithRootViewController:loginViewController];
+        loginViewController.loginBlock = ^{
+            self.loginBlock();
+        };
+        callBack(homeController);
+    }
+    
 }
 
 @end
