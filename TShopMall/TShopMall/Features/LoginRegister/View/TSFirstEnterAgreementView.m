@@ -42,7 +42,7 @@
     self.contentView.backgroundColor = KWhiteColor;
     self.frame = [[UIScreen mainScreen] bounds];
     self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
-    self.contentView.frame = CGRectMake(KRateW(36), kScreenHeight, kScreenWidth - KRateW(36) * 2, KRateH(378));
+    self.contentView.frame = CGRectMake(KRateW(36), kScreenHeight, kScreenWidth - KRateW(36) * 2, 378);
     [self.contentView setCorners:UIRectCornerAllCorners radius:12];
     ///设置约束
     [self addConstraints];
@@ -56,7 +56,7 @@
     }
     [UIView animateWithDuration:.5 animations:^{
         CGRect rect = self.contentView.frame;
-        rect.origin.y = (kScreenHeight - KRateH(378)) / 2.0;
+        rect.origin.y = (kScreenHeight - 378) / 2.0;
         self.contentView.frame = rect;
     }];
 }

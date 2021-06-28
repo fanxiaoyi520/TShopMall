@@ -8,8 +8,11 @@
 #import "TSMainViewController.h"
 #import "TSUserLoginManager.h"
 #import "TSTabBarController.h"
+#import "TSFirstEnterAgreementView.h"
+#import "TSHybridViewController.h"
+#import "TSAgreementModel.h"
 
-@interface TSMainViewController ()
+@interface TSMainViewController ()<TSFirstEnterAgreementViewDelegate, TSHybridViewControllerDelegate>
 @property (nonatomic, strong) UIViewController *loginVC;
 @end
 
@@ -21,12 +24,10 @@
     // Do any additional setup after loading the view.
     if ([TSUserLoginManager shareInstance].state == TSLoginStateNone) {
         
-        
-        
-        
         [[TSUserLoginManager shareInstance] configLoginController:^(UIViewController * _Nonnull vc) {
             @strongify(self)
             [self addChildViewController:vc];
+            [self showAlertInView:vc.view];
             [self.view addSubview:vc.view];
         }];
         
@@ -59,6 +60,27 @@
     
 }
 
+- (void)showAlertInView:(UIView *)view {
+    if ([TSGlobalManager shareInstance].firstStartApp) {
+        TSFirstEnterAgreementView *firstEnterAlert = [[TSFirstEnterAgreementView alloc] init];
+        firstEnterAlert.delegate = self;
+        [firstEnterAlert showInView:view];
+    }
+}
+
+#pragma mark - TSFirstEnterAgreementViewDelegate
+
+- (void)goToH5WithAgreementModel:(TSAgreementModel *)agreementModel {
+    TSHybridViewController *web = [[TSHybridViewController alloc] initWithURLString:[agreementModel.serverUrl stringByAppendingString:@"&mode=webview"]];
+    web.delegate = self;
+    [self.navigationController pushViewController:web animated:YES];
+}
+
+#pragma mark - TSHybridViewControllerDelegate
+-(void)hybridViewControllerWillDidDisappear:(TSHybridViewController *)hybridViewController params:(NSDictionary *)param{
+    
+    
+}
 
 
 @end

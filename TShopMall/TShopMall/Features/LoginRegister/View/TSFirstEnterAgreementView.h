@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 /** 代理  */
 @property(nonatomic, weak) id<TSFirstEnterAgreementViewDelegate> delegate;
 
-- (void)show;
+- (void)showInView:(UIView *)view;
 
 @end
 

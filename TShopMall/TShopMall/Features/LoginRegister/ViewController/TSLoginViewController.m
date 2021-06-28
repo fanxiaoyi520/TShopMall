@@ -25,9 +25,9 @@
 #import "AuthAppleIDManager.h"
 #import <AuthenticationServices/AuthenticationServices.h>
 #import "TSAgreementModel.h"
-#import "TSFirstEnterAgreementView.h"
+//#import "TSFirstEnterAgreementView.h"
 
-@interface TSLoginViewController ()<TSQuickLoginTopViewDelegate, TSLoginTopViewDelegate, TSLoginBottomViewDelegate, TSCheckedViewDelegate, TSQuickCheckViewDelegate, TSHybridViewControllerDelegate, TSFirstEnterAgreementViewDelegate>
+@interface TSLoginViewController ()<TSQuickLoginTopViewDelegate, TSLoginTopViewDelegate, TSLoginBottomViewDelegate, TSCheckedViewDelegate, TSQuickCheckViewDelegate, TSHybridViewControllerDelegate>
 /** 背景图 */
 @property(nonatomic, weak) UIImageView *bgImgV;
 /** 关闭 */
@@ -56,7 +56,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.gk_navigationBar.hidden = YES;
-    [self showFirstEnterAlert];
+    //[self showFirstEnterAlert];
     if (@available(iOS 13.0, *)) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleSignInWithAppleStateChanged:) name:ASAuthorizationAppleIDProviderCredentialRevokedNotification object:nil];
     } else {
@@ -66,17 +66,6 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-}
-
-- (void)showFirstEnterAlert {
-    NSString *firstEnterValue = [[NSUserDefaults standardUserDefaults] valueForKey:KFirstEnterAppKey];
-    if (firstEnterValue) {
-        return;
-    }
-    TSFirstEnterAgreementView *enterAgreementView = [[TSFirstEnterAgreementView alloc] init];
-    enterAgreementView.delegate = self;
-    [self.view addSubview:enterAgreementView];
-    [enterAgreementView show];
 }
 
 - (void)dealloc {
@@ -101,6 +90,7 @@
     self.view.backgroundColor = UIColor.whiteColor;
     UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panAction:)];
     [self.view addGestureRecognizer:panGestureRecognizer];
+    self.closeButton.hidden = !self.needClose;
     [self getAgreementInfo];
 }
 

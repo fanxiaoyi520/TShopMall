@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// app版本号
 @property(nonatomic, copy) NSString *appVersion;
 /** 是否是第一次进入APP  */
-@property(nonatomic, assign, getter=isFirstStartApp) BOOL firstStartApp;
+@property(nonatomic, assign) BOOL firstStartApp;
 
 /// 单利
 + (instancetype)shareInstance;

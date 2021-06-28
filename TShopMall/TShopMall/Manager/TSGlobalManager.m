@@ -41,7 +41,7 @@
 }
 
 - (void)setFirstStartApp:(BOOL)firstStartApp {
-    _firstStartApp = firstStartApp;
+    //firstStartApp = firstStartApp;
     [[NSUserDefaults standardUserDefaults] setValue:KFirstEnterAppValue forKey:KFirstEnterAppKey];
 }
 
