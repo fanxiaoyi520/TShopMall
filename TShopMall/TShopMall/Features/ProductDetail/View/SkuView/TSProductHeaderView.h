@@ -7,9 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TSGoodDetailItemModel.h"
 
 @interface TSProductHeaderView : UIView
 
+@property(nonatomic, copy) NSString *num;
+
+@property(nonatomic, strong) TSGoodDetailItemPurchaseModel *purchaseModel;
 
 @end
 

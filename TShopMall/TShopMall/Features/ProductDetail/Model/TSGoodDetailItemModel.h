@@ -70,6 +70,13 @@ NS_ASSUME_NONNULL_BEGIN
 /// 市id
 @property(nonatomic, copy) NSString *areaUuid;
 
+@property(nonatomic, copy) NSString *iconUrl;
+@property(nonatomic, copy) NSString *price;
+@property(nonatomic, assign) BOOL canBuy;
+@property(nonatomic, assign) BOOL hasProduct;
+@property(nonatomic, assign) NSUInteger totalNum;
+@property(nonatomic, assign) NSUInteger limitBuyNum;
+
 @end
 
 

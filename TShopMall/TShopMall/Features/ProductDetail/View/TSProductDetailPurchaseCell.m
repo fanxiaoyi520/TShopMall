@@ -45,6 +45,8 @@
 
 @implementation TSProductDetailPurchaseCell
 
+@synthesize delegate = _delegate;
+
 -(void)fillCustomContentView{
     self.contentView.backgroundColor = [UIColor clearColor];
     
@@ -348,6 +350,7 @@
 }
 
 -(void)setDelegate:(id<UniversalCollectionViewCellDataDelegate>)delegate{
+    _delegate = delegate;
     TSGoodDetailItemPurchaseModel *item = (TSGoodDetailItemPurchaseModel *)[delegate universalCollectionViewCellModel:self.indexPath];
     self.selectValueLabel.text = item.selectedStr;
     self.deliveryValueLabel.text = item.localaddress;
