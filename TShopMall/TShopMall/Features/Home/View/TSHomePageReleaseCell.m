@@ -9,10 +9,14 @@
 #import "TSHomePageReleaseViewModel.h"
 #import "UIButton+WebCache.h"
 #import "TSImageBaseModel.h"
+#import "TSRecomendGoodsView.h"
 @interface TSHomePageReleaseCell()
 
 @property(nonatomic, strong) UIButton *iconButton;
 @property(nonatomic, strong) UILabel *nameLabel;
+@property(nonatomic, strong) TSRecomendGoodsView *goodsView;
+@property(nonatomic, strong) TSHomePageReleaseViewModel *releaseViewModel;
+
 @end
 
 @implementation TSHomePageReleaseCell
@@ -27,10 +31,30 @@
         make.height.equalTo(@(height));
         make.bottom.equalTo(self.contentView).priorityLow();
     }];
+    
+//    [self.contentView addSubview:self.goodsView];
+//
+//    [self.goodsView mas_remakeConstraints:^(MASConstraintMaker *make) {
+//        make.edges.equalTo(self.contentView);
+//    }];
+   
 }
 
 - (void)setViewModel:(TSHomePageCellViewModel *)viewModel{
     [super setViewModel:viewModel];
+//    self.releaseViewModel = (TSHomePageReleaseViewModel *)viewModel;
+//    @weakify(self);
+//    if (!self.releaseViewModel.datas.count) {
+//        [self.goodsView getRecommendListWithType:@"searchResult_page" success:^(NSArray * _Nullable list) {
+//            @strongify(self)
+//            self.releaseViewModel.datas = list;
+//            [self tableviewReloadCell];
+//        }];
+//
+//    }else{
+//        self.goodsView.items = self.releaseViewModel.datas;
+//    }
+    
     TSHomePageReleaseViewModel *releaseViewModel = (TSHomePageReleaseViewModel *)viewModel;
 
     if (!releaseViewModel.releaseModel) {
@@ -47,9 +71,6 @@
             [self.iconButton sd_setImageWithURL:[NSURL URLWithString:releaseViewModel.releaseModel.imageData.url] forState:UIControlStateNormal];
         }
     }];
-
-    
-
 }
 
 - (void)clickAction{
@@ -79,4 +100,10 @@
     return _nameLabel;
 }
 
+- (TSRecomendGoodsView *)goodsView{
+    if (!_goodsView) {
+        _goodsView = [TSRecomendGoodsView new];
+    }
+    return _goodsView;
+}
 @end

@@ -6,10 +6,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "TSUniversaItemModel.h"
+#import "TSRecomendGoodsProtocol.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TSProductBaseModel : TSUniversaItemModel
+@interface TSProductBaseModel : NSObject<TSRecomendGoodsProtocol>
+
 @property (nonatomic, copy) NSString *uuid;//商品UUID
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *secondParentCategory;

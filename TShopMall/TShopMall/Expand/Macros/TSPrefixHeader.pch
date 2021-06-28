@@ -43,6 +43,6 @@
 #import <SDWebImage/SDWebImage.h>
 #import <GKCommon.h>
 #import <GKNavigationBarConfigure.h>
-
+#import "TSServicesManager.h"
 #import "UIButton+Badge.h"
 #endif /* TSPrefixHeader_pch */

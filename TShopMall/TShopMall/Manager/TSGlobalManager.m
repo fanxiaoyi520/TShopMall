@@ -6,7 +6,10 @@
 //
 
 #import "TSGlobalManager.h"
+@interface TSGlobalManager ()
+@property (nonatomic, strong) TSUserInfoManager *currentUserInfo;
 
+@end
 @implementation TSGlobalManager
 
 + (instancetype)shareInstance{
@@ -18,9 +21,12 @@
     return instance;
 }
 
+- (void)setCurrentUserInfo:(TSUserInfoManager *)currentUserInfo{
+    self.currentUserInfo = currentUserInfo;
+}
+
 -(instancetype)init{
     if (self = [super init]) {
-        self.currentUserInfo = [TSUserInfoManager userInfo];
     }
     return self;
 }
@@ -29,14 +35,7 @@
     return [UIApplication sharedApplication].appVersion;
 }
 
-- (void)saveCurrentUserInfo{
-    [self.currentUserInfo saveUserInfo:self.currentUserInfo];
-}
-
-- (void)clearUserInfo{
-    self.isLogin = NO;
-    [self.currentUserInfo clearUserInfo];
-    self.currentUserInfo = nil;
-    
+- (BOOL)isLogin{
+    return self.currentUserInfo;
 }
 @end

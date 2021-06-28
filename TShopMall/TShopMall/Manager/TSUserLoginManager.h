@@ -7,8 +7,8 @@
 
 #import <Foundation/Foundation.h>
 typedef NS_ENUM(NSUInteger, TSLoginState) {
-    Login,
-    None
+    TSLoginStateLogin,
+    TSLoginStateNone
 };
 
 NS_ASSUME_NONNULL_BEGIN

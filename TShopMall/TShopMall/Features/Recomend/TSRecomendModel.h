@@ -6,7 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "TSRecomendGoodsProtocol.h"
 @class TSRecomendGoods;
 @class TSRecomendPageInfo;
 
@@ -20,7 +20,7 @@
 @property (nonatomic, strong) TSRecomendPageInfo *pageInfo;
 @end
 
-@interface TSRecomendGoods : NSObject
+@interface TSRecomendGoods : NSObject<TSRecomendGoodsProtocol>
 @property (nonatomic, copy) NSString *baseRetailPrice;
 @property (nonatomic, assign) BOOL buyState;
 @property (nonatomic, copy) NSString *earnMost;

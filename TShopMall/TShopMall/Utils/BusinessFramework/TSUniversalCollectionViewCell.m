@@ -90,5 +90,9 @@
     [view setTitle:title forState:UIControlStateNormal];
 }
 
-
+- (void)collectionViewReloadCell {
+    [UIView performWithoutAnimation:^{
+        [self.cellSuperViewCollectionView reloadItemsAtIndexPaths:@[self.indexPath]];
+    }];
+}
 @end

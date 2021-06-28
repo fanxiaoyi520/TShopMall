@@ -6,7 +6,7 @@
 //
 
 #import "TSRankDataController.h"
-#import "TSProductBaseModel.h"
+
 @interface TSRankDataController()
 
 @property (nonatomic, strong) NSMutableArray <TSRankSectionModel *> *coronalSections;
@@ -55,7 +55,7 @@
         
         [sections addObject:section];
     }
-    
+
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         self.coronalSections = sections;
         if (complete) {
@@ -66,37 +66,60 @@
     
 }
 
--(void)fetchRankRecommendComplete:(void(^)(BOOL isSucess))complete{
-    {
-        NSMutableArray *items = [NSMutableArray array];
+-(void)fetchRecomendComplete:(void(^)(BOOL isSucess))complete{
+    
+    NSMutableArray *items = [NSMutableArray array];
 
-        for (int i = 0; i < 10; i++) {
-            TSProductBaseModel *item = [[TSProductBaseModel alloc] init];
-            item.cellHeight = 282;
-            item.identify = @"TSHomePageContainerCollectionViewCell";
+    TSRankSectionItemModel *item = [[TSRankSectionItemModel alloc] init];
+    item.cellHeight = 282;
+    item.identify = @"TSRankRecommendCell";
+    [items addObject:item];
 
-            [items addObject:item];
-        }
+    TSRankSectionModel *section = [[TSRankSectionModel alloc] init];
+    section.hasHeader = NO;
+    section.column = 1;
+    section.interitemSpacing = 0;
+    section.lineSpacing = 0;
+    section.items = items;
 
-        TSRankSectionModel *section = [[TSRankSectionModel alloc] init];
-        section.hasHeader = YES;
-        section.headerSize = CGSizeMake(0, 64);
-        section.headerIdentify = @"TSRankRecommendHeaderView";
-        section.column = 2;
-        section.interitemSpacing = 8;
-        section.lineSpacing = 10;
-        section.items = items;
-        section.sectionInset = UIEdgeInsetsMake(0, 16, 0, 16);
-
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self.coronalSections addObject:section];
-            if (complete) {
-                complete(YES);
-            }
-        });
+    [self.coronalSections addObject:section];
+    
+    if (complete) {
+        complete(YES);
     }
     
     
-   
+
+//    [[TSServicesManager sharedInstance].bestSellingRecommendService getRecommendListWithType:@"searchResult_page" success:^(NSArray<id<TSRecomendGoodsProtocol>> * _Nullable list) {
+//
+//        NSMutableArray *items = [NSMutableArray array];
+//
+//        for (int i = 0; i < list.count; i++) {
+//            TSRankSectionItemModel *item = [[TSRankSectionItemModel alloc] init];
+//            item.cellHeight = 282;
+//            item.identify = @"TSRankRecommendCell";
+//            item.recomendGoods = list[i];
+//            [items addObject:item];
+//        }
+//
+//        TSRankSectionModel *section = [[TSRankSectionModel alloc] init];
+//        section.hasHeader = YES;
+//        section.headerSize = CGSizeMake(0, 64);
+//        section.headerIdentify = @"TSRankRecommendHeaderView";
+//        section.column = 2;
+//        section.interitemSpacing = 8;
+//        section.lineSpacing = 10;
+//        section.items = items;
+//
+//        [self.coronalSections addObject:section];
+//
+//        if (complete) {
+//            complete(YES);
+//        }
+//
+//    } failure:^(NSError * _Nonnull error) {
+//
+//    }];
 }
+
 @end
