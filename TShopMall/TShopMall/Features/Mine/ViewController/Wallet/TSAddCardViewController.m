@@ -9,6 +9,7 @@
 #import "TSAddBankCardCell.h"
 #import "TSPresentationController.h"
 #import "TSSelectorViewController.h"
+#import "TSAreaSelectedController.h"
 
 @interface TSAddCardViewController ()<UITableViewDelegate,UITableViewDataSource,TSAddBankCardDelegate,UIViewControllerTransitioningDelegate>
 
@@ -86,10 +87,40 @@
 - (void)addBankCardfuncAction:(id _Nullable)sender {
     //****结束textView的输入****//
     [self.view endEditing:YES];
-    TSSelectorViewController *vc = [TSSelectorViewController new];
-    vc.modalPresentationStyle = UIModalPresentationCustom;
-    vc.transitioningDelegate = self;
-    [self presentViewController:vc animated:YES completion:nil];
+    UIButton *btn = (UIButton *)sender;
+    if (btn.tag == 11) {
+        TSSelectorViewController *vc = [TSSelectorViewController new];
+        vc.modalPresentationStyle = UIModalPresentationCustom;
+        vc.transitioningDelegate = self;
+        [self presentViewController:vc animated:YES completion:nil];
+    } else {
+        __weak typeof(self) weakSelf = self;
+        [TSAreaSelectedController showAreaSelected:^(TSAreaModel *provice, TSAreaModel *city, TSAreaModel *eare, TSAreaModel *street, NSString *location) {
+    //        if (provice) {
+    //            weakSelf.vm.provice = provice.provinceName;
+    //            weakSelf.vm.proviceUUid = provice.currentUUid;
+    //        }
+    //        if (city) {
+    //            weakSelf.vm.city = city.cityName;
+    //            weakSelf.vm.cityUUid = city.currentUUid;
+    //        }
+    //        if (eare) {
+    //            weakSelf.vm.area = eare.regionName;
+    //            weakSelf.vm.areaUUid = eare.currentUUid;
+    //        }
+    //        if (street) {
+    //            weakSelf.vm.street = street.streetName;
+    //            weakSelf.vm.streetUUid = street.currentUUid;
+    //        }
+    //        if (provice == nil) {
+    //            weakSelf.vm.address = location;
+    //        } else {
+    //            NSString *address = [NSString stringWithFormat:@"%@%@%@%@", provice.provinceName, city.cityName, eare.regionName, street.streetName];
+    //            weakSelf.vm.address = address;
+    //        }
+    //        [weakSelf.editView updateAddress:weakSelf.vm.address];
+        } OnController:self];
+    }
 }
 
 - (void)addBankCardFooterSureAction:(id _Nullable)sender {

@@ -151,6 +151,10 @@
         TSSecurCenterViewController *personalVC = [[TSSecurCenterViewController alloc] init];
         [self.navigationController pushViewController:personalVC animated:YES];
         return;
+    } else if (indexPath.section == 2 && indexPath.item == 0) {
+        TSSecurCenterViewController *personalVC = [[TSSecurCenterViewController alloc] init];
+        [self.navigationController pushViewController:personalVC animated:YES];
+        return;
     } else if (indexPath.section == 3 && indexPath.item == 0) {
         [self exitAlert];
         return;
