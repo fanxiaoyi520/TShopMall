@@ -40,12 +40,15 @@
             @strongify(self)
             [self otherLoginWithAnimation:YES];
         };
+        oneClickLoginVC.loginBlock = ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"TS_LoginUpdateNotification" object:@0];
+        };
         oneClickLoginVC.bindBlock = ^{
             TSBindMobileController *vc = [TSBindMobileController new];
             TSBaseNavigationController *nav = [[TSBaseNavigationController alloc] initWithRootViewController:vc];
 
             vc.bindedBlock = ^{
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"TS_LoginUpdateNotification" object:@1];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"TS_LoginUpdateNotification" object:@0];
 
             };
             nav.modalPresentationStyle = UIModalPresentationFullScreen;
@@ -65,6 +68,7 @@
     TSLogoutRequest *request = [TSLogoutRequest new];
     [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
         [[TSUserInfoManager userInfo] clearUserInfo];
+        [[TSGlobalManager shareInstance] setCurrentUserInfo:nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"TS_LoginUpdateNotification" object:@1];
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
         
