@@ -48,7 +48,12 @@
     [self addConstraints];
 }
 
-- (void)show {
+- (void)showInView:(UIView *)view {
+    if (view == nil) {
+        [[UIApplication sharedApplication].keyWindow addSubview:self];
+    } else {
+        [view addSubview:self];
+    }
     [UIView animateWithDuration:.5 animations:^{
         CGRect rect = self.contentView.frame;
         rect.origin.y = (kScreenHeight - KRateH(378)) / 2.0;
@@ -238,7 +243,7 @@
 }
 /** 同意并进入 */
 - (void)confirmAction {
-    [[NSUserDefaults standardUserDefaults] setValue:KFirstEnterAppValue forKey:KFirstEnterAppKey];
+    [TSGlobalManager shareInstance].firstStartApp = NO;
     [self dismiss];
 }
 
