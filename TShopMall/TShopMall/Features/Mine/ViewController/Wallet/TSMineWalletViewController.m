@@ -9,6 +9,7 @@
 #import "TSWithdrawalRecordViewController.h"
 #import "TSWithdrawalViewController.h"
 #import "TSPresentationController.h"
+#import "TSMineDataController.h"
 
 #import "TSWalletHeaderView.h"
 
@@ -20,6 +21,7 @@
 @property (nonatomic ,strong) UIButton *problemBtn;
 @property (nonatomic ,strong) UIButton *withdrawalBtn;
 @property (nonatomic ,strong) UILabel *tipsLab;
+@property (nonatomic ,strong) TSMineDataController *dataController;
 @end
 
 @implementation TSMineWalletViewController
@@ -34,7 +36,27 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.gk_navTitle = @"我的收益";
     
-    [self.walletHeaderView setModel:@""];
+    @weakify(self);
+    [self.dataController fetchMyIncomeDataComplete:^(BOOL isSucess) {
+        @strongify(self);
+        if (isSucess) {
+            [self.profitScrollView addSubview:self.walletHeaderView];
+            self.walletHeaderView.frame = CGRectMake(0, -13, kScreenWidth, 237);
+
+            [self.profitScrollView addSubview:self.walletCellView];
+            self.walletCellView.frame = CGRectMake(0, self.walletHeaderView.bottom-32, kScreenWidth, 64);
+
+            [self.profitScrollView addSubview:self.problemBtn];
+            self.problemBtn.frame = CGRectMake(kScreenWidth - 70 - 16, self.walletCellView.bottom, 70, 24);
+            
+            [self.profitScrollView addSubview:self.withdrawalBtn];
+            self.withdrawalBtn.frame = CGRectMake(24, self.walletCellView.bottom + 36, kScreenWidth - 48, 40);
+            [self.withdrawalBtn jaf_customFilletRectCorner:UIRectCornerAllCorners cornerRadii:CGSizeMake(20, 20)];
+            
+            [self.profitScrollView addSubview:self.tipsLab];
+            self.tipsLab.frame = CGRectMake(0, self.withdrawalBtn.bottom + 12, kScreenWidth, 24);
+        }
+    }];
 }
 
 -(void)fillCustomView{
@@ -43,22 +65,7 @@
     self.profitScrollView.frame = CGRectMake(0, GK_STATUSBAR_NAVBAR_HEIGHT, kScreenWidth, kScreenHeight - GK_STATUSBAR_NAVBAR_HEIGHT);
     self.profitScrollView.contentSize = self.profitScrollView.size;
     
-    [self.profitScrollView addSubview:self.walletHeaderView];
-    self.walletHeaderView.frame = CGRectMake(0, -13, kScreenWidth, 237);
-    
-    [self.profitScrollView addSubview:self.walletCellView];
-    self.walletCellView.frame = CGRectMake(0, _walletHeaderView.bottom-32, kScreenWidth, 64);
-    
-    [self.profitScrollView addSubview:self.problemBtn];
-    self.problemBtn.frame = CGRectMake(kScreenWidth - 70 - 16, self.walletCellView.bottom, 70, 24);
-    
-    [self.profitScrollView addSubview:self.withdrawalBtn];
-    self.withdrawalBtn.frame = CGRectMake(24, self.walletCellView.bottom + 36, kScreenWidth - 48, 40);
-    [self.withdrawalBtn jaf_customFilletRectCorner:UIRectCornerAllCorners cornerRadii:CGSizeMake(20, 20)];
-    
-    [self.profitScrollView addSubview:self.tipsLab];
-    self.tipsLab.frame = CGRectMake(0, self.withdrawalBtn.bottom + 12, kScreenWidth, 24);
-    
+
 }
 
 // MARK: actions
@@ -103,7 +110,7 @@
 
 - (TSWalletHeaderView *)walletHeaderView {
     if (!_walletHeaderView) {
-        _walletHeaderView = [TSWalletHeaderView new];
+        _walletHeaderView = [[TSWalletHeaderView alloc] initWithModel:self.dataController.myIncomeModel];
         _walletHeaderView.image = KImageMake(@"mall_mine_wallet_bg");
         _walletHeaderView.userInteractionEnabled = YES;
         _walletHeaderView.kDelegate = self;
@@ -113,7 +120,7 @@
 
 - (TSWalletCellView *)walletCellView {
     if (!_walletCellView) {
-        _walletCellView = [TSWalletCellView new];
+        _walletCellView = [[TSWalletCellView alloc] initWithModel:self.dataController.myIncomeModel];
         _walletCellView.userInteractionEnabled = YES;
         _walletCellView.kDelegate = self;
     }
@@ -154,4 +161,12 @@
     }
     return _tipsLab;
 }
+
+-(TSMineDataController *)dataController{
+    if (!_dataController) {
+        _dataController = [[TSMineDataController alloc] init];
+    }
+    return _dataController;
+}
+
 @end

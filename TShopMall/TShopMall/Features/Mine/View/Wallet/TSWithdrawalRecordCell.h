@@ -25,6 +25,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface TSWithdrawalRecordHeader : UIView
 
 @property (nonatomic ,assign) id<TSWithdrawalRecordHeaderDelegate> kDelegate;
-- (void)setModel:(TSWithdrawalRecordModel * _Nonnull)model;
+- (void)setModel:(id _Nullable)model;
 @end
 NS_ASSUME_NONNULL_END

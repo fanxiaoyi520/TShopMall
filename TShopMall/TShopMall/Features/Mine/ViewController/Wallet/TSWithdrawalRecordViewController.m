@@ -19,6 +19,9 @@
 @end
 
 @implementation TSWithdrawalRecordViewController
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleDefault;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -27,9 +30,14 @@
     self.gk_navTitle = @"提现记录";
     self.automaticallyAdjustsScrollViewInsets = NO;
     
+    @weakify(self);
+    self.dataController.pageNo = 1;
+    self.dataController.requestMethod = Ordinary;
     [self.dataController fetchWithdrawalRecordDataComplete:^(BOOL isSucess) {
+        @strongify(self);
         if (isSucess) {
-            [self.headerView setModel:self.dataController.withdrawalRecordModel];
+            [self.headerView setModel:nil];
+            [self.recordTableView reloadData];
         }
     }];
 }
@@ -48,7 +56,7 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 10;
+    return self.dataController.withdrawalRecordArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -56,7 +64,8 @@
     if ([cell isKindOfClass:TSWithdrawalRecordCell.class]) {
         TSWithdrawalRecordCell *recordCell = (TSWithdrawalRecordCell *)cell;
         recordCell.selectionStyle = UITableViewCellSelectionStyleNone;
-        [recordCell setModel:self.dataController.withdrawalRecordModel];
+        if(self.dataController.withdrawalRecordArray.count>0)
+            [recordCell setModel:self.dataController.withdrawalRecordArray[indexPath.row]];
     }
     return cell;
 }
@@ -91,7 +100,49 @@
 
 // MARK: TSWithdrawalRecordHeaderDelegate
 - (void)withdrawalRecordHeaderBtnAction:(id)sender {
+    UIButton *btn = (UIButton *)sender;
+    self.recordTableView.mj_footer.state = MJRefreshStateIdle;
     [self.recordTableView  scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
+    self.dataController.status = btn.tag - 10;
+    self.dataController.pageNo = 1;
+    self.dataController.requestMethod = Ordinary;
+    [self.dataController fetchWithdrawalRecordDataComplete:^(BOOL isSucess) {
+        if (isSucess) {
+            [self.headerView setModel:nil];
+            [self.recordTableView reloadData];
+        }
+    }];
+}
+
+// MARK: 刷新
+- (void)mjHeadreRefresh {
+    self.dataController.pageNo = 1;
+    self.dataController.status = self.dataController.status;
+    self.dataController.requestMethod = Refresh;
+    @weakify(self);
+    [self.dataController fetchWithdrawalRecordDataComplete:^(BOOL isSucess) {
+        @strongify(self);
+        if (isSucess) {
+            [self.recordTableView.mj_header endRefreshing];
+            [self.recordTableView reloadData];
+        }
+    }];
+}
+
+- (void)mjFooterRefresh {
+    self.dataController.pageNo++;
+    self.dataController.status = self.dataController.status;
+    self.dataController.requestMethod = Load;
+    @weakify(self);
+    [self.dataController fetchWithdrawalRecordDataComplete:^(BOOL isSucess) {
+        @strongify(self);
+        if (isSucess) {
+            [self.recordTableView.mj_header endRefreshing];
+            [self.recordTableView.mj_footer endRefreshing];
+            if (self.dataController.pageNo==1) [self.recordTableView.mj_footer endRefreshingWithNoMoreData];
+            [self.recordTableView reloadData];
+        }
+    }];
 }
 
 // MARK: get
@@ -106,6 +157,13 @@
         _recordTableView.backgroundColor = [UIColor clearColor];
         _recordTableView.backgroundView = nil;
         [_recordTableView registerClass:[TSWithdrawalRecordCell class] forCellReuseIdentifier:@"cellid"];
+        RefreshGifHeader *header = [RefreshGifHeader headerWithRefreshingTarget:self refreshingAction:@selector(mjHeadreRefresh)];
+        _recordTableView.mj_header = header;
+
+        RefreshGifFooter *footer = [RefreshGifFooter footerWithRefreshingTarget:self refreshingAction:@selector(mjFooterRefresh)];
+        self.recordTableView.mj_footer = footer;
+        self.recordTableView.mj_footer.hidden = NO;
+        
     }
     return _recordTableView;
 }

@@ -12,7 +12,9 @@
 @property (nonatomic, strong) NSMutableArray <TSMineSectionModel *> *sections;
 @property (nonatomic, strong) TSMineMerchantUserInformationModel *merchantUserInformationModel;
 @property (nonatomic, strong) TSPartnerCenterData *partnerCenterDataModel;
-@property (nonatomic, strong) TSWithdrawalRecordModel *withdrawalRecordModel;
+@property (nonatomic, strong) NSMutableArray <TSWithdrawalRecordModel *> *withdrawalRecordArray;
+@property (nonatomic, strong) TSWalletModel *walletModel;
+@property (nonatomic, strong) TSMyIncomeModel *myIncomeModel;
 @end
 
 @implementation TSMineDataController
@@ -254,10 +256,7 @@
 // MARK: 我的钱包
 - (void)fetchMineWalletDataComplete:(void(^)(BOOL isSucess))complete {
     NSMutableDictionary *header = [NSMutableDictionary dictionary];
-    if ([TSGlobalManager shareInstance].currentUserInfo) {
-        [header setValue:[TSGlobalManager shareInstance].currentUserInfo.accessToken forKey:@"ihome-token"];
-    }
-    [header setValue:@"application/json" forKey:@"Content-Type"];
+    [header setValue:@"111" forKey:@"ihome-token"];
     NSMutableDictionary *body = [NSMutableDictionary dictionary];
     [body setValue:@"6226097804210467" forKey:@"bankCardNo"];
     [body setValue:@"招商银行" forKey:@"accountBank"];
@@ -277,25 +276,34 @@
     [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
         if (request.responseModel.isSucceed) {
             NSDictionary *data = request.responseModel.data;
+            TSWalletModel *model = [TSWalletModel yy_modelWithDictionary:data];
+            self.walletModel = model;
+        }
+        if (complete) {
+            complete(YES);
         }
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
         if (complete) {
-            complete(YES);
+            complete(NO);
         }
     }];
 }
 
-// MARK: 提现记录
-- (void)fetchWithdrawalRecordDataComplete:(void(^)(BOOL isSucess))complete {
+// MARK: 我的收益
+- (void)fetchMyIncomeDataComplete:(void(^)(BOOL isSucess))complete {
     NSMutableDictionary *header = [NSMutableDictionary dictionary];
-//    if ([TSGlobalManager shareInstance].currentUserInfo) {
-//        [header setValue:[TSGlobalManager shareInstance].currentUserInfo.accessToken forKey:@"ihome-token"];
-//    }
     [header setValue:@"111" forKey:@"ihome-token"];
     NSMutableDictionary *body = [NSMutableDictionary dictionary];
-    [body setValue:@(1) forKey:@"pageNo"];
-    [body setValue:@(1) forKey:@"status"];
-    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kMineWithdrawalRecordListData
+    [body setValue:@"6226097804210467" forKey:@"bankCardNo"];
+    [body setValue:@"招商银行" forKey:@"accountBank"];
+    [body setValue:@"CMD" forKey:@"accountBankCode"];
+    [body setValue:@"招商银行北京支行" forKey:@"bankName"];
+    [body setValue:@"308551024051" forKey:@"bankBranchId"];
+    [body setValue:@"北京市" forKey:@"bankAddressProvince"];
+    [body setValue:@"110000" forKey:@"bankAddressProvinceCode"];
+    [body setValue:@"北京市" forKey:@"bankAddressCity"];
+    [body setValue:@"110000" forKey:@"bankAddressCityCode"];
+    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kMineQueryProfit
                                                                requestMethod:YTKRequestMethodGET
                                                        requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON
                                                                requestHeader:header
@@ -304,13 +312,67 @@
     [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
         if (request.responseModel.isSucceed) {
             NSDictionary *data = request.responseModel.data;
+            TSMyIncomeModel *model = [TSMyIncomeModel yy_modelWithDictionary:data];
+            self.myIncomeModel = model;
         }
         if (complete) {
             complete(YES);
         }
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
         if (complete) {
+            complete(NO);
+        }
+    }];
+}
+
+// MARK: 提现记录
+- (void)fetchWithdrawalRecordDataComplete:(void(^)(BOOL isSucess))complete {
+    NSMutableDictionary *header = [NSMutableDictionary dictionary];
+    [header setValue:@"111" forKey:@"ihome-token"];
+    NSMutableDictionary *body = [NSMutableDictionary dictionary];
+    [body setValue:@(self.pageNo) forKey:@"pageNo"];
+    if (self.status!=0)
+        [body setValue:@(self.status) forKey:@"status"];
+    [body setValue:@"6226097804210467" forKey:@"bankCardNo"];
+    [body setValue:@"招商银行" forKey:@"accountBank"];
+    [body setValue:@"CMD" forKey:@"accountBankCode"];
+    [body setValue:@"招商银行北京支行" forKey:@"bankName"];
+    [body setValue:@"308551024051" forKey:@"bankBranchId"];
+    [body setValue:@"北京市" forKey:@"bankAddressProvince"];
+    [body setValue:@"110000" forKey:@"bankAddressProvinceCode"];
+    [body setValue:@"北京市" forKey:@"bankAddressCity"];
+    [body setValue:@"110000" forKey:@"bankAddressCityCode"];
+    
+    if (self.requestMethod == Ordinary)
+        [self.withdrawalRecordArray removeAllObjects];
+    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kMineWithdrawalRecordListData
+                                                               requestMethod:YTKRequestMethodGET
+                                                       requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON
+                                                               requestHeader:header
+                                                                 requestBody:body
+                                                              needErrorToast:YES];
+    NSMutableArray *array = [NSMutableArray array];
+    [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+        if (request.responseModel.isSucceed) {
+            NSArray *data = request.responseModel.data;
+            [data enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                TSWithdrawalRecordModel *model = [TSWithdrawalRecordModel yy_modelWithDictionary:(NSDictionary *)obj];
+                [array addObject:model];
+            }];
+            if (self.requestMethod == Refresh || self.requestMethod == Ordinary) {
+                self.withdrawalRecordArray = array;
+                
+            } else {
+                [self.withdrawalRecordArray addObjectsFromArray:array];
+                if (array.count<10) self.pageNo = 1;
+            }
+        }
+        if (complete) {
             complete(YES);
+        }
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        if (complete) {
+            complete(NO);
         }
     }];
 }
