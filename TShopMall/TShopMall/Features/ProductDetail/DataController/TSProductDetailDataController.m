@@ -228,7 +228,7 @@
             NSDictionary *promotionInteactiveModel = priceAndPromotion[@"promotionInteactiveModel"];
             NSArray *productSku = productModel[@"productSku"];
             NSDictionary *productSkuDic = [productSku firstObject];
-            
+
             NSArray *selectNameArr = front[@"selectName"];
             NSString *selected = [selectNameArr componentsJoinedByString:@","];
 
@@ -338,21 +338,21 @@
         
         if (request.responseModel.isSucceed) {
 
-            TSGoodDetailSectionModel *section = self.sections[5];
-            TSGoodDetailItemPurchaseModel *item = (TSGoodDetailItemPurchaseModel *)[section.items firstObject];
-            NSDictionary *data = request.responseJSONObject[@"data"];
-            
-            item.canBuy = [data[@"canBuy"] boolValue];
-            item.hasProduct = [data[@"hasProduct"] boolValue];
-            item.totalNum = [data[@"totalNum"] integerValue];
-            
-            if (![data[@"limitBuyNum"] isKindOfClass:[NSNull class]]) {
-                item.limitBuyNum = [data[@"limitBuyNum"] integerValue];
-            }
-            
-            if (complete) {
-                complete(YES);
-            }
+//            TSGoodDetailSectionModel *section = self.sections[5];
+//            TSGoodDetailItemPurchaseModel *item = (TSGoodDetailItemPurchaseModel *)[section.items firstObject];
+//            NSDictionary *data = request.responseJSONObject[@"data"];
+//
+//            item.canBuy = [data[@"canBuy"] boolValue];
+//            item.hasProduct = [data[@"hasProduct"] boolValue];
+//            item.totalNum = [data[@"totalNum"] integerValue];
+//
+//            if (![data[@"limitBuyNum"] isKindOfClass:[NSNull class]]) {
+//                item.limitBuyNum = [data[@"limitBuyNum"] integerValue];
+//            }
+//
+//            if (complete) {
+//                complete(YES);
+//            }
         }
         
         } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
@@ -476,7 +476,7 @@
                 TSGoodDetailItemImageModel *item = [[TSGoodDetailItemImageModel alloc] init];
                 item.identify = @"TSProductDetailImageCell";
                 item.imgUrl = imgDict[@"url"];
-                item.imageWidth = imageW;
+                item.imageWidth = kScreenWidth;
                 item.imageHeight = adjustHeight;
                 item.cellHeight = adjustHeight;
                 if (item.imgUrl && [urlTest evaluateWithObject:item.imgUrl]) {
