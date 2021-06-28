@@ -118,11 +118,13 @@
             [self otherLoginWithAnimation:YES];
         };
         oneClickLoginVC.loginBlock = ^{
+            @strongify(self)
             if (self.loginBlock) {
                 self.loginBlock();
             }
         };
         oneClickLoginVC.bindBlock = ^{
+            @strongify(self)
             TSBindMobileController *vc = [TSBindMobileController new];
             TSBaseNavigationController *nav = [[TSBaseNavigationController alloc] initWithRootViewController:vc];
             
