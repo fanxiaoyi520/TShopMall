@@ -6,9 +6,8 @@
 //
 
 #import "TSRankCoronalViewController.h"
-#import "TSRankCurrentMonthController.h"
-#import "TSRankLastMonthController.h"
 #import "TSRankDataController.h"
+#import "TSRankMonthViewController.h"
 
 @interface TSRankCoronalViewController ()
 
@@ -35,9 +34,12 @@
     lineView.indicatorColor = [UIColor whiteColor];
     self.myCategoryView.indicators = @[lineView];
     self.myCategoryView.separatorLineShowEnabled = YES;
-    
+    @weakify(self);
     [self.dataController fetchRankCoronalComplete:^(BOOL isSucess) {
-
+        @strongify(self)
+        [self.dataController fetchRecomendComplete:^(BOOL isSucess) {
+            [self.myCategoryView reloadData];
+        }];
     }];
 }
 
@@ -60,15 +62,9 @@
 }
 
 - (id<JXCategoryListContentViewDelegate>)listContainerView:(JXCategoryListContainerView *)listContainerView initListForIndex:(NSInteger)index {
-    if (index == 0) {
-        TSRankCurrentMonthController *list = [[TSRankCurrentMonthController alloc] init];
-        list.coronalSections = self.dataController.coronalSections;
-        return list;
-    }else{
-        TSRankLastMonthController *list = [[TSRankLastMonthController alloc] init];
-        list.coronalSections = self.dataController.coronalSections;
-        return list;
-    }
+    TSRankMonthViewController *list = [[TSRankMonthViewController alloc] init];
+    list.coronalSections = self.dataController.coronalSections;
+    return list;
 }
 
 - (UIView *)listView {

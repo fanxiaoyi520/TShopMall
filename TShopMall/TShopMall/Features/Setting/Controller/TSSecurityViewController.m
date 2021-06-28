@@ -15,6 +15,7 @@
 #import "TSAccountCancelViewController.h"
 #import "TSSecurCenterViewController.h"
 #import "TSAlertView.h"
+#import "TSChangeMobileViewController.h"
 
 @interface TSSecurityViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate>
 /// 数据中心
@@ -116,7 +117,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0 && indexPath.item == 0) {
-        TSBindMobileController *bindVC = [[TSBindMobileController alloc] init];
+        TSChangeMobileViewController *bindVC = [[TSChangeMobileViewController alloc] init];
 //        TSPhoneNumVeriViewController *bindVC = [[TSPhoneNumVeriViewController alloc] init];
         [self.navigationController pushViewController:bindVC animated:YES];
         return;

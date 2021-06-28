@@ -1,26 +1,24 @@
 //
-//  TSHomePageContainerCollectionViewCell.m
+//  TSGridGoodsCollectionViewCell.m
 //  TShopMall
 //
-//  Created by sway on 2021/6/15.
+//  Created by sway on 2021/6/27.
 //
 
-#import "TSHomePageContainerCollectionViewCell.h"
+#import "TSGridGoodsCollectionViewCell.h"
 #import "TSHighPriceTagView.h"
 #import "UIImageView+WebCache.h"
 
-@interface TSHomePageContainerCollectionViewCell()
+@interface TSGridGoodsCollectionViewCell()
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *priceLabel;
 @property (nonatomic, strong) TSHighPriceTagView *highPriceView;
 @property (nonatomic, strong) UILabel *getPriceLabel;
 @property (nonatomic, strong) UILabel *rmbLabel;
-
-
 @end
-@implementation TSHomePageContainerCollectionViewCell
 
+@implementation TSGridGoodsCollectionViewCell
 - (instancetype)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
@@ -53,36 +51,33 @@
         [self.rmbLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(self.highPriceView);
             make.left.equalTo(self).offset(8);
-            make.height.equalTo(@18);
-            make.width.equalTo(@10).priorityLow();
+            make.height.equalTo(@30).priorityLow();;
         }];
         
         [self addSubview: self.priceLabel];
         [self.priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(self.highPriceView);
             make.left.equalTo(self.rmbLabel.mas_right).offset(2);
-            make.height.equalTo(@18).priorityLow();
-            make.width.equalTo(@69).priorityLow();
+            make.height.equalTo(@30).priorityLow();;
         }];
         
         
         
         [self addSubview: self.getPriceLabel];
         [self.getPriceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.priceLabel.mas_bottom).offset(12);
+            make.top.equalTo(self.priceLabel.mas_bottom);
             make.left.equalTo(self).offset(8);
             make.height.equalTo(@16);
-            make.bottom.equalTo(self).offset(-8).priorityLow();
-            make.width.equalTo(@69).priorityLow();
+            make.bottom.equalTo(self).offset(-8).priorityLow();;
         }];
     }
     return self;
 }
 
-- (void)setItem:(TSProductBaseModel *)item{
+- (void)setItem:(id<TSRecomendGoodsProtocol>)item{
     _item = item;
     
-    [self.imageView sd_setImageWithURL:[NSURL URLWithString:item.pic]];
+    [self.imageView sd_setImageWithURL:[NSURL URLWithString:item.imageUrl]];
     
     self.titleLabel.text = item.name;
     self.titleLabel.backgroundColor = [UIColor clearColor];
@@ -91,11 +86,11 @@
     self.rmbLabel.text = @"¥";
     self.rmbLabel.backgroundColor = [UIColor clearColor];
 
-    self.priceLabel.text = [NSString stringWithFormat:@"%.0f",item.price];
+    self.priceLabel.text = item.goodsPrice;
     self.priceLabel.backgroundColor = [UIColor clearColor];
 
-    [self.highPriceView setLeftText:@"最高赚" rightText:[NSString stringWithFormat:@"¥%.0f",item.earnMost]];
-    self.getPriceLabel.text = [NSString stringWithFormat:@"提货价 ¥%.0f",item.staffPrice];
+    [self.highPriceView setLeftText:@"最高赚" rightText:[NSString stringWithFormat:@"¥%@",item.goodsEarnMost]];
+    self.getPriceLabel.text = [NSString stringWithFormat:@"提货价 ¥%@",item.goodsStaffPrice];
     self.getPriceLabel.backgroundColor = [UIColor clearColor];
     
     [self.getPriceLabel mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -103,13 +98,6 @@
     }];
 
     [self layoutIfNeeded];
-}
-
--(void)setDelegate:(id<UniversalCollectionViewCellDataDelegate>)delegate{
-    if ([delegate respondsToSelector:@selector(universalCollectionViewCellModel:)]) {
-        TSProductBaseModel *item = [delegate universalCollectionViewCellModel:self.indexPath];
-        self.item = item;
-    }
 }
 
 - (UIImageView *)imageView{

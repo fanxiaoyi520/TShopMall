@@ -18,7 +18,19 @@
 
 
 @implementation TSRecomendGoods
+@synthesize name = _name;
+- (NSString *)name{
+    return self.productName;
+}
 
+@synthesize uuid;
+- (NSString *)uuid{
+    return self.goodsUuid;
+}
+@synthesize goodsPrice;
+- (NSString *)goodsPrice{
+    return self.price;
+}
 @end
 
 @implementation TSRecomendPageInfo

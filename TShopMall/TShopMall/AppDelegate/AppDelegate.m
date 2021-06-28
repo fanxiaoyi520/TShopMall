@@ -8,6 +8,7 @@
 #import "AppDelegate.h"
 #import "AppDelegate+RootController.h"
 #import "AppDelegate+Initialize.h"
+#import "TSBestSellingRecommendService.h"
 #import "WXApi.h"
 #import "TSAccountConst.h"
 #import "WechatManager.h"
@@ -30,6 +31,7 @@
     [self initWechatConfig];
     [self initRouteConfig];
     
+    [TSServicesManager sharedInstance].bestSellingRecommendService = [TSBestSellingRecommendService new];
     
     if (@available(iOS 13.0, *)) {
         

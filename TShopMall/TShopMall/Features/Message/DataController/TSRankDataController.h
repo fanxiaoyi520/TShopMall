@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(void)fetchRankCoronalComplete:(void(^)(BOOL isSucess))complete;
 
+-(void)fetchRecomendComplete:(void(^)(BOOL isSucess))complete;
 @end
 
 NS_ASSUME_NONNULL_END

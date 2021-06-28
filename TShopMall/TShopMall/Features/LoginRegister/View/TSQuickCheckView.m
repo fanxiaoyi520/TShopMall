@@ -6,6 +6,7 @@
 //
 
 #import "TSQuickCheckView.h"
+#import "TSAgreementModel.h"
 
 @interface TSQuickCheckView ()<UITextViewDelegate>
 /** check按钮 */
@@ -20,7 +21,6 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         [self addConstraints];
-        [self setUpInit];
     }
     return self;
 }
@@ -34,40 +34,12 @@
     }];
     [self.textView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.checkButton.mas_right).with.offset(3);
-        make.top.equalTo(self.mas_top).with.offset(0);
-        make.bottom.equalTo(self.mas_bottom).with.offset(0);
+        make.centerY.equalTo(self.mas_centerY).with.offset(0);
+        //make.top.equalTo(self.mas_top).with.offset(10);
+        //make.bottom.equalTo(self.mas_bottom).with.offset(0);
         make.right.equalTo(self.mas_right).with.offset(-25);
+        make.height.mas_equalTo(60);
     }];
-}
-
-- (void)setUpInit {
-    NSString *agreeStr = @"已阅读并同意以下协议：";
-    NSString *certificationStr = @"《中国xx认证服务器条款》";
-    NSString *serviceStr = @"《服务协议》";
-    NSString *privateStr = @"《隐私政策》";
-    NSString *allStr = [NSString stringWithFormat:@"%@%@%@%@", agreeStr, certificationStr, serviceStr, privateStr];
-    NSRange agreeRange = [allStr rangeOfString:agreeStr];
-    NSRange certificationRange = [allStr rangeOfString:certificationStr];
-    NSRange serviceRange = [allStr rangeOfString:serviceStr];
-    NSRange privateRange = [allStr rangeOfString:privateStr];
-    NSDictionary *attributes = @{
-        NSFontAttributeName: KRegularFont(14)
-    };
-    NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:allStr attributes:attributes];
-    //NSString *valueAgree = [[NSString stringWithFormat:@"agreeProtocol://%@", agreeStr] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLFragmentAllowedCharacterSet]];
-    NSString *valueCertification = [[NSString stringWithFormat:@"certificationProtocol://%@", certificationStr] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLFragmentAllowedCharacterSet]];
-    NSString *valueService = [[NSString stringWithFormat:@"serviceProtocol://%@", serviceStr] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLFragmentAllowedCharacterSet]];
-    NSString *valuePrivate = [[NSString stringWithFormat:@"privateProtocol://%@", privateStr] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLFragmentAllowedCharacterSet]];
-    //[attrString addAttribute:NSLinkAttributeName value:valueAgree range:agreeRange];
-    [attrString addAttribute:NSLinkAttributeName value:valueService range:serviceRange];
-    [attrString addAttribute:NSLinkAttributeName value:valuePrivate range:privateRange];
-    [attrString addAttribute:NSLinkAttributeName value:valueCertification range:certificationRange];
-    [attrString addAttribute:NSForegroundColorAttributeName value:KHexColor(@"#666666") range:agreeRange];
-    [attrString addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:certificationRange];
-    [attrString addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:serviceRange];
-    [attrString addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:privateRange];
-    self.textView.attributedText = attrString;
-    self.textView.linkTextAttributes = @{NSForegroundColorAttributeName:KHexColor(@"#E64C3D")};
 }
 
 - (UIButton *)checkButton {
@@ -90,6 +62,7 @@
         _textView.delegate = self;
         _textView.editable = NO;
         _textView.backgroundColor = UIColor.clearColor;
+        _textView.linkTextAttributes = @{NSForegroundColorAttributeName:KHexColor(@"#E64C3D")};
         [self addSubview:_textView];
     }
     return _textView;
@@ -100,6 +73,34 @@
     self.checkButton.selected = checked;
 }
 
+- (void)setAgreementModels:(NSArray<TSAgreementModel *> *)agreementModels {
+    _agreementModels = agreementModels;
+    NSMutableString *allString = [NSMutableString stringWithString:@"已阅读并同意以下协议："];
+    for (int i = 0; i < agreementModels.count; i++) {
+        TSAgreementModel *agreementModel = agreementModels[i];
+        NSString *_str = [NSString stringWithFormat:@"《%@》", agreementModel.title];
+        [allString appendString:_str];
+    }
+    NSDictionary *attributes = @{
+        NSFontAttributeName: KRegularFont(14)
+    };
+    NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:allString attributes:attributes];
+    NSRange agreeRange = [allString rangeOfString:@"已阅读并同意以下协议："];
+    [attrString addAttribute:NSForegroundColorAttributeName value:KHexColor(@"#666666") range:agreeRange];
+    for (int i = 0; i < agreementModels.count; i++) {
+        TSAgreementModel *agreementModel = agreementModels[i];
+        NSString *_str = [NSString stringWithFormat:@"《%@》", agreementModel.title];
+        NSRange range = [allString rangeOfString:_str];
+        NSString *value = [[NSString stringWithFormat:@"tranfer%d://%@", i, _str] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLFragmentAllowedCharacterSet]];
+        [attrString addAttribute:NSLinkAttributeName value:value range:range];
+    }
+    self.textView.attributedText = attrString;
+    //CGFloat width = [allString widthForFont:KRegularFont(14)];
+    //CGFloat left = (self.frame.size.width - 50 - width) / 2.0;
+    ///self.textView.contentInset = UIEdgeInsetsMake(-10, left, 0, 0);
+}
+
+
 #pragma mark - Actions
 - (void)checkAction {
     self.checkButton.selected = !self.checkButton.isSelected;
@@ -108,17 +109,12 @@
 
 #pragma mark - UITextViewDelegate
 - (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange {
-    if ([[URL scheme] isEqualToString:@"certificationProtocol"]) {
-        if ([self.delegate respondsToSelector:@selector(openAuthenticationProtocol)]) {
-            [self.delegate openAuthenticationProtocol];
-        }
-    } else if ([[URL scheme] isEqualToString:@"serviceProtocol"]) {
-        if ([self.delegate respondsToSelector:@selector(openServiceProtocol)]) {
-            [self.delegate openServiceProtocol];
-        }
-    } else if ([[URL scheme] isEqualToString:@"privateProtocol"]) {
-        if ([self.delegate respondsToSelector:@selector(openPrivateProtocol)]) {
-            [self.delegate openPrivateProtocol];
+    NSString *scheme = [URL scheme];
+    if ([scheme containsString:@"tranfer"]) {
+        NSString *indexString = [scheme substringFromIndex:scheme.length - 1];
+        int index = [indexString intValue];
+        if ([self.delegate respondsToSelector:@selector(goToH5WithAgreementModel:)]) {
+            [self.delegate goToH5WithAgreementModel:self.agreementModels[index]];
         }
     }
     return YES;
