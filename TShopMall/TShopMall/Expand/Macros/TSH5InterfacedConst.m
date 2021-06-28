@@ -18,6 +18,19 @@
 #endif
 
 /*集团账户中心账号信息，不要手动修改*/
+
+#if DEBUG
+
+#if (kH5ServerFlag == 0)
+    NSString * kMallH5ApiPrefix = @"https://m.tcl.com/seller-app-h5/";
+#elif (kH5ServerFlag == 1)
+    NSString * kMallH5ApiPrefix = @"https://prewap.tclo2o.cn/seller-app-h5/";
+#elif (kH5ServerFlag == 2)
+    NSString * kMallH5ApiPrefix = @"https://testwap.tclo2o.cn/seller-app-h5/";
+#endif
+
+#else
+
 #if (kH5ServerFlag == 0)
     NSString *const kMallH5ApiPrefix = @"https://m.tcl.com/seller-app-h5/";
 #elif (kH5ServerFlag == 1)
@@ -25,6 +38,9 @@
 #elif (kH5ServerFlag == 2)
     NSString *const kMallH5ApiPrefix = @"https://testwap.tclo2o.cn/seller-app-h5/";
 #endif
+
+#endif
+
 
 #pragma mark - 各页面
 
