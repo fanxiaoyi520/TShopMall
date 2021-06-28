@@ -53,24 +53,27 @@
         [self.rmbLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(self.highPriceView);
             make.left.equalTo(self).offset(8);
-            make.height.equalTo(@30).priorityLow();;
+            make.height.equalTo(@18);
+            make.width.equalTo(@10).priorityLow();
         }];
         
         [self addSubview: self.priceLabel];
         [self.priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(self.highPriceView);
             make.left.equalTo(self.rmbLabel.mas_right).offset(2);
-            make.height.equalTo(@30).priorityLow();;
+            make.height.equalTo(@18).priorityLow();
+            make.width.equalTo(@69).priorityLow();
         }];
         
         
         
         [self addSubview: self.getPriceLabel];
         [self.getPriceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.priceLabel.mas_bottom);
+            make.top.equalTo(self.priceLabel.mas_bottom).offset(12);
             make.left.equalTo(self).offset(8);
             make.height.equalTo(@16);
-            make.bottom.equalTo(self).offset(-8).priorityLow();;
+            make.bottom.equalTo(self).offset(-8).priorityLow();
+            make.width.equalTo(@69).priorityLow();
         }];
     }
     return self;
@@ -82,17 +85,37 @@
     [self.imageView sd_setImageWithURL:[NSURL URLWithString:item.pic]];
     
     self.titleLabel.text = item.name;
+    self.titleLabel.backgroundColor = [UIColor clearColor];
+    self.titleLabel.layer.cornerRadius = 0;
+    
+    self.rmbLabel.text = @"¥";
+    self.rmbLabel.backgroundColor = [UIColor clearColor];
+
     self.priceLabel.text = [NSString stringWithFormat:@"%.0f",item.price];
-    self.highPriceView.leftLabel.text = @"最高赚";
-    self.highPriceView.rightLabel.text = [NSString stringWithFormat:@"¥%.0f",item.earnMost];
+    self.priceLabel.backgroundColor = [UIColor clearColor];
+
+    [self.highPriceView setLeftText:@"最高赚" rightText:[NSString stringWithFormat:@"¥%.0f",item.earnMost]];
     self.getPriceLabel.text = [NSString stringWithFormat:@"提货价 ¥%.0f",item.staffPrice];
+    self.getPriceLabel.backgroundColor = [UIColor clearColor];
+    
+    [self.getPriceLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.priceLabel.mas_bottom);
+    }];
 
     [self layoutIfNeeded];
+}
+
+-(void)setDelegate:(id<UniversalCollectionViewCellDataDelegate>)delegate{
+    if ([delegate respondsToSelector:@selector(universalCollectionViewCellModel:)]) {
+        TSProductBaseModel *item = [delegate universalCollectionViewCellModel:self.indexPath];
+        self.item = item;
+    }
 }
 
 - (UIImageView *)imageView{
     if (!_imageView) {
         _imageView = [[UIImageView alloc] init];
+        _imageView.backgroundColor = KGrayColor;
     }
     return _imageView;
 }
@@ -100,6 +123,9 @@
 - (UILabel *)titleLabel{
     if (!_titleLabel) {
         _titleLabel = [UILabel new];
+        _titleLabel.backgroundColor = KGrayColor;
+        _titleLabel.layer.cornerRadius = 4;
+        _titleLabel.clipsToBounds = YES;
         _titleLabel.numberOfLines = 2;
         _titleLabel.font = KFont(PingFangSCRegular, 15.0);
         _titleLabel.textColor = KHexColor(@"#2D3132");
@@ -112,6 +138,9 @@
         _priceLabel = [UILabel new];
         _priceLabel.font = KFont(PingFangSCMedium, 20.0);
         _priceLabel.textColor = KHexColor(@"#E64C3D");
+        _priceLabel.backgroundColor = KGrayColor;
+        _priceLabel.layer.cornerRadius = 4;
+        _priceLabel.clipsToBounds = YES;
     }
     return _priceLabel;
 }
@@ -121,7 +150,10 @@
         _rmbLabel = [UILabel new];
         _rmbLabel.font = KFont(PingFangSCRegular, 16.0);
         _rmbLabel.textColor = KHexColor(@"#E64C3D");
-        _rmbLabel.text = @"¥";
+
+        _rmbLabel.backgroundColor = KGrayColor;
+        _rmbLabel.layer.cornerRadius = 4;
+        _rmbLabel.clipsToBounds = YES;
     }
     return _rmbLabel;
 }
@@ -131,13 +163,20 @@
         _getPriceLabel = [UILabel new];
         _getPriceLabel.font = KFont(PingFangSCRegular, 10.0);
         _getPriceLabel.textColor = KHexAlphaColor(@"333333", .6);
+        
+        _getPriceLabel.backgroundColor = KGrayColor;
+        _getPriceLabel.layer.cornerRadius = 4;
+        _getPriceLabel.clipsToBounds = YES;
     }
     return _getPriceLabel;
 }
 
 - (TSHighPriceTagView *)highPriceView{
     if (!_highPriceView) {
-        _highPriceView = [[TSHighPriceTagView alloc] initWithFrame:CGRectZero leftText:@"最高赚" rightText:@"¥19999"];
+        _highPriceView = [TSHighPriceTagView new];
+        _highPriceView.backgroundColor = KGrayColor;
+        _highPriceView.layer.cornerRadius = 4;
+        _highPriceView.clipsToBounds = YES;
     }
     return _highPriceView;
 }
