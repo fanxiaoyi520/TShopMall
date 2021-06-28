@@ -80,7 +80,7 @@
     [self addSubview:self.changeButton];
     [self addSubview:self.shareButton];
     [self addSubview:self.downloadButton];
-    [self addSubview:self.sharePosterButton];
+//    [self addSubview:self.sharePosterButton];
     
     [self.closeButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self).offset(40);
@@ -113,12 +113,12 @@
         make.height.mas_equalTo(66);
     }];
     
-    [self.sharePosterButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self).offset(-31);
-        make.left.equalTo(self.downloadButton.mas_right).offset(10);
-        make.width.mas_equalTo(width);
-        make.height.mas_equalTo(66);
-    }];
+//    [self.sharePosterButton mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.bottom.equalTo(self).offset(-31);
+//        make.left.equalTo(self.downloadButton.mas_right).offset(10);
+//        make.width.mas_equalTo(width);
+//        make.height.mas_equalTo(66);
+//    }];
 }
 
 #pragma mark - Actions
@@ -165,7 +165,7 @@
 -(TSFuncButton *)changeButton{
     if (!_changeButton) {
         _changeButton = [TSFuncButton buttonWithType:UIButtonTypeCustom];
-        [_changeButton setTitle:@"改价发券" forState:UIControlStateNormal];
+        [_changeButton setTitle:@"改价" forState:UIControlStateNormal];
         [_changeButton setImage:KImageMake(@"mall_detail_change_price") forState:UIControlStateNormal];
         [_changeButton addTarget:self action:@selector(changeAction:) forControlEvents:UIControlEventTouchUpInside];
     }
