@@ -5,11 +5,11 @@
 //  Created by 陈结 on 2021/6/17.
 //
 
-#import "TSUniversalCollectionViewCell.h"
+#import "TSTableViewBaseCell.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TSRankHonourCell : TSUniversalCollectionViewCell
+@interface TSRankHonourCell : TSTableViewBaseCell
 
 @end
 

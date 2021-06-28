@@ -68,7 +68,6 @@
     TSLogoutRequest *request = [TSLogoutRequest new];
     [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
         [[TSUserInfoManager userInfo] clearUserInfo];
-        [[TSGlobalManager shareInstance] setCurrentUserInfo:nil];
         [self postNotificationWithLoginState:TSLoginStateNone];
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
         

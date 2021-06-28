@@ -6,11 +6,7 @@
 //
 
 #import "TSRankMonthViewController.h"
-#import "TSUniversalFlowLayout.h"
-#import "TSUniversalCollectionViewCell.h"
-#import "TSUniversalFooterView.h"
-#import "TSUniversalHeaderView.h"
-
+#import "TSTableViewBaseCell.h"
 @interface TSRankMonthViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property(nonatomic, strong) UITableView *tableView;
@@ -57,18 +53,11 @@
     Class className = NSClassFromString(item.identify);
     [tableView registerClass:[className class] forCellReuseIdentifier:item.identify];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:item.identify forIndexPath:indexPath];
-    if ([cell isKindOfClass:TSUniversalCollectionViewCell.class]) {
-        TSUniversalCollectionViewCell *contentCell = (TSUniversalCollectionViewCell *)cell;
+    if ([cell isKindOfClass:TSTableViewBaseCell.class]) {
+        TSTableViewBaseCell *contentCell = (TSTableViewBaseCell *)cell;
         contentCell.indexPath = indexPath;
-//        contentCell.cellSuperViewTableView = self.tableView;
-//        if ([cell isKindOfClass:TSHomePageContainerCell.class]) {
-//            TSHomePageContainerCell *contentCell = (TSHomePageContainerCell *)cell;
-//            if (contentCell.containerHeight == 0) {
-//                contentCell.containerHeight = kScreenHeight - self.navBackgroundView.bottom - 48;
-//            }
-//            self.containerView = contentCell.containerView;
-//        }
-//        contentCell.viewModel = viewModel;
+        contentCell.cellSuperViewTableView = self.tableView;
+        contentCell.data = item;
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     

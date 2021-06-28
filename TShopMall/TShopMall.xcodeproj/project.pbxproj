@@ -270,6 +270,7 @@
 		DFB3FFE82685E43D00FC8FF9 /* TSBindUserByAuthCodeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB3FFE72685E43D00FC8FF9 /* TSBindUserByAuthCodeRequest.m */; };
 		DFB3FFEC2686BDEC00FC8FF9 /* TSCustomPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB3FFEB2686BDEB00FC8FF9 /* TSCustomPageControl.m */; };
 		DFB3FFEF2686E60C00FC8FF9 /* TSURLRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB3FFEE2686E60C00FC8FF9 /* TSURLRouter.m */; };
+		DFB3FFF326899EF300FC8FF9 /* TSTableViewBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB3FFF226899EF300FC8FF9 /* TSTableViewBaseCell.m */; };
 		E2BE996F8804E0C3E7D5AE61 /* libPods-TShopMall-TShopMallUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD1ABBE857D307088E9BF2DC /* libPods-TShopMall-TShopMallUITests.a */; };
 		F530C6D526802E5D009DC29A /* TSSMSCodeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F530C6CC26802E5D009DC29A /* TSSMSCodeRequest.m */; };
 		F530C6D626802E5D009DC29A /* TSQuickLoginRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F530C6CF26802E5D009DC29A /* TSQuickLoginRequest.m */; };
@@ -1019,6 +1020,8 @@
 		DFB3FFEB2686BDEB00FC8FF9 /* TSCustomPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSCustomPageControl.m; sourceTree = "<group>"; };
 		DFB3FFED2686E60C00FC8FF9 /* TSURLRouter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSURLRouter.h; sourceTree = "<group>"; };
 		DFB3FFEE2686E60C00FC8FF9 /* TSURLRouter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSURLRouter.m; sourceTree = "<group>"; };
+		DFB3FFF126899EF300FC8FF9 /* TSTableViewBaseCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSTableViewBaseCell.h; sourceTree = "<group>"; };
+		DFB3FFF226899EF300FC8FF9 /* TSTableViewBaseCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSTableViewBaseCell.m; sourceTree = "<group>"; };
 		ECCE8A564DF47B445E7905B1 /* Pods-TShopMall-TShopMallUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TShopMall-TShopMallUITests.release.xcconfig"; path = "Target Support Files/Pods-TShopMall-TShopMallUITests/Pods-TShopMall-TShopMallUITests.release.xcconfig"; sourceTree = "<group>"; };
 		F530C6CC26802E5D009DC29A /* TSSMSCodeRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSSMSCodeRequest.m; sourceTree = "<group>"; };
 		F530C6CD26802E5D009DC29A /* TSQuickLoginRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSQuickLoginRequest.h; sourceTree = "<group>"; };
@@ -2221,11 +2224,13 @@
 			path = PageControl;
 			sourceTree = "<group>";
 		};
-		DFB3FFF026899D8E00FC8FF9 /* TSHomePageBaseCell */ = {
+		DFB3FFF026899D8E00FC8FF9 /* TSTableViewBaseCell */ = {
 			isa = PBXGroup;
 			children = (
+				DFB3FFF126899EF300FC8FF9 /* TSTableViewBaseCell.h */,
+				DFB3FFF226899EF300FC8FF9 /* TSTableViewBaseCell.m */,
 			);
-			path = TSHomePageBaseCell;
+			path = TSTableViewBaseCell;
 			sourceTree = "<group>";
 		};
 		F530C6CB26802E5D009DC29A /* DataController */ = {
@@ -2801,7 +2806,7 @@
 		F54973782668A94600181E3F /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				DFB3FFF026899D8E00FC8FF9 /* TSHomePageBaseCell */,
+				DFB3FFF026899D8E00FC8FF9 /* TSTableViewBaseCell */,
 				DC99119D267AE34600EF9B26 /* Model */,
 				F55D2AE7266F9CC7006BACCF /* HeaderView */,
 				F55D2AE3266F97C2006BACCF /* DecorateView */,
@@ -3380,8 +3385,6 @@
 				F55D2D37267B3F38006BACCF /* TSRankCell.m */,
 				F55D2D39267B3F72006BACCF /* TSRankRecommendHeaderView.h */,
 				F55D2D3A267B3F72006BACCF /* TSRankRecommendHeaderView.m */,
-				04113170268021CC000B5BAF /* TSCustomLabel.h */,
-				0411316F268021CC000B5BAF /* TSCustomLabel.m */,
 				DC06D6E1268810C20013633F /* TSRecomendGoodsView.h */,
 				DC06D6E2268810C20013633F /* TSRecomendGoodsView.m */,
 			);
@@ -3838,6 +3841,7 @@
 				C2EF88C12670997100E7374A /* TSCartCell.m in Sources */,
 				F55D2C3A2671E14B006BACCF /* TSUniversalFooterView.m in Sources */,
 				CE4F6BDE268708E700812275 /* TSScoreViewController.m in Sources */,
+				DFB3FFF326899EF300FC8FF9 /* TSTableViewBaseCell.m in Sources */,
 				F55D2CB02674A6A9006BACCF /* TSCategoryKindCellViewModel.m in Sources */,
 				CE4F6BDA26867C0E00812275 /* TSGlobalNotifyServer.m in Sources */,
 				F530CCAF26803FCD009DC29A /* UITextField+General.m in Sources */,

@@ -6,7 +6,6 @@
 //
 
 #import "TSHomePageContainerHeaderView.h"
-#import "KVOController.h"
 #import "TSHomePageContainerGroup.h"
 @interface TSHomePageContainerHeaderView ()<JXCategoryViewDelegate>
 @property (nonatomic, strong) JXCategoryTitleView *segmentHeader;
