@@ -10,7 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TSBindMobileCell : TSUniversalCollectionViewCell
-
+@property (nonatomic, copy) void (^ codeButtonClickBlock) (NSString *phoneNumber);
 @end
 
 NS_ASSUME_NONNULL_END

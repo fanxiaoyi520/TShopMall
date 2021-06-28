@@ -30,16 +30,11 @@
 - (void)getPageContainerDataWithStartPageIndex:(NSInteger)startIndex count:(NSInteger)count group:(TSHomePageContainerGroup *)group callBack:(nonnull void (^)(NSArray * _Nonnull, NSError * _Nonnull))listCallBack{
     
     NSMutableDictionary *body = [NSMutableDictionary dictionary];
-    [body setValue:@"platform_tcl_shop" forKey:@"platform"];
-    [body setValue:@"tclplus" forKey:@"storeUuid"];
-    [body setValue:@"TCL" forKey:@"t-id"];
-    [body setValue:@"02" forKey:@"terminalType"];
     [body setValue:[NSString stringWithFormat:@"%ld",startIndex] forKey:@"nowPage"];
     [body setValue:[NSString stringWithFormat:@"%ld",count] forKey:@"pageShow"];
     [body setValue:group.groupId forKey:@"cateGroupUuid"];
-    [body setValue:@"1" forKey:@"sortType"];
-    [body setValue:@"sortWeight" forKey:@"sortBy"];
-    [body setValue:@"application/x-www-form-urlencoded" forKey:@"Content-Type"];
+//    [body setValue:@"1" forKey:@"sortType"];
+//    [body setValue:@"sortWeight" forKey:@"sortBy"];
 
     SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kProducts
                                                                requestMethod:YTKRequestMethodPOST

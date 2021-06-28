@@ -108,7 +108,7 @@
     TSCartGoodsRow *row = [TSCartGoodsRow new];
     row.cellIdentifier = @"TSCartEmptyCell";
     row.isAutoHeight = NO;
-    row.rowHeight = KRateW(384.0);
+    row.rowHeight = KRateW(406.0);
     
     TSCartGoodsSection *section = [TSCartGoodsSection new];
     section.heightForHeader = 0.1f;
@@ -138,6 +138,40 @@
     [self.sections addObject:section];
 }
 
+- (void)configRecomendSectons:(NSArray<TSRecomendGoods *> *)goods isGrid:(BOOL)isGrid{
+    NSMutableArray *rows = [NSMutableArray array];
+    NSInteger a = goods.count;
+    if (isGrid) {
+        a= goods.count/2 + goods.count%2;
+    }
+    for (NSInteger i=0; i<a; i++) {
+        id obj;
+        if (isGrid) {
+            NSMutableArray *arr = [NSMutableArray array];
+            [arr addObject:goods[2*i]];
+            if (2*i+1 <= a - 1) {
+                [arr addObject:goods[2*i+1]];
+            }
+            obj = arr;
+        } else {
+            obj = goods[i];
+        }
+        TSCartGoodsRow *row = [TSCartGoodsRow new];
+        row.cellIdentifier = isGrid==NO? @"TSCartRecomendCell":@"TSCartRecomendGirdCell";
+        row.obj = obj;
+        row.isAutoHeight = NO;
+        row.rowHeight = isGrid==NO? KRateW(120.0):KRateW(290.0);
+        [rows addObject:row];
+    }
+    
+    TSCartGoodsSection *section = [TSCartGoodsSection new];
+    section.heightForHeader = KRateW(54.0);
+    section.headerIdentifier = @"TSCartRecomendHeader";
+    section.heightForFooter = KRateW(32.0);
+    section.rows = rows;
+    [self.sections addObject:section];
+}
+
 - (NSMutableArray<TSCartGoodsSection *> *)sections{
     if (_sections) {
         return _sections;
@@ -148,6 +182,9 @@
 }
 
 - (BOOL)isAllSelected{
+    if (self.cartModel.carts.count == 0) {
+        return NO;
+    }
     NSString *isContainNo = @"0";
     for (TSCart *cart in self.cartModel.carts) {
         if (cart.checked == NO) {

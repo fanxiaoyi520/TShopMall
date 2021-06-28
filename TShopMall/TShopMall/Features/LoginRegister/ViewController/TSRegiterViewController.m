@@ -11,8 +11,10 @@
 #import <Toast.h>
 #import "TSTools.h"
 #import "NSTimer+TSBlcokTimer.h"
+#import "TSHybridViewController.h"
+#import "TSAgreementModel.h"
 
-@interface TSRegiterViewController ()<TSRegisterTopViewDelegate, TSCheckedViewDelegate>
+@interface TSRegiterViewController ()<TSRegisterTopViewDelegate, TSCheckedViewDelegate, TSHybridViewControllerDelegate>
 /** 背景图 */
 @property(nonatomic, weak) UIImageView *bgImgV;
 /** 关闭 */
@@ -40,6 +42,8 @@
 - (void)fillCustomView {
     ///添加约束
     [self addConstraints];
+    
+    
 }
 
 - (void)setupBasic {
@@ -47,6 +51,7 @@
     self.view.backgroundColor = UIColor.whiteColor;
     UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panAction:)];
     [self.view addGestureRecognizer:panGestureRecognizer];
+    [self getAgreementInfo];
 }
 
 - (void)panAction: (UIPanGestureRecognizer *)recognizer {
@@ -71,7 +76,14 @@
     [self.checkedView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.view.mas_bottom).with.offset(-56);
         make.left.right.equalTo(self.view).with.offset(0);
-        make.height.mas_equalTo(50);
+        make.height.mas_equalTo(66);
+    }];
+}
+
+- (void)getAgreementInfo {
+    __weak __typeof(self)weakSelf = self;
+    [self.dataController fetchAgreementWithCompleted:^(NSArray<TSAgreementModel *> * _Nonnull agreementModels) {
+        weakSelf.checkedView.agreementModels = agreementModels;
     }];
 }
 
@@ -82,7 +94,7 @@
         UIButton *closeButton = [[UIButton alloc] init];
         _closeButton = closeButton;
         [_closeButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [_closeButton setBackgroundImage:KImageMake(@"mall_login_close") forState:UIControlStateNormal];
+        [_closeButton setImage:KImageMake(@"mall_login_close") forState:UIControlStateNormal];
         [_closeButton addTarget:self action:@selector(closePage) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_closeButton];
     }
@@ -119,7 +131,7 @@
     return _bgImgV;
 }
 
--(TSLoginRegisterDataController *)dataController{
+- (TSLoginRegisterDataController *)dataController{
     if (!_dataController) {
         _dataController = [[TSLoginRegisterDataController alloc] init];
     }
@@ -152,11 +164,12 @@
         return;
     }
     [self.view endEditing:YES];
+    @weakify(self);
     [self.dataController fetchRegisterMobile:phoneNumber validCode:[self.topView getCode] invitationCode:[self.topView getInvitationCode] complete:^(BOOL isSucess) {
         if (isSucess) {
-            if (self.regiterBlock) {
-                self.regiterBlock();
-            }
+            @strongify(self)
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"TS_LoginUpdateNotification" object:@0];
+            [self dismissViewControllerAnimated:YES completion:nil];
         }
     }];
 }
@@ -171,6 +184,10 @@
         [self.view makeToast:@"请输入正确的手机号" duration:3.0 position:CSToastPositionCenter];
         return;
     }
+    if (self.timer) {
+        [self.timer invalidate];
+        self.timer = nil;
+    }
     __weak typeof(self) weakSelf = self;
     self.timer = [NSTimer ts_scheduledTimerWithTimeInterval:1 block:^{
          [weakSelf goToRun];
@@ -183,7 +200,7 @@
             [Popover popToastOnWindowWithText:@"验证码请求失败"];
             weakSelf.count = 60;
             [weakSelf.timer invalidate];
-            [weakSelf.topView setCodeButtonTitleAndColor:@"重新验证码" isResend:YES];
+            [weakSelf.topView setCodeButtonTitleAndColor:@"重发验证码" isResend:YES enabled:YES];
         }
     }];
 }
@@ -199,10 +216,10 @@
     if (self.count <= 1) {
         self.count = 60;
         [self.timer invalidate];
-        [self.topView setCodeButtonTitleAndColor:@"重新验证码" isResend:YES];
+        [self.topView setCodeButtonTitleAndColor:@"重发验证码" isResend:YES enabled:YES];
     } else {
         self.count--;
-        [self.topView setCodeButtonTitleAndColor:[NSString stringWithFormat:@"重发 %ld", (long)self.count] isResend:NO];
+        [self.topView setCodeButtonTitleAndColor:[NSString stringWithFormat:@"重发 %ld", (long)self.count] isResend:NO enabled:NO];
     }
 }
 
@@ -215,16 +232,11 @@
 }
 
 #pragma mark - TSCheckedViewDelegate
-- (void)goToServiceProtocol {
-    
-}
-
-- (void)goToPrivatePolicy {
-    
-}
-
-- (void)goToRegisterProtocol {
-    
+/** 跳转查看协议 */
+- (void)goToH5WithAgreementModel:(TSAgreementModel *)agreementModel {
+    TSHybridViewController *web = [[TSHybridViewController alloc] initWithURLString:[agreementModel.serverUrl stringByAppendingString:@"&mode=webview"]];
+    web.delegate = self;
+    [self.navigationController pushViewController:web animated:YES];
 }
 
 - (void)checkedAction:(BOOL)isChecked {

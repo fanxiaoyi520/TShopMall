@@ -126,27 +126,27 @@
 
 #pragma mark - Actions
 -(void)closeAction:(UIButton *)sender{
-//    if (self.delegate && [self.delegate respondsToSelector:@selector(topFunctionView:closeClick:)]) {
-//        [self.delegate topFunctionView:self closeClick:sender];
-//    }
+    if (self.delegate && [self.delegate respondsToSelector:@selector(shareViewView:closeClick:)]) {
+        [self.delegate shareViewView:self closeClick:sender];
+    }
 }
 
--(void)changeAction:(TSDetailShareButton *)sender{
-//    if (self.delegate && [self.delegate respondsToSelector:@selector(topFunctionView:changeClick:)]) {
-//        [self.delegate topFunctionView:self changeClick:sender];
-//    }
+-(void)shareFriendsAction:(TSDetailShareButton *)sender{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(shareViewView:shareFriendsAction:)]) {
+        [self.delegate shareViewView:self shareFriendsAction:sender];
+    }
 }
 
--(void)shareAction:(TSDetailShareButton *)sender{
-//    if (self.delegate && [self.delegate respondsToSelector:@selector(topFunctionView:shareClick:)]) {
-//        [self.delegate topFunctionView:self shareClick:sender];
-//    }
+-(void)sharePYQAction:(TSDetailShareButton *)sender{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(shareViewView:sharePYQAction:)]) {
+        [self.delegate shareViewView:self sharePYQAction:sender];
+    }
 }
 
 -(void)downloadAction:(TSDetailShareButton *)sender{
-//    if (self.delegate && [self.delegate respondsToSelector:@selector(topFunctionView:downloadClick:)]) {
-//        [self.delegate topFunctionView:self downloadClick:sender];
-//    }
+    if (self.delegate && [self.delegate respondsToSelector:@selector(shareViewView:downloadAction:)]) {
+        [self.delegate shareViewView:self downloadAction:sender];
+    }
 }
 
 #pragma mark - Getter
@@ -176,7 +176,7 @@
         _weixinButton = [TSDetailShareButton buttonWithType:UIButtonTypeCustom];
         [_weixinButton setTitle:@"微信" forState:UIControlStateNormal];
         [_weixinButton setImage:KImageMake(@"mall_detail_share_weixin") forState:UIControlStateNormal];
-        [_weixinButton addTarget:self action:@selector(changeAction:) forControlEvents:UIControlEventTouchUpInside];
+        [_weixinButton addTarget:self action:@selector(shareFriendsAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _weixinButton;
 }
@@ -186,7 +186,7 @@
         _friendButton = [TSDetailShareButton buttonWithType:UIButtonTypeCustom];
         [_friendButton setTitle:@"朋友圈" forState:UIControlStateNormal];
         [_friendButton setImage:KImageMake(@"mall_detail_share_friend") forState:UIControlStateNormal];
-        [_friendButton addTarget:self action:@selector(shareAction:) forControlEvents:UIControlEventTouchUpInside];
+        [_friendButton addTarget:self action:@selector(sharePYQAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _friendButton;
 }

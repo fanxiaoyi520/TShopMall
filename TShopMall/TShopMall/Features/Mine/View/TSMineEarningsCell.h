@@ -7,10 +7,12 @@
 
 #import "TSUniversalCollectionViewCell.h"
 
+typedef NS_ENUM(NSInteger,MineEarningsClick) {
+    EyeAction,
+};
+
 NS_ASSUME_NONNULL_BEGIN
-
 @interface TSMineEarningsCell : TSUniversalCollectionViewCell
-
 @end
 
 NS_ASSUME_NONNULL_END

@@ -19,14 +19,14 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol TSUserInfoViewDelegate <NSObject>
 
 @optional
--(void)loginAction:(id _Nullable)sender;
--(void)seeCodeAction:(id _Nullable)sender;
-- (void)kCopyCodeAction:(id _Nullable)sender;
+-(void)userInfoLoginAction:(id _Nullable)sender;
+-(void)userInfoSeeCodeAction:(id _Nullable)sender;
+- (void)userInfoKCopyCodeAction:(id _Nullable)sender;
 @end
 
 @interface TSUserInfoView : UIView
 
-@property (nonatomic ,assign)id <TSUserInfoViewDelegate> userInfoDelegate;
+@property (nonatomic ,assign)id <TSUserInfoViewDelegate> kDelegate;
 -(instancetype)initWithRoleType:(TSRoleType)type;
 -(void)setModel:(TSMineMerchantUserInformationModel *)model;
 @end

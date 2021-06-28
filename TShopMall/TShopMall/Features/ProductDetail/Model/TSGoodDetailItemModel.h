@@ -8,6 +8,8 @@
 
 #import "TSUniversaItemModel.h"
 
+@class TSMaterialImageModel;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TSGoodDetailItemModel : TSUniversaItemModel
@@ -29,12 +31,51 @@ NS_ASSUME_NONNULL_BEGIN
 /// 最高赚
 @property (nonatomic, copy) NSString *earnMost;
 
+@end
 
+@interface TSGoodDetailItemHotModel : TSGoodDetailItemModel
 
 /// 标题
 @property (nonatomic, copy) NSString *title;
 /// 内容
 @property (nonatomic, copy) NSString *content;
+
+@end
+
+@interface TSGoodDetailItemDownloadImageModel : TSGoodDetailItemModel
+
+/// images
+@property (nonatomic, strong) NSArray <TSMaterialImageModel *> *materialModels;
+
+@end
+
+@interface TSGoodDetailItemCopyModel : TSGoodDetailItemModel
+
+@property(nonatomic, copy) NSString *writeStr;
+
+@end
+
+@interface TSGoodDetailItemPurchaseModel : TSGoodDetailItemModel
+
+/// 已选
+@property(nonatomic, copy) NSString *selectedStr;
+/// 配送
+@property(nonatomic, copy) NSString *localaddress;
+/// 省id
+@property(nonatomic, copy) NSString *provinceId;
+/// 市id
+@property(nonatomic, copy) NSString *cityId;
+/// 省id
+@property(nonatomic, copy) NSString *regionUuid;
+/// 市id
+@property(nonatomic, copy) NSString *areaUuid;
+
+@property(nonatomic, copy) NSString *iconUrl;
+@property(nonatomic, copy) NSString *price;
+@property(nonatomic, assign) BOOL canBuy;
+@property(nonatomic, assign) BOOL hasProduct;
+@property(nonatomic, assign) NSUInteger totalNum;
+@property(nonatomic, assign) NSUInteger limitBuyNum;
 
 @end
 

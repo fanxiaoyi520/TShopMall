@@ -86,8 +86,8 @@
 - (void)layoutSubviews{
     [self.title mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self);
+        make.top.equalTo(self);
         make.height.mas_equalTo(KRateW(24.0));
-        make.top.equalTo(self.mas_top).offset(KRateW(22.0));
     }];
 }
 

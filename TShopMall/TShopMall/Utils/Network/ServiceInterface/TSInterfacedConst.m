@@ -82,7 +82,10 @@ NSString *const kLoginQuickLoginUrl = @"/auth/auth/quickLogin";
 NSString *const kRegisterUrl = @"/rest/sysback/salesman/registered/distributor";
 NSString *const kLogoutUrl = @"/auth/auth/signOut";
 NSString *const kOneStepLoginUrl = @"/auth/auth/oneClickLogin";
-
+NSString *const kLoginByTokenUrl = @"/auth/thirdParty/loginByToken";
+NSString *const kLoginByAuthCode = @"/auth/thirdParty/loginByAuthCode";
+NSString *const kBindUserByAuthCode = @"/auth/thirdParty/bindUserByAuthCode";
+NSString *const kLoginRegisterAgreementUrl = @"/rest/v2/front/shopStatement/getShopStatementAuthList";
 #pragma mark - 首页
 
 NSString *const kHomePageInfoUrl = @"/rest/v2/front/shopContent/getIndexPageInfo";
@@ -96,6 +99,9 @@ NSString * const kSearchResult = @"/rest/v2/itemsearch/toProductList";
 NSString *const kGoodDetailUrl = @"/rest/v2/front/product/toProduct";
 NSString *const kGoodDetailCartNumberUrl = @"/rest/v2/cart/count";
 NSString *const kGoodDetailAddProductToCartUrl = @"/rest/v2/front/product/addProductToCart";
+NSString *const kGoodDetailHasProductUrl = @"/rest/v2/front/product/hasProduct";
+NSString *const kGoodDetailChangeChooseUrl = @"/rest/v2/cart/changeChoose";
+NSString *const kGoodDetailFastBuyUrl = @"/rest/v2/front/product/fastBuy";
 
 #pragma mark - 分类
 NSString *const kShopContentUrl = @"/rest/v2/front/shopContent/getPageManageByPageType";
@@ -110,14 +116,25 @@ NSString * const kCartChangeNums = @"/rest/v2/cart/changeNums";
 NSString * const kCartRemove = @"/rest/v2/cart/remove";
 NSString * const kCartCount = @"/rest/v2/cart/count";
 
+#pragma  mark - 下单
+NSString * const kToBalance = @"/rest/v2/order/toBalance";
+NSString * const kSaveOrder = @"/rest/v2/cart/saveOrder";
+
 #pragma mark - 地址
 NSString * const kProvice = @"/rest/v2/usercenter/region/getAllProvince";
 NSString * const kCities = @"/rest/v2/usercenter/region/getCitysByProvinceUuid";
 NSString * const kAreas = @"/rest/v2/usercenter/region/getRegionsByCityUuid";
 NSString * const kStreets = @"/rest/v2/usercenter/region/getStreetsByRegionUuid";
 NSString * const kAddAddress = @"/rest/v2/usercenter/customeraddress/addAddress";
+NSString * const kEditAddress = @"/rest/v2/usercenter/customeraddress/doEdit";
+NSString * const kDeleteAddress = @"/rest/v2/usercenter/customeraddress/delDeliveryAddress";
+NSString * const kCustomerAddress = @"/rest/v2/usercenter/customeraddress/toCustomerAddress";
+NSString * const kAddressTag = @"/v2/usercenter/customerAddressTag/list";
+NSString * const kSmartAddress = @"/rest/v2/usercenter/customeraddress/getSmartAddress";
 
 
 #pragma mark - 我的
 NSString * const kMineMerchantUserInformation = @"/rest/v2/tclcustomer/userInfo";
 NSString * const kMinePartnerCenterData = @"/sysback/v2/salesman/dataCenter";
+
+

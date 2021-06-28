@@ -80,6 +80,13 @@ typedef NS_ENUM(NSInteger, ShadowPathSide) {
 
 - (void)drawLineWithWidth:(CGFloat)width color:(UIColor *)borderCol starPiont:(CGPoint)startPiont endPoint:(CGPoint)endPoint;
 
+/**
+ * 自定义切圆角
+ * corners : 需要切的方向
+ * cornerRadiiSize : 切割的大小
+ */
+- (void)jaf_customFilletRectCorner:(UIRectCorner)corners
+                       cornerRadii:(CGSize)cornerRadiiSize;
 @end
 
 NS_ASSUME_NONNULL_END

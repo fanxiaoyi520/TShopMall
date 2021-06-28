@@ -9,6 +9,15 @@
 #import "MyDimeScale.h"
 #import <IQKeyboardManager/IQKeyboardManager.h>
 #import <GKNavigationBarConfigure.h>
+#import "WXApi.h"
+
+#import "TSURLRouter.h"
+#import "TSServicesManager.h"
+#import "TSAccountConst.h"
+#import "WechatShareManager.h"
+@interface AppDelegate ()<WXApiDelegate>
+
+@end
 
 @implementation AppDelegate (Initialize)
 
@@ -46,5 +55,14 @@
         configure.gk_openScrollViewGestureHandle = YES;
     }];
 }
+
+-(void)initWechatConfig{
+    [WechatShareManager registerApp:WXAPPId universalLink:WXAPPLink];
+}
+
+- (void)initRouteConfig{
+    [TSServicesManager sharedInstance].uriHandler = [TSURLRouter sharedInstance];
+}
+
 
 @end

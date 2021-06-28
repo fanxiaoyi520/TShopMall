@@ -10,6 +10,7 @@
 #import "TSMakeOrderCommitView.h"
 #import "TSMakeOrderDataController.h"
 #import "TSShippingAddressController.h"
+#import "TSMakeOrderCommitOrderDataController.h"
 
 @interface TSMakeOrderController ()
 @property (nonatomic, strong) TSMakeOrderView *makeOrderView;
@@ -28,23 +29,63 @@
         self.automaticallyAdjustsScrollViewInsets = YES;
     }
     self.dataCon = [TSMakeOrderDataController new];
+    self.dataCon.paramsISFromCart = self.isFromCart;
+    self.dataCon.context = self;
     [self refreshData];
 }
 
 - (void)refreshData{
+    
     __weak typeof(self) weakSelf = self;
-    [self.dataCon initData:^{
-            [weakSelf updateUI];
-        }];
+    [self.dataCon checkBalance:^(BOOL finished) {
+        weakSelf.commitView.hidden  = !finished;
+        [weakSelf updateUI];
+    }];
 }
 
 - (void)updateUI{
     self.makeOrderView.sections = self.dataCon.sections;
+    self.commitView.price.text = [NSString stringWithFormat:@"¥ %@", self.dataCon.balanceModel.orderTotalMoney];
 }
 
+//选择地址
 - (void)gotoSelectedAddress{
     TSShippingAddressController *con = [TSShippingAddressController new];
+    con.addressSelected = ^(TSAddressModel * _Nonnull address) {
+        [self.dataCon updateAddressSection:address];
+        self.makeOrderView.sections = self.dataCon.sections;
+    };
     [self.navigationController pushViewController:con animated:YES];
+}
+
+//选择配送方式
+- (void)operationForChangeDelivery{
+}
+
+//选择发票
+- (void)operationForChangeBill{
+}
+
+- (void)operationForMessageEditEnd:(NSString *)message{
+    [self.dataCon updateMessage:message];
+    self.makeOrderView.sections = self.dataCon.sections;
+}
+
+- (void)commit{
+    TSMakeOrderRow *row = (TSMakeOrderRow *)[self.makeOrderView.sections[0].rows lastObject];
+    if (row.obj == nil) {//地址为空
+        [Popover popToastOnView:self.view text:@"请先选择收获地址"];
+        return;
+    }
+    TSAddressModel *address = row.obj;
+    TSMakeOrderRow *invoiceRow = (TSMakeOrderRow *)[self.makeOrderView.sections[2].rows lastObject];
+    TSMakeOrderInvoiceViewModel *invoce = invoiceRow.obj;
+   
+    [TSMakeOrderCommitOrderDataController commitOrderWithAddress:address balanceInfo:self.dataCon.balanceModel invoice:invoce finished:^(BOOL finished, NSString *payOrderId, NSString *isGroup) {
+        if (finished == YES) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    } OnController:self];
 }
 
 - (void)viewWillLayoutSubviews{
@@ -78,6 +119,7 @@
         return _commitView;
     }
     self.commitView = [TSMakeOrderCommitView new];
+    [self.commitView.commitBtn addTarget:self action:@selector(commit) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.commitView];
     
     return self.commitView;

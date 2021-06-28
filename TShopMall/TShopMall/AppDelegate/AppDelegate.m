@@ -8,11 +8,14 @@
 #import "AppDelegate.h"
 #import "AppDelegate+RootController.h"
 #import "AppDelegate+Initialize.h"
-#import "NSObject+TSProperty.h"
-#import "NSString+Plugin.h"
 #import "TSBestSellingRecommendService.h"
+#import "WXApi.h"
+#import "TSAccountConst.h"
+#import "WechatManager.h"
+#import "WechatShareManager.h"
+#import <AuthenticationServices/AuthenticationServices.h>
 
-@interface AppDelegate ()
+@interface AppDelegate ()<WXApiDelegate>
 
 @end
 
@@ -25,74 +28,70 @@
     [self setKeywordAttribute];
     [self setNavigationConfig];
     [self setupRootController];
+    [self initWechatConfig];
+    [self initRouteConfig];
     
     [TSServicesManager sharedInstance].bestSellingRecommendService = [TSBestSellingRecommendService new];
+    
+    if (@available(iOS 13.0, *)) {
+        
+        // 注意 存储用户标识信息需要使用钥匙串来存储 这里使用NSUserDefaults 做的简单示例
+        NSString *userIdentifier = [[NSUserDefaults standardUserDefaults] valueForKey:@"appleID"];
+        
+        if (userIdentifier) {
+            
+            ASAuthorizationAppleIDProvider *appleIDProvider = [[ASAuthorizationAppleIDProvider alloc] init];
+            
+            [appleIDProvider getCredentialStateForUserID:userIdentifier
+                                              completion:^(ASAuthorizationAppleIDProviderCredentialState credentialState, NSError * _Nullable error) {
+                switch (credentialState) {
+                    case ASAuthorizationAppleIDProviderCredentialAuthorized:
+                        // 授权状态有效
+                        break;
+                    case ASAuthorizationAppleIDProviderCredentialRevoked:
+                        // 苹果账号登录的凭据已被移除，需解除绑定并重新引导用户使用苹果登录
+                        break;
+                    case ASAuthorizationAppleIDProviderCredentialNotFound:
+                        // 未登录授权，直接弹出登录页面，引导用户登录
+                        break;
+                    case ASAuthorizationAppleIDProviderCredentialTransferred:
+                        // 授权AppleID提供者凭据转移
+                        break;
+                }
+            }];
+        }
+        
+    }
     
     return YES;
 }
 
-- (UIViewController *)getCurrentVC{
-    
-    
-    UIWindow * window = [[UIApplication sharedApplication] keyWindow];
-    //app默认windowLevel是UIWindowLevelNormal，如果不是，找到UIWindowLevelNormal的
-    //其他框架可能会改我们的keywindow，比如支付宝支付，qq登录都是在一个新的window上，这时候的keywindow就不是appdelegate中的window。 当然这里也可以直接用APPdelegate里的window。
-    if (window.windowLevel != UIWindowLevelNormal)
-    {
-        NSArray *windows = [[UIApplication sharedApplication] windows];
-        for(UIWindow * tmpWin in windows)
-        {
-            if (tmpWin.windowLevel == UIWindowLevelNormal)
-            {
-                window = tmpWin;
-                break;
-            }
-        }
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString*, id> *)options
+{
+    NSLog(@"url.host:%@",url.host);
+    if ([url.host isEqualToString:@"oauth"]) {
+        return [WechatManager handleOpenUrl:url];
     }
-    
-    UIViewController* currentViewController = window.rootViewController;
-    while (YES) {
-        if (currentViewController.presentedViewController) {
-            currentViewController = currentViewController.presentedViewController;
-        } else {
-            if ([currentViewController isKindOfClass:[UINavigationController class]]) {
-                currentViewController = ((UINavigationController *)currentViewController).visibleViewController;
-            } else if ([currentViewController isKindOfClass:[UITabBarController class]]) {
-                currentViewController = ((UITabBarController* )currentViewController).selectedViewController;
-            } else {
-                break;
-            }
-        }
+    else{
+        //微信分享
+        [WechatShareManager handleOpenUrl:url];
     }
+    return YES;
     
-    return currentViewController;
 }
 
-- (void)openURI:(NSString *_Nullable)uri {
-    NSLog(@"AppDelegate 中 uri==%@",uri);
-    
-    Class cls = NSClassFromString([self getClassDict][[uri componentsSeparatedByString:@"?"].firstObject]);
-    if (cls == nil) { return; }
-    
-    UIViewController *obj = [[cls alloc] init];
-    if (obj == nil || ![obj isKindOfClass:[UIViewController class]]) {
-        return;
-    }
-
-    for (NSString *propertyKey in obj.ts_validProperties) {
-        NSObject *propertyValue = [uri.ts_urlParsing objectForKey:propertyKey];
-        if (propertyValue) {
-            [obj setValue:propertyValue forKey:propertyKey];
+- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler {
+    NSURL *continueURL = userActivity.webpageURL;
+    NSString *relativePath = continueURL.relativePath;
+    if ([relativePath containsString:WXAPPId] && [relativePath containsString:@"pay"]) {
+        return [WXApi handleOpenUniversalLink:userActivity delegate:[WechatManager shareInstance]];
+    } else
+        if ([relativePath containsString:[NSString stringWithFormat:@"%@", WXAPPId]]) {
+            return [WXApi handleOpenUniversalLink:userActivity delegate:[WechatShareManager shareInstance]];
+        }else{
+            
         }
-    }
-    
-    [self.getCurrentVC.navigationController pushViewController:obj animated:YES];
+    return YES;
 }
 
-- (NSDictionary *)getClassDict {
-    return @{
-        @"page://quote/detailList": @"CMSQuoteDetailListViewController",
-        @"page://quote/config": @"CMSQuotesConfigViewController",
-    };
-}
 @end

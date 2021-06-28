@@ -6,8 +6,9 @@
 //
 
 #import "TSLoginTopView.h"
+#import "TSTools.h"
 
-@interface TSLoginTopView ()
+@interface TSLoginTopView ()<UITextFieldDelegate>
 /** 标题 */
 @property(nonatomic, weak) UILabel *titleLabel;
 /** 副标题 */
@@ -135,6 +136,9 @@
         _phoneInput.textColor = KHexColor(@"#2D3132");
         _phoneInput.font = KRegularFont(16);
         _phoneInput.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"请输入手机号码" attributes:@{NSForegroundColorAttributeName : KHexAlphaColor(@"#2D3132", 0.2)}];
+        [_phoneInput addTarget:self
+                           action:@selector(textFieldDidChangeValue:)
+                 forControlEvents:UIControlEventEditingChanged];
         [self addSubview:_phoneInput];
     }
     return _phoneInput;
@@ -145,9 +149,14 @@
         UITextField *codeInput = [[UITextField alloc] init];
         _codeInput = codeInput;
         _codeInput.keyboardType = UIKeyboardTypeNumberPad;
+        _codeInput.returnKeyType = UIReturnKeyDone;
         _codeInput.textColor = KHexColor(@"#2D3132");
         _codeInput.font = KRegularFont(16);
         _codeInput.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"请输入验证码" attributes:@{NSForegroundColorAttributeName : KHexAlphaColor(@"#2D3132", 0.2)}];
+        _codeInput.delegate = self;
+        [_codeInput addTarget:self
+                           action:@selector(textFieldDidChangeValue:)
+                 forControlEvents:UIControlEventEditingChanged];
         [self addSubview:_codeInput];
     }
     return _codeInput;
@@ -158,11 +167,13 @@
         UIButton *codeButton = [[UIButton alloc] init];
         _codeButton = codeButton;
         _codeButton.clipsToBounds = YES;
+        _codeButton.enabled = NO;
         _codeButton.titleLabel.font = KRegularFont(11);
         [_codeButton setCorners:UIRectCornerAllCorners radius:2.5];
         [_codeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [_codeButton setBackgroundColor:KHexColor(@"#41A98F")];
-        [_codeButton setTitleColor:KHexColor(@"#2D3132") forState:UIControlStateDisabled];
+        [_codeButton setBackgroundColor:KHexColor(@"#D7D8D8")];
+        [_codeButton setTitleColor:KWhiteColor forState:UIControlStateDisabled];
+        [_codeButton setTitleColor:KWhiteColor forState:UIControlStateNormal];
         [_codeButton setTitle:@"获取验证码" forState:UIControlStateNormal];
         [_codeButton addTarget:self action:@selector(sendCode) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_codeButton];
@@ -194,8 +205,10 @@
     if (_loginButton == nil) {
         UIButton *loginButton = [[UIButton alloc] init];
         _loginButton = loginButton;
-        _loginButton.backgroundColor = KHexColor(@"#FF4D49");
-        //_loginButton.layer.cornerRadius = KRateW(20);
+        _loginButton.enabled = NO;
+        _loginButton.backgroundColor = KHexColor(@"#DDDDDD");
+        [_loginButton setTitleColor:KWhiteColor forState:UIControlStateNormal];
+        [_loginButton setTitleColor:KWhiteColor forState:UIControlStateDisabled];
         [_loginButton setCorners:(UIRectCornerAllCorners) radius:KRateW(20)];
         _loginButton.clipsToBounds = YES;
         _loginButton.titleLabel.font = KRegularFont(16);
@@ -207,17 +220,18 @@
 }
 
 #pragma mark - Public Method
-- (void)setCodeButtonTitleAndColor:(NSString *)codeTitle isResend:(BOOL)isResend {
+- (void)setCodeButtonTitleAndColor:(NSString *)codeTitle isResend:(BOOL)isResend enabled:(BOOL)enabled {
     if (isResend) {
         self.codeButton.enabled = YES;
         self.codeButton.backgroundColor = KHexColor(@"#F9AB50");
+        [self.codeButton setTitle:codeTitle forState:UIControlStateNormal];
     } else {
-        if (self.codeButton.isEnabled) {
-            self.codeButton.backgroundColor = KHexColor(@"#D7D8D8");
-            self.codeButton.enabled = NO;
+        if ((self.codeButton.isEnabled && !enabled) || (!self.codeButton.isEnabled && enabled)) {
+            self.codeButton.backgroundColor = enabled ? KHexColor(@"#41A98F") : KHexColor(@"#D7D8D8");
+            self.codeButton.enabled = enabled;
         }
+        [self.codeButton setTitle:codeTitle forState:UIControlStateNormal];
     }
-    [self.codeButton setTitle:codeTitle forState:UIControlStateNormal];
 }
 
 - (NSString *)getPhoneNumber {
@@ -245,6 +259,41 @@
     if ([self.delegate respondsToSelector:@selector(sendCode)]) {
         [self.delegate sendCode];
     }
+}
+
+- (void)setLoginButtonEnable:(BOOL)isEnable {
+    BOOL enable = isEnable && [TSTools isPhoneNumber: self.phoneInput.text] && self.codeInput.text.length;
+    self.loginButton.enabled = enable;
+    if (enable) {
+        self.loginButton.backgroundColor = KHexColor(@"#FF4D49");
+    } else {
+        self.loginButton.backgroundColor = KHexColor(@"#DDDDDD");
+    }
+}
+
+#pragma mark - <UITextFieldDelegate>
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    
+    return [textField resignFirstResponder];
+}
+
+#pragma mark - UIControlEventEditingChanged
+- (void)textFieldDidChangeValue:(UITextField *)textfield {
+    if ([TSTools isPhoneNumber:self.phoneInput.text] && textfield == self.phoneInput) {
+        [self setCodeButtonTitleAndColor:@"获取验证码" isResend:NO enabled:YES];
+    } else if ([TSTools isPhoneNumber:self.phoneInput.text] && textfield == self.codeInput) {
+        if (self.codeInput.text.length && [self.delegate respondsToSelector:@selector(inputDoneAction)]) {
+            if (!self.loginButton.enabled) {
+                [self.delegate inputDoneAction];
+            }
+        } else {
+            [self setLoginButtonEnable: NO];
+        }
+    } else {
+        [self setCodeButtonTitleAndColor:@"获取验证码" isResend:NO enabled:NO];
+        [self setLoginButtonEnable: NO];
+    }
+
 }
 
 @end

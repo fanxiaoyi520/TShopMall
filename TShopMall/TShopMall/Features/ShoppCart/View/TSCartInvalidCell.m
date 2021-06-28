@@ -31,7 +31,6 @@
         return _goodView;
     }
     self.goodView = [TSCartInvalideGoodView new];
-    [self.goodView performSelector:@selector(testUI)];
     [self.contentView addSubview:self.goodView];
     
     return self.goodView;

@@ -50,10 +50,6 @@
         self.naviView.searchView.textField.text = self.searchKey;
         [self refreshGoods];
     }];
-    
-    [[TSRecomendDataController new] fetchRecomentDatas:^{
-            
-    }];
 }
 
 - (void)hideSearchResultView{

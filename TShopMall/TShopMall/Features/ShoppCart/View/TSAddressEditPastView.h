@@ -8,6 +8,7 @@
 #import <UIKit/UIKit.h>
 
 @interface TSAddressEditPastView : UIView
-
+@property (nonatomic, copy) void(^pastContentChanged)(NSString *pastStr);
+- (void)updatePastView:(NSString *)string;
 @end
 

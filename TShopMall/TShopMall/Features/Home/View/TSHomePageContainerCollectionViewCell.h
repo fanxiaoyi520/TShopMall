@@ -7,9 +7,10 @@
 
 #import <UIKit/UIKit.h>
 #import "TSProductBaseModel.h"
+#import "TSUniversalCollectionViewCell.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TSHomePageContainerCollectionViewCell : UICollectionViewCell
+@interface TSHomePageContainerCollectionViewCell : TSUniversalCollectionViewCell
 @property (nonatomic, strong) TSProductBaseModel *item;
 @end
 

@@ -8,6 +8,7 @@
 #import "TSAddressEditView.h"
 #import "TSAddressEditPastView.h"
 #import "TSAddressMarkView.h"
+#import "TSAddressSmartDataController.h"
 
 @interface TSAddressEditView()
 @property (nonatomic, strong) TSAddressEditItem *nameItem;
@@ -26,6 +27,10 @@
         [self configUI];
         [self initObserver];
         
+        __weak typeof(self) weakSelf = self;
+        self.pastView.pastContentChanged = ^(NSString *pastStr) {
+            [weakSelf shouldFetchSmartAddress:pastStr];
+        };
     }
     return self;
 }
@@ -52,13 +57,13 @@
         }
     }
     if (object == self.nameItem.textField) {
-        self.addressModel.name = self.nameItem.textField.text;
+        self.vm.consignee = self.nameItem.textField.text;
     } else if (object == self.phoneItem.textField) {
-        self.addressModel.phone = self.addressItem.textField.text;
+        self.vm.mobile = self.phoneItem.textField.text;
     } else if (object == self.addressItem.textField) {
-        self.addressModel.address = self.addressItem.textField.text;
+        self.vm.address = self.addressItem.textField.text;
     } else if (object == self.detailItem.textField) {
-        self.addressModel.detailAddress = self.detailItem.textField.text;
+        self.vm.area = self.detailItem.textField.text;
     }
 }
 
@@ -79,10 +84,30 @@
     self.addressItem.textField.placeholder = @"选择所在地区";
     self.detailItem.title.text = @"详细地址";
     self.detailItem.textField.placeholder = @"填写小区、门牌号等";
-    self.nameItem.textField.text = self.addressModel.name;
-    self.phoneItem.textField.text = self.addressModel.phone;
-    self.addressItem.textField.text = self.addressModel.address;
-    self.detailItem.textField.text = self.addressModel.detailAddress;
+}
+
+- (void)setVm:(TSAddressViewModel *)vm{
+    _vm = vm;
+    self.nameItem.textField.text = self.vm.consignee;
+    self.phoneItem.textField.text = self.vm.mobile;
+    self.addressItem.textField.text = vm.address;
+    self.detailItem.textField.text = self.vm.area;
+    self.markView.currentMark = self.vm.tag;
+}
+
+- (void)shouldFetchSmartAddress:(NSString *)address{
+    
+    __weak typeof(self) weakSelf = self;
+    [TSAddressSmartDataController smartAddress:address finished:^(TSAddressModel *model) {
+        if (model.isValid == NO) {
+            return;
+        }
+        BOOL isDefault = weakSelf.vm.isDefault;
+        weakSelf.vm = [[TSAddressViewModel alloc] initWithAddress:model];
+        weakSelf.vm.isDefault = isDefault;
+        NSString *str = [NSString stringWithFormat:@"%@\n%@\n%@%@%@%@%@", model.consignee,model.mobile, model.provinceName, model.cityName, model.regionName, model.streetName,model.address];
+        [weakSelf.pastView updatePastView:str];
+    } onController:weakSelf.controller];
 }
 
 - (void)layouView{
@@ -188,6 +213,10 @@
     }
     self.markView = [TSAddressMarkView new];
     [self addSubview:self.markView];
+    __weak typeof(self) weakSelf = self;
+    self.markView.markChanged = ^(NSString * _Nonnull mark) {
+        weakSelf.vm.tag = mark;
+    };
     
     return self.markView;
 }

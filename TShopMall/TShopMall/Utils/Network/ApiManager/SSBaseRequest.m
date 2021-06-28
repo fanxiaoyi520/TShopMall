@@ -13,7 +13,7 @@
 #pragma mark - 失败处理器（stateCode != 200）
 -(void)requestFailedFilter{
     SSResponseModel *reponseModel = [[SSResponseModel alloc] init];
-    reponseModel.stateCode = @"500";
+    reponseModel.stateCode = 500;
     self.responseModel = reponseModel;
 }
 
@@ -55,6 +55,7 @@
     NSMutableDictionary *commonRequestHeader = [NSMutableDictionary dictionary];
     [commonRequestHeader setValue:@"platform_tcl_shop" forKey:@"platform"];
     [commonRequestHeader setValue:@"thome" forKey:@"storeUuid"];
+//  [commonRequestHeader setValue:@"tclplus" forKey:@"storeUuid"];
     [commonRequestHeader setValue:@"TCL" forKey:@"t-id"];
     [commonRequestHeader setValue:@"02" forKey:@"terminalType"];
     

@@ -18,10 +18,6 @@
 @property (nonatomic, strong) UIButton *saveBtn;
 @property (nonatomic, strong) UIButton *selBtn;
 @property (nonatomic, strong) UILabel *selTips;
-@property (nonatomic, strong) TSAreaModel *provice;
-@property (nonatomic, strong) TSAreaModel *city;
-@property (nonatomic, strong) TSAreaModel *area;
-@property (nonatomic, strong) TSAreaModel *street;
 @end
 
 @implementation TSAddressEditController
@@ -29,20 +25,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = UIColor.whiteColor;
-    if (self.addressModel == nil) {
+    if (self.vm == nil) {
         self.gk_navTitle = @"新增收货地址";
+        isAllInfoInput = NO;
     } else {
         self.gk_navTitle = @"编辑收货地址";
+        isAllInfoInput = YES;
     }
     if (@available(iOS 11.0, *)) {
         self.editView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     } else {
         self.automaticallyAdjustsScrollViewInsets = YES;
     }
-    
     [self updateSaveStatus];
     
-    self.editView.addressModel = self.addressModel;
+    self.editView.vm = self.vm;
 }
 
 - (void)shouldUpdateSaveStatus:(id)status{
@@ -54,7 +51,7 @@
 
 - (void)updateSaveStatus{
     BOOL enable = NO;
-    if (self.selBtn.selected == YES && isAllInfoInput == YES) {
+    if (isAllInfoInput == YES) {
         enable = YES;
     } else {
         enable = NO;
@@ -72,7 +69,7 @@
 
 - (void)setDefaultAddress:(UIButton *)sender{
     sender.selected = !sender.selected;
-    [self updateSaveStatus];
+    self.editView.vm.isDefault = sender.selected;
 }
 
 //选择地区
@@ -80,50 +77,68 @@
     
     __weak typeof(self) weakSelf = self;
     [TSAreaSelectedController showAreaSelected:^(TSAreaModel *provice, TSAreaModel *city, TSAreaModel *eare, TSAreaModel *street, NSString *location) {
+        if (provice) {
+            weakSelf.editView.vm.provinceName = provice.provinceName;
+            weakSelf.editView.vm.province = provice.currentUUid;
+        }
+        if (city) {
+            weakSelf.editView.vm.cityName = city.cityName;
+            weakSelf.editView.vm.city = city.currentUUid;
+        }
+        if (eare) {
+            weakSelf.editView.vm.regionName = eare.regionName;
+            weakSelf.editView.vm.region = eare.currentUUid;
+        }
+        if (street) {
+            weakSelf.editView.vm.streetName = street.streetName;
+            weakSelf.editView.vm.street = street.currentUUid;
+        }
         if (provice == nil) {
-            weakSelf.addressModel.address = location;
+            weakSelf.editView.vm.address = location;
         } else {
             NSString *address = [NSString stringWithFormat:@"%@%@%@%@", provice.provinceName, city.cityName, eare.regionName, street.streetName];
-            weakSelf.addressModel.address = address;
+            weakSelf.editView.vm.address = address;
         }
-        [weakSelf.editView updateAddress:weakSelf.addressModel.address];
+        [weakSelf.editView updateAddress:weakSelf.editView.vm.address];
     } OnController:self];
 }
 
 - (void)saveAddress{
-    NSString *name = self.editView.addressModel.name;
-    NSString *phone = self.editView.addressModel.phone;
-    NSString *address = self.editView.addressModel.address;
-    NSString *detail = self.editView.addressModel.detailAddress;
-//    NSDictionary *params = @{
-//        @"province" : self.provice==nil? @"":self.provice.currentUUid,
-//        @"city" : self.city==nil? @"":self.city.currentUUid,
-//        @"region" : self.area==nil? @"":self.area.currentUUid,
-//        @"street" : self.street==nil? @"":self.street.currentUUid,
-//        @"area" : self.editView.addressModel.detailAddress,
-//        @"address" : self.editView.addressModel.address,
-//        @"consignee" : name,
-//        @"mobile" : phone,
-//        @"isDefault" : @(self.selBtn.selected),
-//        @"zipcode" : self.provice.postCode,
-//        @"tag" : @"",
-//    };
+    TSAddressViewModel *vm = self.editView.vm;
     NSDictionary *params = @{
-        @"province" : @"02",
-        @"city" : @"116",
-        @"region" : @"1105",
-        @"street" : @"11643",
-        @"area" : @"北京北京市昌平区城北街道",
-        @"address" : @"天天路11号",
-        @"consignee" : @"橙子",
-        @"mobile" : @"15678767890",
-        @"isDefault" : @(self.selBtn.selected),
-        @"zipcode" : @"",
-        @"tag" : @"学校",
+        @"province" : vm.province.length==0? @"":vm.province,
+        @"city" : vm.city.length==0? @"":vm.city,
+        @"region" : vm.region.length==0? @"":vm.region,
+        @"street" : vm.street.length==0? @"":vm.street,
+        @"area" : vm.area.length==0? @"":vm.area,
+        @"address" : vm.address.length==0? @"":vm.address,
+        @"consignee" : vm.consignee.length==0? @"":vm.consignee,
+        @"mobile" : vm.mobile.length==0? @"":vm.mobile,
+        @"isDefault" : vm.isDefault==YES? @"1":@"0",
+        @"zipcode" : vm.zipcode.length==0? @"":vm.zipcode,
+        @"tag" : vm.tag.length==0? @"":vm.tag,
+        @"uuid" : vm.uuid.length==0? @"":vm.uuid
     };
-    [TSAddressEditDataController editAddress:params finished:^(BOOL isSuccess) {
-        
-    } controller:self];
+    if (self.vm == nil) {
+        [TSAddressEditDataController addAddress:params finished:^(BOOL isSuccess) {
+            if (isSuccess) {
+                [self.navigationController popViewControllerAnimated:YES];
+                if (self.addressChanged) {
+                    self.addressChanged();
+                }
+            }
+        } controller:self];
+    } else {
+        [TSAddressEditDataController editAddress:params finished:^(BOOL isSuccess) {
+            if (isSuccess) {
+                [self.navigationController popViewControllerAnimated:YES];
+                if (self.addressChanged) {
+                    self.addressChanged();
+                }
+            }
+        } controller:self];
+    }
+    
 }
 
 - (void)viewWillLayoutSubviews{
@@ -173,6 +188,7 @@
         return _selBtn;
     }
     self.selBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.selBtn.selected = self.vm.isDefault;
     [self.selBtn setBackgroundImage:KImageMake(@"btn_normal") forState:UIControlStateNormal];
     [self.selBtn setBackgroundImage:KImageMake(@"btn_sel") forState:UIControlStateSelected];
     [self.selBtn addTarget:self action:@selector(setDefaultAddress:) forControlEvents:UIControlEventTouchUpInside];

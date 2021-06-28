@@ -11,7 +11,10 @@
 #import "TSUserInfoManager.h"
 #import "TSLogoutRequest.h"
 #import <NTESQuickPass/NTESQuickPass.h>
-#import "NTESQLHomePageCustomUIModel.h"
+#import "TSAccountConst.h"
+#import "TSOneClickLoginViewController.h"
+#import "TSLoginRegisterDataController.h"
+#import "TSBindMobileController.h"
 @interface TSUserLoginManager ()
 
 @end
@@ -22,22 +25,40 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         instance = [[TSUserLoginManager alloc] init];
+        [instance registerQuickLogin];
     });
     return instance;
 }
 
 - (void)startLogin{
-    
-    TSLoginViewController *loginViewController = [TSLoginViewController new];
-    TSBaseNavigationController *homeController = [[TSBaseNavigationController alloc] initWithRootViewController:loginViewController];
-    loginViewController.loginBlock = ^{
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"TS_LoginUpdateNotification" object:@0];
-    };
-    UIViewController *vc = [UIApplication sharedApplication].delegate.window.rootViewController;
-    homeController.modalPresentationStyle = UIModalPresentationFullScreen;
-    [vc presentViewController:homeController animated:YES completion:^{
-    }];
-    
+    BOOL shouldQL = [[NTESQuickLoginManager sharedInstance] shouldQuickLogin];
+    if (shouldQL) {
+        TSOneClickLoginViewController *oneClickLoginVC = [TSOneClickLoginViewController new];
+        TSBaseNavigationController *nav = [[TSBaseNavigationController alloc] initWithRootViewController:oneClickLoginVC];
+        @weakify(self);
+        oneClickLoginVC.otherLoginBlock = ^{
+            @strongify(self)
+            [self otherLoginWithAnimation:YES];
+        };
+        oneClickLoginVC.bindBlock = ^{
+            TSBindMobileController *vc = [TSBindMobileController new];
+            TSBaseNavigationController *nav = [[TSBaseNavigationController alloc] initWithRootViewController:vc];
+
+            vc.bindedBlock = ^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"TS_LoginUpdateNotification" object:@1];
+
+            };
+            nav.modalPresentationStyle = UIModalPresentationFullScreen;
+            [[UIApplication sharedApplication].delegate.window.rootViewController presentViewController:nav animated:YES completion:^{
+            }];
+        };
+        UIViewController *vc = [UIApplication sharedApplication].delegate.window.rootViewController;
+        nav.modalPresentationStyle = UIModalPresentationFullScreen;
+        [vc presentViewController:nav animated:YES completion:^{
+        }];
+    }else{
+        [self otherLoginWithAnimation:YES];
+    }
 }
 
 - (void)logout{
@@ -56,5 +77,23 @@
     }else
         return None;
 }
+
+- (void)registerQuickLogin {
+    [[NTESQuickLoginManager sharedInstance] registerWithBusinessID:QuickLoginBusinessID];
+}
+
+- (void)otherLoginWithAnimation:(BOOL)animation{
+    TSLoginViewController *loginViewController = [TSLoginViewController new];
+    TSBaseNavigationController *homeController = [[TSBaseNavigationController alloc] initWithRootViewController:loginViewController];
+    loginViewController.loginBlock = ^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"TS_LoginUpdateNotification" object:@0];
+    };
+    UIViewController *vc = [UIApplication sharedApplication].delegate.window.rootViewController;
+    homeController.modalPresentationStyle = UIModalPresentationFullScreen;
+    [vc presentViewController:homeController animated:animation completion:^{
+    }];
+}
+
+
 
 @end

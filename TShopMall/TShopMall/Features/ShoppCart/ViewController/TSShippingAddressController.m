@@ -9,13 +9,13 @@
 #import "TSShippingAddressCell.h"
 #import "TSShippingAddressDataController.h"
 #import "TSAddressEditController.h"
+#import "TSEmptyAlertView.h"
 
 @interface TSShippingAddressController ()<UITableViewDelegate, UITableViewDataSource>{
-    NSArray *address;
+    NSArray<TSAddressModel *> *addresses;
 }
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UIButton *addBtn;
-@property (nonatomic, strong) TSShippingAddressDataController *dataCon;
 @end
 
 @implementation TSShippingAddressController
@@ -24,25 +24,29 @@
     [super viewDidLoad];
     self.gk_navTitle = @"我的收货地址";
     
-    self.view.backgroundColor = UIColor.whiteColor;
+    self.view.backgroundColor = KHexColor(@"#F4F4F4");
     if (@available(iOS 11.0, *)) {
         self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     } else {
         self.automaticallyAdjustsScrollViewInsets = YES;
     }
     
-    self.dataCon = [TSShippingAddressDataController new];
-    [self configDatas];
+    [self fetchAddress];
 }
 
-- (void)configDatas{
-    address = @[
-        @"广东省深圳市南山区西丽街道TCL国际e城808有多的就两行",
-        @"广东省深圳市南山区西丽街道TCL国际e城808有多的就两行为了三行为了三行为了三行为了三行为了三行为了三行为了三行",
-        @"广东省深圳市南山区西丽街道TCL国际e城808有多的就两行",
-        @"广东省深圳市南山区西丽街道TCL国际e城"
-    ];
-    [self.tableView reloadData];
+- (void)fetchAddress{
+    __weak typeof(self) weakSelf = self;
+    [TSShippingAddressDataController  fetchAddress:^(NSArray<TSAddressModel *> *addresses) {
+        if (addresses.count == 0) {
+            TSEmptyAlertView.new.alertInfo(@"没有收获地址点击添加", @"").alertImage(@"alert_address_empty").show(self.tableView, @"center", ^{
+                [weakSelf gotoAddNewAddress];
+            });
+        } else {
+            [TSEmptyAlertView hideInView:self.tableView];
+            self->addresses = addresses;
+            [weakSelf.tableView reloadData];
+        }
+    } lodingView:self.view];
 }
 
 - (void)gotoAddNewAddress{
@@ -51,7 +55,12 @@
 
 - (void)gotoEditAddress:(TSAddressModel *)obj{
     TSAddressEditController *con = [TSAddressEditController new];
-    con.addressModel = [TSAddressModel new];
+    if (obj != nil) {
+        con.vm = [[TSAddressViewModel alloc] initWithAddress:obj];
+    }
+    con.addressChanged = ^{
+        [self fetchAddress];
+    };
     [self.navigationController pushViewController:con animated:YES];
 }
 
@@ -60,13 +69,13 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return address.count;
+    return addresses.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     __weak typeof(self) weakSelf = self;
     TSShippingAddressCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TSShippingAddressCell"];
-    cell.addressStr = address[indexPath.row];
+    cell.addressModel = addresses[indexPath.row];
     cell.addressEdit = ^(TSAddressModel * _Nonnull address) {
         [weakSelf gotoEditAddress:address];
     };
@@ -75,7 +84,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (self.addressSelected) {
-        self.addressSelected(address[indexPath.row]);
+        self.addressSelected(addresses[indexPath.row]);
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 
@@ -100,6 +110,12 @@
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    TSShippingAddressCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    
+    [TSShippingAddressDataController deleteAddress:cell.addressModel finished:^{
+        [self fetchAddress];
+    } lodingView:self.view];
+    
 }
 
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -134,7 +150,7 @@
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 0.1)];
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 0.1)];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.backgroundColor = KHexColor(@"#ffffff");
+    self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.estimatedRowHeight = 140.0;

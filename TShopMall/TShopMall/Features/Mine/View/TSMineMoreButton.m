@@ -19,7 +19,7 @@
 -(void)setupBasic{
     self.backgroundColor = [UIColor whiteColor];
     self.titleLabel.font = KRegularFont(12);
-    [self setImage:KImageMake(@"mall_mine_more") forState:UIControlStateNormal];
+    [self setImage:KImageMake(@"mall_detail_more") forState:UIControlStateNormal];
     [self setTitleColor:KHexAlphaColor(@"#999999", 1.0) forState:UIControlStateNormal];
     [self setTitleColor:KHexAlphaColor(@"#999999", 1.0) forState:UIControlStateHighlighted];
     self.imageView.contentMode = UIViewContentModeScaleAspectFit;
@@ -37,7 +37,7 @@
 -(CGRect)imageRectForContentRect:(CGRect)contentRect{
     CGFloat imageW = 16;
     CGFloat imageH = 16;
-    CGFloat imageX = contentRect.size.width - 6;
+    CGFloat imageX = contentRect.size.width - 16;
     CGFloat imageY = (contentRect.size.height - imageH) * 0.5;
 
     return CGRectMake(imageX, imageY, imageW, imageH);

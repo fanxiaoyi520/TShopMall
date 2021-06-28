@@ -8,7 +8,7 @@
 #import "TSMakeOrderView.h"
 #import "TSMakeOrderBaseCell.h"
 
-@interface TSMakeOrderView()<UITableViewDelegate, UITableViewDataSource, TSMakeOrderCellDelegate>{
+@interface TSMakeOrderView()<UITableViewDelegate, UITableViewDataSource>{
     
 }
 @end
@@ -22,16 +22,6 @@
         [self configTable];
     }
     return self;
-}
-
-//选择配送方式
-- (void)operationForChangeDelivery{
-    
-}
-
-//选择发票
-- (void)operationForChangeBill{
-    
 }
 
 - (void)setSections:(NSMutableArray<TSMakeOrderSection *> *)sections{
@@ -53,13 +43,15 @@
     [tableView registerClass:cla forCellReuseIdentifier:row.cellIdentifier];
     TSMakeOrderBaseCell *cell = [tableView dequeueReusableCellWithIdentifier:row.cellIdentifier];
     cell.obj = row.obj;
-    cell.delegate = self;
+    cell.delegate = self.controller;
     cell.indexPath = indexPath;
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section == 0) {
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    if ([cell isKindOfClass:NSClassFromString(@"TSMakeOrderAddressCell")] ||
+        [cell isKindOfClass:NSClassFromString(@"TSMakeOrderAddressTipsCell")]) {
         [self.controller performSelector:@selector(gotoSelectedAddress)];
     }
 }
@@ -110,4 +102,5 @@
     self.showsVerticalScrollIndicator = NO;
 }
 
+- (void)gotoSelectedAddres{}
 @end

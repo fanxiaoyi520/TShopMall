@@ -7,6 +7,11 @@
 
 #import "TSBaseDataController.h"
 #import "TSLoginSMSModel.h"
+#import "TSAgreementModel.h"
+//typedef NS_ENUM(NSUInteger, TSLoginState) {
+//    Login,
+//    None
+//};
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -32,6 +37,17 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)fetchOneStepLoginToken:(NSString *)token
                      accessToken:(NSString *)accessToken
                         complete:(void(^)(BOOL isSucess))complete;
+
+-(void)fetchLoginByAuthCode:(NSString *)code
+                    platformId:(NSString *)platformId
+                     sucess:(void(^)(BOOL isHaveMobile, NSString *token))complete;
+
+- (void)fetchLoginByToken:(NSString *)token
+                    platformId:(NSString *)platformId
+                   sucess:(void(^)(BOOL isHaveMobile, NSString *token))complete;
+
+/** 获取注册登录的协议信息 */
+- (void)fetchAgreementWithCompleted: (void(^)(NSArray<TSAgreementModel *> *agreementModels))completed;
 @end
 
 NS_ASSUME_NONNULL_END

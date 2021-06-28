@@ -7,19 +7,21 @@
 
 #import "TSMineViewController.h"
 #import "TSMineDataController.h"
+
 #import "TSUserInfoView.h"
 #import "TSUniversalFlowLayout.h"
 #import "TSMineOrderHeaderView.h"
-#import "TSUniversalCollectionViewCell.h"
 #import "TSUniversalFooterView.h"
 #import "TSMineNavigationBar.h"
+#import "TSUniversalCollectionViewCell.h"
+#import "TSMineEarningsCell.h"
+
+#import "TSMineWalletCenterViewController.h"
 #import "TSSettingViewController.h"
-#import "TSOrderManageViewController.h"
+#import "TSHybridViewController.h"
 
 @interface TSMineViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate,TSUserInfoViewDelegate,TSMineOrderHeaderViewDelegate>
 
-/// 自定义导航栏
-@property(nonatomic, strong) TSMineNavigationBar *navigationBar;
 /// 背景视图
 @property(nonatomic, strong) UIImageView *bgImageView;
 /// 设置按钮
@@ -64,26 +66,27 @@
     [self.view addSubview:self.bgImageView];
     [self.view addSubview:self.collectionView];
     [self.collectionView addSubview:self.infoView];
-    [self.collectionView addSubview:self.setButton];
-    [self.view addSubview:self.navigationBar];
+    [self.view addSubview:self.setButton];
     
-    CGFloat top = 6;
+    CGFloat top = 6 + GK_STATUSBAR_HEIGHT;
     
     self.bgImageView.frame = CGRectMake(0, 0, kScreenWidth, 205);
     self.collectionView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight - GK_TABBAR_HEIGHT);
     self.infoView.frame = CGRectMake(0, 30, kScreenWidth, 60);
     self.setButton.frame = CGRectMake(kScreenWidth - 48, top, 32, 32);
-    self.navigationBar.frame = CGRectMake(0, 0, kScreenWidth, GK_STATUSBAR_NAVBAR_HEIGHT);
-
 }
 
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    [self hiddenNavigationBar];
-}
-
--(void)viewWillLayoutSubviews{
-    [super viewWillLayoutSubviews];
+-(void)setupNavigationBar{
+    [super setupNavigationBar];
+    
+    self.gk_navigationBar.alpha = 0;
+    
+    UIButton *setButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [setButton setTitle:@"设置" forState:UIControlStateNormal];
+    [setButton setTitleColor:KTextColor forState:UIControlStateNormal];
+    setButton.titleLabel.font = KRegularFont(14);
+    [setButton addTarget:self action:@selector(setAction:) forControlEvents:UIControlEventTouchUpInside];
+    self.gk_navRightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:setButton];
 }
 
 #pragma mark - Noti
@@ -106,6 +109,8 @@
 #pragma mark - UIScrollViewDelegate
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     CGFloat offsetY = ceil(scrollView.contentOffset.y);
+    CGFloat progress = offsetY / GK_STATUSBAR_NAVBAR_HEIGHT;
+    self.gk_navigationBar.alpha = progress;
     if (offsetY <= 0) {
         CGRect frame = self.bgImageView.frame;
         frame.size.height = 205 - offsetY;
@@ -116,8 +121,7 @@
         frame.origin.y = -offsetY;
         self.bgImageView.frame = frame;
     }
-    
-    self.navigationBar.alpha = offsetY / 50.0;
+    self.setButton.alpha = 0.2 - progress;
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -142,15 +146,42 @@
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    
-    if (indexPath.item == 0) {//测试我的订单
-        TSOrderManageViewController *orderVc = [[TSOrderManageViewController alloc] init];
-        [self.navigationController pushViewController:orderVc animated:YES];
-        return;
+    //我的订单
+    if (indexPath.section == 0 && indexPath.row == 0) {//待付款
+        NSString *path = [NSString stringWithFormat:@"%@%@?&orderType=%@&orderState=%@rightbutoon=show",kMallH5ApiPrefix,kMallH5OrderManageUrl,@"1",@"1"];
+        TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:path];
+        [self.navigationController pushViewController:hybrid animated:YES];
+    }else if (indexPath.section == 0 && indexPath.row == 1){//待发货
+        NSString *path = [NSString stringWithFormat:@"%@%@?&orderType=%@&orderState=%@",kMallH5ApiPrefix,kMallH5OrderManageUrl,@"1",@"4"];
+        TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:path];
+        [self.navigationController pushViewController:hybrid animated:YES];
+    }else if (indexPath.section == 0 && indexPath.row == 2){//待收货
+        NSString *path = [NSString stringWithFormat:@"%@%@?&orderType=%@&orderState=%@",kMallH5ApiPrefix,kMallH5OrderManageUrl,@"1",@"6"];
+        TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:path];
+        [self.navigationController pushViewController:hybrid animated:YES];
+    }else if (indexPath.section == 0 && indexPath.row == 3){//已完成
+        NSString *path = [NSString stringWithFormat:@"%@%@?&orderType=%@&orderState=%@",kMallH5ApiPrefix,kMallH5OrderManageUrl,@"1",@"6"];
+        TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:path];
+        [self.navigationController pushViewController:hybrid animated:YES];
+    }else if (indexPath.section == 0 && indexPath.row == 4){//退款退货
+        NSString *path = [NSString stringWithFormat:@"%@%@",kMallH5ApiPrefix,kMallH5RefundManageUrl];
+        TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:path];
+        [self.navigationController pushViewController:hybrid animated:YES];
     }
     
-    TSSettingViewController *settingVC = [[TSSettingViewController alloc] init];
-    [self.navigationController pushViewController:settingVC animated:YES];
+    //发票中心
+    if (indexPath.section == 4 && indexPath.row == 1) {
+        NSString *path = [NSString stringWithFormat:@"%@%@",kMallH5ApiPrefix,kMallH5InvoiceListUrl];
+        TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:path];
+        hybrid.isInvoice = YES;
+        [self.navigationController pushViewController:hybrid animated:YES];
+    }
+
+    //我的钱包
+    if (indexPath.section == 1 && indexPath.row == 0) {
+        TSMineWalletCenterViewController *vc = [TSMineWalletCenterViewController new];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
@@ -164,7 +195,9 @@
                   withReuseIdentifier:sectionModel.headerIdentify];
         TSMineOrderHeaderView *header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:sectionModel.headerIdentify forIndexPath:indexPath];
         [header bindMineSectionModel:sectionModel];
-        header.mineOrderDelegate = self;
+        if ([sectionModel.headerIdentify isEqualToString:@"TSMineOrderHeaderView"]) {
+            header.kDelegate = self;
+        }
         return header;
     }else{
         Class className = NSClassFromString(sectionModel.footerIdentify);
@@ -176,10 +209,32 @@
     }
 }
 
+#pragma mark - mineOrderHeaderMoreAction
+-(void)mineOrderHeaderMoreAction:(id _Nullable)sender{
+    NSString *path = [NSString stringWithFormat:@"%@%@?orderType=1",kMallH5ApiPrefix,kMallH5OrderManageUrl];
+    TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:path];
+    [self.navigationController pushViewController:hybrid animated:YES];
+}
+
 #pragma mark - UniversalCollectionViewCellDataDelegate
 -(id)universalCollectionViewCellModel:(NSIndexPath *)indexPath{
     TSMineSectionModel *sectionModel = self.dataController.sections[indexPath.section];
     return sectionModel.items[indexPath.row];
+}
+
+- (void)universalCollectionViewCellClick:(NSIndexPath *)indexPath params:(NSDictionary *)params {
+    NSString *cellType = (NSString *)[params objectForKey:@"cellType"];
+    if ([@"TSMineEarningsCell" isEqualToString:cellType]) {
+        NSInteger clickType = (NSInteger)[params objectForKey:@"clickType"];
+        switch (clickType) {
+            case 0:
+                break;
+        }
+    }else if ([@"TSMinePartnerCenterCell" isEqualToString:cellType]){
+        NSString *path = [NSString stringWithFormat:@"%@%@",kMallH5ApiPrefix,kMallH5CopartnerUrl];
+        TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:path];
+        [self.navigationController pushViewController:hybrid animated:YES];
+    }
 }
 
 #pragma mark - UniversalFlowLayoutDelegate
@@ -275,14 +330,14 @@ spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
 }
 
 #pragma mark - TSUserInfoViewDelegate
--(void)loginAction:(id _Nullable)sender {
+-(void)userInfoLoginAction:(id _Nullable)sender {
     
 }
--(void)seeCodeAction:(id _Nullable)sender {
+-(void)userInfoSeeCodeAction:(id _Nullable)sender {
     
 }
 
-- (void)kCopyCodeAction:(id _Nullable)sender {
+- (void)userInfoKCopyCodeAction:(id _Nullable)sender {
     UIPasteboard *pab = (UIPasteboard *)sender;
     if (pab) {
         [self.collectionView makeToast:@"复制成功" duration:2.0 position:CSToastPositionBottom];
@@ -293,18 +348,10 @@ spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
 
 #pragma mark - TSMineOrderHeaderViewDelegate
 - (void)moreAction:(id)sender {
-    NSLog(@"1");
+    NSLog(@"查看全部订单");
 }
 
 #pragma mark - Getter
--(TSMineNavigationBar *)navigationBar{
-    if (!_navigationBar) {
-        _navigationBar = [[TSMineNavigationBar alloc] init];
-        _navigationBar.alpha = 0;
-    }
-    return _navigationBar;
-}
-
 -(UIButton *)setButton{
     if (!_setButton) {
         _setButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -327,7 +374,7 @@ spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
 -(TSUserInfoView *)infoView{
     if (!_infoView) {
         _infoView = [[TSUserInfoView alloc] initWithRoleType:TSRoleTypePlatinum];
-        _infoView.userInfoDelegate = self;
+        _infoView.kDelegate = self;
     }
     return _infoView;
 }

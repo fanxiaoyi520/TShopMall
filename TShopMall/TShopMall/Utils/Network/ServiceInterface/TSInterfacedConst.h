@@ -30,7 +30,14 @@ UIKIT_EXTERN NSString *const kRegisterUrl;
 UIKIT_EXTERN NSString *const kLogoutUrl;
 ///  一键登录
 UIKIT_EXTERN NSString *const kOneStepLoginUrl;
-
+///  第三方Token登录接口
+UIKIT_EXTERN NSString *const kLoginByTokenUrl;
+/// 将第三方应用如微信小程序通过授权码登录
+UIKIT_EXTERN NSString *const kLoginByAuthCode;
+/// 第三方绑定用户信息接口
+UIKIT_EXTERN NSString *const kBindUserByAuthCode;
+/// 协议信息的接口
+UIKIT_EXTERN NSString *const kLoginRegisterAgreementUrl;
 #pragma mark - 首页
 UIKIT_EXTERN NSString *const kHomePageInfoUrl;
 UIKIT_EXTERN NSString *const kSearchKey;//搜索关键词
@@ -42,6 +49,9 @@ UIKIT_EXTERN NSString *const kSearchResult;//搜索结果
 UIKIT_EXTERN NSString *const kGoodDetailUrl;
 UIKIT_EXTERN NSString *const kGoodDetailCartNumberUrl;
 UIKIT_EXTERN NSString *const kGoodDetailAddProductToCartUrl;
+UIKIT_EXTERN NSString *const kGoodDetailHasProductUrl;
+UIKIT_EXTERN NSString *const kGoodDetailChangeChooseUrl;
+UIKIT_EXTERN NSString *const kGoodDetailFastBuyUrl;
 
 
 #pragma mark - 分类
@@ -57,13 +67,21 @@ UIKIT_EXTERN NSString * const kCartChangeNums;
 UIKIT_EXTERN NSString * const kCartRemove;
 UIKIT_EXTERN NSString * const kCartCount;
 
+#pragma mark - 下单
+UIKIT_EXTERN NSString * const kToBalance;
+UIKIT_EXTERN NSString * const kSaveOrder;
+
 #pragma mark - 地址
 UIKIT_EXTERN NSString * const kProvice;
 UIKIT_EXTERN NSString * const kCities;
 UIKIT_EXTERN NSString * const kAreas;
 UIKIT_EXTERN NSString * const kStreets;
 UIKIT_EXTERN NSString * const kAddAddress;
-
+UIKIT_EXTERN NSString * const kEditAddress;
+UIKIT_EXTERN NSString * const kDeleteAddress;
+UIKIT_EXTERN NSString * const kCustomerAddress;
+UIKIT_EXTERN NSString * const kAddressTag;
+UIKIT_EXTERN NSString * const kSmartAddress;
 
 #pragma mark - 我的
 UIKIT_EXTERN NSString * const kMineMerchantUserInformation;

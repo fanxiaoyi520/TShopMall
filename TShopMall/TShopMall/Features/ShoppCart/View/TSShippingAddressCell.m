@@ -28,12 +28,16 @@
     return self;
 }
 
-- (void)setAddressStr:(NSString *)addressStr{
-    self.address.text = addressStr;
-}
-
 - (void)editBtnAction{
     self.addressEdit(self.addressModel);
+}
+
+- (void)setAddressModel:(TSAddressModel *)addressModel{
+    _addressModel = addressModel;
+    self.name.text  = addressModel.consignee;
+    self.phone.text = addressModel.mobile;
+    self.address.text = [NSString stringWithFormat:@"%@%@", addressModel.address, addressModel.area];
+    self.mark.hidden = !addressModel.isDefault;
 }
 
 - (void)configUI{

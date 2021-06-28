@@ -20,9 +20,13 @@
 #import "NTESQLHomePageCustomUIModel.h"
 #import "TSHybridViewController.h"
 #import "TSBaseNavigationController.h"
+#import "WechatManager.h"
+#import "TSAccountConst.h"
+#import "AuthAppleIDManager.h"
+#import <AuthenticationServices/AuthenticationServices.h>
+#import "TSAgreementModel.h"
 
-
-@interface TSLoginViewController ()<TSQuickLoginTopViewDelegate, TSLoginTopViewDelegate, TSLoginBottomViewDelegate, TSCheckedViewDelegate, TSQuickCheckViewDelegate, NTESQuickLoginManagerDelegate, TSHybridViewControllerDelegate>
+@interface TSLoginViewController ()<TSQuickLoginTopViewDelegate, TSLoginTopViewDelegate, TSLoginBottomViewDelegate, TSCheckedViewDelegate, TSQuickCheckViewDelegate, TSHybridViewControllerDelegate>
 /** 背景图 */
 @property(nonatomic, weak) UIImageView *bgImgV;
 /** 关闭 */
@@ -44,8 +48,6 @@
 
 @property(nonatomic, strong) TSLoginRegisterDataController *dataController;
 
-@property (nonatomic, strong) NTESQuickLoginModel *customModel;
-
 @end
 
 @implementation TSLoginViewController
@@ -53,17 +55,29 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.gk_navigationBar.hidden = YES;
-    [self registerQuickLogin];
-    [self getPhoneNumber];
+    
+    
+    if (@available(iOS 13.0, *)) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleSignInWithAppleStateChanged:) name:ASAuthorizationAppleIDProviderCredentialRevokedNotification object:nil];
+    } else {
+        // Fallback on earlier versions
+    }
 }
 
 - (void)dealloc {
     [self.timer invalidate];
+    if (@available(iOS 13.0, *)) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:ASAuthorizationAppleIDProviderCredentialRevokedNotification object:nil];
+    } else {
+        // Fallback on earlier versions
+    }
+
 }
 
 - (void)fillCustomView {
     ///添加约束
-//    [self addConstraints];
+    [self addConstraints];
+    [self otherLogin];
     
 }
 
@@ -72,6 +86,7 @@
     self.view.backgroundColor = UIColor.whiteColor;
     UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panAction:)];
     [self.view addGestureRecognizer:panGestureRecognizer];
+    [self getAgreementInfo];
 }
 
 - (void)panAction: (UIPanGestureRecognizer *)recognizer {
@@ -103,12 +118,12 @@
     [self.checkedView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.view.mas_bottom).with.offset(-KRateH(30));
         make.left.right.equalTo(self.view).with.offset(0);
-        make.height.mas_equalTo(56);
+        make.height.mas_equalTo(66);
     }];
     [self.quickCheckView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.view.mas_bottom).with.offset(-KRateH(30));
         make.left.right.equalTo(self.view).with.offset(0);
-        make.height.mas_equalTo(56);
+        make.height.mas_equalTo(66);
     }];
     [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.checkedView.mas_top).with.offset(-KRateW(20));
@@ -117,98 +132,22 @@
     }];
 }
 
-#pragma mark - 使用易盾
-- (void)registerQuickLogin {
-    [NTESQuickLoginManager sharedInstance].delegate = self;
-    [[NTESQuickLoginManager sharedInstance] registerWithBusinessID:@"639f7862dc1842dabe8720e6a7a26468"];
+- (void)getAgreementInfo {
+    __weak __typeof(self)weakSelf = self;
+    [self.dataController fetchAgreementWithCompleted:^(NSArray<TSAgreementModel *> * _Nonnull agreementModels) {
+        weakSelf.checkedView.agreementModels = agreementModels;
+    }];
 }
-
-- (void)getPhoneNumber{
-    
-    @weakify(self);
-    [[NTESQuickLoginManager sharedInstance] getPhoneNumberCompletion:^(NSDictionary * _Nonnull resultDic1) {
-        @strongify(self)
-        NSNumber *boolNum = [resultDic1 objectForKey:@"success"];
-        BOOL success = [boolNum boolValue];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (success) {
-                [self setCustomUI];
-                
-                [[NTESQuickLoginManager sharedInstance] CUCMCTAuthorizeLoginCompletion:^(NSDictionary * _Nonnull resultDic2) {
-                        NSNumber *boolNum = [resultDic2 objectForKey:@"success"];
-                        BOOL success = [boolNum boolValue];
-                        if (success) {
-                            [self.dataController fetchOneStepLoginToken:[resultDic1 objectForKey:@"token"] accessToken:[resultDic2 objectForKey:@"accessToken"] complete:^(BOOL isSucess) {
-                                if (isSucess) {
-                                    [[NTESQuickLoginManager sharedInstance] closeAuthController:^{
-                                        [self dismissViewControllerAnimated:YES completion:^{
-                                            if (self.loginBlock) {
-                                                self.loginBlock();
-                                            }
-                                        }];
-                                    }];
-                                }
-                                
-                            }];
-                        } else {
-                             // 取号失败
-                        }
-                      }];
-            } else {
-                [self addConstraints];
-                [self otherLogin];
-            }
-          });
-      }];
-}
-
-/// 授权页面自定义
-- (void)setCustomUI {
-    @weakify(self);
-    NTESQLHomePageCustomUIModel *uiModel = [NTESQLHomePageCustomUIModel getInstance];
-    self.customModel = [uiModel configCustomUIModel:NTESPresentDirectionPush withType:0 faceOrientation:UIInterfaceOrientationPortrait];
-    self.customModel.currentVC = self;
-    uiModel.otherLoginBlock = ^{
-        @strongify(self)
-        [self addConstraints];
-        [self otherLogin];
-    };
-    uiModel.appleLoginBlock = ^{
-        
-    };
-    uiModel.weChatLoginBlock = ^{
-        
-    };
-    self.customModel.backActionBlock = ^{
-        @strongify(self)
-        [self dismissViewControllerAnimated:NO completion:nil];
-    };
-    self.customModel.pageCustomBlock = ^(int privacyType) {
-        NSLog(@"privacyType:%d", privacyType);
-        @strongify(self)
-        TSHybridViewController *web = [[TSHybridViewController alloc] initWithURLString:@"https://www.baidu.com"];
-        web.delegate = self;
-        [self.navigationController pushViewController:web animated:YES];
-        [[NTESQuickLoginManager sharedInstance] closeAuthController:^{
-            
-
-        }];
-        
-    };
-    
-    [[NTESQuickLoginManager sharedInstance] setupModel:self.customModel];
-}
-
 
 #pragma mark - Actions
 - (void)goToRun {
     if (self.count <= 1) {
         self.count = 60;
         [self.timer invalidate];
-        [self.topView setCodeButtonTitleAndColor:@"重新验证码" isResend:YES];
+        [self.topView setCodeButtonTitleAndColor:@"重发验证码" isResend:YES enabled:YES];
     } else {
         self.count--;
-        [self.topView setCodeButtonTitleAndColor:[NSString stringWithFormat:@"重发 %ld", (long)self.count] isResend:NO];
+        [self.topView setCodeButtonTitleAndColor:[NSString stringWithFormat:@"重发 %ld", (long)self.count] isResend:NO enabled:NO];
     }
 }
 
@@ -248,6 +187,10 @@
     NSString *mobile = [self.topView getPhoneNumber];
     
     __weak typeof(self) weakSelf = self;
+    if (self.timer) {
+        [self.timer invalidate];
+        self.timer = nil;
+    }
     [self.dataController fetchLoginSMSCodeMobile:mobile complete:^(BOOL isSucess) {
         __strong __typeof(weakSelf)strongSelf = weakSelf;
         if (isSucess) {
@@ -267,13 +210,6 @@
 - (void)goToRegister {
     if (self.navigationController) {
         TSRegiterViewController *registerVC = [[TSRegiterViewController alloc] init];
-        registerVC.regiterBlock = ^{
-            [self dismissViewControllerAnimated:YES completion:^{
-                if (self.loginBlock) {
-                    self.loginBlock();
-                }
-            }];
-        };
         registerVC.dataController = self.dataController;
         [self.navigationController pushViewController:registerVC animated:YES];
     } else {
@@ -306,48 +242,88 @@
     if (![inputCode isEqualToString:rightCode]) {//验证码输入错误
         [Popover popToastOnWindowWithText:@"验证码输入有误"];
     }
+    [self.view endEditing:YES];
     
+    [Popover popProgressOnWindowWithProgressModel:[Popover defaultConfig] appearBlock:^(id frontView) {
+        
+    }];
+    
+    @weakify(self);
     [self.dataController fetchQuickLoginUsername:[self.topView getPhoneNumber]
                                        validCode:[self.topView getCode]
                                         complete:^(BOOL isSucess) {
-        [self dismissViewControllerAnimated:YES completion:^{
-            if (self.loginBlock) {
-                self.loginBlock();
-            }
+        @strongify(self)
+        if (isSucess) {
+            [Popover removePopoverOnWindow];
             
-        }];
+            [self dismissViewControllerAnimated:YES completion:^{
+                if (self.loginBlock) {
+                    self.loginBlock();
+                }
+                
+            }];
+        }
+        
     }];
 }
 
+- (void)inputDoneAction {
+    if (self.checkedView.isChecked) {
+        [self.topView setLoginButtonEnable:YES];
+    }
+}
+
 - (void)closePage {
-    NSLog(@"----");
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - TSLoginBottomViewDelegate
 - (void)goToWechat {
-    
+   
+    [self sendWXAuthReq];
 }
 
 - (void)goToApple {
-    
+    @weakify(self);
+   
+    AuthAppleIDManager *manager = [AuthAppleIDManager sharedInstance];
+    [manager authorizationAppleID];
+    manager.loginByTokenBlock = ^(NSString * _Nonnull token) {
+        @strongify(self)
+        [self.dataController fetchLoginByToken:token platformId:@"15" sucess:^(BOOL isHaveMobile, NSString * _Nonnull token) {
+            if (isHaveMobile) {
+                /// 完成登录
+                [self dismissViewControllerAnimated:YES completion:^{
+                    if (self.loginBlock) {
+                        self.loginBlock();
+                    }
+                    
+                }];
+            }
+            else{
+                [[NTESQuickLoginManager sharedInstance] closeAuthController:^{
+
+                 }];
+                [self dismissViewControllerAnimated:NO completion:^{
+                    if (self.bindBlock) {
+                        self.bindBlock();
+                    }
+                }];
+            }
+        }];
+    };
 }
 
 #pragma mark - TSCheckedViewDelegate
-- (void)goToServiceProtocol {
-    
-}
-
-- (void)goToPrivatePolicy {
-    
-}
-
-- (void)goToRegisterProtocol {
-    
+/** 跳转查看协议 */
+- (void)goToH5WithAgreementModel:(TSAgreementModel *)agreementModel {
+    TSHybridViewController *web = [[TSHybridViewController alloc] initWithURLString:[agreementModel.serverUrl stringByAppendingString:@"&mode=webview"]];
+    web.delegate = self;
+    [self.navigationController pushViewController:web animated:YES];
 }
 
 - (void)checkedAction:(BOOL)isChecked{
-    
+    [self.topView setLoginButtonEnable:isChecked];
 }
 
 #pragma mark - TSQuickCheckViewDelegate
@@ -366,7 +342,8 @@
 
 #pragma mark - TSHybridViewControllerDelegate
 -(void)hybridViewControllerWillDidDisappear:(TSHybridViewController *)hybridViewController params:(NSDictionary *)param{
-    [self getPhoneNumber];
+    
+    
 }
 
 #pragma mark - Lazy Method
@@ -456,13 +433,54 @@
     return UIStatusBarStyleDefault;
 }
 
-//-(void)sendAuthRequest
-//{
-//    //构造SendAuthReq结构体
-//    SendAuthReq* req =[[[SendAuthReq alloc]init]autorelease];
-//    req.scope = @"snsapi_userinfo";
-//    req.state = @"123";
-//    //第三方向微信终端发送一个SendAuthReq消息结构
-//    [WXApi sendReq:req];
-//}
+#pragma mark- 微信登录
+- (void)sendWXAuthReq{
+    @weakify(self);
+    WechatManager * payManager = [WechatManager shareInstance];
+    payManager.WXFail = ^{
+
+    };
+    payManager.WXSuccess = ^(NSString *code){
+        @strongify(self)
+        if (code) {
+            [self.dataController fetchLoginByAuthCode:code platformId:@"3" sucess:^(BOOL isHaveMobile, NSString * _Nonnull token) {
+                if (isHaveMobile) {
+                    /// 完成登录
+                    [self dismissViewControllerAnimated:YES completion:^{
+                        if (self.loginBlock) {
+                            self.loginBlock();
+                        }
+                        
+                    }];
+                }
+                else{
+                    /// 跳转绑定手机号
+                    [self dismissViewControllerAnimated:NO completion:^{
+                        if (self.bindBlock) {
+                            self.bindBlock();
+                        }
+                    }];
+                }
+            }];
+        }
+    };
+    
+    if([WXApi isWXAppInstalled]){//判断用户是否已安装微信App
+        SendAuthReq *req = [[SendAuthReq alloc] init];
+        req.state = @"wx_oauth_authorization_state";//用于保持请求和回调的状态，授权请求或原样带回
+        req.scope = @"snsapi_userinfo";//授权作用域：获取用户个人信息
+        //唤起微信
+        [WechatManager hangleWechatAuthWith:req];
+        
+    }else{
+        [Popover popToastOnWindowWithText:@"未安装微信应用或版本过低"];
+    }
+}
+
+#pragma mark- apple授权状态 更改通知
+- (void)handleSignInWithAppleStateChanged:(NSNotification *)notification
+{
+    NSLog(@"%@", notification.userInfo);
+}
+
 @end

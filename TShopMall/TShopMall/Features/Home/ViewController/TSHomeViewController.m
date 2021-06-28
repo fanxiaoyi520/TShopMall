@@ -6,7 +6,6 @@
 //
 
 #import "TSHomeViewController.h"
-#import "TSCategoryViewController.h"
 #import "TSGeneralSearchButton.h"
 #import "TSHomePageViewModel.h"
 #import <MJRefresh/MJRefresh.h>
@@ -17,8 +16,6 @@
 #import "YBNestViews.h"
 #import "TSHomePageLoginBarView.h"
 #import "TSHomePagePerchView.h"
-
-#import "TSProductDetailController.h"
 #import "RefreshGifHeader.h"
 
 #define tableViewBackGroundViewHeight 204.0
@@ -57,7 +54,6 @@
     
     [self.viewModel fetchData];
     [self registCellInfo];
-//    [self registerQuickLogin];
 
     @weakify(self);
     [self.KVOController observe:self.viewModel keyPath:@"dataSource" options:(NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew) block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
@@ -77,7 +73,6 @@
         [self.view addSubview:self.loginBar];
         self.loginBar.clickBlock = ^{
             [[TSUserLoginManager shareInstance] startLogin];
-            
         };
     }
     
@@ -239,12 +234,11 @@
 }
 
 -(void)categoryAction:(UIButton *)sender{
-    [[TSUserInfoManager userInfo] clearUserInfo];
-    return;
     
-    TSProductDetailController *con = [[TSProductDetailController alloc] init];
-//    TSCategoryViewController *category = [[TSCategoryViewController alloc] init];
-    [self.navigationController pushViewController:con animated:YES];
+//    [[TSUserInfoManager userInfo] clearUserInfo];
+//    return;
+    [[TSServicesManager sharedInstance].uriHandler openURI:@"page://quote/category"];
+    
 }
 
 #pragma mark - Getter

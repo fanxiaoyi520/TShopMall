@@ -9,6 +9,7 @@
 #import "TSUniversalFlowLayout.h"
 #import "TSUniversalCollectionViewCell.h"
 #import "TSRealNameAuthDataController.h"
+#import "TSAgreementView.h"
 
 @interface TSRealNameAuthViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate>
 /// 数据中心
@@ -23,6 +24,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    TSAgreementView *agreementView = [TSAgreementView agreementViewWithTitle:@"TCL App实名认证服务协议"];
+    [agreementView show];
 }
 
 - (void)setupBasic {
@@ -79,6 +86,12 @@
     [self.view endEditing:YES];
 }
 
+#pragma mark - Actions
+/** 开始实名认证 */
+- (void)startCertificationWithRealname:(NSString *)realname idcard:(NSString *)idcard {
+    
+}
+
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return self.dataController.sections.count;
@@ -108,6 +121,15 @@
 - (id)universalCollectionViewCellModel:(NSIndexPath *)indexPath{
     TSRealNameAuthSectionModel *sectionModel = self.dataController.sections[indexPath.section];
     return sectionModel.items[indexPath.row];
+}
+
+- (void)universalCollectionViewCellClick:(NSIndexPath *)indexPath params:(NSDictionary *)params {
+    NSString *cellType = params[@"cellType"];
+    if ([cellType isEqualToString:@"TSRealNameAuthCell"] && [params[@"RealNameAuthClickType"] integerValue] == 1) {///提交按钮
+        NSString *realName = params[@"RealName"];///真实姓名
+        NSString *idcardNum = params[@"IdcardNum"];///身份证号
+        [self startCertificationWithRealname:realName idcard:idcardNum];
+    }
 }
 
 #pragma mark - UniversalFlowLayoutDelegate

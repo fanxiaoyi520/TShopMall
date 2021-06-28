@@ -6,6 +6,7 @@
 //
 
 #import "TSGoodDetailCopyWriterCell.h"
+#import "TSGoodDetailItemModel.h"
 
 @interface TSGoodDetailCopyWriterCell()
 
@@ -57,7 +58,13 @@
 
 #pragma mark - Actions
 -(void)downloadAction:(UIButton *)sender{
+    NSString *stringToCopy = self.textView.text;
+    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+    if (stringToCopy) {
+        pasteboard.string = stringToCopy;
+    }
     
+    [Popover popToastOnWindowWithText:@"复制成功"];
 }
 
 #pragma mark - Getter
@@ -96,10 +103,18 @@
         _textView = [[UITextView alloc] init];
         _textView.backgroundColor = KHexColor(@"#DDDDDD");
         _textView.font = KRegularFont(10);
-        _textView.text = @"V2D 超薄AI声控电视，体验未来，快人";
+        _textView.text = @"";
+        [_textView setEditable:NO];
         [_textView setCorners:UIRectCornerAllCorners radius:8];
     }
     return _textView;
+}
+
+-(void)setDelegate:(id<UniversalCollectionViewCellDataDelegate>)delegate{
+    TSGoodDetailItemCopyModel *item = [delegate universalCollectionViewCellModel:self.indexPath];
+    if (![item.writeStr isKindOfClass:[NSNull class]]) {
+        self.textView.text = item.writeStr;
+    }
 }
 
 @end

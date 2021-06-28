@@ -8,7 +8,8 @@
 
 #import "NTESQLHomePageCustomUIModel.h"
 #import "NTESQPDemoDefines.h"
-
+#import "WXApi.h"
+#import "WechatManager.h"
 @implementation NTESQLHomePageCustomUIModel
 
 + (instancetype)getInstance {
@@ -94,6 +95,9 @@
     model.logBtnOffsetTopY = 293;
     
     model.loadingViewBlock = ^(UIView * _Nullable customLoadingView) {
+        [Popover popProgressOnWindowWithProgressModel:[Popover defaultConfig] appearBlock:^(id frontView) {
+            
+        }];
     };
     
         /// 隐私协议
@@ -159,11 +163,15 @@
 }
 
 - (void)labelTapped {
-    [[NTESQuickLoginManager sharedInstance] closeAuthController:^{
-        if (self.otherLoginBlock) {
-            self.otherLoginBlock();
-        }
-    }];;
+//    [[NTESQuickLoginManager sharedInstance] closeAuthController:^{
+//        if (self.otherLoginBlock) {
+//            self.otherLoginBlock();
+//        }
+//    }];
+    
+    if (self.otherLoginBlock) {
+        self.otherLoginBlock();
+    }
 }
 
 - (void)goToWechat{

@@ -10,13 +10,14 @@
 #import "TSTools.h"
 #import <Toast.h>
 
+
+typedef NS_ENUM(NSUInteger, BindMobileValueType){
+    BindMobileValueTypeCommit = 1,///提交按钮
+};
+
 @interface TSBindMobileCell ()
-/** 已绑定的手机号文字显示 */
-@property(nonatomic, weak) UILabel *phoneLabel;
 /** 分割线 */
 @property(nonatomic, weak) UIView *splitTopView;
-/** 手机号显示 */
-@property(nonatomic, weak) UILabel *phoneNumLabel;
 /** 分割线 */
 @property(nonatomic, weak) UIView *splitBottomView;
 /** 新手机号输入框 */
@@ -57,17 +58,9 @@
 }
 
 - (void)addConstraints {
-    [self.phoneLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.contentView.mas_centerX).with.offset(0);
-        make.top.equalTo(self.contentView.mas_top).with.offset(48);
-    }];
-    [self.phoneNumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.contentView.mas_centerX).with.offset(0);
-        make.top.equalTo(self.phoneLabel.mas_bottom).with.offset(8);
-    }];
     [self.mobileTextField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contentView.mas_left).with.offset(16);
-        make.top.equalTo(self.phoneNumLabel.mas_bottom).with.offset(24);
+        make.top.equalTo(self.contentView.mas_top).with.offset(138);
         make.right.equalTo(self.contentView.mas_right).with.offset(-16);
         make.height.mas_equalTo(56);
     }];
@@ -118,30 +111,6 @@
     }];
 }
 
-- (UILabel *)phoneNumLabel {
-    if (_phoneNumLabel == nil) {
-        UILabel *phoneNumLabel = [[UILabel alloc] init];
-        _phoneNumLabel = phoneNumLabel;
-        _phoneNumLabel.text = @"133-7869-2380";
-        _phoneNumLabel.textColor = KTextColor;
-        _phoneNumLabel.font = KRegularFont(24);
-        [self.contentView addSubview:_phoneNumLabel];
-    }
-    return _phoneNumLabel;
-}
-
-- (UILabel *)phoneLabel {
-    if (_phoneLabel == nil) {
-        UILabel *phoneLabel = [[UILabel alloc] init];
-        _phoneLabel = phoneLabel;
-        _phoneLabel.text = @"已绑定手机号";
-        _phoneLabel.textColor = KHexAlphaColor(@"#2D3132", 0.6);
-        _phoneLabel.font = KRegularFont(14);
-        [self.contentView addSubview:_phoneLabel];
-    }
-    return _phoneLabel;
-}
-
 - (UILabel *)tipsLabel {
     if (_tipsLabel == nil) {
         UILabel *tipsLabel = [[UILabel alloc] init];
@@ -160,6 +129,7 @@
         UILabel *errorTipsLabel = [[UILabel alloc] init];
         _errorTipsLabel = errorTipsLabel;
         _errorTipsLabel.text = @"手机号已注册";
+        _errorTipsLabel.hidden = YES;
         _errorTipsLabel.textColor = KHexColor(@"#F7AF34");
         _errorTipsLabel.font = KRegularFont(12);
         _errorTipsLabel.numberOfLines = 0;
@@ -278,6 +248,10 @@
     self.timer = [NSTimer ts_scheduledTimerWithTimeInterval:1 block:^{
          [weakSelf goToRun];
     } repeats:YES];
+    
+    if (self.codeButtonClickBlock) {
+        self.codeButtonClickBlock(phoneNumber);
+    }
 }
 
 - (void)goToRun {
@@ -300,7 +274,6 @@
 }
 
 - (void)textFieldDidChangeValue:(UITextField *)textField {
-    
     if (self.mobileTextField.text.length && [TSTools isPhoneNumber: self.mobileTextField.text]) {
         self.codeButton.enabled = YES;
         if (self.codeTextField.text.length) {
@@ -317,12 +290,24 @@
 }
 
 - (void)commitAction {
-    
+    if (![TSTools isPhoneNumber: self.mobileTextField.text]) {
+        [self.contentView makeToast:@"请输入正确的手机号" duration:3.0 position:CSToastPositionCenter];
+        return;
+    }
+    if (self.codeTextField.text.length == 0) {
+        [self.contentView makeToast:@"请输入验证码" duration:3.0 position:CSToastPositionCenter];
+        return;
+    }
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setValue:NSStringFromClass([self class]) forKey:@"cellType"];
+    [params setValue:@(BindMobileValueTypeCommit) forKey:@"commitType"];
+    ///手机号
+    [params setValue:self.mobileTextField.text forKey:@"MobileNumber"];
+    ///验证码
+    [params setValue:self.codeTextField.text forKey:@"CodeNumber"];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(universalCollectionViewCellClick:params:)]) {
+        [self.delegate universalCollectionViewCellClick:self.indexPath params:params];
+    }
 }
-
-//- (void)setDelegate:(id<UniversalCollectionViewCellDataDelegate>)delegate {
-//    TSPhoneNumSectionItemModel *item = [delegate universalCollectionViewCellModel:self.indexPath];
-//    self.phoneNumLabel.text = item.phoneNum;
-//}
 
 @end

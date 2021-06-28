@@ -10,6 +10,7 @@
 @protocol TSMakeOrderCellDelegate <NSObject>
 - (void)operationForChangeDelivery;
 - (void)operationForChangeBill;
+- (void)operationForMessageEditEnd:(NSString *)message;
 @end
 
 @interface TSMakeOrderBaseCell : UITableViewCell

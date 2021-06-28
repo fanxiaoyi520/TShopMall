@@ -171,6 +171,15 @@ typedef enum : NSUInteger {
         self.gk_navItemRightSpace = 12;
     }
     
+    if (self.isInvoice) {
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        [button addTarget:self action:@selector(invoiceAction:) forControlEvents:UIControlEventTouchUpInside];
+        [button setImage:KImageMake(@"mall_mine_invoice") forState:UIControlStateNormal];
+        [button setImage:KImageMake(@"mall_mine_invoice") forState:UIControlStateHighlighted];
+        button.frame = CGRectMake(0, 0, 40, 40);
+        self.gk_navRightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+    }
+    
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:_webView];
 }
@@ -210,6 +219,12 @@ typedef enum : NSUInteger {
     if (self.rightClick.length > 0) {
         [TSWKMessageHandlerHelper callbackWithMethodName:self.rightClick callBackParams:@"" webView:self.webView];
     }
+}
+
+-(void)invoiceAction:(UIButton *)sender{
+    NSString *path = [NSString stringWithFormat:@"%@%@",kMallH5ApiPrefix,kMallH5InvoiceUrl];
+    TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:path];
+    [self.navigationController pushViewController:hybrid animated:YES];
 }
 
 #pragma mark - 重写返回方法

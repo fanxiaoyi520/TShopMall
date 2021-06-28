@@ -7,16 +7,15 @@
 
 #import "TSBaseDataController.h"
 #import "TSRecomendModel.h"
-#import "TSRecomendSection.h"
+
+typedef NS_ENUM(NSInteger, RecomendPageType) {
+    RecomendSearchPage     = 0,
+    RecomendSearchResultPage   ,
+    RecomendCartPage                ,
+};
 
 @interface TSRecomendDataController : TSBaseDataController
-@property (nonatomic, strong) TSRecomendModel *recomend;
-@property (nonatomic, strong) TSRecomendPageInfo *pageInfo;
-@property (nonatomic, assign) CGSize rowSize;
-@property (nonatomic, assign) NSInteger pageType;
-- (void)fetchRecomentDatas:(void(^)(void))finished;
 
-
-- (NSArray<TSRecomendSection *> *)congifSections;
++ (void)checkCurrentRecomendPage:(RecomendPageType)pageType finished:(void(^)(TSRecomendModel *recomendInfo, TSRecomendPageInfo *pageInfo))finished;
 @end
 

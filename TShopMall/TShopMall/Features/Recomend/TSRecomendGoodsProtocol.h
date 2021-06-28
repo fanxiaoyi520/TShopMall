@@ -11,8 +11,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol TSRecomendGoodsProtocol <NSObject>
 @property (nonatomic, copy) NSString *goodsPrice;
-@property (nonatomic, copy) NSString *staffPrice;
-@property (nonatomic, copy) NSString *earnMost;
+@property (nonatomic, copy) NSString *goodsStaffPrice;
+@property (nonatomic, copy) NSString *goodsEarnMost;
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *imageUrl;
 @property (nonatomic, copy) NSString *uuid;//商品UUID

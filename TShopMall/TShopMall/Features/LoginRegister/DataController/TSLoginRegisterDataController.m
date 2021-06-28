@@ -9,8 +9,10 @@
 #import "TSSMSCodeRequest.h"
 #import "TSQuickLoginRequest.h"
 #import "TSOneStepLoginRequest.h"
-
 #import "TSUserInfoManager.h"
+#import "TSLoginByAuthCodeRequest.h"
+#import "TSLoginByTokenRequest.h"
+
 @implementation TSLoginRegisterDataController
 
 -(void)fetchLoginSMSCodeMobile:(NSString *)mobile
@@ -29,7 +31,8 @@
             }
         }else{
             self.smsModel = [[TSLoginSMSModel alloc] init];
-            
+            [Popover popToastOnWindowWithText:request.responseModel.originalData[@"failCause"]];
+
             if (complete) {
                 complete(NO);
             }
@@ -61,9 +64,13 @@
             [manager saveCurrentUserInfo];
             complete(YES);
         }
+        else{
+            complete(NO);
+            [Popover popToastOnWindowWithText:request.responseModel.originalData[@"msg"]];
+        }
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
         complete(NO);
-//        [Popover popToastOnWindowWithText:request.responseModel.originalData[@"message"]];
+
 
     }];
     
@@ -84,10 +91,11 @@
             }
         }else{
             self.smsModel = [[TSLoginSMSModel alloc] init];
-            
             if (complete) {
                 complete(NO);
             }
+            [Popover popToastOnWindowWithText:request.responseModel.originalData[@"msg"]];
+
         }
         
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
@@ -160,5 +168,85 @@
         complete(NO);
     }];
     
+}
+
+-(void)fetchLoginByAuthCode:(NSString *)code
+                    platformId:(NSString *)platformId
+                     sucess:(void(^)(BOOL isHaveMobile, NSString *token))complete{
+    TSLoginByAuthCodeRequest *request = [[TSLoginByAuthCodeRequest alloc] initWithCode:code platformId:platformId];
+    [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+        if (request.responseModel.isSucceed) {
+            NSDictionary *dic = request.responseModel.data;
+            if ([dic[@"flag"] intValue] == 1) {
+                complete(NO, dic[@"token"]);
+            }else if([dic[@"flag"] intValue] == 3){
+                complete(YES, dic[@"token"]);
+            }
+           
+        }
+        else{
+            [Popover popToastOnWindowWithText:request.responseModel.originalData[@"msg"]];
+        }
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+    
+    }];
+}
+
+- (void)fetchLoginByToken:(NSString *)token
+                    platformId:(NSString *)platformId
+                     sucess:(void(^)(BOOL isHaveMobile, NSString *token))complete{
+
+    TSLoginByTokenRequest *request = [[TSLoginByTokenRequest alloc] initWithToken:token platformId:platformId];
+
+    [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+        
+        if (request.responseModel.isSucceed) {
+            if (request.responseModel.data) {
+                NSDictionary *dic = request.responseModel.data;
+                if ([dic[@"flag"] intValue] == 1) {
+                    complete(NO, dic[@"token"]);
+                }else if([dic[@"flag"] intValue] == 3){
+                    complete(YES, dic[@"token"]);
+                }
+                
+            }
+            
+        }else
+        {
+            [Popover popToastOnWindowWithText:request.responseModel.originalData[@"message"]];
+        }
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        
+    }];
+}
+/** 获取注册登录的协议信息 */
+- (void)fetchAgreementWithCompleted: (void(^)(NSArray<TSAgreementModel *> *agreementModels))completed {
+    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kLoginRegisterAgreementUrl
+                                                               requestMethod:YTKRequestMethodGET
+                                                       requestSerializerType:YTKRequestSerializerTypeJSON
+                                                      responseSerializerType:YTKResponseSerializerTypeJSON
+                                                               requestHeader:@{}
+                                                                 requestBody:@{}
+                                                              needErrorToast:NO];
+    [request startWithCompletionBlockWithSuccess:^(__kindof SSGenaralRequest * _Nonnull request) {
+        if (request.responseModel.isSucceed) {
+            NSArray *data = request.responseObject[@"data"];
+            if (data != nil && data.count) {
+                NSMutableArray *_agreementModels = [NSMutableArray array];
+                for (int i = 0; i < data.count; i++) {
+                    NSDictionary *dict = data[i];
+                    TSAgreementModel *agreementModel = [[TSAgreementModel alloc] init];
+                    agreementModel.serverUrl = dict[@"serverUrl"];
+                    agreementModel.title = dict[@"title"];
+                    [_agreementModels addObject:agreementModel];
+                }
+                if (completed) {
+                    completed([_agreementModels copy]);
+                }
+            }
+        }
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        
+    }];
 }
 @end

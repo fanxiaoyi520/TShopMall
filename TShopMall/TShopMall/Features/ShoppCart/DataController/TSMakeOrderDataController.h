@@ -5,12 +5,22 @@
 //  Created by 橙子 on 2021/6/16.
 //
 
-#import <Foundation/Foundation.h>
+#import "TSBaseDataController.h"
 #import "TSMakeOrderSection.h"
+#import "TSBalanceModel.h"
+#import "TSMakeOrderGoodsViewModel.h"
+#import "TSMakeOrderPriceViewModel.h"
+#import "TSMakeOrderInvoiceViewModel.h"
 
-@interface TSMakeOrderDataController : NSObject
+@interface TSMakeOrderDataController : TSBaseDataController
+@property (nonatomic, strong) TSBalanceModel *balanceModel;
+@property (nonatomic, assign) BOOL paramsISFromCart;//YES-从购物车过来的，NO-非购物车过来的
 @property (nonatomic, strong) NSMutableArray<TSMakeOrderSection *> *sections;
 
-- (void)initData:(void(^)(void))finished;
+- (void)checkBalance:(void(^)(BOOL))finished;
+
+- (void)updateAddressSection:(TSAddressModel *)address;
+- (void)updateMessage:(NSString *)messgae;
+- (void)configEmptySection;
 @end
 

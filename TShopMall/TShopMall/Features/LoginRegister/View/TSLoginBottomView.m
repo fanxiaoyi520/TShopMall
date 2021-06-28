@@ -27,13 +27,13 @@
 - (void)addConstraints {
     [self.wechatButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.mas_centerX).with.offset(KRateW(-60));
-        make.width.mas_equalTo(KRateW(35));
-        make.height.mas_equalTo(KRateW(35));
+        make.width.mas_equalTo(KRateW(30));
+        make.height.mas_equalTo(KRateW(30));
     }];
     [self.appleButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.mas_centerX).with.offset(KRateW(60));
-        make.width.mas_equalTo(KRateW(35));
-        make.height.mas_equalTo(KRateW(35));
+        make.width.mas_equalTo(KRateW(30));
+        make.height.mas_equalTo(KRateW(30));
     }];
 }
 
@@ -53,7 +53,7 @@
         UIButton *appleButton = [[UIButton alloc] init];
         _appleButton = appleButton;
         [_appleButton setBackgroundImage:KImageMake(@"mall_login_apple") forState:UIControlStateNormal];
-        [_wechatButton addTarget:self action:@selector(goToApple) forControlEvents:UIControlEventTouchUpInside];
+        [_appleButton addTarget:self action:@selector(goToApple) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_appleButton];
     }
     return _appleButton;

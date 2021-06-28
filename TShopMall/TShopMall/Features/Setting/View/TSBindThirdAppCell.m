@@ -37,7 +37,7 @@
         make.centerX.equalTo(self.contentView.mas_centerX).with.offset(0);
         make.top.equalTo(self.contentView.mas_top).with.offset(32);
     }];
-    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.iconImgV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.contentView.mas_centerX).with.offset(0);
         make.top.equalTo(self.titleLabel.mas_bottom).with.offset(30);
         make.width.mas_equalTo(66);

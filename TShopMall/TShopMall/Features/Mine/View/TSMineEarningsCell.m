@@ -71,7 +71,20 @@
 
 #pragma mark - Actions
 -(void)eyeAction:(UIButton *)sender{
+    if (sender.selected) {
+        _earnMoneyLabel.hidden = YES;
+        sender.selected = NO;
+    } else {
+        _earnMoneyLabel.hidden = NO;
+        sender.selected = YES;
+    }
     
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setValue:@"TSMineEarningsCell" forKey:@"cellType"];
+    [params setValue:@(EyeAction) forKey:@"clickType"];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(universalCollectionViewCellClick:params:)]) {
+        [self.delegate universalCollectionViewCellClick:self.indexPath params:params];
+    }
 }
 
 #pragma mark - Getter
@@ -120,6 +133,7 @@
         _earnMoneyLabel.textAlignment = NSTextAlignmentCenter;
         _earnMoneyLabel.textColor = KHexColor(@"#333333");
         _earnMoneyLabel.text = @"¥999";
+        _earnMoneyLabel.hidden = NO;
     }
     return _earnMoneyLabel;
 }
@@ -127,9 +141,10 @@
 -(UIButton *)eyeButton{
     if (!_eyeButton) {
         _eyeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_eyeButton setImage:KImageMake(@"mall_mine_eye") forState:UIControlStateNormal];
-        [_eyeButton setImage:KImageMake(@"mall_mine_eye") forState:UIControlStateHighlighted];
+        [_eyeButton setImage:KImageMake(@"mall_mine_invisiable") forState:UIControlStateNormal];
+        [_eyeButton setImage:KImageMake(@"mall_mine_eye") forState:UIControlStateSelected];
         [_eyeButton addTarget:self action:@selector(eyeAction:) forControlEvents:UIControlEventTouchUpInside];
+        _eyeButton.selected = YES;
     }
     return _eyeButton;
 }
