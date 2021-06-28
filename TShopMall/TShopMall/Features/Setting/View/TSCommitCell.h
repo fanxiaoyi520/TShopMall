@@ -9,7 +9,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol TSCommitCellDelegate <NSObject>
+/** 提交事件 */
+- (void)commitAction;
+
+@end
+
 @interface TSCommitCell : TSUniversalCollectionViewCell
+/** 点击事件的代理  */
+@property(nonatomic, weak) id<TSCommitCellDelegate> actionDelegate;
 
 @end
 

@@ -21,6 +21,12 @@
     return isMatch;
 }
 
+/** 身份证号校验 */
++ (BOOL)isIdcard:(NSString *)idcardNum {
+    
+    return YES;
+}
+
 /** 提现密码的校验 */
 + (BOOL)isWithdrawalPsw:(NSString *)psw {
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", @"^\\d{6}$"];

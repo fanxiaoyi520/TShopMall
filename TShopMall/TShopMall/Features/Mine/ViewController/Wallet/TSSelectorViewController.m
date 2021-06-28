@@ -32,6 +32,9 @@
     
     [self.bgView addSubview:self.selectorTableView];
     self.selectorTableView.frame = CGRectMake(0, headerView.bottom, kScreenWidth, self.bgView.height-headerView.height);
+    TSSelectorCellHeader *headerCellView = [[TSSelectorCellHeader alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 50)];
+    self.selectorTableView.tableHeaderView = headerCellView;
+
 }
 
 // MARK: UITableViewDelegate & UITableViewDataSource
@@ -42,8 +45,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellid" forIndexPath:indexPath];
     if ([cell isKindOfClass:UITableViewCell.class]) {
-        TSSelectorCell *selCell = (TSSelectorCell *)cell;
-        selCell.textLabel.text = @"1111111";
+//        TSSelectorCell *selCell = (TSSelectorCell *)cell;
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
@@ -53,25 +55,14 @@
     return 44;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 50;
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    TSSelectorCellHeader *headerView = [TSSelectorCellHeader new];
-    return headerView;
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
 // MARK: TSSelectorDelegate
 - (void)selectorHeaderCloseAction:(id _Nullable)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-
-- (void)selectorCellHeaderOneTitleAction:(id _Nullable)sender {
-    NSLog(@"选择省份");
-}
-
-
 
 // MARK: get
 - (UIView *)bgView {

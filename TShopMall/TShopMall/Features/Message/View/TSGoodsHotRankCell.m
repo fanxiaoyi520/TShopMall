@@ -6,7 +6,7 @@
 //
 
 #import "TSGoodsHotRankCell.h"
-#import "TSCustomLabel.h"
+#import "TSEdgeInsetLabel.h"
 #import "TSHotSectionModel.h"
 
 @interface TSGoodsHotRankCell ()
@@ -25,9 +25,9 @@
 /** 原价（提货价） */
 @property(nonatomic, weak) UILabel *originPriceLabel;
 /** 最高赚文字的显示  */
-@property(nonatomic, weak) TSCustomLabel *bestLabel;
+@property(nonatomic, weak) TSEdgeInsetLabel *bestLabel;
 /** 最高赚数字的显示  */
-@property(nonatomic, weak) TSCustomLabel *bestNumLabel;
+@property(nonatomic, weak) TSEdgeInsetLabel *bestNumLabel;
 /** 最高赚父视图  */
 @property(nonatomic, weak) UIView *bestView;
 /** 分割线  */
@@ -178,9 +178,9 @@
     return _rmbLabel;
 }
 
-- (TSCustomLabel *)bestLabel {
+- (TSEdgeInsetLabel *)bestLabel {
     if (_bestLabel == nil) {
-        TSCustomLabel *bestLabel = [[TSCustomLabel alloc] init];
+        TSEdgeInsetLabel *bestLabel = [[TSEdgeInsetLabel alloc] init];
         _bestLabel = bestLabel;
         _bestLabel.textColor = KWhiteColor;
         _bestLabel.backgroundColor = KHexColor(@"#F9AB50");
@@ -195,9 +195,9 @@
     return _bestLabel;
 }
 
-- (TSCustomLabel *)bestNumLabel {
+- (TSEdgeInsetLabel *)bestNumLabel {
     if (_bestNumLabel == nil) {
-        TSCustomLabel *bestNumLabel = [[TSCustomLabel alloc] init];
+        TSEdgeInsetLabel *bestNumLabel = [[TSEdgeInsetLabel alloc] init];
         _bestNumLabel = bestNumLabel;
         _bestNumLabel.textColor = KWhiteColor;
         _bestNumLabel.backgroundColor = KHexColor(@"#FF4D49");

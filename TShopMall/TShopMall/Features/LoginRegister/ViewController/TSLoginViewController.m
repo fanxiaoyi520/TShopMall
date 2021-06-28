@@ -25,6 +25,7 @@
 #import "AuthAppleIDManager.h"
 #import <AuthenticationServices/AuthenticationServices.h>
 #import "TSAgreementModel.h"
+//#import "TSFirstEnterAgreementView.h"
 
 @interface TSLoginViewController ()<TSQuickLoginTopViewDelegate, TSLoginTopViewDelegate, TSLoginBottomViewDelegate, TSCheckedViewDelegate, TSQuickCheckViewDelegate, TSHybridViewControllerDelegate>
 /** 背景图 */
@@ -55,13 +56,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.gk_navigationBar.hidden = YES;
-    
-    
+    //[self showFirstEnterAlert];
     if (@available(iOS 13.0, *)) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleSignInWithAppleStateChanged:) name:ASAuthorizationAppleIDProviderCredentialRevokedNotification object:nil];
     } else {
         // Fallback on earlier versions
     }
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
 }
 
 - (void)dealloc {
@@ -86,6 +90,7 @@
     self.view.backgroundColor = UIColor.whiteColor;
     UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panAction:)];
     [self.view addGestureRecognizer:panGestureRecognizer];
+    self.closeButton.hidden = !self.needClose;
     [self getAgreementInfo];
 }
 
@@ -257,12 +262,9 @@
         if (isSucess) {
             [Popover removePopoverOnWindow];
             
-            [self dismissViewControllerAnimated:YES completion:^{
-                if (self.loginBlock) {
-                    self.loginBlock();
-                }
-                
-            }];
+            if (self.loginBlock) {
+                self.loginBlock();
+            }
         }
         
     }];
@@ -294,12 +296,9 @@
         [self.dataController fetchLoginByToken:token platformId:@"15" sucess:^(BOOL isHaveMobile, NSString * _Nonnull token) {
             if (isHaveMobile) {
                 /// 完成登录
-                [self dismissViewControllerAnimated:YES completion:^{
-                    if (self.loginBlock) {
-                        self.loginBlock();
-                    }
-                    
-                }];
+                if (self.loginBlock) {
+                    self.loginBlock();
+                }
             }
             else{
                 [[NTESQuickLoginManager sharedInstance] closeAuthController:^{
@@ -328,18 +327,7 @@
 }
 
 #pragma mark - TSQuickCheckViewDelegate
-/** 认证信息 */
-- (void)openAuthenticationProtocol {
-    
-}
-/** 服务协议 */
-- (void)openServiceProtocol {
-    
-}
-/** 隐私政策 */
-- (void)openPrivateProtocol {
-    
-}
+
 
 #pragma mark - TSHybridViewControllerDelegate
 -(void)hybridViewControllerWillDidDisappear:(TSHybridViewController *)hybridViewController params:(NSDictionary *)param{

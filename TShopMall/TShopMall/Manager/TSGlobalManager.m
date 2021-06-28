@@ -6,7 +6,10 @@
 //
 
 #import "TSGlobalManager.h"
+@interface TSGlobalManager ()
+//@property (nonatomic, strong) TSUserInfoManager *currentUserInfo;
 
+@end
 @implementation TSGlobalManager
 
 + (instancetype)shareInstance{
@@ -18,25 +21,34 @@
     return instance;
 }
 
+- (TSUserInfoManager *)currentUserInfo{
+    return [TSUserInfoManager userInfo];
+}
+
 -(instancetype)init{
     if (self = [super init]) {
-        self.currentUserInfo = [TSUserInfoManager userInfo];
     }
     return self;
 }
 
--(NSString *)appVersion{
+- (NSString *)appVersion{
     return [UIApplication sharedApplication].appVersion;
 }
 
-- (void)saveCurrentUserInfo{
-    [self.currentUserInfo saveUserInfo:self.currentUserInfo];
+- (BOOL)firstStartApp {
+    NSString *value = [[NSUserDefaults standardUserDefaults] valueForKey:KFirstEnterAppKey];
+    return value == nil;
 }
 
-- (void)clearUserInfo{
-    self.isLogin = NO;
-    [self.currentUserInfo clearUserInfo];
-    self.currentUserInfo = nil;
-    
+- (void)setFirstStartApp:(BOOL)firstStartApp {
+    //firstStartApp = firstStartApp;
+    [[NSUserDefaults standardUserDefaults] setValue:KFirstEnterAppValue forKey:KFirstEnterAppKey];
+}
+
+- (BOOL)isLogin{
+    if ([TSUserInfoManager userInfo].accessToken && [TSUserInfoManager userInfo].userName && [TSUserInfoManager userInfo].refreshToken) {
+        return YES;
+    }else
+        return NO;
 }
 @end

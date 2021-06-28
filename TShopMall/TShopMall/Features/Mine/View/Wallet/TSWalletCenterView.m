@@ -47,10 +47,10 @@
         make.height.mas_equalTo(24);
     }];
     [self.eyeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self).offset(51);
+        make.top.equalTo(self.mineAssetsLab).offset(-3);
         make.left.equalTo(@[self.mineAssetsLab.mas_right]).offset(6);
         make.width.mas_equalTo(15);
-        make.height.mas_equalTo(10);
+        make.height.mas_equalTo(30);
     }];
     
     
@@ -89,10 +89,10 @@
 // MARK: actions
 - (void)eyeAction:(UIButton *)sender {
     if (sender.selected) {
-        self.mineProfitNumLab.hidden = YES;
+        self.mineProfitNumLab.text = @"****";
         sender.selected = NO;
     } else {
-        self.mineProfitNumLab.hidden = NO;
+        self.mineProfitNumLab.text = @"¥2380";
         sender.selected = YES;
     }
 }
@@ -124,7 +124,8 @@
     if (!_eyeBtn) {
         _eyeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [_eyeBtn addTarget:self action:@selector(eyeAction:) forControlEvents:UIControlEventTouchUpInside];
-        [_eyeBtn setImage:KImageMake(@"mall_mine_eye") forState:UIControlStateNormal];
+        [_eyeBtn setImage:KImageMake(@"mall_mine_invisiable") forState:UIControlStateNormal];
+        [_eyeBtn setImage:KImageMake(@"mall_mine_eye") forState:UIControlStateSelected];
         _eyeBtn.selected = YES;
         [_eyeBtn jaf_setEnlargeEdgeWithTop:10 right:10 bottom:10 left:10];
     }

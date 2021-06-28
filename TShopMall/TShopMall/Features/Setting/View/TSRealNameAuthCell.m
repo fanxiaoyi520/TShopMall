@@ -8,11 +8,6 @@
 #import "TSRealNameAuthCell.h"
 #import "TSTools.h"
 
-typedef NS_ENUM(NSUInteger, RealNameAuthClickType){
-    RealNameAuthClickTypeCommit = 1,///提交按钮
-    RealNameAuthClickTypeAgreement = 2,///认证协议
-};
-
 @interface TSRealNameAuthCell ()<UITextFieldDelegate>
 /** 提示语的父视图  */
 @property(nonatomic, weak) UIView *tipsView;
@@ -44,6 +39,7 @@ typedef NS_ENUM(NSUInteger, RealNameAuthClickType){
 @property(nonatomic, weak) UILabel *remainLabel;
 /** 提交按钮 */
 @property(nonatomic, weak) UIButton *commitButton;
+
 @end
 
 @implementation TSRealNameAuthCell
@@ -328,6 +324,7 @@ typedef NS_ENUM(NSUInteger, RealNameAuthClickType){
         _commitButton.titleLabel.font = KRegularFont(16);
         _commitButton.enabled = NO;
         [_commitButton setTitle:@"开始认证" forState:UIControlStateNormal];
+        [_commitButton setTitle:@"正在认证..." forState:UIControlStateDisabled];
         [_commitButton addTarget:self action:@selector(commitAction) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:_commitButton];
     }
@@ -352,11 +349,8 @@ typedef NS_ENUM(NSUInteger, RealNameAuthClickType){
 }
 
 - (void)agreementAction {
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setValue:NSStringFromClass([self class]) forKey:@"cellType"];
-    [params setValue:@(RealNameAuthClickTypeCommit) forKey:@"RealNameAuthClickType"];
-    if (self.delegate && [self.delegate respondsToSelector:@selector(universalCollectionViewCellClick:params:)]) {
-        [self.delegate universalCollectionViewCellClick:self.indexPath params:params];
+    if ([self.actionDelegate respondsToSelector:@selector(openAgreement)]) {
+        [self.actionDelegate openAgreement];
     }
 }
 
@@ -365,19 +359,14 @@ typedef NS_ENUM(NSUInteger, RealNameAuthClickType){
         [self.contentView makeToast:@"请输入您的真实姓名" duration:3.0 position:CSToastPositionCenter];
         return;
     }
-    if (![TSTools isPhoneNumber: self.idNumTextField.text]) {
+    ///身份证号校验
+    if (![TSTools isIdcard: self.idNumTextField.text]) {
         [self.contentView makeToast:@"请输入正确的身份证号" duration:3.0 position:CSToastPositionCenter];
         return;
     }
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setValue:NSStringFromClass([self class]) forKey:@"cellType"];
-    [params setValue:@(RealNameAuthClickTypeCommit) forKey:@"RealNameAuthClickType"];
-    ///真实姓名
-    [params setValue:self.nameTextField.text forKey:@"RealName"];
-    ///身份证号码
-    [params setValue:self.idNumTextField.text forKey:@"IdcardNum"];
-    if (self.delegate && [self.delegate respondsToSelector:@selector(universalCollectionViewCellClick:params:)]) {
-        [self.delegate universalCollectionViewCellClick:self.indexPath params:params];
+    self.commitButton.enabled = NO;
+    if ([self.actionDelegate respondsToSelector:@selector(startAuthWithRealname:idcard:authButton:)]) {
+        [self.actionDelegate startAuthWithRealname:self.nameTextField.text idcard:self.idNumTextField.text authButton:self.commitButton];
     }
 }
 

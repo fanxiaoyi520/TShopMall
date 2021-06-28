@@ -59,8 +59,7 @@
 
 @implementation TSRankHonourCell
 
-- (void)fillCustomContentView {
-    [super fillCustomContentView];
+- (void)setupUI {
     self.contentView.backgroundColor = KWhiteColor;
     ///添加约束
     [self addConstraints];

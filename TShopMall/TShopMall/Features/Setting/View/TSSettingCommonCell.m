@@ -7,6 +7,7 @@
 
 #import "TSSettingCommonCell.h"
 #import "TSSettingSectionModel.h"
+#import "TSAboutMeSectionModel.h"
 
 @interface TSSettingCommonCell ()
 /** 标题 */
@@ -119,11 +120,21 @@
 }
 
 -(void)setDelegate:(id<UniversalCollectionViewCellDataDelegate>)delegate {
-    TSSettingCommonSectionItemModel *item = [delegate universalCollectionViewCellModel:self.indexPath];
-    self.titleLabel.text = item.title;
-    self.detailLabel.text = item.detail;
-    self.splitView.hidden = !item.showLine;
-    self.updateFlagView.hidden = !item.updateFlag;
+    TSUniversaItemModel *item = [delegate universalCollectionViewCellModel:self.indexPath];
+    if ([item isKindOfClass:[TSSettingCommonSectionItemModel class]]) {
+        TSSettingCommonSectionItemModel *_item = (TSSettingCommonSectionItemModel *)item;
+        self.titleLabel.text = _item.title;
+        self.detailLabel.text = _item.detail;
+        self.splitView.hidden = !_item.showLine;
+        self.updateFlagView.hidden = !_item.updateFlag;
+    } else if ([item isKindOfClass:[TSAboutMeBottomSectionItemModel class]]) {
+        TSAboutMeBottomSectionItemModel *_item = (TSAboutMeBottomSectionItemModel *)item;
+        self.titleLabel.text = _item.title;
+        self.detailLabel.text = _item.detail;
+        self.splitView.hidden = !_item.showLine;
+        self.updateFlagView.hidden = !_item.updateFlag;
+    }
+    
 }
 
 @end

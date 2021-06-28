@@ -7,6 +7,7 @@
 
 #import "TSBaseDataController.h"
 #import "TSAboutMeSectionModel.h"
+#import "TSAgreementModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
