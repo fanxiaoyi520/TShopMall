@@ -7,7 +7,14 @@
 
 #import "TSBestSellingRecommendService.h"
 @implementation TSBestSellingRecommendService
-
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        
+    }
+    return self;
+}
 - (void)getRecommendListWithType:(NSString * _Nullable)type
                          success:(void(^_Nullable)(NSArray<id<TSRecomendGoodsProtocol>> *_Nullable list))success
                          failure:(void(^_Nullable)(NSError *_Nonnull error))failure{

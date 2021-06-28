@@ -33,7 +33,7 @@
     _viewModel = viewModel;
 }
 
-- (void)setDatas:(NSArray<TSHomePageBaseModel *> *)datas{
-    _datas = datas;
-}
+//- (void)setDatas:(NSArray<TSHomePageBaseModel *> *)datas{
+//    _datas = datas;
+//}
 @end

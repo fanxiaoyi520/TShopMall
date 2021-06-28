@@ -13,6 +13,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TSBestSellingRecommendService : NSObject<TSBestSellingRecommendServiceProtocol>
 //@property (nonatomic, strong) NSArray<id<TSRecomendGoodsProtocol>> *recommendList;
+//@property (nonatomic, strong) NSArray<id<TSRecomendGoodsProtocol>> *recommendList;
+//@property (nonatomic, strong) NSArray<id<TSRecomendGoodsProtocol>> *recommendList;
+//@property (nonatomic, strong) NSArray<id<TSRecomendGoodsProtocol>> *recommendList;
+//@property (nonatomic, strong) NSArray<id<TSRecomendGoodsProtocol>> *recommendList;
 
 @end
 
