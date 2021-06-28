@@ -59,9 +59,7 @@
             userInfo.userName = request.responseModel.originalData[@"username"];
             [[TSUserInfoManager userInfo] saveUserInfo:userInfo];
             TSGlobalManager *manager = [TSGlobalManager shareInstance];
-            manager.isLogin = YES;
-            manager.currentUserInfo = userInfo;
-            [manager saveCurrentUserInfo];
+            [manager setCurrentUserInfo:userInfo];
             complete(YES);
         }
         else{
@@ -153,11 +151,10 @@
             userInfo.accessToken = request.responseModel.originalData[@"accessToken"];
             userInfo.refreshToken = request.responseModel.originalData[@"refreshToken"];
             userInfo.userName = request.responseModel.originalData[@"username"];
+            userInfo.accountId = request.responseModel.originalData[@"accountId"];
             [[TSUserInfoManager userInfo] saveUserInfo:userInfo];
-            TSGlobalManager *manager = [TSGlobalManager shareInstance];
-            manager.isLogin = YES;
-            manager.currentUserInfo = userInfo;
-            [manager saveCurrentUserInfo];
+            [[TSGlobalManager shareInstance] setCurrentUserInfo:userInfo];
+            [Popover removePopoverOnWindow];
             complete(YES);
         }
         else{

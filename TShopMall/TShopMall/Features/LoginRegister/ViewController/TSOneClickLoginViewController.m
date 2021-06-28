@@ -69,6 +69,9 @@
                         if (success) {
                             [self.dataController fetchOneStepLoginToken:[resultDic1 objectForKey:@"token"] accessToken:[resultDic2 objectForKey:@"accessToken"] complete:^(BOOL isSucess) {
                                 if (isSucess) {
+                                    [[NTESQuickLoginManager sharedInstance] closeAuthController:^{
+
+                                     }];
                                     [self dismissViewControllerAnimated:YES completion:^{
                                         if (self.loginBlock) {
                                             self.loginBlock();

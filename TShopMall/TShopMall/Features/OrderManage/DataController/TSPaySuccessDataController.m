@@ -31,24 +31,24 @@
         section.items = items;
         [sections addObject:section];
     }
-    {
-        NSMutableArray *items = [NSMutableArray array];
-
-        for (int i = 0; i < 10; i++) {
-            TSProductBaseModel *item = [[TSProductBaseModel alloc] init];
-            item.cellHeight = 282;
-            item.identify = @"TSHomePageContainerCollectionViewCell";
-
-            [items addObject:item];
-        }
-        TSPaySuccessSectionModel *section = [[TSPaySuccessSectionModel alloc] init];
-        section.column = 2;
-        section.sectionInset = UIEdgeInsetsMake(0, 16, 0, 16);
-        section.lineSpacing = 8;
-        section.interitemSpacing = 8;
-        section.items = items;
-        [sections addObject:section];
-    }
+//    {
+//        NSMutableArray *items = [NSMutableArray array];
+//
+//        for (int i = 0; i < 10; i++) {
+//            TSProductBaseModel *item = [[TSProductBaseModel alloc] init];
+//            item.cellHeight = 282;
+//            item.identify = @"TSHomePageContainerCollectionViewCell";
+//
+//            [items addObject:item];
+//        }
+//        TSPaySuccessSectionModel *section = [[TSPaySuccessSectionModel alloc] init];
+//        section.column = 2;
+//        section.sectionInset = UIEdgeInsetsMake(0, 16, 0, 16);
+//        section.lineSpacing = 8;
+//        section.interitemSpacing = 8;
+//        section.items = items;
+//        [sections addObject:section];
+//    }
     self.sections = sections;
     if (complete) {
         complete(YES);

@@ -7,7 +7,7 @@
 
 #import "TSUniversalSectionModel.h"
 #import "TSUniversaItemModel.h"
-
+#import "TSRecomendGoodsProtocol.h"
 @class TSRankSectionItemModel;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -24,6 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface TSRankSectionItemModel : TSUniversaItemModel
 /** 排名  */
 @property(nonatomic, assign) int rank;
+@property(nonatomic, strong) NSArray *datas;
 
 @end
 

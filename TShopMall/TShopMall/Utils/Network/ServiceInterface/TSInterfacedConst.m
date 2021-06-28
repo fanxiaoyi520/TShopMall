@@ -138,4 +138,6 @@ NSString * const kMineMerchantUserInformation = @"/rest/v2/tclcustomer/userInfo"
 NSString * const kMinePartnerCenterData = @"/sysback/v2/salesman/dataCenter";
 NSString * const kMineWithdrawalRecordListData = @"/v2/withdrawal/record/queryAppWithdrawalRecordList";
 NSString * const kMineWalletData = @"/v2/withdrawal/record/queryWallet";
+NSString *const kAboutMeAgreementUrl = @"/rest/v2/front/shopStatement/getShopStatementList";
+
 

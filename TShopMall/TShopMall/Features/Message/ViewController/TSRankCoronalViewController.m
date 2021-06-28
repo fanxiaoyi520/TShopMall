@@ -37,7 +37,7 @@
     @weakify(self);
     [self.dataController fetchRankCoronalComplete:^(BOOL isSucess) {
         @strongify(self)
-        [self.dataController fetchRankRecommendComplete:^(BOOL isSucess) {
+        [self.dataController fetchRecomendComplete:^(BOOL isSucess) {
             [self.myCategoryView reloadData];
         }];
     }];
