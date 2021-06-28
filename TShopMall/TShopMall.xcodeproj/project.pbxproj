@@ -28,6 +28,7 @@
 		04F1EFB92682DF8900FF007D /* TSRealNameAuthSectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F1EFB82682DF8900FF007D /* TSRealNameAuthSectionModel.m */; };
 		04F1EFBC2682E33600FF007D /* TSRealNameAuthDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F1EFBB2682E33600FF007D /* TSRealNameAuthDataController.m */; };
 		04F1EFBF2683287D00FF007D /* TSPayOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F1EFBE2683287D00FF007D /* TSPayOrderViewController.m */; };
+		04F852122689BA4C00B59910 /* TSFirstEnterAgreementView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F852112689BA4C00B59910 /* TSFirstEnterAgreementView.m */; };
 		AE4DC537B4A93FA6C04B9037 /* libPods-TShopMall.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 825A9D1C217F35DCFB651B21 /* libPods-TShopMall.a */; };
 		C21A4B6E267AF5AE00766F72 /* TSMakeOrderBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C21A4B6D267AF5AE00766F72 /* TSMakeOrderBaseCell.m */; };
 		C21A4B71267AF91F00766F72 /* TSMakeOrderPriceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C21A4B70267AF91F00766F72 /* TSMakeOrderPriceCell.m */; };
@@ -271,6 +272,7 @@
 		DFB3FFEC2686BDEC00FC8FF9 /* TSCustomPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB3FFEB2686BDEB00FC8FF9 /* TSCustomPageControl.m */; };
 		DFB3FFEF2686E60C00FC8FF9 /* TSURLRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB3FFEE2686E60C00FC8FF9 /* TSURLRouter.m */; };
 		DFB3FFF326899EF300FC8FF9 /* TSTableViewBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB3FFF226899EF300FC8FF9 /* TSTableViewBaseCell.m */; };
+		DFB3FFF62689A7AE00FC8FF9 /* TSRankRecommendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB3FFF52689A7AE00FC8FF9 /* TSRankRecommendCell.m */; };
 		E2BE996F8804E0C3E7D5AE61 /* libPods-TShopMall-TShopMallUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD1ABBE857D307088E9BF2DC /* libPods-TShopMall-TShopMallUITests.a */; };
 		F530C6D526802E5D009DC29A /* TSSMSCodeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F530C6CC26802E5D009DC29A /* TSSMSCodeRequest.m */; };
 		F530C6D626802E5D009DC29A /* TSQuickLoginRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F530C6CF26802E5D009DC29A /* TSQuickLoginRequest.m */; };
@@ -558,6 +560,8 @@
 		04F1EFBB2682E33600FF007D /* TSRealNameAuthDataController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSRealNameAuthDataController.m; sourceTree = "<group>"; };
 		04F1EFBD2683287D00FF007D /* TSPayOrderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSPayOrderViewController.h; sourceTree = "<group>"; };
 		04F1EFBE2683287D00FF007D /* TSPayOrderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSPayOrderViewController.m; sourceTree = "<group>"; };
+		04F852102689BA4C00B59910 /* TSFirstEnterAgreementView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSFirstEnterAgreementView.h; sourceTree = "<group>"; };
+		04F852112689BA4C00B59910 /* TSFirstEnterAgreementView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSFirstEnterAgreementView.m; sourceTree = "<group>"; };
 		1942D505D7004833F274B5D1 /* libPods-TShopMallTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TShopMallTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		27EC567AA21935502889F6EB /* Pods-TShopMall.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TShopMall.debug.xcconfig"; path = "Target Support Files/Pods-TShopMall/Pods-TShopMall.debug.xcconfig"; sourceTree = "<group>"; };
 		825A9D1C217F35DCFB651B21 /* libPods-TShopMall.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TShopMall.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1022,6 +1026,8 @@
 		DFB3FFEE2686E60C00FC8FF9 /* TSURLRouter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSURLRouter.m; sourceTree = "<group>"; };
 		DFB3FFF126899EF300FC8FF9 /* TSTableViewBaseCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSTableViewBaseCell.h; sourceTree = "<group>"; };
 		DFB3FFF226899EF300FC8FF9 /* TSTableViewBaseCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSTableViewBaseCell.m; sourceTree = "<group>"; };
+		DFB3FFF42689A7AE00FC8FF9 /* TSRankRecommendCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSRankRecommendCell.h; sourceTree = "<group>"; };
+		DFB3FFF52689A7AE00FC8FF9 /* TSRankRecommendCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSRankRecommendCell.m; sourceTree = "<group>"; };
 		ECCE8A564DF47B445E7905B1 /* Pods-TShopMall-TShopMallUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TShopMall-TShopMallUITests.release.xcconfig"; path = "Target Support Files/Pods-TShopMall-TShopMallUITests/Pods-TShopMall-TShopMallUITests.release.xcconfig"; sourceTree = "<group>"; };
 		F530C6CC26802E5D009DC29A /* TSSMSCodeRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSSMSCodeRequest.m; sourceTree = "<group>"; };
 		F530C6CD26802E5D009DC29A /* TSQuickLoginRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSQuickLoginRequest.h; sourceTree = "<group>"; };
@@ -1574,6 +1580,8 @@
 				C3B4CCE1267493490001EE75 /* TSRegisterTopView.m */,
 				046DEA8426856ADF009CE557 /* TSAgreementView.h */,
 				046DEA8526856ADF009CE557 /* TSAgreementView.m */,
+				04F852102689BA4C00B59910 /* TSFirstEnterAgreementView.h */,
+				04F852112689BA4C00B59910 /* TSFirstEnterAgreementView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3383,6 +3391,8 @@
 				F55D2D34267B3F04006BACCF /* TSRankHeaderView.m */,
 				F55D2D36267B3F38006BACCF /* TSRankCell.h */,
 				F55D2D37267B3F38006BACCF /* TSRankCell.m */,
+				DFB3FFF42689A7AE00FC8FF9 /* TSRankRecommendCell.h */,
+				DFB3FFF52689A7AE00FC8FF9 /* TSRankRecommendCell.m */,
 				F55D2D39267B3F72006BACCF /* TSRankRecommendHeaderView.h */,
 				F55D2D3A267B3F72006BACCF /* TSRankRecommendHeaderView.m */,
 				DC06D6E1268810C20013633F /* TSRecomendGoodsView.h */,
@@ -3869,6 +3879,7 @@
 				DC9911C6267C475000EF9B26 /* YBNestCollectionView.m in Sources */,
 				F56D4B3A266DFB8900C1AD9E /* FMLayoutBaseSection.m in Sources */,
 				C2EF88BB2670997100E7374A /* TSCartHeaderFooterView.m in Sources */,
+				DFB3FFF62689A7AE00FC8FF9 /* TSRankRecommendCell.m in Sources */,
 				C2EF88DE2671E92400E7374A /* TSCartEmptyCell.m in Sources */,
 				C2A34C992674C1760095497E /* TSSearchMarkCell.m in Sources */,
 				C2C765482679FCBA004757B9 /* TSMakeOrderGoodsCell.m in Sources */,
@@ -4123,6 +4134,7 @@
 				F55D2AEA266F9CEC006BACCF /* TSUniverseBackgroundHeaderView.m in Sources */,
 				F55D2CAD2674A4AF006BACCF /* TSCategoryKindViewModel.m in Sources */,
 				DC3440B226720E4C00F5B0DA /* TSGridButtonCollectionView.m in Sources */,
+				04F852122689BA4C00B59910 /* TSFirstEnterAgreementView.m in Sources */,
 				F530CC3C26803862009DC29A /* NSTimer+TSBlcokTimer.m in Sources */,
 				C35F1867267C7F8A00F65AF9 /* TSSexSelectingView.m in Sources */,
 				F530CCA726803FCD009DC29A /* UIControl+RepeatClick.m in Sources */,
