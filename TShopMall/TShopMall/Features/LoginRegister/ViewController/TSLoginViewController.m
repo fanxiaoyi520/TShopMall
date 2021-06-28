@@ -64,8 +64,8 @@
     }
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleDefault;
 }
 
 - (void)dealloc {
@@ -416,10 +416,6 @@
         _dataController = [[TSLoginRegisterDataController alloc] init];
     }
     return _dataController;
-}
-
-- (UIStatusBarStyle)preferredStatusBarStyle{
-    return UIStatusBarStyleDefault;
 }
 
 #pragma mark- 微信登录

@@ -151,24 +151,6 @@
     }
 }
 
-- (void)goToServiceProtocol {
-    if ([self.delegate respondsToSelector:@selector(goToServiceProtocol)]) {
-        [self.delegate goToServiceProtocol];
-    }
-}
-
-- (void)goToPrivatePolicy {
-    if ([self.delegate respondsToSelector:@selector(goToPrivatePolicy)]) {
-        [self.delegate goToPrivatePolicy];
-    }
-}
-
-- (void)goToRegisterProtocol {
-    if ([self.delegate respondsToSelector:@selector(goToRegisterProtocol)]) {
-        [self.delegate goToRegisterProtocol];
-    }
-}
-
 #pragma mark - UITextViewDelegate
 - (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange {
     NSString *scheme = [URL scheme];

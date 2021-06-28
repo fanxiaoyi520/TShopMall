@@ -13,12 +13,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol TSQuickCheckViewDelegate <NSObject>
 
-- (void)openAuthenticationProtocol;
-
-- (void)openServiceProtocol;
-
-- (void)openPrivateProtocol;
-
 - (void)goToH5WithAgreementModel:(TSAgreementModel *)agreementModel;
 
 @end

@@ -36,7 +36,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.gk_navigationBar.hidden = YES;
-
 }
 
 - (void)fillCustomView {

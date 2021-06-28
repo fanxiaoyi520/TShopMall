@@ -64,6 +64,10 @@
     
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleDefault;
+}
+
 - (void)showAlertInView:(UIView *)view {
     if ([TSGlobalManager shareInstance].firstStartApp) {
         TSFirstEnterAgreementView *firstEnterAlert = [[TSFirstEnterAgreementView alloc] init];
