@@ -37,9 +37,7 @@
     @weakify(self);
     [self.dataController fetchRankCoronalComplete:^(BOOL isSucess) {
         @strongify(self)
-        [self.dataController fetchRecomendComplete:^(BOOL isSucess) {
-            [self.myCategoryView reloadData];
-        }];
+        [self.myCategoryView reloadData];
     }];
 }
 
@@ -63,7 +61,7 @@
 
 - (id<JXCategoryListContentViewDelegate>)listContainerView:(JXCategoryListContainerView *)listContainerView initListForIndex:(NSInteger)index {
     TSRankMonthViewController *list = [[TSRankMonthViewController alloc] init];
-    list.coronalSections = self.dataController.coronalSections;
+    list.dataController = self.dataController;
     return list;
 }
 

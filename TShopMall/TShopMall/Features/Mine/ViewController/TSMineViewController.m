@@ -19,6 +19,9 @@
 #import "TSMineWalletCenterViewController.h"
 #import "TSSettingViewController.h"
 #import "TSHybridViewController.h"
+#import "TSScoreViewController.h"
+#import "TSOfficialServicesViewController.h"
+#import "TSInviteFriendsViewController.h"
 
 @interface TSMineViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate,TSUserInfoViewDelegate,TSMineOrderHeaderViewDelegate>
 
@@ -169,12 +172,24 @@
         [self.navigationController pushViewController:hybrid animated:YES];
     }
     
+    //邀请好友
+    if (indexPath.section == 2 && indexPath.row == 0) {
+        TSInviteFriendsViewController *vc = [TSInviteFriendsViewController new];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    
     //发票中心
     if (indexPath.section == 4 && indexPath.row == 1) {
         NSString *path = [NSString stringWithFormat:@"%@%@",kMallH5ApiPrefix,kMallH5InvoiceListUrl];
         TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:path];
         hybrid.isInvoice = YES;
         [self.navigationController pushViewController:hybrid animated:YES];
+    } else if (indexPath.section == 4 && indexPath.row == 4) {
+        TSScoreViewController *vc = [TSScoreViewController new];
+        [self.navigationController pushViewController:vc animated:YES];
+    } else if (indexPath.section == 4 && indexPath.row == 3) {
+        TSOfficialServicesViewController *vc = [TSOfficialServicesViewController new];
+        [self.navigationController pushViewController:vc animated:YES];
     }
 
     //我的钱包

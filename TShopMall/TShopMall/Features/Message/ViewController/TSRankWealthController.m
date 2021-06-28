@@ -59,7 +59,7 @@
 
 - (id<JXCategoryListContentViewDelegate>)listContainerView:(JXCategoryListContainerView *)listContainerView initListForIndex:(NSInteger)index {
     TSRankMonthViewController *list = [[TSRankMonthViewController alloc] init];
-    list.coronalSections = self.dataController.coronalSections;
+    list.dataController = self.dataController;
     return list;
 }
 

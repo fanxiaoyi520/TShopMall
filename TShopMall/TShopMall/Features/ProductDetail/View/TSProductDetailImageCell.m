@@ -29,7 +29,8 @@
 -(UIImageView *)imgView{
     if (!_imgView) {
         _imgView = [[UIImageView alloc] init];
-        _imgView.backgroundColor = KGrayColor;
+        _imgView.backgroundColor = UIColor.clearColor;
+        _imgView.contentMode = UIViewContentModeScaleAspectFill;
     }
     return _imgView;
 }

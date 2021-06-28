@@ -109,6 +109,18 @@
     }
 }
 
+-(void)buyAction:(UIButton *)sender{
+    if ([self.delegate respondsToSelector:@selector(productDetailBottomView:buyClick:)]) {
+        [self.delegate productDetailBottomView:self buyClick:sender];
+    }
+}
+
+-(void)sellAction:(UIButton *)sender{
+    if ([self.delegate respondsToSelector:@selector(productDetailBottomView:sellClick:)]) {
+        [self.delegate productDetailBottomView:self sellClick:sender];
+    }
+}
+
 #pragma mark - Getter
 -(UIView *)contentView{
     if (!_contentView) {
@@ -167,7 +179,7 @@
         [_buyButton setTitleColor:KWhiteColor forState:UIControlStateNormal];
         [_buyButton setTitleColor:KWhiteColor forState:UIControlStateHighlighted];
         [_buyButton setBackgroundColor:[UIColor orangeColor]];
-        [_buyButton addTarget:self action:@selector(addAction:) forControlEvents:UIControlEventTouchUpInside];
+        [_buyButton addTarget:self action:@selector(buyAction:) forControlEvents:UIControlEventTouchUpInside];
         [_buyButton setCorners:(UIRectCornerTopLeft | UIRectCornerBottomLeft) radius:20];
     }
     return _buyButton;
@@ -181,7 +193,7 @@
         [_sellButton setTitleColor:KWhiteColor forState:UIControlStateNormal];
         [_sellButton setTitleColor:KWhiteColor forState:UIControlStateHighlighted];
         [_sellButton setBackgroundColor:[UIColor redColor]];
-        [_sellButton addTarget:self action:@selector(addAction:) forControlEvents:UIControlEventTouchUpInside];
+        [_sellButton addTarget:self action:@selector(sellAction:) forControlEvents:UIControlEventTouchUpInside];
         [_sellButton setCorners:(UIRectCornerTopRight | UIRectCornerBottomRight) radius:20];
     }
     return _sellButton;

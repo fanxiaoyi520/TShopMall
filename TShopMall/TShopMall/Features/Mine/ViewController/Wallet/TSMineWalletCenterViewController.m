@@ -10,11 +10,13 @@
 
 #import "TSMineWalletViewController.h"
 #import "TSBankCardViewController.h"
+#import "TSMineDataController.h"
 
 @interface TSMineWalletCenterViewController ()<TSWalletCenterViewDelegate>
 
 @property (nonatomic ,strong) UIScrollView *mainScrollView;
 @property (nonatomic ,strong) TSWalletCenterView *walletCenterView;
+@property (nonatomic ,strong) TSMineDataController *dataController;
 @end
 
 @implementation TSMineWalletCenterViewController
@@ -28,6 +30,11 @@
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.gk_navTitle = @"我的钱包";
+    [self.dataController fetchMineWalletDataComplete:^(BOOL isSucess) {
+        if (isSucess) {
+            NSLog(@"");
+        }
+    }];
 }
 
 -(void)fillCustomView{
@@ -69,5 +76,12 @@
         _walletCenterView.kDelegate = self;
     }
     return _walletCenterView;
+}
+
+-(TSMineDataController *)dataController{
+    if (!_dataController) {
+        _dataController = [[TSMineDataController alloc] init];
+    }
+    return _dataController;
 }
 @end

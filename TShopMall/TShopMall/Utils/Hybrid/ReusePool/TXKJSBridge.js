@@ -1,7 +1,7 @@
 /* eslint-disable */
 window.JXBCallBackList = {};
 
-window.TXKJSBridge = {
+window.TZKJSBridge = {
 call:call,
 };
 

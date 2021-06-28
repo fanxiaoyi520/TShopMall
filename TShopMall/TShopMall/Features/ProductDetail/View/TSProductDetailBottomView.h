@@ -14,6 +14,8 @@
 -(void)productDetailBottomView:(TSProductDetailBottomView *_Nullable)bottomView mallClick:(TSDetailFunctionButton *_Nullable)sender;
 -(void)productDetailBottomView:(TSProductDetailBottomView *_Nullable)bottomView customClick:(TSDetailFunctionButton *_Nullable)sender;
 -(void)productDetailBottomView:(TSProductDetailBottomView *_Nullable)bottomView addClick:(TSDetailFunctionButton *_Nullable)sender;
+-(void)productDetailBottomView:(TSProductDetailBottomView *_Nullable)bottomView buyClick:(UIButton *_Nullable)sender;
+-(void)productDetailBottomView:(TSProductDetailBottomView *_Nullable)bottomView sellClick:(UIButton *_Nullable)sender;
 
 @end
 
