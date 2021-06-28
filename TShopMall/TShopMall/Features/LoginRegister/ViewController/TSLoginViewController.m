@@ -136,6 +136,7 @@
     __weak __typeof(self)weakSelf = self;
     [self.dataController fetchAgreementWithCompleted:^(NSArray<TSAgreementModel *> * _Nonnull agreementModels) {
         weakSelf.checkedView.agreementModels = agreementModels;
+        weakSelf.quickCheckView.agreementModels = agreementModels;
     }];
 }
 
