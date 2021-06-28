@@ -42,16 +42,21 @@
     self.contentView.backgroundColor = KWhiteColor;
     self.frame = [[UIScreen mainScreen] bounds];
     self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
-    self.contentView.frame = CGRectMake(KRateW(36), kScreenHeight, kScreenWidth - KRateW(36) * 2, KRateH(378));
+    self.contentView.frame = CGRectMake(KRateW(36), kScreenHeight, kScreenWidth - KRateW(36) * 2, 378);
     [self.contentView setCorners:UIRectCornerAllCorners radius:12];
     ///设置约束
     [self addConstraints];
 }
 
-- (void)show {
+- (void)showInView:(UIView *)view {
+    if (view == nil) {
+        [[UIApplication sharedApplication].keyWindow addSubview:self];
+    } else {
+        [view addSubview:self];
+    }
     [UIView animateWithDuration:.5 animations:^{
         CGRect rect = self.contentView.frame;
-        rect.origin.y = (kScreenHeight - KRateH(378)) / 2.0;
+        rect.origin.y = (kScreenHeight - 378) / 2.0;
         self.contentView.frame = rect;
     }];
 }
@@ -86,7 +91,7 @@
     }];
     [self.cancelButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contentView.mas_left).with.offset(16);
-        make.right.equalTo(self.confirmButton.mas_left).with.offset(-16);
+        //make.right.equalTo(self.confirmButton.mas_left).with.offset(-11);
         make.width.equalTo(self.confirmButton.mas_width).with.offset(0);
         make.bottom.equalTo(self.contentView.mas_bottom).with.offset(-25);
         make.height.mas_equalTo(40);
@@ -238,7 +243,7 @@
 }
 /** 同意并进入 */
 - (void)confirmAction {
-    [[NSUserDefaults standardUserDefaults] setValue:KFirstEnterAppValue forKey:KFirstEnterAppKey];
+    [TSGlobalManager shareInstance].firstStartApp = NO;
     [self dismiss];
 }
 

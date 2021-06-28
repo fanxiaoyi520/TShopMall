@@ -13,10 +13,7 @@
 @end
 
 @implementation TSBaseViewController
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -25,12 +22,9 @@
     [self setupNavigationBar];
     [self fillCustomView];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginStateDidChanged:) name:@"TS_LoginUpdateNotification" object:nil];
 }
 
-- (void)loginStateDidChanged:(NSNotification *)noti{
-    
-}
+
 
 -(UIStatusBarStyle)preferredStatusBarStyle{
     return UIStatusBarStyleLightContent;

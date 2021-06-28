@@ -7,4 +7,4 @@
 
 #import "TSNotificationConst.h"
 
-NSString *const FXSC_Login_Sucess = @"123";
+NSString *const TS_Login_State = @"TS_LoginUpdateNotification";

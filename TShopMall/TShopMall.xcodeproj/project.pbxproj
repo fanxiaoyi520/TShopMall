@@ -273,6 +273,7 @@
 		DFB3FFEF2686E60C00FC8FF9 /* TSURLRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB3FFEE2686E60C00FC8FF9 /* TSURLRouter.m */; };
 		DFB3FFF326899EF300FC8FF9 /* TSTableViewBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB3FFF226899EF300FC8FF9 /* TSTableViewBaseCell.m */; };
 		DFB3FFF62689A7AE00FC8FF9 /* TSRankRecommendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB3FFF52689A7AE00FC8FF9 /* TSRankRecommendCell.m */; };
+		DFB3FFF92689C1AA00FC8FF9 /* TSMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB3FFF82689C1AA00FC8FF9 /* TSMainViewController.m */; };
 		E2BE996F8804E0C3E7D5AE61 /* libPods-TShopMall-TShopMallUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD1ABBE857D307088E9BF2DC /* libPods-TShopMall-TShopMallUITests.a */; };
 		F530C6D526802E5D009DC29A /* TSSMSCodeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F530C6CC26802E5D009DC29A /* TSSMSCodeRequest.m */; };
 		F530C6D626802E5D009DC29A /* TSQuickLoginRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F530C6CF26802E5D009DC29A /* TSQuickLoginRequest.m */; };
@@ -1028,6 +1029,8 @@
 		DFB3FFF226899EF300FC8FF9 /* TSTableViewBaseCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSTableViewBaseCell.m; sourceTree = "<group>"; };
 		DFB3FFF42689A7AE00FC8FF9 /* TSRankRecommendCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSRankRecommendCell.h; sourceTree = "<group>"; };
 		DFB3FFF52689A7AE00FC8FF9 /* TSRankRecommendCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSRankRecommendCell.m; sourceTree = "<group>"; };
+		DFB3FFF72689C1AA00FC8FF9 /* TSMainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSMainViewController.h; sourceTree = "<group>"; };
+		DFB3FFF82689C1AA00FC8FF9 /* TSMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSMainViewController.m; sourceTree = "<group>"; };
 		ECCE8A564DF47B445E7905B1 /* Pods-TShopMall-TShopMallUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TShopMall-TShopMallUITests.release.xcconfig"; path = "Target Support Files/Pods-TShopMall-TShopMallUITests/Pods-TShopMall-TShopMallUITests.release.xcconfig"; sourceTree = "<group>"; };
 		F530C6CC26802E5D009DC29A /* TSSMSCodeRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSSMSCodeRequest.m; sourceTree = "<group>"; };
 		F530C6CD26802E5D009DC29A /* TSQuickLoginRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSQuickLoginRequest.h; sourceTree = "<group>"; };
@@ -2795,6 +2798,8 @@
 				F54973D12668CF3300181E3F /* AppDelegate+RootController.m */,
 				F56D4B64266E053800C1AD9E /* AppDelegate+Initialize.h */,
 				F56D4B65266E053800C1AD9E /* AppDelegate+Initialize.m */,
+				DFB3FFF72689C1AA00FC8FF9 /* TSMainViewController.h */,
+				DFB3FFF82689C1AA00FC8FF9 /* TSMainViewController.m */,
 			);
 			path = AppDelegate;
 			sourceTree = "<group>";
@@ -4157,6 +4162,7 @@
 				DC3440DF2672FC3900F5B0DA /* TSHomePageBaseModel.m in Sources */,
 				C2EF88B82670997100E7374A /* TSCartModel.m in Sources */,
 				CE4F6BE82687908200812275 /* TSOfficialServicesCell.m in Sources */,
+				DFB3FFF92689C1AA00FC8FF9 /* TSMainViewController.m in Sources */,
 				DFB3FFD92684837300FC8FF9 /* TSPaySuccessCell.m in Sources */,
 				C3A6C471267A1BEA00FC71D6 /* TSBindThirdViewController.m in Sources */,
 				F54973662668A22100181E3F /* YTKBaseRequest+AnimatingAccessory.m in Sources */,
