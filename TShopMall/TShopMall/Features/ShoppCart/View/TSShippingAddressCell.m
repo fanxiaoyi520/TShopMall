@@ -36,7 +36,7 @@
     _addressModel = addressModel;
     self.name.text  = addressModel.consignee;
     self.phone.text = addressModel.mobile;
-    self.address.text = [NSString stringWithFormat:@"%@%@", addressModel.area, addressModel.address];
+    self.address.text = [NSString stringWithFormat:@"%@%@", addressModel.address, addressModel.area];
     self.mark.hidden = !addressModel.isDefault;
 }
 

@@ -49,7 +49,9 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section == 0) {
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    if ([cell isKindOfClass:NSClassFromString(@"TSMakeOrderAddressCell")] ||
+        [cell isKindOfClass:NSClassFromString(@"TSMakeOrderAddressTipsCell")]) {
         [self.controller performSelector:@selector(gotoSelectedAddress)];
     }
 }
@@ -100,4 +102,5 @@
     self.showsVerticalScrollIndicator = NO;
 }
 
+- (void)gotoSelectedAddres{}
 @end

@@ -9,6 +9,7 @@
 
 @interface TSSearchResultController : TSBaseViewController
 @property (nonatomic, copy) NSString *searchKey;
+@property (nonatomic, copy) NSString *goodsGroupUuid;// 商品类别uuid
 - (void)showSearchResultView;
 @end
 

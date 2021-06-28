@@ -34,7 +34,10 @@ UIKIT_EXTERN NSString *const kOneStepLoginUrl;
 UIKIT_EXTERN NSString *const kLoginByTokenUrl;
 /// 将第三方应用如微信小程序通过授权码登录
 UIKIT_EXTERN NSString *const kLoginByAuthCode;
-
+/// 第三方绑定用户信息接口
+UIKIT_EXTERN NSString *const kBindUserByAuthCode;
+/// 协议信息的接口
+UIKIT_EXTERN NSString *const kLoginRegisterAgreementUrl;
 #pragma mark - 首页
 UIKIT_EXTERN NSString *const kHomePageInfoUrl;
 UIKIT_EXTERN NSString *const kSearchKey;//搜索关键词
@@ -78,6 +81,7 @@ UIKIT_EXTERN NSString * const kEditAddress;
 UIKIT_EXTERN NSString * const kDeleteAddress;
 UIKIT_EXTERN NSString * const kCustomerAddress;
 UIKIT_EXTERN NSString * const kAddressTag;
+UIKIT_EXTERN NSString * const kSmartAddress;
 
 #pragma mark - 我的
 UIKIT_EXTERN NSString * const kMineMerchantUserInformation;

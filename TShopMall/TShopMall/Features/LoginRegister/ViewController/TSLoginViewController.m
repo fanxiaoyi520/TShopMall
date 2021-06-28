@@ -24,6 +24,7 @@
 #import "TSAccountConst.h"
 #import "AuthAppleIDManager.h"
 #import <AuthenticationServices/AuthenticationServices.h>
+#import "TSAgreementModel.h"
 
 @interface TSLoginViewController ()<TSQuickLoginTopViewDelegate, TSLoginTopViewDelegate, TSLoginBottomViewDelegate, TSCheckedViewDelegate, TSQuickCheckViewDelegate, TSHybridViewControllerDelegate>
 /** 背景图 */
@@ -85,6 +86,7 @@
     self.view.backgroundColor = UIColor.whiteColor;
     UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panAction:)];
     [self.view addGestureRecognizer:panGestureRecognizer];
+    [self getAgreementInfo];
 }
 
 - (void)panAction: (UIPanGestureRecognizer *)recognizer {
@@ -116,17 +118,24 @@
     [self.checkedView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.view.mas_bottom).with.offset(-KRateH(30));
         make.left.right.equalTo(self.view).with.offset(0);
-        make.height.mas_equalTo(56);
+        make.height.mas_equalTo(66);
     }];
     [self.quickCheckView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.view.mas_bottom).with.offset(-KRateH(30));
         make.left.right.equalTo(self.view).with.offset(0);
-        make.height.mas_equalTo(56);
+        make.height.mas_equalTo(66);
     }];
     [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.checkedView.mas_top).with.offset(-KRateW(20));
         make.left.right.equalTo(self.view).with.offset(0);
         make.height.mas_equalTo(KRateW(35));
+    }];
+}
+
+- (void)getAgreementInfo {
+    __weak __typeof(self)weakSelf = self;
+    [self.dataController fetchAgreementWithCompleted:^(NSArray<TSAgreementModel *> * _Nonnull agreementModels) {
+        weakSelf.checkedView.agreementModels = agreementModels;
     }];
 }
 
@@ -201,13 +210,6 @@
 - (void)goToRegister {
     if (self.navigationController) {
         TSRegiterViewController *registerVC = [[TSRegiterViewController alloc] init];
-        registerVC.regiterBlock = ^{
-            [self dismissViewControllerAnimated:YES completion:^{
-                if (self.loginBlock) {
-                    self.loginBlock();
-                }
-            }];
-        };
         registerVC.dataController = self.dataController;
         [self.navigationController pushViewController:registerVC animated:YES];
     } else {
@@ -282,25 +284,40 @@
 }
 
 - (void)goToApple {
-    
-    [[AuthAppleIDManager sharedInstance] authorizationAppleID];
+    @weakify(self);
+   
+    AuthAppleIDManager *manager = [AuthAppleIDManager sharedInstance];
+    [manager authorizationAppleID];
+    manager.loginByTokenBlock = ^(NSString * _Nonnull token) {
+        @strongify(self)
+        [self.dataController fetchLoginByToken:token platformId:@"15" sucess:^(BOOL isHaveMobile, NSString * _Nonnull token) {
+            if (isHaveMobile) {
+                /// 完成登录
+                [self dismissViewControllerAnimated:YES completion:^{
+                    if (self.loginBlock) {
+                        self.loginBlock();
+                    }
+                    
+                }];
+            }
+            else{
+                [[NTESQuickLoginManager sharedInstance] closeAuthController:^{
+
+                 }];
+                [self dismissViewControllerAnimated:NO completion:^{
+                    if (self.bindBlock) {
+                        self.bindBlock();
+                    }
+                }];
+            }
+        }];
+    };
 }
 
 #pragma mark - TSCheckedViewDelegate
-- (void)goToServiceProtocol {
-    TSHybridViewController *web = [[TSHybridViewController alloc] initWithURLString:@"https://www.baidu.com"];
-    web.delegate = self;
-    [self.navigationController pushViewController:web animated:YES];
-}
-
-- (void)goToPrivatePolicy {
-    TSHybridViewController *web = [[TSHybridViewController alloc] initWithURLString:@"https://www.baidu.com"];
-    web.delegate = self;
-    [self.navigationController pushViewController:web animated:YES];
-}
-
-- (void)goToRegisterProtocol {
-    TSHybridViewController *web = [[TSHybridViewController alloc] initWithURLString:@"https://www.baidu.com"];
+/** 跳转查看协议 */
+- (void)goToH5WithAgreementModel:(TSAgreementModel *)agreementModel {
+    TSHybridViewController *web = [[TSHybridViewController alloc] initWithURLString:[agreementModel.serverUrl stringByAppendingString:@"&mode=webview"]];
     web.delegate = self;
     [self.navigationController pushViewController:web animated:YES];
 }
@@ -418,12 +435,34 @@
 
 #pragma mark- 微信登录
 - (void)sendWXAuthReq{
+    @weakify(self);
     WechatManager * payManager = [WechatManager shareInstance];
     payManager.WXFail = ^{
 
     };
     payManager.WXSuccess = ^(NSString *code){
-
+        @strongify(self)
+        if (code) {
+            [self.dataController fetchLoginByAuthCode:code platformId:@"3" sucess:^(BOOL isHaveMobile, NSString * _Nonnull token) {
+                if (isHaveMobile) {
+                    /// 完成登录
+                    [self dismissViewControllerAnimated:YES completion:^{
+                        if (self.loginBlock) {
+                            self.loginBlock();
+                        }
+                        
+                    }];
+                }
+                else{
+                    /// 跳转绑定手机号
+                    [self dismissViewControllerAnimated:NO completion:^{
+                        if (self.bindBlock) {
+                            self.bindBlock();
+                        }
+                    }];
+                }
+            }];
+        }
     };
     
     if([WXApi isWXAppInstalled]){//判断用户是否已安装微信App

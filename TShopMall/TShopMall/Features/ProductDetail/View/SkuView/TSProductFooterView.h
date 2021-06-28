@@ -11,6 +11,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TSProductFooterView : UIView
 
+@property(nonatomic, copy) void(^cartBlock) (void);
+@property(nonatomic, copy) void(^buyBlock) (void);
+
 @end
 
 NS_ASSUME_NONNULL_END

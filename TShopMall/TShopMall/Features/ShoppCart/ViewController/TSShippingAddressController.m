@@ -55,7 +55,9 @@
 
 - (void)gotoEditAddress:(TSAddressModel *)obj{
     TSAddressEditController *con = [TSAddressEditController new];
-    con.vm = [[TSAddressViewModel alloc] initWithAddress:obj];
+    if (obj != nil) {
+        con.vm = [[TSAddressViewModel alloc] initWithAddress:obj];
+    }
     con.addressChanged = ^{
         [self fetchAddress];
     };

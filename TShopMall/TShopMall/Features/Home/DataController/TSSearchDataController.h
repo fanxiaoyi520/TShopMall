@@ -9,16 +9,17 @@
 #import "TSSearchSection.h"
 #import "TSSearchHotKeyModel.h"
 #import "TSSearchKeyViewModel.h"
+#import "TSRecomendModel.h"
 
 @interface TSSearchDataController : TSBaseDataController
 @property (nonatomic, strong) NSArray<TSSearchHotKeyModel *> *hotkeys;
-@property (nonatomic, strong) NSArray<TSSearchSection *> *sections;
+@property (nonatomic, strong) NSMutableArray<TSSearchSection *> *sections;
 
 - (void)fetchData:(void(^)(NSArray<TSSearchSection *> *sections,  NSError *error))finished;
 
 + (NSArray<TSSearchSection *> *)updateHistorySections:(NSArray<TSSearchSection *> *)sections;
 
-- (NSArray<TSSearchSection *> *)configRecomendSection:(UICollectionReusableView *)recomendView;
+- (void)configRecomendSection:(NSArray<TSRecomendGoods *> *)goods isGrid:(BOOL)isGrid;
 @end
 
 

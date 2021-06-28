@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, readonly) NSMutableArray <TSRankSectionModel *> *coronalSections;
 
 -(void)fetchRankCoronalComplete:(void(^)(BOOL isSucess))complete;
+-(void)fetchRankRecommendComplete:(void(^)(BOOL isSucess))complete;
 
 @end
 

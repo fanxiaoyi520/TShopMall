@@ -16,6 +16,9 @@
     if ([str isEqual:@"历史搜索"]) {
         self.deleteBtn.hidden = NO;
     }
+    if ([str containsString:@"推荐"]){
+        self.title.font = KFont(PingFangSCMedium, 14.0);
+    }
 }
 
 - (void)deleteTapAction{

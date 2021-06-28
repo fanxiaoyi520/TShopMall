@@ -6,10 +6,10 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "TSUniversaItemModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TSProductBaseModel : NSObject
+@interface TSProductBaseModel : TSUniversaItemModel
 @property (nonatomic, copy) NSString *uuid;//商品UUID
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *secondParentCategory;
@@ -22,7 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) double price;
 @property (nonatomic, assign) double sellingPrice;//划线价
 @property (nonatomic, assign) double promotionPrice;//促销价格
-
+@property (nonatomic, assign) double earnMost;//最高赚
+@property (nonatomic, assign) double staffPrice;//提货价
 @property (nonatomic, copy) NSString *promotionDesc;//促销描述
 @property (nonatomic, copy) NSString *skuNo;//商品编码
 @property (nonatomic, copy) NSString *existProduct;//商品库存是否存在1：存在0：不存在

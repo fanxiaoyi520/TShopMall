@@ -1,32 +1,32 @@
 //
-//  TSRankCurrentMonthController.m
+//  TSRankMonthViewController.m
 //  TShopMall
 //
 //  Created by 陈结 on 2021/6/17.
 //
 
-#import "TSRankCurrentMonthController.h"
+#import "TSRankMonthViewController.h"
 #import "TSUniversalFlowLayout.h"
 #import "TSUniversalCollectionViewCell.h"
 #import "TSUniversalFooterView.h"
 #import "TSUniversalHeaderView.h"
 
-@interface TSRankCurrentMonthController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate>
+@interface TSRankMonthViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate>
 
 /// CollectionView
 @property(nonatomic, strong) UICollectionView *collectionView;
 
 @end
 
-@implementation TSRankCurrentMonthController
+@implementation TSRankMonthViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.gk_navigationBar.hidden = YES;
+    self.view.backgroundColor = KWhiteColor;
 }
 
--(void)fillCustomView {
-    self.view.backgroundColor = UIColor.whiteColor;
+-(void)fillCustomView{
     [self.view addSubview:self.collectionView];
     CGFloat bottom = self.view.ts_safeAreaInsets.bottom + 56 + GK_TABBAR_HEIGHT + GK_STATUSBAR_NAVBAR_HEIGHT + 5;
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -43,11 +43,9 @@
 //    CGFloat viewX = 0;
 //    CGFloat viewY = 0;
 //    CGFloat viewW = self.view.bounds.size.width;
-//    CGFloat viewH = kScreenHeight - GK_NAVBAR_HEIGHT - 126 - self.view.ts_safeAreaInsets.bottom ;
+//    CGFloat viewH = kScreenHeight - GK_NAVBAR_HEIGHT - 126 - self.view.ts_safeAreaInsets.bottom - 80;
 //
 //    self.collectionView.frame = CGRectMake(viewX, viewY, viewW, viewH);
-    
-//    NSLog(@" screenHeight == %f, self.view == %f", kScreenHeight, CGRectGetHeight(self.view.frame));
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -72,7 +70,6 @@
     [collectionView registerClass:[className class] forCellWithReuseIdentifier:item.identify];
     TSUniversalCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:item.identify forIndexPath:indexPath];
     cell.indexPath = indexPath;
-    cell.delegate = self;
     return cell;
 }
 
@@ -211,7 +208,7 @@ spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
         flowLayout.delegate = self;
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero
                                              collectionViewLayout:flowLayout];
-        _collectionView.backgroundColor = UIColor.whiteColor;
+        _collectionView.backgroundColor = UIColor.clearColor;
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.showsVerticalScrollIndicator = NO;
@@ -224,5 +221,6 @@ spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
     _coronalSections = coronalSections;
     [self.collectionView reloadData];
 }
+
 
 @end

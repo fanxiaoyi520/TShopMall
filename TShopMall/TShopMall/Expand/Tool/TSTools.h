@@ -10,8 +10,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TSTools : NSObject
-
+/** 手机号码的校验 */
 + (BOOL)isPhoneNumber:(NSString *)phoneNumber;
+/** 提现密码的校验 */
++ (BOOL)isWithdrawalPsw:(NSString *)psw;
 
 @end
 

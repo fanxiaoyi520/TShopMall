@@ -20,6 +20,7 @@
         self.delegate = self;
         self.dataSource = self;
         [self configTable];
+        self.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, KRateW(56.0))];
     }
     return self;
 }
@@ -27,13 +28,6 @@
 - (void)clearInvalideGoods{}
 - (void)scrollDeleteCart:(TSCart *)cart{}
 
-- (void)checkGift:(TSCart *)cartModel{
-    
-}
-
-- (void)goToShopping{
-    
-}
 
 - (void)setSections:(NSArray<TSCartGoodsSection *> *)sections{
     _sections = sections;

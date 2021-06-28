@@ -6,6 +6,7 @@
 //
 
 #import "TSPaySuccessDataController.h"
+#import "TSProductBaseModel.h"
 
 
 @interface TSPaySuccessDataController ()
@@ -32,10 +33,12 @@
     }
     {
         NSMutableArray *items = [NSMutableArray array];
+
         for (int i = 0; i < 10; i++) {
-            TSPaySuccessSectionItemModel *item = [[TSPaySuccessSectionItemModel alloc] init];
+            TSProductBaseModel *item = [[TSProductBaseModel alloc] init];
             item.cellHeight = 282;
-            item.identify = @"TSRankRecommendCell";
+            item.identify = @"TSHomePageContainerCollectionViewCell";
+
             [items addObject:item];
         }
         TSPaySuccessSectionModel *section = [[TSPaySuccessSectionModel alloc] init];

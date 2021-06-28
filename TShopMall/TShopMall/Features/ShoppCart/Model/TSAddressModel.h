@@ -33,5 +33,8 @@
 @property (nonatomic, copy) NSString *telephone;
 @property (nonatomic, copy) NSString *uuid;
 @property (nonatomic, copy) NSString *zipcode;
+
+
+@property (nonatomic, assign, readonly) BOOL isValid;
 @end
 

@@ -29,6 +29,7 @@
         self.automaticallyAdjustsScrollViewInsets = YES;
     }
     self.dataCon = [TSMakeOrderDataController new];
+    self.dataCon.paramsISFromCart = self.isFromCart;
     self.dataCon.context = self;
     [self refreshData];
 }
@@ -37,13 +38,7 @@
     
     __weak typeof(self) weakSelf = self;
     [self.dataCon checkBalance:^(BOOL finished) {
-        if (finished == NO) {
-            [Popover popToastOnView:self.view text:@"下单信息获取失败, 请重试!"];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [self.navigationController popViewControllerAnimated:YES];
-            });
-            return;
-        }
+        weakSelf.commitView.hidden  = !finished;
         [weakSelf updateUI];
     }];
 }

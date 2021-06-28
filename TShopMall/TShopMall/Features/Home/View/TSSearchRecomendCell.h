@@ -6,9 +6,17 @@
 //
 
 #import "TSSearchBaseCell.h"
+#import "TSRecomendWidthView.h"
+#import "TSRecomendSlimView.h"
+#import "TSRecomendModel.h"
+
+@class TSSearchRecomendSlimCell;
 
 @interface TSSearchRecomendCell : TSSearchBaseCell
-
+@property (nonatomic, strong) TSRecomendWidthView *recomendView;
 @end
 
 
+@interface TSSearchRecomendSlimCell : TSSearchBaseCell
+@property (nonatomic, strong) TSRecomendSlimView *recomendView;
+@end

@@ -17,6 +17,13 @@
     _carts = [NSArray yy_modelArrayWithClass:TSCart.class json:carts];
 }
 
+- (NSString *)cartsTotalMount{
+    if ([_cartsTotalMount containsString:@"null"] || _cartsTotalMount.length == 0) {
+        return @"0";
+    }
+    return _cartsTotalMount;
+}
+
 @end
 
 @implementation TSCartStore
