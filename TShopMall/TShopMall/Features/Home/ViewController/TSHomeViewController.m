@@ -69,7 +69,7 @@
         }
     }];
 
-    if ([TSUserLoginManager shareInstance].state == None) {
+    if ([TSUserLoginManager shareInstance].state == TSLoginStateNone) {
         [self.view addSubview:self.loginBar];
         self.loginBar.clickBlock = ^{
             [[TSUserLoginManager shareInstance] startLogin];

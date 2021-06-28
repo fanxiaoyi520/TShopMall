@@ -343,7 +343,7 @@
 }
 -(void)productDetailBottomView:(TSProductDetailBottomView *_Nullable)bottomView addClick:(TSDetailFunctionButton *_Nullable)sender{
     
-    if ([TSUserLoginManager shareInstance].state == None) {
+    if ([TSUserLoginManager shareInstance].state == TSLoginStateNone) {
         [[TSUserLoginManager shareInstance] startLogin];
         return;
     }

@@ -41,15 +41,15 @@
             [self otherLoginWithAnimation:YES];
         };
         oneClickLoginVC.loginBlock = ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"TS_LoginUpdateNotification" object:@0];
+            [self postNotificationWithLoginState:TSLoginStateLogin];
         };
         oneClickLoginVC.bindBlock = ^{
             TSBindMobileController *vc = [TSBindMobileController new];
             TSBaseNavigationController *nav = [[TSBaseNavigationController alloc] initWithRootViewController:vc];
-
+            
             vc.bindedBlock = ^{
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"TS_LoginUpdateNotification" object:@0];
-
+                [self postNotificationWithLoginState:TSLoginStateLogin];
+                
             };
             nav.modalPresentationStyle = UIModalPresentationFullScreen;
             [[UIApplication sharedApplication].delegate.window.rootViewController presentViewController:nav animated:YES completion:^{
@@ -69,7 +69,7 @@
     [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
         [[TSUserInfoManager userInfo] clearUserInfo];
         [[TSGlobalManager shareInstance] setCurrentUserInfo:nil];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"TS_LoginUpdateNotification" object:@1];
+        [self postNotificationWithLoginState:TSLoginStateNone];
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
         
     }];
@@ -77,9 +77,9 @@
 
 - (TSLoginState)state{
     if ([TSUserInfoManager userInfo].accessToken && [TSUserInfoManager userInfo].userName && [TSUserInfoManager userInfo].refreshToken) {
-        return Login;
+        return TSLoginStateLogin;
     }else
-        return None;
+        return TSLoginStateNone;
 }
 
 - (void)registerQuickLogin {
@@ -90,7 +90,7 @@
     TSLoginViewController *loginViewController = [TSLoginViewController new];
     TSBaseNavigationController *homeController = [[TSBaseNavigationController alloc] initWithRootViewController:loginViewController];
     loginViewController.loginBlock = ^{
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"TS_LoginUpdateNotification" object:@0];
+        [self postNotificationWithLoginState:TSLoginStateLogin];
     };
     UIViewController *vc = [UIApplication sharedApplication].delegate.window.rootViewController;
     homeController.modalPresentationStyle = UIModalPresentationFullScreen;
@@ -98,6 +98,8 @@
     }];
 }
 
-
+- (void)postNotificationWithLoginState:(TSLoginState)state{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"TS_LoginUpdateNotification" object:@(state)];
+}
 
 @end
