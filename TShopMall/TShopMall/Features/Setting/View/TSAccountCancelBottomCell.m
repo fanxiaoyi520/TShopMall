@@ -29,14 +29,14 @@
         make.left.equalTo(self.contentView.mas_left).with.offset(25);
         make.right.equalTo(self.confirmButton.mas_left).with.offset(-16);
         make.width.equalTo(self.confirmButton.mas_width).with.offset(0);
-        make.bottom.equalTo(self.contentView.mas_bottom).with.offset(-48);
+        make.bottom.equalTo(self.contentView.mas_bottom).with.offset(-58);
         make.height.mas_equalTo(40);
     }];
     [self.confirmButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.cancelButton.mas_right).with.offset(16);
         make.right.equalTo(self.contentView.mas_right).with.offset(-25);
         make.width.equalTo(self.cancelButton.mas_width).with.offset(0);
-        make.bottom.equalTo(self.contentView.mas_bottom).with.offset(-48);
+        make.bottom.equalTo(self.contentView.mas_bottom).with.offset(-58);
         make.height.mas_equalTo(40);
     }];
 }
@@ -53,6 +53,7 @@
         _cancelButton.layer.borderColor = KHexColor(@"#FF4D49").CGColor;
         [_cancelButton setTitleColor:KHexColor(@"#FF4D49") forState:UIControlStateNormal];
         [_cancelButton setTitle:@"取消" forState:UIControlStateNormal];
+        [_cancelButton addTarget:self action:@selector(cancelAction) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:_cancelButton];
     }
     return _cancelButton;
@@ -69,9 +70,22 @@
         _confirmButton.layer.borderWidth = 1.0;
         _confirmButton.layer.borderColor = KHexColor(@"#FF4D49").CGColor;
         [_confirmButton setTitleColor:KHexColor(@"#FF4D49") forState:UIControlStateNormal];
+        [_confirmButton addTarget:self action:@selector(confirmAction) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:_confirmButton];
     }
     return _confirmButton;
+}
+
+- (void)confirmAction {
+    if ([self.actionDelegate respondsToSelector:@selector(confirmAction)]) {
+        [self.actionDelegate confirmAction];
+    }
+}
+
+- (void)cancelAction {
+    if ([self.actionDelegate respondsToSelector:@selector(cancelAction)]) {
+        [self.actionDelegate cancelAction];
+    }
 }
 
 - (void)setDelegate:(id<UniversalCollectionViewCellDataDelegate>)delegate {

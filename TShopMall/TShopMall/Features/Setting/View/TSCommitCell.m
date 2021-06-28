@@ -47,7 +47,9 @@
 }
 
 - (void)commitAction {
-    
+    if ([self.actionDelegate respondsToSelector:@selector(commitAction)]) {
+        [self.actionDelegate commitAction];
+    }
 }
 
 - (void)setDelegate:(id<UniversalCollectionViewCellDataDelegate>)delegate {
