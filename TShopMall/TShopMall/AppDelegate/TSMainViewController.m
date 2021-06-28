@@ -13,7 +13,7 @@
 #import "TSAgreementModel.h"
 
 @interface TSMainViewController ()<TSFirstEnterAgreementViewDelegate, TSHybridViewControllerDelegate>
-
+@property (nonatomic, strong) UIViewController *loginVC;
 @end
 
 @implementation TSMainViewController
@@ -31,6 +31,7 @@
         [[TSUserLoginManager shareInstance] configLoginController:^(UIViewController * _Nonnull vc) {
             @strongify(self)
             [self addChildViewController:vc];
+            self.loginVC = vc;
             [self showAlertInView:vc.view];
             [self.view addSubview:vc.view];
         }];
@@ -45,13 +46,11 @@
     [TSUserLoginManager shareInstance].loginBlock = ^{
         @strongify(self)
         [self.view removeAllSubviews];
-        [self removeFromParentViewController];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            TSTabBarController *tab = [TSTabBarController new];
-            [self addChildViewController:tab];
-            [self.view addSubview:tab.view];
-        });
+        [self.loginVC removeFromParentViewController];
         
+        TSTabBarController *tab = [TSTabBarController new];
+        [self addChildViewController:tab];
+        [self.view addSubview:tab.view];
     };
     
     [TSUserLoginManager shareInstance].logoutBlock = ^{
