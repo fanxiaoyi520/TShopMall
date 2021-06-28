@@ -8,9 +8,10 @@
 #import "TSAccountCancelNextViewController.h"
 #import "TSUniversalFlowLayout.h"
 #import "TSUniversalCollectionViewCell.h"
+#import "TSAccountCancelBottomCell.h"
 #import "TSAccountCancelDataController.h"
 
-@interface TSAccountCancelNextViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate>
+@interface TSAccountCancelNextViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate,TSAccountCancelBottomCellDelegate>
 /// 数据中心
 @property(nonatomic, strong) TSAccountCancelDataController *dataController;
 /// CollectionView
@@ -23,6 +24,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleDefault;
 }
 
 - (void)setupBasic {
@@ -78,6 +83,17 @@
     return _dataController;
 }
 
+#pragma mark - TSAccountCancelBottomCellDelegate
+/** 确认注销 */
+- (void)confirmAction {
+    TSAccountCancelNextViewController *nextVC = [[TSAccountCancelNextViewController alloc] init];
+    [self.navigationController pushViewController:nextVC animated:YES];
+}
+/** 取消 */
+- (void)cancelAction {
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return self.dataController.sections.count;
@@ -96,6 +112,10 @@
     TSUniversalCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:item.identify forIndexPath:indexPath];
     cell.indexPath = indexPath;
     cell.delegate = self;
+    if ([cell isKindOfClass:[TSAccountCancelBottomCell class]]) {
+        TSAccountCancelBottomCell *_cell = (TSAccountCancelBottomCell *)cell;
+        _cell.actionDelegate = self;
+    }
     return cell;
 }
 

@@ -25,8 +25,9 @@
 #import "AuthAppleIDManager.h"
 #import <AuthenticationServices/AuthenticationServices.h>
 #import "TSAgreementModel.h"
+#import "TSFirstEnterAgreementView.h"
 
-@interface TSLoginViewController ()<TSQuickLoginTopViewDelegate, TSLoginTopViewDelegate, TSLoginBottomViewDelegate, TSCheckedViewDelegate, TSQuickCheckViewDelegate, TSHybridViewControllerDelegate>
+@interface TSLoginViewController ()<TSQuickLoginTopViewDelegate, TSLoginTopViewDelegate, TSLoginBottomViewDelegate, TSCheckedViewDelegate, TSQuickCheckViewDelegate, TSHybridViewControllerDelegate, TSFirstEnterAgreementViewDelegate>
 /** 背景图 */
 @property(nonatomic, weak) UIImageView *bgImgV;
 /** 关闭 */
@@ -55,13 +56,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.gk_navigationBar.hidden = YES;
-    
-    
+    [self showFirstEnterAlert];
     if (@available(iOS 13.0, *)) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleSignInWithAppleStateChanged:) name:ASAuthorizationAppleIDProviderCredentialRevokedNotification object:nil];
     } else {
         // Fallback on earlier versions
     }
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+}
+
+- (void)showFirstEnterAlert {
+    NSString *firstEnterValue = [[NSUserDefaults standardUserDefaults] valueForKey:KFirstEnterAppKey];
+    if (firstEnterValue) {
+        return;
+    }
+    TSFirstEnterAgreementView *enterAgreementView = [[TSFirstEnterAgreementView alloc] init];
+    enterAgreementView.delegate = self;
+    [self.view addSubview:enterAgreementView];
+    [enterAgreementView show];
 }
 
 - (void)dealloc {
@@ -328,18 +343,7 @@
 }
 
 #pragma mark - TSQuickCheckViewDelegate
-/** 认证信息 */
-- (void)openAuthenticationProtocol {
-    
-}
-/** 服务协议 */
-- (void)openServiceProtocol {
-    
-}
-/** 隐私政策 */
-- (void)openPrivateProtocol {
-    
-}
+
 
 #pragma mark - TSHybridViewControllerDelegate
 -(void)hybridViewControllerWillDidDisappear:(TSHybridViewController *)hybridViewController params:(NSDictionary *)param{

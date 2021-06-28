@@ -24,32 +24,46 @@ NS_ASSUME_NONNULL_BEGIN
 /// 购物车角标
 @property(nonatomic, copy) NSString *cartNumber;
 
+/// 下载素材
+@property (nonatomic, strong) NSArray <TSMaterialImageModel *> *materialModels;
+
 @property (nonatomic, strong, readonly) NSMutableArray <TSGoodDetailSectionModel *> *sections;
 
 
-/// 商品详情数据
-/// @param uuid 商品uuid
-/// @param complete 请求完成block
+/// 请求商品详情数据
+/// @param uuid 商品UUID
+/// @param isRequired 是否需要加入线程组
+/// @param complete 请求完成回调
 -(NSMutableArray <TSGoodDetailSectionModel *> *)fetchProductDetailWithUuid:(NSString *)uuid
+                                                       isRequireEnterGroup:(BOOL)isRequired
+                                                                     group:(dispatch_group_t)group
                                                                   complete:(void(^)(BOOL isSucess))complete;
-
-
 /// 获取商品详情购物车角标
-/// @param complete 请求完成block
--(void)fetchProductDetailCartNumber:(void(^)(BOOL isSucess))complete;
+/// @param isRequired 是否需要加入线程组
+/// @param complete 请求完成回调
+-(void)fetchProductDetailCartNumberIsRequireEnterGroup:(BOOL)isRequired
+                                                 group:(dispatch_group_t)group
+                                              complete:(void(^)(BOOL isSucess))complete;
 
 
-
-/// 加购
-/// @param productUuid 商品UUID
-/// @param buyNum 数量
-/// @param attrId 商品SKU
-/// @param complete 请求完成block
--(void)fetchProductDetailAddProductToCart:(NSString *)productUuid
+/// 详情页计算运费接口
+/// @param skuNo 商品sku
+/// @param buyNum 购买数量
+/// @param provinceUuid 省
+/// @param cityUuid 市
+/// @param regionUuid 区
+/// @param streetUuid 街道
+/// @param isRequired 是否需要加入线程组
+/// @param complete 请求完成回调
+-(void)fetchProductDetailFreightWithSkuNo:(NSString *)skuNo
                                    buyNum:(NSString *)buyNum
-                                   attrId:(NSString *)attrId
+                             provinceUuid:(NSString *)provinceUuid
+                                 cityUuid:(NSString *)cityUuid
+                               regionUuid:(NSString *)regionUuid
+                               streetUuid:(NSString *)streetUuid
+                      isRequireEnterGroup:(BOOL)isRequired
+                                    group:(dispatch_group_t)group
                                  complete:(void(^)(BOOL isSucess))complete;
-
 
 /// 商品检查库存
 /// @param skuNo 商品SKU
@@ -63,15 +77,26 @@ NS_ASSUME_NONNULL_BEGIN
                         parentSkuNo:(NSString *)parentSkuNo
                              buyNum:(NSString *)buyNum
                              region:(NSString *)region
+                              group:(dispatch_group_t)group
                            complete:(void(^)(BOOL isSucess))complete;
 
 
-/// 自己买 先清空购物车中的其他商品，注意两个入参固定：productIdAndAttrId: allRecords，chooseState: false
+
+/// 加购
+/// @param productUuid 商品UUID
+/// @param buyNum 数量
+/// @param attrId 商品SKU
+/// @param complete 请求完成block
+-(void)fetchProductDetailAddProductToCart:(NSString *)productUuid
+                                   buyNum:(NSString *)buyNum
+                                   attrId:(NSString *)attrId
+                                 complete:(void(^)(BOOL isSucess))complete;
+
+/// 自己买
 /// @param suitUuid 套装UUID
 /// @param complete 请求完成block
 -(void)fetchProductDetailCustomBuy:(NSString *)suitUuid
                           complete:(void(^)(BOOL isSucess))complete;
-
 
 @end
 
