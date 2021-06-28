@@ -56,10 +56,13 @@
         [sections addObject:section];
     }
     
-    self.coronalSections = sections;
-    if (complete) {
-        complete(YES);
-    }
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        self.coronalSections = sections;
+        if (complete) {
+            complete(YES);
+        }
+    });
+    
     
 }
 
@@ -85,7 +88,7 @@
         section.items = items;
         section.sectionInset = UIEdgeInsetsMake(0, 16, 0, 16);
 
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self.coronalSections addObject:section];
             if (complete) {
                 complete(YES);

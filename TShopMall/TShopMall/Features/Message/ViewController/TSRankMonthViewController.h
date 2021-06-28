@@ -1,5 +1,5 @@
 //
-//  TSRankCurrentMonthController.h
+//  TSRankMonthViewController.h
 //  TShopMall
 //
 //  Created by 陈结 on 2021/6/17.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TSRankCurrentMonthController : TSBaseListController<JXCategoryListContentViewDelegate>
+@interface TSRankMonthViewController : TSBaseListController<JXCategoryListContentViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray <TSRankSectionModel *> *coronalSections;
 
