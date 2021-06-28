@@ -135,6 +135,12 @@
     //切换显示类型
     [self.areaView updateString:model.currentShowName type:currentType-1];
     [self.delegate reloadDataWiteType:currentType uuid:model.currentUUid];
+    
+    if (currentType == 4) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self.delegate exit];
+        });
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

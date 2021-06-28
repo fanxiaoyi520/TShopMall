@@ -70,6 +70,10 @@ UIKIT_EXTERN NSString * const kCartCount;
 #pragma mark - 下单
 UIKIT_EXTERN NSString * const kToBalance;
 UIKIT_EXTERN NSString * const kSaveOrder;
+UIKIT_EXTERN NSString * const kOrderPay;
+UIKIT_EXTERN NSString * const kPayChanne;
+UIKIT_EXTERN NSString * const kSubmitOrder;
+UIKIT_EXTERN NSString * const kMockPay;
 
 #pragma mark - 地址
 UIKIT_EXTERN NSString * const kProvice;

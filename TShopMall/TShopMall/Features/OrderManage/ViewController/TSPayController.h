@@ -1,5 +1,5 @@
 //
-//  TSPayOrderViewController.h
+//  TSPayController.h
 //  TShopMall
 //
 //  Created by edy on 2021/6/23.
@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TSPayOrderViewController : TSBaseViewController
+@interface TSPayController : TSBaseViewController
 @property (nonatomic, copy) NSString *payOrderId;
 @property (nonatomic, copy) NSString *isGroup;
 @end

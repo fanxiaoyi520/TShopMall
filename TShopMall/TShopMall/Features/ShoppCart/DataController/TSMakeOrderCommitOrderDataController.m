@@ -8,8 +8,9 @@
 #import "TSMakeOrderCommitOrderDataController.h"
 
 @implementation TSMakeOrderCommitOrderDataController
-+ (void)commitOrderWithAddress:(TSAddressModel *)address balanceInfo:(TSBalanceModel *)balanceInfo invoice:(TSMakeOrderInvoiceViewModel *)invoice finished:(void(^)(BOOL, NSString *, NSString *))finished OnController:(UIViewController *)controller{
++ (void)commitOrderWithAddress:(TSAddressModel *)address balanceInfo:(TSBalanceModel *)balanceInfo invoice:(TSMakeOrderInvoiceViewModel *)invoice isFromCart:(BOOL)isFromCart finished:(void(^)(BOOL, NSString *, NSString *))finished OnController:(UIViewController *)controller{
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"noCart"] = @(!isFromCart);
     params[@"checkArea"] = address.uuid;
     params[@"area"] = address.area;
     params[@"orderFrom"] = @"11";

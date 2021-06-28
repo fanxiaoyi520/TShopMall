@@ -14,6 +14,7 @@
 #import "WechatManager.h"
 #import "WechatShareManager.h"
 #import <AuthenticationServices/AuthenticationServices.h>
+#import "WechatPayManager.h"
 
 @interface AppDelegate ()<WXApiDelegate>
 
@@ -69,11 +70,13 @@
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString*, id> *)options
 {
     NSLog(@"url.host:%@",url.host);
-    if ([url.host isEqualToString:@"oauth"]) {
+    if ([url.host isEqualToString:@"oauth"]) {//微信授权
         return [WechatManager handleOpenUrl:url];
-    }
-    else{
-        //微信分享
+    } else if ([url.host isEqualToString:@"safepay"]) {//支付宝支付回调
+        
+    } else if([url.host isEqualToString:@"pay"]) {//微信支付回调
+        [WXApi handleOpenURL:url delegate:[WechatPayManager defaultWechatPayManager]];
+    } else{ //微信分享
         [WechatShareManager handleOpenUrl:url];
     }
     return YES;

@@ -133,7 +133,8 @@
 
 //去购物
 - (void)goToShopping{
-    
+    UIViewController *con = [NSClassFromString(@"TSPaySuccessController") new];
+    [self.navigationController pushViewController:con animated:YES];
 }
 
 - (void)updateSettleView{
