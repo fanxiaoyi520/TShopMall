@@ -8,14 +8,16 @@
 #import "AppDelegate+RootController.h"
 #import "TSTabBarController.h"
 #import "TSMainViewController.h"
+#import "TSBaseNavigationController.h"
 
 @implementation AppDelegate (RootController)
 
 -(void)setupRootController{
     self.window = [[UIWindow alloc] init];
     self.window.frame = [UIScreen mainScreen].bounds;
-    
-    self.window.rootViewController = [TSMainViewController new];
+    TSMainViewController *mainVC = [TSMainViewController new];
+    TSBaseNavigationController *nav = [[TSBaseNavigationController alloc] initWithRootViewController:mainVC];
+    self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];
 }
 

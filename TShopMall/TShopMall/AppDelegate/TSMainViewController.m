@@ -10,13 +10,13 @@
 #import "TSTabBarController.h"
 
 @interface TSMainViewController ()
-@property (nonatomic, strong) UIViewController *loginVC;
 @end
 
 @implementation TSMainViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self hiddenNavigationBar];
     @weakify(self);
     // Do any additional setup after loading the view.
     if ([TSUserLoginManager shareInstance].state == TSLoginStateNone) {
