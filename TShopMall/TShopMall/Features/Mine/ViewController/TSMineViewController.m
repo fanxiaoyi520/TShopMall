@@ -191,7 +191,25 @@
         TSOfficialServicesViewController *vc = [TSOfficialServicesViewController new];
         [self.navigationController pushViewController:vc animated:YES];
     }
-
+#if DEBUG
+    if (indexPath.section == 4 && indexPath.row == 5) {
+      
+        UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"站点设置" message:[NSString stringWithFormat:@"当前站点：%@",kMallH5ApiPrefix] preferredStyle:UIAlertControllerStyleAlert];
+        [alertVc addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+            
+        }];
+        UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            kMallH5ApiPrefix = alertVc.textFields.firstObject.text;
+        }];
+        UIAlertAction *cancle = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+           
+        }] ;
+        [alertVc addAction:cancle];
+        [alertVc addAction:confirm];
+        [self presentViewController:alertVc animated:true completion:nil];
+        
+    }
+#endif
     //我的钱包
     if (indexPath.section == 1 && indexPath.row == 0) {
         TSMineWalletCenterViewController *vc = [TSMineWalletCenterViewController new];
