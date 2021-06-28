@@ -129,6 +129,7 @@ typedef NS_ENUM(NSUInteger, BindMobileValueType){
         UILabel *errorTipsLabel = [[UILabel alloc] init];
         _errorTipsLabel = errorTipsLabel;
         _errorTipsLabel.text = @"手机号已注册";
+        _errorTipsLabel.hidden = YES;
         _errorTipsLabel.textColor = KHexColor(@"#F7AF34");
         _errorTipsLabel.font = KRegularFont(12);
         _errorTipsLabel.numberOfLines = 0;
@@ -247,6 +248,10 @@ typedef NS_ENUM(NSUInteger, BindMobileValueType){
     self.timer = [NSTimer ts_scheduledTimerWithTimeInterval:1 block:^{
          [weakSelf goToRun];
     } repeats:YES];
+    
+    if (self.codeButtonClickBlock) {
+        self.codeButtonClickBlock(phoneNumber);
+    }
 }
 
 - (void)goToRun {

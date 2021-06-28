@@ -6,6 +6,12 @@
 //
 
 #import "TSWithdrawalPswSettingCell.h"
+#import "TSTools.h"
+#import <Toast.h>
+
+typedef NS_ENUM(NSUInteger, WithdrawalPswSetClickType){
+    WithdrawalPswSetClickTypeCommit = 1,///提交按钮
+};
 
 @interface TSWithdrawalPswSettingCell ()
 /** 密码文字显示 */
@@ -126,7 +132,7 @@
         _showPswButton.titleLabel.font = KRegularFont(16);
         [_showPswButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_showPswButton setBackgroundImage:KImageMake(@"mall_setting_showpsw") forState:UIControlStateSelected];
-        [_showPswButton setBackgroundImage:KImageMake(@"mall_setting_showpsw") forState:UIControlStateNormal];
+        [_showPswButton setBackgroundImage:KImageMake(@"mall_setting_hiddenpsw") forState:UIControlStateNormal];
         [_showPswButton addTarget:self action:@selector(showOrHiddenPsw) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:_showPswButton];
     }
@@ -181,7 +187,7 @@
 }
 
 - (void)textFieldDidChangeValue:(UITextField *)textField {
-    if (self.pswTextField.text.length >= 6) {
+    if ([TSTools isWithdrawalPsw:self.pswTextField.text]) {
         [self enabledButton:YES];
     } else {
         [self enabledButton:NO];
@@ -189,7 +195,18 @@
 }
 
 - (void)commitAction {
-    
+    if (![TSTools isWithdrawalPsw:self.pswTextField.text]) {
+        [self.contentView makeToast:@"请输入的提现密码为6位数字" duration:3.0 position:CSToastPositionCenter];
+        return;
+    }
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setValue:NSStringFromClass([self class]) forKey:@"cellType"];
+    [params setValue:@(WithdrawalPswSetClickTypeCommit) forKey:@"WithdrawalPswSetClickType"];
+    ///提现密码
+    [params setValue:self.pswTextField.text forKey:@"WithdrawalPsw"];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(universalCollectionViewCellClick:params:)]) {
+        [self.delegate universalCollectionViewCellClick:self.indexPath params:params];
+    }
 }
 
 @end

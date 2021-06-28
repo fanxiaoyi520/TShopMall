@@ -107,7 +107,7 @@
 }
 
 #pragma mark - UITextViewDelegate
-- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction {
+- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange {
     if ([[URL scheme] isEqualToString:@"certificationProtocol"]) {
         if ([self.delegate respondsToSelector:@selector(openAuthenticationProtocol)]) {
             [self.delegate openAuthenticationProtocol];

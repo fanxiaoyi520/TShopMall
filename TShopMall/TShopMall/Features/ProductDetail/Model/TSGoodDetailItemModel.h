@@ -55,6 +55,30 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface TSGoodDetailItemPurchaseModel : TSGoodDetailItemModel
+
+/// 已选
+@property(nonatomic, copy) NSString *selectedStr;
+/// 配送
+@property(nonatomic, copy) NSString *localaddress;
+/// 省id
+@property(nonatomic, copy) NSString *provinceId;
+/// 市id
+@property(nonatomic, copy) NSString *cityId;
+/// 省id
+@property(nonatomic, copy) NSString *regionUuid;
+/// 市id
+@property(nonatomic, copy) NSString *areaUuid;
+
+@property(nonatomic, copy) NSString *iconUrl;
+@property(nonatomic, copy) NSString *price;
+@property(nonatomic, assign) BOOL canBuy;
+@property(nonatomic, assign) BOOL hasProduct;
+@property(nonatomic, assign) NSUInteger totalNum;
+@property(nonatomic, assign) NSUInteger limitBuyNum;
+
+@end
+
 
 @interface TSGoodDetailItemImageModel : TSGoodDetailItemModel
 

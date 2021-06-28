@@ -6,6 +6,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TSGoodDetailItemModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -13,14 +14,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol GoodDetailSkuViewDelegate <NSObject>
 
--(void)goodDetailSkuView:(TSGoodDetailSkuView *)skuView addShoppingCart:(UIButton *)addButton;
--(void)goodDetailSkuView:(TSGoodDetailSkuView *)skuView buyImmediately:(UIButton *)buyButton;
+-(void)goodDetailSkuView:(TSGoodDetailSkuView *)skuView addShoppingCart:(UIButton *)addButton buyNum:(NSString *)buyNum;
+-(void)goodDetailSkuView:(TSGoodDetailSkuView *)skuView buyImmediately:(UIButton *)buyButton buyNum:(NSString *)buyNum;
 -(void)goodDetailSkuView:(TSGoodDetailSkuView *)skuView specificationExchange:(NSDictionary *)detail;
 -(void)goodDetailSkuView:(TSGoodDetailSkuView *)skuView numberChange:(NSString *)currentNumber;
 
 @end
 
 @interface TSGoodDetailSkuView : UIView
+
+@property(nonatomic, strong) TSGoodDetailItemPurchaseModel *purchaseModel;
 
 @property (nonatomic, weak) id<GoodDetailSkuViewDelegate> delegate;
 

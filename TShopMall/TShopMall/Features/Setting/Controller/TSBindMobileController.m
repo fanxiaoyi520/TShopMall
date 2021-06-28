@@ -9,6 +9,7 @@
 #import "TSBindMobileDataController.h"
 #import "TSUniversalFlowLayout.h"
 #import "TSUniversalCollectionViewCell.h"
+#import "TSBindMobileCell.h"
 
 @interface TSBindMobileController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate>
 /// 数据中心
@@ -28,6 +29,8 @@
 - (void)setupBasic {
     [super setupBasic];
     self.gk_navTitle = @"绑定手机号码";
+    UIBarButtonItem *item = [UIBarButtonItem itemWithImageName:@"mall_login_close" target:self action:@selector(dismissPage)];
+    self.gk_navLeftBarButtonItem = item;
     __weak __typeof(self)weakSelf = self;
     [self.dataController fetchBindMobileContentsComplete:^(BOOL isSucess) {
         __strong __typeof(weakSelf)strongSelf = weakSelf;
@@ -78,7 +81,17 @@
 #pragma mark - Actions
 /** 绑定手机号的操作 */
 - (void)bindMobile:(NSString *)phoneNumber code:(NSString *)code {
-    
+    [self.dataController fetchBindUserByAuthCode:self.token type:@"2" platformId:@"3" phone:phoneNumber smsCode:code complete:^(BOOL isSucess) {
+        if (self.bindedBlock) {
+            self.bindedBlock();
+        }
+    }];
+}
+
+- (void)dismissPage{
+    [self dismissViewControllerAnimated:YES completion:^{
+            
+    }];
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -99,6 +112,21 @@
     TSUniversalCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:item.identify forIndexPath:indexPath];
     cell.indexPath = indexPath;
     cell.delegate = self;
+    if ([cell isKindOfClass:[TSBindMobileCell class]]) {
+        @weakify(self);
+        TSBindMobileCell *bindMobileCell = (TSBindMobileCell *)cell;
+        bindMobileCell.codeButtonClickBlock = ^(NSString *phoneNumber){
+            @strongify(self);
+            [self.dataController fetchLoginSMSCodeMobile:phoneNumber complete:^(BOOL isSucess) {
+                if (isSucess) {
+                    
+                }else
+                {
+                    
+                }
+            }];
+        };
+    }
     return cell;
 }
 

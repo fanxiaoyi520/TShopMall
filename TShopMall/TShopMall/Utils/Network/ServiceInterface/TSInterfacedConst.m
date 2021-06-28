@@ -84,6 +84,8 @@ NSString *const kLogoutUrl = @"/auth/auth/signOut";
 NSString *const kOneStepLoginUrl = @"/auth/auth/oneClickLogin";
 NSString *const kLoginByTokenUrl = @"/auth/thirdParty/loginByToken";
 NSString *const kLoginByAuthCode = @"/auth/thirdParty/loginByAuthCode";
+NSString *const kBindUserByAuthCode = @"/auth/thirdParty/bindUserByAuthCode";
+NSString *const kLoginRegisterAgreementUrl = @"/rest/v2/front/shopStatement/getShopStatementAuthList";
 #pragma mark - 首页
 
 NSString *const kHomePageInfoUrl = @"/rest/v2/front/shopContent/getIndexPageInfo";
@@ -134,3 +136,5 @@ NSString * const kSmartAddress = @"/rest/v2/usercenter/customeraddress/getSmartA
 #pragma mark - 我的
 NSString * const kMineMerchantUserInformation = @"/rest/v2/tclcustomer/userInfo";
 NSString * const kMinePartnerCenterData = @"/sysback/v2/salesman/dataCenter";
+
+

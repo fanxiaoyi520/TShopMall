@@ -6,7 +6,8 @@
 //
 
 #import "TSBindMobileDataController.h"
-
+#import "TSSMSCodeRequest.h"
+#import "TSBindUserByAuthCodeRequest.h"
 @interface TSBindMobileDataController ()
 
 @property (nonatomic, strong) NSMutableArray <TSBindMobileSectionModel *> *sections;
@@ -52,6 +53,58 @@
     if (complete) {
         complete(YES);
     }
+}
+
+-(void)fetchLoginSMSCodeMobile:(NSString *)mobile
+                      complete:(void(^)(BOOL isSucess))complete{
+    TSSMSCodeRequest *codeRequest = [[TSSMSCodeRequest alloc] initWithMobile:mobile type:@"BINDING"];
+    [codeRequest startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+        
+        if (request.responseModel.isSucceed) {
+            if (complete) {
+                complete(YES);
+            }
+        }else{
+            [Popover popToastOnWindowWithText:request.responseModel.originalData[@"failCause"]];
+
+            if (complete) {
+                complete(NO);
+            }
+        }
+        
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        if (complete) {
+            complete(NO);
+        }
+    }];
+}
+
+-(void)fetchBindUserByAuthCode:(NSString *)token
+                          type:(NSString *)type
+                    platformId:(NSString *)platformId
+                         phone:(NSString *)phone
+                       smsCode:(NSString *)smsCode
+                      complete:(void(^)(BOOL isSucess))complete{
+    TSBindUserByAuthCodeRequest *codeRequest = [[TSBindUserByAuthCodeRequest alloc] initWithType:type platformId:platformId phone:phone token:token smsCode:smsCode];
+    [codeRequest startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+        
+        if (request.responseModel.isSucceed) {
+            if (complete) {
+                complete(YES);
+            }
+        }else{
+            [Popover popToastOnWindowWithText:request.responseModel.originalData[@"failCause"]];
+
+            if (complete) {
+                complete(NO);
+            }
+        }
+        
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        if (complete) {
+            complete(NO);
+        }
+    }];
 }
 
 @end

@@ -9,6 +9,7 @@
 #import "TSBindMobileDataController.h"
 #import "TSUniversalFlowLayout.h"
 #import "TSUniversalCollectionViewCell.h"
+#import "TSChangeMobileCell.h"
 
 @interface TSChangeMobileViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate>
 /// 数据中心
@@ -75,6 +76,10 @@
 - (void)changeMobile:(NSString *)phoneNumber oldMobile:(NSString *)oldPhoneNumber code:(NSString *)code {
     NSLog(@"新手机号 === %@ 旧手机号 === %@ 验证码 === %@", phoneNumber, oldPhoneNumber, code);
 }
+/** 发送验证码 */
+- (void)sendCode {
+    NSLog(@"发送验证码请求====");
+}
 
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -109,11 +114,13 @@
 
 - (void)universalCollectionViewCellClick:(NSIndexPath *)indexPath params:(NSDictionary *)params {
     NSString *cellType = params[@"cellType"];
-    if ([cellType isEqualToString:@"TSChangeMobileCell"] && [params[@"commitType"] integerValue] == 1) {///提交按钮
+    if ([cellType isEqualToString:@"TSChangeMobileCell"] && [params[@"ChangeMobileButtonClickType"] integerValue] == ChangeMobileValueTypeCommit) {///提交按钮
         NSString *mobileNumber = params[@"MobileNumber"];///手机号
         NSString *code = params[@"CodeNumber"];///验证码
         NSString *oldMobileNumber = params[@"OldMobileNumber"];///旧手机号
         [self changeMobile:mobileNumber oldMobile:oldMobileNumber code:code];
+    } else if ([cellType isEqualToString:@"TSChangeMobileCell"] && [params[@"ChangeMobileButtonClickType"] integerValue] == ChangeMobileValueTypeSendCode) {///发送验证码事件
+        [self sendCode];
     }
 }
 
