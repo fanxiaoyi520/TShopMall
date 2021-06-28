@@ -42,8 +42,6 @@
 - (void)fillCustomView {
     ///添加约束
     [self addConstraints];
-    
-    
 }
 
 - (void)setupBasic {
