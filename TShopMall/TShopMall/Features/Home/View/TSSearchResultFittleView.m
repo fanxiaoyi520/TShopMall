@@ -38,7 +38,7 @@
     
     if (sender.selected == YES) {
         sender.isUp = !sender.isUp;
-        [self.delegate operationType:sender.tag sortType:sender.isUp==YES? 2:1];
+        [self.delegate operationType:sender.tag sortType:sender.isUp == YES? 2:1];
     }
 }
 
