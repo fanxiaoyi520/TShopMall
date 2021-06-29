@@ -6,7 +6,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TSWalletModel.h"
+#import "TSMyIncomeModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 @protocol TSWalletHeaderViewDelegate <NSObject>
@@ -16,10 +16,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)walletHeaderWithdrawalRecordAction:(id _Nullable)sender;
 @end
 @interface TSWalletHeaderView : UIImageView
-
+- (instancetype)initWithModel:(TSMyIncomeModel *)model;
+//- (void)setModel:(TSMyIncomeModel *)model;
 @property (nonatomic ,assign) id <TSWalletHeaderViewDelegate> kDelegate;
-
-- (void)setModel:(TSWalletModel *)model;
 @end
 
 
@@ -29,7 +28,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)walletCellViewIsBindingAction:(id _Nullable)sender;
 @end
 @interface TSWalletCellView : UIView
-
+- (instancetype)initWithModel:(TSMyIncomeModel *)model;
+//- (void)setModel:(TSMyIncomeModel *)model;
 @property (nonatomic, assign)id <TSWalletCellViewDelegate> kDelegate;
 @end
 

@@ -8,7 +8,7 @@
 #import "TSWalletCenterView.h"
 
 @interface TSWalletCenterView ()
-
+@property (nonatomic ,strong)TSWalletModel *model;
 @property (nonatomic ,strong)UILabel *mineAssetsLab;
 @property (nonatomic ,strong)UIButton *eyeBtn;
 @property (nonatomic ,strong)UIButton *mineProfitBtn;
@@ -22,10 +22,11 @@
 @end
 @implementation TSWalletCenterView
 
-- (instancetype)init
+- (instancetype)initWithModel:(TSWalletModel *)model
 {
     self = [super init];
     if (self) {
+        self.model = model;
         [self jaf_layoutSubview];
     }
     return self;
@@ -92,7 +93,7 @@
         self.mineProfitNumLab.text = @"****";
         sender.selected = NO;
     } else {
-        self.mineProfitNumLab.text = @"¥2380";
+        self.mineProfitNumLab.text = [NSString stringWithFormat:@"¥%@",self.model.totalRevenue];
         sender.selected = YES;
     }
 }
@@ -155,7 +156,7 @@
         _mineProfitNumLab = [UILabel new];
         _mineProfitNumLab.textColor = KHexColor(@"#FFFFFF");
         _mineProfitNumLab.font = KRegularFont(20);
-        _mineProfitNumLab.text = @"¥2380";
+        _mineProfitNumLab.text = [NSString stringWithFormat:@"¥%@",self.model.totalRevenue];
     }
     return _mineProfitNumLab;
 }
@@ -183,7 +184,7 @@
         _mineBankCardNumLab = [UILabel new];
         _mineBankCardNumLab.textColor = KHexColor(@"#FFFFFF");
         _mineBankCardNumLab.font = KRegularFont(20);
-        _mineBankCardNumLab.text = @"2";
+        _mineBankCardNumLab.text = self.model.count;
     }
     return _mineBankCardNumLab;
 }

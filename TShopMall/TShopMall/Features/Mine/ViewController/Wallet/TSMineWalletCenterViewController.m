@@ -32,7 +32,8 @@
     self.gk_navTitle = @"我的钱包";
     [self.dataController fetchMineWalletDataComplete:^(BOOL isSucess) {
         if (isSucess) {
-            NSLog(@"");
+            [self.mainScrollView addSubview:self.walletCenterView];
+            self.walletCenterView.frame = CGRectMake(0, -13, kScreenWidth, 237);
         }
     }];
 }
@@ -42,9 +43,6 @@
     [self.view addSubview:self.mainScrollView];
     self.mainScrollView.frame = CGRectMake(0, GK_STATUSBAR_NAVBAR_HEIGHT, kScreenWidth, kScreenHeight - GK_STATUSBAR_NAVBAR_HEIGHT);
     self.mainScrollView.contentSize = self.mainScrollView.size;
-    
-    [self.mainScrollView addSubview:self.walletCenterView];
-    self.walletCenterView.frame = CGRectMake(0, -13, kScreenWidth, 237);
 }
 
 // MARK: TSWalletCenterViewDelegate
@@ -70,7 +68,7 @@
 
 - (TSWalletCenterView *)walletCenterView {
     if (!_walletCenterView) {
-        _walletCenterView = [TSWalletCenterView new];
+        _walletCenterView = [[TSWalletCenterView alloc] initWithModel:self.dataController.walletModel];
         _walletCenterView.image = KImageMake(@"mall_mine_wallet_bg");
         _walletCenterView.userInteractionEnabled = YES;
         _walletCenterView.kDelegate = self;

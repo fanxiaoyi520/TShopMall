@@ -110,8 +110,14 @@
 }
 
 - (void)setModel:(TSWithdrawalRecordModel * _Nullable)model {
-    //if (!model) return;
-    
+    if (!model) return;
+    self.oddNumbersLab.text = model.withdrawalNo;//提现申请单号
+    self.recordSattusLab.text = model.statusName;//状态
+    self.WithdrawalNumLab.text = [NSString stringWithFormat:@"¥%@",model.withdrawalAmount];//提现金额
+    self.taxDeductionAmount.text = [NSString stringWithFormat:@"¥%@",model.serviceCharge];//手续费
+    self.afterTaxNumLab.text = [NSString stringWithFormat:@"¥%@",model.arrivalAmount];//到账金额
+    self.WithdrawalCardNumLab.text = model.accountNo;//银行卡号
+    self.applicationTimeNumLab.text = model.createTime;//申请时间
 }
 
 // MARK: get
@@ -294,7 +300,7 @@
     }];
 }
 
-- (void)setModel:(TSWithdrawalRecordModel *)model {
+- (void)setModel:(id _Nullable)model {
     NSArray *arrayModel = [TSWithdrawalRecordModel getFixedFata];
     [[TSWithdrawalRecordModel getFixedFata] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
        

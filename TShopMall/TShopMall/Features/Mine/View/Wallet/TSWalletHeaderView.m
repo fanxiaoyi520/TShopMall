@@ -18,15 +18,16 @@
 @property (nonatomic ,strong) UILabel *amountNotReceivedNumLab;
 @property (nonatomic ,strong) UIView *lineView;
 @property (nonatomic ,strong) UIButton *withdrawalRecordBtn;
-
+@property (nonatomic ,strong) TSMyIncomeModel *model;
 @end
 
 @implementation TSWalletHeaderView
 
-- (instancetype)init
+- (instancetype)initWithModel:(TSMyIncomeModel *)model
 {
     self = [super init];
     if (self) {
+        self.model = model;
         [self jaf_layoutSubview];
     }
     return self;
@@ -34,76 +35,79 @@
 
 - (void)jaf_layoutSubview {
     [self addSubview:self.revenueAmountLab];
+    [self addSubview:self.eyeBtn];
+    [self addSubview:self.amountNumLab];
+    [self addSubview:self.amountReceivedLab];
+    [self addSubview:self.amountReceivedNumLab];
+    [self addSubview:self.amountNotReceivedLab];
+    [self addSubview:self.amountNotReceivedNumLab];
+    [self addSubview:self.lineView];
+    [self addSubview:self.withdrawalRecordBtn];
+    
     [self.revenueAmountLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self).offset(50);
         make.height.mas_equalTo(17);
         make.centerX.equalTo(self);
     }];
     
-    [self addSubview:self.eyeBtn];
     [self.eyeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.revenueAmountLab).offset(-5);
         make.left.equalTo(@[self.revenueAmountLab.mas_right]).offset(6);
         make.height.mas_equalTo(30);
     }];
-    
-    [self addSubview:self.amountNumLab];
+
     [self.amountNumLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self).offset(75);
         make.centerX.equalTo(self);
     }];
     
-    [self addSubview:self.amountReceivedLab];
     [self.amountReceivedLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self).offset(109);
         make.left.equalTo(self).offset(62);
         make.height.mas_equalTo(15);
     }];
     
-    [self addSubview:self.amountReceivedNumLab];
     [self.amountReceivedNumLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self).offset(126);
         make.centerX.equalTo(self.amountReceivedLab);
         make.height.mas_equalTo(20);
     }];
     
-    [self addSubview:self.amountNotReceivedLab];
     [self.amountNotReceivedLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self).offset(109);
         make.right.equalTo(self).offset(-62);
         make.height.mas_equalTo(15);
     }];
     
-    [self addSubview:self.amountNotReceivedNumLab];
     [self.amountNotReceivedNumLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self).offset(126);
         make.centerX.equalTo(self.amountNotReceivedLab);
         make.height.mas_equalTo(20);
     }];
     
-    [self addSubview:self.lineView];
     [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self).offset(120);
         make.centerX.equalTo(self);
         make.height.mas_equalTo(14);
         make.width.mas_equalTo(1);
     }];
-
-    [self addSubview:self.withdrawalRecordBtn];
+    
     [self.withdrawalRecordBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self).offset(-61);
         make.right.equalTo(self).offset(-17);
         make.height.mas_equalTo(24);
         make.width.mas_equalTo(77);
     }];
+    
     [_withdrawalRecordBtn jaf_customFilletRectCorner:UIRectCornerTopLeft|UIRectCornerBottomLeft  cornerRadii:CGSizeMake(12, 12)];
-
 }
 
-// MARK: model
-- (void)setModel:(TSWalletModel *)model {
-    //设置数据
-}
+/**布局有误*/
+//// MARK: model
+//- (void)setModel:(TSMyIncomeModel *)model {
+//    if (!model) return;
+//    self.model = model;
+//}
 
 // MARK: actions
 - (void)eyeAction:(UIButton *)sender {
@@ -111,7 +115,7 @@
         _amountNumLab.text = @"****";
         sender.selected = NO;
     } else {
-        _amountNumLab.text = @"¥2380";
+        _amountNumLab.text = [NSString stringWithFormat:@"¥%@",self.model.totalRevenue];
         sender.selected = YES;
     }
     if ([self.kDelegate respondsToSelector:@selector(walletHeaderEyeAction:)]) {
@@ -120,7 +124,6 @@
 }
 
 - (void)withdrawalRecordAction:(UIButton *)sender {
-    NSLog(@"提现记录");
     if ([self.kDelegate respondsToSelector:@selector(walletHeaderWithdrawalRecordAction:)]) {
         [self.kDelegate walletHeaderWithdrawalRecordAction:sender];
     }
@@ -153,7 +156,7 @@
     if (!_amountNumLab) {
         _amountNumLab = [UILabel new];
         _amountNumLab.textColor = KWhiteColor;
-        _amountNumLab.text = @"¥2380";
+        _amountNumLab.text = [NSString stringWithFormat:@"¥%@",self.model.totalRevenue];
         _amountNumLab.font = KRegularFont(20);
     }
     return _amountNumLab;
@@ -173,7 +176,7 @@
     if (!_amountReceivedNumLab) {
         _amountReceivedNumLab = [UILabel new];
         _amountReceivedNumLab.textColor = KWhiteColor;
-        _amountReceivedNumLab.text = @"¥2380";
+        _amountReceivedNumLab.text = [NSString stringWithFormat:@"¥%@",self.model.arrivalAmount];
         _amountReceivedNumLab.font = KRegularFont(14);
     }
     return _amountReceivedNumLab;
@@ -193,7 +196,7 @@
     if (!_amountNotReceivedNumLab) {
         _amountNotReceivedNumLab = [UILabel new];
         _amountNotReceivedNumLab.textColor = KWhiteColor;
-        _amountNotReceivedNumLab.text = @"¥3380";
+        _amountNotReceivedNumLab.text = [NSString stringWithFormat:@"¥%@",self.model.noArrivalAmount];
         _amountNotReceivedNumLab.font = KRegularFont(14);
     }
     return _amountNotReceivedNumLab;
@@ -228,14 +231,16 @@
 @property (nonatomic ,strong) UILabel *cardNumberLab;
 @property (nonatomic ,strong) UIButton *isBindingLab;
 @property (nonatomic ,strong) UIImageView *instrucImgView;
+@property (nonatomic ,strong) TSMyIncomeModel *model;
 @end
 
 @implementation TSWalletCellView
 
-- (instancetype)init
+- (instancetype)initWithModel:(TSMyIncomeModel *)model
 {
     self = [super init];
     if (self) {
+        self.model = model;
         [self jaf_layoutSubview];
     }
     return self;
@@ -244,34 +249,35 @@
 - (void)jaf_layoutSubview {
     
     [self addSubview:self.bankImageView];
+    [self addSubview:self.titleLab];
+    [self addSubview:self.cardNumberLab];
+    [self addSubview:self.isBindingLab];
+    [self addSubview:self.instrucImgView];
+    
     [self.bankImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self).offset(8);
         make.height.mas_offset(25);
         make.left.equalTo(self).offset(16);
     }];
-    
-    [self addSubview:self.titleLab];
+
     [self.titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.bankImageView).offset(2);
         make.height.mas_offset(21);
         make.left.equalTo(self).offset(46);
     }];
-    
-    [self addSubview:self.cardNumberLab];
+
     [self.cardNumberLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self).offset(33);
         make.height.mas_offset(24);
         make.left.equalTo(self).offset(16);
     }];
     
-    [self addSubview:self.isBindingLab];
     [self.isBindingLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self).offset(21);
         make.height.mas_offset(22);
         make.right.equalTo(self).offset(-41);
     }];
     
-    [self addSubview:self.instrucImgView];
     [self.instrucImgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(@[self.isBindingLab.mas_top]).offset(1.5);
         make.height.mas_offset(19);
@@ -286,6 +292,13 @@
         [self.kDelegate walletCellViewIsBindingAction:sender];
     }
 }
+
+//// MARK: model
+//- (void)setModel:(TSMyIncomeModel *)model {
+//    if (!model) return;
+//
+//    _cardNumberLab.text = model.bankCardNo;
+//}
 
 // MARK: get
 - (UIImageView *)bankImageView {
@@ -311,7 +324,7 @@
         _cardNumberLab = [UILabel new];
         _cardNumberLab.textColor = KHexColor(@"#2D3132");
         _cardNumberLab.font = KRegularFont(10);
-        _cardNumberLab.text = @"提现到银行卡账号：6444*******6667";
+        _cardNumberLab.text =  self.model.bankCardNo;
     }
     return _cardNumberLab;
 }

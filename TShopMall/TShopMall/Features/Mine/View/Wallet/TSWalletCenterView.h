@@ -6,6 +6,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TSWalletModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 @protocol TSWalletCenterViewDelegate <NSObject>
@@ -15,9 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface TSWalletCenterView : UIImageView
+- (instancetype)initWithModel:(TSWalletModel *)model;
 @property (nonatomic ,assign) id <TSWalletCenterViewDelegate> kDelegate;
-
-//- (void)setModel:(TSWalletModel *)model;
 @end
 
 NS_ASSUME_NONNULL_END

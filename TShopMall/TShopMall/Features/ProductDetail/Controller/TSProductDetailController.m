@@ -210,7 +210,7 @@
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle{
-    return UIStatusBarStyleLightContent;
+    return UIStatusBarStyleDefault;
 }
 
 - (void)addCollectionCoverView{
@@ -264,6 +264,9 @@
 
 #pragma mark - GoodDetailSkuViewDelegate
 -(void)goodDetailSkuView:(TSGoodDetailSkuView *)skuView addShoppingCart:(UIButton *)addButton buyNum:(NSString *)buyNum{
+    
+    [self.skuPpopups dismissAnimated:YES completion:nil];
+    
     [self.dataController fetchProductDetailAddProductToCart:self.dataController.productUuid
                                                      buyNum:@"1"
                                                      attrId:self.dataController.attrId
@@ -272,13 +275,15 @@
     }];
 }
 -(void)goodDetailSkuView:(TSGoodDetailSkuView *)skuView buyImmediately:(UIButton *)buyButton buyNum:(NSString *)buyNum{
-    NSLog(@"----");
+    [self.skuPpopups dismissAnimated:YES completion:nil];
 }
+
 -(void)goodDetailSkuView:(TSGoodDetailSkuView *)skuView specificationExchange:(NSDictionary *)detail{
-    NSLog(@"----");
+    
 }
+
 -(void)goodDetailSkuView:(TSGoodDetailSkuView *)skuView numberChange:(NSString *)currentNumber{
-    NSLog(@"----");
+    
 }
 
 #pragma mark - SnailQuickMaskPopupsDelegate
