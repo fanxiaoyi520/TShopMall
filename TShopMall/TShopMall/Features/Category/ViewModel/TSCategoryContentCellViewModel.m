@@ -38,7 +38,8 @@
             item.identify = @"TSMeasureCell";
             item.TwoLevelTitle = itemDic[@"TwoLevelTitle"];
             item.TwoLevelImg = itemDic[@"TwoLevelImg"];
-            
+            item.typeValue = itemDic[@"typeValue"];
+            item.objectValue = itemDic[@"objectValue"];
             [items addObject:item];
         }
         
@@ -72,6 +73,7 @@
             item.imageUrl = itemDic[@"imageUrl"];
             item.stock = itemDic[@"stock"];
             item.staffPrice = itemDic[@"staffPrice"];
+            item.earnMost = itemDic[@"earnMost"];
             [items addObject:item];
         }
 

@@ -15,7 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy) NSString *kind;
 /// 是否选中
 @property(nonatomic, assign) BOOL selected;
-
+/// section 开始下标
+@property (nonatomic, assign) NSInteger startSection;
 @end
 
 NS_ASSUME_NONNULL_END

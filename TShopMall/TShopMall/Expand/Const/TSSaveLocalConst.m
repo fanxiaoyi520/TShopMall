@@ -11,4 +11,8 @@
 
 NSString *const UserInfo_Save_Key = @"mall_userinfo_localstorage";
 
+NSString *const KFirstEnterAppKey = @"KFirstEnterAppKey";
+
+NSString *const KFirstEnterAppValue = @"KFirstEnterAppValue";
+
 @end

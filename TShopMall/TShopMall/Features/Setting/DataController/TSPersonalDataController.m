@@ -30,7 +30,7 @@
             if (i == 0) {///头像
                 item.head = @"mall_setting_defautlhead";
             } else if(i == 1) {///姓名
-                item.detail = @"JERRY";
+                item.detail = [TSUserInfoManager userInfo].nickname;
             } else if(i == 2) {///身份证
                 item.detail = @"62241999****";
             } else if(i == 3) {///性别

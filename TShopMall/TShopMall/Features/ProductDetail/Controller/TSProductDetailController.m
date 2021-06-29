@@ -32,6 +32,7 @@
 #import "TSAreaSelectedController.h"
 #import "TSMakeOrderController.h"
 #import "TSAreaModel.h"
+#import "TSStockoutView.h"
 
 @interface TSProductDetailController ()<UICollectionViewDelegate,UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate,TSTopFunctionViewDelegate,TSChangePriceViewDelegate,ProductDetailBottomViewDelegate,SnailQuickMaskPopupsDelegate,GoodDetailMaterialViewDelegate, TSDetailShareViewDelegate,GoodDetailSkuViewDelegate>
 
@@ -78,6 +79,10 @@
 @property (nonatomic, strong) SnailQuickMaskPopups *materialPopups;
 /// 下载更多视图
 @property(nonatomic, strong) TSGoodDetailMaterialView *materialView;
+/// 售空视图
+@property(nonatomic, strong) TSStockoutView *stockoutView;
+
+@property(nonatomic, strong) UIButton *topButton;
 
 /// 数据中心
 @property(nonatomic, strong) TSProductDetailDataController *dataController;
@@ -172,6 +177,8 @@
     [self.view addSubview:self.shareButton];
     [self.view addSubview:self.cartButton];
     [self.view addSubview:self.dragView];
+    [self.view addSubview:self.stockoutView];
+    [self.view addSubview:self.topButton];
     [self addConstraints];
     [self addMJHeaderAndFooter];
 }
@@ -206,6 +213,19 @@
         make.top.equalTo(self.view).offset(top);
         make.width.height.mas_equalTo(32);
     }];
+    
+    [self.stockoutView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(self.view);
+        make.bottom.equalTo(self.bottomView.mas_top).offset(0);
+        make.height.mas_equalTo(42);
+    }];
+    
+    [self.topButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.height.mas_equalTo(40);
+        make.right.equalTo(self.view.mas_right).offset(-16);
+        make.bottom.equalTo(self.bottomView.mas_top).offset(-24);
+    }];
+    
     ///解决collectionView 往下滑的问题
     if (@available(iOS 11.0, *)) {
         self.collectionView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
@@ -287,6 +307,10 @@
     [self.navigationController pushViewController:cart animated:YES];
 }
 
+-(void)toTopButtonClick{
+    [self.collectionView scrollToTop];
+}
+
 /// 下拉刷新
 - (void)mjHeadreRefresh:(MJRefreshNormalHeader *)mj_header {
 
@@ -306,6 +330,7 @@
     }];
     
     dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+        [self.collectionView.mj_header endRefreshing];
         [self.collectionView reloadData];
         [self.topCartBtn setBadgeValue:self.dataController.cartNumber];
         [self fetchFreightInventory];
@@ -334,8 +359,16 @@
 
 -(void)goodDetailSkuView:(TSGoodDetailSkuView *)skuView buyImmediatelyNum:(NSString *)buyNum{
     [self.skuPpopups dismissAnimated:YES completion:nil];
-    [self.dataController fetchProductDetailCustomBuy:@""
-                                            complete:^(BOOL isSucess) {
+    __weak __typeof(self)weakSelf = self;
+    [self.dataController fetchProductDetailCustomBuyProductUuid:self.dataController.productUuid
+                                                         buyNum:self.dataController.buyNum
+                                                         attrId:self.dataController.attrId
+                                                       complete:^(BOOL isSucess) {
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
+        if (isSucess) {
+            TSMakeOrderController *order = [[TSMakeOrderController alloc] init];
+            [strongSelf.navigationController pushViewController:order animated:YES];
+        }
             
     }];
 }
@@ -423,17 +456,20 @@
 
 -(void)productDetailBottomView:(TSProductDetailBottomView *_Nullable)bottomView buyClick:(UIButton *_Nullable)sender{
     __weak __typeof(self)weakSelf = self;
-    [self.dataController fetchProductDetailCustomBuy:@""
-                                            complete:^(BOOL isSucess) {
+    [self.dataController fetchProductDetailCustomBuyProductUuid:self.dataController.productUuid
+                                                         buyNum:self.dataController.buyNum
+                                                         attrId:self.dataController.attrId
+                                                       complete:^(BOOL isSucess) {
         __strong __typeof(weakSelf)strongSelf = weakSelf;
         if (isSucess) {
             TSMakeOrderController *order = [[TSMakeOrderController alloc] init];
             [strongSelf.navigationController pushViewController:order animated:YES];
         }
+            
     }];
 }
 -(void)productDetailBottomView:(TSProductDetailBottomView *_Nullable)bottomView sellClick:(UIButton *_Nullable)sender{
-    [self.sharePopups presentAnimated:YES completion:nil];
+    [self.changePopups presentAnimated:YES completion:nil];
 }
 
 #pragma mark - GoodDetailMaterialViewDelegate
@@ -466,6 +502,7 @@
         self.cartButton.alpha = diff;
     }
     self.gk_navigationBar.alpha = progress;
+    self.topButton.alpha = offsetY / 200.0;
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -875,5 +912,27 @@ spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
     }
     return _materialPopups;
 }
+
+-(TSStockoutView *)stockoutView{
+    if (!_stockoutView) {
+        _stockoutView = [[TSStockoutView alloc] init];
+        _stockoutView.hidden = YES;
+    }
+    return _stockoutView;
+}
+
+- (UIButton *)topButton {
+    if (_topButton == nil) {
+        _topButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _topButton.backgroundColor = [UIColor whiteColor];
+        [_topButton setImage:[UIImage imageNamed:@"mall_detail_top"] forState:UIControlStateNormal];
+        [_topButton addTarget:self action:@selector(toTopButtonClick) forControlEvents:UIControlEventTouchUpInside];
+        _topButton.layer.cornerRadius = 20.0;
+        _topButton.layer.masksToBounds = YES;
+        _topButton.alpha = 0;
+    }
+    return _topButton;
+}
+
 
 @end

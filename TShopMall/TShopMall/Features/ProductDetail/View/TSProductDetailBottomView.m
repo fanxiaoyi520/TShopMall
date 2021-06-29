@@ -163,7 +163,7 @@
 -(TSDetailFunctionButton *)addButton{
     if (!_addButton) {
         _addButton = [TSDetailFunctionButton buttonWithType:UIButtonTypeCustom];
-        [_addButton setTitle:@"加入购物车" forState:UIControlStateNormal];
+        [_addButton setTitle:@"加购" forState:UIControlStateNormal];
         [_addButton setImage:KImageMake(@"mall_detail_addCart") forState:UIControlStateNormal];
         [_addButton setImage:KImageMake(@"mall_detail_addCart") forState:UIControlStateHighlighted];
         [_addButton addTarget:self action:@selector(addAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -178,7 +178,7 @@
         _buyButton.titleLabel.font = KRegularFont(16);
         [_buyButton setTitleColor:KWhiteColor forState:UIControlStateNormal];
         [_buyButton setTitleColor:KWhiteColor forState:UIControlStateHighlighted];
-        [_buyButton setBackgroundColor:[UIColor orangeColor]];
+        [_buyButton setBackgroundColor:KHexColor(@"#F7AF34")];
         [_buyButton addTarget:self action:@selector(buyAction:) forControlEvents:UIControlEventTouchUpInside];
         [_buyButton setCorners:(UIRectCornerTopLeft | UIRectCornerBottomLeft) radius:20];
     }
@@ -192,7 +192,7 @@
         _sellButton.titleLabel.font = KRegularFont(16);
         [_sellButton setTitleColor:KWhiteColor forState:UIControlStateNormal];
         [_sellButton setTitleColor:KWhiteColor forState:UIControlStateHighlighted];
-        [_sellButton setBackgroundColor:[UIColor redColor]];
+        [_sellButton setBackgroundColor:KHexColor(@"#FF4D49")];
         [_sellButton addTarget:self action:@selector(sellAction:) forControlEvents:UIControlEventTouchUpInside];
         [_sellButton setCorners:(UIRectCornerTopRight | UIRectCornerBottomRight) radius:20];
     }

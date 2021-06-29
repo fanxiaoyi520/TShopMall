@@ -361,6 +361,7 @@
                                    buyNum:(NSString *)buyNum
                                    attrId:(NSString *)attrId
                                  complete:(void(^)(BOOL isSucess))complete{
+    
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setValue:productUuid forKey:@"productUuid"];
     [params setValue:buyNum forKey:@"buyNum"];
@@ -380,18 +381,24 @@
             [Popover popToastOnWindowWithText:@"加入购物车成功"];
         }
         
+        if (complete) {
+            complete(YES);
+        }
+        
         } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
 
     }];
 }
 
 #pragma mark - 自己买
--(void)fetchProductDetailCustomBuy:(NSString *)suitUuid
-                          complete:(void(^)(BOOL isSucess))complete{
-    
+-(void)fetchProductDetailCustomBuyProductUuid:(NSString *)productUuid
+                                       buyNum:(NSString *)buyNum
+                                       attrId:(NSString *)attrId
+                                     complete:(void(^)(BOOL isSucess))complete{
     NSMutableDictionary *fast = [NSMutableDictionary dictionary];
-    [fast setValue:self.productUuid forKey:@"productUuid"];
+    [fast setValue:productUuid forKey:@"productUuid"];
     [fast setValue:self.skuNo forKey:@"attrId"];
+    [fast setValue:buyNum forKey:@"buyNum"];
     [fast setValue:@"true" forKey:@"noCart"];
     
     SSGenaralRequest *fastBuy = [[SSGenaralRequest alloc] initWithRequestUrl:kGoodDetailFastBuyUrl

@@ -27,6 +27,13 @@
     return YES;
 }
 
+/** 昵称的校验 */
++ (BOOL)isCorrectNickname:(NSString *)nickname {///
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", @"^[\u4e00-\u9fa5a-zA-Z0-9_\\-c]{4,20}$"];
+    BOOL isMatch = [pred evaluateWithObject:nickname];
+    return isMatch;
+}
+
 /** 提现密码的校验 */
 + (BOOL)isWithdrawalPsw:(NSString *)psw {
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", @"^\\d{6}$"];

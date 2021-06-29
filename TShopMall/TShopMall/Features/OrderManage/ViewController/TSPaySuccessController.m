@@ -10,6 +10,7 @@
 #import "TSPaySuccessDataController.h"
 #import "TSRecomendDataController.h"
 #import "TSPaySuccessBaseCell.h"
+#import "TSHybridViewController.h"
 
 @interface TSPaySuccessController ()<TSPaySucceddCellDelegate>
 @property (nonatomic, strong) TSPaySuccessView *collectionView;
@@ -54,7 +55,13 @@
 }
 
 - (void)goToOrderDetail{
-    
+    NSString *path = [NSString stringWithFormat:@"%@%@?uuid=%@",kMallH5ApiPrefix,kMallH5OrderDetailUrl, self.orderId];
+    TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:path];
+    [self.navigationController pushViewController:hybrid animated:YES];
+    NSMutableArray *arr = [NSMutableArray array];
+    [arr addObject:self.navigationController.viewControllers[0]];
+    [arr addObject:[self.navigationController.viewControllers lastObject]];
+    self.navigationController.viewControllers = arr;
 }
 
 - (void)recomendGoodsTapped:(TSRecomendGoods *)goods{

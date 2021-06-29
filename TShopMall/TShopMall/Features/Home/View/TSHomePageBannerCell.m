@@ -70,8 +70,8 @@
 
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index{
     TSHomePageBannerViewModel *bannerViewModel = (TSHomePageBannerViewModel *)self.viewModel;
-    [[TSServicesManager sharedInstance].uriHandler openURI:bannerViewModel.bannerDatas[index].uri];
-    NSLog(@"uri:%@",bannerViewModel.bannerDatas[index].uri);
+    [[TSServicesManager sharedInstance].uriHandler openURI:[[TSServicesManager sharedInstance].uriHandler configUriWithTypeValue:bannerViewModel.bannerDatas[index].linkData.typeValue objectValue:bannerViewModel.bannerDatas[index].linkData.objectValue]];
+    NSLog(@"uri:%@",[[TSServicesManager sharedInstance].uriHandler configUriWithTypeValue:bannerViewModel.bannerDatas[index].linkData.typeValue objectValue:bannerViewModel.bannerDatas[index].linkData.objectValue]);
 }
 
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didScrollToIndex:(NSInteger)index{

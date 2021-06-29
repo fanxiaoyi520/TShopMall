@@ -106,6 +106,10 @@
     
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [self.view endEditing:YES];
+}
+
 #pragma mark - UniversalCollectionViewCellDataDelegate
 - (id)universalCollectionViewCellModel:(NSIndexPath *)indexPath{
     TSBindMobileSectionModel *sectionModel = self.dataController.sections[indexPath.section];

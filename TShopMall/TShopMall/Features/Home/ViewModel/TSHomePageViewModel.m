@@ -165,8 +165,8 @@
         viewModel = [viewModelClass new];
         if ([viewModel isKindOfClass:TSHomePageCellViewModel.class]) {
             TSHomePageCellTemplateModel *templateModel = [TSHomePageCellTemplateModel new];
-            templateModel.templateName = sectionName;
-            templateModel.headerTemplateName = [NSString stringWithFormat:@"%@Header",sectionName];
+            templateModel.templateName = @"TSHomePageContainer";
+            templateModel.headerTemplateName = @"TSHomePageContainerHeader";
             templateModel.data = model.data;
             viewModel.model = templateModel;
             _containerViewModel = (TSCategoryGroupViewModel *)viewModel;
@@ -183,7 +183,7 @@
         @"Nav":@"TSHomePageCategory",
 //        @"RichText":@"TSHomePageReleaseTitle",
         @"ImageAd0":@"TSHomePageRelease",
-        @"GroupType":@"TSHomePageContainer",
+        @"GroupType":@"TSCategoryGroup",
     };
     
 }
