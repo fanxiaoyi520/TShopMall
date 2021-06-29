@@ -67,3 +67,11 @@
 @property (nonatomic, assign) NSInteger lastTag;
 @property (nonatomic, copy) void(^indexChanged)(NSInteger index);
 @end
+
+
+@interface TSAreaHotCityHeader : UITableViewHeaderFooterView
+@property (nonatomic, strong) NSArray<TSAreaModel *> *hotCities;
+@property (nonatomic, strong) UILabel *title;
+@property (nonatomic, strong) UIView *line;
+@property (nonatomic, copy) void(^hotcitySeleted)(TSAreaModel *);
+@end

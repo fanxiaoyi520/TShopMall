@@ -16,6 +16,9 @@
 
 }
 
+- (void)checkInvoice:(NSDictionary *)invoice{
+    NSLog(@"%@", invoice);
+}
 
 
 @end
