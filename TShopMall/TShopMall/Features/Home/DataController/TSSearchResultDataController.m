@@ -48,6 +48,7 @@
     switch (self.sortType) {
         case SortWeight:
             sortBy = @"sortWeight";
+            self.sort = 1;
             break;
         case YongJing:
             sortBy = @"commission";

@@ -166,7 +166,7 @@
         
         if ([headerView isKindOfClass:TSHomePageContainerHeaderView.class]) {
             TSHomePageContainerHeaderView *header = (TSHomePageContainerHeaderView *)headerView;
-            header.viewModel = (TSHomePageContainerViewModel *)viewModel;
+            header.viewModel = (TSCategoryGroupViewModel *)viewModel;
         }
         return headerView;
     }

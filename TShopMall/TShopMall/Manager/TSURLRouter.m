@@ -55,8 +55,24 @@
     return currentViewController;
 }
 
-- (void)openURI:(NSString *_Nullable)uri {
-    NSLog(@"AppDelegate 中 uri==%@",uri);
+- (NSString *)configUriWithTypeValue:(NSString *_Nullable)typeValue objectValue:(NSString *)objectValue{
+    NSString *uri;
+    if ([typeValue isEqualToString:@"APP_PAGE"]) {
+        uri = @"page://quote/category";
+    }
+    else if([typeValue isEqualToString:@"goodsGroup"]){
+        uri = [NSString stringWithFormat:@"page://quote/categoryDetail?uuid=%@", objectValue];
+
+    }
+    else if([typeValue isEqualToString:@"Goods"]){
+        uri = [NSString stringWithFormat:@"page://quote/productDetail?uuid=%@", objectValue];
+    }
+    return uri;
+}
+
+- (void)openURI:(NSString *)uri{
+   
+    NSLog(@"TSURLRouter 中 uri==%@",uri);
     
     Class cls = NSClassFromString([self getClassDict][[uri componentsSeparatedByString:@"?"].firstObject]);
     if (cls == nil) { return; }
@@ -80,8 +96,7 @@
     return @{
         @"page://quote/productDetail": @"TSProductDetailController",
         @"page://quote/category": @"TSCategoryViewController",
-        @"page://quote/searchResult": @"TSSearchResultController",
-
+        @"page://quote/categoryDetail": @"TSCategoryDetailViewController",
     };
 }
 @end

@@ -6,7 +6,7 @@
 //
 
 #import "TSHomePageContainerHeaderView.h"
-#import "TSHomePageContainerGroup.h"
+#import "TSCategoryGroup.h"
 @interface TSHomePageContainerHeaderView ()<JXCategoryViewDelegate>
 @property (nonatomic, strong) JXCategoryTitleView *segmentHeader;
 
@@ -32,9 +32,9 @@
     }];
 }
 
-- (void)setViewModel:(TSHomePageContainerViewModel *)viewModel{
+- (void)setViewModel:(TSCategoryGroupViewModel *)viewModel{
     _viewModel = viewModel;
-    _viewModel = (TSHomePageContainerViewModel *)viewModel;
+    _viewModel = (TSCategoryGroupViewModel *)viewModel;
     if (!_viewModel.segmentHeaderDatas.count) {
         [_viewModel getSegmentHeaderData];
     }
@@ -43,7 +43,7 @@
         @strongify(self)
         NSMutableArray *titles = @[].mutableCopy;
         for (int i = 0; i < self.viewModel.segmentHeaderDatas.count; i ++) {
-            TSHomePageContainerGroup *model = self.viewModel.segmentHeaderDatas[i];
+            TSCategoryGroup *model = self.viewModel.segmentHeaderDatas[i];
             [titles addObject:model.name];
         }
         self.segmentHeader.titles = titles;

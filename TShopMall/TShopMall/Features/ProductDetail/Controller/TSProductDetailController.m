@@ -31,6 +31,8 @@
 #import "WechatShareManager.h"
 #import "TSAreaSelectedController.h"
 #import "TSMakeOrderController.h"
+#import "TSAreaModel.h"
+#import "TSStockoutView.h"
 
 @interface TSProductDetailController ()<UICollectionViewDelegate,UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate,TSTopFunctionViewDelegate,TSChangePriceViewDelegate,ProductDetailBottomViewDelegate,SnailQuickMaskPopupsDelegate,GoodDetailMaterialViewDelegate, TSDetailShareViewDelegate,GoodDetailSkuViewDelegate>
 
@@ -77,6 +79,10 @@
 @property (nonatomic, strong) SnailQuickMaskPopups *materialPopups;
 /// 下载更多视图
 @property(nonatomic, strong) TSGoodDetailMaterialView *materialView;
+/// 售空视图
+@property(nonatomic, strong) TSStockoutView *stockoutView;
+
+@property(nonatomic, strong) UIButton *topButton;
 
 /// 数据中心
 @property(nonatomic, strong) TSProductDetailDataController *dataController;
@@ -88,8 +94,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    dispatch_group_t group = dispatch_group_create();
+    [self fetchProductDetailData];
     
+    __weak __typeof(self)weakSelf = self;
+    self.dragView.clickDragViewBlock = ^(WMDragView *dragView){
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
+        [strongSelf.changePopups presentAnimated:YES completion:nil];
+    };
+}
+
+-(void)fetchProductDetailData{
+    dispatch_group_t group = dispatch_group_create();
     //商品详情
     NSMutableArray *sections = [self.dataController fetchProductDetailWithUuid:self.uuid
                                                            isRequireEnterGroup:YES
@@ -112,13 +127,8 @@
     dispatch_group_notify(group, dispatch_get_main_queue(), ^{
         [self.collectionView reloadData];
         [self.topCartBtn setBadgeValue:self.dataController.cartNumber];
+        [self fetchFreightInventory];
     });
-    
-    __weak __typeof(self)weakSelf = self;
-    self.dragView.clickDragViewBlock = ^(WMDragView *dragView){
-        __strong __typeof(weakSelf)strongSelf = weakSelf;
-        [strongSelf.changePopups presentAnimated:YES completion:nil];
-    };
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -167,6 +177,8 @@
     [self.view addSubview:self.shareButton];
     [self.view addSubview:self.cartButton];
     [self.view addSubview:self.dragView];
+    [self.view addSubview:self.stockoutView];
+    [self.view addSubview:self.topButton];
     [self addConstraints];
     [self addMJHeaderAndFooter];
 }
@@ -201,6 +213,19 @@
         make.top.equalTo(self.view).offset(top);
         make.width.height.mas_equalTo(32);
     }];
+    
+    [self.stockoutView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(self.view);
+        make.bottom.equalTo(self.bottomView.mas_top).offset(0);
+        make.height.mas_equalTo(42);
+    }];
+    
+    [self.topButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.height.mas_equalTo(40);
+        make.right.equalTo(self.view.mas_right).offset(-16);
+        make.bottom.equalTo(self.bottomView.mas_top).offset(-24);
+    }];
+    
     ///解决collectionView 往下滑的问题
     if (@available(iOS 11.0, *)) {
         self.collectionView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
@@ -236,6 +261,38 @@
     self.collectionView.mj_header = mj_header;
 }
 
+-(void)fetchFreightInventory{
+    dispatch_group_t group = dispatch_group_create();
+    
+    [self.dataController fetchProductDetailFreightWithSkuNo:self.dataController.skuNo
+                                                     buyNum:self.dataController.buyNum
+                                               provinceUuid:self.dataController.locationModel.provinceId
+                                                   cityUuid:self.dataController.locationModel.cityId
+                                                 regionUuid:self.dataController.locationModel.areaUuid
+                                                 streetUuid:self.dataController.locationModel.region
+                                        isRequireEnterGroup:YES
+                                                      group:group
+                                                   complete:^(BOOL isSucess) {
+            
+    }];
+    
+    [self.dataController fetchProductDetailHasProduct:self.dataController.skuNo
+                                             areaUuid:self.dataController.locationModel.areaUuid
+                                          parentSkuNo:self.dataController.parentSkuNo
+                                               buyNum:self.dataController.buyNum
+                                               region:self.dataController.locationModel.region
+                                  isRequireEnterGroup:YES
+                                                group:group
+                                             complete:^(BOOL isSucess) {
+        
+    }];
+    
+    dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+        [self.collectionView reloadData];
+    });
+    
+}
+
 #pragma mark - Actions
 -(void)backAction:(UIButton *)sender{
     [self.navigationController popViewControllerAnimated:YES];
@@ -250,32 +307,62 @@
     [self.navigationController pushViewController:cart animated:YES];
 }
 
+-(void)toTopButtonClick{
+    [self.collectionView scrollToTop];
+}
+
 /// 下拉刷新
 - (void)mjHeadreRefresh:(MJRefreshNormalHeader *)mj_header {
-//    __weak __typeof(self)weakSelf = self;
-//    [self.dataController fetchProductDetailWithUuid:self.uuid complete:^(BOOL isSucess) {
-//        __strong __typeof(weakSelf)strongSelf = weakSelf;
-//        if (isSucess) {
-//            [strongSelf.collectionView.mj_header endRefreshing];
-//            [strongSelf.collectionView reloadData];
-//        }
-//    }];
+
+    dispatch_group_t group = dispatch_group_create();
+    [self.dataController fetchProductDetailWithUuid:self.uuid
+                                isRequireEnterGroup:YES
+                                              group:group
+                                           complete:^(BOOL isSucess) {
+            
+    }];
+    
+    //购物车角标
+    [self.dataController fetchProductDetailCartNumberIsRequireEnterGroup:YES
+                                                                   group:group
+                                                                complete:^(BOOL isSucess) {
+            
+    }];
+    
+    dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+        [self.collectionView.mj_header endRefreshing];
+        [self.collectionView reloadData];
+        [self.topCartBtn setBadgeValue:self.dataController.cartNumber];
+        [self fetchFreightInventory];
+    });
 }
 
 #pragma mark - GoodDetailSkuViewDelegate
--(void)goodDetailSkuView:(TSGoodDetailSkuView *)skuView addShoppingCart:(UIButton *)addButton buyNum:(NSString *)buyNum{
-    
+-(void)goodDetailSkuView:(TSGoodDetailSkuView *)skuView addShoppingCartNum:(NSString *)buyNum{
     [self.skuPpopups dismissAnimated:YES completion:nil];
     
+    __weak __typeof(self)weakSelf = self;
     [self.dataController fetchProductDetailAddProductToCart:self.dataController.productUuid
-                                                     buyNum:@"1"
+                                                     buyNum:self.dataController.buyNum
                                                      attrId:self.dataController.attrId
                                                    complete:^(BOOL isSucess) {
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
+        //购物车角标
+        [strongSelf.dataController fetchProductDetailCartNumberIsRequireEnterGroup:NO
+                                                                             group:dispatch_group_create()
+                                                                          complete:^(BOOL isSucess) {
+            [strongSelf.topCartBtn setBadgeValue:strongSelf.dataController.cartNumber];
+        }];
             
     }];
 }
--(void)goodDetailSkuView:(TSGoodDetailSkuView *)skuView buyImmediately:(UIButton *)buyButton buyNum:(NSString *)buyNum{
+
+-(void)goodDetailSkuView:(TSGoodDetailSkuView *)skuView buyImmediatelyNum:(NSString *)buyNum{
     [self.skuPpopups dismissAnimated:YES completion:nil];
+    [self.dataController fetchProductDetailCustomBuy:@""
+                                            complete:^(BOOL isSucess) {
+            
+    }];
 }
 
 -(void)goodDetailSkuView:(TSGoodDetailSkuView *)skuView specificationExchange:(NSDictionary *)detail{
@@ -283,7 +370,7 @@
 }
 
 -(void)goodDetailSkuView:(TSGoodDetailSkuView *)skuView numberChange:(NSString *)currentNumber{
-    
+    self.dataController.buyNum = currentNumber;
 }
 
 #pragma mark - SnailQuickMaskPopupsDelegate
@@ -332,7 +419,8 @@
     self.tabBarController.selectedIndex = 0;
 }
 -(void)productDetailBottomView:(TSProductDetailBottomView *_Nullable)bottomView customClick:(TSDetailFunctionButton *_Nullable)sender{
-    TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:@"http://www.baidu.com"];
+    NSString *url = @"https://wap.service.tcl.com/web/index.php?apps=thome";
+    TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:url];
     [self.navigationController pushViewController:hybrid animated:YES];
 }
 -(void)productDetailBottomView:(TSProductDetailBottomView *_Nullable)bottomView addClick:(TSDetailFunctionButton *_Nullable)sender{
@@ -344,11 +432,16 @@
     
     __weak __typeof(self)weakSelf = self;
     [self.dataController fetchProductDetailAddProductToCart:self.dataController.productUuid
-                                                     buyNum:@"1"
+                                                     buyNum:self.dataController.buyNum
                                                      attrId:self.dataController.attrId
                                                    complete:^(BOOL isSucess) {
         __strong __typeof(weakSelf)strongSelf = weakSelf;
-        NSLog(@"---");
+        //购物车角标
+        [strongSelf.dataController fetchProductDetailCartNumberIsRequireEnterGroup:NO
+                                                                             group:dispatch_group_create()
+                                                                          complete:^(BOOL isSucess) {
+            [strongSelf.topCartBtn setBadgeValue:strongSelf.dataController.cartNumber];
+        }];
         
     }];
 }
@@ -365,7 +458,7 @@
     }];
 }
 -(void)productDetailBottomView:(TSProductDetailBottomView *_Nullable)bottomView sellClick:(UIButton *_Nullable)sender{
-    
+    [self.changePopups presentAnimated:YES completion:nil];
 }
 
 #pragma mark - GoodDetailMaterialViewDelegate
@@ -398,6 +491,7 @@
         self.cartButton.alpha = diff;
     }
     self.gk_navigationBar.alpha = progress;
+    self.topButton.alpha = offsetY / 200.0;
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -482,16 +576,38 @@
             [self.skuPpopups presentAnimated:YES completion:NULL];
             self.skuView.purchaseModel = (TSGoodDetailItemPurchaseModel *)[section.items firstObject];
         } else if ([params[@"purchaseType"] intValue] == 2){//配送
+            __weak __typeof(self)weakSelf = self;
             [TSAreaSelectedController showAreaSelected:^(TSAreaModel *provice, TSAreaModel *city, TSAreaModel *eare, TSAreaModel *street, NSString *location) {
+                __strong __typeof(weakSelf)strongSelf = weakSelf;
+                NSString *address = [NSString stringWithFormat:@"%@ %@ %@ %@",provice.provinceName,city.cityName,eare.regionName,street.streetName];
                 
-                NSLog(@"-----");
+                strongSelf.dataController.locationModel.provinceId = provice.uuid;
+                strongSelf.dataController.locationModel.cityId = city.uuid;
+                strongSelf.dataController.locationModel.areaUuid = eare.uuid;
+                strongSelf.dataController.locationModel.region = street.uuid;
+                strongSelf.dataController.locationModel.localaddress = address;
+                
+                [strongSelf.dataController.locationModel saveLocationInfo];
+                
+                [strongSelf fetchFreightInventory];
                 
             } OnController:self];
             
         }else{//运费
+            __weak __typeof(self)weakSelf = self;
             [TSAreaSelectedController showAreaSelected:^(TSAreaModel *provice, TSAreaModel *city, TSAreaModel *eare, TSAreaModel *street, NSString *location) {
+                __strong __typeof(weakSelf)strongSelf = weakSelf;
+                NSString *address = [NSString stringWithFormat:@"%@ %@ %@ %@",provice.provinceName,city.cityName,eare.regionName,street.streetName];
                 
-                NSLog(@"-----");
+                strongSelf.dataController.locationModel.provinceId = provice.uuid;
+                strongSelf.dataController.locationModel.cityId = city.uuid;
+                strongSelf.dataController.locationModel.areaUuid = eare.uuid;
+                strongSelf.dataController.locationModel.region = street.uuid;
+                strongSelf.dataController.locationModel.localaddress = address;
+                
+                [strongSelf.dataController.locationModel saveLocationInfo];
+                
+                [strongSelf fetchFreightInventory];
                 
             } OnController:self];
         }
@@ -785,5 +901,27 @@ spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
     }
     return _materialPopups;
 }
+
+-(TSStockoutView *)stockoutView{
+    if (!_stockoutView) {
+        _stockoutView = [[TSStockoutView alloc] init];
+        _stockoutView.hidden = YES;
+    }
+    return _stockoutView;
+}
+
+- (UIButton *)topButton {
+    if (_topButton == nil) {
+        _topButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _topButton.backgroundColor = [UIColor whiteColor];
+        [_topButton setImage:[UIImage imageNamed:@"mall_detail_top"] forState:UIControlStateNormal];
+        [_topButton addTarget:self action:@selector(toTopButtonClick) forControlEvents:UIControlEventTouchUpInside];
+        _topButton.layer.cornerRadius = 20.0;
+        _topButton.layer.masksToBounds = YES;
+        _topButton.alpha = 0;
+    }
+    return _topButton;
+}
+
 
 @end

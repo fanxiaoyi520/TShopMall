@@ -6,11 +6,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TSCollectionViewMeanWidthLayout.h"
 
 NS_ASSUME_NONNULL_BEGIN
 typedef void(^TSGridGoodsCollectionViewDidSelectedBlock)(id selectItem, NSInteger index);
 
 @interface TSGridGoodsCollectionView : UIView
+@property (nonatomic, strong, readonly) TSCollectionViewMeanWidthLayout *layout;
 @property (nonatomic, strong)   UICollectionView   * collectionView;
 @property (nonatomic, strong)   NSArray            * items;
 @property (nonatomic, copy)     TSGridGoodsCollectionViewDidSelectedBlock   clickedBlock;

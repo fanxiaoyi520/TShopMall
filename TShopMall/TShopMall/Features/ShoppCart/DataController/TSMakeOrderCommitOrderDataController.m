@@ -8,7 +8,7 @@
 #import "TSMakeOrderCommitOrderDataController.h"
 
 @implementation TSMakeOrderCommitOrderDataController
-+ (void)commitOrderWithAddress:(TSAddressModel *)address balanceInfo:(TSBalanceModel *)balanceInfo invoice:(TSMakeOrderInvoiceViewModel *)invoice isFromCart:(BOOL)isFromCart finished:(void(^)(BOOL, NSString *, NSString *))finished OnController:(UIViewController *)controller{
++ (void)commitOrderWithAddress:(TSAddressModel *)address balanceInfo:(TSBalanceModel *)balanceInfo invoice:(TSInvoiceModel *)invoice message:(NSString *)message isFromCart:(BOOL)isFromCart finished:(void(^)(BOOL, NSString *, NSString *))finished OnController:(UIViewController *)controller{
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"noCart"] = @(!isFromCart);
     params[@"checkArea"] = address.uuid;
@@ -18,14 +18,14 @@
     params[@"integralReduceNum"] = @"";//积分扣减金额
     params[@"totalMoneyShow"] = balanceInfo.orderTotalMoney;//订单总价
     
-//    params[@"invoiceCate"] = invoice.type.length==0? @"":invoice.type;
-//    params[@"invoiceUuid"] = invoice.invoiceUuid.length==0? @"":invoice.invoiceUuid;
-//    params[@"electron_titleContent"] = invoice.invoiceTitle.length==0? @"":invoice.invoiceTitle;
-//    params[@"electron_code"] = invoice.code.length==0? @"":invoice.code;
-//    params[@"add_companyName"] = invoice.companyName.length==0? @"":invoice.companyName;
-//    params[@"add_code"] = @"";
-//    params[@"add_address"] = invoice.registerAddress.length==0? @"":invoice.registerAddress;
-//    params[@"add_registerMobile"] = invoice.registerPhone.length==0? @"":invoice.registerPhone;
+    params[@"invoiceCate"] = [NSString stringWithFormat:@"%ld", invoice.formType];
+    params[@"invoiceUuid"] = invoice.uuid.length==0? @"":invoice.uuid;
+    params[@"electron_titleContent"] = invoice.titleContent.length==0? @"":invoice.titleContent;
+    params[@"electron_code"] = invoice.code.length==0? @"":invoice.code;
+    params[@"add_companyName"] = invoice.companyName.length==0? @"":invoice.companyName;
+    params[@"add_code"] = invoice.code.length==0? @"":invoice.code;
+    params[@"add_address"] = invoice.registerAddress.length==0? @"":invoice.registerAddress;
+    params[@"add_registerMobile"] = invoice.mobile.length==0? @"":invoice.mobile;
     
     for (TSBalanceCartManagerDetailModel *detail in balanceInfo.cartManager.detailModelList) {
         params[[NSString stringWithFormat:@"productPrice_%@", detail.attrAndValue]] = detail.totalPrice;
@@ -38,7 +38,7 @@
     params[[NSString stringWithFormat:@"affix_%@", balanceInfo.cartManager.storeUuid]] = balanceInfo.cartManager.affix;
     params[[NSString stringWithFormat:@"shipType_%@", balanceInfo.cartManager.storeUuid]] = balanceInfo.cartManager.shipType;
     params[[NSString stringWithFormat:@"storeReduce_%@", balanceInfo.cartManager.storeUuid]] = balanceInfo.cartManager.reduceMoney;
-    params[[NSString stringWithFormat:@"storeNote_%@", balanceInfo.cartManager.storeUuid]] = invoice.message;//买家留言
+    params[[NSString stringWithFormat:@"storeNote_%@", balanceInfo.cartManager.storeUuid]] = message;//买家留言
     
 
     SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kSaveOrder

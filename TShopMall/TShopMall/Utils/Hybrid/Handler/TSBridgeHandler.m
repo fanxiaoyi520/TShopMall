@@ -7,13 +7,30 @@
 //
 
 #import "TSBridgeHandler.h"
+#import "TSHybridViewController.h"
+#import "TSWKAppManager.h"
 
 
 @implementation TSBridgeHandler
 
-//跳转到订单详情
--(void)goOrderDetail:(NSDictionary *)params{
+-(void)goForward:(NSDictionary *)params{
+    NSDictionary *data = params[@"data"];
+    NSDictionary *paramDic = data[@"params"];
 
+    TSHybridViewController *controller = [[TSHybridViewController alloc] initWithURLString:paramDic[@"url"]];
+    controller.jsDataParams = data;
+    [[TSWKAppManager currentNavigationController] pushViewController:controller animated:YES];
+}
+
+- (void)checkInvoice:(NSDictionary *)invoice{
+    NSLog(@"%@", invoice);
+    NSDictionary *params = invoice[@"data"][@"params"];
+    if (params) {
+        NSDictionary *data = params[@"data"];
+        if (data) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"InvoiceChanged" object:nil userInfo:@{@"invoice":data}];
+        }
+    }
 }
 
 

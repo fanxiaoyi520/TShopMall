@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic ,copy) NSString *bankCardNo;
 @property (nonatomic ,copy) NSString *noArrivalAmount;
 @property (nonatomic ,copy) NSString *totalRevenue;
+@property (nonatomic ,copy) NSString *withdrawalRate;
 @end
 
 NS_ASSUME_NONNULL_END

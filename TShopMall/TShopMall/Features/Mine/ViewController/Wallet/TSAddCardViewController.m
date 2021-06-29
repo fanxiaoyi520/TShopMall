@@ -11,11 +11,19 @@
 #import "TSSelectorViewController.h"
 #import "TSAreaSelectedController.h"
 
+#import "TSMineDataController.h"
+
+#import "TSAddBankCardModel.h"
+#import "TSAddBankCardBackModel.h"
 @interface TSAddCardViewController ()<UITableViewDelegate,UITableViewDataSource,TSAddBankCardDelegate,UIViewControllerTransitioningDelegate>
 
 @property (nonatomic ,strong) UITableView *addCardTableView;
 @property (nonatomic ,strong) TSAddBankCardFooter *footerView;
 @property (nonatomic ,strong) NSArray *dataList;
+@property (nonatomic ,strong) NSMutableDictionary *mutableDic;
+@property (nonatomic ,strong) TSAddBankCardModel *model;
+@property (nonatomic ,strong) TSMineDataController *dataController;
+
 @end
 
 @implementation TSAddCardViewController
@@ -25,8 +33,19 @@
     // Do any additional setup after loading the view.
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.gk_navTitle = @"添加银行卡";
-    
+
     self.dataList = @[@"银行卡号",@"银行名称",@"开户银行省市",@"开户银行"];
+    //dic容错设置
+    self.mutableDic = [NSMutableDictionary dictionary];
+    [self.mutableDic setValue:@"" forKey:@"bankCardNo"];
+    [self.mutableDic setValue:@"" forKey:@"accountBank"];
+    [self.mutableDic setValue:@"" forKey:@"accountBankCode"];
+    [self.mutableDic setValue:@"" forKey:@"bankName"];
+    [self.mutableDic setValue:@"" forKey:@"bankBranchId"];
+    [self.mutableDic setValue:@"" forKey:@"bankAddressProvince"];
+    [self.mutableDic setValue:@"" forKey:@"bankAddressProvinceCode"];
+    [self.mutableDic setValue:@"" forKey:@"bankAddressCity"];
+    [self.mutableDic setValue:@"" forKey:@"bankAddressCityCode"];
 }
 
 - (void)fillCustomView {
@@ -82,20 +101,48 @@
 }
 
 // MARK: TSAddBankCardDelegate
-- (void)addBankCardInputInfoTextFieldAction:(UITextField *)textField {NSLog(@"输入");}
+- (void)addBankCardInputInfoTextFieldAction:(UITextField *)textField {
+    if (textField.tag == 20) {
+        if (textField.text) {
+            NSString *str = [textField.text stringByReplacingOccurrencesOfString:@" "withString:@""];;
+            [self.mutableDic setValue:str forKey:@"bankCardNo"];
+        }
+        self.model = [TSAddBankCardModel yy_modelWithDictionary:self.mutableDic];
+    } else {
+        if (textField.text)
+            [self.mutableDic setValue:textField.text forKey:@"bankName"];
+        self.model = [TSAddBankCardModel yy_modelWithDictionary:self.mutableDic];
+    }
+}
 
 - (void)addBankCardfuncAction:(id _Nullable)sender {
     //****结束textView的输入****//
     [self.view endEditing:YES];
     UIButton *btn = (UIButton *)sender;
     if (btn.tag == 11) {
+        TSAddBankCardCell *cell = (TSAddBankCardCell *)btn.superview;
+        __block UITextField *textField = nil;
+        [cell.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if ([obj isKindOfClass:UITextField.class]) {
+                textField = (UITextField *)obj;
+            }
+        }];
         TSSelectorViewController *vc = [TSSelectorViewController new];
         vc.modalPresentationStyle = UIModalPresentationCustom;
         vc.transitioningDelegate = self;
+        @weakify(self);
+        vc.selectBankBlock = ^(id  _Nullable info) {
+            @strongify(self);
+            textField.text = (NSString *)info;
+            NSString *str = (NSString *)info;
+            [self.mutableDic setValue:str forKey:@"accountBank"];
+            self.model = [TSAddBankCardModel yy_modelWithDictionary:self.mutableDic];
+        };
         [self presentViewController:vc animated:YES completion:nil];
     } else {
-        __weak typeof(self) weakSelf = self;
+        //@weakify(self);
         [TSAreaSelectedController showAreaSelected:^(TSAreaModel *provice, TSAreaModel *city, TSAreaModel *eare, TSAreaModel *street, NSString *location) {
+            //@strongify(self);
     //        if (provice) {
     //            weakSelf.vm.provice = provice.provinceName;
     //            weakSelf.vm.proviceUUid = provice.currentUUid;
@@ -104,27 +151,25 @@
     //            weakSelf.vm.city = city.cityName;
     //            weakSelf.vm.cityUUid = city.currentUUid;
     //        }
-    //        if (eare) {
-    //            weakSelf.vm.area = eare.regionName;
-    //            weakSelf.vm.areaUUid = eare.currentUUid;
-    //        }
-    //        if (street) {
-    //            weakSelf.vm.street = street.streetName;
-    //            weakSelf.vm.streetUUid = street.currentUUid;
-    //        }
-    //        if (provice == nil) {
-    //            weakSelf.vm.address = location;
-    //        } else {
-    //            NSString *address = [NSString stringWithFormat:@"%@%@%@%@", provice.provinceName, city.cityName, eare.regionName, street.streetName];
-    //            weakSelf.vm.address = address;
-    //        }
-    //        [weakSelf.editView updateAddress:weakSelf.vm.address];
         } OnController:self];
     }
 }
 
 - (void)addBankCardFooterSureAction:(id _Nullable)sender {
-    NSLog(@"提交");
+//    if (self.model.bankCardNo || [self.model.bankCardNo isEqualToString:@""]) {
+//        [Popover popToastOnWindowWithText:@"银行卡号不能为空"];
+//        return;
+//    }
+    self.dataController.addBankCardModel = self.model;
+    @weakify(self);
+    [self.dataController fetchCheckBankCardDataComplete:^(BOOL isSucess) {
+        @strongify(self);
+        if (isSucess) {
+            [self.dataController fetchAddToBankCardDataComplete:^(BOOL isSucess) {
+        
+            }];
+        }
+    }];
 }
 
 // MARK: UIViewControllerTransitioningDelegate
@@ -153,5 +198,12 @@
         _footerView.kDelegate = self;
     }
     return _footerView;
+}
+
+- (TSMineDataController *)dataController {
+    if (!_dataController) {
+        _dataController = [[TSMineDataController alloc] init];
+    }
+    return _dataController;
 }
 @end

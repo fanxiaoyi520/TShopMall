@@ -6,7 +6,7 @@
 //
 
 #import "TSHomePageContainerCell.h"
-#import "TSHomePageContainerViewModel.h"
+#import "TSCategoryGroupViewModel.h"
 #import "TSHomePageContainerCollectionView.h"
 #import "YBNestViews.h"
 #import <MJRefresh/MJRefresh.h>
@@ -15,7 +15,7 @@
 
 
 @interface TSHomePageContainerCell()<YBNestContainerViewDataSource, YBNestContainerViewDelegate>
-@property(nonatomic, strong) TSHomePageContainerViewModel *containerViewModel;
+@property(nonatomic, strong) TSCategoryGroupViewModel *containerViewModel;
 
 @end
 @implementation TSHomePageContainerCell
@@ -68,7 +68,7 @@
     }
     
     [super setViewModel:viewModel];
-    self.containerViewModel = (TSHomePageContainerViewModel *)viewModel;
+    self.containerViewModel = (TSCategoryGroupViewModel *)viewModel;
     @weakify(self);
     [self.KVOController observe:self.containerViewModel keyPath:@"pageIndex" options:(NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew) block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
         @strongify(self)
@@ -131,24 +131,22 @@
         
     }];
     
-    TSHomePageContainerGroup *group = self.containerViewModel.segmentHeaderDatas[collectionView.tag];
-    [self.containerViewModel loadData:group callBack:^(NSArray * _Nonnull list, NSError * _Nonnull error) {
-        
+    TSCategoryGroup *group = self.containerViewModel.segmentHeaderDatas[collectionView.tag];
+    [self.containerViewModel loadData:group success:^(NSArray * _Nonnull list) {
         [Popover removePopoverOnWindow];
         
-        if (!error) {
-            collectionView.items = list;
-            [collectionView reloadData];
-            if (list.count < group.totalNum) {
-                [collectionView.collectionView.mj_footer resetNoMoreData];
-            } else {
-                [collectionView.collectionView.mj_footer endRefreshingWithNoMoreData];
-            }
-            [self showEmptyView:collectionView];
+        collectionView.items = list;
+        [collectionView reloadData];
+        if (list.count < group.totalNum) {
+            [collectionView.collectionView.mj_footer resetNoMoreData];
+        } else {
+            [collectionView.collectionView.mj_footer endRefreshingWithNoMoreData];
         }
-        else{
-            [self showErrorView:collectionView];
-        }
+        [self showEmptyView:collectionView];
+    
+    } failure:^(NSError * _Nonnull error) {
+        [Popover removePopoverOnWindow];
+        [self showErrorView:collectionView];
     }];
 }
 

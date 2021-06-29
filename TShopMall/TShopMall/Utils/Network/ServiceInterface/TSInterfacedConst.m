@@ -103,6 +103,7 @@ NSString *const kGoodDetailAddProductToCartUrl = @"/rest/v2/front/product/addPro
 NSString *const kGoodDetailHasProductUrl = @"/rest/v2/front/product/hasProduct";
 NSString *const kGoodDetailChangeChooseUrl = @"/rest/v2/cart/changeChoose";
 NSString *const kGoodDetailFastBuyUrl = @"/rest/v2/front/product/fastBuy";
+NSString *const kGoodDetailCarriageCostUrl = @"/rest/v2/front/product/getCarriageCost";
 
 #pragma mark - 分类
 NSString *const kShopContentUrl = @"/rest/v2/front/shopContent/getPageManageByPageType";
@@ -144,8 +145,15 @@ NSString * const kMineWithdrawalRecordListData = @"/rest/v2/withdrawal/record/qu
 NSString * const kMineWalletData = @"/rest/v2/withdrawal/record/queryWallet";
 NSString *const kMineQueryProfit = @"/rest/v2/withdrawal/record/queryProfit";
 
+
 #pragma mark - 设置
 NSString *const kAboutMeAgreementUrl = @"/rest/v2/front/shopStatement/getShopStatementList";
 NSString *const kModifyUserUrl = @"/user/mng/user";
+
+NSString *const kMineWithdrawalApply = @"/rest/v2/withdrawal/record/withdrawalApply";
+NSString *const kMineQueryAppBankCardAccountList = @"/rest/v2/bankCardAccount/queryAppBankCardAccountList";
+NSString *const kMineAddBankCardAccount = @"/rest/v2/bankCardAccount/addBankCardAccount";
+NSString *const kMineBankNoCheck = @"/rest/v2/bankCardAccount/bankNoCheck";
+NSString *const kMineGetBankInfo = @"/rest/v2/bankCardAccount/getBankInfo";
 
 

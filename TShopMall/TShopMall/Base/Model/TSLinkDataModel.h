@@ -6,14 +6,13 @@
 //
 
 #import <Foundation/Foundation.h>
-
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TSLinkDataModel : NSObject
-@property (nonatomic, strong) NSString *objectValue;
-@property (nonatomic, strong) NSString *typeValue;
-@property (nonatomic, strong) NSString *typeLabel;
-@property (nonatomic, strong) NSString *objectLabel;
+@property (nonatomic, copy) NSString *objectValue;
+@property (nonatomic, copy) NSString *typeValue;
+@property (nonatomic, copy) NSString *typeLabel;
+@property (nonatomic, copy) NSString *objectLabel;
 
 @end
 

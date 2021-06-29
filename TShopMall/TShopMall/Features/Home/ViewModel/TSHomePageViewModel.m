@@ -13,11 +13,24 @@
 #import "TSHomePageReleaseTitleViewModel.h"
 #import "TSHomePageBaseModel.h"
 #import "TSHomePageContentModel.h"
+#import "TSJsonCacheData.h"
 
 @interface TSHomePageViewModel ()
 @end
-@implementation TSHomePageViewModel
 
+@implementation TSHomePageViewModel
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(netWorkStatusChanged:) name:TS_NetWork_State object:nil];
+    }
+    return self;
+}
 - (void)loadDefaultData{
 //    TSHomePageBannerViewModel *bannerViewModel = [TSHomePageBannerViewModel new];
 //    TSHomePageCellTemplateModel *templateModel = [TSHomePageCellTemplateModel new];
@@ -41,7 +54,7 @@
 //    releaseViewModel.model = templateModel;
 //
 //
-//    TSHomePageContainerViewModel *containerViewModel = [TSHomePageContainerViewModel new];
+//    TSCategoryGroupViewModel *containerViewModel = [TSCategoryGroupViewModel new];
 //    templateModel = [TSHomePageCellTemplateModel new];
 //    templateModel.templateName = @"TSHomePageContainer";
 //    templateModel.headerTemplateName = @"TSHomePageContainerHeader";
@@ -55,7 +68,7 @@
 //     NSMutableArray *marr = @[].mutableCopy;
 //
 //     for (NSDictionary *dic in temp) {
-//         TSHomePageContainerGroup *model = [TSHomePageContainerGroup new];
+//         TSCategoryGroup *model = [TSCategoryGroup new];
 //         model.name = dic[@"groupName"];
 //         model.groupId = dic[@"goodsgroupUuid"];
 //         [marr addObject:model];
@@ -76,7 +89,7 @@
 }
 
 -(void)fetchData{
-   
+    
     NSMutableDictionary *body = [NSMutableDictionary dictionary];
         [body setValue:@"APP" forKey:@"uiType"];
 
@@ -90,25 +103,28 @@
         
         if (request.responseModel.isSucceed) {
             NSString *content = request.responseModel.data[@"content"];
-            NSArray *contentArr = [content jsonValueDecoded][@"items"];
-            
-            NSMutableArray *sections = [NSMutableArray array];
-            NSArray *temp = [NSArray yy_modelArrayWithClass:TSHomePageContentModel.class json:contentArr];
-
-            for (TSHomePageContentModel *model in temp) {
-                TSHomePageCellViewModel *viewModel = [self configSection:model];
-                if(viewModel){
-                    [sections addObject:viewModel];
-                }
-            }
-            self.dataSource = sections;
-            
+            [TSJsonCacheData writePlistWithData:content saveKey:@"homePageList"];
+            [self setUITemplateWithResponseData:content];
         }
         
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
 
     }];
 
+}
+
+- (void)setUITemplateWithResponseData:(NSString *)responseData{
+    NSArray *contentArr = [responseData jsonValueDecoded][@"items"];
+    NSMutableArray *sections = [NSMutableArray array];
+    NSArray *temp = [NSArray yy_modelArrayWithClass:TSHomePageContentModel.class json:contentArr];
+
+    for (TSHomePageContentModel *model in temp) {
+        TSHomePageCellViewModel *viewModel = [self configSection:model];
+        if(viewModel){
+            [sections addObject:viewModel];
+        }
+    }
+    self.dataSource = sections;
 }
 
 - (TSHomePageCellViewModel *)configSection:(TSHomePageContentModel *)model{
@@ -149,11 +165,11 @@
         viewModel = [viewModelClass new];
         if ([viewModel isKindOfClass:TSHomePageCellViewModel.class]) {
             TSHomePageCellTemplateModel *templateModel = [TSHomePageCellTemplateModel new];
-            templateModel.templateName = sectionName;
-            templateModel.headerTemplateName = [NSString stringWithFormat:@"%@Header",sectionName];
+            templateModel.templateName = @"TSHomePageContainer";
+            templateModel.headerTemplateName = @"TSHomePageContainerHeader";
             templateModel.data = model.data;
             viewModel.model = templateModel;
-            _containerViewModel = (TSHomePageContainerViewModel *)viewModel;
+            _containerViewModel = (TSCategoryGroupViewModel *)viewModel;
         }
     }
 
@@ -167,13 +183,20 @@
         @"Nav":@"TSHomePageCategory",
 //        @"RichText":@"TSHomePageReleaseTitle",
         @"ImageAd0":@"TSHomePageRelease",
-        @"GroupType":@"TSHomePageContainer",
+        @"GroupType":@"TSCategoryGroup",
     };
-    
-    
-    
     
 }
 
-
+- (void)netWorkStatusChanged:(NSNotification *)noti{
+    NSInteger state = [noti.object intValue];
+    if (state == 0) {
+        /// 取缓存
+        NSString *content = [TSJsonCacheData readPlistWithKey:@"homePageList"];
+        if (content) {
+            [self setUITemplateWithResponseData:content];
+        }
+    }
+   
+}
 @end

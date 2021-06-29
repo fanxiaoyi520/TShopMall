@@ -52,12 +52,17 @@
     __weak __typeof(self)weakSelf = self;
     self.footerView.cartBlock = ^{
         __strong __typeof(weakSelf)strongSelf = weakSelf;
-        [strongSelf.delegate goodDetailSkuView:strongSelf addShoppingCart:nil buyNum:@"1"];
+        [strongSelf.delegate goodDetailSkuView:strongSelf addShoppingCartNum:strongSelf.headerView.num];
     };
     
     self.footerView.buyBlock = ^{
         __strong __typeof(weakSelf)strongSelf = weakSelf;
-        [strongSelf.delegate goodDetailSkuView:strongSelf buyImmediately:nil buyNum:@"1"];
+        [strongSelf.delegate goodDetailSkuView:strongSelf buyImmediatelyNum:strongSelf.headerView.num];
+    };
+    
+    self.headerView.buyNumChangeBlock = ^(NSString *buyNum) {
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
+        [strongSelf.delegate goodDetailSkuView:strongSelf numberChange:buyNum];
     };
     
 //    [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {

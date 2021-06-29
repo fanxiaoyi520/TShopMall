@@ -11,6 +11,6 @@
 #import "TSMakeOrderInvoiceViewModel.h"
 
 @interface TSMakeOrderCommitOrderDataController : NSObject
-+ (void)commitOrderWithAddress:(TSAddressModel *)address balanceInfo:(TSBalanceModel *)balanceInfo invoice:(TSMakeOrderInvoiceViewModel *)invoice isFromCart:(BOOL)isFromCart  finished:(void(^)(BOOL, NSString *, NSString *))finished OnController:(UIViewController *)controller;
++ (void)commitOrderWithAddress:(TSAddressModel *)address balanceInfo:(TSBalanceModel *)balanceInfo invoice:(TSInvoiceModel *)invoice message:(NSString *)message isFromCart:(BOOL)isFromCart  finished:(void(^)(BOOL, NSString *, NSString *))finished OnController:(UIViewController *)controller;
 @end
 

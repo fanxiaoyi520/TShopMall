@@ -13,7 +13,7 @@
 
 #import "TSWalletHeaderView.h"
 
-@interface TSMineWalletViewController ()<TSWalletHeaderViewDelegate,TSWalletCellViewDelegate,UIViewControllerTransitioningDelegate>
+@interface TSMineWalletViewController ()<TSWalletHeaderViewDelegate,TSWalletCellViewDelegate,UIViewControllerTransitioningDelegate,WithdrawalDelegate>
 
 @property (nonatomic ,strong) UIScrollView *profitScrollView;
 @property (nonatomic ,strong) TSWalletHeaderView *walletHeaderView;
@@ -75,6 +75,8 @@
 
 - (void)withdrawalAction:(UIButton *)sender {
     TSWithdrawalViewController *vc = [TSWithdrawalViewController new];
+    vc.kDataController = self.dataController;
+    vc.kDelegate = self;
     vc.modalPresentationStyle = UIModalPresentationCustom;
     vc.transitioningDelegate = self;
     [self presentViewController:vc animated:YES completion:nil];
@@ -95,6 +97,11 @@
 // MARK: UIViewControllerTransitioningDelegate
 - (UIPresentationController *)presentationControllerForPresentedViewController:(UIViewController *)presented presentingViewController:(UIViewController *)presenting sourceViewController:(UIViewController *)source{
     return [[TSPresentationController alloc] initWithPresentedViewController:presented presentingViewController:presenting];
+}
+
+// MARK:
+- (void)withdrawalApplication:(id _Nullable)sender {
+    [Popover popToastOnWindowWithText:@"申请成功"];
 }
 
 // MARK: get
