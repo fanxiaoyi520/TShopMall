@@ -7,7 +7,7 @@
 
 #import <UIKit/UIKit.h>
 #import "TSHomePageBaseCell.h"
-#import "TSHomePageContainerGroup.h"
+#import "TSCategoryGroup.h"
 #import "YBNestViews.h"
 NS_ASSUME_NONNULL_BEGIN
 

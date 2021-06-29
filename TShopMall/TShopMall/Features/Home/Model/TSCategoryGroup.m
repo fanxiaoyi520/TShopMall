@@ -1,13 +1,13 @@
 //
-//  TSHomePageContainerGroup.m
+//  TSCategoryGroup.m
 //  TShopMall
 //
 //  Created by sway on 2021/6/14.
 //
 
-#import "TSHomePageContainerGroup.h"
+#import "TSCategoryGroup.h"
 
-@implementation TSHomePageContainerGroup
+@implementation TSCategoryGroup
 - (instancetype)init
 {
     self = [super init];

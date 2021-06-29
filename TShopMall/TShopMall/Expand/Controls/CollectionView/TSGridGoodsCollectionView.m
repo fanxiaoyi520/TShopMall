@@ -6,13 +6,12 @@
 //
 
 #import "TSGridGoodsCollectionView.h"
-#import "TSCollectionViewMeanWidthLayout.h"
 #import "TSGridGoodsCollectionViewCell.h"
 #import "TSRecomendGoodsProtocol.h"
+#import "TSOneRowsGoodsCollectionViewCell.h"
 
 @interface TSGridGoodsCollectionView()<UICollectionViewDelegate, UICollectionViewDataSource>
 @property (nonatomic, strong) TSCollectionViewMeanWidthLayout *layout;
-
 @end
 
 @implementation TSGridGoodsCollectionView
@@ -54,11 +53,19 @@
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    TSGridGoodsCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TSGridGoodsCollectionViewCell" forIndexPath:indexPath];
-
-    id<TSRecomendGoodsProtocol> item = self.items[indexPath.row];
-    cell.item = item;
+    TSCollectionViewMeanWidthSectionLayout *layout = _layout.secionLayouts.firstObject;
+    UICollectionViewCell *cell;
+    if (layout.columns == 1) {
+        TSOneRowsGoodsCollectionViewCell *contentCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TSOneRowsGoodsCollectionViewCell" forIndexPath:indexPath];
+        id<TSRecomendGoodsProtocol> item = self.items[indexPath.row];
+        contentCell.item = item;
+        cell = contentCell;
+    }else{
+        TSGridGoodsCollectionViewCell *contentCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TSGridGoodsCollectionViewCell" forIndexPath:indexPath];
+        id<TSRecomendGoodsProtocol> item = self.items[indexPath.row];
+        contentCell.item = item;
+        cell = contentCell;
+    }
     return cell;
     
 }
@@ -87,6 +94,8 @@
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         [_collectionView registerClass:[TSGridGoodsCollectionViewCell class] forCellWithReuseIdentifier:@"TSGridGoodsCollectionViewCell"];
+        [_collectionView registerClass:[TSOneRowsGoodsCollectionViewCell class] forCellWithReuseIdentifier:@"TSOneRowsGoodsCollectionViewCell"];
+
     }
     return _collectionView;
 }

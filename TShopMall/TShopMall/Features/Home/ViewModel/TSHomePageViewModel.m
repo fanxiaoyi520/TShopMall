@@ -54,7 +54,7 @@
 //    releaseViewModel.model = templateModel;
 //
 //
-//    TSHomePageContainerViewModel *containerViewModel = [TSHomePageContainerViewModel new];
+//    TSCategoryGroupViewModel *containerViewModel = [TSCategoryGroupViewModel new];
 //    templateModel = [TSHomePageCellTemplateModel new];
 //    templateModel.templateName = @"TSHomePageContainer";
 //    templateModel.headerTemplateName = @"TSHomePageContainerHeader";
@@ -68,7 +68,7 @@
 //     NSMutableArray *marr = @[].mutableCopy;
 //
 //     for (NSDictionary *dic in temp) {
-//         TSHomePageContainerGroup *model = [TSHomePageContainerGroup new];
+//         TSCategoryGroup *model = [TSCategoryGroup new];
 //         model.name = dic[@"groupName"];
 //         model.groupId = dic[@"goodsgroupUuid"];
 //         [marr addObject:model];
@@ -169,7 +169,7 @@
             templateModel.headerTemplateName = [NSString stringWithFormat:@"%@Header",sectionName];
             templateModel.data = model.data;
             viewModel.model = templateModel;
-            _containerViewModel = (TSHomePageContainerViewModel *)viewModel;
+            _containerViewModel = (TSCategoryGroupViewModel *)viewModel;
         }
     }
 

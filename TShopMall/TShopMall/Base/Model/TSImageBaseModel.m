@@ -13,7 +13,7 @@
         return @"page://quote/category";
     }
     else if([self.linkData.typeValue isEqualToString:@"goodsGroup"]){
-        return [NSString stringWithFormat:@"page://quote/searchResult?goodsGroupUuid=%@",self.linkData.objectValue];
+        return [NSString stringWithFormat:@"page://quote/categoryDetail?uuid=%@&name=%@",self.linkData.objectValue, self.title];
 
     }
     else if([self.linkData.typeValue isEqualToString:@"Goods"]){
