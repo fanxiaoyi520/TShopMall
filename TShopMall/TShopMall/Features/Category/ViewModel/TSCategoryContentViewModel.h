@@ -13,12 +13,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TSCategoryContentViewModel : NSObject
 
-@property(nonatomic, strong) TSCategoryContentCellViewModel *currentCellViewModel;
+//@property(nonatomic, strong) TSCategoryContentCellViewModel *currentCellViewModel;
 
 @property (nonatomic, strong, nonnull) NSArray<TSCategoryContentCellViewModel *> *cellViewModels;
 
 -(void)viewModelWithSubjects:(nonnull NSArray<TSCategoryContentModel *> *)subjects selectedRow:(NSUInteger)selectedRow;
--(void)viewModelExchangeSelectedRow:(NSUInteger)selectedRow;
+//-(void)viewModelExchangeSelectedRow:(NSUInteger)selectedRow;
 
 @end
 

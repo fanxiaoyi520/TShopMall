@@ -19,12 +19,12 @@
     }
     
     self.cellViewModels = cellViewModels;
-    self.currentCellViewModel = cellViewModels[selectedRow];
+//    self.currentCellViewModel = cellViewModels[selectedRow];
       
 }
 
 -(void)viewModelExchangeSelectedRow:(NSUInteger)selectedRow{
-    self.currentCellViewModel = self.cellViewModels[selectedRow];
+//    self.currentCellViewModel = self.cellViewModels[selectedRow];
 }
 
 @end

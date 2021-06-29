@@ -9,6 +9,8 @@
 #import "TSCategoryKindModel.h"
 #import "TSCategoryContentModel.h"
 
+/// 每个分类的 section 总数量
+#define categoryContentCount 3
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -19,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(void)fetchKindsComplete:(void(^)(BOOL isSucess))complete;
 
-
+- (NSIndexPath *)fatchContentIndexPath:(NSInteger)section;
 @end
 
 NS_ASSUME_NONNULL_END
