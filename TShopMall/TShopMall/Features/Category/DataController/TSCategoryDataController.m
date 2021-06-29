@@ -42,6 +42,7 @@
                 NSDictionary *itemDic = contentArr[i];
                 TSCategoryKindModel *kindModel = [[TSCategoryKindModel alloc] init];
                 kindModel.kind = itemDic[@"OneLevelTitle"];
+                kindModel.startSection = i * categoryContentCount;
                 [kinds addObject:kindModel];
                 
                 TSCategoryContentModel *content = [[TSCategoryContentModel alloc] init];
@@ -66,6 +67,8 @@
 
 }
 
-
+- (NSIndexPath *)fatchContentIndexPath:(NSInteger)section {
+    return [NSIndexPath indexPathForItem:section % categoryContentCount inSection:section / categoryContentCount];
+}
 
 @end
