@@ -11,9 +11,13 @@
 #import "TSFirstEnterAgreementView.h"
 #import "TSHybridViewController.h"
 #import "TSAgreementModel.h"
+#import <NTESQuickPass/NTESQuickPass.h>
+#import "TSLoginViewController.h"
 
-@interface TSMainViewController ()<TSFirstEnterAgreementViewDelegate, TSHybridViewControllerDelegate>
+@interface TSMainViewController ()<TSFirstEnterAgreementViewDelegate, TSHybridViewControllerDelegate, NTESQuickLoginManagerDelegate>
 @property (nonatomic, strong) UIViewController *loginVC;
+@property (nonatomic, strong) TSTabBarController *tab;
+
 @end
 
 @implementation TSMainViewController
@@ -21,7 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self hiddenNavigationBar];
-    
+    [NTESQuickLoginManager sharedInstance].delegate = self;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginStateDidChanged:) name:TS_Login_State object:nil];
 
     @weakify(self);
@@ -32,15 +36,18 @@
             @strongify(self)
             [self addChildViewController:vc];
             self.loginVC = vc;
-            [self showAlertInView:vc.view];
+            if ([self.loginVC isKindOfClass:TSLoginViewController.class]) {
+                [self showAlertInView:[UIApplication sharedApplication].keyWindow];
+            }
+            
             [self.view addSubview:vc.view];
         }];
         
     }else{
        
-        TSTabBarController *tab = [TSTabBarController new];
-        [self addChildViewController:tab];
-        [self.view addSubview:tab.view];
+        self.tab = [TSTabBarController new];
+        [self addChildViewController:self.tab];
+        [self.view addSubview:self.tab.view];
     }
     
     [TSUserLoginManager shareInstance].loginBlock = ^{
@@ -48,17 +55,18 @@
         [self.view removeAllSubviews];
         [self.loginVC removeFromParentViewController];
         
-        TSTabBarController *tab = [TSTabBarController new];
-        [self addChildViewController:tab];
-        [self.view addSubview:tab.view];
+        self.tab = [TSTabBarController new];
+        [self addChildViewController:self.tab];
+        [self.view addSubview:self.tab.view];
     };
     
     [TSUserLoginManager shareInstance].logoutBlock = ^{
         @strongify(self)
         [self.view removeAllSubviews];
-        [self removeFromParentViewController];
+        [self.tab removeFromParentViewController];
         [[TSUserLoginManager shareInstance] configLoginController:^(UIViewController * _Nonnull vc) {
             @strongify(self)
+            self.loginVC = vc;
             [self addChildViewController:vc];
             [self.view addSubview:vc.view];
         }];
@@ -96,15 +104,41 @@
     TSLoginState state = ![noti.object intValue];
     if (state == TSLoginStateNone) {
         [self.view removeAllSubviews];
-        [self removeFromParentViewController];
+        [self.tab removeFromParentViewController];
         @weakify(self);
         [[TSUserLoginManager shareInstance] configLoginController:^(UIViewController * _Nonnull vc) {
             @strongify(self)
+            self.loginVC = vc;
             [self addChildViewController:vc];
             [self.view addSubview:vc.view];
         }];
     }
    
 }
+
+- (void)authViewDealloc {
+    
+}
+
+- (void)authViewDidAppear {
+    [self showAlertInView:[UIApplication sharedApplication].keyWindow];
+}
+
+- (void)authViewDidDisappear {
+    
+}
+
+- (void)authViewDidLoad {
+    
+}
+
+- (void)authViewWillAppear {
+    
+}
+
+- (void)authViewWillDisappear {
+    
+}
+
 
 @end
