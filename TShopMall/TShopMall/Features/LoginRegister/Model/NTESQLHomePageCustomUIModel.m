@@ -26,6 +26,7 @@
     model.navBgColor = KWhiteColor;
     model.navText = @"";
     model.navReturnImg = [UIImage imageNamed:@"mall_login_close"];
+    model.shouldHiddenNavReturnImg = YES;
     model.navReturnImgLeftMargin = 21;
     model.faceOrientation = faceOrientation;
     model.navBarHidden = NO;
