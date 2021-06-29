@@ -13,6 +13,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 保存登录用户信息
 UIKIT_EXTERN NSString *const UserInfo_Save_Key;
+///保存第一次启动APP同意协议的响应
+UIKIT_EXTERN NSString *const KFirstEnterAppKey;
+///保存第一次启动APP同意协议的响应
+UIKIT_EXTERN NSString *const KFirstEnterAppValue;
 
 @end
 

@@ -38,6 +38,8 @@ UIKIT_EXTERN NSString *const kLoginByAuthCode;
 UIKIT_EXTERN NSString *const kBindUserByAuthCode;
 /// 协议信息的接口
 UIKIT_EXTERN NSString *const kLoginRegisterAgreementUrl;
+/// 获取用户信息的接口
+UIKIT_EXTERN NSString *const kUserInfoUrl;
 #pragma mark - 首页
 UIKIT_EXTERN NSString *const kHomePageInfoUrl;
 UIKIT_EXTERN NSString *const kSearchKey;//搜索关键词
@@ -93,5 +95,8 @@ UIKIT_EXTERN NSString * const kMinePartnerCenterData;
 
 UIKIT_EXTERN NSString * const kMineWithdrawalRecordListData;//提现记录
 UIKIT_EXTERN NSString * const kMineWalletData;//我的钱包
-UIKIT_EXTERN NSString * const kAboutMeAgreementUrl;
 UIKIT_EXTERN NSString * const kMineQueryProfit;//我的收益
+
+#pragma mark - 设置
+UIKIT_EXTERN NSString *const kAboutMeAgreementUrl;
+UIKIT_EXTERN NSString *const kModifyUserUrl;

@@ -86,6 +86,7 @@ NSString *const kLoginByTokenUrl = @"/auth/thirdParty/loginByToken";
 NSString *const kLoginByAuthCode = @"/auth/thirdParty/loginByAuthCode";
 NSString *const kBindUserByAuthCode = @"/auth/thirdParty/bindUserByAuthCode";
 NSString *const kLoginRegisterAgreementUrl = @"/rest/v2/front/shopStatement/getShopStatementAuthList";
+NSString *const kUserInfoUrl = @"/user/user/info";
 #pragma mark - 首页
 
 NSString *const kHomePageInfoUrl = @"/rest/v2/front/shopContent/getIndexPageInfo";
@@ -136,14 +137,15 @@ NSString * const kCustomerAddress = @"/rest/v2/usercenter/customeraddress/toCust
 NSString * const kAddressTag = @"/v2/usercenter/customerAddressTag/list";
 NSString * const kSmartAddress = @"/rest/v2/usercenter/customeraddress/getSmartAddress";
 
-
 #pragma mark - 我的
 NSString * const kMineMerchantUserInformation = @"/rest/v2/tclcustomer/userInfo";
 NSString * const kMinePartnerCenterData = @"/sysback/v2/salesman/dataCenter";
 NSString * const kMineWithdrawalRecordListData = @"/rest/v2/withdrawal/record/queryAppWithdrawalRecordList";
 NSString * const kMineWalletData = @"/rest/v2/withdrawal/record/queryWallet";
-NSString *const kAboutMeAgreementUrl = @"/rest/v2/front/shopStatement/getShopStatementList";
 NSString *const kMineQueryProfit = @"/rest/v2/withdrawal/record/queryProfit";
 
+#pragma mark - 设置
+NSString *const kAboutMeAgreementUrl = @"/rest/v2/front/shopStatement/getShopStatementList";
+NSString *const kModifyUserUrl = @"/user/mng/user";
 
 

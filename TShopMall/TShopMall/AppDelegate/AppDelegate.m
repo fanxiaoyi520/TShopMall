@@ -33,6 +33,8 @@
     [self initRouteConfig];
     
     [TSServicesManager sharedInstance].bestSellingRecommendService = [TSBestSellingRecommendService new];
+    [TSServicesManager sharedInstance].userInfoService = [TSUserInfoService new];
+    
     
     if (@available(iOS 13.0, *)) {
         

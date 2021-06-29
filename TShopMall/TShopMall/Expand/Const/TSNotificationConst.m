@@ -8,3 +8,5 @@
 #import "TSNotificationConst.h"
 
 NSString *const TS_Login_State = @"TS_LoginUpdateNotification";
+
+NSString *const TSNicknameModifiedNotificationName = @"TSNicknameModifiedNotificationName";
