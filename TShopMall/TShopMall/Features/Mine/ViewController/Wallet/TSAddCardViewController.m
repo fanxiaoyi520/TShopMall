@@ -37,7 +37,7 @@
     self.dataList = @[@"银行卡号",@"银行名称",@"开户银行省市",@"开户银行"];
     //dic容错设置
     self.mutableDic = [NSMutableDictionary dictionary];
-    [self.mutableDic setValue:@"" forKey:@"bankCardNo"];
+    [self.mutableDic setValue:@"6214830137754759" forKey:@"bankCardNo"];
     [self.mutableDic setValue:@"" forKey:@"accountBank"];
     [self.mutableDic setValue:@"" forKey:@"accountBankCode"];
     [self.mutableDic setValue:@"" forKey:@"bankName"];
@@ -46,6 +46,7 @@
     [self.mutableDic setValue:@"" forKey:@"bankAddressProvinceCode"];
     [self.mutableDic setValue:@"" forKey:@"bankAddressCity"];
     [self.mutableDic setValue:@"" forKey:@"bankAddressCityCode"];
+    self.model = [TSAddBankCardModel yy_modelWithDictionary:self.mutableDic];
 }
 
 - (void)fillCustomView {
@@ -160,6 +161,32 @@
 //        [Popover popToastOnWindowWithText:@"银行卡号不能为空"];
 //        return;
 //    }
+//
+//    if (self.model.accountBank || [self.model.accountBank isEqualToString:@""]) {
+//        [Popover popToastOnWindowWithText:@"银行名称不能为空"];
+//        return;
+//    }
+//
+//    if (self.model.bankName || [self.model.bankName isEqualToString:@""]) {
+//        [Popover popToastOnWindowWithText:@"开户银行不能为空"];
+//        return;
+//    }
+//
+//    if (self.model.bankAddressProvince || [self.model.bankAddressProvince isEqualToString:@""]) {
+//        [Popover popToastOnWindowWithText:@"开户银行省市不能为空"];
+//        return;
+//    }
+//
+//    if (self.model.bankAddressCity || [self.model.bankAddressCity isEqualToString:@""]) {
+//        [Popover popToastOnWindowWithText:@"开户银行省市不能为空"];
+//        return;
+//    }
+//
+//    if (self.model.userName || [self.model.userName isEqualToString:@""]) {
+//        [Popover popToastOnWindowWithText:@"用户名不能为空"];
+//        return;
+//    }
+    
     self.dataController.addBankCardModel = self.model;
     @weakify(self);
     [self.dataController fetchCheckBankCardDataComplete:^(BOOL isSucess) {

@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic ,copy) NSString *bankAddressProvinceCode;//开户省编码
 @property (nonatomic ,copy) NSString *bankAddressCity;//开户市
 @property (nonatomic ,copy) NSString *bankAddressCityCode;//开户市编码
+@property (nonatomic ,copy) NSString *userName;//用户名
 @end
 
 NS_ASSUME_NONNULL_END

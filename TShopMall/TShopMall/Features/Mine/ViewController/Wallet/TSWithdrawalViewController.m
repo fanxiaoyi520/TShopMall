@@ -127,18 +127,18 @@
 }
 
 - (void)allAmountBtnAction:(UIButton *)sender {
-    if ([self.kDataController.myIncomeModel.totalRevenue floatValue] < 0 || !self.kDataController.myIncomeModel.totalRevenue) {
-        [Popover popToastOnWindowWithText:@"参数错误"];
-        return;
-    }
-    self.inputTextField.text = [NSString stringWithFormat:@"¥%@",self.kDataController.myIncomeModel.totalRevenue];
-    if (self.inputTextField.text.length > 0) {
-        [self.sureBtn setBackgroundImage:KImageMake(@"btn_large_black_norm1") forState:UIControlStateNormal];
-        self.sureBtn.userInteractionEnabled = YES;
-    } else {
-        [self.sureBtn setBackgroundImage:KImageMake(@"btn_large_black_norm") forState:UIControlStateNormal];
-        self.sureBtn.userInteractionEnabled = NO;
-    }
+    [self.dataController fetchCheckMyBalanceDataComplete:^(BOOL isSucess) {
+        if (isSucess) {
+            self.inputTextField.text = [NSString stringWithFormat:@"¥%.2f",(floorf([self.dataController.amount floatValue]))/100];
+            if (self.inputTextField.text.length > 0) {
+                [self.sureBtn setBackgroundImage:KImageMake(@"btn_large_black_norm1") forState:UIControlStateNormal];
+                self.sureBtn.userInteractionEnabled = YES;
+            } else {
+                [self.sureBtn setBackgroundImage:KImageMake(@"btn_large_black_norm") forState:UIControlStateNormal];
+                self.sureBtn.userInteractionEnabled = NO;
+            }
+        }
+    }];
 }
 
 - (void)sureAction:(UIButton *)sender {

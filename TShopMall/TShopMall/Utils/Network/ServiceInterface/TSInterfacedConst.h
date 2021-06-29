@@ -100,3 +100,5 @@ UIKIT_EXTERN NSString * const kMineQueryAppBankCardAccountList;//查询银行卡
 UIKIT_EXTERN NSString * const kMineAddBankCardAccount;//添加银行卡
 UIKIT_EXTERN NSString * const kMineBankNoCheck;//校验银行卡
 UIKIT_EXTERN NSString * const kMineGetBankInfo;//查询支行
+UIKIT_EXTERN NSString * const kMineDelBankCardAccount;//删除银行卡
+UIKIT_EXTERN NSString * const kMineQueryAmount;//查询我的余额
