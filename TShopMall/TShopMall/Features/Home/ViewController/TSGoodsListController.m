@@ -25,6 +25,10 @@
     [super viewDidLoad];
 }
 
+- (void)operationType:(NSInteger)type sortType:(NSInteger)sortType{}
+- (void)updateCollectionBackgroundColor:(UIColor *)color{
+    self.collectionView.backgroundColor = color;
+}
 
 - (void)setSections:(NSArray<TSSearchSection *> *)sections{
     _sections = sections;
@@ -99,6 +103,5 @@
     
     return self.collectionView;
 }
-
 
 @end
