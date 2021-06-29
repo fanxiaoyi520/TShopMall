@@ -77,6 +77,7 @@ NS_ASSUME_NONNULL_BEGIN
                         parentSkuNo:(NSString *)parentSkuNo
                              buyNum:(NSString *)buyNum
                              region:(NSString *)region
+                isRequireEnterGroup:(BOOL)isRequired
                               group:(dispatch_group_t)group
                            complete:(void(^)(BOOL isSucess))complete;
 
