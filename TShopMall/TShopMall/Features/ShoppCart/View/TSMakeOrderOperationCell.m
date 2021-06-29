@@ -30,6 +30,14 @@
     if ([obj isKindOfClass:[TSMakeOrderInvoiceViewModel class]]) {
         TSMakeOrderInvoiceViewModel *vm = (TSMakeOrderInvoiceViewModel *)obj;
         self.messageView.textField.text = vm.message;
+        
+        if (vm.invoice.formType == 1) {
+            self.billView.textField.text = @"电子普通发票 - 个人";
+        } else if (vm.invoice.formType == 2) {
+            self.billView.textField.text = @"电子普通发票 - 企业";
+        } else {
+            self.billView.textField.text = @"增值税发票";
+        }
     }
 }
 

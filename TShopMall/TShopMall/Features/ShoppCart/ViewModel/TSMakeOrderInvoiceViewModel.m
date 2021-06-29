@@ -8,6 +8,7 @@
 #import "TSMakeOrderInvoiceViewModel.h"
 
 @implementation TSMakeOrderInvoiceViewModel
+
 - (NSString *)message{
     if (_message.length == 0) {
         return @"";

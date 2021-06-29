@@ -47,6 +47,17 @@
     }
 }
 
+- (void)recomendGoodsTappedAction:(UITapGestureRecognizer *)tapGes{
+    UIView *view = tapGes.view;
+    TSRecomendViewModel *vm = nil;
+    if (view == self.leftRecomendView) {
+        vm = self.leftRecomendView.vm;
+    } else {
+        vm = self.rightRecomendView.vm;
+    }
+    [self.delegate recomendGoodsSelected:vm.uuid];
+}
+
 - (void)layoutSubviews{
     [self.leftRecomendView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contentView.mas_left).offset(KRateW(16.0));
@@ -69,6 +80,11 @@
     self.leftRecomendView = [TSRecomendSlimView new];
     [self.contentView addSubview:self.leftRecomendView];
     
+    self.leftRecomendView.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(recomendGoodsTappedAction:)];
+    tapGes.numberOfTapsRequired = 1;
+    [self.leftRecomendView addGestureRecognizer:tapGes];
+    
     return self.leftRecomendView;
 }
 
@@ -78,6 +94,11 @@
     }
     self.rightRecomendView = [TSRecomendSlimView new];
     [self.contentView addSubview:self.rightRecomendView];
+    
+    self.rightRecomendView.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(recomendGoodsTappedAction:)];
+    tapGes.numberOfTapsRequired = 1;
+    [self.rightRecomendView addGestureRecognizer:tapGes];
     
     return self.rightRecomendView;
 }
