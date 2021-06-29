@@ -91,6 +91,7 @@
 
 - (void)paySuccess{
     TSPaySuccessController *con = [TSPaySuccessController new];
+    con.orderId = self.payOrderId;
     [self.navigationController pushViewController:con animated:YES];
 }
 
