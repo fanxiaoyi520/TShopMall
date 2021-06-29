@@ -117,7 +117,7 @@
         return _thPrice;
     }
     self.thPrice = [UILabel new];
-    self.thPrice.font = KRegularFont(8.0);
+    self.thPrice.font = KRegularFont(10.0);
     self.thPrice.textColor = KHexAlphaColor(@"#333333", 0.6);
     [self addSubview:self.thPrice];
     

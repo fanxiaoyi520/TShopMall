@@ -11,13 +11,13 @@
 #import "TSSearchDataController.h"
 #import "TSSearchResultController.h"
 #import "TSSearchKeyViewModel.h"
-#import "TSSearchResultController.h"
+#import "TSTestSearchResultController.h"
 #import "TSRecomendDataController.h"
 
 @interface TSSearchController ()
 @property (nonatomic, strong) TSSearchView *searchView;
 @property (nonatomic, strong) TSSearchDataController *dataCon;
-@property (nonatomic, strong) TSSearchResultController *searchResultCon;
+@property (nonatomic, strong) TSTestSearchResultController *searchResultCon;
 @end
 
 @implementation TSSearchController
@@ -91,11 +91,11 @@
     return self.searchView;
 }
 
-- (TSSearchResultController *)searchResultCon{
+- (TSTestSearchResultController *)searchResultCon{
     if (_searchResultCon) {
         return _searchResultCon;
     }
-    self.searchResultCon = [TSSearchResultController new];
+    self.searchResultCon = [TSTestSearchResultController new];
     self.searchResultCon.view.frame = self.view.frame;
     [self.view addSubview:self.searchResultCon.view];
     [self addChildViewController:self.searchResultCon];

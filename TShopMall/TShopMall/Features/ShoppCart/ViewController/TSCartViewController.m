@@ -14,6 +14,9 @@
 #import "TSAlertView.h"
 #import "TSMakeOrderController.h"
 #import "TSRecomendDataController.h"
+#import "TSHybridViewController.h"
+
+#import "TSAreaSelectedController.h"
 
 @interface TSCartViewController ()<TSCartProtocol>
 @property (nonatomic, strong) UIButton *editBtn;
@@ -133,8 +136,13 @@
 
 //去购物
 - (void)goToShopping{
-    UIViewController *con = [NSClassFromString(@"TSPaySuccessController") new];
-    [self.navigationController pushViewController:con animated:YES];
+//        UIViewController *con = [NSClassFromString(@"TSPaySuccessController") new];
+//        [self.navigationController pushViewController:con animated:YES];
+    
+    NSString *path = [NSString stringWithFormat:@"%@%@?isFromOrder=1&uuid=",kMallH5ApiPrefix,kMallH5InvoiceUrl];
+    TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:path];
+    hybrid.isInvoice = YES;
+    [self.navigationController pushViewController:hybrid animated:YES];
 }
 
 - (void)updateSettleView{

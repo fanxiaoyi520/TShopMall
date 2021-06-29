@@ -7,8 +7,8 @@
 
 #import "TSHomePageContainerViewModel.h"
 #import "TSProductBaseModel.h"
-@interface TSHomePageContainerViewModel()
 
+@interface TSHomePageContainerViewModel()
 @end
 @implementation TSHomePageContainerViewModel
 
@@ -27,14 +27,12 @@
     self.segmentHeaderDatas = marr;
 }
 
-- (void)getPageContainerDataWithStartPageIndex:(NSInteger)startIndex count:(NSInteger)count group:(TSHomePageContainerGroup *)group callBack:(nonnull void (^)(NSArray * _Nonnull, NSError * _Nonnull))listCallBack{
+- (void)getPageContainerDataWithStartPageIndex:(NSInteger)startIndex count:(NSInteger)count group:(TSHomePageContainerGroup *)group success:(void(^_Nullable)(NSArray * list))success failure:(void(^_Nullable)(NSError *_Nonnull error))failure{
     
     NSMutableDictionary *body = [NSMutableDictionary dictionary];
     [body setValue:[NSString stringWithFormat:@"%ld",startIndex] forKey:@"nowPage"];
     [body setValue:[NSString stringWithFormat:@"%ld",count] forKey:@"pageShow"];
     [body setValue:group.groupId forKey:@"cateGroupUuid"];
-//    [body setValue:@"1" forKey:@"sortType"];
-//    [body setValue:@"sortWeight" forKey:@"sortBy"];
 
     SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kProducts
                                                                requestMethod:YTKRequestMethodPOST
@@ -45,29 +43,25 @@
     [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
         
         if (request.responseModel.isSucceed) {
-            NSLog(@"%d",request.responseModel.isSucceed);
             NSDictionary *data = request.responseModel.data;
             TSHomePageContainerGroup *model = [TSHomePageContainerGroup yy_modelWithDictionary:data];
             NSArray *temp = [NSArray yy_modelArrayWithClass:TSProductBaseModel.class json:model.list];
-           
             group.totalNum = model.totalNum;
             NSMutableArray *marr = [NSMutableArray arrayWithArray:group.list];
             [marr addObjectsFromArray:temp];
             group.list = marr;
-            listCallBack(group.list, nil);
+            success(group.list);
         }
         
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-        listCallBack(nil, [NSError new]);
+        failure([NSError new]);
     }];
 }
 
-- (void)loadData:(TSHomePageContainerGroup *)group callBack:(nonnull void (^)(NSArray * _Nonnull, NSError * _Nonnull))listCallBack{
+- (void)loadData:(TSHomePageContainerGroup *)group success:(void (^ _Nullable)(NSArray * _Nonnull))success failure:(void (^ _Nullable)(NSError * _Nonnull))failure{
     
     NSInteger count = group.list.count?(group.totalNum/group.list.count + 1):1;
-    [self getPageContainerDataWithStartPageIndex:count count:10 group:group callBack:listCallBack];
+    [self getPageContainerDataWithStartPageIndex:count count:10 group:group success:success failure:failure];
 }
-
-
 
 @end

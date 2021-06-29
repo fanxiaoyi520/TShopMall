@@ -13,7 +13,10 @@
 @end
 
 @implementation TSBaseViewController
-
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -22,9 +25,13 @@
     [self setupNavigationBar];
     [self fillCustomView];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(netWorkStatusChanged:) name:TS_NetWork_State object:nil];
+    
 }
 
-
+- (void)netWorkStatusChanged:(NSNotification *)noti{
+    
+}
 
 -(UIStatusBarStyle)preferredStatusBarStyle{
     return UIStatusBarStyleLightContent;

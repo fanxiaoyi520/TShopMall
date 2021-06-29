@@ -27,6 +27,9 @@
     [[TSWKAppManager currentNavigationController] pushViewController:controller animated:YES];
 }
 
+- (void)checkInvoice:(NSDictionary *)invoice{
+    NSLog(@"%@", invoice);
+}
 
 
 
