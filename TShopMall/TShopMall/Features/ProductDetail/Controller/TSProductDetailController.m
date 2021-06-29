@@ -359,8 +359,16 @@
 
 -(void)goodDetailSkuView:(TSGoodDetailSkuView *)skuView buyImmediatelyNum:(NSString *)buyNum{
     [self.skuPpopups dismissAnimated:YES completion:nil];
-    [self.dataController fetchProductDetailCustomBuy:@""
-                                            complete:^(BOOL isSucess) {
+    __weak __typeof(self)weakSelf = self;
+    [self.dataController fetchProductDetailCustomBuyProductUuid:self.dataController.productUuid
+                                                         buyNum:self.dataController.buyNum
+                                                         attrId:self.dataController.attrId
+                                                       complete:^(BOOL isSucess) {
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
+        if (isSucess) {
+            TSMakeOrderController *order = [[TSMakeOrderController alloc] init];
+            [strongSelf.navigationController pushViewController:order animated:YES];
+        }
             
     }];
 }
@@ -448,13 +456,16 @@
 
 -(void)productDetailBottomView:(TSProductDetailBottomView *_Nullable)bottomView buyClick:(UIButton *_Nullable)sender{
     __weak __typeof(self)weakSelf = self;
-    [self.dataController fetchProductDetailCustomBuy:@""
-                                            complete:^(BOOL isSucess) {
+    [self.dataController fetchProductDetailCustomBuyProductUuid:self.dataController.productUuid
+                                                         buyNum:self.dataController.buyNum
+                                                         attrId:self.dataController.attrId
+                                                       complete:^(BOOL isSucess) {
         __strong __typeof(weakSelf)strongSelf = weakSelf;
         if (isSucess) {
             TSMakeOrderController *order = [[TSMakeOrderController alloc] init];
             [strongSelf.navigationController pushViewController:order animated:YES];
         }
+            
     }];
 }
 -(void)productDetailBottomView:(TSProductDetailBottomView *_Nullable)bottomView sellClick:(UIButton *_Nullable)sender{
