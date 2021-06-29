@@ -11,6 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TSSelectorViewController : UIViewController
 
+@property (nonatomic ,copy) void (^selectBankBlock)(id _Nullable info);
 @end
 
 NS_ASSUME_NONNULL_END

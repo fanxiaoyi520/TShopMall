@@ -8,11 +8,15 @@
 #import "TSWithdrawalViewController.h"
 #import "UIView+Plugin.h"
 
-@interface TSWithdrawalViewController ()
+@interface TSWithdrawalViewController ()<UITextFieldDelegate>
 
 @property (nonatomic ,strong) UIView *bgView;
 @property (nonatomic ,strong) UIButton *closeBtn;
 @property (nonatomic ,strong) UIButton *sureBtn;
+@property (nonatomic ,strong) UITextField *inputTextField;
+@property (nonatomic ,strong) TSMineDataController *dataController;
+@property (nonatomic, assign) BOOL isHaveDian;
+@property (nonatomic, assign) BOOL isFirstZero;
 @end
 
 @implementation TSWithdrawalViewController
@@ -72,6 +76,9 @@
     [textField jaf_customFilletRectCorner:UIRectCornerTopLeft | UIRectCornerBottomLeft cornerRadii:CGSizeMake(4, 4)];
     [textField addTarget:self action:@selector(textFieldAction:) forControlEvents:UIControlEventEditingChanged];
     textField.keyboardType = UIKeyboardTypeNumberPad;
+    textField.textAlignment = NSTextAlignmentCenter;
+    textField.delegate = self;
+    self.inputTextField = textField;
     
     UIButton *allAmountBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.bgView addSubview:allAmountBtn];
@@ -120,21 +127,119 @@
 }
 
 - (void)allAmountBtnAction:(UIButton *)sender {
-    NSLog(@"全部金额");
+    if ([self.kDataController.myIncomeModel.totalRevenue floatValue] < 0 || !self.kDataController.myIncomeModel.totalRevenue) {
+        [Popover popToastOnWindowWithText:@"参数错误"];
+        return;
+    }
+    self.inputTextField.text = [NSString stringWithFormat:@"¥%@",self.kDataController.myIncomeModel.totalRevenue];
+    if (self.inputTextField.text.length > 0) {
+        [self.sureBtn setBackgroundImage:KImageMake(@"btn_large_black_norm1") forState:UIControlStateNormal];
+        self.sureBtn.userInteractionEnabled = YES;
+    } else {
+        [self.sureBtn setBackgroundImage:KImageMake(@"btn_large_black_norm") forState:UIControlStateNormal];
+        self.sureBtn.userInteractionEnabled = NO;
+    }
 }
 
 - (void)sureAction:(UIButton *)sender {
-    NSLog(@"确定");
+    NSString *amountStr = [self.inputTextField.text stringByReplacingOccurrencesOfString:@"" withString:@"¥"];
+    NSString *specAmount = [NSString stringWithFormat:@"%ld",([amountStr integerValue] * [self.kDataController.myIncomeModel.withdrawalRate integerValue])];
+    self.dataController.bankCardAccountId = self.kDataController.myIncomeModel.bankCardId;
+    self.dataController.withdrawalAmount = specAmount;
+    @weakify(self);
+    [self.dataController fetchWithdrawalApplicationDataComplete:^(BOOL isSucess) {
+        @strongify(self);
+        if (isSucess) {
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }
+    }];
 }
 
 - (void)textFieldAction:(UITextField *)textField {
-    if (textField.text.length > 2) {
-        self.sureBtn.backgroundColor = KHexColor(@"#FF4D49");
+    if (textField.text.length > 0) {
+        [self.sureBtn setBackgroundImage:KImageMake(@"btn_large_black_norm1") forState:UIControlStateNormal];
         self.sureBtn.userInteractionEnabled = YES;
+        if (![textField.text containsString:@"¥"])
+            self.inputTextField.text = [NSString stringWithFormat:@"¥%@",textField.text];
+        self.inputTextField.text = textField.text;
     } else {
-        self.sureBtn.backgroundColor = KHexColor(@"#DDDDDD");
+        [self.sureBtn setBackgroundImage:KImageMake(@"btn_large_black_norm") forState:UIControlStateNormal];
         self.sureBtn.userInteractionEnabled = NO;
     }
+}
+
+// MARK: UITextFieldDelegate
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    if (textField == self.inputTextField) {
+        if ([textField.text rangeOfString:@"."].location==NSNotFound) {
+            _isHaveDian = NO;
+        }
+        if ([textField.text rangeOfString:@"0"].location==NSNotFound) {
+            _isFirstZero = NO;
+        }
+        if ([string length]>0)
+        {
+            unichar single=[string characterAtIndex:0];//当前输入的字符
+            if ((single >='0' && single<='9') || single=='.') {//数据格式正确
+                if([textField.text length]==0){
+                    if(single == '.'){//首字母不能为小数点
+                        return NO;
+                    }
+                    if (single == '0') {
+                        _isFirstZero = YES;
+                        return YES;
+                    }
+                }
+                
+                if (single=='.'){
+                    if(!_isHaveDian)//text中还没有小数点
+                    {
+                        _isHaveDian=YES;
+                        return YES;
+                    }else{
+                        return NO;
+                    }
+                }else if(single=='0'){
+                    if ((_isFirstZero&&_isHaveDian)||(!_isFirstZero&&_isHaveDian)) {//首位有0有.（0.01）或首位没0有.（10200.00）可输入两位数的0
+                        if([textField.text isEqualToString:@"0.0"]){
+                            return NO;
+                        }
+                        NSRange ran=[textField.text rangeOfString:@"."];
+                        int tt=(int)(range.location-ran.location);
+                        if (tt <= 2){
+                            return YES;
+                        }else{
+                            return NO;
+                        }
+                    }else if (_isFirstZero&&!_isHaveDian){
+                        //首位有0没.不能再输入0
+                        return NO;
+                    }else{
+                        return YES;
+                    }
+                }else{
+                    if (_isHaveDian){//存在小数点，保留两位小数
+                        NSRange ran=[textField.text rangeOfString:@"."];
+                        int tt= (int)(range.location-ran.location);
+                        if (tt <= 2){
+                            return YES;
+                        }else{
+                            return NO;
+                        }
+                    }else if(_isFirstZero&&!_isHaveDian){//首位有0没点
+                        return NO;
+                    }else{
+                        return YES;
+                    }
+                }
+            }else{//输入的数据格式不正确
+                return NO;
+            }
+        }else{
+            return YES;
+        }
+    }
+    return YES;
 }
 
 // MAKR: get
@@ -155,4 +260,12 @@
     }
     return _closeBtn;
 }
+
+- (TSMineDataController *)dataController {
+    if (!_dataController) {
+        _dataController = [[TSMineDataController alloc] init];
+    }
+    return _dataController;
+}
+
 @end

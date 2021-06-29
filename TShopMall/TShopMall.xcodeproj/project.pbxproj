@@ -222,6 +222,10 @@
 		CE5674B726833A5000252F5D /* TSWalletHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5674B626833A5000252F5D /* TSWalletHeaderView.m */; };
 		CE5674BB2683570300252F5D /* TSWalletModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5674BA2683570300252F5D /* TSWalletModel.m */; };
 		CE5C706D2689DA4100D455DB /* TSMyIncomeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5C706C2689DA4100D455DB /* TSMyIncomeModel.m */; };
+		CE663E57268AE9570092DDCA /* TSBankCardModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE663E56268AE9570092DDCA /* TSBankCardModel.m */; };
+		CE663E5A268AF3F20092DDCA /* TSAddBankCardModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE663E59268AF3F20092DDCA /* TSAddBankCardModel.m */; };
+		CE663E5D268AFB6B0092DDCA /* UITextField+ExtendRange.m in Sources */ = {isa = PBXBuildFile; fileRef = CE663E5C268AFB6B0092DDCA /* UITextField+ExtendRange.m */; };
+		CE663E60268AFD620092DDCA /* TSAddBankCardBackModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE663E5F268AFD620092DDCA /* TSAddBankCardBackModel.m */; };
 		CE66DAEF26841F2600E8D433 /* TSWithdrawalRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE66DAEE26841F2600E8D433 /* TSWithdrawalRecordViewController.m */; };
 		CE66DAF22684222F00E8D433 /* TSWithdrawalRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE66DAF12684222F00E8D433 /* TSWithdrawalRecordCell.m */; };
 		CE66DAF52684267B00E8D433 /* TSWithdrawalRecordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE66DAF42684267B00E8D433 /* TSWithdrawalRecordModel.m */; };
@@ -941,6 +945,14 @@
 		CE5674BA2683570300252F5D /* TSWalletModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSWalletModel.m; sourceTree = "<group>"; };
 		CE5C706B2689DA4100D455DB /* TSMyIncomeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSMyIncomeModel.h; sourceTree = "<group>"; };
 		CE5C706C2689DA4100D455DB /* TSMyIncomeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSMyIncomeModel.m; sourceTree = "<group>"; };
+		CE663E55268AE9570092DDCA /* TSBankCardModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSBankCardModel.h; sourceTree = "<group>"; };
+		CE663E56268AE9570092DDCA /* TSBankCardModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSBankCardModel.m; sourceTree = "<group>"; };
+		CE663E58268AF3F20092DDCA /* TSAddBankCardModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSAddBankCardModel.h; sourceTree = "<group>"; };
+		CE663E59268AF3F20092DDCA /* TSAddBankCardModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSAddBankCardModel.m; sourceTree = "<group>"; };
+		CE663E5B268AFB6B0092DDCA /* UITextField+ExtendRange.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITextField+ExtendRange.h"; sourceTree = "<group>"; };
+		CE663E5C268AFB6B0092DDCA /* UITextField+ExtendRange.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITextField+ExtendRange.m"; sourceTree = "<group>"; };
+		CE663E5E268AFD620092DDCA /* TSAddBankCardBackModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSAddBankCardBackModel.h; sourceTree = "<group>"; };
+		CE663E5F268AFD620092DDCA /* TSAddBankCardBackModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSAddBankCardBackModel.m; sourceTree = "<group>"; };
 		CE66DAED26841F2600E8D433 /* TSWithdrawalRecordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSWithdrawalRecordViewController.h; sourceTree = "<group>"; };
 		CE66DAEE26841F2600E8D433 /* TSWithdrawalRecordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSWithdrawalRecordViewController.m; sourceTree = "<group>"; };
 		CE66DAF02684222F00E8D433 /* TSWithdrawalRecordCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSWithdrawalRecordCell.h; sourceTree = "<group>"; };
@@ -2192,6 +2204,12 @@
 				CE66DAF42684267B00E8D433 /* TSWithdrawalRecordModel.m */,
 				CE5C706B2689DA4100D455DB /* TSMyIncomeModel.h */,
 				CE5C706C2689DA4100D455DB /* TSMyIncomeModel.m */,
+				CE663E55268AE9570092DDCA /* TSBankCardModel.h */,
+				CE663E56268AE9570092DDCA /* TSBankCardModel.m */,
+				CE663E58268AF3F20092DDCA /* TSAddBankCardModel.h */,
+				CE663E59268AF3F20092DDCA /* TSAddBankCardModel.m */,
+				CE663E5E268AFD620092DDCA /* TSAddBankCardBackModel.h */,
+				CE663E5F268AFD620092DDCA /* TSAddBankCardBackModel.m */,
 			);
 			path = Wallet;
 			sourceTree = "<group>";
@@ -2533,6 +2551,8 @@
 				F530CE8E26846D3E009DC29A /* UIView+Frame.m */,
 				DFB3FFCA26847AF200FC8FF9 /* Popover+TSDefaultConfig.h */,
 				DFB3FFCB26847AF200FC8FF9 /* Popover+TSDefaultConfig.m */,
+				CE663E5B268AFB6B0092DDCA /* UITextField+ExtendRange.h */,
+				CE663E5C268AFB6B0092DDCA /* UITextField+ExtendRange.m */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -4009,6 +4029,7 @@
 				DC9911C2267C475000EF9B26 /* UIScrollView+YBNestViews.m in Sources */,
 				C25A7F8526845FB20006C6AF /* TSBalanceModel.m in Sources */,
 				DFB3FFE22685B76200FC8FF9 /* TSLoginByTokenRequest.m in Sources */,
+				CE663E5A268AF3F20092DDCA /* TSAddBankCardModel.m in Sources */,
 				DC9911C6267C475000EF9B26 /* YBNestCollectionView.m in Sources */,
 				F56D4B3A266DFB8900C1AD9E /* FMLayoutBaseSection.m in Sources */,
 				C2EF88BB2670997100E7374A /* TSCartHeaderFooterView.m in Sources */,
@@ -4164,6 +4185,7 @@
 				04DAFAFE267B37450098275A /* TSOrderManageViewController.m in Sources */,
 				C3B4CCDA2674930C0001EE75 /* TSTools.m in Sources */,
 				F55D2CCB26784ACD006BACCF /* TSMinePartnerCenterCell.m in Sources */,
+				CE663E57268AE9570092DDCA /* TSBankCardModel.m in Sources */,
 				F530CD2B2680B912009DC29A /* TSGoodDetailReusableHeaderView.m in Sources */,
 				C21A4B87267B3C2400766F72 /* TSAddressEditView.m in Sources */,
 				C3A6C470267A1BEA00FC71D6 /* TSBindMobileController.m in Sources */,
@@ -4206,6 +4228,7 @@
 				F54973B42668BBCE00181E3F /* TSRankViewController.m in Sources */,
 				C2EF88B52670997100E7374A /* TSCartGoodsSection.m in Sources */,
 				C3A6C4B8267A1C5700FC71D6 /* TSChangePictureCell.m in Sources */,
+				CE663E60268AFD620092DDCA /* TSAddBankCardBackModel.m in Sources */,
 				F56D4B4B266DFB8900C1AD9E /* FMLayoutCrossTransformSection.m in Sources */,
 				C3A6C4DF267A1CAF00FC71D6 /* TSSecurityCenterDataController.m in Sources */,
 				044AAEAF26871A89000DB09F /* TSAgreementModel.m in Sources */,
@@ -4380,6 +4403,7 @@
 				C3A6C4C1267A1C5700FC71D6 /* TSCommitCell.m in Sources */,
 				C3A6C47A267A1BEA00FC71D6 /* TSAccountCancelViewController.m in Sources */,
 				DC45FEC026783A6E00CE762E /* TSHomePageContainerCollectionViewCell.m in Sources */,
+				CE663E5D268AFB6B0092DDCA /* UITextField+ExtendRange.m in Sources */,
 				C35F186D267D954700F65AF9 /* TSAccountCancelNextViewController.m in Sources */,
 				C2F0573B2685B6D2003D1B2A /* TSRecomendWidthView.m in Sources */,
 				CE5674B32683333400252F5D /* TSMineWalletViewController.m in Sources */,

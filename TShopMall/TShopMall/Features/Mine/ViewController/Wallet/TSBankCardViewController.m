@@ -9,6 +9,7 @@
 #import "TSBankCardCell.h"
 #import "TSUnbundlingCardViewController.h"
 #import "TSAddCardViewController.h"
+#import "TSMineDataController.h"
 
 @interface TSBankCardViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,TSBankCardFooterDelegate> {
     ///开始滑动时的 Y 值
@@ -19,6 +20,8 @@
     BOOL _firstRun;
     NSArray * _bankNameArray;
 }
+@property (nonatomic ,strong) TSMineDataController *dataController;
+@property (nonatomic ,strong) UICollectionView *collectionView;
 @end
 
 @implementation TSBankCardViewController
@@ -31,6 +34,13 @@
     // Do any additional setup after loading the view.
     
     self.gk_navTitle = @"银行卡";
+    @weakify(self);
+    [self.dataController fetchQueryBankCardListDataComplete:^(BOOL isSucess) {
+        @strongify(self);
+        if (isSucess) {
+            [self.collectionView reloadData];
+        }
+    }];
 }
 
 - (void)initData {
@@ -46,7 +56,8 @@
     
     UICollectionViewFlowLayout *flatout = [[UICollectionViewFlowLayout alloc] init];
     CGFloat width = kScreenWidth-32;
-    if (_bankNameArray.count < 3) {
+//    if (_bankNameArray.count < 3) {
+    if (self.dataController.bankCardArray.count < 3) {
         flatout.itemSize = CGSizeMake(width, 120);
         flatout.minimumLineSpacing = 11;
     } else {
@@ -62,6 +73,7 @@
     collectionView.alwaysBounceVertical = YES;
     collectionView.backgroundColor=KWhiteColor;
     [self.view addSubview:collectionView];
+    self.collectionView = collectionView;
     [collectionView registerClass:[TSBankCardCell class] forCellWithReuseIdentifier:@"cellIdentifier"];
     [collectionView registerClass:[TSBankCardFooter class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"FooterView"];
     [collectionView registerClass:[TSBankCardHeader class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView"];
@@ -69,13 +81,14 @@
 
 // MARK: UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return _bankNameArray.count;
+    //return _bankNameArray.count;
+    return self.dataController.bankCardArray.count;
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     TSBankCardCell * cell =[collectionView dequeueReusableCellWithReuseIdentifier:@"cellIdentifier" forIndexPath:indexPath];
-    [cell setModel:nil];
-    cell.bankName=_bankNameArray[indexPath.row];
-    cell.account=@"****  ****  ****  8888";
+    [cell setModel:self.dataController.bankCardArray[indexPath.row]];
+//    cell.bankName=_bankNameArray[indexPath.row];
+//    cell.account=@"****  ****  ****  8888";
     return cell;
 }
 
@@ -85,7 +98,8 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
-    if (!_bankNameArray || _bankNameArray.count == 0)
+    //if (!_bankNameArray || _bankNameArray.count == 0)
+    if (!self.dataController.bankCardArray || self.dataController.bankCardArray.count == 0)
         return CGSizeMake(kScreenWidth, 314);
     return CGSizeMake(0, 0);
 }
@@ -157,4 +171,11 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+// MARK: get
+- (TSMineDataController *)dataController {
+    if (!_dataController) {
+        _dataController = [[TSMineDataController alloc] init];
+    }
+    return _dataController;
+}
 @end
