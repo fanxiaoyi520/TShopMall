@@ -53,6 +53,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy) NSString *imageUrl;
 @property(nonatomic, copy) NSString *stock;
 @property(nonatomic, copy) NSString *staffPrice;
+@property(nonatomic, copy) NSString *earnMost;
 
 @end
 

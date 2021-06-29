@@ -7,17 +7,21 @@
 
 #import "TSRecommendCell.h"
 #import "TSCategorySectionModel.h"
+#import "TSRecommendMaxPriceView.h"
 
 @interface TSRecommendCell()
 
 @property(nonatomic, strong) UIImageView *imgView;
 @property(nonatomic, strong) UILabel *contentLabel;
+
 @property(nonatomic, strong) UILabel *signLabel;
 @property(nonatomic, strong) UILabel *retailPriceLabel;
-@property(nonatomic, strong) UIImageView *commissionImgView;
-@property(nonatomic, strong) UILabel *commissionLabel;
+
 @property(nonatomic, strong) UILabel *goodsPriceLabel;
 @property(nonatomic, strong) UIView *seperateView;
+
+//最高价
+@property (nonatomic, strong) TSRecommendMaxPriceView * maxPriceView;
 
 @end
 
@@ -32,6 +36,7 @@
     [self.contentView addSubview:self.retailPriceLabel];
     [self.contentView addSubview:self.goodsPriceLabel];
     [self.contentView addSubview:self.seperateView];
+    [self.contentView addSubview:self.maxPriceView];
     
     
     [self.imgView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -69,7 +74,14 @@
     
     [self.retailPriceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.signLabel.mas_right).offset(2);
+        make.right.equalTo(self.maxPriceView.mas_left);
         make.centerY.equalTo(self.signLabel);
+    }];
+    
+    [self.maxPriceView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.offset(-23);
+        make.centerY.equalTo(self.signLabel);
+        make.size.sizeOffset(CGSizeMake(KRateW(69), KRateH(18)));
     }];
 }
 
@@ -136,6 +148,13 @@
     return _seperateView;
 }
 
+- (TSRecommendMaxPriceView *)maxPriceView {
+    if (!_maxPriceView) {
+        _maxPriceView = [[TSRecommendMaxPriceView alloc] init];
+    }
+    return _maxPriceView;
+}
+
 -(void)setDelegate:(id<UniversalCollectionViewCellDataDelegate>)delegate{
     TSCategorySectionRecommendItemModel *item = [delegate universalCollectionViewCellModel:self.indexPath];
     [self.imgView sd_setImageWithURL:[NSURL URLWithString:item.imageUrl] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
@@ -144,6 +163,7 @@
     self.contentLabel.text = item.productName;
     self.retailPriceLabel.text = [NSString stringWithFormat:@"%@",item.price];
     self.goodsPriceLabel.text = [NSString stringWithFormat:@"提货价¥%@",item.staffPrice];
+    self.maxPriceView.maxPrice = item.earnMost;
 }
 
 @end
