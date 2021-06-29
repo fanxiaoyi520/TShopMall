@@ -13,6 +13,8 @@
 
 @property(nonatomic, copy) NSString *num;
 
+@property(nonatomic, copy) void(^buyNumChangeBlock) (NSString *buyNum);
+
 @property(nonatomic, strong) TSGoodDetailItemPurchaseModel *purchaseModel;
 
 @end

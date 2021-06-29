@@ -184,7 +184,11 @@
         TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:path];
         hybrid.isInvoice = YES;
         [self.navigationController pushViewController:hybrid animated:YES];
-    } else if (indexPath.section == 4 && indexPath.row == 4) {
+    } else if (indexPath.section == 4 && indexPath.row == 2) {
+        UIViewController *con = [NSClassFromString(@"TSShippingAddressController") new];
+        [self.navigationController pushViewController:con animated:YES];
+    }
+    else if (indexPath.section == 4 && indexPath.row == 4) {
         TSScoreViewController *vc = [TSScoreViewController new];
         [self.navigationController pushViewController:vc animated:YES];
     } else if (indexPath.section == 4 && indexPath.row == 3) {

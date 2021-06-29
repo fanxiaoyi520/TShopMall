@@ -69,12 +69,21 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy) NSString *regionUuid;
 /// 市id
 @property(nonatomic, copy) NSString *areaUuid;
-
+/// 运费
+@property(nonatomic, copy) NSString *freight;
+/// 图片url
 @property(nonatomic, copy) NSString *iconUrl;
+/// 价格
 @property(nonatomic, copy) NSString *price;
+/// 是否可购买
 @property(nonatomic, assign) BOOL canBuy;
+/// 是否有产品
 @property(nonatomic, assign) BOOL hasProduct;
+/// 是否限购
+@property(nonatomic, assign) BOOL hasLimit;
+/// 总数量
 @property(nonatomic, assign) NSUInteger totalNum;
+/// 限购
 @property(nonatomic, assign) NSUInteger limitBuyNum;
 
 @end

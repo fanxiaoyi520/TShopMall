@@ -41,6 +41,10 @@
 @property (nonatomic, copy) NSString *currentShowName;
 @property (nonatomic, copy) NSString *currentUUid;
 @property (nonatomic, copy) NSString *belongUuid;
+
+
+
++ (NSArray<TSAreaModel *> *)hotCities;
 @end
 
 /*

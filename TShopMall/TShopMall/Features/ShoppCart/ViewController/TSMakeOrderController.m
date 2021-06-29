@@ -12,6 +12,7 @@
 #import "TSShippingAddressController.h"
 #import "TSMakeOrderCommitOrderDataController.h"
 #import "TSPayController.h"
+#import "TSHybridViewController.h"
 
 @interface TSMakeOrderController ()
 @property (nonatomic, strong) TSMakeOrderView *makeOrderView;
@@ -65,6 +66,10 @@
 
 //选择发票
 - (void)operationForChangeBill{
+    NSString *path = [NSString stringWithFormat:@"%@%@?isFromOrder=1",kMallH5ApiPrefix,kMallH5InvoiceUrl];
+    TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:path];
+    hybrid.isInvoice = YES;
+    [self.navigationController pushViewController:hybrid animated:YES];
 }
 
 - (void)operationForMessageEditEnd:(NSString *)message{
