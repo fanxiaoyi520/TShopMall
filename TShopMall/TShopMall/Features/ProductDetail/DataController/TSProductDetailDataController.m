@@ -231,6 +231,37 @@
                                     group:(dispatch_group_t)group
                                  complete:(void(^)(BOOL isSucess))complete{
     
+    if (isRequired) {
+        dispatch_group_enter(group);
+    }
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setValue:skuNo forKey:@"skuNo"];
+    [params setValue:buyNum forKey:@"buyNum"];
+    [params setValue:provinceUuid forKey:@"provinceUuid"];
+    [params setValue:cityUuid forKey:@"cityUuid"];
+    [params setValue:regionUuid forKey:@"regionUuid"];
+    [params setValue:streetUuid forKey:@"streetUuid"];
+    
+    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kGoodDetailCarriageCostUrl
+                                                               requestMethod:YTKRequestMethodGET
+                                                       requestSerializerType:YTKRequestSerializerTypeJSON
+                                                      responseSerializerType:YTKResponseSerializerTypeJSON
+                                                               requestHeader:@{}
+                                                                 requestBody:params
+                                                              needErrorToast:NO];
+    
+    [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
+        if (isRequired) {
+            dispatch_group_leave(group);
+        }
+            
+        } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+            if (isRequired) {
+                dispatch_group_leave(group);
+            }
+    }];
+    
 }
 
 #pragma mark - 商品库存
@@ -239,8 +270,9 @@
                         parentSkuNo:(NSString *)parentSkuNo
                              buyNum:(NSString *)buyNum
                              region:(NSString *)region
+                isRequireEnterGroup:(BOOL)isRequired
                               group:(dispatch_group_t)group
-                           complete:(void(^)(BOOL isSucess))complete{
+                           complete:(void(^)(BOOL isSucess))complete;{
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setValue:skuNo forKey:@"skuNo"];
@@ -258,6 +290,10 @@
                                                               needErrorToast:NO];
     request.animatingView = self.context.view;
     [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+        
+        if (isRequired) {
+            dispatch_group_leave(group);
+        }
         
         if (request.responseModel.isSucceed) {
 
@@ -279,7 +315,9 @@
         }
         
         } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-            
+            if (isRequired) {
+                dispatch_group_leave(group);
+            }
     }];
     
 }
