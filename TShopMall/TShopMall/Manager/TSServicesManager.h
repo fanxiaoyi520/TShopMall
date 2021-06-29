@@ -7,6 +7,8 @@
 
 #import <Foundation/Foundation.h>
 #import "TSRecomendGoodsProtocol.h"
+#import "AFNetworkReachabilityManager.h"
+
 NS_ASSUME_NONNULL_BEGIN
 @protocol TSUriHandler <NSObject>
 

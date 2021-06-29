@@ -31,6 +31,7 @@
     [self setupRootController];
     [self initWechatConfig];
     [self initRouteConfig];
+    [self initNetworkReachability];
     
     [TSServicesManager sharedInstance].bestSellingRecommendService = [TSBestSellingRecommendService new];
     

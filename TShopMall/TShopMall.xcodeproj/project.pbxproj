@@ -290,6 +290,7 @@
 		DFB3FFF326899EF300FC8FF9 /* TSTableViewBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB3FFF226899EF300FC8FF9 /* TSTableViewBaseCell.m */; };
 		DFB3FFF62689A7AE00FC8FF9 /* TSRankRecommendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB3FFF52689A7AE00FC8FF9 /* TSRankRecommendCell.m */; };
 		DFB3FFF92689C1AA00FC8FF9 /* TSMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB3FFF82689C1AA00FC8FF9 /* TSMainViewController.m */; };
+		DFB3FFFD268AB6EF00FC8FF9 /* TSJsonCacheData.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB3FFFC268AB6EF00FC8FF9 /* TSJsonCacheData.m */; };
 		E2BE996F8804E0C3E7D5AE61 /* libPods-TShopMall-TShopMallUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD1ABBE857D307088E9BF2DC /* libPods-TShopMall-TShopMallUITests.a */; };
 		F530C6D526802E5D009DC29A /* TSSMSCodeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F530C6CC26802E5D009DC29A /* TSSMSCodeRequest.m */; };
 		F530C6D626802E5D009DC29A /* TSQuickLoginRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F530C6CF26802E5D009DC29A /* TSQuickLoginRequest.m */; };
@@ -1080,6 +1081,8 @@
 		DFB3FFF52689A7AE00FC8FF9 /* TSRankRecommendCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSRankRecommendCell.m; sourceTree = "<group>"; };
 		DFB3FFF72689C1AA00FC8FF9 /* TSMainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSMainViewController.h; sourceTree = "<group>"; };
 		DFB3FFF82689C1AA00FC8FF9 /* TSMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSMainViewController.m; sourceTree = "<group>"; };
+		DFB3FFFB268AB6EF00FC8FF9 /* TSJsonCacheData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSJsonCacheData.h; sourceTree = "<group>"; };
+		DFB3FFFC268AB6EF00FC8FF9 /* TSJsonCacheData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSJsonCacheData.m; sourceTree = "<group>"; };
 		ECCE8A564DF47B445E7905B1 /* Pods-TShopMall-TShopMallUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TShopMall-TShopMallUITests.release.xcconfig"; path = "Target Support Files/Pods-TShopMall-TShopMallUITests/Pods-TShopMall-TShopMallUITests.release.xcconfig"; sourceTree = "<group>"; };
 		F530C6CC26802E5D009DC29A /* TSSMSCodeRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSSMSCodeRequest.m; sourceTree = "<group>"; };
 		F530C6CD26802E5D009DC29A /* TSQuickLoginRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSQuickLoginRequest.h; sourceTree = "<group>"; };
@@ -2323,6 +2326,15 @@
 			path = TSTableViewBaseCell;
 			sourceTree = "<group>";
 		};
+		DFB3FFFA268AB6D400FC8FF9 /* JsonCacheData */ = {
+			isa = PBXGroup;
+			children = (
+				DFB3FFFB268AB6EF00FC8FF9 /* TSJsonCacheData.h */,
+				DFB3FFFC268AB6EF00FC8FF9 /* TSJsonCacheData.m */,
+			);
+			path = JsonCacheData;
+			sourceTree = "<group>";
+		};
 		F530C6CB26802E5D009DC29A /* DataController */ = {
 			isa = PBXGroup;
 			children = (
@@ -2807,6 +2819,7 @@
 		F54973162668A22100181E3F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				DFB3FFFA268AB6D400FC8FF9 /* JsonCacheData */,
 				F530CE8726846B1E009DC29A /* AlertView */,
 				F530CD1726809B62009DC29A /* MaskPopups */,
 				F530CCBE26804167009DC29A /* Hybrid */,
@@ -4130,6 +4143,7 @@
 				C2C7652B26788F40004757B9 /* TSSearchHotKeyModel.m in Sources */,
 				C24A69B82689669B0022A81F /* TSPayChannelItem.m in Sources */,
 				F56D4B44266DFB8900C1AD9E /* FMCollectionLayoutAttributes.m in Sources */,
+				DFB3FFFD268AB6EF00FC8FF9 /* TSJsonCacheData.m in Sources */,
 				041131CF268096CB000B5BAF /* TSHotDataController.m in Sources */,
 				DC3440C72672600600F5B0DA /* TSHomePageCategoryViewModel.m in Sources */,
 				CE4F6BD126859ED300812275 /* TSAddBankCardCell.m in Sources */,

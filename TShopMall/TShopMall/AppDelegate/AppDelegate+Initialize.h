@@ -28,7 +28,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 初始化路由
 -(void)initRouteConfig;
-
+/// 网络状态监听
+-(void)initNetworkReachability;
 @end
 
 NS_ASSUME_NONNULL_END

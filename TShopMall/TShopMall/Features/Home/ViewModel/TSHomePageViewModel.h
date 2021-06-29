@@ -14,8 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSArray <TSHomePageCellViewModel *> *dataSource;
 @property (nonatomic, strong) TSHomePageContainerViewModel *containerViewModel;
 - (void)fetchData;
-- (void)fetchData1;
-
+- (void)netWorkStatusChanged:(NSNotification *)noti;
 @end
 
 NS_ASSUME_NONNULL_END
