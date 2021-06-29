@@ -34,6 +34,12 @@
     self.dataCon.paramsISFromCart = self.isFromCart;
     self.dataCon.context = self;
     [self refreshData];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(invoiceChanged:) name:@"InvoiceChanged" object:nil];
+}
+
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)refreshData{
@@ -52,10 +58,11 @@
 
 //选择地址
 - (void)gotoSelectedAddress{
+    __weak typeof(self) weakSelf = self;
     TSShippingAddressController *con = [TSShippingAddressController new];
     con.addressSelected = ^(TSAddressModel * _Nonnull address) {
-        [self.dataCon updateAddressSection:address];
-        self.makeOrderView.sections = self.dataCon.sections;
+        [weakSelf.dataCon updateAddressSection:address];
+        weakSelf.makeOrderView.sections = weakSelf.dataCon.sections;
     };
     [self.navigationController pushViewController:con animated:YES];
 }
@@ -77,6 +84,13 @@
     self.makeOrderView.sections = self.dataCon.sections;
 }
 
+- (void)invoiceChanged:(NSNotification *)noti{
+    NSDictionary *invoice = noti.userInfo[@"invoice"];
+    TSInvoiceModel *model = [TSInvoiceModel creatWithInvoice:invoice];
+    [self.dataCon updateInvoiceSectionWithInvoice:model];
+    self.makeOrderView.sections = self.dataCon.sections;
+}
+
 - (void)commit{
     TSMakeOrderRow *row = (TSMakeOrderRow *)[self.makeOrderView.sections[0].rows lastObject];
     if (row.obj == nil) {//地址为空
@@ -84,10 +98,10 @@
         return;
     }
     TSAddressModel *address = row.obj;
-    TSMakeOrderRow *invoiceRow = (TSMakeOrderRow *)[self.makeOrderView.sections[2].rows lastObject];
-    TSMakeOrderInvoiceViewModel *invoce = invoiceRow.obj;
+    TSMakeOrderRow *operationRow = (TSMakeOrderRow *)[self.makeOrderView.sections[2].rows lastObject];
+    TSMakeOrderInvoiceViewModel *vm = operationRow.obj;
    
-    [TSMakeOrderCommitOrderDataController commitOrderWithAddress:address balanceInfo:self.dataCon.balanceModel invoice:invoce isFromCart:self.isFromCart finished:^(BOOL finished, NSString *payOrderId, NSString *isGroup) {
+    [TSMakeOrderCommitOrderDataController commitOrderWithAddress:address balanceInfo:self.dataCon.balanceModel invoice:vm.invoice message:vm.message isFromCart:self.isFromCart finished:^(BOOL finished, NSString *payOrderId, NSString *isGroup) {
         if (finished == YES) {
             TSPayController *con = [TSPayController new];
             con.payOrderId = payOrderId;

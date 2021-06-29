@@ -81,6 +81,7 @@
 		C25A7F91268480FD0006C6AF /* TSMakeOrderInvoiceViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C25A7F90268480FD0006C6AF /* TSMakeOrderInvoiceViewModel.m */; };
 		C25AD82D268AB38C000D2258 /* TSGoodsListController.m in Sources */ = {isa = PBXBuildFile; fileRef = C25AD82C268AB38C000D2258 /* TSGoodsListController.m */; };
 		C25AD830268AB839000D2258 /* TSTestSearchResultController.m in Sources */ = {isa = PBXBuildFile; fileRef = C25AD82F268AB839000D2258 /* TSTestSearchResultController.m */; };
+		C25AD833268B13AC000D2258 /* TSInvoiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C25AD832268B13AC000D2258 /* TSInvoiceModel.m */; };
 		C2A34C6A267449080095497E /* TSAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2A34C69267449080095497E /* TSAlertView.m */; };
 		C2A34C7726749E3E0095497E /* TSSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2A34C7626749E3D0095497E /* TSSearchController.m */; };
 		C2A34C7A26749FCD0095497E /* TSSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2A34C7926749FCD0095497E /* TSSearchView.m */; };
@@ -691,6 +692,8 @@
 		C25AD82C268AB38C000D2258 /* TSGoodsListController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSGoodsListController.m; sourceTree = "<group>"; };
 		C25AD82E268AB839000D2258 /* TSTestSearchResultController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSTestSearchResultController.h; sourceTree = "<group>"; };
 		C25AD82F268AB839000D2258 /* TSTestSearchResultController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSTestSearchResultController.m; sourceTree = "<group>"; };
+		C25AD831268B13AC000D2258 /* TSInvoiceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSInvoiceModel.h; sourceTree = "<group>"; };
+		C25AD832268B13AC000D2258 /* TSInvoiceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSInvoiceModel.m; sourceTree = "<group>"; };
 		C2A34C68267449060095497E /* TSAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSAlertView.h; sourceTree = "<group>"; };
 		C2A34C69267449080095497E /* TSAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSAlertView.m; sourceTree = "<group>"; };
 		C2A34C7526749E3D0095497E /* TSSearchController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSSearchController.h; sourceTree = "<group>"; };
@@ -1852,6 +1855,8 @@
 				C21A4B98267CAAC100766F72 /* TSAreaModel.m */,
 				C25A7F8326845FB10006C6AF /* TSBalanceModel.h */,
 				C25A7F8426845FB10006C6AF /* TSBalanceModel.m */,
+				C25AD831268B13AC000D2258 /* TSInvoiceModel.h */,
+				C25AD832268B13AC000D2258 /* TSInvoiceModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -4316,6 +4321,7 @@
 				F530CC6526803E43009DC29A /* Toasty.m in Sources */,
 				C24A69D62689D73A0022A81F /* TSPaySuccessRecomendCell.m in Sources */,
 				C3A6C4E2267A1CAF00FC71D6 /* TSBindMobileDataController.m in Sources */,
+				C25AD833268B13AC000D2258 /* TSInvoiceModel.m in Sources */,
 				DCA035F8268355D2003DE5F7 /* TSServicesManager.m in Sources */,
 				F54973622668A22100181E3F /* SSResponseModel.m in Sources */,
 				C35F1865267C7F8A00F65AF9 /* TSDatePickerView.m in Sources */,
