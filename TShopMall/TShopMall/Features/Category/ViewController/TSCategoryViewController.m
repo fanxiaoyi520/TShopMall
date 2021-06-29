@@ -152,8 +152,16 @@
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    TSProductDetailController *detail = [[TSProductDetailController alloc] init];
-    [self.navigationController pushViewController:detail animated:YES];
+    TSCategorySectionModel *model = self.contentViewModel.currentCellViewModel.sections[indexPath.section];
+    TSCategorySectionItemModel *item = (TSCategorySectionRecommendItemModel *)model.items[indexPath.row];
+    if ([item isKindOfClass:TSCategorySectionRecommendItemModel.class]) {
+        TSCategorySectionRecommendItemModel *model = (TSCategorySectionRecommendItemModel *)item;
+        [[TSServicesManager sharedInstance].uriHandler openURI:[NSString stringWithFormat:@"page://quote/productDetail?uuid=%@", model.uuid]];
+    }
+    else if ([item isKindOfClass:TSCategorySectionKindItemModel.class]){
+        TSCategorySectionKindItemModel *model = (TSCategorySectionKindItemModel *)item;
+//        [[TSServicesManager sharedInstance].uriHandler openURI:[NSString stringWithFormat:@"page://quote/productDetail?uuid=%@", model.uuid]];
+    }
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView

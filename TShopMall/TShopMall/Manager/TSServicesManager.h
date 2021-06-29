@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol TSUriHandler <NSObject>
 
 - (void)openURI:(NSString *_Nullable)uri;
+- (NSString *)configUriWithTypeValue:(NSString *_Nullable)typeValue objectValue:(NSString *)objectValue;
 
 @end
 

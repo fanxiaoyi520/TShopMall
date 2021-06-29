@@ -37,7 +37,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, copy) NSString *TwoLevelImg;
 @property(nonatomic, copy) NSString *TwoLevelTitle;
-
+@property(nonatomic, copy) NSString *typeValue;
+@property(nonatomic, copy) NSString *objectValue;
 @end
 
 @interface TSCategorySectionRecommendItemModel : TSCategorySectionItemModel
