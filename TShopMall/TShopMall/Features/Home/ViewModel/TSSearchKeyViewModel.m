@@ -9,6 +9,10 @@
 
 @implementation TSSearchKeyViewModel
 + (void)handleHistoryKeys:(NSString *)key{
+    NSString *a = [key stringByReplacingOccurrencesOfString:@" " withString:@""];
+    if (a.length == 0) {
+        return;
+    }
     NSArray *keys = [[NSUserDefaults standardUserDefaults] objectForKey:@"SearchHistoryKeys"];
     NSMutableArray *arr = [NSMutableArray array];
     BOOL exist = NO;

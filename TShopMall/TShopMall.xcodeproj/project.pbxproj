@@ -79,6 +79,8 @@
 		C25A7F8B26846AB00006C6AF /* TSMakeOrderPriceViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C25A7F8A26846AB00006C6AF /* TSMakeOrderPriceViewModel.m */; };
 		C25A7F8E268474200006C6AF /* TSMakeOrderCommitOrderDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = C25A7F8D2684741F0006C6AF /* TSMakeOrderCommitOrderDataController.m */; };
 		C25A7F91268480FD0006C6AF /* TSMakeOrderInvoiceViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C25A7F90268480FD0006C6AF /* TSMakeOrderInvoiceViewModel.m */; };
+		C25AD82D268AB38C000D2258 /* TSGoodsListController.m in Sources */ = {isa = PBXBuildFile; fileRef = C25AD82C268AB38C000D2258 /* TSGoodsListController.m */; };
+		C25AD830268AB839000D2258 /* TSTestSearchResultController.m in Sources */ = {isa = PBXBuildFile; fileRef = C25AD82F268AB839000D2258 /* TSTestSearchResultController.m */; };
 		C2A34C6A267449080095497E /* TSAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2A34C69267449080095497E /* TSAlertView.m */; };
 		C2A34C7726749E3E0095497E /* TSSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2A34C7626749E3D0095497E /* TSSearchController.m */; };
 		C2A34C7A26749FCD0095497E /* TSSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2A34C7926749FCD0095497E /* TSSearchView.m */; };
@@ -387,6 +389,7 @@
 		F530CE8D26846BE0009DC29A /* TSToolsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CE8C26846BE0009DC29A /* TSToolsManager.m */; };
 		F530CE9026846D3E009DC29A /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CE8E26846D3E009DC29A /* UIView+Frame.m */; };
 		F530CE9326846E9C009DC29A /* NSString+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CE9126846E9C009DC29A /* NSString+Frame.m */; };
+		F530CEB9268AB515009DC29A /* TSLocationInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CEB8268AB515009DC29A /* TSLocationInfoModel.m */; };
 		F54972FE2668842500181E3F /* TShopMallTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F54972FD2668842500181E3F /* TShopMallTests.m */; };
 		F54973092668842500181E3F /* TShopMallUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F54973082668842500181E3F /* TShopMallUITests.m */; };
 		F54973602668A22100181E3F /* SSGenaralRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F54973402668A22100181E3F /* SSGenaralRequest.m */; };
@@ -681,6 +684,10 @@
 		C25A7F8D2684741F0006C6AF /* TSMakeOrderCommitOrderDataController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSMakeOrderCommitOrderDataController.m; sourceTree = "<group>"; };
 		C25A7F8F268480FD0006C6AF /* TSMakeOrderInvoiceViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSMakeOrderInvoiceViewModel.h; sourceTree = "<group>"; };
 		C25A7F90268480FD0006C6AF /* TSMakeOrderInvoiceViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSMakeOrderInvoiceViewModel.m; sourceTree = "<group>"; };
+		C25AD82B268AB38C000D2258 /* TSGoodsListController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSGoodsListController.h; sourceTree = "<group>"; };
+		C25AD82C268AB38C000D2258 /* TSGoodsListController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSGoodsListController.m; sourceTree = "<group>"; };
+		C25AD82E268AB839000D2258 /* TSTestSearchResultController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSTestSearchResultController.h; sourceTree = "<group>"; };
+		C25AD82F268AB839000D2258 /* TSTestSearchResultController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSTestSearchResultController.m; sourceTree = "<group>"; };
 		C2A34C68267449060095497E /* TSAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSAlertView.h; sourceTree = "<group>"; };
 		C2A34C69267449080095497E /* TSAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSAlertView.m; sourceTree = "<group>"; };
 		C2A34C7526749E3D0095497E /* TSSearchController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSSearchController.h; sourceTree = "<group>"; };
@@ -1249,6 +1256,8 @@
 		F530CE8F26846D3E009DC29A /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
 		F530CE9126846E9C009DC29A /* NSString+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Frame.m"; sourceTree = "<group>"; };
 		F530CE9226846E9C009DC29A /* NSString+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Frame.h"; sourceTree = "<group>"; };
+		F530CEB7268AB515009DC29A /* TSLocationInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSLocationInfoModel.h; sourceTree = "<group>"; };
+		F530CEB8268AB515009DC29A /* TSLocationInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSLocationInfoModel.m; sourceTree = "<group>"; };
 		F54972DE2668842200181E3F /* TShopMall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TShopMall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F54972F22668842400181E3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F54972F92668842500181E3F /* TShopMallTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TShopMallTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -3012,6 +3021,10 @@
 				C2A34C7626749E3D0095497E /* TSSearchController.m */,
 				C22EE25F26806D2B00E59C86 /* TSSearchResultController.h */,
 				C22EE26026806D2B00E59C86 /* TSSearchResultController.m */,
+				C25AD82B268AB38C000D2258 /* TSGoodsListController.h */,
+				C25AD82C268AB38C000D2258 /* TSGoodsListController.m */,
+				C25AD82E268AB839000D2258 /* TSTestSearchResultController.h */,
+				C25AD82F268AB839000D2258 /* TSTestSearchResultController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -3462,6 +3475,8 @@
 				F55D2CEE2678A6B9006BACCF /* TSGoodDetailSectionModel.m */,
 				F55D2CF02678A6B9006BACCF /* TSGoodDetailItemModel.h */,
 				F55D2CF12678A6B9006BACCF /* TSGoodDetailItemModel.m */,
+				F530CEB7268AB515009DC29A /* TSLocationInfoModel.h */,
+				F530CEB8268AB515009DC29A /* TSLocationInfoModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3955,6 +3970,7 @@
 				C3A6C4E4267A1CAF00FC71D6 /* TSSettingDataController.m in Sources */,
 				F55D2D20267B1EE9006BACCF /* TSRankHotCellController.m in Sources */,
 				C21A4B9C267D95A000766F72 /* TSLocationManager.m in Sources */,
+				F530CEB9268AB515009DC29A /* TSLocationInfoModel.m in Sources */,
 				F55D2D38267B3F38006BACCF /* TSRankCell.m in Sources */,
 				04F1EFBC2682E33600FF007D /* TSRealNameAuthDataController.m in Sources */,
 				F54973632668A22100181E3F /* YTKAnimatingRequestAccessory.m in Sources */,
@@ -4149,6 +4165,7 @@
 				F55D2C392671E14B006BACCF /* TSCollectionViewLeftAlignedLayout.m in Sources */,
 				C25A7F91268480FD0006C6AF /* TSMakeOrderInvoiceViewModel.m in Sources */,
 				C2F0573526857B20003D1B2A /* TSAddressSmartDataController.m in Sources */,
+				C25AD830268AB839000D2258 /* TSTestSearchResultController.m in Sources */,
 				F530CC9D26803FCD009DC29A /* UIColor+General.m in Sources */,
 				F56D4B47266DFB8900C1AD9E /* FMLayoutBackground.m in Sources */,
 				F530CCEA26804167009DC29A /* UITableView+TSWebImageAutoSize.m in Sources */,
@@ -4254,6 +4271,7 @@
 				C21A4B96267CA25200766F72 /* TSAreaDataController.m in Sources */,
 				C3A6C4E6267A1CAF00FC71D6 /* TSWithdrawalPswSetDataController.m in Sources */,
 				C3A6C4C6267A1C5700FC71D6 /* TSAboutMeBottomCell.m in Sources */,
+				C25AD82D268AB38C000D2258 /* TSGoodsListController.m in Sources */,
 				DC3440DF2672FC3900F5B0DA /* TSHomePageBaseModel.m in Sources */,
 				C2EF88B82670997100E7374A /* TSCartModel.m in Sources */,
 				CE4F6BE82687908200812275 /* TSOfficialServicesCell.m in Sources */,
