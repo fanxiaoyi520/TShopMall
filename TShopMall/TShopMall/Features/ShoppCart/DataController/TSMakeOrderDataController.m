@@ -70,6 +70,14 @@
     row.obj = address;
 }
 
+
+- (void)updateInvoiceSectionWithInvoice:(TSInvoiceModel *)invoice{
+    TSMakeOrderSection *section = self.sections[2];
+    TSMakeOrderRow *row = [section.rows lastObject];
+    TSMakeOrderInvoiceViewModel *vm = (TSMakeOrderInvoiceViewModel *)row.obj;
+    vm.invoice = invoice;
+}
+
 - (void)updateMessage:(NSString *)messgae{
     TSMakeOrderSection *section = self.sections[2];
     TSMakeOrderRow *row = [section.rows lastObject];

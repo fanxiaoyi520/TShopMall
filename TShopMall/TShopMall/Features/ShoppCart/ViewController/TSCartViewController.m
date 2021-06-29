@@ -15,8 +15,10 @@
 #import "TSMakeOrderController.h"
 #import "TSRecomendDataController.h"
 #import "TSHybridViewController.h"
-
-#import "TSAreaSelectedController.h"
+#import "TSProductDetailController.h"
+#import "AppDelegate.h"
+#import "TSBaseNavigationController.h"
+#import "TSMainViewController.h"
 
 @interface TSCartViewController ()<TSCartProtocol>
 @property (nonatomic, strong) UIButton *editBtn;
@@ -136,13 +138,17 @@
 
 //去购物
 - (void)goToShopping{
-//        UIViewController *con = [NSClassFromString(@"TSPaySuccessController") new];
-//        [self.navigationController pushViewController:con animated:YES];
-    
-    NSString *path = [NSString stringWithFormat:@"%@%@?isFromOrder=1&uuid=",kMallH5ApiPrefix,kMallH5InvoiceUrl];
-    TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:path];
-    hybrid.isInvoice = YES;
-    [self.navigationController pushViewController:hybrid animated:YES];
+    AppDelegate *ap = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    TSBaseNavigationController *naviCon = (TSBaseNavigationController *)ap.window.rootViewController;
+    TSMainViewController *mainCon = [naviCon.viewControllers lastObject];
+    UITabBarController *tabbarCon = [mainCon.childViewControllers lastObject];
+    [tabbarCon setSelectedIndex:0];
+}
+
+- (void)recomendGoodsSelected:(NSString *)uuid{
+    TSProductDetailController *detail = [[TSProductDetailController alloc] init];
+    detail.uuid = uuid;
+    [self.navigationController pushViewController:detail animated:YES];
 }
 
 - (void)updateSettleView{

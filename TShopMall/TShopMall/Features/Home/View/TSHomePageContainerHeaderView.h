@@ -7,12 +7,12 @@
 
 #import <UIKit/UIKit.h>
 #import <JXCategoryView/JXCategoryView.h>
-#import "TSHomePageContainerViewModel.h"
+#import "TSCategoryGroupViewModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TSHomePageContainerHeaderView : UITableViewHeaderFooterView
-@property (nonatomic, strong) TSHomePageContainerViewModel *viewModel;
+@property (nonatomic, strong) TSCategoryGroupViewModel *viewModel;
 
 @end
 

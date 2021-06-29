@@ -54,7 +54,7 @@
 //    releaseViewModel.model = templateModel;
 //
 //
-//    TSHomePageContainerViewModel *containerViewModel = [TSHomePageContainerViewModel new];
+//    TSCategoryGroupViewModel *containerViewModel = [TSCategoryGroupViewModel new];
 //    templateModel = [TSHomePageCellTemplateModel new];
 //    templateModel.templateName = @"TSHomePageContainer";
 //    templateModel.headerTemplateName = @"TSHomePageContainerHeader";
@@ -68,7 +68,7 @@
 //     NSMutableArray *marr = @[].mutableCopy;
 //
 //     for (NSDictionary *dic in temp) {
-//         TSHomePageContainerGroup *model = [TSHomePageContainerGroup new];
+//         TSCategoryGroup *model = [TSCategoryGroup new];
 //         model.name = dic[@"groupName"];
 //         model.groupId = dic[@"goodsgroupUuid"];
 //         [marr addObject:model];
@@ -165,11 +165,11 @@
         viewModel = [viewModelClass new];
         if ([viewModel isKindOfClass:TSHomePageCellViewModel.class]) {
             TSHomePageCellTemplateModel *templateModel = [TSHomePageCellTemplateModel new];
-            templateModel.templateName = sectionName;
-            templateModel.headerTemplateName = [NSString stringWithFormat:@"%@Header",sectionName];
+            templateModel.templateName = @"TSHomePageContainer";
+            templateModel.headerTemplateName = @"TSHomePageContainerHeader";
             templateModel.data = model.data;
             viewModel.model = templateModel;
-            _containerViewModel = (TSHomePageContainerViewModel *)viewModel;
+            _containerViewModel = (TSCategoryGroupViewModel *)viewModel;
         }
     }
 
@@ -183,7 +183,7 @@
         @"Nav":@"TSHomePageCategory",
 //        @"RichText":@"TSHomePageReleaseTitle",
         @"ImageAd0":@"TSHomePageRelease",
-        @"GroupType":@"TSHomePageContainer",
+        @"GroupType":@"TSCategoryGroup",
     };
     
 }

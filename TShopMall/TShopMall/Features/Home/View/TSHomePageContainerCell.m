@@ -6,7 +6,7 @@
 //
 
 #import "TSHomePageContainerCell.h"
-#import "TSHomePageContainerViewModel.h"
+#import "TSCategoryGroupViewModel.h"
 #import "TSHomePageContainerCollectionView.h"
 #import "YBNestViews.h"
 #import <MJRefresh/MJRefresh.h>
@@ -15,7 +15,7 @@
 
 
 @interface TSHomePageContainerCell()<YBNestContainerViewDataSource, YBNestContainerViewDelegate>
-@property(nonatomic, strong) TSHomePageContainerViewModel *containerViewModel;
+@property(nonatomic, strong) TSCategoryGroupViewModel *containerViewModel;
 
 @end
 @implementation TSHomePageContainerCell
@@ -68,7 +68,7 @@
     }
     
     [super setViewModel:viewModel];
-    self.containerViewModel = (TSHomePageContainerViewModel *)viewModel;
+    self.containerViewModel = (TSCategoryGroupViewModel *)viewModel;
     @weakify(self);
     [self.KVOController observe:self.containerViewModel keyPath:@"pageIndex" options:(NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew) block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
         @strongify(self)
@@ -131,7 +131,7 @@
         
     }];
     
-    TSHomePageContainerGroup *group = self.containerViewModel.segmentHeaderDatas[collectionView.tag];
+    TSCategoryGroup *group = self.containerViewModel.segmentHeaderDatas[collectionView.tag];
     [self.containerViewModel loadData:group success:^(NSArray * _Nonnull list) {
         [Popover removePopoverOnWindow];
         

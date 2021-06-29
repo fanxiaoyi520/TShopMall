@@ -11,6 +11,7 @@
 #import "TSMakeOrderGoodsViewModel.h"
 #import "TSMakeOrderPriceViewModel.h"
 #import "TSMakeOrderInvoiceViewModel.h"
+#import "TSInvoiceModel.h"
 
 @interface TSMakeOrderDataController : TSBaseDataController
 @property (nonatomic, strong) TSBalanceModel *balanceModel;
@@ -20,6 +21,7 @@
 - (void)checkBalance:(void(^)(BOOL))finished;
 
 - (void)updateAddressSection:(TSAddressModel *)address;
+- (void)updateInvoiceSectionWithInvoice:(TSInvoiceModel *)invoice;
 - (void)updateMessage:(NSString *)messgae;
 - (void)configEmptySection;
 @end

@@ -56,7 +56,7 @@
 }
 
 - (void)openURI:(NSString *_Nullable)uri {
-    NSLog(@"AppDelegate 中 uri==%@",uri);
+    NSLog(@"TSURLRouter 中 uri==%@",uri);
     
     Class cls = NSClassFromString([self getClassDict][[uri componentsSeparatedByString:@"?"].firstObject]);
     if (cls == nil) { return; }
@@ -80,8 +80,7 @@
     return @{
         @"page://quote/productDetail": @"TSProductDetailController",
         @"page://quote/category": @"TSCategoryViewController",
-        @"page://quote/searchResult": @"TSSearchResultController",
-
+        @"page://quote/categoryDetail": @"TSCategoryDetailViewController",
     };
 }
 @end

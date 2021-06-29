@@ -16,4 +16,5 @@
 @property (nonatomic, copy) NSString *price;
 @property (nonatomic, copy) NSString *earn;
 @property (nonatomic, copy) NSString *thPrice;
+@property (nonatomic, copy) NSString *uuid;
 @end

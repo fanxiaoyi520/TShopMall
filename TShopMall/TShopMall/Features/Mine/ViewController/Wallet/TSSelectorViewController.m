@@ -9,7 +9,7 @@
 #import "TSSelectorCell.h"
 #import "UIView+Plugin.h"
 
-@interface TSSelectorViewController ()<UITableViewDelegate,UITableViewDataSource,TSSelectorDelegate>
+@interface TSSelectorViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic ,strong) UIView *bgView;
 @property (nonatomic ,strong) UITableView *selectorTableView;
@@ -57,6 +57,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    [self dismissViewControllerAnimated:YES completion:nil];
+    if (self.selectBankBlock) {
+        self.selectBankBlock(@"招商银行");
+    }
 }
 
 // MARK: TSSelectorDelegate

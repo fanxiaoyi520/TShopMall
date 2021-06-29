@@ -23,6 +23,7 @@
 #define WXAPPSecret @"eca01d9d2a31f58327c70138d7d99ac5"
 #define WXAPPLink @"https://tsales.tcl.com.cn/tsales/"
 #define QuickLoginBusinessID @"7de91dbe2b424320a849fddac6545c0a"
+#define QuickLoginBundleID @"com.tcl.TSalesDev"
 
 #endif
 

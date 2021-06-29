@@ -56,11 +56,14 @@
 
 // MARK: model
 - (void)setModel:(id)model {
-    //if (!model) return;
+    if (!model) return;
+    TSBankCardModel *kModel = model;
     if (self.height == 120) {
         _bgImageView.image=[UIImage imageNamed:@"mine_yellow_bg1"];
         _accountLabel.top = 87;
     }
+    _bankNameLabel.text = kModel.accountBank;
+    _accountLabel.text=kModel.bankCardNo;
 }
 
 - (void)setUserName:(NSString *)userName {
