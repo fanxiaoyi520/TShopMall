@@ -20,15 +20,16 @@
 
 @synthesize accountId = _accountId;
 
+@synthesize nickname = _nickname;
+
 -(id)copyWithZone:(NSZone *)zone {
     TSUserInfoManager *copy =[[[self class] allocWithZone:zone] init];
     copy.accessToken = [self.accessToken copyWithZone:zone];
     copy.accountId = [self.accountId copyWithZone:zone];
     copy.userName = [self.userName copyWithZone:zone];
     copy.refreshToken = [self.refreshToken copyWithZone:zone];
-    
+    copy.nickname = [self.nickname copyWithZone:zone];
     return copy;
-    
 }
 
 -(instancetype)initWithCoder:(NSCoder *)coder{
@@ -37,7 +38,7 @@
         _refreshToken = [coder decodeObjectForKey:@"refreshToken"];
         _userName = [coder decodeObjectForKey:@"userName"];
         _accountId = [coder decodeObjectForKey:@"accountId"];
-
+        _nickname = [coder decodeObjectForKey:@"nickname"];
     }
     return self;
 }
@@ -47,7 +48,7 @@
     [coder encodeObject:self.refreshToken forKey:@"refreshToken"];
     [coder encodeObject:self.userName forKey:@"userName"];
     [coder encodeObject:self.accountId forKey:@"accountId"];
-
+    [coder encodeObject:self.nickname forKey:@"nickname"];
 }
 
 +(TSUserInfoManager *)userInfo{

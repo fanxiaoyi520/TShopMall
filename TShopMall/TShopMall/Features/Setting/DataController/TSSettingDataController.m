@@ -6,6 +6,7 @@
 //
 
 #import "TSSettingDataController.h"
+#import "TSModifyUserInfoRequest.h"
 
 @interface TSSettingDataController ()
 
@@ -96,5 +97,35 @@
         complete(YES);
     }
 }
+/**
+ *@params key 可以为nickname（昵称）、city（城市）、province（省份）、country（国家）、sex（性别 1: 男 2:女）、area（区）
+ *@params value 为对应key的修改值
+ *@params accountId 用户账号的唯一标识
+ */
+- (void)fetchModifyUserInfoWithKey:(NSString *)key
+                             value:(NSString *)value
+                         accountId:(NSString *)accountId
+                          complete:(void(^)(BOOL isSucess))complete {
+    TSModifyUserInfoRequest *request = [[TSModifyUserInfoRequest alloc] initWithAccountId:accountId modifyKey:key modifyValue:value];
+//    request.animatingText = @"正在提交...";
+//    request.animatingView = self.context.view;
+    [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+        if (request.responseModel.isSucceed) {
+            if (complete) {
+                complete(YES);
+            }
+        } else {
+            [Popover popToastOnWindowWithText:request.responseModel.originalData[@"failCause"]];
+            if (complete) {
+                complete(NO);
+            }
+        }
+    } failure:^(__kindof SSBaseRequest * _Nonnull request) {
+        if (complete) {
+            complete(NO);
+        }
+    }];
+}
+    
 
 @end
