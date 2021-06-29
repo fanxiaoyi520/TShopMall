@@ -75,7 +75,7 @@
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleDefault;
+    return [TSUserLoginManager shareInstance].state == TSLoginStateNone?UIStatusBarStyleDefault:UIStatusBarStyleLightContent;
 }
 
 - (void)showAlertInView:(UIView *)view {
