@@ -56,6 +56,11 @@
     }];
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleDefault;
+}
+
+
 #pragma mark - TSSearchResultFittleDelegate
 - (void)operationType:(NSInteger)type sortType:(NSInteger)sortType{
     self.sortType = [NSString stringWithFormat:@"%ld",sortType];
