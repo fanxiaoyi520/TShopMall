@@ -354,6 +354,14 @@
     TSGoodDetailItemPurchaseModel *item = (TSGoodDetailItemPurchaseModel *)[delegate universalCollectionViewCellModel:self.indexPath];
     self.selectValueLabel.text = item.selectedStr;
     self.deliveryValueLabel.text = item.localaddress;
+    NSString *freight = [NSString stringWithFormat:@"运费:￥%@",item.freight];
+    [_feeButton setTitle:freight forState:UIControlStateNormal];
+    
+    if (item.canBuy) {
+        _flagLabel.text = @"有货";
+    }else{
+        _flagLabel.text = @"无货";
+    }
 }
 
 @end

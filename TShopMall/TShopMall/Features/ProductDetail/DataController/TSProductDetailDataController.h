@@ -8,6 +8,7 @@
 #import "TSBaseDataController.h"
 #import "TSGoodDetailSectionModel.h"
 #import "TSGoodDetailItemModel.h"
+#import "TSLocationInfoModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -23,9 +24,15 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy) NSString *productUuid;
 /// 购物车角标
 @property(nonatomic, copy) NSString *cartNumber;
+/// 购买数量(默认购买数量为1)
+@property(nonatomic, copy) NSString *buyNum;
+
+@property(nonatomic, strong) TSLocationInfoModel *locationModel;
 
 /// 下载素材
 @property (nonatomic, strong) NSArray <TSMaterialImageModel *> *materialModels;
+
+
 
 @property (nonatomic, strong, readonly) NSMutableArray <TSGoodDetailSectionModel *> *sections;
 

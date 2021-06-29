@@ -387,6 +387,7 @@
 		F530CE9026846D3E009DC29A /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CE8E26846D3E009DC29A /* UIView+Frame.m */; };
 		F530CE9326846E9C009DC29A /* NSString+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CE9126846E9C009DC29A /* NSString+Frame.m */; };
 		F530CEB9268AB515009DC29A /* TSLocationInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CEB8268AB515009DC29A /* TSLocationInfoModel.m */; };
+		F530CEBD268B09DD009DC29A /* TSStockoutView.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CEBC268B09DD009DC29A /* TSStockoutView.m */; };
 		F54972FE2668842500181E3F /* TShopMallTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F54972FD2668842500181E3F /* TShopMallTests.m */; };
 		F54973092668842500181E3F /* TShopMallUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F54973082668842500181E3F /* TShopMallUITests.m */; };
 		F54973602668A22100181E3F /* SSGenaralRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F54973402668A22100181E3F /* SSGenaralRequest.m */; };
@@ -1249,6 +1250,8 @@
 		F530CE9226846E9C009DC29A /* NSString+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Frame.h"; sourceTree = "<group>"; };
 		F530CEB7268AB515009DC29A /* TSLocationInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSLocationInfoModel.h; sourceTree = "<group>"; };
 		F530CEB8268AB515009DC29A /* TSLocationInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSLocationInfoModel.m; sourceTree = "<group>"; };
+		F530CEBB268B09DD009DC29A /* TSStockoutView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSStockoutView.h; sourceTree = "<group>"; };
+		F530CEBC268B09DD009DC29A /* TSStockoutView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSStockoutView.m; sourceTree = "<group>"; };
 		F54972DE2668842200181E3F /* TShopMall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TShopMall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F54972F22668842400181E3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F54972F92668842500181E3F /* TShopMallTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TShopMallTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2741,6 +2744,15 @@
 			path = AlertView;
 			sourceTree = "<group>";
 		};
+		F530CEBA268B09B6009DC29A /* StockoutView */ = {
+			isa = PBXGroup;
+			children = (
+				F530CEBB268B09DD009DC29A /* TSStockoutView.h */,
+				F530CEBC268B09DD009DC29A /* TSStockoutView.m */,
+			);
+			path = StockoutView;
+			sourceTree = "<group>";
+		};
 		F54972D52668842200181E3F = {
 			isa = PBXGroup;
 			children = (
@@ -3410,6 +3422,7 @@
 		F55D2CE0267881AB006BACCF /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F530CEBA268B09B6009DC29A /* StockoutView */,
 				F530CD612681E105009DC29A /* ShareView */,
 				F530CD4B26818FDF009DC29A /* PriceView */,
 				F530CD47268174EE009DC29A /* TopFunctionView */,
@@ -4234,6 +4247,7 @@
 				C24A69BB26896ADE0022A81F /* TSPayTimeView.m in Sources */,
 				04F1EFAD2682D22100FF007D /* TSRealnameInfoSectionModel.m in Sources */,
 				DCA035D72680765B003DE5F7 /* TSUserLoginManager.m in Sources */,
+				F530CEBD268B09DD009DC29A /* TSStockoutView.m in Sources */,
 				C3A6C475267A1BEA00FC71D6 /* TSSettingViewController.m in Sources */,
 				DFB3FFC726844A0A00FC8FF9 /* WechatManager.m in Sources */,
 				F530CCA626803FCD009DC29A /* UIView+General.m in Sources */,

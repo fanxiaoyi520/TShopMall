@@ -19,6 +19,14 @@
 
 @implementation TSProductDetailDataController
 
+-(instancetype)init{
+    if (self = [super init]) {
+        self.buyNum = @"1";
+        self.locationModel = [TSLocationInfoModel locationInfoModel];
+    }
+    return self;
+}
+
 #pragma mark - 查询商品详情数据
 -(NSMutableArray <TSGoodDetailSectionModel *> *)fetchProductDetailWithUuid:(NSString *)uuid
                                                        isRequireEnterGroup:(BOOL)isRequired
@@ -150,11 +158,11 @@
             TSGoodDetailSectionModel *section = self.sections[5];
             TSGoodDetailItemPurchaseModel *item = (TSGoodDetailItemPurchaseModel *)[section.items firstObject];
             item.selectedStr = selected;
-            item.localaddress = @"广东省 深圳市 南山区 西丽街道";
-            item.provinceId = @"05";
-            item.cityId = @"154";
-            item.areaUuid = @"15845";
-            item.regionUuid = @"1385";
+            item.localaddress = self.locationModel.localaddress;
+            item.provinceId = self.locationModel.provinceId;
+            item.cityId = self.locationModel.cityId;
+            item.areaUuid = self.locationModel.areaUuid;
+            item.regionUuid = self.locationModel.region;
             item.iconUrl = productImage[@"bigImageUrl"];
             item.price = promotionInteactiveModel[@"marketPrice"];
         }
@@ -251,10 +259,23 @@
                                                                  requestBody:params
                                                               needErrorToast:NO];
     
-    [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
+    [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
         if (isRequired) {
             dispatch_group_leave(group);
         }
+        
+        if (request.responseModel.isSucceed) {
+
+            TSGoodDetailSectionModel *section = self.sections[5];
+            TSGoodDetailItemPurchaseModel *item = (TSGoodDetailItemPurchaseModel *)[section.items firstObject];
+
+            item.freight = [NSString stringWithFormat:@"%@",request.responseJSONObject[@"data"]];
+
+            if (complete) {
+                complete(YES);
+            }
+        }
+        
             
         } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
             if (isRequired) {
@@ -272,7 +293,11 @@
                              region:(NSString *)region
                 isRequireEnterGroup:(BOOL)isRequired
                               group:(dispatch_group_t)group
-                           complete:(void(^)(BOOL isSucess))complete;{
+                           complete:(void(^)(BOOL isSucess))complete{
+    
+    if (isRequired) {
+        dispatch_group_enter(group);
+    }
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setValue:skuNo forKey:@"skuNo"];
@@ -306,8 +331,17 @@
             item.totalNum = [data[@"totalNum"] integerValue];
 
             if (![data[@"limitBuyNum"] isKindOfClass:[NSNull class]]) {
+                item.hasLimit = YES;
                 item.limitBuyNum = [data[@"limitBuyNum"] integerValue];
+            }else{
+                item.hasLimit = NO;
             }
+            
+            item.localaddress = self.locationModel.localaddress;
+            item.provinceId = self.locationModel.provinceId;
+            item.cityId = self.locationModel.cityId;
+            item.regionUuid = self.locationModel.region;
+            item.areaUuid = self.locationModel.areaUuid;
 
             if (complete) {
                 complete(YES);
