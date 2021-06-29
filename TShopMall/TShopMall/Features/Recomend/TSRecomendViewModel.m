@@ -15,6 +15,7 @@
         self.price = goods.price;
         self.earn = goods.earnMost;
         self.thPrice = goods.staffPrice;
+        self.uuid = goods.goodsUuid;
     }
     return self;
 }

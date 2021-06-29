@@ -102,6 +102,7 @@ NSString *const kGoodDetailAddProductToCartUrl = @"/rest/v2/front/product/addPro
 NSString *const kGoodDetailHasProductUrl = @"/rest/v2/front/product/hasProduct";
 NSString *const kGoodDetailChangeChooseUrl = @"/rest/v2/cart/changeChoose";
 NSString *const kGoodDetailFastBuyUrl = @"/rest/v2/front/product/fastBuy";
+NSString *const kGoodDetailCarriageCostUrl = @"/rest/v2/front/product/getCarriageCost";
 
 #pragma mark - 分类
 NSString *const kShopContentUrl = @"/rest/v2/front/shopContent/getPageManageByPageType";

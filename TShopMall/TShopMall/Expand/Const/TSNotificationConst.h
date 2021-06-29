@@ -8,3 +8,4 @@
 #import <UIKit/UIKit.h>
 
 UIKIT_EXTERN NSString *const TS_Login_State;
+UIKIT_EXTERN NSString *const TS_NetWork_State;

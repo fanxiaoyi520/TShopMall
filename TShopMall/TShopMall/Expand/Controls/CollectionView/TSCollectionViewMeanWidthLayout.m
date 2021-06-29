@@ -24,7 +24,6 @@
 @property (nonatomic, assign) CGFloat totalwidth;
 
 @property (nonatomic, strong) NSMutableArray *attributesArrayM;
-@property (nonatomic, strong) NSMutableArray *secionLayouts;
 @end
 
 @implementation TSCollectionViewMeanWidthLayout

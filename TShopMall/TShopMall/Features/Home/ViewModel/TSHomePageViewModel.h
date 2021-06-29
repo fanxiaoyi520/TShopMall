@@ -8,14 +8,13 @@
 #import <Foundation/Foundation.h>
 #import "TSHomePageCellViewModel.h"
 #import "TSHomePageCellTemplateModel.h"
-#import "TSHomePageContainerViewModel.h"
+#import "TSCategoryGroupViewModel.h"
 NS_ASSUME_NONNULL_BEGIN
 @interface TSHomePageViewModel : NSObject
 @property (nonatomic, strong) NSArray <TSHomePageCellViewModel *> *dataSource;
-@property (nonatomic, strong) TSHomePageContainerViewModel *containerViewModel;
+@property (nonatomic, strong) TSCategoryGroupViewModel *containerViewModel;
 - (void)fetchData;
-- (void)fetchData1;
-
+- (void)netWorkStatusChanged:(NSNotification *)noti;
 @end
 
 NS_ASSUME_NONNULL_END

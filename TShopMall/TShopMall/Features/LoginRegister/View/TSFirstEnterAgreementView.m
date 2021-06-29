@@ -54,10 +54,12 @@
     } else {
         [view addSubview:self];
     }
+    self.alpha = 0;
     [UIView animateWithDuration:.5 animations:^{
         CGRect rect = self.contentView.frame;
         rect.origin.y = (kScreenHeight - 378) / 2.0;
         self.contentView.frame = rect;
+        self.alpha = 1;
     }];
 }
 
@@ -66,6 +68,7 @@
         CGRect rect = self.contentView.frame;
         rect.origin.y += self.contentView.bounds.size.height;
         self.contentView.frame = rect;
+        self.alpha = 0;
     } completion:^(BOOL finished) {
         [self removeFromSuperview];
     }];

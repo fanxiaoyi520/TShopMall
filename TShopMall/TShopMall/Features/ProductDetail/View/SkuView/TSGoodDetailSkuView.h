@@ -14,8 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol GoodDetailSkuViewDelegate <NSObject>
 
--(void)goodDetailSkuView:(TSGoodDetailSkuView *)skuView addShoppingCart:(UIButton *)addButton buyNum:(NSString *)buyNum;
--(void)goodDetailSkuView:(TSGoodDetailSkuView *)skuView buyImmediately:(UIButton *)buyButton buyNum:(NSString *)buyNum;
+-(void)goodDetailSkuView:(TSGoodDetailSkuView *)skuView addShoppingCartNum:(NSString *)buyNum;
+-(void)goodDetailSkuView:(TSGoodDetailSkuView *)skuView buyImmediatelyNum:(NSString *)buyNum;
 -(void)goodDetailSkuView:(TSGoodDetailSkuView *)skuView specificationExchange:(NSDictionary *)detail;
 -(void)goodDetailSkuView:(TSGoodDetailSkuView *)skuView numberChange:(NSString *)currentNumber;
 

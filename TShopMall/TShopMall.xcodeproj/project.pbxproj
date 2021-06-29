@@ -79,6 +79,9 @@
 		C25A7F8B26846AB00006C6AF /* TSMakeOrderPriceViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C25A7F8A26846AB00006C6AF /* TSMakeOrderPriceViewModel.m */; };
 		C25A7F8E268474200006C6AF /* TSMakeOrderCommitOrderDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = C25A7F8D2684741F0006C6AF /* TSMakeOrderCommitOrderDataController.m */; };
 		C25A7F91268480FD0006C6AF /* TSMakeOrderInvoiceViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C25A7F90268480FD0006C6AF /* TSMakeOrderInvoiceViewModel.m */; };
+		C25AD82D268AB38C000D2258 /* TSGoodsListController.m in Sources */ = {isa = PBXBuildFile; fileRef = C25AD82C268AB38C000D2258 /* TSGoodsListController.m */; };
+		C25AD830268AB839000D2258 /* TSTestSearchResultController.m in Sources */ = {isa = PBXBuildFile; fileRef = C25AD82F268AB839000D2258 /* TSTestSearchResultController.m */; };
+		C25AD833268B13AC000D2258 /* TSInvoiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C25AD832268B13AC000D2258 /* TSInvoiceModel.m */; };
 		C2A34C6A267449080095497E /* TSAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2A34C69267449080095497E /* TSAlertView.m */; };
 		C2A34C7726749E3E0095497E /* TSSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2A34C7626749E3D0095497E /* TSSearchController.m */; };
 		C2A34C7A26749FCD0095497E /* TSSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2A34C7926749FCD0095497E /* TSSearchView.m */; };
@@ -246,12 +249,12 @@
 		DC3440C426723D4D00F5B0DA /* TSHomePageBannerViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3440C326723D4D00F5B0DA /* TSHomePageBannerViewModel.m */; };
 		DC3440C72672600600F5B0DA /* TSHomePageCategoryViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3440C62672600600F5B0DA /* TSHomePageCategoryViewModel.m */; };
 		DC3440CA2672601F00F5B0DA /* TSHomePageReleaseViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3440C92672601F00F5B0DA /* TSHomePageReleaseViewModel.m */; };
-		DC3440CD2672604400F5B0DA /* TSHomePageContainerViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3440CC2672604400F5B0DA /* TSHomePageContainerViewModel.m */; };
+		DC3440CD2672604400F5B0DA /* TSCategoryGroupViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3440CC2672604400F5B0DA /* TSCategoryGroupViewModel.m */; };
 		DC3440D32672F62C00F5B0DA /* TSHomePageBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3440D22672F62C00F5B0DA /* TSHomePageBaseCell.m */; };
 		DC3440DF2672FC3900F5B0DA /* TSHomePageBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3440DE2672FC3900F5B0DA /* TSHomePageBaseModel.m */; };
 		DC3440E82673621000F5B0DA /* TSHomePageContainerHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3440E72673621000F5B0DA /* TSHomePageContainerHeaderView.m */; };
 		DC45FEB326773AE700CE762E /* EXTScope.m in Sources */ = {isa = PBXBuildFile; fileRef = DC45FEB126773AE700CE762E /* EXTScope.m */; };
-		DC45FEBA267742F700CE762E /* TSHomePageContainerGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = DC45FEB9267742F700CE762E /* TSHomePageContainerGroup.m */; };
+		DC45FEBA267742F700CE762E /* TSCategoryGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = DC45FEB9267742F700CE762E /* TSCategoryGroup.m */; };
 		DC45FEBD26783A1300CE762E /* TSHomePageContainerCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC45FEBC26783A1300CE762E /* TSHomePageContainerCollectionView.m */; };
 		DC45FEC026783A6E00CE762E /* TSHomePageContainerCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DC45FEBF26783A6E00CE762E /* TSHomePageContainerCollectionViewCell.m */; };
 		DC45FEC32678425700CE762E /* TSHighPriceTagView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC45FEC22678425700CE762E /* TSHighPriceTagView.m */; };
@@ -273,6 +276,8 @@
 		DCA035DD2681ACC8003DE5F7 /* TSLogoutRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA035DC2681ACC8003DE5F7 /* TSLogoutRequest.m */; };
 		DCA035F8268355D2003DE5F7 /* TSServicesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA035F7268355D2003DE5F7 /* TSServicesManager.m */; };
 		DCA035FB2683578C003DE5F7 /* NSObject+TSProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA035FA2683578C003DE5F7 /* NSObject+TSProperty.m */; };
+		DFB30000268AEE7700FC8FF9 /* TSOneRowsGoodsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB3FFFF268AEE7700FC8FF9 /* TSOneRowsGoodsCollectionViewCell.m */; };
+		DFB30003268AF5D600FC8FF9 /* TSCategoryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB30002268AF5D600FC8FF9 /* TSCategoryDetailViewController.m */; };
 		DFB3FFB42682E4B300FC8FF9 /* NTESQLHomePageCustomUIModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB3FFB22682E4B300FC8FF9 /* NTESQLHomePageCustomUIModel.m */; };
 		DFB3FFB82683205600FC8FF9 /* TSOneStepLoginRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB3FFB72683205600FC8FF9 /* TSOneStepLoginRequest.m */; };
 		DFB3FFC726844A0A00FC8FF9 /* WechatManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB3FFC426844A0A00FC8FF9 /* WechatManager.m */; };
@@ -292,6 +297,7 @@
 		DFB3FFF326899EF300FC8FF9 /* TSTableViewBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB3FFF226899EF300FC8FF9 /* TSTableViewBaseCell.m */; };
 		DFB3FFF62689A7AE00FC8FF9 /* TSRankRecommendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB3FFF52689A7AE00FC8FF9 /* TSRankRecommendCell.m */; };
 		DFB3FFF92689C1AA00FC8FF9 /* TSMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB3FFF82689C1AA00FC8FF9 /* TSMainViewController.m */; };
+		DFB3FFFD268AB6EF00FC8FF9 /* TSJsonCacheData.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB3FFFC268AB6EF00FC8FF9 /* TSJsonCacheData.m */; };
 		E2BE996F8804E0C3E7D5AE61 /* libPods-TShopMall-TShopMallUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD1ABBE857D307088E9BF2DC /* libPods-TShopMall-TShopMallUITests.a */; };
 		F530C6D526802E5D009DC29A /* TSSMSCodeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F530C6CC26802E5D009DC29A /* TSSMSCodeRequest.m */; };
 		F530C6D626802E5D009DC29A /* TSQuickLoginRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F530C6CF26802E5D009DC29A /* TSQuickLoginRequest.m */; };
@@ -390,6 +396,8 @@
 		F530CE8D26846BE0009DC29A /* TSToolsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CE8C26846BE0009DC29A /* TSToolsManager.m */; };
 		F530CE9026846D3E009DC29A /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CE8E26846D3E009DC29A /* UIView+Frame.m */; };
 		F530CE9326846E9C009DC29A /* NSString+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CE9126846E9C009DC29A /* NSString+Frame.m */; };
+		F530CEB9268AB515009DC29A /* TSLocationInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CEB8268AB515009DC29A /* TSLocationInfoModel.m */; };
+		F530CEBD268B09DD009DC29A /* TSStockoutView.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CEBC268B09DD009DC29A /* TSStockoutView.m */; };
 		F54972FE2668842500181E3F /* TShopMallTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F54972FD2668842500181E3F /* TShopMallTests.m */; };
 		F54973092668842500181E3F /* TShopMallUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F54973082668842500181E3F /* TShopMallUITests.m */; };
 		F54973602668A22100181E3F /* SSGenaralRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F54973402668A22100181E3F /* SSGenaralRequest.m */; };
@@ -684,6 +692,12 @@
 		C25A7F8D2684741F0006C6AF /* TSMakeOrderCommitOrderDataController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSMakeOrderCommitOrderDataController.m; sourceTree = "<group>"; };
 		C25A7F8F268480FD0006C6AF /* TSMakeOrderInvoiceViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSMakeOrderInvoiceViewModel.h; sourceTree = "<group>"; };
 		C25A7F90268480FD0006C6AF /* TSMakeOrderInvoiceViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSMakeOrderInvoiceViewModel.m; sourceTree = "<group>"; };
+		C25AD82B268AB38C000D2258 /* TSGoodsListController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSGoodsListController.h; sourceTree = "<group>"; };
+		C25AD82C268AB38C000D2258 /* TSGoodsListController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSGoodsListController.m; sourceTree = "<group>"; };
+		C25AD82E268AB839000D2258 /* TSTestSearchResultController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSTestSearchResultController.h; sourceTree = "<group>"; };
+		C25AD82F268AB839000D2258 /* TSTestSearchResultController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSTestSearchResultController.m; sourceTree = "<group>"; };
+		C25AD831268B13AC000D2258 /* TSInvoiceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSInvoiceModel.h; sourceTree = "<group>"; };
+		C25AD832268B13AC000D2258 /* TSInvoiceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSInvoiceModel.m; sourceTree = "<group>"; };
 		C2A34C68267449060095497E /* TSAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSAlertView.h; sourceTree = "<group>"; };
 		C2A34C69267449080095497E /* TSAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSAlertView.m; sourceTree = "<group>"; };
 		C2A34C7526749E3D0095497E /* TSSearchController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSSearchController.h; sourceTree = "<group>"; };
@@ -987,8 +1001,8 @@
 		DC3440C62672600600F5B0DA /* TSHomePageCategoryViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSHomePageCategoryViewModel.m; sourceTree = "<group>"; };
 		DC3440C82672601F00F5B0DA /* TSHomePageReleaseViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSHomePageReleaseViewModel.h; sourceTree = "<group>"; };
 		DC3440C92672601F00F5B0DA /* TSHomePageReleaseViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSHomePageReleaseViewModel.m; sourceTree = "<group>"; };
-		DC3440CB2672604400F5B0DA /* TSHomePageContainerViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSHomePageContainerViewModel.h; sourceTree = "<group>"; };
-		DC3440CC2672604400F5B0DA /* TSHomePageContainerViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSHomePageContainerViewModel.m; sourceTree = "<group>"; };
+		DC3440CB2672604400F5B0DA /* TSCategoryGroupViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSCategoryGroupViewModel.h; sourceTree = "<group>"; };
+		DC3440CC2672604400F5B0DA /* TSCategoryGroupViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSCategoryGroupViewModel.m; sourceTree = "<group>"; };
 		DC3440D12672F62C00F5B0DA /* TSHomePageBaseCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSHomePageBaseCell.h; sourceTree = "<group>"; };
 		DC3440D22672F62C00F5B0DA /* TSHomePageBaseCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSHomePageBaseCell.m; sourceTree = "<group>"; };
 		DC3440DD2672FC3900F5B0DA /* TSHomePageBaseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSHomePageBaseModel.h; sourceTree = "<group>"; };
@@ -998,8 +1012,8 @@
 		DC45FEB126773AE700CE762E /* EXTScope.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EXTScope.m; sourceTree = "<group>"; };
 		DC45FEB226773AE700CE762E /* EXTScope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXTScope.h; sourceTree = "<group>"; };
 		DC45FEB426773B5C00CE762E /* metamacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = metamacros.h; sourceTree = "<group>"; };
-		DC45FEB8267742F700CE762E /* TSHomePageContainerGroup.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSHomePageContainerGroup.h; sourceTree = "<group>"; };
-		DC45FEB9267742F700CE762E /* TSHomePageContainerGroup.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSHomePageContainerGroup.m; sourceTree = "<group>"; };
+		DC45FEB8267742F700CE762E /* TSCategoryGroup.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSCategoryGroup.h; sourceTree = "<group>"; };
+		DC45FEB9267742F700CE762E /* TSCategoryGroup.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSCategoryGroup.m; sourceTree = "<group>"; };
 		DC45FEBB26783A1300CE762E /* TSHomePageContainerCollectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSHomePageContainerCollectionView.h; sourceTree = "<group>"; };
 		DC45FEBC26783A1300CE762E /* TSHomePageContainerCollectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSHomePageContainerCollectionView.m; sourceTree = "<group>"; };
 		DC45FEBE26783A6E00CE762E /* TSHomePageContainerCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSHomePageContainerCollectionViewCell.h; sourceTree = "<group>"; };
@@ -1044,6 +1058,8 @@
 		DCA035F7268355D2003DE5F7 /* TSServicesManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSServicesManager.m; sourceTree = "<group>"; };
 		DCA035F92683578C003DE5F7 /* NSObject+TSProperty.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+TSProperty.h"; sourceTree = "<group>"; };
 		DCA035FA2683578C003DE5F7 /* NSObject+TSProperty.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+TSProperty.m"; sourceTree = "<group>"; };
+		DFB30001268AF5D600FC8FF9 /* TSCategoryDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSCategoryDetailViewController.h; sourceTree = "<group>"; };
+		DFB30002268AF5D600FC8FF9 /* TSCategoryDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSCategoryDetailViewController.m; sourceTree = "<group>"; };
 		DFB3FFB22682E4B300FC8FF9 /* NTESQLHomePageCustomUIModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTESQLHomePageCustomUIModel.m; sourceTree = "<group>"; };
 		DFB3FFB32682E4B300FC8FF9 /* NTESQLHomePageCustomUIModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESQLHomePageCustomUIModel.h; sourceTree = "<group>"; };
 		DFB3FFB52682E54900FC8FF9 /* NTESQPDemoDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESQPDemoDefines.h; sourceTree = "<group>"; };
@@ -1085,6 +1101,10 @@
 		DFB3FFF52689A7AE00FC8FF9 /* TSRankRecommendCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSRankRecommendCell.m; sourceTree = "<group>"; };
 		DFB3FFF72689C1AA00FC8FF9 /* TSMainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSMainViewController.h; sourceTree = "<group>"; };
 		DFB3FFF82689C1AA00FC8FF9 /* TSMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSMainViewController.m; sourceTree = "<group>"; };
+		DFB3FFFB268AB6EF00FC8FF9 /* TSJsonCacheData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSJsonCacheData.h; sourceTree = "<group>"; };
+		DFB3FFFC268AB6EF00FC8FF9 /* TSJsonCacheData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSJsonCacheData.m; sourceTree = "<group>"; };
+		DFB3FFFE268AEE7700FC8FF9 /* TSOneRowsGoodsCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSOneRowsGoodsCollectionViewCell.h; sourceTree = "<group>"; };
+		DFB3FFFF268AEE7700FC8FF9 /* TSOneRowsGoodsCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSOneRowsGoodsCollectionViewCell.m; sourceTree = "<group>"; };
 		ECCE8A564DF47B445E7905B1 /* Pods-TShopMall-TShopMallUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TShopMall-TShopMallUITests.release.xcconfig"; path = "Target Support Files/Pods-TShopMall-TShopMallUITests/Pods-TShopMall-TShopMallUITests.release.xcconfig"; sourceTree = "<group>"; };
 		F530C6CC26802E5D009DC29A /* TSSMSCodeRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSSMSCodeRequest.m; sourceTree = "<group>"; };
 		F530C6CD26802E5D009DC29A /* TSQuickLoginRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSQuickLoginRequest.h; sourceTree = "<group>"; };
@@ -1258,6 +1278,10 @@
 		F530CE8F26846D3E009DC29A /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
 		F530CE9126846E9C009DC29A /* NSString+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Frame.m"; sourceTree = "<group>"; };
 		F530CE9226846E9C009DC29A /* NSString+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Frame.h"; sourceTree = "<group>"; };
+		F530CEB7268AB515009DC29A /* TSLocationInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSLocationInfoModel.h; sourceTree = "<group>"; };
+		F530CEB8268AB515009DC29A /* TSLocationInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSLocationInfoModel.m; sourceTree = "<group>"; };
+		F530CEBB268B09DD009DC29A /* TSStockoutView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSStockoutView.h; sourceTree = "<group>"; };
+		F530CEBC268B09DD009DC29A /* TSStockoutView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSStockoutView.m; sourceTree = "<group>"; };
 		F54972DE2668842200181E3F /* TShopMall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TShopMall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F54972F22668842400181E3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F54972F92668842500181E3F /* TShopMallTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TShopMallTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1843,6 +1867,8 @@
 				C21A4B98267CAAC100766F72 /* TSAreaModel.m */,
 				C25A7F8326845FB10006C6AF /* TSBalanceModel.h */,
 				C25A7F8426845FB10006C6AF /* TSBalanceModel.m */,
+				C25AD831268B13AC000D2258 /* TSInvoiceModel.h */,
+				C25AD832268B13AC000D2258 /* TSInvoiceModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2203,6 +2229,8 @@
 				DC06D6E5268812CB0013633F /* TSGridGoodsCollectionView.m */,
 				DC06D6E7268813500013633F /* TSGridGoodsCollectionViewCell.h */,
 				DC06D6E8268813500013633F /* TSGridGoodsCollectionViewCell.m */,
+				DFB3FFFE268AEE7700FC8FF9 /* TSOneRowsGoodsCollectionViewCell.h */,
+				DFB3FFFF268AEE7700FC8FF9 /* TSOneRowsGoodsCollectionViewCell.m */,
 			);
 			path = CollectionView;
 			sourceTree = "<group>";
@@ -2330,6 +2358,15 @@
 				DFB3FFF226899EF300FC8FF9 /* TSTableViewBaseCell.m */,
 			);
 			path = TSTableViewBaseCell;
+			sourceTree = "<group>";
+		};
+		DFB3FFFA268AB6D400FC8FF9 /* JsonCacheData */ = {
+			isa = PBXGroup;
+			children = (
+				DFB3FFFB268AB6EF00FC8FF9 /* TSJsonCacheData.h */,
+				DFB3FFFC268AB6EF00FC8FF9 /* TSJsonCacheData.m */,
+			);
+			path = JsonCacheData;
 			sourceTree = "<group>";
 		};
 		F530C6CB26802E5D009DC29A /* DataController */ = {
@@ -2758,6 +2795,15 @@
 			path = AlertView;
 			sourceTree = "<group>";
 		};
+		F530CEBA268B09B6009DC29A /* StockoutView */ = {
+			isa = PBXGroup;
+			children = (
+				F530CEBB268B09DD009DC29A /* TSStockoutView.h */,
+				F530CEBC268B09DD009DC29A /* TSStockoutView.m */,
+			);
+			path = StockoutView;
+			sourceTree = "<group>";
+		};
 		F54972D52668842200181E3F = {
 			isa = PBXGroup;
 			children = (
@@ -2818,6 +2864,7 @@
 		F54973162668A22100181E3F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				DFB3FFFA268AB6D400FC8FF9 /* JsonCacheData */,
 				F530CE8726846B1E009DC29A /* AlertView */,
 				F530CD1726809B62009DC29A /* MaskPopups */,
 				F530CCBE26804167009DC29A /* Hybrid */,
@@ -2964,8 +3011,8 @@
 				C22EE27126807A9500E59C86 /* SearchResult */,
 				DC3440B926722DB600F5B0DA /* TSHomePageViewModel.h */,
 				DC3440BA26722DB600F5B0DA /* TSHomePageViewModel.m */,
-				DC3440CB2672604400F5B0DA /* TSHomePageContainerViewModel.h */,
-				DC3440CC2672604400F5B0DA /* TSHomePageContainerViewModel.m */,
+				DC3440CB2672604400F5B0DA /* TSCategoryGroupViewModel.h */,
+				DC3440CC2672604400F5B0DA /* TSCategoryGroupViewModel.m */,
 				DC3440BC267238F600F5B0DA /* TSHomePageCellViewModel.h */,
 				DC3440BD267238F600F5B0DA /* TSHomePageCellViewModel.m */,
 				DC3440C226723D4D00F5B0DA /* TSHomePageBannerViewModel.h */,
@@ -2990,8 +3037,8 @@
 				DC3440C0267239CD00F5B0DA /* TSHomePageCellTemplateModel.m */,
 				DC3440DD2672FC3900F5B0DA /* TSHomePageBaseModel.h */,
 				DC3440DE2672FC3900F5B0DA /* TSHomePageBaseModel.m */,
-				DC45FEB8267742F700CE762E /* TSHomePageContainerGroup.h */,
-				DC45FEB9267742F700CE762E /* TSHomePageContainerGroup.m */,
+				DC45FEB8267742F700CE762E /* TSCategoryGroup.h */,
+				DC45FEB9267742F700CE762E /* TSCategoryGroup.m */,
 				DC99118E2679FB3800EF9B26 /* TSHomePageContentModel.h */,
 				DC99118F2679FB3800EF9B26 /* TSHomePageContentModel.m */,
 				C2C7652A26788F40004757B9 /* TSSearchHotKeyModel.h */,
@@ -3019,6 +3066,10 @@
 				C2A34C7626749E3D0095497E /* TSSearchController.m */,
 				C22EE25F26806D2B00E59C86 /* TSSearchResultController.h */,
 				C22EE26026806D2B00E59C86 /* TSSearchResultController.m */,
+				C25AD82B268AB38C000D2258 /* TSGoodsListController.h */,
+				C25AD82C268AB38C000D2258 /* TSGoodsListController.m */,
+				C25AD82E268AB839000D2258 /* TSTestSearchResultController.h */,
+				C25AD82F268AB839000D2258 /* TSTestSearchResultController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -3040,6 +3091,8 @@
 			children = (
 				F54973AF2668BBB200181E3F /* TSCategoryViewController.h */,
 				F54973B02668BBB200181E3F /* TSCategoryViewController.m */,
+				DFB30001268AF5D600FC8FF9 /* TSCategoryDetailViewController.h */,
+				DFB30002268AF5D600FC8FF9 /* TSCategoryDetailViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -3427,6 +3480,7 @@
 		F55D2CE0267881AB006BACCF /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F530CEBA268B09B6009DC29A /* StockoutView */,
 				F530CD612681E105009DC29A /* ShareView */,
 				F530CD4B26818FDF009DC29A /* PriceView */,
 				F530CD47268174EE009DC29A /* TopFunctionView */,
@@ -3469,6 +3523,8 @@
 				F55D2CEE2678A6B9006BACCF /* TSGoodDetailSectionModel.m */,
 				F55D2CF02678A6B9006BACCF /* TSGoodDetailItemModel.h */,
 				F55D2CF12678A6B9006BACCF /* TSGoodDetailItemModel.m */,
+				F530CEB7268AB515009DC29A /* TSLocationInfoModel.h */,
+				F530CEB8268AB515009DC29A /* TSLocationInfoModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3939,6 +3995,7 @@
 				C25A7F88268467430006C6AF /* TSMakeOrderGoodsViewModel.m in Sources */,
 				F55D2D26267B3015006BACCF /* TSRankMonthViewController.m in Sources */,
 				C2EF88CA2670997100E7374A /* TSCartDataController.m in Sources */,
+				DFB30000268AEE7700FC8FF9 /* TSOneRowsGoodsCollectionViewCell.m in Sources */,
 				CE5674BB2683570300252F5D /* TSWalletModel.m in Sources */,
 				DC3440CA2672601F00F5B0DA /* TSHomePageReleaseViewModel.m in Sources */,
 				C22EE27726807E4C00E59C86 /* TSSearchResultFittleView.m in Sources */,
@@ -3962,6 +4019,7 @@
 				C3A6C4E4267A1CAF00FC71D6 /* TSSettingDataController.m in Sources */,
 				F55D2D20267B1EE9006BACCF /* TSRankHotCellController.m in Sources */,
 				C21A4B9C267D95A000766F72 /* TSLocationManager.m in Sources */,
+				F530CEB9268AB515009DC29A /* TSLocationInfoModel.m in Sources */,
 				F55D2D38267B3F38006BACCF /* TSRankCell.m in Sources */,
 				04F1EFBC2682E33600FF007D /* TSRealNameAuthDataController.m in Sources */,
 				F54973632668A22100181E3F /* YTKAnimatingRequestAccessory.m in Sources */,
@@ -4099,6 +4157,7 @@
 				CE66DAF52684267B00E8D433 /* TSWithdrawalRecordModel.m in Sources */,
 				C25A7F8B26846AB00006C6AF /* TSMakeOrderPriceViewModel.m in Sources */,
 				F55D2D1A267B1AC5006BACCF /* TSBaseListController.m in Sources */,
+				DFB30003268AF5D600FC8FF9 /* TSCategoryDetailViewController.m in Sources */,
 				DC3440D32672F62C00F5B0DA /* TSHomePageBaseCell.m in Sources */,
 				DC45FEBD26783A1300CE762E /* TSHomePageContainerCollectionView.m in Sources */,
 				DC06D6E9268813500013633F /* TSGridGoodsCollectionViewCell.m in Sources */,
@@ -4114,7 +4173,7 @@
 				F55D2C362671E14B006BACCF /* TSUniversalHeaderView.m in Sources */,
 				F54973672668A22100181E3F /* SSNetworkAlertUtil.m in Sources */,
 				04F1EFB62682DF1000FF007D /* TSRealNameAuthViewController.m in Sources */,
-				DC3440CD2672604400F5B0DA /* TSHomePageContainerViewModel.m in Sources */,
+				DC3440CD2672604400F5B0DA /* TSCategoryGroupViewModel.m in Sources */,
 				F530CCFA26804167009DC29A /* TSWKAppManager.m in Sources */,
 				F549739B2668AA7900181E3F /* TSBaseViewController.m in Sources */,
 				DC9911C5267C475000EF9B26 /* YBNestContainerLayout.m in Sources */,
@@ -4136,6 +4195,7 @@
 				C2C7652B26788F40004757B9 /* TSSearchHotKeyModel.m in Sources */,
 				C24A69B82689669B0022A81F /* TSPayChannelItem.m in Sources */,
 				F56D4B44266DFB8900C1AD9E /* FMCollectionLayoutAttributes.m in Sources */,
+				DFB3FFFD268AB6EF00FC8FF9 /* TSJsonCacheData.m in Sources */,
 				041131CF268096CB000B5BAF /* TSHotDataController.m in Sources */,
 				DC3440C72672600600F5B0DA /* TSHomePageCategoryViewModel.m in Sources */,
 				CE4F6BD126859ED300812275 /* TSAddBankCardCell.m in Sources */,
@@ -4157,6 +4217,7 @@
 				F55D2C392671E14B006BACCF /* TSCollectionViewLeftAlignedLayout.m in Sources */,
 				C25A7F91268480FD0006C6AF /* TSMakeOrderInvoiceViewModel.m in Sources */,
 				C2F0573526857B20003D1B2A /* TSAddressSmartDataController.m in Sources */,
+				C25AD830268AB839000D2258 /* TSTestSearchResultController.m in Sources */,
 				F530CC9D26803FCD009DC29A /* UIColor+General.m in Sources */,
 				F56D4B47266DFB8900C1AD9E /* FMLayoutBackground.m in Sources */,
 				F530CCEA26804167009DC29A /* UITableView+TSWebImageAutoSize.m in Sources */,
@@ -4251,6 +4312,7 @@
 				C24A69BB26896ADE0022A81F /* TSPayTimeView.m in Sources */,
 				04F1EFAD2682D22100FF007D /* TSRealnameInfoSectionModel.m in Sources */,
 				DCA035D72680765B003DE5F7 /* TSUserLoginManager.m in Sources */,
+				F530CEBD268B09DD009DC29A /* TSStockoutView.m in Sources */,
 				C3A6C475267A1BEA00FC71D6 /* TSSettingViewController.m in Sources */,
 				DFB3FFC726844A0A00FC8FF9 /* WechatManager.m in Sources */,
 				F530CCA626803FCD009DC29A /* UIView+General.m in Sources */,
@@ -4263,6 +4325,7 @@
 				C21A4B96267CA25200766F72 /* TSAreaDataController.m in Sources */,
 				C3A6C4E6267A1CAF00FC71D6 /* TSWithdrawalPswSetDataController.m in Sources */,
 				C3A6C4C6267A1C5700FC71D6 /* TSAboutMeBottomCell.m in Sources */,
+				C25AD82D268AB38C000D2258 /* TSGoodsListController.m in Sources */,
 				DC3440DF2672FC3900F5B0DA /* TSHomePageBaseModel.m in Sources */,
 				C2EF88B82670997100E7374A /* TSCartModel.m in Sources */,
 				CE4F6BE82687908200812275 /* TSOfficialServicesCell.m in Sources */,
@@ -4281,6 +4344,7 @@
 				F530CC6526803E43009DC29A /* Toasty.m in Sources */,
 				C24A69D62689D73A0022A81F /* TSPaySuccessRecomendCell.m in Sources */,
 				C3A6C4E2267A1CAF00FC71D6 /* TSBindMobileDataController.m in Sources */,
+				C25AD833268B13AC000D2258 /* TSInvoiceModel.m in Sources */,
 				DCA035F8268355D2003DE5F7 /* TSServicesManager.m in Sources */,
 				F54973622668A22100181E3F /* SSResponseModel.m in Sources */,
 				C35F1865267C7F8A00F65AF9 /* TSDatePickerView.m in Sources */,
@@ -4391,7 +4455,7 @@
 				F530CC6626803E43009DC29A /* Progress.m in Sources */,
 				DC06D6E6268812CB0013633F /* TSGridGoodsCollectionView.m in Sources */,
 				DFB3FFC926844A0A00FC8FF9 /* TSShareView.m in Sources */,
-				DC45FEBA267742F700CE762E /* TSHomePageContainerGroup.m in Sources */,
+				DC45FEBA267742F700CE762E /* TSCategoryGroup.m in Sources */,
 				F55D2D35267B3F04006BACCF /* TSRankHeaderView.m in Sources */,
 				F55D2D32267B3DB7006BACCF /* TSRankSectionModel.m in Sources */,
 				F54973602668A22100181E3F /* SSGenaralRequest.m in Sources */,

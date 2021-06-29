@@ -17,5 +17,7 @@
 - (void)checkGift:(TSCart *)cart;
 - (void)goToShopping;
 - (void)goToSettle;
+
+- (void)recomendGoodsSelected:(NSString *)uuid;
 @end
 
