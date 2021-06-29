@@ -137,11 +137,16 @@
     sender.enabled = YES;
     current = current - 1;
     self.inputTF.text = [NSString stringWithFormat:@"%ld",current];
+    
+    if (self.buyNumChangeBlock) {
+        self.buyNumChangeBlock(self.inputTF.text);
+    }
 }
 
 -(void)addAction:(UIButton *)sender{
     if ([self.inputTF.text integerValue] >= self.purchaseModel.totalNum) {
         sender.enabled = NO;
+        [Popover popToastOnWindowWithText:@"已超库存数"];
         return;
     }
     sender.enabled = YES;
@@ -149,6 +154,9 @@
     current = current + 1;
     self.inputTF.text = [NSString stringWithFormat:@"%ld",current];
     
+    if (self.buyNumChangeBlock) {
+        self.buyNumChangeBlock(self.inputTF.text);
+    }
 }
 
 #pragma mark - UITextFieldDelegate
@@ -273,6 +281,11 @@
     _purchaseModel = purchaseModel;
     [_iconImge sd_setImageWithURL:[NSURL URLWithString:purchaseModel.iconUrl]];
     _priceValueLable.text = [NSString stringWithFormat:@"%@",purchaseModel.price];
+    if (purchaseModel.hasProduct) {
+        _statusLable.text = @"有货";
+    } else {
+        _statusLable.text = @"无货";
+    }
 }
 
 @end

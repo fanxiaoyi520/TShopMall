@@ -29,6 +29,7 @@
     if (self == [super init]) {
         self.view.alpha = 0;
         self.dataCon = [TSSearchResultDataController new];
+        self.dataCon.context = self;
     }
     return self;
 }

@@ -132,23 +132,21 @@
     }];
     
     TSHomePageContainerGroup *group = self.containerViewModel.segmentHeaderDatas[collectionView.tag];
-    [self.containerViewModel loadData:group callBack:^(NSArray * _Nonnull list, NSError * _Nonnull error) {
-        
+    [self.containerViewModel loadData:group success:^(NSArray * _Nonnull list) {
         [Popover removePopoverOnWindow];
         
-        if (!error) {
-            collectionView.items = list;
-            [collectionView reloadData];
-            if (list.count < group.totalNum) {
-                [collectionView.collectionView.mj_footer resetNoMoreData];
-            } else {
-                [collectionView.collectionView.mj_footer endRefreshingWithNoMoreData];
-            }
-            [self showEmptyView:collectionView];
+        collectionView.items = list;
+        [collectionView reloadData];
+        if (list.count < group.totalNum) {
+            [collectionView.collectionView.mj_footer resetNoMoreData];
+        } else {
+            [collectionView.collectionView.mj_footer endRefreshingWithNoMoreData];
         }
-        else{
-            [self showErrorView:collectionView];
-        }
+        [self showEmptyView:collectionView];
+    
+    } failure:^(NSError * _Nonnull error) {
+        [Popover removePopoverOnWindow];
+        [self showErrorView:collectionView];
     }];
 }
 

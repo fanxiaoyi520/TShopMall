@@ -152,6 +152,9 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (currentType == 0 && section == 0) {
+        return KRateW(168.0);
+    }
     return KRateW(10.0);
 }
 
@@ -160,6 +163,24 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    if (currentType == 0 && section == 0) {
+        TSAreaHotCityHeader *header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"TSAreaHotCityHeader"];
+        header.hotCities = [TSAreaModel hotCities];
+        __weak typeof(self) weakSelf = self;
+        header.hotcitySeleted = ^(TSAreaModel *hotCity) {
+            weakSelf.provice.uuid = hotCity.provinceUuid;
+            weakSelf.provice.provinceName = hotCity.provinceName;
+            [weakSelf.areaView updateString:hotCity.provinceName type:0];
+            
+            weakSelf.city.uuid = hotCity.uuid;
+            weakSelf.city.cityName = hotCity.cityName;
+            weakSelf.city.provinceUuid = hotCity.provinceUuid;
+            self->currentType = 2;
+            [weakSelf.areaView updateString:hotCity.cityName type:1];
+            [weakSelf.delegate reloadDataWiteType:self->currentType uuid:hotCity.uuid];
+        };
+        return header;
+    }
     return [UITableViewHeaderFooterView new];
 }
 
@@ -307,6 +328,7 @@
     [self addSubview:self.tableView];
     
     [self.tableView registerClass:[TSAreaCell class] forCellReuseIdentifier:@"TSAreaCell"];
+    [self.tableView registerClass:[TSAreaHotCityHeader class] forHeaderFooterViewReuseIdentifier:@"TSAreaHotCityHeader"];
         
     return self.tableView;
 }
@@ -738,4 +760,89 @@
     return self.indeDes;
 }
 
+@end
+
+
+@implementation TSAreaHotCityHeader
+
+- (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier{
+    if (self = [super initWithReuseIdentifier:reuseIdentifier]) {
+        self.backgroundColor = UIColor.whiteColor;
+    }
+    return self;
+}
+
+- (void)setHotCities:(NSArray<TSAreaModel *> *)hotCities{
+    if (self.hotCities.count != 0) {
+        return;
+    }
+    _hotCities = hotCities;
+    [self setUpUI];
+}
+
+- (void)hotCityTapped:(UIButton *)sender{
+    if (self.hotcitySeleted) {
+        self.hotcitySeleted(self.hotCities[sender.tag]);
+    }
+}
+
+- (void)setUpUI{
+    CGFloat width = (kScreenWidth - KRateW(32.0)) / 4.0;
+    CGFloat height = KRateW(22.0);
+    for (NSInteger i=0; i<self.hotCities.count; i++) {
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        btn.tag = i;
+        btn.titleLabel.font = KRegularFont(14.0);
+        [btn setTitleColor:KHexColor(@"#2D3132") forState:UIControlStateNormal];
+        [self.contentView addSubview:btn];
+        [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.contentView.mas_left).offset(width * (i % 4));
+            make.width.mas_equalTo(width);
+            make.height.mas_equalTo(height);
+            make.top.equalTo(self.title.mas_bottom).offset(KRateH(14.0) + (height + KRateW(14.0)) * (i/4));
+        }];
+        [btn setTitle:self.hotCities[i].cityName forState:UIControlStateNormal];
+        [btn addTarget:self action:@selector(hotCityTapped:) forControlEvents:UIControlEventTouchUpInside];
+    }
+}
+
+
+- (void)layoutSubviews{
+    [self.title mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.contentView.mas_left).offset(KRateW(16.0));
+        make.height.mas_equalTo(KRateW(22.0));
+        make.top.equalTo(self.contentView.mas_top).offset(KRateW(14.0));
+    }];
+    [self.line mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.contentView.mas_top);
+        make.left.equalTo(self.contentView.mas_left).offset(KRateW(16.0));
+        make.width.mas_equalTo(kScreenWidth - KRateW(32.0));
+        make.height.mas_equalTo(0.36);
+    }];
+}
+
+- (UILabel *)title{
+    if (_title) {
+        return _title;
+    }
+    self.title = [UILabel new];
+    self.title.text = @"热门城市";
+    self.title.font = KFont(PingFangSCMedium, 14.0);
+    self.title.textColor = KHexColor(@"#2D3132");
+    [self.contentView addSubview:self.title];
+    
+    return self.title;
+}
+
+
+- (UIView *)line{
+    if (_line) {
+        return _line;
+    }
+    self.line = [UIView new];
+    self.line.backgroundColor = KHexColor(@"#E6E6E6");
+    [self.contentView addSubview:self.line];
+    
+    return self.line;
+}
 @end

@@ -25,11 +25,6 @@
 }
 
 - (void)itemTap:(TSSearchResultFittleButton *)sender{
-    if (sender.selected == YES) {
-        sender.selected = YES;
-        [self.delegate operationType:sender.tag sortType:sender.isUp==YES? 2:1];
-        return;
-    }
     for (UIView *view in self.subviews) {
         if ([view isKindOfClass:[TSSearchResultFittleButton class]]) {
             TSSearchResultFittleButton *btn = (TSSearchResultFittleButton *)view;
@@ -41,7 +36,10 @@
         }
     }
     
-    [self.delegate operationType:sender.tag sortType:sender.isUp];
+    if (sender.selected == YES) {
+        sender.isUp = !sender.isUp;
+        [self.delegate operationType:sender.tag sortType:sender.isUp==YES? 2:1];
+    }
 }
 
 - (void)setFittleItems{
@@ -71,17 +69,20 @@
 - (void)setSelected:(BOOL)selected{
     [super setSelected:selected];
     if (selected == YES) {
-        self.isUp = !self.isUp;
         self.name.textColor = KHexColor(@"#E64C3D");
-        if (self.isUp == YES) {
-            self.indeImg.image = KImageMake(@"inde_red_up");
-        } else {
-            self.indeImg.image = KImageMake(@"inde_red_down");
-        }
     } else {
         self.isUp = NO;
         self.name.textColor = KHexAlphaColor(@"#2D3132", 0.6);
         self.indeImg.image = KImageMake(@"");
+    }
+}
+
+- (void)setIsUp:(BOOL)isUp{
+    _isUp = isUp;
+    if (isUp) {
+        self.indeImg.image = KImageMake(@"inde_red_up");
+    } else {
+        self.indeImg.image = KImageMake(@"inde_red_down");
     }
 }
 
