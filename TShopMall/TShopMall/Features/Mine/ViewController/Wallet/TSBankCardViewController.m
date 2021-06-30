@@ -168,13 +168,13 @@
 // MARK: TSBankCardFooterDelegate
 - (void)bankCardFooterAddBankCardAction:(id)sender {
     TSAddCardViewController *vc = [TSAddCardViewController new];
+    vc.popToWhere = BankCardList;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 // MARK: TSGlobalNotifyServer
 - (void)addKeyCommand:(UIKeyCommand *)keyCommand {
     dispatch_async(dispatch_get_main_queue(), ^{
-        NSLog(@"陈工");
         @weakify(self);
         [self.dataController fetchQueryBankCardListDataComplete:^(BOOL isSucess) {
             @strongify(self);

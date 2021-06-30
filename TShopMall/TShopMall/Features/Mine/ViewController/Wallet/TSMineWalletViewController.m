@@ -93,6 +93,7 @@
 // MARK: TSWalletCellViewDelegate
 - (void)walletCellViewIsBindingAction:(id)sender {
     TSAddCardViewController *vc = [TSAddCardViewController new];
+    vc.popToWhere = MyIncome;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

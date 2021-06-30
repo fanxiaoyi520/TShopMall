@@ -11,6 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol TSAddBankCardDelegate <NSObject>
 @optional
 - (void)addBankCardInputInfoTextFieldAction:(UITextField *)textField;
+- (void)addBankCardInputInfoTextFieldEditingDidBeginAction:(UITextField *)textField;
 - (void)addBankCardfuncAction:(id _Nullable)sender;
 - (void)addBankCardFooterSureAction:(id _Nullable)sender;
 @end
