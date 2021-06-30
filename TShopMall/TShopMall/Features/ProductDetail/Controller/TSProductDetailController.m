@@ -724,7 +724,15 @@ spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
 }
 
 - (void)shareViewView:(UIView *)view shareFriendsAction:(UIButton *)sender{
-    [[WechatShareManager shareInstance] shareWXWithTitle:@"标题" andDescription:@"描述" andShareURL:@"http://www.baidu.com" andThumbImage:nil andWXScene:WechatShareTypeFriends];
+    
+    __weak __typeof(self)weakSelf = self;
+    [self.dataController fetchStaffShareShareType:0 complete:^(BOOL isSucess, NSDictionary * _Nonnull data) {
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
+        if (isSucess) {
+            [strongSelf staffShare:data];
+        }
+        
+    }];
 }
 
 - (void)shareViewView:(UIView *)view sharePYQAction:(UIButton *)sender{
@@ -745,6 +753,41 @@ spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
     }else{
         [Popover popToastOnWindowWithText:@"保存成功"];
     }
+}
+
+-(void)staffShare:(NSDictionary *)share{
+    if (![WXApi isWXAppInstalled]) {
+        [Popover popToastOnWindowWithText:@"请安装微信再进行分享~"];
+        return;
+    }
+
+    WXMiniProgramObject *object = [WXMiniProgramObject object];
+    object.webpageUrl = share[@"webpageUrl"];
+    object.userName = @"gh_99b9b7fce84a";
+    object.path = share[@"path"];
+    UIImage *image = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:share[@"smallShareUrl"]]]];
+    object.hdImageData = [self imageWithImage:image scaledToSize:CGSizeMake(300, image.size.height/image.size.width*300)];
+    object.withShareTicket = NO;
+    object.miniProgramType = WXMiniProgramTypeTest;
+    WXMediaMessage *message = [WXMediaMessage message];
+    message.title = @"123";
+    message.description = share[@"description"];
+    message.mediaObject = object;
+    SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
+    req.bText = NO;
+    req.message = message;
+    req.scene = WXSceneSession;
+    [WXApi sendReq:req completion:^(BOOL success) {
+        
+    }];
+}
+
+- (NSData *)imageWithImage:(UIImage*)image scaledToSize:(CGSize)newSize;{
+    UIGraphicsBeginImageContext(newSize);
+    [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return UIImageJPEGRepresentation(newImage, 0.8);
 }
 
 #pragma mark - Getter
