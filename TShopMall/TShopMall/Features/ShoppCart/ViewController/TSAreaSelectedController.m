@@ -99,7 +99,12 @@
 }
 
 - (void)dismiss{
-    self.areaSelected(self.card.provice, self.card.city, self.card.area, self.card.street, self.card.location);
+    if (self.card.provice.provinceName.length !=0 &&
+        self.card.city.cityName.length !=0 &&
+        self.card.area.regionName.length != 0 &&
+        self.card.street.streetName.length != 0) {
+        self.areaSelected(self.card.provice, self.card.city, self.card.area, self.card.street, self.card.location);
+    }
     [self dismissViewControllerAnimated:NO completion:^{
         
     }];
