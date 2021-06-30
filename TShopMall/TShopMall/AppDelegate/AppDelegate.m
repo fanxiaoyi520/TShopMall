@@ -35,6 +35,7 @@
     
     [TSServicesManager sharedInstance].bestSellingRecommendService = [TSBestSellingRecommendService new];
     [TSServicesManager sharedInstance].userInfoService = [TSUserInfoService new];
+    [TSServicesManager sharedInstance].uploadImageService = [TSUploadImageService new];
     
     [[TSServicesManager sharedInstance].userInfoService updateUserInfoSuccess:nil failure:nil];
     

@@ -155,7 +155,7 @@
 
 - (void)uploadAvartar:(UIImage *)image {
     [Popover popProgressOnWindowWithText:@"正在上传..."];
-    [[TSServicesManager sharedInstance].userInfoService uploadImage:image success:^(NSString * _Nonnull imageURL) {
+    [[TSServicesManager sharedInstance].uploadImageService uploadImage:image success:^(NSString * _Nonnull imageURL) {
         if (imageURL) {
             [self modifyAvartar:imageURL];
         } else {

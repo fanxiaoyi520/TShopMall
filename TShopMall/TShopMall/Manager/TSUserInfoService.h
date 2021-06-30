@@ -14,11 +14,6 @@ NS_ASSUME_NONNULL_BEGIN
 /** 用户  */
 @property(nonatomic, strong) TSUser *user;
 
-/** 上传图片 */
-- (void)uploadImage:(UIImage *)image
-            success:(void(^_Nullable)(NSString *imageURL))success
-            failure:(void(^_Nullable)(NSString *errorMsg))failure;
-
 - (void)updateUserInfoSuccess:(void(^_Nullable)(void))success
                      failure:(void(^_Nullable)(NSString *errorMsg))failure;
 
