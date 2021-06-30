@@ -9,18 +9,9 @@
 
 @interface TSUserInfoRequest ()
 
-@property (nonatomic, copy) NSString *accountId;
-
 @end
 
 @implementation TSUserInfoRequest
-
-//- (instancetype)initWithAccountId:(NSString *)accountId {
-//    if (self = [super init]) {
-//        _accountId = accountId;
-//    }
-//    return self;
-//}
 
 - (NSString *)baseUrl {
     return kAccountCenterApiPrefix;

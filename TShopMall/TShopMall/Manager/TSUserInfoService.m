@@ -51,8 +51,7 @@
     }];
 }
 
-- (void)getUserInfoAccountId:(NSString *)accountId
-                     success:(void(^_Nullable)(void))success
+- (void)updateUserInfoSuccess:(void(^_Nullable)(void))success
                      failure:(void(^_Nullable)(NSString *errorMsg))failure {
     TSUserInfoRequest *request = [[TSUserInfoRequest alloc] init];
     @weakify(self);
@@ -83,9 +82,8 @@
     TSModifyUserInfoRequest *request = [[TSModifyUserInfoRequest alloc] initWithModifyKey:key modifyValue:value];
     [request startWithCompletionBlockWithSuccess:^(__kindof SSGenaralRequest * _Nonnull request) {
         if (request.responseModel.isSucceed) {
-            if (success) {
-                success();
-            }
+            ///更新本地个人信息
+            [self updateUserInfoSuccess:success failure:failure];
         } else {
             if (failure) {
                 failure(request.responseModel.originalData[@"failCause"]);

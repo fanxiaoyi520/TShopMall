@@ -19,8 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
             success:(void(^_Nullable)(NSString *imageURL))success
             failure:(void(^_Nullable)(NSString *errorMsg))failure;
 
-- (void)getUserInfoAccountId:(NSString *)accountId
-                     success:(void(^_Nullable)(void))success
+- (void)updateUserInfoSuccess:(void(^_Nullable)(void))success
                      failure:(void(^_Nullable)(NSString *errorMsg))failure;
 
 /**

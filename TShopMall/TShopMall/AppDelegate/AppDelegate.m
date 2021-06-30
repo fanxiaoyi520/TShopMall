@@ -36,7 +36,7 @@
     [TSServicesManager sharedInstance].bestSellingRecommendService = [TSBestSellingRecommendService new];
     [TSServicesManager sharedInstance].userInfoService = [TSUserInfoService new];
     
-    [[TSServicesManager sharedInstance].userInfoService getUserInfoAccountId:[TSUserInfoManager userInfo].accountId success:nil failure:nil];
+    [[TSServicesManager sharedInstance].userInfoService updateUserInfoSuccess:nil failure:nil];
     
     if (@available(iOS 13.0, *)) {
         
