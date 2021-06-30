@@ -27,11 +27,12 @@
     [self addSubview:self.titleLabel];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.equalTo(self);
+        make.height.offset(56);
     }];
     
     [self addSubview:self.collectionView];
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.titleLabel.mas_bottom).offset(10).priorityLow();
+        make.top.equalTo(self.titleLabel.mas_bottom).priorityLow();
         make.left.bottom.equalTo(self);
         make.width.equalTo(@(kScreenWidth));
     }];
