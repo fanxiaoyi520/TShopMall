@@ -108,6 +108,8 @@
     self.dataController.requestMethod = Ordinary;
     [self.dataController fetchWithdrawalRecordDataComplete:^(BOOL isSucess) {
         if (isSucess) {
+            if (self.dataController.withdrawalRecordArray.count < 10)
+                [self.recordTableView.mj_footer endRefreshingWithNoMoreData];
             [self.headerView setModel:nil];
             [self.recordTableView reloadData];
         }

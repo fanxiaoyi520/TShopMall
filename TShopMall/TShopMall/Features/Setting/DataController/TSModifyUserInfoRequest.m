@@ -8,8 +8,6 @@
 #import "TSModifyUserInfoRequest.h"
 
 @interface TSModifyUserInfoRequest ()
-
-@property (nonatomic, copy) NSString *accountId;
 /** 需要修改的字段名 */
 @property (nonatomic, copy) NSString *modifyKey;
 /** 修改后的值 */
@@ -19,9 +17,8 @@
 
 @implementation TSModifyUserInfoRequest
 
-- (instancetype)initWithAccountId:(NSString *)accountId modifyKey:(NSString *)key modifyValue:(NSString *)value {
+- (instancetype)initWithModifyKey:(NSString *)key modifyValue:(NSString *)value {
     if (self = [super init]) {
-        _accountId = accountId;
         _modifyKey = key;
         _modifyValue = value;
     }
@@ -50,9 +47,9 @@
     return YTKRequestMethodPOST;
 }
 
-- (id)requestArgument{
+- (id)requestArgument {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setValue:self.accountId forKey:@"accountId"];
+    [params setValue:[TSUserInfoManager userInfo].accountId forKey:@"accountId"];
     [params setValue:self.modifyValue forKey:self.modifyKey];
     [params setValue:@"0" forKey:@"id"];
     NSMutableDictionary *comBody = [self commonBady];

@@ -155,6 +155,7 @@ NSString *const kMineOrderCount = @"v2/usercenter/order/query/queryAllStatusOrde
 
 NSString *const kAboutMeAgreementUrl = @"/rest/v2/front/shopStatement/getShopStatementList";
 NSString *const kModifyUserUrl = @"/user/mng/user";
+NSString *const kUploadImageUrl = @"/rest/v2/usercenter/batchfileupload/batch/upload";
 
 NSString *const kMineWithdrawalApply = @"/rest/v2/withdrawal/record/withdrawalApply";
 NSString *const kMineQueryAppBankCardAccountList = @"/rest/v2/bankCardAccount/queryAppBankCardAccountList";
@@ -163,4 +164,6 @@ NSString *const kMineBankNoCheck = @"/rest/v2/bankCardAccount/bankNoCheck";
 NSString *const kMineGetBankInfo = @"/rest/v2/bankCardAccount/getBankInfo";
 NSString *const kMineDelBankCardAccount = @"/rest/v2/bankCardAccount/delBankCardAccount";
 NSString *const kMineQueryAmount = @"/rest/v2/withdrawal/record/queryAmount";
+NSString *const kMineGetBankNames = @"/rest/v2/bankCardAccount/getBankNames";
+
 

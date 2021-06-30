@@ -22,7 +22,9 @@
    login.animatingView = self.context.view;
    [login startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
        if (request.responseModel.isSucceed) {
-//          [TSServicesManager  sharedInstance].userInfoService getUserInfoAccountId:<#(nonnull NSString *)#> success:<#^(BOOL isSucess)success#> failure:<#^(NSString * _Nonnull errorMsg)failure#>
+           [[TSUserInfoManager userInfo] updateUserInfo:^(BOOL success) {
+                          
+           }];
 
            complete(YES);
        }

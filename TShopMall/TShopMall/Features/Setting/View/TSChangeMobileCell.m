@@ -349,6 +349,12 @@
     if (_delegate && [_delegate respondsToSelector:@selector(universalCollectionViewCellClick:params:)]) {
         [_delegate universalCollectionViewCellClick:self.indexPath params:params];
     }
+    [self.dataController fetchChangeBindWithNewMobile:self.mobileTextField.text validCode:self.codeTextField.text complete:^(BOOL isSucess) {
+        if (isSucess) {
+            [Popover popToastOnWindowWithText:@"换绑成功"];
+            
+        }
+    }];
 }
 
 - (void)setDelegate:(id<UniversalCollectionViewCellDataDelegate>)delegate {
