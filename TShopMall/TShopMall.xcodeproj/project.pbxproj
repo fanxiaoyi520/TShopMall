@@ -34,6 +34,7 @@
 		04F1EFBC2682E33600FF007D /* TSRealNameAuthDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F1EFBB2682E33600FF007D /* TSRealNameAuthDataController.m */; };
 		04F852122689BA4C00B59910 /* TSFirstEnterAgreementView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F852112689BA4C00B59910 /* TSFirstEnterAgreementView.m */; };
 		700F0730268B0B20007C1891 /* TSRecommendMaxPriceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 700F072F268B0B20007C1891 /* TSRecommendMaxPriceView.m */; };
+		65CD9E3D268AED2B00262D98 /* TSMineWalletModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CD9E3C268AED2B00262D98 /* TSMineWalletModel.m */; };
 		AE4DC537B4A93FA6C04B9037 /* libPods-TShopMall.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 825A9D1C217F35DCFB651B21 /* libPods-TShopMall.a */; };
 		C21A4B6E267AF5AE00766F72 /* TSMakeOrderBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C21A4B6D267AF5AE00766F72 /* TSMakeOrderBaseCell.m */; };
 		C21A4B71267AF91F00766F72 /* TSMakeOrderPriceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C21A4B70267AF91F00766F72 /* TSMakeOrderPriceCell.m */; };
@@ -608,6 +609,8 @@
 		27EC567AA21935502889F6EB /* Pods-TShopMall.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TShopMall.debug.xcconfig"; path = "Target Support Files/Pods-TShopMall/Pods-TShopMall.debug.xcconfig"; sourceTree = "<group>"; };
 		700F072E268B0B20007C1891 /* TSRecommendMaxPriceView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSRecommendMaxPriceView.h; sourceTree = "<group>"; };
 		700F072F268B0B20007C1891 /* TSRecommendMaxPriceView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSRecommendMaxPriceView.m; sourceTree = "<group>"; };
+		65CD9E3B268AED2B00262D98 /* TSMineWalletModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSMineWalletModel.h; sourceTree = "<group>"; };
+		65CD9E3C268AED2B00262D98 /* TSMineWalletModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSMineWalletModel.m; sourceTree = "<group>"; };
 		825A9D1C217F35DCFB651B21 /* libPods-TShopMall.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TShopMall.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		847295D7102568B80FCAB72E /* Pods-TShopMallTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TShopMallTests.release.xcconfig"; path = "Target Support Files/Pods-TShopMallTests/Pods-TShopMallTests.release.xcconfig"; sourceTree = "<group>"; };
 		BBF16248DC0233F9DA291554 /* Pods-TShopMallTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TShopMallTests.debug.xcconfig"; path = "Target Support Files/Pods-TShopMallTests/Pods-TShopMallTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -2696,10 +2699,10 @@
 		F530CCE126804167009DC29A /* Helper */ = {
 			isa = PBXGroup;
 			children = (
-				F530CCE226804167009DC29A /* TSWKAppManager.m */,
-				F530CCE326804167009DC29A /* TSWKMessageHandlerHelper.m */,
 				F530CCE426804167009DC29A /* TSWKAppManager.h */,
+				F530CCE226804167009DC29A /* TSWKAppManager.m */,
 				F530CCE526804167009DC29A /* TSWKMessageHandlerHelper.h */,
+				F530CCE326804167009DC29A /* TSWKMessageHandlerHelper.m */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -3448,6 +3451,8 @@
 				CE5674AC26831F0300252F5D /* TSPartnerCenterData.m */,
 				F55D2CB626784ACD006BACCF /* TSMineSectionModel.h */,
 				F55D2CB526784ACD006BACCF /* TSMineSectionModel.m */,
+				65CD9E3B268AED2B00262D98 /* TSMineWalletModel.h */,
+				65CD9E3C268AED2B00262D98 /* TSMineWalletModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -4406,6 +4411,7 @@
 				DFB3FFB42682E4B300FC8FF9 /* NTESQLHomePageCustomUIModel.m in Sources */,
 				F55D2AD0266F5F53006BACCF /* TSHomePageBannerCell.m in Sources */,
 				C3A6C478267A1BEA00FC71D6 /* TSSecurityViewController.m in Sources */,
+				65CD9E3D268AED2B00262D98 /* TSMineWalletModel.m in Sources */,
 				F55D2CDF26788193006BACCF /* TSProductDetailDataController.m in Sources */,
 				F56D4B4A266DFB8900C1AD9E /* FMLayoutCrossSection.m in Sources */,
 				F530CC4826803B1C009DC29A /* RefreshGifHeader.m in Sources */,

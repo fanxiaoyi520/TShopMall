@@ -40,3 +40,19 @@ UIKIT_EXTERN NSString *const kMallH5RefundSelectUrl;
 UIKIT_EXTERN NSString *const kMallH5RefundApplyUrl;
 ///合伙人中心
 UIKIT_EXTERN NSString *const kMallH5CopartnerUrl;
+///人工客服
+UIKIT_EXTERN NSString *const kMallH5StaffServiceUrl;
+///报装报修
+UIKIT_EXTERN NSString *const kMallH5RepairsUrl;
+///服务进度
+UIKIT_EXTERN NSString *const kMallH5ServiceScheduleUrl;
+///延保查询
+UIKIT_EXTERN NSString *const kMallH5ExtendWarrantyUrl;
+///故障自查
+UIKIT_EXTERN NSString *const kMallH5FaultInspectionUrl;
+///服务政策 & 收费标准
+UIKIT_EXTERN NSString *const kMallH5ServicePolicyUrl;
+///说明书
+UIKIT_EXTERN NSString *const kMallH5InstructionUrl;
+///服务工程师
+UIKIT_EXTERN NSString *const kMallH5ServiceEngineerUrl;
