@@ -50,7 +50,6 @@
 		C21A4B96267CA25200766F72 /* TSAreaDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = C21A4B95267CA25200766F72 /* TSAreaDataController.m */; };
 		C21A4B99267CAAC100766F72 /* TSAreaModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C21A4B98267CAAC100766F72 /* TSAreaModel.m */; };
 		C21A4B9C267D95A000766F72 /* TSLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C21A4B9B267D95A000766F72 /* TSLocationManager.m */; };
-		C22EE26126806D2B00E59C86 /* TSSearchResultController.m in Sources */ = {isa = PBXBuildFile; fileRef = C22EE26026806D2B00E59C86 /* TSSearchResultController.m */; };
 		C22EE26726806F3F00E59C86 /* TSSearchResultNaviView.m in Sources */ = {isa = PBXBuildFile; fileRef = C22EE26626806F3F00E59C86 /* TSSearchResultNaviView.m */; };
 		C22EE26A2680747000E59C86 /* TSSearchResultCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = C22EE2692680747000E59C86 /* TSSearchResultCollectionView.m */; };
 		C22EE26D268078C500E59C86 /* TSSearchResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C22EE26C268078C500E59C86 /* TSSearchResultCell.m */; };
@@ -86,7 +85,7 @@
 		C25A7F8E268474200006C6AF /* TSMakeOrderCommitOrderDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = C25A7F8D2684741F0006C6AF /* TSMakeOrderCommitOrderDataController.m */; };
 		C25A7F91268480FD0006C6AF /* TSMakeOrderInvoiceViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C25A7F90268480FD0006C6AF /* TSMakeOrderInvoiceViewModel.m */; };
 		C25AD82D268AB38C000D2258 /* TSGoodsListController.m in Sources */ = {isa = PBXBuildFile; fileRef = C25AD82C268AB38C000D2258 /* TSGoodsListController.m */; };
-		C25AD830268AB839000D2258 /* TSTestSearchResultController.m in Sources */ = {isa = PBXBuildFile; fileRef = C25AD82F268AB839000D2258 /* TSTestSearchResultController.m */; };
+		C25AD830268AB839000D2258 /* TSSearchResultController.m in Sources */ = {isa = PBXBuildFile; fileRef = C25AD82F268AB839000D2258 /* TSSearchResultController.m */; };
 		C25AD833268B13AC000D2258 /* TSInvoiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C25AD832268B13AC000D2258 /* TSInvoiceModel.m */; };
 		C2A34C6A267449080095497E /* TSAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2A34C69267449080095497E /* TSAlertView.m */; };
 		C2A34C7726749E3E0095497E /* TSSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2A34C7626749E3D0095497E /* TSSearchController.m */; };
@@ -641,8 +640,6 @@
 		C21A4B98267CAAC100766F72 /* TSAreaModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSAreaModel.m; sourceTree = "<group>"; };
 		C21A4B9A267D95A000766F72 /* TSLocationManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSLocationManager.h; sourceTree = "<group>"; };
 		C21A4B9B267D95A000766F72 /* TSLocationManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSLocationManager.m; sourceTree = "<group>"; };
-		C22EE25F26806D2B00E59C86 /* TSSearchResultController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSSearchResultController.h; sourceTree = "<group>"; };
-		C22EE26026806D2B00E59C86 /* TSSearchResultController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSSearchResultController.m; sourceTree = "<group>"; };
 		C22EE26526806F3F00E59C86 /* TSSearchResultNaviView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSSearchResultNaviView.h; sourceTree = "<group>"; };
 		C22EE26626806F3F00E59C86 /* TSSearchResultNaviView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSSearchResultNaviView.m; sourceTree = "<group>"; };
 		C22EE2682680747000E59C86 /* TSSearchResultCollectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSSearchResultCollectionView.h; sourceTree = "<group>"; };
@@ -713,8 +710,8 @@
 		C25A7F90268480FD0006C6AF /* TSMakeOrderInvoiceViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSMakeOrderInvoiceViewModel.m; sourceTree = "<group>"; };
 		C25AD82B268AB38C000D2258 /* TSGoodsListController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSGoodsListController.h; sourceTree = "<group>"; };
 		C25AD82C268AB38C000D2258 /* TSGoodsListController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSGoodsListController.m; sourceTree = "<group>"; };
-		C25AD82E268AB839000D2258 /* TSTestSearchResultController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSTestSearchResultController.h; sourceTree = "<group>"; };
-		C25AD82F268AB839000D2258 /* TSTestSearchResultController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSTestSearchResultController.m; sourceTree = "<group>"; };
+		C25AD82E268AB839000D2258 /* TSSearchResultController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSSearchResultController.h; sourceTree = "<group>"; };
+		C25AD82F268AB839000D2258 /* TSSearchResultController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSSearchResultController.m; sourceTree = "<group>"; };
 		C25AD831268B13AC000D2258 /* TSInvoiceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSInvoiceModel.h; sourceTree = "<group>"; };
 		C25AD832268B13AC000D2258 /* TSInvoiceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSInvoiceModel.m; sourceTree = "<group>"; };
 		C2A34C68267449060095497E /* TSAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSAlertView.h; sourceTree = "<group>"; };
@@ -3093,12 +3090,10 @@
 				F54973AD2668BB8100181E3F /* TSHomeViewController.m */,
 				C2A34C7526749E3D0095497E /* TSSearchController.h */,
 				C2A34C7626749E3D0095497E /* TSSearchController.m */,
-				C22EE25F26806D2B00E59C86 /* TSSearchResultController.h */,
-				C22EE26026806D2B00E59C86 /* TSSearchResultController.m */,
 				C25AD82B268AB38C000D2258 /* TSGoodsListController.h */,
 				C25AD82C268AB38C000D2258 /* TSGoodsListController.m */,
-				C25AD82E268AB839000D2258 /* TSTestSearchResultController.h */,
-				C25AD82F268AB839000D2258 /* TSTestSearchResultController.m */,
+				C25AD82E268AB839000D2258 /* TSSearchResultController.h */,
+				C25AD82F268AB839000D2258 /* TSSearchResultController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -4104,7 +4099,6 @@
 				C3B4CCDF2674932D0001EE75 /* TSLoginViewController.m in Sources */,
 				F55D2D0E2679EEE2006BACCF /* TSTextImageButton.m in Sources */,
 				F530CCF326804167009DC29A /* TSWKCallNativeMethodMessageHandler.m in Sources */,
-				C22EE26126806D2B00E59C86 /* TSSearchResultController.m in Sources */,
 				F55D2C7226725618006BACCF /* TSRankCoronalViewController.m in Sources */,
 				F530CD462680CDF5009DC29A /* TSGoodDetailMaterialView.m in Sources */,
 				F55D2C382671E14B006BACCF /* TSUniversalCollectionViewCell.m in Sources */,
@@ -4257,7 +4251,7 @@
 				F55D2C392671E14B006BACCF /* TSCollectionViewLeftAlignedLayout.m in Sources */,
 				C25A7F91268480FD0006C6AF /* TSMakeOrderInvoiceViewModel.m in Sources */,
 				C2F0573526857B20003D1B2A /* TSAddressSmartDataController.m in Sources */,
-				C25AD830268AB839000D2258 /* TSTestSearchResultController.m in Sources */,
+				C25AD830268AB839000D2258 /* TSSearchResultController.m in Sources */,
 				F530CC9D26803FCD009DC29A /* UIColor+General.m in Sources */,
 				F56D4B47266DFB8900C1AD9E /* FMLayoutBackground.m in Sources */,
 				F530CCEA26804167009DC29A /* UITableView+TSWebImageAutoSize.m in Sources */,
