@@ -112,12 +112,22 @@
     
     NSString *backColor = paramsDic[@"backColor"];
     NSString *textColor = paramsDic[@"textColor"];
+    NSString *imageName = paramsDic[@"navBackgroundImg"];
     
     TSHybridViewController *controller = [TSWKAppManager currentController:params[@"webview"]];
-    controller.gk_navTitleColor = KHexColor(textColor);
-    controller.gk_navBackgroundColor = KHexColor(backColor);
-    controller.gk_navLineHidden = YES;
     
+    if (textColor.length > 0) {
+        controller.gk_navTitleColor = KHexColor(textColor);
+    }
+    
+    if (imageName.length > 0) {
+        controller.gk_navBackgroundImage = KImageMake(imageName);
+    } else {
+        controller.gk_navBackgroundColor = KHexColor(backColor);
+    }
+
+    controller.gk_navLineHidden = YES;
+
     if ([textColor isEqualToString:@"#FFFFFF"]) {
         controller.gk_backStyle = GKNavigationBarBackStyleWhite;
     } else {
@@ -167,6 +177,16 @@
 }
 
 
+#pragma  mark - 选择发票
+- (void)checkInvoice:(NSDictionary *)invoice{
+    NSDictionary *params = invoice[@"data"][@"params"];
+    if (params) {
+        NSDictionary *data = params[@"data"];
+        if (data) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"InvoiceChanged" object:nil userInfo:@{@"invoice":data}];
+        }
+    }
+}
 
 @end
 

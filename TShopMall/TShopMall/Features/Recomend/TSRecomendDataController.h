@@ -12,6 +12,8 @@ typedef NS_ENUM(NSInteger, RecomendPageType) {
     RecomendSearchPage     = 0,
     RecomendSearchResultPage   ,
     RecomendCartPage                ,
+    RecomendPaySuccess            ,
+    
 };
 
 @interface TSRecomendDataController : TSBaseDataController

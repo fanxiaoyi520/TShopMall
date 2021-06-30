@@ -49,9 +49,10 @@
     }];
     [self.headImgV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.usernameLabel.mas_left).with.offset(-2);
-        make.centerY.equalTo(self.contentView.mas_centerY).with.offset(0);
-        make.width.mas_equalTo(35);
-        make.height.mas_equalTo(35);
+        make.top.offset(10);
+        make.bottom.offset(-10);
+        make.width.mas_equalTo(33);
+        make.height.mas_equalTo(33);
     }];
     [self.salesNumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.contentView.mas_right).with.offset(-21);
