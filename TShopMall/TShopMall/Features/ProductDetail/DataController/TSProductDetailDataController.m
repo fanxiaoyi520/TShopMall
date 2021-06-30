@@ -67,6 +67,8 @@
             
             [urls addObject:productImage[@"bigImageUrl"]];
             
+            self.bigImageUrl = productImage[@"bigImageUrl"];
+            
             for (NSDictionary *dic in productMultiImage) {
                 NSString *basicImageUrl = dic[@"basicImageUrl"];
                 [urls addObject:basicImageUrl];
@@ -89,6 +91,9 @@
             item.marketPrice = promotionInteactiveModel[@"marketPrice"];
             item.staffPrice = promotionInteactiveModel[@"staffPrice"];
             item.earnMost = productSkuDic[@"earnMost"];
+            
+            
+            self.staffPrice = item.staffPrice;
         }
         
         {   //卖点
@@ -96,6 +101,10 @@
             NSDictionary *productMain = productModel[@"productMain"];
             NSString *productName = productMain[@"productName"];
             NSString *adviceNote = productMain[@"adviceNote"];
+            
+            if ([adviceNote isKindOfClass:[NSNull class]]) {
+                adviceNote = @"";
+            }
             
             CGFloat titleH = [productName sizeForFont:KRegularFont(16)
                                                  size:CGSizeMake(kScreenWidth - 32, 1000)
@@ -143,7 +152,13 @@
             
             TSGoodDetailSectionModel *section = self.sections[4];
             TSGoodDetailItemCopyModel *item = (TSGoodDetailItemCopyModel *)[section.items firstObject];
-            item.writeStr = productInfo[@"productShareContent"];
+            
+            NSString *write = productInfo[@"productShareContent"];
+            
+            if ([write isKindOfClass:[NSNull class]]) {
+                write = @"";
+            }
+            item.writeStr = write;
         }
         
         {   //已选等
@@ -171,8 +186,12 @@
             TSGoodDetailSectionModel *section = [self.sections lastObject];
             NSDictionary *productDescription = productModel[@"productDescription"];
             NSString *descriptionJson = productDescription[@"descriptionJson"];
-            NSMutableArray *items = [self detailImageModelsWithJsonString:descriptionJson];
-            section.items = items;
+            if ([descriptionJson isKindOfClass:[NSNull class]]) {
+                section.items = @[];
+            }else{
+                NSMutableArray *items = [self detailImageModelsWithJsonString:descriptionJson];
+                section.items = items;
+            }
         }
         
         if (isRequired) {
@@ -416,6 +435,37 @@
         } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
             
     }];
+}
+
+-(void)fetchStaffShareShareType:(NSUInteger)shareType
+                       complete:(void(^)(BOOL isSucess, NSDictionary *data))complete{
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setValue:self.productUuid forKey:@"uuid"];
+    [params setValue:@(shareType) forKey:@"shareType"];
+    [params setValue:self.bigImageUrl forKey:@"bigImageUrl"];
+    
+    SSGenaralRequest *shareRequest = [[SSGenaralRequest alloc] initWithRequestUrl:kGoodDetailStaffShareUrl
+                                                                    requestMethod:YTKRequestMethodGET
+                                                            requestSerializerType:YTKRequestSerializerTypeJSON
+                                                           responseSerializerType:YTKResponseSerializerTypeJSON
+                                                                    requestHeader:@{}
+                                                                      requestBody:params
+                                                                   needErrorToast:YES];
+    shareRequest.animatingView = self.context.view;
+    [shareRequest startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+        if (request.responseModel.isSucceed) {
+            complete(YES,request.responseModel.data);
+        }
+        
+        } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+            
+    }];
+}
+
+-(void)fetchProductDiscountPriceDiscountType:(NSString *)discountType
+                                 productUuid:(NSString *)productUuid
+                                    complete:(void(^)(BOOL isSucess))complete{
+    
 }
 
 #pragma mark - private method

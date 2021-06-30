@@ -92,7 +92,8 @@
         });
     }
     if ([cell.obj isKindOfClass:[TSRecomendModel class]]) {
-        [self.controller performSelector:@selector(recomentGoodsSelected:) withObject:cell.obj];
+        TSRecomendGoods *obj = cell.obj;
+        [self.controller performSelector:@selector(recomentGoodsSelected:) withObject:obj.goodsUuid];
     }
 }
 

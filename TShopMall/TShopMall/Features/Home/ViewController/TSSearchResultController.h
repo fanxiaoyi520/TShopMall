@@ -2,14 +2,17 @@
 //  TSSearchResultController.h
 //  TShopMall
 //
-//  Created by 橙子 on 2021/6/21.
+//  Created by 橙子 on 2021/6/29.
 //
 
-#import "TSBaseViewController.h"
+#import "TSGoodsListController.h"
 
-@interface TSSearchResultController : TSBaseViewController
+NS_ASSUME_NONNULL_BEGIN
+
+@interface TSSearchResultController : TSGoodsListController
 @property (nonatomic, copy) NSString *searchKey;
 @property (nonatomic, copy) NSString *goodsGroupUuid;// 商品类别uuid
 - (void)showSearchResultView;
 @end
 
+NS_ASSUME_NONNULL_END

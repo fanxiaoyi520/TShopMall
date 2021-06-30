@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface TSCategoryKindViewModel : NSObject
 
 @property (nonatomic, strong, nonnull) NSArray<TSCategoryKindCellViewModel *> *cellViewModels;
-
+@property (nonatomic, assign, readonly) NSInteger selectedRow;
 -(void)viewModelWithKinds:(nonnull NSArray <TSCategoryKindModel *> *)kinds selectedRow:(NSUInteger)selectedRow;
 -(void)viewModelExchangeSelectedRow:(NSUInteger)selectedRow;
 

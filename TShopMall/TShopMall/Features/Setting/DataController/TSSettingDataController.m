@@ -8,6 +8,9 @@
 #import "TSSettingDataController.h"
 #import "TSModifyUserInfoRequest.h"
 
+#import <SDImageCache.h>
+#import "Popover.h"
+
 @interface TSSettingDataController ()
 
 @property (nonatomic, strong) NSMutableArray <TSSettingSectionModel *> *sections;
@@ -58,11 +61,12 @@
         NSMutableArray *items = [NSMutableArray array];
         TSSettingCommonSectionItemModel *item1 = [[TSSettingCommonSectionItemModel alloc] init];
         item1.title = @"清理缓存";
-        item1.detail = @"";
+        item1.detail = [self getWebImageCache];
         item1.showLine = YES;
         item1.cellHeight = 56.5;
         item1.identify = @"TSSettingCommonCell";
         [items addObject:item1];
+        
         TSSettingCommonSectionItemModel *item2 = [[TSSettingCommonSectionItemModel alloc] init];
         item2.title = @"关于我们";
         item2.detail = @"";
@@ -70,6 +74,7 @@
         item2.cellHeight = 56;
         item2.identify = @"TSSettingCommonCell";
         [items addObject:item2];
+        
         TSSettingSectionModel *section = [[TSSettingSectionModel alloc] init];
         section.column = 1;
         section.spacingWithLastSection = 10;
@@ -124,5 +129,48 @@
     }];
 }
     
+#pragma mark - <本地缓存>
+/// 获取缓存大小
+- (NSString *)getWebImageCache {
+    return [self getFileSizeString:[[SDImageCache sharedImageCache] totalDiskSize]];
+}
+
+/// 文件占用内存
+/// @param fileSize 文件大小
+- (NSString *)getFileSizeString:(NSInteger)fileSize {
+    CGFloat unit = 1024;
+    if (fileSize >= unit *unit * unit) {
+        return  [NSString stringWithFormat:@"%.1fG",fileSize/(unit * unit * unit)];
+    } else if (fileSize >= unit * unit) {
+        return  [NSString stringWithFormat:@"%.1fM",fileSize/(unit * unit)];
+    } else if (fileSize >=unit) {
+        return [NSString stringWithFormat:@"%.1fK",fileSize/unit];
+    } else if (fileSize > 0) {
+        return [NSString stringWithFormat:@"%ldB",fileSize];
+    } else {
+        return @"清理干净啦";
+    }
+}
+
+/// 清理缓存
+- (void)clearCacheWithComplete:(void(^)(BOOL isSucess))complete {
+    @weakify(self);
+    [Popover popProgressOnWindowWithText:@"清理中"];
+    [[SDImageCache sharedImageCache] clearDiskOnCompletion:^{
+        @strongify(self);
+        //延时
+        dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC));
+        dispatch_after(delayTime, dispatch_get_main_queue(), ^{
+            @strongify(self);
+            //更新数据
+            TSSettingSectionItemModel *model = self.sections[2].items[0];
+            TSSettingCommonSectionItemModel *subModel = (TSSettingCommonSectionItemModel *)model;
+            subModel.detail = [self getWebImageCache];
+            //移除提示
+            [Popover removePopoverOnWindow];
+            complete(YES);
+        });
+    }];
+}
 
 @end

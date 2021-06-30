@@ -22,9 +22,9 @@
 #import "TSRealNameAuthViewController.h"
 #import "TSModifyNicknameViewController.h"
 #import "PhotoBrowser.h"
-#import "CMPhotoSelectorController.h"
+#import "UIViewController+Plugin.h"
 
-@interface TSPersonalViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate, TSSexSelectingViewDelegate, TSDatePickerViewDelegate, CMPhotoSelectorControllerDelegate>
+@interface TSPersonalViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate, TSSexSelectingViewDelegate, TSDatePickerViewDelegate>
 /// 数据中心
 @property(nonatomic, strong) TSPersonalDataController *dataController;
 /// CollectionView
@@ -102,7 +102,7 @@
         return;
     }
     if (status == PHAuthorizationStatusNotDetermined) {
-        [self pushImagePickerController];
+        [self pushImagePickerControllerWithType:BrowserTypeAlbum];
         //请求授权
 //        [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
 //            if (status == PHAuthorizationStatusAuthorized) {
@@ -114,7 +114,7 @@
         return;
     }
     if (status == PHAuthorizationStatusAuthorized) {///已授权
-        [self pushImagePickerController];
+        [self pushImagePickerControllerWithType:BrowserTypeAlbum];
         return;
     }
 }
@@ -138,13 +138,13 @@
 }
 
 #pragma mark - 添加图片
-- (void)pushImagePickerController {
+- (void)pushImagePickerControllerWithType:(BrowserType)browserType {
     BrowserConfig *config = [[BrowserConfig alloc] init];
-    config.type = BrowserTypeSheet;
+    config.type = browserType;
     config.maxImagesCount = 1;
     config.allowCrop = NO;
     __weak typeof(self) weakSelf = self;
-    self.photoBrowser = [[PhotoBrowser alloc] initWithBrowserConfig:config superViewController:self];
+    self.photoBrowser = [[PhotoBrowser alloc] initWithBrowserConfig:config superViewController:[UIViewController windowCurrentViewController]];
     self.photoBrowser.photosBlock = ^(NSArray *_Nonnull selectedPhotosArray, NSArray *_Nonnull selectedAssets) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
         UIImage *image = selectedPhotosArray.firstObject;
@@ -176,13 +176,6 @@
     }];
 }
 
-//- (void)pushImagePickerController {
-//    CMPhotoSelectorController *selectorController = [CMPhotoSelectorController photoSelectorControllerWithMultiSelection:NO maxCount:1];
-//    selectorController.selectorDelegate = self;
-//    selectorController.modalPresentationStyle = UIModalPresentationFullScreen;
-//    [self.navigationController presentViewController:selectorController animated:YES completion:nil];
-//}
-
 /** 相机权限 */
 - (void)captureAuthorized {
     AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
@@ -196,15 +189,11 @@
         return;
     }
     if (authStatus  == AVAuthorizationStatusNotDetermined) {
-        [AVCaptureDevice requestAccessForMediaType: AVMediaTypeVideo completionHandler:^(BOOL granted) {
-            if (granted) {///成功授权
-                
-            }
-        }];
+        [self pushImagePickerControllerWithType:BrowserTypeCamera];
         return;
     }
     if (authStatus == AVAuthorizationStatusAuthorized) {
-        
+        [self pushImagePickerControllerWithType:BrowserTypeCamera];
         return;
     }
 }
@@ -350,16 +339,6 @@
 lineSpacingForSectionAtIndex:(NSInteger)section{
     TSPersonalSectionModel *model = self.dataController.sections[section];
     return model.lineSpacing;
-}
-
-#pragma mark - CMPhotoSelectorControllerDelegate
-
-- (void)finishMultiSelectionWithData:(NSArray<CMPhotoALAssets *> *)photoAssets {
-    
-}
-
-- (void)finishSingleSelectionWithImage:(UIImage *)image {
-    NSLog(@"选择的图片====%@", image);
 }
 
 

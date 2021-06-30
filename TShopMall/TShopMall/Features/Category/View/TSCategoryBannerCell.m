@@ -7,7 +7,7 @@
 
 #import "TSCategoryBannerCell.h"
 #import <SDCycleScrollView.h>
-#import "TSCategorySectionModel.h"
+#import "TSCategoryContentModel.h"
 
 @interface TSCategoryBannerCell()<SDCycleScrollViewDelegate>
 
@@ -17,22 +17,22 @@
 
 @implementation TSCategoryBannerCell
 
--(instancetype)initWithFrame:(CGRect)frame
-{
-    if (self = [super initWithFrame:frame]) {
-        [self fillCustomView];
-    }
-    return self;
+-(void)setupUI{
+    self.contentView.backgroundColor = [UIColor clearColor];
+    [self.contentView addSubview:self.cycleScrollView];
+    [self.cycleScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.contentView).offset(16);
+        make.right.equalTo(self.contentView).offset(-16);
+        make.top.equalTo(self.contentView).offset(16);
+        make.bottom.equalTo(self.contentView).offset(-16);
+        make.height.equalTo(@144);
+    }];
 }
 
--(void)fillCustomView{
-    self.contentView.backgroundColor = [UIColor clearColor];
-    [self addSubview:self.cycleScrollView];
-    [self.cycleScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self).offset(16);
-        make.right.equalTo(self).offset(-16);
-        make.top.bottom.equalTo(self);
-    }];
+- (void)setData:(id)data{
+    [super setData:data];
+    TSCategoryContentModel *model = (TSCategoryContentModel *)data;
+    self.cycleScrollView.imageURLStringsGroup = @[model.OneLevelImg];
 }
 
 #pragma mark - SDCycleScrollViewDelegate
@@ -55,10 +55,10 @@
     return _cycleScrollView;
 }
 
--(void)setDelegate:(id<UniversalCollectionViewCellDataDelegate>)delegate{
-    TSCategorySectionBannerItemModel *item = [delegate universalCollectionViewCellModel:self.indexPath];
-    self.cycleScrollView.imageURLStringsGroup = item.imgUrls;
-}
+//-(void)setDelegate:(id<UniversalCollectionViewCellDataDelegate>)delegate{
+//    TSCategorySectionBannerItemModel *item = [delegate universalCollectionViewCellModel:self.indexPath];
+//    self.cycleScrollView.imageURLStringsGroup = item.imgUrls;
+//}
 
 
 @end

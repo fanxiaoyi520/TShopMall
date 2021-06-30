@@ -14,9 +14,9 @@
 }
 @property (nonatomic, strong) UILabel *title;
 @property (nonatomic, strong) UIButton *closeBtn;
-@property (nonatomic, strong) UILabel *locationTips;
-@property (nonatomic, strong) UIButton *locationBtn;
-@property (nonatomic, strong) UILabel *locationAddress;
+//@property (nonatomic, strong) UILabel *locationTips;
+//@property (nonatomic, strong) UIButton *locationBtn;
+//@property (nonatomic, strong) UILabel *locationAddress;
 @property (nonatomic, strong) TSAreaView *areaView;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) TSAreaIndexView *indexView;
@@ -33,22 +33,27 @@
         [self updateLocationAddress];
         self.areaView.proviceBtn.str = @"init";
         self.areaView.cityBtn.hidden = YES;
+        
+        self.provice = [TSAreaModel new];
+        self.city = [TSAreaModel new];
+        self.area = [TSAreaModel new];
+        self.street = [TSAreaModel new];
     }
     return self;
 }
 
 - (void)updateLocationAddress{
-    self.title.text = @"请选择所在地区";
-    self.locationTips.text = @"定位到的地址";
-    [TSLocationManager startLocation:^(NSString *address, NSError *error) {
-        if (error) {
-            self.locationAddress.text = @"定位失败";
-            return;
-        } else {
-            self.location = address;
-            self.locationAddress.text = address;
-        }
-    }];
+//
+//    self.locationTips.text = @"定位到的地址";
+//    [TSLocationManager startLocation:^(NSString *address, NSError *error) {
+//        if (error) {
+//            self.locationAddress.text = @"定位失败";
+//            return;
+//        } else {
+//            self.location = address;
+//            self.locationAddress.text = address;
+//        }
+//    }];
 }
 
 - (void)areaViewItemTapped:(UITapGestureRecognizer *)tapGes{
@@ -197,29 +202,29 @@
         make.centerY.equalTo(self.title);
     }];
     
-    [self.locationTips mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.title);
-        make.top.equalTo(self.title.mas_bottom).offset(KRateW(8.0));
-        make.height.mas_equalTo(KRateW(22.0));
-    }];
-    
-    [self.locationBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.locationTips.mas_bottom).offset(KRateW(8.0));
-        make.width.height.mas_equalTo(KRateW(20.0));
-        make.left.equalTo(self.locationTips.mas_left);
-    }];
-    
-    [self.locationAddress mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.locationBtn);
-        make.left.equalTo(self.locationBtn.mas_right).offset(KRateW(8.0));
-        make.right.equalTo(self.mas_right).offset(-KRateW(8.0));
+//    [self.locationTips mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(self.title);
+//        make.top.equalTo(self.title.mas_bottom).offset(KRateW(8.0));
 //        make.height.mas_equalTo(KRateW(22.0));
-    }];
+//    }];
+//
+//    [self.locationBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.locationTips.mas_bottom).offset(KRateW(8.0));
+//        make.width.height.mas_equalTo(KRateW(20.0));
+//        make.left.equalTo(self.locationTips.mas_left);
+//    }];
+//
+//    [self.locationAddress mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.centerY.equalTo(self.locationBtn);
+//        make.left.equalTo(self.locationBtn.mas_right).offset(KRateW(8.0));
+//        make.right.equalTo(self.mas_right).offset(-KRateW(8.0));
+////        make.height.mas_equalTo(KRateW(22.0));
+//    }];
     
     [self.areaView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.mas_left).offset(KRateW(16.0));
         make.right.equalTo(self.mas_right).offset(-KRateW(16.0));
-        make.top.equalTo(self.locationAddress.mas_bottom).offset(24.0);
+        make.top.equalTo(self.title.mas_bottom).offset(24.0);
         make.height.mas_equalTo(KRateW(24.0));
     }];
     
@@ -244,6 +249,7 @@
         return _title;
     }
     self.title = [UILabel new];
+    self.title.text = @"请选择所在地区";
     self.title.font = KFont(PingFangSCMedium, 16.0);
     self.title.textColor = KHexColor(@"#333333");
     [self addSubview:self.title];
@@ -263,42 +269,42 @@
     return self.closeBtn;
 }
 
-- (UILabel *)locationTips{
-    if (_locationTips) {
-        return _locationTips;
-    }
-    self.locationTips = [UILabel new];
-    self.locationTips.font = KRegularFont(14.0);
-    self.locationTips.textColor = [KHexColor(@"#2D3132") colorWithAlphaComponent:0.6];
-    [self addSubview:self.locationTips];
-    
-    return self.locationTips;
-}
-
-- (UIButton *)locationBtn{
-    if (_locationBtn) {
-        return _locationBtn;
-    }
-    self.locationBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.locationBtn setBackgroundImage:KImageMake(@"address_located") forState:UIControlStateNormal];
-    [self.locationBtn addTarget:self action:@selector(updateLocationAddress) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:self.locationBtn];
-    
-    return self.locationBtn;
-}
-
-- (UILabel *)locationAddress{
-    if (_locationAddress) {
-        return _locationAddress;
-    }
-    self.locationAddress = [UILabel new];
-    self.locationAddress.font = KRegularFont(14.0);
-    self.locationAddress.textColor = KHexColor(@"#2D3132");
-    self.locationAddress.numberOfLines = 0;
-    [self addSubview:self.locationAddress];
-    
-    return self.locationAddress;
-}
+//- (UILabel *)locationTips{
+//    if (_locationTips) {
+//        return _locationTips;
+//    }
+//    self.locationTips = [UILabel new];
+//    self.locationTips.font = KRegularFont(14.0);
+//    self.locationTips.textColor = [KHexColor(@"#2D3132") colorWithAlphaComponent:0.6];
+//    [self addSubview:self.locationTips];
+//
+//    return self.locationTips;
+//}
+//
+//- (UIButton *)locationBtn{
+//    if (_locationBtn) {
+//        return _locationBtn;
+//    }
+//    self.locationBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [self.locationBtn setBackgroundImage:KImageMake(@"address_located") forState:UIControlStateNormal];
+//    [self.locationBtn addTarget:self action:@selector(updateLocationAddress) forControlEvents:UIControlEventTouchUpInside];
+//    [self addSubview:self.locationBtn];
+//
+//    return self.locationBtn;
+//}
+//
+//- (UILabel *)locationAddress{
+//    if (_locationAddress) {
+//        return _locationAddress;
+//    }
+//    self.locationAddress = [UILabel new];
+//    self.locationAddress.font = KRegularFont(14.0);
+//    self.locationAddress.textColor = KHexColor(@"#2D3132");
+//    self.locationAddress.numberOfLines = 0;
+//    [self addSubview:self.locationAddress];
+//
+//    return self.locationAddress;
+//}
 
 - (TSAreaView *)areaView{
     if (_areaView) {
@@ -766,8 +772,8 @@
 @implementation TSAreaHotCityHeader
 
 - (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier{
-    if (self = [super initWithReuseIdentifier:reuseIdentifier]) {
-        self.backgroundColor = UIColor.whiteColor;
+    if (self == [super initWithReuseIdentifier:reuseIdentifier]) {
+        [self layoutView];
     }
     return self;
 }
@@ -787,8 +793,14 @@
 }
 
 - (void)setUpUI{
+    for (UIView *view in self.subviews) {
+        if ([view isKindOfClass:[UIButton class]]) {
+            [view removeFromSuperview];
+        }
+    }
+    self.userInteractionEnabled = YES;
     CGFloat width = (kScreenWidth - KRateW(32.0)) / 4.0;
-    CGFloat height = KRateW(22.0);
+    CGFloat height = KRateW(36.0);
     for (NSInteger i=0; i<self.hotCities.count; i++) {
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         btn.tag = i;
@@ -799,7 +811,7 @@
             make.left.equalTo(self.contentView.mas_left).offset(width * (i % 4));
             make.width.mas_equalTo(width);
             make.height.mas_equalTo(height);
-            make.top.equalTo(self.title.mas_bottom).offset(KRateH(14.0) + (height + KRateW(14.0)) * (i/4));
+            make.top.equalTo(self.title.mas_bottom).offset(KRateH(7.0) + height * (i/4));
         }];
         [btn setTitle:self.hotCities[i].cityName forState:UIControlStateNormal];
         [btn addTarget:self action:@selector(hotCityTapped:) forControlEvents:UIControlEventTouchUpInside];
@@ -807,7 +819,7 @@
 }
 
 
-- (void)layoutSubviews{
+- (void)layoutView{
     [self.title mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contentView.mas_left).offset(KRateW(16.0));
         make.height.mas_equalTo(KRateW(22.0));

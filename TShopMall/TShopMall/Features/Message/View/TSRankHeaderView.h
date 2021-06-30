@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TSRankHeaderView : UITableViewHeaderFooterView
+@interface TSRankHeaderView : UIView
 
 @end
 

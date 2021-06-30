@@ -12,8 +12,10 @@
 #import "TSRankHotCellController.h"
 
 @interface TSRankViewController ()<JXCategoryListContainerViewDelegate>
+
+@property (nonatomic, strong) UIImageView * background_imgView;
 /// 分割线
-@property (nonatomic, strong) UIView *seperateView;
+//@property (nonatomic, strong) UIView *seperateView;
 @property (nonatomic, strong) JXCategoryTitleView *myCategoryView;
 @property (nonatomic, assign) NSInteger currentIndex;
 
@@ -24,31 +26,36 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    //背景红色图
+    _background_imgView = [[UIImageView alloc] initWithImage:KImageMake(@"mall_rank_background")];
+    [self.view addSubview:_background_imgView];
+    
     self.myCategoryView.titles = @[@"冲冠榜", @"财富榜", @"热销榜"];
+    self.myCategoryView.contentEdgeInsetLeft = 24;
+    self.myCategoryView.contentEdgeInsetRight = 24;
     self.myCategoryView.cellSpacing = 0;
-    self.myCategoryView.titleFont = KRegularFont(16);
-    self.myCategoryView.titleSelectedFont = KRegularFont(16);
-    self.myCategoryView.titleColor = KHexAlphaColor(@"#2D3132", 0.4);
-    self.myCategoryView.titleSelectedColor = KHexColor(@"#E64C3D");
-    self.myCategoryView.backgroundColor = KWhiteColor;
-
-    JXCategoryIndicatorLineView *backgroundView = [[JXCategoryIndicatorLineView alloc] init];
-    backgroundView.indicatorColor = [UIColor whiteColor];
-    self.myCategoryView.indicators = @[backgroundView];
-    self.myCategoryView.separatorLineShowEnabled = YES;
+    self.myCategoryView.titleFont = KRegularFont(14);
+    self.myCategoryView.titleSelectedFont = KRegularFont(14);
+    self.myCategoryView.titleColor = [KWhiteColor colorWithAlphaComponent:0.5];
+    self.myCategoryView.titleSelectedColor = KWhiteColor;
+    self.myCategoryView.backgroundColor = KClearColor;
 
     [self.view addSubview:self.categoryView];
-    [self.view addSubview:self.seperateView];
+//    [self.view addSubview:self.seperateView];
     [self.view addSubview:self.listContainerView];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleDefault;
+    return UIStatusBarStyleLightContent;
 }
 
 - (void)setupBasic{
     [super setupBasic];
-    self.gk_navTitle = @"排行版";
+    self.gk_navTitle = @"排行榜";
+    self.gk_navTitleColor = KWhiteColor;
+    self.gk_navBackgroundColor = KClearColor;
+    self.listContainerView.backgroundColor = KClearColor;
+//    self.view.backgroundColor = KBlueColor;
 }
 
 - (void)viewDidLayoutSubviews {
@@ -57,13 +64,14 @@
     CGFloat categoryY = CGRectGetHeight(self.gk_navigationBar.frame);
     CGFloat categoryViewHeight = [self preferredCategoryViewHeight];
     
-    CGFloat containViewY = categoryViewHeight + 1;
+    CGFloat containViewY = categoryViewHeight;
     CGFloat bottom = self.view.ts_safeAreaInsets.bottom;
 
     self.myCategoryView.frame = CGRectMake(0, categoryY, kScreenWidth, categoryViewHeight);
-    self.seperateView.frame = CGRectMake(0, categoryY + categoryViewHeight, kScreenWidth, 1);
-    CGFloat listContainerY = categoryY + containViewY + 1;
+//    self.seperateView.frame = CGRectMake(0, categoryY + categoryViewHeight, kScreenWidth, 1);
+    CGFloat listContainerY = categoryY + containViewY;
     self.listContainerView.frame = CGRectMake(0, listContainerY, kScreenWidth ,kScreenHeight - listContainerY - bottom);
+    self.background_imgView.frame = CGRectMake(0, 0, kScreenWidth, listContainerY + 54);
     //self.listContainerView.backgroundColor = UIColor.redColor;
     //NSLog(@" screenHeight == %f, self.listContainerView == %f", kScreenHeight, CGRectGetHeight(self.listContainerView.frame));
 }
@@ -77,7 +85,7 @@
 }
 
 - (CGFloat)preferredCategoryViewHeight {
-    return 56;
+    return 44;
 }
 
 #pragma mark - JXCategoryListContainerViewDelegate
@@ -116,12 +124,12 @@
 }
 
 #pragma mark - Getter
--(UIView *)seperateView{
-    if (!_seperateView) {
-        _seperateView = [[UIView alloc] init];
-        _seperateView.backgroundColor = KHexColor(@"#EEEEEE");
-    }
-    return _seperateView;
-}
+//-(UIView *)seperateView{
+//    if (!_seperateView) {
+//        _seperateView = [[UIView alloc] init];
+//        _seperateView.backgroundColor = KHexColor(@"#EEEEEE");
+//    }
+//    return _seperateView;
+//}
 
 @end

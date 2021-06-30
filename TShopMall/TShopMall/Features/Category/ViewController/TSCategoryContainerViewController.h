@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol TSCategoryContainerDataSource <NSObject>
 @required
 - (NSInteger)numberOfContentsInContainerView:(TSCategoryContainerViewController *)viewController;
-- (UIView *)viewForContainerViewController:(TSCategoryContainerViewController *)viewController;
+- (UIView *)viewForContainerViewController:(TSCategoryContainerViewController *)viewController currentPage:(NSInteger)page;
 
 @end
 @interface TSCategoryContainerViewController : TSBaseViewController

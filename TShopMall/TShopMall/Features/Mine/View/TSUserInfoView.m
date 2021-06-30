@@ -10,7 +10,7 @@
 @interface TSUserInfoView()
 
 /// 角色
-@property(nonatomic, assign) TSRoleType type;
+//@property(nonatomic, assign) TSRoleType type;
 /// 头像
 @property(nonatomic, strong) UIImageView *iconImageView;
 /// 登录按钮
@@ -20,6 +20,8 @@
 /// 员工头像
 @property(nonatomic, strong) UIImageView *staffImageView;
 /// 邀请码
+@property(nonatomic, strong) UIImageView *invitationCodeBack;
+/// 邀请码背景
 @property(nonatomic, strong) UILabel *invitationCodeLab;
 /// 查看邀请码
 @property(nonatomic, strong) UIButton *seeCodeBtn;
@@ -29,17 +31,24 @@
 
 @implementation TSUserInfoView
 
--(instancetype)initWithRoleType:(TSRoleType)type{
-    if (self = [super init]) {
-        self.type = type;
+//-(instancetype)initWithRoleType:(TSRoleType)type{
+//    if (self = [super init]) {
+//        self.type = type;
+//        [self fillCustomView];
+//    }
+//    return self;
+//}
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
         [self fillCustomView];
     }
     return self;
 }
-
 -(void)fillCustomView{
     self.backgroundColor = [UIColor clearColor];
-    
+    [self addSubview:self.invitationCodeBack];
     [self addSubview:self.iconImageView];
     [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self).offset(16);
@@ -54,11 +63,7 @@
         make.height.mas_equalTo(30);
     }];
     
-    if (self.type == TSRoleTypeUnLogin) {
-        self.loginButton.userInteractionEnabled = YES;
-    }else if (self.type == TSRoleTypePlatinum){
-        self.loginButton.userInteractionEnabled = NO;
-        
+    
         [self addSubview:self.partnerImageView];
         [self addSubview:self.staffImageView];
         
@@ -75,21 +80,27 @@
             make.width.mas_equalTo(60);
             make.height.mas_equalTo(22);
         }];
-    }
-    
     [self addSubview:self.seeCodeBtn];
     [self.seeCodeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self).offset(-24);
-        make.top.equalTo(self.iconImageView).offset(10.5);
-        make.height.mas_equalTo(10);
-        make.width.mas_equalTo(15);
+        make.right.equalTo(self).offset(-16);
+        make.centerY.equalTo(self.loginButton.mas_centerY);
     }];
+    
     
     [self addSubview:self.invitationCodeLab];
     [self.invitationCodeLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.seeCodeBtn).offset(-16);
-        make.top.equalTo(self.iconImageView).offset(7);
+        make.right.mas_equalTo(self.seeCodeBtn.mas_left).offset(-10);
+        make.centerY.equalTo(self.loginButton.mas_centerY);
+//        make.top.equalTo(self.iconImageView).offset(7);
         make.height.mas_equalTo(17);
+    }];
+    
+   
+    [self.invitationCodeBack mas_makeConstraints:^(MASConstraintMaker *make) {
+    make.right.mas_equalTo(self.seeCodeBtn.mas_right);
+     make.top.equalTo(self.invitationCodeLab.mas_top).offset(-2);
+        make.left.equalTo(self.invitationCodeLab.mas_left).offset(-2);
+        make.bottom.equalTo(self.invitationCodeLab.mas_bottom).offset(2);
     }];
     
     [self addSubview:self.kCopyCodeBtn];
@@ -124,9 +135,13 @@
         self.partnerImageView.image = KImageMake(@"mall_mine_partner");
     }
     
-    if ([model.salesmanRankName isEqualToString:@"铂金合伙人"]) {
-        
+    if (model.invitationCode == nil) {
+        self.seeCodeBtn.hidden = YES;
+        self.kCopyCodeBtn.hidden = YES;
+        self.invitationCodeLab.hidden = YES;
+        self.invitationCodeBack.hidden = YES;
     } else {
+        self.invitationCodeBack.hidden = NO;
         self.seeCodeBtn.hidden = NO;
         self.kCopyCodeBtn.hidden = NO;
         self.invitationCodeLab.hidden = NO;
@@ -136,11 +151,10 @@
 
 #pragma mark - Action
 -(void)loginAction:(UIButton *)sender{
-    if (self.type == TSRoleTypeUnLogin) {
-        
-    }
-    if ([self.kDelegate respondsToSelector:@selector(userInfoLoginAction:)]) {
-        [self.kDelegate userInfoLoginAction:sender];
+    if (![TSGlobalManager shareInstance].currentUserInfo) {
+        if ([self.kDelegate respondsToSelector:@selector(userInfoLoginAction:)]) {
+            [self.kDelegate userInfoLoginAction:sender];
+        }
     }
 }
 
@@ -204,6 +218,15 @@
     return _staffImageView;
 }
 
+-(UIImageView *)invitationCodeBack{
+    if (!_invitationCodeBack) {
+        _invitationCodeBack = [[UIImageView alloc] init];
+        _invitationCodeBack.image = KImageMake(@"mall_mine_juxing");
+    }
+    return _invitationCodeBack;
+}
+
+
 -(UILabel *)invitationCodeLab {
     if (!_invitationCodeLab) {
         _invitationCodeLab = [[UILabel alloc] init];
@@ -219,10 +242,11 @@
 -(UIButton *)seeCodeBtn {
     if (!_seeCodeBtn) {
         _seeCodeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_seeCodeBtn setImage:KImageMake(@"mall_mine_staff") forState:UIControlStateNormal];
-        [_seeCodeBtn setImage:KImageMake(@"mall_mine_partner") forState:UIControlStateSelected];
+        [_seeCodeBtn setImage:KImageMake(@"mall_mine_eye_white") forState:UIControlStateSelected];
+        [_seeCodeBtn setImage:KImageMake(@"mall_mine_eye_white_invisible") forState:UIControlStateNormal];
         [_seeCodeBtn addTarget:self action:@selector(seeCodeAction:) forControlEvents:UIControlEventTouchUpInside];
         [_seeCodeBtn jaf_setEnlargeEdgeWithTop:10 right:10 bottom:10 left:10];
+        _seeCodeBtn.tintColor = [UIColor whiteColor];
         self.seeCodeBtn.hidden = YES;
         _seeCodeBtn.selected = YES;
     }
