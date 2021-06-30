@@ -29,6 +29,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy) NSString *cartNumber;
 /// 购买数量(默认购买数量为1)
 @property(nonatomic, copy) NSString *buyNum;
+/// 挂牌价
+@property(nonatomic, copy) NSString *marketPrice;
+/// 提货价
+@property(nonatomic, copy) NSString *staffPrice;
 
 @property(nonatomic, strong) TSLocationInfoModel *locationModel;
 
