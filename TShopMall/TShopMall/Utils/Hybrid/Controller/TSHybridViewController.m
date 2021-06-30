@@ -170,6 +170,7 @@ typedef enum : NSUInteger {
 
         [rightButton setTitleColor:KTextColor forState:UIControlStateNormal];
         rightButton.titleLabel.font = KRegularFont(15.0);
+        [rightButton setTitle:self.rightParams[@"rightText"] forState:UIControlStateNormal];
         [rightButton addTarget:self action:@selector(rightAction:) forControlEvents:UIControlEventTouchUpInside];
         self.gk_navRightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
         self.gk_navItemRightSpace = 12;
