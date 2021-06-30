@@ -8,7 +8,9 @@
 #import "TSUniversalCollectionViewCell.h"
 
 NS_ASSUME_NONNULL_BEGIN
-
+typedef NS_ENUM(NSInteger,MinePartnerCenterClick) {
+    EyeAction,MoreAction
+};
 @interface TSMinePartnerCenterCell : TSUniversalCollectionViewCell
 
 @end

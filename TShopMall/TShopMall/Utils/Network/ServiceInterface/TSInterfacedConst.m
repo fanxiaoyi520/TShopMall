@@ -139,9 +139,13 @@ NSString * const kSmartAddress = @"/rest/v2/usercenter/customeraddress/getSmartA
 
 #pragma mark - 我的
 NSString * const kMineMerchantUserInformation = @"/rest/v2/tclcustomer/userInfo";
-NSString * const kMinePartnerCenterData = @"/sysback/v2/salesman/dataCenter";
+NSString * const kMinePartnerCenterData = @"v2/sysback/salesman/dataCenter";
 NSString * const kMineWithdrawalRecordListData = @"/v2/withdrawal/record/queryAppWithdrawalRecordList";
 NSString * const kMineWalletData = @"/v2/withdrawal/record/queryWallet";
+///收益
+NSString *const kMineEarningsUrl = @"/rest/v2/withdrawal/record/queryProfit";
+//广告图
+NSString * const kMineShopContentUrl = @"rest/shopContent/getPageManageByPageType";
 NSString *const kAboutMeAgreementUrl = @"/rest/v2/front/shopStatement/getShopStatementList";
 
 

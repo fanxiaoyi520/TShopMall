@@ -10,7 +10,7 @@
 #import "TSMineMerchantUserInformationModel.h"
 #import "TSPartnerCenterData.h"
 #import "TSWithdrawalRecordModel.h"
-
+#import "TSMineWalletModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TSMineDataController : TSBaseDataController
@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, readonly) TSMineMerchantUserInformationModel *merchantUserInformationModel;
 @property (nonatomic, strong, readonly) TSPartnerCenterData *partnerCenterDataModel;
 @property (nonatomic, strong, readonly) TSWithdrawalRecordModel *withdrawalRecordModel;
+@property (nonatomic, strong, readonly) TSMineWalletEarningModel *earningModel;
 
 -(void)fetchMineContentsComplete:(void(^)(BOOL isSucess))complete;
 -(void)fetchDataComplete:(void(^)(BOOL isSucess))complete;

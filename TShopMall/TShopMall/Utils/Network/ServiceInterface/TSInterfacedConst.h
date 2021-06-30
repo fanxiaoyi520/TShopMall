@@ -94,3 +94,7 @@ UIKIT_EXTERN NSString * const kMinePartnerCenterData;
 UIKIT_EXTERN NSString * const kMineWithdrawalRecordListData;//提现记录
 UIKIT_EXTERN NSString * const kMineWalletData;//我的钱包
 UIKIT_EXTERN NSString * const kAboutMeAgreementUrl;
+///收益
+UIKIT_EXTERN NSString *const kMineEarningsUrl;
+//广告图
+UIKIT_EXTERN NSString * const kMineShopContentUrl;

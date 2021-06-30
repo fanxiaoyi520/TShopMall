@@ -13,6 +13,7 @@
 @property (nonatomic, strong) TSMineMerchantUserInformationModel *merchantUserInformationModel;
 @property (nonatomic, strong) TSPartnerCenterData *partnerCenterDataModel;
 @property (nonatomic, strong) TSWithdrawalRecordModel *withdrawalRecordModel;
+@property (nonatomic, strong) TSMineWalletEarningModel *earningModel;
 @end
 
 @implementation TSMineDataController
@@ -186,8 +187,9 @@
 -(void)fetchDataComplete:(void(^)(BOOL isSucess))complete {
     dispatch_group_t group = dispatch_group_create();
 
-    dispatch_group_enter(group);
+   
     dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+      dispatch_group_enter(group);
         [self requestMethodWithGroup:group withIndex:1];
     });
 
@@ -196,6 +198,16 @@
         [self requestMethodWithGroup:group withIndex:2];
     });
 
+    dispatch_group_enter(group);
+    dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self requestMethodWithGroup:group withIndex:3];
+    });
+    
+    dispatch_group_enter(group);
+    dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self requestMethodWithGroup:group withIndex:4];
+    });
+    
     dispatch_group_notify(group, dispatch_get_main_queue(), ^{
         if (complete) {
             complete(YES);
@@ -205,9 +217,10 @@
 
 - (void)requestMethodWithGroup:(dispatch_group_t)thegroup withIndex:(NSInteger)aIndex
 {
-    NSString *request = [NSString stringWithFormat:@"request%ld",aIndex];
+   
+    NSString *request = [NSString stringWithFormat:@"request%ld",(long)aIndex];
     SEL requestSel = NSSelectorFromString(request);
-    
+    NSLog(@"-------方法开始%ld thread:%@",(long)aIndex,[NSThread currentThread]);
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
      [(SSGenaralRequest *)[self performSelector:requestSel] startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
@@ -216,13 +229,22 @@
              if (aIndex == 1) {
                  TSMineMerchantUserInformationModel *model = [TSMineMerchantUserInformationModel yy_modelWithDictionary:data];
                  self.merchantUserInformationModel = model;
-             } else {
+             } else if (aIndex == 2) {
                  TSPartnerCenterData *model = [TSPartnerCenterData yy_modelWithDictionary:data];
                  self.partnerCenterDataModel = model;
+                 self.partnerCenterDataModel.eyeIsOn = YES;
+             } else if (aIndex == 3){
+               self.earningModel = [TSMineWalletEarningModel yy_modelWithDictionary:data];
+                 self.earningModel.eyeIsOn = YES;
+             } else {
+                 
              }
          }
+         
+        NSLog(@"-------方法%ld thread:%@",(long)aIndex,[NSThread currentThread]);
          dispatch_group_leave(thegroup);
      } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+         NSLog(@"-------方法%ld thread:%@",(long)aIndex,[NSThread currentThread]);
          dispatch_group_leave(thegroup);
      }];
 #pragma clang diagnostic pop
@@ -234,6 +256,7 @@
     if ([TSGlobalManager shareInstance].currentUserInfo) {
         [header setValue:[TSGlobalManager shareInstance].currentUserInfo.accessToken forKey:@"accessToken"];
     }
+   
     SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kMineMerchantUserInformation
                                                                requestMethod:YTKRequestMethodGET
                                                        requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON
@@ -245,14 +268,10 @@
 }
 
 - (SSGenaralRequest *)request2{
-    
     NSMutableDictionary *header = [NSMutableDictionary dictionary];
-    if ([TSGlobalManager shareInstance].currentUserInfo) {
-        [header setValue:[TSGlobalManager shareInstance].currentUserInfo.accessToken forKey:@"accessToken"];
-    }
-    
+ 
     SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kMinePartnerCenterData
-                                                               requestMethod:YTKRequestMethodPOST
+                                                               requestMethod:YTKRequestMethodGET
                                                        requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON
                                                                requestHeader:header
                                                                  requestBody:NSMutableDictionary.dictionary
@@ -261,6 +280,51 @@
     return request;
 }
 
+//收益
+- (SSGenaralRequest *)request3{
+    
+    NSMutableDictionary *header = [NSMutableDictionary dictionary];
+    if ([TSGlobalManager shareInstance].currentUserInfo) {
+        [header setValue:[TSGlobalManager shareInstance].currentUserInfo.accessToken forKey:@"accessToken"];
+    }
+//    [header setValue:@"application/json" forKey:@"Content-Type"];
+    NSMutableDictionary *body = [NSMutableDictionary dictionary];
+    [body setValue:@"6226097804210467" forKey:@"bankCardNo"];
+    [body setValue:@"招商银行" forKey:@"accountBank"];
+    [body setValue:@"CMD" forKey:@"accountBankCode"];
+    [body setValue:@"招商银行北京支行" forKey:@"bankName"];
+    [body setValue:@"308551024051" forKey:@"bankBranchId"];
+    [body setValue:@"北京市" forKey:@"bankAddressProvince"];
+    [body setValue:@"110000" forKey:@"bankAddressProvinceCode"];
+    [body setValue:@"北京市" forKey:@"bankAddressCity"];
+    [body setValue:@"110000" forKey:@"bankAddressCityCode"];
+    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kMineEarningsUrl
+                                                               requestMethod:YTKRequestMethodGET
+                                                       requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON
+                                                               requestHeader:header
+                                                                 requestBody:body
+                                                              needErrorToast:YES];
+    
+    return request;
+}
+
+//广告图
+- (SSGenaralRequest *)request4{
+    
+    NSMutableDictionary *header = [NSMutableDictionary dictionary];
+    if ([TSGlobalManager shareInstance].currentUserInfo) {
+        [header setValue:[TSGlobalManager shareInstance].currentUserInfo.accessToken forKey:@"accessToken"];
+    }
+    [header setValue:@"application/json" forKey:@"Content-Type"];
+    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kMineShopContentUrl
+                                                               requestMethod:YTKRequestMethodGET
+                                                       requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON
+                                                               requestHeader:header
+                                                                 requestBody:NSMutableDictionary.dictionary
+                                                              needErrorToast:YES];
+    
+    return request;
+}
 // MARK: 我的钱包
 - (void)fetchMineWalletDataComplete:(void(^)(BOOL isSucess))complete {
     NSMutableDictionary *header = [NSMutableDictionary dictionary];
