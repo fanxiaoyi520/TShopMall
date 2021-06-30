@@ -12,9 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TSUserInfoService : NSObject
 /** 用户  */
-@property(nonatomic, strong) TSUser *user;
+//@property(nonatomic, strong) TSUser *user;
 
-- (void)updateUserInfoSuccess:(void(^_Nullable)(void))success
+- (void)getUserInfoAccountId:(NSString *)accountId
+                     success:(void(^_Nullable)(TSUser *))success
                      failure:(void(^_Nullable)(NSString *errorMsg))failure;
 
 /**

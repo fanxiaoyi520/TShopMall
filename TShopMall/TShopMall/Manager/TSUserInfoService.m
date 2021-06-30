@@ -17,17 +17,16 @@
 
 @implementation TSUserInfoService
 
-- (void)updateUserInfoSuccess:(void(^_Nullable)(void))success
+- (void)getUserInfoAccountId:(NSString *)accountId
+                     success:(void(^_Nullable)(TSUser *))success
                      failure:(void(^_Nullable)(NSString *errorMsg))failure {
     TSUserInfoRequest *request = [[TSUserInfoRequest alloc] init];
-    @weakify(self);
     [request startWithCompletionBlockWithSuccess:^(__kindof SSGenaralRequest * _Nonnull request) {
-        @strongify(self);
         NSLog(@"获取用户信息 === %@", request.responseModel.originalData);
         if (request.responseModel.isSucceed) {
-            self.user = [TSUser yy_modelWithJSON:request.responseModel.originalData[@"data"]];
+            TSUser *user = [TSUser yy_modelWithJSON:request.responseModel.originalData[@"data"]];
             if (success) {
-                success();
+                success(user);
             }
         }
         
@@ -49,7 +48,9 @@
     [request startWithCompletionBlockWithSuccess:^(__kindof SSGenaralRequest * _Nonnull request) {
         if (request.responseModel.isSucceed) {
             ///更新本地个人信息
-            [self updateUserInfoSuccess:success failure:failure];
+            if (success) {
+                success();
+            }
         } else {
             if (failure) {
                 failure(request.responseModel.originalData[@"failCause"]);

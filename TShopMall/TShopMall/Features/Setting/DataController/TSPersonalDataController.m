@@ -21,6 +21,7 @@
     {
         NSMutableArray *items = [NSMutableArray array];
         NSArray *titles = @[@"头像", @"姓名", @"身份证", @"性别", @"出生年月"];
+        TSUser *user = [TSUserInfoManager userInfo].user;
         for (int i = 0; i < titles.count; i++) {
             NSString *title = titles[i];
             TSPersonalSectionItemModel *item = [[TSPersonalSectionItemModel alloc] init];
@@ -29,16 +30,16 @@
             item.sex = none;
             item.identify = @"TSPersonalCommonCell";
             if (i == 0) {///头像
-                NSString *avatar = [TSServicesManager sharedInstance].userInfoService.user.avatar;
+                NSString *avatar = user.avatar;
                 item.head = avatar.length == 0 ? @"default" : avatar;
             } else if(i == 1) {///姓名
-                item.detail = [TSServicesManager sharedInstance].userInfoService.user.nickname;
+                item.detail = user.nickname;
             } else if(i == 2) {///身份证
-                item.detail = [TSServicesManager sharedInstance].userInfoService.user.identity;
+                item.detail = user.identity;
             } else if(i == 3) {///性别
-                item.sex = [TSServicesManager sharedInstance].userInfoService.user.sex;
+                item.sex = user.sex;
             } else if(i == 4) {///出生年月
-                item.detail = [TSServicesManager sharedInstance].userInfoService.user.birthday;
+                item.detail = user.birthday;
             }
             [items addObject:item];
         }

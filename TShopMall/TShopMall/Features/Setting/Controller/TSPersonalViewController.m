@@ -168,7 +168,7 @@
 
 - (void)modifyAvartar:(NSString *)avatarURL {
     [[TSServicesManager sharedInstance].userInfoService modifyUserInfoWithKey:@"avatar" value:avatarURL success:^ {
-        [TSServicesManager sharedInstance].userInfoService.user.avatar = avatarURL;
+        //[TSUserInfoManager userInfo].user.avatar = avatarURL;
         [[NSNotificationCenter defaultCenter] postNotificationName:TSUserInfoModifiedNotificationName object:nil];
         [Popover popToastOnWindowWithText:@"头像修改成功！"];
     } failure:^(NSString * _Nonnull errorMsg) {
@@ -250,7 +250,7 @@
     @weakify(self);
     [self modifyUserInfoWithKey:@"sex" value:sexString completed:^{
         @strongify(self);
-        [TSServicesManager sharedInstance].userInfoService.user.sex = sex;
+        //[TSUserInfoManager userInfo].user.sex = sex;
         [self userInfoModifiedAction];
     }];
 }
@@ -260,7 +260,7 @@
     @weakify(self);
     [self modifyUserInfoWithKey:@"birthday" value:dateString completed:^{
         @strongify(self);
-        [TSServicesManager sharedInstance].userInfoService.user.birthday = dateString;
+        //[TSUserInfoManager userInfo].user.birthday = dateString;
         [self userInfoModifiedAction];
     }];
 }

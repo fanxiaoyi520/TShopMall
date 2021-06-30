@@ -113,7 +113,7 @@
 }
 
 - (void)setDelegate:(id<UniversalCollectionViewCellDataDelegate>)delegate {
-    TSUser *user = [TSServicesManager sharedInstance].userInfoService.user;
+    TSUser *user = [TSUserInfoManager userInfo].user;
     self.phoneNumberLabel.text = user.phone;
     NSString *avatar = user.avatar;
     if (avatar) {
