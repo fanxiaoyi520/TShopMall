@@ -24,7 +24,7 @@
     //target-action
     NSString *targetName = params[@"targetName"];
     NSString *actionName = params[@"actionName"];
-    
+    NSLog(@"%@",params);
     if ([actionName isKindOfClass:[NSString class]] && actionName.length > 0) {
         [[TSWKMessageHandlerDispatch sharedInstance] performTarget:targetName action:actionName params:params shouldCacheTarget:YES];
     }
