@@ -1,22 +1,22 @@
 //
-//  TSCategoryIndicatorCell.m
+//  TSMonthIndicatorCell.m
 //  TShopMall
 //
 //  Created by oneyian on 2021/6/30.
 //
 
-#import "TSCategoryIndicatorCell.h"
+#import "TSMonthIndicatorCell.h"
 #import "JXCategoryTitleCellModel.h"
 #import "JXCategoryFactory.h"
 #import "UIView+AZGradient.h"
 
-@interface TSCategoryIndicatorCell ()
+@interface TSMonthIndicatorCell ()
 @property (nonatomic, strong) CALayer *titleMaskLayer;
 @property (nonatomic, strong) CALayer *maskTitleMaskLayer;
 @property (nonatomic, strong) NSLayoutConstraint *maskTitleLabelCenterY;
 @end
 
-@implementation TSCategoryIndicatorCell
+@implementation TSMonthIndicatorCell
 
 - (void)initializeViews {
     [super initializeViews];

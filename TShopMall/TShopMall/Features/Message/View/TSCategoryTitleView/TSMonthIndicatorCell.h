@@ -10,7 +10,7 @@
 
 @class JXCategoryTitleCellModel;
 
-@interface TSCategoryIndicatorCell : JXCategoryIndicatorCell
+@interface TSMonthIndicatorCell : JXCategoryIndicatorCell
 
 @property (nonatomic, strong) UIView * bg_white_view;
 @property (nonatomic, strong) UIView * bg_View;
