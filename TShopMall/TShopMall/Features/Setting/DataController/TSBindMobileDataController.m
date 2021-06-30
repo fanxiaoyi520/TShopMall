@@ -41,7 +41,7 @@
         NSMutableArray *items = [NSMutableArray array];
         TSBindMobileSectionItemModel *item = [[TSBindMobileSectionItemModel alloc] init];
         item.cellHeight = kScreenHeight;
-        item.oldMobile = @"18175753790";///获取旧手机号
+        item.oldMobile = [TSUserInfoManager userInfo].userName;///获取旧手机号
         item.identify = @"TSChangeMobileCell";
         [items addObject:item];
         TSBindMobileSectionModel *section = [[TSBindMobileSectionModel alloc] init];

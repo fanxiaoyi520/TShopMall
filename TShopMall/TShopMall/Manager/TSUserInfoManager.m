@@ -87,4 +87,12 @@
     return _accessToken;
 }
 
+-(void)updateUserInfo:(void(^)(BOOL))success{
+    [[TSServicesManager sharedInstance].userInfoService updateUserInfoSuccess:^{
+        
+    } failure:^(NSString * _Nonnull errorMsg) {
+        
+    }];
+}
+
 @end
