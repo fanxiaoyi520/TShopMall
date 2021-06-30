@@ -23,7 +23,7 @@
    [login startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
        if (request.responseModel.isSucceed) {
            [[TSUserInfoManager userInfo] updateUserInfo:^(BOOL success) {
-                          
+                
            }];
 
            complete(YES);
@@ -112,7 +112,6 @@
             userInfo.refreshToken = request.responseModel.originalData[@"refreshToken"];
             userInfo.userName = request.responseModel.originalData[@"username"];
             userInfo.accountId = request.responseModel.originalData[@"accountId"];
-            userInfo.nickname = request.responseModel.originalData[@"nickname"];
             [[TSUserInfoManager userInfo] saveUserInfo:userInfo];
 
             complete(YES);

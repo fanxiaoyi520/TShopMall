@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 //@property(nonatomic, strong) TSUser *user;
 
 - (void)getUserInfoAccountId:(NSString *)accountId
-                     success:(void(^_Nullable)(TSUser *))success
+                     success:(void(^_Nullable)(TSUser *user))success
                      failure:(void(^_Nullable)(NSString *errorMsg))failure;
 
 /**

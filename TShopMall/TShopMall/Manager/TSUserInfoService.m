@@ -18,9 +18,9 @@
 @implementation TSUserInfoService
 
 - (void)getUserInfoAccountId:(NSString *)accountId
-                     success:(void(^_Nullable)(TSUser *))success
+                     success:(void(^_Nullable)(TSUser *user))success
                      failure:(void(^_Nullable)(NSString *errorMsg))failure {
-    TSUserInfoRequest *request = [[TSUserInfoRequest alloc] init];
+    TSUserInfoRequest *request = [[TSUserInfoRequest alloc] initWithAccountId:accountId];
     [request startWithCompletionBlockWithSuccess:^(__kindof SSGenaralRequest * _Nonnull request) {
         NSLog(@"获取用户信息 === %@", request.responseModel.originalData);
         if (request.responseModel.isSucceed) {
@@ -48,9 +48,11 @@
     [request startWithCompletionBlockWithSuccess:^(__kindof SSGenaralRequest * _Nonnull request) {
         if (request.responseModel.isSucceed) {
             ///更新本地个人信息
-            if (success) {
-                success();
-            }
+            [[TSUserInfoManager userInfo] updateUserInfo:^(BOOL isSuccess) {
+                if (success) {
+                    success();
+                }
+            }];
         } else {
             if (failure) {
                 failure(request.responseModel.originalData[@"failCause"]);
