@@ -15,7 +15,7 @@
 @property (nonatomic, strong) TSAddressEditItem *phoneItem;
 @property (nonatomic, strong) TSAddressEditItem *addressItem;
 @property (nonatomic, strong) TSAddressEditItem *detailItem;
-@property (nonatomic, strong) TSAddressEditPastView *pastView;
+//@property (nonatomic, strong) TSAddressEditPastView *pastView;
 @property (nonatomic, strong) TSAddressMarkView *markView;
 @end
 
@@ -27,10 +27,10 @@
         [self configUI];
         [self initObserver];
         
-        __weak typeof(self) weakSelf = self;
-        self.pastView.pastContentChanged = ^(NSString *pastStr) {
-            [weakSelf shouldFetchSmartAddress:pastStr];
-        };
+//        __weak typeof(self) weakSelf = self;
+//        self.pastView.pastContentChanged = ^(NSString *pastStr) {
+//            [weakSelf shouldFetchSmartAddress:pastStr];
+//        };
     }
     return self;
 }
@@ -68,6 +68,8 @@
 }
 
 - (void)updateAddress:(NSString *)address{
+    [address stringByReplacingOccurrencesOfString:@"(null)" withString:@""];
+    [address stringByReplacingOccurrencesOfString:@" " withString:@""];
     self.addressItem.textField.text = address;
 }
 
@@ -110,7 +112,7 @@
         weakSelf.vm = [[TSAddressViewModel alloc] initWithAddress:model];
         weakSelf.vm.isDefault = isDefault;
         NSString *str = [NSString stringWithFormat:@"%@\n%@\n%@%@%@%@%@", model.consignee,model.mobile, model.provinceName, model.cityName, model.regionName, model.streetName,model.address];
-        [weakSelf.pastView updatePastView:str];
+//        [weakSelf.pastView updatePastView:str];
     } onController:weakSelf.controller];
 }
 
@@ -138,14 +140,14 @@
         make.top.equalTo(self.addressItem.mas_bottom);
     }];
     
-    [self.pastView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.nameItem);
-        make.top.equalTo(self.detailItem.mas_bottom);
-    }];
+//    [self.pastView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.right.equalTo(self.nameItem);
+//        make.top.equalTo(self.detailItem.mas_bottom);
+//    }];
     
     [self.markView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.nameItem);
-        make.top.equalTo(self.pastView.mas_bottom);
+        make.top.equalTo(self.detailItem.mas_bottom);
         make.bottom.equalTo(self.mas_bottom);
     }];
 }
@@ -201,15 +203,15 @@
     return self.detailItem;
 }
 
-- (TSAddressEditPastView *)pastView{
-    if (_pastView) {
-        return _pastView;
-    }
-    self.pastView = [TSAddressEditPastView new];
-    [self addSubview:self.pastView];
-    
-    return self.pastView;
-}
+//- (TSAddressEditPastView *)pastView{
+//    if (_pastView) {
+//        return _pastView;
+//    }
+//    self.pastView = [TSAddressEditPastView new];
+//    [self addSubview:self.pastView];
+//
+//    return self.pastView;
+//}
 
 - (TSAddressMarkView *)markView{
     if (_markView) {

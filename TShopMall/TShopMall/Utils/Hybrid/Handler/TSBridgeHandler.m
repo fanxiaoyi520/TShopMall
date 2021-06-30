@@ -177,6 +177,16 @@
 }
 
 
+#pragma  mark - 选择发票
+- (void)checkInvoice:(NSDictionary *)invoice{
+    NSDictionary *params = invoice[@"data"][@"params"];
+    if (params) {
+        NSDictionary *data = params[@"data"];
+        if (data) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"InvoiceChanged" object:nil userInfo:@{@"invoice":data}];
+        }
+    }
+}
 
 @end
 

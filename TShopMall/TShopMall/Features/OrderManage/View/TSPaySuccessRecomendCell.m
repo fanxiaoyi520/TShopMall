@@ -21,6 +21,10 @@
     }
 }
 
+- (void)recomendViewTapped{
+    [self.theDelegate recomendGoodsTapped:self.aView.vm.uuid];
+}
+
 - (void)layoutSubviews{
     [self.aView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.contentView);

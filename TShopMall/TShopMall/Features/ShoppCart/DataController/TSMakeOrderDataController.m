@@ -40,6 +40,9 @@
             }
             [self updateGoodsSection:self.balanceModel.cartManager.detailModelList];
             [self updatePriceSection];
+            if ([self defaultAddress] != nil) {
+                [self updateAddressSection:[self defaultAddress]];
+            }
             finished(YES);
         } else{
             [self configEmptySection];
@@ -205,5 +208,16 @@
     section.rows = @[row];
     
     [self.sections addObject:section];
+}
+
+
+- (TSAddressModel *)defaultAddress{
+    TSAddressModel *address = nil;
+    for(TSAddressModel *model in self.balanceModel.addressList){
+        if(model.isDefault == YES){
+            return model;
+        }
+    }
+    return nil;
 }
 @end

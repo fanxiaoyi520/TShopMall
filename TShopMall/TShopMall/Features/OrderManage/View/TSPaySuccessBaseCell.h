@@ -11,7 +11,7 @@
 
 - (void)backToHome;
 - (void)goToOrderDetail;
-- (void)recomendGoodsTapped:(id)goods;
+- (void)recomendGoodsTapped:(NSString *)uuid;
 @end
 
 @interface TSPaySuccessBaseCell : TSUniversalCollectionViewCell
