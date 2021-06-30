@@ -99,6 +99,10 @@
             NSString *productName = productMain[@"productName"];
             NSString *adviceNote = productMain[@"adviceNote"];
             
+            if ([adviceNote isKindOfClass:[NSNull class]]) {
+                adviceNote = @"";
+            }
+            
             CGFloat titleH = [productName sizeForFont:KRegularFont(16)
                                                  size:CGSizeMake(kScreenWidth - 32, 1000)
                                                  mode:NSLineBreakByWordWrapping].height;
@@ -145,7 +149,13 @@
             
             TSGoodDetailSectionModel *section = self.sections[4];
             TSGoodDetailItemCopyModel *item = (TSGoodDetailItemCopyModel *)[section.items firstObject];
-            item.writeStr = productInfo[@"productShareContent"];
+            
+            NSString *write = productInfo[@"productShareContent"];
+            
+            if ([write isKindOfClass:[NSNull class]]) {
+                write = @"";
+            }
+            item.writeStr = write;
         }
         
         {   //已选等
@@ -173,8 +183,12 @@
             TSGoodDetailSectionModel *section = [self.sections lastObject];
             NSDictionary *productDescription = productModel[@"productDescription"];
             NSString *descriptionJson = productDescription[@"descriptionJson"];
-            NSMutableArray *items = [self detailImageModelsWithJsonString:descriptionJson];
-            section.items = items;
+            if ([descriptionJson isKindOfClass:[NSNull class]]) {
+                section.items = @[];
+            }else{
+                NSMutableArray *items = [self detailImageModelsWithJsonString:descriptionJson];
+                section.items = items;
+            }
         }
         
         if (isRequired) {
@@ -443,6 +457,12 @@
         } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
             
     }];
+}
+
+-(void)fetchProductDiscountPriceDiscountType:(NSString *)discountType
+                                 productUuid:(NSString *)productUuid
+                                    complete:(void(^)(BOOL isSucess))complete{
+    
 }
 
 #pragma mark - private method
