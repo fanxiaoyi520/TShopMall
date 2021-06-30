@@ -23,7 +23,7 @@
         NSMutableArray *items = [NSMutableArray array];
         
         TSRankSectionItemModel *item = [[TSRankSectionItemModel alloc] init];
-        item.cellHeight = 340;
+        item.cellHeight = 280;
         item.identify = @"TSRankHonourCell";
         
         [items addObject:item];
@@ -40,7 +40,7 @@
         
         for (int i = 1; i <= 8; i++) {
             TSRankSectionItemModel *item = [[TSRankSectionItemModel alloc] init];
-            item.cellHeight = 55.5;
+            item.cellHeight = 55;
             item.identify = @"TSRankCell";
             item.rank = i;
             [items addObject:item];
@@ -48,7 +48,7 @@
         
         TSRankSectionModel *section = [[TSRankSectionModel alloc] init];
         section.hasHeader = YES;
-        section.headerSize = CGSizeMake(0, 56);
+        section.headerSize = CGSizeMake(0, 44);
         section.headerIdentify = @"TSRankHeaderView";
         section.column = 1;
         section.items = items;

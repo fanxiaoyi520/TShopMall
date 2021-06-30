@@ -17,9 +17,12 @@
 
 @implementation TSRankHeaderView
 
--(instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier{
-    if (self = [super initWithReuseIdentifier:reuseIdentifier]) {
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
         [self fillCustomView];
+        self.backgroundColor = KWhiteColor;
     }
     return self;
 }
@@ -80,7 +83,7 @@
         _earnLabel.font = KRegularFont(14);
         _earnLabel.textAlignment = NSTextAlignmentCenter;
         _earnLabel.textColor = KTextColor;
-        _earnLabel.text = @"销售收益";
+        _earnLabel.text = @"销售金额";
     }
     return _earnLabel;
 }

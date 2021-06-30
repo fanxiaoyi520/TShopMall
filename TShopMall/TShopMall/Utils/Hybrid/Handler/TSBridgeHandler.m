@@ -112,7 +112,7 @@
     
     NSString *backColor = paramsDic[@"backColor"];
     NSString *textColor = paramsDic[@"textColor"];
-    NSString *imageName = paramsDic[@"navBackgroundImg"];
+    NSString *imageName = paramsDic[@"imgUrl"];
     
     TSHybridViewController *controller = [TSWKAppManager currentController:params[@"webview"]];
     
