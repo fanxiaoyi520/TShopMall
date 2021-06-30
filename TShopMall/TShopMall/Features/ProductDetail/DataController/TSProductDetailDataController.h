@@ -120,6 +120,16 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)fetchStaffShareShareType:(NSUInteger)shareType
                        complete:(void(^)(BOOL isSucess, NSDictionary *data))complete;
 
+
+
+/// 特权分享设置特权优惠价
+/// @param discountType 优惠方式:打折(percent)、指定价格(price)
+/// @param productUuid 需要分享的商品
+/// @param complete 请求创建分享票据
+-(void)fetchProductDiscountPriceDiscountType:(NSString *)discountType
+                                 productUuid:(NSString *)productUuid
+                                    complete:(void(^)(BOOL isSucess))complete;
+
 @end
 
 NS_ASSUME_NONNULL_END

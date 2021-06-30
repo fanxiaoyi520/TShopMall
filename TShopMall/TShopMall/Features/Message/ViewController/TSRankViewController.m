@@ -43,11 +43,6 @@
     [self.view addSubview:self.categoryView];
 //    [self.view addSubview:self.seperateView];
     [self.view addSubview:self.listContainerView];
-    
-    [_background_imgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.offset(0);
-        make.height.offset(KRateH(161));
-    }];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
@@ -76,6 +71,7 @@
 //    self.seperateView.frame = CGRectMake(0, categoryY + categoryViewHeight, kScreenWidth, 1);
     CGFloat listContainerY = categoryY + containViewY;
     self.listContainerView.frame = CGRectMake(0, listContainerY, kScreenWidth ,kScreenHeight - listContainerY - bottom);
+    self.background_imgView.frame = CGRectMake(0, 0, kScreenWidth, listContainerY + 54);
     //self.listContainerView.backgroundColor = UIColor.redColor;
     //NSLog(@" screenHeight == %f, self.listContainerView == %f", kScreenHeight, CGRectGetHeight(self.listContainerView.frame));
 }

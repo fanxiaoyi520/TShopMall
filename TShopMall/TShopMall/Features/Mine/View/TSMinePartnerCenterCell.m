@@ -139,11 +139,29 @@
     [super setDelegate:delegate];
     TSPartnerCenterData *model = [delegate universalCollectionViewCellModel:self.indexPath];
     
-    _orderValueLabel.text = model.orderNum;
-    _moneyValueLabel.text = model.orderMoney;
-    _contributeValueLabel.text = model.profitFromMyself;
-    _partnerValueLabel.text = model.profitFromPartner;
-    _eyeButton.selected = model.eyeIsOn;
+    _orderValueLabel.text = [NSString stringWithFormat:@"¥%@",model.orderNum];
+    _moneyValueLabel.text = [NSString stringWithFormat:@"¥%@",model.orderMoney];
+    _contributeValueLabel.text = [NSString stringWithFormat:@"¥%@",model.profitFromMyself];
+    _partnerValueLabel.text = [NSString stringWithFormat:@"¥%@",model.profitFromPartner];
+    if (![model.rankLevel isEqualToString: @"2"]) {
+        self.partnerLabel.hidden = YES;
+        self.partnerValueLabel.hidden = YES;
+        [self.contributeLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(self.contentView.mas_right);;
+        }];
+        [self.contributeValueLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(self.contentView.mas_right);
+        }];
+    } else {
+        [self.contributeLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(self.contentView.mas_centerX);;
+        }];
+        [self.contributeValueLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(self.contentView.mas_centerX);
+        }];
+        self.partnerLabel.hidden = NO;
+        self.partnerValueLabel.hidden = NO;
+    }
 }
 
 #pragma mark - Actions
@@ -166,10 +184,10 @@
     } else {
         if ([self.delegate respondsToSelector:@selector(universalCollectionViewCellClick:params:)]) {
             TSPartnerCenterData *model = [self.delegate universalCollectionViewCellModel:self.indexPath];
-            _orderValueLabel.text = model.orderNum;
-            _moneyValueLabel.text = model.orderMoney;
-            _contributeValueLabel.text = model.profitFromMyself;
-            _partnerValueLabel.text = model.profitFromPartner;
+            _orderValueLabel.text = [NSString stringWithFormat:@"¥%@",model.orderNum];
+            _moneyValueLabel.text = [NSString stringWithFormat:@"¥%@",model.orderMoney];
+            _contributeValueLabel.text = [NSString stringWithFormat:@"¥%@",model.profitFromMyself];
+            _partnerValueLabel.text = [NSString stringWithFormat:@"¥%@",model.profitFromPartner];
         }
         sender.selected = YES;
     }

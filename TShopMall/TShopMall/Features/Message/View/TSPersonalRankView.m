@@ -33,9 +33,8 @@
 
 - (instancetype)init
 {
-    self = [super initWithFrame:CGRectMake(0, 0, kScreenWidth, KRateH(70))];
+    self = [super initWithFrame:CGRectMake(0, 0, kScreenWidth, 84)];
     if (self) {
-        
         
         [self.personalImgV mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(self);
@@ -43,12 +42,12 @@
         
         [self.headImgV mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.offset(27);
-            make.centerY.equalTo(self);
+            make.bottom.offset(-10);
             make.width.height.offset(50);
         }];
         
         [self.usernameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.offset(14);
+            make.top.equalTo(self.headImgV).offset(4);
             make.left.equalTo(self.headImgV.mas_right).with.offset(15);
         }];
         

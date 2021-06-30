@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "蒙版@2x.png",
+      "filename" : "mall_mine_eye_white_invisible.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "蒙版@2x-1.png",
+      "filename" : "mall_mine_eye_white_invisible@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "蒙版@3x.png",
+      "filename" : "mall_mine_eye_white_invisible@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface TSUserInfoView : UIView
 
 @property (nonatomic ,assign)id <TSUserInfoViewDelegate> kDelegate;
--(instancetype)initWithRoleType:(TSRoleType)type;
+//-(instancetype)initWithRoleType:(TSRoleType)type;
 -(void)setModel:(TSMineMerchantUserInformationModel *)model;
 @end
 

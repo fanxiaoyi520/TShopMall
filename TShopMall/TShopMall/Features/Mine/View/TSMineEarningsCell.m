@@ -72,7 +72,7 @@
 - (void)setDelegate:(id<UniversalCollectionViewCellDataDelegate>)delegate {
     [super setDelegate:delegate];
     TSMineWalletEarningModel *model = [delegate universalCollectionViewCellModel:self.indexPath];
-    _earnMoneyLabel.text = model.arrivalAmount;
+    _earnMoneyLabel.text = [NSString stringWithFormat:@"¥%@",model.arrivalAmount];
     _eyeButton.selected = model.eyeIsOn;
 }
 
@@ -84,7 +84,7 @@
     } else {
         if ([self.delegate respondsToSelector:@selector(universalCollectionViewCellClick:params:)]) {
             TSMineWalletEarningModel *model = [self.delegate universalCollectionViewCellModel:self.indexPath];
-            _earnMoneyLabel.text = model.arrivalAmount;
+            _earnMoneyLabel.text = [NSString stringWithFormat:@"¥%@",model.arrivalAmount];
         }
         sender.selected = YES;
     }
