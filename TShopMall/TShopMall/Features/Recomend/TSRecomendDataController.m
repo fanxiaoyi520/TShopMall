@@ -55,6 +55,8 @@
         return @"searchResult_page";
     } else if (type == RecomendCartPage) {
         return @"cart_page";
+    } else if (type == RecomendPaySuccess) {
+        return @"paySuccess_page";
     }
     return @"";
 }

@@ -138,6 +138,9 @@
 
 //去购物
 - (void)goToShopping{
+    UIViewController *con = [NSClassFromString(@"TSAddressEditController") new];
+    [self.navigationController pushViewController:con animated:YES];
+    return;
     AppDelegate *ap = (AppDelegate *)[UIApplication sharedApplication].delegate;
     TSBaseNavigationController *naviCon = (TSBaseNavigationController *)ap.window.rootViewController;
     TSMainViewController *mainCon = [naviCon.viewControllers lastObject];
