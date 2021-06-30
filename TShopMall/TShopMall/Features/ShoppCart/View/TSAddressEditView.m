@@ -87,7 +87,11 @@
 }
 
 - (void)setVm:(TSAddressViewModel *)vm{
-    _vm = vm;
+    if (vm == nil) {
+        _vm = [TSAddressViewModel new];
+    } else {
+        _vm = vm;
+    }
     self.nameItem.textField.text = self.vm.consignee;
     self.phoneItem.textField.text = self.vm.mobile;
     self.addressItem.textField.text = vm.address;

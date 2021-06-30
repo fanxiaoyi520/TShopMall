@@ -27,16 +27,17 @@
 @implementation TSMakeOrderOperationCell
 
 - (void)setObj:(id)obj{
-    if ([obj isKindOfClass:[TSMakeOrderInvoiceViewModel class]]) {
+    if (obj != nil &&[obj isKindOfClass:[TSMakeOrderInvoiceViewModel class]]) {
         TSMakeOrderInvoiceViewModel *vm = (TSMakeOrderInvoiceViewModel *)obj;
         self.messageView.textField.text = vm.message;
-        
-        if (vm.invoice.formType == 1) {
-            self.billView.textField.text = @"电子普通发票 - 个人";
-        } else if (vm.invoice.formType == 2) {
-            self.billView.textField.text = @"电子普通发票 - 企业";
-        } else {
-            self.billView.textField.text = @"增值税发票";
+        if (vm.invoice != nil) {
+            if (vm.invoice.formType == 1) {
+                self.billView.textField.text = @"电子普通发票 - 个人";
+            } else if (vm.invoice.formType == 2) {
+                self.billView.textField.text = @"电子普通发票 - 企业";
+            } else {
+                self.billView.textField.text = @"增值税发票";
+            }
         }
     }
 }
@@ -52,20 +53,21 @@
 }
 
 - (void)messageEditingEnd:(UITextField *)textField{
-    [self.delegate operationForMessageEditEnd:textField.text];
+    
 }
 
 - (void)messageEditingChange:(UITextField *)textField{
     if (textField.text.length > 50) {
         textField.text = [textField.text substringWithRange:NSMakeRange(0, 50)];
     }
+    [self.delegate operationForMessageEditEnd:textField.text];
 }
 
 - (void)configUI{
     self.deliveryView.title.text = @"配送";
     self.deliveryView.textField.text = @"快递配送  免运费";
     self.billView.title.text = @"发票";
-    self.billView.textField.text = @"电子普通发票 - 个人";
+    self.billView.textField.text = @"选择发票抬头";
     self.messageView.title.text = @"给商家留言";
     self.messageView.textField.placeholder = @"留言建议留言建议提前协商（50字以内）";
 }
