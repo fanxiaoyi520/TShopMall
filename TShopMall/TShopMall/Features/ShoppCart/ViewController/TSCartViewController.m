@@ -139,10 +139,10 @@
 //去购物
 - (void)goToShopping{
     AppDelegate *ap = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    TSBaseNavigationController *naviCon = (TSBaseNavigationController *)ap.window.rootViewController;
-    TSMainViewController *mainCon = [naviCon.viewControllers lastObject];
-    UITabBarController *tabbarCon = [mainCon.childViewControllers lastObject];
-    [tabbarCon setSelectedIndex:0];
+//    TSBaseNavigationController *naviCon = (TSBaseNavigationController *)ap.window.rootViewController;
+//    TSMainViewController *mainCon = [naviCon.viewControllers lastObject];
+//    UITabBarController *tabbarCon = [mainCon.childViewControllers lastObject];
+//    [tabbarCon setSelectedIndex:0];
 }
 
 - (void)recomendGoodsSelected:(NSString *)uuid{

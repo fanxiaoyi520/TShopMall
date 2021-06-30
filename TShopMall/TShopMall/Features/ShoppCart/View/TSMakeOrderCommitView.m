@@ -34,7 +34,8 @@
         return _commitBtn;
     }
     self.commitBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.commitBtn setBackgroundImage:KImageMake(@"cart_settle_bg") forState:UIControlStateNormal];
+//    [self.commitBtn setBackgroundImage:KImageMake(@"cart_settle_bg") forState:UIControlStateNormal];
+    self.commitBtn.backgroundColor = KHexColor(@"#FF4D49");
     self.commitBtn.titleLabel.font = KFont(PingFangSCRegular, 14.0);
     [self.commitBtn setTitleColor:KHexColor(@"#FFFFFF") forState:UIControlStateNormal];
     [self.commitBtn setTitle:@"提交订单" forState:UIControlStateNormal];

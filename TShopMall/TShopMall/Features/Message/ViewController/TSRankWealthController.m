@@ -8,11 +8,11 @@
 #import "TSRankWealthController.h"
 #import "TSRankDataController.h"
 #import "TSRankMonthViewController.h"
-#import "TSCategoryTitleView.h"
+#import "TSMonthTitleView.h"
 
 @interface TSRankWealthController ()
 
-@property (nonatomic, strong) TSCategoryTitleView *myCategoryView;
+@property (nonatomic, strong) TSMonthTitleView *myCategoryView;
 @property(nonatomic, strong) TSRankDataController *dataController;
 
 @end
@@ -49,7 +49,7 @@
 }
 
 - (JXCategoryBaseView *)preferredCategoryView {
-    return [[TSCategoryTitleView alloc] init];
+    return [[TSMonthTitleView alloc] init];
 }
 
 - (CGFloat)preferredCategoryViewHeight {
