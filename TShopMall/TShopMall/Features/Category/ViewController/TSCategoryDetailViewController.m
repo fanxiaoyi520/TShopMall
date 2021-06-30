@@ -30,13 +30,12 @@
     // Do any additional setup after loading the view.
     
     TSCategoryGroup *group = [TSCategoryGroup new];
-    group.name = self.name;
+    
     group.groupId = self.uuid;
     self.group = group;
     self.PageIndex = 1;
     [self reloadContainerCollectionView];
     
-    self.gk_navTitle = self.group.name;
     self.gk_navRightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"mall_category_btn_rail"] style:UIBarButtonItemStylePlain target:self action:@selector(changeLayout)];
 
 }
@@ -125,6 +124,7 @@
     [self.viewModel getCategoryGroupDataWithStartPageIndex:self.PageIndex count:10 group:self.group sortType:self.sortType sortBy:self.sortBy success:^(NSArray * _Nonnull list) {
         @strongify(self);
         [Popover removePopoverOnWindow];
+        self.gk_navTitle = self.group.name;
         self.collectionView.items = list;
         [self.collectionView reloadData];
         if (list.count < self.group.totalNum) {

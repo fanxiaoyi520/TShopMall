@@ -25,6 +25,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *companyName;
 @property (nonatomic, copy) NSString *registerAddress;
+@property (nonatomic, copy) NSString *bankName;
+@property (nonatomic, copy) NSString *bankNo;
+
 
 + (TSInvoiceModel *)creatWithInvoice:(NSDictionary *)invoice;
 @end

@@ -124,7 +124,7 @@
             }
         };
         oneClickLoginVC.bindBlock = ^{
-            @strongify(self)
+            
             TSBindMobileController *vc = [TSBindMobileController new];
             TSBaseNavigationController *nav = [[TSBaseNavigationController alloc] initWithRootViewController:vc];
             
@@ -136,7 +136,7 @@
             [[UIApplication sharedApplication].delegate.window.rootViewController presentViewController:nav animated:YES completion:^{
             }];
         };
-        callBack(nav);
+        callBack(oneClickLoginVC);
     }else{
         TSLoginViewController *loginViewController = [TSLoginViewController new];
         loginViewController.needClose = NO;
@@ -144,7 +144,7 @@
         loginViewController.loginBlock = ^{
             self.loginBlock();
         };
-        callBack(homeController);
+        callBack(loginViewController);
     }
     
 }

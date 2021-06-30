@@ -15,7 +15,7 @@
 #import "TSBankCardModel.h"
 #import "TSAddBankCardModel.h"
 #import "TSAddBankCardBackModel.h"
-
+#import "TSMineWalletModel.h"
 NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSInteger, RequestMethod){
     Ordinary,
@@ -39,6 +39,10 @@ typedef NS_ENUM(NSInteger, RequestMethod){
  * 银行卡入参model
  */
 @property (nonatomic ,strong)TSAddBankCardModel *addBankCardModel;
+/**
+ * 删除银行卡model
+ */
+@property (nonatomic ,strong)TSBankCardModel *bankCardModel;
 
 @property (nonatomic, strong, readonly) NSMutableArray <TSMineSectionModel *> *sections;
 @property (nonatomic, strong, readonly) TSMineMerchantUserInformationModel *merchantUserInformationModel;
@@ -48,7 +52,9 @@ typedef NS_ENUM(NSInteger, RequestMethod){
 @property (nonatomic, strong, readonly) NSMutableArray <TSWithdrawalRecordModel *> *withdrawalRecordArray;
 @property (nonatomic, strong, readonly) NSMutableArray <TSBankCardModel *> *bankCardArray;
 @property (nonatomic, strong, readonly) TSAddBankCardBackModel *addBankCardBackModel;
-
+@property (nonatomic,   copy, readonly) NSString *amount;//分
+@property (nonatomic, strong, readonly) TSWithdrawalRecordModel *withdrawalRecordModel;
+@property (nonatomic, strong, readonly) TSMineWalletEarningModel *earningModel;
 
 -(void)fetchMineContentsComplete:(void(^)(BOOL isSucess))complete;
 -(void)fetchDataComplete:(void(^)(BOOL isSucess))complete;
@@ -69,6 +75,10 @@ typedef NS_ENUM(NSInteger, RequestMethod){
 - (void)fetchCheckBankCardDataComplete:(void(^)(BOOL isSucess))complete;
 //查询支行
 - (void)fetchInquiryBranchDataComplete:(void(^)(BOOL isSucess))complete;
+//删除银行卡
+- (void)fetchDeleteBankCardDataComplete:(void(^)(BOOL isSucess))complete;
+//查询我的余额
+- (void)fetchCheckMyBalanceDataComplete:(void(^)(BOOL isSucess))complete;
 @end
 
 NS_ASSUME_NONNULL_END

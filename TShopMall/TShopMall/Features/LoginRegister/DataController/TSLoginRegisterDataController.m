@@ -57,6 +57,8 @@
             userInfo.accessToken = request.responseModel.originalData[@"accessToken"];
             userInfo.refreshToken = request.responseModel.originalData[@"refreshToken"];
             userInfo.userName = request.responseModel.originalData[@"username"];
+            userInfo.accountId = request.responseModel.originalData[@"accountId"];
+            userInfo.nickname = request.responseModel.originalData[@"nickname"];
             [[TSUserInfoManager userInfo] saveUserInfo:userInfo];
 
             complete(YES);
@@ -178,7 +180,6 @@
             }else if([dic[@"flag"] intValue] == 3){
                 complete(YES, dic[@"token"]);
             }
-           
         }
         else{
             [Popover popToastOnWindowWithText:request.responseModel.originalData[@"msg"]];

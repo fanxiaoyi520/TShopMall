@@ -15,7 +15,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) TSLinkDataModel *linkData;
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) TSImageDataModel *imageData;
-@property (nonatomic, strong, readonly) NSString *uri;
 
 @end
 

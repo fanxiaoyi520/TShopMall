@@ -10,7 +10,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TSUserInfoManager : NSObject
-
 /// 授权token
 @property(nonatomic, copy) NSString *accessToken;
 /// 刷新token 调刷新token接口的时候 , 需要穿这个值
@@ -19,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy) NSString *userName;
 /// accountId
 @property(nonatomic, copy) NSString *accountId;
+/** 昵称  */
+@property(nonatomic, copy) NSString *nickname;
 /// 初始化并加载本地的用户信息
 +(TSUserInfoManager *)userInfo;
 

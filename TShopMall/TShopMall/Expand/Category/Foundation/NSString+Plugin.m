@@ -704,4 +704,15 @@
     return muDict.copy;
 }
 
+//银行卡部分秘文展示
++ (NSString *)returnBankCard:(NSString *)BankCardStr {
+    NSString *formerStr = [BankCardStr substringToIndex:4];
+    NSString *str1 = [BankCardStr stringByReplacingOccurrencesOfString:formerStr withString:@""];
+    NSString *endStr = [BankCardStr substringFromIndex:BankCardStr.length-4];
+    NSString *str2 = [str1 stringByReplacingOccurrencesOfString:endStr withString:@""];
+    NSString *middleStr = [str2 stringByReplacingOccurrencesOfString:str2 withString:@"****"];
+    NSString *CardNumberStr = [formerStr stringByAppendingFormat:@"%@%@",middleStr,endStr];
+    return CardNumberStr;
+}
+
 @end

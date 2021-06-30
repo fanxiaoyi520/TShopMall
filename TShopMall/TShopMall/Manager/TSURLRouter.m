@@ -55,7 +55,23 @@
     return currentViewController;
 }
 
-- (void)openURI:(NSString *_Nullable)uri {
+- (NSString *)configUriWithTypeValue:(NSString *_Nullable)typeValue objectValue:(NSString *)objectValue{
+    NSString *uri;
+    if ([typeValue isEqualToString:@"APP_PAGE"]) {
+        uri = @"page://quote/category";
+    }
+    else if([typeValue isEqualToString:@"goodsGroup"]){
+        uri = [NSString stringWithFormat:@"page://quote/categoryDetail?uuid=%@", objectValue];
+
+    }
+    else if([typeValue isEqualToString:@"Goods"]){
+        uri = [NSString stringWithFormat:@"page://quote/productDetail?uuid=%@", objectValue];
+    }
+    return uri;
+}
+
+- (void)openURI:(NSString *)uri{
+   
     NSLog(@"TSURLRouter 中 uri==%@",uri);
     
     Class cls = NSClassFromString([self getClassDict][[uri componentsSeparatedByString:@"?"].firstObject]);

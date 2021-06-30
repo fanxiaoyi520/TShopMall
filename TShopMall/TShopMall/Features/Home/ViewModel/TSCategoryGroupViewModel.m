@@ -54,6 +54,9 @@
             TSCategoryGroup *model = [TSCategoryGroup yy_modelWithDictionary:data];
             NSArray *temp = [NSArray yy_modelArrayWithClass:TSProductBaseModel.class json:model.list];
             group.totalNum = model.totalNum;
+            if (group.name == nil) {
+                group.name = data[@"searcheName"];
+            }
             NSMutableArray *marr;
             if (startIndex == 1) {
                 marr = [NSMutableArray array];

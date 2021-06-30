@@ -56,9 +56,6 @@ NS_ASSUME_NONNULL_BEGIN
 #define KPersonalPointColor KHexColor(@"#D8D8D8")
 #define KOrderMsgBGColor KHexColor(@"#FAFAFA")
 
-UIKIT_EXTERN NSString *const KFirstEnterAppKey;
-UIKIT_EXTERN NSString *const KFirstEnterAppValue;
-
 /**
  *简单单例宏H和M配套使用
  *H放于声明文件

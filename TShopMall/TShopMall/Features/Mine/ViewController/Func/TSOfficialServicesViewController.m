@@ -15,11 +15,13 @@
 
 #import "TSOfficialServicesViewController.h"
 #import "TSOfficialServicesCell.h"
-
+#import "TSHybridViewController.h"
 @interface TSOfficialServicesViewController ()<UICollectionViewDataSource,UICollectionViewDelegate>
 {
     NSArray *_iconArray;
     NSArray *_titleArray;
+    NSArray *_Urls;
+
 }
 @property (nonatomic ,strong) UIView *bgView;
 @property (nonatomic ,strong) UIImageView *bottomImageView;
@@ -38,6 +40,7 @@
     self.gk_navTitle = @"官方服务";
     _iconArray = @[@"mine_rengong",@"mine_baoxiu",@"mine_fuwujindu",@"mine_bao_baoxiu",@"mine_guzhangzicha",@"mine_fuwuzhengce",@"mine_shuomingshu",@"mine_qingxifuwu"];
     _titleArray = @[@"人工客服",@"报装报修",@"服务进度",@"延保查询",@"故障自查",@"服务政策\n收费标准",@"说明书",@"清洗服务"];
+    _Urls = @[kMallH5StaffServiceUrl,kMallH5RepairsUrl,kMallH5ServiceScheduleUrl,kMallH5ExtendWarrantyUrl,kMallH5FaultInspectionUrl,kMallH5ServicePolicyUrl,kMallH5InstructionUrl,kMallH5ServiceEngineerUrl];
 }
 
 - (void)fillCustomView {
@@ -53,7 +56,7 @@
     self.iphoneLab.frame = CGRectMake(0, 44, kScreenWidth, 16.5);
     
     UICollectionViewFlowLayout *flatout = [[UICollectionViewFlowLayout alloc] init];
-    UICollectionView * collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(10,-20, self.bgView.width-20, self.bgView.height+20) collectionViewLayout:flatout];
+    UICollectionView * collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(10,0, self.bgView.width-20, self.bgView.height) collectionViewLayout:flatout];
     collectionView.dataSource=self;
     collectionView.delegate=self;
     collectionView.showsVerticalScrollIndicator = NO;
@@ -101,7 +104,11 @@
     return GH_BRANDDEV;
 }
 
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {}
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    TSHybridViewController *vc = [[TSHybridViewController alloc]initWithURLString:_Urls[indexPath.row]]; 
+    [self.navigationController pushViewController:vc animated:true];
+}
 
 // MARK: get
 - (UIView *)bgView {

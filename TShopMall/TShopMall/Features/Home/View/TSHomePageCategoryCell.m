@@ -17,9 +17,7 @@
 @implementation TSHomePageCategoryCell
 
 -(void)setupUI{
-    
-    [super setupUI];
-    
+        
     [self.contentView addSubview:self.collectionView];
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.contentView).offset(12);
@@ -53,8 +51,10 @@
         UIEdgeInsets padding = UIEdgeInsetsMake(13, 13, 16, 13);
         _collectionView = [[TSGridButtonCollectionView alloc] initWithFrame:CGRectZero items:nil ColumnSpacing:23 rowSpacing:17 itemsHeight:68 rows:2 columns:5 padding:padding clickedBlock:^(id selectItem, NSInteger index) {
             TSImageBaseModel *model = (TSImageBaseModel *)selectItem;
-            [[TSServicesManager sharedInstance].uriHandler openURI:model.uri];
-            NSLog(@"uri:%@",model.uri);
+            NSString *uri = [[TSServicesManager sharedInstance].uriHandler configUriWithTypeValue:model.linkData.typeValue objectValue:model.linkData.objectValue];
+            
+            [[TSServicesManager sharedInstance].uriHandler openURI:uri];
+            NSLog(@"uri:%@",uri);
         }];
         _collectionView.clipsToBounds = YES;
         _collectionView.layer.cornerRadius = 8;

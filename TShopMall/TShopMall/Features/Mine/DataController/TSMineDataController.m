@@ -17,6 +17,9 @@
 @property (nonatomic, strong) TSMyIncomeModel *myIncomeModel;
 @property (nonatomic, strong) NSMutableArray <TSBankCardModel *> *bankCardArray;
 @property (nonatomic, strong) TSAddBankCardBackModel *addBankCardBackModel;
+@property (nonatomic, copy) NSString *amount;
+@property (nonatomic, strong) TSWithdrawalRecordModel *withdrawalRecordModel;
+@property (nonatomic, strong) TSMineWalletEarningModel *earningModel;
 @end
 
 @implementation TSMineDataController
@@ -190,8 +193,9 @@
 -(void)fetchDataComplete:(void(^)(BOOL isSucess))complete {
     dispatch_group_t group = dispatch_group_create();
 
-    dispatch_group_enter(group);
+   
     dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+      dispatch_group_enter(group);
         [self requestMethodWithGroup:group withIndex:1];
     });
 
@@ -200,6 +204,16 @@
         [self requestMethodWithGroup:group withIndex:2];
     });
 
+    dispatch_group_enter(group);
+    dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self requestMethodWithGroup:group withIndex:3];
+    });
+    
+    dispatch_group_enter(group);
+    dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self requestMethodWithGroup:group withIndex:4];
+    });
+    
     dispatch_group_notify(group, dispatch_get_main_queue(), ^{
         if (complete) {
             complete(YES);
@@ -220,11 +234,18 @@
              if (aIndex == 1) {
                  TSMineMerchantUserInformationModel *model = [TSMineMerchantUserInformationModel yy_modelWithDictionary:data];
                  self.merchantUserInformationModel = model;
-             } else {
+             } else if (aIndex == 2) {
                  TSPartnerCenterData *model = [TSPartnerCenterData yy_modelWithDictionary:data];
                  self.partnerCenterDataModel = model;
+                 self.partnerCenterDataModel.eyeIsOn = YES;
+             } else if (aIndex == 3){
+               self.earningModel = [TSMineWalletEarningModel yy_modelWithDictionary:data];
+                 self.earningModel.eyeIsOn = YES;
+             } else {
+                 
              }
          }
+         
          dispatch_group_leave(thegroup);
      } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
          dispatch_group_leave(thegroup);
@@ -238,6 +259,7 @@
     if ([TSGlobalManager shareInstance].currentUserInfo) {
         [header setValue:[TSGlobalManager shareInstance].currentUserInfo.accessToken forKey:@"accessToken"];
     }
+   
     SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kMineMerchantUserInformation
                                                                requestMethod:YTKRequestMethodGET
                                                        requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON
@@ -249,14 +271,56 @@
 }
 
 - (SSGenaralRequest *)request2{
+    NSMutableDictionary *header = [NSMutableDictionary dictionary];
+ 
+    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kMinePartnerCenterData
+                                                               requestMethod:YTKRequestMethodGET
+                                                       requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON
+                                                               requestHeader:header
+                                                                 requestBody:NSMutableDictionary.dictionary
+                                                              needErrorToast:YES];
+    
+    return request;
+}
+
+//收益
+- (SSGenaralRequest *)request3{
     
     NSMutableDictionary *header = [NSMutableDictionary dictionary];
     if ([TSGlobalManager shareInstance].currentUserInfo) {
         [header setValue:[TSGlobalManager shareInstance].currentUserInfo.accessToken forKey:@"accessToken"];
     }
+//    [header setValue:@"application/json" forKey:@"Content-Type"];
+    NSMutableDictionary *body = [NSMutableDictionary dictionary];
+    [body setValue:@"6226097804210467" forKey:@"bankCardNo"];
+    [body setValue:@"招商银行" forKey:@"accountBank"];
+    [body setValue:@"CMD" forKey:@"accountBankCode"];
+    [body setValue:@"招商银行北京支行" forKey:@"bankName"];
+    [body setValue:@"308551024051" forKey:@"bankBranchId"];
+    [body setValue:@"北京市" forKey:@"bankAddressProvince"];
+    [body setValue:@"110000" forKey:@"bankAddressProvinceCode"];
+    [body setValue:@"北京市" forKey:@"bankAddressCity"];
+    [body setValue:@"110000" forKey:@"bankAddressCityCode"];
+    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kMineQueryProfit
+                                                               requestMethod:YTKRequestMethodGET
+                                                       requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON
+                                                               requestHeader:header
+                                                                 requestBody:body
+                                                              needErrorToast:YES];
     
-    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kMinePartnerCenterData
-                                                               requestMethod:YTKRequestMethodPOST
+    return request;
+}
+
+//广告图
+- (SSGenaralRequest *)request4{
+    
+    NSMutableDictionary *header = [NSMutableDictionary dictionary];
+    if ([TSGlobalManager shareInstance].currentUserInfo) {
+        [header setValue:[TSGlobalManager shareInstance].currentUserInfo.accessToken forKey:@"accessToken"];
+    }
+    [header setValue:@"application/json" forKey:@"Content-Type"];
+    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kMineShopContentUrl
+                                                               requestMethod:YTKRequestMethodGET
                                                        requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON
                                                                requestHeader:header
                                                                  requestBody:NSMutableDictionary.dictionary
@@ -303,40 +367,28 @@
 }
 
 // MARK: 我的收益
-- (void)fetchMyIncomeDataComplete:(void(^)(BOOL isSucess))complete {
-    NSMutableDictionary *header = [NSMutableDictionary dictionary];
-    [header setValue:@"111" forKey:@"ihome-token"];
-    NSMutableDictionary *body = [NSMutableDictionary dictionary];
-    [body setValue:@"6226097804210467" forKey:@"bankCardNo"];
-    [body setValue:@"招商银行" forKey:@"accountBank"];
-    [body setValue:@"CMD" forKey:@"accountBankCode"];
-    [body setValue:@"招商银行北京支行" forKey:@"bankName"];
-    [body setValue:@"308551024051" forKey:@"bankBranchId"];
-    [body setValue:@"北京市" forKey:@"bankAddressProvince"];
-    [body setValue:@"110000" forKey:@"bankAddressProvinceCode"];
-    [body setValue:@"北京市" forKey:@"bankAddressCity"];
-    [body setValue:@"110000" forKey:@"bankAddressCityCode"];
-    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kMineQueryProfit
-                                                               requestMethod:YTKRequestMethodGET
-                                                       requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON
-                                                               requestHeader:header
-                                                                 requestBody:body
-                                                              needErrorToast:YES];
-    [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
-        if (request.responseModel.isSucceed) {
-            NSDictionary *data = request.responseModel.data;
-            TSMyIncomeModel *model = [TSMyIncomeModel yy_modelWithDictionary:data];
-            self.myIncomeModel = model;
-        }
-        if (complete) {
-            complete(YES);
-        }
-    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-        if (complete) {
-            complete(NO);
-        }
-    }];
-}
+//- (void)fetchMyIncomeDataComplete:(void(^)(BOOL isSucess))complete {
+//    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kMineQueryProfit
+//                                                               requestMethod:YTKRequestMethodGET
+//                                                       requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON
+//                                                               requestHeader:NSDictionary.dictionary
+//                                                                 requestBody:NSDictionary.dictionary
+//                                                              needErrorToast:YES];
+//    [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+//        if (request.responseModel.isSucceed) {
+//            NSDictionary *data = request.responseModel.data;
+//            TSMyIncomeModel *model = [TSMyIncomeModel yy_modelWithDictionary:data];
+//            self.myIncomeModel = model;
+//        }
+//        if (complete) {
+//            complete(YES);
+//        }
+//    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+//        if (complete) {
+//            complete(NO);
+//        }
+//    }];
+//}
 
 // MARK: 提现申请
 - (void)fetchWithdrawalApplicationDataComplete:(void(^)(BOOL isSucess))complete {
@@ -423,9 +475,11 @@
 // MARK: 查询银行卡列表
 - (void)fetchQueryBankCardListDataComplete:(void(^)(BOOL isSucess))complete {
     NSMutableDictionary *header = [NSMutableDictionary dictionary];
-    [header setValue:@"111" forKey:@"ihome-token"];
-    [header setValue:@"4300dbc7-7c23-48a9-8248-738ce6d4f10f" forKey:@"ec-token"];
-    
+    if ([TSGlobalManager shareInstance].currentUserInfo.accessToken.length > 0) {
+        [header setValue:[TSGlobalManager shareInstance].currentUserInfo.refreshToken forKey:@"ec-token"];
+    }else{
+        [header setValue:@"" forKey:@"ec-token"];
+    }
     NSMutableDictionary *body = [NSMutableDictionary dictionary];
     [body setValue:@(1) forKey:@"pageNo"];
     if (self.requestMethod == Ordinary)
@@ -459,26 +513,11 @@
 
 // MARK: 添加银行卡
 - (void)fetchAddToBankCardDataComplete:(void(^)(BOOL isSucess))complete {
-    NSMutableDictionary *header = [NSMutableDictionary dictionary];
-    [header setValue:@"111" forKey:@"ihome-token"];
-    [header setValue:@"11" forKey:@"storeUuid"];
-    
     NSMutableDictionary *body = [NSMutableDictionary dictionary];
-//    [body setValue:self.addBankCardModel.bankCardNo forKey:@"bankCardNo"];
-//    [body setValue:self.addBankCardModel.accountBank forKey:@"accountBank"];
-//    [body setValue:@"6226097804210467" forKey:@"bankCardNo"];
-//    [body setValue:@"招商银行" forKey:@"accountBank"];
-//    [body setValue:@"CMD" forKey:@"accountBankCode"];
-//    [body setValue:@"招商银行北京支行" forKey:@"bankName"];
-//    [body setValue:@"308551024051" forKey:@"bankBranchId"];
-//    [body setValue:@"北京市" forKey:@"bankAddressProvince"];
-//    [body setValue:@"110000" forKey:@"bankAddressProvinceCode"];
-//    [body setValue:@"北京市" forKey:@"bankAddressCity"];
-//    [body setValue:@"110000" forKey:@"bankAddressCityCode"];
-    
-    [body setValue:@"6214830137754759" forKey:@"bankCardNo"];
+    [body setValue:self.addBankCardModel.bankCardNo forKey:@"bankCardNo"];
     [body setValue:self.addBankCardBackModel.bankName forKey:@"accountBank"];
     [body setValue:self.addBankCardBackModel.accountBankCode forKey:@"accountBankCode"];
+    [body setValue:@"范晓益" forKey:@"userName"];
     [body setValue:@"北京支行望京西园支行" forKey:@"bankName"];
     [body setValue:@"308551024051" forKey:@"bankBranchId"];
     [body setValue:@"北京市" forKey:@"bankAddressProvince"];
@@ -488,10 +527,11 @@
     SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kMineAddBankCardAccount
                                                                requestMethod:YTKRequestMethodPOST
                                                        requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON
-                                                               requestHeader:header
+                                                               requestHeader:NSDictionary.dictionary
                                                                  requestBody:body
                                                               needErrorToast:YES];
     [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+
         if (request.responseModel.isSucceed) {
             NSDictionary *data = request.responseModel.data;
         }
@@ -553,6 +593,47 @@
             NSDictionary *data = request.responseModel.data;
             TSAddBankCardBackModel *model = [TSAddBankCardBackModel yy_modelWithDictionary:data];
             self.addBankCardBackModel = model;
+        }
+        complete(YES);
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        complete(NO);
+    }];
+}
+
+// MARK: 删除银行卡
+- (void)fetchDeleteBankCardDataComplete:(void(^)(BOOL isSucess))complete {
+    NSMutableDictionary *body = [NSMutableDictionary dictionary];
+    [body setValue:self.bankCardModel.bank_id forKey:@"id"];//银行卡id
+    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kMineDelBankCardAccount
+                                                               requestMethod:YTKRequestMethodGET
+                                                       requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON
+                                                               requestHeader:NSDictionary.dictionary
+                                                                 requestBody:body
+                                                              needErrorToast:YES];
+    [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+        if (request.responseModel.isSucceed) {
+            NSDictionary *data = request.responseModel.data;
+            TSAddBankCardBackModel *model = [TSAddBankCardBackModel yy_modelWithDictionary:data];
+            self.addBankCardBackModel = model;
+        }
+        complete(YES);
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        complete(NO);
+    }];
+}
+
+// MARK: 查询我的余额
+- (void)fetchCheckMyBalanceDataComplete:(void(^)(BOOL isSucess))complete {
+    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kMineQueryAmount
+                                                               requestMethod:YTKRequestMethodGET
+                                                       requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON
+                                                               requestHeader:NSDictionary.dictionary
+                                                                 requestBody:NSDictionary.dictionary
+                                                              needErrorToast:YES];
+    [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+        if (request.responseModel.isSucceed) {
+            NSString *data = request.responseModel.data;
+            self.amount = data;
         }
         complete(YES);
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {

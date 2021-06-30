@@ -9,7 +9,6 @@
 #import "TSAddressModel.h"
 
 @interface TSMakeOrderDataController()
-@property (nonatomic, copy) void(^finished)(BOOL);
 @end
 
 @implementation TSMakeOrderDataController
@@ -17,13 +16,12 @@
 - (instancetype)init{
     if (self == [super init]) {
         self.sections = [NSMutableArray array];
+        [self configSections];
     }
     return self;
 }
 
 - (void)checkBalance:(void(^)(BOOL))finished{
-    [self.sections removeAllObjects];
-    self.finished = finished;
     SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kToBalance
                                                                 requestMethod:YTKRequestMethodGET
                                                         requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON
@@ -40,8 +38,12 @@
                 [self configEmptySection];
                 return;
             }
-            self.finished = finished;
-            [self configSections];
+            [self updateGoodsSection:self.balanceModel.cartManager.detailModelList];
+            [self updatePriceSection];
+            if ([self defaultAddress] != nil) {
+                [self updateAddressSection:[self defaultAddress]];
+            }
+            finished(YES);
         } else{
             [self configEmptySection];
             finished(NO);
@@ -58,8 +60,6 @@
     [self configGoodsSection];
     [self configOperationSection];
     [self confitPriceSection];
-    
-    self.finished(YES);
 }
 
 - (void)updateAddressSection:(TSAddressModel *)address{
@@ -70,6 +70,21 @@
     row.obj = address;
 }
 
+- (void)updateGoodsSection:(NSArray<TSBalanceCartManagerDetailModel *> *)lists{
+    TSMakeOrderSection *section = self.sections[1];
+    NSMutableArray *rows = [NSMutableArray array];
+    for (TSBalanceCartManagerDetailModel *detail in lists){
+        TSMakeOrderGoodsViewModel *vm = [[TSMakeOrderGoodsViewModel alloc] initWithDetail:detail];
+     
+        TSMakeOrderRow *row = [TSMakeOrderRow new];
+        row.cellIdentifier = @"TSMakeOrderGoodsCell";
+        row.isAutoHeight = YES;
+        row.obj = vm;
+        [rows addObject:row];
+    }
+    
+    section.rows = rows;
+}
 
 - (void)updateInvoiceSectionWithInvoice:(TSInvoiceModel *)invoice{
     TSMakeOrderSection *section = self.sections[2];
@@ -83,6 +98,14 @@
     TSMakeOrderRow *row = [section.rows lastObject];
     TSMakeOrderInvoiceViewModel *vm = (TSMakeOrderInvoiceViewModel *)row.obj;
     vm.message = messgae;
+}
+
+- (void)updatePriceSection{
+    TSMakeOrderSection *section = [self.sections lastObject];
+    TSMakeOrderRow *row = [section.rows lastObject];
+    TSMakeOrderPriceViewModel *vm = (TSMakeOrderPriceViewModel *)row.obj;
+    vm.thPrice = self.balanceModel.orderTotalMoney;
+    vm.deliveryPrice = self.balanceModel.allAffix;
 }
 
 - (void)configAddressSection{
@@ -185,5 +208,16 @@
     section.rows = @[row];
     
     [self.sections addObject:section];
+}
+
+
+- (TSAddressModel *)defaultAddress{
+    TSAddressModel *address = nil;
+    for(TSAddressModel *model in self.balanceModel.addressList){
+        if(model.isDefault == YES){
+            return model;
+        }
+    }
+    return nil;
 }
 @end
