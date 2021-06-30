@@ -6,6 +6,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TSGoodDetailItemModel.h"
 
 @class TSChangePriceView;
 
@@ -18,6 +19,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TSChangePriceView : UIView
+
+@property(nonatomic, strong) TSGoodDetailItemPriceModel *model;
 
 @property(nonatomic, weak) id<TSChangePriceViewDelegate> delegate;
 

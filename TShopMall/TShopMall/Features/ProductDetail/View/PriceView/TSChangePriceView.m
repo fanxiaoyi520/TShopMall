@@ -289,7 +289,7 @@
         _adjustLabel = [[UILabel alloc] init];
         _adjustLabel.textColor = KHexAlphaColor(@"#2D3132", 0.4);
         _adjustLabel.font = KRegularFont(9);
-        _adjustLabel.text = @"可调整区间 ￥9000-10000";
+        _adjustLabel.text = @"可调整区间 ￥";
         _adjustLabel.textAlignment = NSTextAlignmentRight;
     }
     return _adjustLabel;
@@ -312,6 +312,7 @@
         _inputTF.font = KRegularFont(14);
         _inputTF.backgroundColor = KHexColor(@"#F4F4F4");
         _inputTF.keyboardType = UIKeyboardTypeNumberPad;
+        _inputTF.textAlignment = NSTextAlignmentCenter;
     }
     return _inputTF;
 }
@@ -351,7 +352,7 @@
         _guidePriceValueLabel = [[UILabel alloc] init];
         _guidePriceValueLabel.textColor = KMainColor;
         _guidePriceValueLabel.font = KRegularFont(14);
-        _guidePriceValueLabel.text = @"¥688888";
+        _guidePriceValueLabel.text = @"¥";
         _guidePriceValueLabel.textAlignment = NSTextAlignmentLeft;
     }
     return _guidePriceValueLabel;
@@ -396,5 +397,13 @@
     }
     return _weixinLabel;
 }
+
+-(void)setModel:(TSGoodDetailItemPriceModel *)model{
+    _model = model;
+    _retailLabel.text = [NSString stringWithFormat:@"¥%@",model.marketPrice];
+    _guidePriceValueLabel.text = [NSString stringWithFormat:@"¥%@",model.staffPrice];
+    _adjustLabel.text = [NSString stringWithFormat:@"可调整区间 ￥%@-%@",model.staffPrice,model.marketPrice];
+}
+
 
 @end
