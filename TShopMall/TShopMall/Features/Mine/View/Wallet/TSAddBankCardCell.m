@@ -113,6 +113,12 @@ static NSInteger const kGroupSize = 4;
     }
 }
 
+- (void)inputInfoTextFieldEditingDidBeginAction:(UITextField *)textField {
+    if ([self.kDelegate respondsToSelector:@selector(addBankCardInputInfoTextFieldEditingDidBeginAction:)]) {
+        [self.kDelegate addBankCardInputInfoTextFieldEditingDidBeginAction:textField];
+    }
+}
+
 - (void)funcAction:(UIButton *)sender {
     if ([self.kDelegate respondsToSelector:@selector(addBankCardfuncAction:)]) {
         [self.kDelegate addBankCardfuncAction:sender];
@@ -264,6 +270,8 @@ static NSInteger const kGroupSize = 4;
     if (!_inputInfoTextField) {
         _inputInfoTextField = [[UITextField alloc] init];
         [_inputInfoTextField addTarget:self action:@selector(inputInfoTextFieldAction:) forControlEvents:UIControlEventEditingChanged];
+        [_inputInfoTextField addTarget:self action:@selector(inputInfoTextFieldEditingDidBeginAction:) forControlEvents:UIControlEventEditingDidBegin];
+        
         _inputInfoTextField.textColor = KHexColor(@"#2D3132");
         _inputInfoTextField.font = KRegularFont(14);
         //_inputInfoTextField.hidden = YES;
@@ -288,9 +296,9 @@ static NSInteger const kGroupSize = 4;
 @property (nonatomic ,strong) UILabel *tipsLable;
 @end
 @implementation TSAddBankCardHeader
-- (instancetype)init
+- (instancetype)initWithFrame:(CGRect)frame
 {
-    self = [super init];
+    self = [super initWithFrame:frame];
     if (self) {
         [self jaf_layoutSubViews];
     }

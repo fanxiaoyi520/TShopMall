@@ -46,7 +46,7 @@
     // Do any additional setup after loading the view.
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.gk_navTitle = @"添加银行卡";
-    [[IQKeyboardManager sharedManager] setEnable:NO];
+    //[[IQKeyboardManager sharedManager] setEnable:NO];
     
     //增加监听，当键盘出现或改变时收出消息
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -79,10 +79,14 @@
 - (void)fillCustomView {
     [self.view addSubview:self.addCardTableView];
     self.addCardTableView.frame = CGRectMake(0, GK_STATUSBAR_NAVBAR_HEIGHT, kScreenWidth, kScreenHeight-GK_STATUSBAR_NAVBAR_HEIGHT);
+    
+    TSAddBankCardHeader *view = [[TSAddBankCardHeader alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 106)];
+    self.addCardTableView.tableHeaderView = view;
 
     self.addCardTableView.tableFooterView = self.footerView;
     self.footerView.frame = CGRectMake(0, self.addCardTableView.bottom, kScreenWidth, 56);
     
+
     [self.view addSubview:self.dropDownView];
 }
 
@@ -110,19 +114,6 @@
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 106;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return .01;
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    TSAddBankCardHeader *view = [TSAddBankCardHeader new];
-    return view;
-}
-
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
 //    TSAddBankCardFooter *view = [TSAddBankCardFooter new];
 //    view.kDelegate = self;
@@ -131,7 +122,14 @@
 }
 
 // MARK: TSAddBankCardDelegate
+- (void)addBankCardInputInfoTextFieldEditingDidBeginAction:(UITextField *)textField {
+    self.addCardTableView.top = GK_STATUSBAR_NAVBAR_HEIGHT;
+    self.dropDownView.hidden = YES;
+}
+
 - (void)addBankCardInputInfoTextFieldAction:(UITextField *)textField {
+    self.addCardTableView.top = GK_STATUSBAR_NAVBAR_HEIGHT;
+    self.dropDownView.hidden = YES;
     if (textField.tag == 15) {
         if (textField.text)
             [self.mutableDic setValue:textField.text forKey:@"userName"];
@@ -181,7 +179,7 @@
                 if (isSucess) {
                     if (self.dataController.branchCardArray.count>0) {
                         self.dropDownView.hidden = NO;
-                        self.addCardTableView.top = GK_STATUSBAR_NAVBAR_HEIGHT - self.dropDownView.height;
+                        self.addCardTableView.top = GK_STATUSBAR_NAVBAR_HEIGHT - self.dropDownView.height+56;
                         self.dropDownView.top = textField.superview.bottom-self.dropDownView.height+1;
                         self.dropDownView.bottom = kScreenHeight-self.keyBoardRect.size.height;
                         [self.dropDownView setModel:self.dataController.branchCardArray];
@@ -189,8 +187,6 @@
                             @strongify(self);
                             [self.view endEditing:YES];
                             TSBranchCardModel *model = (TSBranchCardModel *)info;
-//                            self.addCardTableView.top = GK_STATUSBAR_NAVBAR_HEIGHT;
-//                            self.dropDownView.hidden = YES;
                             textField.text = model.bankFullName;
                             [self.mutableDic setValue:model.bankFullName forKey:@"bankName"];
                             [self.mutableDic setValue:model.linkNumber forKey:@"bankBranchId"];
@@ -282,6 +278,7 @@
         if (isSucess) {
             TSOperationBankTipsViewController *vc = [TSOperationBankTipsViewController new];
             vc.kNavTitle = @"添加银行卡";
+            vc.popToWhere = self.popToWhere;
             [self.navigationController pushViewController:vc animated:YES];
         }
     }];
