@@ -27,7 +27,10 @@
 -(void)requestCompleteFilter{
     SSResponseModel *reponseModel = [SSResponseModel responseWithRequest:self];
     self.responseModel = reponseModel;
-    
+#if  DEBUG
+    NSLog(@"url --%@%@",self.baseUrl,self.requestUrl);
+    NSLog(@" --%@",reponseModel.data);
+#endif
     if (!reponseModel.isSucceed) {//网络请求失败
         if (self.needErrorToast) {//toast提示
             

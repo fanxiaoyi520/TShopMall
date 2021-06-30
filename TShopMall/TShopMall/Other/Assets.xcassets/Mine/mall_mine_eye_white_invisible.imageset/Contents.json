@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "mall_mine_eye_white_invisible.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "mall_mine_eye_white_invisible@2x.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "mall_mine_eye_white_invisible@3x.png",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

@@ -140,14 +140,16 @@ NSString * const kAddressTag = @"/v2/usercenter/customerAddressTag/list";
 NSString * const kSmartAddress = @"/rest/v2/usercenter/customeraddress/getSmartAddress";
 
 #pragma mark - 我的
-NSString * const kMineMerchantUserInformation = @"/rest/v2/tclcustomer/userInfo";
-NSString * const kMinePartnerCenterData = @"sysback/v2/salesman/dataCenter";
+NSString * const kMineMerchantUserInformation = @"v2/login/userInfo";
+//NSString * const kMineMerchantUserInformation = @"v2/login/userInfo";
+NSString * const kMinePartnerCenterData = @"v2/sysback/salesman/dataCenter";
 NSString * const kMineWithdrawalRecordListData = @"/rest/v2/withdrawal/record/queryAppWithdrawalRecordList";
 NSString * const kMineWalletData = @"/rest/v2/withdrawal/record/queryWallet";
 NSString *const kMineQueryProfit = @"/rest/v2/withdrawal/record/queryProfit";
 //广告图
 NSString * const kMineShopContentUrl = @"rest/shopContent/getPageManageByPageType";
-
+//查询订单各状态下的订单数
+NSString *const kMineOrderCount = @"v2/usercenter/order/query/queryAllStatusOrderCountByGroup";
 #pragma mark - 设置
 
 NSString *const kAboutMeAgreementUrl = @"/rest/v2/front/shopStatement/getShopStatementList";
@@ -160,5 +162,4 @@ NSString *const kMineBankNoCheck = @"/rest/v2/bankCardAccount/bankNoCheck";
 NSString *const kMineGetBankInfo = @"/rest/v2/bankCardAccount/getBankInfo";
 NSString *const kMineDelBankCardAccount = @"/rest/v2/bankCardAccount/delBankCardAccount";
 NSString *const kMineQueryAmount = @"/rest/v2/withdrawal/record/queryAmount";
-
 
