@@ -13,7 +13,7 @@
 @interface TSUnbundlingCardViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,TSBankCardUnbundlingFooterDelegate>{
     NSArray * _bankNameArray;
 }
-
+@property (nonatomic ,strong) TSMineDataController *dataController;
 @end
 
 @implementation TSUnbundlingCardViewController
@@ -29,7 +29,7 @@
 }
 
 - (void)initData {
-    _bankNameArray=@[@"中国银行"];
+    _bankNameArray=@[self.model];
     //_bankNameArray = @[];
 }
 
@@ -65,10 +65,7 @@
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     TSBankCardCell * cell =[collectionView dequeueReusableCellWithReuseIdentifier:@"cellIdentifier" forIndexPath:indexPath];
-    cell.backgroundColor= [UIColor colorWithRed: arc4random_uniform(256)/255.0f green: arc4random_uniform(256)/255.0f blue: arc4random_uniform(256)/255.0f alpha:1];
-    [cell setModel:nil];
-    cell.bankName=_bankNameArray[indexPath.row];
-    cell.account=@"****  ****  ****  8888";
+    [cell setModel:@[self.model][indexPath.row]];
     return cell;
 }
 
@@ -94,13 +91,24 @@
 
 // MARK: TSBankCardUnbundlingFooterDelegate
 - (void)bankCardFooterBankCardUnbundlingAction:(id)sender {
+    
     TSAlertView.new.alertInfo(nil, @"您是否确定解除银行卡").confirm(@"确定", ^{
-        TSOperationBankTipsViewController *vc = [TSOperationBankTipsViewController new];
-        vc.kNavTitle = @"银行卡";
-        [self.navigationController pushViewController:vc animated:YES];
-
-        [[TSUserLoginManager shareInstance] logout];
-
+        self.dataController.bankCardModel = self.model;
+        [self.dataController fetchDeleteBankCardDataComplete:^(BOOL isSucess) {
+            if (isSucess) {
+                TSOperationBankTipsViewController *vc = [TSOperationBankTipsViewController new];
+                vc.kNavTitle = @"银行卡";
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+        }];
     }).cancel(@"取消", ^{}).show();
+}
+
+// MARK: get
+- (TSMineDataController *)dataController {
+    if (!_dataController) {
+        _dataController = [[TSMineDataController alloc] init];
+    }
+    return _dataController;
 }
 @end

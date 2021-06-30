@@ -300,6 +300,17 @@
 //    _cardNumberLab.text = model.bankCardNo;
 //}
 
+// 银行卡部分秘文显示
+-(NSString *)returnBankCard:(NSString *)BankCardStr {
+    NSString *formerStr = [BankCardStr substringToIndex:4];
+    NSString *str1 = [BankCardStr stringByReplacingOccurrencesOfString:formerStr withString:@""];
+    NSString *endStr = [BankCardStr substringFromIndex:BankCardStr.length-4];
+    NSString *str2 = [str1 stringByReplacingOccurrencesOfString:endStr withString:@""];
+    NSString *middleStr = [str2 stringByReplacingOccurrencesOfString:str2 withString:@"****"];
+    NSString *CardNumberStr = [formerStr stringByAppendingFormat:@"%@%@",middleStr,endStr];
+    return CardNumberStr;
+}
+
 // MARK: get
 - (UIImageView *)bankImageView {
     if (!_bankImageView) {
@@ -324,7 +335,12 @@
         _cardNumberLab = [UILabel new];
         _cardNumberLab.textColor = KHexColor(@"#2D3132");
         _cardNumberLab.font = KRegularFont(10);
-        _cardNumberLab.text =  self.model.bankCardNo;
+        if (self.model.bankCardNo) {
+            _cardNumberLab.text = [NSString stringWithFormat:@"提现到银行卡账号:%@",[self returnBankCard:self.model.bankCardNo]];
+        } else {
+            _cardNumberLab.textColor = KHexAlphaColor(@"#2D3132", .5);
+            _cardNumberLab.text =  @"请先绑定提现银行卡账号";
+        }
     }
     return _cardNumberLab;
 }
@@ -334,8 +350,12 @@
         _isBindingLab = [UIButton buttonWithType:UIButtonTypeCustom];
         [_isBindingLab setTitleColor:KHexAlphaColor(@"#2D3132", .5) forState:UIControlStateNormal];
         _isBindingLab.titleLabel.font = KRegularFont(14);
-        [_isBindingLab setTitle:@"已绑定" forState:UIControlStateNormal];
-        [_isBindingLab addTarget:self action:@selector(isBindingAction:) forControlEvents:UIControlEventTouchUpInside];
+        if (self.model.bankCardNo) {
+            [_isBindingLab setTitle:@"已绑定" forState:UIControlStateNormal];
+        } else {
+            [_isBindingLab setTitle:@"去绑定" forState:UIControlStateNormal];
+            [_isBindingLab addTarget:self action:@selector(isBindingAction:) forControlEvents:UIControlEventTouchUpInside];
+        }
     }
     return _isBindingLab;
 }
