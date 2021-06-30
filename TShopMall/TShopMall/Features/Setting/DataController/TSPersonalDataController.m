@@ -7,6 +7,7 @@
 
 #import "TSPersonalDataController.h"
 
+
 @interface TSPersonalDataController ()
 
 @property (nonatomic, strong) NSMutableArray <TSPersonalSectionModel *> *sections;
@@ -28,15 +29,16 @@
             item.sex = none;
             item.identify = @"TSPersonalCommonCell";
             if (i == 0) {///头像
-                item.head = @"mall_setting_defautlhead";
+                NSString *avatar = [TSServicesManager sharedInstance].userInfoService.user.avatar;
+                item.head = avatar.length == 0 ? @"default" : avatar;
             } else if(i == 1) {///姓名
-                item.detail = [TSUserInfoManager userInfo].nickname;
+                item.detail = [TSServicesManager sharedInstance].userInfoService.user.nickname;
             } else if(i == 2) {///身份证
-                item.detail = @"62241999****";
+                item.detail = [TSServicesManager sharedInstance].userInfoService.user.identity;
             } else if(i == 3) {///性别
-                item.sex = male;
+                item.sex = [TSServicesManager sharedInstance].userInfoService.user.sex;
             } else if(i == 4) {///出生年月
-                item.detail = @"1997-09-13";
+                item.detail = [TSServicesManager sharedInstance].userInfoService.user.birthday;
             }
             [items addObject:item];
         }

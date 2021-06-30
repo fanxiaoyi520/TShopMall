@@ -149,6 +149,7 @@ NSString *const kMineQueryProfit = @"/rest/v2/withdrawal/record/queryProfit";
 #pragma mark - 设置
 NSString *const kAboutMeAgreementUrl = @"/rest/v2/front/shopStatement/getShopStatementList";
 NSString *const kModifyUserUrl = @"/user/mng/user";
+NSString *const kUploadImageUrl = @"/rest/v2/usercenter/batchfileupload/batch/upload";
 
 NSString *const kMineWithdrawalApply = @"/rest/v2/withdrawal/record/withdrawalApply";
 NSString *const kMineQueryAppBankCardAccountList = @"/rest/v2/bankCardAccount/queryAppBankCardAccountList";

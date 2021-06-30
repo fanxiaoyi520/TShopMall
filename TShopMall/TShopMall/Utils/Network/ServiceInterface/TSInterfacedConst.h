@@ -101,6 +101,7 @@ UIKIT_EXTERN NSString * const kMineQueryProfit;//我的收益
 #pragma mark - 设置
 UIKIT_EXTERN NSString *const kAboutMeAgreementUrl;
 UIKIT_EXTERN NSString *const kModifyUserUrl;
+UIKIT_EXTERN NSString *const kUploadImageUrl;
 
 UIKIT_EXTERN NSString * const kMineWithdrawalApply;//提现申请
 UIKIT_EXTERN NSString * const kMineQueryAppBankCardAccountList;//查询银行卡列表

@@ -28,14 +28,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
 }
 
 - (void)setupBasic {
     [super setupBasic];
     self.gk_navTitle = @"个人设置";
     [self.navigationController setNavigationBarHidden:NO];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userInfoModifiedAction) name:TSUserInfoModifiedNotificationName object:nil];
     __weak __typeof(self)weakSelf = self;
     [self.dataController fetchSettingContentsComplete:^(BOOL isSucess) {
         __strong __typeof(weakSelf)strongSelf = weakSelf;
@@ -56,6 +55,11 @@
         make.top.equalTo(self.view.mas_top).with.offset(GK_STATUSBAR_NAVBAR_HEIGHT + 1);
         make.bottom.equalTo(self.view.mas_bottom).with.offset(0);
     }];
+}
+
+///信息修改成功
+- (void)userInfoModifiedAction {
+    [self.collectionView reloadData];
 }
 
 #pragma mark - Lazy Method

@@ -9,16 +9,25 @@
 
 @interface TSUserInfoRequest ()
 
+@property (nonatomic, copy) NSString *accountId;
+
 @end
 
 @implementation TSUserInfoRequest
 
--(NSString *)baseUrl{
+//- (instancetype)initWithAccountId:(NSString *)accountId {
+//    if (self = [super init]) {
+//        _accountId = accountId;
+//    }
+//    return self;
+//}
+
+- (NSString *)baseUrl {
     return kAccountCenterApiPrefix;
 }
 
 -(NSString *)requestUrl{
-    NSString *requestUrl = [NSString stringWithFormat:@"%@?appId=%@&tenantId=%@&appSecret=%@",kLogoutUrl,kAppId,@"tcl",kAppSecret];
+    NSString *requestUrl = [NSString stringWithFormat:@"%@?appId=%@&tenantId=%@&appSecret=%@",kUserInfoUrl,kAppId,@"tcl",kAppSecret];
     return requestUrl;
 }
 
