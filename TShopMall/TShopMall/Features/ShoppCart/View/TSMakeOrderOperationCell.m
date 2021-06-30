@@ -210,6 +210,7 @@
     self.textField.textAlignment = NSTextAlignmentRight;
     self.textField.font = KRegularFont(14.0);
     self.textField.textColor = KHexColor(@"#2D3132");
+    [self.textField setPlaceholderColor:[KHexColor(@"#2D3132") colorWithAlphaComponent:0.4] fontType:PingFangSCRegular fontSize:14.0];
     [self addSubview:self.textField];
     
     return self.textField;

@@ -17,11 +17,11 @@
             NSArray *data = request.responseJSONObject[@"data"];
             NSArray<TSSearchHotKeyModel *> *keywords = [NSArray yy_modelArrayWithClass:TSSearchHotKeyModel.class json:data];
             NSArray *historyKeys = [TSSearchKeyViewModel readHistoryKeys];
-            if (historyKeys.count != 0) {
-                [self.sections addObject:[TSSearchDataController configHistorySection:historyKeys]];
-            }
             if (keywords.count != 0) {
                 [self.sections addObject:[TSSearchDataController configHotSection:keywords]];
+            }
+            if (historyKeys.count != 0) {
+                [self.sections addObject:[TSSearchDataController configHistorySection:historyKeys]];
             }
             weakSelf.hotkeys = keywords;
             if (self.sections.count == 0) {

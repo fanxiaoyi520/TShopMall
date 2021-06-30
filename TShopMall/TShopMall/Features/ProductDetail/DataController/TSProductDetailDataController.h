@@ -14,6 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TSProductDetailDataController : TSBaseDataController
 
+/// 商品主图
+@property(nonatomic, copy) NSString *bigImageUrl;
+
 /// 商品sku
 @property(nonatomic, copy) NSString *attrId;
 /// 商品skuNo
@@ -110,6 +113,12 @@ NS_ASSUME_NONNULL_BEGIN
                                        buyNum:(NSString *)buyNum
                                        attrId:(NSString *)attrId
                           complete:(void(^)(BOOL isSucess))complete;
+
+
+/// 员工分享
+/// @param shareType 分享类型
+-(void)fetchStaffShareShareType:(NSUInteger)shareType
+                       complete:(void(^)(BOOL isSucess, NSDictionary *data))complete;
 
 @end
 

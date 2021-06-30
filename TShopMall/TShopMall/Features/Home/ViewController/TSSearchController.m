@@ -12,6 +12,7 @@
 #import "TSSearchKeyViewModel.h"
 #import "TSSearchResultController.h"
 #import "TSRecomendDataController.h"
+#import "TSProductDetailController.h"
 
 @interface TSSearchController ()
 @property (nonatomic, strong) TSSearchView *searchView;
@@ -29,6 +30,14 @@
     [con presentViewController:naviCon animated:YES completion:nil];
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle{
+    if (@available(iOS 13.0, *)) {
+        return [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDarkContent;
+    } else {
+        return [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = UIColor.whiteColor;
@@ -41,6 +50,12 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super view];
     [self hiddenNavigationBar];
+    
+    if (@available(iOS 13.0, *)) {
+        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDarkContent;
+    } else {
+        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+    }
 }
 
 - (void)refreshData{
@@ -68,8 +83,10 @@
     [self.searchResultCon showSearchResultView];
 }
 
-- (void)recomentGoodsSelected:(TSRecomendModel *)recomend{
-    
+- (void)recomentGoodsSelected:(NSString *)uuid{
+    TSProductDetailController *detail = [[TSProductDetailController alloc] init];
+    detail.uuid = uuid;
+    [self.navigationController pushViewController:detail animated:YES];
 }
 
 - (void)viewWillLayoutSubviews{

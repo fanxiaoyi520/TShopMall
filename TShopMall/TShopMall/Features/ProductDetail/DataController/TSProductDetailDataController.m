@@ -67,6 +67,8 @@
             
             [urls addObject:productImage[@"bigImageUrl"]];
             
+            self.bigImageUrl = productImage[@"bigImageUrl"];
+            
             for (NSDictionary *dic in productMultiImage) {
                 NSString *basicImageUrl = dic[@"basicImageUrl"];
                 [urls addObject:basicImageUrl];
@@ -411,6 +413,31 @@
     [fastBuy startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
         if (request.responseModel.isSucceed) {
             complete(YES);
+        }
+        
+        } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+            
+    }];
+}
+
+-(void)fetchStaffShareShareType:(NSUInteger)shareType
+                       complete:(void(^)(BOOL isSucess, NSDictionary *data))complete{
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setValue:self.productUuid forKey:@"uuid"];
+    [params setValue:@(shareType) forKey:@"shareType"];
+    [params setValue:self.bigImageUrl forKey:@"bigImageUrl"];
+    
+    SSGenaralRequest *shareRequest = [[SSGenaralRequest alloc] initWithRequestUrl:kGoodDetailStaffShareUrl
+                                                                    requestMethod:YTKRequestMethodGET
+                                                            requestSerializerType:YTKRequestSerializerTypeJSON
+                                                           responseSerializerType:YTKResponseSerializerTypeJSON
+                                                                    requestHeader:@{}
+                                                                      requestBody:params
+                                                                   needErrorToast:YES];
+    shareRequest.animatingView = self.context.view;
+    [shareRequest startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+        if (request.responseModel.isSucceed) {
+            complete(YES,request.responseModel.data);
         }
         
         } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
