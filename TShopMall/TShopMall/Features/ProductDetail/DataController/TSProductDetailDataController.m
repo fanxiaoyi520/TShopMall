@@ -91,9 +91,6 @@
             item.marketPrice = promotionInteactiveModel[@"marketPrice"];
             item.staffPrice = promotionInteactiveModel[@"staffPrice"];
             item.earnMost = productSkuDic[@"earnMost"];
-            
-            
-            self.staffPrice = item.staffPrice;
         }
         
         {   //卖点
