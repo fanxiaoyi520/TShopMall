@@ -71,7 +71,7 @@
                 iconButton.backgroundColor = [UIColor clearColor];
                 iconButton.clipsToBounds = YES;
                 iconButton.layer.cornerRadius = 8;
-                [iconButton addTarget:self action:@selector(clickAction) forControlEvents:UIControlEventTouchUpInside];
+                [iconButton addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
                 iconButton.adjustsImageWhenHighlighted = NO;
                 [self.contentView addSubview:iconButton];
                 [iconButton sd_setImageWithURL:[NSURL URLWithString:model.imageData.url] forState:UIControlStateNormal];
@@ -81,6 +81,7 @@
             for (int i = 0; i < self.iconButtons.count; i ++) {
                 TSImageBaseModel *model = releaseViewModel.ReleaseDatas[i];
                 UIButton *iconButton = self.iconButtons[i];
+                iconButton.tag = i;
                 CGFloat top = 0.0;
                 if (i == 0) {
                     top = 0;
@@ -106,9 +107,12 @@
     }];
 }
 
-- (void)clickAction{
-//    TSHomePageReleaseViewModel *releaseViewModel = (TSHomePageReleaseViewModel *)self.viewModel;
-//    NSLog(@"uri:%@", releaseViewModel.releaseModel.linkData.objectValue);
+- (void)clickAction:(UIButton *)sender{
+    TSHomePageReleaseViewModel *releaseViewModel = (TSHomePageReleaseViewModel *)self.viewModel;
+    TSImageBaseModel *model = releaseViewModel.ReleaseDatas[sender.tag];
+    NSString *uri = [[TSServicesManager sharedInstance].uriHandler configUriWithTypeValue:model.linkData.typeValue objectValue:model.linkData.objectValue];
+    [[TSServicesManager sharedInstance].uriHandler openURI:uri];
+    NSLog(@"uri:%@",uri);
 }
 
 #pragma mark - Getter
