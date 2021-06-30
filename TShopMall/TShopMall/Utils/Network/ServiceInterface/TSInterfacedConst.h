@@ -96,7 +96,8 @@ UIKIT_EXTERN NSString * const kMinePartnerCenterData;
 UIKIT_EXTERN NSString * const kMineWithdrawalRecordListData;//提现记录
 UIKIT_EXTERN NSString * const kMineWalletData;//我的钱包
 UIKIT_EXTERN NSString * const kMineQueryProfit;//我的收益
-
+//广告图
+UIKIT_EXTERN NSString * const kMineShopContentUrl;
 
 #pragma mark - 设置
 UIKIT_EXTERN NSString *const kAboutMeAgreementUrl;
@@ -109,3 +110,4 @@ UIKIT_EXTERN NSString * const kMineBankNoCheck;//校验银行卡
 UIKIT_EXTERN NSString * const kMineGetBankInfo;//查询支行
 UIKIT_EXTERN NSString * const kMineDelBankCardAccount;//删除银行卡
 UIKIT_EXTERN NSString * const kMineQueryAmount;//查询我的余额
+UIKIT_EXTERN NSString * const kAboutMeAgreementUrl;

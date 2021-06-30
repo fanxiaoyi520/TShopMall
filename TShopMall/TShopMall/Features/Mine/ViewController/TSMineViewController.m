@@ -257,7 +257,14 @@
 #pragma mark - UniversalCollectionViewCellDataDelegate
 -(id)universalCollectionViewCellModel:(NSIndexPath *)indexPath{
     TSMineSectionModel *sectionModel = self.dataController.sections[indexPath.section];
-    return sectionModel.items[indexPath.row];
+    if ([sectionModel.items[indexPath.row].identify isEqualToString: @"TSMineEarningsCell"]) {
+        return  self.dataController.earningModel;
+    } else if ([sectionModel.items[indexPath.row].identify isEqualToString: @"TSMinePartnerCenterCell"]) {
+        return  self.dataController.partnerCenterDataModel;
+    } else {
+        return sectionModel.items[indexPath.row];
+    }
+    
 }
 
 - (void)universalCollectionViewCellClick:(NSIndexPath *)indexPath params:(NSDictionary *)params {
@@ -266,12 +273,23 @@
         NSInteger clickType = (NSInteger)[params objectForKey:@"clickType"];
         switch (clickType) {
             case 0:
-                break;
+        self.dataController.earningModel.eyeIsOn = ! self.dataController.earningModel.eyeIsOn;
+            break;
         }
     }else if ([@"TSMinePartnerCenterCell" isEqualToString:cellType]){
-        NSString *path = [NSString stringWithFormat:@"%@%@",kMallH5ApiPrefix,kMallH5CopartnerUrl];
-        TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:path];
-        [self.navigationController pushViewController:hybrid animated:YES];
+        switch ([params[@"clickType"] integerValue] ) {
+            case 0:
+                self.dataController.partnerCenterDataModel.eyeIsOn = !self.dataController.partnerCenterDataModel.eyeIsOn;
+             break;
+            default:
+            {
+                NSString *path = [NSString stringWithFormat:@"%@%@",kMallH5ApiPrefix,kMallH5CopartnerUrl];
+                TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:path];
+                [self.navigationController pushViewController:hybrid animated:YES];
+            }
+                break;
+        }
+       
     }
 }
 
