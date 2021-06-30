@@ -15,6 +15,7 @@
 #import "TSBankCardModel.h"
 #import "TSAddBankCardModel.h"
 #import "TSAddBankCardBackModel.h"
+#import "TSBranchCardModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSInteger, RequestMethod){
@@ -53,6 +54,8 @@ typedef NS_ENUM(NSInteger, RequestMethod){
 @property (nonatomic, strong, readonly) NSMutableArray <TSBankCardModel *> *bankCardArray;
 @property (nonatomic, strong, readonly) TSAddBankCardBackModel *addBankCardBackModel;
 @property (nonatomic,   copy, readonly) NSString *amount;//分
+@property (nonatomic, strong, readonly) NSMutableArray <TSBranchCardModel *> *branchCardArray;
+@property (nonatomic, strong, readonly) NSMutableArray <TSAddBankCardBackModel *> *addBankCardBackArray;
 
 -(void)fetchMineContentsComplete:(void(^)(BOOL isSucess))complete;
 -(void)fetchDataComplete:(void(^)(BOOL isSucess))complete;
@@ -77,6 +80,8 @@ typedef NS_ENUM(NSInteger, RequestMethod){
 - (void)fetchDeleteBankCardDataComplete:(void(^)(BOOL isSucess))complete;
 //查询我的余额
 - (void)fetchCheckMyBalanceDataComplete:(void(^)(BOOL isSucess))complete;
+//查询银行列表
+- (void)fetchQueryBankDataComplete:(void(^)(BOOL isSucess))complete;
 @end
 
 NS_ASSUME_NONNULL_END

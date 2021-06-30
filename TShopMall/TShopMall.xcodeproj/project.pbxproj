@@ -228,6 +228,8 @@
 		CE5674B726833A5000252F5D /* TSWalletHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5674B626833A5000252F5D /* TSWalletHeaderView.m */; };
 		CE5674BB2683570300252F5D /* TSWalletModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5674BA2683570300252F5D /* TSWalletModel.m */; };
 		CE5C706D2689DA4100D455DB /* TSMyIncomeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5C706C2689DA4100D455DB /* TSMyIncomeModel.m */; };
+		CE6361D9268C3A2900606E02 /* TSDropDownView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6361D8268C3A2900606E02 /* TSDropDownView.m */; };
+		CE6361DC268C508400606E02 /* TSBranchCardModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6361DB268C508400606E02 /* TSBranchCardModel.m */; };
 		CE663E57268AE9570092DDCA /* TSBankCardModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE663E56268AE9570092DDCA /* TSBankCardModel.m */; };
 		CE663E5A268AF3F20092DDCA /* TSAddBankCardModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE663E59268AF3F20092DDCA /* TSAddBankCardModel.m */; };
 		CE663E5D268AFB6B0092DDCA /* UITextField+ExtendRange.m in Sources */ = {isa = PBXBuildFile; fileRef = CE663E5C268AFB6B0092DDCA /* UITextField+ExtendRange.m */; };
@@ -964,6 +966,10 @@
 		CE5674BA2683570300252F5D /* TSWalletModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSWalletModel.m; sourceTree = "<group>"; };
 		CE5C706B2689DA4100D455DB /* TSMyIncomeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSMyIncomeModel.h; sourceTree = "<group>"; };
 		CE5C706C2689DA4100D455DB /* TSMyIncomeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSMyIncomeModel.m; sourceTree = "<group>"; };
+		CE6361D7268C3A2900606E02 /* TSDropDownView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSDropDownView.h; sourceTree = "<group>"; };
+		CE6361D8268C3A2900606E02 /* TSDropDownView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSDropDownView.m; sourceTree = "<group>"; };
+		CE6361DA268C508400606E02 /* TSBranchCardModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSBranchCardModel.h; sourceTree = "<group>"; };
+		CE6361DB268C508400606E02 /* TSBranchCardModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSBranchCardModel.m; sourceTree = "<group>"; };
 		CE663E55268AE9570092DDCA /* TSBankCardModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSBankCardModel.h; sourceTree = "<group>"; };
 		CE663E56268AE9570092DDCA /* TSBankCardModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSBankCardModel.m; sourceTree = "<group>"; };
 		CE663E58268AF3F20092DDCA /* TSAddBankCardModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSAddBankCardModel.h; sourceTree = "<group>"; };
@@ -2206,6 +2212,8 @@
 		CE5674B426833A0E00252F5D /* Wallet */ = {
 			isa = PBXGroup;
 			children = (
+				CE6361D7268C3A2900606E02 /* TSDropDownView.h */,
+				CE6361D8268C3A2900606E02 /* TSDropDownView.m */,
 				CE66DB02268490BB00E8D433 /* TSWalletCenterView.h */,
 				CE66DB03268490BB00E8D433 /* TSWalletCenterView.m */,
 				CE5674B526833A5000252F5D /* TSWalletHeaderView.h */,
@@ -2237,6 +2245,8 @@
 				CE663E59268AF3F20092DDCA /* TSAddBankCardModel.m */,
 				CE663E5E268AFD620092DDCA /* TSAddBankCardBackModel.h */,
 				CE663E5F268AFD620092DDCA /* TSAddBankCardBackModel.m */,
+				CE6361DA268C508400606E02 /* TSBranchCardModel.h */,
+				CE6361DB268C508400606E02 /* TSBranchCardModel.m */,
 			);
 			path = Wallet;
 			sourceTree = "<group>";
@@ -4178,6 +4188,7 @@
 				C3B4CCF12674934E0001EE75 /* TSQuickLoginTopView.m in Sources */,
 				C35F1870267D963100F65AF9 /* TSAccountCancelConfirmViewController.m in Sources */,
 				C3A6C4C5267A1C5700FC71D6 /* TSBindThirdAppCell.m in Sources */,
+				CE6361D9268C3A2900606E02 /* TSDropDownView.m in Sources */,
 				F54973CB2668C27300181E3F /* TSH5InterfacedConst.m in Sources */,
 				041131D7268096F6000B5BAF /* TSGoodsShowCell.m in Sources */,
 				DC9911C9267C8B0E00EF9B26 /* TSHomePageLoginBarView.m in Sources */,
@@ -4455,6 +4466,7 @@
 				CE4F6BEE2688544A00812275 /* TSInviteFriendsHeader.m in Sources */,
 				DC3440BE267238F600F5B0DA /* TSHomePageCellViewModel.m in Sources */,
 				F55D2CFF2678CFFA006BACCF /* TSGoodDetailCopyWriterCell.m in Sources */,
+				CE6361DC268C508400606E02 /* TSBranchCardModel.m in Sources */,
 				DC3440C1267239CD00F5B0DA /* TSHomePageCellTemplateModel.m in Sources */,
 				F55D2CF92678CDA0006BACCF /* TSGoodDetailIntroduceCell.m in Sources */,
 				F55D2AE6266F983E006BACCF /* TSUniverseCollectionBackgroundView.m in Sources */,

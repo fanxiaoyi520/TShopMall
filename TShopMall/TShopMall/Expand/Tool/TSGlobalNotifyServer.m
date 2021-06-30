@@ -10,8 +10,8 @@
 @implementation TSGlobalNotifyServer
 SingletonM(Server)
 
--(void)postBusinessNewSatu:(BOOL)haveNew{
-    [JAFProxy(GWGlobalNotifyServerDelegate) businessNewSatauChange:haveNew];
+-(void)postAddBankCard:(id)info {
+    [JAFProxy(GWGlobalNotifyServerDelegate) addBankCard:info];
 }
 
 @end

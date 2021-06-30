@@ -18,6 +18,8 @@
 @property (nonatomic, strong) NSMutableArray <TSBankCardModel *> *bankCardArray;
 @property (nonatomic, strong) TSAddBankCardBackModel *addBankCardBackModel;
 @property (nonatomic, copy) NSString *amount;
+@property (nonatomic, strong) NSMutableArray <TSBranchCardModel *> *branchCardArray;
+@property (nonatomic, strong) NSMutableArray <TSAddBankCardBackModel *> *addBankCardBackArray;
 @end
 
 @implementation TSMineDataController
@@ -268,23 +270,10 @@
 
 // MARK: 我的钱包
 - (void)fetchMineWalletDataComplete:(void(^)(BOOL isSucess))complete {
-    NSMutableDictionary *header = [NSMutableDictionary dictionary];
-    
-    [header setValue:@"111" forKey:@"ihome-token"];
-//    NSMutableDictionary *body = [NSMutableDictionary dictionary];
-//    [body setValue:@"6226097804210467" forKey:@"bankCardNo"];
-//    [body setValue:@"招商银行" forKey:@"accountBank"];
-//    [body setValue:@"CMD" forKey:@"accountBankCode"];
-//    [body setValue:@"招商银行北京支行" forKey:@"bankName"];
-//    [body setValue:@"308551024051" forKey:@"bankBranchId"];
-//    [body setValue:@"北京市" forKey:@"bankAddressProvince"];
-//    [body setValue:@"110000" forKey:@"bankAddressProvinceCode"];
-//    [body setValue:@"北京市" forKey:@"bankAddressCity"];
-//    [body setValue:@"110000" forKey:@"bankAddressCityCode"];
     SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kMineWalletData
                                                                requestMethod:YTKRequestMethodGET
                                                        requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON
-                                                               requestHeader:header
+                                                               requestHeader:NSDictionary.dictionary
                                                                  requestBody:NSDictionary.dictionary
                                                               needErrorToast:YES];
     [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
@@ -329,16 +318,13 @@
 
 // MARK: 提现申请
 - (void)fetchWithdrawalApplicationDataComplete:(void(^)(BOOL isSucess))complete {
-    NSMutableDictionary *header = [NSMutableDictionary dictionary];
-    [header setValue:@"111" forKey:@"ihome-token"];
-    [header setValue:@"test" forKey:@"storeUuid"];
     NSMutableDictionary *body = [NSMutableDictionary dictionary];
     [body setValue:self.withdrawalAmount forKey:@"withdrawalAmount"];
     [body setValue:self.bankCardAccountId forKey:@"bankCardAccountId"];
     SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kMineWithdrawalApply
                                                                requestMethod:YTKRequestMethodPOST
                                                        requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON
-                                                               requestHeader:header
+                                                               requestHeader:NSDictionary.dictionary
                                                                  requestBody:body
                                                               needErrorToast:YES];
     [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
@@ -359,28 +345,16 @@
 
 // MARK: 提现记录
 - (void)fetchWithdrawalRecordDataComplete:(void(^)(BOOL isSucess))complete {
-    NSMutableDictionary *header = [NSMutableDictionary dictionary];
-    [header setValue:@"111" forKey:@"ihome-token"];
     NSMutableDictionary *body = [NSMutableDictionary dictionary];
     [body setValue:@(self.pageNo) forKey:@"pageNo"];
     if (self.status!=0)
         [body setValue:@(self.status) forKey:@"status"];
-    [body setValue:@"6226097804210467" forKey:@"bankCardNo"];
-    [body setValue:@"招商银行" forKey:@"accountBank"];
-    [body setValue:@"CMD" forKey:@"accountBankCode"];
-    [body setValue:@"招商银行北京支行" forKey:@"bankName"];
-    [body setValue:@"308551024051" forKey:@"bankBranchId"];
-    [body setValue:@"北京市" forKey:@"bankAddressProvince"];
-    [body setValue:@"110000" forKey:@"bankAddressProvinceCode"];
-    [body setValue:@"北京市" forKey:@"bankAddressCity"];
-    [body setValue:@"110000" forKey:@"bankAddressCityCode"];
-    
     if (self.requestMethod == Ordinary)
         [self.withdrawalRecordArray removeAllObjects];
     SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kMineWithdrawalRecordListData
                                                                requestMethod:YTKRequestMethodGET
                                                        requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON
-                                                               requestHeader:header
+                                                               requestHeader:NSDictionary.dictionary
                                                                  requestBody:body
                                                               needErrorToast:YES];
     NSMutableArray *array = [NSMutableArray array];
@@ -454,9 +428,9 @@
     [body setValue:self.addBankCardModel.bankCardNo forKey:@"bankCardNo"];
     [body setValue:self.addBankCardBackModel.bankName forKey:@"accountBank"];
     [body setValue:self.addBankCardBackModel.accountBankCode forKey:@"accountBankCode"];
-    [body setValue:@"范晓益" forKey:@"userName"];
-    [body setValue:@"北京支行望京西园支行" forKey:@"bankName"];
-    [body setValue:@"308551024051" forKey:@"bankBranchId"];
+    [body setValue:self.addBankCardModel.userName forKey:@"userName"];
+    [body setValue:self.addBankCardModel.bankName forKey:@"bankName"];
+    [body setValue:self.addBankCardModel.bankBranchId forKey:@"bankBranchId"];
     [body setValue:@"北京市" forKey:@"bankAddressProvince"];
     [body setValue:@"110000" forKey:@"bankAddressProvinceCode"];
     [body setValue:@"北京市" forKey:@"bankAddressCity"];
@@ -480,15 +454,12 @@
 
 // MARK: 校验银行卡
 - (void)fetchCheckBankCardDataComplete:(void(^)(BOOL isSucess))complete {
-    NSMutableDictionary *header = [NSMutableDictionary dictionary];
-    [header setValue:@"111" forKey:@"ihome-token"];
-
     NSMutableDictionary *body = [NSMutableDictionary dictionary];
     [body setValue:self.addBankCardModel.bankCardNo forKey:@"bankNo"];
     SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kMineBankNoCheck
                                                                requestMethod:YTKRequestMethodGET
                                                        requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON
-                                                               requestHeader:header
+                                                               requestHeader:NSDictionary.dictionary
                                                                  requestBody:body
                                                               needErrorToast:YES];
     [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
@@ -496,8 +467,10 @@
             NSDictionary *data = request.responseModel.data;
             TSAddBankCardBackModel *model = [TSAddBankCardBackModel yy_modelWithDictionary:data];
             self.addBankCardBackModel = model;
+            complete(YES);
+        } else {
+            complete(NO);
         }
-        complete(YES);
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
         complete(NO);
     }];
@@ -505,31 +478,23 @@
 
 // MARK: 查询支行
 - (void)fetchInquiryBranchDataComplete:(void(^)(BOOL isSucess))complete {
-    NSMutableDictionary *header = [NSMutableDictionary dictionary];
-    [header setValue:@"111" forKey:@"ihome-token"];
-    [header setValue:self.addBankCardModel.bankName forKey:@"bankFullName"];
-
     NSMutableDictionary *body = [NSMutableDictionary dictionary];
-    [body setValue:self.addBankCardModel.bankCardNo forKey:@"bankCardNo"];
-    [body setValue:self.addBankCardBackModel.bankName forKey:@"accountBank"];
-    [body setValue:self.addBankCardBackModel.accountBankCode forKey:@"accountBankCode"];
-    [body setValue:self.addBankCardModel.bankName forKey:@"bankName"];
-    [body setValue:@"308551024051" forKey:@"bankBranchId"];
-    [body setValue:@"北京市" forKey:@"bankAddressProvince"];
-    [body setValue:@"110000" forKey:@"bankAddressProvinceCode"];
-    [body setValue:@"北京市" forKey:@"bankAddressCity"];
-    [body setValue:@"110000" forKey:@"bankAddressCityCode"];
+    [body setValue:self.addBankCardModel.bankName forKey:@"bankFullName"];
     SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kMineGetBankInfo
                                                                requestMethod:YTKRequestMethodGET
                                                        requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON
-                                                               requestHeader:header
+                                                               requestHeader:NSDictionary.dictionary
                                                                  requestBody:body
                                                               needErrorToast:YES];
+    NSMutableArray *array = [NSMutableArray array];
     [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
         if (request.responseModel.isSucceed) {
-            NSDictionary *data = request.responseModel.data;
-            TSAddBankCardBackModel *model = [TSAddBankCardBackModel yy_modelWithDictionary:data];
-            self.addBankCardBackModel = model;
+            NSArray *data = request.responseModel.data[@"bankInfo"][@"list"];
+            [data enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                TSBranchCardModel *model = [TSBranchCardModel yy_modelWithDictionary:obj];
+                [array addObject:model];
+            }];
+            self.branchCardArray = array;
         }
         complete(YES);
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
@@ -576,5 +541,35 @@
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
         complete(NO);
     }];
+}
+
+ // MARK: 查询银行列表
+ - (void)fetchQueryBankDataComplete:(void(^)(BOOL isSucess))complete {
+    NSMutableDictionary *body = [NSMutableDictionary dictionary];
+    [body setValue:@"北京银行" forKey:@"bankName"];
+    [body setValue:@(1) forKey:@"pageNo"];
+    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kMineGetBankNames
+                                                                requestMethod:YTKRequestMethodGET
+                                                        requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON
+                                                                requestHeader:NSDictionary.dictionary
+                                                                  requestBody:body
+                                                               needErrorToast:YES];
+    NSMutableArray *array = [NSMutableArray array];
+    [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+        if (request.responseModel.isSucceed) {
+             NSArray *data = request.responseModel.data;
+             [data enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                 TSAddBankCardBackModel *model = [TSAddBankCardBackModel yy_modelWithDictionary:obj];
+                 self.addBankCardBackModel = model;
+                 [array addObject:model];
+             }];
+             self.addBankCardBackArray = array;
+             complete(YES);
+         } else {
+             complete(NO);
+         }
+     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+         complete(NO);
+     }];
 }
 @end

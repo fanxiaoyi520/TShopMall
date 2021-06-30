@@ -109,3 +109,4 @@ UIKIT_EXTERN NSString * const kMineBankNoCheck;//校验银行卡
 UIKIT_EXTERN NSString * const kMineGetBankInfo;//查询支行
 UIKIT_EXTERN NSString * const kMineDelBankCardAccount;//删除银行卡
 UIKIT_EXTERN NSString * const kMineQueryAmount;//查询我的余额
+UIKIT_EXTERN NSString * const kMineGetBankNames;//查询银行列表
