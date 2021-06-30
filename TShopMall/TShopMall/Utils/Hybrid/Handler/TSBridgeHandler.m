@@ -33,6 +33,10 @@
     }
 }
 
+-(void)close:(NSDictionary *)params{
+    [[TSWKAppManager currentNavigationController] popViewControllerAnimated:YES];
+}
+
 
 
 @end
