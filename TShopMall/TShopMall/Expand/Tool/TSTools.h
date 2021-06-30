@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (BOOL)isWithdrawalPsw:(NSString *)psw;
 /** 身份证号校验 */
 + (BOOL)isIdcard:(NSString *)idcardNum;
+/** 昵称的校验 */
++ (BOOL)isCorrectNickname:(NSString *)nickname;
 
 @end
 

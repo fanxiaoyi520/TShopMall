@@ -100,10 +100,15 @@ NS_ASSUME_NONNULL_BEGIN
                                    attrId:(NSString *)attrId
                                  complete:(void(^)(BOOL isSucess))complete;
 
+
 /// 自己买
-/// @param suitUuid 套装UUID
+/// @param productUuid 商品UUID
+/// @param buyNum 数量
+/// @param attrId 商品SKU
 /// @param complete 请求完成block
--(void)fetchProductDetailCustomBuy:(NSString *)suitUuid
+-(void)fetchProductDetailCustomBuyProductUuid:(NSString *)productUuid
+                                       buyNum:(NSString *)buyNum
+                                       attrId:(NSString *)attrId
                           complete:(void(^)(BOOL isSucess))complete;
 
 @end

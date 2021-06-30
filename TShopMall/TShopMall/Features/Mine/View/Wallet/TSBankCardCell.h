@@ -11,11 +11,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TSBankCardCell : UICollectionViewCell
-
-@property(nonatomic,retain)NSString * userName;
-@property(nonatomic,retain)NSString * bankName;
-@property(nonatomic,retain)NSString * account;
-
 - (void)setModel:(id _Nullable)model;
 @end
 

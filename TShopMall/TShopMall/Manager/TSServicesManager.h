@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import "TSRecomendGoodsProtocol.h"
+#import "TSUserInfoService.h"
 #import "AFNetworkReachabilityManager.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -28,6 +29,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)sharedInstance;
 @property (nonatomic, strong) id<TSUriHandler> uriHandler;
 @property (nonatomic, strong) id<TSBestSellingRecommendServiceProtocol> bestSellingRecommendService;
+/** 用户信息的service  */
+@property(nonatomic, strong) TSUserInfoService *userInfoService;
 
 @end
 

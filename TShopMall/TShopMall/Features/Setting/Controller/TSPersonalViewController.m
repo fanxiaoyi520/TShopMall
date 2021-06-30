@@ -20,6 +20,7 @@
 #import "TSDatePickerView.h"
 #import "TSRealnameInfoViewController.h"
 #import "TSRealNameAuthViewController.h"
+#import "TSModifyNicknameViewController.h"
 
 @interface TSPersonalViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate, TSSexSelectingViewDelegate, TSDatePickerViewDelegate>
 /// 数据中心
@@ -34,6 +35,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)setupBasic {
@@ -59,9 +64,15 @@
         make.top.equalTo(self.view.mas_top).with.offset(GK_STATUSBAR_NAVBAR_HEIGHT + 1);
         make.bottom.equalTo(self.view.mas_bottom).with.offset(0);
     }];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nicknameModifiedAction) name:TSNicknameModifiedNotificationName object:nil];
 }
 
 #pragma mark - Actions
+///昵称修改成功
+- (void)nicknameModifiedAction {
+    //[self.collectionView reloadData];
+    NSLog(@"昵称修改成功");
+}
 /** 相册权限 */
 - (void)photoAuthorized {
     PHAuthorizationStatus status = [PHPhotoLibrary authorizationStatus];
@@ -215,6 +226,10 @@
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.item == 0) {
         [self showPictureSheet];
+        return;
+    } else if (indexPath.item == 1) {
+        TSModifyNicknameViewController *nicknameVC = [[TSModifyNicknameViewController alloc] init];
+        [self.navigationController pushViewController:nicknameVC animated:YES];
         return;
     } else if (indexPath.item == 2) {
 //        TSRealnameInfoViewController *realnameInfoVC = [[TSRealnameInfoViewController alloc] init];

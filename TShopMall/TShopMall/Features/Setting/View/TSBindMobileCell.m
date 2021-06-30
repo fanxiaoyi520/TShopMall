@@ -10,7 +10,6 @@
 #import "TSTools.h"
 #import <Toast.h>
 
-
 typedef NS_ENUM(NSUInteger, BindMobileValueType){
     BindMobileValueTypeCommit = 1,///提交按钮
 };

@@ -87,8 +87,6 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     TSBankCardCell * cell =[collectionView dequeueReusableCellWithReuseIdentifier:@"cellIdentifier" forIndexPath:indexPath];
     [cell setModel:self.dataController.bankCardArray[indexPath.row]];
-//    cell.bankName=_bankNameArray[indexPath.row];
-//    cell.account=@"****  ****  ****  8888";
     return cell;
 }
 
@@ -144,8 +142,8 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-
     TSUnbundlingCardViewController *vc = [TSUnbundlingCardViewController new];
+    vc.model = self.dataController.bankCardArray[indexPath.row];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

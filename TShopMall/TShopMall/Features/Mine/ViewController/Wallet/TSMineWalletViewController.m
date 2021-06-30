@@ -10,6 +10,7 @@
 #import "TSWithdrawalViewController.h"
 #import "TSPresentationController.h"
 #import "TSMineDataController.h"
+#import "TSAddCardViewController.h"
 
 #import "TSWalletHeaderView.h"
 
@@ -91,7 +92,8 @@
 
 // MARK: TSWalletCellViewDelegate
 - (void)walletCellViewIsBindingAction:(id)sender {
-    NSLog(@"去绑定");
+    TSAddCardViewController *vc = [TSAddCardViewController new];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 // MARK: UIViewControllerTransitioningDelegate

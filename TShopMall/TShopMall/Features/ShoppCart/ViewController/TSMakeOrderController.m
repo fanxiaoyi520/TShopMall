@@ -62,7 +62,7 @@
     TSShippingAddressController *con = [TSShippingAddressController new];
     con.addressSelected = ^(TSAddressModel * _Nonnull address) {
         [weakSelf.dataCon updateAddressSection:address];
-        weakSelf.makeOrderView.sections = weakSelf.dataCon.sections;
+        [weakSelf refreshData];
     };
     [self.navigationController pushViewController:con animated:YES];
 }
@@ -73,7 +73,7 @@
 
 //选择发票
 - (void)operationForChangeBill{
-    NSString *path = [NSString stringWithFormat:@"%@%@?isFromOrder=1",kMallH5ApiPrefix,kMallH5InvoiceUrl];
+    NSString *path = [NSString stringWithFormat:@"%@%@?isFromOrder=1&uuid=",kMallH5ApiPrefix,kMallH5InvoiceUrl];
     TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:path];
     hybrid.isInvoice = YES;
     [self.navigationController pushViewController:hybrid animated:YES];

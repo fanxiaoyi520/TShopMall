@@ -70,3 +70,19 @@ NSString *const kMallH5RefundSelectUrl = @"pages/refund/select";
 NSString *const kMallH5RefundApplyUrl = @"pages/refund/apply";
 ///合伙人中心
 NSString *const kMallH5CopartnerUrl = @"pages/copartner/index";
+///人工客服
+NSString *const kMallH5StaffServiceUrl = @"https://wap.service.tcl.com/web/index.php?apps=thome";
+///报装报修
+NSString *const kMallH5RepairsUrl = @"https://service2.tcl.com/install?apps=thome";
+///服务进度
+NSString *const kMallH5ServiceScheduleUrl = @"https://service2.tcl.com/login?apps=thome";
+///延保查询
+NSString *const kMallH5ExtendWarrantyUrl = @"https://service2.tcl.com/install?apps=thome";
+///故障自查
+NSString *const kMallH5FaultInspectionUrl = @"https://service2.tcl.com/fault-query?apps=thome";
+///服务政策 & 收费标准
+NSString *const kMallH5ServicePolicyUrl = @"https://m.tcl.com/service/policy";
+///说明书
+NSString *const kMallH5InstructionUrl = @"https://service2.tcl.com/manual?apps=thome";
+///服务工程师
+NSString *const kMallH5ServiceEngineerUrl = @"https://service2.tcl.com/login?apps=thome";

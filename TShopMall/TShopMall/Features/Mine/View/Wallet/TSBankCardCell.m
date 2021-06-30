@@ -6,6 +6,7 @@
 //
 
 #import "TSBankCardCell.h"
+#import "NSString+Plugin.h"
 
 @implementation TSBankCardCell {
     UIImageView * _bankImageCion;
@@ -33,7 +34,7 @@
     _bgImageView.image=[UIImage imageNamed:@"mine_red_bg"];
      [self.contentView addSubview:_bgImageView];
     
-   _bankImageCion = [[UIImageView alloc] initWithFrame:CGRectMake(15, 15, 40, 40)];
+    _bankImageCion = [[UIImageView alloc] initWithFrame:CGRectMake(15, 15, 40, 40)];
     _bankImageCion.backgroundColor=[UIColor colorWithRed: arc4random_uniform(256)/255.0f green: arc4random_uniform(256)/255.0f blue: arc4random_uniform(256)/255.0f alpha:1];
     _bankImageCion.image=[UIImage imageNamed:@""];
     _bankImageCion.layer.cornerRadius=_bankImageCion.width/2;
@@ -51,33 +52,40 @@
     _accountLabel.textColor=KWhiteColor;
     _accountLabel.textAlignment = NSTextAlignmentRight;
     [_bgImageView addSubview:_accountLabel];
-
 }
 
 // MARK: model
 - (void)setModel:(id)model {
     if (!model) return;
     TSBankCardModel *kModel = model;
-    if (self.height == 120) {
-        _bgImageView.image=[UIImage imageNamed:@"mine_yellow_bg1"];
-        _accountLabel.top = 87;
-    }
     _bankNameLabel.text = kModel.accountBank;
-    _accountLabel.text=kModel.bankCardNo;
+    _accountLabel.text = [NSString returnBankCard:kModel.bankCardNo];
+    
+    if (self.height == 120) {
+        _accountLabel.top = 87;
+        
+        if ([kModel.bankStatus isEqualToString:@"0"]) {
+            _bgImageView.image=[UIImage imageNamed:@"mine_shenhezhong_da"];
+            _accountLabel.text = kModel.bankStatusName;
+        } else if ([kModel.bankStatus isEqualToString:@"1"]) {
+            _bgImageView.image=[UIImage imageNamed:@"mine_bankstatus_hong"];
+        } else {
+            _bgImageView.image=[UIImage imageNamed:@"mine_yellow_bg1"];
+        }
+    } else {
+        if ([kModel.bankStatus isEqualToString:@"0"]) {
+            _bgImageView.image=[UIImage imageNamed:@"mine_grey_bg"];
+            _accountLabel.text = kModel.bankStatusName;
+        } else if ([kModel.bankStatus isEqualToString:@"1"]) {
+            _bgImageView.image=[UIImage imageNamed:@"mine_red_bg"];
+        } else {
+            _bgImageView.image=[UIImage imageNamed:@"mine_yellow_bg2"];
+        }
+    }
+    
+
 }
 
-- (void)setUserName:(NSString *)userName {
-    _userName=userName;
-    _masterLabel.text=_userName;
-}
-- (void)setBankName:(NSString *)bankName {
-    _bankName=bankName;
-    _bankNameLabel.text=_bankName;
-}
-- (void)setAccount:(NSString *)account {
-    _account=account;
-    _accountLabel.text=_account;
-}
 @end
 
 @interface TSBankCardHeader ()

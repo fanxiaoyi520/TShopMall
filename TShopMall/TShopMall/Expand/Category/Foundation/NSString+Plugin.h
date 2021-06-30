@@ -165,6 +165,8 @@ static inline NSString *TStringToString(NSString *str) { return TStringIsEmpty(s
 /// url解析获取其中的参数
 - (NSDictionary *)ts_urlParsing;
 
+//银行卡部分秘文展示
++ (NSString *)returnBankCard:(NSString *)BankCardStr;
 @end
 
 

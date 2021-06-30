@@ -7,7 +7,7 @@
 
 #import "TSMinePartnerCenterCell.h"
 #import "TSMineMoreButton.h"
-
+#import "TSPartnerCenterData.h"
 @interface TSMinePartnerCenterCell()
 
 /// 标题
@@ -135,10 +135,48 @@
     }];
 }
 
+- (void)setDelegate:(id<UniversalCollectionViewCellDataDelegate>)delegate {
+    [super setDelegate:delegate];
+    TSPartnerCenterData *model = [delegate universalCollectionViewCellModel:self.indexPath];
+    
+    _orderValueLabel.text = model.orderNum;
+    _moneyValueLabel.text = model.orderMoney;
+    _contributeValueLabel.text = model.profitFromMyself;
+    _partnerValueLabel.text = model.profitFromPartner;
+    _eyeButton.selected = model.eyeIsOn;
+}
+
 #pragma mark - Actions
 -(void)moreAction:(TSMineMoreButton *)sender{
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setValue:@"TSMinePartnerCenterCell" forKey:@"cellType"];
+    [params setValue:@(MoreAction) forKey:@"clickType"];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(universalCollectionViewCellClick:params:)]) {
+        [self.delegate universalCollectionViewCellClick:self.indexPath params:params];
+    }
+}
+
+-(void)eyeAction:(UIButton *)sender{
+    if (sender.selected) {
+        _orderValueLabel.text = @"****";
+        _moneyValueLabel.text = @"****";
+        _contributeValueLabel.text = @"****";
+        _partnerValueLabel.text = @"****";
+        sender.selected = NO;
+    } else {
+        if ([self.delegate respondsToSelector:@selector(universalCollectionViewCellClick:params:)]) {
+            TSPartnerCenterData *model = [self.delegate universalCollectionViewCellModel:self.indexPath];
+            _orderValueLabel.text = model.orderNum;
+            _moneyValueLabel.text = model.orderMoney;
+            _contributeValueLabel.text = model.profitFromMyself;
+            _partnerValueLabel.text = model.profitFromPartner;
+        }
+        sender.selected = YES;
+    }
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setValue:@"TSMinePartnerCenterCell" forKey:@"cellType"];
+    [params setValue:@(EyeAction) forKey:@"clickType"];
     if (self.delegate && [self.delegate respondsToSelector:@selector(universalCollectionViewCellClick:params:)]) {
         [self.delegate universalCollectionViewCellClick:self.indexPath params:params];
     }
@@ -182,6 +220,17 @@
         _orderLabel.text = @"累计订单";
     }
     return _orderLabel;
+}
+
+-(UIButton *)eyeButton{
+    if (!_eyeButton) {
+        _eyeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_eyeButton setImage:KImageMake(@"mall_mine_invisiable") forState:UIControlStateNormal];
+        [_eyeButton setImage:KImageMake(@"mall_mine_eye") forState:UIControlStateSelected];
+        [_eyeButton addTarget:self action:@selector(eyeAction:) forControlEvents:UIControlEventTouchUpInside];
+        _eyeButton.selected = YES;
+    }
+    return _eyeButton;
 }
 
 -(UILabel *)orderValueLabel{
