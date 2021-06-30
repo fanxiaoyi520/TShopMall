@@ -10,14 +10,14 @@
 NS_ASSUME_NONNULL_BEGIN
 @protocol GWGlobalNotifyServerDelegate <NSObject>
 @optional
-/** 业务沟通是否存在未读计数的状态变换  */
--(void)businessNewSatauChange:(BOOL)haveNew;
+//添加银行卡
+-(void)addBankCard:(id _Nullable)info;
 @end
 
 @interface TSGlobalNotifyServer : NSObject
 SingletonH(Server)
 
--(void)postBusinessNewSatu:(BOOL)haveNew;
+-(void)postAddBankCard:(id _Nullable)info;
 @end
 
 NS_ASSUME_NONNULL_END

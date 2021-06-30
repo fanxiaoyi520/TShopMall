@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 @interface TSSelectorCell : UITableViewCell
 
+- (void)setModel:(id _Nullable)model;
 @end
 
 @interface TSSelectorHeader : UIView

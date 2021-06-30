@@ -46,7 +46,7 @@
     titleLab.text = @"输入提现金额";
     
     NSArray *array = @[@"提现金额",@"扣税金额",@"税后金额"];
-    NSArray *conArray = @[@"¥0",@"¥199999"];
+    NSArray *conArray = @[@"¥0",@"¥0"];
     [array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         UILabel *lab = [UILabel new];
         lab.textColor = KHexColor(@"#2D3132");
@@ -64,6 +64,7 @@
             UILabel *conLab = [UILabel new];
             [self.bgView addSubview:conLab];
             conLab.textColor = KHexColor(@"#2D3132");
+            conLab.tag = 50+idx;
             conLab.font = KRegularFont(14);
             conLab.frame = CGRectMake(99, 134+idx *(22+38), 150, 22);
             conLab.text = conArray[idx];
@@ -142,10 +143,8 @@
 }
 
 - (void)sureAction:(UIButton *)sender {
-    NSString *amountStr = [self.inputTextField.text stringByReplacingOccurrencesOfString:@"" withString:@"¥"];
-    NSString *specAmount = [NSString stringWithFormat:@"%ld",([amountStr integerValue] * [self.kDataController.myIncomeModel.withdrawalRate integerValue])];
     self.dataController.bankCardAccountId = self.kDataController.myIncomeModel.bankCardId;
-    self.dataController.withdrawalAmount = specAmount;
+    self.dataController.withdrawalAmount = [self calculationRules:self.inputTextField.text];
     @weakify(self);
     [self.dataController fetchWithdrawalApplicationDataComplete:^(BOOL isSucess) {
         @strongify(self);
@@ -157,6 +156,10 @@
 
 - (void)textFieldAction:(UITextField *)textField {
     if (textField.text.length > 0) {
+        UILabel *taxDeductionAmountLab = [self.bgView viewWithTag:50];
+        UILabel *afterTaxAmountLab = [self.bgView viewWithTag:51];
+        taxDeductionAmountLab.text = [NSString stringWithFormat:@"¥%.2f",([[textField.text stringByReplacingOccurrencesOfString:@"" withString:@"¥"] floatValue] - [[self calculationRules:self.inputTextField.text] floatValue])];
+        afterTaxAmountLab.text = [self calculationRules:self.inputTextField.text];
         [self.sureBtn setBackgroundImage:KImageMake(@"btn_large_black_norm1") forState:UIControlStateNormal];
         self.sureBtn.userInteractionEnabled = YES;
         if (![textField.text containsString:@"¥"])
@@ -166,6 +169,13 @@
         [self.sureBtn setBackgroundImage:KImageMake(@"btn_large_black_norm") forState:UIControlStateNormal];
         self.sureBtn.userInteractionEnabled = NO;
     }
+}
+
+// 计算规则
+- (NSString *)calculationRules:(NSString *)text {
+    NSString *amountStr = [text stringByReplacingOccurrencesOfString:@"¥" withString:@""];
+    NSString *specAmount = [NSString stringWithFormat:@"%.2f",([amountStr floatValue] * [self.kDataController.myIncomeModel.withdrawalRate floatValue])];
+    return specAmount;
 }
 
 // MARK: UITextFieldDelegate

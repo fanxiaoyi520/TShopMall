@@ -78,6 +78,12 @@ static NSInteger const kGroupSize = 4;
 //    TSAddBankCardModel *kModel
     _infoLab.text = (NSString *)model;
     if (indexPath.row == 0) {
+        _inputInfoTextField.placeholder = @"请输入持卡本人的真实姓名";
+        _inputInfoTextField.keyboardType = UIKeyboardTypeNamePhonePad;
+        _inputInfoTextField.tag = 15;
+    }
+    
+    if (indexPath.row == 1) {
         _inputInfoTextField.hidden = NO;
         _inputInfoTextField.placeholder = @"请绑定持卡本人的银行卡";
         _inputInfoTextField.keyboardType = UIKeyboardTypeNumberPad;
@@ -86,13 +92,13 @@ static NSInteger const kGroupSize = 4;
         _bankCardNoField.tag = 20;
     }
     
-    if (indexPath.row == 3) {
+    if (indexPath.row == 4) {
         _inputInfoTextField.hidden = NO;
         _inputInfoTextField.placeholder = @"请输入开户银行";
         _inputInfoTextField.keyboardType = UIKeyboardTypeNamePhonePad;
     }
     
-    if (indexPath.row == 1 || indexPath.row == 2){
+    if (indexPath.row == 2 || indexPath.row == 3){
         _inputInfoTextField.userInteractionEnabled = NO;
         _funcBtn.hidden = NO;
         _tipsImgView.hidden = NO;
