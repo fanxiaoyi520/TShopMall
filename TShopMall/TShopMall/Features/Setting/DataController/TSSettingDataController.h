@@ -25,6 +25,10 @@ NS_ASSUME_NONNULL_BEGIN
                          accountId:(NSString *)accountId
                           complete:(void(^)(BOOL isSucess))complete;
 
+
+/// 清理缓存
+- (void)clearCacheWithComplete:(void(^)(BOOL isSucess))complete;
+
 @end
 
 NS_ASSUME_NONNULL_END
