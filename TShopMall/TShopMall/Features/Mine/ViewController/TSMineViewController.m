@@ -167,7 +167,8 @@
         TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:path];
         [self.navigationController pushViewController:hybrid animated:YES];
     }else if (indexPath.section == 0 && indexPath.row == 4){//退款退货
-        NSString *path = [NSString stringWithFormat:@"%@%@",@"http://10.68.245.26:8081/seller-app-h5/",kMallH5RefundManageUrl];
+//        NSString *path = [NSString stringWithFormat:@"%@%@",@"http://10.68.245.26:8081/seller-app-h5/",kMallH5RefundManageUrl];
+        NSString *path = @"http://10.68.245.26:8081/seller-app-h5/pages/bridgeDemo/index";
         TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:path];
         [self.navigationController pushViewController:hybrid animated:YES];
     }

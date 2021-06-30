@@ -18,7 +18,12 @@
     NSDictionary *paramDic = data[@"params"];
 
     TSHybridViewController *controller = [[TSHybridViewController alloc] initWithURLString:paramDic[@"url"]];
+    controller.rightParams = paramDic;
     controller.jsDataParams = data;
+    controller.gk_navTitle = paramDic[@"title"];
+    controller.rightButtonTitle = paramDic[@"rightText"];
+    controller.rightClick = paramDic[@"rightClick"];
+    controller.leftClick = paramDic[@"leftClick"];
     [[TSWKAppManager currentNavigationController] pushViewController:controller animated:YES];
 }
 
