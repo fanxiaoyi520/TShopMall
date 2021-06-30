@@ -58,10 +58,10 @@
     [self.dataCon viewCart:^{
         [weakSelf endRefresh];
         weakSelf.settleView.hidden = !weakSelf.dataCon.cartModel.carts.count;
-        weakSelf.editBtn.hidden  = !weakSelf.dataCon.cartModel.carts.count;
         weakSelf.cartView.sections = weakSelf.dataCon.sections;
         [weakSelf updateSettleView];
         [weakSelf configRecomendView];
+        weakSelf.editBtn.hidden  = weakSelf.dataCon.cartModel.carts.count==0? YES:NO;
     }];
 }
 
@@ -138,9 +138,6 @@
 
 //去购物
 - (void)goToShopping{
-    UIViewController *con = [NSClassFromString(@"TSAddressEditController") new];
-    [self.navigationController pushViewController:con animated:YES];
-    return;
     AppDelegate *ap = (AppDelegate *)[UIApplication sharedApplication].delegate;
     TSBaseNavigationController *naviCon = (TSBaseNavigationController *)ap.window.rootViewController;
     TSMainViewController *mainCon = [naviCon.viewControllers lastObject];
