@@ -16,6 +16,7 @@
 #import "TSAddBankCardModel.h"
 #import "TSAddBankCardBackModel.h"
 #import "TSMineWalletModel.h"
+#import "TSMineOrderCountModel.h"
 NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSInteger, RequestMethod){
     Ordinary,
@@ -55,6 +56,8 @@ typedef NS_ENUM(NSInteger, RequestMethod){
 @property (nonatomic,   copy, readonly) NSString *amount;//分
 @property (nonatomic, strong, readonly) TSWithdrawalRecordModel *withdrawalRecordModel;
 @property (nonatomic, strong, readonly) TSMineWalletEarningModel *earningModel;
+//订单数
+@property (nonatomic, strong, readonly) TSMineOrderCountModel *orderInfo;
 
 -(void)fetchMineContentsComplete:(void(^)(BOOL isSucess))complete;
 -(void)fetchDataComplete:(void(^)(BOOL isSucess))complete;

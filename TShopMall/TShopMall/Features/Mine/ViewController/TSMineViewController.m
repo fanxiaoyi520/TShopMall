@@ -15,6 +15,7 @@
 #import "TSMineNavigationBar.h"
 #import "TSUniversalCollectionViewCell.h"
 #import "TSMineEarningsCell.h"
+#import "TSMineLeftBarView.h"
 
 #import "TSMineWalletCenterViewController.h"
 #import "TSSettingViewController.h"
@@ -33,6 +34,8 @@
 @property(nonatomic, strong) TSUserInfoView *infoView;
 /// CollectionView
 @property(nonatomic, strong) UICollectionView *collectionView;
+///左边导航view
+@property(nonatomic, strong) TSMineLeftBarView *leftBarView;
 
 /// 数据中心
 @property(nonatomic, strong) TSMineDataController *dataController;
@@ -57,7 +60,9 @@
         [self.dataController fetchDataComplete:^(BOOL isSucess) {
             __strong __typeof(weakSelf)strongSelf = weakSelf;
             if (isSucess) {
-                [self.infoView setModel:self.dataController.merchantUserInformationModel];
+                [strongSelf.infoView setModel:strongSelf.dataController.merchantUserInformationModel];
+                [strongSelf.leftBarView.userImg sd_setImageWithURL:[NSURL URLWithString:strongSelf.dataController.merchantUserInformationModel.customerImgUrl]];
+                strongSelf.leftBarView.userName.text = strongSelf.dataController.merchantUserInformationModel.customerName;
                 [strongSelf.collectionView reloadData];
             }
         }];
@@ -75,7 +80,7 @@
     
     self.bgImageView.frame = CGRectMake(0, 0, kScreenWidth, 205);
     self.collectionView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight - GK_TABBAR_HEIGHT);
-    self.infoView.frame = CGRectMake(0, 30, kScreenWidth, 60);
+    self.infoView.frame = CGRectMake(0, 30, kScreenWidth, 90);
     self.setButton.frame = CGRectMake(kScreenWidth - 48, top, 32, 32);
 }
 
@@ -83,13 +88,11 @@
     [super setupNavigationBar];
     
     self.gk_navigationBar.alpha = 0;
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithImage:KImageMake(@"mall_mine_setting") style:UIBarButtonItemStylePlain target:self action:@selector(setAction:)];
+    item.tintColor = [UIColor blackColor];
+    self.gk_navRightBarButtonItem = item;
+    self.gk_navLeftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.leftBarView];
     
-    UIButton *setButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [setButton setTitle:@"设置" forState:UIControlStateNormal];
-    [setButton setTitleColor:KTextColor forState:UIControlStateNormal];
-    setButton.titleLabel.font = KRegularFont(14);
-    [setButton addTarget:self action:@selector(setAction:) forControlEvents:UIControlEventTouchUpInside];
-    self.gk_navRightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:setButton];
 }
 
 #pragma mark - Noti
@@ -416,21 +419,30 @@ spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
         [_setButton addTarget:self action:@selector(setAction:) forControlEvents:UIControlEventTouchUpInside];
         _setButton.imageView.contentMode = UIViewContentModeCenter;
     }
+    
     return _setButton;
+}
+
+-(TSMineLeftBarView *)leftBarView{
+    if (!_leftBarView) {
+        _leftBarView = [[TSMineLeftBarView  alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth/2, 44)];
+    }
+    return _leftBarView;
 }
 
 -(UIImageView *)bgImageView{
     if (!_bgImageView) {
         _bgImageView = [[UIImageView alloc] init];
         _bgImageView.image = KImageMake(@"mall_mine_bg");
+        _bgImageView.contentMode = UIViewContentModeRedraw;
     }
     return _bgImageView;
 }
 
 -(TSUserInfoView *)infoView{
     if (!_infoView) {
-        _infoView = [[TSUserInfoView alloc] initWithRoleType:TSRoleTypePlatinum];
-        _infoView.kDelegate = self;
+        _infoView = [[TSUserInfoView alloc] init];
+        _infoView.kDelegate = self; 
     }
     return _infoView;
 }

@@ -34,6 +34,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic ,copy) NSString *ucUuid;
 @property (nonatomic ,copy) NSString *invitationCode;
 @property (nonatomic ,copy) NSString *salesmanRankName;
+@property (nonatomic ,copy) NSString *rankLevel; //分销等级
+
 @end
 
 NS_ASSUME_NONNULL_END
