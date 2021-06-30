@@ -57,7 +57,7 @@
     //冠军
     [self.championImgV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(KRateW(145));
-        make.bottom.offset(-KRateH(146));
+        make.bottom.offset(-KRateW(146));
         make.width.height.offset(KRateW(70));
     }];
     
@@ -72,7 +72,7 @@
         make.centerY.equalTo(self.championImgV.mas_top);
         make.left.equalTo(self.championImgV.mas_centerX).offset(-3);
         make.width.offset(KRateW(44));
-        make.height.offset(KRateH(42));
+        make.height.offset(KRateW(42));
     }];
     
     [self.championLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -84,7 +84,7 @@
     //亚军
     [self.secondImgV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.offset(-KRateW(47));
-        make.bottom.offset(-KRateH(123));
+        make.bottom.offset(-KRateW(123));
         make.width.height.offset(KRateW(60));
     }];
     
@@ -99,7 +99,7 @@
         make.centerY.equalTo(self.secondImgV.mas_top);
         make.left.equalTo(self.secondImgV.mas_centerX).offset(-2);
         make.width.offset(KRateW(38));
-        make.height.offset(KRateH(36));
+        make.height.offset(KRateW(36));
     }];
     
     [self.secondLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -112,7 +112,7 @@
     //季军
     [self.thirdImgV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(KRateW(33));
-        make.bottom.offset(-KRateH(91));
+        make.bottom.offset(-KRateW(91));
         make.width.height.offset(KRateW(60));
     }];
     
@@ -127,7 +127,7 @@
         make.centerY.equalTo(self.thirdImgV.mas_top);
         make.left.equalTo(self.thirdImgV.mas_centerX).offset(-2);
         make.width.offset(KRateW(38));
-        make.height.offset(KRateH(36));
+        make.height.offset(KRateW(36));
     }];
     
     [self.thirdLabel mas_makeConstraints:^(MASConstraintMaker *make) {

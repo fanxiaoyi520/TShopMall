@@ -187,7 +187,7 @@
         }
     }
     
-    NSLog(@"oneyian：%@ - %@", @(myCellModel.index), @(myCellModel.isSelected));
+//    NSLog(@"oneyian：%@ - %@", @(myCellModel.index), @(myCellModel.isSelected));
 //    self.backgroundColor = KWhiteColor;
     
     //渐变颜色
