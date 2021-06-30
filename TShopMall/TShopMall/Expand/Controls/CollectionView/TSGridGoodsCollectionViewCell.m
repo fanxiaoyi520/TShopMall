@@ -84,7 +84,6 @@
     
     self.titleLabel.text = item.name;
     self.titleLabel.backgroundColor = [UIColor clearColor];
-    self.titleLabel.layer.cornerRadius = 0;
     
     self.rmbLabel.text = @"¥";
     self.rmbLabel.backgroundColor = [UIColor clearColor];
@@ -115,10 +114,8 @@
     if (!_titleLabel) {
         _titleLabel = [UILabel new];
         _titleLabel.backgroundColor = KGrayColor;
-        _titleLabel.layer.cornerRadius = 4;
-        _titleLabel.clipsToBounds = YES;
         _titleLabel.numberOfLines = 2;
-        _titleLabel.font = KFont(PingFangSCRegular, 15.0);
+        _titleLabel.font = KRegularFont(14);
         _titleLabel.textColor = KHexColor(@"#2D3132");
     }
     return _titleLabel;
@@ -130,8 +127,6 @@
         _priceLabel.font = KFont(PingFangSCMedium, 20.0);
         _priceLabel.textColor = KHexColor(@"#E64C3D");
         _priceLabel.backgroundColor = KGrayColor;
-        _priceLabel.layer.cornerRadius = 4;
-        _priceLabel.clipsToBounds = YES;
     }
     return _priceLabel;
 }
@@ -139,12 +134,10 @@
 - (UILabel *)rmbLabel{
     if (!_rmbLabel) {
         _rmbLabel = [UILabel new];
-        _rmbLabel.font = KFont(PingFangSCRegular, 16.0);
+        _rmbLabel.font = KRegularFont(16);
         _rmbLabel.textColor = KHexColor(@"#E64C3D");
 
         _rmbLabel.backgroundColor = KGrayColor;
-        _rmbLabel.layer.cornerRadius = 4;
-        _rmbLabel.clipsToBounds = YES;
     }
     return _rmbLabel;
 }
@@ -156,8 +149,6 @@
         _getPriceLabel.textColor = KHexAlphaColor(@"333333", .6);
         
         _getPriceLabel.backgroundColor = KGrayColor;
-        _getPriceLabel.layer.cornerRadius = 4;
-        _getPriceLabel.clipsToBounds = YES;
     }
     return _getPriceLabel;
 }

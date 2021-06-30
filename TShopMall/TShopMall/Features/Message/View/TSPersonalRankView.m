@@ -106,7 +106,7 @@
         UILabel *usernameLabel = [[UILabel alloc] init];
         _usernameLabel = usernameLabel;
         _usernameLabel.text = @"JERRYJUICE";
-        _usernameLabel.font = KRegularFont(16);
+        _usernameLabel.font = KFont(PingFangSCMedium, 16);
         _usernameLabel.textColor = KTextColor;
         [self addSubview: _usernameLabel];
     }
@@ -154,7 +154,7 @@
         UILabel *salesNumLabel = [[UILabel alloc] init];
         _salesNumLabel = salesNumLabel;
         _salesNumLabel.text = @"￥89000";
-        _salesNumLabel.font = KRegularFont(12);
+        _salesNumLabel.font = KFont(PingFangSCMedium, 12);
         _salesNumLabel.textColor = KHexColor(@"#2D3132");
         [self addSubview: _salesNumLabel];
     }

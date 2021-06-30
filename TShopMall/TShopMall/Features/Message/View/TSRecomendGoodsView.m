@@ -68,7 +68,7 @@
     if (!_titleLabel) {
         _titleLabel = [UILabel new];
         _titleLabel.textColor = KBlackColor;
-        _titleLabel.font = KFont(PingFangSCRegular, 16);
+        _titleLabel.font = KRegularFont(16);
         _titleLabel.textAlignment = NSTextAlignmentCenter;
         _titleLabel.text = @"热销推荐";
     }
