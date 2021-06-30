@@ -46,6 +46,13 @@ NS_ASSUME_NONNULL_BEGIN
                     platformId:(NSString *)platformId
                    sucess:(void(^)(BOOL isHaveMobile, NSString *token))complete;
 
+-(void)fetchChangeMobileSMSCodeMobile:(NSString *)mobile
+                             complete:(void(^)(BOOL isSucess))complete;
+
+-(void)fetchChangeBindWithNewMobile:(NSString *)newMobile
+                    validCode:(NSString *)validCode
+                    complete:(void(^)(BOOL isSucess))complete;
+
 /** 获取注册登录的协议信息 */
 - (void)fetchAgreementWithCompleted: (void(^)(NSArray<TSAgreementModel *> *agreementModels))completed;
 @end

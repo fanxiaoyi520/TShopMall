@@ -175,7 +175,7 @@
     [Popover popProgressOnWindowWithText:@"提交中..."];
     [[TSServicesManager sharedInstance].userInfoService modifyUserInfoWithKey:@"nickname" value:self.nickTextField.text success:^ {
         ///发通知修改成功
-        [TSServicesManager sharedInstance].userInfoService.user.nickname = self.nickTextField.text;
+        //[TSUserInfoManager userInfo].user.nickname = self.nickTextField.text;
         [[NSNotificationCenter defaultCenter] postNotificationName:TSUserInfoModifiedNotificationName object:nil];
         [Popover popToastOnWindowWithText:@"昵称修改成功！"];
         [self.navigationController popViewControllerAnimated:YES];

@@ -61,6 +61,7 @@
 		0465170A268C57EF000829C2 /* TextViewDialogElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 046516EB268C57EF000829C2 /* TextViewDialogElement.m */; };
 		04651732268C64E2000829C2 /* UploadImageApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 04651731268C64E2000829C2 /* UploadImageApi.m */; };
 		04651735268C8C32000829C2 /* UIViewController+Plugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 04651734268C8C32000829C2 /* UIViewController+Plugin.m */; };
+		04651738268C969C000829C2 /* TSUploadImageService.m in Sources */ = {isa = PBXBuildFile; fileRef = 04651737268C969C000829C2 /* TSUploadImageService.m */; };
 		046DEA8626856ADF009CE557 /* TSAgreementView.m in Sources */ = {isa = PBXBuildFile; fileRef = 046DEA8526856ADF009CE557 /* TSAgreementView.m */; };
 		046DEA892685BD97009CE557 /* TSChangeMobileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 046DEA882685BD97009CE557 /* TSChangeMobileCell.m */; };
 		046DEA8C2685C5BA009CE557 /* TSChangeMobileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 046DEA8B2685C5BA009CE557 /* TSChangeMobileViewController.m */; };
@@ -334,6 +335,7 @@
 		DFB30007268B3ECB00FC8FF9 /* TSCategoryContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB30006268B3ECB00FC8FF9 /* TSCategoryContainerViewController.m */; };
 		DFB3000A268C430300FC8FF9 /* TSCategoryKindCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB30008268C430300FC8FF9 /* TSCategoryKindCellViewModel.m */; };
 		DFB30014268C436A00FC8FF9 /* TSCategoryKindViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB3000E268C436A00FC8FF9 /* TSCategoryKindViewModel.m */; };
+		DFB30017268C8D8100FC8FF9 /* TSChangeBindRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB30016268C8D8100FC8FF9 /* TSChangeBindRequest.m */; };
 		DFB3FFB42682E4B300FC8FF9 /* NTESQLHomePageCustomUIModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB3FFB22682E4B300FC8FF9 /* NTESQLHomePageCustomUIModel.m */; };
 		DFB3FFB82683205600FC8FF9 /* TSOneStepLoginRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB3FFB72683205600FC8FF9 /* TSOneStepLoginRequest.m */; };
 		DFB3FFC726844A0A00FC8FF9 /* WechatManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB3FFC426844A0A00FC8FF9 /* WechatManager.m */; };
@@ -701,6 +703,8 @@
 		04651731268C64E2000829C2 /* UploadImageApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadImageApi.m; sourceTree = "<group>"; };
 		04651733268C8C32000829C2 /* UIViewController+Plugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Plugin.h"; sourceTree = "<group>"; };
 		04651734268C8C32000829C2 /* UIViewController+Plugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Plugin.m"; sourceTree = "<group>"; };
+		04651736268C969C000829C2 /* TSUploadImageService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSUploadImageService.h; sourceTree = "<group>"; };
+		04651737268C969C000829C2 /* TSUploadImageService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSUploadImageService.m; sourceTree = "<group>"; };
 		046DEA8426856ADF009CE557 /* TSAgreementView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSAgreementView.h; sourceTree = "<group>"; };
 		046DEA8526856ADF009CE557 /* TSAgreementView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSAgreementView.m; sourceTree = "<group>"; };
 		046DEA872685BD96009CE557 /* TSChangeMobileCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSChangeMobileCell.h; sourceTree = "<group>"; };
@@ -1220,6 +1224,8 @@
 		DFB3000B268C433800FC8FF9 /* TSCategoryKindCellViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSCategoryKindCellViewModel.h; sourceTree = "<group>"; };
 		DFB3000E268C436A00FC8FF9 /* TSCategoryKindViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSCategoryKindViewModel.m; sourceTree = "<group>"; };
 		DFB30011268C436A00FC8FF9 /* TSCategoryKindViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSCategoryKindViewModel.h; sourceTree = "<group>"; };
+		DFB30015268C8D8100FC8FF9 /* TSChangeBindRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSChangeBindRequest.h; sourceTree = "<group>"; };
+		DFB30016268C8D8100FC8FF9 /* TSChangeBindRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSChangeBindRequest.m; sourceTree = "<group>"; };
 		DFB3FFB22682E4B300FC8FF9 /* NTESQLHomePageCustomUIModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTESQLHomePageCustomUIModel.m; sourceTree = "<group>"; };
 		DFB3FFB32682E4B300FC8FF9 /* NTESQLHomePageCustomUIModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESQLHomePageCustomUIModel.h; sourceTree = "<group>"; };
 		DFB3FFB52682E54900FC8FF9 /* NTESQPDemoDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESQPDemoDefines.h; sourceTree = "<group>"; };
@@ -2739,6 +2745,8 @@
 				DFB3FFE72685E43D00FC8FF9 /* TSBindUserByAuthCodeRequest.m */,
 				043C2353268B454A00460FDB /* TSUserInfoRequest.h */,
 				043C2354268B454A00460FDB /* TSUserInfoRequest.m */,
+				DFB30015268C8D8100FC8FF9 /* TSChangeBindRequest.h */,
+				DFB30016268C8D8100FC8FF9 /* TSChangeBindRequest.m */,
 			);
 			path = DataController;
 			sourceTree = "<group>";
@@ -3737,6 +3745,8 @@
 				DC06D6DE268761E20013633F /* TSBestSellingRecommendService.m */,
 				043C2350268B248300460FDB /* TSUserInfoService.h */,
 				043C2351268B248300460FDB /* TSUserInfoService.m */,
+				04651736268C969C000829C2 /* TSUploadImageService.h */,
+				04651737268C969C000829C2 /* TSUploadImageService.m */,
 				DFB3FFDD268571B100FC8FF9 /* AuthAppleIDManager.h */,
 				DFB3FFDE268571B100FC8FF9 /* AuthAppleIDManager.m */,
 				DFB3FFED2686E60C00FC8FF9 /* TSURLRouter.h */,
@@ -4376,6 +4386,7 @@
 				DFB3FFF326899EF300FC8FF9 /* TSTableViewBaseCell.m in Sources */,
 				04651706268C57EF000829C2 /* ButtonsDialogElement.m in Sources */,
 				CE4F6BDA26867C0E00812275 /* TSGlobalNotifyServer.m in Sources */,
+				04651738268C969C000829C2 /* TSUploadImageService.m in Sources */,
 				F530CCAF26803FCD009DC29A /* UITextField+General.m in Sources */,
 				F530CCB426803FCD009DC29A /* UIFont+Plugin.m in Sources */,
 				F55D2C3B2671E14B006BACCF /* TSUniversalDecorationView.m in Sources */,
@@ -4838,6 +4849,7 @@
 				C2A34C962674BC2E0095497E /* TSSearchHeaderView.m in Sources */,
 				C3A6C4E0267A1CAF00FC71D6 /* TSPhoneNumDataController.m in Sources */,
 				F54973762668A31000181E3F /* main.m in Sources */,
+				DFB30017268C8D8100FC8FF9 /* TSChangeBindRequest.m in Sources */,
 				046516FD268C57EF000829C2 /* ButtonsDialogModel.m in Sources */,
 				CE4F6BC826857AA400812275 /* TSUnbundlingCardViewController.m in Sources */,
 				C22EE27A26807EF000E59C86 /* TSSearchResult.m in Sources */,

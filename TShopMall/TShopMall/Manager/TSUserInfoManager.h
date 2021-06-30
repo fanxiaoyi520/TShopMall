@@ -19,8 +19,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy) NSString *userName;
 /// accountId
 @property(nonatomic, copy) NSString *accountId;
-/** 昵称  */
-@property(nonatomic, copy) NSString *nickname;
 /** 用户  */
 @property(nonatomic, strong) TSUser *user;
 /// 初始化并加载本地的用户信息
@@ -32,6 +30,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// 清除用户信息到本地
 -(void)clearUserInfo;
 
+/// 更新用户信息到本地
+-(void)updateUserInfo:(void(^)(BOOL isSuccess))success;
 @end
 
 NS_ASSUME_NONNULL_END
