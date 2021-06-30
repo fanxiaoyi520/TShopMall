@@ -97,7 +97,7 @@
                     make.width.equalTo(@(kScreenWidth-32));
                     make.height.equalTo(@(height));
                     if (self.iconButtons.count-1 == i) {
-                        make.bottom.equalTo(self.contentView);
+                        make.bottom.equalTo(self.contentView).priorityLow();
                     }
                     
                 }];
