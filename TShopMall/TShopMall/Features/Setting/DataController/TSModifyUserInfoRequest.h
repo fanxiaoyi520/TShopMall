@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TSModifyUserInfoRequest : SSBaseRequest
 
-- (instancetype)initWithAccountId:(NSString *)accountId modifyKey:(NSString *)key modifyValue:(NSString *)value;
+- (instancetype)initWithModifyKey:(NSString *)key modifyValue:(NSString *)value;
 
 @end
 

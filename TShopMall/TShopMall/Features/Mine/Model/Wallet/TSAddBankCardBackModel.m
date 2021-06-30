@@ -8,5 +8,8 @@
 #import "TSAddBankCardBackModel.h"
 
 @implementation TSAddBankCardBackModel
-
++ (NSDictionary *)modelCustomPropertyMapper {
+    return @{@"accountBankCode":@"bankCode"};
+}
 @end
+

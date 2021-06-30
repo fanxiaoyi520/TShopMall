@@ -22,6 +22,45 @@
 		043C2352268B248300460FDB /* TSUserInfoService.m in Sources */ = {isa = PBXBuildFile; fileRef = 043C2351268B248300460FDB /* TSUserInfoService.m */; };
 		043C2355268B454A00460FDB /* TSUserInfoRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 043C2354268B454A00460FDB /* TSUserInfoRequest.m */; };
 		044AAEAF26871A89000DB09F /* TSAgreementModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 044AAEAE26871A89000DB09F /* TSAgreementModel.m */; };
+		04651692268C0290000829C2 /* TSUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 04651691268C0290000829C2 /* TSUser.m */; };
+		046516A1268C5641000829C2 /* UIImage+fixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 04651696268C5641000829C2 /* UIImage+fixOrientation.m */; };
+		046516A2268C5641000829C2 /* PhotoBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 04651699268C5641000829C2 /* PhotoBrowser.m */; };
+		046516A3268C5641000829C2 /* ImageCompresser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0465169A268C5641000829C2 /* ImageCompresser.m */; };
+		046516A4268C5641000829C2 /* ImageCropper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0465169C268C5641000829C2 /* ImageCropper.m */; };
+		046516A5268C5641000829C2 /* BrowserConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 0465169F268C5641000829C2 /* BrowserConfig.m */; };
+		046516EC268C57EF000829C2 /* DialogTextTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 046516A8268C57EE000829C2 /* DialogTextTool.m */; };
+		046516ED268C57EF000829C2 /* UITextView+Dialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 046516A9268C57EE000829C2 /* UITextView+Dialog.m */; };
+		046516EE268C57EF000829C2 /* Dialog+Input.m in Sources */ = {isa = PBXBuildFile; fileRef = 046516AE268C57EE000829C2 /* Dialog+Input.m */; };
+		046516EF268C57EF000829C2 /* DialogModelEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 046516AF268C57EE000829C2 /* DialogModelEditor.m */; };
+		046516F0268C57EF000829C2 /* Dialog+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 046516B1268C57EE000829C2 /* Dialog+Common.m */; };
+		046516F1268C57EF000829C2 /* Dialog+CustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 046516B4268C57EE000829C2 /* Dialog+CustomView.m */; };
+		046516F2268C57EF000829C2 /* DialogView.m in Sources */ = {isa = PBXBuildFile; fileRef = 046516B5268C57EE000829C2 /* DialogView.m */; };
+		046516F3268C57EF000829C2 /* Dialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 046516B8268C57EE000829C2 /* Dialog.m */; };
+		046516F4268C57EF000829C2 /* Dialog+Selector.m in Sources */ = {isa = PBXBuildFile; fileRef = 046516B9268C57EE000829C2 /* Dialog+Selector.m */; };
+		046516F5268C57EF000829C2 /* Dialog+Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 046516BB268C57EE000829C2 /* Dialog+Image.m */; };
+		046516F6268C57EF000829C2 /* Dialog+SpecialColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 046516BD268C57EE000829C2 /* Dialog+SpecialColors.m */; };
+		046516F7268C57EF000829C2 /* SelectorDialogDot0.png in Resources */ = {isa = PBXBuildFile; fileRef = 046516C1268C57EE000829C2 /* SelectorDialogDot0.png */; };
+		046516F8268C57EF000829C2 /* SelectorDialogDot1.png in Resources */ = {isa = PBXBuildFile; fileRef = 046516C2268C57EE000829C2 /* SelectorDialogDot1.png */; };
+		046516F9268C57EF000829C2 /* SelectorDialogArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 046516C3268C57EF000829C2 /* SelectorDialogArrow.png */; };
+		046516FA268C57EF000829C2 /* BasicDialogElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 046516C7268C57EF000829C2 /* BasicDialogElement.m */; };
+		046516FB268C57EF000829C2 /* BasicDialogModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 046516CA268C57EF000829C2 /* BasicDialogModel.m */; };
+		046516FC268C57EF000829C2 /* DialogDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 046516CC268C57EF000829C2 /* DialogDemoViewController.m */; };
+		046516FD268C57EF000829C2 /* ButtonsDialogModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 046516D0268C57EF000829C2 /* ButtonsDialogModel.m */; };
+		046516FE268C57EF000829C2 /* TextFieldDialogModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 046516D2268C57EF000829C2 /* TextFieldDialogModel.m */; };
+		046516FF268C57EF000829C2 /* TextViewDialogModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 046516D4268C57EF000829C2 /* TextViewDialogModel.m */; };
+		04651700268C57EF000829C2 /* DialogResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 046516D8268C57EF000829C2 /* DialogResult.m */; };
+		04651701268C57EF000829C2 /* TextDialogModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 046516DA268C57EF000829C2 /* TextDialogModel.m */; };
+		04651702268C57EF000829C2 /* TextShouldChangeResModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 046516DB268C57EF000829C2 /* TextShouldChangeResModel.m */; };
+		04651703268C57EF000829C2 /* SelectorDialogModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 046516DD268C57EF000829C2 /* SelectorDialogModel.m */; };
+		04651704268C57EF000829C2 /* ImageDialogModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 046516DE268C57EF000829C2 /* ImageDialogModel.m */; };
+		04651705268C57EF000829C2 /* TextFieldDialogElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 046516E1268C57EF000829C2 /* TextFieldDialogElement.m */; };
+		04651706268C57EF000829C2 /* ButtonsDialogElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 046516E6268C57EF000829C2 /* ButtonsDialogElement.m */; };
+		04651707268C57EF000829C2 /* TextDialogElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 046516E7268C57EF000829C2 /* TextDialogElement.m */; };
+		04651708268C57EF000829C2 /* SelectorDialogElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 046516E9268C57EF000829C2 /* SelectorDialogElement.m */; };
+		04651709268C57EF000829C2 /* ImageDialogElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 046516EA268C57EF000829C2 /* ImageDialogElement.m */; };
+		0465170A268C57EF000829C2 /* TextViewDialogElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 046516EB268C57EF000829C2 /* TextViewDialogElement.m */; };
+		04651732268C64E2000829C2 /* UploadImageApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 04651731268C64E2000829C2 /* UploadImageApi.m */; };
+		04651735268C8C32000829C2 /* UIViewController+Plugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 04651734268C8C32000829C2 /* UIViewController+Plugin.m */; };
 		046DEA8626856ADF009CE557 /* TSAgreementView.m in Sources */ = {isa = PBXBuildFile; fileRef = 046DEA8526856ADF009CE557 /* TSAgreementView.m */; };
 		046DEA892685BD97009CE557 /* TSChangeMobileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 046DEA882685BD97009CE557 /* TSChangeMobileCell.m */; };
 		046DEA8C2685C5BA009CE557 /* TSChangeMobileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 046DEA8B2685C5BA009CE557 /* TSChangeMobileViewController.m */; };
@@ -234,6 +273,8 @@
 		CE5674B726833A5000252F5D /* TSWalletHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5674B626833A5000252F5D /* TSWalletHeaderView.m */; };
 		CE5674BB2683570300252F5D /* TSWalletModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5674BA2683570300252F5D /* TSWalletModel.m */; };
 		CE5C706D2689DA4100D455DB /* TSMyIncomeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5C706C2689DA4100D455DB /* TSMyIncomeModel.m */; };
+		CE6361D9268C3A2900606E02 /* TSDropDownView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6361D8268C3A2900606E02 /* TSDropDownView.m */; };
+		CE6361DC268C508400606E02 /* TSBranchCardModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6361DB268C508400606E02 /* TSBranchCardModel.m */; };
 		CE663E57268AE9570092DDCA /* TSBankCardModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE663E56268AE9570092DDCA /* TSBankCardModel.m */; };
 		CE663E5A268AF3F20092DDCA /* TSAddBankCardModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE663E59268AF3F20092DDCA /* TSAddBankCardModel.m */; };
 		CE663E5D268AFB6B0092DDCA /* UITextField+ExtendRange.m in Sources */ = {isa = PBXBuildFile; fileRef = CE663E5C268AFB6B0092DDCA /* UITextField+ExtendRange.m */; };
@@ -584,6 +625,82 @@
 		043C2354268B454A00460FDB /* TSUserInfoRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSUserInfoRequest.m; sourceTree = "<group>"; };
 		044AAEAD26871A89000DB09F /* TSAgreementModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSAgreementModel.h; sourceTree = "<group>"; };
 		044AAEAE26871A89000DB09F /* TSAgreementModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSAgreementModel.m; sourceTree = "<group>"; };
+		04651690268C0290000829C2 /* TSUser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSUser.h; sourceTree = "<group>"; };
+		04651691268C0290000829C2 /* TSUser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSUser.m; sourceTree = "<group>"; };
+		04651695268C5641000829C2 /* UIImage+fixOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+fixOrientation.h"; sourceTree = "<group>"; };
+		04651696268C5641000829C2 /* UIImage+fixOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+fixOrientation.m"; sourceTree = "<group>"; };
+		04651698268C5641000829C2 /* ImageCropper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCropper.h; sourceTree = "<group>"; };
+		04651699268C5641000829C2 /* PhotoBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoBrowser.m; sourceTree = "<group>"; };
+		0465169A268C5641000829C2 /* ImageCompresser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCompresser.m; sourceTree = "<group>"; };
+		0465169B268C5641000829C2 /* PhotoBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoBrowser.h; sourceTree = "<group>"; };
+		0465169C268C5641000829C2 /* ImageCropper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCropper.m; sourceTree = "<group>"; };
+		0465169D268C5641000829C2 /* ImageCompresser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCompresser.h; sourceTree = "<group>"; };
+		0465169F268C5641000829C2 /* BrowserConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowserConfig.m; sourceTree = "<group>"; };
+		046516A0268C5641000829C2 /* BrowserConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowserConfig.h; sourceTree = "<group>"; };
+		046516A8268C57EE000829C2 /* DialogTextTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogTextTool.m; sourceTree = "<group>"; };
+		046516A9268C57EE000829C2 /* UITextView+Dialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+Dialog.m"; sourceTree = "<group>"; };
+		046516AA268C57EE000829C2 /* DialogTextTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogTextTool.h; sourceTree = "<group>"; };
+		046516AB268C57EE000829C2 /* UITextView+Dialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+Dialog.h"; sourceTree = "<group>"; };
+		046516AD268C57EE000829C2 /* Dialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dialog.h; sourceTree = "<group>"; };
+		046516AE268C57EE000829C2 /* Dialog+Input.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Dialog+Input.m"; sourceTree = "<group>"; };
+		046516AF268C57EE000829C2 /* DialogModelEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogModelEditor.m; sourceTree = "<group>"; };
+		046516B0268C57EE000829C2 /* Dialog+Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Dialog+Image.h"; sourceTree = "<group>"; };
+		046516B1268C57EE000829C2 /* Dialog+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Dialog+Common.m"; sourceTree = "<group>"; };
+		046516B2268C57EE000829C2 /* Dialog+Selector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Dialog+Selector.h"; sourceTree = "<group>"; };
+		046516B3268C57EE000829C2 /* DialogHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogHeader.h; sourceTree = "<group>"; };
+		046516B4268C57EE000829C2 /* Dialog+CustomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Dialog+CustomView.m"; sourceTree = "<group>"; };
+		046516B5268C57EE000829C2 /* DialogView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogView.m; sourceTree = "<group>"; };
+		046516B6268C57EE000829C2 /* Dialog+SpecialColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Dialog+SpecialColors.h"; sourceTree = "<group>"; };
+		046516B7268C57EE000829C2 /* Dialog+Input.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Dialog+Input.h"; sourceTree = "<group>"; };
+		046516B8268C57EE000829C2 /* Dialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Dialog.m; sourceTree = "<group>"; };
+		046516B9268C57EE000829C2 /* Dialog+Selector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Dialog+Selector.m"; sourceTree = "<group>"; };
+		046516BA268C57EE000829C2 /* Dialog+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Dialog+Common.h"; sourceTree = "<group>"; };
+		046516BB268C57EE000829C2 /* Dialog+Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Dialog+Image.m"; sourceTree = "<group>"; };
+		046516BC268C57EE000829C2 /* DialogModelEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogModelEditor.h; sourceTree = "<group>"; };
+		046516BD268C57EE000829C2 /* Dialog+SpecialColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Dialog+SpecialColors.m"; sourceTree = "<group>"; };
+		046516BE268C57EE000829C2 /* DialogView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogView.h; sourceTree = "<group>"; };
+		046516BF268C57EE000829C2 /* Dialog+CustomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Dialog+CustomView.h"; sourceTree = "<group>"; };
+		046516C1268C57EE000829C2 /* SelectorDialogDot0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SelectorDialogDot0.png; sourceTree = "<group>"; };
+		046516C2268C57EE000829C2 /* SelectorDialogDot1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SelectorDialogDot1.png; sourceTree = "<group>"; };
+		046516C3268C57EF000829C2 /* SelectorDialogArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SelectorDialogArrow.png; sourceTree = "<group>"; };
+		046516C6268C57EF000829C2 /* BasicDialogElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicDialogElement.h; sourceTree = "<group>"; };
+		046516C7268C57EF000829C2 /* BasicDialogElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicDialogElement.m; sourceTree = "<group>"; };
+		046516C9268C57EF000829C2 /* BasicDialogModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicDialogModel.h; sourceTree = "<group>"; };
+		046516CA268C57EF000829C2 /* BasicDialogModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicDialogModel.m; sourceTree = "<group>"; };
+		046516CC268C57EF000829C2 /* DialogDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogDemoViewController.m; sourceTree = "<group>"; };
+		046516CD268C57EF000829C2 /* DialogDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogDemoViewController.h; sourceTree = "<group>"; };
+		046516CF268C57EF000829C2 /* TextDialogModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextDialogModel.h; sourceTree = "<group>"; };
+		046516D0268C57EF000829C2 /* ButtonsDialogModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonsDialogModel.m; sourceTree = "<group>"; };
+		046516D1268C57EF000829C2 /* DialogResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogResult.h; sourceTree = "<group>"; };
+		046516D2268C57EF000829C2 /* TextFieldDialogModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldDialogModel.m; sourceTree = "<group>"; };
+		046516D3268C57EF000829C2 /* SelectorDialogModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectorDialogModel.h; sourceTree = "<group>"; };
+		046516D4268C57EF000829C2 /* TextViewDialogModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextViewDialogModel.m; sourceTree = "<group>"; };
+		046516D5268C57EF000829C2 /* TextShouldChangeResModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextShouldChangeResModel.h; sourceTree = "<group>"; };
+		046516D6268C57EF000829C2 /* ImageDialogModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageDialogModel.h; sourceTree = "<group>"; };
+		046516D7268C57EF000829C2 /* TextFieldDialogModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldDialogModel.h; sourceTree = "<group>"; };
+		046516D8268C57EF000829C2 /* DialogResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogResult.m; sourceTree = "<group>"; };
+		046516D9268C57EF000829C2 /* ButtonsDialogModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonsDialogModel.h; sourceTree = "<group>"; };
+		046516DA268C57EF000829C2 /* TextDialogModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextDialogModel.m; sourceTree = "<group>"; };
+		046516DB268C57EF000829C2 /* TextShouldChangeResModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextShouldChangeResModel.m; sourceTree = "<group>"; };
+		046516DC268C57EF000829C2 /* TextViewDialogModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextViewDialogModel.h; sourceTree = "<group>"; };
+		046516DD268C57EF000829C2 /* SelectorDialogModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectorDialogModel.m; sourceTree = "<group>"; };
+		046516DE268C57EF000829C2 /* ImageDialogModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageDialogModel.m; sourceTree = "<group>"; };
+		046516E0268C57EF000829C2 /* ButtonsDialogElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonsDialogElement.h; sourceTree = "<group>"; };
+		046516E1268C57EF000829C2 /* TextFieldDialogElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldDialogElement.m; sourceTree = "<group>"; };
+		046516E2268C57EF000829C2 /* TextDialogElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextDialogElement.h; sourceTree = "<group>"; };
+		046516E3268C57EF000829C2 /* TextViewDialogElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextViewDialogElement.h; sourceTree = "<group>"; };
+		046516E4268C57EF000829C2 /* ImageDialogElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageDialogElement.h; sourceTree = "<group>"; };
+		046516E5268C57EF000829C2 /* SelectorDialogElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectorDialogElement.h; sourceTree = "<group>"; };
+		046516E6268C57EF000829C2 /* ButtonsDialogElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonsDialogElement.m; sourceTree = "<group>"; };
+		046516E7268C57EF000829C2 /* TextDialogElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextDialogElement.m; sourceTree = "<group>"; };
+		046516E8268C57EF000829C2 /* TextFieldDialogElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldDialogElement.h; sourceTree = "<group>"; };
+		046516E9268C57EF000829C2 /* SelectorDialogElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectorDialogElement.m; sourceTree = "<group>"; };
+		046516EA268C57EF000829C2 /* ImageDialogElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageDialogElement.m; sourceTree = "<group>"; };
+		046516EB268C57EF000829C2 /* TextViewDialogElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextViewDialogElement.m; sourceTree = "<group>"; };
+		04651730268C64E2000829C2 /* UploadImageApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadImageApi.h; sourceTree = "<group>"; };
+		04651731268C64E2000829C2 /* UploadImageApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadImageApi.m; sourceTree = "<group>"; };
+		04651733268C8C32000829C2 /* UIViewController+Plugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Plugin.h"; sourceTree = "<group>"; };
+		04651734268C8C32000829C2 /* UIViewController+Plugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Plugin.m"; sourceTree = "<group>"; };
 		046DEA8426856ADF009CE557 /* TSAgreementView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSAgreementView.h; sourceTree = "<group>"; };
 		046DEA8526856ADF009CE557 /* TSAgreementView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSAgreementView.m; sourceTree = "<group>"; };
 		046DEA872685BD96009CE557 /* TSChangeMobileCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSChangeMobileCell.h; sourceTree = "<group>"; };
@@ -978,6 +1095,10 @@
 		CE5674BA2683570300252F5D /* TSWalletModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSWalletModel.m; sourceTree = "<group>"; };
 		CE5C706B2689DA4100D455DB /* TSMyIncomeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSMyIncomeModel.h; sourceTree = "<group>"; };
 		CE5C706C2689DA4100D455DB /* TSMyIncomeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSMyIncomeModel.m; sourceTree = "<group>"; };
+		CE6361D7268C3A2900606E02 /* TSDropDownView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSDropDownView.h; sourceTree = "<group>"; };
+		CE6361D8268C3A2900606E02 /* TSDropDownView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSDropDownView.m; sourceTree = "<group>"; };
+		CE6361DA268C508400606E02 /* TSBranchCardModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSBranchCardModel.h; sourceTree = "<group>"; };
+		CE6361DB268C508400606E02 /* TSBranchCardModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSBranchCardModel.m; sourceTree = "<group>"; };
 		CE663E55268AE9570092DDCA /* TSBankCardModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSBankCardModel.h; sourceTree = "<group>"; };
 		CE663E56268AE9570092DDCA /* TSBankCardModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSBankCardModel.m; sourceTree = "<group>"; };
 		CE663E58268AF3F20092DDCA /* TSAddBankCardModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSAddBankCardModel.h; sourceTree = "<group>"; };
@@ -1600,6 +1721,186 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04651693268C5641000829C2 /* PhotoBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				04651694268C5641000829C2 /* Tools */,
+				04651697268C5641000829C2 /* Core */,
+				0465169E268C5641000829C2 /* Models */,
+			);
+			path = PhotoBrowser;
+			sourceTree = "<group>";
+		};
+		04651694268C5641000829C2 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				04651695268C5641000829C2 /* UIImage+fixOrientation.h */,
+				04651696268C5641000829C2 /* UIImage+fixOrientation.m */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
+		04651697268C5641000829C2 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				0465169D268C5641000829C2 /* ImageCompresser.h */,
+				0465169A268C5641000829C2 /* ImageCompresser.m */,
+				04651698268C5641000829C2 /* ImageCropper.h */,
+				0465169C268C5641000829C2 /* ImageCropper.m */,
+				0465169B268C5641000829C2 /* PhotoBrowser.h */,
+				04651699268C5641000829C2 /* PhotoBrowser.m */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		0465169E268C5641000829C2 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				0465169F268C5641000829C2 /* BrowserConfig.m */,
+				046516A0268C5641000829C2 /* BrowserConfig.h */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		046516A6268C57EE000829C2 /* DialogView */ = {
+			isa = PBXGroup;
+			children = (
+				046516A7268C57EE000829C2 /* Tools */,
+				046516AC268C57EE000829C2 /* Core */,
+				046516C0268C57EE000829C2 /* Resources */,
+				046516C4268C57EF000829C2 /* Basic */,
+				046516CB268C57EF000829C2 /* DemoFiles */,
+				046516CE268C57EF000829C2 /* Models */,
+				046516DF268C57EF000829C2 /* Elements */,
+			);
+			path = DialogView;
+			sourceTree = "<group>";
+		};
+		046516A7268C57EE000829C2 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				046516A8268C57EE000829C2 /* DialogTextTool.m */,
+				046516A9268C57EE000829C2 /* UITextView+Dialog.m */,
+				046516AA268C57EE000829C2 /* DialogTextTool.h */,
+				046516AB268C57EE000829C2 /* UITextView+Dialog.h */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
+		046516AC268C57EE000829C2 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				046516AD268C57EE000829C2 /* Dialog.h */,
+				046516AE268C57EE000829C2 /* Dialog+Input.m */,
+				046516AF268C57EE000829C2 /* DialogModelEditor.m */,
+				046516B0268C57EE000829C2 /* Dialog+Image.h */,
+				046516B1268C57EE000829C2 /* Dialog+Common.m */,
+				046516B2268C57EE000829C2 /* Dialog+Selector.h */,
+				046516B3268C57EE000829C2 /* DialogHeader.h */,
+				046516B4268C57EE000829C2 /* Dialog+CustomView.m */,
+				046516B5268C57EE000829C2 /* DialogView.m */,
+				046516B6268C57EE000829C2 /* Dialog+SpecialColors.h */,
+				046516B7268C57EE000829C2 /* Dialog+Input.h */,
+				046516B8268C57EE000829C2 /* Dialog.m */,
+				046516B9268C57EE000829C2 /* Dialog+Selector.m */,
+				046516BA268C57EE000829C2 /* Dialog+Common.h */,
+				046516BB268C57EE000829C2 /* Dialog+Image.m */,
+				046516BC268C57EE000829C2 /* DialogModelEditor.h */,
+				046516BD268C57EE000829C2 /* Dialog+SpecialColors.m */,
+				046516BE268C57EE000829C2 /* DialogView.h */,
+				046516BF268C57EE000829C2 /* Dialog+CustomView.h */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		046516C0268C57EE000829C2 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				046516C1268C57EE000829C2 /* SelectorDialogDot0.png */,
+				046516C2268C57EE000829C2 /* SelectorDialogDot1.png */,
+				046516C3268C57EF000829C2 /* SelectorDialogArrow.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		046516C4268C57EF000829C2 /* Basic */ = {
+			isa = PBXGroup;
+			children = (
+				046516C5268C57EF000829C2 /* Element */,
+				046516C8268C57EF000829C2 /* Models */,
+			);
+			path = Basic;
+			sourceTree = "<group>";
+		};
+		046516C5268C57EF000829C2 /* Element */ = {
+			isa = PBXGroup;
+			children = (
+				046516C6268C57EF000829C2 /* BasicDialogElement.h */,
+				046516C7268C57EF000829C2 /* BasicDialogElement.m */,
+			);
+			path = Element;
+			sourceTree = "<group>";
+		};
+		046516C8268C57EF000829C2 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				046516C9268C57EF000829C2 /* BasicDialogModel.h */,
+				046516CA268C57EF000829C2 /* BasicDialogModel.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		046516CB268C57EF000829C2 /* DemoFiles */ = {
+			isa = PBXGroup;
+			children = (
+				046516CC268C57EF000829C2 /* DialogDemoViewController.m */,
+				046516CD268C57EF000829C2 /* DialogDemoViewController.h */,
+			);
+			path = DemoFiles;
+			sourceTree = "<group>";
+		};
+		046516CE268C57EF000829C2 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				046516CF268C57EF000829C2 /* TextDialogModel.h */,
+				046516D0268C57EF000829C2 /* ButtonsDialogModel.m */,
+				046516D1268C57EF000829C2 /* DialogResult.h */,
+				046516D2268C57EF000829C2 /* TextFieldDialogModel.m */,
+				046516D3268C57EF000829C2 /* SelectorDialogModel.h */,
+				046516D4268C57EF000829C2 /* TextViewDialogModel.m */,
+				046516D5268C57EF000829C2 /* TextShouldChangeResModel.h */,
+				046516D6268C57EF000829C2 /* ImageDialogModel.h */,
+				046516D7268C57EF000829C2 /* TextFieldDialogModel.h */,
+				046516D8268C57EF000829C2 /* DialogResult.m */,
+				046516D9268C57EF000829C2 /* ButtonsDialogModel.h */,
+				046516DA268C57EF000829C2 /* TextDialogModel.m */,
+				046516DB268C57EF000829C2 /* TextShouldChangeResModel.m */,
+				046516DC268C57EF000829C2 /* TextViewDialogModel.h */,
+				046516DD268C57EF000829C2 /* SelectorDialogModel.m */,
+				046516DE268C57EF000829C2 /* ImageDialogModel.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		046516DF268C57EF000829C2 /* Elements */ = {
+			isa = PBXGroup;
+			children = (
+				046516E0268C57EF000829C2 /* ButtonsDialogElement.h */,
+				046516E1268C57EF000829C2 /* TextFieldDialogElement.m */,
+				046516E2268C57EF000829C2 /* TextDialogElement.h */,
+				046516E3268C57EF000829C2 /* TextViewDialogElement.h */,
+				046516E4268C57EF000829C2 /* ImageDialogElement.h */,
+				046516E5268C57EF000829C2 /* SelectorDialogElement.h */,
+				046516E6268C57EF000829C2 /* ButtonsDialogElement.m */,
+				046516E7268C57EF000829C2 /* TextDialogElement.m */,
+				046516E8268C57EF000829C2 /* TextFieldDialogElement.h */,
+				046516E9268C57EF000829C2 /* SelectorDialogElement.m */,
+				046516EA268C57EF000829C2 /* ImageDialogElement.m */,
+				046516EB268C57EF000829C2 /* TextViewDialogElement.m */,
+			);
+			path = Elements;
+			sourceTree = "<group>";
+		};
 		04DAFAF6267B36A50098275A /* OrderManage */ = {
 			isa = PBXGroup;
 			children = (
@@ -2223,6 +2524,8 @@
 		CE5674B426833A0E00252F5D /* Wallet */ = {
 			isa = PBXGroup;
 			children = (
+				CE6361D7268C3A2900606E02 /* TSDropDownView.h */,
+				CE6361D8268C3A2900606E02 /* TSDropDownView.m */,
 				CE66DB02268490BB00E8D433 /* TSWalletCenterView.h */,
 				CE66DB03268490BB00E8D433 /* TSWalletCenterView.m */,
 				CE5674B526833A5000252F5D /* TSWalletHeaderView.h */,
@@ -2254,6 +2557,8 @@
 				CE663E59268AF3F20092DDCA /* TSAddBankCardModel.m */,
 				CE663E5E268AFD620092DDCA /* TSAddBankCardBackModel.h */,
 				CE663E5F268AFD620092DDCA /* TSAddBankCardBackModel.m */,
+				CE6361DA268C508400606E02 /* TSBranchCardModel.h */,
+				CE6361DB268C508400606E02 /* TSBranchCardModel.m */,
 			);
 			path = Wallet;
 			sourceTree = "<group>";
@@ -2547,6 +2852,8 @@
 		F530CC6C26803FCD009DC29A /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
+				04651733268C8C32000829C2 /* UIViewController+Plugin.h */,
+				04651734268C8C32000829C2 /* UIViewController+Plugin.m */,
 				F530CC7326803FCD009DC29A /* UIAlertController+Color.h */,
 				F530CC8A26803FCD009DC29A /* UIAlertController+Color.m */,
 				F530CC9626803FCD009DC29A /* UIBarButtonItem+Additions.h */,
@@ -2912,6 +3219,8 @@
 		F54973162668A22100181E3F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				046516A6268C57EE000829C2 /* DialogView */,
+				04651693268C5641000829C2 /* PhotoBrowser */,
 				DFB3FFFA268AB6D400FC8FF9 /* JsonCacheData */,
 				F530CE8726846B1E009DC29A /* AlertView */,
 				F530CD1726809B62009DC29A /* MaskPopups */,
@@ -2944,6 +3253,8 @@
 				F54973422668A22100181E3F /* SSResponseModel.m */,
 				F54973442668A22100181E3F /* SSBaseRequest.h */,
 				F54973412668A22100181E3F /* SSBaseRequest.m */,
+				04651730268C64E2000829C2 /* UploadImageApi.h */,
+				04651731268C64E2000829C2 /* UploadImageApi.m */,
 				F54973452668A22100181E3F /* SSGenaralRequest.h */,
 				F54973402668A22100181E3F /* SSGenaralRequest.m */,
 			);
@@ -3430,6 +3741,8 @@
 				DFB3FFDE268571B100FC8FF9 /* AuthAppleIDManager.m */,
 				DFB3FFED2686E60C00FC8FF9 /* TSURLRouter.h */,
 				DFB3FFEE2686E60C00FC8FF9 /* TSURLRouter.m */,
+				04651690268C0290000829C2 /* TSUser.h */,
+				04651691268C0290000829C2 /* TSUser.m */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -3894,12 +4207,14 @@
 				F530CC4A26803B1C009DC29A /* PulldownRefreshStyleRed.json in Resources */,
 				F530CD5926819449009DC29A /* mall_logo@3x.png in Resources */,
 				F530CD402680CD6A009DC29A /* tabbar_home.json in Resources */,
+				046516F9268C57EF000829C2 /* SelectorDialogArrow.png in Resources */,
 				F530CC4726803B1C009DC29A /* PulldownRefreshStyleWhite.json in Resources */,
 				F530CCF226804167009DC29A /* TXKJSBridge.js in Resources */,
 				F530CD382680CCC5009DC29A /* launch.png in Resources */,
 				F530CC6A26803E43009DC29A /* ProgressAnimation.json in Resources */,
 				F530CD5A26819449009DC29A /* mall_launch_bottom.png in Resources */,
 				F530CC6826803E43009DC29A /* Toast_Success.png in Resources */,
+				046516F8268C57EF000829C2 /* SelectorDialogDot1.png in Resources */,
 				F530CD372680CCC5009DC29A /* launch@3x.png in Resources */,
 				F54973752668A31000181E3F /* Main.storyboard in Resources */,
 				F530CD5D26819449009DC29A /* mall_logo.png in Resources */,
@@ -3909,6 +4224,7 @@
 				F530CD6026819449009DC29A /* mall_logo@2x.png in Resources */,
 				F54973742668A31000181E3F /* LaunchScreen.storyboard in Resources */,
 				F530CC6926803E43009DC29A /* Toast_Failure.png in Resources */,
+				046516F7268C57EF000829C2 /* SelectorDialogDot0.png in Resources */,
 				F530CD422680CD6A009DC29A /* tabbar_mine.json in Resources */,
 				F530CD432680CD6A009DC29A /* tabbar_cart.json in Resources */,
 				F530CD3F2680CD6A009DC29A /* tabbar_rank.json in Resources */,
@@ -4056,7 +4372,9 @@
 				C2EF88C12670997100E7374A /* TSCartCell.m in Sources */,
 				F55D2C3A2671E14B006BACCF /* TSUniversalFooterView.m in Sources */,
 				CE4F6BDE268708E700812275 /* TSScoreViewController.m in Sources */,
+				0465170A268C57EF000829C2 /* TextViewDialogElement.m in Sources */,
 				DFB3FFF326899EF300FC8FF9 /* TSTableViewBaseCell.m in Sources */,
+				04651706268C57EF000829C2 /* ButtonsDialogElement.m in Sources */,
 				CE4F6BDA26867C0E00812275 /* TSGlobalNotifyServer.m in Sources */,
 				F530CCAF26803FCD009DC29A /* UITextField+General.m in Sources */,
 				F530CCB426803FCD009DC29A /* UIFont+Plugin.m in Sources */,
@@ -4074,15 +4392,18 @@
 				F530CEB9268AB515009DC29A /* TSLocationInfoModel.m in Sources */,
 				F55D2D38267B3F38006BACCF /* TSRankCell.m in Sources */,
 				04F1EFBC2682E33600FF007D /* TSRealNameAuthDataController.m in Sources */,
+				046516F1268C57EF000829C2 /* Dialog+CustomView.m in Sources */,
 				F54973632668A22100181E3F /* YTKAnimatingRequestAccessory.m in Sources */,
 				04F1EFB92682DF8900FF007D /* TSRealNameAuthSectionModel.m in Sources */,
 				046DEA8626856ADF009CE557 /* TSAgreementView.m in Sources */,
 				F56D4B4C266DFB8900C1AD9E /* FMLayoutCrossCell.m in Sources */,
 				DC9911C2267C475000EF9B26 /* UIScrollView+YBNestViews.m in Sources */,
 				C25A7F8526845FB20006C6AF /* TSBalanceModel.m in Sources */,
+				04651708268C57EF000829C2 /* SelectorDialogElement.m in Sources */,
 				DFB3FFE22685B76200FC8FF9 /* TSLoginByTokenRequest.m in Sources */,
 				CE663E5A268AF3F20092DDCA /* TSAddBankCardModel.m in Sources */,
 				DC9911C6267C475000EF9B26 /* YBNestCollectionView.m in Sources */,
+				046516F5268C57EF000829C2 /* Dialog+Image.m in Sources */,
 				F56D4B3A266DFB8900C1AD9E /* FMLayoutBaseSection.m in Sources */,
 				C2EF88BB2670997100E7374A /* TSCartHeaderFooterView.m in Sources */,
 				DFB3FFF62689A7AE00FC8FF9 /* TSRankRecommendCell.m in Sources */,
@@ -4130,7 +4451,9 @@
 				043C234C268AB9BB00460FDB /* TSClearButton.m in Sources */,
 				F530CCF126804167009DC29A /* TSWKWebView.m in Sources */,
 				C3A6C4E3267A1CAF00FC71D6 /* TSSecurityDataController.m in Sources */,
+				04651701268C57EF000829C2 /* TextDialogModel.m in Sources */,
 				F530CD642681E11C009DC29A /* TSDetailShareView.m in Sources */,
+				046516FE268C57EF000829C2 /* TextFieldDialogModel.m in Sources */,
 				F55D2CB32674AE55006BACCF /* TSCategoryContentModel.m in Sources */,
 				F55D2CCA26784ACD006BACCF /* TSMineTitleHeaderView.m in Sources */,
 				046DEA892685BD97009CE557 /* TSChangeMobileCell.m in Sources */,
@@ -4142,6 +4465,7 @@
 				C3B4CCEE2674934E0001EE75 /* TSLoginBottomView.m in Sources */,
 				C3A6C4C7267A1C5700FC71D6 /* TSSettingUserCell.m in Sources */,
 				F54973B72668BBEE00181E3F /* TSCartViewController.m in Sources */,
+				046516EE268C57EF000829C2 /* Dialog+Input.m in Sources */,
 				F56D4B4D266DFB8900C1AD9E /* FMTeslaLayoutView.m in Sources */,
 				DC06D6E3268810C20013633F /* TSRecomendGoodsView.m in Sources */,
 				F530CCAC26803FCD009DC29A /* UIButton+Badge.m in Sources */,
@@ -4149,6 +4473,7 @@
 				F56D4B4E266DFB8900C1AD9E /* FMKVOArrayObject.m in Sources */,
 				F530CCEF26804167009DC29A /* UIProgressView+TSWKWebView.m in Sources */,
 				C24A69C12689A91A0022A81F /* TSPayDataController.m in Sources */,
+				046516FF268C57EF000829C2 /* TextViewDialogModel.m in Sources */,
 				F54973D62668DBF500181E3F /* TSGeneralSearchButton.m in Sources */,
 				C2A34C9C26759DD00095497E /* TSSearchRecomendCell.m in Sources */,
 				F54973C82668C1D600181E3F /* TSNotificationConst.m in Sources */,
@@ -4172,6 +4497,7 @@
 				F530CCA526803FCD009DC29A /* UILabel+Plugin.m in Sources */,
 				F55D2CE926788E27006BACCF /* TSDetailFunctionButton.m in Sources */,
 				F530CCEC26804167009DC29A /* TSWebImageAutoSizeCache.m in Sources */,
+				046516FB268C57EF000829C2 /* BasicDialogModel.m in Sources */,
 				F55D2CCD26784ACD006BACCF /* TSMineAdsCell.m in Sources */,
 				F5686B05267F8F400023DAA6 /* WMDragView.m in Sources */,
 				F530CCA126803FCD009DC29A /* UIDevice+Additions.m in Sources */,
@@ -4193,6 +4519,7 @@
 				C3B4CCF12674934E0001EE75 /* TSQuickLoginTopView.m in Sources */,
 				C35F1870267D963100F65AF9 /* TSAccountCancelConfirmViewController.m in Sources */,
 				C3A6C4C5267A1C5700FC71D6 /* TSBindThirdAppCell.m in Sources */,
+				CE6361D9268C3A2900606E02 /* TSDropDownView.m in Sources */,
 				F54973CB2668C27300181E3F /* TSH5InterfacedConst.m in Sources */,
 				041131D7268096F6000B5BAF /* TSGoodsShowCell.m in Sources */,
 				DC9911C9267C8B0E00EF9B26 /* TSHomePageLoginBarView.m in Sources */,
@@ -4224,9 +4551,11 @@
 				F55D2CC826784ACD006BACCF /* TSMineImageTextCell.m in Sources */,
 				F55D2CE326788370006BACCF /* TSProductDetailNavigationBar.m in Sources */,
 				CE66DB0A2684AA7C00E8D433 /* TSBankCardCell.m in Sources */,
+				046516A5268C5641000829C2 /* BrowserConfig.m in Sources */,
 				F55D2C362671E14B006BACCF /* TSUniversalHeaderView.m in Sources */,
 				F54973672668A22100181E3F /* SSNetworkAlertUtil.m in Sources */,
 				04F1EFB62682DF1000FF007D /* TSRealNameAuthViewController.m in Sources */,
+				046516EC268C57EF000829C2 /* DialogTextTool.m in Sources */,
 				DC3440CD2672604400F5B0DA /* TSCategoryGroupViewModel.m in Sources */,
 				F530CCFA26804167009DC29A /* TSWKAppManager.m in Sources */,
 				F549739B2668AA7900181E3F /* TSBaseViewController.m in Sources */,
@@ -4235,6 +4564,7 @@
 				CE66DB04268490BB00E8D433 /* TSWalletCenterView.m in Sources */,
 				C3B4CCE02674932D0001EE75 /* TSRegiterViewController.m in Sources */,
 				F55D2AD9266F777B006BACCF /* TSBaseDataController.m in Sources */,
+				046516F2268C57EF000829C2 /* DialogView.m in Sources */,
 				04DAFAFE267B37450098275A /* TSOrderManageViewController.m in Sources */,
 				C3B4CCDA2674930C0001EE75 /* TSTools.m in Sources */,
 				F55D2CCB26784ACD006BACCF /* TSMinePartnerCenterCell.m in Sources */,
@@ -4249,6 +4579,8 @@
 				C24A69B82689669B0022A81F /* TSPayChannelItem.m in Sources */,
 				F56D4B44266DFB8900C1AD9E /* FMCollectionLayoutAttributes.m in Sources */,
 				DFB3FFFD268AB6EF00FC8FF9 /* TSJsonCacheData.m in Sources */,
+				046516F0268C57EF000829C2 /* Dialog+Common.m in Sources */,
+				046516A1268C5641000829C2 /* UIImage+fixOrientation.m in Sources */,
 				041131CF268096CB000B5BAF /* TSHotDataController.m in Sources */,
 				DC3440C72672600600F5B0DA /* TSHomePageCategoryViewModel.m in Sources */,
 				CE4F6BD126859ED300812275 /* TSAddBankCardCell.m in Sources */,
@@ -4256,6 +4588,7 @@
 				F55D2ACD266F5C95006BACCF /* TSHomePageReleaseCell.m in Sources */,
 				C3A6C4E9267A1CAF00FC71D6 /* TSBindThirdDataController.m in Sources */,
 				F530CC6426803E43009DC29A /* Popover.m in Sources */,
+				04651703268C57EF000829C2 /* SelectorDialogModel.m in Sources */,
 				65F71270268C1D7C002A1ECC /* TSMineLeftBarView.m in Sources */,
 				F54973BF2668C01F00181E3F /* TSTipsConst.m in Sources */,
 				C2EF88B22670997100E7374A /* TSCartViewModel.m in Sources */,
@@ -4268,15 +4601,19 @@
 				70EBC07E268C3F0B009D735B /* TSPersonalRankView.m in Sources */,
 				F530CCF626804167009DC29A /* WKWebView+TSSyncUserAgent.m in Sources */,
 				C3A6C491267A1C1700FC71D6 /* TSAccountCancelSectionModel.m in Sources */,
+				046516FA268C57EF000829C2 /* BasicDialogElement.m in Sources */,
 				F530CC9F26803FCD009DC29A /* UIBarButtonItem+Additions.m in Sources */,
 				F55D2C392671E14B006BACCF /* TSCollectionViewLeftAlignedLayout.m in Sources */,
+				04651705268C57EF000829C2 /* TextFieldDialogElement.m in Sources */,
 				C25A7F91268480FD0006C6AF /* TSMakeOrderInvoiceViewModel.m in Sources */,
+				046516F4268C57EF000829C2 /* Dialog+Selector.m in Sources */,
 				C2F0573526857B20003D1B2A /* TSAddressSmartDataController.m in Sources */,
 				C25AD830268AB839000D2258 /* TSSearchResultController.m in Sources */,
 				F530CC9D26803FCD009DC29A /* UIColor+General.m in Sources */,
 				F56D4B47266DFB8900C1AD9E /* FMLayoutBackground.m in Sources */,
 				F530CCEA26804167009DC29A /* UITableView+TSWebImageAutoSize.m in Sources */,
 				C3A6C477267A1BEA00FC71D6 /* TSAboutMeViewController.m in Sources */,
+				04651704268C57EF000829C2 /* ImageDialogModel.m in Sources */,
 				C3A6C476267A1BEA00FC71D6 /* TSChangePictureViewController.m in Sources */,
 				F530CD2D2680B912009DC29A /* TSProductCollectionViewCell.m in Sources */,
 				F56D4B49266DFB8900C1AD9E /* FMSupplementary.m in Sources */,
@@ -4288,6 +4625,7 @@
 				C3A6C4DF267A1CAF00FC71D6 /* TSSecurityCenterDataController.m in Sources */,
 				044AAEAF26871A89000DB09F /* TSAgreementModel.m in Sources */,
 				C25A7F8226841B1F0006C6AF /* TSAddressViewModel.m in Sources */,
+				04651709268C57EF000829C2 /* ImageDialogElement.m in Sources */,
 				F55D2CD626785249006BACCF /* TSMineMoreButton.m in Sources */,
 				C2F057452685D4D7003D1B2A /* TSSearchEmptyCell.m in Sources */,
 				F530CD1A26809B62009DC29A /* SnailQuickMaskPopups.m in Sources */,
@@ -4303,6 +4641,7 @@
 				F56D4B3B266DFB8900C1AD9E /* FMLayoutCombineSection.m in Sources */,
 				DC9911A3267AE40100EF9B26 /* TSLinkDataModel.m in Sources */,
 				C3A6C4BE267A1C5700FC71D6 /* TSAccountCancelContentCell.m in Sources */,
+				046516F6268C57EF000829C2 /* Dialog+SpecialColors.m in Sources */,
 				DC9911C4267C475000EF9B26 /* YBNestTableView.m in Sources */,
 				DFB3FFE52685C19700FC8FF9 /* TSLoginByAuthCodeRequest.m in Sources */,
 				C3A6C472267A1BEA00FC71D6 /* TSPhoneNumVeriViewController.m in Sources */,
@@ -4316,6 +4655,7 @@
 				F55D2CC726784ACD006BACCF /* TSMineOrderHeaderView.m in Sources */,
 				F55D2D0B2679DB2C006BACCF /* TSGoodDetailImageCell.m in Sources */,
 				CE5674AE26831F0400252F5D /* TSMineMerchantUserInformationModel.m in Sources */,
+				04651702268C57EF000829C2 /* TextShouldChangeResModel.m in Sources */,
 				F530CCEB26804167009DC29A /* UICollectionView+TSWebImageAutoSize.m in Sources */,
 				F530CC3D26803862009DC29A /* NSString+Time.m in Sources */,
 				C3A6C4C4267A1C5700FC71D6 /* TSPhoneNumVeriCell.m in Sources */,
@@ -4325,8 +4665,10 @@
 				F54973B12668BBB200181E3F /* TSCategoryViewController.m in Sources */,
 				C24A69CD2689C42A0022A81F /* TSPaySuccessView.m in Sources */,
 				F55D2D2A267B3B26006BACCF /* TSRankHonourCell.m in Sources */,
+				04651700268C57EF000829C2 /* DialogResult.m in Sources */,
 				C3A6C4C8267A1C5700FC71D6 /* TSAccountCancelBottomCell.m in Sources */,
 				F530CCB226803FCD009DC29A /* UIView+Plugin.m in Sources */,
+				046516A2268C5641000829C2 /* PhotoBrowser.m in Sources */,
 				C2C7653C2679E6FA004757B9 /* TSMakeOrderCommitView.m in Sources */,
 				65F71273268C4154002A1ECC /* TSMineOrderCountModel.m in Sources */,
 				C2C765362679E2DA004757B9 /* TSMakeOrderController.m in Sources */,
@@ -4345,6 +4687,7 @@
 				CE4F6BCB268586BF00812275 /* TSOperationBankTipsViewController.m in Sources */,
 				042F42402681FDFE00555F5D /* TSRealNameInfoCell.m in Sources */,
 				C3A6C48F267A1C1700FC71D6 /* TSSettingSectionModel.m in Sources */,
+				04651692268C0290000829C2 /* TSUser.m in Sources */,
 				CE4F6BCE26859D2600812275 /* TSAddCardViewController.m in Sources */,
 				F530CCB326803FCD009DC29A /* UIImage+TSColor.m in Sources */,
 				F55D2C792672F4E2006BACCF /* TSMineDataController.m in Sources */,
@@ -4358,6 +4701,7 @@
 				C3A6C473267A1BEA00FC71D6 /* TSPersonalViewController.m in Sources */,
 				F55D2AEA266F9CEC006BACCF /* TSUniverseBackgroundHeaderView.m in Sources */,
 				DC3440B226720E4C00F5B0DA /* TSGridButtonCollectionView.m in Sources */,
+				046516FC268C57EF000829C2 /* DialogDemoViewController.m in Sources */,
 				04F852122689BA4C00B59910 /* TSFirstEnterAgreementView.m in Sources */,
 				F530CC3C26803862009DC29A /* NSTimer+TSBlcokTimer.m in Sources */,
 				C35F1867267C7F8A00F65AF9 /* TSSexSelectingView.m in Sources */,
@@ -4377,6 +4721,7 @@
 				F55D2D2E267B3CF4006BACCF /* TSRankDataController.m in Sources */,
 				C2C765392679E3C4004757B9 /* TSMakeOrderView.m in Sources */,
 				C25A7F792682C7140006C6AF /* TSSearchResultEmptyCell.m in Sources */,
+				046516EF268C57EF000829C2 /* DialogModelEditor.m in Sources */,
 				DFB30007268B3ECB00FC8FF9 /* TSCategoryContainerViewController.m in Sources */,
 				C21A4B96267CA25200766F72 /* TSAreaDataController.m in Sources */,
 				C3A6C4E6267A1CAF00FC71D6 /* TSWithdrawalPswSetDataController.m in Sources */,
@@ -4392,12 +4737,14 @@
 				C3A6C4BB267A1C5700FC71D6 /* TSWithdrawalPswSettingCell.m in Sources */,
 				F55D2C6426722807006BACCF /* TSCategoryKindCell.m in Sources */,
 				C22EE270268079F700E59C86 /* TSSearchResultDataController.m in Sources */,
+				046516A4268C5641000829C2 /* ImageCropper.m in Sources */,
 				C21A4B93267C7E1000766F72 /* TSAreaCard.m in Sources */,
 				C3B4CCEF2674934E0001EE75 /* TSLoginTopView.m in Sources */,
 				F530CD4E26819012009DC29A /* TSChangePriceView.m in Sources */,
 				F530CCF526804167009DC29A /* WKWebView+TSClearWebCache.m in Sources */,
 				F55D2CC626784ACD006BACCF /* TSMineSectionModel.m in Sources */,
 				F530CC6526803E43009DC29A /* Toasty.m in Sources */,
+				046516ED268C57EF000829C2 /* UITextView+Dialog.m in Sources */,
 				C24A69D62689D73A0022A81F /* TSPaySuccessRecomendCell.m in Sources */,
 				C3A6C4E2267A1CAF00FC71D6 /* TSBindMobileDataController.m in Sources */,
 				C25AD833268B13AC000D2258 /* TSInvoiceModel.m in Sources */,
@@ -4419,6 +4766,7 @@
 				F530CCAA26803FCD009DC29A /* UIFont+General.m in Sources */,
 				F549739E2668AABD00181E3F /* TSInterfacedConst.m in Sources */,
 				DFB3FFB42682E4B300FC8FF9 /* NTESQLHomePageCustomUIModel.m in Sources */,
+				04651735268C8C32000829C2 /* UIViewController+Plugin.m in Sources */,
 				F55D2AD0266F5F53006BACCF /* TSHomePageBannerCell.m in Sources */,
 				C3A6C478267A1BEA00FC71D6 /* TSSecurityViewController.m in Sources */,
 				70EBC074268C0DC0009D735B /* UIView+AZGradient.m in Sources */,
@@ -4434,6 +4782,7 @@
 				F56D4B66266E053800C1AD9E /* AppDelegate+Initialize.m in Sources */,
 				F530CD302680BB57009DC29A /* TSProductFooterView.m in Sources */,
 				043C2355268B454A00460FDB /* TSUserInfoRequest.m in Sources */,
+				046516F3268C57EF000829C2 /* Dialog.m in Sources */,
 				F55D2C3C2671E14B006BACCF /* TSUniversalSectionModel.m in Sources */,
 				F530CCF826804167009DC29A /* WKWebView+TSExternalNavigationDelegates.m in Sources */,
 				F530CCFF26806BDD009DC29A /* TSSaveLocalConst.m in Sources */,
@@ -4471,12 +4820,15 @@
 				C3A6C474267A1BEA00FC71D6 /* TSSecurCenterViewController.m in Sources */,
 				F56D4B45266DFB8900C1AD9E /* FMLayoutFooter.m in Sources */,
 				CE4F6BEE2688544A00812275 /* TSInviteFriendsHeader.m in Sources */,
+				04651732268C64E2000829C2 /* UploadImageApi.m in Sources */,
 				70EBC084268C5F52009D735B /* TSRecommendMaxPriceView.m in Sources */,
 				DC3440BE267238F600F5B0DA /* TSHomePageCellViewModel.m in Sources */,
 				F55D2CFF2678CFFA006BACCF /* TSGoodDetailCopyWriterCell.m in Sources */,
+				CE6361DC268C508400606E02 /* TSBranchCardModel.m in Sources */,
 				DC3440C1267239CD00F5B0DA /* TSHomePageCellTemplateModel.m in Sources */,
 				F55D2CF92678CDA0006BACCF /* TSGoodDetailIntroduceCell.m in Sources */,
 				F55D2AE6266F983E006BACCF /* TSUniverseCollectionBackgroundView.m in Sources */,
+				04651707268C57EF000829C2 /* TextDialogElement.m in Sources */,
 				F54973642668A22100181E3F /* YTKBatchRequest+AnimatingAccessory.m in Sources */,
 				F530C6D526802E5D009DC29A /* TSSMSCodeRequest.m in Sources */,
 				F54973A82668B98000181E3F /* TSTabBarController.m in Sources */,
@@ -4486,6 +4838,7 @@
 				C2A34C962674BC2E0095497E /* TSSearchHeaderView.m in Sources */,
 				C3A6C4E0267A1CAF00FC71D6 /* TSPhoneNumDataController.m in Sources */,
 				F54973762668A31000181E3F /* main.m in Sources */,
+				046516FD268C57EF000829C2 /* ButtonsDialogModel.m in Sources */,
 				CE4F6BC826857AA400812275 /* TSUnbundlingCardViewController.m in Sources */,
 				C22EE27A26807EF000E59C86 /* TSSearchResult.m in Sources */,
 				F55D2CCC26784ACD006BACCF /* TSMineEarningsCell.m in Sources */,
@@ -4523,6 +4876,7 @@
 				F54973602668A22100181E3F /* SSGenaralRequest.m in Sources */,
 				DFB3FFCC26847AF200FC8FF9 /* Popover+TSDefaultConfig.m in Sources */,
 				F530CCB126803FCD009DC29A /* UIView+UIKit.m in Sources */,
+				046516A3268C5641000829C2 /* ImageCompresser.m in Sources */,
 				C2EF88D82671AB6B00E7374A /* TSNumOperationView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

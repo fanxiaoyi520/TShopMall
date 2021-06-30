@@ -28,15 +28,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
 }
 
 - (void)setupBasic {
     [super setupBasic];
     self.gk_navTitle = @"个人设置";
     [self.navigationController setNavigationBarHidden:NO];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userInfoModifiedAction) name:TSUserInfoModifiedNotificationName object:nil];
     __weak __typeof(self)weakSelf = self;
+    self.dataController.context = self;
     [self.dataController fetchSettingContentsComplete:^(BOOL isSucess) {
         __strong __typeof(weakSelf)strongSelf = weakSelf;
         if (isSucess) {
@@ -56,6 +56,11 @@
         make.top.equalTo(self.view.mas_top).with.offset(GK_STATUSBAR_NAVBAR_HEIGHT + 1);
         make.bottom.equalTo(self.view.mas_bottom).with.offset(0);
     }];
+}
+
+///信息修改成功
+- (void)userInfoModifiedAction {
+    [self.collectionView reloadData];
 }
 
 #pragma mark - Lazy Method
@@ -152,15 +157,23 @@
         [self.navigationController pushViewController:personalVC animated:YES];
         return;
     } else if (indexPath.section == 2 && indexPath.item == 0) {
-        TSSecurCenterViewController *personalVC = [[TSSecurCenterViewController alloc] init];
-        [self.navigationController pushViewController:personalVC animated:YES];
+        //清理缓存
+        @weakify(self);
+        [self.dataController clearCacheWithComplete:^(BOOL isSucess) {
+            @strongify(self);
+            if (isSucess) {
+                [self.collectionView reloadData];
+            }
+        }];
+        return;
+    } else if (indexPath.section == 2 && indexPath.item == 1) {
+        TSAboutMeViewController *aboutMeVC = [[TSAboutMeViewController alloc] init];
+        [self.navigationController pushViewController:aboutMeVC animated:YES];
         return;
     } else if (indexPath.section == 3 && indexPath.item == 0) {
         [self exitAlert];
         return;
     }
-    TSAboutMeViewController *aboutMeVC = [[TSAboutMeViewController alloc] init];
-    [self.navigationController pushViewController:aboutMeVC animated:YES];
 }
 
 #pragma mark - UniversalCollectionViewCellDataDelegate

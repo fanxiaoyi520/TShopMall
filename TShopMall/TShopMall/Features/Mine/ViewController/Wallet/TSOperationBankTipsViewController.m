@@ -25,6 +25,22 @@
     
     self.gk_navTitle = self.kNavTitle;
 }
+      
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    if ([self.kNavTitle isEqualToString:@"添加银行卡"])
+        [[TSGlobalNotifyServer sharedServer] postAddBankCard:nil];
+}
+
+- (void)backItemClick:(id)sender {
+    if ([self.kNavTitle isEqualToString:@"添加银行卡"]) {
+        NSArray *pushVCAry = [self.navigationController viewControllers];
+        UIViewController *vc = [pushVCAry objectAtIndex:pushVCAry.count-2];
+        [self.navigationController popToViewController:vc animated:YES];
+    } else {
+        
+    }
+}
 
 - (void)fillCustomView {
     [self.view addSubview:self.tipsImageView];

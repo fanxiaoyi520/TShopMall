@@ -73,7 +73,6 @@
     if (_userLabel == nil) {
         UILabel *userLabel = [[UILabel alloc] init];
         _userLabel = userLabel;
-        _userLabel.text = @"JERRYJUICE";
         _userLabel.textColor = KTextColor;
         _userLabel.font = KRegularFont(16);
         [self.contentView addSubview:_userLabel];
@@ -111,6 +110,17 @@
         [self.contentView addSubview:_rightImgV];
     }
     return _rightImgV;
+}
+
+- (void)setDelegate:(id<UniversalCollectionViewCellDataDelegate>)delegate {
+    TSUser *user = [TSServicesManager sharedInstance].userInfoService.user;
+    self.phoneNumberLabel.text = user.phone;
+    NSString *avatar = user.avatar;
+    if (avatar) {
+        [self.headImgV sd_setImageWithURL:[NSURL URLWithString:avatar] placeholderImage:KImageMake(@"mall_setting_defautlhead")];
+    }
+    self.sexImgV.image = user.sex == male ? KImageMake(@"mall_setting_male") : KImageMake(@"mall_setting_female");
+    self.userLabel.text = user.nickname.length == 0 ? user.phone : user.nickname;
 }
 
 @end

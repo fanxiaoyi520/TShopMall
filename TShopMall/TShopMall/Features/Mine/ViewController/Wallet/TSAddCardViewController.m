@@ -6,15 +6,19 @@
 //
 
 #import "TSAddCardViewController.h"
-#import "TSAddBankCardCell.h"
 #import "TSPresentationController.h"
 #import "TSSelectorViewController.h"
 #import "TSAreaSelectedController.h"
-
 #import "TSMineDataController.h"
+#import <IQKeyboardManager/IQKeyboardManager.h>
+#import "TSAddBankCardCell.h"
+#import "TSDropDownView.h"
+#import "TSOperationBankTipsViewController.h"
 
 #import "TSAddBankCardModel.h"
 #import "TSAddBankCardBackModel.h"
+#import "TSBranchCardModel.h"
+
 @interface TSAddCardViewController ()<UITableViewDelegate,UITableViewDataSource,TSAddBankCardDelegate,UIViewControllerTransitioningDelegate>
 
 @property (nonatomic ,strong) UITableView *addCardTableView;
@@ -23,20 +27,43 @@
 @property (nonatomic ,strong) NSMutableDictionary *mutableDic;
 @property (nonatomic ,strong) TSAddBankCardModel *model;
 @property (nonatomic ,strong) TSMineDataController *dataController;
-
+@property (nonatomic ,strong) TSDropDownView *dropDownView;
+@property (nonatomic ,assign) CGRect keyBoardRect;
 @end
 
 @implementation TSAddCardViewController
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleDefault;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.gk_navTitle = @"添加银行卡";
+    [[IQKeyboardManager sharedManager] setEnable:NO];
+    
+    //增加监听，当键盘出现或改变时收出消息
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(keyboardWillShow:)
+                                                     name:UIKeyboardWillShowNotification
+                                                   object:nil];
+        
+    //增加监听，当键退出时收出消息
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(keyboardWillHide:)
+                                                     name:UIKeyboardWillHideNotification
+                                                   object:nil];
 
-    self.dataList = @[@"银行卡号",@"银行名称",@"开户银行省市",@"开户银行"];
+    self.dataList = @[@"姓名",@"银行卡号",@"银行名称",@"开户银行省市",@"开户银行"];
     //dic容错设置
     self.mutableDic = [NSMutableDictionary dictionary];
+    [self.mutableDic setValue:@"" forKey:@"userName"];
     [self.mutableDic setValue:@"6214830137754759" forKey:@"bankCardNo"];
     [self.mutableDic setValue:@"" forKey:@"accountBank"];
     [self.mutableDic setValue:@"" forKey:@"accountBankCode"];
@@ -55,6 +82,8 @@
 
     self.addCardTableView.tableFooterView = self.footerView;
     self.footerView.frame = CGRectMake(0, self.addCardTableView.bottom, kScreenWidth, 56);
+    
+    [self.view addSubview:self.dropDownView];
 }
 
 // MARK: UITableViewDelegate & UITableViewDataSource
@@ -103,16 +132,74 @@
 
 // MARK: TSAddBankCardDelegate
 - (void)addBankCardInputInfoTextFieldAction:(UITextField *)textField {
-    if (textField.tag == 20) {
+    if (textField.tag == 15) {
+        if (textField.text)
+            [self.mutableDic setValue:textField.text forKey:@"userName"];
+        self.model = [TSAddBankCardModel yy_modelWithDictionary:self.mutableDic];
+    } else if (textField.tag == 20) {
         if (textField.text) {
             NSString *str = [textField.text stringByReplacingOccurrencesOfString:@" "withString:@""];;
             [self.mutableDic setValue:str forKey:@"bankCardNo"];
+            self.model = [TSAddBankCardModel yy_modelWithDictionary:self.mutableDic];
+            self.dataController.addBankCardModel = self.model;
+            if (str.length >= 16) {
+                @weakify(self);
+                [self.dataController fetchCheckBankCardDataComplete:^(BOOL isSucess) {
+                    @strongify(self);
+                    if (isSucess == YES) {
+                        [self.view endEditing:YES];
+                        [self.mutableDic setValue:str forKey:@"bankCardNo"];
+                        [self.mutableDic setValue:self.dataController.addBankCardBackModel.bankName forKey:@"accountBank"];
+                        [self.mutableDic setValue:self.dataController.addBankCardBackModel.accountBankCode forKey:@"accountBankCode"];
+                        self.model = [TSAddBankCardModel yy_modelWithDictionary:self.mutableDic];
+                        [Popover popToastOnWindowWithPopPosition:PopPositionMiddle text:@"银行卡号校验成功" toastyType:ToastyTypeNormal appearBlock:nil];
+                        
+                        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:0];;
+                        TSAddBankCardCell *kCell = [self.addCardTableView cellForRowAtIndexPath:indexPath];
+                        [kCell.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                            if ([obj isKindOfClass:UITextField.class]) {
+                                UITextField *textField = (UITextField *)obj;
+                                textField.text = self.dataController.addBankCardBackModel.bankName;
+                            }
+                        }];
+                    } else {
+                        [Popover popToastOnWindowWithPopPosition:PopPositionMiddle text:@"银行卡号校验有误" toastyType:ToastyTypeNormal appearBlock:nil];
+                    }
+                }];
+            }
         }
-        self.model = [TSAddBankCardModel yy_modelWithDictionary:self.mutableDic];
     } else {
-        if (textField.text)
+        if (textField.text) {
             [self.mutableDic setValue:textField.text forKey:@"bankName"];
-        self.model = [TSAddBankCardModel yy_modelWithDictionary:self.mutableDic];
+            self.model = [TSAddBankCardModel yy_modelWithDictionary:self.mutableDic];
+            
+            textField.clearButtonMode=UITextFieldViewModeWhileEditing; 
+            self.dataController.addBankCardModel = self.model;
+            @weakify(self);
+            [self.dataController fetchInquiryBranchDataComplete:^(BOOL isSucess) {
+                @strongify(self);
+                if (isSucess) {
+                    if (self.dataController.branchCardArray.count>0) {
+                        self.dropDownView.hidden = NO;
+                        self.addCardTableView.top = GK_STATUSBAR_NAVBAR_HEIGHT - self.dropDownView.height;
+                        self.dropDownView.top = textField.superview.bottom-self.dropDownView.height+1;
+                        self.dropDownView.bottom = kScreenHeight-self.keyBoardRect.size.height;
+                        [self.dropDownView setModel:self.dataController.branchCardArray];
+                        self.dropDownView.selectBranchBlock = ^(id  _Nullable info) {
+                            @strongify(self);
+                            [self.view endEditing:YES];
+                            TSBranchCardModel *model = (TSBranchCardModel *)info;
+//                            self.addCardTableView.top = GK_STATUSBAR_NAVBAR_HEIGHT;
+//                            self.dropDownView.hidden = YES;
+                            textField.text = model.bankFullName;
+                            [self.mutableDic setValue:model.bankFullName forKey:@"bankName"];
+                            [self.mutableDic setValue:model.linkNumber forKey:@"bankBranchId"];
+                            self.model = [TSAddBankCardModel yy_modelWithDictionary:self.mutableDic];
+                        };
+                    }
+                }
+            }];
+        }
     }
 }
 
@@ -120,7 +207,7 @@
     //****结束textView的输入****//
     [self.view endEditing:YES];
     UIButton *btn = (UIButton *)sender;
-    if (btn.tag == 11) {
+    if (btn.tag == 12) {
         TSAddBankCardCell *cell = (TSAddBankCardCell *)btn.superview;
         __block UITextField *textField = nil;
         [cell.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -134,9 +221,10 @@
         @weakify(self);
         vc.selectBankBlock = ^(id  _Nullable info) {
             @strongify(self);
-            textField.text = (NSString *)info;
-            NSString *str = (NSString *)info;
-            [self.mutableDic setValue:str forKey:@"accountBank"];
+            TSAddBankCardBackModel *model = (TSAddBankCardBackModel *)info;
+            textField.text = model.bankName;
+            [self.mutableDic setValue:model.bankName forKey:@"accountBank"];
+            [self.mutableDic setValue:model.accountBankCode forKey:@"accountBankCode"];
             self.model = [TSAddBankCardModel yy_modelWithDictionary:self.mutableDic];
         };
         [self presentViewController:vc animated:YES completion:nil];
@@ -189,12 +277,12 @@
     
     self.dataController.addBankCardModel = self.model;
     @weakify(self);
-    [self.dataController fetchCheckBankCardDataComplete:^(BOOL isSucess) {
+    [self.dataController fetchAddToBankCardDataComplete:^(BOOL isSucess) {
         @strongify(self);
         if (isSucess) {
-            [self.dataController fetchAddToBankCardDataComplete:^(BOOL isSucess) {
-        
-            }];
+            TSOperationBankTipsViewController *vc = [TSOperationBankTipsViewController new];
+            vc.kNavTitle = @"添加银行卡";
+            [self.navigationController pushViewController:vc animated:YES];
         }
     }];
 }
@@ -202,6 +290,24 @@
 // MARK: UIViewControllerTransitioningDelegate
 - (UIPresentationController *)presentationControllerForPresentedViewController:(UIViewController *)presented presentingViewController:(UIViewController *)presenting sourceViewController:(UIViewController *)source{
     return [[TSPresentationController alloc] initWithPresentedViewController:presented presentingViewController:presenting];
+}
+
+// MARK: keyboard noti
+- (void)keyboardWillShow:(NSNotification *)aNotification {//当键盘出现或改变时调用
+    NSDictionary *userInfo = [aNotification userInfo];
+    NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    CGRect keyboardRect = [aValue CGRectValue];
+    self.keyBoardRect = keyboardRect;
+}
+ 
+//当键退出时调用
+- (void)keyboardWillHide:(NSNotification *)aNotification {
+    NSDictionary *userInfo = [aNotification userInfo];
+    NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    CGRect keyboardRect = [aValue CGRectValue];
+    self.keyBoardRect = keyboardRect;
+    self.addCardTableView.top = GK_STATUSBAR_NAVBAR_HEIGHT;
+    self.dropDownView.hidden = YES;
 }
 
 // MARK: get
@@ -232,5 +338,13 @@
         _dataController = [[TSMineDataController alloc] init];
     }
     return _dataController;
+}
+
+- (TSDropDownView *)dropDownView {
+    if (!_dropDownView) {
+        _dropDownView = [[TSDropDownView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 3*33)];
+        _dropDownView.hidden = YES;
+    }
+    return _dropDownView;
 }
 @end

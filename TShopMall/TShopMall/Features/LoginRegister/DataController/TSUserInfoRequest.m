@@ -13,12 +13,12 @@
 
 @implementation TSUserInfoRequest
 
--(NSString *)baseUrl{
+- (NSString *)baseUrl {
     return kAccountCenterApiPrefix;
 }
 
 -(NSString *)requestUrl{
-    NSString *requestUrl = [NSString stringWithFormat:@"%@?appId=%@&tenantId=%@&appSecret=%@",kLogoutUrl,kAppId,@"tcl",kAppSecret];
+    NSString *requestUrl = [NSString stringWithFormat:@"%@?appId=%@&tenantId=%@&appSecret=%@",kUserInfoUrl,kAppId,@"tcl",kAppSecret];
     return requestUrl;
 }
 

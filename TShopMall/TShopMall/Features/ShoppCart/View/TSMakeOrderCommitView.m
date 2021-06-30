@@ -11,6 +11,8 @@
 
 - (void)layoutSubviews{
     self.backgroundColor = UIColor.whiteColor;
+    self.commitBtn.layer.cornerRadius = KRateW(20.0);
+    self.commitBtn.layer.masksToBounds = YES;
     [self.commitBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.mas_right).offset(-KRateW(16.0));
         make.top.equalTo(self.mas_top).offset(KRateW(8.0));
