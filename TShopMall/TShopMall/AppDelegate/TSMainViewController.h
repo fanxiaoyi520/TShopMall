@@ -10,6 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TSMainViewController : TSBaseViewController
+@property (nonatomic, copy) void(^ _Nonnull rootViewControllerBlock)(UIViewController *vc);
 
 @end
 
