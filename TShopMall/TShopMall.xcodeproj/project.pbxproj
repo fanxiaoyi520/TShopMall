@@ -28,7 +28,6 @@
 		04F1EFB92682DF8900FF007D /* TSRealNameAuthSectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F1EFB82682DF8900FF007D /* TSRealNameAuthSectionModel.m */; };
 		04F1EFBC2682E33600FF007D /* TSRealNameAuthDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F1EFBB2682E33600FF007D /* TSRealNameAuthDataController.m */; };
 		04F852122689BA4C00B59910 /* TSFirstEnterAgreementView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F852112689BA4C00B59910 /* TSFirstEnterAgreementView.m */; };
-		700F0730268B0B20007C1891 /* TSRecommendMaxPriceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 700F072F268B0B20007C1891 /* TSRecommendMaxPriceView.m */; };
 		AE4DC537B4A93FA6C04B9037 /* libPods-TShopMall.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 825A9D1C217F35DCFB651B21 /* libPods-TShopMall.a */; };
 		C21A4B6E267AF5AE00766F72 /* TSMakeOrderBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C21A4B6D267AF5AE00766F72 /* TSMakeOrderBaseCell.m */; };
 		C21A4B71267AF91F00766F72 /* TSMakeOrderPriceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C21A4B70267AF91F00766F72 /* TSMakeOrderPriceCell.m */; };
@@ -453,7 +452,6 @@
 		F55D2C6726722807006BACCF /* TSCategoryKindModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2C5D26722807006BACCF /* TSCategoryKindModel.m */; };
 		F55D2C6826722807006BACCF /* TSCategorySectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2C5E26722807006BACCF /* TSCategorySectionModel.m */; };
 		F55D2C6926722807006BACCF /* TSCategoryDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2C6226722807006BACCF /* TSCategoryDataController.m */; };
-		F55D2C6C267231AA006BACCF /* TSCategoryHeaderReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2C6B267231AA006BACCF /* TSCategoryHeaderReusableView.m */; };
 		F55D2C7226725618006BACCF /* TSRankCoronalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2C7126725618006BACCF /* TSRankCoronalViewController.m */; };
 		F55D2C792672F4E2006BACCF /* TSMineDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2C782672F4E2006BACCF /* TSMineDataController.m */; };
 		F55D2C9A26745E2E006BACCF /* TSGlobalManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2C9926745E2E006BACCF /* TSGlobalManager.m */; };
@@ -591,8 +589,6 @@
 		04F852112689BA4C00B59910 /* TSFirstEnterAgreementView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSFirstEnterAgreementView.m; sourceTree = "<group>"; };
 		1942D505D7004833F274B5D1 /* libPods-TShopMallTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TShopMallTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		27EC567AA21935502889F6EB /* Pods-TShopMall.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TShopMall.debug.xcconfig"; path = "Target Support Files/Pods-TShopMall/Pods-TShopMall.debug.xcconfig"; sourceTree = "<group>"; };
-		700F072E268B0B20007C1891 /* TSRecommendMaxPriceView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSRecommendMaxPriceView.h; sourceTree = "<group>"; };
-		700F072F268B0B20007C1891 /* TSRecommendMaxPriceView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSRecommendMaxPriceView.m; sourceTree = "<group>"; };
 		825A9D1C217F35DCFB651B21 /* libPods-TShopMall.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TShopMall.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		847295D7102568B80FCAB72E /* Pods-TShopMallTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TShopMallTests.release.xcconfig"; path = "Target Support Files/Pods-TShopMallTests/Pods-TShopMallTests.release.xcconfig"; sourceTree = "<group>"; };
 		BBF16248DC0233F9DA291554 /* Pods-TShopMallTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TShopMallTests.debug.xcconfig"; path = "Target Support Files/Pods-TShopMallTests/Pods-TShopMallTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1395,8 +1391,6 @@
 		F55D2C6026722807006BACCF /* TSCategoryKindModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSCategoryKindModel.h; sourceTree = "<group>"; };
 		F55D2C6226722807006BACCF /* TSCategoryDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSCategoryDataController.m; sourceTree = "<group>"; };
 		F55D2C6326722807006BACCF /* TSCategoryDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSCategoryDataController.h; sourceTree = "<group>"; };
-		F55D2C6A267231AA006BACCF /* TSCategoryHeaderReusableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSCategoryHeaderReusableView.h; sourceTree = "<group>"; };
-		F55D2C6B267231AA006BACCF /* TSCategoryHeaderReusableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSCategoryHeaderReusableView.m; sourceTree = "<group>"; };
 		F55D2C7026725618006BACCF /* TSRankCoronalViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSRankCoronalViewController.h; sourceTree = "<group>"; };
 		F55D2C7126725618006BACCF /* TSRankCoronalViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSRankCoronalViewController.m; sourceTree = "<group>"; };
 		F55D2C772672F4E2006BACCF /* TSMineDataController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSMineDataController.h; sourceTree = "<group>"; };
@@ -3329,16 +3323,12 @@
 			children = (
 				042F42392681A05C00555F5D /* TSRecommendCell.h */,
 				042F42382681A05B00555F5D /* TSRecommendCell.m */,
-				F55D2C6A267231AA006BACCF /* TSCategoryHeaderReusableView.h */,
-				F55D2C6B267231AA006BACCF /* TSCategoryHeaderReusableView.m */,
 				F55D2C5626722807006BACCF /* TSCategoryKindCell.h */,
 				F55D2C5926722807006BACCF /* TSCategoryKindCell.m */,
 				F55D2C5726722807006BACCF /* TSCategoryBannerCell.h */,
 				F55D2C5A26722807006BACCF /* TSCategoryBannerCell.m */,
 				F55D2C5826722807006BACCF /* TSMeasureCell.h */,
 				F55D2C5B26722807006BACCF /* TSMeasureCell.m */,
-				700F072E268B0B20007C1891 /* TSRecommendMaxPriceView.h */,
-				700F072F268B0B20007C1891 /* TSRecommendMaxPriceView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4117,7 +4107,6 @@
 				C24A69D02689C6680022A81F /* TSPaySuccessSection.m in Sources */,
 				F530CCF426804167009DC29A /* TSWKMessageHandlerDispatch.m in Sources */,
 				CE4F6BEB2687D36800812275 /* TSInviteFriendsViewController.m in Sources */,
-				700F0730268B0B20007C1891 /* TSRecommendMaxPriceView.m in Sources */,
 				C3A6C4C2267A1C5700FC71D6 /* TSAboutMeTopCell.m in Sources */,
 				F530CD232680B8A0009DC29A /* TSProductHeaderView.m in Sources */,
 				DFB3FFC826844A0A00FC8FF9 /* WechatShareManager.m in Sources */,
@@ -4135,7 +4124,6 @@
 				F54973D22668CF3300181E3F /* AppDelegate+RootController.m in Sources */,
 				DCA035DD2681ACC8003DE5F7 /* TSLogoutRequest.m in Sources */,
 				DC9911A0267AE3B900EF9B26 /* TSImageDataModel.m in Sources */,
-				F55D2C6C267231AA006BACCF /* TSCategoryHeaderReusableView.m in Sources */,
 				CE66DAEF26841F2600E8D433 /* TSWithdrawalRecordViewController.m in Sources */,
 				F530CCA826803FCD009DC29A /* UITextView+Holder.m in Sources */,
 				C2C765422679ECBF004757B9 /* TSMakeOrderSection.m in Sources */,

@@ -6,7 +6,6 @@
 //
 
 #import "TSCategoryViewController.h"
-#import "TSCategoryHeaderReusableView.h"
 #import "TSGeneralSearchButton.h"
 #import "TSCategoryDataController.h"
 #import "TSUniversalCollectionViewCell.h"
@@ -18,6 +17,10 @@
 #import "TSProductDetailController.h"
 #import "TSSearchController.h"
 #import "TSCategoryContainerViewController.h"
+#import "TSCategoryBannerCell.h"
+#import "TSMeasureCell.h"
+#import "TSRecommendCell.h"
+#import "TSTableViewBaseCell.h"
 
 @interface TSCategoryViewController ()<UITableViewDelegate,UITableViewDataSource, TSCategoryContainerDataSource>
 
@@ -112,11 +115,19 @@
     if (tableView == self.leftTableView) {
         return self.dataController.kinds.count;
     }
-    else{
-        return 10;
-    }
-    return 0;
+   
+    return 1;
 }
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    if (tableView == self.leftTableView) {
+        return 1;
+    }
+    else{
+        return 3;
+    }
+}
+
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (tableView == self.leftTableView) {
@@ -126,20 +137,67 @@
         return cell;
         
     }else{
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+        TSCategoryContentModel *model = self.dataController.sections[indexPath.section];
+        TSTableViewBaseCell *cell;
+        if (indexPath.section == 0) {
+            cell =  [tableView dequeueReusableCellWithIdentifier:@"TSCategoryBannerCell"];
+        }else if(indexPath.section == 1){
+            cell =  [tableView dequeueReusableCellWithIdentifier:@"TSMeasureCell"];
+
+        }else{
+            cell = [tableView dequeueReusableCellWithIdentifier:@"TSRecommendCell"];
+        }
+        cell.indexPath = indexPath;
+        cell.cellSuperViewTableView = tableView;
+        cell.data = model;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
     return nil;
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if (tableView == self.leftTableView) {
-        return 44;
-    }else{
-        return 44;
+        return nil;
     }
-    return 0;
+    if (section != 0) {
+        UIView *view = [UIView new];
+        UILabel *titleLabel = [UILabel new];
+        titleLabel = [[UILabel alloc] init];
+        titleLabel.text = section==1?@"产品类型":@"推荐商品";
+        titleLabel.font = KFont(PingFangSCMedium, 14);
+        titleLabel.textAlignment = NSTextAlignmentLeft;
+        titleLabel.textColor = KTextColor;
+        [view addSubview:titleLabel];
+        [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(view).offset(16);
+            make.centerY.equalTo(view);
+        }];
+        return view;
+    }
+    return nil;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (tableView == self.leftTableView) {
+        return 0;
+    }else{
+        if (section != 0) {
+            return 32;
+        }
+        return 0;
+    }
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self updateTableViewWithRow:indexPath.row];
+    [self.container showContentAtPage:indexPath.row];
+}
+
+- (void)updateTableViewWithRow:(NSInteger)row {
+    [self.kindViewModel viewModelExchangeSelectedRow:row];
+    [self.leftTableView reloadData];
 }
 
 #pragma mark - Getter
@@ -210,17 +268,25 @@
     return self.dataController.kinds.count;
 }
 
-- (nonnull UIView *)viewForContainerViewController:(nonnull TSCategoryContainerViewController *)viewController {
+- (nonnull UIView *)viewForContainerViewController:(nonnull TSCategoryContainerViewController *)viewController currentPage:(NSInteger)page{
     
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
-    tableView.backgroundColor = [UIColor redColor];
+    if (page %2 == 0) {
+        tableView.backgroundColor = [UIColor redColor];
+    }else
+        tableView.backgroundColor = [UIColor greenColor];
+
     tableView.rowHeight = UITableViewAutomaticDimension;
     tableView.delegate = self;
     tableView.dataSource = self;
     tableView.showsVerticalScrollIndicator = NO;
     tableView.showsHorizontalScrollIndicator = NO;
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
+    [tableView registerClass:[TSMeasureCell class] forCellReuseIdentifier:@"TSMeasureCell"];
+    [tableView registerClass:[TSCategoryBannerCell class] forCellReuseIdentifier:@"TSCategoryBannerCell"];
+    [tableView registerClass:[TSRecommendCell class] forCellReuseIdentifier:@"TSRecommendCell"];
+    [tableView registerClass:[UITableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:@"UITableViewHeaderFooterView"];
+
 
     if (@available(iOS 11.0, *)) {
         tableView.estimatedRowHeight = 200;

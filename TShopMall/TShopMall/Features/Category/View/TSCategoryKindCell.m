@@ -47,6 +47,7 @@
     [self.kindLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.seperateView.mas_right).offset(0);
         make.right.top.bottom.equalTo(self.contentView);
+        make.height.equalTo(@44);
     }];
 
 }
