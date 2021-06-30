@@ -44,8 +44,8 @@
     
     [self.personalRankView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.view);
-        make.height.offset(KRateH(70));
-        make.bottom.equalTo(self.view).offset(- GK_TABBAR_HEIGHT - GK_STATUSBAR_NAVBAR_HEIGHT - KRateH(42));
+        make.height.offset(84);
+        make.bottom.equalTo(self.view).offset(- GK_TABBAR_HEIGHT - GK_STATUSBAR_NAVBAR_HEIGHT - 44);
     }];
 }
 
@@ -143,7 +143,7 @@
         _tableView.showsVerticalScrollIndicator = NO;
         _tableView.showsHorizontalScrollIndicator = NO;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        _tableView.contentInset = UIEdgeInsetsMake(0, 0, KRateH(70), 0);
+        _tableView.contentInset = UIEdgeInsetsMake(0, 0, 84, 0);
         _tableView.mj_header = header;
         if (@available(iOS 11.0, *)) {
             _tableView.estimatedRowHeight = 200;
