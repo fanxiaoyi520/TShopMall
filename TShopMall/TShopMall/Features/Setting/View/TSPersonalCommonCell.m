@@ -7,6 +7,7 @@
 
 #import "TSPersonalCommonCell.h"
 #import "TSPersonalSectionModel.h"
+#import "UIImageView+WebCache.h"
 
 @interface TSPersonalCommonCell ()
 /** 标题 */
@@ -134,13 +135,15 @@
     TSPersonalSectionItemModel *item = [delegate universalCollectionViewCellModel:self.indexPath];
     self.titleLabel.text = item.title;
     if (item.detail) {
-        self.detailLabel.text = item.detail;
+        NSString *detail = [item.detail isEqualToString:@"2"] ? @"未实名认证" : item.detail;
+        self.detailLabel.text = detail;
         self.detailLabel.hidden = NO;
         self.headImgV.hidden = YES;
         self.sexImgV.hidden = YES;
     }
     if (item.head) {
-        self.headImgV.image = KImageMake(item.head);
+        NSString *headUrl = [item.head isEqualToString:@"default"] ? @"mall_setting_defautlhead" : item.head;
+        [self.headImgV sd_setImageWithURL:[NSURL URLWithString:headUrl] placeholderImage:KImageMake(@"mall_setting_defautlhead")];
         self.detailLabel.hidden = YES;
         self.headImgV.hidden = NO;
         self.sexImgV.hidden = YES;

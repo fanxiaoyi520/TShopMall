@@ -9,7 +9,7 @@
 
 NSString *const TS_Login_State = @"TS_LoginUpdateNotification";
 
-NSString *const TSNicknameModifiedNotificationName = @"TSNicknameModifiedNotificationName";
+NSString *const TSUserInfoModifiedNotificationName = @"TSUserInfoModifiedNotificationName";
 
 NSString *const TS_NetWork_State = @"TS_NetWork_StateNotification";
 

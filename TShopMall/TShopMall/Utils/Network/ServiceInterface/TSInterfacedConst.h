@@ -102,6 +102,7 @@ UIKIT_EXTERN NSString *const kMineOrderCount;//查询订单各状态下的订单
 #pragma mark - 设置
 UIKIT_EXTERN NSString *const kAboutMeAgreementUrl;
 UIKIT_EXTERN NSString *const kModifyUserUrl;
+UIKIT_EXTERN NSString *const kUploadImageUrl;
 
 UIKIT_EXTERN NSString * const kMineWithdrawalApply;//提现申请
 UIKIT_EXTERN NSString * const kMineQueryAppBankCardAccountList;//查询银行卡列表

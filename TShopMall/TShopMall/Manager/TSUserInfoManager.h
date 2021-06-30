@@ -6,6 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TSUser.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -20,6 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy) NSString *accountId;
 /** 昵称  */
 @property(nonatomic, copy) NSString *nickname;
+/** 用户  */
+@property(nonatomic, strong) TSUser *user;
 /// 初始化并加载本地的用户信息
 +(TSUserInfoManager *)userInfo;
 

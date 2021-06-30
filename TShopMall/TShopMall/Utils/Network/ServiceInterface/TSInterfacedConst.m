@@ -154,6 +154,7 @@ NSString *const kMineOrderCount = @"v2/usercenter/order/query/queryAllStatusOrde
 
 NSString *const kAboutMeAgreementUrl = @"/rest/v2/front/shopStatement/getShopStatementList";
 NSString *const kModifyUserUrl = @"/user/mng/user";
+NSString *const kUploadImageUrl = @"/rest/v2/usercenter/batchfileupload/batch/upload";
 
 NSString *const kMineWithdrawalApply = @"/rest/v2/withdrawal/record/withdrawalApply";
 NSString *const kMineQueryAppBankCardAccountList = @"/rest/v2/bankCardAccount/queryAppBankCardAccountList";

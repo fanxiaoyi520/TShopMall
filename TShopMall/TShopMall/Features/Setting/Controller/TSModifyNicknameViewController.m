@@ -172,15 +172,15 @@
     if ([TSUserInfoManager userInfo].accountId.length == 0) {///返回登录
         return;
     }
-    @weakify(self);
-    [self.dataController fetchModifyUserInfoWithKey:@"nickname" value:self.nickTextField.text accountId:[TSUserInfoManager userInfo].accountId complete:^(BOOL isSucess) {
-        @strongify(self);
-        if (isSucess) {
-            ///发通知修改成功
-            [[NSNotificationCenter defaultCenter] postNotificationName:TSNicknameModifiedNotificationName object:nil];
-            [Popover popToastOnWindowWithText:@"昵称修改成功！"];
-            [self.navigationController popViewControllerAnimated:YES];
-        }
+    [Popover popProgressOnWindowWithText:@"提交中..."];
+    [[TSServicesManager sharedInstance].userInfoService modifyUserInfoWithKey:@"nickname" value:self.nickTextField.text success:^ {
+        ///发通知修改成功
+        [TSServicesManager sharedInstance].userInfoService.user.nickname = self.nickTextField.text;
+        [[NSNotificationCenter defaultCenter] postNotificationName:TSUserInfoModifiedNotificationName object:nil];
+        [Popover popToastOnWindowWithText:@"昵称修改成功！"];
+        [self.navigationController popViewControllerAnimated:YES];
+    } failure:^(NSString * _Nonnull errorMsg) {
+        [Popover popToastOnWindowWithText:errorMsg];
     }];
 }
 

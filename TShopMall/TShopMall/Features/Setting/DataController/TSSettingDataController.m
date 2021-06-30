@@ -109,11 +109,8 @@
  */
 - (void)fetchModifyUserInfoWithKey:(NSString *)key
                              value:(NSString *)value
-                         accountId:(NSString *)accountId
                           complete:(void(^)(BOOL isSucess))complete {
-    TSModifyUserInfoRequest *request = [[TSModifyUserInfoRequest alloc] initWithAccountId:accountId modifyKey:key modifyValue:value];
-//    request.animatingText = @"正在提交...";
-//    request.animatingView = self.context.view;
+    TSModifyUserInfoRequest *request = [[TSModifyUserInfoRequest alloc] initWithModifyKey:key modifyValue:value];
     [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
         if (request.responseModel.isSucceed) {
             if (complete) {

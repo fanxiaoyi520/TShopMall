@@ -28,6 +28,7 @@ target 'TShopMall' do
     pod 'MBProgressHUD', '~> 1.2.0'
     pod 'NTESQuickPass'
     pod 'JAFMultiDelegate'
+    pod 'TZImagePickerController'
   target 'TShopMallTests' do
     inherit! :search_paths
     # Pods for testing
