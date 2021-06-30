@@ -8,11 +8,14 @@
 #import "TSSelectorViewController.h"
 #import "TSSelectorCell.h"
 #import "UIView+Plugin.h"
+#import "TSMineDataController.h"
 
-@interface TSSelectorViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface TSSelectorViewController ()<UITableViewDelegate,UITableViewDataSource,TSSelectorDelegate>
 
 @property (nonatomic ,strong) UIView *bgView;
 @property (nonatomic ,strong) UITableView *selectorTableView;
+@property (nonatomic ,strong) TSMineDataController *dataController;
+@property (nonatomic ,strong) NSArray *dataList;
 @end
 
 @implementation TSSelectorViewController
@@ -35,17 +38,29 @@
     TSSelectorCellHeader *headerCellView = [[TSSelectorCellHeader alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 50)];
     self.selectorTableView.tableHeaderView = headerCellView;
 
+    
+    @weakify(self);
+    [self.dataController fetchQueryBankDataComplete:^(BOOL isSucess) {
+        @strongify(self);
+        if (isSucess) {
+            self.dataList = self.dataController.addBankCardBackArray;
+            [self.selectorTableView reloadData];
+        }
+    }];
 }
 
 // MARK: UITableViewDelegate & UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    if (self.dataList || self.dataList.count > 0)
+        return self.dataList.count;
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellid" forIndexPath:indexPath];
     if ([cell isKindOfClass:UITableViewCell.class]) {
-//        TSSelectorCell *selCell = (TSSelectorCell *)cell;
+        TSSelectorCell *selCell = (TSSelectorCell *)cell;
+        [selCell setModel:self.dataList[indexPath.row]];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
@@ -59,7 +74,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     [self dismissViewControllerAnimated:YES completion:nil];
     if (self.selectBankBlock) {
-        self.selectBankBlock(@"招商银行");
+        self.selectBankBlock(self.dataList[indexPath.row]);
     }
 }
 
@@ -91,4 +106,10 @@
     return _selectorTableView;
 }
 
+- (TSMineDataController *)dataController {
+    if (!_dataController) {
+        _dataController = [[TSMineDataController alloc] init];
+    }
+    return _dataController;
+}
 @end

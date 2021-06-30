@@ -34,6 +34,8 @@
     // Do any additional setup after loading the view.
     
     self.gk_navTitle = @"银行卡";
+    [[TSGlobalNotifyServer sharedServer] jaf_addDelegate:self];
+    
     @weakify(self);
     [self.dataController fetchQueryBankCardListDataComplete:^(BOOL isSucess) {
         @strongify(self);
@@ -167,6 +169,20 @@
 - (void)bankCardFooterAddBankCardAction:(id)sender {
     TSAddCardViewController *vc = [TSAddCardViewController new];
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+// MARK: TSGlobalNotifyServer
+- (void)addKeyCommand:(UIKeyCommand *)keyCommand {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSLog(@"陈工");
+        @weakify(self);
+        [self.dataController fetchQueryBankCardListDataComplete:^(BOOL isSucess) {
+            @strongify(self);
+            if (isSucess) {
+                [self.collectionView reloadData];
+            }
+        }];
+    });
 }
 
 // MARK: get

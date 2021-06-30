@@ -6,6 +6,7 @@
 //
 
 #import "TSSelectorCell.h"
+#import "TSAddBankCardBackModel.h"
 
 @interface TSSelectorCell ()
 
@@ -53,6 +54,13 @@
         make.left.equalTo(self).offset(16);
         make.right.equalTo(self).offset(-16);
     }];
+}
+
+// MARK: model
+- (void)setModel:(id _Nullable)model {
+    if (!model) return;
+    TSAddBankCardBackModel *kModel = (TSAddBankCardBackModel *)model;
+    _bankNameLab.text = kModel.bankName;
 }
 
 // MARK: get
@@ -202,6 +210,8 @@
         make.height.mas_equalTo(1);
     }];
 }
+
+
 
 // MARK: actions
 

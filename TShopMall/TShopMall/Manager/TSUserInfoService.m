@@ -6,6 +6,10 @@
 //
 
 #import "TSUserInfoService.h"
+#import "TSUserInfoRequest.h"
+#import "TSUser.h"
+#import "TSModifyUserInfoRequest.h"
+#import "UploadImageApi.h"
 
 @interface TSUserInfoService ()
 
@@ -14,34 +18,72 @@
 
 @implementation TSUserInfoService
 
-- (void)getUserInfoAccountId:(NSString *)accountId
-                     success:(void(^_Nullable)(BOOL isSucess))success
+
+- (void)uploadImage:(UIImage *)image
+            success:(void(^_Nullable)(NSString *imageURL))success
+            failure:(void(^_Nullable)(NSString *errorMsg))failure
+{
+    UploadImageApi *uploadRequest = [[UploadImageApi alloc] initWithImage:image];
+    [uploadRequest startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
+        NSError *error;
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:request.responseData options:NSJSONReadingMutableContainers error:&error];
+        NSDictionary *data = json[@"data"];
+        if (error) {
+            if (failure) {
+                failure(@"数据格式错误！");
+            }
+            return;
+        }
+        if (data) {
+            NSString *imageURL = data[@"fileUrl"];
+            if (success) {
+                success(imageURL);
+            }
+        } else {
+            if (failure) {
+                failure(@"发生未知错误~~~");
+            }
+        }
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        if (failure) {
+            failure(@"发生未知错误~~~");
+        }
+    }];
+}
+
+- (void)updateUserInfoSuccess:(void(^_Nullable)(void))success
                      failure:(void(^_Nullable)(NSString *errorMsg))failure {
-    SSGenaralRequest *request = [self getUserInfoRequestWithAccountId:accountId];
+    TSUserInfoRequest *request = [[TSUserInfoRequest alloc] init];
+    @weakify(self);
     [request startWithCompletionBlockWithSuccess:^(__kindof SSGenaralRequest * _Nonnull request) {
+        @strongify(self);
         NSLog(@"获取用户信息 === %@", request.responseModel.originalData);
+        if (request.responseModel.isSucceed) {
+            self.user = [TSUser yy_modelWithJSON:request.responseModel.originalData[@"data"]];
+            if (success) {
+                success();
+            }
+        }
+        
     } failure:^(__kindof SSGenaralRequest * _Nonnull request) {
-        NSLog(@"获取用户信息 === %@", request.responseModel.originalData);
+        
     }];
 }
 
 /**
  * @params key 可以为nickname（昵称）、city（城市）、province（省份）、country（国家）、sex（性别 1: 男 2:女）、area（区）
  * @params value 为对应key的修改值
- * @params accountId 用户账号的唯一标识
  */
 - (void)modifyUserInfoWithKey:(NSString *)key
                         value:(NSString *)value
-                    accountId:(NSString *)accountId
-                      success:(void(^_Nullable)(BOOL isSucess))success
+                      success:(void(^_Nullable)(void))success
                       failure:(void(^_Nullable)(NSString *errorMsg))failure {
-    SSGenaralRequest *request = [self getModifyUserInfoRequestWithKey:key value:value accountId:accountId];
-    
+    //SSGenaralRequest *request = [self getModifyUserInfoRequestWithKey:key value:value accountId:accountId];
+    TSModifyUserInfoRequest *request = [[TSModifyUserInfoRequest alloc] initWithModifyKey:key modifyValue:value];
     [request startWithCompletionBlockWithSuccess:^(__kindof SSGenaralRequest * _Nonnull request) {
         if (request.responseModel.isSucceed) {
-            if (success) {
-                success(YES);
-            }
+            ///更新本地个人信息
+            [self updateUserInfoSuccess:success failure:failure];
         } else {
             if (failure) {
                 failure(request.responseModel.originalData[@"failCause"]);
@@ -54,7 +96,6 @@
     }];
 }
 
-
 - (SSGenaralRequest *)getUserInfoRequestWithAccountId: (NSString *)accountId {
     NSDictionary *params = @{
         @"mask": @"1",
@@ -66,7 +107,7 @@
     SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kUserInfoUrl
                                                                requestMethod:YTKRequestMethodGET
                                                        requestSerializerType:YTKRequestSerializerTypeJSON responseSerializerType:YTKResponseSerializerTypeJSON
-                                                               requestHeader:NSMutableDictionary.dictionary
+                                                               requestHeader:NSMutableDictionary.new
                                                                  requestBody:params
                                                               needErrorToast:YES];
     

@@ -22,13 +22,14 @@
 
 @synthesize nickname = _nickname;
 
--(id)copyWithZone:(NSZone *)zone {
+- (id)copyWithZone:(NSZone *)zone {
     TSUserInfoManager *copy =[[[self class] allocWithZone:zone] init];
     copy.accessToken = [self.accessToken copyWithZone:zone];
     copy.accountId = [self.accountId copyWithZone:zone];
     copy.userName = [self.userName copyWithZone:zone];
     copy.refreshToken = [self.refreshToken copyWithZone:zone];
     copy.nickname = [self.nickname copyWithZone:zone];
+    copy.user = [self.user copyWithZone:zone];
     return copy;
 }
 
@@ -39,6 +40,7 @@
         _userName = [coder decodeObjectForKey:@"userName"];
         _accountId = [coder decodeObjectForKey:@"accountId"];
         _nickname = [coder decodeObjectForKey:@"nickname"];
+        _user = [coder decodeObjectForKey:@"user"];
     }
     return self;
 }
@@ -49,9 +51,10 @@
     [coder encodeObject:self.userName forKey:@"userName"];
     [coder encodeObject:self.accountId forKey:@"accountId"];
     [coder encodeObject:self.nickname forKey:@"nickname"];
+    [coder encodeObject:self.user forKey:@"user"];
 }
 
-+(TSUserInfoManager *)userInfo{
++ (TSUserInfoManager *)userInfo {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSData *data = [userDefaults objectForKey:UserInfo_Save_Key];
     TSUserInfoManager *userInfo = [NSKeyedUnarchiver unarchiveObjectWithData:data];
@@ -61,7 +64,7 @@
     return userInfo;
 }
 
--(void)saveUserInfo:(TSUserInfoManager *)info{
+- (void)saveUserInfo:(TSUserInfoManager *)info{
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:info];
     dispatch_async(dispatch_get_main_queue(), ^{
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -70,7 +73,7 @@
     });
 }
 
--(void)clearUserInfo{
+- (void)clearUserInfo {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults removeObjectForKey:UserInfo_Save_Key];
 }

@@ -142,7 +142,9 @@
 - (TSGridGoodsCollectionView *)collectionView{
     if (!_collectionView) {
         _collectionView = [[TSGridGoodsCollectionView alloc] initWithFrame:CGRectZero items:nil ColumnSpacing:0 rowSpacing:0 itemsHeight:120 rows:0 columns:1 padding:UIEdgeInsetsMake(10, 16, 10, 16) clickedBlock:^(id  _Nonnull selectItem, NSInteger index) {
-            
+            id<TSRecomendGoodsProtocol> item = selectItem;
+            NSString *uri = [[TSServicesManager sharedInstance].uriHandler configUriWithTypeValue:@"Goods" objectValue:item.uuid];
+            [[TSServicesManager sharedInstance].uriHandler openURI:uri];
         }];
         @weakify(self);
         _collectionView.collectionView.backgroundColor = KWhiteColor;
