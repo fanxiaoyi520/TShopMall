@@ -26,8 +26,8 @@
     if (_dataSource && [_dataSource respondsToSelector:@selector(numberOfContentsInContainerView:)]) {
         NSInteger count = [_dataSource numberOfContentsInContainerView:self];
         for (int i = 0; i < count; i ++) {
-            if (_dataSource && [_dataSource respondsToSelector:@selector(viewForContainerViewController:)]) {
-                UIView *view = [_dataSource viewForContainerViewController:self];
+            if (_dataSource && [_dataSource respondsToSelector:@selector(viewForContainerViewController:currentPage:)]) {
+                UIView *view = [_dataSource viewForContainerViewController:self currentPage:i];
 //                [self.view addSubview:view];
                 [self.containers addObject:view];
                 

@@ -12,7 +12,7 @@
 - (void)getReleaseData{
     
     NSArray *temp = [NSArray yy_modelArrayWithClass:TSImageBaseModel.class json:self.model.data[@"list"]];
-    self.releaseModel = temp.firstObject;
+    self.ReleaseDatas = temp;
 }
 
 

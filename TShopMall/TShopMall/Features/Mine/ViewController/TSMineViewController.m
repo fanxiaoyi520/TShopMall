@@ -15,6 +15,7 @@
 #import "TSMineNavigationBar.h"
 #import "TSUniversalCollectionViewCell.h"
 #import "TSMineEarningsCell.h"
+#import "TSMineLeftBarView.h"
 
 #import "TSMineWalletCenterViewController.h"
 #import "TSSettingViewController.h"
@@ -33,6 +34,8 @@
 @property(nonatomic, strong) TSUserInfoView *infoView;
 /// CollectionView
 @property(nonatomic, strong) UICollectionView *collectionView;
+///左边导航view
+@property(nonatomic, strong) TSMineLeftBarView *leftBarView;
 
 /// 数据中心
 @property(nonatomic, strong) TSMineDataController *dataController;
@@ -57,7 +60,9 @@
         [self.dataController fetchDataComplete:^(BOOL isSucess) {
             __strong __typeof(weakSelf)strongSelf = weakSelf;
             if (isSucess) {
-                [self.infoView setModel:self.dataController.merchantUserInformationModel];
+                [strongSelf.infoView setModel:strongSelf.dataController.merchantUserInformationModel];
+                [strongSelf.leftBarView.userImg sd_setImageWithURL:[NSURL URLWithString:strongSelf.dataController.merchantUserInformationModel.customerImgUrl]];
+                strongSelf.leftBarView.userName.text = strongSelf.dataController.merchantUserInformationModel.customerName;
                 [strongSelf.collectionView reloadData];
             }
         }];
@@ -75,7 +80,7 @@
     
     self.bgImageView.frame = CGRectMake(0, 0, kScreenWidth, 205);
     self.collectionView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight - GK_TABBAR_HEIGHT);
-    self.infoView.frame = CGRectMake(0, 30, kScreenWidth, 60);
+    self.infoView.frame = CGRectMake(0, 30, kScreenWidth, 90);
     self.setButton.frame = CGRectMake(kScreenWidth - 48, top, 32, 32);
 }
 
@@ -83,13 +88,11 @@
     [super setupNavigationBar];
     
     self.gk_navigationBar.alpha = 0;
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithImage:KImageMake(@"mall_mine_setting") style:UIBarButtonItemStylePlain target:self action:@selector(setAction:)];
+    item.tintColor = [UIColor blackColor];
+    self.gk_navRightBarButtonItem = item;
+    self.gk_navLeftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.leftBarView];
     
-    UIButton *setButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [setButton setTitle:@"设置" forState:UIControlStateNormal];
-    [setButton setTitleColor:KTextColor forState:UIControlStateNormal];
-    setButton.titleLabel.font = KRegularFont(14);
-    [setButton addTarget:self action:@selector(setAction:) forControlEvents:UIControlEventTouchUpInside];
-    self.gk_navRightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:setButton];
 }
 
 #pragma mark - Noti
@@ -167,7 +170,8 @@
         TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:path];
         [self.navigationController pushViewController:hybrid animated:YES];
     }else if (indexPath.section == 0 && indexPath.row == 4){//退款退货
-        NSString *path = [NSString stringWithFormat:@"%@%@",kMallH5ApiPrefix,kMallH5RefundManageUrl];
+//        NSString *path = [NSString stringWithFormat:@"%@%@",@"http://10.68.245.26:8081/seller-app-h5/",kMallH5RefundManageUrl];
+        NSString *path = @"http://10.68.245.26:8081/seller-app-h5/pages/bridgeDemo/index";
         TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:path];
         [self.navigationController pushViewController:hybrid animated:YES];
     }
@@ -256,7 +260,14 @@
 #pragma mark - UniversalCollectionViewCellDataDelegate
 -(id)universalCollectionViewCellModel:(NSIndexPath *)indexPath{
     TSMineSectionModel *sectionModel = self.dataController.sections[indexPath.section];
-    return sectionModel.items[indexPath.row];
+    if ([sectionModel.items[indexPath.row].identify isEqualToString: @"TSMineEarningsCell"]) {
+        return  self.dataController.earningModel;
+    } else if ([sectionModel.items[indexPath.row].identify isEqualToString: @"TSMinePartnerCenterCell"]) {
+        return  self.dataController.partnerCenterDataModel;
+    } else {
+        return sectionModel.items[indexPath.row];
+    }
+    
 }
 
 - (void)universalCollectionViewCellClick:(NSIndexPath *)indexPath params:(NSDictionary *)params {
@@ -265,12 +276,23 @@
         NSInteger clickType = (NSInteger)[params objectForKey:@"clickType"];
         switch (clickType) {
             case 0:
-                break;
+        self.dataController.earningModel.eyeIsOn = ! self.dataController.earningModel.eyeIsOn;
+            break;
         }
     }else if ([@"TSMinePartnerCenterCell" isEqualToString:cellType]){
-        NSString *path = [NSString stringWithFormat:@"%@%@",kMallH5ApiPrefix,kMallH5CopartnerUrl];
-        TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:path];
-        [self.navigationController pushViewController:hybrid animated:YES];
+        switch ([params[@"clickType"] integerValue] ) {
+            case 0:
+                self.dataController.partnerCenterDataModel.eyeIsOn = !self.dataController.partnerCenterDataModel.eyeIsOn;
+             break;
+            default:
+            {
+                NSString *path = [NSString stringWithFormat:@"%@%@",kMallH5ApiPrefix,kMallH5CopartnerUrl];
+                TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:path];
+                [self.navigationController pushViewController:hybrid animated:YES];
+            }
+                break;
+        }
+       
     }
 }
 
@@ -397,21 +419,30 @@ spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
         [_setButton addTarget:self action:@selector(setAction:) forControlEvents:UIControlEventTouchUpInside];
         _setButton.imageView.contentMode = UIViewContentModeCenter;
     }
+    
     return _setButton;
+}
+
+-(TSMineLeftBarView *)leftBarView{
+    if (!_leftBarView) {
+        _leftBarView = [[TSMineLeftBarView  alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth/2, 44)];
+    }
+    return _leftBarView;
 }
 
 -(UIImageView *)bgImageView{
     if (!_bgImageView) {
         _bgImageView = [[UIImageView alloc] init];
         _bgImageView.image = KImageMake(@"mall_mine_bg");
+        _bgImageView.contentMode = UIViewContentModeRedraw;
     }
     return _bgImageView;
 }
 
 -(TSUserInfoView *)infoView{
     if (!_infoView) {
-        _infoView = [[TSUserInfoView alloc] initWithRoleType:TSRoleTypePlatinum];
-        _infoView.kDelegate = self;
+        _infoView = [[TSUserInfoView alloc] init];
+        _infoView.kDelegate = self; 
     }
     return _infoView;
 }

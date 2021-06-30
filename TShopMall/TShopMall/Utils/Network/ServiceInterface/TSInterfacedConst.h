@@ -55,6 +55,7 @@ UIKIT_EXTERN NSString *const kGoodDetailHasProductUrl;
 UIKIT_EXTERN NSString *const kGoodDetailChangeChooseUrl;
 UIKIT_EXTERN NSString *const kGoodDetailFastBuyUrl;
 UIKIT_EXTERN NSString *const kGoodDetailCarriageCostUrl;
+UIKIT_EXTERN NSString *const kGoodDetailStaffShareUrl;
 
 #pragma mark - 分类
 UIKIT_EXTERN NSString *const kShopContentUrl;
@@ -96,8 +97,8 @@ UIKIT_EXTERN NSString * const kMinePartnerCenterData;
 UIKIT_EXTERN NSString * const kMineWithdrawalRecordListData;//提现记录
 UIKIT_EXTERN NSString * const kMineWalletData;//我的钱包
 UIKIT_EXTERN NSString * const kMineQueryProfit;//我的收益
-
-
+UIKIT_EXTERN NSString * const kMineShopContentUrl;//广告图
+UIKIT_EXTERN NSString *const kMineOrderCount;//查询订单各状态下的订单数
 #pragma mark - 设置
 UIKIT_EXTERN NSString *const kAboutMeAgreementUrl;
 UIKIT_EXTERN NSString *const kModifyUserUrl;
@@ -110,3 +111,4 @@ UIKIT_EXTERN NSString * const kMineGetBankInfo;//查询支行
 UIKIT_EXTERN NSString * const kMineDelBankCardAccount;//删除银行卡
 UIKIT_EXTERN NSString * const kMineQueryAmount;//查询我的余额
 UIKIT_EXTERN NSString * const kMineGetBankNames;//查询银行列表
+UIKIT_EXTERN NSString * const kAboutMeAgreementUrl;

@@ -31,23 +31,11 @@
     @weakify(self);
     // Do any additional setup after loading the view.
     if ([TSUserLoginManager shareInstance].state == TSLoginStateNone) {
-        
-        [[TSUserLoginManager shareInstance] configLoginController:^(UIViewController * _Nonnull vc) {
-            @strongify(self)
-            [self addChildViewController:vc];
-            self.loginVC = vc;
-            if ([self.loginVC isKindOfClass:TSLoginViewController.class]) {
-                [self showAlertInView:[UIApplication sharedApplication].keyWindow];
-            }
-            
-            [self.view addSubview:vc.view];
-        }];
-        
+        [self configLoginController];
     }else{
-       
-        self.tab = [TSTabBarController new];
-        [self addChildViewController:self.tab];
-        [self.view addSubview:self.tab.view];
+        if (self.rootViewControllerBlock) {
+            self.rootViewControllerBlock([TSTabBarController new]);
+        }
     }
     
     [TSUserLoginManager shareInstance].loginBlock = ^{
@@ -55,23 +43,33 @@
         [self.view removeAllSubviews];
         [self.loginVC removeFromParentViewController];
         
-        self.tab = [TSTabBarController new];
-        [self addChildViewController:self.tab];
-        [self.view addSubview:self.tab.view];
+        if (self.rootViewControllerBlock) {
+            self.rootViewControllerBlock([TSTabBarController new]);
+        }
     };
     
     [TSUserLoginManager shareInstance].logoutBlock = ^{
         @strongify(self)
         [self.view removeAllSubviews];
-        [self.tab removeFromParentViewController];
-        [[TSUserLoginManager shareInstance] configLoginController:^(UIViewController * _Nonnull vc) {
-            @strongify(self)
-            self.loginVC = vc;
-            [self addChildViewController:vc];
-            [self.view addSubview:vc.view];
-        }];
+        if (self.rootViewControllerBlock) {
+            self.rootViewControllerBlock(self);
+        }
     };
     
+}
+
+- (void)configLoginController{
+    @weakify(self);
+    [[TSUserLoginManager shareInstance] configLoginController:^(UIViewController * _Nonnull vc) {
+        @strongify(self)
+        self.loginVC = vc;
+        [self addChildViewController:vc];
+        [self.view addSubview:vc.view];
+        
+        if ([self.loginVC isKindOfClass:TSLoginViewController.class]) {
+            [self showAlertInView:[UIApplication sharedApplication].keyWindow];
+        }
+    }];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {

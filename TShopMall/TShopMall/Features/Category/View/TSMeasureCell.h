@@ -5,11 +5,10 @@
 //  Created by 陈结 on 2021/6/10.
 //
 
-#import "TSUniversalCollectionViewCell.h"
-
+#import "TSTableViewBaseCell.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TSMeasureCell : TSUniversalCollectionViewCell
+@interface TSMeasureCell : TSTableViewBaseCell
 
 @end
 

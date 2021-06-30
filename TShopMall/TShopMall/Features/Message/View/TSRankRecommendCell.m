@@ -17,7 +17,7 @@
 @implementation TSRankRecommendCell
 
 - (void)setupUI{
-    self.contentView.backgroundColor = KWhiteColor;
+    self.contentView.backgroundColor = KHexColor(@"#F4F4F4");
     [self.contentView addSubview:self.goodsView];
     [self.goodsView mas_remakeConstraints:^(MASConstraintMaker *make) {
        make.edges.equalTo(self.contentView);

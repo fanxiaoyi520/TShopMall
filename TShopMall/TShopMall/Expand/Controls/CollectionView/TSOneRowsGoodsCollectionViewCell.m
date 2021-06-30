@@ -16,6 +16,8 @@
 @property (nonatomic, strong) TSHighPriceTagView *highPriceView;
 @property (nonatomic, strong) UILabel *getPriceLabel;
 @property (nonatomic, strong) UILabel *rmbLabel;
+@property (nonatomic, strong) UIView *line;
+
 @end
 
 @implementation TSOneRowsGoodsCollectionViewCell
@@ -26,8 +28,10 @@
         self.backgroundColor = [UIColor whiteColor];
         [self addSubview: self.imageView];
         [self.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.left.equalTo(self.contentView);
-            make.height.width.equalTo(@120);
+            make.top.equalTo(self.contentView).offset(10);
+            make.left.equalTo(self.contentView).offset(16);
+            make.bottom.equalTo(self.contentView).offset(-10);
+            make.width.equalTo(@(self.contentView.height-20));
         }];
         
         [self addSubview: self.titleLabel];
@@ -37,8 +41,6 @@
             make.right.equalTo(self.contentView);
             make.height.equalTo(@44).priorityLow();;
         }];
-        
-
         
         [self addSubview:self.rmbLabel];
         [self.rmbLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -64,10 +66,19 @@
         
         [self addSubview: self.getPriceLabel];
         [self.getPriceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.priceLabel.mas_bottom);
+//            make.top.equalTo(self.priceLabel.mas_bottom);
             make.left.equalTo(self.imageView.mas_right).offset(8);
             make.height.equalTo(@16);
-            make.bottom.equalTo(self.contentView).offset(-8).priorityLow();;
+            make.bottom.equalTo(self.imageView.mas_bottom).priorityLow();;
+        }];
+        
+        [self addSubview: self.line];
+        [self.line mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.top.equalTo(self.priceLabel.mas_bottom);
+            make.left.equalTo(self.imageView.mas_right).offset(8);
+            make.right.equalTo(self.contentView);
+            make.height.equalTo(@0.5);
+            make.bottom.equalTo(self.contentView).offset(-0.5);
         }];
     }
     return self;
@@ -168,5 +179,13 @@
         _highPriceView.clipsToBounds = YES;
     }
     return _highPriceView;
+}
+
+- (UIView *)line{
+    if (!_line) {
+        _line = [UIView new];
+        _line.backgroundColor = KHexColor(@"E6E6E6");
+    }
+    return _line;
 }
 @end

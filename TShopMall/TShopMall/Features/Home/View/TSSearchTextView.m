@@ -53,7 +53,7 @@
     self.textField.clearButtonMode = UITextFieldViewModeWhileEditing;
     [self.textField setPlaceholderColor:[KHexColor(@"#2D3132") colorWithAlphaComponent:0.6] fontType:PingFangSCRegular fontSize:12.0];
     [self.textField setTextColor:KHexColor(@"#2D3132") fontType:PingFangSCRegular fontSize:12.0];
-    self.textField.placeholder = @"请输入商品编号";
+    self.textField.placeholder = @"请输入商品";
     [self addSubview:self.textField];
     
     return self.textField;

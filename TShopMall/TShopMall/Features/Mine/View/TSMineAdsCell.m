@@ -24,6 +24,11 @@
     }];
 }
 
+- (void)setDelegate:(id<UniversalCollectionViewCellDataDelegate>)delegate {
+    [delegate universalCollectionViewCellModel:self.indexPath];
+//    [_adsImageView sd_setImageWithURL:<#(nullable NSURL *)#>]
+}
+
 #pragma mark - Getter
 -(UIImageView *)adsImageView{
     if (!_adsImageView) {

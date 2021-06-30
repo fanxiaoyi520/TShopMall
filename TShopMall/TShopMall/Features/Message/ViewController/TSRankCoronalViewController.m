@@ -8,10 +8,11 @@
 #import "TSRankCoronalViewController.h"
 #import "TSRankDataController.h"
 #import "TSRankMonthViewController.h"
+#import "TSMonthTitleView.h"
 
 @interface TSRankCoronalViewController ()
 
-@property(nonatomic, strong) JXCategoryTitleView *myCategoryView;
+@property(nonatomic, strong) TSMonthTitleView *myCategoryView;
 @property(nonatomic, strong) TSRankDataController *dataController;
 
 @end
@@ -21,19 +22,21 @@
 -(void)viewDidLoad{
     [super viewDidLoad];
     
+    self.view.backgroundColor = KClearColor;
     self.gk_navigationBar.hidden = YES;
+    
     self.myCategoryView.titles = self.titles;
     self.myCategoryView.cellSpacing = 0;
-    self.myCategoryView.titleFont = KRegularFont(16);
-    self.myCategoryView.titleSelectedFont = KRegularFont(16);
-    self.myCategoryView.titleColor = KHexAlphaColor(@"#2D3132", 0.4);
-    self.myCategoryView.titleSelectedColor = KHexColor(@"#E64C3D");
-    self.myCategoryView.backgroundColor = [UIColor whiteColor];
+    CGFloat padding = (kScreenWidth - 71 * 2) / 2;
+    self.myCategoryView.contentEdgeInsetLeft = padding;
+    self.myCategoryView.contentEdgeInsetRight = padding;
+    self.myCategoryView.cellWidth = 71;
+    self.myCategoryView.titleFont = KRegularFont(14);
+    self.myCategoryView.titleSelectedFont = KRegularFont(14);
+    self.myCategoryView.titleColor = [KWhiteColor colorWithAlphaComponent:0.5];
+    self.myCategoryView.titleSelectedColor = KWhiteColor;
+    self.myCategoryView.backgroundColor = KClearColor;
     
-    JXCategoryIndicatorLineView *lineView = [[JXCategoryIndicatorLineView alloc ]init];
-    lineView.indicatorColor = [UIColor whiteColor];
-    self.myCategoryView.indicators = @[lineView];
-    self.myCategoryView.separatorLineShowEnabled = YES;
     @weakify(self);
     [self.dataController fetchRankCoronalComplete:^(BOOL isSucess) {
         @strongify(self)
@@ -46,7 +49,11 @@
 }
 
 - (JXCategoryBaseView *)preferredCategoryView {
-    return [[JXCategoryTitleView alloc] init];
+    return [[TSMonthTitleView alloc] init];
+}
+
+- (CGFloat)preferredCategoryViewHeight {
+    return 53;
 }
 
 #pragma mark - JXCategoryViewDelegate

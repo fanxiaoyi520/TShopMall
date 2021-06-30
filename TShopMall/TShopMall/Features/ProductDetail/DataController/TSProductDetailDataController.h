@@ -14,6 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TSProductDetailDataController : TSBaseDataController
 
+/// 商品主图
+@property(nonatomic, copy) NSString *bigImageUrl;
+
 /// 商品sku
 @property(nonatomic, copy) NSString *attrId;
 /// 商品skuNo
@@ -26,6 +29,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy) NSString *cartNumber;
 /// 购买数量(默认购买数量为1)
 @property(nonatomic, copy) NSString *buyNum;
+/// 挂牌价
+@property(nonatomic, copy) NSString *marketPrice;
+/// 提货价
+@property(nonatomic, copy) NSString *staffPrice;
 
 @property(nonatomic, strong) TSLocationInfoModel *locationModel;
 
@@ -110,6 +117,22 @@ NS_ASSUME_NONNULL_BEGIN
                                        buyNum:(NSString *)buyNum
                                        attrId:(NSString *)attrId
                           complete:(void(^)(BOOL isSucess))complete;
+
+
+/// 员工分享
+/// @param shareType 分享类型
+-(void)fetchStaffShareShareType:(NSUInteger)shareType
+                       complete:(void(^)(BOOL isSucess, NSDictionary *data))complete;
+
+
+
+/// 特权分享设置特权优惠价
+/// @param discountType 优惠方式:打折(percent)、指定价格(price)
+/// @param productUuid 需要分享的商品
+/// @param complete 请求创建分享票据
+-(void)fetchProductDiscountPriceDiscountType:(NSString *)discountType
+                                 productUuid:(NSString *)productUuid
+                                    complete:(void(^)(BOOL isSucess))complete;
 
 @end
 

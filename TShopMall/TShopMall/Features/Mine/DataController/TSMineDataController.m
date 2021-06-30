@@ -20,6 +20,10 @@
 @property (nonatomic, copy) NSString *amount;
 @property (nonatomic, strong) NSMutableArray <TSBranchCardModel *> *branchCardArray;
 @property (nonatomic, strong) NSMutableArray <TSAddBankCardBackModel *> *addBankCardBackArray;
+@property (nonatomic, strong) TSWithdrawalRecordModel *withdrawalRecordModel;
+@property (nonatomic, strong) TSMineWalletEarningModel *earningModel;
+@property (nonatomic, strong) TSMineOrderCountModel *orderInfo;
+
 @end
 
 @implementation TSMineDataController
@@ -43,9 +47,33 @@
             TSMineSectionOrderItemModel *item = [[TSMineSectionOrderItemModel alloc] init];
             item.title = title;
             item.imageName = image;
-            item.cellHeight = 75;
+            item.cellHeight = 80;
             item.identify = @"TSMineImageTextCell";
-            
+            switch (i) {
+                case 0:
+                    item.orderCount = self.orderInfo.waitpay;
+                    break;
+                case 1:
+                    item.orderCount = self.orderInfo.waitship;
+                    break;
+
+                case 2:
+                    item.orderCount = self.orderInfo.shipping;
+                    break;
+
+                case 3:
+                    item.orderCount = self.orderInfo.succeedorder;
+                    break;
+
+                case 4:
+                    item.orderCount = self.orderInfo.waitpay;
+                    break;
+                case 5:
+                    item.orderCount = self.orderInfo.afterorder;
+                    break;
+                default:
+                    break;
+            }
             [items addObject:item];
         }
 
@@ -55,7 +83,7 @@
         section.headerSize = CGSizeMake(0, 45);
         section.headerIdentify = @"TSMineOrderHeaderView";
         section.hasFooter = YES;
-        section.footerSize = CGSizeMake(0, 24);
+        section.footerSize = CGSizeMake(0, 14);
         section.footerIdentify = @"TSUniversalBottomFooterView";
         section.sectionInset = UIEdgeInsetsMake(0, 16, 0, 16);
         section.spacingWithLastSection = 130;
@@ -123,8 +151,8 @@
     {
         NSMutableArray *items = [NSMutableArray array];
         
-        NSArray *titles = @[@"在线客服",@"发票管理",@"地址管理",@"官方服务",@"去评分"];
-        NSArray *images = @[@"mall_mine_service",@"mall_mine_invoice_manager",@"mall_mine_address_manager",@"mall_mine_official",@"mall_mine_evaluate"];
+        NSArray *titles = @[@"官方服务",@"在线客服",@"发票管理",@"地址管理",@"去评分"];
+        NSArray *images = @[@"mall_mine_official",@"mall_mine_service",@"mall_mine_invoice_manager",@"mall_mine_address_manager",@"mall_mine_evaluate"];
         
         for (int i = 0; i < titles.count; i++) {
             NSString *title = titles[i];
@@ -137,6 +165,14 @@
             item.identify = @"TSMineImageTextCell";
             
             [items addObject:item];
+        }
+        if (![self.merchantUserInformationModel.rankLevel isEqualToString:@"1"]) {
+            TSMineSectionOrderItemModel *item = [[TSMineSectionOrderItemModel alloc] init];
+            item.title = @"合伙人中心";
+            item.imageName = @"mall_mine_partner_center";
+            item.cellHeight = 75;
+            item.identify = @"TSMineImageTextCell";
+            [items insertObject:item atIndex:0];
         }
         
 #if DEBUG
@@ -193,8 +229,9 @@
 -(void)fetchDataComplete:(void(^)(BOOL isSucess))complete {
     dispatch_group_t group = dispatch_group_create();
 
-    dispatch_group_enter(group);
+   
     dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+      dispatch_group_enter(group);
         [self requestMethodWithGroup:group withIndex:1];
     });
 
@@ -203,8 +240,27 @@
         [self requestMethodWithGroup:group withIndex:2];
     });
 
+    dispatch_group_enter(group);
+    dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self requestMethodWithGroup:group withIndex:3];
+    });
+    
+    dispatch_group_enter(group);
+    dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self requestMethodWithGroup:group withIndex:4];
+    });
+    
+    dispatch_group_enter(group);
+    dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self requestMethodWithGroup:group withIndex:5];
+    });
+    
     dispatch_group_notify(group, dispatch_get_main_queue(), ^{
         if (complete) {
+        self.partnerCenterDataModel.rankLevel = self.merchantUserInformationModel.rankLevel;
+        [self fetchMineContentsComplete:^(BOOL isSucess) {
+                
+            }];
             complete(YES);
         }
     });
@@ -223,11 +279,18 @@
              if (aIndex == 1) {
                  TSMineMerchantUserInformationModel *model = [TSMineMerchantUserInformationModel yy_modelWithDictionary:data];
                  self.merchantUserInformationModel = model;
-             } else {
+             } else if (aIndex == 2) {
                  TSPartnerCenterData *model = [TSPartnerCenterData yy_modelWithDictionary:data];
                  self.partnerCenterDataModel = model;
+                 self.partnerCenterDataModel.eyeIsOn = YES;
+             } else if (aIndex == 3){
+               self.earningModel = [TSMineWalletEarningModel yy_modelWithDictionary:data];
+                 self.earningModel.eyeIsOn = YES;
+             } else if (aIndex == 5){
+                 self.orderInfo =  [TSMineOrderCountModel yy_modelWithDictionary:data];
              }
          }
+         
          dispatch_group_leave(thegroup);
      } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
          dispatch_group_leave(thegroup);
@@ -241,6 +304,7 @@
     if ([TSGlobalManager shareInstance].currentUserInfo) {
         [header setValue:[TSGlobalManager shareInstance].currentUserInfo.accessToken forKey:@"accessToken"];
     }
+   
     SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kMineMerchantUserInformation
                                                                requestMethod:YTKRequestMethodGET
                                                        requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON
@@ -252,14 +316,10 @@
 }
 
 - (SSGenaralRequest *)request2{
-    
     NSMutableDictionary *header = [NSMutableDictionary dictionary];
-    if ([TSGlobalManager shareInstance].currentUserInfo) {
-        [header setValue:[TSGlobalManager shareInstance].currentUserInfo.accessToken forKey:@"accessToken"];
-    }
-    
+ 
     SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kMinePartnerCenterData
-                                                               requestMethod:YTKRequestMethodPOST
+                                                               requestMethod:YTKRequestMethodGET
                                                        requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON
                                                                requestHeader:header
                                                                  requestBody:NSMutableDictionary.dictionary
@@ -268,6 +328,64 @@
     return request;
 }
 
+//收益
+- (SSGenaralRequest *)request3{
+    
+    NSMutableDictionary *header = [NSMutableDictionary dictionary];
+    if ([TSGlobalManager shareInstance].currentUserInfo) {
+        [header setValue:[TSGlobalManager shareInstance].currentUserInfo.accessToken forKey:@"accessToken"];
+    }
+//    [header setValue:@"application/json" forKey:@"Content-Type"];
+    NSMutableDictionary *body = [NSMutableDictionary dictionary];
+    [body setValue:@"6226097804210467" forKey:@"bankCardNo"];
+    [body setValue:@"招商银行" forKey:@"accountBank"];
+    [body setValue:@"CMD" forKey:@"accountBankCode"];
+    [body setValue:@"招商银行北京支行" forKey:@"bankName"];
+    [body setValue:@"308551024051" forKey:@"bankBranchId"];
+    [body setValue:@"北京市" forKey:@"bankAddressProvince"];
+    [body setValue:@"110000" forKey:@"bankAddressProvinceCode"];
+    [body setValue:@"北京市" forKey:@"bankAddressCity"];
+    [body setValue:@"110000" forKey:@"bankAddressCityCode"];
+    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kMineQueryProfit
+                                                               requestMethod:YTKRequestMethodGET
+                                                       requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON
+                                                               requestHeader:header
+                                                                 requestBody:body
+                                                              needErrorToast:YES];
+    
+    return request;
+}
+
+//广告图
+- (SSGenaralRequest *)request4{
+    
+    NSMutableDictionary *header = [NSMutableDictionary dictionary];
+    if ([TSGlobalManager shareInstance].currentUserInfo) {
+        [header setValue:[TSGlobalManager shareInstance].currentUserInfo.accessToken forKey:@"accessToken"];
+    }
+    [header setValue:@"application/json" forKey:@"Content-Type"];
+    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kMineShopContentUrl
+                                                               requestMethod:YTKRequestMethodGET
+                                                       requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON
+                                                               requestHeader:header
+                                                                 requestBody:NSMutableDictionary.dictionary
+                                                              needErrorToast:YES];
+    
+    return request;
+}
+//查询订单各状态下的订单数
+- (SSGenaralRequest *)request5{
+    NSMutableDictionary *header = [NSMutableDictionary dictionary];
+ 
+    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kMineOrderCount
+                                                               requestMethod:YTKRequestMethodPOST
+                                                       requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON
+                                                               requestHeader:header
+                                                                 requestBody:NSMutableDictionary.dictionary
+                                                              needErrorToast:YES];
+    
+    return request;
+}
 // MARK: 我的钱包
 - (void)fetchMineWalletDataComplete:(void(^)(BOOL isSucess))complete {
     SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kMineWalletData

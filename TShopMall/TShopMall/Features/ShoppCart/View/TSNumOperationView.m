@@ -50,7 +50,6 @@
 - (void)addAction{
     [self endEditing:YES];
     if (self.addBtn.selected == YES) {
-        [self executeOperationDone:Add];
         return;
     }
     NSInteger num = self.number.text.intValue;
@@ -67,7 +66,6 @@
 - (void)diviAction{
     [self endEditing:YES];
     if (self.diviBtn.selected == YES) {
-        [self executeOperationDone:Divi];
         return;
     }
     NSInteger num = self.number.text.intValue;

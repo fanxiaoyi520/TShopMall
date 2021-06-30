@@ -18,14 +18,16 @@
     params[@"integralReduceNum"] = @"";//积分扣减金额
     params[@"totalMoneyShow"] = balanceInfo.orderTotalMoney;//订单总价
     
-    params[@"invoiceCate"] = [NSString stringWithFormat:@"%ld", invoice.formType];
-    params[@"invoiceUuid"] = invoice.uuid.length==0? @"":invoice.uuid;
-    params[@"electron_titleContent"] = invoice.titleContent.length==0? @"":invoice.titleContent;
-    params[@"electron_code"] = invoice.code.length==0? @"":invoice.code;
-    params[@"add_companyName"] = invoice.companyName.length==0? @"":invoice.companyName;
-    params[@"add_code"] = invoice.code.length==0? @"":invoice.code;
-    params[@"add_address"] = invoice.registerAddress.length==0? @"":invoice.registerAddress;
-    params[@"add_registerMobile"] = invoice.mobile.length==0? @"":invoice.mobile;
+    if (invoice) {
+        params[@"invoiceCate"] = [NSString stringWithFormat:@"%ld", invoice.formType];
+        params[@"invoiceUuid"] = invoice.uuid.length==0? @"":invoice.uuid;
+        params[@"electron_titleContent"] = invoice.titleContent.length==0? @"":invoice.titleContent;
+        params[@"electron_code"] = invoice.code.length==0? @"":invoice.code;
+        params[@"add_companyName"] = invoice.companyName.length==0? @"":invoice.companyName;
+        params[@"add_code"] = invoice.code.length==0? @"":invoice.code;
+        params[@"add_address"] = invoice.registerAddress.length==0? @"":invoice.registerAddress;
+        params[@"add_registerMobile"] = invoice.mobile.length==0? @"":invoice.mobile;
+    }
     
     for (TSBalanceCartManagerDetailModel *detail in balanceInfo.cartManager.detailModelList) {
         params[[NSString stringWithFormat:@"productPrice_%@", detail.attrAndValue]] = detail.totalPrice;

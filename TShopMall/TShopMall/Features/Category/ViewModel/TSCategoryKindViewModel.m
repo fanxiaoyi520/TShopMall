@@ -6,7 +6,9 @@
 //
 
 #import "TSCategoryKindViewModel.h"
-
+@interface TSCategoryKindViewModel()
+@property (nonatomic, assign) NSInteger selectedRow;
+@end
 @implementation TSCategoryKindViewModel
 
 -(void)viewModelWithKinds:(nonnull NSArray <TSCategoryKindModel *> *)kinds selectedRow:(NSUInteger)selectedRow{
@@ -26,6 +28,8 @@
 }
 
 -(void)viewModelExchangeSelectedRow:(NSUInteger)selectedRow{
+    self.selectedRow = selectedRow;
+    
     for (int i = 0; i < self.cellViewModels.count; i++) {
         TSCategoryKindCellViewModel *cellModel = self.cellViewModels[i];
         if (i == selectedRow) {

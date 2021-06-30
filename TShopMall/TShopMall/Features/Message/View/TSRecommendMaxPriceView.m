@@ -29,7 +29,7 @@
 
 - (instancetype)init
 {
-    self = [super initWithFrame:CGRectMake(0, 0, KRateW(69), KRateH(18))];
+    self = [super initWithFrame:CGRectMake(0, 0, KRateW(69), KRateW(18))];
     if (self) {
         //right
         self.right_img = [[UIImageView alloc] initWithImage:KImageMake(@"mall_category_maxPrice_right")];
@@ -42,6 +42,7 @@
         self.left_label = [UILabel new];
         self.left_label.font = KRegularFont(10);
         self.left_label.textColor = KWhiteColor;
+        self.left_label.textAlignment = NSTextAlignmentCenter;
         self.left_label.text = @"最高赚";
         [self.left_img addSubview:self.left_label];
         

@@ -18,7 +18,7 @@
     [self.icon sd_setImageWithURL:url];
     self.name.text = vm.name;
     self.thPrice.text = [NSString stringWithFormat:@"提货价: ¥%@", vm.thPrice];
-    self.price.text = [NSString stringWithFormat:@"¥ %@", vm.price];
+    self.price.text = [NSString stringWithFormat:@"¥%@", vm.price];
     [self.earnView updatePrice:vm.earn];
 }
 
@@ -60,7 +60,7 @@
         make.left.equalTo(self.name);
         make.right.equalTo(self.mas_right);
         make.bottom.equalTo(self.icon.mas_bottom);
-        make.height.mas_equalTo(1);
+        make.height.mas_equalTo(0.33);
     }];
 }
 
@@ -129,7 +129,7 @@
         return _line;
     }
     self.line = [UILabel new];
-    self.line.backgroundColor = KHexColor(@"#E6E6E6");
+    self.line.backgroundColor = KHexColor(@"#F4F4F4");
     [self addSubview:self.line];
     
     return self.line;

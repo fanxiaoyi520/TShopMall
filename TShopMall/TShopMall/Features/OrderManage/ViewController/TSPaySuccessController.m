@@ -11,6 +11,7 @@
 #import "TSRecomendDataController.h"
 #import "TSPaySuccessBaseCell.h"
 #import "TSHybridViewController.h"
+#import "TSProductDetailController.h"
 
 @interface TSPaySuccessController ()<TSPaySucceddCellDelegate>
 @property (nonatomic, strong) TSPaySuccessView *collectionView;
@@ -64,8 +65,10 @@
     self.navigationController.viewControllers = arr;
 }
 
-- (void)recomendGoodsTapped:(TSRecomendGoods *)goods{
-    
+- (void)recomendGoodsTapped:(NSString *)uuid{
+    TSProductDetailController *detail = [[TSProductDetailController alloc] init];
+    detail.uuid = uuid;
+    [self.navigationController pushViewController:detail animated:YES];
 }
 
 - (void)changeNaviBarBgAlpha:(NSString *)alpha{

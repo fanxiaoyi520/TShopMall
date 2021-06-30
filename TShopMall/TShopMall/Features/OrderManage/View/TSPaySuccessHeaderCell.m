@@ -112,6 +112,7 @@
     self.backHomeBtn.layer.borderWidth = 1;
     self.backHomeBtn.layer.borderColor = KHexColor(@"#E64C3D").CGColor;
     [self.operationView addSubview:self.backHomeBtn];
+    [self.backHomeBtn addTarget:self action:@selector(backHomeAction) forControlEvents:UIControlEventTouchUpInside];
     
     return self.backHomeBtn;
 }
@@ -128,6 +129,7 @@
     self.orderDetailBtn.layer.borderWidth = 1;
     self.orderDetailBtn.layer.borderColor = KHexColor(@"#E64C3D").CGColor;
     [self.operationView addSubview:self.orderDetailBtn];
+    [self.orderDetailBtn addTarget:self action:@selector(orderDetailAction) forControlEvents:UIControlEventTouchUpInside];
     
     return self.orderDetailBtn;
 }

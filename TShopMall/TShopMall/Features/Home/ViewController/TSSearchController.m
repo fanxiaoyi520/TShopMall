@@ -9,15 +9,15 @@
 #import "TSBaseNavigationController.h"
 #import "TSSearchView.h"
 #import "TSSearchDataController.h"
-#import "TSSearchResultController.h"
 #import "TSSearchKeyViewModel.h"
-#import "TSTestSearchResultController.h"
+#import "TSSearchResultController.h"
 #import "TSRecomendDataController.h"
+#import "TSProductDetailController.h"
 
 @interface TSSearchController ()
 @property (nonatomic, strong) TSSearchView *searchView;
 @property (nonatomic, strong) TSSearchDataController *dataCon;
-@property (nonatomic, strong) TSTestSearchResultController *searchResultCon;
+@property (nonatomic, strong) TSSearchResultController *searchResultCon;
 @end
 
 @implementation TSSearchController
@@ -28,6 +28,14 @@
     naviCon.modalPresentationStyle = UIModalPresentationFullScreen;
     UIViewController *con = [UIApplication sharedApplication].delegate.window.rootViewController;
     [con presentViewController:naviCon animated:YES completion:nil];
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle{
+    if (@available(iOS 13.0, *)) {
+        return [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDarkContent;
+    } else {
+        return [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+    }
 }
 
 - (void)viewDidLoad {
@@ -42,6 +50,12 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super view];
     [self hiddenNavigationBar];
+    
+    if (@available(iOS 13.0, *)) {
+        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDarkContent;
+    } else {
+        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+    }
 }
 
 - (void)refreshData{
@@ -69,8 +83,10 @@
     [self.searchResultCon showSearchResultView];
 }
 
-- (void)recomentGoodsSelected:(TSRecomendModel *)recomend{
-    
+- (void)recomentGoodsSelected:(NSString *)uuid{
+    TSProductDetailController *detail = [[TSProductDetailController alloc] init];
+    detail.uuid = uuid;
+    [self.navigationController pushViewController:detail animated:YES];
 }
 
 - (void)viewWillLayoutSubviews{
@@ -91,11 +107,11 @@
     return self.searchView;
 }
 
-- (TSTestSearchResultController *)searchResultCon{
+- (TSSearchResultController *)searchResultCon{
     if (_searchResultCon) {
         return _searchResultCon;
     }
-    self.searchResultCon = [TSTestSearchResultController new];
+    self.searchResultCon = [TSSearchResultController new];
     self.searchResultCon.view.frame = self.view.frame;
     [self.view addSubview:self.searchResultCon.view];
     [self addChildViewController:self.searchResultCon];

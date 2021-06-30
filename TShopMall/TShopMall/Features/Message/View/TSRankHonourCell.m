@@ -10,8 +10,7 @@
 @interface TSRankHonourCell()
 /// 背景视图
 @property(nonatomic, weak) UIImageView *bgImageView;
-/** 底部  */
-@property(nonatomic, weak) UIImageView *rankBottomImgV;
+
 /** 冠军的名称  */
 @property(nonatomic, weak) UILabel *championLabel;
 /** 冠军的标图  */
@@ -20,6 +19,7 @@
 @property(nonatomic, weak) UIImageView *championIconImgV;
 /** 冠军帽子  */
 @property(nonatomic, weak) UIImageView *championHatImgV;
+
 /** 亚军的名称  */
 @property(nonatomic, weak) UILabel *secondLabel;
 /** 亚军的标图  */
@@ -28,32 +28,15 @@
 @property(nonatomic, weak) UIImageView *secondIconImgV;
 /** 亚军帽子  */
 @property(nonatomic, weak) UIImageView *secondHatImgV;
-/** 季军的名称  */
-@property(nonatomic, weak) UILabel *thirdLabel;
+
 /** 季军的标图  */
 @property(nonatomic, weak) UIImageView *thirdImgV;
 /** 季军的头像  */
 @property(nonatomic, weak) UIImageView *thirdIconImgV;
 /** 季军帽子  */
 @property(nonatomic, weak) UIImageView *thirdHatImgV;
-/** 个人信息的父视图  */
-@property(nonatomic, weak) UIView *personalView;
-/// 信息背景
-@property(nonatomic, weak) UIImageView *personalImgV;
-/** 个人头像  */
-@property(nonatomic, weak) UIImageView *headImgV;
-/** 个人名称  */
-@property(nonatomic, weak) UILabel *usernameLabel;
-/** 排名两字显示  */
-@property(nonatomic, weak) UILabel *rankShowLabel;
-/** 排名显示  */
-@property(nonatomic, weak) UILabel *rankNumLabel;
-/** 销售收益四字显示  */
-@property(nonatomic, weak) UILabel *salesShowLabel;
-/** 销售收益数目显示  */
-@property(nonatomic, weak) UILabel *salesNumLabel;
-/** 分割线  */
-@property(nonatomic, weak) UIView *splitView;
+/** 季军的名称  */
+@property(nonatomic, weak) UILabel *thirdLabel;
 
 @end
 
@@ -67,120 +50,90 @@
 
 - (void)addConstraints {
     [self.bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.contentView.mas_top).with.offset(0);
-        make.left.equalTo(self.contentView.mas_left).with.offset(0);
-        make.right.equalTo(self.contentView.mas_right).with.offset(0);
-        make.height.mas_equalTo(260);
+        make.edges.equalTo(self.contentView);
+        make.height.mas_equalTo(282);
     }];
-    [self.rankBottomImgV mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.contentView.mas_left).with.offset(0);
-        make.right.equalTo(self.contentView.mas_right).with.offset(0);
-        make.bottom.equalTo(self.bgImageView.mas_bottom).with.offset(10);
-        make.height.mas_equalTo(64);
-    }];
-    [self.championLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.contentView.mas_centerX).with.offset(-10);
-        make.centerY.equalTo(self.contentView.mas_centerY).with.offset(-15);
-    }];
+    
+    //冠军
     [self.championImgV mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.championLabel.mas_centerX).with.offset(0);
-        make.bottom.equalTo(self.championLabel.mas_top).with.offset(-5);
-        make.width.height.mas_equalTo(83);
+        make.left.offset(KRateW(145));
+        make.bottom.offset(-KRateW(146));
+        make.width.height.offset(KRateW(70));
     }];
+    
+    self.championIconImgV.layer.masksToBounds = YES;
+    self.championIconImgV.layer.cornerRadius = KRateW(62/2);
     [self.championIconImgV mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.championImgV.mas_centerX).with.offset(0);
-        make.centerY.equalTo(self.championImgV.mas_centerY).with.offset(0);
-        make.width.height.mas_equalTo(83);
+        make.center.equalTo(self.championImgV);
+        make.width.height.offset(KRateW(62));
     }];
+    
     [self.championHatImgV mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.championImgV.mas_top).with.offset(0);
-        make.left.equalTo(self.championImgV.mas_centerX).with.offset(-10);
-        make.width.mas_equalTo(66);
-        make.height.mas_equalTo(62);
+        make.centerY.equalTo(self.championImgV.mas_top);
+        make.left.equalTo(self.championImgV.mas_centerX).offset(-3);
+        make.width.offset(KRateW(44));
+        make.height.offset(KRateW(42));
     }];
-    [self.secondLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.contentView.mas_right).with.offset(-KRateW(70));
-        make.bottom.equalTo(self.thirdLabel.mas_top).with.offset(-5);
+    
+    [self.championLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(self.thirdLabel);
+        make.centerX.equalTo(self.championImgV);
+        make.top.equalTo(self.championImgV.mas_bottom).offset(3);
     }];
+    
+    //亚军
     [self.secondImgV mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.secondLabel.mas_centerX).with.offset(0);
-        make.bottom.equalTo(self.secondLabel.mas_top).with.offset(-5);
-        make.width.height.mas_equalTo(70);
+        make.right.offset(-KRateW(47));
+        make.bottom.offset(-KRateW(123));
+        make.width.height.offset(KRateW(60));
     }];
+    
+    self.secondIconImgV.layer.masksToBounds = YES;
+    self.secondIconImgV.layer.cornerRadius = KRateW(52/2);
     [self.secondIconImgV mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.secondImgV.mas_centerX).with.offset(0);
-        make.centerY.equalTo(self.secondImgV.mas_centerY).with.offset(0);
-        make.width.height.mas_equalTo(70);
+        make.center.equalTo(self.secondImgV);
+        make.width.height.offset(KRateW(52));
     }];
+    
     [self.secondHatImgV mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.secondImgV.mas_top).with.offset(0);
-        make.left.equalTo(self.secondImgV.mas_centerX).with.offset(-5);
-        make.width.mas_equalTo(46);
-        make.height.mas_equalTo(43);
+        make.centerY.equalTo(self.secondImgV.mas_top);
+        make.left.equalTo(self.secondImgV.mas_centerX).offset(-2);
+        make.width.offset(KRateW(38));
+        make.height.offset(KRateW(36));
     }];
-    [self.thirdLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.contentView.mas_left).with.offset(KRateW(55));
-        make.bottom.equalTo(self.rankBottomImgV.mas_top).with.offset(5);
+    
+    [self.secondLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(self.thirdLabel);
+        make.centerX.equalTo(self.secondImgV);
+        make.top.equalTo(self.secondImgV.mas_bottom).offset(3);
     }];
+    
+    
+    //季军
     [self.thirdImgV mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.thirdLabel.mas_centerX).with.offset(0);
-        make.bottom.equalTo(self.thirdLabel.mas_top).with.offset(-5);
-        make.width.height.mas_equalTo(70);
+        make.left.offset(KRateW(33));
+        make.bottom.offset(-KRateW(91));
+        make.width.height.offset(KRateW(60));
     }];
+    
+    self.thirdIconImgV.layer.masksToBounds = YES;
+    self.thirdIconImgV.layer.cornerRadius = KRateW(52/2);
     [self.thirdIconImgV mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.thirdImgV.mas_centerX).with.offset(0);
-        make.centerY.equalTo(self.thirdImgV.mas_centerY).with.offset(0);
-        make.width.height.mas_equalTo(70);
+        make.center.equalTo(self.thirdImgV);
+        make.width.height.offset(KRateW(52));
     }];
+    
     [self.thirdHatImgV mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.thirdImgV.mas_top).with.offset(0);
-        make.left.equalTo(self.thirdImgV.mas_centerX).with.offset(-5);
-        make.width.mas_equalTo(46);
-        make.height.mas_equalTo(43);
+        make.centerY.equalTo(self.thirdImgV.mas_top);
+        make.left.equalTo(self.thirdImgV.mas_centerX).offset(-2);
+        make.width.offset(KRateW(38));
+        make.height.offset(KRateW(36));
     }];
-    [self.personalView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.contentView.mas_left).with.offset(0);
-        make.right.equalTo(self.contentView.mas_right).with.offset(0);
-        make.bottom.equalTo(self.contentView.mas_bottom).with.offset(0);
-        make.top.equalTo(self.rankBottomImgV.mas_bottom).with.offset(0);
-    }];
-    [self.personalImgV mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.personalView.mas_left).with.offset(0);
-        make.right.equalTo(self.personalView.mas_right).with.offset(0);
-        make.bottom.equalTo(self.personalView.mas_bottom).with.offset(0);
-        make.top.equalTo(self.personalView.mas_top).with.offset(0);
-    }];
-    [self.headImgV mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.personalView.mas_left).with.offset(21);
-        make.centerY.equalTo(self.personalView.mas_centerY).with.offset(0);
-        make.width.mas_equalTo(60);
-        make.height.mas_equalTo(60);
-    }];
-    [self.usernameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.headImgV.mas_right).with.offset(10);
-        make.top.equalTo(self.headImgV.mas_top).with.offset(5);
-    }];
-    [self.rankShowLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.usernameLabel.mas_left).with.offset(0);
-        make.bottom.equalTo(self.headImgV.mas_bottom).with.offset(-5);
-    }];
-    [self.rankNumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.rankShowLabel.mas_right).with.offset(3);
-        make.centerY.equalTo(self.rankShowLabel.mas_centerY).with.offset(0);
-    }];
-    [self.splitView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.rankNumLabel.mas_right).with.offset(8);
-        make.centerY.equalTo(self.rankShowLabel.mas_centerY).with.offset(0);
-        make.width.mas_equalTo(1);
-        make.height.mas_equalTo(14);
-    }];
-    [self.salesShowLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.splitView.mas_right).with.offset(8);
-        make.centerY.equalTo(self.rankShowLabel.mas_centerY).with.offset(0);
-    }];
-    [self.salesNumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.salesShowLabel.mas_right).with.offset(3);
-        make.centerY.equalTo(self.rankShowLabel.mas_centerY).with.offset(0);
+    
+    [self.thirdLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.offset(88);
+        make.centerX.equalTo(self.thirdImgV);
+        make.top.equalTo(self.thirdImgV.mas_bottom).offset(3);
     }];
     
 }
@@ -196,22 +149,13 @@
     return _bgImageView;
 }
 
-- (UIImageView *)rankBottomImgV {
-    if (_rankBottomImgV == nil) {
-        UIImageView *rankBottomImgV = [[UIImageView alloc] init];
-        _rankBottomImgV = rankBottomImgV;
-        _rankBottomImgV.image = KImageMake(@"mall_rank_bottom");
-        [self.contentView addSubview: _rankBottomImgV];
-    }
-    return _rankBottomImgV;
-}
-
 - (UILabel *)championLabel {
     if (_championLabel == nil) {
         UILabel *championLabel = [[UILabel alloc] init];
         _championLabel = championLabel;
         _championLabel.font = KRegularFont(14);
         _championLabel.textColor = KWhiteColor;
+        _championLabel.textAlignment = NSTextAlignmentCenter;
         _championLabel.text = @"JERRY";
         [self.contentView addSubview: _championLabel];
     }
@@ -254,6 +198,7 @@
         _secondLabel = secondLabel;
         _secondLabel.font = KRegularFont(14);
         _secondLabel.textColor = KWhiteColor;
+        _secondLabel.textAlignment = NSTextAlignmentCenter;
         _secondLabel.text = @"亚军";
         [self.contentView addSubview: _secondLabel];
     }
@@ -296,6 +241,7 @@
         _thirdLabel = thirdLabel;
         _thirdLabel.font = KRegularFont(14);
         _thirdLabel.textColor = KWhiteColor;
+        _thirdLabel.textAlignment = NSTextAlignmentCenter;
         _thirdLabel.text = @"季军";
         [self.contentView addSubview: _thirdLabel];
     }
@@ -332,107 +278,5 @@
     return _thirdIconImgV;
 }
 
-- (UIView *)personalView {
-    if (_personalView == nil) {
-        UIView *personalView = [[UIView alloc] init];
-        _personalView = personalView;
-        _personalView.layer.shadowColor = KHexColor(@"#000000").CGColor;
-        _personalView.layer.shadowOffset = CGSizeMake(0, 1);
-        _personalView.layer.shadowRadius = 3;
-        _personalView.layer.shadowOpacity = 0.2;
-        [self.contentView addSubview: _personalView];
-    }
-    return _personalView;
-}
-
-- (UIImageView *)personalImgV {
-    if (_personalImgV == nil) {
-        UIImageView *personalImgV = [[UIImageView alloc] init];
-        _personalImgV = personalImgV;
-        _personalImgV.image = KImageMake(@"mall_rank_personalbg");
-        [self.personalView addSubview: _personalImgV];
-    }
-    return _personalImgV;
-}
-
-- (UIImageView *)headImgV {
-    if (_headImgV == nil) {
-        UIImageView *headImgV = [[UIImageView alloc] init];
-        _headImgV = headImgV;
-        _headImgV.image = KImageMake(@"mall_setting_defautlhead");
-        [self.personalView addSubview: _headImgV];
-    }
-    return _headImgV;
-}
-
-- (UILabel *)usernameLabel {
-    if (_usernameLabel == nil) {
-        UILabel *usernameLabel = [[UILabel alloc] init];
-        _usernameLabel = usernameLabel;
-        _usernameLabel.text = @"JERRYJUICE";
-        _usernameLabel.font = KRegularFont(16);
-        _usernameLabel.textColor = KTextColor;
-        [self.personalView addSubview: _usernameLabel];
-    }
-    return _usernameLabel;
-}
-
-- (UILabel *)rankShowLabel {
-    if (_rankShowLabel == nil) {
-        UILabel *rankShowLabel = [[UILabel alloc] init];
-        _rankShowLabel = rankShowLabel;
-        _rankShowLabel.text = @"排名";
-        _rankShowLabel.font = KRegularFont(12);
-        _rankShowLabel.textColor = KHexAlphaColor(@"#2D3132", 0.4);
-        [self.personalView addSubview: _rankShowLabel];
-    }
-    return _rankShowLabel;
-}
-
-- (UILabel *)rankNumLabel {
-    if (_rankNumLabel == nil) {
-        UILabel *rankNumLabel = [[UILabel alloc] init];
-        _rankNumLabel = rankNumLabel;
-        _rankNumLabel.text = @"6";
-        _rankNumLabel.font = KRegularFont(12);
-        _rankNumLabel.textColor = KHexColor(@"#2D3132");
-        [self.personalView addSubview: _rankNumLabel];
-    }
-    return _rankNumLabel;
-}
-
-- (UILabel *)salesShowLabel {
-    if (_salesShowLabel == nil) {
-        UILabel *salesShowLabel = [[UILabel alloc] init];
-        _salesShowLabel = salesShowLabel;
-        _salesShowLabel.text = @"销售收益";
-        _salesShowLabel.font = KRegularFont(12);
-        _salesShowLabel.textColor = KHexAlphaColor(@"#2D3132", 0.4);
-        [self.personalView addSubview: _salesShowLabel];
-    }
-    return _salesShowLabel;
-}
-
-- (UILabel *)salesNumLabel {
-    if (_salesNumLabel == nil) {
-        UILabel *salesNumLabel = [[UILabel alloc] init];
-        _salesNumLabel = salesNumLabel;
-        _salesNumLabel.text = @"￥89000";
-        _salesNumLabel.font = KRegularFont(12);
-        _salesNumLabel.textColor = KHexColor(@"#2D3132");
-        [self.personalView addSubview: _salesNumLabel];
-    }
-    return _salesNumLabel;
-}
-
-- (UIView *)splitView {
-    if (_splitView == nil) {
-        UIView *splitView = [[UIView alloc] init];
-        _splitView = splitView;
-        _splitView.backgroundColor = KHexAlphaColor(@"#2D3132", 0.4);
-        [self.personalView addSubview: _splitView];
-    }
-    return _splitView;
-}
 
 @end

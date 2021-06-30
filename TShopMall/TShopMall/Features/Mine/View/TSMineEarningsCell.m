@@ -6,7 +6,7 @@
 //
 
 #import "TSMineEarningsCell.h"
-
+#import "TSMineWalletModel.h"
 @interface TSMineEarningsCell()
 
 @property(nonatomic, strong) UIImageView *walletImgView;
@@ -69,13 +69,23 @@
     }];
 }
 
+- (void)setDelegate:(id<UniversalCollectionViewCellDataDelegate>)delegate {
+    [super setDelegate:delegate];
+    TSMineWalletEarningModel *model = [delegate universalCollectionViewCellModel:self.indexPath];
+    _earnMoneyLabel.text = [NSString stringWithFormat:@"¥%@",model.arrivalAmount];
+    _eyeButton.selected = model.eyeIsOn;
+}
+
 #pragma mark - Actions
 -(void)eyeAction:(UIButton *)sender{
     if (sender.selected) {
         _earnMoneyLabel.text = @"****";
         sender.selected = NO;
     } else {
-        _earnMoneyLabel.text = @"¥999";
+        if ([self.delegate respondsToSelector:@selector(universalCollectionViewCellClick:params:)]) {
+            TSMineWalletEarningModel *model = [self.delegate universalCollectionViewCellModel:self.indexPath];
+            _earnMoneyLabel.text = [NSString stringWithFormat:@"¥%@",model.arrivalAmount];
+        }
         sender.selected = YES;
     }
     

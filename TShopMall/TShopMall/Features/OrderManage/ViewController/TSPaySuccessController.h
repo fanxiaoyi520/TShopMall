@@ -11,6 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TSPaySuccessController : TSBaseViewController
 @property (nonatomic, copy) NSString *orderId;
+@property (nonatomic, copy) NSString *orderMainUuid;
 @end
 
 NS_ASSUME_NONNULL_END
