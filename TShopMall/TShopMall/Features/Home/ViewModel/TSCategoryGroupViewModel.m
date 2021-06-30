@@ -67,6 +67,9 @@
             group.list = marr;
             success(group.list);
         }
+        else{
+            failure([NSError new]);
+        }
         
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
         failure([NSError new]);

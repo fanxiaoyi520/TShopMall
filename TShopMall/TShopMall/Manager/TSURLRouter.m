@@ -64,9 +64,10 @@
         uri = [NSString stringWithFormat:@"page://quote/categoryDetail?uuid=%@", objectValue];
 
     }
-    else if([typeValue isEqualToString:@"Goods"]){
+    else if([typeValue isEqualToString:@"Goods"] || [typeValue isEqualToString:@"GOODS"]){
         uri = [NSString stringWithFormat:@"page://quote/productDetail?uuid=%@", objectValue];
     }
+    
     return uri;
 }
 

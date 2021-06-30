@@ -8,13 +8,8 @@
 #import "TSCategoryViewController.h"
 #import "TSGeneralSearchButton.h"
 #import "TSCategoryDataController.h"
-#import "TSUniversalCollectionViewCell.h"
 #import "TSCategoryKindCell.h"
-#import "TSUniversalFlowLayout.h"
 #import "TSCategoryKindViewModel.h"
-#import "TSCategoryContentViewModel.h"
-
-#import "TSProductDetailController.h"
 #import "TSSearchController.h"
 #import "TSCategoryContainerViewController.h"
 #import "TSCategoryBannerCell.h"
@@ -34,31 +29,34 @@
 @property(nonatomic, strong) TSCategoryContainerViewController *container;
 /// 左边ViewModel
 @property(nonatomic, strong) TSCategoryKindViewModel *kindViewModel;
-/// 右边边ViewModel
-@property(nonatomic, strong) TSCategoryContentViewModel *contentViewModel;
 
 @property(nonatomic, strong) TSCategoryDataController *dataController;
-
-//@property (nonatomic, assign) BOOL isScrollDown;
 
 @end
 
 @implementation TSCategoryViewController
-
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    __weak __typeof(self)weakSelf = self;
+    [self.dataController fetchKindsComplete:^(BOOL isSucess) {
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
+        if (isSucess) {
+            [strongSelf.container showContentAtPage:self.kindViewModel.selectedRow];
+        }
+    }];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self addChildViewController:self.container];
 
-    
     __weak __typeof(self)weakSelf = self;
     [self.dataController fetchKindsComplete:^(BOOL isSucess) {
         __strong __typeof(weakSelf)strongSelf = weakSelf;
         if (isSucess) {
             self.container.dataSource = self;
             [strongSelf.kindViewModel viewModelWithKinds:self.dataController.kinds selectedRow:0];
-            [strongSelf.contentViewModel viewModelWithSubjects:self.dataController.sections selectedRow:0];
             [strongSelf.tableView reloadData];
-//            [strongSelf.collectionView reloadData];
             [strongSelf.container showContentAtPage:0];
         }
     }];
@@ -128,7 +126,6 @@
     }
 }
 
-
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (tableView == self.leftTableView) {
         TSCategoryKindCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([TSCategoryKindCell class])];
@@ -137,7 +134,7 @@
         return cell;
         
     }else{
-        TSCategoryContentModel *model = self.dataController.sections[indexPath.section];
+        TSCategoryContentModel *model = self.dataController.sections[self.kindViewModel.selectedRow];
         TSTableViewBaseCell *cell;
         if (indexPath.section == 0) {
             cell =  [tableView dequeueReusableCellWithIdentifier:@"TSCategoryBannerCell"];
@@ -189,10 +186,17 @@
     }
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 0;
+}
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [self updateTableViewWithRow:indexPath.row];
-    [self.container showContentAtPage:indexPath.row];
+    if (tableView == self.leftTableView) {
+        [self updateTableViewWithRow:indexPath.row];
+        [self.container showContentAtPage:indexPath.row];
+    }
+   
 }
 
 - (void)updateTableViewWithRow:(NSInteger)row {
@@ -257,13 +261,6 @@
     return _kindViewModel;
 }
 
--(TSCategoryContentViewModel *)contentViewModel{
-    if (!_contentViewModel) {
-        _contentViewModel = [[TSCategoryContentViewModel alloc] init];
-    }
-    return _contentViewModel;
-}
-
 - (NSInteger)numberOfContentsInContainerView:(nonnull TSCategoryContainerViewController *)viewController {
     return self.dataController.kinds.count;
 }
@@ -271,11 +268,7 @@
 - (nonnull UIView *)viewForContainerViewController:(nonnull TSCategoryContainerViewController *)viewController currentPage:(NSInteger)page{
     
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
-    if (page %2 == 0) {
-        tableView.backgroundColor = [UIColor redColor];
-    }else
-        tableView.backgroundColor = [UIColor greenColor];
-
+    tableView.backgroundColor = KWhiteColor;
     tableView.rowHeight = UITableViewAutomaticDimension;
     tableView.delegate = self;
     tableView.dataSource = self;

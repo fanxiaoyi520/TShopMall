@@ -86,6 +86,11 @@
     }
     else{
         
+        TSHybridViewController *web = [[TSHybridViewController alloc] initWithURLString:[agreementModel.serverUrl stringByAppendingString:@"&mode=webview"]];
+        TSBaseNavigationController *nav1 = [[TSBaseNavigationController alloc] initWithRootViewController:web];
+        nav1.modalPresentationStyle = UIModalPresentationFullScreen;
+        web.delegate = self;
+        [nav.visibleViewController presentViewController:nav1 animated:YES completion:nil];
     }
     
 }
@@ -98,8 +103,6 @@
 
 - (void)authViewDidAppear {
     TSBaseNavigationController *nav = (TSBaseNavigationController *)self.window.rootViewController;
-
-//    [self showAlertInView:nav.visibleViewController.view];
-    [self showAlertInView:self.window];
+    [self showAlertInView:nav.visibleViewController.view];
 }
 @end
