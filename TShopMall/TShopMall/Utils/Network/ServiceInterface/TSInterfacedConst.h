@@ -40,6 +40,9 @@ UIKIT_EXTERN NSString *const kBindUserByAuthCode;
 UIKIT_EXTERN NSString *const kLoginRegisterAgreementUrl;
 /// 获取用户信息的接口
 UIKIT_EXTERN NSString *const kUserInfoUrl;
+/// 换绑手机号
+UIKIT_EXTERN NSString *const kChangeBindMobileUrl;
+
 #pragma mark - 首页
 UIKIT_EXTERN NSString *const kHomePageInfoUrl;
 UIKIT_EXTERN NSString *const kSearchKey;//搜索关键词

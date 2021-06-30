@@ -10,6 +10,7 @@
 #import "TSTools.h"
 #import <Toast.h>
 #import "TSBindMobileSectionModel.h"
+#import "TSLoginRegisterDataController.h"
 
 @interface TSChangeMobileCell ()
 {
@@ -42,6 +43,7 @@
 /** 定时器 */
 @property (nonatomic, strong) NSTimer *timer;
 
+@property (nonatomic, strong) TSLoginRegisterDataController *dataController;
 @end
 
 @implementation TSChangeMobileCell
@@ -277,9 +279,12 @@
     }
     self.codeButton.enabled = NO;
     __weak typeof(self) weakSelf = self;
-    self.timer = [NSTimer ts_scheduledTimerWithTimeInterval:1 block:^{
-         [weakSelf goToRun];
-    } repeats:YES];
+   
+    [self.dataController fetchChangeMobileSMSCodeMobile:phoneNumber complete:^(BOOL isSucess) {
+        weakSelf.timer = [NSTimer ts_scheduledTimerWithTimeInterval:1 block:^{
+             [weakSelf goToRun];
+        } repeats:YES];
+    }];
 }
 
 - (void)goToRun {
@@ -352,5 +357,10 @@
     self.phoneNumLabel.text = item.oldMobile;
 }
 
-
+- (TSLoginRegisterDataController *)dataController{
+    if (!_dataController) {
+        _dataController = [TSLoginRegisterDataController new];
+    }
+    return _dataController;
+}
 @end

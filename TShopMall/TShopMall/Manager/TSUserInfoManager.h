@@ -29,6 +29,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// 清除用户信息到本地
 -(void)clearUserInfo;
 
+/// 更新用户信息到本地
+-(void)updateUserInfo:(void(^)(BOOL))success;
 @end
 
 NS_ASSUME_NONNULL_END

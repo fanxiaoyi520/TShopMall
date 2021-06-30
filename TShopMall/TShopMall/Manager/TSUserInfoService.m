@@ -14,7 +14,7 @@
 
 @implementation TSUserInfoService
 
-- (void)getUserInfoAccountId:(NSString *)accountId
+- (void)updateUserInfoAccountId:(NSString *)accountId
                      success:(void(^_Nullable)(BOOL isSucess))success
                      failure:(void(^_Nullable)(NSString *errorMsg))failure {
     SSGenaralRequest *request = [self getUserInfoRequestWithAccountId:accountId];

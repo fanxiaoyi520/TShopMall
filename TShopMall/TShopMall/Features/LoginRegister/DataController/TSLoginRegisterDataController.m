@@ -12,8 +12,60 @@
 #import "TSUserInfoManager.h"
 #import "TSLoginByAuthCodeRequest.h"
 #import "TSLoginByTokenRequest.h"
+#import "TSChangeBindRequest.h"
 
 @implementation TSLoginRegisterDataController
+-(void)fetchChangeBindWithNewMobile:(NSString *)newMobile
+                    validCode:(NSString *)validCode
+                    complete:(void(^)(BOOL isSucess))complete{
+    TSChangeBindRequest *login = [[TSChangeBindRequest alloc] initWithNewMobile:newMobile validCode:validCode];
+   login.animatingView = self.context.view;
+   [login startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+       if (request.responseModel.isSucceed) {
+//          [TSServicesManager  sharedInstance].userInfoService getUserInfoAccountId:<#(nonnull NSString *)#> success:<#^(BOOL isSucess)success#> failure:<#^(NSString * _Nonnull errorMsg)failure#>
+
+           complete(YES);
+       }
+       else{
+           complete(NO);
+           [Popover popToastOnWindowWithText:request.responseModel.originalData[@"msg"]];
+       }
+   } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+       complete(NO);
+
+
+   }];
+}
+
+-(void)fetchChangeMobileSMSCodeMobile:(NSString *)mobile
+                             complete:(void(^)(BOOL isSucess))complete{
+    TSSMSCodeRequest *codeRequest = [[TSSMSCodeRequest alloc] initWithMobile:mobile type:@"CHANGE_BIND"];
+    [codeRequest startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+        
+        if (request.responseModel.isSucceed) {
+            self.smsModel = [[TSLoginSMSModel alloc] init];
+            self.smsModel.key = request.responseModel.data[@"key"];
+            self.smsModel.text = request.responseModel.data[@"text"];
+            self.smsModel.expirationTime = request.responseModel.data[@"expirationTime"];
+            
+            if (complete) {
+                complete(YES);
+            }
+        }else{
+            self.smsModel = [[TSLoginSMSModel alloc] init];
+            [Popover popToastOnWindowWithText:request.responseModel.originalData[@"failCause"]];
+
+            if (complete) {
+                complete(NO);
+            }
+        }
+        
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        if (complete) {
+            complete(NO);
+        }
+    }];
+}
 
 -(void)fetchLoginSMSCodeMobile:(NSString *)mobile
                       complete:(void(^)(BOOL isSucess))complete{
