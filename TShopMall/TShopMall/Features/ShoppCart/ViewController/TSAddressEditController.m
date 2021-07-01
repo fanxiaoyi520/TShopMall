@@ -60,7 +60,7 @@
     self.saveBtn.enabled = enable;
     if (enable == NO) {
         self.saveBtn.backgroundColor = KHexColor(@"#DDDDDD");
-        [self.saveBtn setTitleColor:KHexColor(@"#2D3132") forState:UIControlStateNormal];
+        [self.saveBtn setTitleColor:[KHexColor(@"#2D3132") colorWithAlphaComponent:0.4] forState:UIControlStateNormal];
     } else {
         self.saveBtn.backgroundColor = KHexColor(@"FF4D49");
         [self.saveBtn setTitleColor:KHexColor(@"FFFFFF") forState:UIControlStateNormal];

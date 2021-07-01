@@ -30,13 +30,13 @@
     [con presentViewController:naviCon animated:YES completion:nil];
 }
 
-- (UIStatusBarStyle)preferredStatusBarStyle{
-    if (@available(iOS 13.0, *)) {
-        return [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDarkContent;
-    } else {
-        return [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
-    }
-}
+//- (UIStatusBarStyle)preferredStatusBarStyle{
+//    if (@available(iOS 13.0, *)) {
+//        return [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDarkContent;
+//    } else {
+//        return [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+//    }
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

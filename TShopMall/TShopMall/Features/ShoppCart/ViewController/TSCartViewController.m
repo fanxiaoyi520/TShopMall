@@ -57,7 +57,6 @@
     __weak typeof(self) weakSelf = self;
     [self.dataCon viewCart:^{
         [weakSelf endRefresh];
-        weakSelf.settleView.hidden = !weakSelf.dataCon.cartModel.carts.count;
         weakSelf.cartView.sections = weakSelf.dataCon.sections;
         [weakSelf updateSettleView];
         [weakSelf configRecomendView];
@@ -88,9 +87,6 @@
 }
 
 - (void)goToSettle{
-    UIViewController *con = [NSClassFromString(@"TSAddressEditController") new];
-    [self.navigationController pushViewController:con animated:YES];
-    return;
     if (self.editBtn.selected == YES) {//编辑
         NSArray *carts = [self.dataCon selectedGoods];
         TSAlertView.new.alertInfo(nil, @"确认删除选中商品吗？").confirm(@"确定", ^{
@@ -151,6 +147,7 @@
 }
 
 - (void)updateSettleView{
+    self.settleView.hidden = self.dataCon.validCarts.count==0? YES:NO;
     [self.settleView updateSelBtnStatus:self.dataCon.isAllSelected];
     [self.settleView updatePrice:self.dataCon.cartModel.cartsTotalMount];
     [self.settleView updateSettleBtnText:self.dataCon.selectedCount];

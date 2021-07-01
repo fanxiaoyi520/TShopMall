@@ -28,7 +28,7 @@
         [self.icon  sd_setImageWithURL:[NSURL URLWithString:vm.productImgUrl]];
         self.name.text = vm.productName;
         self.specification.text = vm.attr;
-        self.price.text = [@"¥ " stringByAppendingString:vm.price];
+        self.price.text = [@"¥" stringByAppendingString:vm.price];
         self.num.text = [NSString stringWithFormat:@"x%ld", vm.buyNum];
     }
 }
