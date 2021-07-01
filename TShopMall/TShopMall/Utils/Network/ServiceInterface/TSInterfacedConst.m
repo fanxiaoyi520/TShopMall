@@ -165,5 +165,6 @@ NSString *const kMineGetBankInfo = @"/rest/v2/bankCardAccount/getBankInfo";
 NSString *const kMineDelBankCardAccount = @"/rest/v2/bankCardAccount/delBankCardAccount";
 NSString *const kMineQueryAmount = @"/rest/v2/withdrawal/record/queryAmount";
 NSString *const kMineGetBankNames = @"/rest/v2/bankCardAccount/getBankNames";
-
+NSString *const kMineGetAllProvince = @"/rest/v2/withdrawal/record/getAllProvince";
+NSString *const kMineGetAllCityByProvinceUuid = @"/rest/v2/withdrawal/record/getAllCityByProvinceUuid";
 
