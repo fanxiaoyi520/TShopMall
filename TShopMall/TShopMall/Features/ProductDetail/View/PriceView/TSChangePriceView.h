@@ -13,6 +13,7 @@
 @protocol TSChangePriceViewDelegate <NSObject>
 
 -(void)changePriceView:(TSChangePriceView *_Nullable)changePriceView closeClick:(UIButton *_Nonnull)sender;
+-(void)changePriceView:(TSChangePriceView *_Nullable)changePriceView shareClick:(UIButton *_Nonnull)sender discountPrice:(NSString *_Nullable)discountPrice;
 
 @end
 

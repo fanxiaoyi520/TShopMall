@@ -47,5 +47,5 @@
 #import "UIButton+Badge.h"
 #import "TSGlobalNotifyServer.h"
 #import "UIView+Plugin.h"
-
+#import "NSDictionary+Value.h"
 #endif /* TSPrefixHeader_pch */

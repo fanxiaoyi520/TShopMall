@@ -22,8 +22,8 @@
 @property (nonatomic, strong) NSMutableArray <TSAddBankCardBackModel *> *addBankCardBackArray;
 @property (nonatomic, strong) TSWithdrawalRecordModel *withdrawalRecordModel;
 @property (nonatomic, strong) TSMineWalletEarningModel *earningModel;
-@property (nonatomic, strong) TSMineOrderCountModel *orderInfo;
-
+@property (nonatomic, strong) TSMineOrderCountModel *orderInfo; 
+@property (nonatomic,copy) NSString* content;
 @end
 
 @implementation TSMineDataController
@@ -166,7 +166,7 @@
             
             [items addObject:item];
         }
-        if (![self.merchantUserInformationModel.rankLevel isEqualToString:@"1"]) {
+    if ([self.merchantUserInformationModel.salesmanRankLevel isEqualToString:@"1"]) {
             TSMineSectionOrderItemModel *item = [[TSMineSectionOrderItemModel alloc] init];
             item.title = @"合伙人中心";
             item.imageName = @"mall_mine_partner_center";
@@ -257,7 +257,7 @@
     
     dispatch_group_notify(group, dispatch_get_main_queue(), ^{
         if (complete) {
-        self.partnerCenterDataModel.rankLevel = self.merchantUserInformationModel.rankLevel;
+        self.partnerCenterDataModel.salesmanRankLevel = self.merchantUserInformationModel.salesmanRankLevel;
         [self fetchMineContentsComplete:^(BOOL isSucess) {
                 
             }];
@@ -268,7 +268,7 @@
 
 - (void)requestMethodWithGroup:(dispatch_group_t)thegroup withIndex:(NSInteger)aIndex
 {
-    NSString *request = [NSString stringWithFormat:@"request%ld",aIndex];
+    NSString *request = [NSString stringWithFormat:@"request%ld",(long)aIndex];
     SEL requestSel = NSSelectorFromString(request);
     
 #pragma clang diagnostic push
@@ -286,6 +286,9 @@
              } else if (aIndex == 3){
                self.earningModel = [TSMineWalletEarningModel yy_modelWithDictionary:data];
                  self.earningModel.eyeIsOn = YES;
+             } else if (aIndex == 4) {
+                 NSLog(@"%@",data);
+                 self.content = [data stringForkey:@"content"];
              } else if (aIndex == 5){
                  self.orderInfo =  [TSMineOrderCountModel yy_modelWithDictionary:data];
              }
@@ -359,16 +362,15 @@
 //广告图
 - (SSGenaralRequest *)request4{
     
-    NSMutableDictionary *header = [NSMutableDictionary dictionary];
-    if ([TSGlobalManager shareInstance].currentUserInfo) {
-        [header setValue:[TSGlobalManager shareInstance].currentUserInfo.accessToken forKey:@"accessToken"];
-    }
-    [header setValue:@"application/json" forKey:@"Content-Type"];
+    NSMutableDictionary *body = [NSMutableDictionary dictionary];
+     
+    body[@"uiType"] = @"APP";
+    body[@"pageType"] = @"userCenter_page";
     SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kMineShopContentUrl
-                                                               requestMethod:YTKRequestMethodGET
+                                                               requestMethod:YTKRequestMethodPOST
                                                        requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON
-                                                               requestHeader:header
-                                                                 requestBody:NSMutableDictionary.dictionary
+                                                               requestHeader:NSDictionary.dictionary
+                                                                 requestBody:body
                                                               needErrorToast:YES];
     
     return request;

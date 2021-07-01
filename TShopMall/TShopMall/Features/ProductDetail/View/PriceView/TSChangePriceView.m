@@ -199,7 +199,9 @@
 }
 
 -(void)shareAction:(UIButton *)sender{
-    
+    if ([self.delegate respondsToSelector:@selector(changePriceView:shareClick:discountPrice:)]) {
+        [self.delegate changePriceView:self shareClick:sender discountPrice:_inputTF.text];
+    }
 }
 
 -(void)preferenceAction:(UIButton *)sender{
