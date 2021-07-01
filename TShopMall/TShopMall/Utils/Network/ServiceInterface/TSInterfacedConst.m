@@ -87,7 +87,7 @@ NSString *const kLoginByAuthCode = @"/auth/thirdParty/loginByAuthCode";
 NSString *const kBindUserByAuthCode = @"/auth/thirdParty/bindUserByAuthCode";
 NSString *const kLoginRegisterAgreementUrl = @"/rest/v2/front/shopStatement/getShopStatementAuthList";
 NSString *const kUserInfoUrl = @"/user/user/info";
-NSString *const kChangeBindMobileUrl = @"/account/changeBind";
+NSString *const kChangeBindMobileUrl = @"/auth/account/changeBind";
 #pragma mark - 首页
 
 NSString *const kHomePageInfoUrl = @"/rest/v2/front/shopContent/getIndexPageInfo";
