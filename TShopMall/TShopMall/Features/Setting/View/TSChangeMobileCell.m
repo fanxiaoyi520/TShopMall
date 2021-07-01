@@ -228,7 +228,7 @@
     if (_codeTextField == nil) {
         UITextField *codeTextField = [[UITextField alloc] init];
         _codeTextField = codeTextField;
-        _codeTextField.keyboardType = UIKeyboardTypeDefault;
+        _codeTextField.keyboardType = UIKeyboardTypeNumberPad;
         _codeTextField.textColor = KHexColor(@"#2D3132");
         _codeTextField.font = KRegularFont(16);
         _codeTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"验证码" attributes:@{NSForegroundColorAttributeName : KHexAlphaColor(@"#2D3132", 0.2)}];
