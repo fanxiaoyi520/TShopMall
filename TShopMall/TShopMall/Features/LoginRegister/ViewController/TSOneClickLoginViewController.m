@@ -19,6 +19,7 @@
 @interface TSOneClickLoginViewController ()<TSHybridViewControllerDelegate, NTESQuickLoginManagerDelegate>
 @property (nonatomic, strong) NTESQuickLoginModel  *customModel;
 @property(nonatomic, strong) TSLoginRegisterDataController *dataController;
+@property(nonatomic, assign) TSServiceProvider provider;
 
 @end
 
@@ -46,7 +47,6 @@
         // Fallback on earlier versions
     }
     
-//    [NTESQuickLoginManager sharedInstance].delegate = self;
     self.gk_navigationBar.hidden = YES;
     self.view.backgroundColor = KWhiteColor;
     
@@ -57,6 +57,16 @@
     @weakify(self);
     [[NTESQuickLoginManager sharedInstance] getPhoneNumberCompletion:^(NSDictionary * _Nonnull resultDic1) {
         @strongify(self)
+        
+        if ([resultDic1[@"resultCode"] isEqualToString:@"103000"]) {
+            self.provider = TSServiceProviderYD;
+        }
+        else if ([resultDic1[@"resultCode"] isEqualToString:@"100"]){
+            self.provider = TSServiceProviderLT;
+        }
+        else if ([resultDic1[@"resultCode"] isEqualToString:@"0"]){
+            self.provider = TSServiceProviderDX;
+        }
         NSNumber *boolNum = [resultDic1 objectForKey:@"success"];
         BOOL success = [boolNum boolValue];
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -149,9 +159,24 @@
         @strongify(self)
         [self dismissViewControllerAnimated:NO completion:nil];
     };
+    self.customModel.rootViewController = self;
     self.customModel.pageCustomBlock = ^(int privacyType) {
+        NSString *url;
+        if (privacyType == 0) {
+            if (self.provider == TSServiceProviderYD) {
+                url = @"https://wap.cmpassport.com/resources/html/contract.html";
+            }
+            else if (self.provider == TSServiceProviderLT){
+                url = @"https://ms.zzx9.cn/html/oauth/protocol2.html";
+            }
+            else if (self.provider == TSServiceProviderDX){
+                url = @"https://e.189.cn/sdk/agreement/content.do?type=main&appKey=&hidetop=true";
+            }
+        }else{
+            url = [TSGlobalManager shareInstance].agreementModels[privacyType - 1].serverUrl;
+        }
         @strongify(self)
-        TSHybridViewController *web = [[TSHybridViewController alloc] initWithURLString:@"https://www.baidu.com"];
+        TSHybridViewController *web = [[TSHybridViewController alloc] initWithURLString:url];
         web.delegate = self;
         [self.navigationController pushViewController:web animated:YES];
         [[NTESQuickLoginManager sharedInstance] closeAuthController:^{
