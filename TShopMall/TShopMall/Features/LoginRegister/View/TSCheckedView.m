@@ -46,10 +46,10 @@
         make.right.equalTo(self.protocolButton.mas_left).with.offset(-6);
     }];
     [self.textView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.mas_left).with.offset(25);
-        make.right.equalTo(self.mas_right).with.offset(-25);
         make.bottom.equalTo(self.mas_bottom).offset(0);
-        make.top.equalTo(self.protocolButton.mas_bottom).with.offset(5);
+        make.centerX.equalTo(self).offset(0);
+        make.width.equalTo(@(kScreenWidth - 48)).priorityLow();
+        make.top.equalTo(self.protocolButton.mas_bottom).with.offset(0);
     }];
 }
 
@@ -135,7 +135,12 @@
     self.textView.attributedText = attrString;
     CGFloat width = [allString widthForFont:KRegularFont(14)];
     CGFloat left = (self.frame.size.width - 50 - width) / 2.0;
-    self.textView.contentInset = UIEdgeInsetsMake(-10, left, 0, 0);
+//    self.textView.contentInset = UIEdgeInsetsMake(-10, left, 0, 0);
+    
+    [self.textView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(@(width + 20));
+    }];
+    
 }
 
 #pragma mark - Public Method

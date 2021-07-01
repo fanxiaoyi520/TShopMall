@@ -487,6 +487,15 @@
     [self.changePopups dismissAnimated:YES completion:nil];
 }
 
+-(void)changePriceView:(TSChangePriceView *_Nullable)changePriceView shareClick:(UIButton *_Nonnull)sender discountPrice:(NSString *_Nullable)discountPrice{
+    [self.dataController fetchProductPrerogativeStaffShareType:@"3"
+                                                  discountType:@"price"
+                                                 discountPrice:discountPrice
+                                                      complete:^(BOOL isSucess, NSDictionary * _Nonnull data) {
+            
+    }];
+}
+
 #pragma mark - UIScrollViewDelegate
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     CGFloat offsetY = scrollView.contentOffset.y;

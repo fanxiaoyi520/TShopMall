@@ -123,7 +123,7 @@
     [self.checkedView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.view.mas_bottom).with.offset(-KRateH(30));
         make.left.right.equalTo(self.view).with.offset(0);
-        make.height.mas_equalTo(66);
+        make.height.mas_equalTo(48);
     }];
     [self.quickCheckView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.view.mas_bottom).with.offset(-KRateH(30));

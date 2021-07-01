@@ -11,7 +11,7 @@
 #import <Toast.h>
 #import "TSBindMobileSectionModel.h"
 #import "TSLoginRegisterDataController.h"
-
+#import "UIViewController+Plugin.h"
 @interface TSChangeMobileCell ()
 {
     id<UniversalCollectionViewCellDataDelegate> _delegate;
@@ -337,22 +337,24 @@
         [self.contentView makeToast:@"请输入验证码" duration:3.0 position:CSToastPositionCenter];
         return;
     }
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setValue:NSStringFromClass([self class]) forKey:@"cellType"];
-    [params setValue:@(ChangeMobileValueTypeCommit) forKey:@"ChangeMobileButtonClickType"];
-    ///手机号
-    [params setValue:self.mobileTextField.text forKey:@"MobileNumber"];
-    ///旧手机号
-    [params setValue:self.phoneNumLabel.text forKey:@"OldMobileNumber"];
-    ///验证码
-    [params setValue:self.codeTextField.text forKey:@"CodeNumber"];
-    if (_delegate && [_delegate respondsToSelector:@selector(universalCollectionViewCellClick:params:)]) {
-        [_delegate universalCollectionViewCellClick:self.indexPath params:params];
-    }
+//    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+//    [params setValue:NSStringFromClass([self class]) forKey:@"cellType"];
+//    [params setValue:@(ChangeMobileValueTypeCommit) forKey:@"ChangeMobileButtonClickType"];
+//    ///手机号
+//    [params setValue:self.mobileTextField.text forKey:@"MobileNumber"];
+//    ///旧手机号
+//    [params setValue:self.phoneNumLabel.text forKey:@"OldMobileNumber"];
+//    ///验证码
+//    [params setValue:self.codeTextField.text forKey:@"CodeNumber"];
+//    if (_delegate && [_delegate respondsToSelector:@selector(universalCollectionViewCellClick:params:)]) {
+//        [_delegate universalCollectionViewCellClick:self.indexPath params:params];
+//    }
+    
+    
     [self.dataController fetchChangeBindWithNewMobile:self.mobileTextField.text validCode:self.codeTextField.text complete:^(BOOL isSucess) {
         if (isSucess) {
             [Popover popToastOnWindowWithText:@"换绑成功"];
-            
+            [[UIViewController windowCurrentViewController].navigationController popViewControllerAnimated:YES];
         }
     }];
 }
