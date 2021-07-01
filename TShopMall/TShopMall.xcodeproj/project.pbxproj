@@ -34,14 +34,14 @@
 		04F1EFBC2682E33600FF007D /* TSRealNameAuthDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F1EFBB2682E33600FF007D /* TSRealNameAuthDataController.m */; };
 		04F852122689BA4C00B59910 /* TSFirstEnterAgreementView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F852112689BA4C00B59910 /* TSFirstEnterAgreementView.m */; };
 		65CD9E3D268AED2B00262D98 /* TSMineWalletModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CD9E3C268AED2B00262D98 /* TSMineWalletModel.m */; };
+		65F71270268C1D7C002A1ECC /* TSMineLeftBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F7126F268C1D7C002A1ECC /* TSMineLeftBarView.m */; };
+		65F71273268C4154002A1ECC /* TSMineOrderCountModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F71272268C4154002A1ECC /* TSMineOrderCountModel.m */; };
+		65F71276268C7AE0002A1ECC /* NSDictionary+Value.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F71274268C7ADF002A1ECC /* NSDictionary+Value.m */; };
 		70EBC074268C0DC0009D735B /* UIView+AZGradient.m in Sources */ = {isa = PBXBuildFile; fileRef = 70EBC073268C0DC0009D735B /* UIView+AZGradient.m */; };
 		70EBC07B268C136A009D735B /* TSMonthIndicatorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 70EBC07A268C136A009D735B /* TSMonthIndicatorCell.m */; };
 		70EBC07E268C3F0B009D735B /* TSPersonalRankView.m in Sources */ = {isa = PBXBuildFile; fileRef = 70EBC07D268C3F0B009D735B /* TSPersonalRankView.m */; };
 		70EBC084268C5F52009D735B /* TSRecommendMaxPriceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 70EBC083268C5F52009D735B /* TSRecommendMaxPriceView.m */; };
 		70EBC087268C6523009D735B /* TSMonthTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 70EBC085268C6522009D735B /* TSMonthTitleView.m */; };
-		65F71270268C1D7C002A1ECC /* TSMineLeftBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F7126F268C1D7C002A1ECC /* TSMineLeftBarView.m */; };
-		65F71273268C4154002A1ECC /* TSMineOrderCountModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F71272268C4154002A1ECC /* TSMineOrderCountModel.m */; };
-		700F0730268B0B20007C1891 /* TSRecommendMaxPriceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 700F072F268B0B20007C1891 /* TSRecommendMaxPriceView.m */; };
 		AE4DC537B4A93FA6C04B9037 /* libPods-TShopMall.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 825A9D1C217F35DCFB651B21 /* libPods-TShopMall.a */; };
 		C21A4B6E267AF5AE00766F72 /* TSMakeOrderBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C21A4B6D267AF5AE00766F72 /* TSMakeOrderBaseCell.m */; };
 		C21A4B71267AF91F00766F72 /* TSMakeOrderPriceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C21A4B70267AF91F00766F72 /* TSMakeOrderPriceCell.m */; };
@@ -610,7 +610,13 @@
 		1942D505D7004833F274B5D1 /* libPods-TShopMallTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TShopMallTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		27EC567AA21935502889F6EB /* Pods-TShopMall.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TShopMall.debug.xcconfig"; path = "Target Support Files/Pods-TShopMall/Pods-TShopMall.debug.xcconfig"; sourceTree = "<group>"; };
 		65CD9E3B268AED2B00262D98 /* TSMineWalletModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSMineWalletModel.h; sourceTree = "<group>"; };
-		65CD9E3C268AED2B00262D98 /* TSMineWalletModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSMineWalletModel.m; sourceTree = "<group>"; }; 
+		65CD9E3C268AED2B00262D98 /* TSMineWalletModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSMineWalletModel.m; sourceTree = "<group>"; };
+		65F7126E268C1D7C002A1ECC /* TSMineLeftBarView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSMineLeftBarView.h; sourceTree = "<group>"; };
+		65F7126F268C1D7C002A1ECC /* TSMineLeftBarView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSMineLeftBarView.m; sourceTree = "<group>"; };
+		65F71271268C4154002A1ECC /* TSMineOrderCountModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSMineOrderCountModel.h; sourceTree = "<group>"; };
+		65F71272268C4154002A1ECC /* TSMineOrderCountModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSMineOrderCountModel.m; sourceTree = "<group>"; };
+		65F71274268C7ADF002A1ECC /* NSDictionary+Value.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Value.m"; sourceTree = "<group>"; };
+		65F71275268C7AE0002A1ECC /* NSDictionary+Value.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Value.h"; sourceTree = "<group>"; };
 		70EBC072268C0DC0009D735B /* UIView+AZGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AZGradient.h"; sourceTree = "<group>"; };
 		70EBC073268C0DC0009D735B /* UIView+AZGradient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AZGradient.m"; sourceTree = "<group>"; };
 		70EBC079268C136A009D735B /* TSMonthIndicatorCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSMonthIndicatorCell.h; sourceTree = "<group>"; };
@@ -621,12 +627,6 @@
 		70EBC083268C5F52009D735B /* TSRecommendMaxPriceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSRecommendMaxPriceView.m; sourceTree = "<group>"; };
 		70EBC085268C6522009D735B /* TSMonthTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSMonthTitleView.m; sourceTree = "<group>"; };
 		70EBC086268C6523009D735B /* TSMonthTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSMonthTitleView.h; sourceTree = "<group>"; };
-		65F7126E268C1D7C002A1ECC /* TSMineLeftBarView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSMineLeftBarView.h; sourceTree = "<group>"; };
-		65F7126F268C1D7C002A1ECC /* TSMineLeftBarView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSMineLeftBarView.m; sourceTree = "<group>"; };
-		65F71271268C4154002A1ECC /* TSMineOrderCountModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSMineOrderCountModel.h; sourceTree = "<group>"; };
-		65F71272268C4154002A1ECC /* TSMineOrderCountModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSMineOrderCountModel.m; sourceTree = "<group>"; };
-		700F072E268B0B20007C1891 /* TSRecommendMaxPriceView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSRecommendMaxPriceView.h; sourceTree = "<group>"; };
-		700F072F268B0B20007C1891 /* TSRecommendMaxPriceView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSRecommendMaxPriceView.m; sourceTree = "<group>"; }; 
 		825A9D1C217F35DCFB651B21 /* libPods-TShopMall.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TShopMall.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		847295D7102568B80FCAB72E /* Pods-TShopMallTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TShopMallTests.release.xcconfig"; path = "Target Support Files/Pods-TShopMallTests/Pods-TShopMallTests.release.xcconfig"; sourceTree = "<group>"; };
 		BBF16248DC0233F9DA291554 /* Pods-TShopMallTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TShopMallTests.debug.xcconfig"; path = "Target Support Files/Pods-TShopMallTests/Pods-TShopMallTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -2458,6 +2458,8 @@
 		F530CC2826803862009DC29A /* Foundation */ = {
 			isa = PBXGroup;
 			children = (
+				65F71275268C7AE0002A1ECC /* NSDictionary+Value.h */,
+				65F71274268C7ADF002A1ECC /* NSDictionary+Value.m */,
 				F530CC2D26803862009DC29A /* NSDate+Plugin.h */,
 				F530CC2B26803862009DC29A /* NSDate+Plugin.m */,
 				F530CC2F26803862009DC29A /* NSString+Plugin.h */,
@@ -4144,6 +4146,7 @@
 				F530CCA326803FCD009DC29A /* UIImage+Extension.m in Sources */,
 				C3B4CCEE2674934E0001EE75 /* TSLoginBottomView.m in Sources */,
 				C3A6C4C7267A1C5700FC71D6 /* TSSettingUserCell.m in Sources */,
+				65F71276268C7AE0002A1ECC /* NSDictionary+Value.m in Sources */,
 				F54973B72668BBEE00181E3F /* TSCartViewController.m in Sources */,
 				F56D4B4D266DFB8900C1AD9E /* FMTeslaLayoutView.m in Sources */,
 				DC06D6E3268810C20013633F /* TSRecomendGoodsView.m in Sources */,
@@ -4724,7 +4727,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 2GM7ZL62GN;
-				EXCLUDED_ARCHS = "";
+				EXCLUDED_ARCHS = arm64;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PREFIX_HEADER = TShopMall/Expand/Macros/TSPrefixHeader.pch;
 				INFOPLIST_FILE = TShopMall/Info.plist;
@@ -4733,7 +4736,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tcl.TSalesDev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "T销客_开发";
@@ -4751,7 +4754,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 2GM7ZL62GN;
-				EXCLUDED_ARCHS = "";
+				EXCLUDED_ARCHS = arm64;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PREFIX_HEADER = TShopMall/Expand/Macros/TSPrefixHeader.pch;
 				INFOPLIST_FILE = TShopMall/Info.plist;
