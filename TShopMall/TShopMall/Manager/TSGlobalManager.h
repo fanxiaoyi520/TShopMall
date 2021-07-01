@@ -29,7 +29,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// 单利
 + (instancetype)shareInstance;
 
-//- (void)setCurrentUserInfo:(TSUserInfoManager * _Nonnull)currentUserInfo;
 @end
 
 NS_ASSUME_NONNULL_END

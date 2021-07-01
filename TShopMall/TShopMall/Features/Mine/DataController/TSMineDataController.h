@@ -61,6 +61,8 @@ typedef NS_ENUM(NSInteger, RequestMethod){
 @property (nonatomic, strong, readonly) TSMineWalletEarningModel *earningModel;
 //订单数
 @property (nonatomic, strong, readonly) TSMineOrderCountModel *orderInfo;
+//html富文本
+@property (nonatomic,copy,readonly) NSString* content;
 
 -(void)fetchMineContentsComplete:(void(^)(BOOL isSucess))complete;
 -(void)fetchDataComplete:(void(^)(BOOL isSucess))complete;
@@ -71,7 +73,7 @@ typedef NS_ENUM(NSInteger, RequestMethod){
 - (void)fetchWithdrawalRecordDataComplete:(void(^)(BOOL isSucess))complete;
 //提现申请
 - (void)fetchWithdrawalApplicationDataComplete:(void(^)(BOOL isSucess))complete;
-//我的收益
+////我的收益
 - (void)fetchMyIncomeDataComplete:(void(^)(BOOL isSucess))complete;
 //查询银行卡列表
 - (void)fetchQueryBankCardListDataComplete:(void(^)(BOOL isSucess))complete;

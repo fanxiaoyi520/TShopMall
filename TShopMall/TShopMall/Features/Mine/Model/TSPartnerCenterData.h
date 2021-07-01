@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 //
 @property (nonatomic ,assign) BOOL eyeIsOn;
 //分销等级
-@property (nonatomic ,copy) NSString *rankLevel;
+@property (nonatomic ,copy) NSString *salesmanRankLevel;
 @end
 
 NS_ASSUME_NONNULL_END
