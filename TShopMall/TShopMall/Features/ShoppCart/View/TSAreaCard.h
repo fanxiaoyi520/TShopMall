@@ -17,7 +17,7 @@
 
 @class TSAreaCell;
 @class TSAreaView;
-@class TSAreaLable;
+@class TSAreaButton;
 @class TSAreaIndexView;
 
 @interface TSAreaCard : UIView
@@ -42,21 +42,21 @@
 
 
 @interface TSAreaView : UIScrollView
-@property (nonatomic, strong) TSAreaLable *proviceBtn;
-@property (nonatomic, strong) TSAreaLable *cityBtn;
-@property (nonatomic, strong) TSAreaLable *areaBtn;
-@property (nonatomic, strong) TSAreaLable *streetBtn;
+@property (nonatomic, strong) TSAreaButton *proviceBtn;
+@property (nonatomic, strong) TSAreaButton *cityBtn;
+@property (nonatomic, strong) TSAreaButton *areaBtn;
+@property (nonatomic, strong) TSAreaButton *streetBtn;
+
+@property (nonatomic, strong) NSMutableArray<TSAreaButton *> *areaBtns;
 
 - (void)updateString:(NSString *)string type:(NSInteger)type;
+- (void)changeUIOfAreaButtonTapped:(NSInteger)type;
 @end
 
-
-@interface TSAreaLable : UILabel
-@property (nonatomic, copy) NSString *placeholder;
-@property (nonatomic, copy) NSString *str;
-- (void)addTarget:(id)target selector:(SEL)selector;
+@interface TSAreaButton : UIButton
+@property (nonatomic, copy) NSString *normalTitle;
+@property (nonatomic, copy) NSString *selectedTitle;
 @end
-
 
 @interface TSAreaIndexView : UIView
 @property (nonatomic, strong) NSArray<NSString *> *indexs;

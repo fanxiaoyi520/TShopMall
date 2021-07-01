@@ -93,6 +93,10 @@
     TSPaySuccessController *con = [TSPaySuccessController new];
     con.orderId = self.payOrderId;
     [self.navigationController pushViewController:con animated:YES];
+    
+    NSMutableArray *arr = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
+    [arr removeObject:self];
+    self.navigationController.viewControllers = arr;
 }
 
 - (void)updatePayBtnWithPrice:(NSString *)price{

@@ -57,7 +57,6 @@
     __weak typeof(self) weakSelf = self;
     [self.dataCon viewCart:^{
         [weakSelf endRefresh];
-        weakSelf.settleView.hidden = !weakSelf.dataCon.cartModel.carts.count;
         weakSelf.cartView.sections = weakSelf.dataCon.sections;
         [weakSelf updateSettleView];
         [weakSelf configRecomendView];
@@ -148,6 +147,7 @@
 }
 
 - (void)updateSettleView{
+    self.settleView.hidden = self.dataCon.validCarts.count==0? YES:NO;
     [self.settleView updateSelBtnStatus:self.dataCon.isAllSelected];
     [self.settleView updatePrice:self.dataCon.cartModel.cartsTotalMount];
     [self.settleView updateSettleBtnText:self.dataCon.selectedCount];

@@ -29,10 +29,7 @@
         self.backgroundColor = UIColor.whiteColor;
         self.layer.cornerRadius = KRateW(8.0);
         self.layer.masksToBounds = YES;
-//        [self layoutView];
         [self updateLocationAddress];
-        self.areaView.proviceBtn.str = @"init";
-        self.areaView.cityBtn.hidden = YES;
         
         self.provice = [TSAreaModel new];
         self.city = [TSAreaModel new];
@@ -56,8 +53,8 @@
 //    }];
 }
 
-- (void)areaViewItemTapped:(UITapGestureRecognizer *)tapGes{
-    currentType = tapGes.view.tag;
+- (void)areaViewItemTapped:(TSAreaButton *)sender{
+    currentType = sender.tag;
     NSString *belongUuid = @"";
     if (currentType == 1) {
         belongUuid = self.city.belongUuid;
@@ -66,29 +63,8 @@
     } else if (currentType == 3){
         belongUuid = self.street.belongUuid;
     }
-    [self.delegate reloadDataWiteType:tapGes.view.tag uuid:belongUuid];
-    if (currentType == 0) {
-        self.areaView.cityBtn.str = @"";
-        self.areaView.areaBtn.str = @"";
-        self.areaView.streetBtn.str = @"";
-        self.city = nil;
-        self.area = nil;
-        self.street = nil;
-        self.areaView.cityBtn.hidden = YES;
-        self.areaView.areaBtn.hidden = YES;
-        self.areaView.streetBtn.hidden = YES;
-    } else if (currentType == 1) {
-        self.areaView.areaBtn.str = @"";
-        self.areaView.streetBtn.str = @"";
-        self.area = nil;
-        self.street = nil;
-        self.areaView.areaBtn.hidden = YES;
-        self.areaView.streetBtn.hidden = YES;
-    } else {
-        self.areaView.streetBtn.str = @"";
-        self.street = nil;
-        self.areaView.streetBtn.hidden = YES;
-    }
+    [self.delegate reloadDataWiteType:currentType uuid:belongUuid];
+    [self.areaView changeUIOfAreaButtonTapped:currentType];
 }
 
 - (void)setDatas:(NSDictionary<NSString *,NSArray *> *)datas{
@@ -225,7 +201,7 @@
         make.left.equalTo(self.mas_left).offset(KRateW(16.0));
         make.right.equalTo(self.mas_right).offset(-KRateW(16.0));
         make.top.equalTo(self.title.mas_bottom).offset(24.0);
-        make.height.mas_equalTo(KRateW(24.0));
+        make.height.mas_equalTo(KRateW(44.0));
     }];
     
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -312,10 +288,10 @@
     }
     self.areaView = [TSAreaView new];
     [self addSubview:self.areaView];
-    [self.areaView.proviceBtn addTarget:self selector:@selector(areaViewItemTapped:)];
-    [self.areaView.cityBtn addTarget:self selector:@selector(areaViewItemTapped:)];
-    [self.areaView.areaBtn addTarget:self selector:@selector(areaViewItemTapped:)];
-    [self.areaView.streetBtn addTarget:self selector:@selector(areaViewItemTapped:)];
+    [self.areaView.proviceBtn addTarget:self action:@selector(areaViewItemTapped:) forControlEvents:UIControlEventTouchUpInside];
+    [self.areaView.cityBtn addTarget:self action:@selector(areaViewItemTapped:) forControlEvents:UIControlEventTouchUpInside];
+    [self.areaView.areaBtn addTarget:self action:@selector(areaViewItemTapped:) forControlEvents:UIControlEventTouchUpInside];
+    [self.areaView.streetBtn addTarget:self action:@selector(areaViewItemTapped:) forControlEvents:UIControlEventTouchUpInside];
     return self.areaView;
 }
 
@@ -358,127 +334,120 @@
 
 @implementation TSAreaView
 
-- (void)dealloc{
-    [self.proviceBtn removeObserver:self forKeyPath:@"text" context:nil];
-    [self.cityBtn removeObserver:self forKeyPath:@"text" context:nil];
-    [self.areaBtn removeObserver:self forKeyPath:@"text" context:nil];
-    [self.streetBtn removeObserver:self forKeyPath:@"text" context:nil];
-}
-
 - (instancetype)init{
     if (self == [super init]) {
-        [self.proviceBtn addObserver:self forKeyPath:@"text" options:(NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld) context:nil];
-        [self.cityBtn addObserver:self forKeyPath:@"text" options:(NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld) context:nil];
-        [self.areaBtn addObserver:self forKeyPath:@"text" options:(NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld) context:nil];
-        [self.streetBtn addObserver:self forKeyPath:@"text" options:(NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld) context:nil];
-        self.proviceBtn.text = @"";
+        self.areaBtns = [NSMutableArray array];
         self.showsHorizontalScrollIndicator = NO;
     }
     return self;
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
-//    self.cityBtn.hidden = !self.proviceBtn.str.length;
-//    self.areaBtn.hidden = !self.cityBtn.str.length;
-//    self.streetBtn.hidden = !self.areaBtn.str.length;
-    if (object == self.proviceBtn && self.proviceBtn.str.length != 0) {
-        self.cityBtn.str = @"init";
-        self.cityBtn.hidden = NO;
-        self.areaBtn.hidden = YES;
-        self.streetBtn.hidden = YES;
-    }
-    if (object == self.cityBtn && self.cityBtn.str.length != 0) {
-        self.areaBtn.str = @"init";
-        self.areaBtn.hidden = NO;
-        self.streetBtn.hidden = YES;
-    }
-    if (object == self.areaBtn && self.areaBtn.str.length != 0) {
-        self.streetBtn.str = @"init";
-        self.streetBtn.hidden = NO;
+- (void)updateString:(NSString *)string type:(NSInteger)type{
+    self.areaBtns[type].selectedTitle = string;
+    for (NSInteger i=0; i<self.areaBtns.count; i++) {
+        TSAreaButton *btn = self.areaBtns[i];
+        if (i > type + 1) {
+            btn.enabled = NO;
+        }
+        if (i == type + 1) {
+            btn.enabled = YES;
+        }
     }
 }
 
-- (void)updateString:(NSString *)string type:(NSInteger)type{
-    if (type == 0) {
-        self.proviceBtn.str = string;
-    } else if (type == 1) {
-        self.cityBtn.str = string;
-    } else if (type == 2) {
-        self.areaBtn.str = string;
-    } else {
-        self.streetBtn.str = string;
+- (void)changeUIOfAreaButtonTapped:(NSInteger)type{
+    for (NSInteger i=0; i<self.areaBtns.count; i++) {
+        TSAreaButton *btn = self.areaBtns[i];
+        if (i > type) {
+            btn.selected = NO;
+            btn.enabled = NO;
+        } else if (i == type) {
+            btn.selected = NO;
+        }
     }
 }
 
 - (void)layoutSubviews{
     [self.proviceBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.bottom.equalTo(self);
+        make.left.top.equalTo(self);
+        make.height.mas_equalTo(KRateW(44.0));
+        make.width.mas_equalTo((kScreenWidth - KRateW(32.0) - KRateW(24.0))/ 4.0);
     }];
     
     [self.cityBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.equalTo(self.proviceBtn);
-        make.left.equalTo(self.proviceBtn.mas_right).offset(KRateW(12.0));
+        make.left.equalTo(self.proviceBtn.mas_right).offset(KRateW(8.0));
+        make.width.equalTo(self.proviceBtn);
     }];
     
     [self.areaBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.equalTo(self.proviceBtn);
-        make.left.equalTo(self.cityBtn.mas_right).offset(KRateW(12.0));
+        make.left.equalTo(self.cityBtn.mas_right).offset(KRateW(8.0));
+        make.width.equalTo(self.proviceBtn);
     }];
     
     [self.streetBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.equalTo(self.proviceBtn);
-        make.left.equalTo(self.areaBtn.mas_right).offset(KRateW(12.0));
-        make.right.equalTo(self.mas_right).priorityHigh();
+        make.left.equalTo(self.areaBtn.mas_right).offset(KRateW(8.0));
+//        make.right.equalTo(self.mas_right).priorityHigh();
+        make.width.equalTo(self.proviceBtn);
     }];
-    
-//    [self layoutIfNeeded];
-//    self.contentSize = CGSizeMake(self.streetBtn.x+self.streetBtn.width, 0);
 }
 
-- (TSAreaLable *)proviceBtn{
+- (TSAreaButton *)proviceBtn{
     if (_proviceBtn) {
         return _proviceBtn;
     }
-    self.proviceBtn = [TSAreaLable new];
+    self.proviceBtn = [TSAreaButton new];
+    self.proviceBtn.normalTitle = @"选择省份";
+    self.proviceBtn.selected = NO;
+    self.proviceBtn.enabled = YES;
     self.proviceBtn.tag = 0;
-    self.proviceBtn.placeholder = @"选择省份";
     [self addSubview:self.proviceBtn];
+    
+    [self.areaBtns addObject:self.proviceBtn];
     
     return self.proviceBtn;
 }
 
-- (TSAreaLable *)cityBtn{
+- (TSAreaButton *)cityBtn{
     if (_cityBtn) {
         return _cityBtn;
     }
-    self.cityBtn = [TSAreaLable new];
+    self.cityBtn = [TSAreaButton new];
+    self.cityBtn.normalTitle = @"选择市区";
+    self.cityBtn.selected = NO;
     self.cityBtn.tag = 1;
-    self.cityBtn.placeholder = @"选择市区";
     [self addSubview:self.cityBtn];
+    [self.areaBtns addObject:self.cityBtn];
     
     return self.cityBtn;
 }
 
-- (TSAreaLable *)areaBtn{
+- (TSAreaButton *)areaBtn{
     if (_areaBtn) {
         return _areaBtn;
     }
-    self.areaBtn = [TSAreaLable new];
+    self.areaBtn = [TSAreaButton new];
+    self.areaBtn.normalTitle = @"选择区/县";
+    self.areaBtn.selected = NO;
     self.areaBtn.tag = 2;
-    self.areaBtn.placeholder = @"选择区/县";
     [self addSubview:self.areaBtn];
+    [self.areaBtns addObject:self.areaBtn];
     
     return self.areaBtn;
 }
 
-- (TSAreaLable *)streetBtn{
+- (TSAreaButton *)streetBtn{
     if (_streetBtn) {
         return _streetBtn;
     }
-    self.streetBtn = [TSAreaLable new];
+    self.streetBtn = [TSAreaButton new];
+    self.streetBtn.normalTitle = @"选择街道";
+    self.streetBtn.selected = NO;
     self.streetBtn.tag = 3;
-    self.streetBtn.placeholder = @"选择街道";
     [self addSubview:self.streetBtn];
+    [self.areaBtns addObject:self.streetBtn];
     
     return self.streetBtn;
 }
@@ -549,38 +518,29 @@
 }
 @end
 
+@implementation TSAreaButton
 
-@implementation TSAreaLable
 - (instancetype)init{
     if (self == [super init]) {
-        self.text = @"";
-        self.font = KFont(PingFangSCMedium, 14.0);
+        [self setTitleColor:KHexColor(@"#E64C3D") forState:UIControlStateNormal];
+        [self setTitleColor:KHexColor(@"#2D3132") forState:UIControlStateSelected];
+        [self setTitle:@"" forState:UIControlStateDisabled];
+        self.titleLabel.font = KRegularFont(14.0);
+        self.titleLabel.numberOfLines = 0;
+        self.titleLabel.lineBreakMode = NSLineBreakByCharWrapping;
         
-        [self addObserver:self forKeyPath:@"str" options:NSKeyValueObservingOptionNew context:nil];
+        self.enabled = NO;
     }
     return self;
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
-    if (self.str.length == 0 || [self.str isEqualToString:@"init"]) {
-        self.text = self.placeholder;
-        self.textColor = KHexColor(@"#E64C3D");
-    } else {
-        self.textColor = KHexColor(@"#2D3132");
-        self.text = self.str;
-        self.hidden = NO;
-    }
+- (void)setNormalTitle:(NSString *)normalTitle{
+    [self setTitle:normalTitle forState:UIControlStateNormal];
 }
 
-- (void)addTarget:(id)target selector:(SEL)selector{
-    self.userInteractionEnabled = YES;
-    UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc] initWithTarget:target action:selector];
-    tapGes.numberOfTouchesRequired = 1;
-    [self addGestureRecognizer:tapGes];
-}
-
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
-    return NO;
+- (void)setSelectedTitle:(NSString *)selectedTitle{
+    self.selected = YES;
+    [self setTitle:selectedTitle forState:UIControlStateSelected];
 }
 
 @end
