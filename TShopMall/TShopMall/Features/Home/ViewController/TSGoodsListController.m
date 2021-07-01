@@ -10,6 +10,7 @@
 #import "TSSearchResultDataController.h"
 #import "TSEmptyAlertView.h"
 #import "TSRecomendDataController.h"
+#import "TSProductDetailController.h"
 
 @interface TSGoodsListController ()
 @property (nonatomic, strong) TSSearchResultFittleView *fittleView;
@@ -23,6 +24,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    __weak typeof(self) weakSelf = self;
+    self.collectionView.goodsSelected = ^(NSString *uuid) {
+        TSProductDetailController *detail = [[TSProductDetailController alloc] init];
+        detail.uuid = uuid;
+        [weakSelf.navigationController pushViewController:detail animated:YES];
+    };
 }
 
 - (void)operationType:(NSInteger)type sortType:(NSInteger)sortType{}

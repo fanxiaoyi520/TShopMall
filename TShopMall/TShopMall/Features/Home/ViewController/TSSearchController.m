@@ -77,10 +77,11 @@
 - (void)goToGoodsList:(NSString *)key{
     [TSSearchKeyViewModel handleHistoryKeys:key];
     [self.dataCon configHistorySection];
-    self.searchView.sections = self.dataCon.sections;
+    TSSearchResultController *con = [TSSearchResultController new];
+    con.searchKey = key;
+    [self.navigationController pushViewController:con animated:YES];
     
-    self.searchResultCon.searchKey = key;
-    [self.searchResultCon showSearchResultView];
+    self.searchView.sections = self.dataCon.sections;
 }
 
 - (void)recomentGoodsSelected:(NSString *)uuid{
