@@ -15,6 +15,7 @@
     vm.price = list.promotionPrice;
     vm.earnPrice = list.earnMost;
     vm.thPrice = list.baseRetailPrice;
+    vm.uuid = list.productUuid;
     return vm;
 }
 @end

@@ -20,7 +20,6 @@
 
 - (instancetype)init{
     if (self == [super init]) {
-        self.view.alpha = 0;
         self.dataCon = [TSSearchResultDataController new];
     }
     return self;
@@ -32,6 +31,8 @@
     [self hiddenNavigationBar];
     [self configRefreshFooterWithTarget:self selector:@selector(mjFooterRefresh:)];
     [self configRefreshHeaderWithTarget:self selector:@selector(mjHeadreRefresh:)];
+    
+    [self showSearchResultView];
 }
 
 - (void)refreshGoods{
@@ -86,9 +87,7 @@
 }
 
 - (void)hideSearchResultView{
-    [UIView animateWithDuration:0.5 animations:^{
-        self.view.alpha = 0;
-    }];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)showSearchResultView{
@@ -96,12 +95,9 @@
     self.naviView.typeBtn.selected = NO;
     self.dataCon.keyword = self.searchKey;
     [self.dataCon defaultConfig];
-    [UIView animateWithDuration:0.5 animations:^{
-        self.view.alpha = 1;
-    } completion:^(BOOL finished) {
-        self.naviView.searchView.textField.text = self.searchKey;
-        [self refreshGoods];
-    }];
+    
+    self.naviView.searchView.textField.text = self.searchKey;
+    [self refreshGoods];
 }
 
 - (void)viewWillLayoutSubviews{

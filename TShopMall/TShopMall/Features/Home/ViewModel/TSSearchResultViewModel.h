@@ -14,6 +14,7 @@
 @property (nonatomic, copy) NSString *price;
 @property (nonatomic, copy) NSString *earnPrice;
 @property (nonatomic, copy) NSString *thPrice;
+@property (nonatomic, copy) NSString *uuid;
 
 - (instancetype)initWithList:(TSSearchList *)list;
 @end

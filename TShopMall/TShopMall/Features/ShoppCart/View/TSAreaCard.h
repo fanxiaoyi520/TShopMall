@@ -63,7 +63,6 @@
 @property (nonatomic, strong) UIImageView *indeImg;
 @property (nonatomic, strong) UILabel *indeDes;
 @property (nonatomic, strong) UIView *bgView;
-@property (nonatomic, assign) CGFloat btnHeight;
 @property (nonatomic, assign) NSInteger lastTag;
 @property (nonatomic, copy) void(^indexChanged)(NSInteger index);
 @end
