@@ -16,7 +16,6 @@
 #import <AVFoundation/AVMediaFormat.h>
 #import "TSAlertView.h"
 #import "TSChangePictureViewController.h"
-#import "TSSexSelectingView.h"
 #import "TSDatePickerView.h"
 #import "TSRealnameInfoViewController.h"
 #import "TSRealNameAuthViewController.h"
@@ -24,7 +23,7 @@
 #import "PhotoBrowser.h"
 #import "UIViewController+Plugin.h"
 
-@interface TSPersonalViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate, TSSexSelectingViewDelegate, TSDatePickerViewDelegate>
+@interface TSPersonalViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate, TSDatePickerViewDelegate>
 /// 数据中心
 @property(nonatomic, strong) TSPersonalDataController *dataController;
 /// CollectionView
@@ -46,6 +45,8 @@
 
 - (void)setupBasic {
     [super setupBasic];
+    self.gk_navTitleFont = KRegularFont(18);
+    self.gk_navTitleColor = KHexColor(@"#2D3132");
     self.gk_navTitle = @"个人资料";
     [self userInfoModifiedAction];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userInfoModifiedAction) name:TSUserInfoModifiedNotificationName object:nil];
@@ -126,9 +127,19 @@
 }
 
 - (void)showSexAlert {
-    TSSexSelectingView *sexSelectedView = [TSSexSelectingView sexSelectingView];
-    sexSelectedView.delegate = self;
-    [sexSelectedView show];
+    @weakify(self);
+    TSUser *user = [TSUserInfoManager userInfo].user;
+    TSChangePictureActionSheet *actionSheet = [[TSChangePictureActionSheet alloc] initWithTitles:@[@"男", @"女"] selectIndex:(user.sex - 1) actionHandler:^(NSInteger index, NSString * _Nonnull title) {
+        @strongify(self);
+        NSLog(@"%ld-%@", index, title);
+        NSString *sexString = [NSString stringWithFormat:@"%ld", index + 1];
+        [self modifyUserInfoWithKey:@"sex" value:sexString completed:^{
+            @strongify(self);
+            //[TSUserInfoManager userInfo].user.sex = sex;
+            [self userInfoModifiedAction];
+        }];
+    }];
+    [actionSheet show];
 }
 
 - (void)showDatePickerView {
@@ -155,7 +166,7 @@
 
 - (void)uploadAvartar:(UIImage *)image {
     [Popover popProgressOnWindowWithText:@"正在上传..."];
-    [[TSServicesManager sharedInstance].userInfoService uploadImage:image success:^(NSString * _Nonnull imageURL) {
+    [[TSServicesManager sharedInstance].uploadImageService uploadImage:image success:^(NSString * _Nonnull imageURL) {
         if (imageURL) {
             [self modifyAvartar:imageURL];
         } else {
@@ -168,7 +179,7 @@
 
 - (void)modifyAvartar:(NSString *)avatarURL {
     [[TSServicesManager sharedInstance].userInfoService modifyUserInfoWithKey:@"avatar" value:avatarURL success:^ {
-        [TSServicesManager sharedInstance].userInfoService.user.avatar = avatarURL;
+        //[TSUserInfoManager userInfo].user.avatar = avatarURL;
         [[NSNotificationCenter defaultCenter] postNotificationName:TSUserInfoModifiedNotificationName object:nil];
         [Popover popToastOnWindowWithText:@"头像修改成功！"];
     } failure:^(NSString * _Nonnull errorMsg) {
@@ -244,23 +255,12 @@
     return _dataController;
 }
 
-#pragma mark - TSSexSelectingViewDelegate(性别选择)
-- (void)selectedSex:(Sex)sex {
-    NSString *sexString = [NSString stringWithFormat:@"%d", sex];
-    @weakify(self);
-    [self modifyUserInfoWithKey:@"sex" value:sexString completed:^{
-        @strongify(self);
-        [TSServicesManager sharedInstance].userInfoService.user.sex = sex;
-        [self userInfoModifiedAction];
-    }];
-}
-
 #pragma mark - TSDatePickerViewDelegate(日期选择器）
 - (void)selectedDateString:(NSString *)dateString {
     @weakify(self);
     [self modifyUserInfoWithKey:@"birthday" value:dateString completed:^{
         @strongify(self);
-        [TSServicesManager sharedInstance].userInfoService.user.birthday = dateString;
+        //[TSUserInfoManager userInfo].user.birthday = dateString;
         [self userInfoModifiedAction];
     }];
 }

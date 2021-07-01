@@ -23,8 +23,8 @@
 - (void)setObj:(id)obj{
     if ([obj isKindOfClass: [TSMakeOrderPriceViewModel class]]) {
         TSMakeOrderPriceViewModel *vm = (TSMakeOrderPriceViewModel *)obj;
-        self.thPriceView.des.text  = [NSString stringWithFormat:@"¥ %@", vm.thPrice];
-        self.deliveryView.des.text = [NSString stringWithFormat:@"¥ %@", vm.deliveryPrice];
+        self.thPriceView.des.text  = [NSString stringWithFormat:@"¥ %d", vm.thPrice.intValue];
+        self.deliveryView.des.text = [NSString stringWithFormat:@"¥ %d", vm.deliveryPrice.intValue];
     }
 }
 

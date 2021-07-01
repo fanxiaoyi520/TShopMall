@@ -53,7 +53,7 @@
 
 - (void)updateUI{
     self.makeOrderView.sections = self.dataCon.sections;
-    self.commitView.price.text = [NSString stringWithFormat:@"¥ %@", self.dataCon.balanceModel.orderTotalMoney];
+    self.commitView.price.text = [NSString stringWithFormat:@"¥ %d", self.dataCon.balanceModel.orderTotalMoney.intValue];
 }
 
 //选择地址
@@ -107,6 +107,10 @@
             con.payOrderId = payOrderId;
             con.isGroup = isGroup;
             [self.navigationController pushViewController:con animated:YES];
+            
+            NSMutableArray *arr = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
+            [arr removeObject:self];
+            self.navigationController.viewControllers = arr;
         }
     } OnController:self];
 }

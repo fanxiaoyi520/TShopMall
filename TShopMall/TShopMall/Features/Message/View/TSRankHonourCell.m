@@ -62,15 +62,15 @@
     }];
     
     self.championIconImgV.layer.masksToBounds = YES;
-    self.championIconImgV.layer.cornerRadius = KRateW(62/2);
+    self.championIconImgV.layer.cornerRadius = KRateW(64/2);
     [self.championIconImgV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self.championImgV);
-        make.width.height.offset(KRateW(62));
+        make.width.height.offset(KRateW(64));
     }];
     
     [self.championHatImgV mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.championImgV.mas_top);
-        make.left.equalTo(self.championImgV.mas_centerX).offset(-3);
+        make.centerY.equalTo(self.championImgV.mas_top).offset(-KRateW(3));
+        make.left.equalTo(self.championImgV.mas_centerX).offset(KRateW(3));
         make.width.offset(KRateW(44));
         make.height.offset(KRateW(42));
     }];
@@ -78,7 +78,7 @@
     [self.championLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(self.thirdLabel);
         make.centerX.equalTo(self.championImgV);
-        make.top.equalTo(self.championImgV.mas_bottom).offset(3);
+        make.top.equalTo(self.championImgV.mas_bottom).offset(KRateW(3));
     }];
     
     //亚军
@@ -89,15 +89,15 @@
     }];
     
     self.secondIconImgV.layer.masksToBounds = YES;
-    self.secondIconImgV.layer.cornerRadius = KRateW(52/2);
+    self.secondIconImgV.layer.cornerRadius = KRateW(54/2);
     [self.secondIconImgV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self.secondImgV);
-        make.width.height.offset(KRateW(52));
+        make.width.height.offset(KRateW(54));
     }];
     
     [self.secondHatImgV mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.secondImgV.mas_top);
-        make.left.equalTo(self.secondImgV.mas_centerX).offset(-2);
+        make.centerY.equalTo(self.secondImgV.mas_top).offset(-KRateW(5));
+        make.left.equalTo(self.secondImgV.mas_centerX).offset(KRateW(2));
         make.width.offset(KRateW(38));
         make.height.offset(KRateW(36));
     }];
@@ -105,7 +105,7 @@
     [self.secondLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(self.thirdLabel);
         make.centerX.equalTo(self.secondImgV);
-        make.top.equalTo(self.secondImgV.mas_bottom).offset(3);
+        make.top.equalTo(self.secondImgV.mas_bottom).offset(KRateW(3));
     }];
     
     
@@ -117,15 +117,15 @@
     }];
     
     self.thirdIconImgV.layer.masksToBounds = YES;
-    self.thirdIconImgV.layer.cornerRadius = KRateW(52/2);
+    self.thirdIconImgV.layer.cornerRadius = KRateW(54/2);
     [self.thirdIconImgV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self.thirdImgV);
-        make.width.height.offset(KRateW(52));
+        make.width.height.offset(KRateW(54));
     }];
     
     [self.thirdHatImgV mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.thirdImgV.mas_top);
-        make.left.equalTo(self.thirdImgV.mas_centerX).offset(-2);
+        make.centerY.equalTo(self.thirdImgV.mas_top).offset(-KRateW(5));
+        make.left.equalTo(self.thirdImgV.mas_centerX).offset(KRateW(2));
         make.width.offset(KRateW(38));
         make.height.offset(KRateW(36));
     }];
@@ -133,7 +133,7 @@
     [self.thirdLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.offset(88);
         make.centerX.equalTo(self.thirdImgV);
-        make.top.equalTo(self.thirdImgV.mas_bottom).offset(3);
+        make.top.equalTo(self.thirdImgV.mas_bottom).offset(KRateW(3));
     }];
     
 }
@@ -186,6 +186,7 @@
     if (_championIconImgV == nil) {
         UIImageView *championIconImgV = [[UIImageView alloc] init];
         _championIconImgV = championIconImgV;
+        _championIconImgV.backgroundColor = KWhiteColor;
         _championIconImgV.image = KImageMake(@"mall_setting_defautlhead");
         [self.contentView addSubview: _championIconImgV];
     }
@@ -229,6 +230,7 @@
     if (_secondIconImgV == nil) {
         UIImageView *secondIconImgV = [[UIImageView alloc] init];
         _secondIconImgV = secondIconImgV;
+        _secondIconImgV.backgroundColor = KWhiteColor;
         _secondIconImgV.image = KImageMake(@"mall_setting_defautlhead");
         [self.contentView addSubview: _secondIconImgV];
     }
@@ -272,6 +274,7 @@
     if (_thirdIconImgV == nil) {
         UIImageView *thirdIconImgV = [[UIImageView alloc] init];
         _thirdIconImgV = thirdIconImgV;
+        _thirdIconImgV.backgroundColor = KWhiteColor;
         _thirdIconImgV.image = KImageMake(@"mall_setting_defautlhead");
         [self.contentView addSubview: _thirdIconImgV];
     }

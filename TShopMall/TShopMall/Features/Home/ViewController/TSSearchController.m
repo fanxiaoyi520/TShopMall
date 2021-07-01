@@ -30,13 +30,13 @@
     [con presentViewController:naviCon animated:YES completion:nil];
 }
 
-- (UIStatusBarStyle)preferredStatusBarStyle{
-    if (@available(iOS 13.0, *)) {
-        return [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDarkContent;
-    } else {
-        return [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
-    }
-}
+//- (UIStatusBarStyle)preferredStatusBarStyle{
+//    if (@available(iOS 13.0, *)) {
+//        return [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDarkContent;
+//    } else {
+//        return [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+//    }
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -44,7 +44,6 @@
     
     self.dataCon = [TSSearchDataController new];
     [self refreshData];
-    [self configRecomendView];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -60,8 +59,8 @@
 
 - (void)refreshData{
     __weak typeof(self) weakSelf = self;
-    [self.dataCon fetchData:^(NSArray<TSSearchSection *> *sections, NSError *error) {
-        weakSelf.searchView.sections = sections;
+    [self.dataCon fetchData:^{
+        weakSelf.searchView.sections = weakSelf.dataCon.sections;
         [self configRecomendView];
     }];
 }
@@ -77,10 +76,12 @@
 
 - (void)goToGoodsList:(NSString *)key{
     [TSSearchKeyViewModel handleHistoryKeys:key];
-    self.searchView.sections = [TSSearchDataController updateHistorySections:self.dataCon.sections];
+    [self.dataCon configHistorySection];
+    TSSearchResultController *con = [TSSearchResultController new];
+    con.searchKey = key;
+    [self.navigationController pushViewController:con animated:YES];
     
-    self.searchResultCon.searchKey = key;
-    [self.searchResultCon showSearchResultView];
+    self.searchView.sections = self.dataCon.sections;
 }
 
 - (void)recomentGoodsSelected:(NSString *)uuid{
@@ -117,5 +118,15 @@
     [self addChildViewController:self.searchResultCon];
     
     return self.searchResultCon;
+}
+
+- (TSSearchDataController *)dataCon {
+    if (_dataCon) {
+        return _dataCon;
+    }
+    self.dataCon = [TSSearchDataController new];
+    self.dataCon.context = self;
+    
+    return self.dataCon;
 }
 @end

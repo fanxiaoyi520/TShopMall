@@ -143,7 +143,7 @@
     _moneyValueLabel.text = [NSString stringWithFormat:@"¥%@",model.orderMoney];
     _contributeValueLabel.text = [NSString stringWithFormat:@"¥%@",model.profitFromMyself];
     _partnerValueLabel.text = [NSString stringWithFormat:@"¥%@",model.profitFromPartner];
-    if (![model.rankLevel isEqualToString: @"2"]) {
+    if (![model.salesmanRankLevel isEqualToString: @"1"]) {
         self.partnerLabel.hidden = YES;
         self.partnerValueLabel.hidden = YES;
         [self.contributeLabel mas_updateConstraints:^(MASConstraintMaker *make) {

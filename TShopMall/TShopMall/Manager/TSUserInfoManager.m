@@ -20,15 +20,12 @@
 
 @synthesize accountId = _accountId;
 
-@synthesize nickname = _nickname;
-
 - (id)copyWithZone:(NSZone *)zone {
     TSUserInfoManager *copy =[[[self class] allocWithZone:zone] init];
     copy.accessToken = [self.accessToken copyWithZone:zone];
     copy.accountId = [self.accountId copyWithZone:zone];
     copy.userName = [self.userName copyWithZone:zone];
     copy.refreshToken = [self.refreshToken copyWithZone:zone];
-    copy.nickname = [self.nickname copyWithZone:zone];
     copy.user = [self.user copyWithZone:zone];
     return copy;
 }
@@ -39,7 +36,6 @@
         _refreshToken = [coder decodeObjectForKey:@"refreshToken"];
         _userName = [coder decodeObjectForKey:@"userName"];
         _accountId = [coder decodeObjectForKey:@"accountId"];
-        _nickname = [coder decodeObjectForKey:@"nickname"];
         _user = [coder decodeObjectForKey:@"user"];
     }
     return self;
@@ -50,7 +46,6 @@
     [coder encodeObject:self.refreshToken forKey:@"refreshToken"];
     [coder encodeObject:self.userName forKey:@"userName"];
     [coder encodeObject:self.accountId forKey:@"accountId"];
-    [coder encodeObject:self.nickname forKey:@"nickname"];
     [coder encodeObject:self.user forKey:@"user"];
 }
 
@@ -66,11 +61,11 @@
 
 - (void)saveUserInfo:(TSUserInfoManager *)info{
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:info];
-    dispatch_async(dispatch_get_main_queue(), ^{
+    //dispatch_async(dispatch_get_main_queue(), ^{
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         [userDefaults setObject:data forKey:UserInfo_Save_Key];
         [userDefaults synchronize];
-    });
+   // });
 }
 
 - (void)clearUserInfo {
@@ -87,11 +82,20 @@
     return _accessToken;
 }
 
--(void)updateUserInfo:(void(^)(BOOL))success{
-    [[TSServicesManager sharedInstance].userInfoService updateUserInfoSuccess:^{
-        
+-(void)updateUserInfo:( void(^ _Nullable)(BOOL isSuccess))success {
+    [[TSServicesManager sharedInstance].userInfoService getUserInfoAccountId:self.accountId success:^(TSUser * _Nonnull user) {
+        TSUserInfoManager *userInfoManager = [[TSUserInfoManager alloc] init];
+        userInfoManager.accessToken = self.accessToken;
+        userInfoManager.accountId = self.accountId;
+        userInfoManager.refreshToken = self.refreshToken;
+        userInfoManager.userName = user.username;
+        userInfoManager.user = user;
+        [self saveUserInfo:userInfoManager];
+        if (success) {
+            success(YES);
+        }
     } failure:^(NSString * _Nonnull errorMsg) {
-        
+        success(NO);
     }];
 }
 

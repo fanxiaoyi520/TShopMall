@@ -487,6 +487,18 @@
     [self.changePopups dismissAnimated:YES completion:nil];
 }
 
+-(void)changePriceView:(TSChangePriceView *_Nullable)changePriceView shareClick:(UIButton *_Nonnull)sender discountPrice:(NSString *_Nullable)discountPrice{
+    __weak __typeof(self)weakSelf = self;
+    [self.dataController fetchProductPrerogativeStaffShareType:@"3"
+                                                  discountType:@"price"
+                                                 discountPrice:discountPrice
+                                                      complete:^(BOOL isSucess, NSDictionary * _Nonnull data) {
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
+        [strongSelf staffShare:@{}];
+            
+    }];
+}
+
 #pragma mark - UIScrollViewDelegate
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     CGFloat offsetY = scrollView.contentOffset.y;
@@ -724,15 +736,15 @@ spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
 }
 
 - (void)shareViewView:(UIView *)view shareFriendsAction:(UIButton *)sender{
+    [self staffShare:@{}];
     
-    __weak __typeof(self)weakSelf = self;
-    [self.dataController fetchStaffShareShareType:0 complete:^(BOOL isSucess, NSDictionary * _Nonnull data) {
-        __strong __typeof(weakSelf)strongSelf = weakSelf;
-        if (isSucess) {
-            [strongSelf staffShare:data];
-        }
-        
-    }];
+//    __weak __typeof(self)weakSelf = self;
+//    [self.dataController fetchStaffShareShareType:0 complete:^(BOOL isSucess, NSDictionary * _Nonnull data) {
+//        __strong __typeof(weakSelf)strongSelf = weakSelf;
+//        if (isSucess) {
+//            [strongSelf staffShare:data];
+//        }
+//    }];
 }
 
 - (void)shareViewView:(UIView *)view sharePYQAction:(UIButton *)sender{

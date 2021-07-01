@@ -15,7 +15,6 @@
 #import <Toast.h>
 #import "TSRegiterViewController.h"
 #import "NSTimer+TSBlcokTimer.h"
-#import "TSLoginRegisterDataController.h"
 #import <NTESQuickPass/NTESQuickPass.h>
 #import "NTESQLHomePageCustomUIModel.h"
 #import "TSHybridViewController.h"
@@ -25,6 +24,7 @@
 #import "AuthAppleIDManager.h"
 #import <AuthenticationServices/AuthenticationServices.h>
 #import "TSAgreementModel.h"
+
 //#import "TSFirstEnterAgreementView.h"
 
 @interface TSLoginViewController ()<TSQuickLoginTopViewDelegate, TSLoginTopViewDelegate, TSLoginBottomViewDelegate, TSCheckedViewDelegate, TSQuickCheckViewDelegate, TSHybridViewControllerDelegate>
@@ -46,8 +46,6 @@
 @property(nonatomic, assign) NSInteger count;
 /** 定时器 */
 @property (nonatomic, strong) NSTimer *timer;
-
-@property(nonatomic, strong) TSLoginRegisterDataController *dataController;
 
 @end
 
@@ -123,7 +121,7 @@
     [self.checkedView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.view.mas_bottom).with.offset(-KRateH(30));
         make.left.right.equalTo(self.view).with.offset(0);
-        make.height.mas_equalTo(66);
+        make.height.mas_equalTo(48);
     }];
     [self.quickCheckView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.view.mas_bottom).with.offset(-KRateH(30));
@@ -138,11 +136,16 @@
 }
 
 - (void)getAgreementInfo {
-    __weak __typeof(self)weakSelf = self;
-    [self.dataController fetchAgreementWithCompleted:^(NSArray<TSAgreementModel *> * _Nonnull agreementModels) {
-        weakSelf.checkedView.agreementModels = agreementModels;
-        weakSelf.quickCheckView.agreementModels = agreementModels;
-    }];
+    NSArray *agreementModels = [TSGlobalManager shareInstance].agreementModels;
+    if (agreementModels.count) {
+        self.checkedView.agreementModels = agreementModels;
+        self.quickCheckView.agreementModels = agreementModels;
+    } else {
+        [[TSUserLoginManager shareInstance] fetchAgreementWithCompleted:^(NSArray<TSAgreementModel *> * _Nonnull agreementModels) {
+            self.checkedView.agreementModels = agreementModels;
+            self.quickCheckView.agreementModels = agreementModels;
+        }];
+    }
 }
 
 #pragma mark - Actions
@@ -197,7 +200,7 @@
         [self.timer invalidate];
         self.timer = nil;
     }
-    [self.dataController fetchLoginSMSCodeMobile:mobile complete:^(BOOL isSucess) {
+    [[TSServicesManager sharedInstance].acconutService fetchLoginSMSCodeMobile:mobile complete:^(BOOL isSucess) {
         __strong __typeof(weakSelf)strongSelf = weakSelf;
         if (isSucess) {
             strongSelf.timer = [NSTimer ts_scheduledTimerWithTimeInterval:1 block:^{
@@ -207,7 +210,7 @@
             [Popover popToastOnWindowWithText:@"获取验证码成功"];
             
         }else{
-            [strongSelf.view makeToast:self.dataController.smsModel.failCause duration:2.0 position:CSToastPositionBottom];
+            
         }
     }];
     
@@ -216,7 +219,6 @@
 - (void)goToRegister {
     if (self.navigationController) {
         TSRegiterViewController *registerVC = [[TSRegiterViewController alloc] init];
-        registerVC.dataController = self.dataController;
         [self.navigationController pushViewController:registerVC animated:YES];
     } else {
         [self dismissViewControllerAnimated:YES completion:nil];
@@ -243,7 +245,7 @@
     }
     
     NSString *inputCode = [self.topView getCode];
-    NSString *rightCode = self.dataController.smsModel.text;
+    NSString *rightCode = [TSServicesManager sharedInstance].acconutService.smsModel.text;
     
     if (![inputCode isEqualToString:rightCode]) {//验证码输入错误
         [Popover popToastOnWindowWithText:@"验证码输入有误"];
@@ -255,7 +257,7 @@
     }];
     
     @weakify(self);
-    [self.dataController fetchQuickLoginUsername:[self.topView getPhoneNumber]
+    [[TSServicesManager sharedInstance].acconutService fetchQuickLoginUsername:[self.topView getPhoneNumber]
                                        validCode:[self.topView getCode]
                                         complete:^(BOOL isSucess) {
         @strongify(self)
@@ -293,7 +295,7 @@
     [manager authorizationAppleID];
     manager.loginByTokenBlock = ^(NSString * _Nonnull token) {
         @strongify(self)
-        [self.dataController fetchLoginByToken:token platformId:@"15" sucess:^(BOOL isHaveMobile, NSString * _Nonnull token) {
+        [[TSServicesManager sharedInstance].acconutService fetchLoginByToken:token platformId:@"15" sucess:^(BOOL isHaveMobile, NSString * _Nonnull token) {
             if (isHaveMobile) {
                 /// 完成登录
                 if (self.loginBlock) {
@@ -411,13 +413,6 @@
     return _bgImgV;
 }
 
--(TSLoginRegisterDataController *)dataController{
-    if (!_dataController) {
-        _dataController = [[TSLoginRegisterDataController alloc] init];
-    }
-    return _dataController;
-}
-
 #pragma mark- 微信登录
 - (void)sendWXAuthReq{
     @weakify(self);
@@ -428,7 +423,7 @@
     payManager.WXSuccess = ^(NSString *code){
         @strongify(self)
         if (code) {
-            [self.dataController fetchLoginByAuthCode:code platformId:@"3" sucess:^(BOOL isHaveMobile, NSString * _Nonnull token) {
+            [[TSServicesManager sharedInstance].acconutService fetchLoginByAuthCode:code platformId:@"3" sucess:^(BOOL isHaveMobile, NSString * _Nonnull token) {
                 if (isHaveMobile) {
                     /// 完成登录
                     [self dismissViewControllerAnimated:YES completion:^{

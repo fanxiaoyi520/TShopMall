@@ -42,55 +42,56 @@
 
 - (instancetype)initWithCoder:(NSCoder *)coder {
     if (self = [super init]) {
-        [coder encodeObject:self.accountId forKey:@"accountId"];
-        [coder encodeObject:self.addressText forKey:@"addressText"];
-        [coder encodeObject:self.appId forKey:@"appId"];
-        [coder encodeObject:self.appName forKey:@"appName"];
-        [coder encodeObject:self.area forKey:@"area"];
-        [coder encodeObject:self.avatar forKey:@"avatar"];
-        [coder encodeObject:self.birthday forKey:@"birthday"];
-        [coder encodeObject:self.city forKey:@"city"];
-        [coder encodeObject:self.province forKey:@"province"];
-        [coder encodeObject:self.country forKey:@"country"];
-        [coder encodeObject:self.email forKey:@"email"];
-        [coder encodeObject:self.identity forKey:@"identity"];
-        [coder encodeObject:self.institutionUser forKey:@"institutionUser"];
-        [coder encodeObject:self.nickname forKey:@"nickname"];
-        [coder encodeObject:self.permissionValue forKey:@"permissionValue"];
-        [coder encodeObject:self.personalUser forKey:@"personalUser"];
-        [coder encodeObject:self.phone forKey:@"phone"];
-        [coder encodeObject:self.region forKey:@"region"];
-        [coder encodeObject:self.regRegion forKey:@"regRegion"];
-        [coder encodeInt:self.sex forKey:@"sex"];
-        [coder encodeObject:self.userType forKey:@"userType"];
-        [coder encodeObject:self.username forKey:@"username"];
+        _accountId = [coder decodeObjectForKey:@"accountId"];
+        _addressText = [coder decodeObjectForKey:@"addressText"];
+        _appId = [coder decodeObjectForKey:@"appId"];
+        _appName = [coder decodeObjectForKey:@"appName"];
+        _area = [coder decodeObjectForKey:@"area"];
+        _avatar = [coder decodeObjectForKey:@"avatar"];
+        _birthday = [coder decodeObjectForKey:@"birthday"];
+        _city = [coder decodeObjectForKey:@"city"];
+        _province = [coder decodeObjectForKey:@"province"];
+        _country = [coder decodeObjectForKey:@"country"];
+        _email = [coder decodeObjectForKey:@"email"];
+        _identity = [coder decodeObjectForKey:@"identity"];
+        _institutionUser = [coder decodeObjectForKey:@"institutionUser"];
+        _nickname = [coder decodeObjectForKey:@"nickname"];
+        _permissionValue = [coder decodeObjectForKey:@"permissionValue"];
+        _personalUser = [coder decodeObjectForKey:@"personalUser"];
+        _phone = [coder decodeObjectForKey:@"phone"];
+        _region = [coder decodeObjectForKey:@"region"];
+        _regRegion = [coder decodeObjectForKey:@"regRegion"];
+        _sex = [coder decodeIntForKey:@"sex"];
+        _userType = [coder decodeObjectForKey:@"userType"];
+        _username = [coder decodeObjectForKey:@"username"];
     }
     return self;
 }
 
 - (void)encodeWithCoder:(nonnull NSCoder *)coder {
-    self.accountId = [coder decodeObjectForKey:@"accountId"];
-    self.addressText = [coder decodeObjectForKey:@"addressText"];
-    self.appId = [coder decodeObjectForKey:@"appId"];
-    self.appName = [coder decodeObjectForKey:@"appName"];
-    self.area = [coder decodeObjectForKey:@"area"];
-    self.avatar = [coder decodeObjectForKey:@"avatar"];
-    self.birthday = [coder decodeObjectForKey:@"birthday"];
-    self.city = [coder decodeObjectForKey:@"city"];
-    self.province = [coder decodeObjectForKey:@"province"];
-    self.country = [coder decodeObjectForKey:@"country"];
-    self.email = [coder decodeObjectForKey:@"email"];
-    self.identity = [coder decodeObjectForKey:@"identity"];
-    self.institutionUser = [coder decodeObjectForKey:@"institutionUser"];
-    self.nickname = [coder decodeObjectForKey:@"nickname"];
-    self.permissionValue = [coder decodeObjectForKey:@"permissionValue"];
-    self.personalUser = [coder decodeObjectForKey:@"personalUser"];
-    self.phone = [coder decodeObjectForKey:@"phone"];
-    self.region = [coder decodeObjectForKey:@"region"];
-    self.regRegion = [coder decodeObjectForKey:@"regRegion"];
-    self.sex = [coder decodeIntForKey:@"sex"];
-    self.userType = [coder decodeObjectForKey:@"userType"];
-    self.username = [coder decodeObjectForKey:@"username"];
+    
+    [coder encodeObject:self.accountId forKey:@"accountId"];
+    [coder encodeObject:self.addressText forKey:@"addressText"];
+    [coder encodeObject:self.appId forKey:@"appId"];
+    [coder encodeObject:self.appName forKey:@"appName"];
+    [coder encodeObject:self.area forKey:@"area"];
+    [coder encodeObject:self.avatar forKey:@"avatar"];
+    [coder encodeObject:self.birthday forKey:@"birthday"];
+    [coder encodeObject:self.city forKey:@"city"];
+    [coder encodeObject:self.province forKey:@"province"];
+    [coder encodeObject:self.country forKey:@"country"];
+    [coder encodeObject:self.email forKey:@"email"];
+    [coder encodeObject:self.identity forKey:@"identity"];
+    [coder encodeObject:self.institutionUser forKey:@"institutionUser"];
+    [coder encodeObject:self.nickname forKey:@"nickname"];
+    [coder encodeObject:self.permissionValue forKey:@"permissionValue"];
+    [coder encodeObject:self.personalUser forKey:@"personalUser"];
+    [coder encodeObject:self.phone forKey:@"phone"];
+    [coder encodeObject:self.region forKey:@"region"];
+    [coder encodeObject:self.regRegion forKey:@"regRegion"];
+    [coder encodeInt:self.sex forKey:@"sex"];
+    [coder encodeObject:self.userType forKey:@"userType"];
+    [coder encodeObject:self.username forKey:@"username"];
 }
 
 

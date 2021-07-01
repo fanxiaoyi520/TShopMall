@@ -34,6 +34,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self hideTabBarShadowImageView];
+    
     [TSCartDataController checkCartNumber:^(NSInteger num) {
         [self updateCartsBadge:num];
     }];
@@ -44,6 +47,10 @@
        didSelectControl:(UIControl *)control{
     UITabBarItem *item = [tabBarController.tabBar.items objectAtIndex:tabBarController.selectedIndex];
     item.badgeValue = nil;
+    TSBaseNavigationController *nav = tabBarController.childViewControllers[tabBarController.selectedIndex];
+    if ([nav.topViewController conformsToProtocol:@protocol(TSTabBarControllerProtocol)]) {
+        [nav.topViewController performSelector:@selector(refreshData)];
+    }
 }
 
 #pragma mark - Private
@@ -69,9 +76,9 @@
     [[UITabBar appearance] setBackgroundColor:[UIColor whiteColor]];
     [[UITabBar appearance] setBackgroundImage:[[UIImage alloc] init]];
     
-    self.tabBar.layer.shadowColor = [[UIColor grayColor] colorWithAlphaComponent:0.65].CGColor;
-    self.tabBar.layer.shadowOpacity = 0.2;
-    self.tabBar.layer.shadowOffset = CGSizeMake(0, 3);
+    self.tabBar.layer.shadowColor = [[UIColor blackColor] colorWithAlphaComponent:0.2].CGColor;
+    self.tabBar.layer.shadowOpacity = 0.6;
+    self.tabBar.layer.shadowOffset = CGSizeMake(0, 4);
     self.tabBar.layer.masksToBounds = NO;
     self.tabBar.clipsToBounds = NO;
 }

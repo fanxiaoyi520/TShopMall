@@ -9,8 +9,10 @@
 #import "TSAddressViewModel.h"
 
 @class TSAddressEditItem;
+@class TSAddressDefaultItem;
 
 @interface TSAddressEditView : UIScrollView
+@property (nonatomic, strong) TSAddressDefaultItem *isDefaultItem;
 @property (nonatomic, weak) id controller;
 @property (nonatomic, strong) TSAddressViewModel *vm;
 
@@ -30,4 +32,10 @@
 
 @interface TSAddressPastView : UIView
 
+@end
+
+
+@interface TSAddressDefaultItem : UIView
+@property (nonatomic, strong) UIButton *selBtn;
+@property (nonatomic, strong) UILabel *tips;
 @end

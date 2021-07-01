@@ -9,7 +9,8 @@
 #import "TSRecomendGoodsProtocol.h"
 #import "TSUserInfoService.h"
 #import "AFNetworkReachabilityManager.h"
-
+#import "TSUploadImageService.h"
+#import "TSLoginRegisterDataController.h"
 NS_ASSUME_NONNULL_BEGIN
 @protocol TSUriHandler <NSObject>
 
@@ -31,6 +32,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) id<TSBestSellingRecommendServiceProtocol> bestSellingRecommendService;
 /** 用户信息的service  */
 @property(nonatomic, strong) TSUserInfoService *userInfoService;
+/** 上传图片的service  */
+@property(nonatomic, strong) TSUploadImageService *uploadImageService;
+/// 账号Service
+@property(nonatomic, strong) TSLoginRegisterDataController *acconutService;
 
 @end
 

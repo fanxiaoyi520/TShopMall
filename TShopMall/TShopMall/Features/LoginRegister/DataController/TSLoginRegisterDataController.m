@@ -16,25 +16,22 @@
 
 @implementation TSLoginRegisterDataController
 -(void)fetchChangeBindWithNewMobile:(NSString *)newMobile
-                    validCode:(NSString *)validCode
-                    complete:(void(^)(BOOL isSucess))complete{
+                          validCode:(NSString *)validCode
+                           success:(void (^ _Nullable)(void))success failure:(void (^ _Nullable)(NSString * _Nonnull))failure{
     TSChangeBindRequest *login = [[TSChangeBindRequest alloc] initWithNewMobile:newMobile validCode:validCode];
-   login.animatingView = self.context.view;
-   [login startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+    login.animatingView = self.context.view;
+    [login startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
        if (request.responseModel.isSucceed) {
            [[TSUserInfoManager userInfo] updateUserInfo:^(BOOL success) {
-                          
+                
            }];
 
-           complete(YES);
+           success();
        }
        else{
-           complete(NO);
-           [Popover popToastOnWindowWithText:request.responseModel.originalData[@"msg"]];
+           failure(request.responseModel.originalData[@"msg"]);         
        }
    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-       complete(NO);
-
 
    }];
 }
@@ -112,10 +109,10 @@
             userInfo.refreshToken = request.responseModel.originalData[@"refreshToken"];
             userInfo.userName = request.responseModel.originalData[@"username"];
             userInfo.accountId = request.responseModel.originalData[@"accountId"];
-            userInfo.nickname = request.responseModel.originalData[@"nickname"];
             [[TSUserInfoManager userInfo] saveUserInfo:userInfo];
-
-            complete(YES);
+            ///登录成功后获取用户信息
+            [[TSUserInfoManager userInfo] updateUserInfo:complete];
+            //complete(YES);
         }
         else{
             complete(NO);
@@ -180,7 +177,8 @@
                 userInfo.userName = dic[@"username"];
                 userInfo.accountId = dic[@"accountId"];
                 [[TSUserInfoManager userInfo] saveUserInfo:userInfo];
-                complete(YES);
+                //complete(YES);
+                [[TSUserInfoManager userInfo] updateUserInfo:complete];
             }
             
         }else
@@ -208,9 +206,9 @@
             userInfo.userName = request.responseModel.originalData[@"username"];
             userInfo.accountId = request.responseModel.originalData[@"accountId"];
             [[TSUserInfoManager userInfo] saveUserInfo:userInfo];
-            
+            [[TSUserInfoManager userInfo] updateUserInfo:complete];
             [Popover removePopoverOnWindow];
-            complete(YES);
+            //complete(YES);
         }
         else{
             complete(NO);
@@ -298,6 +296,61 @@
         }
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
         
+    }];
+}
+
+- (void)fetchAccountCancelBackCallBack:(void(^)(BOOL isSucess))complete{
+    NSString *requestUrl = [NSString stringWithFormat:@"%@?appId=%@&tenantId=%@&appSecret=%@&accountId=%@",kLoginByTokenUrl,kAppId,@"tcl",kAppSecret, [TSUserInfoManager userInfo].accountId];
+
+    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithBaseUrl:kAccountCenterApiPrefix RequestUrl:requestUrl requestMethod:YTKRequestMethodGET requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON requestHeader:@{} requestBody:@{} needErrorToast:YES];
+    request.animatingView = self.context.view;
+    [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+        
+        if (request.responseModel.isSucceed) {
+            
+            
+        }else
+        {
+            
+                        
+        }
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        
+    }];
+}
+
+- (void)fetchAccountCancelCallBack:(void (^ _Nullable)(NSString * _Nonnull, NSString * _Nonnull))success failure:(void (^ _Nullable)(NSString * _Nonnull))failure{
+    NSString *requestUrl = [NSString stringWithFormat:@"%@?appId=%@&tenantId=%@&appSecret=%@&accountId=%@&username=%@",kAccountCancelUrl,kAppId,@"tcl",kAppSecret, [TSUserInfoManager userInfo].accountId, [TSUserInfoManager userInfo].userName];
+
+    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithBaseUrl:kAccountCenterApiPrefix RequestUrl:requestUrl requestMethod:YTKRequestMethodGET requestSerializerType:YTKRequestSerializerTypeJSON responseSerializerType:YTKResponseSerializerTypeJSON requestHeader:@{} requestBody:@{} needErrorToast:YES];
+    request.animatingView = self.context.view;
+    [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+        if (request.responseModel.isSucceed) {
+            success(request.responseModel.originalData[@"data"], request.responseModel.originalData[@"nickname"]);
+        }else{
+            failure(request.responseModel.originalData[@"msg"]);
+        }
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+       
+    }];
+}
+
+- (void)fetchAccountCancelInfoCallBack:(void(^_Nullable)(NSString *date, NSString *nickname))success
+                                  failure:(void(^_Nullable)(NSString *errorMsg))failure{
+    NSString *requestUrl = [NSString stringWithFormat:@"%@?appId=%@&tenantId=%@&appSecret=%@&accountId=%@",kAccountCancelInfoUrl,kAppId,@"tcl",kAppSecret, [TSUserInfoManager userInfo].accountId];
+
+    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithBaseUrl:kAccountCenterApiPrefix RequestUrl:requestUrl requestMethod:YTKRequestMethodGET requestSerializerType:YTKRequestSerializerTypeJSON responseSerializerType:YTKResponseSerializerTypeJSON requestHeader:@{} requestBody:@{} needErrorToast:YES];
+    request.animatingView = self.context.view;
+    [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+        
+        if (request.responseModel.isSucceed) {
+            success(request.responseModel.originalData[@"data"], request.responseModel.originalData[@"nickname"]);
+            
+        }else{
+            failure(request.responseModel.originalData[@"msg"]);
+        }
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+       
     }];
 }
 @end

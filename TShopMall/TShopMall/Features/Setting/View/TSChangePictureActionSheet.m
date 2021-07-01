@@ -62,11 +62,53 @@
     }
 }
 
+/// 选择性别
+- (void)fetchContentsWithTitle:(NSArray *)titles selectIndex:(NSInteger)index Complete:(void (^)(BOOL))complete {
+    NSMutableArray *sections = [NSMutableArray array];
+    {
+        NSMutableArray *items = [NSMutableArray array];
+        for (int i = 0; i < titles.count; i++) {
+            NSString *title = titles[i];
+            TSChangePictureActionSheetItemModel *item = [[TSChangePictureActionSheetItemModel alloc] init];
+            item.title = title;
+            item.isSelect = i == index;
+            item.cellHeight = 56;
+            item.identify = @"TSChangePictureActionSheetCell";
+            [items addObject:item];
+        }
+        TSChangePictureActionSheetSectionModel *section = [[TSChangePictureActionSheetSectionModel alloc] init];
+        section.column = 1;
+        section.items = items;
+        [sections addObject:section];
+    }
+    {
+        NSMutableArray *items = [NSMutableArray array];
+        TSChangePictureActionSheetItemModel *item = [[TSChangePictureActionSheetItemModel alloc] init];
+        item.title = @"取消";
+        item.cellHeight = 56;
+        item.identify = @"TSChangePictureActionSheetCell";
+        [items addObject:item];
+        TSChangePictureActionSheetSectionModel *section = [[TSChangePictureActionSheetSectionModel alloc] init];
+        section.column = 1;
+        section.spacingWithLastSection = 10;
+        section.items = items;
+        [sections addObject:section];
+    }
+    self.sections = sections;
+    if (complete) {
+        complete(YES);
+    }
+}
+
 @end
 
 @interface TSChangePictureActionSheetCell ()
 /** 标题 */
 @property(nonatomic, weak) UILabel *titleLabel;
+/// 选中图片
+@property (nonatomic, strong) UIImageView * select_ImgView;
+
+@property (nonatomic, strong) UIView *line;
 
 @end
 
@@ -81,9 +123,19 @@
 
 - (void)addConstraints {
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.contentView.mas_centerY).with.offset(0);
-        make.centerX.equalTo(self.contentView.mas_centerX).with.offset(0);
+        make.center.equalTo(self.contentView);
         make.width.mas_lessThanOrEqualTo(150);
+    }];
+    
+    [self.select_ImgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.contentView);
+        make.right.offset(-18);
+        make.width.height.offset(20);
+    }];
+    
+    [self.line mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.bottom.right.equalTo(self.contentView);
+        make.height.mas_equalTo(0.33);
     }];
 }
 
@@ -98,9 +150,28 @@
     return _titleLabel;
 }
 
+- (UIImageView *)select_ImgView {
+    if (_select_ImgView == nil) {
+        _select_ImgView = [[UIImageView alloc] initWithImage:KImageMake(@"mall_detail_selected")];
+        _select_ImgView.hidden = YES;
+        [self.contentView addSubview:_select_ImgView];
+    }
+    return _select_ImgView;
+}
+
+- (UIView *)line {
+    if (_line == nil) {
+        _line = [UILabel new];
+        _line.backgroundColor = KHexColor(@"#F4F4F4");
+        [self.contentView addSubview:_line];
+    }
+    return _line;
+}
+
 - (void)setDelegate:(id<UniversalCollectionViewCellDataDelegate>)delegate {
     TSChangePictureActionSheetItemModel *item = [delegate universalCollectionViewCellModel:self.indexPath];
     self.titleLabel.text = item.title;
+    self.select_ImgView.hidden = !item.isSelect;
 }
 
 @end
@@ -120,6 +191,31 @@
 @end
 
 @implementation TSChangePictureActionSheet
+
+/// 选择弹出框
+/// @param titles 标题数组
+/// @param index 默认选中下标
+/// @param actionHandler 点击完成回调
+- (instancetype)initWithTitles:(NSArray *)titles selectIndex:(NSInteger)index actionHandler:(void(^)(NSInteger index, NSString *title))actionHandler {
+    self = [super init];
+    if (self) {
+        _titles = titles;
+        _actionHandler = actionHandler;
+        self.frame = [[UIScreen mainScreen] bounds];
+        self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
+        self.contentView.frame = CGRectMake(0, kScreenHeight, kScreenWidth, (self.titles.count + 1) * 56 + 10);
+        [self addConstraints];
+        
+        @weakify(self);
+        [self.dataController fetchContentsWithTitle:titles selectIndex:index Complete:^(BOOL isSucess) {
+            @strongify(self);
+            if (isSucess) {
+                [self.collectionView reloadData];
+            }
+        }];
+    }
+    return self;
+}
 
 - (instancetype)initWithTitles:(NSArray *)titles actionHandler:(void(^)(NSInteger index, NSString *title))actionHandler {
     if (self = [super init]) {

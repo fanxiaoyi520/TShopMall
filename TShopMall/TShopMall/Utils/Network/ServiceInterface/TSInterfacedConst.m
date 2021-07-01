@@ -87,7 +87,11 @@ NSString *const kLoginByAuthCode = @"/auth/thirdParty/loginByAuthCode";
 NSString *const kBindUserByAuthCode = @"/auth/thirdParty/bindUserByAuthCode";
 NSString *const kLoginRegisterAgreementUrl = @"/rest/v2/front/shopStatement/getShopStatementAuthList";
 NSString *const kUserInfoUrl = @"/user/user/info";
-NSString *const kChangeBindMobileUrl = @"/account/changeBind";
+NSString *const kChangeBindMobileUrl = @"/auth/account/changeBind";
+NSString *const kAccountCancelUrl = @"/auth/account/cancel";
+NSString *const kAccountCancelBackUrl = @"/auth/account/cancelBack";
+NSString *const kAccountCancelInfoUrl = @"/auth/account/cancelInfo";
+
 #pragma mark - 首页
 
 NSString *const kHomePageInfoUrl = @"/rest/v2/front/shopContent/getIndexPageInfo";
@@ -106,6 +110,7 @@ NSString *const kGoodDetailChangeChooseUrl = @"/rest/v2/cart/changeChoose";
 NSString *const kGoodDetailFastBuyUrl = @"/rest/v2/front/product/fastBuy";
 NSString *const kGoodDetailCarriageCostUrl = @"/rest/v2/front/product/getCarriageCost";
 NSString *const kGoodDetailStaffShareUrl = @"/rest/v2/usercenter/staffShare/toShare";
+NSString *const kGoodDetailSetProductDiscountPriceUrl = @"/rest/v2/usercenter/staffbuy/setProductDiscountPrice";
 
 #pragma mark - 分类
 NSString *const kShopContentUrl = @"/rest/v2/front/shopContent/getPageManageByPageType";
@@ -148,7 +153,7 @@ NSString * const kMineWithdrawalRecordListData = @"/rest/v2/withdrawal/record/qu
 NSString * const kMineWalletData = @"/rest/v2/withdrawal/record/queryWallet";
 NSString *const kMineQueryProfit = @"/rest/v2/withdrawal/record/queryProfit";
 //广告图
-NSString * const kMineShopContentUrl = @"rest/shopContent/getPageManageByPageType";
+NSString * const kMineShopContentUrl = @"v2/front/shopContent/getPageManageByPageType";
 //查询订单各状态下的订单数
 NSString *const kMineOrderCount = @"v2/usercenter/order/query/queryAllStatusOrderCountByGroup";
 #pragma mark - 设置

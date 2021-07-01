@@ -10,6 +10,7 @@
 #import "TSUniversalCollectionViewCell.h"
 #import "TSAccountCancelBottomCell.h"
 #import "TSAccountCancelDataController.h"
+#import "TSAccountCancelConfirmViewController.h"
 
 @interface TSAccountCancelNextViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate,TSAccountCancelBottomCellDelegate>
 /// 数据中心
@@ -86,12 +87,28 @@
 #pragma mark - TSAccountCancelBottomCellDelegate
 /** 确认注销 */
 - (void)confirmAction {
-    TSAccountCancelNextViewController *nextVC = [[TSAccountCancelNextViewController alloc] init];
-    [self.navigationController pushViewController:nextVC animated:YES];
+    @weakify(self);
+    [[TSServicesManager sharedInstance].acconutService fetchAccountCancelCallBack:^(NSString * _Nonnull date, NSString * _Nonnull nickname) {
+        @strongify(self);
+        TSAccountCancelConfirmViewController *nextVC = [[TSAccountCancelConfirmViewController alloc] init];
+        nextVC.nickname = nickname;
+        nextVC.date = date;
+        [self.navigationController pushViewController:nextVC animated:YES];
+    } failure:^(NSString * _Nonnull errorMsg) {
+        [Popover popToastOnWindowWithText:errorMsg];
+    }];
+    
 }
 /** 取消 */
 - (void)cancelAction {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    NSArray *childrenVCs = self.navigationController.viewControllers;
+    for (UIViewController *vc in childrenVCs) {
+        if ([vc isKindOfClass:NSClassFromString(@"TSSecurityViewController")]) {
+            [self.navigationController popToViewController:vc animated:YES];
+            break;
+        }
+    }
+    
 }
 
 #pragma mark - UICollectionViewDataSource

@@ -101,7 +101,7 @@
 -(UITextView *)textView{
     if (!_textView) {
         _textView = [[UITextView alloc] init];
-        _textView.backgroundColor = KHexColor(@"#DDDDDD");
+        _textView.backgroundColor = KHexColor(@"#F4F4F4");
         _textView.font = KRegularFont(10);
         _textView.text = @"";
         [_textView setEditable:NO];

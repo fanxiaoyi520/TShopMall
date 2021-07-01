@@ -9,9 +9,18 @@
 
 @interface TSUserInfoRequest ()
 
+@property (nonatomic, copy) NSString *accountId;
+
 @end
 
 @implementation TSUserInfoRequest
+
+- (instancetype)initWithAccountId:(NSString *)accountId {
+    if (self = [super init]) {
+        _accountId = accountId;
+    }
+    return self;
+}
 
 - (NSString *)baseUrl {
     return kAccountCenterApiPrefix;
@@ -41,7 +50,7 @@
 
 - (id)requestArgument {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setValue:[TSUserInfoManager userInfo].accountId forKey:@"accountId"];
+    [params setValue:self.accountId forKey:@"accountId"];
     NSMutableDictionary *comBody = [self commonBady];
     [comBody setValuesForKeysWithDictionary:params];
     return comBody;

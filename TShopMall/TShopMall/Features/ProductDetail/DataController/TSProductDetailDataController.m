@@ -11,7 +11,7 @@
 
 @interface TSProductDetailDataController()<YTKChainRequestDelegate>
 
-@property(nonatomic, copy) void (^customBuyBlock) (BOOL isScuess);
+@property(nonatomic, copy) void (^shareBlock) (BOOL isScuess,NSDictionary *shareData);
 
 @property (nonatomic, strong) NSMutableArray <TSGoodDetailSectionModel *> *sections;
 
@@ -459,10 +459,63 @@
     }];
 }
 
--(void)fetchProductDiscountPriceDiscountType:(NSString *)discountType
-                                 productUuid:(NSString *)productUuid
-                                    complete:(void(^)(BOOL isSucess))complete{
+-(void)fetchProductPrerogativeStaffShareType:(NSString *)shareType
+                                discountType:(NSString *)discountType
+                               discountPrice:(NSString *)discountPrice
+                                    complete:(void(^)(BOOL isSucess, NSDictionary *data))complete{
     
+    self.shareBlock = complete;
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setValue:self.productUuid forKey:@"uuid"];
+    [params setValue:@(3) forKey:@"shareType"];
+    [params setValue:self.bigImageUrl forKey:@"bigImageUrl"];
+    
+    SSGenaralRequest *relevanceRequest = [[SSGenaralRequest alloc] initWithRequestUrl:kGoodDetailStaffShareUrl
+                                                                    requestMethod:YTKRequestMethodGET
+                                                            requestSerializerType:YTKRequestSerializerTypeJSON
+                                                           responseSerializerType:YTKResponseSerializerTypeJSON
+                                                                    requestHeader:@{}
+                                                                      requestBody:params
+                                                                   needErrorToast:YES];
+    YTKChainRequest *chainReq = [[YTKChainRequest alloc] init];
+    __weak __typeof(YTKChainRequest *)weakSelf = chainReq;
+    [chainReq addRequest:relevanceRequest callback:^(YTKChainRequest * _Nonnull chainRequest, YTKBaseRequest * _Nonnull baseRequest) {
+        SSGenaralRequest *result = (SSGenaralRequest *)baseRequest;
+        
+        NSString *shareToken = result.responseJSONObject[@"data"][@"shareToken"];
+        
+        NSMutableDictionary *setParams = [NSMutableDictionary dictionary];
+        [setParams setValue:@"price" forKey:@"discountType"];
+        [setParams setValue:discountPrice forKey:@"discountPrice"];
+        [setParams setValue:self.productUuid forKey:@"productUuid"];
+        [setParams setValue:shareToken forKey:@"shareToken"];
+        
+        SSGenaralRequest *setRequest = [[SSGenaralRequest alloc] initWithRequestUrl:kGoodDetailSetProductDiscountPriceUrl
+                                                                      requestMethod:YTKRequestMethodPOST
+                                                              requestSerializerType:YTKRequestSerializerTypeHTTP
+                                                             responseSerializerType:YTKResponseSerializerTypeJSON
+                                                                      requestHeader:@{}
+                                                                        requestBody:setParams
+                                                                     needErrorToast:YES];
+        [weakSelf addRequest:setRequest callback:nil];
+    }];
+    chainReq.delegate = self;
+    [chainReq start];
+    
+}
+
+#pragma mark - YTKChainRequestDelegate
+-(void)chainRequestFinished:(YTKChainRequest *)chainRequest{
+    NSArray *requests = chainRequest.requestArray;
+    SSGenaralRequest *setRequest = [requests lastObject];
+    if (self.shareBlock) {
+        self.shareBlock(YES,setRequest.responseJSONObject[@"data"]);
+    }
+}
+
+-(void)chainRequestFailed:(YTKChainRequest *)chainRequest failedBaseRequest:(YTKBaseRequest *)request{
+
 }
 
 #pragma mark - private method

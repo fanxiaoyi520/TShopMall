@@ -6,12 +6,12 @@
 //
 
 #import "TSOneStepLoginRequest.h"
-@interface TSOneStepLoginRequest()
 
+@interface TSOneStepLoginRequest()
 @property(nonatomic, copy) NSString *token;
 @property(nonatomic, copy) NSString *accessToken;
-
 @end
+
 @implementation TSOneStepLoginRequest
 -(instancetype)initWithToken:(NSString *)token accessToken:(NSString *)accessToken{
     if (self = [super init]) {

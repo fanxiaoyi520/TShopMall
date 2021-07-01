@@ -106,14 +106,14 @@
     if (_rightImgV == nil) {
         UIImageView *rightImgV = [[UIImageView alloc] init];
         _rightImgV = rightImgV;
-        _rightImgV.image = KImageMake(@"mall_setting_arrow");
+        _rightImgV.image = KImageMake(@"mall_setting_arrow_light");
         [self.contentView addSubview:_rightImgV];
     }
     return _rightImgV;
 }
 
 - (void)setDelegate:(id<UniversalCollectionViewCellDataDelegate>)delegate {
-    TSUser *user = [TSServicesManager sharedInstance].userInfoService.user;
+    TSUser *user = [TSUserInfoManager userInfo].user;
     self.phoneNumberLabel.text = user.phone;
     NSString *avatar = user.avatar;
     if (avatar) {

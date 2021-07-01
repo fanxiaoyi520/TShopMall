@@ -132,7 +132,7 @@
     if (_phoneInput == nil) {
         UITextField *phoneInput = [[UITextField alloc] init];
         _phoneInput = phoneInput;
-        _phoneInput.keyboardType = UIKeyboardTypePhonePad;
+        _phoneInput.keyboardType = UIKeyboardTypeNumberPad;
         _phoneInput.textColor = KHexColor(@"#2D3132");
         _phoneInput.font = KRegularFont(16);
         _phoneInput.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"请输入手机号码" attributes:@{NSForegroundColorAttributeName : KHexAlphaColor(@"#2D3132", 0.2)}];

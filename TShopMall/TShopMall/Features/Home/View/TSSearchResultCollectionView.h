@@ -10,5 +10,7 @@
 
 @interface TSSearchResultCollectionView : UICollectionView
 @property (nonatomic, strong) NSArray<TSSearchSection *> *sections;
+
+@property (nonatomic, copy) void(^goodsSelected)(NSString *uuid);
 @end
 

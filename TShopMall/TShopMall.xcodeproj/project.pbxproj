@@ -61,6 +61,7 @@
 		0465170A268C57EF000829C2 /* TextViewDialogElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 046516EB268C57EF000829C2 /* TextViewDialogElement.m */; };
 		04651732268C64E2000829C2 /* UploadImageApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 04651731268C64E2000829C2 /* UploadImageApi.m */; };
 		04651735268C8C32000829C2 /* UIViewController+Plugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 04651734268C8C32000829C2 /* UIViewController+Plugin.m */; };
+		04651738268C969C000829C2 /* TSUploadImageService.m in Sources */ = {isa = PBXBuildFile; fileRef = 04651737268C969C000829C2 /* TSUploadImageService.m */; };
 		046DEA8626856ADF009CE557 /* TSAgreementView.m in Sources */ = {isa = PBXBuildFile; fileRef = 046DEA8526856ADF009CE557 /* TSAgreementView.m */; };
 		046DEA892685BD97009CE557 /* TSChangeMobileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 046DEA882685BD97009CE557 /* TSChangeMobileCell.m */; };
 		046DEA8C2685C5BA009CE557 /* TSChangeMobileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 046DEA8B2685C5BA009CE557 /* TSChangeMobileViewController.m */; };
@@ -75,6 +76,7 @@
 		65CD9E3D268AED2B00262D98 /* TSMineWalletModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CD9E3C268AED2B00262D98 /* TSMineWalletModel.m */; };
 		65F71270268C1D7C002A1ECC /* TSMineLeftBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F7126F268C1D7C002A1ECC /* TSMineLeftBarView.m */; };
 		65F71273268C4154002A1ECC /* TSMineOrderCountModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F71272268C4154002A1ECC /* TSMineOrderCountModel.m */; };
+		65F71276268C7AE0002A1ECC /* NSDictionary+Value.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F71274268C7ADF002A1ECC /* NSDictionary+Value.m */; };
 		70EBC074268C0DC0009D735B /* UIView+AZGradient.m in Sources */ = {isa = PBXBuildFile; fileRef = 70EBC073268C0DC0009D735B /* UIView+AZGradient.m */; };
 		70EBC07B268C136A009D735B /* TSMonthIndicatorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 70EBC07A268C136A009D735B /* TSMonthIndicatorCell.m */; };
 		70EBC07E268C3F0B009D735B /* TSPersonalRankView.m in Sources */ = {isa = PBXBuildFile; fileRef = 70EBC07D268C3F0B009D735B /* TSPersonalRankView.m */; };
@@ -193,7 +195,6 @@
 		C2F057482685F1BA003D1B2A /* TSMakeOrderEmptyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C2F057472685F1BA003D1B2A /* TSMakeOrderEmptyCell.m */; };
 		C35F1865267C7F8A00F65AF9 /* TSDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = C35F185F267C7F8800F65AF9 /* TSDatePickerView.m */; };
 		C35F1866267C7F8A00F65AF9 /* TSChangePictureActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = C35F1862267C7F8900F65AF9 /* TSChangePictureActionSheet.m */; };
-		C35F1867267C7F8A00F65AF9 /* TSSexSelectingView.m in Sources */ = {isa = PBXBuildFile; fileRef = C35F1864267C7F8A00F65AF9 /* TSSexSelectingView.m */; };
 		C35F186D267D954700F65AF9 /* TSAccountCancelNextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C35F186C267D954700F65AF9 /* TSAccountCancelNextViewController.m */; };
 		C35F1870267D963100F65AF9 /* TSAccountCancelConfirmViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C35F186F267D963100F65AF9 /* TSAccountCancelConfirmViewController.m */; };
 		C35F1873267D970800F65AF9 /* TSAccountCancelDropViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C35F1872267D970800F65AF9 /* TSAccountCancelDropViewController.m */; };
@@ -707,6 +708,8 @@
 		04651731268C64E2000829C2 /* UploadImageApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadImageApi.m; sourceTree = "<group>"; };
 		04651733268C8C32000829C2 /* UIViewController+Plugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Plugin.h"; sourceTree = "<group>"; };
 		04651734268C8C32000829C2 /* UIViewController+Plugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Plugin.m"; sourceTree = "<group>"; };
+		04651736268C969C000829C2 /* TSUploadImageService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSUploadImageService.h; sourceTree = "<group>"; };
+		04651737268C969C000829C2 /* TSUploadImageService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSUploadImageService.m; sourceTree = "<group>"; };
 		046DEA8426856ADF009CE557 /* TSAgreementView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSAgreementView.h; sourceTree = "<group>"; };
 		046DEA8526856ADF009CE557 /* TSAgreementView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSAgreementView.m; sourceTree = "<group>"; };
 		046DEA872685BD96009CE557 /* TSChangeMobileCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSChangeMobileCell.h; sourceTree = "<group>"; };
@@ -737,6 +740,8 @@
 		65F7126F268C1D7C002A1ECC /* TSMineLeftBarView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSMineLeftBarView.m; sourceTree = "<group>"; };
 		65F71271268C4154002A1ECC /* TSMineOrderCountModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSMineOrderCountModel.h; sourceTree = "<group>"; };
 		65F71272268C4154002A1ECC /* TSMineOrderCountModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSMineOrderCountModel.m; sourceTree = "<group>"; };
+		65F71274268C7ADF002A1ECC /* NSDictionary+Value.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Value.m"; sourceTree = "<group>"; };
+		65F71275268C7AE0002A1ECC /* NSDictionary+Value.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Value.h"; sourceTree = "<group>"; };
 		70EBC072268C0DC0009D735B /* UIView+AZGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AZGradient.h"; sourceTree = "<group>"; };
 		70EBC073268C0DC0009D735B /* UIView+AZGradient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AZGradient.m"; sourceTree = "<group>"; };
 		70EBC079268C136A009D735B /* TSMonthIndicatorCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSMonthIndicatorCell.h; sourceTree = "<group>"; };
@@ -939,8 +944,6 @@
 		C35F1860267C7F8800F65AF9 /* TSChangePictureActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSChangePictureActionSheet.h; sourceTree = "<group>"; };
 		C35F1861267C7F8900F65AF9 /* TSDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSDatePickerView.h; sourceTree = "<group>"; };
 		C35F1862267C7F8900F65AF9 /* TSChangePictureActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSChangePictureActionSheet.m; sourceTree = "<group>"; };
-		C35F1863267C7F8A00F65AF9 /* TSSexSelectingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSSexSelectingView.h; sourceTree = "<group>"; };
-		C35F1864267C7F8A00F65AF9 /* TSSexSelectingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSSexSelectingView.m; sourceTree = "<group>"; };
 		C35F186B267D954700F65AF9 /* TSAccountCancelNextViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSAccountCancelNextViewController.h; sourceTree = "<group>"; };
 		C35F186C267D954700F65AF9 /* TSAccountCancelNextViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSAccountCancelNextViewController.m; sourceTree = "<group>"; };
 		C35F186E267D963100F65AF9 /* TSAccountCancelConfirmViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSAccountCancelConfirmViewController.h; sourceTree = "<group>"; };
@@ -2464,8 +2467,6 @@
 				C35F1862267C7F8900F65AF9 /* TSChangePictureActionSheet.m */,
 				C35F1861267C7F8900F65AF9 /* TSDatePickerView.h */,
 				C35F185F267C7F8800F65AF9 /* TSDatePickerView.m */,
-				C35F1863267C7F8A00F65AF9 /* TSSexSelectingView.h */,
-				C35F1864267C7F8A00F65AF9 /* TSSexSelectingView.m */,
 				042F423B2681FDB000555F5D /* TSRealNameAuthCell.h */,
 				042F423C2681FDB000555F5D /* TSRealNameAuthCell.m */,
 				042F423E2681FDFE00555F5D /* TSRealNameInfoCell.h */,
@@ -2790,6 +2791,8 @@
 		F530CC2826803862009DC29A /* Foundation */ = {
 			isa = PBXGroup;
 			children = (
+				65F71275268C7AE0002A1ECC /* NSDictionary+Value.h */,
+				65F71274268C7ADF002A1ECC /* NSDictionary+Value.m */,
 				F530CC2D26803862009DC29A /* NSDate+Plugin.h */,
 				F530CC2B26803862009DC29A /* NSDate+Plugin.m */,
 				F530CC2F26803862009DC29A /* NSString+Plugin.h */,
@@ -3767,6 +3770,8 @@
 				DC06D6DE268761E20013633F /* TSBestSellingRecommendService.m */,
 				043C2350268B248300460FDB /* TSUserInfoService.h */,
 				043C2351268B248300460FDB /* TSUserInfoService.m */,
+				04651736268C969C000829C2 /* TSUploadImageService.h */,
+				04651737268C969C000829C2 /* TSUploadImageService.m */,
 				DFB3FFDD268571B100FC8FF9 /* AuthAppleIDManager.h */,
 				DFB3FFDE268571B100FC8FF9 /* AuthAppleIDManager.m */,
 				DFB3FFED2686E60C00FC8FF9 /* TSURLRouter.h */,
@@ -4406,6 +4411,7 @@
 				DFB3FFF326899EF300FC8FF9 /* TSTableViewBaseCell.m in Sources */,
 				04651706268C57EF000829C2 /* ButtonsDialogElement.m in Sources */,
 				CE4F6BDA26867C0E00812275 /* TSGlobalNotifyServer.m in Sources */,
+				04651738268C969C000829C2 /* TSUploadImageService.m in Sources */,
 				F530CCAF26803FCD009DC29A /* UITextField+General.m in Sources */,
 				F530CCB426803FCD009DC29A /* UIFont+Plugin.m in Sources */,
 				F55D2C3B2671E14B006BACCF /* TSUniversalDecorationView.m in Sources */,
@@ -4494,6 +4500,7 @@
 				F530CCA326803FCD009DC29A /* UIImage+Extension.m in Sources */,
 				C3B4CCEE2674934E0001EE75 /* TSLoginBottomView.m in Sources */,
 				C3A6C4C7267A1C5700FC71D6 /* TSSettingUserCell.m in Sources */,
+				65F71276268C7AE0002A1ECC /* NSDictionary+Value.m in Sources */,
 				F54973B72668BBEE00181E3F /* TSCartViewController.m in Sources */,
 				046516EE268C57EF000829C2 /* Dialog+Input.m in Sources */,
 				F56D4B4D266DFB8900C1AD9E /* FMTeslaLayoutView.m in Sources */,
@@ -4736,7 +4743,6 @@
 				046516FC268C57EF000829C2 /* DialogDemoViewController.m in Sources */,
 				04F852122689BA4C00B59910 /* TSFirstEnterAgreementView.m in Sources */,
 				F530CC3C26803862009DC29A /* NSTimer+TSBlcokTimer.m in Sources */,
-				C35F1867267C7F8A00F65AF9 /* TSSexSelectingView.m in Sources */,
 				F530CCA726803FCD009DC29A /* UIControl+RepeatClick.m in Sources */,
 				F530CE8D26846BE0009DC29A /* TSToolsManager.m in Sources */,
 				F54973612668A22100181E3F /* SSBaseRequest.m in Sources */,

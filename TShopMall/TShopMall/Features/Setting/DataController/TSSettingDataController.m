@@ -10,7 +10,7 @@
 
 #import <SDImageCache.h>
 #import "Popover.h"
-
+#import "TSJsonCacheData.h"
 @interface TSSettingDataController ()
 
 @property (nonatomic, strong) NSMutableArray <TSSettingSectionModel *> *sections;
@@ -156,6 +156,9 @@
 - (void)clearCacheWithComplete:(void(^)(BOOL isSucess))complete {
     @weakify(self);
     [Popover popProgressOnWindowWithText:@"清理中"];
+    
+    [TSJsonCacheData clearWithKey:@"homePageList"];
+    
     [[SDImageCache sharedImageCache] clearDiskOnCompletion:^{
         @strongify(self);
         //延时

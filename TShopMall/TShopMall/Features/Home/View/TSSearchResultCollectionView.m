@@ -7,6 +7,7 @@
 
 #import "TSSearchResultCollectionView.h"
 #import "TSSearchResultCell.h"
+#import "TSSearchResultViewModel.h"
 
 @interface TSSearchResultCollectionView()<UICollectionViewDelegate,UICollectionViewDataSource>
 
@@ -70,9 +71,10 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     TSSearchRow *row = self.sections[indexPath.section].rows[indexPath.row];
-//    TSGoodListViewModel *vm = (TSGoodListViewModel *)row.obj;
-//    TSMakeOrderController *con = [TSMakeOrderController new];
-//    [self.navigationController pushViewController:con animated:YES];
+    TSSearchResultViewModel *vm = (TSSearchResultViewModel *)row.obj;
+    if (vm != nil) {
+        self.goodsSelected(vm.uuid);
+    }
 }
 
 @end

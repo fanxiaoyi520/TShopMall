@@ -71,17 +71,21 @@
         make.bottom.equalTo(self.checkedView.mas_top).with.offset(0);
     }];
     [self.checkedView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.view.mas_bottom).with.offset(-56);
+        make.bottom.equalTo(self.view.mas_bottom).with.offset(-KRateH(30));
         make.left.right.equalTo(self.view).with.offset(0);
-        make.height.mas_equalTo(66);
+//        make.height.mas_equalTo(48);
     }];
 }
 
 - (void)getAgreementInfo {
-    __weak __typeof(self)weakSelf = self;
-    [self.dataController fetchAgreementWithCompleted:^(NSArray<TSAgreementModel *> * _Nonnull agreementModels) {
-        weakSelf.checkedView.agreementModels = agreementModels;
-    }];
+    NSArray *agreementModels = [TSGlobalManager shareInstance].agreementModels;
+    if (agreementModels.count) {
+        self.checkedView.agreementModels = agreementModels;
+    } else {
+        [[TSUserLoginManager shareInstance] fetchAgreementWithCompleted:^(NSArray<TSAgreementModel *> * _Nonnull agreementModels) {
+            self.checkedView.agreementModels = agreementModels;
+        }];
+    }
 }
 
 #pragma mark - Lazy Method
@@ -128,13 +132,6 @@
     return _bgImgV;
 }
 
-- (TSLoginRegisterDataController *)dataController{
-    if (!_dataController) {
-        _dataController = [[TSLoginRegisterDataController alloc] init];
-    }
-    return _dataController;
-}
-
 #pragma mark - TSRegisterTopViewDelegate
 - (void)registerAction {
     NSString *phoneNumber = [self.topView getPhoneNumber];
@@ -162,7 +159,7 @@
     }
     [self.view endEditing:YES];
     @weakify(self);
-    [self.dataController fetchRegisterMobile:phoneNumber validCode:[self.topView getCode] invitationCode:[self.topView getInvitationCode] complete:^(BOOL isSucess) {
+    [[TSServicesManager sharedInstance].acconutService fetchRegisterMobile:phoneNumber validCode:[self.topView getCode] invitationCode:[self.topView getInvitationCode] complete:^(BOOL isSucess) {
         if (isSucess) {
             @strongify(self)
             [[NSNotificationCenter defaultCenter] postNotificationName:@"TS_LoginUpdateNotification" object:@0];
@@ -190,7 +187,7 @@
          [weakSelf goToRun];
     } repeats:YES];
     
-    [self.dataController fetchRegisterSMSCodeMobile:phoneNumber complete:^(BOOL isSucess) {
+    [[TSServicesManager sharedInstance].acconutService fetchRegisterSMSCodeMobile:phoneNumber complete:^(BOOL isSucess) {
         if (isSucess) {
             [Popover popToastOnWindowWithText:@"验证码已成功发送"];
         }else{
