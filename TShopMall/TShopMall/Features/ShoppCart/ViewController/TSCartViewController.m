@@ -88,6 +88,9 @@
 }
 
 - (void)goToSettle{
+    UIViewController *con = [NSClassFromString(@"TSAddressEditController") new];
+    [self.navigationController pushViewController:con animated:YES];
+    return;
     if (self.editBtn.selected == YES) {//编辑
         NSArray *carts = [self.dataCon selectedGoods];
         TSAlertView.new.alertInfo(nil, @"确认删除选中商品吗？").confirm(@"确定", ^{
