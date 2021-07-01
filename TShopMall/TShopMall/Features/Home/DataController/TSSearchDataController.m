@@ -7,30 +7,22 @@
 
 #import "TSSearchDataController.h"
 
+@interface TSSearchDataController()
+
+@end
+
 @implementation TSSearchDataController
 
-- (void)fetchData:(void (^)(NSArray<TSSearchSection *> *, NSError *))finished{
+- (void)fetchData:(void (^)(void))finished{
     [self.sections removeAllObjects];
     __weak typeof(self) weakSelf = self;
     [[self hotKeyRequest] startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
         if (request.responseModel.isSucceed) {
-            NSArray *data = request.responseJSONObject[@"data"];
-            NSArray<TSSearchHotKeyModel *> *keywords = [NSArray yy_modelArrayWithClass:TSSearchHotKeyModel.class json:data];
-            NSArray *historyKeys = [TSSearchKeyViewModel readHistoryKeys];
-            if (keywords.count != 0) {
-                [self.sections addObject:[TSSearchDataController configHotSection:keywords]];
-            }
-            if (historyKeys.count != 0) {
-                [self.sections addObject:[TSSearchDataController configHistorySection:historyKeys]];
-            }
-            weakSelf.hotkeys = keywords;
-            if (self.sections.count == 0) {
-                [self configEmptySection];
-            }
-            finished(self.sections, nil);
+            [weakSelf handleRequest:request];
+            finished();
         }
-        } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-            finished(nil, request.error);
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        finished();
     }];
 }
 
@@ -46,18 +38,25 @@
                                                                requestHeader:NSMutableDictionary.dictionary
                                                                  requestBody:params
                                                               needErrorToast:YES];
+    request.animatingView = self.context.view;
     
     return request;
 }
 
-- (void)handleRes:(id)obj{
-    
+- (void)handleRequest:(SSGenaralRequest *)request{
+    NSArray *data = request.responseJSONObject[@"data"];
+    self.hotkeys = [NSArray yy_modelArrayWithClass:TSSearchHotKeyModel.class json:data];
+    [self configHotKeySection];
+    [self configHistorySection];
+    if (self.sections.count == 0) {
+        [self configEmptySection];
+    }
 }
 
-+ (TSSearchSection *)configHotSection:(NSArray<TSSearchHotKeyModel *> *)keywords{
-    if (keywords.count == 0) return nil;
+- (void)configHotKeySection{
+    if (self.hotkeys.count == 0) return;
     NSMutableArray *rows = [NSMutableArray array];
-    for (TSSearchHotKeyModel *keyModel in keywords) {
+    for (TSSearchHotKeyModel *keyModel in self.hotkeys) {
         TSSearchKeyViewModel *keyVM = [TSSearchKeyViewModel new];
         keyVM.keywords = keyModel.searchWord;
         
@@ -75,13 +74,24 @@
     section.footerHeight = KRateW(22.0);
     section.rows = rows;
     
-    return section;
+    [self.sections addObject:section];
 }
 
-+ (TSSearchSection *)configHistorySection:(NSArray<NSString *> *)keys{
+- (void)configHistorySection{
+    NSArray *historyKeys = [TSSearchKeyViewModel readHistoryKeys];
+    if (historyKeys.count == 0) {
+        return;
+    }
+    TSSearchSection *historySection ;
+    for (TSSearchSection *section in self.sections) {
+        if ([section.headerTitle isEqualToString:@"历史搜索"]) {
+            historySection = section;
+            break;
+        }
+    }
     
     NSMutableArray *rows = [NSMutableArray array];
-    for (NSString *str in keys) {
+    for (NSString *str in historyKeys) {
         TSSearchKeyViewModel *keyVM = [TSSearchKeyViewModel new];
         keyVM.keywords = str;
         
@@ -91,44 +101,27 @@
         [rows addObject:row];
     }
     
-    TSSearchSection *section = [TSSearchSection new];
-    section.headerIdentifier = @"TSSearchHeaderView";
-    section.footerIdentifier = @"UICollectionReusableView";
-    section.headerTitle = @"历史搜索";
-    section.headerHeight = KRateW(40.0);
-    section.footerHeight = KRateW(22.0);
-    section.rows = rows;
-    
-    return section;
-}
-
-+ (NSArray<TSSearchSection *> *)updateHistorySections:(NSArray<TSSearchSection *> *)sections{
-    BOOL isContainHistory = NO;
-    for (TSSearchSection *section in sections) {
-        if ([section.headerTitle isEqualToString:@"历史搜索"]) {
-            isContainHistory = YES;
-            break;
-        }
-    }
-    
-    NSArray *keys = [TSSearchKeyViewModel readHistoryKeys];
-    TSSearchSection *historySection = [TSSearchDataController configHistorySection:keys];
-    NSMutableArray *temSections = [NSMutableArray arrayWithArray:sections];
-    if (sections.count == 0) {
-        return @[historySection];
-    }
-    if (isContainHistory == YES) {
-        [temSections replaceObjectAtIndex:0 withObject:historySection];
+    if (historySection == nil) {
+        historySection = [TSSearchSection new];
+        historySection.headerIdentifier = @"TSSearchHeaderView";
+        historySection.footerIdentifier = @"UICollectionReusableView";
+        historySection.headerTitle = @"历史搜索";
+        historySection.headerHeight = KRateW(40.0);
+        historySection.footerHeight = KRateW(22.0);
+        
+        historySection.rows = rows;
+        [self.sections addObject:historySection];
     } else {
-        [temSections insertObject:historySection atIndex:0];
+        historySection.rows = rows;
     }
-    return temSections;
+
+    [self removeEmptySection];
 }
 
 - (void)configEmptySection{
     TSSearchRow *row = [TSSearchRow new];
     row.cellIdentifier = @"TSSearchEmptyCell";
-//    row.rowSize = CGSizeMake(kScreenWidth, KRateW(320.0));
+    //    row.rowSize = CGSizeMake(kScreenWidth, KRateW(320.0));
     
     TSSearchSection *section = [TSSearchSection new];
     section.headerIdentifier = @"TSSearchHeaderView";
@@ -138,6 +131,26 @@
     section.rows = @[row];
     
     [self.sections addObject:section];
+}
+
+- (void)removeEmptySection{
+    BOOL contentIsEmpty = YES;
+    for (TSSearchSection *section in self.sections) {
+        if ([section.headerTitle isEqualToString:@"热门搜索"] ||
+            [section.headerTitle isEqualToString:@"历史搜索"]) {
+            contentIsEmpty = NO;
+            break;
+        }
+    }
+    if (contentIsEmpty == NO) {
+        for (TSSearchSection *section in self.sections) {
+            TSSearchRow *row = [section.rows lastObject];
+            if ([row.cellIdentifier isEqualToString:@"TSSearchEmptyCell"]) {
+                [self.sections removeObject:section];
+                break;
+            }
+        }
+    }
 }
 
 
@@ -163,35 +176,13 @@
     [self.sections addObject:section];
 }
 
-- (NSArray<TSSearchSection *> *)configRecomendSection:(UICollectionReusableView *)recomendView{
-    TSSearchRow *row = [TSSearchRow new];
-    row.cellIdentifier = @"TSSearchRecomendCell";
-    row.rowSize = CGSizeMake(kScreenWidth, recomendView.frame.size.height);
-    row.obj = recomendView;
-    
-    TSSearchSection *section = [TSSearchSection new];
-    section.headerIdentifier = @"TSSearchHeaderView";
-    section.footerIdentifier = @"TSRecomendView";
-    section.viewForFooter = recomendView;
-    section.headerTitle = @"";
-    section.headerHeight = 0;
-    section.footerHeight = 0.1f;
-    section.rows = @[row];
-    
-    NSMutableArray *arr = [NSMutableArray arrayWithArray:self.sections];
-    [arr addObject:section];
-    self.sections = arr;
+
+- (NSMutableArray<TSSearchSection *> *)sections{
+    if (_sections) {
+        return _sections;
+    }
+    self.sections = [NSMutableArray array];
     
     return self.sections;
 }
-
-    
-    - (NSMutableArray<TSSearchSection *> *)sections{
-        if (_sections) {
-            return _sections;
-        }
-        self.sections = [NSMutableArray array];
-        
-        return self.sections;
-    }
 @end

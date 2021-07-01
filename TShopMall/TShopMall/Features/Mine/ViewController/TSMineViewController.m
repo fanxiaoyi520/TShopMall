@@ -189,6 +189,9 @@
             TSOfficialServicesViewController *vc = [TSOfficialServicesViewController new];
             [self.navigationController pushViewController:vc animated:YES];
         } else if ([item.title isEqualToString: @"在线客服"]) {
+            NSString *url = @"https://wap.service.tcl.com/web/index.php?apps=thome";
+            TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:url];
+            [self.navigationController pushViewController:hybrid animated:YES];
            
         } else if ([item.title isEqualToString: @"发票管理"]) {
             NSString *path = [NSString stringWithFormat:@"%@%@",kMallH5ApiPrefix,kMallH5InvoiceListUrl];

@@ -43,7 +43,7 @@
 }
 
 - (void)configRecomendView{
-    [TSRecomendDataController checkCurrentRecomendPage:RecomendCartPage finished:^(TSRecomendModel *recomendInfo, TSRecomendPageInfo *pageInfo) {
+    [TSRecomendDataController checkCurrentRecomendPage:RecomendPaySuccess finished:^(TSRecomendModel *recomendInfo, TSRecomendPageInfo *pageInfo) {
         if (recomendInfo.goodsList.count != 0) {
             [self.dataCon configRecomendSection:recomendInfo.goodsList isGrid:YES];
             self.collectionView.sections = self.dataCon.sections;

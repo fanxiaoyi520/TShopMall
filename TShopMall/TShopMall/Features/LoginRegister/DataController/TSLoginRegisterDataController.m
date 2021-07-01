@@ -16,8 +16,8 @@
 
 @implementation TSLoginRegisterDataController
 -(void)fetchChangeBindWithNewMobile:(NSString *)newMobile
-                    validCode:(NSString *)validCode
-                    complete:(void(^)(BOOL isSucess))complete{
+                          validCode:(NSString *)validCode
+                           complete:(void(^)(BOOL isSucess))complete{
     TSChangeBindRequest *login = [[TSChangeBindRequest alloc] initWithNewMobile:newMobile validCode:validCode];
    login.animatingView = self.context.view;
    [login startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
