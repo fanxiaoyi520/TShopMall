@@ -123,3 +123,4 @@ UIKIT_EXTERN NSString * const kMineDelBankCardAccount;//删除银行卡
 UIKIT_EXTERN NSString * const kMineQueryAmount;//查询我的余额
 UIKIT_EXTERN NSString * const kMineGetBankNames;//查询银行列表
 UIKIT_EXTERN NSString * const kAboutMeAgreementUrl;
+UIKIT_EXTERN NSString * const kSecurCenterAgreementUrl;//安全中心协议

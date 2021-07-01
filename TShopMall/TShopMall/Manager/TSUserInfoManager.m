@@ -91,6 +91,10 @@
         userInfoManager.userName = user.username;
         userInfoManager.user = user;
         [self saveUserInfo:userInfoManager];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:TSUserInfoModifiedNotificationName object:nil];
+
+        
         if (success) {
             success(YES);
         }

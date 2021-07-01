@@ -106,6 +106,11 @@
     }];
 }
 
+- (void)userInfoUpdated{
+    [self.collectionView reloadData];
+    [self.infoView setModel:self.dataController.merchantUserInformationModel];
+}
+
 #pragma mark - Action
 -(void)setAction:(UIButton *)sender{
     TSSettingViewController *settingVC = [[TSSettingViewController alloc] init];

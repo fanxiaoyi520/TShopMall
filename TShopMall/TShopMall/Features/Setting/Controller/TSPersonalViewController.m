@@ -39,17 +39,18 @@
     // Do any additional setup after loading the view.
 }
 
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
 - (void)setupBasic {
     [super setupBasic];
     self.gk_navTitleFont = KRegularFont(18);
     self.gk_navTitleColor = KHexColor(@"#2D3132");
     self.gk_navTitle = @"个人资料";
-    [self userInfoModifiedAction];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userInfoModifiedAction) name:TSUserInfoModifiedNotificationName object:nil];
+    __weak __typeof(self)weakSelf = self;
+    [self.dataController fetchPersonalContentsComplete:^(BOOL isSucess) {
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
+        if (isSucess) {
+            [strongSelf.collectionView reloadData];
+        }
+    }];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
@@ -68,8 +69,6 @@
 - (void)modifyUserInfoWithKey:(NSString *)key value:(NSString *)value completed:(void (^)(void))completed {
     [Popover popProgressOnWindowWithText:@"提交中..."];
     [[TSServicesManager sharedInstance].userInfoService modifyUserInfoWithKey:key value:value success:^ {
-        ///发通知修改成功
-        [[NSNotificationCenter defaultCenter] postNotificationName:TSUserInfoModifiedNotificationName object:nil];
         [Popover popToastOnWindowWithText:@"修改成功！"];
         if (completed) {
             completed();
@@ -81,7 +80,7 @@
 
 #pragma mark - Actions
 ///信息修改成功
-- (void)userInfoModifiedAction {
+- (void)userInfoUpdated {
     __weak __typeof(self)weakSelf = self;
     [self.dataController fetchPersonalContentsComplete:^(BOOL isSucess) {
         __strong __typeof(weakSelf)strongSelf = weakSelf;
@@ -134,9 +133,8 @@
         NSLog(@"%ld-%@", index, title);
         NSString *sexString = [NSString stringWithFormat:@"%ld", index + 1];
         [self modifyUserInfoWithKey:@"sex" value:sexString completed:^{
-            @strongify(self);
+//            @strongify(self);
             //[TSUserInfoManager userInfo].user.sex = sex;
-            [self userInfoModifiedAction];
         }];
     }];
     [actionSheet show];
@@ -180,7 +178,6 @@
 - (void)modifyAvartar:(NSString *)avatarURL {
     [[TSServicesManager sharedInstance].userInfoService modifyUserInfoWithKey:@"avatar" value:avatarURL success:^ {
         //[TSUserInfoManager userInfo].user.avatar = avatarURL;
-        [[NSNotificationCenter defaultCenter] postNotificationName:TSUserInfoModifiedNotificationName object:nil];
         [Popover popToastOnWindowWithText:@"头像修改成功！"];
     } failure:^(NSString * _Nonnull errorMsg) {
         [Popover popToastOnWindowWithText:@"头像修改失败！"];
@@ -261,7 +258,7 @@
     [self modifyUserInfoWithKey:@"birthday" value:dateString completed:^{
         @strongify(self);
         //[TSUserInfoManager userInfo].user.birthday = dateString;
-        [self userInfoModifiedAction];
+//        [self userInfoModifiedAction];
     }];
 }
 
