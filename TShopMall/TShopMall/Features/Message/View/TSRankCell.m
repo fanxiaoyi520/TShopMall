@@ -153,13 +153,9 @@
     }
     
     //最底部切圆角
-//    NSInteger radii = item.isLast ? 10 : 0;
-//    [self.contentView layoutIfNeeded];
-//    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:self.contentView.bounds byRoundingCorners:UIRectCornerBottomLeft|UIRectCornerBottomRight cornerRadii:CGSizeMake(radii, radii)];
-//    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
-//    maskLayer.frame = self.contentView.bounds;
-//    maskLayer.path = maskPath.CGPath;
-//    self.contentView.layer.mask = maskLayer;
+    NSInteger radii = item.isLast ? 10 : 0;
+    self.contentView.clipsToBounds = YES;
+    [self.contentView setCorners:UIRectCornerBottomLeft | UIRectCornerBottomRight radius:radii];
     
 }
 
