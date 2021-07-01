@@ -136,9 +136,6 @@
 
 //去购物
 - (void)goToShopping{
-    UIViewController *con = [NSClassFromString(@"TSAddressEditController") new];
-    [self.navigationController pushViewController:con animated:YES];
-    return;
     self.tabBarController.selectedIndex = 0;
 }
 

@@ -16,15 +16,12 @@
 }
 @property (nonatomic, strong) TSAddressEditView *editView;
 @property (nonatomic, strong) UIButton *saveBtn;
-@property (nonatomic, strong) UIButton *selBtn;
-@property (nonatomic, strong) UILabel *selTips;
 @end
 
 @implementation TSAddressEditController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = UIColor.whiteColor;
     if (self.vm == nil) {
         self.gk_navTitle = @"新增收货地址";
         isAllInfoInput = NO;
@@ -40,6 +37,7 @@
     [self updateSaveStatus];
     
     self.editView.vm = self.vm;
+    
 }
 
 - (void)shouldUpdateSaveStatus:(id)status{
@@ -149,21 +147,10 @@
         make.height.mas_equalTo(KRateW(40.0));
     }];
     
-    [self.selBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.height.mas_equalTo(KRateW(24.0));
-        make.left.equalTo(self.saveBtn.mas_left);
-        make.bottom.equalTo(self.saveBtn.mas_top).offset(-KRateW(22.0));
-    }];
-    
-    [self.selTips mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.selBtn.mas_right).offset(KRateW(8.0));
-        make.top.bottom.equalTo(self.selBtn);
-    }];
-    
     [self.editView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.view);
         make.top.equalTo(self.view.mas_top).offset(GK_STATUSBAR_NAVBAR_HEIGHT);
-        make.bottom.equalTo(self.selBtn.mas_top).offset(-KRateW(16.0));
+        make.bottom.equalTo(self.saveBtn.mas_top).offset(-KRateW(16.0));
     }];
 }
 
@@ -183,33 +170,6 @@
     return self.saveBtn;
 }
 
-- (UIButton *)selBtn{
-    if (_selBtn) {
-        return _selBtn;
-    }
-    self.selBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.selBtn.selected = self.vm.isDefault;
-    [self.selBtn setBackgroundImage:KImageMake(@"btn_normal") forState:UIControlStateNormal];
-    [self.selBtn setBackgroundImage:KImageMake(@"btn_sel") forState:UIControlStateSelected];
-    [self.selBtn addTarget:self action:@selector(setDefaultAddress:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:self.selBtn];
-    
-    return self.selBtn;
-}
-
-- (UILabel *)selTips{
-    if (_selTips) {
-        return _selTips;
-    }
-    self.selTips = [UILabel new];
-    self.selTips.text = @"设为默认地址";
-    self.selTips.font = KRegularFont(14.0);
-    self.selTips.textColor = KHexColor(@"#2D3132");
-    [self.view addSubview:self.selTips];
-    
-    return self.selTips;
-}
-
 - (TSAddressEditView *)editView{
     if (_editView) {
         return _editView;
@@ -217,6 +177,7 @@
     self.editView = [TSAddressEditView new];
     self.editView.controller = self;
     [self.view addSubview:self.editView];
+    [self.editView.isDefaultItem.selBtn addTarget:self action:@selector(setDefaultAddress:) forControlEvents:UIControlEventTouchUpInside];
     
     return self.editView;
 }
