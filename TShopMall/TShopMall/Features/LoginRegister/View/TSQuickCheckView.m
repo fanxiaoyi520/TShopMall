@@ -29,16 +29,14 @@
     [self.checkButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.mas_equalTo(KRateH(18));
         make.height.mas_equalTo(KRateH(18));
-        make.centerY.equalTo(self.mas_centerY).with.offset(0);
-        make.left.equalTo(self.mas_left).with.offset(25);
+        make.centerY.equalTo(self);
+        make.left.equalTo(self);
     }];
     [self.textView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.checkButton.mas_right).with.offset(3);
-        make.centerY.equalTo(self.mas_centerY).with.offset(0);
-        //make.top.equalTo(self.mas_top).with.offset(10);
-        //make.bottom.equalTo(self.mas_bottom).with.offset(0);
-        make.right.equalTo(self.mas_right).with.offset(-25);
-        make.height.mas_equalTo(60);
+        make.centerY.equalTo(self);
+        make.right.equalTo(self);
+        make.bottom.equalTo(self);
     }];
 }
 
