@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)clearUserInfo;
 
 /// 更新用户信息到本地
--(void)updateUserInfo:(void(^)(BOOL isSuccess))success;
+-(void)updateUserInfo:( void(^ _Nullable)(BOOL isSuccess))success;
 @end
 
 NS_ASSUME_NONNULL_END

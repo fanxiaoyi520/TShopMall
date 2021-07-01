@@ -152,28 +152,73 @@
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    //我的订单
-    if (indexPath.section == 0 && indexPath.row == 0) {//待付款
-        NSString *path = [NSString stringWithFormat:@"%@%@?&orderType=%@&orderState=%@rightbutoon=show",kMallH5ApiPrefix,kMallH5OrderManageUrl,@"1",@"1"];
-        TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:path];
-        [self.navigationController pushViewController:hybrid animated:YES];
-    }else if (indexPath.section == 0 && indexPath.row == 1){//待发货
-        NSString *path = [NSString stringWithFormat:@"%@%@?&orderType=%@&orderState=%@",kMallH5ApiPrefix,kMallH5OrderManageUrl,@"1",@"4"];
-        TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:path];
-        [self.navigationController pushViewController:hybrid animated:YES];
-    }else if (indexPath.section == 0 && indexPath.row == 2){//待收货
-        NSString *path = [NSString stringWithFormat:@"%@%@?&orderType=%@&orderState=%@",kMallH5ApiPrefix,kMallH5OrderManageUrl,@"1",@"6"];
-        TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:path];
-        [self.navigationController pushViewController:hybrid animated:YES];
-    }else if (indexPath.section == 0 && indexPath.row == 3){//已完成
-        NSString *path = [NSString stringWithFormat:@"%@%@?&orderType=%@&orderState=%@",kMallH5ApiPrefix,kMallH5OrderManageUrl,@"1",@"6"];
-        TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:path];
-        [self.navigationController pushViewController:hybrid animated:YES];
-    }else if (indexPath.section == 0 && indexPath.row == 4){//退款退货
-//        NSString *path = [NSString stringWithFormat:@"%@%@",@"http://10.68.245.26:8081/seller-app-h5/",kMallH5RefundManageUrl];
-        NSString *path = @"http://10.68.245.26:8081/seller-app-h5/pages/bridgeDemo/index";
-        TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:path];
-        [self.navigationController pushViewController:hybrid animated:YES];
+    TSMineSectionModel *model = self.dataController.sections[indexPath.section];
+    
+    if ([model.headerName isEqualToString: @"订单"]) {
+        TSMineSectionOrderItemModel *item = (TSMineSectionOrderItemModel *)model.items[indexPath.row];
+        if ([item.title isEqualToString: @"待付款"]) {
+            NSString *path = [NSString stringWithFormat:@"%@%@?&orderType=%@&orderState=%@rightbutoon=show",kMallH5ApiPrefix,kMallH5OrderManageUrl,@"1",@"1"];
+            TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:path];
+            [self.navigationController pushViewController:hybrid animated:YES];
+        } else if ([item.title isEqualToString: @"待发货"]) {
+            NSString *path = [NSString stringWithFormat:@"%@%@?&orderType=%@&orderState=%@",kMallH5ApiPrefix,kMallH5OrderManageUrl,@"1",@"4"];
+            TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:path];
+            [self.navigationController pushViewController:hybrid animated:YES];
+        } else if ([item.title isEqualToString: @"待收货"]) {
+            NSString *path = [NSString stringWithFormat:@"%@%@?&orderType=%@&orderState=%@",kMallH5ApiPrefix,kMallH5OrderManageUrl,@"1",@"6"];
+            TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:path];
+            [self.navigationController pushViewController:hybrid animated:YES];
+        } else if ([item.title isEqualToString: @"已完成"]) {
+            
+            NSString *path = [NSString stringWithFormat:@"%@%@?&orderType=%@&orderState=%@",kMallH5ApiPrefix,kMallH5OrderManageUrl,@"1",@"6"];
+            TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:path];
+            [self.navigationController pushViewController:hybrid animated:YES];
+        } else if ([item.title isEqualToString: @"退款/退货"]) {
+            NSString *path = @"http://10.68.245.26:8081/seller-app-h5/pages/bridgeDemo/index";
+            TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:path];
+            [self.navigationController pushViewController:hybrid animated:YES];
+        }
+    }
+   
+    if ([model.headerName isEqualToString: @"更多服务"]) {
+        TSMineSectionOrderItemModel *item = (TSMineSectionOrderItemModel *)model.items[indexPath.row];
+        
+        if ([item.title isEqualToString: @"合伙人中心"]) {
+           
+        }else if ([item.title isEqualToString: @"官方服务"]) {
+            TSOfficialServicesViewController *vc = [TSOfficialServicesViewController new];
+            [self.navigationController pushViewController:vc animated:YES];
+        } else if ([item.title isEqualToString: @"在线客服"]) {
+            NSString *url = @"https://wap.service.tcl.com/web/index.php?apps=thome";
+            TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:url];
+            [self.navigationController pushViewController:hybrid animated:YES];
+           
+        } else if ([item.title isEqualToString: @"发票管理"]) {
+            NSString *path = [NSString stringWithFormat:@"%@%@",kMallH5ApiPrefix,kMallH5InvoiceListUrl];
+            TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:path];
+            hybrid.isInvoice = YES;
+            [self.navigationController pushViewController:hybrid animated:YES];
+        } else if ([item.title isEqualToString: @"地址管理"]) {
+            UIViewController *con = [NSClassFromString(@"TSShippingAddressController") new];
+            [self.navigationController pushViewController:con animated:YES];
+        } else if ([item.title isEqualToString: @"去评分"]) {
+            TSScoreViewController *vc = [TSScoreViewController new];
+            [self.navigationController pushViewController:vc animated:YES];
+        } else if ([item.title isEqualToString: @"站点设置"]) {
+            UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"站点设置" message:[NSString stringWithFormat:@"当前站点：%@",kMallH5ApiPrefix] preferredStyle:UIAlertControllerStyleAlert];
+            [alertVc addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+                
+            }];
+            UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                kMallH5ApiPrefix = alertVc.textFields.firstObject.text;
+            }];
+            UIAlertAction *cancle = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+               
+            }] ;
+            [alertVc addAction:cancle];
+            [alertVc addAction:confirm];
+            [self presentViewController:alertVc animated:true completion:nil];
+        }
     }
     
     //邀请好友
@@ -182,42 +227,6 @@
         [self.navigationController pushViewController:vc animated:YES];
     }
     
-    //发票中心
-    if (indexPath.section == 4 && indexPath.row == 1) {
-        NSString *path = [NSString stringWithFormat:@"%@%@",kMallH5ApiPrefix,kMallH5InvoiceListUrl];
-        TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:path];
-        hybrid.isInvoice = YES;
-        [self.navigationController pushViewController:hybrid animated:YES];
-    } else if (indexPath.section == 4 && indexPath.row == 2) {
-        UIViewController *con = [NSClassFromString(@"TSShippingAddressController") new];
-        [self.navigationController pushViewController:con animated:YES];
-    }
-    else if (indexPath.section == 4 && indexPath.row == 4) {
-        TSScoreViewController *vc = [TSScoreViewController new];
-        [self.navigationController pushViewController:vc animated:YES];
-    } else if (indexPath.section == 4 && indexPath.row == 3) {
-        TSOfficialServicesViewController *vc = [TSOfficialServicesViewController new];
-        [self.navigationController pushViewController:vc animated:YES];
-    }
-#if DEBUG
-    if (indexPath.section == 4 && indexPath.row == 5) {
-      
-        UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"站点设置" message:[NSString stringWithFormat:@"当前站点：%@",kMallH5ApiPrefix] preferredStyle:UIAlertControllerStyleAlert];
-        [alertVc addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-            
-        }];
-        UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            kMallH5ApiPrefix = alertVc.textFields.firstObject.text;
-        }];
-        UIAlertAction *cancle = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-           
-        }] ;
-        [alertVc addAction:cancle];
-        [alertVc addAction:confirm];
-        [self presentViewController:alertVc animated:true completion:nil];
-        
-    }
-#endif
     //我的钱包
     if (indexPath.section == 1 && indexPath.row == 0) {
         TSMineWalletCenterViewController *vc = [TSMineWalletCenterViewController new];
@@ -264,7 +273,9 @@
         return  self.dataController.earningModel;
     } else if ([sectionModel.items[indexPath.row].identify isEqualToString: @"TSMinePartnerCenterCell"]) {
         return  self.dataController.partnerCenterDataModel;
-    } else {
+    } else if ([sectionModel.items[indexPath.row].identify isEqualToString: @"TSMineAdsCell"]) {
+        return  self.dataController.content;
+    }  else {
         return sectionModel.items[indexPath.row];
     }
     

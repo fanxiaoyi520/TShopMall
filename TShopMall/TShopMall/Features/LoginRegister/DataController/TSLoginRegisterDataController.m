@@ -16,8 +16,8 @@
 
 @implementation TSLoginRegisterDataController
 -(void)fetchChangeBindWithNewMobile:(NSString *)newMobile
-                    validCode:(NSString *)validCode
-                    complete:(void(^)(BOOL isSucess))complete{
+                          validCode:(NSString *)validCode
+                           complete:(void(^)(BOOL isSucess))complete{
     TSChangeBindRequest *login = [[TSChangeBindRequest alloc] initWithNewMobile:newMobile validCode:validCode];
    login.animatingView = self.context.view;
    [login startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
@@ -113,8 +113,9 @@
             userInfo.userName = request.responseModel.originalData[@"username"];
             userInfo.accountId = request.responseModel.originalData[@"accountId"];
             [[TSUserInfoManager userInfo] saveUserInfo:userInfo];
-
-            complete(YES);
+            ///登录成功后获取用户信息
+            [[TSUserInfoManager userInfo] updateUserInfo:complete];
+            //complete(YES);
         }
         else{
             complete(NO);
@@ -179,7 +180,8 @@
                 userInfo.userName = dic[@"username"];
                 userInfo.accountId = dic[@"accountId"];
                 [[TSUserInfoManager userInfo] saveUserInfo:userInfo];
-                complete(YES);
+                //complete(YES);
+                [[TSUserInfoManager userInfo] updateUserInfo:complete];
             }
             
         }else
@@ -207,9 +209,9 @@
             userInfo.userName = request.responseModel.originalData[@"username"];
             userInfo.accountId = request.responseModel.originalData[@"accountId"];
             [[TSUserInfoManager userInfo] saveUserInfo:userInfo];
-            
+            [[TSUserInfoManager userInfo] updateUserInfo:complete];
             [Popover removePopoverOnWindow];
-            complete(YES);
+            //complete(YES);
         }
         else{
             complete(NO);

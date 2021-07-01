@@ -82,7 +82,7 @@
     return _accessToken;
 }
 
-- (void)updateUserInfo:(void(^)(BOOL isSuccess))success {
+-(void)updateUserInfo:( void(^ _Nullable)(BOOL isSuccess))success {
     [[TSServicesManager sharedInstance].userInfoService getUserInfoAccountId:self.accountId success:^(TSUser * _Nonnull user) {
         TSUserInfoManager *userInfoManager = [[TSUserInfoManager alloc] init];
         userInfoManager.accessToken = self.accessToken;

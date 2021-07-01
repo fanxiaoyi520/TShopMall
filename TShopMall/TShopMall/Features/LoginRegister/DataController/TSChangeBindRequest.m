@@ -27,12 +27,11 @@
 }
 
 -(NSString *)requestUrl{
-    NSString *requestUrl = [NSString stringWithFormat:@"%@?appId=%@&tenantId=%@&appSecret=%@",kChangeBindMobileUrl,kAppId,@"tcl",kAppSecret];
-    return requestUrl;
+    return kChangeBindMobileUrl;
 }
 
 -(YTKRequestSerializerType)requestSerializerType{
-    return YTKRequestSerializerTypeJSON;
+    return YTKRequestSerializerTypeHTTP;
 }
 
 -(YTKResponseSerializerType)responseSerializerType{
@@ -49,13 +48,16 @@
 }
 
 -(id)requestArgument{
-    
+
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setValue:kAppId forKey:@"appId"];
+    [params setValue:@"tcl" forKey:@"tenantId"];
+    [params setValue:kAppSecret forKey:@"appSecret"];
     [params setValue:[TSUserInfoManager userInfo].userName forKey:@"username"];
     [params setValue:self.mobile forKey:@"value"];
     [params setValue:self.validCode forKey:@"validCode"];
     [params setValue:@"CHANGE_BIND" forKey:@"bType"];
-    
+
     NSMutableDictionary *comBody = [self commonBady];
     [comBody setValuesForKeysWithDictionary:params];
     return comBody;
