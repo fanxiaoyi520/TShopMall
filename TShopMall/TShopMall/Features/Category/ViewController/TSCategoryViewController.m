@@ -16,8 +16,8 @@
 #import "TSMeasureCell.h"
 #import "TSRecommendCell.h"
 #import "TSTableViewBaseCell.h"
-
-@interface TSCategoryViewController ()<UITableViewDelegate,UITableViewDataSource, TSCategoryContainerDataSource>
+#import "TSTabBarController.h"
+@interface TSCategoryViewController ()<UITableViewDelegate,UITableViewDataSource, TSCategoryContainerDataSource, TSTabBarControllerProtocol>
 
 /// 搜索按钮
 @property(nonatomic, strong) TSGeneralSearchButton *searchButton;
@@ -37,29 +37,11 @@
 @implementation TSCategoryViewController
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
-    __weak __typeof(self)weakSelf = self;
-    [self.dataController fetchKindsComplete:^(BOOL isSucess) {
-        __strong __typeof(weakSelf)strongSelf = weakSelf;
-        if (isSucess) {
-            [strongSelf.container showContentAtPage:self.kindViewModel.selectedRow];
-        }
-    }];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self addChildViewController:self.container];
 
-    __weak __typeof(self)weakSelf = self;
-    [self.dataController fetchKindsComplete:^(BOOL isSucess) {
-        __strong __typeof(weakSelf)strongSelf = weakSelf;
-        if (isSucess) {
-            self.container.dataSource = self;
-            [strongSelf.kindViewModel viewModelWithKinds:self.dataController.kinds selectedRow:0];
-            [strongSelf.tableView reloadData];
-            [strongSelf.container showContentAtPage:0];
-        }
-    }];
 }
 
 -(void)setupNavigationBar{
@@ -289,5 +271,17 @@
     return tableView;
 }
 
-
+#pragma mark -TSTabBarControllerProtocol
+- (void)refreshData{
+    __weak __typeof(self)weakSelf = self;
+    [self.dataController fetchKindsComplete:^(BOOL isSucess) {
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
+        if (isSucess) {
+            self.container.dataSource = self;
+            [strongSelf.kindViewModel viewModelWithKinds:self.dataController.kinds selectedRow:0];
+            [strongSelf.tableView reloadData];
+            [strongSelf.container showContentAtPage:0];
+        }
+    }];
+}
 @end
