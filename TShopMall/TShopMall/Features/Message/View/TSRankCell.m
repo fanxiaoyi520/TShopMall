@@ -132,25 +132,35 @@
     return _splitView;
 }
 
-//- (void)setDelegate:(id<UniversalCollectionViewCellDataDelegate>)delegate {
-//    TSRankSectionItemModel *item = [delegate universalCollectionViewCellModel:self.indexPath];
-//    if (item.rank == 1) {
-//        self.rankImgV.hidden = NO;
-//        self.rankNumLabel.hidden = YES;
-//        self.rankImgV.image = KImageMake(@"mall_rank_no1");
-//    } else if (item.rank == 2) {
-//        self.rankImgV.hidden = NO;
-//        self.rankNumLabel.hidden = YES;
-//        self.rankImgV.image = KImageMake(@"mall_rank_no2");
-//    } else if (item.rank == 3) {
-//        self.rankImgV.hidden = NO;
-//        self.rankNumLabel.hidden = YES;
-//        self.rankImgV.image = KImageMake(@"mall_rank_no3");
-//    } else {
-//        self.rankImgV.hidden = YES;
-//        self.rankNumLabel.hidden = NO;
-//        self.rankNumLabel.text = [NSString stringWithFormat:@"%d", item.rank];
-//    }
-//}
+- (void)setData:(id)data {
+    TSRankSectionItemModel *item = (TSRankSectionItemModel *)data;
+    if (item.rank == 1) {
+        self.rankImgV.hidden = NO;
+        self.rankNumLabel.hidden = YES;
+        self.rankImgV.image = KImageMake(@"mall_rank_no1");
+    } else if (item.rank == 2) {
+        self.rankImgV.hidden = NO;
+        self.rankNumLabel.hidden = YES;
+        self.rankImgV.image = KImageMake(@"mall_rank_no2");
+    } else if (item.rank == 3) {
+        self.rankImgV.hidden = NO;
+        self.rankNumLabel.hidden = YES;
+        self.rankImgV.image = KImageMake(@"mall_rank_no3");
+    } else {
+        self.rankImgV.hidden = YES;
+        self.rankNumLabel.hidden = NO;
+        self.rankNumLabel.text = [NSString stringWithFormat:@"%d", item.rank];
+    }
+    
+    //最底部切圆角
+//    NSInteger radii = item.isLast ? 10 : 0;
+//    [self.contentView layoutIfNeeded];
+//    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:self.contentView.bounds byRoundingCorners:UIRectCornerBottomLeft|UIRectCornerBottomRight cornerRadii:CGSizeMake(radii, radii)];
+//    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+//    maskLayer.frame = self.contentView.bounds;
+//    maskLayer.path = maskPath.CGPath;
+//    self.contentView.layer.mask = maskLayer;
+    
+}
 
 @end

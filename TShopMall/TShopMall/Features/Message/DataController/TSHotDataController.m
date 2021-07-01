@@ -21,7 +21,7 @@
     {
         NSMutableArray *items = [NSMutableArray array];
         TSHotSectionItemModel *item = [[TSHotSectionItemModel alloc] init];
-        item.cellHeight = 250;
+        item.cellHeight = 265;
         item.identify = @"TSGoodsShowCell";
         [items addObject:item];
         
