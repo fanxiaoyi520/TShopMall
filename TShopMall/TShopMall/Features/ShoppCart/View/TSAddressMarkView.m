@@ -24,6 +24,7 @@
 
 - (instancetype)init{
     if (self == [super init]) {
+        self.backgroundColor = [UIColor whiteColor];
         [self layoutView];
         [self configMarks];
     }
@@ -47,8 +48,8 @@
         [btn addTarget:self action:@selector(markSelected:) forControlEvents:UIControlEventTouchUpInside];
         btn.tag = i;
         [btn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.mas_left).offset(KRateW(22.0) + (KRateW(46.0) + edgX) * i);
-            make.top.equalTo(self.mas_top).offset(KRateW(40.0));
+            make.left.equalTo(self.title.mas_right).offset(KRateW(32.0) + (KRateW(46.0) + edgX) * i);
+            make.centerY.mas_equalTo(self.title);
             make.height.mas_equalTo(KRateW(22.0));
             make.width.mas_equalTo(KRateW(46.0));
             make.bottom.equalTo(self.mas_bottom).offset(-KRateW(16.0));
@@ -184,7 +185,7 @@
     self.title = [UILabel new];
     self.title.font = KRegularFont(14.0);
     self.title.textColor = KHexColor(@"#2F2F2F");
-    self.title.text = @"标签";
+    self.title.text = @"标签:";
     [self addSubview:self.title];
 
     return self.title;
