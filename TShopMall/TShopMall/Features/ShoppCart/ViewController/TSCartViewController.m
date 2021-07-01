@@ -57,7 +57,6 @@
     __weak typeof(self) weakSelf = self;
     [self.dataCon viewCart:^{
         [weakSelf endRefresh];
-        weakSelf.settleView.hidden = !weakSelf.dataCon.cartModel.carts.count;
         weakSelf.cartView.sections = weakSelf.dataCon.sections;
         [weakSelf updateSettleView];
         [weakSelf configRecomendView];
@@ -138,11 +137,7 @@
 
 //去购物
 - (void)goToShopping{
-    AppDelegate *ap = (AppDelegate *)[UIApplication sharedApplication].delegate;
-//    TSBaseNavigationController *naviCon = (TSBaseNavigationController *)ap.window.rootViewController;
-//    TSMainViewController *mainCon = [naviCon.viewControllers lastObject];
-//    UITabBarController *tabbarCon = [mainCon.childViewControllers lastObject];
-//    [tabbarCon setSelectedIndex:0];
+    self.tabBarController.selectedIndex = 0;
 }
 
 - (void)recomendGoodsSelected:(NSString *)uuid{
@@ -152,6 +147,7 @@
 }
 
 - (void)updateSettleView{
+    self.settleView.hidden = self.dataCon.validCarts.count==0? YES:NO;
     [self.settleView updateSelBtnStatus:self.dataCon.isAllSelected];
     [self.settleView updatePrice:self.dataCon.cartModel.cartsTotalMount];
     [self.settleView updateSettleBtnText:self.dataCon.selectedCount];

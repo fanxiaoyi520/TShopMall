@@ -88,7 +88,7 @@
         userInfoManager.accessToken = self.accessToken;
         userInfoManager.accountId = self.accountId;
         userInfoManager.refreshToken = self.refreshToken;
-        userInfoManager.userName = self.userName;
+        userInfoManager.userName = user.username;
         userInfoManager.user = user;
         [self saveUserInfo:userInfoManager];
         if (success) {

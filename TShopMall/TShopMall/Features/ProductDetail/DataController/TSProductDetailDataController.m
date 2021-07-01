@@ -493,7 +493,7 @@
         
         SSGenaralRequest *setRequest = [[SSGenaralRequest alloc] initWithRequestUrl:kGoodDetailSetProductDiscountPriceUrl
                                                                       requestMethod:YTKRequestMethodPOST
-                                                              requestSerializerType:YTKRequestSerializerTypeJSON
+                                                              requestSerializerType:YTKRequestSerializerTypeHTTP
                                                              responseSerializerType:YTKResponseSerializerTypeJSON
                                                                       requestHeader:@{}
                                                                         requestBody:params

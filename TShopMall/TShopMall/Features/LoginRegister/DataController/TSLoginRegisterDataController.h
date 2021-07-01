@@ -8,10 +8,6 @@
 #import "TSBaseDataController.h"
 #import "TSLoginSMSModel.h"
 #import "TSAgreementModel.h"
-//typedef NS_ENUM(NSUInteger, TSLoginState) {
-//    Login,
-//    None
-//};
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -50,9 +46,17 @@ NS_ASSUME_NONNULL_BEGIN
                              complete:(void(^)(BOOL isSucess))complete;
 
 -(void)fetchChangeBindWithNewMobile:(NSString *)newMobile
-                    validCode:(NSString *)validCode
-                    complete:(void(^)(BOOL isSucess))complete;
+                          validCode:(NSString *)validCode
+                            success:(void(^_Nullable)(void))success
+                            failure:(void(^_Nullable)(NSString *errorMsg))failure;
 
+- (void)fetchAccountCancelBackCallBack:(void(^)(BOOL isSucess))complete;
+
+- (void)fetchAccountCancelCallBack:(void(^_Nullable)(NSString *date, NSString *nickname))success
+                              failure:(void(^_Nullable)(NSString *errorMsg))failure;
+
+- (void)fetchAccountCancelInfoCallBack:(void(^_Nullable)(NSString *date, NSString *nickname))success
+                                  failure:(void(^_Nullable)(NSString *errorMsg))failure;
 /** 获取注册登录的协议信息 */
 - (void)fetchAgreementWithCompleted: (void(^)(NSArray<TSAgreementModel *> *agreementModels))completed;
 @end

@@ -16,7 +16,6 @@
 #import <AVFoundation/AVMediaFormat.h>
 #import "TSAlertView.h"
 #import "TSChangePictureViewController.h"
-#import "TSSexSelectingView.h"
 #import "TSDatePickerView.h"
 #import "TSRealnameInfoViewController.h"
 #import "TSRealNameAuthViewController.h"
@@ -24,7 +23,8 @@
 #import "ImageCropper.h"
 #import "CMPhotoSelectorController.h"
 
-@interface TSPersonalViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate, TSSexSelectingViewDelegate, TSDatePickerViewDelegate, CMPhotoSelectorControllerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+
+@interface TSPersonalViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate, TSDatePickerViewDelegate, CMPhotoSelectorControllerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 /// 数据中心
 @property(nonatomic, strong) TSPersonalDataController *dataController;
 /// CollectionView
@@ -126,9 +126,19 @@
 }
 
 - (void)showSexAlert {
-    TSSexSelectingView *sexSelectedView = [TSSexSelectingView sexSelectingView];
-    sexSelectedView.delegate = self;
-    [sexSelectedView show];
+    @weakify(self);
+    TSUser *user = [TSUserInfoManager userInfo].user;
+    TSChangePictureActionSheet *actionSheet = [[TSChangePictureActionSheet alloc] initWithTitles:@[@"男", @"女"] selectIndex:(user.sex - 1) actionHandler:^(NSInteger index, NSString * _Nonnull title) {
+        @strongify(self);
+        NSLog(@"%ld-%@", index, title);
+        NSString *sexString = [NSString stringWithFormat:@"%ld", index + 1];
+        [self modifyUserInfoWithKey:@"sex" value:sexString completed:^{
+            @strongify(self);
+            //[TSUserInfoManager userInfo].user.sex = sex;
+            [self userInfoModifiedAction];
+        }];
+    }];
+    [actionSheet show];
 }
 
 - (void)showDatePickerView {
@@ -292,17 +302,6 @@
         _dataController = [[TSPersonalDataController alloc] init];
     }
     return _dataController;
-}
-
-#pragma mark - TSSexSelectingViewDelegate(性别选择)
-- (void)selectedSex:(Sex)sex {
-    NSString *sexString = [NSString stringWithFormat:@"%d", sex];
-    @weakify(self);
-    [self modifyUserInfoWithKey:@"sex" value:sexString completed:^{
-        @strongify(self);
-        //[TSUserInfoManager userInfo].user.sex = sex;
-        [self userInfoModifiedAction];
-    }];
 }
 
 #pragma mark - TSDatePickerViewDelegate(日期选择器）

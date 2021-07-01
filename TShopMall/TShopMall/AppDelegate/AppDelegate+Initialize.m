@@ -79,6 +79,7 @@
 }
 
 - (void)initService {
+    [TSServicesManager sharedInstance].acconutService = [TSLoginRegisterDataController new];
     [TSServicesManager sharedInstance].bestSellingRecommendService = [TSBestSellingRecommendService new];
     [TSServicesManager sharedInstance].userInfoService = [TSUserInfoService new];
     [TSServicesManager sharedInstance].uploadImageService = [TSUploadImageService new];
