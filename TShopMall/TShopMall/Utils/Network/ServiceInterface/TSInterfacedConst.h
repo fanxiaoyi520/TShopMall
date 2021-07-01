@@ -59,6 +59,7 @@ UIKIT_EXTERN NSString *const kGoodDetailChangeChooseUrl;
 UIKIT_EXTERN NSString *const kGoodDetailFastBuyUrl;
 UIKIT_EXTERN NSString *const kGoodDetailCarriageCostUrl;
 UIKIT_EXTERN NSString *const kGoodDetailStaffShareUrl;
+UIKIT_EXTERN NSString *const kGoodDetailSetProductDiscountPriceUrl;
 
 #pragma mark - 分类
 UIKIT_EXTERN NSString *const kShopContentUrl;

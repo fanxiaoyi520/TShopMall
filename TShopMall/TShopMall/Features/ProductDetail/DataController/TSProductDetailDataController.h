@@ -122,13 +122,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 
-/// 特权分享设置特权优惠价
+/// 特权分享设置
+/// @param shareType 分享类型（0 普通分享 1员工分享 2特权分享 3 特惠价分享）
 /// @param discountType 优惠方式:打折(percent)、指定价格(price)
-/// @param productUuid 需要分享的商品
-/// @param complete 请求创建分享票据
--(void)fetchProductDiscountPriceDiscountType:(NSString *)discountType
-                                 productUuid:(NSString *)productUuid
-                                    complete:(void(^)(BOOL isSucess))complete;
+/// @param discountPrice 折扣金额
+-(void)fetchProductPrerogativeStaffShareType:(NSString *)shareType
+                                discountType:(NSString *)discountType
+                               discountPrice:(NSString *)discountPrice
+                                    complete:(void(^)(BOOL isSucess, NSDictionary *data))complete;
 
 @end
 
