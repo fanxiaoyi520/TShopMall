@@ -143,7 +143,7 @@ typedef NS_ENUM(NSUInteger, WithdrawalPswSetClickType){
     if (_pswTextField == nil) {
         UITextField *pswTextField = [[UITextField alloc] init];
         _pswTextField = pswTextField;
-        _pswTextField.keyboardType = UIKeyboardTypeDefault;
+        _pswTextField.keyboardType = UIKeyboardTypeNumberPad;
         _pswTextField.secureTextEntry = YES;
         _pswTextField.textColor = KHexColor(@"#2D3132");
         _pswTextField.font = KRegularFont(16);
