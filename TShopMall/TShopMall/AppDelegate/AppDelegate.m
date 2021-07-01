@@ -35,8 +35,11 @@
     
     [TSServicesManager sharedInstance].bestSellingRecommendService = [TSBestSellingRecommendService new];
     [TSServicesManager sharedInstance].userInfoService = [TSUserInfoService new];
+    [TSServicesManager sharedInstance].uploadImageService = [TSUploadImageService new];
     
-    [[TSServicesManager sharedInstance].userInfoService updateUserInfoSuccess:nil failure:nil];
+    [[TSServicesManager sharedInstance].userInfoService getUserInfoAccountId:[TSUserInfoManager userInfo].accountId success:^(TSUser * _Nonnull user) {
+        [[TSUserInfoManager userInfo] updateUserInfo:nil];
+    } failure:nil];
     
     if (@available(iOS 13.0, *)) {
         

@@ -11,6 +11,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TSUserInfoRequest : SSBaseRequest
 
+- (instancetype)initWithAccountId:(NSString *)accountId;
+
 @end
 
 NS_ASSUME_NONNULL_END

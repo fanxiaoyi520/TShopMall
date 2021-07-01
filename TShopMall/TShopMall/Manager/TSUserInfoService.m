@@ -9,7 +9,6 @@
 #import "TSUserInfoRequest.h"
 #import "TSUser.h"
 #import "TSModifyUserInfoRequest.h"
-#import "UploadImageApi.h"
 
 @interface TSUserInfoService ()
 
@@ -18,50 +17,16 @@
 
 @implementation TSUserInfoService
 
-
-- (void)uploadImage:(UIImage *)image
-            success:(void(^_Nullable)(NSString *imageURL))success
-            failure:(void(^_Nullable)(NSString *errorMsg))failure
-{
-    UploadImageApi *uploadRequest = [[UploadImageApi alloc] initWithImage:image];
-    [uploadRequest startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
-        NSError *error;
-        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:request.responseData options:NSJSONReadingMutableContainers error:&error];
-        NSDictionary *data = json[@"data"];
-        if (error) {
-            if (failure) {
-                failure(@"数据格式错误！");
-            }
-            return;
-        }
-        if (data) {
-            NSString *imageURL = data[@"fileUrl"];
-            if (success) {
-                success(imageURL);
-            }
-        } else {
-            if (failure) {
-                failure(@"发生未知错误~~~");
-            }
-        }
-    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-        if (failure) {
-            failure(@"发生未知错误~~~");
-        }
-    }];
-}
-
-- (void)updateUserInfoSuccess:(void(^_Nullable)(void))success
+- (void)getUserInfoAccountId:(NSString *)accountId
+                     success:(void(^_Nullable)(TSUser *user))success
                      failure:(void(^_Nullable)(NSString *errorMsg))failure {
-    TSUserInfoRequest *request = [[TSUserInfoRequest alloc] init];
-    @weakify(self);
+    TSUserInfoRequest *request = [[TSUserInfoRequest alloc] initWithAccountId:accountId];
     [request startWithCompletionBlockWithSuccess:^(__kindof SSGenaralRequest * _Nonnull request) {
-        @strongify(self);
         NSLog(@"获取用户信息 === %@", request.responseModel.originalData);
         if (request.responseModel.isSucceed) {
-            self.user = [TSUser yy_modelWithJSON:request.responseModel.originalData[@"data"]];
+            TSUser *user = [TSUser yy_modelWithJSON:request.responseModel.originalData[@"data"]];
             if (success) {
-                success();
+                success(user);
             }
         }
         
@@ -83,7 +48,11 @@
     [request startWithCompletionBlockWithSuccess:^(__kindof SSGenaralRequest * _Nonnull request) {
         if (request.responseModel.isSucceed) {
             ///更新本地个人信息
-            [self updateUserInfoSuccess:success failure:failure];
+            [[TSUserInfoManager userInfo] updateUserInfo:^(BOOL isSuccess) {
+                if (success) {
+                    success();
+                }
+            }];
         } else {
             if (failure) {
                 failure(request.responseModel.originalData[@"failCause"]);

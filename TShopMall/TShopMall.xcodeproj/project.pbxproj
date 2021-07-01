@@ -61,6 +61,7 @@
 		0465170A268C57EF000829C2 /* TextViewDialogElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 046516EB268C57EF000829C2 /* TextViewDialogElement.m */; };
 		04651732268C64E2000829C2 /* UploadImageApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 04651731268C64E2000829C2 /* UploadImageApi.m */; };
 		04651735268C8C32000829C2 /* UIViewController+Plugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 04651734268C8C32000829C2 /* UIViewController+Plugin.m */; };
+		04651738268C969C000829C2 /* TSUploadImageService.m in Sources */ = {isa = PBXBuildFile; fileRef = 04651737268C969C000829C2 /* TSUploadImageService.m */; };
 		046DEA8626856ADF009CE557 /* TSAgreementView.m in Sources */ = {isa = PBXBuildFile; fileRef = 046DEA8526856ADF009CE557 /* TSAgreementView.m */; };
 		046DEA892685BD97009CE557 /* TSChangeMobileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 046DEA882685BD97009CE557 /* TSChangeMobileCell.m */; };
 		046DEA8C2685C5BA009CE557 /* TSChangeMobileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 046DEA8B2685C5BA009CE557 /* TSChangeMobileViewController.m */; };
@@ -702,6 +703,8 @@
 		04651731268C64E2000829C2 /* UploadImageApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadImageApi.m; sourceTree = "<group>"; };
 		04651733268C8C32000829C2 /* UIViewController+Plugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Plugin.h"; sourceTree = "<group>"; };
 		04651734268C8C32000829C2 /* UIViewController+Plugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Plugin.m"; sourceTree = "<group>"; };
+		04651736268C969C000829C2 /* TSUploadImageService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSUploadImageService.h; sourceTree = "<group>"; };
+		04651737268C969C000829C2 /* TSUploadImageService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSUploadImageService.m; sourceTree = "<group>"; };
 		046DEA8426856ADF009CE557 /* TSAgreementView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSAgreementView.h; sourceTree = "<group>"; };
 		046DEA8526856ADF009CE557 /* TSAgreementView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSAgreementView.m; sourceTree = "<group>"; };
 		046DEA872685BD96009CE557 /* TSChangeMobileCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSChangeMobileCell.h; sourceTree = "<group>"; };
@@ -3742,6 +3745,8 @@
 				DC06D6DE268761E20013633F /* TSBestSellingRecommendService.m */,
 				043C2350268B248300460FDB /* TSUserInfoService.h */,
 				043C2351268B248300460FDB /* TSUserInfoService.m */,
+				04651736268C969C000829C2 /* TSUploadImageService.h */,
+				04651737268C969C000829C2 /* TSUploadImageService.m */,
 				DFB3FFDD268571B100FC8FF9 /* AuthAppleIDManager.h */,
 				DFB3FFDE268571B100FC8FF9 /* AuthAppleIDManager.m */,
 				DFB3FFED2686E60C00FC8FF9 /* TSURLRouter.h */,
@@ -4381,6 +4386,7 @@
 				DFB3FFF326899EF300FC8FF9 /* TSTableViewBaseCell.m in Sources */,
 				04651706268C57EF000829C2 /* ButtonsDialogElement.m in Sources */,
 				CE4F6BDA26867C0E00812275 /* TSGlobalNotifyServer.m in Sources */,
+				04651738268C969C000829C2 /* TSUploadImageService.m in Sources */,
 				F530CCAF26803FCD009DC29A /* UITextField+General.m in Sources */,
 				F530CCB426803FCD009DC29A /* UIFont+Plugin.m in Sources */,
 				F55D2C3B2671E14B006BACCF /* TSUniversalDecorationView.m in Sources */,
