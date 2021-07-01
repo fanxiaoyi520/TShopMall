@@ -12,9 +12,10 @@
 - (void)setStr:(NSString *)str{
     _str = str;
     self.title.text = str;
-    self.deleteBtn.hidden = YES;
     if ([str isEqual:@"历史搜索"]) {
         self.deleteBtn.hidden = NO;
+    } else {
+        self.deleteBtn.hidden = YES;
     }
     if ([str containsString:@"推荐"]){
         self.title.font = KFont(PingFangSCMedium, 14.0);
@@ -60,6 +61,7 @@
         return _deleteBtn;
     }
     self.deleteBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.deleteBtn.hidden = YES;
     [self.deleteBtn setBackgroundImage:KImageMake(@"home_search_delete") forState:UIControlStateNormal];
     [self.deleteBtn addTarget:self action:@selector(deleteTapAction) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.deleteBtn];

@@ -15,9 +15,9 @@
 @property (nonatomic, strong) NSArray<TSSearchHotKeyModel *> *hotkeys;
 @property (nonatomic, strong) NSMutableArray<TSSearchSection *> *sections;
 
-- (void)fetchData:(void(^)(NSArray<TSSearchSection *> *sections,  NSError *error))finished;
+- (void)fetchData:(void(^)(void))finished;
 
-+ (NSArray<TSSearchSection *> *)updateHistorySections:(NSArray<TSSearchSection *> *)sections;
+- (void)configHistorySection;
 
 - (void)configRecomendSection:(NSArray<TSRecomendGoods *> *)goods isGrid:(BOOL)isGrid;
 @end
