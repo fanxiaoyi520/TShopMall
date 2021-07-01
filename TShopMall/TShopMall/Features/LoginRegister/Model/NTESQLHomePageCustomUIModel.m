@@ -10,6 +10,7 @@
 #import "NTESQPDemoDefines.h"
 #import "WXApi.h"
 #import "WechatManager.h"
+
 @implementation NTESQLHomePageCustomUIModel
 
 + (instancetype)getInstance {
@@ -101,10 +102,17 @@
         }];
     };
     
+    TSAgreementModel *firstObject = [TSGlobalManager shareInstance].agreementModels.firstObject;
+    TSAgreementModel *secondObject = [TSGlobalManager shareInstance].agreementModels[1];
+    
         /// 隐私协议
-    model.appPrivacyText = @"已阅读并同意以下协议：《默认》《服务协议》《隐私政策》";
-    model.appFPrivacyText = @"《服务协议》";
-    model.appSPrivacyText = @"《隐私政策》";
+    model.appPrivacyText = [NSString stringWithFormat:@"已阅读并同意以下协议：《默认》《%@》《%@》",firstObject.title, secondObject.title];
+    model.appFPrivacyText = [NSString stringWithFormat:@"《%@》",firstObject.title];
+    model.appSPrivacyText = [NSString stringWithFormat:@"《%@》",secondObject.title];
+    model.appFPrivacyURL = firstObject.serverUrl;
+    model.appSPrivacyURL = secondObject.serverUrl;
+    model.appFPrivacyTitleText = firstObject.title;
+    model.appSPrivacyTitleText = secondObject.title;
 
     model.uncheckedImg = [[UIImage imageNamed:@"mall_login_uncheck"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     model.checkedImg = [[UIImage imageNamed:@"mall_login_checked"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
