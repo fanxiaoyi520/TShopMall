@@ -18,18 +18,22 @@
 @property(nonatomic, weak) UIImageView *rankImgV;
 /** 商品标题  */
 @property(nonatomic, weak) UILabel *titleLabel;
+
 /** 商品价格  */
 @property(nonatomic, weak) UILabel *priceLabel;
 /** RMB显示  */
 @property(nonatomic, weak) UILabel *rmbLabel;
+
 /** 原价（提货价） */
 @property(nonatomic, weak) UILabel *originPriceLabel;
+
 /** 最高赚文字的显示  */
 @property(nonatomic, weak) TSEdgeInsetLabel *bestLabel;
 /** 最高赚数字的显示  */
 @property(nonatomic, weak) TSEdgeInsetLabel *bestNumLabel;
 /** 最高赚父视图  */
 @property(nonatomic, weak) UIView *bestView;
+
 /** 分割线  */
 @property(nonatomic, weak) UIView *splitView;
 
@@ -68,22 +72,22 @@
         make.right.equalTo(self.contentView.mas_right).with.offset(-16);
         make.top.equalTo(self.contentView.mas_top).with.offset(10);
     }];
+    
     [self.rmbLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.titleLabel.mas_left).with.offset(0);
+        make.left.equalTo(self.titleLabel);
         make.centerY.equalTo(self.priceLabel.mas_centerY).with.offset(1);
-        make.width.mas_equalTo(15);
     }];
     [self.priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.rmbLabel.mas_right).with.offset(0);
-        make.centerY.equalTo(self.bestView.mas_centerY).with.offset(0);
-        make.right.equalTo(self.bestView.mas_left).with.offset(-3);
+        make.left.equalTo(self.rmbLabel.mas_right).with.offset(1);
+        make.centerY.equalTo(self.bestView);
     }];
     [self.originPriceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.rmbLabel.mas_left).with.offset(0);
         make.top.equalTo(self.priceLabel.mas_bottom).with.offset(5);
     }];
+    
     [self.bestView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.titleLabel.mas_centerX).with.offset(0);
+        make.left.equalTo(self.priceLabel.mas_right).offset(10);
         make.top.equalTo(self.titleLabel.mas_bottom).with.offset(14);
         make.width.mas_equalTo(70);
         make.height.mas_equalTo(18);
@@ -95,7 +99,7 @@
         make.height.mas_equalTo(18);
     }];
     [self.bestLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.bestNumLabel.mas_left).with.offset(10);
+        make.right.equalTo(self.bestNumLabel.mas_left).with.offset(12);
         make.centerY.equalTo(self.bestNumLabel.mas_centerY).with.offset(0);
         make.width.mas_equalTo(37);
         make.height.mas_equalTo(18);
@@ -172,7 +176,7 @@
         _rmbLabel = rmbLabel;
         _rmbLabel.textColor = KHexColor(@"#E64C3D");
         _rmbLabel.font = KRegularFont(16);
-        _rmbLabel.text = @"￥";
+        _rmbLabel.text = @"¥";
         [self.contentView addSubview: _rmbLabel];
     }
     return _rmbLabel;
@@ -215,7 +219,7 @@
         UILabel *originPriceLabel = [[UILabel alloc] init];
         _originPriceLabel = originPriceLabel;
         _originPriceLabel.textColor = KHexAlphaColor(@"#333333", 0.6);
-        _originPriceLabel.font = KRegularFont(8);
+        _originPriceLabel.font = KRegularFont(10);
         _originPriceLabel.text = @"提货价 ￥23990";
         [self.contentView addSubview: _originPriceLabel];
     }

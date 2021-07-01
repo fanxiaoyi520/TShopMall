@@ -38,7 +38,13 @@
     [self setUpInit];
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleDefault;
+}
+
 - (void)setUpInit {
+    self.gk_navTitleFont = KRegularFont(18);
+    self.gk_navTitleColor = KHexColor(@"#2D3132");
     self.gk_navTitle = @"修改昵称";
     self.gk_navRightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"确定" style:(UIBarButtonItemStylePlain) target:self action:@selector(confirmAction)];
     UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panAction:)];

@@ -157,7 +157,7 @@
     if ([model.headerName isEqualToString: @"订单"]) {
         TSMineSectionOrderItemModel *item = (TSMineSectionOrderItemModel *)model.items[indexPath.row];
         if ([item.title isEqualToString: @"待付款"]) {
-            NSString *path = [NSString stringWithFormat:@"%@%@?&orderType=%@&orderState=%@rightbutoon=show",kMallH5ApiPrefix,kMallH5OrderManageUrl,@"1",@"1"];
+            NSString *path = [NSString stringWithFormat:@"%@%@?&orderType=%@&orderState=%@",kMallH5ApiPrefix,kMallH5OrderManageUrl,@"1",@"1"];
             TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:path];
             [self.navigationController pushViewController:hybrid animated:YES];
         } else if ([item.title isEqualToString: @"待发货"]) {
@@ -170,7 +170,7 @@
             [self.navigationController pushViewController:hybrid animated:YES];
         } else if ([item.title isEqualToString: @"已完成"]) {
             
-            NSString *path = [NSString stringWithFormat:@"%@%@?&orderType=%@&orderState=%@",kMallH5ApiPrefix,kMallH5OrderManageUrl,@"1",@"6"];
+            NSString *path = [NSString stringWithFormat:@"%@%@?&orderType=%@&orderState=%@",kMallH5ApiPrefix,kMallH5OrderManageUrl,@"1",@"7"];
             TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:path];
             [self.navigationController pushViewController:hybrid animated:YES];
         } else if ([item.title isEqualToString: @"退款/退货"]) {
