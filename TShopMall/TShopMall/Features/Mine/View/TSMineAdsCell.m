@@ -25,8 +25,20 @@
 }
 
 - (void)setDelegate:(id<UniversalCollectionViewCellDataDelegate>)delegate {
-    [delegate universalCollectionViewCellModel:self.indexPath];
-//    [_adsImageView sd_setImageWithURL:<#(nullable NSURL *)#>]
+   NSString *content = [delegate universalCollectionViewCellModel:self.indexPath];
+    if (content.length > 0 ) { //^http://([\\w-]+.)+[\\w-]+(/[\\w-./?%&=])?$
+        NSError *error;
+        NSRegularExpression *regular = [NSRegularExpression regularExpressionWithPattern:@"(https{1}|http{1})://([\\w-]+.)+[\\w-]+(/[\\w-./?%&=])?" options: NSRegularExpressionCaseInsensitive | NSRegularExpressionAnchorsMatchLines
+                                                                                   error:&error];
+      
+       NSRange matchRange = [regular rangeOfFirstMatchInString:content options:0 range:NSMakeRange(0, content.length)];
+        if (matchRange.location != NSNotFound) {
+            NSString *url = [content substringWithRange:matchRange];
+            [_adsImageView sd_setImageWithURL:[NSURL URLWithString:url]];
+        }
+       
+    }
+   
 }
 
 #pragma mark - Getter

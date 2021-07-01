@@ -148,7 +148,7 @@ NSString * const kMineWithdrawalRecordListData = @"/rest/v2/withdrawal/record/qu
 NSString * const kMineWalletData = @"/rest/v2/withdrawal/record/queryWallet";
 NSString *const kMineQueryProfit = @"/rest/v2/withdrawal/record/queryProfit";
 //广告图
-NSString * const kMineShopContentUrl = @"rest/shopContent/getPageManageByPageType";
+NSString * const kMineShopContentUrl = @"v2/front/shopContent/getPageManageByPageType";
 //查询订单各状态下的订单数
 NSString *const kMineOrderCount = @"v2/usercenter/order/query/queryAllStatusOrderCountByGroup";
 #pragma mark - 设置
