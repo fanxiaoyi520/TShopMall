@@ -26,7 +26,7 @@
 }
 
 - (void)updatePrice:(NSString *)price{
-    price = [NSString stringWithFormat:@"¥ %@", price];
+    price = [NSString stringWithFormat:@"¥%@", price];
     self.price.text = price;
     self.tips.text = @"最高赚";
     

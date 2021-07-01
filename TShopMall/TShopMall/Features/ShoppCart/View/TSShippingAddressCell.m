@@ -35,9 +35,17 @@
 - (void)setAddressModel:(TSAddressModel *)addressModel{
     _addressModel = addressModel;
     self.name.text  = addressModel.consignee;
-    self.phone.text = addressModel.mobile;
+    self.phone.text = [self securtyPhone:addressModel.mobile];
     self.address.text = [NSString stringWithFormat:@"%@%@", addressModel.address, addressModel.area];
     self.mark.hidden = !addressModel.isDefault;
+}
+
+- (NSString *)securtyPhone:(NSString *)phone{
+    if (phone.length < 7) {
+        return phone;
+    }
+    NSRange range = NSMakeRange(3, 4);
+    return [phone stringByReplacingCharactersInRange:range withString:@"****"];
 }
 
 - (void)configUI{

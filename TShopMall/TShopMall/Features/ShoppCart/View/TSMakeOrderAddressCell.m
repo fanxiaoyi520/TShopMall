@@ -21,9 +21,17 @@
     if ([obj isKindOfClass:[TSAddressModel class]]) {
         TSAddressModel *address = (TSAddressModel *)obj;
         self.name.text = address.consignee;
-        self.phone.text = address.mobile;
+        self.phone.text = [self securtyPhone:address.mobile];
         self.address.text = [NSString stringWithFormat:@"%@%@", address.area, address.address];
     }
+}
+
+- (NSString *)securtyPhone:(NSString *)phone{
+    if (phone.length < 7) {
+        return phone;
+    }
+    NSRange range = NSMakeRange(3, 4);
+    return [phone stringByReplacingCharactersInRange:range withString:@"****"];
 }
 
 - (void)layoutView{
