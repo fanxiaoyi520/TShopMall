@@ -44,6 +44,10 @@
        didSelectControl:(UIControl *)control{
     UITabBarItem *item = [tabBarController.tabBar.items objectAtIndex:tabBarController.selectedIndex];
     item.badgeValue = nil;
+    TSBaseNavigationController *nav = tabBarController.childViewControllers[tabBarController.selectedIndex];
+    if ([nav.topViewController conformsToProtocol:@protocol(TSTabBarControllerProtocol)]) {
+        [nav.topViewController performSelector:@selector(refreshData)];
+    }
 }
 
 #pragma mark - Private

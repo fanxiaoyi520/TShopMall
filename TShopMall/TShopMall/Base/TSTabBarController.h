@@ -8,7 +8,11 @@
 #import "CYLTabBarController.h"
 
 NS_ASSUME_NONNULL_BEGIN
+@protocol TSTabBarControllerProtocol <NSObject>
 
+- (void)refreshData;
+
+@end
 @interface TSTabBarController : CYLTabBarController
 
 @end
