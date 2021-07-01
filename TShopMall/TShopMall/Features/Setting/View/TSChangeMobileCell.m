@@ -164,6 +164,7 @@
         UILabel *errorTipsLabel = [[UILabel alloc] init];
         _errorTipsLabel = errorTipsLabel;
         _errorTipsLabel.text = @"手机号已注册";
+        _errorTipsLabel.hidden = YES;
         _errorTipsLabel.textColor = KHexColor(@"#F7AF34");
         _errorTipsLabel.font = KRegularFont(12);
         _errorTipsLabel.numberOfLines = 0;
@@ -337,24 +338,18 @@
         [self.contentView makeToast:@"请输入验证码" duration:3.0 position:CSToastPositionCenter];
         return;
     }
-//    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-//    [params setValue:NSStringFromClass([self class]) forKey:@"cellType"];
-//    [params setValue:@(ChangeMobileValueTypeCommit) forKey:@"ChangeMobileButtonClickType"];
-//    ///手机号
-//    [params setValue:self.mobileTextField.text forKey:@"MobileNumber"];
-//    ///旧手机号
-//    [params setValue:self.phoneNumLabel.text forKey:@"OldMobileNumber"];
-//    ///验证码
-//    [params setValue:self.codeTextField.text forKey:@"CodeNumber"];
-//    if (_delegate && [_delegate respondsToSelector:@selector(universalCollectionViewCellClick:params:)]) {
-//        [_delegate universalCollectionViewCellClick:self.indexPath params:params];
-//    }
+    self.errorTipsLabel.hidden = YES;
+    [[UIViewController windowCurrentViewController].view endEditing:YES];
     
-    
-    [self.dataController fetchChangeBindWithNewMobile:self.mobileTextField.text validCode:self.codeTextField.text complete:^(BOOL isSucess) {
-        if (isSucess) {
-            [Popover popToastOnWindowWithText:@"换绑成功"];
-            [[UIViewController windowCurrentViewController].navigationController popViewControllerAnimated:YES];
+    [self.dataController fetchChangeBindWithNewMobile:self.mobileTextField.text validCode:self.codeTextField.text success:^{
+        [Popover popToastOnWindowWithText:@"换绑成功"];
+        [[UIViewController windowCurrentViewController].navigationController popViewControllerAnimated:YES];
+    } failure:^(NSString * _Nonnull errorMsg) {
+        if ([errorMsg isEqualToString:@"被绑定的邮箱或者手机号已存在"]) {
+            self.errorTipsLabel.hidden = NO;
+        }else{
+            self.errorTipsLabel.hidden = YES;
+            [Popover popToastOnWindowWithText:errorMsg];
         }
     }];
 }

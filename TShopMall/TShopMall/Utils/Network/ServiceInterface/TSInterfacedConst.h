@@ -42,6 +42,12 @@ UIKIT_EXTERN NSString *const kLoginRegisterAgreementUrl;
 UIKIT_EXTERN NSString *const kUserInfoUrl;
 /// 换绑手机号
 UIKIT_EXTERN NSString *const kChangeBindMobileUrl;
+/// 注销账号
+UIKIT_EXTERN NSString *const kAccountCancelUrl;
+///  取消注销账号
+UIKIT_EXTERN NSString *const kAccountCancelBackUrl;
+///  查询注销状态
+UIKIT_EXTERN NSString *const kAccountCancelInfoUrl;
 
 #pragma mark - 首页
 UIKIT_EXTERN NSString *const kHomePageInfoUrl;
