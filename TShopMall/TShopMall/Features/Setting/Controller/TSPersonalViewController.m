@@ -45,6 +45,8 @@
 
 - (void)setupBasic {
     [super setupBasic];
+    self.gk_navTitleFont = KRegularFont(18);
+    self.gk_navTitleColor = KHexColor(@"#2D3132");
     self.gk_navTitle = @"个人资料";
     [self userInfoModifiedAction];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userInfoModifiedAction) name:TSUserInfoModifiedNotificationName object:nil];

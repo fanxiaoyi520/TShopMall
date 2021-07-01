@@ -24,6 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface TSRankSectionItemModel : TSUniversaItemModel
 /** 排名  */
 @property(nonatomic, assign) int rank;
+@property (nonatomic, assign) BOOL isLast;
 @property(nonatomic, strong) NSArray *datas;
 
 @end
