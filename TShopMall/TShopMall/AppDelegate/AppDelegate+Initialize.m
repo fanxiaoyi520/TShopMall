@@ -16,6 +16,7 @@
 #import "TSAccountConst.h"
 #import "WechatShareManager.h"
 #import "AFNetworkReachabilityManager.h"
+#import "TSBestSellingRecommendService.h"
 
 @interface AppDelegate ()<WXApiDelegate>
 
@@ -66,16 +67,30 @@
     [TSServicesManager sharedInstance].uriHandler = [TSURLRouter sharedInstance];
 }
 
-- (void)initNetworkReachability{
+- (void)initNetworkReachability {
     // 监听网络状况
-        AFNetworkReachabilityManager *mgr = [AFNetworkReachabilityManager sharedManager];
-        [mgr setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
-            /// 简化成两种状态 0 为 无网络 1 为有网络
-            NSInteger state = status == AFNetworkReachabilityStatusNotReachable?0:1;
-            [[NSNotificationCenter defaultCenter] postNotificationName:TS_NetWork_State object:@(state)];
-        }];
-        [mgr startMonitoring];
-    
+    AFNetworkReachabilityManager *mgr = [AFNetworkReachabilityManager sharedManager];
+    [mgr setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        /// 简化成两种状态 0 为 无网络 1 为有网络
+        NSInteger state = status == AFNetworkReachabilityStatusNotReachable?0:1;
+        [[NSNotificationCenter defaultCenter] postNotificationName:TS_NetWork_State object:@(state)];
+    }];
+    [mgr startMonitoring];
+}
+
+- (void)initService {
+    [TSServicesManager sharedInstance].bestSellingRecommendService = [TSBestSellingRecommendService new];
+    [TSServicesManager sharedInstance].userInfoService = [TSUserInfoService new];
+    [TSServicesManager sharedInstance].uploadImageService = [TSUploadImageService new];
+}
+
+- (void)getNetData {
+    [[TSServicesManager sharedInstance].userInfoService getUserInfoAccountId:[TSUserInfoManager userInfo].accountId success:^(TSUser * _Nonnull user) {
+        [[TSUserInfoManager userInfo] updateUserInfo:nil];
+    } failure:nil];
+    [[TSUserLoginManager shareInstance] fetchAgreementWithCompleted:^(NSArray<TSAgreementModel *> * _Nonnull agreementModels) {
+        [TSGlobalManager shareInstance].agreementModels = agreementModels;
+    }];
 }
 
 

@@ -113,8 +113,9 @@
             userInfo.userName = request.responseModel.originalData[@"username"];
             userInfo.accountId = request.responseModel.originalData[@"accountId"];
             [[TSUserInfoManager userInfo] saveUserInfo:userInfo];
-
-            complete(YES);
+            ///登录成功后获取用户信息
+            [[TSUserInfoManager userInfo] updateUserInfo:complete];
+            //complete(YES);
         }
         else{
             complete(NO);
@@ -179,7 +180,8 @@
                 userInfo.userName = dic[@"username"];
                 userInfo.accountId = dic[@"accountId"];
                 [[TSUserInfoManager userInfo] saveUserInfo:userInfo];
-                complete(YES);
+                //complete(YES);
+                [[TSUserInfoManager userInfo] updateUserInfo:complete];
             }
             
         }else
@@ -207,9 +209,9 @@
             userInfo.userName = request.responseModel.originalData[@"username"];
             userInfo.accountId = request.responseModel.originalData[@"accountId"];
             [[TSUserInfoManager userInfo] saveUserInfo:userInfo];
-            
+            [[TSUserInfoManager userInfo] updateUserInfo:complete];
             [Popover removePopoverOnWindow];
-            complete(YES);
+            //complete(YES);
         }
         else{
             complete(NO);

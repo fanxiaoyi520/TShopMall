@@ -27,7 +27,7 @@
 }
 
 -(NSString *)requestUrl{
-    NSString *requestUrl = [NSString stringWithFormat:@"%@?appId=%@&tenantId=%@&appSecret=%@",kChangeBindMobileUrl,kAppId,@"tcl",kAppSecret];
+    NSString *requestUrl = [NSString stringWithFormat:@"%@?appId=%@&tenantId=%@&appSecret=%@&username=%@&value=%@&validCode=%@&bType=CHANGE_BIND",kChangeBindMobileUrl,kAppId,@"tcl",kAppSecret, [TSUserInfoManager userInfo].userName, self.mobile, self.validCode];
     return requestUrl;
 }
 
@@ -49,13 +49,9 @@
 }
 
 -(id)requestArgument{
-    
+
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setValue:[TSUserInfoManager userInfo].userName forKey:@"username"];
-    [params setValue:self.mobile forKey:@"value"];
-    [params setValue:self.validCode forKey:@"validCode"];
-    [params setValue:@"CHANGE_BIND" forKey:@"bType"];
-    
+
     NSMutableDictionary *comBody = [self commonBady];
     [comBody setValuesForKeysWithDictionary:params];
     return comBody;

@@ -30,6 +30,10 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)initRouteConfig;
 /// 网络状态监听
 -(void)initNetworkReachability;
+/// 初始化service
+- (void)initService;
+/// 获取网络必要的数据
+- (void)getNetData;
 @end
 
 NS_ASSUME_NONNULL_END

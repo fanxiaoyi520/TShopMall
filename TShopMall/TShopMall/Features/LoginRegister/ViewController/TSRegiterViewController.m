@@ -78,10 +78,14 @@
 }
 
 - (void)getAgreementInfo {
-    __weak __typeof(self)weakSelf = self;
-    [self.dataController fetchAgreementWithCompleted:^(NSArray<TSAgreementModel *> * _Nonnull agreementModels) {
-        weakSelf.checkedView.agreementModels = agreementModels;
-    }];
+    NSArray *agreementModels = [TSGlobalManager shareInstance].agreementModels;
+    if (agreementModels.count) {
+        self.checkedView.agreementModels = agreementModels;
+    } else {
+        [[TSUserLoginManager shareInstance] fetchAgreementWithCompleted:^(NSArray<TSAgreementModel *> * _Nonnull agreementModels) {
+            self.checkedView.agreementModels = agreementModels;
+        }];
+    }
 }
 
 #pragma mark - Lazy Method
