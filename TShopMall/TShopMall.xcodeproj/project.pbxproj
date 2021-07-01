@@ -195,7 +195,6 @@
 		C2F057482685F1BA003D1B2A /* TSMakeOrderEmptyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C2F057472685F1BA003D1B2A /* TSMakeOrderEmptyCell.m */; };
 		C35F1865267C7F8A00F65AF9 /* TSDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = C35F185F267C7F8800F65AF9 /* TSDatePickerView.m */; };
 		C35F1866267C7F8A00F65AF9 /* TSChangePictureActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = C35F1862267C7F8900F65AF9 /* TSChangePictureActionSheet.m */; };
-		C35F1867267C7F8A00F65AF9 /* TSSexSelectingView.m in Sources */ = {isa = PBXBuildFile; fileRef = C35F1864267C7F8A00F65AF9 /* TSSexSelectingView.m */; };
 		C35F186D267D954700F65AF9 /* TSAccountCancelNextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C35F186C267D954700F65AF9 /* TSAccountCancelNextViewController.m */; };
 		C35F1870267D963100F65AF9 /* TSAccountCancelConfirmViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C35F186F267D963100F65AF9 /* TSAccountCancelConfirmViewController.m */; };
 		C35F1873267D970800F65AF9 /* TSAccountCancelDropViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C35F1872267D970800F65AF9 /* TSAccountCancelDropViewController.m */; };
@@ -735,8 +734,9 @@
 		65F7126E268C1D7C002A1ECC /* TSMineLeftBarView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSMineLeftBarView.h; sourceTree = "<group>"; };
 		65F7126F268C1D7C002A1ECC /* TSMineLeftBarView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSMineLeftBarView.m; sourceTree = "<group>"; };
 		65F71271268C4154002A1ECC /* TSMineOrderCountModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSMineOrderCountModel.h; sourceTree = "<group>"; };
-		65F71272268C4154002A1ECC /* TSMineOrderCountModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSMineOrderCountModel.m; sourceTree = "<group>"; }; 		65F71274268C7ADF002A1ECC /* NSDictionary+Value.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Value.m"; sourceTree = "<group>"; };
-		65F71275268C7AE0002A1ECC /* NSDictionary+Value.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Value.h"; sourceTree = "<group>"; }; 
+		65F71272268C4154002A1ECC /* TSMineOrderCountModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSMineOrderCountModel.m; sourceTree = "<group>"; };
+		65F71274268C7ADF002A1ECC /* NSDictionary+Value.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Value.m"; sourceTree = "<group>"; };
+		65F71275268C7AE0002A1ECC /* NSDictionary+Value.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Value.h"; sourceTree = "<group>"; };
 		70EBC072268C0DC0009D735B /* UIView+AZGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AZGradient.h"; sourceTree = "<group>"; };
 		70EBC073268C0DC0009D735B /* UIView+AZGradient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AZGradient.m"; sourceTree = "<group>"; };
 		70EBC079268C136A009D735B /* TSMonthIndicatorCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSMonthIndicatorCell.h; sourceTree = "<group>"; };
@@ -939,8 +939,6 @@
 		C35F1860267C7F8800F65AF9 /* TSChangePictureActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSChangePictureActionSheet.h; sourceTree = "<group>"; };
 		C35F1861267C7F8900F65AF9 /* TSDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSDatePickerView.h; sourceTree = "<group>"; };
 		C35F1862267C7F8900F65AF9 /* TSChangePictureActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSChangePictureActionSheet.m; sourceTree = "<group>"; };
-		C35F1863267C7F8A00F65AF9 /* TSSexSelectingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSSexSelectingView.h; sourceTree = "<group>"; };
-		C35F1864267C7F8A00F65AF9 /* TSSexSelectingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSSexSelectingView.m; sourceTree = "<group>"; };
 		C35F186B267D954700F65AF9 /* TSAccountCancelNextViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSAccountCancelNextViewController.h; sourceTree = "<group>"; };
 		C35F186C267D954700F65AF9 /* TSAccountCancelNextViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSAccountCancelNextViewController.m; sourceTree = "<group>"; };
 		C35F186E267D963100F65AF9 /* TSAccountCancelConfirmViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSAccountCancelConfirmViewController.h; sourceTree = "<group>"; };
@@ -2454,8 +2452,6 @@
 				C35F1862267C7F8900F65AF9 /* TSChangePictureActionSheet.m */,
 				C35F1861267C7F8900F65AF9 /* TSDatePickerView.h */,
 				C35F185F267C7F8800F65AF9 /* TSDatePickerView.m */,
-				C35F1863267C7F8A00F65AF9 /* TSSexSelectingView.h */,
-				C35F1864267C7F8A00F65AF9 /* TSSexSelectingView.m */,
 				042F423B2681FDB000555F5D /* TSRealNameAuthCell.h */,
 				042F423C2681FDB000555F5D /* TSRealNameAuthCell.m */,
 				042F423E2681FDFE00555F5D /* TSRealNameInfoCell.h */,
@@ -4720,7 +4716,6 @@
 				046516FC268C57EF000829C2 /* DialogDemoViewController.m in Sources */,
 				04F852122689BA4C00B59910 /* TSFirstEnterAgreementView.m in Sources */,
 				F530CC3C26803862009DC29A /* NSTimer+TSBlcokTimer.m in Sources */,
-				C35F1867267C7F8A00F65AF9 /* TSSexSelectingView.m in Sources */,
 				F530CCA726803FCD009DC29A /* UIControl+RepeatClick.m in Sources */,
 				F530CE8D26846BE0009DC29A /* TSToolsManager.m in Sources */,
 				F54973612668A22100181E3F /* SSBaseRequest.m in Sources */,
