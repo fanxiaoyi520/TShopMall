@@ -8,9 +8,13 @@
 #import "TSBaseViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
-
+typedef NS_ENUM(NSInteger ,PopToWhere) {
+    MyIncome = 0,
+    BankCardList = 1,
+};
 @interface TSAddCardViewController : TSBaseViewController
 
+@property (nonatomic ,assign) PopToWhere popToWhere;
 @end
 
 NS_ASSUME_NONNULL_END

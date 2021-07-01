@@ -889,6 +889,11 @@ spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
         [changeView setCorners:(UIRectCornerTopLeft | UIRectCornerTopRight) radius:8.0];
         changeView.clipsToBounds = YES;
         changeView.delegate = self;
+        
+        TSGoodDetailSectionModel *section = self.dataController.sections[1];
+        TSGoodDetailItemPriceModel *item = (TSGoodDetailItemPriceModel *)[section.items firstObject];
+        changeView.model = item;
+
         self.changeView = changeView;
         
         _changePopups = [SnailQuickMaskPopups popupsWithMaskStyle:MaskStyleBlackTranslucent aView:changeView];

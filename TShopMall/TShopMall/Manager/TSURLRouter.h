@@ -11,6 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TSURLRouter : NSObject<TSUriHandler>
 + (instancetype)sharedInstance;
+- (UIViewController *)getCurrentVC;
 @end
 
 NS_ASSUME_NONNULL_END

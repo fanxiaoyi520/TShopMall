@@ -7,7 +7,7 @@
 
 #import "TSChangePriceView.h"
 
-@interface TSChangePriceView()
+@interface TSChangePriceView()<UITextFieldDelegate>
 
 /// 关闭按钮
 @property(nonatomic, strong) UIButton *closeButton;
@@ -207,11 +207,49 @@
 }
 
 -(void)reduceAction:(UIButton *)sender{
+    NSUInteger currentPrice = [_inputTF.text integerValue];
+    if (currentPrice <= [_model.staffPrice integerValue]) {
+        sender.enabled = NO;
+        return;
+    }
+    sender.enabled = YES;
+    currentPrice = currentPrice - 1;
+    self.inputTF.text = [NSString stringWithFormat:@"%lu",(unsigned long)currentPrice];
     
+    if (currentPrice >= [_model.marketPrice integerValue]) {
+        _addButton.enabled = NO;
+    }else{
+        _addButton.enabled = YES;
+    }
 }
 
 -(void)addAction:(UIButton *)sender{
+    NSUInteger currentPrice = [_inputTF.text integerValue];
+    if (currentPrice >= [_model.marketPrice integerValue]) {
+        sender.enabled = NO;
+        return;
+    }
+    sender.enabled = YES;
+    currentPrice = currentPrice + 1;
+    self.inputTF.text = [NSString stringWithFormat:@"%lu",(unsigned long)currentPrice];
     
+    if (currentPrice <= [_model.staffPrice integerValue]) {
+        _reduceButton.enabled = NO;
+    }else{
+        _reduceButton.enabled = YES;
+    }
+}
+
+#pragma mark - UITextFieldDelegate
+-(void)textFieldDidEndEditing:(UITextField *)textField{
+    NSUInteger currentPrice = [_inputTF.text integerValue];
+    if (currentPrice <= [_model.staffPrice integerValue]) {
+        textField.text = [NSString stringWithFormat:@"%@",_model.staffPrice];
+    }
+    
+    if (currentPrice >= [_model.marketPrice integerValue]) {
+        textField.text = [NSString stringWithFormat:@"%@",_model.marketPrice];
+    }
 }
 
 #pragma mark - Getter
@@ -249,7 +287,7 @@
         _retailLabel = [[UILabel alloc] init];
         _retailLabel.textColor = KWhiteColor;
         _retailLabel.font = KRegularFont(14);
-        _retailLabel.text = @"统一零售价 ¥891999";
+        _retailLabel.text = @"统一零售价 ¥";
         _retailLabel.textAlignment = NSTextAlignmentLeft;
     }
     return _retailLabel;
@@ -289,7 +327,7 @@
         _adjustLabel = [[UILabel alloc] init];
         _adjustLabel.textColor = KHexAlphaColor(@"#2D3132", 0.4);
         _adjustLabel.font = KRegularFont(9);
-        _adjustLabel.text = @"可调整区间 ￥9000-10000";
+        _adjustLabel.text = @"可调整区间 ￥";
         _adjustLabel.textAlignment = NSTextAlignmentRight;
     }
     return _adjustLabel;
@@ -299,7 +337,7 @@
     if (!_reduceButton) {
         _reduceButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_reduceButton setImage:KImageMake(@"mall_detail_reduce_able") forState:UIControlStateNormal];
-        [_reduceButton setImage:KImageMake(@"mall_detail_add_disable") forState:UIControlStateDisabled];
+        [_reduceButton setImage:KImageMake(@"mall_detail_reduce_disable") forState:UIControlStateDisabled];
         [_reduceButton addTarget:self action:@selector(reduceAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _reduceButton;
@@ -312,6 +350,8 @@
         _inputTF.font = KRegularFont(14);
         _inputTF.backgroundColor = KHexColor(@"#F4F4F4");
         _inputTF.keyboardType = UIKeyboardTypeNumberPad;
+        _inputTF.textAlignment = NSTextAlignmentCenter;
+        _inputTF.delegate = self;
     }
     return _inputTF;
 }
@@ -320,9 +360,8 @@
     if (!_addButton) {
         _addButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_addButton setImage:KImageMake(@"mall_detail_add") forState:UIControlStateNormal];
-        [_addButton setImage:KImageMake(@"mall_detail_add") forState:UIControlStateDisabled];
+        [_addButton setImage:KImageMake(@"mall_detail_add_disable") forState:UIControlStateDisabled];
         [_addButton addTarget:self action:@selector(addAction:) forControlEvents:UIControlEventTouchUpInside];
-        [_addButton setBackgroundColor:UIColor.redColor];
     }
     return _addButton;
 }
@@ -351,7 +390,7 @@
         _guidePriceValueLabel = [[UILabel alloc] init];
         _guidePriceValueLabel.textColor = KMainColor;
         _guidePriceValueLabel.font = KRegularFont(14);
-        _guidePriceValueLabel.text = @"¥688888";
+        _guidePriceValueLabel.text = @"¥";
         _guidePriceValueLabel.textAlignment = NSTextAlignmentLeft;
     }
     return _guidePriceValueLabel;
@@ -396,5 +435,15 @@
     }
     return _weixinLabel;
 }
+
+-(void)setModel:(TSGoodDetailItemPriceModel *)model{
+    _model = model;
+    _retailLabel.text = [NSString stringWithFormat:@"¥%@",model.marketPrice];
+    _guidePriceValueLabel.text = [NSString stringWithFormat:@"¥%@",model.staffPrice];
+    _adjustLabel.text = [NSString stringWithFormat:@"可调整区间 ￥%@-%@",model.staffPrice,model.marketPrice];
+    _inputTF.text = [NSString stringWithFormat:@"%@",model.marketPrice];
+    _addButton.enabled = NO;
+}
+
 
 @end
