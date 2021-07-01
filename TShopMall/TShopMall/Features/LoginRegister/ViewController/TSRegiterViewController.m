@@ -132,13 +132,6 @@
     return _bgImgV;
 }
 
-- (TSLoginRegisterDataController *)dataController{
-    if (!_dataController) {
-        _dataController = [[TSLoginRegisterDataController alloc] init];
-    }
-    return _dataController;
-}
-
 #pragma mark - TSRegisterTopViewDelegate
 - (void)registerAction {
     NSString *phoneNumber = [self.topView getPhoneNumber];
@@ -166,7 +159,7 @@
     }
     [self.view endEditing:YES];
     @weakify(self);
-    [self.dataController fetchRegisterMobile:phoneNumber validCode:[self.topView getCode] invitationCode:[self.topView getInvitationCode] complete:^(BOOL isSucess) {
+    [[TSServicesManager sharedInstance].acconutService fetchRegisterMobile:phoneNumber validCode:[self.topView getCode] invitationCode:[self.topView getInvitationCode] complete:^(BOOL isSucess) {
         if (isSucess) {
             @strongify(self)
             [[NSNotificationCenter defaultCenter] postNotificationName:@"TS_LoginUpdateNotification" object:@0];
@@ -194,7 +187,7 @@
          [weakSelf goToRun];
     } repeats:YES];
     
-    [self.dataController fetchRegisterSMSCodeMobile:phoneNumber complete:^(BOOL isSucess) {
+    [[TSServicesManager sharedInstance].acconutService fetchRegisterSMSCodeMobile:phoneNumber complete:^(BOOL isSucess) {
         if (isSucess) {
             [Popover popToastOnWindowWithText:@"验证码已成功发送"];
         }else{

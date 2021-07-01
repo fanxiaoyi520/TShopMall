@@ -19,4 +19,8 @@
     }
     return self;
 }
+- (NSString *)price{
+    return [NSString stringWithFormat:@"%d", _price.intValue];
+}
+
 @end

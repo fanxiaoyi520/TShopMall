@@ -44,7 +44,7 @@
     {
         NSMutableArray *items = [NSMutableArray array];
         TSAccountCancelSectionItemModel *item = [[TSAccountCancelSectionItemModel alloc] init];
-        item.cellHeight = kScreenHeight - 448 - KNaviBarHeight;
+        item.cellHeight = kScreenHeight - 448 - KNaviBarHeight - 50;
         item.identify = @"TSAccountCancelBottomCell";
         item.nextTitle = @"确认，进入下一步";
         [items addObject:item];
@@ -89,7 +89,7 @@
     {
         NSMutableArray *items = [NSMutableArray array];
         TSAccountCancelSectionItemModel *item = [[TSAccountCancelSectionItemModel alloc] init];
-        item.cellHeight = kScreenHeight - 448 - KNaviBarHeight;
+        item.cellHeight = kScreenHeight - 448 - KNaviBarHeight - 50;
         item.identify = @"TSAccountCancelBottomCell";
         item.nextTitle = @"确认注销";
         [items addObject:item];
@@ -134,7 +134,7 @@
     {
         NSMutableArray *items = [NSMutableArray array];
         TSAccountCancelSectionItemModel *item = [[TSAccountCancelSectionItemModel alloc] init];
-        item.cellHeight = kScreenHeight - 478 - KNaviBarHeight;
+        item.cellHeight = kScreenHeight - 478 - KNaviBarHeight - 50;
         item.identify = @"TSCommitCell";
         item.title = @"确认";
         [items addObject:item];
@@ -179,7 +179,7 @@
     {
         NSMutableArray *items = [NSMutableArray array];
         TSAccountCancelSectionItemModel *item = [[TSAccountCancelSectionItemModel alloc] init];
-        item.cellHeight = kScreenHeight - 478 - KNaviBarHeight;
+        item.cellHeight = kScreenHeight - 478 - KNaviBarHeight - 50;
         item.identify = @"TSCommitCell";
         item.title = @"取消";
         [items addObject:item];

@@ -39,7 +39,7 @@
 }
 
 - (void)updatePrice:(NSString *)price{
-    self.price.text = [NSString stringWithFormat:@"¥ %@", price];
+    self.price.text = [NSString stringWithFormat:@"¥ %ld", price.integerValue];
 }
 
 - (void)updateSelBtnStatus:(BOOL)status{
@@ -49,6 +49,11 @@
 - (void)selBtnAction:(UIButton *)sender{
     sender.selected = !sender.selected;
     [self.delegate allSelected:sender.selected];
+}
+
+- (void)hideSelBtn:(BOOL)hide{
+    self.selBtn.hidden = hide;
+    self.selBtnTips.hidden = hide;
 }
 
 - (void)settlement{

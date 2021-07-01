@@ -33,6 +33,17 @@
     [self configRecomendView];
 }
 
+- (BOOL)navigationShouldPopOnClick{
+    NSMutableArray *arr = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
+    for (UIViewController *con in arr) {
+        if ([con isKindOfClass:NSClassFromString(@"TSMakeOrderController")]) {
+            
+        }
+    }
+    
+    return YES;
+}
+
 - (void)setupNavigationBar{
     self.gk_navTitle = @"支付成功";
     self.gk_backImage = KImageMake(@"mall_white_naviback");
@@ -59,9 +70,9 @@
     NSString *path = [NSString stringWithFormat:@"%@%@?uuid=%@",kMallH5ApiPrefix,kMallH5OrderDetailUrl, self.orderId];
     TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:path];
     [self.navigationController pushViewController:hybrid animated:YES];
-    NSMutableArray *arr = [NSMutableArray array];
-    [arr addObject:self.navigationController.viewControllers[0]];
-    [arr addObject:[self.navigationController.viewControllers lastObject]];
+    
+    NSMutableArray *arr = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
+    [arr removeObject:self];
     self.navigationController.viewControllers = arr;
 }
 

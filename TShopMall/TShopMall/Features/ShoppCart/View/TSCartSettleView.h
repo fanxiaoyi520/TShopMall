@@ -21,5 +21,7 @@
 
 ///根系结算按钮选中商品数量
 - (void)updateSettleBtnText:(NSInteger)number;
+
+- (void)hideSelBtn:(BOOL)hide;
 @end
 

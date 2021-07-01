@@ -124,7 +124,7 @@
     [self.indeImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.contentView.mas_right).offset(-KRateW(16.0));
         make.centerY.equalTo(self.contentView);
-        make.width.height.mas_equalTo(KRateW(24.0));
+        make.width.height.mas_equalTo(KRateW(16.0));
     }];
     
 //    [self.line mas_makeConstraints:^(MASConstraintMaker *make) {
