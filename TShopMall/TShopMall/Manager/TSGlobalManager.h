@@ -25,7 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy) NSString *appVersion;
 /** 是否是第一次进入APP  */
 @property(nonatomic, assign) BOOL firstStartApp;
-
+/** 协议信息  */
+@property(nonatomic, strong) NSArray *agreementModels;
 /// 单利
 + (instancetype)shareInstance;
 

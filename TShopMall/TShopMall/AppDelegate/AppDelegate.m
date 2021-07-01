@@ -8,7 +8,6 @@
 #import "AppDelegate.h"
 #import "AppDelegate+RootController.h"
 #import "AppDelegate+Initialize.h"
-#import "TSBestSellingRecommendService.h"
 #import "WXApi.h"
 #import "TSAccountConst.h"
 #import "WechatManager.h"
@@ -32,14 +31,8 @@
     [self initWechatConfig];
     [self initRouteConfig];
     [self initNetworkReachability];
-    
-    [TSServicesManager sharedInstance].bestSellingRecommendService = [TSBestSellingRecommendService new];
-    [TSServicesManager sharedInstance].userInfoService = [TSUserInfoService new];
-    [TSServicesManager sharedInstance].uploadImageService = [TSUploadImageService new];
-    
-    [[TSServicesManager sharedInstance].userInfoService getUserInfoAccountId:[TSUserInfoManager userInfo].accountId success:^(TSUser * _Nonnull user) {
-        [[TSUserInfoManager userInfo] updateUserInfo:nil];
-    } failure:nil];
+    [self initService];///初始化service，顺序不能换
+    [self getNetData];/// 获取网络必要数据，改方法所在位置不能写前面
     
     if (@available(iOS 13.0, *)) {
         

@@ -138,11 +138,16 @@
 }
 
 - (void)getAgreementInfo {
-    __weak __typeof(self)weakSelf = self;
-    [self.dataController fetchAgreementWithCompleted:^(NSArray<TSAgreementModel *> * _Nonnull agreementModels) {
-        weakSelf.checkedView.agreementModels = agreementModels;
-        weakSelf.quickCheckView.agreementModels = agreementModels;
-    }];
+    NSArray *agreementModels = [TSGlobalManager shareInstance].agreementModels;
+    if (agreementModels.count) {
+        self.checkedView.agreementModels = agreementModels;
+        self.quickCheckView.agreementModels = agreementModels;
+    } else {
+        [[TSUserLoginManager shareInstance] fetchAgreementWithCompleted:^(NSArray<TSAgreementModel *> * _Nonnull agreementModels) {
+            self.checkedView.agreementModels = agreementModels;
+            self.quickCheckView.agreementModels = agreementModels;
+        }];
+    }
 }
 
 #pragma mark - Actions
