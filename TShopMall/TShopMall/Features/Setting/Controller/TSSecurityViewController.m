@@ -16,6 +16,7 @@
 #import "TSSecurCenterViewController.h"
 #import "TSAlertView.h"
 #import "TSChangeMobileViewController.h"
+#import "TSAccountCancelDropViewController.h"
 
 @interface TSSecurityViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate>
 /// 数据中心
@@ -122,8 +123,21 @@
         [self.navigationController pushViewController:bindVC animated:YES];
         return;
     } else if (indexPath.section == 0 && indexPath.item == 1) {
-        TSAccountCancelViewController *accoutCancelVC = [[TSAccountCancelViewController alloc] init];
-        [self.navigationController pushViewController:accoutCancelVC animated:YES];
+        @weakify(self);
+        ///查询注销状态
+        [[TSServicesManager sharedInstance].acconutService fetchAccountCancelInfoCallBack:^(NSString * _Nonnull date, NSString * _Nonnull nickname) {
+            @strongify(self)
+            TSAccountCancelDropViewController *accoutCancelVC = [[TSAccountCancelDropViewController alloc] init];
+            accoutCancelVC.date = date;
+            accoutCancelVC.nickname = nickname;
+            [self.navigationController pushViewController:accoutCancelVC animated:YES];
+        } failure:^(NSString * _Nonnull errorMsg) {
+            @strongify(self)
+            if ([errorMsg isEqualToString:@"该账号不存在注销申请记录"]) {
+                TSAccountCancelViewController *accoutCancelVC = [[TSAccountCancelViewController alloc] init];
+                [self.navigationController pushViewController:accoutCancelVC animated:YES];
+            }
+        }];
         return;
     } else if (indexPath.section == 1 && indexPath.item == 0) {
         TSWithdrawalPswSetController *pswSetVC = [[TSWithdrawalPswSetController alloc] init];

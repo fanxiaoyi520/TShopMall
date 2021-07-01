@@ -6,7 +6,6 @@
 //
 
 #import "TSFirstEnterAgreementView.h"
-#import "TSLoginRegisterDataController.h"
 
 @interface TSFirstEnterAgreementView ()<UITextViewDelegate>
 /** 背景视图 */
@@ -22,7 +21,6 @@
 /** 确认按钮 */
 @property(nonatomic, weak) UIButton *confirmButton;
 
-@property(nonatomic, strong) TSLoginRegisterDataController *dataController;
 /** 协议信息  */
 @property(nonatomic, strong) NSArray<TSAgreementModel *> *agreementModels;
 
@@ -194,13 +192,6 @@
     return _confirmButton;
 }
 
-- (TSLoginRegisterDataController *)dataController{
-    if (!_dataController) {
-        _dataController = [[TSLoginRegisterDataController alloc] init];
-    }
-    return _dataController;
-}
-
 - (void)setAgreementModels:(NSArray<TSAgreementModel *> *)agreementModels {
     _agreementModels = agreementModels;
     NSMutableString *allString = [NSMutableString stringWithString:@"请你仔细阅读已更新的"];
@@ -233,7 +224,7 @@
 
 - (void)getAgreementInfo {
     __weak typeof(self) _weakSelf = self;
-    [self.dataController fetchAgreementWithCompleted:^(NSArray<TSAgreementModel *> * _Nonnull agreementModels) {
+    [[TSServicesManager sharedInstance].acconutService fetchAgreementWithCompleted:^(NSArray<TSAgreementModel *> * _Nonnull agreementModels) {
         _weakSelf.agreementModels = agreementModels;
     }];
 }

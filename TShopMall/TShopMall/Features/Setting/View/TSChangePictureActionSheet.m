@@ -108,6 +108,8 @@
 /// 选中图片
 @property (nonatomic, strong) UIImageView * select_ImgView;
 
+@property (nonatomic, strong) UIView *line;
+
 @end
 
 @implementation TSChangePictureActionSheetCell
@@ -121,8 +123,7 @@
 
 - (void)addConstraints {
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.contentView.mas_centerY).with.offset(0);
-        make.centerX.equalTo(self.contentView.mas_centerX).with.offset(0);
+        make.center.equalTo(self.contentView);
         make.width.mas_lessThanOrEqualTo(150);
     }];
     
@@ -130,6 +131,11 @@
         make.centerY.equalTo(self.contentView);
         make.right.offset(-18);
         make.width.height.offset(20);
+    }];
+    
+    [self.line mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.bottom.right.equalTo(self.contentView);
+        make.height.mas_equalTo(0.33);
     }];
 }
 
@@ -151,6 +157,15 @@
         [self.contentView addSubview:_select_ImgView];
     }
     return _select_ImgView;
+}
+
+- (UIView *)line {
+    if (_line == nil) {
+        _line = [UILabel new];
+        _line.backgroundColor = KHexColor(@"#F4F4F4");
+        [self.contentView addSubview:_line];
+    }
+    return _line;
 }
 
 - (void)setDelegate:(id<UniversalCollectionViewCellDataDelegate>)delegate {

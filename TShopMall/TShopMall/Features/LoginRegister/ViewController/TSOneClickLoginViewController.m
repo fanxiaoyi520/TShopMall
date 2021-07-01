@@ -13,12 +13,10 @@
 #import "TSAccountConst.h"
 #import "AuthAppleIDManager.h"
 #import <AuthenticationServices/AuthenticationServices.h>
-#import "TSLoginRegisterDataController.h"
 #import "TSBindMobileController.h"
 
 @interface TSOneClickLoginViewController ()<TSHybridViewControllerDelegate, NTESQuickLoginManagerDelegate>
 @property (nonatomic, strong) NTESQuickLoginModel  *customModel;
-@property(nonatomic, strong) TSLoginRegisterDataController *dataController;
 @property(nonatomic, assign) TSServiceProvider provider;
 
 @end
@@ -77,7 +75,7 @@
                         NSNumber *boolNum = [resultDic2 objectForKey:@"success"];
                         BOOL success = [boolNum boolValue];
                         if (success) {
-                            [self.dataController fetchOneStepLoginToken:[resultDic1 objectForKey:@"token"] accessToken:[resultDic2 objectForKey:@"accessToken"] complete:^(BOOL isSucess) {
+                            [[TSServicesManager sharedInstance].acconutService fetchOneStepLoginToken:[resultDic1 objectForKey:@"token"] accessToken:[resultDic2 objectForKey:@"accessToken"] complete:^(BOOL isSucess) {
                                 if (isSucess) {
                                     [[NTESQuickLoginManager sharedInstance] closeAuthController:^{
 
@@ -128,7 +126,7 @@
         AuthAppleIDManager *manager = [AuthAppleIDManager sharedInstance];
         [manager authorizationAppleID];
         manager.loginByTokenBlock = ^(NSString * _Nonnull token) {
-            [self.dataController fetchLoginByToken:token platformId:@"15" sucess:^(BOOL isHaveMobile, NSString * _Nonnull token) {
+            [[TSServicesManager sharedInstance].acconutService fetchLoginByToken:token platformId:@"15" sucess:^(BOOL isHaveMobile, NSString * _Nonnull token) {
                 [[NTESQuickLoginManager sharedInstance] closeAuthController:^{
 
                  }];
@@ -200,7 +198,7 @@
     payManager.WXSuccess = ^(NSString *code){
         @strongify(self)
         if (code) {
-            [self.dataController fetchLoginByAuthCode:code platformId:@"3" sucess:^(BOOL isHaveMobile, NSString * _Nonnull token) {
+            [[TSServicesManager sharedInstance].acconutService fetchLoginByAuthCode:code platformId:@"3" sucess:^(BOOL isHaveMobile, NSString * _Nonnull token) {
                 [[NTESQuickLoginManager sharedInstance] closeAuthController:^{
 
                  }];
@@ -241,13 +239,6 @@
 - (void)handleSignInWithAppleStateChanged:(NSNotification *)notification
 {
     NSLog(@"%@", notification.userInfo);
-}
-
-- (TSLoginRegisterDataController *)dataController{
-    if (!_dataController ) {
-        _dataController = [TSLoginRegisterDataController new];
-    }
-    return _dataController;
 }
 
 @end

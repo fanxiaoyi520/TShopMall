@@ -47,7 +47,6 @@
     [self configInfo];
 }
 
-
 #pragma mark - Noti
 - (void)loginStateDidChanged:(NSNotification *)noti{
    

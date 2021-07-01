@@ -50,11 +50,12 @@
     GKNavigationBarConfigure *config = [GKNavigationBarConfigure sharedInstance];
     [config setupCustomConfigure:^(GKNavigationBarConfigure *configure) {
         configure.backgroundColor = [UIColor whiteColor];
-        configure.titleColor = [UIColor blackColor];
-        configure.titleFont = [UIFont systemFontOfSize:18.0f];
+        configure.titleColor = KTextColor;
+        configure.titleFont = KRegularFont(18);
         configure.backStyle = GKNavigationBarBackStyleBlack;
         configure.gk_navItemLeftSpace = 12.0f;
         configure.gk_navItemRightSpace = 12.0f;
+        configure.backImage = [UIImage imageNamed:@"mall_navigationbar_back"];
         configure.gk_openScrollViewGestureHandle = YES;
     }];
 }
@@ -79,6 +80,7 @@
 }
 
 - (void)initService {
+    [TSServicesManager sharedInstance].acconutService = [TSLoginRegisterDataController new];
     [TSServicesManager sharedInstance].bestSellingRecommendService = [TSBestSellingRecommendService new];
     [TSServicesManager sharedInstance].userInfoService = [TSUserInfoService new];
     [TSServicesManager sharedInstance].uploadImageService = [TSUploadImageService new];

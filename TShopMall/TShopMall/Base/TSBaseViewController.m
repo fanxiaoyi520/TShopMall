@@ -34,12 +34,13 @@
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle{
-    return UIStatusBarStyleLightContent;
+    return UIStatusBarStyleDefault;
 }
 
 #pragma mark - 基本设置
 -(void)setupBasic{
     self.view.backgroundColor = KGrayColor;
+    
 }
 
 #pragma mark - 设置导航栏为白色
