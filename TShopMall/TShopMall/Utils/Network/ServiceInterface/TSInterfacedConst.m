@@ -117,6 +117,8 @@ NSString *const kShopContentUrl = @"/rest/v2/front/shopContent/getPageManageByPa
 NSString * const kProducts = @"/rest/v2/product/category/groups/searchProducts";
 
 #pragma mark - 排行
+NSString * const kRankSaleRankUrl = @"/rest/v2/salesman/rank/saleRank";
+NSString * const kRankProfitRankUrl = @"/rest/v2/salesman/rank/profitRank";
 
 #pragma mark - 采购蓝
 NSString * const kCartShow = @"/rest/v2/cart/show";

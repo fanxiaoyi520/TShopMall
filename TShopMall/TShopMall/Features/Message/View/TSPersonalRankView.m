@@ -11,21 +11,13 @@
 
 /// 信息背景
 @property(nonatomic, weak) UIImageView *personalImgV;
-/** 个人头像  */
-@property(nonatomic, weak) UIImageView *headImgV;
-/** 个人名称  */
-@property(nonatomic, weak) UILabel *usernameLabel;
 /** 排名两字显示  */
 @property(nonatomic, weak) UILabel *rankShowLabel;
-/** 排名显示  */
-@property(nonatomic, weak) UILabel *rankNumLabel;
+
 /** 分割线  */
 @property(nonatomic, weak) UIView *splitView;
 /** 销售收益四字显示  */
 @property(nonatomic, weak) UILabel *salesShowLabel;
-/** 销售收益数目显示  */
-@property(nonatomic, weak) UILabel *salesNumLabel;
-
 
 @end
 
