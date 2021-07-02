@@ -10,6 +10,7 @@
 @interface TSShippingAddressCell()
 @property (nonatomic, strong) UILabel *name;
 @property (nonatomic, strong) UILabel *phone;
+@property (nonatomic, strong) UILabel *isDefatultMark;
 @property (nonatomic, strong) UILabel *mark;
 @property (nonatomic, strong) UIButton *editBtn;
 @property (nonatomic, strong) UILabel *address;
@@ -37,7 +38,19 @@
     self.name.text  = addressModel.consignee;
     self.phone.text = [self securtyPhone:addressModel.mobile];
     self.address.text = [NSString stringWithFormat:@"%@%@", addressModel.address, addressModel.area];
-    self.mark.hidden = !addressModel.isDefault;
+    self.isDefatultMark.hidden = !addressModel.isDefault;
+    
+    self.mark.text = addressModel.tag;
+    self.mark.hidden = addressModel.tag.length==0? YES:NO;
+    if (addressModel.isDefault == YES) {//有默认
+        [self.mark mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.isDefatultMark.mas_left).offset(KRateW(38.0));
+        }];
+    } else {
+        [self.mark mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.isDefatultMark).offset(0);
+        }];
+    }
 }
 
 - (NSString *)securtyPhone:(NSString *)phone{
@@ -73,11 +86,17 @@
         make.top.bottom.equalTo(self.name);
     }];
     
-    [self.mark mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.isDefatultMark mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.phone.mas_right).offset(KRateW(8.0));
         make.height.mas_equalTo(KRateW(16.0));
         make.centerY.equalTo(self.name);
         make.width.mas_equalTo(KRateW(30.0));
+    }];
+    
+    [self.mark mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.isDefatultMark.mas_left).offset(0);
+        make.width.mas_equalTo(KRateW(30.0));
+        make.top.bottom.equalTo(self.isDefatultMark);
     }];
     
     [self.address mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -129,13 +148,29 @@
     return self.phone;
 }
 
+- (UILabel *)isDefatultMark{
+    if (_isDefatultMark) {
+        return _isDefatultMark;
+    }
+    self.isDefatultMark = [UILabel new];
+    self.isDefatultMark.text = @"默认";
+    self.isDefatultMark.backgroundColor = KHexColor(@"#FF4D49");
+    self.isDefatultMark.textColor = UIColor.whiteColor;
+    self.isDefatultMark.font = KRegularFont(9.0);
+    self.isDefatultMark.textAlignment = NSTextAlignmentCenter;
+    self.isDefatultMark.layer.cornerRadius = KRateW(8.0);
+    self.isDefatultMark.layer.masksToBounds = YES;
+    [self.contentView addSubview:self.isDefatultMark];
+    
+    return self.isDefatultMark;
+}
+
 - (UILabel *)mark{
     if (_mark) {
         return _mark;
     }
     self.mark = [UILabel new];
-    self.mark.text = @"默认";
-    self.mark.backgroundColor = KHexColor(@"#FF4D49");
+    self.mark.backgroundColor = [[UIColor blueColor] colorWithAlphaComponent:0.4];
     self.mark.textColor = UIColor.whiteColor;
     self.mark.font = KRegularFont(9.0);
     self.mark.textAlignment = NSTextAlignmentCenter;
