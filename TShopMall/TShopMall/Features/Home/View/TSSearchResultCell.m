@@ -36,11 +36,24 @@
 - (void)configUI:(TSSearchResultViewModel *)vm{
     NSURL *imgUrl = [NSURL URLWithString:vm.icon];
     [self.icon sd_setImageWithURL:imgUrl placeholderImage:KImageMake(@"")];
-    self.name.text = vm.name;
+    self.name.attributedText = [self htmlStringToAttributeString:vm.name];
     self.price.text = [NSString stringWithFormat:@"¥%d", vm.price.intValue];
     self.thPrice.text = [NSString stringWithFormat:@"提货价: %d", vm.thPrice.intValue];
     
     [self.earnView updatePrice:vm.earnPrice];
+}
+
+- (NSAttributedString *)htmlStringToAttributeString:(NSString *)string{
+    NSData *data = [string dataUsingEncoding:NSUTF8StringEncoding];
+    NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithData:data options:@{
+        NSDocumentTypeDocumentAttribute : NSHTMLTextDocumentType,
+        NSCharacterEncodingDocumentAttribute : @(NSUTF8StringEncoding)
+    } documentAttributes:nil error:nil];
+    [attStr addAttributes:@{
+            NSFontAttributeName : KRegularFont(14.0)
+    } range:NSMakeRange(0, attStr.string.length)];
+    
+    return attStr;
 }
 
 - (void)setFrame:(CGRect)frame{

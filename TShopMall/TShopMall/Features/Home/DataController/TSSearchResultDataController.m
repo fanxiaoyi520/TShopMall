@@ -22,7 +22,6 @@
 - (void)queryGoods:(void(^)(NSError *))finished{
     [self goodsListRequest].animatingView = self.context.view;
     [[self goodsListRequest] startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
-//        NSLog(@"%@", request.responseObject);
         if (request.responseModel.isSucceed == YES) {
             [self handleRequestRes:request.responseJSONObject[@"data"]];
         } else {
