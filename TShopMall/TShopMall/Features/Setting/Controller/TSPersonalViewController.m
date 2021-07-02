@@ -155,20 +155,24 @@
 }
 ///打开相机
 - (void)openCameraController {
-    /// 创建UIImagePickerController实例
-    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-    /// 设置代理
-    imagePickerController.delegate = self;
-    /// 是否显示裁剪框编辑（默认为NO），等于YES的时候，照片拍摄完成可以进行裁剪
-    imagePickerController.allowsEditing = YES;
-    /// 设置照片来源为相机
-    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-    /// 设置进入相机时使用前置或后置摄像头
-    imagePickerController.cameraDevice = UIImagePickerControllerCameraDeviceRear;
-    /// 满屏显示
-    imagePickerController.modalPresentationStyle = UIModalPresentationFullScreen;
-    /// 展示选取照片控制器
-    [self presentViewController:imagePickerController animated:YES completion:nil];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        /// 创建UIImagePickerController实例
+        UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+        /// 设置代理
+        imagePickerController.delegate = self;
+        /// 是否显示裁剪框编辑（默认为NO），等于YES的时候，照片拍摄完成可以进行裁剪
+        imagePickerController.allowsEditing = YES;
+        /// 设置照片来源为相机
+        imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+        /// 设置进入相机时使用前置或后置摄像头
+        imagePickerController.cameraDevice = UIImagePickerControllerCameraDeviceRear;
+        /// 满屏显示
+        imagePickerController.modalPresentationStyle = UIModalPresentationFullScreen;
+        /// 展示选取照片控制器
+        [self presentViewController:imagePickerController animated:YES completion:nil];
+    });
+    
+   
 }
 
 - (void)uploadAvartar:(UIImage *)image {
@@ -215,7 +219,7 @@
         return;
     }
     if (authStatus == AVAuthorizationStatusAuthorized) {
-        //[self pushImagePickerControllerWithType:BrowserTypeCamera];
+        [self openCameraController];
         return;
     }
 }
@@ -253,7 +257,7 @@
      * UIImagePickerControllerReferenceURL // 原件的URL
      * UIImagePickerControllerMediaMetadata // 当数据来源是相机时，此值才有效
      */
-    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
     
     [self finishSingleSelectionWithImage:image];
 }
@@ -265,6 +269,7 @@
 
 #pragma mark - CMPhotoSelectorControllerDelegate
 - (void)finishSingleSelectionWithImage:(UIImage *)image {
+    
     ImageCropper *cropperController = [[ImageCropper alloc] init];
     cropperController.image = image;
     cropperController.isRound = YES;
