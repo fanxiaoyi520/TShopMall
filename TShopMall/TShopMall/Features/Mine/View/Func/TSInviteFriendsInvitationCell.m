@@ -37,7 +37,13 @@
     }];
     [self.kCopyBtn jaf_customFilletRectCorner:UIRectCornerAllCorners cornerRadii:CGSizeMake(16, 16)];
 }
-
+//
+- (void)setDelegate:(id<UniversalCollectionViewCellDataDelegate>)delegate {
+     
+    NSString *code = [delegate universalCollectionViewCellModel:self.indexPath];
+    self.kcodeLab.text = code;
+    
+}
 // MARK: actions
 - (void)kCopyAction:(UIButton *)sender {
     UIPasteboard *pab = [UIPasteboard generalPasteboard];
@@ -65,7 +71,7 @@
         _kcodeLab = [UILabel new];
         _kcodeLab.textColor = KHexColor(@"#2D3132");
         _kcodeLab.font = KFont(PingFangSCMedium, 16);
-        _kcodeLab.text = @"DFY788889";
+        _kcodeLab.text = @"";
     }
     return _kcodeLab;
 }

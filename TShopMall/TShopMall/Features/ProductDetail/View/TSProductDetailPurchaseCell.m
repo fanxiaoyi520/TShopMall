@@ -112,50 +112,50 @@
     [self.selectValueLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.selectLabel.mas_right).offset(16);
         make.top.equalTo(self.selectLabel);
-        make.right.equalTo(self.bgView.mas_right).offset(-60);
+        make.right.equalTo(self.bgView.mas_right).offset(-30);
     }];
 
     [self.selectButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.bgView.mas_right).offset(-10);
-        make.width.height.mas_equalTo(40);
+        make.right.equalTo(self.bgView.mas_right).offset(0);
+        make.width.height.mas_equalTo(30);
         make.centerY.equalTo(self.selectValueLabel);
     }];
 
     [self.seperateTwo mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.bgView.mas_left).offset(50);
-        make.top.equalTo(self.bgView).offset(75);
+        make.top.equalTo(self.selectValueLabel.mas_bottom).offset(16);
         make.right.equalTo(self.bgView);
         make.height.mas_equalTo(0.33);
     }];
 
     [self.deliveryLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.bgView).offset(16);
-        make.top.equalTo(self.seperateTwo.mas_bottom).offset(18);
+        make.top.equalTo(self.seperateTwo.mas_bottom).offset(16);
         make.height.mas_equalTo(18);
         make.width.mas_equalTo(24);
     }];
 
     [self.deliveryValueLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.deliveryLabel.mas_right).offset(16);
+        make.left.equalTo(self.deliveryLabel.mas_right).offset(15);
         make.top.equalTo(self.seperateTwo.mas_bottom).offset(16);
-        make.right.equalTo(self.bgView.mas_right).offset(-60);
+        make.right.equalTo(self.bgView.mas_right).offset(-30);
     }];
 
     [self.deliveryButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.bgView.mas_right).offset(-10);
-        make.width.height.mas_equalTo(40);
+        make.right.equalTo(self.bgView.mas_right).offset(0);
+        make.width.height.mas_equalTo(30);
         make.centerY.equalTo(self.deliveryValueLabel);
     }];
 
     [self.flagLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.deliveryValueLabel);
-        make.width.height.mas_equalTo(28);
+        make.height.mas_equalTo(22);
         make.bottom.equalTo(self.bgView).offset(-5);
     }];
 
     [self.feeButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.flagLabel.mas_right).offset(16);
-        make.height.mas_equalTo(30);
+        make.height.mas_equalTo(22);
         make.centerY.equalTo(self.flagLabel);
     }];
 }

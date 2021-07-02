@@ -156,6 +156,10 @@ NSString *const kMineQueryProfit = @"/rest/v2/withdrawal/record/queryProfit";
 NSString * const kMineShopContentUrl = @"v2/front/shopContent/getPageManageByPageType";
 //查询订单各状态下的订单数
 NSString *const kMineOrderCount = @"v2/usercenter/order/query/queryAllStatusOrderCountByGroup";
+//通过手机号、商户、来源（app）查询邀请码
+NSString *const kCustomerInvitationCode  = @"v2/sysback/salesman/get/customer/invitationCode";
+//一级分销员通过邀请码推广记录
+NSString *const kSalesmanInvitationRecord = @"v2/sysback/salesman/get/salesman/page";
 #pragma mark - 设置
 
 NSString *const kAboutMeAgreementUrl = @"/rest/v2/front/shopStatement/getShopStatementList";

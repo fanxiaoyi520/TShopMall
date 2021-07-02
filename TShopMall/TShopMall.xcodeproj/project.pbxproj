@@ -87,6 +87,7 @@
 		65BBA044268DD7DD007AF8D0 /* TSInviteFriendsInvitationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65BBA043268DD7DD007AF8D0 /* TSInviteFriendsInvitationCell.m */; };
 		65BBA047268DD832007AF8D0 /* TSInviteFriendsIntroduceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65BBA046268DD832007AF8D0 /* TSInviteFriendsIntroduceCell.m */; };
 		65CD9E3D268AED2B00262D98 /* TSMineWalletModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CD9E3C268AED2B00262D98 /* TSMineWalletModel.m */; };
+		65CE518A268EF1CB00E5F946 /* TSInviteFriendsDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CE5189268EF1CB00E5F946 /* TSInviteFriendsDataModel.m */; };
 		65F71270268C1D7C002A1ECC /* TSMineLeftBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F7126F268C1D7C002A1ECC /* TSMineLeftBarView.m */; };
 		65F71273268C4154002A1ECC /* TSMineOrderCountModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F71272268C4154002A1ECC /* TSMineOrderCountModel.m */; };
 		65F71276268C7AE0002A1ECC /* NSDictionary+Value.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F71274268C7ADF002A1ECC /* NSDictionary+Value.m */; };
@@ -329,8 +330,6 @@
 		DC45FEB326773AE700CE762E /* EXTScope.m in Sources */ = {isa = PBXBuildFile; fileRef = DC45FEB126773AE700CE762E /* EXTScope.m */; };
 		DC45FEBA267742F700CE762E /* TSCategoryGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = DC45FEB9267742F700CE762E /* TSCategoryGroup.m */; };
 		DC45FEBD26783A1300CE762E /* TSHomePageContainerCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC45FEBC26783A1300CE762E /* TSHomePageContainerCollectionView.m */; };
-		DC45FEC026783A6E00CE762E /* TSHomePageContainerCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DC45FEBF26783A6E00CE762E /* TSHomePageContainerCollectionViewCell.m */; };
-		DC45FEC32678425700CE762E /* TSHighPriceTagView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC45FEC22678425700CE762E /* TSHighPriceTagView.m */; };
 		DC9911902679FB3800EF9B26 /* TSHomePageContentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DC99118F2679FB3800EF9B26 /* TSHomePageContentModel.m */; };
 		DC991196267A158A00EF9B26 /* TSHomePageReleaseTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DC991195267A158A00EF9B26 /* TSHomePageReleaseTitleCell.m */; };
 		DC99119C267A195400EF9B26 /* TSHomePageReleaseTitleViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DC99119B267A195400EF9B26 /* TSHomePageReleaseTitleViewModel.m */; };
@@ -546,7 +545,6 @@
 		F55D2CD626785249006BACCF /* TSMineMoreButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2CD526785249006BACCF /* TSMineMoreButton.m */; };
 		F55D2CDB2678812E006BACCF /* TSProductDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2CDA2678812E006BACCF /* TSProductDetailController.m */; };
 		F55D2CDF26788193006BACCF /* TSProductDetailDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2CDE26788193006BACCF /* TSProductDetailDataController.m */; };
-		F55D2CE326788370006BACCF /* TSProductDetailNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2CE226788370006BACCF /* TSProductDetailNavigationBar.m */; };
 		F55D2CE626788721006BACCF /* TSProductDetailBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2CE526788721006BACCF /* TSProductDetailBottomView.m */; };
 		F55D2CE926788E27006BACCF /* TSDetailFunctionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2CE826788E27006BACCF /* TSDetailFunctionButton.m */; };
 		F55D2CEC2678A379006BACCF /* TSGoodDetailBannerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2CEB2678A379006BACCF /* TSGoodDetailBannerCell.m */; };
@@ -777,6 +775,8 @@
 		65BBA046268DD832007AF8D0 /* TSInviteFriendsIntroduceCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSInviteFriendsIntroduceCell.m; sourceTree = "<group>"; };
 		65CD9E3B268AED2B00262D98 /* TSMineWalletModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSMineWalletModel.h; sourceTree = "<group>"; };
 		65CD9E3C268AED2B00262D98 /* TSMineWalletModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSMineWalletModel.m; sourceTree = "<group>"; };
+		65CE5188268EF1CB00E5F946 /* TSInviteFriendsDataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSInviteFriendsDataModel.h; sourceTree = "<group>"; };
+		65CE5189268EF1CB00E5F946 /* TSInviteFriendsDataModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSInviteFriendsDataModel.m; sourceTree = "<group>"; };
 		65F7126E268C1D7C002A1ECC /* TSMineLeftBarView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSMineLeftBarView.h; sourceTree = "<group>"; };
 		65F7126F268C1D7C002A1ECC /* TSMineLeftBarView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSMineLeftBarView.m; sourceTree = "<group>"; };
 		65F71271268C4154002A1ECC /* TSMineOrderCountModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSMineOrderCountModel.h; sourceTree = "<group>"; };
@@ -1232,10 +1232,6 @@
 		DC45FEB9267742F700CE762E /* TSCategoryGroup.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSCategoryGroup.m; sourceTree = "<group>"; };
 		DC45FEBB26783A1300CE762E /* TSHomePageContainerCollectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSHomePageContainerCollectionView.h; sourceTree = "<group>"; };
 		DC45FEBC26783A1300CE762E /* TSHomePageContainerCollectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSHomePageContainerCollectionView.m; sourceTree = "<group>"; };
-		DC45FEBE26783A6E00CE762E /* TSHomePageContainerCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSHomePageContainerCollectionViewCell.h; sourceTree = "<group>"; };
-		DC45FEBF26783A6E00CE762E /* TSHomePageContainerCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSHomePageContainerCollectionViewCell.m; sourceTree = "<group>"; };
-		DC45FEC12678425700CE762E /* TSHighPriceTagView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSHighPriceTagView.h; sourceTree = "<group>"; };
-		DC45FEC22678425700CE762E /* TSHighPriceTagView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSHighPriceTagView.m; sourceTree = "<group>"; };
 		DC99118E2679FB3800EF9B26 /* TSHomePageContentModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSHomePageContentModel.h; sourceTree = "<group>"; };
 		DC99118F2679FB3800EF9B26 /* TSHomePageContentModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSHomePageContentModel.m; sourceTree = "<group>"; };
 		DC991194267A158A00EF9B26 /* TSHomePageReleaseTitleCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSHomePageReleaseTitleCell.h; sourceTree = "<group>"; };
@@ -1649,8 +1645,6 @@
 		F55D2CDA2678812E006BACCF /* TSProductDetailController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSProductDetailController.m; sourceTree = "<group>"; };
 		F55D2CDD26788193006BACCF /* TSProductDetailDataController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSProductDetailDataController.h; sourceTree = "<group>"; };
 		F55D2CDE26788193006BACCF /* TSProductDetailDataController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSProductDetailDataController.m; sourceTree = "<group>"; };
-		F55D2CE126788370006BACCF /* TSProductDetailNavigationBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSProductDetailNavigationBar.h; sourceTree = "<group>"; };
-		F55D2CE226788370006BACCF /* TSProductDetailNavigationBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSProductDetailNavigationBar.m; sourceTree = "<group>"; };
 		F55D2CE426788721006BACCF /* TSProductDetailBottomView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSProductDetailBottomView.h; sourceTree = "<group>"; };
 		F55D2CE526788721006BACCF /* TSProductDetailBottomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSProductDetailBottomView.m; sourceTree = "<group>"; };
 		F55D2CE726788E27006BACCF /* TSDetailFunctionButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSDetailFunctionButton.h; sourceTree = "<group>"; };
@@ -2363,10 +2357,6 @@
 				F55D2AD5266F67EF006BACCF /* TSHomePageContainerCell.m */,
 				DC45FEBB26783A1300CE762E /* TSHomePageContainerCollectionView.h */,
 				DC45FEBC26783A1300CE762E /* TSHomePageContainerCollectionView.m */,
-				DC45FEBE26783A6E00CE762E /* TSHomePageContainerCollectionViewCell.h */,
-				DC45FEBF26783A6E00CE762E /* TSHomePageContainerCollectionViewCell.m */,
-				DC45FEC12678425700CE762E /* TSHighPriceTagView.h */,
-				DC45FEC22678425700CE762E /* TSHighPriceTagView.m */,
 				DC3440E62673621000F5B0DA /* TSHomePageContainerHeaderView.h */,
 				DC3440E72673621000F5B0DA /* TSHomePageContainerHeaderView.m */,
 				DC3440D12672F62C00F5B0DA /* TSHomePageBaseCell.h */,
@@ -3903,6 +3893,8 @@
 				65F71272268C4154002A1ECC /* TSMineOrderCountModel.m */,
 				65BBA036268DA95B007AF8D0 /* TSInviteFriendsSectionModel.h */,
 				65BBA037268DA95B007AF8D0 /* TSInviteFriendsSectionModel.m */,
+				65CE5188268EF1CB00E5F946 /* TSInviteFriendsDataModel.h */,
+				65CE5189268EF1CB00E5F946 /* TSInviteFriendsDataModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3982,8 +3974,6 @@
 				F55D2CE826788E27006BACCF /* TSDetailFunctionButton.m */,
 				F55D2D0C2679EEE2006BACCF /* TSTextImageButton.h */,
 				F55D2D0D2679EEE2006BACCF /* TSTextImageButton.m */,
-				F55D2CE126788370006BACCF /* TSProductDetailNavigationBar.h */,
-				F55D2CE226788370006BACCF /* TSProductDetailNavigationBar.m */,
 				F55D2CE426788721006BACCF /* TSProductDetailBottomView.h */,
 				F55D2CE526788721006BACCF /* TSProductDetailBottomView.m */,
 				F55D2CEA2678A379006BACCF /* TSGoodDetailBannerCell.h */,
@@ -4613,11 +4603,11 @@
 				C2A34C9C26759DD00095497E /* TSSearchRecomendCell.m in Sources */,
 				F54973C82668C1D600181E3F /* TSNotificationConst.m in Sources */,
 				C24A69D92689D9010022A81F /* TSPaySuccessRecomendHeaderView.m in Sources */,
-				DC45FEC32678425700CE762E /* TSHighPriceTagView.m in Sources */,
 				F530CE9326846E9C009DC29A /* NSString+Frame.m in Sources */,
 				CE4F6BD42685CEF200812275 /* TSSelectorViewController.m in Sources */,
 				C24A69D32689C76F0022A81F /* TSPaySuccessHeaderCell.m in Sources */,
 				043C2352268B248300460FDB /* TSUserInfoService.m in Sources */,
+				65CE518A268EF1CB00E5F946 /* TSInviteFriendsDataModel.m in Sources */,
 				C24A69D02689C6680022A81F /* TSPaySuccessSection.m in Sources */,
 				F530CCF426804167009DC29A /* TSWKMessageHandlerDispatch.m in Sources */,
 				CE4F6BEB2687D36800812275 /* TSInviteFriendsViewController.m in Sources */,
@@ -4688,7 +4678,6 @@
 				C2EF88D52670B8B900E7374A /* TSCartBaseCell.m in Sources */,
 				F55D2CEC2678A379006BACCF /* TSGoodDetailBannerCell.m in Sources */,
 				F55D2CC826784ACD006BACCF /* TSMineImageTextCell.m in Sources */,
-				F55D2CE326788370006BACCF /* TSProductDetailNavigationBar.m in Sources */,
 				CE66DB0A2684AA7C00E8D433 /* TSBankCardCell.m in Sources */,
 				F55D2C362671E14B006BACCF /* TSUniversalHeaderView.m in Sources */,
 				F54973672668A22100181E3F /* SSNetworkAlertUtil.m in Sources */,
@@ -4958,7 +4947,6 @@
 				C2EF88DB2671E28100E7374A /* TSEmptyAlertView.m in Sources */,
 				C3A6C4C1267A1C5700FC71D6 /* TSCommitCell.m in Sources */,
 				C3A6C47A267A1BEA00FC71D6 /* TSAccountCancelViewController.m in Sources */,
-				DC45FEC026783A6E00CE762E /* TSHomePageContainerCollectionViewCell.m in Sources */,
 				65BBA03B268DB41D007AF8D0 /* TSInviteFriendsPhotoCell.m in Sources */,
 				CE663E5D268AFB6B0092DDCA /* UITextField+ExtendRange.m in Sources */,
 				C35F186D267D954700F65AF9 /* TSAccountCancelNextViewController.m in Sources */,

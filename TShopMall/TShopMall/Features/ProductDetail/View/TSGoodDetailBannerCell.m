@@ -36,7 +36,7 @@
     [self.numImgeLable mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.contentView.mas_right).offset(-16);
         make.bottom.equalTo(self.contentView.mas_bottom).offset(-16);
-        make.size.mas_equalTo(CGSizeMake(40, 20));
+        make.size.mas_equalTo(CGSizeMake(32, 20));
     }];
 }
 
@@ -66,6 +66,12 @@
 
 #pragma mark - SDCycleScrollViewDelegate
 -(void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didScrollToIndex:(NSInteger)index{
+    if (cycleScrollView.imageURLStringsGroup.count > 0) {
+        _numImgeLable.hidden = NO;
+    } else {
+        _numImgeLable.hidden = YES;
+    }
+    
     NSString *testStr = [NSString stringWithFormat:@"%zd/%zd",index + 1,cycleScrollView.imageURLStringsGroup.count];
     self.numImgeLable.attributedText = [self attributeWithString:testStr color:KWhiteColor fonts:@[
         KFont(PingFangSCSemibold, 12.0),
@@ -76,11 +82,10 @@
 #pragma mark - Getter
 -(SDCycleScrollView *)cycleScrollView{
     if (!_cycleScrollView) {
-        _cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectZero delegate:self placeholderImage:nil];
+        _cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectZero delegate:self placeholderImage:KImageMake(@"mall_detail_banner_placeImage")];
         _cycleScrollView.showPageControl = NO;
         _cycleScrollView.autoScroll  = NO;
-        _cycleScrollView.titleLabelBackgroundColor = [UIColor redColor];
-        _cycleScrollView.bannerImageViewContentMode = UIViewContentModeScaleAspectFill;
+        _cycleScrollView.bannerImageViewContentMode = UIViewContentModeScaleToFill;
         _cycleScrollView.backgroundColor = KGrayColor;
     }
     return _cycleScrollView;
@@ -91,6 +96,7 @@
         _numImgeLable.backgroundColor  = [[UIColor blackColor] colorWithAlphaComponent:0.4];
         _numImgeLable.layer.cornerRadius =  10;
         _numImgeLable.layer.masksToBounds = YES;
+        _numImgeLable.hidden = YES;
         _numImgeLable.textAlignment = NSTextAlignmentCenter;
     }
     return _numImgeLable;
@@ -102,8 +108,10 @@
         self.cycleScrollView.imageURLStringsGroup = item.urls;
         NSString *badgeStr = @"";
         if (item.urls.count > 0) {
+            _numImgeLable.hidden = NO;
             badgeStr =  [NSString stringWithFormat:@"1/%zd",self.cycleScrollView.imageURLStringsGroup.count];
         } else {
+            _numImgeLable.hidden = YES;
             badgeStr =  [NSString stringWithFormat:@"0/0"];
         }
         self.numImgeLable.attributedText = [self attributeWithString:badgeStr color:KWhiteColor fonts:@[

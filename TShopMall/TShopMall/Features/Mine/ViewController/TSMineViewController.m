@@ -199,6 +199,9 @@
         TSMineSectionOrderItemModel *item = (TSMineSectionOrderItemModel *)model.items[indexPath.row];
         
         if ([item.title isEqualToString: @"合伙人中心"]) {
+            NSString *path = @"https://testwap.tclo2o.cn/seller-app-h5/pages/mine/index";
+            TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:path];
+            [self.navigationController pushViewController:hybrid animated:YES];
            
         }else if ([item.title isEqualToString: @"官方服务"]) {
             TSOfficialServicesViewController *vc = [TSOfficialServicesViewController new];
@@ -249,6 +252,7 @@
     //邀请好友
     if ([model.headerName isEqualToString: @"邀请"]) {
         TSInviteFriendsViewController *vc = [TSInviteFriendsViewController new];
+        vc.salesmanUuid = self.dataController.merchantUserInformationModel.ucUuid;
         [self.navigationController pushViewController:vc animated:YES];
     }
     
@@ -429,7 +433,7 @@ spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
     
 }
 -(void)userInfoSeeCodeAction:(id _Nullable)sender {
-    
+    self.dataController.merchantUserInformationModel.eyeIsOn = !self.dataController.merchantUserInformationModel.eyeIsOn;
 }
 
 - (void)userInfoKCopyCodeAction:(id _Nullable)sender {
