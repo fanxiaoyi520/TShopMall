@@ -110,8 +110,9 @@
         NSMutableArray *items = [NSMutableArray array];
         TSAccountCancelSectionItemModel *item = [[TSAccountCancelSectionItemModel alloc] init];
         item.title = @"将放弃以下资产和权益";
-        item.nickname = @"昵称昵称昵称昵称昵称昵称昵称";
+        item.nickname = [TSUserInfoManager userInfo].user.nickname;
         item.cellHeight = 178;
+        item.cancelTime = [[NSDate date] stringWithFormat:@"yyyy-MM-dd HH:mm:ss"];
         item.identify = @"TSAccountCancelTopCell";
         [items addObject:item];
         TSAccountCancelSectionModel *section = [[TSAccountCancelSectionModel alloc] init];
@@ -149,13 +150,14 @@
     }
 }
 
-- (void)fetchDropConfirmContentsComplete:(void(^)(BOOL isSucess))complete {
+- (void)fetchDropConfirmContentsWithDropTime:(NSString *)dropTime complete:(void(^)(BOOL isSucess))complete {
     NSMutableArray *sections = [NSMutableArray array];
     {
         NSMutableArray *items = [NSMutableArray array];
         TSAccountCancelSectionItemModel *item = [[TSAccountCancelSectionItemModel alloc] init];
         item.title = @"将放弃以下资产和权益";
-        item.nickname = @"昵称昵称昵称昵称昵称昵称昵称";
+        item.nickname = [TSUserInfoManager userInfo].user.nickname;
+        item.dropTime = dropTime;
         item.cellHeight = 178;
         item.identify = @"TSAccountCancelTopCell";
         [items addObject:item];
@@ -181,6 +183,7 @@
         TSAccountCancelSectionItemModel *item = [[TSAccountCancelSectionItemModel alloc] init];
         item.cellHeight = kScreenHeight - 478 - KNaviBarHeight - 50;
         item.identify = @"TSCommitCell";
+        item.dropTime = dropTime;
         item.title = @"取消";
         [items addObject:item];
         TSAccountCancelSectionModel *section = [[TSAccountCancelSectionModel alloc] init];

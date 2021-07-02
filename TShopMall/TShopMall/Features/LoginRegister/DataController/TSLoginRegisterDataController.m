@@ -300,22 +300,18 @@
 }
 
 - (void)fetchAccountCancelBackCallBack:(void(^)(BOOL isSucess))complete{
-    NSString *requestUrl = [NSString stringWithFormat:@"%@?appId=%@&tenantId=%@&appSecret=%@&accountId=%@",kLoginByTokenUrl,kAppId,@"tcl",kAppSecret, [TSUserInfoManager userInfo].accountId];
+    NSString *requestUrl = [NSString stringWithFormat:@"%@?appId=%@&tenantId=%@&appSecret=%@&accountId=%@",kAccountCancelBackUrl,kAppId,@"tcl",kAppSecret, [TSUserInfoManager userInfo].accountId];
 
     SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithBaseUrl:kAccountCenterApiPrefix RequestUrl:requestUrl requestMethod:YTKRequestMethodGET requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON requestHeader:@{} requestBody:@{} needErrorToast:YES];
     request.animatingView = self.context.view;
     [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
-        
-        if (request.responseModel.isSucceed) {
-            
-            
-        }else
-        {
-            
-                        
+        if (complete) {
+            complete(request.responseModel.isSucceed);
         }
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-        
+        if (complete) {
+            complete(NO);
+        }
     }];
 }
 
@@ -331,7 +327,7 @@
             failure(request.responseModel.originalData[@"msg"]);
         }
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-       
+        failure(@"服务器发生未知错误~~~");
     }];
 }
 
