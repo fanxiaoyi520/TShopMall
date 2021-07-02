@@ -303,6 +303,8 @@
              } else if (aIndex == 4) {
                  NSLog(@"%@",data);
                  self.content = [data stringForkey:@"content"];
+                 NSDictionary *dic = [self.content jsonValueDecoded];
+                 NSLog(@"%@",dic.description);
              } else if (aIndex == 5){
                  self.orderInfo =  [TSMineOrderCountModel yy_modelWithDictionary:data];
              }

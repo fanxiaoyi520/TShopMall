@@ -35,13 +35,21 @@
 @end
 
 @implementation TSCategoryViewController
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self addChildViewController:self.container];
 
+    __weak __typeof(self)weakSelf = self;
+    [self.dataController fetchKindsComplete:^(BOOL isSucess) {
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
+        if (isSucess) {
+            self.container.dataSource = self;
+            [strongSelf.kindViewModel viewModelWithKinds:self.dataController.kinds selectedRow:0];
+            [strongSelf.tableView reloadData];
+            [strongSelf.container showContentAtPage:0];
+        }
+    }];
 }
 
 -(void)setupNavigationBar{

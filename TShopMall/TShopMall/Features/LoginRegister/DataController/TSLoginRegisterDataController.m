@@ -15,6 +15,57 @@
 #import "TSChangeBindRequest.h"
 
 @implementation TSLoginRegisterDataController
+-(void)fetchCheckSalesmanWithMobile:(NSString *)mobile
+                           complete:(void(^)(BOOL isSucess))complete{
+    NSMutableDictionary *body = [NSMutableDictionary dictionary];
+    [body setValue:mobile forKey:@"mobile"];
+    [body setValue:@"thome" forKey:@"storeUuid"];
+    
+    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kAccountCheckSalesmanWithMobileUrl requestMethod:YTKRequestMethodPOST requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON requestHeader:@{} requestBody:body needErrorToast:YES];
+    [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+        
+        if (request.responseModel.isSucceed) {
+            complete(YES);
+            
+        }else
+        {
+            complete(NO);
+            
+            [Popover popToastOnWindowWithText:request.responseModel.originalData[@"message"]];
+            
+        }
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        complete(NO);
+        [Popover removePopoverOnWindow];
+    }];
+}
+
+-(void)fetchCheckSalesmanWithToken:(NSString *)token
+                          complete:(void(^)(BOOL isSucess))complete{
+    NSMutableDictionary *body = [NSMutableDictionary dictionary];
+    [body setValue:token forKey:@"token"];
+    [body setValue:@"thome" forKey:@"storeUuid"];
+    
+    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kAccountCheckSalesmanWithTokenUrl requestMethod:YTKRequestMethodPOST requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON requestHeader:@{} requestBody:body needErrorToast:YES];
+    [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+        
+        if (request.responseModel.isSucceed) {
+            complete(YES);
+            
+        }else
+        {
+            complete(NO);
+            
+            [Popover popToastOnWindowWithText:request.responseModel.originalData[@"message"]];
+            
+        }
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        complete(NO);
+        [Popover removePopoverOnWindow];
+
+    }];
+}
+
 -(void)fetchChangeBindWithNewMobile:(NSString *)newMobile
                           validCode:(NSString *)validCode
                            success:(void (^ _Nullable)(void))success failure:(void (^ _Nullable)(NSString * _Nonnull))failure{

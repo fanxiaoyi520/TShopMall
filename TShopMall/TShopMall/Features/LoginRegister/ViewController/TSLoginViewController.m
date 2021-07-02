@@ -255,21 +255,27 @@
     [Popover popProgressOnWindowWithProgressModel:[Popover defaultConfig] appearBlock:^(id frontView) {
         
     }];
-    
     @weakify(self);
-    [[TSServicesManager sharedInstance].acconutService fetchQuickLoginUsername:[self.topView getPhoneNumber]
-                                       validCode:[self.topView getCode]
-                                        complete:^(BOOL isSucess) {
-        @strongify(self)
+    [[TSServicesManager sharedInstance].acconutService fetchCheckSalesmanWithMobile:[self.topView getPhoneNumber] complete:^(BOOL isSucess) {
         if (isSucess) {
-            [Popover removePopoverOnWindow];
-            
-            if (self.loginBlock) {
-                self.loginBlock();
-            }
+            [[TSServicesManager sharedInstance].acconutService fetchQuickLoginUsername:[self.topView getPhoneNumber]
+                                                                             validCode:[self.topView getCode]
+                                                                              complete:^(BOOL isSucess)
+            {
+                @strongify(self)
+                if (isSucess) {
+                    [Popover removePopoverOnWindow];
+                    if (self.loginBlock) {
+                        self.loginBlock();
+                    }
+                }
+            }];
         }
-        
     }];
+    
+    
+   
+    
 }
 
 - (void)inputDoneAction {

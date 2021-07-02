@@ -57,6 +57,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)fetchAccountCancelInfoCallBack:(void(^_Nullable)(NSString *date, NSString *nickname))success
                                   failure:(void(^_Nullable)(NSString *errorMsg))failure;
+
+-(void)fetchCheckSalesmanWithMobile:(NSString *)mobile
+                             complete:(void(^)(BOOL isSucess))complete;
+
+-(void)fetchCheckSalesmanWithToken:(NSString *)token
+                             complete:(void(^)(BOOL isSucess))complete;
 /** 获取注册登录的协议信息 */
 - (void)fetchAgreementWithCompleted: (void(^)(NSArray<TSAgreementModel *> *agreementModels))completed;
 @end

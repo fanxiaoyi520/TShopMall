@@ -153,8 +153,8 @@
         [self.navigationController pushViewController:securityVC animated:YES];
         return;
     } else if (indexPath.section == 1 && indexPath.item == 1) {
-        TSSecurCenterViewController *personalVC = [[TSSecurCenterViewController alloc] init];
-        [self.navigationController pushViewController:personalVC animated:YES];
+        UIViewController *con = [NSClassFromString(@"TSShippingAddressController") new];
+        [self.navigationController pushViewController:con animated:YES];
         return;
     } else if (indexPath.section == 2 && indexPath.item == 0) {
         //清理缓存
