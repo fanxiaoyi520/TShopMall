@@ -35,6 +35,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic ,copy) NSString *invitationCode;
 @property (nonatomic ,copy) NSString *salesmanRankName;
 @property (nonatomic ,copy) NSString *salesmanRankLevel; //分销等级
+//
+@property (nonatomic ,assign) BOOL eyeIsOn;
 
 @end
 

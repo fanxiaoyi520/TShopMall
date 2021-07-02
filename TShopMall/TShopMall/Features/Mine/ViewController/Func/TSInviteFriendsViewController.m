@@ -29,15 +29,32 @@
     // Do any additional setup after loading the view.
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.gk_navTitle = @"邀请好友";
-    [self.dataController configureDataSource:^{
-        [self.collectionView reloadData];
-    }];
+    RefreshGifFooter *footer = [RefreshGifFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMore)];
+    self.collectionView.mj_footer = footer;
+    MJWeakSelf
+    [self.dataController configureDataSource];
+    [self.dataController fetchInvitationCode];
+    [self.dataController fetchInvitationRecord];
+    
+    self.dataController.updateUI = ^{
+        [weakSelf.collectionView.mj_footer endRefreshing];
+        if (weakSelf.dataController.isNoMore) {
+            [weakSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
+        }
+        [weakSelf.collectionView reloadData];
+    };
+    
 }
 
 - (void)fillCustomView {
     [self.view addSubview:self.collectionView];
     self.collectionView.frame = CGRectMake(0, GK_STATUSBAR_NAVBAR_HEIGHT, kScreenWidth, kScreenHeight-GK_STATUSBAR_NAVBAR_HEIGHT);
   
+}
+
+-(void)loadMore {
+    self.dataController.pageNo += 1;
+    [self.dataController fetchInvitationRecord];
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -75,6 +92,7 @@
            forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
                   withReuseIdentifier:sectionModel.headerIdentify];
         TSInviteFriendsHeader *header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:sectionModel.headerIdentify forIndexPath:indexPath];
+        header.dataControl = self.dataController;
         [header setCorners:UIRectCornerTopLeft | UIRectCornerTopRight radius:8];
         return header;
     }else{
@@ -226,5 +244,8 @@ spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
         _dataController = [[TSInviteFriendsDataController alloc] init];
     }
     return _dataController;
+}
+- (void)dealloc {
+    NSLog(@"dealloc TSInviteFriendsViewController");
 }
 @end

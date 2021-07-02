@@ -292,6 +292,7 @@
              NSDictionary *data = request.responseModel.data;
              if (aIndex == 1) {
                  TSMineMerchantUserInformationModel *model = [TSMineMerchantUserInformationModel yy_modelWithDictionary:data];
+                 model.eyeIsOn = true;
                  self.merchantUserInformationModel = model;
              } else if (aIndex == 2) {
                  TSPartnerCenterData *model = [TSPartnerCenterData yy_modelWithDictionary:data];

@@ -48,7 +48,8 @@ typedef NS_ENUM(int, WechatShareStatusCode){
 /// @param thumbImage 分享右边图片
 -(void)shareWXWithTitle:(NSString *)title andDescription:(NSString *)description andShareURL:(NSString *)URL andThumbImage:(UIImage *)thumbImage andWXScene:(WechatShareType)WXScene;
 //分享小程序
--(void)shareWXSmallCodeImage:(UIImage *)image andParams:(NSDictionary *)params;
+-(void)shareWXSmallCodeImage:(UIImage *)image andUserName:(NSString *)userName andPath:(NSString *)path andParams:(NSDictionary *)params;
 
-
+//直接拉起小程序
+-(void)lanchWXWithUserName:(NSString *)userName andPath:(NSString *)path  andExtMsg:(NSString *)msg andExtDic:(NSDictionary *)dic;
 @end
