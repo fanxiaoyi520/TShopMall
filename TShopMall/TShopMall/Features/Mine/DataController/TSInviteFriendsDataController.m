@@ -6,14 +6,26 @@
 //
 
 #import "TSInviteFriendsDataController.h"
-
+#import "TSInviteFriendsDataModel.h"
 @interface TSInviteFriendsDataController()
 @property (nonatomic, strong) NSMutableArray <TSInviteFriendsSectionModel *> *sections;
+
 @end
 
 @implementation TSInviteFriendsDataController
 
-- (void)configureDataSource:(void(^)(void))complete{
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _pageNo = 1;
+        _isNoMore = NO;
+        _showAll = NO;
+    }
+    return self;
+}
+
+- (void)configureDataSource{
     self.sections = [NSMutableArray array];
     //滚动图
     {
@@ -58,6 +70,9 @@
         TSInviteFriendsSectionModel *section = [[TSInviteFriendsSectionModel alloc] init];
         section.rowsCount = 1;
         section.column = 1;
+        if (self.inviteCode.length > 0) {
+        section.dataSource = [NSMutableArray arrayWithObject:self.inviteCode];
+        }
         section.cellHeight = 56;
         section.identify = @"TSInviteFriendsInvitationCell";
         section.sectionInset = UIEdgeInsetsMake(0, 16, 0, 16);
@@ -104,7 +119,8 @@
     // 邀请记录
     {
         TSInviteFriendsSectionModel *section = [[TSInviteFriendsSectionModel alloc] init];
-        section.rowsCount = 3;
+        section.rowsCount = self.recordList.count;
+        section.dataSource = self.recordList;
         section.cellHeight = 45;
         section.identify = @"TSInviteFriendsCell";
         section.headerIdentify = @"TSInviteFriendsHeader";
@@ -122,6 +138,66 @@
 }
 
  
+// MARK: API
+- (void)fetchInvitationCode {
+    NSMutableDictionary *body = [NSMutableDictionary dictionary];
+     
+    body[@"mobile"] = [TSGlobalManager shareInstance].currentUserInfo.user.phone ;
+    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kCustomerInvitationCode
+                                                               requestMethod:YTKRequestMethodGET
+                                                       requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON
+                                                               requestHeader:NSDictionary.dictionary
+                                                                 requestBody:body
+                                                              needErrorToast:YES];
+    [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+        if (request.responseModel.isSucceed) {
+            NSDictionary *data = request.responseModel.data;
+            self.inviteCode = [data stringForkey:@"invitationCode"];
+            [self configureDataSource];
+            if (self.updateUI) {
+                self.updateUI();
+            }
+        }
+       
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        if (self.updateUI) {
+            self.updateUI();
+        }
+    }];
+}
+
+- (void)fetchInvitationRecord{
+    NSMutableDictionary *body = [NSMutableDictionary dictionary];
+     
+    body[@"salesmanUuid"] = _salesmanUuid;
+    body[@"time"] = self.showAll ? @"2" : @"1"; //今日：1，全部：2
+    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kSalesmanInvitationRecord
+                                                               requestMethod:YTKRequestMethodGET
+                                                       requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON
+                                                               requestHeader:NSDictionary.dictionary
+                                                                 requestBody:body
+                                                              needErrorToast:YES];
+    [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+        
+         
+            NSDictionary *data = request.responseModel.data;
+            TSInviteFriendsResult *result = [TSInviteFriendsResult yy_modelWithDictionary:data];
+            if (self.pageNo == 1) {
+                self.recordList = [NSMutableArray arrayWithArray:result.records];
+            } else {
+                [self.recordList appendObjects:result.records];
+            }
+            self.isNoMore = result.total == self.recordList.count;
+        [self configureDataSource];
+        if (self.updateUI) {
+            self.updateUI();
+        }
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        if (self.updateUI) {
+            self.updateUI();
+        }
+    }];
+}
 
 
 
@@ -129,8 +205,6 @@
  
 - (void)setShowAll:(BOOL)showAll {
     _showAll = showAll;
-    if (_updateUI != nil) {
-        _updateUI();
-    }
+    [self fetchInvitationRecord];
 }
 @end

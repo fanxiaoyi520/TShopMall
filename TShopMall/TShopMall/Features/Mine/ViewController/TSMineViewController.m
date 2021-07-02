@@ -239,6 +239,7 @@
     //邀请好友
     if ([model.headerName isEqualToString: @"邀请"]) {
         TSInviteFriendsViewController *vc = [TSInviteFriendsViewController new];
+        vc.salesmanUuid = self.dataController.merchantUserInformationModel.ucUuid;
         [self.navigationController pushViewController:vc animated:YES];
     }
     
@@ -419,7 +420,7 @@ spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
     
 }
 -(void)userInfoSeeCodeAction:(id _Nullable)sender {
-    
+    self.dataController.merchantUserInformationModel.eyeIsOn = !self.dataController.merchantUserInformationModel.eyeIsOn;
 }
 
 - (void)userInfoKCopyCodeAction:(id _Nullable)sender {

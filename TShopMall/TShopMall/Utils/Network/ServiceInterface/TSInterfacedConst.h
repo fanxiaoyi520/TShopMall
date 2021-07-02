@@ -109,6 +109,10 @@ UIKIT_EXTERN NSString * const kMineWalletData;//我的钱包
 UIKIT_EXTERN NSString * const kMineQueryProfit;//我的收益
 UIKIT_EXTERN NSString * const kMineShopContentUrl;//广告图
 UIKIT_EXTERN NSString *const kMineOrderCount;//查询订单各状态下的订单数
+//通过手机号、商户、来源（app）查询邀请码
+UIKIT_EXTERN NSString *const kCustomerInvitationCode;
+//一级分销员通过邀请码推广记录
+UIKIT_EXTERN NSString *const kSalesmanInvitationRecord;
 #pragma mark - 设置
 UIKIT_EXTERN NSString *const kAboutMeAgreementUrl;
 UIKIT_EXTERN NSString *const kModifyUserUrl;

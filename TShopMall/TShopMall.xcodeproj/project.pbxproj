@@ -81,6 +81,7 @@
 		65BBA044268DD7DD007AF8D0 /* TSInviteFriendsInvitationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65BBA043268DD7DD007AF8D0 /* TSInviteFriendsInvitationCell.m */; };
 		65BBA047268DD832007AF8D0 /* TSInviteFriendsIntroduceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65BBA046268DD832007AF8D0 /* TSInviteFriendsIntroduceCell.m */; };
 		65CD9E3D268AED2B00262D98 /* TSMineWalletModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CD9E3C268AED2B00262D98 /* TSMineWalletModel.m */; };
+		65CE518A268EF1CB00E5F946 /* TSInviteFriendsDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CE5189268EF1CB00E5F946 /* TSInviteFriendsDataModel.m */; };
 		65F71270268C1D7C002A1ECC /* TSMineLeftBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F7126F268C1D7C002A1ECC /* TSMineLeftBarView.m */; };
 		65F71273268C4154002A1ECC /* TSMineOrderCountModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F71272268C4154002A1ECC /* TSMineOrderCountModel.m */; };
 		65F71276268C7AE0002A1ECC /* NSDictionary+Value.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F71274268C7ADF002A1ECC /* NSDictionary+Value.m */; };
@@ -757,6 +758,8 @@
 		65BBA046268DD832007AF8D0 /* TSInviteFriendsIntroduceCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSInviteFriendsIntroduceCell.m; sourceTree = "<group>"; };
 		65CD9E3B268AED2B00262D98 /* TSMineWalletModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSMineWalletModel.h; sourceTree = "<group>"; };
 		65CD9E3C268AED2B00262D98 /* TSMineWalletModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSMineWalletModel.m; sourceTree = "<group>"; };
+		65CE5188268EF1CB00E5F946 /* TSInviteFriendsDataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSInviteFriendsDataModel.h; sourceTree = "<group>"; };
+		65CE5189268EF1CB00E5F946 /* TSInviteFriendsDataModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSInviteFriendsDataModel.m; sourceTree = "<group>"; };
 		65F7126E268C1D7C002A1ECC /* TSMineLeftBarView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSMineLeftBarView.h; sourceTree = "<group>"; };
 		65F7126F268C1D7C002A1ECC /* TSMineLeftBarView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSMineLeftBarView.m; sourceTree = "<group>"; };
 		65F71271268C4154002A1ECC /* TSMineOrderCountModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSMineOrderCountModel.h; sourceTree = "<group>"; };
@@ -3842,6 +3845,8 @@
 				65F71272268C4154002A1ECC /* TSMineOrderCountModel.m */,
 				65BBA036268DA95B007AF8D0 /* TSInviteFriendsSectionModel.h */,
 				65BBA037268DA95B007AF8D0 /* TSInviteFriendsSectionModel.m */,
+				65CE5188268EF1CB00E5F946 /* TSInviteFriendsDataModel.h */,
+				65CE5189268EF1CB00E5F946 /* TSInviteFriendsDataModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -4555,6 +4560,7 @@
 				CE4F6BD42685CEF200812275 /* TSSelectorViewController.m in Sources */,
 				C24A69D32689C76F0022A81F /* TSPaySuccessHeaderCell.m in Sources */,
 				043C2352268B248300460FDB /* TSUserInfoService.m in Sources */,
+				65CE518A268EF1CB00E5F946 /* TSInviteFriendsDataModel.m in Sources */,
 				C24A69D02689C6680022A81F /* TSPaySuccessSection.m in Sources */,
 				F530CCF426804167009DC29A /* TSWKMessageHandlerDispatch.m in Sources */,
 				CE4F6BEB2687D36800812275 /* TSInviteFriendsViewController.m in Sources */,
