@@ -11,12 +11,14 @@
 #import "TSEmptyAlertView.h"
 #import "TSRecomendDataController.h"
 #import "TSProductDetailController.h"
+#import "TSSearchResultSkeletonView.h"
 
 @interface TSGoodsListController ()
 @property (nonatomic, strong) TSSearchResultFittleView *fittleView;
 @property (nonatomic, strong) TSSearchResultCollectionView *collectionView;
 @property (nonatomic, strong) RefreshGifHeader *refreshHeader;
 @property (nonatomic, strong) RefreshGifFooter *refreshFooter;
+@property (nonatomic, strong) TSSearchResultSkeletonView *skeletonView;
 @end
 
 @implementation TSGoodsListController
@@ -38,6 +40,10 @@
     self.collectionView.backgroundColor = color;
 }
 
+- (void)shouldShowSkeletonView:(BOOL)show{
+    self.skeletonView.hidden = !show;
+}
+
 - (void)setSections:(NSArray<TSSearchSection *> *)sections{
     _sections = sections;
     self.collectionView.sections = sections;
@@ -55,12 +61,13 @@
 - (void)configRefreshFooterWithTarget:(id)target selector:(SEL)selector{
     RefreshGifFooter *footer = [RefreshGifFooter footerWithRefreshingTarget:target refreshingAction:selector];
     self.collectionView.mj_footer = footer;
-    self.collectionView.mj_footer.hidden = NO;
+    self.collectionView.mj_footer.hidden = YES;
     
     self.refreshFooter = footer;
 }
 
 - (void)endRefreshIsNoMoreData:(BOOL)noMoreData isEmptyData:(BOOL)isEmptyData{
+    self.refreshFooter.hidden = NO;
     [self.refreshHeader endRefreshing];
     [self.refreshFooter endRefreshing];
     if (noMoreData) {
@@ -107,9 +114,19 @@
     flowLayout.sectionInset = UIEdgeInsetsMake(KRateW(10.0), KRateW(16.0), KRateW(8.0), KRateW(16.0));
     self.collectionView = [[TSSearchResultCollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
     [self.view addSubview:self.collectionView];
+    self.collectionView.backgroundView = self.skeletonView;
     
     
     return self.collectionView;
+}
+
+- (TSSearchResultSkeletonView *)skeletonView{
+    if (_skeletonView) {
+        return _skeletonView;
+    }
+    self.skeletonView = [TSSearchResultSkeletonView new];
+    
+    return self.skeletonView;
 }
 
 @end

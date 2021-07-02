@@ -82,6 +82,8 @@
         return _tips;
     }
     self.tips = [UILabel new];
+    self.tips.layer.cornerRadius = 2;
+    self.tips.layer.masksToBounds = YES;
     self.tips.backgroundColor = [KHexColor(@"#2D3132") colorWithAlphaComponent:0.4];
     self.tips.textAlignment = NSTextAlignmentCenter;
     self.tips.font = KRegularFont(10.0);
@@ -161,6 +163,8 @@
         return _tips;
     }
     self.tips = [UILabel new];
+    self.tips.layer.cornerRadius = 2;
+    self.tips.layer.masksToBounds = YES;
     self.tips.backgroundColor = [KHexColor(@"#2D3132") colorWithAlphaComponent:0.4];
     self.tips.textAlignment = NSTextAlignmentCenter;
     self.tips.font = KRegularFont(10.0);
@@ -175,6 +179,7 @@
         return _icon;
     }
     self.icon = [UIImageView new];
+    self.icon.contentMode = UIViewContentModeScaleAspectFit;
     [self addSubview:self.icon];
     
     return self.icon;

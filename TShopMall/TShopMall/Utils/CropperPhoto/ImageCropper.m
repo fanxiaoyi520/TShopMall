@@ -7,7 +7,6 @@
 //
 
 #import "ImageCropper.h"
-
 #import "UIColor+Plugin.h"
 
 static const CGFloat BottomViewHeight = 100.0;
@@ -39,27 +38,13 @@ static const CGFloat BottomViewHeight = 100.0;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
-    self.navigationItem.title = @"裁剪";
-    self.edgesForExtendedLayout = UIRectEdgeNone;
-
+    self.gk_navTitle = @"裁剪";
+    self.gk_navTitleColor = KWhiteColor;
+    self.gk_backImage = KImageMake(@"mall_white_naviback");
+    self.gk_navBackgroundColor = KBlackColor;
     [self.view setBackgroundColor:[UIColor blackColor]];
     _selfWidth = self.view.frame.size.width;
     _contentViewHeight = self.view.frame.size.height - 100;
-
-    if (self.navigationController) {
-        CGRect rectOfStatusbar = [[UIApplication sharedApplication] statusBarFrame];
-        CGRect rectOfNavigationbar = self.navigationController.navigationBar.frame;
-        _contentViewHeight -= (rectOfNavigationbar.size.height + rectOfStatusbar.size.height);
-
-        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        [button setImage:[UIImage imageNamed:@"NavigationBarBackButtonWhite"] forState:UIControlStateNormal];
-        button.frame = CGRectMake(0, 0, 44, 44);
-        button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        [button addTarget:self action:@selector(cancleButtonClick) forControlEvents:UIControlEventTouchUpInside];
-        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
-    }
 
     if (self.cropSize.width == 0 || self.cropSize.height == 0) {
         self.cropSize = CGSizeMake(_selfWidth - 60, _selfWidth - 60);
@@ -103,11 +88,6 @@ static const CGFloat BottomViewHeight = 100.0;
     //设置刚好填充满裁剪区域的缩放比例，为最小缩放比例
     [self.scrollView setMinimumZoomScale:scale];
     self.scrollView.userInteractionEnabled = YES;
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    self.navigationController.navigationBar.barTintColor = [UIColor colorWithHexString:@"#E64C3D"];
 }
 
 - (void)createUI {
@@ -336,6 +316,8 @@ static const CGFloat BottomViewHeight = 100.0;
         //设置缩放的最大比例和最小比例
         _scrollView.maximumZoomScale = 10;
         _scrollView.minimumZoomScale = 1;
+        _scrollView.showsHorizontalScrollIndicator = NO;
+        _scrollView.showsVerticalScrollIndicator = NO;
         //初始缩放比例为1
         [_scrollView setZoomScale:1 animated:YES];
         [_scrollView setFrame:CGRectMake(0, 0, _selfWidth, _contentViewHeight)];
@@ -366,25 +348,6 @@ static const CGFloat BottomViewHeight = 100.0;
         CGFloat buttonX = 24.0;
         CGFloat buttonY = 14.0;
         CGFloat buttonH = 40.0;
-        if (!self.navigationController) {
-            buttonW = (CGRectGetWidth(self.view.frame) - buttonX * 3) / 2;
-            _cancleButton = [UIButton buttonWithType:UIButtonTypeCustom];
-            _cancleButton.backgroundColor = [UIColor lightGrayColor];
-            [_cancleButton.titleLabel setFont:[UIFont systemFontOfSize:16]];
-            [_cancleButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            [_cancleButton setTitle:@"取消" forState:UIControlStateNormal];
-            [_cancleButton.titleLabel setTextAlignment:NSTextAlignmentCenter];
-            [_cancleButton addTarget:self action:@selector(cancleButtonClick) forControlEvents:UIControlEventTouchUpInside];
-            _cancleButton.frame = CGRectMake(buttonX, buttonY, buttonW, buttonH);
-            _cancleButton.layer.cornerRadius = buttonH / 2;
-            _cancleButton.layer.borderWidth = 1.0;
-            _cancleButton.layer.borderColor = [UIColor whiteColor].CGColor;
-            _cancleButton.clipsToBounds = YES;
-            [_bottomView addSubview:_cancleButton];
-
-            buttonX = buttonW + 2 * buttonX;
-        }
-
         _sureButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _sureButton.backgroundColor = [UIColor colorWithHexString:@"#E64C3D"];
         [_sureButton.titleLabel setFont:[UIFont systemFontOfSize:16]];

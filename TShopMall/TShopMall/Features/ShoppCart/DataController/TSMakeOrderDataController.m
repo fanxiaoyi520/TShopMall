@@ -130,6 +130,8 @@
     
     TSMakeOrderSection *section = [TSMakeOrderSection new];
     section.heightForHeader = 0.1f;
+    section.headerIdentifier = @"TSMakeOrderTableFooterView";
+    section.footerIdentifier = @"TSMakeOrderTableFooterView";
     section.heightForFooter = KRateW(10.0);
     section.rows = @[row];
     
@@ -152,6 +154,8 @@
     TSMakeOrderSection *section = [TSMakeOrderSection new];
     section.heightForHeader = 0.1f;
     section.heightForFooter = KRateW(10.0);
+    section.headerIdentifier = @"TSMakeOrderTableFooterView";
+    section.footerIdentifier = @"TSMakeOrderTableFooterView";
     section.rows = rows;
     
     [self.sections addObject:section];
@@ -169,6 +173,8 @@
     TSMakeOrderSection *section = [TSMakeOrderSection new];
     section.heightForHeader = 0.1f;
     section.heightForFooter = KRateW(10.0);
+    section.headerIdentifier = @"TSMakeOrderTableFooterView";
+    section.footerIdentifier = @"TSMakeOrderTableFooterView";
     section.rows = @[row];
     
     [self.sections addObject:section];
@@ -188,6 +194,8 @@
     TSMakeOrderSection *section = [TSMakeOrderSection new];
     section.heightForHeader = 0.1f;
     section.heightForFooter = KRateW(10.0);
+    section.headerIdentifier = @"TSMakeOrderTableFooterView";
+    section.footerIdentifier = @"TSMakeOrderTableFooterView";
     section.rows = @[row];
     
     [self.sections addObject:section];
@@ -212,7 +220,6 @@
 
 
 - (TSAddressModel *)defaultAddress{
-    TSAddressModel *address = nil;
     for(TSAddressModel *model in self.balanceModel.addressList){
         if(model.isDefault == YES){
             return model;

@@ -15,6 +15,7 @@
 #import "TSSecurityViewController.h"
 #import "UIAlertController+Color.h"
 #import "TSAlertView.h"
+#import "TSShippingAddressController.h"
 
 @interface TSSettingViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate>
 /// 数据中心
@@ -153,8 +154,10 @@
         [self.navigationController pushViewController:securityVC animated:YES];
         return;
     } else if (indexPath.section == 1 && indexPath.item == 1) {
-        TSSecurCenterViewController *personalVC = [[TSSecurCenterViewController alloc] init];
-        [self.navigationController pushViewController:personalVC animated:YES];
+        TSShippingAddressController *con = [TSShippingAddressController new];
+        [self.navigationController pushViewController:con animated:YES];
+//        TSSecurCenterViewController *personalVC = [[TSSecurCenterViewController alloc] init];
+//        [self.navigationController pushViewController:personalVC animated:YES];
         return;
     } else if (indexPath.section == 2 && indexPath.item == 0) {
         //清理缓存

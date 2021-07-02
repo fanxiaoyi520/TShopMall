@@ -82,6 +82,7 @@
 @property (nonatomic, assign, readonly) BOOL isEnough;//库存是否充足
 @property (nonatomic, assign, readonly) BOOL isInvalid;//是否失效
 @property (nonatomic, copy, readonly) NSString *invalidReson;
+@property (nonatomic, copy, readonly) NSString *attrValueStr;
 @end
 
 @interface TSCartAttr : NSObject

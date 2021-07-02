@@ -39,7 +39,7 @@
 }
 
 - (void)updatePrice:(NSString *)price{
-    self.price.text = [NSString stringWithFormat:@"¥ %ld", price.integerValue];
+    self.price.text = [NSString stringWithFormat:@"¥%ld", price.integerValue];
 }
 
 - (void)updateSelBtnStatus:(BOOL)status{
@@ -65,7 +65,6 @@
     if (isEdit == YES) {
         self.price.hidden = YES;
         self.tips.hidden = YES;
-        [self.settleBtn setBackgroundImage:KImageMake(@"") forState:UIControlStateNormal];
         self.settleBtn.layer.cornerRadius = KRateW(20.0);
         self.settleBtn.layer.borderWidth = 0.5;
         self.settleBtn.layer.borderColor = KHexColor(@"2D3132").CGColor;
@@ -74,7 +73,6 @@
     } else {
         self.price.hidden = NO;
         self.tips.hidden = NO;
-        [self.settleBtn setBackgroundImage:KImageMake(@"cart_settle_bg") forState:UIControlStateNormal];
         self.settleBtn.layer.cornerRadius = 0;
         self.settleBtn.layer.borderWidth = 0;
         self.settleBtn.layer.borderColor = [UIColor clearColor].CGColor;
@@ -96,6 +94,8 @@
         make.height.mas_equalTo(KRateW(18.0));
     }];
     
+    self.settleBtn.layer.cornerRadius = KRateW(20.0);
+    self.settleBtn.layer.masksToBounds = YES;
     [self.settleBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.mas_right).offset(-KRateW(16.0));
         make.centerY.equalTo(self);
@@ -133,7 +133,7 @@
         return _settleBtn;
     }
     self.settleBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.settleBtn setBackgroundImage:KImageMake(@"cart_settle_bg") forState:UIControlStateNormal];
+    [self.settleBtn setBackgroundColor:KHexColor(@"#FF4D49")];
     self.settleBtn.titleLabel.font = KFont(PingFangSCRegular, 14.0);
     [self.settleBtn setTitleColor:KHexColor(@"#FFFFFF") forState:UIControlStateNormal];
     [self.settleBtn addTarget:self action:@selector(settlement) forControlEvents:UIControlEventTouchUpInside];
