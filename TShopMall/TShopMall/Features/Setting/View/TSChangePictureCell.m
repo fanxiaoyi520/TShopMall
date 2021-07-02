@@ -38,7 +38,7 @@
     }];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.contentView.mas_centerX).with.offset(0);
-        make.top.equalTo(self.bgView.mas_bottom).with.offset(20);
+        make.top.equalTo(self.bgView.mas_bottom).with.offset(16);
     }];
 }
 

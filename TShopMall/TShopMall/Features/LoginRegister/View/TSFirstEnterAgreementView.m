@@ -40,7 +40,7 @@
     self.contentView.backgroundColor = KWhiteColor;
     self.frame = [[UIScreen mainScreen] bounds];
     self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
-    self.contentView.frame = CGRectMake(KRateW(36), kScreenHeight, kScreenWidth - KRateW(36) * 2, 378);
+    self.contentView.frame = CGRectMake(KRateH(36), kScreenHeight, kScreenWidth - KRateH(36) * 2, 378);
     [self.contentView setCorners:UIRectCornerAllCorners radius:12];
     ///设置约束
     [self addConstraints];
@@ -74,34 +74,34 @@
 
 - (void)addConstraints {
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.contentView.mas_left).with.offset(25);
-        make.right.equalTo(self.contentView.mas_right).with.offset(-25);
-        make.top.equalTo(self.contentView.mas_top).with.offset(24);
+        make.left.equalTo(self.contentView.mas_left).with.offset(24);
+        make.right.equalTo(self.contentView.mas_right).with.offset(-24);
+        make.top.equalTo(self.contentView.mas_top).with.offset(20);
         make.height.mas_equalTo(52);
     }];
     [self.contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.contentView.mas_left).with.offset(25);
-        make.right.equalTo(self.contentView.mas_right).with.offset(-25);
-        make.top.equalTo(self.titleLabel.mas_bottom).with.offset(24);
+        make.left.equalTo(self.contentView.mas_left).with.offset(24);
+        make.right.equalTo(self.contentView.mas_right).with.offset(-24);
+        make.top.equalTo(self.titleLabel.mas_bottom).with.offset(15);
     }];
     [self.textView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contentView.mas_left).with.offset(20);
-        make.right.equalTo(self.contentView.mas_right).with.offset(-20);
+        make.right.equalTo(self.contentView.mas_right).with.offset(-17);
         make.top.equalTo(self.contentLabel.mas_bottom).with.offset(16);
-        make.bottom.equalTo(self.cancelButton.mas_top).with.offset(-25);
+        make.bottom.equalTo(self.cancelButton.mas_top).with.offset(-24);
     }];
     [self.cancelButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contentView.mas_left).with.offset(16);
         //make.right.equalTo(self.confirmButton.mas_left).with.offset(-11);
         make.width.equalTo(self.confirmButton.mas_width).with.offset(0);
-        make.bottom.equalTo(self.contentView.mas_bottom).with.offset(-25);
+        make.bottom.equalTo(self.contentView.mas_bottom).with.offset(-24);
         make.height.mas_equalTo(40);
     }];
     [self.confirmButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.cancelButton.mas_right).with.offset(11);
         make.right.equalTo(self.contentView.mas_right).with.offset(-16);
         make.width.equalTo(self.cancelButton.mas_width).with.offset(0);
-        make.bottom.equalTo(self.contentView.mas_bottom).with.offset(-25);
+        make.bottom.equalTo(self.contentView.mas_bottom).with.offset(-24);
         make.height.mas_equalTo(40);
     }];
 }
@@ -134,7 +134,7 @@
         UILabel *contentLabel = [[UILabel alloc] init];
         _contentLabel = contentLabel;
         _contentLabel.text = @"你的信任对我们至关重要，TCL App将持续采取互联网行业的通行技术措施和数据安全保障措施，全力保护你的个人信息安全";
-        _contentLabel.font = KRegularFont(12);
+        _contentLabel.font = KRegularFont(14);
         _contentLabel.textColor = KTextColor;
         _contentLabel.numberOfLines = 0;
         [self.contentView addSubview: _contentLabel];
@@ -150,8 +150,8 @@
         _textView.editable = NO;
         _textView.textAlignment = NSTextAlignmentCenter;
         _textView.backgroundColor = UIColor.clearColor;
-        _textView.textColor = UIColor.greenColor;//KTextColor;
-        _textView.font = KRegularFont(12);
+        //_textView.textColor = UIColor.greenColor;//KTextColor;
+        _textView.font = KRegularFont(14);
         _textView.linkTextAttributes = @{NSForegroundColorAttributeName:KHexColor(@"#E64C3D")};
         [self.contentView addSubview:_textView];
     }
@@ -166,7 +166,7 @@
         _cancelButton.layer.masksToBounds = YES;
         _cancelButton.layer.cornerRadius = 20;
         _cancelButton.clipsToBounds = YES;
-        _cancelButton.layer.borderWidth = 1.0;
+        _cancelButton.layer.borderWidth = 0.5;
         _cancelButton.layer.borderColor = KHexColor(@"#535558").CGColor;
         [_cancelButton setTitleColor:KTextColor forState:UIControlStateNormal];
         [_cancelButton setTitle:@"暂不使用" forState:UIControlStateNormal];
@@ -206,9 +206,9 @@
     };
     NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:allString attributes:attributes];
     [attrString addAttribute:NSForegroundColorAttributeName value:KTextColor range:NSMakeRange(0, allString.length)];
-    [attrString addAttribute:NSFontAttributeName value:KRegularFont(12) range:NSMakeRange(0, allString.length)];
+    [attrString addAttribute:NSFontAttributeName value:KRegularFont(14) range:NSMakeRange(0, allString.length)];
     NSRange agreeRange = [allString rangeOfString:@"「同意并进入」"];
-    [attrString addAttribute:NSFontAttributeName value:KFont(PingFangSCSemibold, 12) range:agreeRange];
+    [attrString addAttribute:NSFontAttributeName value:KFont(PingFangSCSemibold, 14) range:agreeRange];
     [attrString addAttribute:NSForegroundColorAttributeName value:KTextColor range:agreeRange];
     for (int i = 0; i < agreementModels.count; i++) {
         TSAgreementModel *agreementModel = agreementModels[i];
@@ -216,17 +216,25 @@
         NSRange range = [allString rangeOfString:_str];
         NSString *value = [[NSString stringWithFormat:@"tranfer%d://%@", i, _str] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLFragmentAllowedCharacterSet]];
         [attrString addAttribute:NSLinkAttributeName value:value range:range];
-        [attrString addAttribute:NSFontAttributeName value:KRegularFont(12) range:range];
+        [attrString addAttribute:NSFontAttributeName value:KRegularFont(14) range:range];
     }
     self.textView.attributedText = attrString;
     self.textView.contentInset = UIEdgeInsetsMake(-10, 0, 0, 0);
 }
 
 - (void)getAgreementInfo {
-    __weak typeof(self) _weakSelf = self;
-    [[TSServicesManager sharedInstance].acconutService fetchAgreementWithCompleted:^(NSArray<TSAgreementModel *> * _Nonnull agreementModels) {
-        _weakSelf.agreementModels = agreementModels;
-    }];
+    NSArray *agreementModels = [TSGlobalManager shareInstance].agreementModels;
+    if (agreementModels.count) {
+        self.agreementModels = agreementModels;
+    } else {
+        [[TSUserLoginManager shareInstance] fetchAgreementWithCompleted:^(NSArray<TSAgreementModel *> * _Nonnull agreementModels) {
+            self.agreementModels = agreementModels;
+        }];
+    }
+//    [[TSServicesManager sharedInstance].acconutService fetchAgreementWithCompleted:^(NSArray<TSAgreementModel *> * _Nonnull agreementModels) {
+//        _weakSelf.agreementModels = agreementModels;
+//    }];
+    
 }
 
 #pragma mark - Actions
