@@ -30,7 +30,6 @@
 @property(nonatomic, weak) UIButton *commitButton;
 /** 被选中的item  */
 @property(nonatomic, strong) TSChangePictureSectionItemModel *selectedItem;
-
 @end
 
 @implementation TSChangePictureViewController
@@ -62,6 +61,7 @@
     ///设置约束
     [self addConstraints];
     [self.avatarImgV sd_setImageWithURL:[NSURL URLWithString:[TSUserInfoManager userInfo].user.avatar] placeholderImage:KImageMake(@"mall_setting_defautlhead")];
+    self.bgImgV.image = [[self.avatarImgV.image applyLightEffect] applyLightEffect];
 }
 
 - (void)addConstraints {
@@ -236,6 +236,14 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (UIImage *)getSquareImage:(UIView *)view {
+    UIGraphicsBeginImageContext(view.bounds.size);
+    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return [image applyLightEffect];
+}
+
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return self.dataController.sections.count;
@@ -272,6 +280,7 @@
     self.selectedItem = item;
     [self.collectionView reloadData];
     self.avatarImgV.image = KImageMake(item.icon);
+    self.bgImgV.image = [[self.avatarImgV.image applyLightEffect] applyLightEffect];
 }
 
 #pragma mark - UniversalCollectionViewCellDataDelegate

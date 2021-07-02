@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TSBaseViewController.h"
 
 @class ImageCropper;
 
@@ -14,7 +15,7 @@ typedef void (^ImageCropperCancel)(ImageCropper *cropping);
 typedef void (^ImageCropperSure)(ImageCropper *cropping, UIImage *croppedImage);
 
 
-@interface ImageCropper : UIViewController
+@interface ImageCropper : TSBaseViewController
 
 /// 取消回调
 @property (nonatomic, copy) ImageCropperCancel cancelBlock;
