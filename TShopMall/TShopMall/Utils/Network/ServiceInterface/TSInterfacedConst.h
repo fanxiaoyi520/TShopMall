@@ -72,6 +72,8 @@ UIKIT_EXTERN NSString *const kShopContentUrl;
 UIKIT_EXTERN NSString *const kProducts;//商品列表
 
 #pragma mark - 排行
+UIKIT_EXTERN NSString * const kRankSaleRankUrl;
+UIKIT_EXTERN NSString * const kRankProfitRankUrl;
 
 #pragma mark - 采购蓝
 UIKIT_EXTERN NSString * const kCartShow;

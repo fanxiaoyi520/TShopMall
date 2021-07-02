@@ -6,6 +6,7 @@
 //
 
 #import "TSRankDataController.h"
+#import "TSSaleRankRequest.h"
 
 @interface TSRankDataController()
 
@@ -15,72 +16,93 @@
 
 @implementation TSRankDataController
 
--(void)fetchRankCoronalComplete:(void(^)(BOOL isSucess))complete{
-    
-    NSMutableArray *sections = [NSMutableArray array];
-    
-    {
-        NSMutableArray *items = [NSMutableArray array];
-        
-        TSRankSectionItemModel *item = [[TSRankSectionItemModel alloc] init];
-        item.cellHeight = 280;
-        item.identify = @"TSRankHonourCell";
-        
-        [items addObject:item];
-        
-        TSRankSectionModel *section = [[TSRankSectionModel alloc] init];
-        section.column = 1;
-        section.items = items;
-        
-        [sections addObject:section];
+- (void)fetchRankDataWithRankNum:(NSInteger)rankNum Complete:(void(^)(BOOL isSucess))complete {
+    NSInteger time = self.isNowMonth ? 1 : 2;
+    if (self.isProfitRank) {
+        NSLog(@"财富 - %ld", time);
+    }else {
+        NSLog(@"冲冠 - %ld", time);
     }
     
-    {
-        NSMutableArray *items = [NSMutableArray array];
+    @weakify(self);
+    TSSaleRankRequest *codeRequest = [[TSSaleRankRequest alloc] initWithTime:time rankNum:rankNum];
+    [codeRequest startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+        @strongify(self);
         
-        for (int i = 1; i <= 8; i++) {
-            TSRankSectionItemModel *item = [[TSRankSectionItemModel alloc] init];
-            item.cellHeight = 55;
-            item.identify = @"TSRankCell";
-            item.rank = i;
-            item.isLast = i == 8;
-            [items addObject:item];
+        if (request.responseModel.isSucceed) {
+            
+            NSMutableArray *sections = [NSMutableArray array];
+            
+            {
+                NSMutableArray *items = [NSMutableArray array];
+                
+                TSRankSectionItemModel *item = [[TSRankSectionItemModel alloc] init];
+                item.cellHeight = 280;
+                item.identify = @"TSRankHonourCell";
+                
+                [items addObject:item];
+                
+                TSRankSectionModel *section = [[TSRankSectionModel alloc] init];
+                section.column = 1;
+                section.items = items;
+                
+                [sections addObject:section];
+            }
+            
+            {
+                NSMutableArray *items = [NSMutableArray array];
+                
+                for (int i = 1; i <= 8; i++) {
+                    TSRankSectionItemModel *item = [[TSRankSectionItemModel alloc] init];
+                    item.cellHeight = 55;
+                    item.identify = @"TSRankCell";
+                    item.rank = i;
+                    item.isLast = i == 8;
+                    [items addObject:item];
+                }
+                
+                TSRankSectionModel *section = [[TSRankSectionModel alloc] init];
+                section.hasHeader = YES;
+                section.headerSize = CGSizeMake(0, 44);
+                section.headerIdentify = @"TSRankHeaderView";
+                section.column = 1;
+                section.items = items;
+                
+                [sections addObject:section];
+            }
+            
+            {
+                NSMutableArray *items = [NSMutableArray array];
+
+                TSRankSectionItemModel *item = [[TSRankSectionItemModel alloc] init];
+                item.identify = @"TSRankRecommendCell";
+                [items addObject:item];
+
+                TSRankSectionModel *section = [[TSRankSectionModel alloc] init];
+                section.hasHeader = NO;
+                section.items = items;
+                
+                [sections addObject:section];
+            }
+
+            self.coronalSections = sections;
+            
+            if (complete) {
+                complete(YES);
+            }
+        }else{
+            [Popover popToastOnWindowWithText:request.responseModel.responseMsg];
+            
+            if (complete) {
+                complete(NO);
+            }
         }
-        
-        TSRankSectionModel *section = [[TSRankSectionModel alloc] init];
-        section.hasHeader = YES;
-        section.headerSize = CGSizeMake(0, 44);
-        section.headerIdentify = @"TSRankHeaderView";
-        section.column = 1;
-        section.items = items;
-        
-        [sections addObject:section];
-    }
-    
-    {
-        NSMutableArray *items = [NSMutableArray array];
 
-        TSRankSectionItemModel *item = [[TSRankSectionItemModel alloc] init];
-        item.identify = @"TSRankRecommendCell";
-        [items addObject:item];
-
-        TSRankSectionModel *section = [[TSRankSectionModel alloc] init];
-        section.hasHeader = NO;
-        section.items = items;
-        
-        [sections addObject:section];
-    }
-
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        self.coronalSections = sections;
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
         if (complete) {
-            complete(YES);
+            complete(NO);
         }
-    });
-    
-    
+    }];
 }
-
-
 
 @end

@@ -25,20 +25,30 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.gk_navigationBar.hidden = YES;
+    
+    [self fatchWebData];
+}
+
+- (void)fatchWebData {
+    @weakify(self);
+    [self.dataController fetchRankDataWithRankNum:0 Complete:^(BOOL isSucess) {
+        @strongify(self);
+        
+        [self.tableView.mj_header endRefreshing];
+        
+        if (isSucess) {
+            self.background_imgView.hidden = self.dataController.coronalSections.count == 0;
+            [self.tableView reloadData];
+        }
+    }];
 }
 
 -(void)fillCustomView{
-//    CGFloat bottom = self.view.ts_safeAreaInsets.bottom + 56 + GK_TABBAR_HEIGHT + GK_STATUSBAR_NAVBAR_HEIGHT + 5;
+    
     //背景红色图
     [self.view addSubview:self.background_imgView];
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.personalRankView];
-//    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.equalTo(self.view.mas_left).with.offset(0);
-//        make.right.equalTo(self.view.mas_right).with.offset(0);
-//        make.top.equalTo(self.view.mas_top).with.offset(0.5);
-//        make.bottom.equalTo(self.view.mas_bottom).with.offset(-bottom);
-//    }];
     
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.equalTo(self.view);
@@ -134,11 +144,9 @@
 
 #pragma mark - Action
 - (void)refreshHeaderDataMehtod {
-    self.background_imgView.hidden = self.dataController.coronalSections.count == 0;
-    [self.tableView.mj_header endRefreshing];
-    NSLog(@"刷新");
+    NSLog(@"下拉刷新");
+    [self fatchWebData];
 }
-
 
 #pragma mark - JXCategoryListContentViewDelegate
 - (UIImageView *)background_imgView {
@@ -179,10 +187,11 @@
     return _tableView;
 }
 
-- (void)setDataController:(TSRankDataController *)dataController {
-    _dataController = dataController;
-    self.background_imgView.hidden = self.dataController.coronalSections.count == 0;
-    [self.tableView reloadData];
+- (TSRankDataController *)dataController {
+    if (_dataController == nil) {
+        _dataController = [[TSRankDataController alloc] init];
+    }
+    return _dataController;
 }
 
 - (TSPersonalRankView *)personalRankView {
