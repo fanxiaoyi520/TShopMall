@@ -18,6 +18,10 @@
 #import "TSBranchCardModel.h"
 #import "TSMineWalletModel.h"
 #import "TSMineOrderCountModel.h"
+#import "TSProvinceListModel.h"
+#import "TSCityListModel.h"
+
+
 NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSInteger, RequestMethod){
     Ordinary,
@@ -45,6 +49,11 @@ typedef NS_ENUM(NSInteger, RequestMethod){
  * 删除银行卡model
  */
 @property (nonatomic ,strong)TSBankCardModel *bankCardModel;
+/**
+ * 根据省份uuid获取它下面的城市参数
+ */
+@property (nonatomic ,strong)TSProvinceListModel *provinceListModel;
+
 
 @property (nonatomic, strong, readonly) NSMutableArray <TSMineSectionModel *> *sections;
 @property (nonatomic, strong, readonly) TSMineMerchantUserInformationModel *merchantUserInformationModel;
@@ -59,6 +68,9 @@ typedef NS_ENUM(NSInteger, RequestMethod){
 @property (nonatomic, strong, readonly) NSMutableArray <TSAddBankCardBackModel *> *addBankCardBackArray;
 @property (nonatomic, strong, readonly) TSWithdrawalRecordModel *withdrawalRecordModel;
 @property (nonatomic, strong, readonly) TSMineWalletEarningModel *earningModel;
+@property (nonatomic, strong, readonly) NSMutableArray <TSProvinceListModel *> *provinceListArray;
+@property (nonatomic, strong, readonly) NSMutableArray <TSCityListModel *> *cityListArray;
+
 //订单数
 @property (nonatomic, strong, readonly) TSMineOrderCountModel *orderInfo;
 //html富文本
@@ -89,6 +101,10 @@ typedef NS_ENUM(NSInteger, RequestMethod){
 - (void)fetchCheckMyBalanceDataComplete:(void(^)(BOOL isSucess))complete;
 //查询银行列表
 - (void)fetchQueryBankDataComplete:(void(^)(BOOL isSucess))complete;
+//获取全部省和直辖市
+- (void)fetchGetAllProvinceDataComplete:(void(^)(BOOL isSucess))complete;
+//根据省份uuid获取它下面的城市
+- (void)fetchGetAllCityByProvinceUuidDataComplete:(void(^)(BOOL isSucess))complete;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -115,14 +115,14 @@
 #pragma mark - data
 - (void)setModel:(TSMineMerchantUserInformationModel *)model {
     if (!model) return;
-    [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:model.customerImgUrl] placeholderImage:nil];
+    [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:[TSGlobalManager shareInstance].currentUserInfo.user.avatar] placeholderImage:nil];
     
     if (model.customerName) {
         [self.loginButton setTitle:model.customerName forState:UIControlStateNormal];
     } else {
         [self.loginButton setTitle:@"" forState:UIControlStateNormal];
     }
-    
+    [self.loginButton setTitle:[TSGlobalManager shareInstance].currentUserInfo.user.nickname forState:UIControlStateNormal];
     if ([model.staff isEqualToString:@"staff"]) {
         self.staffImageView.image = KImageMake(@"mall_mine_staff");
     } else {

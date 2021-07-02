@@ -36,7 +36,6 @@
     self.gk_navTitleColor = KHexColor(@"#2D3132");
     self.gk_navTitle = @"设置";
     [self.navigationController setNavigationBarHidden:NO];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userInfoModifiedAction) name:TSUserInfoModifiedNotificationName object:nil];
     __weak __typeof(self)weakSelf = self;
     self.dataController.context = self;
     [self.dataController fetchSettingContentsComplete:^(BOOL isSucess) {
@@ -58,11 +57,6 @@
         make.top.equalTo(self.view.mas_top).with.offset(GK_STATUSBAR_NAVBAR_HEIGHT + 1);
         make.bottom.equalTo(self.view.mas_bottom).with.offset(0);
     }];
-}
-
-///信息修改成功
-- (void)userInfoModifiedAction {
-    [self.collectionView reloadData];
 }
 
 #pragma mark - Lazy Method
@@ -122,6 +116,10 @@
 #pragma mark - Noti
 - (void)loginStateDidChanged:(NSNotification *)noti{
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)userInfoUpdated{
+    [self.collectionView reloadData];
 }
 
 #pragma mark - UICollectionViewDataSource

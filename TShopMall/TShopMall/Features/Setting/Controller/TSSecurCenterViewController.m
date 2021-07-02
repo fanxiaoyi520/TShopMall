@@ -9,7 +9,7 @@
 #import "TSUniversalFlowLayout.h"
 #import "TSUniversalCollectionViewCell.h"
 #import "TSSecurityCenterDataController.h"
-
+#import "TSHybridViewController.h"
 @interface TSSecurCenterViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate>
 /// 数据中心
 @property(nonatomic, strong) TSSecurityCenterDataController *dataController;
@@ -26,7 +26,7 @@
 
 - (void)setupBasic {
     [super setupBasic];
-    self.gk_navTitle = @"个人资料";
+    self.gk_navTitle = @"安全中心";
     __weak __typeof(self)weakSelf = self;
     [self.dataController fetchSecurityCenterContentsComplete:^(BOOL isSucess) {
         __strong __typeof(weakSelf)strongSelf = weakSelf;
@@ -96,7 +96,8 @@
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    
+    TSHybridViewController *web = [[TSHybridViewController alloc] initWithURLString:self.dataController.agreementModels[indexPath.row-1].serverUrl];
+    [self.navigationController pushViewController:web animated:YES];
 }
 
 #pragma mark - UniversalCollectionViewCellDataDelegate
