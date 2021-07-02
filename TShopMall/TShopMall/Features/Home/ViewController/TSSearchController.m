@@ -66,7 +66,7 @@
 }
 
 - (void)configRecomendView{
-    [TSRecomendDataController checkCurrentRecomendPage:RecomendCartPage finished:^(TSRecomendModel *recomendInfo, TSRecomendPageInfo *pageInfo) {
+    [TSRecomendDataController checkCurrentRecomendPage:RecomendSearchPage finished:^(TSRecomendModel *recomendInfo, TSRecomendPageInfo *pageInfo) {
         if (recomendInfo.goodsList.count != 0) {
             [self.dataCon configRecomendSection:recomendInfo.goodsList isGrid:NO];
             self.searchView.sections = self.dataCon.sections;
@@ -77,9 +77,8 @@
 - (void)goToGoodsList:(NSString *)key{
     [TSSearchKeyViewModel handleHistoryKeys:key];
     [self.dataCon configHistorySection];
-    TSSearchResultController *con = [TSSearchResultController new];
-    con.searchKey = key;
-    [self.navigationController pushViewController:con animated:YES];
+    
+    [TSSearchResultController showWithSearchKey:key onController:self];
     
     self.searchView.sections = self.dataCon.sections;
 }

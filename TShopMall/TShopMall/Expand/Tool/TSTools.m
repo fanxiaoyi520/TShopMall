@@ -76,6 +76,13 @@
     }
     return @"账户已注销";
 }
+/** 获取20天后的时间 */
++ (NSString *)getAfter20DaysDate {
+    NSTimeInterval timeInterval = [[NSDate date] timeIntervalSince1970];
+    NSTimeInterval after20dayInterval = timeInterval + 20 * 24 * 60 * 60;
+    NSDate *day14date = [NSDate dateWithTimeIntervalSince1970:after20dayInterval];
+    return [day14date stringWithFormat:@"yyyy-MM-dd HH:mm:ss"];
+}
 
 /*
 + (BOOL)isPhoneNumber:(NSString *)phoneNumber {

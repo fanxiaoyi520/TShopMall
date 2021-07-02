@@ -35,7 +35,7 @@
 
 @property (strong, nonatomic) NSMutableArray *dayArray;
 
-@property (strong, nonatomic) NSMutableArray *yearArray;
+@property (strong, nonatomic) NSMutableArray<NSString *> *yearArray;
 
 @property (strong, nonatomic) NSMutableArray *monthArray;
 
@@ -150,6 +150,15 @@
     self.scrollToDate = [NSDate dateWithString:self.startDateString format:@"yyyy-MM-dd"];
     _startDate = self.scrollToDate;
     [self getNowDate: self.scrollToDate animated:YES];
+}
+
+- (void)setStartDateString:(NSString *)startDateString{
+    _startDateString = startDateString;
+    
+    self.scrollToDate = [NSDate dateWithString:self.startDateString format:@"yyyy-MM-dd"];
+    _startDate = self.scrollToDate;
+    [self getNowDate: self.scrollToDate animated:YES];
+    
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
@@ -327,9 +336,9 @@
     NSInteger yearNum = _yearArray.count;
     NSInteger monthNum = _monthArray.count;
     NSInteger dayNum = 0;
-    if (yearIndex + MINYEAR == _maxYear) {
+    if ([_yearArray[yearIndex] isEqualToString:[NSString stringWithFormat:@"%ld", (long)_maxYear]]) {
         monthNum = _maxMonth;
-        if (_maxMonth == monthIndex + 1) {
+        if ([_monthArray[monthIndex] isEqualToString:[NSString stringWithFormat:@"%02ld", (long)_maxMonth]]) {
             dayNum = _maxDay;
         } else {
             dayNum = [self DaysfromYear:[_yearArray[yearIndex] integerValue] andMonth:[_monthArray[monthIndex] integerValue]];

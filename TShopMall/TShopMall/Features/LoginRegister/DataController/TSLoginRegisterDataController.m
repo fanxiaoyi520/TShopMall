@@ -322,7 +322,11 @@
     request.animatingView = self.context.view;
     [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
         if (request.responseModel.isSucceed) {
-            success(request.responseModel.originalData[@"data"], request.responseModel.originalData[@"nickname"]);
+            NSString *date;
+            if (request.responseModel.originalData[@"data"]) {
+                date = request.responseModel.originalData[@"data"];
+            }
+            success(date, request.responseModel.originalData[@"nickname"]);
         }else{
             failure(request.responseModel.originalData[@"msg"]);
         }

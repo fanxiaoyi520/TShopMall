@@ -328,8 +328,6 @@
 		DC45FEB326773AE700CE762E /* EXTScope.m in Sources */ = {isa = PBXBuildFile; fileRef = DC45FEB126773AE700CE762E /* EXTScope.m */; };
 		DC45FEBA267742F700CE762E /* TSCategoryGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = DC45FEB9267742F700CE762E /* TSCategoryGroup.m */; };
 		DC45FEBD26783A1300CE762E /* TSHomePageContainerCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC45FEBC26783A1300CE762E /* TSHomePageContainerCollectionView.m */; };
-		DC45FEC026783A6E00CE762E /* TSHomePageContainerCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DC45FEBF26783A6E00CE762E /* TSHomePageContainerCollectionViewCell.m */; };
-		DC45FEC32678425700CE762E /* TSHighPriceTagView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC45FEC22678425700CE762E /* TSHighPriceTagView.m */; };
 		DC9911902679FB3800EF9B26 /* TSHomePageContentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DC99118F2679FB3800EF9B26 /* TSHomePageContentModel.m */; };
 		DC991196267A158A00EF9B26 /* TSHomePageReleaseTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DC991195267A158A00EF9B26 /* TSHomePageReleaseTitleCell.m */; };
 		DC99119C267A195400EF9B26 /* TSHomePageReleaseTitleViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DC99119B267A195400EF9B26 /* TSHomePageReleaseTitleViewModel.m */; };
@@ -1228,10 +1226,6 @@
 		DC45FEB9267742F700CE762E /* TSCategoryGroup.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSCategoryGroup.m; sourceTree = "<group>"; };
 		DC45FEBB26783A1300CE762E /* TSHomePageContainerCollectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSHomePageContainerCollectionView.h; sourceTree = "<group>"; };
 		DC45FEBC26783A1300CE762E /* TSHomePageContainerCollectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSHomePageContainerCollectionView.m; sourceTree = "<group>"; };
-		DC45FEBE26783A6E00CE762E /* TSHomePageContainerCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSHomePageContainerCollectionViewCell.h; sourceTree = "<group>"; };
-		DC45FEBF26783A6E00CE762E /* TSHomePageContainerCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSHomePageContainerCollectionViewCell.m; sourceTree = "<group>"; };
-		DC45FEC12678425700CE762E /* TSHighPriceTagView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSHighPriceTagView.h; sourceTree = "<group>"; };
-		DC45FEC22678425700CE762E /* TSHighPriceTagView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSHighPriceTagView.m; sourceTree = "<group>"; };
 		DC99118E2679FB3800EF9B26 /* TSHomePageContentModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSHomePageContentModel.h; sourceTree = "<group>"; };
 		DC99118F2679FB3800EF9B26 /* TSHomePageContentModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSHomePageContentModel.m; sourceTree = "<group>"; };
 		DC991194267A158A00EF9B26 /* TSHomePageReleaseTitleCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSHomePageReleaseTitleCell.h; sourceTree = "<group>"; };
@@ -2355,10 +2349,6 @@
 				F55D2AD5266F67EF006BACCF /* TSHomePageContainerCell.m */,
 				DC45FEBB26783A1300CE762E /* TSHomePageContainerCollectionView.h */,
 				DC45FEBC26783A1300CE762E /* TSHomePageContainerCollectionView.m */,
-				DC45FEBE26783A6E00CE762E /* TSHomePageContainerCollectionViewCell.h */,
-				DC45FEBF26783A6E00CE762E /* TSHomePageContainerCollectionViewCell.m */,
-				DC45FEC12678425700CE762E /* TSHighPriceTagView.h */,
-				DC45FEC22678425700CE762E /* TSHighPriceTagView.m */,
 				DC3440E62673621000F5B0DA /* TSHomePageContainerHeaderView.h */,
 				DC3440E72673621000F5B0DA /* TSHomePageContainerHeaderView.m */,
 				DC3440D12672F62C00F5B0DA /* TSHomePageBaseCell.h */,
@@ -4603,7 +4593,6 @@
 				C2A34C9C26759DD00095497E /* TSSearchRecomendCell.m in Sources */,
 				F54973C82668C1D600181E3F /* TSNotificationConst.m in Sources */,
 				C24A69D92689D9010022A81F /* TSPaySuccessRecomendHeaderView.m in Sources */,
-				DC45FEC32678425700CE762E /* TSHighPriceTagView.m in Sources */,
 				F530CE9326846E9C009DC29A /* NSString+Frame.m in Sources */,
 				CE4F6BD42685CEF200812275 /* TSSelectorViewController.m in Sources */,
 				C24A69D32689C76F0022A81F /* TSPaySuccessHeaderCell.m in Sources */,
@@ -4946,7 +4935,6 @@
 				C2EF88DB2671E28100E7374A /* TSEmptyAlertView.m in Sources */,
 				C3A6C4C1267A1C5700FC71D6 /* TSCommitCell.m in Sources */,
 				C3A6C47A267A1BEA00FC71D6 /* TSAccountCancelViewController.m in Sources */,
-				DC45FEC026783A6E00CE762E /* TSHomePageContainerCollectionViewCell.m in Sources */,
 				65BBA03B268DB41D007AF8D0 /* TSInviteFriendsPhotoCell.m in Sources */,
 				CE663E5D268AFB6B0092DDCA /* UITextField+ExtendRange.m in Sources */,
 				C35F186D267D954700F65AF9 /* TSAccountCancelNextViewController.m in Sources */,

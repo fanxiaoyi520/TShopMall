@@ -11,7 +11,7 @@
 @end
 
 @implementation TSShippingAddressDataController
-+ (void)fetchAddress:(void (^)(NSArray<TSAddressModel *> *))finished lodingView:(UIView *)view{
++ (void)fetchAddress:(void (^)(NSArray<TSAddressModel *> *, NSString *))finished lodingView:(UIView *)view{
     
     SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kCustomerAddress
                                                                 requestMethod:YTKRequestMethodGET
@@ -25,12 +25,12 @@
             NSDictionary *data = request.responseObject[@"data"];
             NSArray *deliveryAddressList = data[@"deliveryAddressList"];
             NSArray<TSAddressModel *> *addresses = [NSArray yy_modelArrayWithClass:TSAddressModel.class json:deliveryAddressList];
-            finished(addresses);
+            finished(addresses, @"");
         } else {
-            finished(nil);
+            finished(nil, @"加载不成功，点击重试");
         }
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-        finished(nil);
+        finished(nil, @"加载不成功，点击重试");
     }];
 }
 

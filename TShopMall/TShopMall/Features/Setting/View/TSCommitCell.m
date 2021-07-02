@@ -21,6 +21,11 @@
     [super fillCustomContentView];
     ///添加约束
     [self addConstraints];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(countdown) name:TSTimeCountdownNotificationName object:nil];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)addConstraints {
@@ -40,7 +45,6 @@
         _commitButton.layer.cornerRadius = 20;
         _commitButton.clipsToBounds = YES;
         _commitButton.titleLabel.font = KRegularFont(16);
-        //[_commitButton setTitle:@"确认" forState:UIControlStateNormal];
         [_commitButton addTarget:self action:@selector(commitAction) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:_commitButton];
     }
@@ -55,12 +59,17 @@
 
 - (void)setDelegate:(id<UniversalCollectionViewCellDataDelegate>)delegate {
     TSAccountCancelSectionItemModel *item = [delegate universalCollectionViewCellModel:self.indexPath];
-    NSTimeInterval interval = [TSTools timeIntervalWithDate:item.dropTime];
-    if (interval <= 0) {
-        self.commitButton.hidden = YES;
-    } else {
-        [self.commitButton setTitle:item.title forState:UIControlStateNormal];
+    if (item.dropTime.length) {
+        NSTimeInterval interval = [TSTools timeIntervalWithDate:item.dropTime];
+        if (interval <= 0) {
+            self.commitButton.hidden = YES;
+        }
     }
+    [self.commitButton setTitle:item.title forState:UIControlStateNormal];
+}
+
+- (void)countdown {
+    self.commitButton.hidden = YES;
 }
 
 @end

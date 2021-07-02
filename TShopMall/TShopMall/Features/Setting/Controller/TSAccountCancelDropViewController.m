@@ -36,7 +36,6 @@
     if ([self.date containsString:@"T"]) {
         self.date = [self.date stringByReplacingOccurrencesOfString:@"T" withString:@" "];
     }
-    NSLog(@"self.date === %@", self.date);
     __weak __typeof(self)weakSelf = self;
     [self.dataController fetchDropConfirmContentsWithDropTime:self.date complete: ^(BOOL isSucess) {
         __strong __typeof(weakSelf)strongSelf = weakSelf;

@@ -43,6 +43,16 @@
     }];
 }
 
+- (void)back {
+    NSArray *childrenVCs = self.navigationController.viewControllers;
+    for (UIViewController *vc in childrenVCs) {
+        if ([vc isKindOfClass: NSClassFromString(@"TSSecurityViewController")]) {
+            [self.navigationController popToViewController:vc animated:YES];
+            break;
+        }
+    }
+}
+
 - (void)fillCustomView {
     [super fillCustomView];
     ///设置约束
@@ -60,13 +70,7 @@
 
 #pragma mark - TSCommitCellDelegate
 - (void)commitAction {
-    NSArray *childrenVCs = self.navigationController.viewControllers;
-    for (UIViewController *vc in childrenVCs) {
-        if ([vc isKindOfClass:NSClassFromString(@"TSSecurityViewController")]) {
-            [self.navigationController popToViewController:vc animated:YES];
-            break;
-        }
-    }
+    [self back];
 }
 
 #pragma mark - Lazy Method
