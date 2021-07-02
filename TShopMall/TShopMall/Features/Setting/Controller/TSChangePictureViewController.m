@@ -46,9 +46,9 @@
 
 - (void)setupBasic {
     [super setupBasic];
-    __weak __typeof(self)weakSelf = self;
     self.view.backgroundColor = KWhiteColor;
     self.gk_navigationBar.hidden = YES;
+    __weak __typeof(self)weakSelf = self;
     [self.dataController fetchChangePictureContentsComplete:^(BOOL isSucess) {
         __strong __typeof(weakSelf)strongSelf = weakSelf;
         if (isSucess) {
@@ -225,7 +225,6 @@
 
 - (void)modifyAvartar:(NSString *)avatarURL {
     [[TSServicesManager sharedInstance].userInfoService modifyUserInfoWithKey:@"avatar" value:avatarURL success:^ {
-        [[NSNotificationCenter defaultCenter] postNotificationName:TSUserInfoModifiedNotificationName object:nil];
         [Popover popToastOnWindowWithText:@"头像修改成功！"];
         [self.navigationController popViewControllerAnimated:YES];
     } failure:^(NSString * _Nonnull errorMsg) {
