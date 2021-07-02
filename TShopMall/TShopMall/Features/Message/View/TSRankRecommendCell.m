@@ -9,7 +9,7 @@
 #import "TSRecomendGoodsView.h"
 #import "TSRankSectionModel.h"
 
-@interface TSRankRecommendCell ()
+@interface TSRankRecommendCell () <TSRecomendGoodsViewDelegate>
 @property(nonatomic, strong) TSRecomendGoodsView *goodsView;
 
 @end
@@ -30,7 +30,7 @@
     TSRankSectionItemModel *item = (TSRankSectionItemModel *)data;
     @weakify(self);
     if (!item.datas.count) {
-        [self.goodsView getRecommendListWithType:@"cart_page" success:^(NSArray * _Nullable list) {
+        [self.goodsView getRecommendListWithType:@"rank_page" success:^(NSArray * _Nullable list) {
             @strongify(self)
             item.datas = list;
             [self tableviewReloadCell];
@@ -44,7 +44,16 @@
 - (TSRecomendGoodsView *)goodsView{
     if (!_goodsView) {
         _goodsView = [TSRecomendGoodsView new];
+        _goodsView.delegate = self;
     }
     return _goodsView;
 }
+
+- (void)didSelectRowAtCollectionView:(id)selectItem index:(NSInteger)index {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(didSelectRowAtCell:index:)]) {
+        [self.delegate didSelectRowAtCell:selectItem index:index];
+    }
+}
+
+
 @end
