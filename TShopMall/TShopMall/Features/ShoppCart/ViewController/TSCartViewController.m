@@ -175,7 +175,7 @@
         return _editBtn;
     }
     self.editBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.editBtn.titleLabel.font = [UIFont font:PingFangSCRegular size:KRateW(16.0)];
+    self.editBtn.titleLabel.font = [UIFont font:PingFangSCRegular size:KRateW(14.0)];
     [self.editBtn setTitle:@"编辑" forState:UIControlStateNormal];
     [self.editBtn setTitleColor:KHexColor(@"#2D3132") forState:UIControlStateNormal];
     self.editBtn.frame = CGRectMake(0, 0, KRateW(32.0), KRateW(24.0));

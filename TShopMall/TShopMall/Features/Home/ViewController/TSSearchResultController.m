@@ -55,9 +55,12 @@
 }
 
 - (void)refreshGoods{
+    if (self.sections.count == 0) {
+        [self shouldShowSkeletonView:YES];
+    }
     __weak typeof(self) weakSelf = self;
     [self.dataCon queryGoods:^(NSError *error) {
-        
+        [self shouldShowSkeletonView:NO];
         if (error) {
             
         } else {

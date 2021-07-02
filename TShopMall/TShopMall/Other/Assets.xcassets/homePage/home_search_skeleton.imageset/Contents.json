@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "btn_divi_normal@1x.png",
+      "filename" : "编组 2.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "btn_divi_normal@2x.png",
+      "filename" : "编组 2@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "btn_divi_normal@3x.png",
+      "filename" : "编组 2@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

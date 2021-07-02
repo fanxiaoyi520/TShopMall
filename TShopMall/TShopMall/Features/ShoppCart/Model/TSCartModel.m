@@ -51,7 +51,7 @@
 }
 
 - (BOOL)isInvalid{
-    if (!_onSell || !_suitOnSell || _stockNo == 0) {
+    if (!_onSell || !_suitOnSell || _stockNo.integerValue == 0) {
         return YES;
     }
     return NO;
@@ -61,7 +61,7 @@
     if (!_onSell || !_suitOnSell) {
         return @"已经下架";
     }
-    if (_onSell && _stockNo == 0) {
+    if (_onSell && _stockNo.integerValue == 0) {
         return @"缺货";
     }
     if (_buyNum <= 0) {

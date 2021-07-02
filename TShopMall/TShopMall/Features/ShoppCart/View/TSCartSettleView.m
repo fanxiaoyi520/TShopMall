@@ -39,7 +39,7 @@
 }
 
 - (void)updatePrice:(NSString *)price{
-    self.price.text = [NSString stringWithFormat:@"¥ %ld", price.integerValue];
+    self.price.text = [NSString stringWithFormat:@"¥%ld", price.integerValue];
 }
 
 - (void)updateSelBtnStatus:(BOOL)status{
@@ -96,6 +96,8 @@
         make.height.mas_equalTo(KRateW(18.0));
     }];
     
+    self.settleBtn.layer.cornerRadius = KRateW(20.0);
+    self.settleBtn.layer.masksToBounds = YES;
     [self.settleBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.mas_right).offset(-KRateW(16.0));
         make.centerY.equalTo(self);
@@ -133,7 +135,7 @@
         return _settleBtn;
     }
     self.settleBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.settleBtn setBackgroundImage:KImageMake(@"cart_settle_bg") forState:UIControlStateNormal];
+    [self.settleBtn setBackgroundColor:KHexColor(@"#FF4D49")];
     self.settleBtn.titleLabel.font = KFont(PingFangSCRegular, 14.0);
     [self.settleBtn setTitleColor:KHexColor(@"#FFFFFF") forState:UIControlStateNormal];
     [self.settleBtn addTarget:self action:@selector(settlement) forControlEvents:UIControlEventTouchUpInside];

@@ -96,7 +96,8 @@
 - (void)layoutSubviews{
     [self.addBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.mas_right);
-        make.width.height.equalTo(self.mas_height);
+        make.height.equalTo(self.mas_height);
+        make.width.equalTo(self.mas_height);
         make.top.equalTo(self.mas_top);
     }];
     
