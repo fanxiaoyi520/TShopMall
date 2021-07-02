@@ -137,6 +137,11 @@
 
 - (void)showDatePickerView {
     TSDatePickerView *datePickerView = [TSDatePickerView datePickerView];
+    TSUser *user = [TSUserInfoManager userInfo].user;
+    if (user.birthday) {
+        datePickerView.startDateString = user.birthday;
+    }
+    
     datePickerView.delegate = self;
     [datePickerView show];
 }
