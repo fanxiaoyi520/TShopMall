@@ -49,7 +49,7 @@
 - (TSGridButtonCollectionView *)collectionView {
     if (!_collectionView) {
         UIEdgeInsets padding = UIEdgeInsetsMake(13, 13, 16, 13);
-        _collectionView = [[TSGridButtonCollectionView alloc] initWithFrame:CGRectZero items:nil ColumnSpacing:23 rowSpacing:17 itemsHeight:68 rows:2 columns:5 padding:padding clickedBlock:^(id selectItem, NSInteger index) {
+        _collectionView = [[TSGridButtonCollectionView alloc] initWithFrame:CGRectZero items:nil ColumnSpacing:22 rowSpacing:17 itemsHeight:69 rows:2 columns:5 padding:padding clickedBlock:^(id selectItem, NSInteger index) {
             TSImageBaseModel *model = (TSImageBaseModel *)selectItem;
             NSString *uri = [[TSServicesManager sharedInstance].uriHandler configUriWithTypeValue:model.linkData.typeValue objectValue:model.linkData.objectValue];
             
@@ -58,7 +58,7 @@
         }];
         _collectionView.clipsToBounds = YES;
         _collectionView.layer.cornerRadius = 8;
-        _collectionView.collectionView.backgroundColor = [UIColor whiteColor];
+        _collectionView.collectionView.backgroundColor = KWhiteColor;
         _collectionView.configCustomView = ^UIView *(TSImageBaseModel *model, NSIndexPath *indexPath) {
             UIView *contetView = [UIView new];
             UILabel *nameLabel = [UILabel new];
@@ -80,7 +80,7 @@
             
             [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.right.top.equalTo(contetView);
-                make.bottom.equalTo(nameLabel.mas_top).offset(-6);
+                make.height.equalTo(contetView.mas_width);
             }];
             
             return contetView;

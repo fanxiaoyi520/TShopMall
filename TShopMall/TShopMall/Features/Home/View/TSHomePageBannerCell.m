@@ -22,12 +22,15 @@
     [super setupUI];
     
     [self.contentView addSubview:self.cycleScrollView];
+    
+  
+    CGFloat height = (kScreenWidth - 32) * 174/343;
     [self.cycleScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contentView).offset(16);
         make.right.equalTo(self.contentView).offset(-16);
         make.top.equalTo(self.contentView).offset(11);
         make.bottom.equalTo(self.contentView).offset(-12);
-        make.height.equalTo(@174).priorityLow();;
+        make.height.equalTo(@(height)).priorityLow();
     }];
   
 }
@@ -61,7 +64,7 @@
         _cycleScrollView.autoScroll  = YES;
         _cycleScrollView.autoScrollTimeInterval = 4;
         _cycleScrollView.clipsToBounds = YES;
-        _cycleScrollView.layer.cornerRadius = 6;
+        _cycleScrollView.layer.cornerRadius = 8;
     }
     return _cycleScrollView;
 }

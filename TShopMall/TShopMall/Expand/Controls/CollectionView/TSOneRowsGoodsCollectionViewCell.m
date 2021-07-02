@@ -6,14 +6,14 @@
 //
 
 #import "TSOneRowsGoodsCollectionViewCell.h"
-#import "TSHighPriceTagView.h"
 #import "UIImageView+WebCache.h"
+#import "TSRecommendMaxPriceView.h"
 
 @interface TSOneRowsGoodsCollectionViewCell()
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *priceLabel;
-@property (nonatomic, strong) TSHighPriceTagView *highPriceView;
+@property (nonatomic, strong) TSRecommendMaxPriceView *maxPriceView;
 @property (nonatomic, strong) UILabel *getPriceLabel;
 @property (nonatomic, strong) UILabel *rmbLabel;
 @property (nonatomic, strong) UIView *line;
@@ -56,12 +56,11 @@
             make.height.equalTo(@30).priorityLow();;
         }];
         
-        [self addSubview:self.highPriceView];
-        [self.highPriceView mas_makeConstraints:^(MASConstraintMaker *make) {
+        [self addSubview: self.maxPriceView];
+        [self.maxPriceView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(self.rmbLabel);
             make.left.equalTo(self.priceLabel.mas_right).offset(14);
-            make.height.equalTo(@18);
-            make.width.equalTo(@69);
+            make.size.sizeOffset(CGSizeMake(KRateW(69), KRateH(18)));
         }];
         
         [self addSubview: self.getPriceLabel];
@@ -99,7 +98,7 @@
     self.priceLabel.text = item.goodsPrice;
     self.priceLabel.backgroundColor = [UIColor clearColor];
 
-    [self.highPriceView setLeftText:@"最高赚" rightText:[NSString stringWithFormat:@"¥%@",item.goodsEarnMost]];
+    self.maxPriceView.maxPrice = item.goodsEarnMost;
     self.getPriceLabel.text = [NSString stringWithFormat:@"提货价 ¥%@",item.goodsStaffPrice];
     self.getPriceLabel.backgroundColor = [UIColor clearColor];
     
@@ -171,14 +170,11 @@
     return _getPriceLabel;
 }
 
-- (TSHighPriceTagView *)highPriceView{
-    if (!_highPriceView) {
-        _highPriceView = [TSHighPriceTagView new];
-        _highPriceView.backgroundColor = KGrayColor;
-        _highPriceView.layer.cornerRadius = 4;
-        _highPriceView.clipsToBounds = YES;
+- (TSRecommendMaxPriceView *)maxPriceView {
+    if (!_maxPriceView) {
+        _maxPriceView = [[TSRecommendMaxPriceView alloc] init];
     }
-    return _highPriceView;
+    return _maxPriceView;
 }
 
 - (UIView *)line{

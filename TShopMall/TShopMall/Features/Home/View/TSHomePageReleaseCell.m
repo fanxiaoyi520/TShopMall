@@ -58,15 +58,16 @@
     
     TSHomePageReleaseViewModel *releaseViewModel = (TSHomePageReleaseViewModel *)viewModel;
 
-    if (!releaseViewModel.ReleaseDatas) {
+    if (!releaseViewModel.releaseDatas) {
         [releaseViewModel getReleaseData];
     }
     @weakify(self);
-    [self.KVOController observe:releaseViewModel keyPath:@"ReleaseDatas" options:(NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew) block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
+    [self.KVOController observe:releaseViewModel keyPath:@"releaseDatas" options:(NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew) block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
         @strongify(self)
-        if (releaseViewModel.ReleaseDatas.count) {
+        if (releaseViewModel.releaseDatas.count) {
+            [self.contentView removeAllSubviews];
             [self.iconButtons removeAllObjects];
-            for (TSImageBaseModel *model in releaseViewModel.ReleaseDatas) {
+            for (TSImageBaseModel *model in releaseViewModel.releaseDatas) {
                 UIButton *iconButton = [[UIButton alloc] init];
                 iconButton.backgroundColor = [UIColor clearColor];
                 iconButton.clipsToBounds = YES;
@@ -79,7 +80,7 @@
             }
             
             for (int i = 0; i < self.iconButtons.count; i ++) {
-                TSImageBaseModel *model = releaseViewModel.ReleaseDatas[i];
+                TSImageBaseModel *model = releaseViewModel.releaseDatas[i];
                 UIButton *iconButton = self.iconButtons[i];
                 iconButton.tag = i;
                 CGFloat top = 0.0;
@@ -109,7 +110,7 @@
 
 - (void)clickAction:(UIButton *)sender{
     TSHomePageReleaseViewModel *releaseViewModel = (TSHomePageReleaseViewModel *)self.viewModel;
-    TSImageBaseModel *model = releaseViewModel.ReleaseDatas[sender.tag];
+    TSImageBaseModel *model = releaseViewModel.releaseDatas[sender.tag];
     NSString *uri = [[TSServicesManager sharedInstance].uriHandler configUriWithTypeValue:model.linkData.typeValue objectValue:model.linkData.objectValue];
     [[TSServicesManager sharedInstance].uriHandler openURI:uri];
     NSLog(@"uri:%@",uri);

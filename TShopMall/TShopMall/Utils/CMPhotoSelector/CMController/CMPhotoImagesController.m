@@ -124,6 +124,7 @@ static NSString * const reuseIdentifier = @"CMPhotoImagesCell_ReuseIdentifier";
             [[CMPhotoGroupsViewModel sharedCMPhotoGroupsViewModel].selectedPhotoImages removeObject:photoALAssets];
         }
     }
+    self.navigationItem.rightBarButtonItem.enabled = !photoALAssets.isSelected;
     photoALAssets.selected = !photoALAssets.isSelected;
     [self.collectionView reloadItemsAtIndexPaths:@[indexPath]];
     [self setupTitleWithCount:[CMPhotoGroupsViewModel sharedCMPhotoGroupsViewModel].selectedPhotoImages.count];
@@ -145,6 +146,7 @@ static NSString * const reuseIdentifier = @"CMPhotoImagesCell_ReuseIdentifier";
 
 - (void)setNavigationRightBtn {
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(doneOnClick)];
+    self.navigationItem.rightBarButtonItem.enabled = NO;
 }
 
 - (void)clearAllData {
