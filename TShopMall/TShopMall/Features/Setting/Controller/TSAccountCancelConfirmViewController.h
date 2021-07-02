@@ -10,8 +10,11 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TSAccountCancelConfirmViewController : TSBaseViewController
+
 @property (nonatomic, copy) NSString *date;
+
 @property (nonatomic, copy) NSString *nickname;
+
 @end
 
 NS_ASSUME_NONNULL_END

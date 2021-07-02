@@ -25,20 +25,24 @@
 
 -(void)layoutSubviews{
     [super layoutSubviews];
-    
+    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds byRoundingCorners:UIRectCornerBottomLeft | UIRectCornerBottomRight cornerRadii:CGSizeMake(8, 8)];
+    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+    maskLayer.frame = self.bounds;
+    maskLayer.path = maskPath.CGPath;
+    _maskLayer = maskLayer;
     self.layer.mask = self.maskLayer;
 }
 
--(CAShapeLayer *)maskLayer{
-    if (!_maskLayer) {
-        UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds byRoundingCorners:UIRectCornerBottomLeft | UIRectCornerBottomRight cornerRadii:CGSizeMake(8, 8)];
-        CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
-        maskLayer.frame = self.bounds;
-        maskLayer.path = maskPath.CGPath;
-        _maskLayer = maskLayer;
-    }
-    return _maskLayer;
-}
+//-(CAShapeLayer *)maskLayer{
+//    if (!_maskLayer) {
+//        UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds byRoundingCorners:UIRectCornerBottomLeft | UIRectCornerBottomRight cornerRadii:CGSizeMake(8, 8)];
+//        CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+//        maskLayer.frame = self.bounds;
+//        maskLayer.path = maskPath.CGPath;
+//        _maskLayer = maskLayer;
+//    }
+//    return _maskLayer;
+//}
 
 @end
 
@@ -59,22 +63,28 @@
 
 -(void)layoutSubviews{
     [super layoutSubviews];
-    
+    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds
+                                                   byRoundingCorners:UIRectCornerAllCorners
+                                                         cornerRadii:CGSizeMake(8, 8)];
+    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+    maskLayer.frame = self.bounds;
+    maskLayer.path = maskPath.CGPath;
+    _maskLayer = maskLayer;
     self.layer.mask = self.maskLayer;
 }
 
--(CAShapeLayer *)maskLayer{
-    if (!_maskLayer) {
-        UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds
-                                                       byRoundingCorners:UIRectCornerAllCorners
-                                                             cornerRadii:CGSizeMake(8, 8)];
-        CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
-        maskLayer.frame = self.bounds;
-        maskLayer.path = maskPath.CGPath;
-        _maskLayer = maskLayer;
-    }
-    return _maskLayer;
-}
+//-(CAShapeLayer *)maskLayer{
+//    if (!_maskLayer) {
+//        UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds
+//                                                       byRoundingCorners:UIRectCornerAllCorners
+//                                                             cornerRadii:CGSizeMake(8, 8)];
+//        CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+//        maskLayer.frame = self.bounds;
+//        maskLayer.path = maskPath.CGPath;
+//        _maskLayer = maskLayer;
+//    }
+//    return _maskLayer;
+//}
 
 @end
 
@@ -95,20 +105,24 @@
 
 -(void)layoutSubviews{
     [super layoutSubviews];
-    
+    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii:CGSizeMake(8, 8)];
+    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+    maskLayer.frame = self.bounds;
+    maskLayer.path = maskPath.CGPath;
+    _maskLayer = maskLayer;
     self.layer.mask = self.maskLayer;
 }
 
--(CAShapeLayer *)maskLayer{
-    if (!_maskLayer) {
-        UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii:CGSizeMake(8, 8)];
-        CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
-        maskLayer.frame = self.bounds;
-        maskLayer.path = maskPath.CGPath;
-        _maskLayer = maskLayer;
-    }
-    return _maskLayer;
-}
+//-(CAShapeLayer *)maskLayer{
+//    if (!_maskLayer) {
+//        UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii:CGSizeMake(8, 8)];
+//        CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+//        maskLayer.frame = self.bounds;
+//        maskLayer.path = maskPath.CGPath;
+//        _maskLayer = maskLayer;
+//    }
+//    return _maskLayer;
+//}
 
 @end
 

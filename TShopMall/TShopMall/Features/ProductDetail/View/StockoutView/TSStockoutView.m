@@ -39,4 +39,9 @@
     return _promptLabel;
 }
 
+-(void)setContent:(NSString *)content{
+    _content = content;
+    _promptLabel.text = content;
+}
+
 @end

@@ -11,7 +11,7 @@
 #import "TSEmptyAlertView.h"
 #import "RefreshGifFooter.h"
 #import "TSSearchResultFittleView.h"
-
+#import "UIView+CMSDrawLine.h"
 @interface TSCategoryDetailViewController ()<TSSearchResultFittleDelegate>
 @property (nonatomic, strong) TSGridGoodsCollectionView *collectionView;
 @property (nonatomic, strong) TSCategoryGroupViewModel *viewModel;
@@ -48,11 +48,15 @@
         make.top.equalTo(@(GK_NAVBAR_HEIGHT + GK_STATUSBAR_HEIGHT));
         make.height.equalTo(@(56.0));
     }];
+    [self.view layoutIfNeeded];
+   UIView *line = [self.view cms_addLineAt:CGPointMake(0, self.fittleView.bottom) isVertical:NO length:kScreenWidth];
     [self.view addSubview:self.collectionView];
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.equalTo(self.view);
-        make.top.equalTo(self.fittleView.mas_bottom);
+        make.top.equalTo(line.mas_bottom);
     }];
+    
+
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
@@ -77,6 +81,8 @@
             sectionLayout.columns = 2;
             sectionLayout.rows = 0;
             sectionLayout.itemsHeight = 282;
+            UIEdgeInsets padding = UIEdgeInsetsMake(12, 16, 12, 16);
+            sectionLayout.padding = padding;
         };
     }else{
         self.currentLayout.updateSectionLayout = ^(TSCollectionViewMeanWidthSectionLayout * _Nonnull sectionLayout, NSIndexPath * _Nonnull indexPath) {
@@ -85,6 +91,8 @@
             sectionLayout.columns = 1;
             sectionLayout.rows = 0;
             sectionLayout.itemsHeight = 120;
+            UIEdgeInsets padding = UIEdgeInsetsMake(0,0,0,0);
+            sectionLayout.padding = padding;
         };
     }
     [self.collectionView reloadData];
@@ -141,7 +149,7 @@
 
 - (TSGridGoodsCollectionView *)collectionView{
     if (!_collectionView) {
-        _collectionView = [[TSGridGoodsCollectionView alloc] initWithFrame:CGRectZero items:nil ColumnSpacing:0 rowSpacing:0 itemsHeight:120 rows:0 columns:1 padding:UIEdgeInsetsMake(10, 16, 10, 16) clickedBlock:^(id  _Nonnull selectItem, NSInteger index) {
+        _collectionView = [[TSGridGoodsCollectionView alloc] initWithFrame:CGRectZero items:nil ColumnSpacing:0 rowSpacing:0 itemsHeight:120 rows:0 columns:1 padding:UIEdgeInsetsMake(0, 0, 0, 0) clickedBlock:^(id  _Nonnull selectItem, NSInteger index) {
             id<TSRecomendGoodsProtocol> item = selectItem;
             NSString *uri = [[TSServicesManager sharedInstance].uriHandler configUriWithTypeValue:@"Goods" objectValue:item.uuid];
             [[TSServicesManager sharedInstance].uriHandler openURI:uri];

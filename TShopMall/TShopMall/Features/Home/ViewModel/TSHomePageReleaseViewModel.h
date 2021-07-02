@@ -9,7 +9,7 @@
 #import "TSImageBaseModel.h"
 NS_ASSUME_NONNULL_BEGIN
 @interface TSHomePageReleaseViewModel : TSHomePageCellViewModel
-@property (nonatomic, strong) NSArray <TSImageBaseModel *> *ReleaseDatas;
+@property (nonatomic, strong) NSArray <TSImageBaseModel *> *releaseDatas;
 - (void)getReleaseData;
 
 @property (nonatomic, strong) NSArray *datas;

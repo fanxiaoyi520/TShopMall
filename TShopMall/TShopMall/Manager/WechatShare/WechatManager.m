@@ -255,4 +255,24 @@
     }];
     [firsttask resume];
 }
+
+- (void)refreshToken{
+    
+//https://api.weixin.qq.com/sns/oauth2/refresh_token?appid=APPID&grant_type=refresh_token&refresh_token=REFRESH_TOKEN
+    
+//    NSString *urlStr = [NSString stringWithFormat:@"https://api.weixin.qq.com/sns/oauth2/access_token?appid=%@&secret=%@&code=%@&grant_type=authorization_code", WXAPPId, WXAPPSecret, code];
+//    NSURL *url = [NSURL URLWithString:urlStr];
+//    NSURLSession *session = [NSURLSession sharedSession];
+//    NSURLSessionDataTask *firsttask = [session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+//        if(error == nil){
+//            id objc = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+//            NSLog(@"%@",objc);
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//
+//            });
+//        }
+//
+//    }];
+//    [firsttask resume];
+}
 @end

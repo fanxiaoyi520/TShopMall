@@ -18,6 +18,12 @@ NS_ASSUME_NONNULL_BEGIN
 + (BOOL)isIdcard:(NSString *)idcardNum;
 /** 昵称的校验 */
 + (BOOL)isCorrectNickname:(NSString *)nickname;
+/** 获取时间间隔差 */
++ (NSTimeInterval)timeIntervalWithDate:(NSString *)dateString;
+/** 获取剩余时间 */
++ (NSString *)getRestTimeWithTimeInterval:(NSTimeInterval)interval;
+/** 获取20天后的时间 */
++ (NSString *)getAfter20DaysDate;
 
 @end
 

@@ -9,8 +9,9 @@
 #import "TSUniversalFlowLayout.h"
 #import "TSUniversalCollectionViewCell.h"
 #import "TSAccountCancelDataController.h"
+#import "TSCommitCell.h"
 
-@interface TSAccountCancelDropViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate>
+@interface TSAccountCancelDropViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate, TSCommitCellDelegate>
 /// 数据中心
 @property(nonatomic, strong) TSAccountCancelDataController *dataController;
 /// CollectionView
@@ -22,14 +23,21 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleDefault;
 }
 
 - (void)setupBasic {
     [super setupBasic];
     self.gk_navTitle = @"账号注销";
+    if ([self.date containsString:@"T"]) {
+        self.date = [self.date stringByReplacingOccurrencesOfString:@"T" withString:@" "];
+    }
     __weak __typeof(self)weakSelf = self;
-    [self.dataController fetchDropConfirmContentsComplete:^(BOOL isSucess) {
+    [self.dataController fetchDropConfirmContentsWithDropTime:self.date complete: ^(BOOL isSucess) {
         __strong __typeof(weakSelf)strongSelf = weakSelf;
         if (isSucess) {
             [strongSelf.collectionView reloadData];
@@ -50,6 +58,28 @@
         make.top.equalTo(self.view.mas_top).with.offset(GK_STATUSBAR_NAVBAR_HEIGHT + 1);
         make.bottom.equalTo(self.view.mas_bottom).with.offset(0);
     }];
+}
+
+#pragma mark - TSCommitCellDelegate
+- (void)commitAction {
+    [[TSServicesManager sharedInstance].acconutService fetchAccountCancelBackCallBack:^(BOOL isSucess) {
+        if (isSucess) {
+            [Popover popToastOnWindowWithText:@"取消注销操作成功！"];
+            [self back];
+        } else {
+            [Popover popToastOnWindowWithText:@"取消操作失败！请稍候~~"];
+        }
+    }];
+}
+
+- (void)back {
+    NSArray *childrenVCs = self.navigationController.viewControllers;
+    for (UIViewController *vc in childrenVCs) {
+        if ([vc isKindOfClass: NSClassFromString(@"TSSecurityViewController")]) {
+            [self.navigationController popToViewController:vc animated:YES];
+            break;
+        }
+    }
 }
 
 #pragma mark - Lazy Method
@@ -96,6 +126,10 @@
     TSUniversalCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:item.identify forIndexPath:indexPath];
     cell.indexPath = indexPath;
     cell.delegate = self;
+    if ([cell isKindOfClass:[TSCommitCell class]]) {
+        TSCommitCell *_cell = (TSCommitCell *)cell;
+        _cell.actionDelegate = self;
+    }
     return cell;
 }
 

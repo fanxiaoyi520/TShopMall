@@ -10,6 +10,8 @@
 #import "TSHybridViewController.h"
 #import "TSWKAppManager.h"
 #import "TSWKMessageHandlerHelper.h"
+#import "TSConventionAlertView.h"
+#import <Photos/Photos.h>
 
 @implementation TSBridgeHandler
 
@@ -185,6 +187,41 @@
         if (data) {
             [[NSNotificationCenter defaultCenter] postNotificationName:@"InvoiceChanged" object:nil userInfo:@{@"invoice":data}];
         }
+    }
+}
+
+#pragma mark - 下载文件
+-(void)downLoad:(NSDictionary *)param{
+    NSDictionary *data = param[@"data"];
+    NSDictionary *params = data[@"params"];
+    
+    if ([@"image" isEqualToString:params[@"type"]]) {
+        NSString *imageStr = params[@"url"];
+        NSString *decodeString = [imageStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+        NSURL *imageUrl = [[NSURL alloc] initWithString:decodeString];
+        [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:imageUrl completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, BOOL finished) {
+            if (data.length > 0) {
+                UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+            }
+        }];
+   
+    } else {
+        NSString *fileStr = params[@"url"];
+        NSString *decodeString = [fileStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+        NSURL *fileUrl = [[NSURL alloc] initWithString:decodeString];
+        [[UIApplication sharedApplication] openURL:fileUrl];
+    }
+}
+
+#pragma mark - Private
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error  contextInfo:(void *)contextInfo{
+    if (error) {
+        TSConventionAlertView *alert =   [TSConventionAlertView tcl_alertViewWithTitle:@"存储失败" message:@"请打开 设置-隐私-照片 来进行设置" preferredStyle:TCLAlertViewStyleAlert msgFont:KRegularFont(16.0) widthMargin:16.0 highlightedText:@"" hasPrefixStr:@"" highlightedColor:KTextColor];
+        TSConventionAlertItem  *sureAlert  = [TSConventionAlertItem tcl_itemWithTitle:@"确定"  titleColor:KTextColor style:TCLAlertItemStyleDefault handler:^(TSConventionAlertItem *item) {}];
+        [alert tcl_addAlertItem:sureAlert];
+        [alert tcl_showView];
+    }else{
+        [Popover popToastOnWindowWithText:@"保存成功"];
     }
 }
 

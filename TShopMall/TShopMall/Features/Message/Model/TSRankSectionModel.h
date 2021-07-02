@@ -21,10 +21,22 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface TSRankUserModel : NSObject
+@property (nonatomic, copy) NSString * rank;
+@property (nonatomic, copy) NSString * imageUrl;
+@property (nonatomic, copy) NSString * userName;
+@property (nonatomic, copy) NSString * mobile;
+@property (nonatomic, copy) NSString * money;
+@end
+
 @interface TSRankSectionItemModel : TSUniversaItemModel
-/** 排名  */
-@property(nonatomic, assign) int rank;
+/// 最后一名
 @property (nonatomic, assign) BOOL isLast;
+/// 用户数据
+@property (nonatomic, strong) TSRankUserModel * userModel;
+/// 前3名排行数据
+@property(nonatomic, strong) NSArray<TSRankUserModel *> *rankList;
+/// 热销数据
 @property(nonatomic, strong) NSArray *datas;
 
 @end

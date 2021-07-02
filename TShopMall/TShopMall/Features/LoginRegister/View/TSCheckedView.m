@@ -71,7 +71,7 @@
     if (_protocolButton == nil) {
         UIButton *protocolButton = [[UIButton alloc] init];
         _protocolButton = protocolButton;
-        _protocolButton.titleLabel.font = KRegularFont(14);
+        _protocolButton.titleLabel.font = KRegularFont(12);
         [_protocolButton setTitleColor:KHexColor(@"#666666") forState:UIControlStateNormal];
         [_protocolButton setTitle:@"登录表示您已阅读并同意" forState:UIControlStateNormal];
         [self addSubview:_protocolButton];
@@ -116,7 +116,7 @@
         [allString appendString:_str];
     }
     NSDictionary *attributes = @{
-        NSFontAttributeName: KRegularFont(14)
+        NSFontAttributeName: KFont(PingFangSCMedium, 12)
     };
     NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:allString attributes:attributes];
     for (int i = 0; i < agreementModels.count; i++) {
@@ -133,8 +133,8 @@
         [attrString addAttribute:NSLinkAttributeName value:value range:range];
     }
     self.textView.attributedText = attrString;
-    CGFloat width = [allString widthForFont:KRegularFont(14)];
-    CGFloat height = [allString heightForFont:KRegularFont(14) width:kScreenWidth - 32];
+    CGFloat width = [allString widthForFont:KFont(PingFangSCMedium, 12)];
+    CGFloat height = [allString heightForFont:KFont(PingFangSCMedium, 12) width:kScreenWidth - 32];
 
     self.textView.contentInset = UIEdgeInsetsMake(-10, self.textView.contentInset.left, self.textView.contentInset.bottom, self.textView.contentInset.right);
     

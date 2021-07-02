@@ -15,6 +15,57 @@
 #import "TSChangeBindRequest.h"
 
 @implementation TSLoginRegisterDataController
+-(void)fetchCheckSalesmanWithMobile:(NSString *)mobile
+                           complete:(void(^)(BOOL isSucess))complete{
+    NSMutableDictionary *body = [NSMutableDictionary dictionary];
+    [body setValue:mobile forKey:@"mobile"];
+    [body setValue:@"thome" forKey:@"storeUuid"];
+    
+    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kAccountCheckSalesmanWithMobileUrl requestMethod:YTKRequestMethodPOST requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON requestHeader:@{} requestBody:body needErrorToast:YES];
+    [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+        
+        if (request.responseModel.isSucceed) {
+            complete(YES);
+            
+        }else
+        {
+            complete(NO);
+            
+            [Popover popToastOnWindowWithText:request.responseModel.originalData[@"message"]];
+            
+        }
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        complete(NO);
+        [Popover removePopoverOnWindow];
+    }];
+}
+
+-(void)fetchCheckSalesmanWithToken:(NSString *)token
+                          complete:(void(^)(BOOL isSucess))complete{
+    NSMutableDictionary *body = [NSMutableDictionary dictionary];
+    [body setValue:token forKey:@"token"];
+    [body setValue:@"thome" forKey:@"storeUuid"];
+    
+    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kAccountCheckSalesmanWithTokenUrl requestMethod:YTKRequestMethodPOST requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON requestHeader:@{} requestBody:body needErrorToast:YES];
+    [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+        
+        if (request.responseModel.isSucceed) {
+            complete(YES);
+            
+        }else
+        {
+            complete(NO);
+            
+            [Popover popToastOnWindowWithText:request.responseModel.originalData[@"message"]];
+            
+        }
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        complete(NO);
+        [Popover removePopoverOnWindow];
+
+    }];
+}
+
 -(void)fetchChangeBindWithNewMobile:(NSString *)newMobile
                           validCode:(NSString *)validCode
                            success:(void (^ _Nullable)(void))success failure:(void (^ _Nullable)(NSString * _Nonnull))failure{
@@ -112,7 +163,7 @@
             [[TSUserInfoManager userInfo] saveUserInfo:userInfo];
             ///登录成功后获取用户信息
             [[TSUserInfoManager userInfo] updateUserInfo:complete];
-            //complete(YES);
+//            complete(YES);
         }
         else{
             complete(NO);
@@ -300,22 +351,18 @@
 }
 
 - (void)fetchAccountCancelBackCallBack:(void(^)(BOOL isSucess))complete{
-    NSString *requestUrl = [NSString stringWithFormat:@"%@?appId=%@&tenantId=%@&appSecret=%@&accountId=%@",kLoginByTokenUrl,kAppId,@"tcl",kAppSecret, [TSUserInfoManager userInfo].accountId];
+    NSString *requestUrl = [NSString stringWithFormat:@"%@?appId=%@&tenantId=%@&appSecret=%@&accountId=%@",kAccountCancelBackUrl,kAppId,@"tcl",kAppSecret, [TSUserInfoManager userInfo].accountId];
 
     SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithBaseUrl:kAccountCenterApiPrefix RequestUrl:requestUrl requestMethod:YTKRequestMethodGET requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON requestHeader:@{} requestBody:@{} needErrorToast:YES];
     request.animatingView = self.context.view;
     [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
-        
-        if (request.responseModel.isSucceed) {
-            
-            
-        }else
-        {
-            
-                        
+        if (complete) {
+            complete(request.responseModel.isSucceed);
         }
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-        
+        if (complete) {
+            complete(NO);
+        }
     }];
 }
 
@@ -326,12 +373,16 @@
     request.animatingView = self.context.view;
     [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
         if (request.responseModel.isSucceed) {
-            success(request.responseModel.originalData[@"data"], request.responseModel.originalData[@"nickname"]);
+            NSString *date;
+            if (request.responseModel.originalData[@"data"]) {
+                date = request.responseModel.originalData[@"data"];
+            }
+            success(date, request.responseModel.originalData[@"nickname"]);
         }else{
             failure(request.responseModel.originalData[@"msg"]);
         }
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-       
+        failure(@"服务器发生未知错误~~~");
     }];
 }
 

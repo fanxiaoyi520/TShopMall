@@ -6,14 +6,13 @@
 //
 
 #import "TSRankCoronalViewController.h"
-#import "TSRankDataController.h"
+
 #import "TSRankMonthViewController.h"
 #import "TSMonthTitleView.h"
 
 @interface TSRankCoronalViewController ()
 
 @property(nonatomic, strong) TSMonthTitleView *myCategoryView;
-@property(nonatomic, strong) TSRankDataController *dataController;
 
 @end
 
@@ -36,12 +35,6 @@
     self.myCategoryView.titleColor = [KWhiteColor colorWithAlphaComponent:0.5];
     self.myCategoryView.titleSelectedColor = KWhiteColor;
     self.myCategoryView.backgroundColor = KClearColor;
-    
-    @weakify(self);
-    [self.dataController fetchRankCoronalComplete:^(BOOL isSucess) {
-        @strongify(self)
-        [self.myCategoryView reloadData];
-    }];
 }
 
 - (JXCategoryTitleView *)myCategoryView {
@@ -68,20 +61,13 @@
 
 - (id<JXCategoryListContentViewDelegate>)listContainerView:(JXCategoryListContainerView *)listContainerView initListForIndex:(NSInteger)index {
     TSRankMonthViewController *list = [[TSRankMonthViewController alloc] init];
-    list.dataController = self.dataController;
+    list.dataController.isProfitRank = NO;
+    list.dataController.isNowMonth = index == 0;
     return list;
 }
 
 - (UIView *)listView {
     return self.view;
-}
-
-#pragma mark - Getter
--(TSRankDataController *)dataController{
-    if (!_dataController) {
-        _dataController = [[TSRankDataController alloc] init];
-    }
-    return _dataController;
 }
 
 @end

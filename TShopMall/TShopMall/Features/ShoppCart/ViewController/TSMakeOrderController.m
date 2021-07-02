@@ -53,7 +53,7 @@
 
 - (void)updateUI{
     self.makeOrderView.sections = self.dataCon.sections;
-    self.commitView.price.text = [NSString stringWithFormat:@"¥ %d", self.dataCon.balanceModel.orderTotalMoney.intValue];
+    self.commitView.price.text = [NSString stringWithFormat:@"¥%d", self.dataCon.balanceModel.orderTotalMoney.intValue];
 }
 
 //选择地址
@@ -62,7 +62,8 @@
     TSShippingAddressController *con = [TSShippingAddressController new];
     con.addressSelected = ^(TSAddressModel * _Nonnull address) {
         [weakSelf.dataCon updateAddressSection:address];
-        [weakSelf refreshData];
+//        [weakSelf refreshData];
+        weakSelf.makeOrderView.sections = weakSelf.dataCon.sections;
     };
     [self.navigationController pushViewController:con animated:YES];
 }

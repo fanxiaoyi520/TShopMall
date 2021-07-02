@@ -48,6 +48,10 @@ UIKIT_EXTERN NSString *const kAccountCancelUrl;
 UIKIT_EXTERN NSString *const kAccountCancelBackUrl;
 ///  查询注销状态
 UIKIT_EXTERN NSString *const kAccountCancelInfoUrl;
+///手机号校验分销员是否存在
+UIKIT_EXTERN NSString *const kAccountCheckSalesmanWithMobileUrl;
+///Token校验分销员是否存在
+UIKIT_EXTERN NSString *const kAccountCheckSalesmanWithTokenUrl;
 
 #pragma mark - 首页
 UIKIT_EXTERN NSString *const kHomePageInfoUrl;
@@ -72,6 +76,8 @@ UIKIT_EXTERN NSString *const kShopContentUrl;
 UIKIT_EXTERN NSString *const kProducts;//商品列表
 
 #pragma mark - 排行
+UIKIT_EXTERN NSString * const kRankSaleRankUrl;
+UIKIT_EXTERN NSString * const kRankProfitRankUrl;
 
 #pragma mark - 采购蓝
 UIKIT_EXTERN NSString * const kCartShow;
@@ -109,6 +115,10 @@ UIKIT_EXTERN NSString * const kMineWalletData;//我的钱包
 UIKIT_EXTERN NSString * const kMineQueryProfit;//我的收益
 UIKIT_EXTERN NSString * const kMineShopContentUrl;//广告图
 UIKIT_EXTERN NSString *const kMineOrderCount;//查询订单各状态下的订单数
+//通过手机号、商户、来源（app）查询邀请码
+UIKIT_EXTERN NSString *const kCustomerInvitationCode;
+//一级分销员通过邀请码推广记录
+UIKIT_EXTERN NSString *const kSalesmanInvitationRecord;
 #pragma mark - 设置
 UIKIT_EXTERN NSString *const kAboutMeAgreementUrl;
 UIKIT_EXTERN NSString *const kModifyUserUrl;
@@ -123,5 +133,6 @@ UIKIT_EXTERN NSString * const kMineDelBankCardAccount;//删除银行卡
 UIKIT_EXTERN NSString * const kMineQueryAmount;//查询我的余额
 UIKIT_EXTERN NSString * const kMineGetBankNames;//查询银行列表
 UIKIT_EXTERN NSString * const kAboutMeAgreementUrl;
+UIKIT_EXTERN NSString * const kSecurCenterAgreementUrl;//安全中心协议
 UIKIT_EXTERN NSString * const kMineGetAllProvince;//获取全部省和直辖市
 UIKIT_EXTERN NSString * const kMineGetAllCityByProvinceUuid;//根据省份uuid获取它下面的城市

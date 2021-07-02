@@ -18,6 +18,8 @@
 @property (nonatomic, strong) UILabel *deliveryLable;
 /// 提货价值
 @property (nonatomic, strong) UILabel *deliveryValueLable;
+/// 最高赚背景图
+@property(nonatomic, strong) UIView *earnView;
 /// 最高赚
 @property(nonatomic, strong) UILabel *earnLabel;
 /// 最高赚金额背景
@@ -38,54 +40,59 @@
     [self.contentView addSubview:self.unifiedPriceLable];
     [self.contentView addSubview:self.earnMoneyView];
     [self.earnMoneyView addSubview:self.earnMoneyLabel];
-    [self.contentView addSubview:self.earnLabel];
+    [self.contentView addSubview:self.earnView];
+    [self.earnView addSubview:self.earnLabel];
     
     [self.unifiedLable mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contentView).offset(16);
-        make.top.equalTo(self.contentView).offset(16);
+        make.top.equalTo(self.contentView).offset(21);
         make.width.mas_equalTo(20);
-        make.height.mas_equalTo(30);
+        make.height.mas_equalTo(20);
     }];
     
     [self.unifiedPriceLable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.unifiedLable.mas_right).offset(0);
+        make.left.equalTo(self.unifiedLable.mas_right).offset(2);
         make.centerY.equalTo(self.unifiedLable);
-        make.height.mas_equalTo(36);
+        make.height.mas_equalTo(24);
     }];
     
     [self.deliveryLable mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contentView).offset(16);
-        make.bottom.equalTo(self.contentView).offset(-11);
-        make.height.mas_equalTo(18);
+        make.bottom.equalTo(self.contentView).offset(-14);
+        make.height.mas_equalTo(12);
     }];
-    
+
     [self.deliveryValueLable mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.deliveryLable.mas_right).offset(5);
-        make.bottom.equalTo(self.contentView).offset(-11);
-        make.height.mas_equalTo(18);
+        make.centerY.equalTo(self.deliveryLable);
     }];
-    
-    [self.earnLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.unifiedPriceLable.mas_right).offset(21);
-        make.centerY.equalTo(self.unifiedLable);
-        make.width.mas_equalTo(50);
+
+    [self.earnView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.unifiedPriceLable.mas_right).offset(19);
+        make.centerY.equalTo(self.unifiedPriceLable);
         make.height.mas_equalTo(20);
+        make.width.mas_equalTo(53);
     }];
-    
+
+    [self.earnLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.earnView);
+    }];
+
     [self.earnMoneyLabel sizeToFit];
     CGFloat width = self.earnMoneyLabel.size.width + 20;
-    if (width < 30) {
-        width = 30;
+    if (width < 51) {
+        width = 51;
     }
-    
+
     [self.earnMoneyView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.earnLabel.mas_right).offset(-10);
-        make.centerY.equalTo(self.unifiedLable);
+        make.left.equalTo(self.earnView.mas_right).offset(-10);
+        make.centerY.equalTo(self.earnView);
         make.width.mas_equalTo(width);
         make.height.mas_equalTo(20);
     }];
-    
+
     [self.earnMoneyLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.earnMoneyView.mas_left).offset(10);
         make.right.equalTo(self.earnMoneyView.mas_right).offset(-5);
         make.centerY.equalTo(self.earnMoneyView);
     }];
@@ -133,10 +140,20 @@
     return _deliveryValueLable;
 }
 
+-(UIView *)earnView{
+    if (!_earnView) {
+        _earnView = [[UIView alloc] init];
+        _earnView.backgroundColor = [UIColor clearColor];
+        [_earnView setCorners:(UIRectCornerTopLeft | UIRectCornerBottomLeft) radius:3];
+        _earnView.clipsToBounds = YES;
+    }
+    return _earnView;
+}
+
 -(UILabel *)earnLabel{
     if (!_earnLabel) {
         _earnLabel = [[UILabel alloc] init];
-        _earnLabel.font = KRegularFont(14);
+        _earnLabel.font = KRegularFont(12);
         _earnLabel.textColor = KWhiteColor;
         _earnLabel.backgroundColor = KHexColor(@"#F9AB50");
         _earnLabel.textAlignment = NSTextAlignmentCenter;
@@ -161,10 +178,10 @@
 -(UILabel *)earnMoneyLabel{
     if (!_earnMoneyLabel) {
         _earnMoneyLabel = [[UILabel alloc] init];
-        _earnMoneyLabel.font = KRegularFont(14);
+        _earnMoneyLabel.font = KRegularFont(12);
         _earnMoneyLabel.textColor = KWhiteColor;
         _earnMoneyLabel.text = @"";
-        _earnMoneyLabel.textAlignment = NSTextAlignmentRight;
+        _earnMoneyLabel.textAlignment = NSTextAlignmentCenter;
     }
     return _earnMoneyLabel;
 }
@@ -179,7 +196,7 @@
     }else{
         self.unifiedPriceLable.text = [NSString stringWithFormat:@"%@",item.marketPrice];
         self.deliveryValueLable.text = [NSString stringWithFormat:@"¥ %@",item.staffPrice];
-        self.earnMoneyLabel.text = [NSString stringWithFormat:@"%@",item.earnMost];
+        self.earnMoneyLabel.text = [NSString stringWithFormat:@"¥%@",item.earnMost];
     }
 }
 

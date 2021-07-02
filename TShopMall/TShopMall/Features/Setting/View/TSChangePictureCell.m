@@ -38,7 +38,7 @@
     }];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.contentView.mas_centerX).with.offset(0);
-        make.top.equalTo(self.bgView.mas_bottom).with.offset(20);
+        make.top.equalTo(self.bgView.mas_bottom).with.offset(16);
     }];
 }
 
@@ -49,7 +49,8 @@
         _bgView.backgroundColor = KHexColor(@"#EEF0FC");
         _bgView.layer.cornerRadius = 5;
         _bgView.clipsToBounds = YES;
-        [self.contentView addSubview:_bgView];
+        _bgView.hidden = YES;
+        [self.contentView insertSubview:_bgView atIndex:0];
     }
     return _bgView;
 }
@@ -58,7 +59,7 @@
     if (_iconImgV == nil) {
         UIImageView *iconImgV = [[UIImageView alloc] init];
         _iconImgV = iconImgV;
-        [self.bgView addSubview:_iconImgV];
+        [self.contentView addSubview:_iconImgV];
     }
     return _iconImgV;
 }
@@ -76,6 +77,7 @@
     TSChangePictureSectionItemModel *item = [delegate universalCollectionViewCellModel:self.indexPath];
     self.iconImgV.image = KImageMake(item.icon);
     self.titleLabel.text = item.title;
+    self.bgView.hidden = !item.isSelected;
 }
 
 @end

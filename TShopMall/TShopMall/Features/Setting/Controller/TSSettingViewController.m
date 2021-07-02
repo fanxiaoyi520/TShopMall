@@ -36,7 +36,6 @@
     self.gk_navTitleColor = KHexColor(@"#2D3132");
     self.gk_navTitle = @"设置";
     [self.navigationController setNavigationBarHidden:NO];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userInfoModifiedAction) name:TSUserInfoModifiedNotificationName object:nil];
     __weak __typeof(self)weakSelf = self;
     self.dataController.context = self;
     [self.dataController fetchSettingContentsComplete:^(BOOL isSucess) {
@@ -58,11 +57,6 @@
         make.top.equalTo(self.view.mas_top).with.offset(GK_STATUSBAR_NAVBAR_HEIGHT + 1);
         make.bottom.equalTo(self.view.mas_bottom).with.offset(0);
     }];
-}
-
-///信息修改成功
-- (void)userInfoModifiedAction {
-    [self.collectionView reloadData];
 }
 
 #pragma mark - Lazy Method
@@ -124,6 +118,10 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (void)userInfoUpdated{
+    [self.collectionView reloadData];
+}
+
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return self.dataController.sections.count;
@@ -155,8 +153,8 @@
         [self.navigationController pushViewController:securityVC animated:YES];
         return;
     } else if (indexPath.section == 1 && indexPath.item == 1) {
-        TSSecurCenterViewController *personalVC = [[TSSecurCenterViewController alloc] init];
-        [self.navigationController pushViewController:personalVC animated:YES];
+        UIViewController *con = [NSClassFromString(@"TSShippingAddressController") new];
+        [self.navigationController pushViewController:con animated:YES];
         return;
     } else if (indexPath.section == 2 && indexPath.item == 0) {
         //清理缓存

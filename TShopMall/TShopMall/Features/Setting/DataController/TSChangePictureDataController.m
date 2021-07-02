@@ -25,7 +25,7 @@
             NSString *image = images[i];
             NSString *title = titles[i];
             TSChangePictureSectionItemModel *item = [[TSChangePictureSectionItemModel alloc] init];
-            item.cellHeight = 138 + 24;
+            item.cellHeight = 150;
             item.identify = @"TSChangePictureCell";
             item.icon = image;
             item.title = title;

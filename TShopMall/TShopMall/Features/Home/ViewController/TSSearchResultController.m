@@ -9,18 +9,33 @@
 #import "TSSearchResultDataController.h"
 #import "TSSearchResultNaviView.h"
 #import "TSSearchKeyViewModel.h"
+#import "TSBaseNavigationController.h"
 
 @interface TSSearchResultController ()
 @property (nonatomic, strong) TSSearchResultNaviView *naviView;
 @property (nonatomic, strong) TSSearchResultDataController *dataCon;
+@property (nonatomic, copy) NSString *searchKey;
 @end
 
 @implementation TSSearchResultController
 
++ (TSSearchResultController *)showWithSearchKey:(NSString *)searchKey onController:(UIViewController *)controller{
+    TSSearchResultController *con = [TSSearchResultController new];
+    con.searchKey = searchKey;
+    con.view.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+    TSBaseNavigationController *naviCon = [[TSBaseNavigationController alloc] initWithRootViewController:con];
+    naviCon.modalPresentationStyle =  UIModalPresentationOverCurrentContext | UIModalPresentationFullScreen;
+    [controller presentViewController:naviCon animated:NO completion:^{
+
+    }];
+    return con;
+}
 
 - (instancetype)init{
     if (self == [super init]) {
+        self.view.alpha = 0;
         self.dataCon = [TSSearchResultDataController new];
+        self.dataCon.context = self;
     }
     return self;
 }
@@ -31,22 +46,29 @@
     [self hiddenNavigationBar];
     [self configRefreshFooterWithTarget:self selector:@selector(mjFooterRefresh:)];
     [self configRefreshHeaderWithTarget:self selector:@selector(mjHeadreRefresh:)];
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
     
     [self showSearchResultView];
 }
 
 - (void)refreshGoods{
+    if (self.sections.count == 0) {
+        [self shouldShowSkeletonView:YES];
+    }
     __weak typeof(self) weakSelf = self;
     [self.dataCon queryGoods:^(NSError *error) {
-        
+        [self shouldShowSkeletonView:NO];
         if (error) {
             
         } else {
             self.sections = self.dataCon.lists;
         }
-        BOOL isNoMoreData = YES;
+        BOOL isNoMoreData = NO;
         if (self.dataCon.totalNum == self.dataCon.currentNum) {
-            isNoMoreData = NO;
+            isNoMoreData = YES;
         }
         [weakSelf endRefreshIsNoMoreData:isNoMoreData isEmptyData:weakSelf.dataCon.isEmptyView];
     }];
@@ -87,7 +109,13 @@
 }
 
 - (void)hideSearchResultView{
-    [self.navigationController popViewControllerAnimated:YES];
+    [UIView animateWithDuration:0.3 animations:^{
+        self.view.alpha = 0;
+    } completion:^(BOOL finished) {
+        [self dismissViewControllerAnimated:NO completion:^{
+            
+        }];
+    }];
 }
 
 - (void)showSearchResultView{
@@ -96,8 +124,14 @@
     self.dataCon.keyword = self.searchKey;
     [self.dataCon defaultConfig];
     
-    self.naviView.searchView.textField.text = self.searchKey;
-    [self refreshGoods];
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        [UIView animateWithDuration:0.5 animations:^{
+            self.view.alpha = 1;
+        } completion:^(BOOL finished) {
+            self.naviView.searchView.textField.text = self.searchKey;
+            [self refreshGoods];
+        }];
+    }];
 }
 
 - (void)viewWillLayoutSubviews{

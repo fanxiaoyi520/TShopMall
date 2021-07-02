@@ -20,27 +20,22 @@
 #import "TSRealnameInfoViewController.h"
 #import "TSRealNameAuthViewController.h"
 #import "TSModifyNicknameViewController.h"
-#import "PhotoBrowser.h"
-#import "UIViewController+Plugin.h"
+#import "ImageCropper.h"
+#import "CMPhotoSelectorController.h"
 
-@interface TSPersonalViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate, TSDatePickerViewDelegate>
+
+@interface TSPersonalViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate, TSDatePickerViewDelegate, CMPhotoSelectorControllerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 /// 数据中心
 @property(nonatomic, strong) TSPersonalDataController *dataController;
 /// CollectionView
 @property(nonatomic, weak) UICollectionView *collectionView;
-/** PhotoBrowser图片选择器  */
-@property(nonatomic, strong) PhotoBrowser *photoBrowser;
+
 @end
 
 @implementation TSPersonalViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-}
-
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)setupBasic {
@@ -48,8 +43,7 @@
     self.gk_navTitleFont = KRegularFont(18);
     self.gk_navTitleColor = KHexColor(@"#2D3132");
     self.gk_navTitle = @"个人资料";
-    [self userInfoModifiedAction];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userInfoModifiedAction) name:TSUserInfoModifiedNotificationName object:nil];
+    [self userInfoUpdated];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
@@ -68,8 +62,6 @@
 - (void)modifyUserInfoWithKey:(NSString *)key value:(NSString *)value completed:(void (^)(void))completed {
     [Popover popProgressOnWindowWithText:@"提交中..."];
     [[TSServicesManager sharedInstance].userInfoService modifyUserInfoWithKey:key value:value success:^ {
-        ///发通知修改成功
-        [[NSNotificationCenter defaultCenter] postNotificationName:TSUserInfoModifiedNotificationName object:nil];
         [Popover popToastOnWindowWithText:@"修改成功！"];
         if (completed) {
             completed();
@@ -81,7 +73,7 @@
 
 #pragma mark - Actions
 ///信息修改成功
-- (void)userInfoModifiedAction {
+- (void)userInfoUpdated {
     __weak __typeof(self)weakSelf = self;
     [self.dataController fetchPersonalContentsComplete:^(BOOL isSucess) {
         __strong __typeof(weakSelf)strongSelf = weakSelf;
@@ -103,7 +95,8 @@
         return;
     }
     if (status == PHAuthorizationStatusNotDetermined) {
-        [self pushImagePickerControllerWithType:BrowserTypeAlbum];
+        //[self pushImagePickerControllerWithType:BrowserTypeAlbum];
+        [self openImageSelecterController];
         //请求授权
 //        [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
 //            if (status == PHAuthorizationStatusAuthorized) {
@@ -115,7 +108,8 @@
         return;
     }
     if (status == PHAuthorizationStatusAuthorized) {///已授权
-        [self pushImagePickerControllerWithType:BrowserTypeAlbum];
+        //[self pushImagePickerControllerWithType:BrowserTypeAlbum];
+        [self openImageSelecterController];
         return;
     }
 }
@@ -134,9 +128,8 @@
         NSLog(@"%ld-%@", index, title);
         NSString *sexString = [NSString stringWithFormat:@"%ld", index + 1];
         [self modifyUserInfoWithKey:@"sex" value:sexString completed:^{
-            @strongify(self);
+//            @strongify(self);
             //[TSUserInfoManager userInfo].user.sex = sex;
-            [self userInfoModifiedAction];
         }];
     }];
     [actionSheet show];
@@ -144,24 +137,42 @@
 
 - (void)showDatePickerView {
     TSDatePickerView *datePickerView = [TSDatePickerView datePickerView];
+    TSUser *user = [TSUserInfoManager userInfo].user;
+    if (user.birthday) {
+        datePickerView.startDateString = user.birthday;
+    }
+    
     datePickerView.delegate = self;
     [datePickerView show];
 }
 
 #pragma mark - 添加图片
-- (void)pushImagePickerControllerWithType:(BrowserType)browserType {
-    BrowserConfig *config = [[BrowserConfig alloc] init];
-    config.type = browserType;
-    config.maxImagesCount = 1;
-    config.allowCrop = NO;
-    __weak typeof(self) weakSelf = self;
-    self.photoBrowser = [[PhotoBrowser alloc] initWithBrowserConfig:config superViewController:[UIViewController windowCurrentViewController]];
-    self.photoBrowser.photosBlock = ^(NSArray *_Nonnull selectedPhotosArray, NSArray *_Nonnull selectedAssets) {
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        UIImage *image = selectedPhotosArray.firstObject;
-        [strongSelf uploadAvartar:image];
-    };
-    [self.photoBrowser showPhotoBrowser];
+- (void)openImageSelecterController {
+    CMPhotoSelectorController *selectorController = [CMPhotoSelectorController photoSelectorController];
+    selectorController.selectorDelegate = self;
+    selectorController.modalPresentationStyle = UIModalPresentationFullScreen;
+    [self presentViewController:selectorController animated:YES completion:nil];
+}
+///打开相机
+- (void)openCameraController {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        /// 创建UIImagePickerController实例
+        UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+        /// 设置代理
+        imagePickerController.delegate = self;
+        /// 是否显示裁剪框编辑（默认为NO），等于YES的时候，照片拍摄完成可以进行裁剪
+        imagePickerController.allowsEditing = YES;
+        /// 设置照片来源为相机
+        imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+        /// 设置进入相机时使用前置或后置摄像头
+        imagePickerController.cameraDevice = UIImagePickerControllerCameraDeviceRear;
+        /// 满屏显示
+        imagePickerController.modalPresentationStyle = UIModalPresentationFullScreen;
+        /// 展示选取照片控制器
+        [self presentViewController:imagePickerController animated:YES completion:nil];
+    });
+    
+   
 }
 
 - (void)uploadAvartar:(UIImage *)image {
@@ -179,8 +190,6 @@
 
 - (void)modifyAvartar:(NSString *)avatarURL {
     [[TSServicesManager sharedInstance].userInfoService modifyUserInfoWithKey:@"avatar" value:avatarURL success:^ {
-        //[TSUserInfoManager userInfo].user.avatar = avatarURL;
-        [[NSNotificationCenter defaultCenter] postNotificationName:TSUserInfoModifiedNotificationName object:nil];
         [Popover popToastOnWindowWithText:@"头像修改成功！"];
     } failure:^(NSString * _Nonnull errorMsg) {
         [Popover popToastOnWindowWithText:@"头像修改失败！"];
@@ -200,11 +209,17 @@
         return;
     }
     if (authStatus  == AVAuthorizationStatusNotDetermined) {
-        [self pushImagePickerControllerWithType:BrowserTypeCamera];
+        [AVCaptureDevice requestAccessForMediaType: AVMediaTypeVideo completionHandler:^(BOOL granted) {
+            if (granted) {///成功授权
+                ///打开相机
+                [self openCameraController];
+            }
+        }];
+        //[self pushImagePickerControllerWithType:BrowserTypeCamera];
         return;
     }
     if (authStatus == AVAuthorizationStatusAuthorized) {
-        [self pushImagePickerControllerWithType:BrowserTypeCamera];
+        [self openCameraController];
         return;
     }
 }
@@ -227,6 +242,43 @@
         }
     }];
     [actionSheet show];
+}
+
+#pragma mark - UIImagePickerControllerDelegate, UINavigationControllerDelegate
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    // 选取完图片后跳转回原控制器
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    /* 此处参数 info 是一个字典，下面是字典中的键值 （从相机获取的图片和相册获取的图片时，两者的info值不尽相同）
+     * UIImagePickerControllerMediaType; // 媒体类型
+     * UIImagePickerControllerOriginalImage; // 原始图片
+     * UIImagePickerControllerEditedImage; // 裁剪后图片
+     * UIImagePickerControllerCropRect; // 图片裁剪区域（CGRect）
+     * UIImagePickerControllerMediaURL; // 媒体的URL
+     * UIImagePickerControllerReferenceURL // 原件的URL
+     * UIImagePickerControllerMediaMetadata // 当数据来源是相机时，此值才有效
+     */
+    UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
+    
+    [self finishSingleSelectionWithImage:image];
+}
+
+// 取消选取调用的方法
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - CMPhotoSelectorControllerDelegate
+- (void)finishSingleSelectionWithImage:(UIImage *)image {
+    
+    ImageCropper *cropperController = [[ImageCropper alloc] init];
+    cropperController.image = image;
+    cropperController.isRound = YES;
+    cropperController.cropSize = CGSizeMake(200, 200);
+    cropperController.sureBlock = ^(ImageCropper *cropping, UIImage *croppedImage) {
+        [self.navigationController popViewControllerAnimated:YES];
+        [self uploadAvartar:croppedImage];
+    };
+    [self.navigationController pushViewController:cropperController animated:YES];
 }
 
 
@@ -257,11 +309,8 @@
 
 #pragma mark - TSDatePickerViewDelegate(日期选择器）
 - (void)selectedDateString:(NSString *)dateString {
-    @weakify(self);
     [self modifyUserInfoWithKey:@"birthday" value:dateString completed:^{
-        @strongify(self);
-        //[TSUserInfoManager userInfo].user.birthday = dateString;
-        [self userInfoModifiedAction];
+        
     }];
 }
 
@@ -340,7 +389,6 @@ lineSpacingForSectionAtIndex:(NSInteger)section{
     TSPersonalSectionModel *model = self.dataController.sections[section];
     return model.lineSpacing;
 }
-
 
 @end
 

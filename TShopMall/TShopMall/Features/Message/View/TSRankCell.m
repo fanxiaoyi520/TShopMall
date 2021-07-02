@@ -47,6 +47,9 @@
         make.left.equalTo(self.contentView.mas_centerX).with.offset(-15);
         make.centerY.equalTo(self.contentView.mas_centerY).with.offset(0);
     }];
+    
+    self.headImgV.layer.masksToBounds = YES;
+    self.headImgV.layer.cornerRadius = 33/2;
     [self.headImgV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.usernameLabel.mas_left).with.offset(-2);
         make.top.offset(10);
@@ -90,7 +93,7 @@
     if (_usernameLabel == nil) {
         UILabel *usernameLabel = [[UILabel alloc] init];
         _usernameLabel = usernameLabel;
-        _usernameLabel.text = @"185****7890";
+        _usernameLabel.text = @"-";
         _usernameLabel.font = KRegularFont(12);
         _usernameLabel.textColor = KTextColor;
         [self.contentView addSubview: _usernameLabel];
@@ -114,7 +117,7 @@
     if (_salesNumLabel == nil) {
         UILabel *salesNumLabel = [[UILabel alloc] init];
         _salesNumLabel = salesNumLabel;
-        _salesNumLabel.text = @"￥89000";
+        _salesNumLabel.text = @"-";
         _salesNumLabel.font = KRegularFont(12);
         _salesNumLabel.textColor = KTextColor;
         [self.contentView addSubview: _salesNumLabel];
@@ -133,24 +136,32 @@
 }
 
 - (void)setData:(id)data {
+    [super setData:data];
+    
     TSRankSectionItemModel *item = (TSRankSectionItemModel *)data;
-    if (item.rank == 1) {
+    NSInteger rank = item.userModel.rank.integerValue;
+    if (rank == 1) {
         self.rankImgV.hidden = NO;
         self.rankNumLabel.hidden = YES;
         self.rankImgV.image = KImageMake(@"mall_rank_no1");
-    } else if (item.rank == 2) {
+    } else if (rank == 2) {
         self.rankImgV.hidden = NO;
         self.rankNumLabel.hidden = YES;
         self.rankImgV.image = KImageMake(@"mall_rank_no2");
-    } else if (item.rank == 3) {
+    } else if (rank == 3) {
         self.rankImgV.hidden = NO;
         self.rankNumLabel.hidden = YES;
         self.rankImgV.image = KImageMake(@"mall_rank_no3");
     } else {
         self.rankImgV.hidden = YES;
         self.rankNumLabel.hidden = NO;
-        self.rankNumLabel.text = [NSString stringWithFormat:@"%d", item.rank];
+        self.rankNumLabel.text = item.userModel.rank;
     }
+    
+    [_headImgV sd_setImageWithURL:[NSURL URLWithString:item.userModel.imageUrl] placeholderImage:KImageMake(@"mall_setting_defautlhead")];
+    NSString *centerStr = [item.userModel.mobile substringWithRange:NSMakeRange(3,4)];
+    _usernameLabel.text = [item.userModel.mobile stringByReplacingOccurrencesOfString:centerStr withString:@"****"];
+    _salesNumLabel.text = [NSString stringWithFormat:@"¥%@", item.userModel.money];
     
     //最底部切圆角
     NSInteger radii = item.isLast ? 10 : 0;

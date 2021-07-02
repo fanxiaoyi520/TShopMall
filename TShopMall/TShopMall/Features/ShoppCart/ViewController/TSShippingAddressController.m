@@ -10,11 +10,13 @@
 #import "TSShippingAddressDataController.h"
 #import "TSAddressEditController.h"
 #import "TSEmptyAlertView.h"
+#import "TSAlertView.h"
 
 @interface TSShippingAddressController ()<UITableViewDelegate, UITableViewDataSource>{
     NSArray<TSAddressModel *> *addresses;
 }
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) UIView *bottomView;
 @property (nonatomic, strong) UIButton *addBtn;
 @end
 
@@ -36,9 +38,16 @@
 
 - (void)fetchAddress{
     __weak typeof(self) weakSelf = self;
-    [TSShippingAddressDataController  fetchAddress:^(NSArray<TSAddressModel *> *addresses) {
+    [TSShippingAddressDataController  fetchAddress:^(NSArray<TSAddressModel *> *addresses, NSString *message) {
+        [TSEmptyAlertView hideInView:self.tableView];
+        if (message.length != 0) {
+            TSEmptyAlertView.new.alertInfo(message, @"刷新").alertImage(@"alert_address_empty").show(self.tableView, @"center", ^{
+                [weakSelf fetchAddress];
+            });
+            return;
+        }
         if (addresses.count == 0) {
-            TSEmptyAlertView.new.alertInfo(@"没有收获地址点击添加", @"").alertImage(@"alert_address_empty").show(self.tableView, @"center", ^{
+            TSEmptyAlertView.new.alertInfo(@"没有收货地址点击添加", @"").alertImage(@"alert_address_empty").show(self.tableView, @"center", ^{
                 [weakSelf gotoAddNewAddress];
             });
         } else {
@@ -112,9 +121,11 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
     TSShippingAddressCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     
-    [TSShippingAddressDataController deleteAddress:cell.addressModel finished:^{
-        [self fetchAddress];
-    } lodingView:self.view];
+    TSAlertView.new.alertInfo(nil, @"确认删除选中商品吗？").confirm(@"确定", ^{
+        [TSShippingAddressDataController deleteAddress:cell.addressModel finished:^{
+            [self fetchAddress];
+        } lodingView:self.view];
+    }).cancel(@"取消", ^{}).show();
     
 }
 
@@ -127,17 +138,23 @@
 }
 
 - (void)viewWillLayoutSubviews{
+    
+    [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.equalTo(self.view);
+        make.height.mas_equalTo(KRateW(96.0) + GK_SAFEAREA_BTM);
+    }];
+    
     [self.addBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view.mas_left).offset(KRateW(24.0));
         make.right.equalTo(self.view.mas_right).offset(-KRateW(24.0));
-        make.bottom.equalTo(self.view.mas_bottom).offset(-GK_SAFEAREA_BTM - KRateW(33.0));
+        make.bottom.equalTo(self.view.mas_bottom).offset(-GK_SAFEAREA_BTM - KRateW(40.0));
         make.height.mas_equalTo(KRateW(40.0));
     }];
     
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.view);
         make.top.equalTo(self.view.mas_top).offset(GK_STATUSBAR_NAVBAR_HEIGHT);
-        make.bottom.equalTo(self.addBtn.mas_top).offset(-KRateW(8.0));
+        make.bottom.equalTo(self.bottomView.mas_top);
     }];
 }
 
@@ -178,5 +195,16 @@
     [self.view addSubview:self.addBtn];
     
     return self.addBtn;
+}
+
+- (UIView *)bottomView{
+    if (_bottomView) {
+        return _bottomView;
+    }
+    self.bottomView = [UIView new];
+    self.bottomView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:self.bottomView];
+    
+    return self.bottomView;
 }
 @end

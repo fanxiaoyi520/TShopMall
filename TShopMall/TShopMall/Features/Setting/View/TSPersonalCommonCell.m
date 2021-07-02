@@ -42,17 +42,17 @@
     }];
     [self.detailLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.contentView.mas_centerY).with.offset(0);
-        make.right.equalTo(self.rightImgV.mas_left).with.offset(-13);
+        make.right.equalTo(self.rightImgV.mas_left).with.offset(-10);
         make.width.mas_lessThanOrEqualTo(150);
     }];
     [self.headImgV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.contentView.mas_centerY).with.offset(0);
-        make.right.equalTo(self.rightImgV.mas_left).with.offset(-13);
+        make.right.equalTo(self.rightImgV.mas_left).with.offset(-10);
         make.width.height.mas_equalTo(30);
     }];
     [self.sexImgV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.contentView.mas_centerY).with.offset(0);
-        make.right.equalTo(self.rightImgV.mas_left).with.offset(-13);
+        make.right.equalTo(self.rightImgV.mas_left).with.offset(-10);
         make.width.height.mas_equalTo(17);
     }];
     [self.rightImgV mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -106,6 +106,8 @@
     if (_headImgV == nil) {
         UIImageView *headImgV = [[UIImageView alloc] init];
         _headImgV = headImgV;
+        [_headImgV setCorners:UIRectCornerAllCorners radius:15];
+        _headImgV.clipsToBounds = YES;
         [self.contentView addSubview:_headImgV];
     }
     return _headImgV;

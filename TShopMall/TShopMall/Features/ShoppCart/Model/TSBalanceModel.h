@@ -154,6 +154,9 @@
 @property (nonatomic, copy) NSString *totalretailPrice;
 @property (nonatomic, copy) NSString *type;
 @property (nonatomic, copy) NSString *uuid;
+
+
+@property (nonatomic, copy, readonly) NSString *attrValueStr;
 @end
 
 

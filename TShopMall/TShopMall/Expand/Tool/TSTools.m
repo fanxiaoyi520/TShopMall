@@ -40,6 +40,49 @@
     BOOL isMatch = [pred evaluateWithObject:psw];
     return isMatch;
 }
+/** 获取时间间隔差 */
++ (NSTimeInterval)timeIntervalWithDate:(NSString *)dateString {
+    NSDate *date = [NSDate dateWithString:dateString format:@"yyyy-MM-dd HH:mm:ss.SSS"];
+    NSTimeInterval endInterval = [date timeIntervalSince1970];///获取时间戳
+    NSTimeInterval startInterval = [[NSDate date] timeIntervalSince1970];///获取当前时间戳
+    NSTimeInterval interval = endInterval - startInterval;
+    return interval;
+}
+/** 获取剩余时间 */
++ (NSString *)getRestTimeWithTimeInterval:(NSTimeInterval)interval {
+    if (interval > (24 * 60 * 60)) {///计算天数
+        NSInteger day = interval / (24 * 60 * 60);
+        NSInteger hourRest = (NSInteger)(interval) % (24 * 60 * 60);
+        NSInteger hour = hourRest / (60 * 60);
+        NSInteger minuteRest = hourRest % (60 * 60);
+        NSInteger minute = minuteRest / 60;
+        NSInteger second = minuteRest % 60;
+        return [NSString stringWithFormat:@"剩余时间%ld天 %02ld:%02ld:%02ld", (long)day, (long)hour, (long)minute, (long)second];
+    }
+    if (interval > (60 * 60)) {///小时
+        NSInteger hour = interval / (60 * 60);
+        NSInteger minuteRest = (NSInteger)(interval) % (60 * 60);
+        NSInteger minute = minuteRest / 60;
+        NSInteger second = minuteRest % 60;
+        return [NSString stringWithFormat:@"剩余时间 %02ld:%02ld:%02ld", (long)hour, (long)minute, (long)second];
+    }
+    if (interval > 60) {///分钟
+        NSInteger minute = interval / 60;
+        NSInteger second = (NSInteger)(interval) % 60;
+        return [NSString stringWithFormat:@"剩余时间 %02ld:%02ld", (long)minute, (long)second];
+    }
+    if (interval <= 60) {///秒
+        return [NSString stringWithFormat:@"剩余时间 %lds", (long)interval];
+    }
+    return @"账户已注销";
+}
+/** 获取20天后的时间 */
++ (NSString *)getAfter20DaysDate {
+    NSTimeInterval timeInterval = [[NSDate date] timeIntervalSince1970];
+    NSTimeInterval after20dayInterval = timeInterval + 20 * 24 * 60 * 60;
+    NSDate *day14date = [NSDate dateWithTimeIntervalSince1970:after20dayInterval];
+    return [day14date stringWithFormat:@"yyyy-MM-dd HH:mm:ss"];
+}
 
 /*
 + (BOOL)isPhoneNumber:(NSString *)phoneNumber {
