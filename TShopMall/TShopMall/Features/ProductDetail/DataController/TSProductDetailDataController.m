@@ -122,7 +122,7 @@
             TSGoodDetailItemHotModel *item = (TSGoodDetailItemHotModel *)[section.items firstObject];
             item.title = productName;
             item.content = adviceNote;
-            item.cellHeight = 8 + titleH + 4 + contentH + 16;
+            item.cellHeight = 23 + titleH + 4 + contentH + 11;
 
         }
         
@@ -561,7 +561,7 @@
 
     {   //下载图片 3
         TSGoodDetailItemDownloadImageModel *item = [[TSGoodDetailItemDownloadImageModel alloc] init];
-        item.cellHeight = 189;
+        item.cellHeight = 194;
         item.identify = @"TSGoodDetailImageCell";
 
         TSGoodDetailSectionModel *section = [[TSGoodDetailSectionModel alloc] init];
@@ -573,7 +573,7 @@
 
     {   //复制文案 4
         TSGoodDetailItemCopyModel *item = [[TSGoodDetailItemCopyModel alloc] init];
-        item.cellHeight = 151;
+        item.cellHeight = 198;
         item.identify = @"TSGoodDetailCopyWriterCell";
 
         TSGoodDetailSectionModel *section = [[TSGoodDetailSectionModel alloc] init];
@@ -585,7 +585,7 @@
 
     {   //所选商品规格参数等 5
         TSGoodDetailItemPurchaseModel *item = [[TSGoodDetailItemPurchaseModel alloc] init];
-        item.cellHeight = 172;
+        item.cellHeight = 126;
         item.identify = @"TSProductDetailPurchaseCell";
 
         TSGoodDetailSectionModel *section = [[TSGoodDetailSectionModel alloc] init];

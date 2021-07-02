@@ -199,6 +199,9 @@
         TSMineSectionOrderItemModel *item = (TSMineSectionOrderItemModel *)model.items[indexPath.row];
         
         if ([item.title isEqualToString: @"合伙人中心"]) {
+            NSString *path = @"https://testwap.tclo2o.cn/seller-app-h5/pages/mine/index";
+            TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:path];
+            [self.navigationController pushViewController:hybrid animated:YES];
            
         }else if ([item.title isEqualToString: @"官方服务"]) {
             TSOfficialServicesViewController *vc = [TSOfficialServicesViewController new];

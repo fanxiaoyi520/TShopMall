@@ -545,7 +545,6 @@
 		F55D2CD626785249006BACCF /* TSMineMoreButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2CD526785249006BACCF /* TSMineMoreButton.m */; };
 		F55D2CDB2678812E006BACCF /* TSProductDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2CDA2678812E006BACCF /* TSProductDetailController.m */; };
 		F55D2CDF26788193006BACCF /* TSProductDetailDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2CDE26788193006BACCF /* TSProductDetailDataController.m */; };
-		F55D2CE326788370006BACCF /* TSProductDetailNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2CE226788370006BACCF /* TSProductDetailNavigationBar.m */; };
 		F55D2CE626788721006BACCF /* TSProductDetailBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2CE526788721006BACCF /* TSProductDetailBottomView.m */; };
 		F55D2CE926788E27006BACCF /* TSDetailFunctionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2CE826788E27006BACCF /* TSDetailFunctionButton.m */; };
 		F55D2CEC2678A379006BACCF /* TSGoodDetailBannerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D2CEB2678A379006BACCF /* TSGoodDetailBannerCell.m */; };
@@ -1646,8 +1645,6 @@
 		F55D2CDA2678812E006BACCF /* TSProductDetailController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSProductDetailController.m; sourceTree = "<group>"; };
 		F55D2CDD26788193006BACCF /* TSProductDetailDataController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSProductDetailDataController.h; sourceTree = "<group>"; };
 		F55D2CDE26788193006BACCF /* TSProductDetailDataController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSProductDetailDataController.m; sourceTree = "<group>"; };
-		F55D2CE126788370006BACCF /* TSProductDetailNavigationBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSProductDetailNavigationBar.h; sourceTree = "<group>"; };
-		F55D2CE226788370006BACCF /* TSProductDetailNavigationBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSProductDetailNavigationBar.m; sourceTree = "<group>"; };
 		F55D2CE426788721006BACCF /* TSProductDetailBottomView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSProductDetailBottomView.h; sourceTree = "<group>"; };
 		F55D2CE526788721006BACCF /* TSProductDetailBottomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSProductDetailBottomView.m; sourceTree = "<group>"; };
 		F55D2CE726788E27006BACCF /* TSDetailFunctionButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSDetailFunctionButton.h; sourceTree = "<group>"; };
@@ -3977,8 +3974,6 @@
 				F55D2CE826788E27006BACCF /* TSDetailFunctionButton.m */,
 				F55D2D0C2679EEE2006BACCF /* TSTextImageButton.h */,
 				F55D2D0D2679EEE2006BACCF /* TSTextImageButton.m */,
-				F55D2CE126788370006BACCF /* TSProductDetailNavigationBar.h */,
-				F55D2CE226788370006BACCF /* TSProductDetailNavigationBar.m */,
 				F55D2CE426788721006BACCF /* TSProductDetailBottomView.h */,
 				F55D2CE526788721006BACCF /* TSProductDetailBottomView.m */,
 				F55D2CEA2678A379006BACCF /* TSGoodDetailBannerCell.h */,
@@ -4683,7 +4678,6 @@
 				C2EF88D52670B8B900E7374A /* TSCartBaseCell.m in Sources */,
 				F55D2CEC2678A379006BACCF /* TSGoodDetailBannerCell.m in Sources */,
 				F55D2CC826784ACD006BACCF /* TSMineImageTextCell.m in Sources */,
-				F55D2CE326788370006BACCF /* TSProductDetailNavigationBar.m in Sources */,
 				CE66DB0A2684AA7C00E8D433 /* TSBankCardCell.m in Sources */,
 				F55D2C362671E14B006BACCF /* TSUniversalHeaderView.m in Sources */,
 				F54973672668A22100181E3F /* SSNetworkAlertUtil.m in Sources */,

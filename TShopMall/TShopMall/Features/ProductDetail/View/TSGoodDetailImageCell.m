@@ -42,14 +42,14 @@
     [self.bgView addSubview:self.downloadBtn];
     [self.bgView addSubview:self.downloadImageBtn];
     [self.bgView addSubview:self.collectionView];
-    [self.bgView addSubview:self.promtLabel];
+//    [self.bgView addSubview:self.promtLabel];
 
     [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.contentView);
     }];
     
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.bgView).offset(15);
+        make.left.equalTo(self.bgView).offset(16);
         make.top.equalTo(self.bgView).offset(14);
         make.height.mas_equalTo(20);
     }];
@@ -64,22 +64,22 @@
     [self.downloadImageBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.bgView.mas_right).offset(-15);
         make.bottom.equalTo(self.bgView.mas_bottom).offset(-16);
-        make.height.mas_equalTo(20);
-        make.width.mas_equalTo(70);
+        make.height.mas_equalTo(24);
+        make.width.mas_equalTo(84);
     }];
     
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.bgView).offset(16);
-        make.right.equalTo(self.bgView).offset(-19);
+        make.right.equalTo(self.bgView).offset(0);
         make.top.equalTo(self.bgView).offset(48);
-        make.bottom.equalTo(self.bgView).offset(-51);
+        make.bottom.equalTo(self.bgView).offset(-56);
     }];
     
-    [self.promtLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.bottom.equalTo(self.collectionView);
-        make.right.equalTo(self.collectionView.mas_right).offset(19);
-        make.width.mas_equalTo(19);
-    }];
+//    [self.promtLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.bottom.equalTo(self.collectionView);
+//        make.right.equalTo(self.collectionView.mas_right).offset(19);
+//        make.width.mas_equalTo(19);
+//    }];
 }
 
 #pragma mark - Actions
@@ -160,8 +160,14 @@
 -(UIButton *)downloadImageBtn{
     if (!_downloadImageBtn) {
         _downloadImageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_downloadImageBtn setImage:KImageMake(@"mall_detail_ download_image") forState:UIControlStateNormal];
-        [_downloadImageBtn setImage:KImageMake(@"mall_detail_ download_image") forState:UIControlStateHighlighted];
+        [_downloadImageBtn setTitle:@"下载图片" forState:UIControlStateNormal];
+        [_downloadImageBtn setTitleColor:KHexColor(@"#FF4D49") forState:UIControlStateNormal];
+        [_downloadImageBtn setTitleColor:KHexColor(@"#FF4D49") forState:UIControlStateNormal];
+        _downloadImageBtn.titleLabel.font = KRegularFont(12);
+        _downloadImageBtn.layer.cornerRadius = 12;
+        _downloadImageBtn.layer.borderColor = KHexColor(@"#FF4D49").CGColor;
+        _downloadImageBtn.layer.borderWidth = 0.85;
+        _downloadImageBtn.clipsToBounds = YES;
         [_downloadImageBtn addTarget:self action:@selector(downloadImageAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _downloadImageBtn;

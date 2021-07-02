@@ -6,7 +6,6 @@
 //
 
 #import "TSProductDetailController.h"
-#import "TSProductDetailNavigationBar.h"
 #import "TSProductDetailBottomView.h"
 #import "TSUniversalFlowLayout.h"
 #import "TSProductDetailDataController.h"
@@ -162,6 +161,7 @@
     [cartBtn setBadgeBGColor:UIColor.redColor];
     [cartBtn setBadgeOriginX:17];
     [cartBtn setBadgeTextColor:UIColor.whiteColor];
+    [cartBtn setShouldHideBadgeAtZero:YES];
     [cartBtn setShouldAnimateBadge:YES];
     self.topCartBtn = cartBtn;
     
