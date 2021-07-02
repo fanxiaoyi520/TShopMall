@@ -21,7 +21,7 @@
     _maxPrice = maxPrice;
     
     if (!maxPrice) {
-        maxPrice= @"0";
+        maxPrice = @"0";
     }
     
     self.right_label.text = [NSString stringWithFormat:@"¥%@", maxPrice];
@@ -29,7 +29,7 @@
 
 - (instancetype)init
 {
-    self = [super initWithFrame:CGRectMake(0, 0, KRateW(69), KRateW(18))];
+    self = [super initWithFrame:CGRectMake(0, 0, 69, 18)];
     if (self) {
         //right
         self.right_img = [[UIImageView alloc] initWithImage:KImageMake(@"mall_category_maxPrice_right")];
@@ -49,6 +49,7 @@
         self.right_label = [UILabel new];
         self.right_label.font = KRegularFont(9);
         self.right_label.textColor = KWhiteColor;
+        self.right_label.textAlignment = NSTextAlignmentCenter;
         [self addSubview:self.right_label];
         
         [self.right_img mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -57,7 +58,7 @@
         
         [self.left_img mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.left.bottom.offset(0);
-            make.width.offset(KRateW(33.7));
+            make.width.offset(33.7);
         }];
         
         [self.left_label mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -65,7 +66,7 @@
         }];
         
         [self.right_label mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.left_img.mas_right).offset(2);
+            make.left.equalTo(self.left_img.mas_right);
             make.top.right.bottom.equalTo(self);
         }];
         

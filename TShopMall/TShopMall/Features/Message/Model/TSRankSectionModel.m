@@ -11,6 +11,10 @@
 
 @end
 
+@implementation TSRankUserModel
+
+@end
+
 @implementation TSRankSectionItemModel
 
 @end

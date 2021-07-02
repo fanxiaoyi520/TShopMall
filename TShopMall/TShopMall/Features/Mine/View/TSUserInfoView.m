@@ -93,6 +93,7 @@
         make.centerY.equalTo(self.loginButton.mas_centerY);
 //        make.top.equalTo(self.iconImageView).offset(7);
         make.height.mas_equalTo(17);
+        make.left.greaterThanOrEqualTo(self.loginButton.mas_right);
     }];
     
    
@@ -108,14 +109,14 @@
         make.right.equalTo(self).offset(-24);
         make.top.equalTo(self.iconImageView).offset(30);
         make.height.mas_equalTo(18);
-        make.width.mas_equalTo(45);
+//        make.width.mas_equalTo(45);
     }];
 }
 
 #pragma mark - data
 - (void)setModel:(TSMineMerchantUserInformationModel *)model {
     if (!model) return;
-    
+    _model = model;
     [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:[TSGlobalManager shareInstance].currentUserInfo.user.avatar] placeholderImage:nil];
     [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:model.customerImgUrl] placeholderImage:nil];
     if ([TSGlobalManager shareInstance].currentUserInfo) {
@@ -147,7 +148,13 @@
         self.seeCodeBtn.hidden = NO;
         self.kCopyCodeBtn.hidden = NO;
         self.invitationCodeLab.hidden = NO;
-        self.invitationCodeLab.text = [NSString stringWithFormat:@"邀请码 %@",model.invitationCode];
+        if (model.eyeIsOn) {
+            self.invitationCodeLab.text = [NSString stringWithFormat:@"邀请码: %@",model.invitationCode];
+        } else {
+            self.invitationCodeLab.text =  @"邀请码: ***";
+        }
+        _seeCodeBtn.selected = model.eyeIsOn;
+       
     }
 }
 
@@ -162,10 +169,12 @@
 
 -(void)seeCodeAction:(UIButton *)sender {
     if (sender.selected) {
-        self.invitationCodeLab.hidden = YES;
+//        self.invitationCodeLab.hidden = YES;
+        _invitationCodeLab.text = @"邀请码 ***";
         sender.selected = NO;
     } else {
-        self.invitationCodeLab.hidden = NO;
+        _invitationCodeLab.text = [NSString stringWithFormat:@"邀请码 %@",_model.invitationCode];
+//        self.invitationCodeLab.hidden = NO;
         sender.selected = YES;
     }
     if ([self.kDelegate respondsToSelector:@selector(userInfoSeeCodeAction:)]) {

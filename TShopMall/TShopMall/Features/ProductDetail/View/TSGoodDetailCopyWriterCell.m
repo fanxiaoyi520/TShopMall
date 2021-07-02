@@ -36,23 +36,23 @@
     }];
     
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.bgView).offset(15);
+        make.left.equalTo(self.bgView).offset(16);
         make.top.equalTo(self.bgView).offset(14);
         make.height.mas_equalTo(20);
     }];
     
     [self.downloadBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.bgView.mas_right).offset(-15);
-        make.centerY.equalTo(self.titleLabel);
-        make.height.mas_equalTo(20);
-        make.width.mas_equalTo(70);
+        make.right.equalTo(self.bgView.mas_right).offset(-16);
+        make.bottom.equalTo(self.bgView.mas_bottom).offset(-14);
+        make.height.mas_equalTo(24);
+        make.width.mas_equalTo(84);
     }];
     
     [self.textView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.bgView.mas_right).offset(-15);
-        make.left.equalTo(self.bgView.mas_left).offset(15);
-        make.bottom.equalTo(self.bgView.mas_bottom).offset(-15);
-        make.top.equalTo(self.downloadBtn.mas_bottom).offset(13);
+        make.right.equalTo(self.bgView.mas_right).offset(-16);
+        make.left.equalTo(self.bgView.mas_left).offset(16);
+        make.bottom.equalTo(self.downloadBtn.mas_top).offset(-14);
+        make.top.equalTo(self.bgView.mas_top).offset(48);
     }];
 }
 
@@ -91,8 +91,14 @@
 -(UIButton *)downloadBtn{
     if (!_downloadBtn) {
         _downloadBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_downloadBtn setImage:KImageMake(@"mall_detail_ copy") forState:UIControlStateNormal];
-        [_downloadBtn setImage:KImageMake(@"mall_detail_ copy") forState:UIControlStateHighlighted];
+        [_downloadBtn setTitle:@"复制文案" forState:UIControlStateNormal];
+        [_downloadBtn setTitleColor:KHexColor(@"#FF4D49") forState:UIControlStateNormal];
+        [_downloadBtn setTitleColor:KHexColor(@"#FF4D49") forState:UIControlStateNormal];
+        _downloadBtn.titleLabel.font = KRegularFont(12);
+        _downloadBtn.layer.cornerRadius = 12;
+        _downloadBtn.layer.borderColor = KHexColor(@"#FF4D49").CGColor;
+        _downloadBtn.layer.borderWidth = 0.85;
+        _downloadBtn.clipsToBounds = YES;
         [_downloadBtn addTarget:self action:@selector(downloadAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _downloadBtn;
@@ -102,7 +108,8 @@
     if (!_textView) {
         _textView = [[UITextView alloc] init];
         _textView.backgroundColor = KHexColor(@"#F4F4F4");
-        _textView.font = KRegularFont(10);
+        _textView.font = KRegularFont(12);
+        _textView.textColor = KHexAlphaColor(@"#2D3132", 0.8);
         _textView.text = @"";
         [_textView setEditable:NO];
         [_textView setCorners:UIRectCornerAllCorners radius:8];

@@ -63,9 +63,9 @@
         } else {
             self.sections = self.dataCon.lists;
         }
-        BOOL isNoMoreData = YES;
+        BOOL isNoMoreData = NO;
         if (self.dataCon.totalNum == self.dataCon.currentNum) {
-            isNoMoreData = NO;
+            isNoMoreData = YES;
         }
         [weakSelf endRefreshIsNoMoreData:isNoMoreData isEmptyData:weakSelf.dataCon.isEmptyView];
     }];

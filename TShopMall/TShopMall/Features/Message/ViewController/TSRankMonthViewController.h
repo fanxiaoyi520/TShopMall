@@ -6,13 +6,12 @@
 //
 
 #import "TSBaseListController.h"
-//#import "TSRankSectionModel.h"
 #import "TSRankDataController.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TSRankMonthViewController : TSBaseListController<JXCategoryListContentViewDelegate>
 
-//@property (nonatomic, strong) NSMutableArray <TSRankSectionModel *> *coronalSections;
 @property(nonatomic, strong) TSRankDataController *dataController;
 
 @end

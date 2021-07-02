@@ -113,7 +113,7 @@
     SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
     req.bText = NO;
     req.message = message;
-    req.scene = WXScene;
+    req.scene = (int) WXScene;
     [WXApi sendReq:req completion:^(BOOL success) {
         //
         if (success == NO) {
@@ -123,22 +123,22 @@
 }
 
 //分享小程序
--(void)shareWXSmallCodeImage:(UIImage *)image andParams:(NSDictionary *)params{
+-(void)shareWXSmallCodeImage:(UIImage *)image andUserName:(NSString *)userName andPath:(NSString *)path andParams:(NSDictionary *)params{
     if (![WXApi isWXAppInstalled]) {
         [Popover popToastOnWindowWithText:@"请安装微信再进行分享~"];
         return;
     }
 
     WXMiniProgramObject *object = [WXMiniProgramObject object];
-    object.webpageUrl = @"https://www.tcl.com/";
+//    object.webpageUrl = @"https://www.tcl.com/";
 //    object.userName = @"gh_99b9b7fce84a";
-//    object.userName = @"gh_649704435091";
-    object.userName = @"gh_2e76decadbc8";//生产
+    object.userName = userName;
+//    object.userName = @"gh_2e76decadbc8";//生产
     /** 小程序页面的路径
      * @attention 不填默认拉起小程序首页
      */
     
-    NSString *path = [NSString stringWithFormat:@"pages/index/index?storeUuid=%@",params[@"storeUuid"]];
+//    NSString *path = [NSString stringWithFormat:@"pages/index/index?storeUuid=%@",params[@"storeUuid"]];
     
     object.path = path;
     /** 小程序新版本的预览图
@@ -160,9 +160,37 @@
     req.message = message;
     req.scene = WXSceneSession;  //目前只支持会话
     [WXApi sendReq:req completion:^(BOOL success) {
-        
+        if (success == NO) {
+            [Popover popToastOnWindowWithText:@"分享失败"];
+        }
     }];
 }
+- (void)lanchWXWithUserName:(NSString *)userName andPath:(NSString *)path  andExtMsg:(NSString *)msg andExtDic:(NSDictionary *)dic {
+    if (![WXApi isWXAppInstalled]) {
+        [Popover popToastOnWindowWithText:@"请安装微信再进行分享~"];
+        return;
+    }
+
+    WXLaunchMiniProgramReq *object = [WXLaunchMiniProgramReq object];
+    object.userName = userName;
+    object.path = path;
+    object.extMsg = msg;
+    object.extDic = dic;
+    //正式版
+    object.miniProgramType = WXMiniProgramTypeRelease;
+    WXMediaMessage *message = [WXMediaMessage message];
+    message.mediaObject = object;
+    SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
+    req.bText = NO;
+    req.message = message;
+    req.scene = WXSceneSession;  //目前只支持会话
+    [WXApi sendReq:req completion:^(BOOL success) {
+        if (success == NO) {
+            [Popover popToastOnWindowWithText:@"打开小程序失败"];
+        }
+    }];
+}
+
 - (NSData *)imageWithImage:(UIImage*)image scaledToSize:(CGSize)newSize;{
     UIGraphicsBeginImageContext(newSize);
     [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
