@@ -26,6 +26,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param complete 获取完成回调
 - (void)fetchRankDataWithRankNum:(NSInteger)rankNum Complete:(void(^)(BOOL isSucess))complete;
 
+@property (nonatomic, strong) TSRankUserModel * currentUserRankModel;
+
 @end
 
 NS_ASSUME_NONNULL_END

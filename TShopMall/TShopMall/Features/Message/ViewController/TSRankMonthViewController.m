@@ -37,6 +37,17 @@
         [self.tableView.mj_header endRefreshing];
         
         if (isSucess) {
+            //当前用户
+            TSRankUserModel *userModel = self.dataController.currentUserRankModel;
+            [self.personalRankView.headImgV sd_setImageWithURL:[NSURL URLWithString:userModel.imageUrl] placeholderImage:KImageMake(@"mall_setting_defautlhead")];
+            self.personalRankView.usernameLabel.text = userModel.userName;
+            self.personalRankView.rankNumLabel.text = userModel.rank;
+            if (userModel.money.integerValue > 0) {
+                self.personalRankView.salesNumLabel.text = [NSString stringWithFormat:@"¥%@", userModel.money];
+            }else {
+                self.personalRankView.salesNumLabel.text = userModel.money;
+            }
+            
             self.background_imgView.hidden = self.dataController.coronalSections.count == 0;
             [self.tableView reloadData];
         }

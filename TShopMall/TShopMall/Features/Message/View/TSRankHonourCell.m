@@ -6,6 +6,7 @@
 //
 
 #import "TSRankHonourCell.h"
+#import "TSRankSectionModel.h"
 
 @interface TSRankHonourCell()
 /// 背景视图
@@ -279,6 +280,38 @@
         [self.contentView addSubview: _thirdIconImgV];
     }
     return _thirdIconImgV;
+}
+
+- (void)setData:(id)data {
+    self.championIconImgV.image = KImageMake(@"mall_setting_defautlhead");
+    self.championLabel.text = @"等待上榜";
+    self.secondIconImgV.image = KImageMake(@"mall_setting_defautlhead");
+    self.secondLabel.text = @"等待上榜";
+    self.thirdIconImgV.image = KImageMake(@"mall_setting_defautlhead");
+    self.thirdLabel.text = @"等待上榜";
+    
+    TSRankSectionItemModel *item = (TSRankSectionItemModel *)data;
+    
+    //冠军
+    if (item.rankList.count > 0) {
+        TSRankUserModel *userModel = item.rankList[0];
+        [self.championIconImgV sd_setImageWithURL:[NSURL URLWithString:userModel.imageUrl] placeholderImage:KImageMake(@"mall_setting_defautlhead")];
+        self.championLabel.text = userModel.userName;
+        
+        //亚军
+        if (item.rankList.count > 1) {
+            TSRankUserModel *userModel = item.rankList[1];
+            [self.secondIconImgV sd_setImageWithURL:[NSURL URLWithString:userModel.imageUrl] placeholderImage:KImageMake(@"mall_setting_defautlhead")];
+            self.secondLabel.text = userModel.userName;
+            
+            //季军
+            if (item.rankList.count > 2) {
+                TSRankUserModel *userModel = item.rankList[2];
+                [self.thirdIconImgV sd_setImageWithURL:[NSURL URLWithString:userModel.imageUrl] placeholderImage:KImageMake(@"mall_setting_defautlhead")];
+                self.thirdLabel.text = userModel.userName;
+            }
+        }
+    }
 }
 
 
