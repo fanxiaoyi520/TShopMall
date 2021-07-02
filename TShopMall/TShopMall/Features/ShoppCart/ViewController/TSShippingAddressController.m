@@ -10,6 +10,7 @@
 #import "TSShippingAddressDataController.h"
 #import "TSAddressEditController.h"
 #import "TSEmptyAlertView.h"
+#import "TSAlertView.h"
 
 @interface TSShippingAddressController ()<UITableViewDelegate, UITableViewDataSource>{
     NSArray<TSAddressModel *> *addresses;
@@ -112,9 +113,11 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
     TSShippingAddressCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     
-    [TSShippingAddressDataController deleteAddress:cell.addressModel finished:^{
-        [self fetchAddress];
-    } lodingView:self.view];
+    TSAlertView.new.alertInfo(nil, @"确认删除选中商品吗？").confirm(@"确定", ^{
+        [TSShippingAddressDataController deleteAddress:cell.addressModel finished:^{
+            [self fetchAddress];
+        } lodingView:self.view];
+    }).cancel(@"取消", ^{}).show();
     
 }
 
