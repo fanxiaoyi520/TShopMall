@@ -104,12 +104,15 @@
 
 -(void)fetchProductDetailData{
     dispatch_group_t group = dispatch_group_create();
+    
+    __block BOOL result = YES;
+    
     //商品详情
     NSMutableArray *sections = [self.dataController fetchProductDetailWithUuid:self.uuid
                                                            isRequireEnterGroup:YES
                                                                          group:group
                                                                       complete:^(BOOL isSucess) {
-            
+        result = isSucess;
     }];
     
     if (sections.count > 0) {
@@ -124,9 +127,15 @@
     }];
     
     dispatch_group_notify(group, dispatch_get_main_queue(), ^{
-        [self.collectionView reloadData];
-        [self.topCartBtn setBadgeValue:self.dataController.cartNumber];
-        [self fetchFreightInventory];
+        if (result) {
+            [self.collectionView reloadData];
+            [self.topCartBtn setBadgeValue:self.dataController.cartNumber];
+            [self fetchFreightInventory];
+        }else{
+            self.stockoutView.hidden = NO;
+            self.stockoutView.content = self.dataController.errorMsg;
+        }
+
     });
 }
 
@@ -315,11 +324,14 @@
 - (void)mjHeadreRefresh:(MJRefreshNormalHeader *)mj_header {
 
     dispatch_group_t group = dispatch_group_create();
+    
+    __block BOOL result = YES;
+    
     [self.dataController fetchProductDetailWithUuid:self.uuid
                                 isRequireEnterGroup:YES
                                               group:group
                                            complete:^(BOOL isSucess) {
-            
+        result = isSucess;
     }];
     
     //购物车角标
@@ -331,9 +343,15 @@
     
     dispatch_group_notify(group, dispatch_get_main_queue(), ^{
         [self.collectionView.mj_header endRefreshing];
-        [self.collectionView reloadData];
-        [self.topCartBtn setBadgeValue:self.dataController.cartNumber];
-        [self fetchFreightInventory];
+        
+        if (result) {
+            [self.collectionView reloadData];
+            [self.topCartBtn setBadgeValue:self.dataController.cartNumber];
+            [self fetchFreightInventory];
+        }else{
+            self.stockoutView.hidden = NO;
+            self.stockoutView.content = self.dataController.errorMsg;
+        }
     });
 }
 
