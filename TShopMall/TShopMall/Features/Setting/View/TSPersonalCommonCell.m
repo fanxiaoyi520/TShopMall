@@ -106,6 +106,8 @@
     if (_headImgV == nil) {
         UIImageView *headImgV = [[UIImageView alloc] init];
         _headImgV = headImgV;
+        [_headImgV setCorners:UIRectCornerAllCorners radius:15];
+        _headImgV.clipsToBounds = YES;
         [self.contentView addSubview:_headImgV];
     }
     return _headImgV;

@@ -7,7 +7,7 @@
 
 #import "TSDatePickerView.h"
 
-#define MAXYEAR 2099
+//#define MAXYEAR 2099
 #define MINYEAR 1900
 
 @interface TSDatePickerView ()<UIPickerViewDelegate>
@@ -17,8 +17,10 @@
     NSInteger monthIndex;
     NSInteger dayIndex;
     NSDate *_startDate;
-    
     NSInteger preRow;
+    NSInteger _maxYear;
+    NSInteger _maxMonth;
+    NSInteger _maxDay;
 }
 /** 背景视图 */
 @property(nonatomic, weak) UIView *contentView;
@@ -114,19 +116,29 @@
     self.dayArray = [NSMutableArray array];
     self.yearArray = [NSMutableArray array];
     self.monthArray = [NSMutableArray array];
-    for (int i = 0; i < 60; i++) {
+    
+    NSDate *currentDate = [NSDate date];
+    
+    _maxYear = [[currentDate stringWithFormat:@"yyyy"] integerValue];
+    
+    _maxMonth = [[currentDate stringWithFormat:@"MM"] integerValue];
+    
+    _maxDay = [[currentDate stringWithFormat:@"dd"] integerValue];
+    
+    for (int i = 1; i < 32; i++) {
         NSString *num = [NSString stringWithFormat:@"%02d", i];
-        if (i > 0 && i <= 12)
+        if (i <= 12) {
             [_monthArray addObject:num];
+        }
     }
-    for (NSInteger i = MINYEAR; i <= MAXYEAR; i++) {
+    for (NSInteger i = MINYEAR; i <= _maxYear; i++) {
         NSString *num = [NSString stringWithFormat:@"%ld",(long)i];
         [_yearArray addObject:num];
     }
     
     //最大最小限制
     if (!self.maxLimitDate) {
-        self.maxLimitDate = [NSDate dateWithString:@"2099-12-31" format:@"yyyy-MM-dd"];
+        self.maxLimitDate = [NSDate dateWithString:[currentDate stringWithFormat:@"yyyy-MM-dd"] format:@"yyyy-MM-dd"];
     }
     //最小限制
     if (!self.minLimitDate) {
@@ -289,7 +301,7 @@
     if (component == 0 || component == 1){
         [self DaysfromYear:[_yearArray[yearIndex] integerValue] andMonth:[_monthArray[monthIndex] integerValue]];
         if (_dayArray.count - 1 < dayIndex) {
-            dayIndex = _dayArray.count-1;
+            dayIndex = _dayArray.count - 1;
         }
     }
     
@@ -314,7 +326,17 @@
 - (NSArray *)getNumberOfRowsInComponent {
     NSInteger yearNum = _yearArray.count;
     NSInteger monthNum = _monthArray.count;
-    NSInteger dayNum = [self DaysfromYear:[_yearArray[yearIndex] integerValue] andMonth:[_monthArray[monthIndex] integerValue]];
+    NSInteger dayNum = 0;
+    if (yearIndex + MINYEAR == _maxYear) {
+        monthNum = _maxMonth;
+        if (_maxMonth == monthIndex + 1) {
+            dayNum = _maxDay;
+        } else {
+            dayNum = [self DaysfromYear:[_yearArray[yearIndex] integerValue] andMonth:[_monthArray[monthIndex] integerValue]];
+        }
+    } else {
+        dayNum = [self DaysfromYear:[_yearArray[yearIndex] integerValue] andMonth:[_monthArray[monthIndex] integerValue]];
+    }
     return @[@(yearNum), @(monthNum), @(dayNum)];
 }
 
