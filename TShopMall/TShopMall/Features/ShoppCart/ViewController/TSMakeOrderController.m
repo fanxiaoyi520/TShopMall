@@ -62,7 +62,8 @@
     TSShippingAddressController *con = [TSShippingAddressController new];
     con.addressSelected = ^(TSAddressModel * _Nonnull address) {
         [weakSelf.dataCon updateAddressSection:address];
-        [weakSelf refreshData];
+//        [weakSelf refreshData];
+        weakSelf.makeOrderView.sections = weakSelf.dataCon.sections;
     };
     [self.navigationController pushViewController:con animated:YES];
 }
