@@ -23,6 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy) NSString *icon;
 /** 标题 */
 @property(nonatomic, copy) NSString *title;
+/** 是否被选中  */
+@property(nonatomic, assign, getter=isSelected) BOOL selected;
 
 @end
 

@@ -7,6 +7,7 @@
 
 #import "TSCommitCell.h"
 #import "TSAccountCancelSectionModel.h"
+#import "TSTools.h"
 
 @interface TSCommitCell ()
 /** 取消 */
@@ -54,7 +55,12 @@
 
 - (void)setDelegate:(id<UniversalCollectionViewCellDataDelegate>)delegate {
     TSAccountCancelSectionItemModel *item = [delegate universalCollectionViewCellModel:self.indexPath];
-    [self.commitButton setTitle:item.title forState:UIControlStateNormal];
+    NSTimeInterval interval = [TSTools timeIntervalWithDate:item.dropTime];
+    if (interval <= 0) {
+        self.commitButton.hidden = YES;
+    } else {
+        [self.commitButton setTitle:item.title forState:UIControlStateNormal];
+    }
 }
 
 @end

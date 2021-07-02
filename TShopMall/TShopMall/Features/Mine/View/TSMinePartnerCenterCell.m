@@ -8,6 +8,58 @@
 #import "TSMinePartnerCenterCell.h"
 #import "TSMineMoreButton.h"
 #import "TSPartnerCenterData.h"
+
+@interface TSMinePartnerCenterCellItem : UIView
+@property(nonatomic, strong) UILabel *title;
+@property(nonatomic, strong) UILabel *detailL;
+@end
+
+@implementation TSMinePartnerCenterCellItem
+
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self addSubview:self.title];
+        [self addSubview:self.detailL];
+        [self.title mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(self);
+            make.top.equalTo(self.mas_centerY).offset(2);
+        }];
+        
+        [self.detailL mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(self);
+            make.bottom.equalTo(self.mas_centerY).offset(-2);
+        }];
+    }
+    return self;
+}
+
+
+-(UILabel *)title{
+    if (!_title) {
+        _title = [[UILabel alloc] init];
+        _title.font = KFont(PingFangSCRegular, 12);
+        _title.textAlignment = NSTextAlignmentCenter;
+        _title.textColor = KHexColor(@"#666666");
+        _title.text = @"自身贡献收入";
+    }
+    return _title;
+}
+
+-(UILabel *)detailL{
+    if (!_detailL) {
+        _detailL = [[UILabel alloc] init];
+        _detailL.font = KFont(PingFangSCMedium, 18);
+        _detailL.textAlignment = NSTextAlignmentCenter;
+        _detailL.textColor = KHexColor(@"#FF6460");
+        _detailL.text = @"¥2380";
+    }
+    return _detailL;
+}
+@end
+
 @interface TSMinePartnerCenterCell()
 
 /// 标题
@@ -20,18 +72,16 @@
 @property(nonatomic, strong) UIView *seperateView;
 
 //累计订单
-@property(nonatomic, strong) UILabel *orderLabel;
-@property(nonatomic, strong) UILabel *orderValueLabel;
+@property(nonatomic, strong) TSMinePartnerCenterCellItem *orderItem;
 
-@property(nonatomic, strong) UILabel *moneyLabel;
-@property(nonatomic, strong) UILabel *moneyValueLabel;
+@property(nonatomic, strong) TSMinePartnerCenterCellItem *moneyItem;
 
-@property(nonatomic, strong) UILabel *contributeLabel;
-@property(nonatomic, strong) UILabel *contributeValueLabel;
+@property(nonatomic, strong) TSMinePartnerCenterCellItem *contributeItem;
 
-@property(nonatomic, strong) UILabel *partnerLabel;
-@property(nonatomic, strong) UILabel *partnerValueLabel;
+@property(nonatomic, strong) TSMinePartnerCenterCellItem *partnerItem;
 
+@property(nonatomic, strong) UIStackView *topStackView;
+@property(nonatomic, strong) UIStackView *bottomStackView;
 @end
 
 @implementation TSMinePartnerCenterCell
@@ -42,14 +92,9 @@
     [self.contentView addSubview:self.moreButton];
     [self.contentView addSubview:self.eyeButton];
     [self.contentView addSubview:self.seperateView];
-    [self.contentView addSubview:self.partnerValueLabel];
-    [self.contentView addSubview:self.partnerLabel];
-    [self.contentView addSubview:self.contributeLabel];
-    [self.contentView addSubview:self.contributeValueLabel];
-    [self.contentView addSubview:self.orderLabel];
-    [self.contentView addSubview:self.orderValueLabel];
-    [self.contentView addSubview:self.moneyLabel];
-    [self.contentView addSubview:self.moneyValueLabel];
+    [self.contentView addSubview:self.topStackView];
+    [self.contentView addSubview:self.bottomStackView];
+    
     
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contentView).offset(16);
@@ -65,7 +110,7 @@
     }];
     
     [self.moreButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.contentView).offset(-16);
+        make.right.equalTo(self.contentView).offset(-20);
         make.centerY.equalTo(self.titleLabel);
         make.height.mas_equalTo(20);
         make.width.mas_equalTo(80);
@@ -78,89 +123,68 @@
         make.top.equalTo(self.titleLabel.mas_bottom).offset(7);
     }];
     
-    [self.partnerLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.contentView.mas_bottom).offset(-14);
-        make.left.equalTo(self.contentView.mas_centerX);
-        make.right.equalTo(self.contentView);
-        make.height.mas_equalTo(17);
+    [self.topStackView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.seperateView.mas_bottom);
+        make.right.left.equalTo(self.contentView);
+        make.height.mas_equalTo(67);
     }];
     
-    [self.partnerValueLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.partnerLabel.mas_top).offset(-3);
-        make.height.mas_equalTo(22);
-        make.left.equalTo(self.contentView.mas_centerX);
-        make.right.equalTo(self.contentView);
+    [self.bottomStackView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.topStackView.mas_bottom);
+        make.right.left.bottom.equalTo(self.contentView);
+        make.height.mas_equalTo(0);
     }];
-    
-    [self.contributeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.contentView.mas_bottom).offset(-14);
-        make.right.equalTo(self.contentView.mas_centerX);
-        make.left.equalTo(self.contentView);
-        make.height.mas_equalTo(17);
-    }];
-    
-    [self.contributeValueLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.contributeLabel.mas_top).offset(-3);
-        make.height.mas_equalTo(22);
-        make.right.equalTo(self.contentView.mas_centerX);
-        make.left.equalTo(self.contentView);
-    }];
-    
-    [self.orderLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.contributeValueLabel.mas_top).offset(-20);
-        make.right.equalTo(self.contentView.mas_centerX);
-        make.left.equalTo(self.contentView);
-        make.height.mas_equalTo(17);
-    }];
-    
-    [self.orderValueLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.orderLabel.mas_top).offset(-3);
-        make.height.mas_equalTo(22);
-        make.right.equalTo(self.contentView.mas_centerX);
-        make.left.equalTo(self.contentView);
-    }];
-    
-    [self.moneyLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.orderLabel);
-        make.left.equalTo(self.contentView.mas_centerX);
-        make.right.equalTo(self.contentView);
-        make.height.mas_equalTo(17);
-    }];
-    
-    [self.moneyValueLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.orderValueLabel);
-        make.height.mas_equalTo(22);
-        make.left.equalTo(self.contentView.mas_centerX);
-        make.right.equalTo(self.contentView);
-    }];
+
+   
 }
 
 - (void)setDelegate:(id<UniversalCollectionViewCellDataDelegate>)delegate {
     [super setDelegate:delegate];
     TSPartnerCenterData *model = [delegate universalCollectionViewCellModel:self.indexPath];
+    if (model.eyeIsOn) {
+        _orderItem.detailL.text = [NSString stringWithFormat:@"¥%@",model.orderNum];
+        _moneyItem.detailL.text = [NSString stringWithFormat:@"¥%@",model.orderMoney];
+        _contributeItem.detailL.text = [NSString stringWithFormat:@"¥%@",model.profitFromMyself];
+        _partnerItem.detailL.text = [NSString stringWithFormat:@"¥%@",model.profitFromPartner];
+        _orderItem.detailL.textColor = KHexColor(@"#FF6460");
+        _moneyItem.detailL.textColor = KHexColor(@"#FF6460");
+        _contributeItem.detailL.textColor = KHexColor(@"#FF6460");
+        _partnerItem.detailL.textColor = KHexColor(@"#FF6460");
+    } else {
+        _orderItem.detailL.text = @"****";
+        _moneyItem.detailL.text = @"****";
+        _contributeItem.detailL.text = @"****";
+        _partnerItem.detailL.text = @"****";
+        _orderItem.detailL.textColor = KHexColor(@"#333333");
+        _moneyItem.detailL.textColor = KHexColor(@"#333333");
+        _contributeItem.detailL.textColor = KHexColor(@"#333333");
+        _partnerItem.detailL.textColor = KHexColor(@"#333333");
+    }
     
-    _orderValueLabel.text = [NSString stringWithFormat:@"¥%@",model.orderNum];
-    _moneyValueLabel.text = [NSString stringWithFormat:@"¥%@",model.orderMoney];
-    _contributeValueLabel.text = [NSString stringWithFormat:@"¥%@",model.profitFromMyself];
-    _partnerValueLabel.text = [NSString stringWithFormat:@"¥%@",model.profitFromPartner];
-    if (![model.salesmanRankLevel isEqualToString: @"1"]) {
-        self.partnerLabel.hidden = YES;
-        self.partnerValueLabel.hidden = YES;
-        [self.contributeLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(self.contentView.mas_right);;
-        }];
-        [self.contributeValueLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(self.contentView.mas_right);
+    [self.topStackView.arrangedSubviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [obj removeFromSuperview];
+    }];
+    [self.bottomStackView.arrangedSubviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [obj removeFromSuperview];
+    }];
+    if ([model.salesmanRankLevel isEqualToString: @"1"]) {
+        
+        [self.topStackView addArrangedSubview:self.orderItem];
+        [self.topStackView addArrangedSubview:self.contributeItem];
+        [self.bottomStackView addArrangedSubview:self.moneyItem];
+        [self.bottomStackView addArrangedSubview:self.partnerItem];
+        self.bottomStackView.hidden = NO;
+        [self.bottomStackView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(67);
         }];
     } else {
-        [self.contributeLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(self.contentView.mas_centerX);;
+        [self.topStackView addArrangedSubview:self.orderItem];
+        [self.topStackView addArrangedSubview:self.contributeItem];
+        [self.topStackView addArrangedSubview:self.moneyItem];
+        self.bottomStackView.hidden = YES;
+        [self.bottomStackView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(0);
         }];
-        [self.contributeValueLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(self.contentView.mas_centerX);
-        }];
-        self.partnerLabel.hidden = NO;
-        self.partnerValueLabel.hidden = NO;
     }
 }
 
@@ -176,18 +200,26 @@
 
 -(void)eyeAction:(UIButton *)sender{
     if (sender.selected) {
-        _orderValueLabel.text = @"****";
-        _moneyValueLabel.text = @"****";
-        _contributeValueLabel.text = @"****";
-        _partnerValueLabel.text = @"****";
+        _orderItem.detailL.text = @"****";
+        _moneyItem.detailL.text = @"****";
+        _contributeItem.detailL.text = @"****";
+        _partnerItem.detailL.text = @"****";
+        _orderItem.detailL.textColor = KHexColor(@"#333333");
+        _moneyItem.detailL.textColor = KHexColor(@"#333333");
+        _contributeItem.detailL.textColor = KHexColor(@"#333333");
+        _partnerItem.detailL.textColor = KHexColor(@"#333333");
         sender.selected = NO;
     } else {
         if ([self.delegate respondsToSelector:@selector(universalCollectionViewCellClick:params:)]) {
             TSPartnerCenterData *model = [self.delegate universalCollectionViewCellModel:self.indexPath];
-            _orderValueLabel.text = [NSString stringWithFormat:@"¥%@",model.orderNum];
-            _moneyValueLabel.text = [NSString stringWithFormat:@"¥%@",model.orderMoney];
-            _contributeValueLabel.text = [NSString stringWithFormat:@"¥%@",model.profitFromMyself];
-            _partnerValueLabel.text = [NSString stringWithFormat:@"¥%@",model.profitFromPartner];
+            _orderItem.detailL.text = [NSString stringWithFormat:@"¥%@",model.orderNum];
+            _moneyItem.detailL.text = [NSString stringWithFormat:@"¥%@",model.orderMoney];
+            _contributeItem.detailL.text = [NSString stringWithFormat:@"¥%@",model.profitFromMyself];
+            _partnerItem.detailL.text = [NSString stringWithFormat:@"¥%@",model.profitFromPartner];
+            _orderItem.detailL.textColor = KHexColor(@"#FF6460");
+            _moneyItem.detailL.textColor = KHexColor(@"#FF6460");
+            _contributeItem.detailL.textColor = KHexColor(@"#FF6460");
+            _partnerItem.detailL.textColor = KHexColor(@"#FF6460");
         }
         sender.selected = YES;
     }
@@ -215,7 +247,7 @@
 -(TSMineMoreButton *)moreButton{
     if (!_moreButton) {
         _moreButton = [TSMineMoreButton buttonWithType:UIButtonTypeCustom];
-        [_moreButton setTitle:@"更多" forState:UIControlStateNormal];
+//        [_moreButton setTitle:@"更多" forState:UIControlStateNormal];
         [_moreButton addTarget:self action:@selector(moreAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _moreButton;
@@ -229,16 +261,6 @@
     return _seperateView;
 }
 
--(UILabel *)orderLabel{
-    if (!_orderLabel) {
-        _orderLabel = [[UILabel alloc] init];
-        _orderLabel.font = KFont(PingFangSCRegular, 12);
-        _orderLabel.textAlignment = NSTextAlignmentCenter;
-        _orderLabel.textColor = KHexColor(@"#333333");
-        _orderLabel.text = @"累计订单";
-    }
-    return _orderLabel;
-}
 
 -(UIButton *)eyeButton{
     if (!_eyeButton) {
@@ -250,83 +272,60 @@
     }
     return _eyeButton;
 }
+ 
 
--(UILabel *)orderValueLabel{
-    if (!_orderValueLabel) {
-        _orderValueLabel = [[UILabel alloc] init];
-        _orderValueLabel.font = KFont(PingFangSCMedium, 16);
-        _orderValueLabel.textAlignment = NSTextAlignmentCenter;
-        _orderValueLabel.textColor = KHexColor(@"#333333");
-        _orderValueLabel.text = @"¥2380";
+-(TSMinePartnerCenterCellItem *)orderItem{
+    if (!_orderItem) {
+        _orderItem = [[TSMinePartnerCenterCellItem alloc] init];
+        _orderItem.title.text = @"累计订单";
     }
-    return _orderValueLabel;
+    return _orderItem;
 }
 
--(UILabel *)moneyLabel{
-    if (!_moneyLabel) {
-        _moneyLabel = [[UILabel alloc] init];
-        _moneyLabel.font = KFont(PingFangSCRegular, 12);
-        _moneyLabel.textAlignment = NSTextAlignmentCenter;
-        _moneyLabel.textColor = KHexColor(@"#333333");
-        _moneyLabel.text = @"累计金额";
+-(TSMinePartnerCenterCellItem *)moneyItem{
+    if (!_moneyItem) {
+        _moneyItem = [[TSMinePartnerCenterCellItem alloc] init];
+        _moneyItem.title.text = @"累计金额";
     }
-    return _moneyLabel;
+    return _moneyItem;
 }
 
--(UILabel *)moneyValueLabel{
-    if (!_moneyValueLabel) {
-        _moneyValueLabel = [[UILabel alloc] init];
-        _moneyValueLabel.font = KFont(PingFangSCMedium, 16);
-        _moneyValueLabel.textAlignment = NSTextAlignmentCenter;
-        _moneyValueLabel.textColor = KHexColor(@"#333333");
-        _moneyValueLabel.text = @"¥8380";
+-(TSMinePartnerCenterCellItem *)contributeItem{
+    if (!_contributeItem) {
+        _contributeItem = [[TSMinePartnerCenterCellItem alloc] init];
+        _contributeItem.title.text = @"自身贡献收入";
     }
-    return _moneyValueLabel;
+    return _contributeItem;
 }
 
--(UILabel *)contributeLabel{
-    if (!_contributeLabel) {
-        _contributeLabel = [[UILabel alloc] init];
-        _contributeLabel.font = KFont(PingFangSCRegular, 12);
-        _contributeLabel.textAlignment = NSTextAlignmentCenter;
-        _contributeLabel.textColor = KHexColor(@"#333333");
-        _contributeLabel.text = @"自身贡献收入";
+-(TSMinePartnerCenterCellItem *)partnerItem{
+    if (!_partnerItem) {
+        _partnerItem = [[TSMinePartnerCenterCellItem alloc] init];
+        _partnerItem.title.text = @"合伙人贡献收入";
     }
-    return _contributeLabel;
+    return _partnerItem;
 }
 
--(UILabel *)contributeValueLabel{
-    if (!_contributeValueLabel) {
-        _contributeValueLabel = [[UILabel alloc] init];
-        _contributeValueLabel.font = KFont(PingFangSCMedium, 16);
-        _contributeValueLabel.textAlignment = NSTextAlignmentCenter;
-        _contributeValueLabel.textColor = KHexColor(@"#333333");
-        _contributeValueLabel.text = @"¥2380";
+- (UIStackView *)topStackView {
+    if (!_topStackView) {
+        _topStackView = [[UIStackView alloc] init];
+        _topStackView.distribution = UIStackViewDistributionFillEqually;
+        _topStackView.axis = UILayoutConstraintAxisHorizontal;
+        _topStackView.alignment = UIStackViewAlignmentFill;
     }
-    return _contributeValueLabel;
+    return  _topStackView;
 }
 
--(UILabel *)partnerValueLabel{
-    if (!_partnerValueLabel) {
-        _partnerValueLabel = [[UILabel alloc] init];
-        _partnerValueLabel.font = KFont(PingFangSCMedium, 16);
-        _partnerValueLabel.textAlignment = NSTextAlignmentCenter;
-        _partnerValueLabel.textColor = KHexColor(@"#333333");
-        _partnerValueLabel.text = @"¥8380";
+- (UIStackView *)bottomStackView {
+    if (!_bottomStackView) {
+        _bottomStackView = [[UIStackView alloc] init];
+        _bottomStackView.distribution = UIStackViewDistributionFillEqually;
+        _bottomStackView.axis = UILayoutConstraintAxisHorizontal;
+        _bottomStackView.alignment = UIStackViewAlignmentFill;
     }
-    return _partnerValueLabel;
+    return  _bottomStackView;
 }
-
--(UILabel *)partnerLabel{
-    if (!_partnerLabel) {
-        _partnerLabel = [[UILabel alloc] init];
-        _partnerLabel.font = KFont(PingFangSCRegular, 12);
-        _partnerLabel.textAlignment = NSTextAlignmentCenter;
-        _partnerLabel.textColor = KHexColor(@"#333333");
-        _partnerLabel.text = @"合伙人贡献收入";
-    }
-    return _partnerLabel;
-}
-
 
 @end
+
+

@@ -23,11 +23,13 @@
 /** 标题 */
 @property(nonatomic, weak) UILabel *titleLabel;
 /** 头像 */
-@property(nonatomic, weak) UIButton *picButton;
+@property(nonatomic, weak) UIImageView *avatarImgV;
 /** 背景模糊图片 */
 @property(nonatomic, weak) UIImageView *bgImgV;
 /** 提交按钮 */
 @property(nonatomic, weak) UIButton *commitButton;
+/** 被选中的item  */
+@property(nonatomic, strong) TSChangePictureSectionItemModel *selectedItem;
 
 @end
 
@@ -44,9 +46,9 @@
 
 - (void)setupBasic {
     [super setupBasic];
-    __weak __typeof(self)weakSelf = self;
     self.view.backgroundColor = KWhiteColor;
     self.gk_navigationBar.hidden = YES;
+    __weak __typeof(self)weakSelf = self;
     [self.dataController fetchChangePictureContentsComplete:^(BOOL isSucess) {
         __strong __typeof(weakSelf)strongSelf = weakSelf;
         if (isSucess) {
@@ -59,6 +61,7 @@
     [super fillCustomView];
     ///设置约束
     [self addConstraints];
+    [self.avatarImgV sd_setImageWithURL:[NSURL URLWithString:[TSUserInfoManager userInfo].user.avatar] placeholderImage:KImageMake(@"mall_setting_defautlhead")];
 }
 
 - (void)addConstraints {
@@ -84,7 +87,7 @@
         make.right.equalTo(self.topView.mas_right).with.offset(0);
         make.bottom.equalTo(self.topView.mas_bottom).with.offset(0);
     }];
-    [self.picButton mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.avatarImgV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.topView.mas_centerY).with.offset(20);
         make.centerX.equalTo(self.topView.mas_centerX).with.offset(0);
         make.width.height.mas_equalTo(86);
@@ -92,7 +95,7 @@
     [self.commitButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view.mas_left).with.offset(25);
         make.right.equalTo(self.view.mas_right).with.offset(-25);
-        make.bottom.equalTo(self.view.mas_bottom).with.offset(-30);
+        make.bottom.equalTo(self.view.mas_bottom).with.offset(-48);
         make.height.mas_equalTo(41);
     }];
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -161,22 +164,23 @@
     return _titleLabel;
 }
 
-- (UIButton *)picButton {
-    if (_picButton == nil) {
-        UIButton *picButton = [[UIButton alloc] init];
-        _picButton = picButton;
-        _picButton.userInteractionEnabled = NO;
-        [_picButton setBackgroundImage:KImageMake(@"mall_setting_scenery") forState:UIControlStateNormal];
-        [self.topView addSubview:_picButton];
+- (UIImageView *)avatarImgV {
+    if (_avatarImgV == nil) {
+        UIImageView *avatarImgV = [[UIImageView alloc] init];
+        _avatarImgV = avatarImgV;
+        _avatarImgV.clipsToBounds = YES;
+        [_avatarImgV setCorners:UIRectCornerAllCorners radius:43];
+        [self.topView addSubview:_avatarImgV];
     }
-    return _picButton;
+    return _avatarImgV;
 }
 
 - (UIImageView *)bgImgV {
     if (_bgImgV == nil) {
         UIImageView *bgImgV = [[UIImageView alloc] init];
         _bgImgV = bgImgV;
-        _bgImgV.image = [KImageMake(@"mall_setting_scenery") applyLightEffect];
+        //_bgImgV.contentMode = UIViewContentModeScaleToFill;
+        _bgImgV.image = [UIImage imageWithColor:KHexAlphaColor(@"#898989", 0.45)];
         [self.topView insertSubview:_bgImgV atIndex:0];
     }
     return _bgImgV;
@@ -190,7 +194,7 @@
         _commitButton.layer.cornerRadius = 20.5;
         _commitButton.clipsToBounds = YES;
         _commitButton.titleLabel.font = KRegularFont(16);
-        _commitButton.enabled = NO;
+        _commitButton.hidden = YES;
         [_commitButton setTitle:@"立即设置" forState:UIControlStateNormal];
         [_commitButton addTarget:self action:@selector(commitAction) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_commitButton];
@@ -201,7 +205,31 @@
 #pragma mark - Actions
 /** 立即设置 */
 - (void)commitAction {
-    
+    if (self.selectedItem) {
+        [self uploadAvartar:KImageMake(self.selectedItem.icon)];
+    }
+}
+
+- (void)uploadAvartar:(UIImage *)image {
+    [Popover popProgressOnWindowWithText:@"正在上传..."];
+    [[TSServicesManager sharedInstance].uploadImageService uploadImage:image success:^(NSString * _Nonnull imageURL) {
+        if (imageURL) {
+            [self modifyAvartar:imageURL];
+        } else {
+            [Popover popToastOnWindowWithText:@"头像上传失败！"];
+        }
+    } failure:^(NSString * _Nonnull errorMsg) {
+        [Popover popToastOnWindowWithText:@"头像上传失败！"];
+    }];
+}
+
+- (void)modifyAvartar:(NSString *)avatarURL {
+    [[TSServicesManager sharedInstance].userInfoService modifyUserInfoWithKey:@"avatar" value:avatarURL success:^ {
+        [Popover popToastOnWindowWithText:@"头像修改成功！"];
+        [self.navigationController popViewControllerAnimated:YES];
+    } failure:^(NSString * _Nonnull errorMsg) {
+        [Popover popToastOnWindowWithText:@"头像修改失败！"];
+    }];
 }
 
 - (void)back {
@@ -229,8 +257,21 @@
     return cell;
 }
 
--(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    TSChangePictureSectionModel *model = self.dataController.sections[indexPath.section];
+    TSChangePictureSectionItemModel *item = model.items[indexPath.item];
+    if (self.selectedItem == item) {
+        return;
+    }
+    item.selected = YES;
+    if (self.selectedItem) {
+        self.selectedItem.selected = NO;
+    } else {
+        self.commitButton.hidden = NO;
+    }
+    self.selectedItem = item;
+    [self.collectionView reloadData];
+    self.avatarImgV.image = KImageMake(item.icon);
 }
 
 #pragma mark - UniversalCollectionViewCellDataDelegate

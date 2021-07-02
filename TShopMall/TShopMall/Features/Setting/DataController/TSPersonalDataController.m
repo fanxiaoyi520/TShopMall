@@ -27,19 +27,28 @@
             TSPersonalSectionItemModel *item = [[TSPersonalSectionItemModel alloc] init];
             item.title = title;
             item.cellHeight = 56.5;
-            item.sex = none;
             item.identify = @"TSPersonalCommonCell";
             if (i == 0) {///头像
                 NSString *avatar = user.avatar;
                 item.head = avatar.length == 0 ? @"default" : avatar;
+                item.sex = none;
+                item.detail = nil;
             } else if(i == 1) {///姓名
                 item.detail = user.nickname;
+                item.head = nil;
+                item.sex = none;
             } else if(i == 2) {///身份证
                 item.detail = user.identity;
+                item.sex = none;
+                item.head = nil;
             } else if(i == 3) {///性别
                 item.sex = user.sex;
+                item.head = nil;
+                item.detail = nil;
             } else if(i == 4) {///出生年月
                 item.detail = user.birthday;
+                item.head = nil;
+                item.sex = none;
             }
             [items addObject:item];
         }

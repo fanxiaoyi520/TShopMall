@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)fetchCancelLastConfirmContentsComplete:(void(^)(BOOL isSucess))complete;
 
-- (void)fetchDropConfirmContentsComplete:(void(^)(BOOL isSucess))complete;
+- (void)fetchDropConfirmContentsWithDropTime:(NSString *)dropTime complete:(void(^)(BOOL isSucess))complete;
 
 @end
 

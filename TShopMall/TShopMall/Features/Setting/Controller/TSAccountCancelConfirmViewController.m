@@ -9,8 +9,9 @@
 #import "TSUniversalFlowLayout.h"
 #import "TSUniversalCollectionViewCell.h"
 #import "TSAccountCancelDataController.h"
+#import "TSCommitCell.h"
 
-@interface TSAccountCancelConfirmViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate>
+@interface TSAccountCancelConfirmViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate,TSCommitCellDelegate>
 /// 数据中心
 @property(nonatomic, strong) TSAccountCancelDataController *dataController;
 /// CollectionView
@@ -22,6 +23,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    NSLog(@"时间 === %@, Nickname ==== %@", self.date, self.nickname);
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleDefault;
 }
 
 - (void)setupBasic {
@@ -49,6 +56,17 @@
         make.top.equalTo(self.view.mas_top).with.offset(GK_STATUSBAR_NAVBAR_HEIGHT + 1);
         make.bottom.equalTo(self.view.mas_bottom).with.offset(0);
     }];
+}
+
+#pragma mark - TSCommitCellDelegate
+- (void)commitAction {
+    NSArray *childrenVCs = self.navigationController.viewControllers;
+    for (UIViewController *vc in childrenVCs) {
+        if ([vc isKindOfClass:NSClassFromString(@"TSSecurityViewController")]) {
+            [self.navigationController popToViewController:vc animated:YES];
+            break;
+        }
+    }
 }
 
 #pragma mark - Lazy Method
@@ -95,6 +113,10 @@
     TSUniversalCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:item.identify forIndexPath:indexPath];
     cell.indexPath = indexPath;
     cell.delegate = self;
+    if ([cell isKindOfClass:[TSCommitCell class]]) {
+        TSCommitCell *_cell = (TSCommitCell *)cell;
+        _cell.actionDelegate = self;
+    }
     return cell;
 }
 

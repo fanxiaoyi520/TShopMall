@@ -108,7 +108,6 @@
             break;
         }
     }
-    
 }
 
 #pragma mark - UICollectionViewDataSource

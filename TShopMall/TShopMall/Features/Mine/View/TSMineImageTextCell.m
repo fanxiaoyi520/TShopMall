@@ -37,7 +37,7 @@
     [self.countLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.imgView.mas_top).offset(8);
         make.centerX.equalTo(self.imgView.mas_right).offset(-5);
-        make.height.width.mas_equalTo(12);
+        make.height.width.mas_equalTo(16);
     }];
 }
 
@@ -68,6 +68,8 @@
         _countLabel.textAlignment = NSTextAlignmentCenter;
         _countLabel.textColor =  KWhiteColor;
         _countLabel.backgroundColor = KHexColor(@"#FF4D49");
+        _countLabel.layer.cornerRadius = 8;
+        _countLabel.layer.masksToBounds = YES;
     }
     return _countLabel;
 }
@@ -84,12 +86,12 @@
         if (item.orderCount.length > 2) {
             self.countLabel.text = @"99+";
         }
-        CGFloat width = [_countLabel sizeThatFits:CGSizeMake(50, 50)].width + 8;
+        
+        CGFloat width = [_countLabel.text sizeWithAttributes: @{NSFontAttributeName: KRegularFont(8)}].width + 12;
         [self.countLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.width.height.mas_equalTo(width);
+            make.width.mas_equalTo(width);
         } ];
-        _countLabel.layer.cornerRadius = width/2;
-        _countLabel.layer.masksToBounds = YES;
+      
     }
 }
 

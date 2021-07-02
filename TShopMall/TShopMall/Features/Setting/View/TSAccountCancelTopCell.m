@@ -7,6 +7,8 @@
 
 #import "TSAccountCancelTopCell.h"
 #import "TSAccountCancelSectionModel.h"
+#import "TSTools.h"
+#import "NSTimer+TSBlcokTimer.h"
 
 @interface TSAccountCancelTopCell ()
 /** logo */
@@ -17,6 +19,10 @@
 @property(nonatomic, weak) UILabel *nickNameLabel;
 /** 页面注销的标题 */
 @property(nonatomic, weak) UILabel *titleLabel;
+/** 定时器  */
+@property(nonatomic, strong) NSTimer *timer;
+/** 倒计时的时间  */
+@property(nonatomic, assign) NSTimeInterval interval;
 
 @end
 
@@ -26,6 +32,11 @@
     [super fillCustomContentView];
     ///添加约束
     [self addConstraints];
+}
+
+- (void)dealloc {
+    [self.timer invalidate];
+    self.timer = nil;
 }
 
 - (void)addConstraints {
@@ -65,13 +76,11 @@
     if (_showTimeButton == nil) {
         UIButton *showTimeButton = [[UIButton alloc] init];
         _showTimeButton = showTimeButton;
-        _showTimeButton.enabled = NO;
         _showTimeButton.layer.cornerRadius = 25.0/2.0;
         _showTimeButton.titleLabel.font = KRegularFont(12);
-        [_showTimeButton setTitle:@"剩余时间14天 14:50:00" forState:UIControlStateNormal];
         [_showTimeButton setTitleColor:KWhiteColor forState:UIControlStateNormal];
         _showTimeButton.backgroundColor = KHexAlphaColor(@"#E74C3D", 0.2);
-        _showTimeButton.hidden = YES;
+        //_showTimeButton.hidden = YES;
         [self.contentView addSubview:_showTimeButton];
     }
     return _showTimeButton;
@@ -103,13 +112,48 @@
 - (void)setDelegate:(id<UniversalCollectionViewCellDataDelegate>)delegate {
     TSAccountCancelSectionItemModel *item = [delegate universalCollectionViewCellModel:self.indexPath];
     self.titleLabel.text = item.title;
-    //self.nickNameLabel.text = [NSString stringWithFormat:@"昵称: %@", item.nickname];
-    [self.nickNameLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(0);
-    }];
-    [self.showTimeButton mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(0);
-    }];
+    if (item.nickname.length) {
+        self.nickNameLabel.hidden = NO;
+        self.nickNameLabel.text = [NSString stringWithFormat:@"昵称: %@", item.nickname];
+    } else {
+        [self.nickNameLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(0);
+        }];
+    }
+    if (item.cancelTime.length) {
+        self.showTimeButton.hidden = NO;
+    } else if (item.dropTime.length) {
+        self.showTimeButton.hidden = NO;
+        [self startTimer:item.dropTime];
+    } else {
+        self.showTimeButton.hidden = YES;
+        [self.showTimeButton mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(0);
+        }];
+    }
+}
+
+- (void)startTimer:(NSString *)time {
+    NSTimeInterval timeInterval = [TSTools timeIntervalWithDate:time];
+    if (timeInterval < 0) {
+        [self.showTimeButton setTitle:@"账户已注销，无法取消" forState:(UIControlStateNormal)];
+        return;
+    }
+    self.interval = timeInterval;
+    @weakify(self);
+    self.timer = [NSTimer ts_scheduledTimerWithTimeInterval:1 block:^{
+        @strongify(self);
+        self.interval--;
+        if (self.interval < 0) {
+            [self.timer invalidate];
+            self.timer = nil;
+            [self.showTimeButton setTitle:@"账户已注销，无法取消" forState:(UIControlStateNormal)];
+            return;
+        }
+        NSString *timeString = [TSTools getRestTimeWithTimeInterval:self.interval];
+        [self.showTimeButton setTitle:timeString forState:(UIControlStateNormal)];
+        
+    } repeats:YES];
 }
 
 @end

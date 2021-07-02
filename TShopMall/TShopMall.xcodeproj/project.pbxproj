@@ -23,11 +23,7 @@
 		043C2355268B454A00460FDB /* TSUserInfoRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 043C2354268B454A00460FDB /* TSUserInfoRequest.m */; };
 		044AAEAF26871A89000DB09F /* TSAgreementModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 044AAEAE26871A89000DB09F /* TSAgreementModel.m */; };
 		04651692268C0290000829C2 /* TSUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 04651691268C0290000829C2 /* TSUser.m */; };
-		046516A1268C5641000829C2 /* UIImage+fixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 04651696268C5641000829C2 /* UIImage+fixOrientation.m */; };
-		046516A2268C5641000829C2 /* PhotoBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 04651699268C5641000829C2 /* PhotoBrowser.m */; };
 		046516A3268C5641000829C2 /* ImageCompresser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0465169A268C5641000829C2 /* ImageCompresser.m */; };
-		046516A4268C5641000829C2 /* ImageCropper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0465169C268C5641000829C2 /* ImageCropper.m */; };
-		046516A5268C5641000829C2 /* BrowserConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 0465169F268C5641000829C2 /* BrowserConfig.m */; };
 		046516EC268C57EF000829C2 /* DialogTextTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 046516A8268C57EE000829C2 /* DialogTextTool.m */; };
 		046516ED268C57EF000829C2 /* UITextView+Dialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 046516A9268C57EE000829C2 /* UITextView+Dialog.m */; };
 		046516EE268C57EF000829C2 /* Dialog+Input.m in Sources */ = {isa = PBXBuildFile; fileRef = 046516AE268C57EE000829C2 /* Dialog+Input.m */; };
@@ -66,6 +62,16 @@
 		046DEA892685BD97009CE557 /* TSChangeMobileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 046DEA882685BD97009CE557 /* TSChangeMobileCell.m */; };
 		046DEA8C2685C5BA009CE557 /* TSChangeMobileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 046DEA8B2685C5BA009CE557 /* TSChangeMobileViewController.m */; };
 		04DAFAFE267B37450098275A /* TSOrderManageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DAFAFD267B37450098275A /* TSOrderManageViewController.m */; };
+		04DC6CCF268DA83B001F282E /* CMPhotoSelectorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DC6CB6268DA83B001F282E /* CMPhotoSelectorController.m */; };
+		04DC6CD0268DA83B001F282E /* CMPhotoGroupsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DC6CB8268DA83B001F282E /* CMPhotoGroupsController.m */; };
+		04DC6CD1268DA83B001F282E /* CMPhotoImagesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DC6CBA268DA83B001F282E /* CMPhotoImagesController.m */; };
+		04DC6CD2268DA83B001F282E /* CMPhotoGroupsViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DC6CC0268DA83B001F282E /* CMPhotoGroupsViewModel.m */; };
+		04DC6CD3268DA83B001F282E /* CMPhotoGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DC6CC3268DA83B001F282E /* CMPhotoGroup.m */; };
+		04DC6CD4268DA83B001F282E /* CMPhotoALAssets.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DC6CC4268DA83B001F282E /* CMPhotoALAssets.m */; };
+		04DC6CD6268DA83B001F282E /* CMPhotoGroupsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DC6CC9268DA83B001F282E /* CMPhotoGroupsCell.m */; };
+		04DC6CD7268DA83B001F282E /* CMPhotoImageFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DC6CCA268DA83B001F282E /* CMPhotoImageFlowLayout.m */; };
+		04DC6CD8268DA83B001F282E /* CMPhotoImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DC6CCB268DA83B001F282E /* CMPhotoImageCell.m */; };
+		04DC6CDC268DB874001F282E /* ImageCropper.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DC6CDA268DB874001F282E /* ImageCropper.m */; };
 		04F1EFAD2682D22100FF007D /* TSRealnameInfoSectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F1EFAC2682D22100FF007D /* TSRealnameInfoSectionModel.m */; };
 		04F1EFB02682D3AC00FF007D /* TSRealnameInfoDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F1EFAF2682D3AC00FF007D /* TSRealnameInfoDataController.m */; };
 		04F1EFB32682DB2A00FF007D /* TSRealnameInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F1EFB22682DB2A00FF007D /* TSRealnameInfoViewController.m */; };
@@ -73,6 +79,13 @@
 		04F1EFB92682DF8900FF007D /* TSRealNameAuthSectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F1EFB82682DF8900FF007D /* TSRealNameAuthSectionModel.m */; };
 		04F1EFBC2682E33600FF007D /* TSRealNameAuthDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F1EFBB2682E33600FF007D /* TSRealNameAuthDataController.m */; };
 		04F852122689BA4C00B59910 /* TSFirstEnterAgreementView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F852112689BA4C00B59910 /* TSFirstEnterAgreementView.m */; };
+		65BBA035268DA49E007AF8D0 /* TSInviteFriendsDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65BBA034268DA49E007AF8D0 /* TSInviteFriendsDataController.m */; };
+		65BBA038268DA95B007AF8D0 /* TSInviteFriendsSectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 65BBA037268DA95B007AF8D0 /* TSInviteFriendsSectionModel.m */; };
+		65BBA03B268DB41D007AF8D0 /* TSInviteFriendsPhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65BBA03A268DB41D007AF8D0 /* TSInviteFriendsPhotoCell.m */; };
+		65BBA03E268DC337007AF8D0 /* TSInviteFriendsShareCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65BBA03D268DC337007AF8D0 /* TSInviteFriendsShareCell.m */; };
+		65BBA041268DD7A1007AF8D0 /* TSInviteFriendsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65BBA040268DD7A1007AF8D0 /* TSInviteFriendsCell.m */; };
+		65BBA044268DD7DD007AF8D0 /* TSInviteFriendsInvitationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65BBA043268DD7DD007AF8D0 /* TSInviteFriendsInvitationCell.m */; };
+		65BBA047268DD832007AF8D0 /* TSInviteFriendsIntroduceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65BBA046268DD832007AF8D0 /* TSInviteFriendsIntroduceCell.m */; };
 		65CD9E3D268AED2B00262D98 /* TSMineWalletModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CD9E3C268AED2B00262D98 /* TSMineWalletModel.m */; };
 		65F71270268C1D7C002A1ECC /* TSMineLeftBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F7126F268C1D7C002A1ECC /* TSMineLeftBarView.m */; };
 		65F71273268C4154002A1ECC /* TSMineOrderCountModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F71272268C4154002A1ECC /* TSMineOrderCountModel.m */; };
@@ -634,16 +647,8 @@
 		044AAEAE26871A89000DB09F /* TSAgreementModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSAgreementModel.m; sourceTree = "<group>"; };
 		04651690268C0290000829C2 /* TSUser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSUser.h; sourceTree = "<group>"; };
 		04651691268C0290000829C2 /* TSUser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSUser.m; sourceTree = "<group>"; };
-		04651695268C5641000829C2 /* UIImage+fixOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+fixOrientation.h"; sourceTree = "<group>"; };
-		04651696268C5641000829C2 /* UIImage+fixOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+fixOrientation.m"; sourceTree = "<group>"; };
-		04651698268C5641000829C2 /* ImageCropper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCropper.h; sourceTree = "<group>"; };
-		04651699268C5641000829C2 /* PhotoBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoBrowser.m; sourceTree = "<group>"; };
 		0465169A268C5641000829C2 /* ImageCompresser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCompresser.m; sourceTree = "<group>"; };
-		0465169B268C5641000829C2 /* PhotoBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoBrowser.h; sourceTree = "<group>"; };
-		0465169C268C5641000829C2 /* ImageCropper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCropper.m; sourceTree = "<group>"; };
 		0465169D268C5641000829C2 /* ImageCompresser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCompresser.h; sourceTree = "<group>"; };
-		0465169F268C5641000829C2 /* BrowserConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowserConfig.m; sourceTree = "<group>"; };
-		046516A0268C5641000829C2 /* BrowserConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowserConfig.h; sourceTree = "<group>"; };
 		046516A8268C57EE000829C2 /* DialogTextTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogTextTool.m; sourceTree = "<group>"; };
 		046516A9268C57EE000829C2 /* UITextView+Dialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+Dialog.m"; sourceTree = "<group>"; };
 		046516AA268C57EE000829C2 /* DialogTextTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogTextTool.h; sourceTree = "<group>"; };
@@ -718,6 +723,27 @@
 		046DEA8B2685C5BA009CE557 /* TSChangeMobileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSChangeMobileViewController.m; sourceTree = "<group>"; };
 		04DAFAFC267B37450098275A /* TSOrderManageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSOrderManageViewController.h; sourceTree = "<group>"; };
 		04DAFAFD267B37450098275A /* TSOrderManageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSOrderManageViewController.m; sourceTree = "<group>"; };
+		04DC6CB6268DA83B001F282E /* CMPhotoSelectorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMPhotoSelectorController.m; sourceTree = "<group>"; };
+		04DC6CB7268DA83B001F282E /* CMPhotoImagesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMPhotoImagesController.h; sourceTree = "<group>"; };
+		04DC6CB8268DA83B001F282E /* CMPhotoGroupsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMPhotoGroupsController.m; sourceTree = "<group>"; };
+		04DC6CB9268DA83B001F282E /* CMPhotoSelectorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMPhotoSelectorController.h; sourceTree = "<group>"; };
+		04DC6CBA268DA83B001F282E /* CMPhotoImagesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMPhotoImagesController.m; sourceTree = "<group>"; };
+		04DC6CBB268DA83B001F282E /* CMPhotoGroupsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMPhotoGroupsController.h; sourceTree = "<group>"; };
+		04DC6CBD268DA83B001F282E /* Singleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Singleton.h; sourceTree = "<group>"; };
+		04DC6CBF268DA83B001F282E /* CMPhotoGroupsViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMPhotoGroupsViewModel.h; sourceTree = "<group>"; };
+		04DC6CC0268DA83B001F282E /* CMPhotoGroupsViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMPhotoGroupsViewModel.m; sourceTree = "<group>"; };
+		04DC6CC2268DA83B001F282E /* CMPhotoALAssets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMPhotoALAssets.h; sourceTree = "<group>"; };
+		04DC6CC3268DA83B001F282E /* CMPhotoGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMPhotoGroup.m; sourceTree = "<group>"; };
+		04DC6CC4268DA83B001F282E /* CMPhotoALAssets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMPhotoALAssets.m; sourceTree = "<group>"; };
+		04DC6CC5268DA83B001F282E /* CMPhotoGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMPhotoGroup.h; sourceTree = "<group>"; };
+		04DC6CC9268DA83B001F282E /* CMPhotoGroupsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMPhotoGroupsCell.m; sourceTree = "<group>"; };
+		04DC6CCA268DA83B001F282E /* CMPhotoImageFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMPhotoImageFlowLayout.m; sourceTree = "<group>"; };
+		04DC6CCB268DA83B001F282E /* CMPhotoImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMPhotoImageCell.m; sourceTree = "<group>"; };
+		04DC6CCC268DA83B001F282E /* CMPhotoImageFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMPhotoImageFlowLayout.h; sourceTree = "<group>"; };
+		04DC6CCD268DA83B001F282E /* CMPhotoGroupsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMPhotoGroupsCell.h; sourceTree = "<group>"; };
+		04DC6CCE268DA83B001F282E /* CMPhotoImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMPhotoImageCell.h; sourceTree = "<group>"; };
+		04DC6CDA268DB874001F282E /* ImageCropper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCropper.m; sourceTree = "<group>"; };
+		04DC6CDB268DB874001F282E /* ImageCropper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCropper.h; sourceTree = "<group>"; };
 		04F1EFAB2682D22100FF007D /* TSRealnameInfoSectionModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSRealnameInfoSectionModel.h; sourceTree = "<group>"; };
 		04F1EFAC2682D22100FF007D /* TSRealnameInfoSectionModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSRealnameInfoSectionModel.m; sourceTree = "<group>"; };
 		04F1EFAE2682D3AC00FF007D /* TSRealnameInfoDataController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSRealnameInfoDataController.h; sourceTree = "<group>"; };
@@ -734,6 +760,20 @@
 		04F852112689BA4C00B59910 /* TSFirstEnterAgreementView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSFirstEnterAgreementView.m; sourceTree = "<group>"; };
 		1942D505D7004833F274B5D1 /* libPods-TShopMallTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TShopMallTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		27EC567AA21935502889F6EB /* Pods-TShopMall.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TShopMall.debug.xcconfig"; path = "Target Support Files/Pods-TShopMall/Pods-TShopMall.debug.xcconfig"; sourceTree = "<group>"; };
+		65BBA033268DA49E007AF8D0 /* TSInviteFriendsDataController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSInviteFriendsDataController.h; sourceTree = "<group>"; };
+		65BBA034268DA49E007AF8D0 /* TSInviteFriendsDataController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSInviteFriendsDataController.m; sourceTree = "<group>"; };
+		65BBA036268DA95B007AF8D0 /* TSInviteFriendsSectionModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSInviteFriendsSectionModel.h; sourceTree = "<group>"; };
+		65BBA037268DA95B007AF8D0 /* TSInviteFriendsSectionModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSInviteFriendsSectionModel.m; sourceTree = "<group>"; };
+		65BBA039268DB41D007AF8D0 /* TSInviteFriendsPhotoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSInviteFriendsPhotoCell.h; sourceTree = "<group>"; };
+		65BBA03A268DB41D007AF8D0 /* TSInviteFriendsPhotoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSInviteFriendsPhotoCell.m; sourceTree = "<group>"; };
+		65BBA03C268DC337007AF8D0 /* TSInviteFriendsShareCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSInviteFriendsShareCell.h; sourceTree = "<group>"; };
+		65BBA03D268DC337007AF8D0 /* TSInviteFriendsShareCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSInviteFriendsShareCell.m; sourceTree = "<group>"; };
+		65BBA03F268DD7A1007AF8D0 /* TSInviteFriendsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSInviteFriendsCell.h; sourceTree = "<group>"; };
+		65BBA040268DD7A1007AF8D0 /* TSInviteFriendsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSInviteFriendsCell.m; sourceTree = "<group>"; };
+		65BBA042268DD7DD007AF8D0 /* TSInviteFriendsInvitationCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSInviteFriendsInvitationCell.h; sourceTree = "<group>"; };
+		65BBA043268DD7DD007AF8D0 /* TSInviteFriendsInvitationCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSInviteFriendsInvitationCell.m; sourceTree = "<group>"; };
+		65BBA045268DD832007AF8D0 /* TSInviteFriendsIntroduceCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSInviteFriendsIntroduceCell.h; sourceTree = "<group>"; };
+		65BBA046268DD832007AF8D0 /* TSInviteFriendsIntroduceCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSInviteFriendsIntroduceCell.m; sourceTree = "<group>"; };
 		65CD9E3B268AED2B00262D98 /* TSMineWalletModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSMineWalletModel.h; sourceTree = "<group>"; };
 		65CD9E3C268AED2B00262D98 /* TSMineWalletModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSMineWalletModel.m; sourceTree = "<group>"; };
 		65F7126E268C1D7C002A1ECC /* TSMineLeftBarView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSMineLeftBarView.h; sourceTree = "<group>"; };
@@ -1742,47 +1782,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		04651693268C5641000829C2 /* PhotoBrowser */ = {
-			isa = PBXGroup;
-			children = (
-				04651694268C5641000829C2 /* Tools */,
-				04651697268C5641000829C2 /* Core */,
-				0465169E268C5641000829C2 /* Models */,
-			);
-			path = PhotoBrowser;
-			sourceTree = "<group>";
-		};
-		04651694268C5641000829C2 /* Tools */ = {
-			isa = PBXGroup;
-			children = (
-				04651695268C5641000829C2 /* UIImage+fixOrientation.h */,
-				04651696268C5641000829C2 /* UIImage+fixOrientation.m */,
-			);
-			path = Tools;
-			sourceTree = "<group>";
-		};
-		04651697268C5641000829C2 /* Core */ = {
-			isa = PBXGroup;
-			children = (
-				0465169D268C5641000829C2 /* ImageCompresser.h */,
-				0465169A268C5641000829C2 /* ImageCompresser.m */,
-				04651698268C5641000829C2 /* ImageCropper.h */,
-				0465169C268C5641000829C2 /* ImageCropper.m */,
-				0465169B268C5641000829C2 /* PhotoBrowser.h */,
-				04651699268C5641000829C2 /* PhotoBrowser.m */,
-			);
-			path = Core;
-			sourceTree = "<group>";
-		};
-		0465169E268C5641000829C2 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				0465169F268C5641000829C2 /* BrowserConfig.m */,
-				046516A0268C5641000829C2 /* BrowserConfig.h */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
 		046516A6268C57EE000829C2 /* DialogView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1945,6 +1944,83 @@
 				C24A69C92689C3F70022A81F /* TSPaySuccessController.m */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		04DC6CB4268DA83B001F282E /* CMPhotoSelector */ = {
+			isa = PBXGroup;
+			children = (
+				04DC6CB5268DA83B001F282E /* CMController */,
+				04DC6CBC268DA83B001F282E /* CMTools */,
+				04DC6CBE268DA83B001F282E /* CMViewModel */,
+				04DC6CC1268DA83B001F282E /* CMModel */,
+				04DC6CC8268DA83B001F282E /* CMView */,
+			);
+			path = CMPhotoSelector;
+			sourceTree = "<group>";
+		};
+		04DC6CB5268DA83B001F282E /* CMController */ = {
+			isa = PBXGroup;
+			children = (
+				04DC6CB6268DA83B001F282E /* CMPhotoSelectorController.m */,
+				04DC6CB7268DA83B001F282E /* CMPhotoImagesController.h */,
+				04DC6CB8268DA83B001F282E /* CMPhotoGroupsController.m */,
+				04DC6CB9268DA83B001F282E /* CMPhotoSelectorController.h */,
+				04DC6CBA268DA83B001F282E /* CMPhotoImagesController.m */,
+				04DC6CBB268DA83B001F282E /* CMPhotoGroupsController.h */,
+			);
+			path = CMController;
+			sourceTree = "<group>";
+		};
+		04DC6CBC268DA83B001F282E /* CMTools */ = {
+			isa = PBXGroup;
+			children = (
+				04DC6CBD268DA83B001F282E /* Singleton.h */,
+			);
+			path = CMTools;
+			sourceTree = "<group>";
+		};
+		04DC6CBE268DA83B001F282E /* CMViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				04DC6CBF268DA83B001F282E /* CMPhotoGroupsViewModel.h */,
+				04DC6CC0268DA83B001F282E /* CMPhotoGroupsViewModel.m */,
+			);
+			path = CMViewModel;
+			sourceTree = "<group>";
+		};
+		04DC6CC1268DA83B001F282E /* CMModel */ = {
+			isa = PBXGroup;
+			children = (
+				04DC6CC2268DA83B001F282E /* CMPhotoALAssets.h */,
+				04DC6CC3268DA83B001F282E /* CMPhotoGroup.m */,
+				04DC6CC4268DA83B001F282E /* CMPhotoALAssets.m */,
+				04DC6CC5268DA83B001F282E /* CMPhotoGroup.h */,
+			);
+			path = CMModel;
+			sourceTree = "<group>";
+		};
+		04DC6CC8268DA83B001F282E /* CMView */ = {
+			isa = PBXGroup;
+			children = (
+				04DC6CC9268DA83B001F282E /* CMPhotoGroupsCell.m */,
+				04DC6CCA268DA83B001F282E /* CMPhotoImageFlowLayout.m */,
+				04DC6CCB268DA83B001F282E /* CMPhotoImageCell.m */,
+				04DC6CCC268DA83B001F282E /* CMPhotoImageFlowLayout.h */,
+				04DC6CCD268DA83B001F282E /* CMPhotoGroupsCell.h */,
+				04DC6CCE268DA83B001F282E /* CMPhotoImageCell.h */,
+			);
+			path = CMView;
+			sourceTree = "<group>";
+		};
+		04DC6CD9268DB03A001F282E /* CropperPhoto */ = {
+			isa = PBXGroup;
+			children = (
+				04DC6CDB268DB874001F282E /* ImageCropper.h */,
+				04DC6CDA268DB874001F282E /* ImageCropper.m */,
+				0465169D268C5641000829C2 /* ImageCompresser.h */,
+				0465169A268C5641000829C2 /* ImageCompresser.m */,
+			);
+			path = CropperPhoto;
 			sourceTree = "<group>";
 		};
 		04F8520F2689677F00B59910 /* CustomView */ = {
@@ -2509,6 +2585,16 @@
 				CE4F6BE72687908200812275 /* TSOfficialServicesCell.m */,
 				CE4F6BEC2688544A00812275 /* TSInviteFriendsHeader.h */,
 				CE4F6BED2688544A00812275 /* TSInviteFriendsHeader.m */,
+				65BBA039268DB41D007AF8D0 /* TSInviteFriendsPhotoCell.h */,
+				65BBA03A268DB41D007AF8D0 /* TSInviteFriendsPhotoCell.m */,
+				65BBA03C268DC337007AF8D0 /* TSInviteFriendsShareCell.h */,
+				65BBA03D268DC337007AF8D0 /* TSInviteFriendsShareCell.m */,
+				65BBA03F268DD7A1007AF8D0 /* TSInviteFriendsCell.h */,
+				65BBA040268DD7A1007AF8D0 /* TSInviteFriendsCell.m */,
+				65BBA042268DD7DD007AF8D0 /* TSInviteFriendsInvitationCell.h */,
+				65BBA043268DD7DD007AF8D0 /* TSInviteFriendsInvitationCell.m */,
+				65BBA045268DD832007AF8D0 /* TSInviteFriendsIntroduceCell.h */,
+				65BBA046268DD832007AF8D0 /* TSInviteFriendsIntroduceCell.m */,
 			);
 			path = Func;
 			sourceTree = "<group>";
@@ -3252,8 +3338,9 @@
 		F54973162668A22100181E3F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				04DC6CD9268DB03A001F282E /* CropperPhoto */,
+				04DC6CB4268DA83B001F282E /* CMPhotoSelector */,
 				046516A6268C57EE000829C2 /* DialogView */,
-				04651693268C5641000829C2 /* PhotoBrowser */,
 				DFB3FFFA268AB6D400FC8FF9 /* JsonCacheData */,
 				F530CE8726846B1E009DC29A /* AlertView */,
 				F530CD1726809B62009DC29A /* MaskPopups */,
@@ -3748,6 +3835,8 @@
 			children = (
 				F55D2C772672F4E2006BACCF /* TSMineDataController.h */,
 				F55D2C782672F4E2006BACCF /* TSMineDataController.m */,
+				65BBA033268DA49E007AF8D0 /* TSInviteFriendsDataController.h */,
+				65BBA034268DA49E007AF8D0 /* TSInviteFriendsDataController.m */,
 			);
 			path = DataController;
 			sourceTree = "<group>";
@@ -3807,6 +3896,8 @@
 				65CD9E3C268AED2B00262D98 /* TSMineWalletModel.m */,
 				65F71271268C4154002A1ECC /* TSMineOrderCountModel.h */,
 				65F71272268C4154002A1ECC /* TSMineOrderCountModel.m */,
+				65BBA036268DA95B007AF8D0 /* TSInviteFriendsSectionModel.h */,
+				65BBA037268DA95B007AF8D0 /* TSInviteFriendsSectionModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -4416,6 +4507,7 @@
 				F530CCB426803FCD009DC29A /* UIFont+Plugin.m in Sources */,
 				F55D2C3B2671E14B006BACCF /* TSUniversalDecorationView.m in Sources */,
 				F530CC4626803B1C009DC29A /* RefreshGifFooter.m in Sources */,
+				04DC6CD0268DA83B001F282E /* CMPhotoGroupsController.m in Sources */,
 				F55D2C6726722807006BACCF /* TSCategoryKindModel.m in Sources */,
 				F530CE9026846D3E009DC29A /* UIView+Frame.m in Sources */,
 				C21A4B81267B335D00766F72 /* TSAddressModel.m in Sources */,
@@ -4434,6 +4526,7 @@
 				046DEA8626856ADF009CE557 /* TSAgreementView.m in Sources */,
 				F56D4B4C266DFB8900C1AD9E /* FMLayoutCrossCell.m in Sources */,
 				DC9911C2267C475000EF9B26 /* UIScrollView+YBNestViews.m in Sources */,
+				04DC6CD1268DA83B001F282E /* CMPhotoImagesController.m in Sources */,
 				C25A7F8526845FB20006C6AF /* TSBalanceModel.m in Sources */,
 				04651708268C57EF000829C2 /* SelectorDialogElement.m in Sources */,
 				DFB3FFE22685B76200FC8FF9 /* TSLoginByTokenRequest.m in Sources */,
@@ -4530,6 +4623,7 @@
 				F55D2D14267AF01E006BACCF /* TSContentBaseViewController.m in Sources */,
 				DC3440AC26720D9200F5B0DA /* TSCollectionViewMeanWidthLayout.m in Sources */,
 				C2F057412685BE1F003D1B2A /* TSCartRecomendCell.m in Sources */,
+				65BBA047268DD832007AF8D0 /* TSInviteFriendsIntroduceCell.m in Sources */,
 				C3A6C493267A1C1700FC71D6 /* TSChangePictureSectionModel.m in Sources */,
 				F530CCA526803FCD009DC29A /* UILabel+Plugin.m in Sources */,
 				F55D2CE926788E27006BACCF /* TSDetailFunctionButton.m in Sources */,
@@ -4538,8 +4632,11 @@
 				F55D2CCD26784ACD006BACCF /* TSMineAdsCell.m in Sources */,
 				F5686B05267F8F400023DAA6 /* WMDragView.m in Sources */,
 				F530CCA126803FCD009DC29A /* UIDevice+Additions.m in Sources */,
+				04DC6CD7268DA83B001F282E /* CMPhotoImageFlowLayout.m in Sources */,
 				C22EE26A2680747000E59C86 /* TSSearchResultCollectionView.m in Sources */,
+				04DC6CD3268DA83B001F282E /* CMPhotoGroup.m in Sources */,
 				F54973D22668CF3300181E3F /* AppDelegate+RootController.m in Sources */,
+				04DC6CCF268DA83B001F282E /* CMPhotoSelectorController.m in Sources */,
 				DCA035DD2681ACC8003DE5F7 /* TSLogoutRequest.m in Sources */,
 				DC9911A0267AE3B900EF9B26 /* TSImageDataModel.m in Sources */,
 				CE66DAEF26841F2600E8D433 /* TSWithdrawalRecordViewController.m in Sources */,
@@ -4588,7 +4685,6 @@
 				F55D2CC826784ACD006BACCF /* TSMineImageTextCell.m in Sources */,
 				F55D2CE326788370006BACCF /* TSProductDetailNavigationBar.m in Sources */,
 				CE66DB0A2684AA7C00E8D433 /* TSBankCardCell.m in Sources */,
-				046516A5268C5641000829C2 /* BrowserConfig.m in Sources */,
 				F55D2C362671E14B006BACCF /* TSUniversalHeaderView.m in Sources */,
 				F54973672668A22100181E3F /* SSNetworkAlertUtil.m in Sources */,
 				04F1EFB62682DF1000FF007D /* TSRealNameAuthViewController.m in Sources */,
@@ -4598,6 +4694,7 @@
 				F549739B2668AA7900181E3F /* TSBaseViewController.m in Sources */,
 				DC9911C5267C475000EF9B26 /* YBNestContainerLayout.m in Sources */,
 				C22EE27426807AB900E59C86 /* TSSearchResultViewModel.m in Sources */,
+				04DC6CD2268DA83B001F282E /* CMPhotoGroupsViewModel.m in Sources */,
 				CE66DB04268490BB00E8D433 /* TSWalletCenterView.m in Sources */,
 				C3B4CCE02674932D0001EE75 /* TSRegiterViewController.m in Sources */,
 				F55D2AD9266F777B006BACCF /* TSBaseDataController.m in Sources */,
@@ -4617,13 +4714,13 @@
 				F56D4B44266DFB8900C1AD9E /* FMCollectionLayoutAttributes.m in Sources */,
 				DFB3FFFD268AB6EF00FC8FF9 /* TSJsonCacheData.m in Sources */,
 				046516F0268C57EF000829C2 /* Dialog+Common.m in Sources */,
-				046516A1268C5641000829C2 /* UIImage+fixOrientation.m in Sources */,
 				041131CF268096CB000B5BAF /* TSHotDataController.m in Sources */,
 				DC3440C72672600600F5B0DA /* TSHomePageCategoryViewModel.m in Sources */,
 				CE4F6BD126859ED300812275 /* TSAddBankCardCell.m in Sources */,
 				DFB3FFE82685E43D00FC8FF9 /* TSBindUserByAuthCodeRequest.m in Sources */,
 				F55D2ACD266F5C95006BACCF /* TSHomePageReleaseCell.m in Sources */,
 				C3A6C4E9267A1CAF00FC71D6 /* TSBindThirdDataController.m in Sources */,
+				65BBA035268DA49E007AF8D0 /* TSInviteFriendsDataController.m in Sources */,
 				F530CC6426803E43009DC29A /* Popover.m in Sources */,
 				04651703268C57EF000829C2 /* SelectorDialogModel.m in Sources */,
 				65F71270268C1D7C002A1ECC /* TSMineLeftBarView.m in Sources */,
@@ -4673,6 +4770,7 @@
 				CE66DAFB2684729600E8D433 /* TSPresentationController.m in Sources */,
 				C24A69B52689636A0022A81F /* TSPayStyleDataController.m in Sources */,
 				C25A7F7F26834B0C0006C6AF /* TSAddressEditDataController.m in Sources */,
+				65BBA041268DD7A1007AF8D0 /* TSInviteFriendsCell.m in Sources */,
 				DC06D6DF268761E20013633F /* TSBestSellingRecommendService.m in Sources */,
 				F530CCEE26804167009DC29A /* TSHybridRightButton.m in Sources */,
 				F56D4B3B266DFB8900C1AD9E /* FMLayoutCombineSection.m in Sources */,
@@ -4707,18 +4805,20 @@
 				04651700268C57EF000829C2 /* DialogResult.m in Sources */,
 				C3A6C4C8267A1C5700FC71D6 /* TSAccountCancelBottomCell.m in Sources */,
 				F530CCB226803FCD009DC29A /* UIView+Plugin.m in Sources */,
-				046516A2268C5641000829C2 /* PhotoBrowser.m in Sources */,
 				C2C7653C2679E6FA004757B9 /* TSMakeOrderCommitView.m in Sources */,
 				65F71273268C4154002A1ECC /* TSMineOrderCountModel.m in Sources */,
 				C2C765362679E2DA004757B9 /* TSMakeOrderController.m in Sources */,
 				F55D2CF32678A6B9006BACCF /* TSGoodDetailItemModel.m in Sources */,
+				65BBA038268DA95B007AF8D0 /* TSInviteFriendsSectionModel.m in Sources */,
 				04F1EFB32682DB2A00FF007D /* TSRealnameInfoViewController.m in Sources */,
 				C3A6C48E267A1C1700FC71D6 /* TSPhoneNumSectionModel.m in Sources */,
 				F55D2CA026745E7A006BACCF /* TSLastUserInfoManager.m in Sources */,
 				042F423D2681FDB000555F5D /* TSRealNameAuthCell.m in Sources */,
 				C35F1873267D970800F65AF9 /* TSAccountCancelDropViewController.m in Sources */,
 				C3A6C4E7267A1CAF00FC71D6 /* TSAboutMeDataController.m in Sources */,
+				04DC6CD4268DA83B001F282E /* CMPhotoALAssets.m in Sources */,
 				C22EE2812681862400E59C86 /* TSRecomendDataController.m in Sources */,
+				04DC6CD6268DA83B001F282E /* CMPhotoGroupsCell.m in Sources */,
 				F55D2C372671E14B006BACCF /* TSUniversalTableViewCell.m in Sources */,
 				F530CE7C26836CFB009DC29A /* TSUserInfoCell.m in Sources */,
 				C21A4B8A267B458D00766F72 /* TSAddressEditPastView.m in Sources */,
@@ -4775,7 +4875,6 @@
 				C3A6C4BB267A1C5700FC71D6 /* TSWithdrawalPswSettingCell.m in Sources */,
 				F55D2C6426722807006BACCF /* TSCategoryKindCell.m in Sources */,
 				C22EE270268079F700E59C86 /* TSSearchResultDataController.m in Sources */,
-				046516A4268C5641000829C2 /* ImageCropper.m in Sources */,
 				C21A4B93267C7E1000766F72 /* TSAreaCard.m in Sources */,
 				C3B4CCEF2674934E0001EE75 /* TSLoginTopView.m in Sources */,
 				F530CD4E26819012009DC29A /* TSChangePriceView.m in Sources */,
@@ -4837,6 +4936,8 @@
 				C2EF88BE2670997100E7374A /* TSCartView.m in Sources */,
 				F530CCA426803FCD009DC29A /* UIImage+Plugin.m in Sources */,
 				C2C7652826788E29004757B9 /* TSSearchKeyViewModel.m in Sources */,
+				04DC6CD8268DA83B001F282E /* CMPhotoImageCell.m in Sources */,
+				65BBA044268DD7DD007AF8D0 /* TSInviteFriendsInvitationCell.m in Sources */,
 				DC3440E82673621000F5B0DA /* TSHomePageContainerHeaderView.m in Sources */,
 				CE63BFB4268DED6D00D00720 /* TSWalletAreaIndexView.m in Sources */,
 				CE66DB0126848FB100E8D433 /* TSMineWalletCenterViewController.m in Sources */,
@@ -4852,6 +4953,7 @@
 				C3A6C4C1267A1C5700FC71D6 /* TSCommitCell.m in Sources */,
 				C3A6C47A267A1BEA00FC71D6 /* TSAccountCancelViewController.m in Sources */,
 				DC45FEC026783A6E00CE762E /* TSHomePageContainerCollectionViewCell.m in Sources */,
+				65BBA03B268DB41D007AF8D0 /* TSInviteFriendsPhotoCell.m in Sources */,
 				CE663E5D268AFB6B0092DDCA /* UITextField+ExtendRange.m in Sources */,
 				C35F186D267D954700F65AF9 /* TSAccountCancelNextViewController.m in Sources */,
 				C2F0573B2685B6D2003D1B2A /* TSRecomendWidthView.m in Sources */,
@@ -4911,8 +5013,10 @@
 				DC9911A6267AE43400EF9B26 /* TSImageBaseModel.m in Sources */,
 				F530CC6626803E43009DC29A /* Progress.m in Sources */,
 				DC06D6E6268812CB0013633F /* TSGridGoodsCollectionView.m in Sources */,
+				65BBA03E268DC337007AF8D0 /* TSInviteFriendsShareCell.m in Sources */,
 				DFB3FFC926844A0A00FC8FF9 /* TSShareView.m in Sources */,
 				DC45FEBA267742F700CE762E /* TSCategoryGroup.m in Sources */,
+				04DC6CDC268DB874001F282E /* ImageCropper.m in Sources */,
 				F55D2D35267B3F04006BACCF /* TSRankHeaderView.m in Sources */,
 				F55D2D32267B3DB7006BACCF /* TSRankSectionModel.m in Sources */,
 				F54973602668A22100181E3F /* SSGenaralRequest.m in Sources */,

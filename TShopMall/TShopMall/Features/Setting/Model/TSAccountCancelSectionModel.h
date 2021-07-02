@@ -28,7 +28,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy) NSString *nickname;
 /** 按钮标题 */
 @property(nonatomic, copy) NSString *nextTitle;
-
+/** 放弃的终点时间  */
+@property(nonatomic, copy) NSString *dropTime;
+/** 注销的时间  */
+@property(nonatomic, copy) NSString *cancelTime;
 @end
 
 NS_ASSUME_NONNULL_END
