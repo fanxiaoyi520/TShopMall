@@ -91,6 +91,8 @@
 		65F71270268C1D7C002A1ECC /* TSMineLeftBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F7126F268C1D7C002A1ECC /* TSMineLeftBarView.m */; };
 		65F71273268C4154002A1ECC /* TSMineOrderCountModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F71272268C4154002A1ECC /* TSMineOrderCountModel.m */; };
 		65F71276268C7AE0002A1ECC /* NSDictionary+Value.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F71274268C7ADF002A1ECC /* NSDictionary+Value.m */; };
+		70A6AF7F268EBD780035F6A3 /* TSSaleRankRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 70A6AF7E268EBD780035F6A3 /* TSSaleRankRequest.m */; };
+		70E5A5C2268F0B16008D961E /* TSProfitRankRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E5A5C1268F0B16008D961E /* TSProfitRankRequest.m */; };
 		70EBC074268C0DC0009D735B /* UIView+AZGradient.m in Sources */ = {isa = PBXBuildFile; fileRef = 70EBC073268C0DC0009D735B /* UIView+AZGradient.m */; };
 		70EBC07B268C136A009D735B /* TSMonthIndicatorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 70EBC07A268C136A009D735B /* TSMonthIndicatorCell.m */; };
 		70EBC07E268C3F0B009D735B /* TSPersonalRankView.m in Sources */ = {isa = PBXBuildFile; fileRef = 70EBC07D268C3F0B009D735B /* TSPersonalRankView.m */; };
@@ -784,6 +786,10 @@
 		65F71272268C4154002A1ECC /* TSMineOrderCountModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSMineOrderCountModel.m; sourceTree = "<group>"; };
 		65F71274268C7ADF002A1ECC /* NSDictionary+Value.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Value.m"; sourceTree = "<group>"; };
 		65F71275268C7AE0002A1ECC /* NSDictionary+Value.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Value.h"; sourceTree = "<group>"; };
+		70A6AF7D268EBD780035F6A3 /* TSSaleRankRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSSaleRankRequest.h; sourceTree = "<group>"; };
+		70A6AF7E268EBD780035F6A3 /* TSSaleRankRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSSaleRankRequest.m; sourceTree = "<group>"; };
+		70E5A5C0268F0B16008D961E /* TSProfitRankRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSProfitRankRequest.h; sourceTree = "<group>"; };
+		70E5A5C1268F0B16008D961E /* TSProfitRankRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSProfitRankRequest.m; sourceTree = "<group>"; };
 		70EBC072268C0DC0009D735B /* UIView+AZGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AZGradient.h"; sourceTree = "<group>"; };
 		70EBC073268C0DC0009D735B /* UIView+AZGradient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AZGradient.m"; sourceTree = "<group>"; };
 		70EBC079268C136A009D735B /* TSMonthIndicatorCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSMonthIndicatorCell.h; sourceTree = "<group>"; };
@@ -4051,6 +4057,10 @@
 				F55D2D2D267B3CF4006BACCF /* TSRankDataController.m */,
 				041131CE268096CB000B5BAF /* TSHotDataController.h */,
 				041131CD268096CB000B5BAF /* TSHotDataController.m */,
+				70A6AF7D268EBD780035F6A3 /* TSSaleRankRequest.h */,
+				70A6AF7E268EBD780035F6A3 /* TSSaleRankRequest.m */,
+				70E5A5C0268F0B16008D961E /* TSProfitRankRequest.h */,
+				70E5A5C1268F0B16008D961E /* TSProfitRankRequest.m */,
 			);
 			path = DataController;
 			sourceTree = "<group>";
@@ -4837,6 +4847,7 @@
 				C2A34C7A26749FCD0095497E /* TSSearchView.m in Sources */,
 				F56D4B3C266DFB8900C1AD9E /* FMLayoutLabelSection.m in Sources */,
 				041131D2268096DA000B5BAF /* TSHotSectionModel.m in Sources */,
+				70E5A5C2268F0B16008D961E /* TSProfitRankRequest.m in Sources */,
 				C3A6C473267A1BEA00FC71D6 /* TSPersonalViewController.m in Sources */,
 				F55D2AEA266F9CEC006BACCF /* TSUniverseBackgroundHeaderView.m in Sources */,
 				DC3440B226720E4C00F5B0DA /* TSGridButtonCollectionView.m in Sources */,
@@ -4988,6 +4999,7 @@
 				DC3440C426723D4D00F5B0DA /* TSHomePageBannerViewModel.m in Sources */,
 				70EBC087268C6523009D735B /* TSMonthTitleView.m in Sources */,
 				C2A34C9F26759F140095497E /* TSEarnView.m in Sources */,
+				70A6AF7F268EBD780035F6A3 /* TSSaleRankRequest.m in Sources */,
 				C3A6C4C3267A1C5700FC71D6 /* TSAccountCancelTopCell.m in Sources */,
 				F55D2C6526722807006BACCF /* TSCategoryBannerCell.m in Sources */,
 				C2A34C902674B0160095497E /* TSSearchDataController.m in Sources */,

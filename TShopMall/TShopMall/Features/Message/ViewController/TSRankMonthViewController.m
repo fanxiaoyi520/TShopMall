@@ -12,6 +12,8 @@
 
 @interface TSRankMonthViewController ()<UITableViewDelegate, UITableViewDataSource>
 
+@property (nonatomic, strong) UIImageView * background_imgView;
+
 @property(nonatomic, strong) UITableView *tableView;
 
 @property (nonatomic, strong) TSPersonalRankView * personalRankView;
@@ -23,19 +25,41 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.gk_navigationBar.hidden = YES;
-    self.view.backgroundColor = KGrayColor;
+    
+    [self fatchWebData];
+}
+
+- (void)fatchWebData {
+    @weakify(self);
+    [self.dataController fetchRankDataWithRankNum:0 Complete:^(BOOL isSucess) {
+        @strongify(self);
+        
+        [self.tableView.mj_header endRefreshing];
+        
+        if (isSucess) {
+            //当前用户
+            TSRankUserModel *userModel = self.dataController.currentUserRankModel;
+            [self.personalRankView.headImgV sd_setImageWithURL:[NSURL URLWithString:userModel.imageUrl] placeholderImage:KImageMake(@"mall_setting_defautlhead")];
+            self.personalRankView.usernameLabel.text = userModel.userName;
+            self.personalRankView.rankNumLabel.text = userModel.rank;
+            if (userModel.money.integerValue > 0) {
+                self.personalRankView.salesNumLabel.text = [NSString stringWithFormat:@"¥%@", userModel.money];
+            }else {
+                self.personalRankView.salesNumLabel.text = userModel.money;
+            }
+            
+            self.background_imgView.hidden = self.dataController.coronalSections.count == 0;
+            [self.tableView reloadData];
+        }
+    }];
 }
 
 -(void)fillCustomView{
-//    CGFloat bottom = self.view.ts_safeAreaInsets.bottom + 56 + GK_TABBAR_HEIGHT + GK_STATUSBAR_NAVBAR_HEIGHT + 5;
+    
+    //背景红色图
+    [self.view addSubview:self.background_imgView];
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.personalRankView];
-//    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.equalTo(self.view.mas_left).with.offset(0);
-//        make.right.equalTo(self.view.mas_right).with.offset(0);
-//        make.top.equalTo(self.view.mas_top).with.offset(0.5);
-//        make.bottom.equalTo(self.view.mas_bottom).with.offset(-bottom);
-//    }];
     
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.equalTo(self.view);
@@ -119,13 +143,32 @@
     return CGFLOAT_MIN;
 }
 
-#pragma mark - Action
-- (void)refreshHeaderDataMehtod {
-    [self.tableView.mj_header endRefreshing];
+// 3.动态调整导航栏
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    CGFloat offsetY = scrollView.contentOffset.y;
+    NSLog(@"%lf", offsetY);
+    
+    if (offsetY > 0) {
+        self.background_imgView.frame = CGRectMake(0, - offsetY, kScreenWidth, KRateW(280));
+    }
 }
 
+#pragma mark - Action
+- (void)refreshHeaderDataMehtod {
+    NSLog(@"下拉刷新");
+    [self fatchWebData];
+}
 
 #pragma mark - JXCategoryListContentViewDelegate
+- (UIImageView *)background_imgView {
+    if (!_background_imgView) {
+        _background_imgView = [[UIImageView alloc] initWithImage:KImageMake(@"mall_rank_background")];
+        _background_imgView.hidden = YES;
+        _background_imgView.frame = CGRectMake(0, 0, kScreenWidth, KRateW(280));
+    }
+    return _background_imgView;
+}
+
 - (UIView *)listView{
     return self.view;
 }
@@ -155,9 +198,11 @@
     return _tableView;
 }
 
-- (void)setDataController:(TSRankDataController *)dataController{
-    _dataController = dataController;
-    [self.tableView reloadData];
+- (TSRankDataController *)dataController {
+    if (_dataController == nil) {
+        _dataController = [[TSRankDataController alloc] init];
+    }
+    return _dataController;
 }
 
 - (TSPersonalRankView *)personalRankView {

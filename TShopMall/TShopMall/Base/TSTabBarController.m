@@ -79,6 +79,7 @@
     self.tabBar.layer.shadowColor = [[UIColor blackColor] colorWithAlphaComponent:0.2].CGColor;
     self.tabBar.layer.shadowOpacity = 0.6;
     self.tabBar.layer.shadowOffset = CGSizeMake(0, 4);
+    self.tabBar.layer.shadowRadius = 5;
     self.tabBar.layer.masksToBounds = NO;
     self.tabBar.clipsToBounds = NO;
 }
