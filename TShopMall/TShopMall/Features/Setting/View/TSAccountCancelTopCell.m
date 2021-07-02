@@ -122,6 +122,7 @@
     }
     if (item.cancelTime.length) {
         self.showTimeButton.hidden = NO;
+        [self.showTimeButton setTitle:[item.cancelTime stringByAppendingString:@"后"] forState:UIControlStateNormal];
     } else if (item.dropTime.length) {
         self.showTimeButton.hidden = NO;
         [self startTimer:item.dropTime];
@@ -147,6 +148,7 @@
         if (self.interval < 0) {
             [self.timer invalidate];
             self.timer = nil;
+            [[NSNotificationCenter defaultCenter] postNotificationName:TSTimeCountdownNotificationName object:nil];
             [self.showTimeButton setTitle:@"账户已注销，无法取消" forState:(UIControlStateNormal)];
             return;
         }

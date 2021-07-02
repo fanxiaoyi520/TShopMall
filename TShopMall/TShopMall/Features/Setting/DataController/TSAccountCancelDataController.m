@@ -6,6 +6,7 @@
 //
 
 #import "TSAccountCancelDataController.h"
+#import "TSTools.h"
 
 @interface TSAccountCancelDataController ()
 
@@ -112,7 +113,7 @@
         item.title = @"将放弃以下资产和权益";
         item.nickname = [TSUserInfoManager userInfo].user.nickname;
         item.cellHeight = 178;
-        item.cancelTime = [[NSDate date] stringWithFormat:@"yyyy-MM-dd HH:mm:ss"];
+        item.cancelTime = [TSTools getAfter20DaysDate];
         item.identify = @"TSAccountCancelTopCell";
         [items addObject:item];
         TSAccountCancelSectionModel *section = [[TSAccountCancelSectionModel alloc] init];
