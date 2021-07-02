@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)fillCustomView;
 
 - (void)netWorkStatusChanged:(NSNotification *)noti;
-
+- (void)userInfoUpdated;
 @end
 
 NS_ASSUME_NONNULL_END

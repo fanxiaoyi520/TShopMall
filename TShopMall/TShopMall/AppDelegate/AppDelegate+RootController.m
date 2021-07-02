@@ -31,7 +31,15 @@
 //        @strongify(self)
 //        self.window.rootViewController = vc;
 //    };
-    
+    /**
+     * 第一次加载键盘慢
+     */
+    UITextField *lagFreeField = [[UITextField alloc] init];
+    [self.window addSubview:lagFreeField];
+    [lagFreeField becomeFirstResponder];
+    [lagFreeField resignFirstResponder];
+    [lagFreeField removeFromSuperview];
+
     [NTESQuickLoginManager sharedInstance].delegate = self;
     
     @weakify(self);

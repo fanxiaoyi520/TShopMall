@@ -84,13 +84,14 @@
 
 -(void)updateUserInfo:( void(^ _Nullable)(BOOL isSuccess))success {
     [[TSServicesManager sharedInstance].userInfoService getUserInfoAccountId:self.accountId success:^(TSUser * _Nonnull user) {
-        TSUserInfoManager *userInfoManager = [[TSUserInfoManager alloc] init];
-        userInfoManager.accessToken = self.accessToken;
-        userInfoManager.accountId = self.accountId;
-        userInfoManager.refreshToken = self.refreshToken;
-        userInfoManager.userName = user.username;
-        userInfoManager.user = user;
-        [self saveUserInfo:userInfoManager];
+        self.user = user;
+        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self];
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        [userDefaults setObject:data forKey:UserInfo_Save_Key];
+        [userDefaults synchronize];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:TSUserInfoModifiedNotificationName object:nil];
+
         if (success) {
             success(YES);
         }

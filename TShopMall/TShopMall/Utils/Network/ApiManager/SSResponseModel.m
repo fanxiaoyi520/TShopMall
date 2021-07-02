@@ -26,7 +26,11 @@
     responseModel.isSucceed = isSucess;
     responseModel.stateCode = baseRequest.responseStatusCode;
     responseModel.code = response[@"code"];
-    responseModel.responseMsg = response[@"responseMsg"];
+    if (response[@"responseMsg"]) {
+        responseModel.responseMsg = response[@"responseMsg"];
+    } else {
+        responseModel.responseMsg = response[@"message"];
+    }
     responseModel.data = response[@"data"];
     responseModel.originalData = response;
     
