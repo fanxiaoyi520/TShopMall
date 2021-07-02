@@ -230,7 +230,9 @@
     }];
 }
 
-- (void)hideCard{}
+- (void)hideCard{
+    [self.controller performSelector:@selector(hideCard)];
+}
 
 - (UILabel *)title{
     if (_title) {
@@ -251,7 +253,7 @@
     }
     self.closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.closeBtn setBackgroundImage:KImageMake(@"general_close") forState:UIControlStateNormal];
-    [self.closeBtn addTarget:self.controller action:@selector(hideCard) forControlEvents:UIControlEventTouchUpInside];
+    [self.closeBtn addTarget:self action:@selector(hideCard) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.closeBtn];
     
     return self.closeBtn;

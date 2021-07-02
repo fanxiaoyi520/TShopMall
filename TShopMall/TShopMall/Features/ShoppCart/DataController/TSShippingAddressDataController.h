@@ -11,7 +11,7 @@
 @interface TSShippingAddressDataController : TSBaseDataController
 
 @property (nonatomic, strong) NSArray<TSAddressModel *> *address;
-+ (void)fetchAddress:(void (^)(NSArray<TSAddressModel *> *))finished lodingView:(UIView *)view;
++ (void)fetchAddress:(void (^)(NSArray<TSAddressModel *> *, NSString *))finished lodingView:(UIView *)view;
 
 + (void)deleteAddress:(TSAddressModel *)address finished:(void (^)(void))finished lodingView:(UIView *)view;
 @end

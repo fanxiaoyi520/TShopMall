@@ -82,6 +82,10 @@
 }
 
 - (void)handleRequestRes:(id)obj{
+    BOOL isGetMoreData = NO;//是否是下拉数据
+    if (self.currentPage > 1) {
+        isGetMoreData = YES;
+    }
     TSSearchResult *result = [TSSearchResult yy_modelWithJSON:obj];
     self.totalNum = result.totalNum;
     if (self.result == nil) {
@@ -91,6 +95,16 @@
         [lists addObjectsFromArray:self.result.list==nil? @[]:self.result.list];
         [lists addObjectsFromArray:result.list==nil? @[]:result.list];
         self.result.list = [lists yy_modelToJSONObject];
+    }
+    if (isGetMoreData == YES) {
+        TSSearchSection *section = self.lists[0];
+        NSMutableArray<TSSearchRow *> *rows = [NSMutableArray arrayWithArray:section.rows];
+        
+        NSArray<TSSearchRow *> *a = [self rowsWithDatas:result.list];
+        [rows addObjectsFromArray:a];
+        self.lists[0].rows = a;
+        self.currentNum = rows.count;
+        return;
     }
     
     self.isEmptyView = NO;
