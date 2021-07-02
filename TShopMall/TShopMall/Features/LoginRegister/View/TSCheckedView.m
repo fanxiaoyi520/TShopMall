@@ -36,7 +36,7 @@
 
 - (void)addConstraints {
     [self.protocolButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.mas_centerX).with.offset(10);
+        make.centerX.equalTo(self.mas_centerX).with.offset(0);
         make.top.equalTo(self.mas_top).with.offset(0);
     }];
     [self.checkButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -134,11 +134,13 @@
     }
     self.textView.attributedText = attrString;
     CGFloat width = [allString widthForFont:KRegularFont(14)];
-    CGFloat left = (self.frame.size.width - 50 - width) / 2.0;
-//    self.textView.contentInset = UIEdgeInsetsMake(-10, left, 0, 0);
+    CGFloat height = [allString heightForFont:KRegularFont(14) width:kScreenWidth - 32];
+
+    self.textView.contentInset = UIEdgeInsetsMake(-10, self.textView.contentInset.left, self.textView.contentInset.bottom, self.textView.contentInset.right);
     
     [self.textView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(@(width + 20));
+        make.height.equalTo(@(height));
     }];
     
 }

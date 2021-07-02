@@ -112,7 +112,7 @@
             [[TSUserInfoManager userInfo] saveUserInfo:userInfo];
             ///登录成功后获取用户信息
             [[TSUserInfoManager userInfo] updateUserInfo:complete];
-            //complete(YES);
+//            complete(YES);
         }
         else{
             complete(NO);

@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, readonly) NSMutableArray <TSSettingSectionModel *> *sections;
 
 - (void)fetchSecurityCenterContentsComplete:(void(^)(BOOL isSucess))complete;
-
+@property (nonatomic, strong) NSArray <TSAgreementModel*> *agreementModels;
 @end
 
 NS_ASSUME_NONNULL_END

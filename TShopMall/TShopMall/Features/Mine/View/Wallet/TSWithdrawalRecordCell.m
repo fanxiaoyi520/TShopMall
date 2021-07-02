@@ -28,6 +28,8 @@
 
 @property (nonatomic ,strong)UILabel *applicationTimeLab;
 @property (nonatomic ,strong)UILabel *applicationTimeNumLab;
+
+@property (nonatomic ,strong)UIView *bacLineView;
 @end
 
 @implementation TSWithdrawalRecordCell
@@ -87,6 +89,13 @@
         make.height.mas_equalTo(24);
     }];
     
+    [self addSubview:self.bacLineView];
+    [self.bacLineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self);
+        make.left.right.equalTo(self).offset(0);
+        make.height.mas_equalTo(10);
+    }];
+    
     [self addSubview:self.WithdrawalLab];
     [self addSubview:self.WithdrawalNumLab];
     [self addSubview:self.afterTaxLab];
@@ -95,6 +104,7 @@
     [self addSubview:self.WithdrawalCardNumLab];
     [self addSubview:self.applicationTimeLab];
     [self addSubview:self.applicationTimeNumLab];
+    [self addSubview:self.bacLineView];
     NSArray *nameViews = @[self.WithdrawalLab,self.afterTaxLab,self.withdrawalCardLab,self.applicationTimeLab];
     [nameViews mas_distributeViewsAlongAxis:MASAxisTypeVertical withFixedSpacing:12 leadSpacing:68 tailSpacing:12];
     [nameViews mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -259,6 +269,14 @@
         _applicationTimeNumLab.text = @"2020-06-01  15:00:00";
     }
     return _applicationTimeNumLab;
+}
+
+- (UIView *)bacLineView {
+    if (!_bacLineView) {
+        _bacLineView = [UIView new];
+        _bacLineView.backgroundColor = KHexColor(@"#F4F4F5");
+    }
+    return _bacLineView;
 }
 @end
 

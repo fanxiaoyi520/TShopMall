@@ -11,6 +11,7 @@
 
 @interface TSAreaCard()<UITableViewDelegate, UITableViewDataSource>{
     NSInteger currentType;//0-省，1-市，2-区/县, 3-街道
+    NSArray *keys;
 }
 @property (nonatomic, strong) UILabel *title;
 @property (nonatomic, strong) UIButton *closeBtn;
@@ -35,6 +36,8 @@
         self.city = [TSAreaModel new];
         self.area = [TSAreaModel new];
         self.street = [TSAreaModel new];
+        
+        [self layoutView];
     }
     return self;
 }
@@ -69,37 +72,46 @@
 
 - (void)setDatas:(NSDictionary<NSString *,NSArray *> *)datas{
     _datas = datas;
+    keys = [[datas allKeys] sortedArrayUsingComparator:^NSComparisonResult(NSString *obj1, NSString *obj2) {
+        return [obj1 compare:obj2 options:NSNumericSearch];
+    }];
+    self.indexView.indexs = keys;
     [self.tableView reloadData];
-    self.indexView.indexs = [datas allKeys];
-    if ([datas allKeys].count == 0) {
+    if (keys.count == 0) {
         TSEmptyAlertView.new.alertInfo(@"网络异常, 请刷新", @"刷新").alertImage(@"alert_net_error").show(self.tableView, @"top", ^{
             [self.delegate reloadData];
         });
     } else {
         [TSEmptyAlertView hideInView: self.tableView];
     }
+    
+    [self.indexView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(KRateW(28.0) * keys.count);
+    }];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return self.datas.allKeys.count;
+    return keys.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.datas[self.datas.allKeys[section]].count;
+    return self.datas[keys[section]].count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    TSAreaModel *model = self.datas[self.datas.allKeys[indexPath.section]][indexPath.row];
+    NSString *key = keys[indexPath.section];
+    TSAreaModel *model = self.datas[key][indexPath.row];
     TSAreaCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TSAreaCell"];
     cell.mark.hidden = indexPath.row;
     cell.areaModel = model;
-    cell.mark.text = [self.datas allKeys][indexPath.section];
+    cell.mark.text = keys[indexPath.section];
     cell.des.text = model.currentShowName;
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    TSAreaModel *model = self.datas[self.datas.allKeys[indexPath.section]][indexPath.row];
+    NSString *key = keys[indexPath.section];
+    TSAreaModel *model = self.datas[key][indexPath.row];
     if (currentType == 0) {
         self.provice = model;
         currentType = 1;
@@ -165,7 +177,7 @@
     return [UITableViewHeaderFooterView new];
 }
 
-- (void)layoutSubviews{
+- (void)layoutView{
     [self.title mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.mas_left).offset(KRateW(16.0));
         make.top.equalTo(self.mas_top).offset(KRateW(16.0));
@@ -213,7 +225,7 @@
     [self.indexView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.mas_right).offset(-KRateW(16.0));
         make.centerY.equalTo(self.tableView);
-        make.height.mas_equalTo(KRateW(390.0));
+        make.height.mas_equalTo(0);
         make.width.mas_equalTo(72.0);
     }];
 }
@@ -580,8 +592,7 @@
         [view removeFromSuperview];
     }
     [self.bgView layoutIfNeeded];
-    CGFloat h = self.bgView.height / self.indexs.count;
-    self.btnHeight = h;
+    CGFloat h = KRateW(28.0);
     for (NSInteger i=0; i<self.indexs.count; i++) {
         UIButton *btn = [UIButton new];
         [btn setTitleColor:[KHexColor(@"#333333") colorWithAlphaComponent:0.6] forState:UIControlStateNormal];
@@ -623,7 +634,7 @@
     if (point.x >= availableX) {
         self.indeImg.hidden = NO;
         self.indeImg.alpha = 1;
-        NSInteger index = point.y / self.btnHeight;
+        NSInteger index = point.y / KRateW(28.0);
         NSString *str = self.indexs[index];
         self.indeDes.text = str;
         [self updateBtnStatus:index];
@@ -663,7 +674,7 @@
 - (void)updateIndeImgae:(NSInteger)index{
     [UIView animateWithDuration:0.3 animations:^{
         [self.indeImg mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.centerY.equalTo(self.bgView.mas_top).offset(self.btnHeight * (index + 1) - self.btnHeight/2.0);
+            make.centerY.equalTo(self.bgView.mas_top).offset(KRateW(28.0) * (index + 1) - KRateW(28.0)/2.0);
         }];
         [self layoutSubviews];
     }];
@@ -679,7 +690,7 @@
         make.right.equalTo(self.bgView.mas_left).offset(-KRateW(8.0));
         make.width.mas_equalTo(KRateW(44.0));
         make.height.mas_equalTo(KRateW(36.0));
-        make.centerY.equalTo(self.bgView.mas_top).offset(self.btnHeight);
+        make.centerY.equalTo(self.bgView.mas_top).offset(KRateW(28.0));
     }];
     
     [self.indeDes mas_makeConstraints:^(MASConstraintMaker *make) {

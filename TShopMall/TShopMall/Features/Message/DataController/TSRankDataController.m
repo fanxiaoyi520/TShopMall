@@ -43,6 +43,7 @@
             item.cellHeight = 55;
             item.identify = @"TSRankCell";
             item.rank = i;
+            item.isLast = i == 8;
             [items addObject:item];
         }
         

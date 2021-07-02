@@ -37,15 +37,10 @@
     NSURL *imgUrl = [NSURL URLWithString:vm.icon];
     [self.icon sd_setImageWithURL:imgUrl placeholderImage:KImageMake(@"")];
     self.name.text = vm.name;
-    self.price.text = [NSString stringWithFormat:@"¥ %@", vm.price];
-    self.thPrice.text = [NSString stringWithFormat:@"提货价: %@", vm.thPrice];
+    self.price.text = [NSString stringWithFormat:@"¥%d", vm.price.intValue];
+    self.thPrice.text = [NSString stringWithFormat:@"提货价: %d", vm.thPrice.intValue];
     
     [self.earnView updatePrice:vm.earnPrice];
-//    if (vm.earnPrice.floatValue <= 0) {
-//        self.earnView.hidden = YES;
-//    } else {
-//        self.earnView.hidden = NO;
-//    }
 }
 
 - (void)setFrame:(CGRect)frame{

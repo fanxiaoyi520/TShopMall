@@ -46,7 +46,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+   
     __weak __typeof(self)weakSelf = self;
     [self.dataController fetchMineContentsComplete:^(BOOL isSucess) {
         __strong __typeof(weakSelf)strongSelf = weakSelf;
@@ -70,7 +70,12 @@
 }
 
 -(void)fillCustomView{
-
+    
+    if (@available(iOS 11.0, *)) {
+        self.collectionView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    } else {
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
     [self.view addSubview:self.bgImageView];
     [self.view addSubview:self.collectionView];
     [self.collectionView addSubview:self.infoView];
@@ -78,9 +83,9 @@
     
     CGFloat top = 6 + GK_STATUSBAR_HEIGHT;
     
-    self.bgImageView.frame = CGRectMake(0, 0, kScreenWidth, 205);
+    self.bgImageView.frame = CGRectMake(0, 0, kScreenWidth, 143 + GK_STATUSBAR_NAVBAR_HEIGHT);
     self.collectionView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight - GK_TABBAR_HEIGHT);
-    self.infoView.frame = CGRectMake(0, 30, kScreenWidth, 90);
+    self.infoView.frame = CGRectMake(0, GK_STATUSBAR_NAVBAR_HEIGHT - 5  , kScreenWidth, 90);
     self.setButton.frame = CGRectMake(kScreenWidth - 48, top, 32, 32);
 }
 
@@ -106,6 +111,11 @@
     }];
 }
 
+- (void)userInfoUpdated{
+    [self.collectionView reloadData];
+    [self.infoView setModel:self.dataController.merchantUserInformationModel];
+}
+
 #pragma mark - Action
 -(void)setAction:(UIButton *)sender{
     TSSettingViewController *settingVC = [[TSSettingViewController alloc] init];
@@ -118,16 +128,21 @@
     CGFloat progress = offsetY / GK_STATUSBAR_NAVBAR_HEIGHT;
     self.gk_navigationBar.alpha = progress;
     if (offsetY <= 0) {
-        CGRect frame = self.bgImageView.frame;
-        frame.size.height = 205 - offsetY;
-        self.bgImageView.frame = frame;
-        
+//        CGRect frame = self.bgImageView.frame;
+//        frame.origin.y +=  offsetY;
+//        self.bgImageView.frame = frame;
+
     } else {
         CGRect frame = self.bgImageView.frame;
         frame.origin.y = -offsetY;
         self.bgImageView.frame = frame;
     }
-    self.setButton.alpha = 0.2 - progress;
+    if (progress > 0) {
+        self.setButton.alpha = 0.2 - progress;
+    } else {
+        self.setButton.alpha = 1;
+    }
+   
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -157,7 +172,7 @@
     if ([model.headerName isEqualToString: @"订单"]) {
         TSMineSectionOrderItemModel *item = (TSMineSectionOrderItemModel *)model.items[indexPath.row];
         if ([item.title isEqualToString: @"待付款"]) {
-            NSString *path = [NSString stringWithFormat:@"%@%@?&orderType=%@&orderState=%@rightbutoon=show",kMallH5ApiPrefix,kMallH5OrderManageUrl,@"1",@"1"];
+            NSString *path = [NSString stringWithFormat:@"%@%@?&orderType=%@&orderState=%@",kMallH5ApiPrefix,kMallH5OrderManageUrl,@"1",@"1"];
             TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:path];
             [self.navigationController pushViewController:hybrid animated:YES];
         } else if ([item.title isEqualToString: @"待发货"]) {
@@ -170,11 +185,11 @@
             [self.navigationController pushViewController:hybrid animated:YES];
         } else if ([item.title isEqualToString: @"已完成"]) {
             
-            NSString *path = [NSString stringWithFormat:@"%@%@?&orderType=%@&orderState=%@",kMallH5ApiPrefix,kMallH5OrderManageUrl,@"1",@"6"];
+            NSString *path = [NSString stringWithFormat:@"%@%@?&orderType=%@&orderState=%@",kMallH5ApiPrefix,kMallH5OrderManageUrl,@"1",@"7"];
             TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:path];
             [self.navigationController pushViewController:hybrid animated:YES];
         } else if ([item.title isEqualToString: @"退款/退货"]) {
-            NSString *path = @"http://10.68.245.26:8081/seller-app-h5/pages/bridgeDemo/index";
+            NSString *path = [NSString stringWithFormat:@"%@%@",kMallH5ApiPrefix,kMallH5RefundManageUrl];
             TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:path];
             [self.navigationController pushViewController:hybrid animated:YES];
         }
@@ -222,13 +237,13 @@
     }
     
     //邀请好友
-    if (indexPath.section == 2 && indexPath.row == 0) {
+    if ([model.headerName isEqualToString: @"邀请"]) {
         TSInviteFriendsViewController *vc = [TSInviteFriendsViewController new];
         [self.navigationController pushViewController:vc animated:YES];
     }
     
     //我的钱包
-    if (indexPath.section == 1 && indexPath.row == 0) {
+    if ([model.headerName isEqualToString: @"我的收益"]) {
         TSMineWalletCenterViewController *vc = [TSMineWalletCenterViewController new];
         [self.navigationController pushViewController:vc animated:YES];
     }
@@ -275,7 +290,7 @@
         return  self.dataController.partnerCenterDataModel;
     } else if ([sectionModel.items[indexPath.row].identify isEqualToString: @"TSMineAdsCell"]) {
         return  self.dataController.content;
-    }  else {
+    }   else {
         return sectionModel.items[indexPath.row];
     }
     
@@ -469,6 +484,7 @@ spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
         _collectionView.dataSource = self;
         _collectionView.showsVerticalScrollIndicator = NO;
         _collectionView.showsHorizontalScrollIndicator = NO;
+        
     }
     return _collectionView;
 }

@@ -125,7 +125,7 @@
         make.left.equalTo(self.bgView.mas_left).offset(50);
         make.top.equalTo(self.bgView).offset(75);
         make.right.equalTo(self.bgView);
-        make.height.mas_equalTo(0.3);
+        make.height.mas_equalTo(0.33);
     }];
 
     [self.deliveryLabel mas_makeConstraints:^(MASConstraintMaker *make) {

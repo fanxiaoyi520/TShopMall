@@ -52,12 +52,12 @@
 
 // MARK: UITableViewDelegate & UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return self.dataController.withdrawalRecordArray.count;
 }
+
+//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+//    return self.dataController.withdrawalRecordArray.count;
+//}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellid" forIndexPath:indexPath];
@@ -71,7 +71,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 211;
+    return 211+10;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -104,6 +104,8 @@
     self.recordTableView.mj_footer.state = MJRefreshStateIdle;
     [self.recordTableView  scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
     self.dataController.status = btn.tag - 10;
+    if (btn.tag - 10 == 3)
+        self.dataController.status = btn.tag - 10 + 1;
     self.dataController.pageNo = 1;
     self.dataController.requestMethod = Ordinary;
     [self.dataController fetchWithdrawalRecordDataComplete:^(BOOL isSucess) {

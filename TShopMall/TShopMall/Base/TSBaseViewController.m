@@ -27,19 +27,26 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(netWorkStatusChanged:) name:TS_NetWork_State object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userInfoUpdated) name:TSUserInfoModifiedNotificationName object:nil];
+    
 }
 
 - (void)netWorkStatusChanged:(NSNotification *)noti{
     
 }
 
+- (void)userInfoUpdated{
+    
+}
+
 -(UIStatusBarStyle)preferredStatusBarStyle{
-    return UIStatusBarStyleLightContent;
+    return UIStatusBarStyleDefault;
 }
 
 #pragma mark - 基本设置
 -(void)setupBasic{
     self.view.backgroundColor = KGrayColor;
+    
 }
 
 #pragma mark - 设置导航栏为白色

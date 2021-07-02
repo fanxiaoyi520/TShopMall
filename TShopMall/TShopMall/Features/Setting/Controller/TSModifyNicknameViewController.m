@@ -38,7 +38,13 @@
     [self setUpInit];
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleDefault;
+}
+
 - (void)setUpInit {
+    self.gk_navTitleFont = KRegularFont(18);
+    self.gk_navTitleColor = KHexColor(@"#2D3132");
     self.gk_navTitle = @"修改昵称";
     self.gk_navRightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"确定" style:(UIBarButtonItemStylePlain) target:self action:@selector(confirmAction)];
     UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panAction:)];
@@ -176,7 +182,6 @@
     [[TSServicesManager sharedInstance].userInfoService modifyUserInfoWithKey:@"nickname" value:self.nickTextField.text success:^ {
         ///发通知修改成功
         //[TSUserInfoManager userInfo].user.nickname = self.nickTextField.text;
-        [[NSNotificationCenter defaultCenter] postNotificationName:TSUserInfoModifiedNotificationName object:nil];
         [Popover popToastOnWindowWithText:@"昵称修改成功！"];
         [self.navigationController popViewControllerAnimated:YES];
     } failure:^(NSString * _Nonnull errorMsg) {

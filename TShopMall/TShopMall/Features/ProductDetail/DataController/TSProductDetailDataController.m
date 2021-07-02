@@ -496,7 +496,7 @@
                                                               requestSerializerType:YTKRequestSerializerTypeHTTP
                                                              responseSerializerType:YTKResponseSerializerTypeJSON
                                                                       requestHeader:@{}
-                                                                        requestBody:params
+                                                                        requestBody:setParams
                                                                      needErrorToast:YES];
         [weakSelf addRequest:setRequest callback:nil];
     }];

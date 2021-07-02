@@ -99,6 +99,7 @@
     self.addressItem.textField.text = vm.address;
     self.detailItem.textField.text = self.vm.area;
     self.markView.currentMark = self.vm.tag;
+    self.isDefaultItem.selBtn.selected = self.vm.isDefault;
 }
 
 - (void)shouldFetchSmartAddress:(NSString *)address{
@@ -111,7 +112,7 @@
         BOOL isDefault = weakSelf.vm.isDefault;
         weakSelf.vm = [[TSAddressViewModel alloc] initWithAddress:model];
         weakSelf.vm.isDefault = isDefault;
-        NSString *str = [NSString stringWithFormat:@"%@\n%@\n%@%@%@%@%@", model.consignee,model.mobile, model.provinceName, model.cityName, model.regionName, model.streetName,model.address];
+//        NSString *str = [NSString stringWithFormat:@"%@\n%@\n%@%@%@%@%@", model.consignee,model.mobile, model.provinceName, model.cityName, model.regionName, model.streetName,model.address];
 //        [weakSelf.pastView updatePastView:str];
     } onController:weakSelf.controller];
 }
@@ -147,8 +148,14 @@
     
     [self.markView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.nameItem);
-        make.top.equalTo(self.detailItem.mas_bottom);
+        make.top.equalTo(self.detailItem.mas_bottom).offset(KRateW(10.0));
         make.bottom.equalTo(self.mas_bottom);
+    }];
+    
+    [self.isDefaultItem mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(self.nameItem);
+        make.height.mas_equalTo(KRateW(56.0));
+        make.top.equalTo(self.markView.mas_bottom).offset(KRateW(8.0));
     }];
 }
 
@@ -227,6 +234,16 @@
     return self.markView;
 }
 
+- (TSAddressDefaultItem *)isDefaultItem{
+    if (_isDefaultItem) {
+        return _isDefaultItem;
+    }
+    self.isDefaultItem = [TSAddressDefaultItem new];
+    [self addSubview:self.isDefaultItem];
+    
+    return self.isDefaultItem;
+}
+
 @end
 
 
@@ -235,6 +252,7 @@
 - (instancetype)init{
     if (self == [super init]) {
         self.canEdit = YES;
+        self.backgroundColor = [UIColor whiteColor];
     }
     return self;
 }
@@ -321,4 +339,48 @@
     
     return self.line;
 }
+@end
+
+
+@implementation TSAddressDefaultItem
+
+- (void)layoutSubviews{
+    self.backgroundColor = [UIColor whiteColor];
+    [self.selBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.mas_left).offset(KRateW(16.0));
+        make.centerY.equalTo(self);
+        make.width.height.mas_equalTo(KRateW(24.0));
+    }];
+    
+    [self.tips mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.selBtn.mas_right).offset(KRateW(8.0));
+        make.top.bottom.equalTo(self);
+    }];
+}
+
+- (UIButton *)selBtn{
+    if (_selBtn) {
+        return _selBtn;
+    }
+    self.selBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.selBtn setBackgroundImage:KImageMake(@"btn_normal") forState:UIControlStateNormal];
+    [self.selBtn setBackgroundImage:KImageMake(@"btn_sel") forState:UIControlStateSelected];
+    [self addSubview:self.selBtn];
+    
+    return self.selBtn;
+}
+
+- (UILabel *)tips{
+    if (_tips) {
+        return _tips;
+    }
+    self.tips = [UILabel new];
+    self.tips.text = @"设为默认地址";
+    self.tips.font = KRegularFont(14.0);
+    self.tips.textColor = KHexColor(@"#2D3132");
+    [self addSubview:self.tips];
+    
+    return self.tips;
+}
+
 @end
