@@ -65,7 +65,8 @@
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     TSBankCardCell * cell =[collectionView dequeueReusableCellWithReuseIdentifier:@"cellIdentifier" forIndexPath:indexPath];
-    [cell setModel:@[self.model][indexPath.row]];
+    cell.sourceInt = 5;
+    [cell setModel:@[self.model][indexPath.row] indexPath:indexPath];
     return cell;
 }
 
@@ -98,6 +99,7 @@
             if (isSucess) {
                 TSOperationBankTipsViewController *vc = [TSOperationBankTipsViewController new];
                 vc.kNavTitle = @"银行卡";
+                vc.isNotice = YES;
                 [self.navigationController pushViewController:vc animated:YES];
             }
         }];

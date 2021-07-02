@@ -706,6 +706,7 @@
 
 //银行卡部分秘文展示
 + (NSString *)returnBankCard:(NSString *)BankCardStr {
+    if (BankCardStr.length < 16) return BankCardStr;
     NSString *formerStr = [BankCardStr substringToIndex:4];
     NSString *str1 = [BankCardStr stringByReplacingOccurrencesOfString:formerStr withString:@""];
     NSString *endStr = [BankCardStr substringFromIndex:BankCardStr.length-4];

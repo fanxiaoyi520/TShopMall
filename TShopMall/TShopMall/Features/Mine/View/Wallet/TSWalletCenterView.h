@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface TSWalletCenterView : UIImageView
+@property (nonatomic ,strong)UILabel *mineBankCardNumLab;
 - (instancetype)initWithModel:(TSWalletModel *)model;
 @property (nonatomic ,assign) id <TSWalletCenterViewDelegate> kDelegate;
 @end

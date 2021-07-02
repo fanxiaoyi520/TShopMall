@@ -18,6 +18,7 @@
 #import "TSAddBankCardModel.h"
 #import "TSAddBankCardBackModel.h"
 #import "TSBranchCardModel.h"
+#import "NSString+Plugin.h"
 
 @interface TSAddCardViewController ()<UITableViewDelegate,UITableViewDataSource,TSAddBankCardDelegate,UIViewControllerTransitioningDelegate>
 
@@ -137,6 +138,12 @@
         if (textField.text)
             [self.mutableDic setValue:textField.text forKey:@"userName"];
         self.model = [TSAddBankCardModel yy_modelWithDictionary:self.mutableDic];
+        
+        if ([self checkAllParameter:NO]) {
+            [self.footerView.sureBtn setBackgroundImage:KImageMake(@"btn_large_black_norm1") forState:UIControlStateNormal];
+        } else {
+            [self.footerView.sureBtn setBackgroundImage:KImageMake(@"btn_large_black_norm") forState:UIControlStateNormal];
+        }
         return;
     }
     
@@ -153,10 +160,17 @@
                 if (isSucess == YES) {
                     [self.view endEditing:YES];
                     [self.mutableDic setValue:str forKey:@"bankCardNo"];
+                    
                     [self.mutableDic setValue:self.dataController.addBankCardBackModel.bankName forKey:@"accountBank"];
                     [self.mutableDic setValue:self.dataController.addBankCardBackModel.accountBankCode forKey:@"accountBankCode"];
                     self.model = [TSAddBankCardModel yy_modelWithDictionary:self.mutableDic];
                     [Popover popToastOnWindowWithPopPosition:PopPositionMiddle text:@"银行卡号校验成功" toastyType:ToastyTypeNormal appearBlock:nil];
+                    
+                    if ([self checkAllParameter:NO]) {
+                        [self.footerView.sureBtn setBackgroundImage:KImageMake(@"btn_large_black_norm1") forState:UIControlStateNormal];
+                    } else {
+                        [self.footerView.sureBtn setBackgroundImage:KImageMake(@"btn_large_black_norm") forState:UIControlStateNormal];
+                    }
                     
                     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:0];;
                     TSAddBankCardCell *kCell = [self.addCardTableView cellForRowAtIndexPath:indexPath];
@@ -164,6 +178,10 @@
                         if ([obj isKindOfClass:UITextField.class]) {
                             UITextField *textField = (UITextField *)obj;
                             textField.text = self.dataController.addBankCardBackModel.bankName;
+                        }
+                        if ([obj isKindOfClass:UIImageView.class]) {
+                            UIImageView *imageView = (UIImageView *)obj;
+                            imageView.hidden = YES;
                         }
                     }];
                 } else {
@@ -185,8 +203,8 @@
         if (isSucess) {
             if (self.dataController.branchCardArray.count>0) {
                 self.dropDownView.hidden = NO;
-                self.addCardTableView.top = GK_STATUSBAR_NAVBAR_HEIGHT - self.dropDownView.height+56;
-                self.dropDownView.top = textField.superview.bottom-self.dropDownView.height+1;
+                self.addCardTableView.top = GK_STATUSBAR_NAVBAR_HEIGHT - self.dropDownView.height+50;
+                self.dropDownView.top = textField.superview.bottom-self.dropDownView.height;
                 self.dropDownView.bottom = kScreenHeight-self.keyBoardRect.size.height;
                 [self.dropDownView setModel:self.dataController.branchCardArray];
                 self.dropDownView.selectBranchBlock = ^(id  _Nullable info) {
@@ -197,6 +215,11 @@
                     [self.mutableDic setValue:model.bankFullName forKey:@"bankName"];
                     [self.mutableDic setValue:model.linkNumber forKey:@"bankBranchId"];
                     self.model = [TSAddBankCardModel yy_modelWithDictionary:self.mutableDic];
+                    if ([self checkAllParameter:NO]) {
+                        [self.footerView.sureBtn setBackgroundImage:KImageMake(@"btn_large_black_norm1") forState:UIControlStateNormal];
+                    } else {
+                        [self.footerView.sureBtn setBackgroundImage:KImageMake(@"btn_large_black_norm") forState:UIControlStateNormal];
+                    }
                 };
             }
         }
@@ -207,13 +230,14 @@
     //****结束textView的输入****//
     [self.view endEditing:YES];
     UIButton *btn = (UIButton *)sender;
+    
     if (btn.tag == 12) {
         TSAddBankCardCell *cell = (TSAddBankCardCell *)btn.superview;
         __block UITextField *textField = nil;
+        __block UIImageView *imageView = nil;
         [cell.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            if ([obj isKindOfClass:UITextField.class]) {
-                textField = (UITextField *)obj;
-            }
+            if ([obj isKindOfClass:UITextField.class]) textField = (UITextField *)obj;
+            if ([obj isKindOfClass:UIImageView.class]) imageView = (UIImageView *)obj;
         }];
         TSSelectorViewController *vc = [TSSelectorViewController new];
         vc.modalPresentationStyle = UIModalPresentationCustom;
@@ -221,66 +245,58 @@
         @weakify(self);
         vc.selectBankBlock = ^(id  _Nullable info) {
             @strongify(self);
+            imageView.hidden = YES;
             TSAddBankCardBackModel *model = (TSAddBankCardBackModel *)info;
             textField.text = model.bankName;
             [self.mutableDic setValue:model.bankName forKey:@"accountBank"];
-            [self.mutableDic setValue:model.accountBankCode forKey:@"accountBankCode"];
+            [self.mutableDic setValue:model.bankCode forKey:@"accountBankCode"];
             self.model = [TSAddBankCardModel yy_modelWithDictionary:self.mutableDic];
+            
+            if ([self checkAllParameter:NO]) {
+                [self.footerView.sureBtn setBackgroundImage:KImageMake(@"btn_large_black_norm1") forState:UIControlStateNormal];
+            } else {
+                [self.footerView.sureBtn setBackgroundImage:KImageMake(@"btn_large_black_norm") forState:UIControlStateNormal];
+            }
         };
         [self presentViewController:vc animated:YES completion:nil];
     } else {
         TSAddBankCardCell *cell = (TSAddBankCardCell *)btn.superview;
         __block UITextField *textField = nil;
+        __block UIImageView *imageView = nil;
         [cell.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            if ([obj isKindOfClass:UITextField.class]) {
-                textField = (UITextField *)obj;
-            }
+            if ([obj isKindOfClass:UITextField.class]) textField = (UITextField *)obj;
+            if ([obj isKindOfClass:UIImageView.class]) imageView = (UIImageView *)obj;
         }];
         
         TSSelectAddressViewController *vc = [TSSelectAddressViewController new];
         vc.modalPresentationStyle = UIModalPresentationCustom;
         vc.transitioningDelegate = self;
+        @weakify(self);
         vc.selectAddressBlock = ^(id  _Nullable info) {
+            @strongify(self);
+            imageView.hidden = YES;
             NSMutableDictionary *dic = (NSMutableDictionary *)info;
             [self.mutableDic addEntriesFromDictionary:dic];
             self.model = [TSAddBankCardModel yy_modelWithDictionary:self.mutableDic];
             textField.text = [NSString stringWithFormat:@"%@%@",self.model.bankAddressProvince,self.model.bankAddressCity];
+            if ([self checkAllParameter:NO]) {
+                [self.footerView.sureBtn setBackgroundImage:KImageMake(@"btn_large_black_norm1") forState:UIControlStateNormal];
+            } else {
+                [self.footerView.sureBtn setBackgroundImage:KImageMake(@"btn_large_black_norm") forState:UIControlStateNormal];
+            }
         };
         [self presentViewController:vc animated:YES completion:nil];
     }
 }
 
 - (void)addBankCardFooterSureAction:(id _Nullable)sender {
-//    if (self.model.bankCardNo || [self.model.bankCardNo isEqualToString:@""]) {
-//        [Popover popToastOnWindowWithText:@"银行卡号不能为空"];
-//        return;
-//    }
+//    TSOperationBankTipsViewController *vc = [TSOperationBankTipsViewController new];
+//    vc.kNavTitle = @"添加银行卡";
+//    vc.isNotice = self.isNotice;
+//    [self.navigationController pushViewController:vc animated:YES];
 //
-//    if (self.model.accountBank || [self.model.accountBank isEqualToString:@""]) {
-//        [Popover popToastOnWindowWithText:@"银行名称不能为空"];
-//        return;
-//    }
-//
-//    if (self.model.bankName || [self.model.bankName isEqualToString:@""]) {
-//        [Popover popToastOnWindowWithText:@"开户银行不能为空"];
-//        return;
-//    }
-//
-//    if (self.model.bankAddressProvince || [self.model.bankAddressProvince isEqualToString:@""]) {
-//        [Popover popToastOnWindowWithText:@"开户银行省市不能为空"];
-//        return;
-//    }
-//
-//    if (self.model.bankAddressCity || [self.model.bankAddressCity isEqualToString:@""]) {
-//        [Popover popToastOnWindowWithText:@"开户银行省市不能为空"];
-//        return;
-//    }
-//
-//    if (self.model.userName || [self.model.userName isEqualToString:@""]) {
-//        [Popover popToastOnWindowWithText:@"用户名不能为空"];
-//        return;
-//    }
-    
+    if (![self checkAllParameter:YES]) return;
+
     self.dataController.addBankCardModel = self.model;
     @weakify(self);
     [self.dataController fetchAddToBankCardDataComplete:^(BOOL isSucess) {
@@ -288,7 +304,7 @@
         if (isSucess) {
             TSOperationBankTipsViewController *vc = [TSOperationBankTipsViewController new];
             vc.kNavTitle = @"添加银行卡";
-            vc.popToWhere = (KPopToWhere)self.popToWhere;
+            vc.isNotice = self.isNotice;
             [self.navigationController pushViewController:vc animated:YES];
         }
     }];
@@ -315,6 +331,49 @@
     self.addCardTableView.top = GK_STATUSBAR_NAVBAR_HEIGHT;
     self.dropDownView.hidden = YES;
 }
+
+
+//校验所有参数
+- (BOOL)checkAllParameter:(BOOL)isSubmit {
+    
+    if (!self.model.userName || [self.model.userName isEqualToString:@""]) {
+        if (isSubmit) [Popover popToastOnWindowWithText:@"用户名不能为空"];
+        return NO;
+    }
+    
+    if (!self.model.bankCardNo || [self.model.bankCardNo isEqualToString:@""]) {
+        if (isSubmit) [Popover popToastOnWindowWithText:@"银行卡号不能为空"];
+        return NO;
+    }
+
+    if (!self.model.accountBank || [self.model.accountBank isEqualToString:@""]) {
+        if (isSubmit) [Popover popToastOnWindowWithText:@"银行名称不能为空"];
+        return NO;
+    }
+
+    if (!self.model.bankName || [self.model.bankName isEqualToString:@""]) {
+        if (isSubmit) [Popover popToastOnWindowWithText:@"开户银行不能为空"];
+        return NO;
+    }
+
+    if (!self.model.bankAddressProvince || [self.model.bankAddressProvince isEqualToString:@""]) {
+        if (isSubmit) [Popover popToastOnWindowWithText:@"开户银行省市不能为空"];
+        return NO;
+    }
+
+    if (!self.model.bankAddressCity || [self.model.bankAddressCity isEqualToString:@""]) {
+        if (isSubmit) [Popover popToastOnWindowWithText:@"开户银行省市不能为空"];
+        return NO;
+    }
+    
+    if (!self.model.bankAddressCityCode || [self.model.bankAddressCityCode isEqualToString:@""]) {
+        if (isSubmit) [Popover popToastOnWindowWithText:@"该开户银行不支持"];
+        return NO;
+    }
+    
+    return YES;
+}
+
 
 // MARK: get
 - (UITableView *)addCardTableView {
@@ -348,7 +407,7 @@
 
 - (TSDropDownView *)dropDownView {
     if (!_dropDownView) {
-        _dropDownView = [[TSDropDownView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 3*33)];
+        _dropDownView = [[TSDropDownView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 4*33)];
         _dropDownView.hidden = YES;
     }
     return _dropDownView;

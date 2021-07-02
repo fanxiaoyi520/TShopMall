@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface TSUnbundlingCardViewController : TSBaseViewController
 
 @property (nonatomic ,strong) TSBankCardModel *model;
+@property (nonatomic ,assign) BOOL isNotice;
 @end
 
 NS_ASSUME_NONNULL_END

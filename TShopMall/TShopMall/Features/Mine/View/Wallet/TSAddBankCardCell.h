@@ -27,6 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface TSAddBankCardFooter : UIView
+@property (nonatomic ,strong) UIButton *sureBtn;
 - (void)setModel:(id _Nullable)model;
 @property (nonatomic ,assign) id<TSAddBankCardDelegate> kDelegate;
 @end
