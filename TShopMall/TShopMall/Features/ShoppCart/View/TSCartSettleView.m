@@ -65,7 +65,6 @@
     if (isEdit == YES) {
         self.price.hidden = YES;
         self.tips.hidden = YES;
-        [self.settleBtn setBackgroundImage:KImageMake(@"") forState:UIControlStateNormal];
         self.settleBtn.layer.cornerRadius = KRateW(20.0);
         self.settleBtn.layer.borderWidth = 0.5;
         self.settleBtn.layer.borderColor = KHexColor(@"2D3132").CGColor;
@@ -74,7 +73,6 @@
     } else {
         self.price.hidden = NO;
         self.tips.hidden = NO;
-        [self.settleBtn setBackgroundImage:KImageMake(@"cart_settle_bg") forState:UIControlStateNormal];
         self.settleBtn.layer.cornerRadius = 0;
         self.settleBtn.layer.borderWidth = 0;
         self.settleBtn.layer.borderColor = [UIColor clearColor].CGColor;

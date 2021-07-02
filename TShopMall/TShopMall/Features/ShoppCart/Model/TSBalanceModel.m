@@ -25,6 +25,15 @@
 - (void)setAttrValues:(NSArray<TSBalanceAttrValue *> *)attrValues{
     _attrValues = [NSArray yy_modelArrayWithClass:TSBalanceAttrValue.class json:attrValues];
 }
+
+- (NSString *)attrValueStr{
+    NSString *str = @"";
+    for (TSBalanceAttrValue *attr in _attrValues) {
+        str = [NSString stringWithFormat:@"%@%@%@", str, attr.name, attr.value];
+    }
+    return str;
+}
+
 @end
 
 

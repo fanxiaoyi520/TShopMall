@@ -70,6 +70,14 @@
     return @"其他";
 }
 
+- (NSString *)attrValueStr{
+    NSString *str = @"";
+    for (TSCartAttr *attr in _attrValues) {
+        str = [NSString stringWithFormat:@"%@%@%@", str, attr.name, attr.value];
+    }
+    return str;
+}
+
 @end
 
 @implementation TSCartAttr
