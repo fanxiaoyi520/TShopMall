@@ -105,6 +105,7 @@
         return _icon;
     }
     self.icon = [UIImageView new];
+    self.icon.contentMode = UIViewContentModeScaleAspectFit;
     [self.contentView addSubview:self.icon];
     
     return self.icon;

@@ -172,6 +172,8 @@
 		C2C765452679ECF4004757B9 /* TSMakeOrderDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2C765442679ECF4004757B9 /* TSMakeOrderDataController.m */; };
 		C2C765482679FCBA004757B9 /* TSMakeOrderGoodsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C2C765472679FCBA004757B9 /* TSMakeOrderGoodsCell.m */; };
 		C2C7654B267A097D004757B9 /* TSMakeOrderOperationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C2C7654A267A097D004757B9 /* TSMakeOrderOperationCell.m */; };
+		C2D144DF268EF2DB00F5BFF6 /* TSSearchResultSkeletonView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2D144DE268EF2DB00F5BFF6 /* TSSearchResultSkeletonView.m */; };
+		C2D144E2268F0D1C00F5BFF6 /* TSMakeOrderTableFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2D144E1268F0D1C00F5BFF6 /* TSMakeOrderTableFooterView.m */; };
 		C2EF88B22670997100E7374A /* TSCartViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EF889B2670997100E7374A /* TSCartViewModel.m */; };
 		C2EF88B32670997100E7374A /* TSCartViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EF889B2670997100E7374A /* TSCartViewModel.m */; };
 		C2EF88B42670997100E7374A /* TSCartViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EF889B2670997100E7374A /* TSCartViewModel.m */; };
@@ -947,6 +949,10 @@
 		C2C765472679FCBA004757B9 /* TSMakeOrderGoodsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSMakeOrderGoodsCell.m; sourceTree = "<group>"; };
 		C2C76549267A097D004757B9 /* TSMakeOrderOperationCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSMakeOrderOperationCell.h; sourceTree = "<group>"; };
 		C2C7654A267A097D004757B9 /* TSMakeOrderOperationCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSMakeOrderOperationCell.m; sourceTree = "<group>"; };
+		C2D144DD268EF2DB00F5BFF6 /* TSSearchResultSkeletonView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSSearchResultSkeletonView.h; sourceTree = "<group>"; };
+		C2D144DE268EF2DB00F5BFF6 /* TSSearchResultSkeletonView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSSearchResultSkeletonView.m; sourceTree = "<group>"; };
+		C2D144E0268F0D1C00F5BFF6 /* TSMakeOrderTableFooterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSMakeOrderTableFooterView.h; sourceTree = "<group>"; };
+		C2D144E1268F0D1C00F5BFF6 /* TSMakeOrderTableFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSMakeOrderTableFooterView.m; sourceTree = "<group>"; };
 		C2EF88982670997100E7374A /* TSCartViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSCartViewModel.h; sourceTree = "<group>"; };
 		C2EF88992670997100E7374A /* TSCartGoodsSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSCartGoodsSection.h; sourceTree = "<group>"; };
 		C2EF889B2670997100E7374A /* TSCartViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSCartViewModel.m; sourceTree = "<group>"; };
@@ -2161,6 +2167,8 @@
 				C21A4B70267AF91F00766F72 /* TSMakeOrderPriceCell.m */,
 				C2F057462685F1BA003D1B2A /* TSMakeOrderEmptyCell.h */,
 				C2F057472685F1BA003D1B2A /* TSMakeOrderEmptyCell.m */,
+				C2D144E0268F0D1C00F5BFF6 /* TSMakeOrderTableFooterView.h */,
+				C2D144E1268F0D1C00F5BFF6 /* TSMakeOrderTableFooterView.m */,
 			);
 			name = MakeOrder;
 			sourceTree = "<group>";
@@ -2201,6 +2209,8 @@
 				C2A34C952674BC2E0095497E /* TSSearchHeaderView.m */,
 				C2A34C9D26759F140095497E /* TSEarnView.h */,
 				C2A34C9E26759F140095497E /* TSEarnView.m */,
+				C2D144DD268EF2DB00F5BFF6 /* TSSearchResultSkeletonView.h */,
+				C2D144DE268EF2DB00F5BFF6 /* TSSearchResultSkeletonView.m */,
 			);
 			name = Search;
 			sourceTree = "<group>";
@@ -4500,6 +4510,7 @@
 				CE4F6BDE268708E700812275 /* TSScoreViewController.m in Sources */,
 				0465170A268C57EF000829C2 /* TextViewDialogElement.m in Sources */,
 				DFB3FFF326899EF300FC8FF9 /* TSTableViewBaseCell.m in Sources */,
+				C2D144E2268F0D1C00F5BFF6 /* TSMakeOrderTableFooterView.m in Sources */,
 				04651706268C57EF000829C2 /* ButtonsDialogElement.m in Sources */,
 				CE4F6BDA26867C0E00812275 /* TSGlobalNotifyServer.m in Sources */,
 				04651738268C969C000829C2 /* TSUploadImageService.m in Sources */,
@@ -4885,6 +4896,7 @@
 				046516ED268C57EF000829C2 /* UITextView+Dialog.m in Sources */,
 				C24A69D62689D73A0022A81F /* TSPaySuccessRecomendCell.m in Sources */,
 				C3A6C4E2267A1CAF00FC71D6 /* TSBindMobileDataController.m in Sources */,
+				C2D144DF268EF2DB00F5BFF6 /* TSSearchResultSkeletonView.m in Sources */,
 				C25AD833268B13AC000D2258 /* TSInvoiceModel.m in Sources */,
 				DCA035F8268355D2003DE5F7 /* TSServicesManager.m in Sources */,
 				F54973622668A22100181E3F /* SSResponseModel.m in Sources */,

@@ -32,6 +32,7 @@
 - (void)viewCart:(void(^)(void))finished{
     __weak typeof(self) weakSelf = self;
     [self.sections removeAllObjects];
+    self.cartModel = nil;
     SSBaseRequest *res = [self cartShowRequest];
     res.animatingView = self.context.view;
     [res startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
@@ -132,7 +133,7 @@
     TSCartGoodsSection *section = [TSCartGoodsSection new];
     section.heightForHeader = KRateW(54.0);
     section.headerIdentifier = @"TSCartInvalidHeader";
-    //    section.heightForFooter = KRateW(10.0);
+    section.heightForFooter = KRateW(10.0);
     section.rows = invalidRow;
     
     [self.sections addObject:section];
@@ -165,7 +166,7 @@
     }
     
     TSCartGoodsSection *section = [TSCartGoodsSection new];
-    section.heightForHeader = KRateW(54.0);
+    section.heightForHeader = KRateW(64.0);
     section.headerIdentifier = @"TSCartRecomendHeader";
     section.heightForFooter = KRateW(32.0);
     section.rows = rows;

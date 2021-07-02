@@ -12,7 +12,7 @@
     if (self == [super init]) {
         self.productName = detail.productName;
         self.productImgUrl = detail.productImgUrl;
-        self.attr = detail.attrValues.count==0? @"":[detail.attrValues lastObject].name;
+        self.attr = detail.attrValueStr;
         self.price = detail.basePrice;
         self.buyNum = detail.buyNum;
         self.productUuid = detail.uuid;

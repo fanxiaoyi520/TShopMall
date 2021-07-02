@@ -22,5 +22,7 @@
 - (void)configRefreshHeaderWithTarget:(id)target selector:(SEL)selector;
 - (void)configRefreshFooterWithTarget:(id)target selector:(SEL)selector;
 - (void)endRefreshIsNoMoreData:(BOOL)noMoreData isEmptyData:(BOOL)isEmptyData;
+
+- (void)shouldShowSkeletonView:(BOOL)show;
 @end
 
