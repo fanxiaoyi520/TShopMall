@@ -78,7 +78,7 @@
     self.indexView.indexs = keys;
     [self.tableView reloadData];
     if (keys.count == 0) {
-        TSEmptyAlertView.new.alertInfo(@"网络异常, 请刷新", @"刷新").alertImage(@"alert_net_error").show(self.tableView, @"top", ^{
+        TSEmptyAlertView.new.alertInfo(@"未查询到ju数据, 请刷新", @"刷新").alertImage(@"alert_net_error").show(self.tableView, @"top", ^{
             [self.delegate reloadData];
         });
     } else {
@@ -230,7 +230,9 @@
     }];
 }
 
-- (void)hideCard{}
+- (void)hideCard{
+    [self.controller performSelector:@selector(hideCard)];
+}
 
 - (UILabel *)title{
     if (_title) {
@@ -251,7 +253,7 @@
     }
     self.closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.closeBtn setBackgroundImage:KImageMake(@"general_close") forState:UIControlStateNormal];
-    [self.closeBtn addTarget:self.controller action:@selector(hideCard) forControlEvents:UIControlEventTouchUpInside];
+    [self.closeBtn addTarget:self action:@selector(hideCard) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.closeBtn];
     
     return self.closeBtn;

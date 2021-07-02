@@ -37,9 +37,16 @@
 
 - (void)fetchAddress{
     __weak typeof(self) weakSelf = self;
-    [TSShippingAddressDataController  fetchAddress:^(NSArray<TSAddressModel *> *addresses) {
+    [TSShippingAddressDataController  fetchAddress:^(NSArray<TSAddressModel *> *addresses, NSString *message) {
+        [TSEmptyAlertView hideInView:self.tableView];
+        if (message.length != 0) {
+            TSEmptyAlertView.new.alertInfo(message, @"刷新").alertImage(@"alert_address_empty").show(self.tableView, @"center", ^{
+                [weakSelf fetchAddress];
+            });
+            return;
+        }
         if (addresses.count == 0) {
-            TSEmptyAlertView.new.alertInfo(@"没有收获地址点击添加", @"").alertImage(@"alert_address_empty").show(self.tableView, @"center", ^{
+            TSEmptyAlertView.new.alertInfo(@"没有收货地址点击添加", @"").alertImage(@"alert_address_empty").show(self.tableView, @"center", ^{
                 [weakSelf gotoAddNewAddress];
             });
         } else {
