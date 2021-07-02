@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "徽章-最新(1).png",
+      "filename" : "mine_wxpyq.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "徽章-最新@2x(1).png",
+      "filename" : "mine_wxpyq@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "徽章-最新@3x(1).png",
+      "filename" : "mine_wxpyq@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

@@ -86,33 +86,13 @@
         section.footerSize = CGSizeMake(0, 14);
         section.footerIdentify = @"TSUniversalBottomFooterView";
         section.sectionInset = UIEdgeInsetsMake(0, 16, 0, 16);
-        section.spacingWithLastSection = 130;
+        section.spacingWithLastSection = GK_STATUSBAR_NAVBAR_HEIGHT + 97;
         section.column = 5;
         section.items = items;
         
         [sections addObject:section];
     }
     
-    {
-        NSMutableArray *items = [NSMutableArray array];
-        
-        TSMineSectionEarnItemModel *item = [[TSMineSectionEarnItemModel alloc] init];
-        item.cellHeight = 66;
-        item.identify = @"TSMineEarningsCell";
-        
-        [items addObject:item];
-        
-        TSMineSectionModel *section = [[TSMineSectionModel alloc] init];
-        section.sectionInset = UIEdgeInsetsMake(0, 16, 0, 16);
-        section.column = 1;
-        section.hasDecorate = YES;
-        section.docorateIdentify = @"TSUniversalAllCornersDecorationView";
-        section.decorateInset = UIEdgeInsetsMake(0, 16, 0, 16);
-        section.spacingWithLastSection = 12;
-        section.items = items;
-        
-        [sections addObject:section];
-    }
     
     {
         TSMineSectionAdsItemModel *item = [[TSMineSectionAdsItemModel alloc] init];
@@ -121,17 +101,48 @@
 
         TSMineSectionModel *section = [[TSMineSectionModel alloc] init];
         section.spacingWithLastSection = 12;
+        section.headerName = @"邀请";
         section.sectionInset = UIEdgeInsetsMake(0, 16, 0, 16);
         section.items = @[item];
-
+//        if ([self.merchantUserInformationModel.salesmanRankLevel isEqualToString:@"1"]) {
         [sections addObject:section];
+//        }
     }
     
     {
         NSMutableArray *items = [NSMutableArray array];
         
+        TSMineSectionEarnItemModel *item = [[TSMineSectionEarnItemModel alloc] init];
+        item.cellHeight = 54;
+        item.identify = @"TSMineEarningsCell";
+        
+        [items addObject:item];
+        
+        TSMineSectionModel *section = [[TSMineSectionModel alloc] init];
+        section.sectionInset = UIEdgeInsetsMake(0, 16, 0, 16);
+        section.column = 1;
+        section.hasDecorate = YES;
+        section.headerName = @"我的收益";
+        section.docorateIdentify = @"TSUniversalAllCornersDecorationView";
+        section.decorateInset = UIEdgeInsetsMake(0, 16, 0, 16);
+        section.spacingWithLastSection = 12;
+        section.items = items;
+        if ([TSGlobalManager shareInstance].currentUserInfo) {
+        [sections addObject:section];
+        }
+    }
+ 
+    
+    {
+        NSMutableArray *items = [NSMutableArray array];
+        
         TSMineSectionParterItemModel *item = [[TSMineSectionParterItemModel alloc] init];
-        item.cellHeight = 182;
+        if ([self.merchantUserInformationModel.salesmanRankLevel isEqualToString:@"1"]) {
+            item.cellHeight = 182;
+        } else {
+            item.cellHeight = 115;
+        }
+        
         item.identify = @"TSMinePartnerCenterCell";
         
         [items addObject:item];
@@ -144,8 +155,9 @@
         section.decorateInset = UIEdgeInsetsMake(0, 16, 0, 16);
         section.spacingWithLastSection = 12;
         section.items = items;
-        
+        if ([TSGlobalManager shareInstance].currentUserInfo) {
         [sections addObject:section];
+        }
     }
 
     {

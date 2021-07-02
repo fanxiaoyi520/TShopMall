@@ -116,11 +116,14 @@
 - (void)setModel:(TSMineMerchantUserInformationModel *)model {
     if (!model) return;
     [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:model.customerImgUrl] placeholderImage:nil];
-    
+    if ([TSGlobalManager shareInstance].currentUserInfo) {
     if (model.customerName) {
         [self.loginButton setTitle:model.customerName forState:UIControlStateNormal];
     } else {
         [self.loginButton setTitle:@"" forState:UIControlStateNormal];
+    }
+    } else {
+    [self.loginButton setTitle:@"登录/注册" forState:UIControlStateNormal];
     }
     
     if ([model.staff isEqualToString:@"staff"]) {
@@ -194,7 +197,7 @@
 -(UIButton *)loginButton{
     if (!_loginButton) {
         _loginButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_loginButton setTitle:@"登录/注册" forState:UIControlStateNormal];
+//        [_loginButton setTitle:@"登录/注册" forState:UIControlStateNormal];
         [_loginButton setTitleColor:KWhiteColor forState:UIControlStateNormal];
         _loginButton.titleLabel.font = KRegularFont(16);
         [_loginButton addTarget:self action:@selector(loginAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -222,6 +225,7 @@
     if (!_invitationCodeBack) {
         _invitationCodeBack = [[UIImageView alloc] init];
         _invitationCodeBack.image = KImageMake(@"mall_mine_juxing");
+        _invitationCodeBack.hidden = true;
     }
     return _invitationCodeBack;
 }
