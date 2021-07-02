@@ -78,7 +78,7 @@
     self.indexView.indexs = keys;
     [self.tableView reloadData];
     if (keys.count == 0) {
-        TSEmptyAlertView.new.alertInfo(@"未查询到数据, 请刷新", @"刷新").alertImage(@"alert_net_error").show(self.tableView, @"top", ^{
+        TSEmptyAlertView.new.alertInfo(@"未查询到ju数据, 请刷新", @"刷新").alertImage(@"alert_net_error").show(self.tableView, @"top", ^{
             [self.delegate reloadData];
         });
     } else {
