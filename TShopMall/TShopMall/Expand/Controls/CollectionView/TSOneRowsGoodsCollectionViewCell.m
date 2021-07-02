@@ -60,7 +60,7 @@
         [self.maxPriceView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(self.rmbLabel);
             make.left.equalTo(self.priceLabel.mas_right).offset(14);
-            make.size.sizeOffset(CGSizeMake(KRateW(69), KRateH(18)));
+            make.size.sizeOffset(CGSizeMake(69, 18));
         }];
         
         [self addSubview: self.getPriceLabel];

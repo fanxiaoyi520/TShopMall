@@ -46,7 +46,7 @@
         [self.maxPriceView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.offset(-8);
             make.top.equalTo(self.titleLabel.mas_bottom).offset(14);
-            make.size.sizeOffset(CGSizeMake(KRateW(69), KRateH(18)));
+            make.size.sizeOffset(CGSizeMake(69, 18));
         }];
         
         [self addSubview:self.rmbLabel];
