@@ -78,7 +78,7 @@
 - (TSGridGoodsCollectionView *)collectionView{
     if (!_collectionView) {
         _collectionView = [[TSGridGoodsCollectionView alloc] initWithFrame:CGRectZero items:nil ColumnSpacing:8 rowSpacing:8 itemsHeight:282 rows:0 columns:2 padding:UIEdgeInsetsMake(0, 16, 16, 16) clickedBlock:^(id  _Nonnull selectItem, NSInteger index) {
-            
+            NSLog(@"%@-%ld", selectItem, index);
         }];
         _collectionView.collectionView.backgroundColor = KGrayColor;
     }

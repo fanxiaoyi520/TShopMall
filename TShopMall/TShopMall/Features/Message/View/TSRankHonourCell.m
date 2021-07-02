@@ -51,7 +51,7 @@
 - (void)addConstraints {
     [self.bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.contentView);
-        make.height.mas_equalTo(282);
+        make.height.mas_equalTo(KRateW(280));
     }];
     
     //冠军

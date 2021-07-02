@@ -12,6 +12,8 @@
 
 @interface TSRankMonthViewController ()<UITableViewDelegate, UITableViewDataSource>
 
+@property (nonatomic, strong) UIImageView * background_imgView;
+
 @property(nonatomic, strong) UITableView *tableView;
 
 @property (nonatomic, strong) TSPersonalRankView * personalRankView;
@@ -23,11 +25,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.gk_navigationBar.hidden = YES;
-    self.view.backgroundColor = KGrayColor;
 }
 
 -(void)fillCustomView{
 //    CGFloat bottom = self.view.ts_safeAreaInsets.bottom + 56 + GK_TABBAR_HEIGHT + GK_STATUSBAR_NAVBAR_HEIGHT + 5;
+    //背景红色图
+    [self.view addSubview:self.background_imgView];
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.personalRankView];
 //    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -119,13 +122,34 @@
     return CGFLOAT_MIN;
 }
 
+// 3.动态调整导航栏
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    CGFloat offsetY = scrollView.contentOffset.y;
+    NSLog(@"%lf", offsetY);
+    
+    if (offsetY > 0) {
+        self.background_imgView.frame = CGRectMake(0, - offsetY, kScreenWidth, KRateW(280));
+    }
+}
+
 #pragma mark - Action
 - (void)refreshHeaderDataMehtod {
+    self.background_imgView.hidden = self.dataController.coronalSections.count == 0;
     [self.tableView.mj_header endRefreshing];
+    NSLog(@"刷新");
 }
 
 
 #pragma mark - JXCategoryListContentViewDelegate
+- (UIImageView *)background_imgView {
+    if (!_background_imgView) {
+        _background_imgView = [[UIImageView alloc] initWithImage:KImageMake(@"mall_rank_background")];
+        _background_imgView.hidden = YES;
+        _background_imgView.frame = CGRectMake(0, 0, kScreenWidth, KRateW(280));
+    }
+    return _background_imgView;
+}
+
 - (UIView *)listView{
     return self.view;
 }
@@ -155,8 +179,9 @@
     return _tableView;
 }
 
-- (void)setDataController:(TSRankDataController *)dataController{
+- (void)setDataController:(TSRankDataController *)dataController {
     _dataController = dataController;
+    self.background_imgView.hidden = self.dataController.coronalSections.count == 0;
     [self.tableView reloadData];
 }
 
