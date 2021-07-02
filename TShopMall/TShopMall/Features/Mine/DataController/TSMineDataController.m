@@ -22,7 +22,9 @@
 @property (nonatomic, strong) NSMutableArray <TSAddBankCardBackModel *> *addBankCardBackArray;
 @property (nonatomic, strong) TSWithdrawalRecordModel *withdrawalRecordModel;
 @property (nonatomic, strong) TSMineWalletEarningModel *earningModel;
-@property (nonatomic, strong) TSMineOrderCountModel *orderInfo; 
+@property (nonatomic, strong) TSMineOrderCountModel *orderInfo;
+@property (nonatomic, strong) NSMutableArray <TSProvinceListModel *> *provinceListArray;
+@property (nonatomic, strong) NSMutableArray <TSCityListModel *> *cityListArray;
 @property (nonatomic,copy) NSString* content;
 @end
 
@@ -452,14 +454,13 @@
             NSDictionary *data = request.responseModel.data;
             TSMyIncomeModel *model = [TSMyIncomeModel yy_modelWithDictionary:data];
             self.myIncomeModel = model;
-        }
-        if (complete) {
             complete(YES);
-        }
-    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-        if (complete) {
+        } else {
+            [Popover popToastOnWindowWithText:request.responseModel.responseMsg];
             complete(NO);
         }
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+            complete(NO);
     }];
 }
 
@@ -551,10 +552,10 @@
     [body setValue:self.addBankCardModel.userName forKey:@"userName"];
     [body setValue:self.addBankCardModel.bankName forKey:@"bankName"];
     [body setValue:self.addBankCardModel.bankBranchId forKey:@"bankBranchId"];
-    [body setValue:@"北京市" forKey:@"bankAddressProvince"];
-    [body setValue:@"110000" forKey:@"bankAddressProvinceCode"];
-    [body setValue:@"北京市" forKey:@"bankAddressCity"];
-    [body setValue:@"110000" forKey:@"bankAddressCityCode"];
+    [body setValue:self.addBankCardModel.bankAddressProvince forKey:@"bankAddressProvince"];
+    [body setValue:self.addBankCardModel.bankAddressProvinceCode forKey:@"bankAddressProvinceCode"];
+    [body setValue:self.addBankCardModel.bankAddressCity forKey:@"bankAddressCity"];
+    [body setValue:self.addBankCardModel.bankAddressCityCode forKey:@"bankAddressCityCode"];
     SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kMineAddBankCardAccount
                                                                requestMethod:YTKRequestMethodPOST
                                                        requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON
@@ -692,4 +693,68 @@
          complete(NO);
      }];
 }
+
+// MARK: 获取全部省和直辖市
+- (void)fetchGetAllProvinceDataComplete:(void(^)(BOOL isSucess))complete {
+    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kMineGetAllProvince
+                                                                requestMethod:YTKRequestMethodGET
+                                                        requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON
+                                                                requestHeader:NSDictionary.dictionary
+                                                                  requestBody:NSDictionary.dictionary
+                                                               needErrorToast:YES];
+    NSMutableArray *array = [NSMutableArray array];
+    [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+        if (request.responseModel.isSucceed) {
+             NSArray *data = request.responseModel.data[@"provinceList"];
+             [data enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                 TSProvinceListModel *model = [TSProvinceListModel yy_modelWithDictionary:obj];
+                 [array addObject:model];
+             }];
+            NSArray<TSProvinceListModel *> *array1 = [self getOrderArraywithArray:array];
+            self.provinceListArray = [array1 mutableCopy];
+             complete(YES);
+         } else {
+             complete(NO);
+         }
+     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+         complete(NO);
+     }];
+}
+
+// MARK: 根据省份uuid获取它下面的城市
+- (void)fetchGetAllCityByProvinceUuidDataComplete:(void(^)(BOOL isSucess))complete {
+    NSDictionary *body = [NSMutableDictionary dictionary];
+    [body setValue:self.provinceListModel.uuid forKey:@"provinceUuid"];
+    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kMineGetAllCityByProvinceUuid
+                                                                requestMethod:YTKRequestMethodGET
+                                                        requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON
+                                                                requestHeader:NSDictionary.dictionary
+                                                                  requestBody:body
+                                                               needErrorToast:YES];
+    NSMutableArray *array = [NSMutableArray array];
+    [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+        if (request.responseModel.isSucceed) {
+             NSArray *data = request.responseModel.data[@"cityList"];
+             [data enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                 TSProvinceListModel *model = [TSProvinceListModel yy_modelWithDictionary:obj];
+                 [array addObject:model];
+             }];
+            NSArray<TSProvinceListModel *> *array1 = [self getOrderArraywithArray:array];
+            self.provinceListArray = array;
+            complete(YES);
+         } else {
+            complete(NO);
+         }
+     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+         complete(NO);
+     }];
+}
+
+- (NSArray<TSProvinceListModel *> *)getOrderArraywithArray:(NSArray<TSProvinceListModel*> *)array{
+    NSArray<TSProvinceListModel *> *result = [array sortedArrayUsingComparator:^NSComparisonResult(TSProvinceListModel *  _Nonnull obj1, TSProvinceListModel *  _Nonnull obj2) {
+        return [obj1.provinceName compare:obj2.provinceName]; //升序
+    }];
+    return result;
+}
+
 @end

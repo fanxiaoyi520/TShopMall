@@ -144,7 +144,8 @@
 
 - (void)sureAction:(UIButton *)sender {
     self.dataController.bankCardAccountId = self.kDataController.myIncomeModel.bankCardId;
-    self.dataController.withdrawalAmount = [self calculationRules:self.inputTextField.text];
+    CGFloat inputAmount = [[self.inputTextField.text stringByReplacingOccurrencesOfString:@"¥" withString:@""] floatValue];//输入金额---转成分
+    self.dataController.withdrawalAmount = [NSString stringWithFormat:@"%f",inputAmount*100];
     @weakify(self);
     [self.dataController fetchWithdrawalApplicationDataComplete:^(BOOL isSucess) {
         @strongify(self);
@@ -156,10 +157,14 @@
 
 - (void)textFieldAction:(UITextField *)textField {
     if (textField.text.length > 0) {
-        UILabel *taxDeductionAmountLab = [self.bgView viewWithTag:50];
-        UILabel *afterTaxAmountLab = [self.bgView viewWithTag:51];
-        taxDeductionAmountLab.text = [NSString stringWithFormat:@"¥%.2f",([[textField.text stringByReplacingOccurrencesOfString:@"" withString:@"¥"] floatValue] - [[self calculationRules:self.inputTextField.text] floatValue])];
-        afterTaxAmountLab.text = [self calculationRules:self.inputTextField.text];
+        UILabel *taxDeductionAmountLab = [self.bgView viewWithTag:50];//扣税金额
+        UILabel *afterTaxAmountLab = [self.bgView viewWithTag:51];//税后金额
+        CGFloat inputAmount = [[textField.text stringByReplacingOccurrencesOfString:@"¥" withString:@"0"] floatValue];//输入金额
+        CGFloat taxDeductionAmount = [self calculationRules:inputAmount];//扣税金额
+        CGFloat afterTaxAmount = inputAmount - taxDeductionAmount;//税后金额
+        
+        taxDeductionAmountLab.text = [NSString stringWithFormat:@"¥%.2f",taxDeductionAmount];
+        afterTaxAmountLab.text = [NSString stringWithFormat:@"¥%.2f",afterTaxAmount];
         [self.sureBtn setBackgroundImage:KImageMake(@"btn_large_black_norm1") forState:UIControlStateNormal];
         self.sureBtn.userInteractionEnabled = YES;
         if (![textField.text containsString:@"¥"])
@@ -171,11 +176,17 @@
     }
 }
 
-// 计算规则
-- (NSString *)calculationRules:(NSString *)text {
-    NSString *amountStr = [text stringByReplacingOccurrencesOfString:@"¥" withString:@""];
-    NSString *specAmount = [NSString stringWithFormat:@"%.2f",([amountStr floatValue] * [self.kDataController.myIncomeModel.withdrawalRate floatValue])];
-    return specAmount;
+// 计算规则------返回扣税金额
+- (CGFloat)calculationRules:(CGFloat)inputAmount {
+    CGFloat withdrawalRate = [self.kDataController.myIncomeModel.withdrawalRate floatValue];//税率
+    CGFloat accumulatedAmount = [self.kDataController.myIncomeModel.accumulatedAmount floatValue];//累计提现金额
+    CGFloat taxDeductionAmount = 0;//扣税金额
+    if (accumulatedAmount > 800*100) {
+        taxDeductionAmount = inputAmount * withdrawalRate;
+    } else if (accumulatedAmount+inputAmount>800*100){
+        taxDeductionAmount = (inputAmount + accumulatedAmount - 800*100)*withdrawalRate;
+    }
+    return taxDeductionAmount;
 }
 
 // MARK: UITextFieldDelegate

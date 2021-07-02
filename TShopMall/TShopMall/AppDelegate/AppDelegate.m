@@ -22,7 +22,7 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
-    
+
     [self initNetworkConfig];
     [self setUITemplateSize];
     [self setKeywordAttribute];

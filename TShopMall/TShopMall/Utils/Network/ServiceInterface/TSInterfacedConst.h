@@ -124,3 +124,5 @@ UIKIT_EXTERN NSString * const kMineQueryAmount;//查询我的余额
 UIKIT_EXTERN NSString * const kMineGetBankNames;//查询银行列表
 UIKIT_EXTERN NSString * const kAboutMeAgreementUrl;
 UIKIT_EXTERN NSString * const kSecurCenterAgreementUrl;//安全中心协议
+UIKIT_EXTERN NSString * const kMineGetAllProvince;//获取全部省和直辖市
+UIKIT_EXTERN NSString * const kMineGetAllCityByProvinceUuid;//根据省份uuid获取它下面的城市
