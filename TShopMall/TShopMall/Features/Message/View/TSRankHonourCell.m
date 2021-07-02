@@ -283,6 +283,8 @@
 }
 
 - (void)setData:(id)data {
+    [super setData:data];
+    
     self.championIconImgV.image = KImageMake(@"mall_setting_defautlhead");
     self.championLabel.text = @"等待上榜";
     self.secondIconImgV.image = KImageMake(@"mall_setting_defautlhead");

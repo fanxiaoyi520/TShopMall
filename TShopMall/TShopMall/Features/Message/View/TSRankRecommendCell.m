@@ -9,7 +9,7 @@
 #import "TSRecomendGoodsView.h"
 #import "TSRankSectionModel.h"
 
-@interface TSRankRecommendCell ()
+@interface TSRankRecommendCell () <TSRecomendGoodsViewDelegate>
 @property(nonatomic, strong) TSRecomendGoodsView *goodsView;
 
 @end
@@ -44,7 +44,16 @@
 - (TSRecomendGoodsView *)goodsView{
     if (!_goodsView) {
         _goodsView = [TSRecomendGoodsView new];
+        _goodsView.delegate = self;
     }
     return _goodsView;
 }
+
+- (void)didSelectRowAtCollectionView:(id)selectItem index:(NSInteger)index {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(didSelectRowAtCell:index:)]) {
+        [self.delegate didSelectRowAtCell:selectItem index:index];
+    }
+}
+
+
 @end
