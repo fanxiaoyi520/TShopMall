@@ -22,9 +22,9 @@ NS_ASSUME_NONNULL_BEGIN
 /** 标题 */
 @property(nonatomic, copy) NSString *title;
 /** 详情 */
-@property(nonatomic, copy) NSString *detail;
+@property(nonatomic, copy) NSString *__nullable detail;
 /** 头像 */
-@property(nonatomic, copy) NSString *head;
+@property(nonatomic, copy) NSString *__nullable head;
 /** 性别 */
 @property(nonatomic, assign) Sex sex;
 
