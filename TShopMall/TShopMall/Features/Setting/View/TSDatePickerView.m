@@ -152,6 +152,15 @@
     [self getNowDate: self.scrollToDate animated:YES];
 }
 
+- (void)setStartDateString:(NSString *)startDateString{
+    _startDateString = startDateString;
+    
+    self.scrollToDate = [NSDate dateWithString:self.startDateString format:@"yyyy-MM-dd"];
+    _startDate = self.scrollToDate;
+    [self getNowDate: self.scrollToDate animated:YES];
+    
+}
+
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     UITouch *touch = [touches anyObject];
     CGPoint point = [touch locationInView:self.contentView];

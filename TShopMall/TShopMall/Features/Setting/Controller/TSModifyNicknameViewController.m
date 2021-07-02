@@ -36,6 +36,7 @@
     [super viewDidLoad];
     ///初始化操作
     [self setUpInit];
+    
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
@@ -97,9 +98,15 @@
     if (_nickTextField == nil) {
         UITextField *nickTextField = [[UITextField alloc] init];
         _nickTextField = nickTextField;
+        [_nickTextField becomeFirstResponder];
         _nickTextField.textColor = KHexColor(@"#2D3132");
         _nickTextField.backgroundColor = KWhiteColor;
         _nickTextField.font = KRegularFont(16);
+        
+        if ([TSUserInfoManager userInfo].user.nickname) {
+            _nickTextField.text = [TSUserInfoManager userInfo].user.nickname;
+        }
+        
         _nickTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"请输入昵称" attributes:@{NSForegroundColorAttributeName : KHexAlphaColor(@"#2D3132", 0.2)}];
         //[_nickTextField addTarget:self
          //                  action:@selector(textFieldDidChangeValue:)
