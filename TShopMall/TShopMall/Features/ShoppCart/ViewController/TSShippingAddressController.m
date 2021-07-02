@@ -16,6 +16,7 @@
     NSArray<TSAddressModel *> *addresses;
 }
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) UIView *bottomView;
 @property (nonatomic, strong) UIButton *addBtn;
 @end
 
@@ -137,17 +138,23 @@
 }
 
 - (void)viewWillLayoutSubviews{
+    
+    [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.equalTo(self.view);
+        make.height.mas_equalTo(KRateW(96.0) + GK_SAFEAREA_BTM);
+    }];
+    
     [self.addBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view.mas_left).offset(KRateW(24.0));
         make.right.equalTo(self.view.mas_right).offset(-KRateW(24.0));
-        make.bottom.equalTo(self.view.mas_bottom).offset(-GK_SAFEAREA_BTM - KRateW(33.0));
+        make.bottom.equalTo(self.view.mas_bottom).offset(-GK_SAFEAREA_BTM - KRateW(40.0));
         make.height.mas_equalTo(KRateW(40.0));
     }];
     
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.view);
         make.top.equalTo(self.view.mas_top).offset(GK_STATUSBAR_NAVBAR_HEIGHT);
-        make.bottom.equalTo(self.addBtn.mas_top).offset(-KRateW(8.0));
+        make.bottom.equalTo(self.bottomView.mas_top);
     }];
 }
 
@@ -188,5 +195,16 @@
     [self.view addSubview:self.addBtn];
     
     return self.addBtn;
+}
+
+- (UIView *)bottomView{
+    if (_bottomView) {
+        return _bottomView;
+    }
+    self.bottomView = [UIView new];
+    self.bottomView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:self.bottomView];
+    
+    return self.bottomView;
 }
 @end

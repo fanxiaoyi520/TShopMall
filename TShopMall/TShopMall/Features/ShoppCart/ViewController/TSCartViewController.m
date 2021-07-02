@@ -150,6 +150,8 @@
     [self.settleView updateSelBtnStatus:self.dataCon.isAllSelected];
     [self.settleView updatePrice:self.dataCon.cartModel.cartsTotalMount];
     [self.settleView updateSettleBtnText:self.dataCon.selectedCount];
+    
+    [self.settleView hideSelBtn:self.dataCon.validCarts.count==0? YES:NO];
 }
 
 - (void)viewWillLayoutSubviews{
@@ -175,8 +177,10 @@
         return _editBtn;
     }
     self.editBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.editBtn.titleLabel.font = [UIFont font:PingFangSCRegular size:KRateW(16.0)];
+    self.editBtn.hidden = YES;
+    self.editBtn.titleLabel.font = [UIFont font:PingFangSCRegular size:KRateW(14.0)];
     [self.editBtn setTitle:@"编辑" forState:UIControlStateNormal];
+    [self.editBtn setTitle:@"完成" forState:UIControlStateSelected];
     [self.editBtn setTitleColor:KHexColor(@"#2D3132") forState:UIControlStateNormal];
     self.editBtn.frame = CGRectMake(0, 0, KRateW(32.0), KRateW(24.0));
     [self.editBtn addTarget:self action:@selector(edit:) forControlEvents:UIControlEventTouchUpInside];
@@ -219,6 +223,7 @@
     self.settleView = [TSCartSettleView new];
     self.settleView.delegate = self;
     [self.view addSubview:self.settleView];
+    [self.settleView hideSelBtn:YES];
     
     return self.settleView;
 }

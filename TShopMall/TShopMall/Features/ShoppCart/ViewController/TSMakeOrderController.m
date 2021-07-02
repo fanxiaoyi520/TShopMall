@@ -53,7 +53,7 @@
 
 - (void)updateUI{
     self.makeOrderView.sections = self.dataCon.sections;
-    self.commitView.price.text = [NSString stringWithFormat:@"¥ %d", self.dataCon.balanceModel.orderTotalMoney.intValue];
+    self.commitView.price.text = [NSString stringWithFormat:@"¥%d", self.dataCon.balanceModel.orderTotalMoney.intValue];
 }
 
 //选择地址
