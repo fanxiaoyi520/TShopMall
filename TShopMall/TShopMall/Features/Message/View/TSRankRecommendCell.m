@@ -30,7 +30,7 @@
     TSRankSectionItemModel *item = (TSRankSectionItemModel *)data;
     @weakify(self);
     if (!item.datas.count) {
-        [self.goodsView getRecommendListWithType:@"cart_page" success:^(NSArray * _Nullable list) {
+        [self.goodsView getRecommendListWithType:@"rank_page" success:^(NSArray * _Nullable list) {
             @strongify(self)
             item.datas = list;
             [self tableviewReloadCell];
