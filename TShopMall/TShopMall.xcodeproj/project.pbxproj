@@ -73,6 +73,13 @@
 		04F1EFB92682DF8900FF007D /* TSRealNameAuthSectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F1EFB82682DF8900FF007D /* TSRealNameAuthSectionModel.m */; };
 		04F1EFBC2682E33600FF007D /* TSRealNameAuthDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F1EFBB2682E33600FF007D /* TSRealNameAuthDataController.m */; };
 		04F852122689BA4C00B59910 /* TSFirstEnterAgreementView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F852112689BA4C00B59910 /* TSFirstEnterAgreementView.m */; };
+		65BBA035268DA49E007AF8D0 /* TSInviteFriendsDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65BBA034268DA49E007AF8D0 /* TSInviteFriendsDataController.m */; };
+		65BBA038268DA95B007AF8D0 /* TSInviteFriendsSectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 65BBA037268DA95B007AF8D0 /* TSInviteFriendsSectionModel.m */; };
+		65BBA03B268DB41D007AF8D0 /* TSInviteFriendsPhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65BBA03A268DB41D007AF8D0 /* TSInviteFriendsPhotoCell.m */; };
+		65BBA03E268DC337007AF8D0 /* TSInviteFriendsShareCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65BBA03D268DC337007AF8D0 /* TSInviteFriendsShareCell.m */; };
+		65BBA041268DD7A1007AF8D0 /* TSInviteFriendsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65BBA040268DD7A1007AF8D0 /* TSInviteFriendsCell.m */; };
+		65BBA044268DD7DD007AF8D0 /* TSInviteFriendsInvitationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65BBA043268DD7DD007AF8D0 /* TSInviteFriendsInvitationCell.m */; };
+		65BBA047268DD832007AF8D0 /* TSInviteFriendsIntroduceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65BBA046268DD832007AF8D0 /* TSInviteFriendsIntroduceCell.m */; };
 		65CD9E3D268AED2B00262D98 /* TSMineWalletModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CD9E3C268AED2B00262D98 /* TSMineWalletModel.m */; };
 		65F71270268C1D7C002A1ECC /* TSMineLeftBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F7126F268C1D7C002A1ECC /* TSMineLeftBarView.m */; };
 		65F71273268C4154002A1ECC /* TSMineOrderCountModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F71272268C4154002A1ECC /* TSMineOrderCountModel.m */; };
@@ -734,6 +741,20 @@
 		04F852112689BA4C00B59910 /* TSFirstEnterAgreementView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSFirstEnterAgreementView.m; sourceTree = "<group>"; };
 		1942D505D7004833F274B5D1 /* libPods-TShopMallTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TShopMallTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		27EC567AA21935502889F6EB /* Pods-TShopMall.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TShopMall.debug.xcconfig"; path = "Target Support Files/Pods-TShopMall/Pods-TShopMall.debug.xcconfig"; sourceTree = "<group>"; };
+		65BBA033268DA49E007AF8D0 /* TSInviteFriendsDataController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSInviteFriendsDataController.h; sourceTree = "<group>"; };
+		65BBA034268DA49E007AF8D0 /* TSInviteFriendsDataController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSInviteFriendsDataController.m; sourceTree = "<group>"; };
+		65BBA036268DA95B007AF8D0 /* TSInviteFriendsSectionModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSInviteFriendsSectionModel.h; sourceTree = "<group>"; };
+		65BBA037268DA95B007AF8D0 /* TSInviteFriendsSectionModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSInviteFriendsSectionModel.m; sourceTree = "<group>"; };
+		65BBA039268DB41D007AF8D0 /* TSInviteFriendsPhotoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSInviteFriendsPhotoCell.h; sourceTree = "<group>"; };
+		65BBA03A268DB41D007AF8D0 /* TSInviteFriendsPhotoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSInviteFriendsPhotoCell.m; sourceTree = "<group>"; };
+		65BBA03C268DC337007AF8D0 /* TSInviteFriendsShareCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSInviteFriendsShareCell.h; sourceTree = "<group>"; };
+		65BBA03D268DC337007AF8D0 /* TSInviteFriendsShareCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSInviteFriendsShareCell.m; sourceTree = "<group>"; };
+		65BBA03F268DD7A1007AF8D0 /* TSInviteFriendsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSInviteFriendsCell.h; sourceTree = "<group>"; };
+		65BBA040268DD7A1007AF8D0 /* TSInviteFriendsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSInviteFriendsCell.m; sourceTree = "<group>"; };
+		65BBA042268DD7DD007AF8D0 /* TSInviteFriendsInvitationCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSInviteFriendsInvitationCell.h; sourceTree = "<group>"; };
+		65BBA043268DD7DD007AF8D0 /* TSInviteFriendsInvitationCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSInviteFriendsInvitationCell.m; sourceTree = "<group>"; };
+		65BBA045268DD832007AF8D0 /* TSInviteFriendsIntroduceCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSInviteFriendsIntroduceCell.h; sourceTree = "<group>"; };
+		65BBA046268DD832007AF8D0 /* TSInviteFriendsIntroduceCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSInviteFriendsIntroduceCell.m; sourceTree = "<group>"; };
 		65CD9E3B268AED2B00262D98 /* TSMineWalletModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSMineWalletModel.h; sourceTree = "<group>"; };
 		65CD9E3C268AED2B00262D98 /* TSMineWalletModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSMineWalletModel.m; sourceTree = "<group>"; };
 		65F7126E268C1D7C002A1ECC /* TSMineLeftBarView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSMineLeftBarView.h; sourceTree = "<group>"; };
@@ -2509,6 +2530,16 @@
 				CE4F6BE72687908200812275 /* TSOfficialServicesCell.m */,
 				CE4F6BEC2688544A00812275 /* TSInviteFriendsHeader.h */,
 				CE4F6BED2688544A00812275 /* TSInviteFriendsHeader.m */,
+				65BBA039268DB41D007AF8D0 /* TSInviteFriendsPhotoCell.h */,
+				65BBA03A268DB41D007AF8D0 /* TSInviteFriendsPhotoCell.m */,
+				65BBA03C268DC337007AF8D0 /* TSInviteFriendsShareCell.h */,
+				65BBA03D268DC337007AF8D0 /* TSInviteFriendsShareCell.m */,
+				65BBA03F268DD7A1007AF8D0 /* TSInviteFriendsCell.h */,
+				65BBA040268DD7A1007AF8D0 /* TSInviteFriendsCell.m */,
+				65BBA042268DD7DD007AF8D0 /* TSInviteFriendsInvitationCell.h */,
+				65BBA043268DD7DD007AF8D0 /* TSInviteFriendsInvitationCell.m */,
+				65BBA045268DD832007AF8D0 /* TSInviteFriendsIntroduceCell.h */,
+				65BBA046268DD832007AF8D0 /* TSInviteFriendsIntroduceCell.m */,
 			);
 			path = Func;
 			sourceTree = "<group>";
@@ -3748,6 +3779,8 @@
 			children = (
 				F55D2C772672F4E2006BACCF /* TSMineDataController.h */,
 				F55D2C782672F4E2006BACCF /* TSMineDataController.m */,
+				65BBA033268DA49E007AF8D0 /* TSInviteFriendsDataController.h */,
+				65BBA034268DA49E007AF8D0 /* TSInviteFriendsDataController.m */,
 			);
 			path = DataController;
 			sourceTree = "<group>";
@@ -3807,6 +3840,8 @@
 				65CD9E3C268AED2B00262D98 /* TSMineWalletModel.m */,
 				65F71271268C4154002A1ECC /* TSMineOrderCountModel.h */,
 				65F71272268C4154002A1ECC /* TSMineOrderCountModel.m */,
+				65BBA036268DA95B007AF8D0 /* TSInviteFriendsSectionModel.h */,
+				65BBA037268DA95B007AF8D0 /* TSInviteFriendsSectionModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -4530,6 +4565,7 @@
 				F55D2D14267AF01E006BACCF /* TSContentBaseViewController.m in Sources */,
 				DC3440AC26720D9200F5B0DA /* TSCollectionViewMeanWidthLayout.m in Sources */,
 				C2F057412685BE1F003D1B2A /* TSCartRecomendCell.m in Sources */,
+				65BBA047268DD832007AF8D0 /* TSInviteFriendsIntroduceCell.m in Sources */,
 				C3A6C493267A1C1700FC71D6 /* TSChangePictureSectionModel.m in Sources */,
 				F530CCA526803FCD009DC29A /* UILabel+Plugin.m in Sources */,
 				F55D2CE926788E27006BACCF /* TSDetailFunctionButton.m in Sources */,
@@ -4624,6 +4660,7 @@
 				DFB3FFE82685E43D00FC8FF9 /* TSBindUserByAuthCodeRequest.m in Sources */,
 				F55D2ACD266F5C95006BACCF /* TSHomePageReleaseCell.m in Sources */,
 				C3A6C4E9267A1CAF00FC71D6 /* TSBindThirdDataController.m in Sources */,
+				65BBA035268DA49E007AF8D0 /* TSInviteFriendsDataController.m in Sources */,
 				F530CC6426803E43009DC29A /* Popover.m in Sources */,
 				04651703268C57EF000829C2 /* SelectorDialogModel.m in Sources */,
 				65F71270268C1D7C002A1ECC /* TSMineLeftBarView.m in Sources */,
@@ -4673,6 +4710,7 @@
 				CE66DAFB2684729600E8D433 /* TSPresentationController.m in Sources */,
 				C24A69B52689636A0022A81F /* TSPayStyleDataController.m in Sources */,
 				C25A7F7F26834B0C0006C6AF /* TSAddressEditDataController.m in Sources */,
+				65BBA041268DD7A1007AF8D0 /* TSInviteFriendsCell.m in Sources */,
 				DC06D6DF268761E20013633F /* TSBestSellingRecommendService.m in Sources */,
 				F530CCEE26804167009DC29A /* TSHybridRightButton.m in Sources */,
 				F56D4B3B266DFB8900C1AD9E /* FMLayoutCombineSection.m in Sources */,
@@ -4712,6 +4750,7 @@
 				65F71273268C4154002A1ECC /* TSMineOrderCountModel.m in Sources */,
 				C2C765362679E2DA004757B9 /* TSMakeOrderController.m in Sources */,
 				F55D2CF32678A6B9006BACCF /* TSGoodDetailItemModel.m in Sources */,
+				65BBA038268DA95B007AF8D0 /* TSInviteFriendsSectionModel.m in Sources */,
 				04F1EFB32682DB2A00FF007D /* TSRealnameInfoViewController.m in Sources */,
 				C3A6C48E267A1C1700FC71D6 /* TSPhoneNumSectionModel.m in Sources */,
 				F55D2CA026745E7A006BACCF /* TSLastUserInfoManager.m in Sources */,
@@ -4837,6 +4876,7 @@
 				C2EF88BE2670997100E7374A /* TSCartView.m in Sources */,
 				F530CCA426803FCD009DC29A /* UIImage+Plugin.m in Sources */,
 				C2C7652826788E29004757B9 /* TSSearchKeyViewModel.m in Sources */,
+				65BBA044268DD7DD007AF8D0 /* TSInviteFriendsInvitationCell.m in Sources */,
 				DC3440E82673621000F5B0DA /* TSHomePageContainerHeaderView.m in Sources */,
 				CE63BFB4268DED6D00D00720 /* TSWalletAreaIndexView.m in Sources */,
 				CE66DB0126848FB100E8D433 /* TSMineWalletCenterViewController.m in Sources */,
@@ -4852,6 +4892,7 @@
 				C3A6C4C1267A1C5700FC71D6 /* TSCommitCell.m in Sources */,
 				C3A6C47A267A1BEA00FC71D6 /* TSAccountCancelViewController.m in Sources */,
 				DC45FEC026783A6E00CE762E /* TSHomePageContainerCollectionViewCell.m in Sources */,
+				65BBA03B268DB41D007AF8D0 /* TSInviteFriendsPhotoCell.m in Sources */,
 				CE663E5D268AFB6B0092DDCA /* UITextField+ExtendRange.m in Sources */,
 				C35F186D267D954700F65AF9 /* TSAccountCancelNextViewController.m in Sources */,
 				C2F0573B2685B6D2003D1B2A /* TSRecomendWidthView.m in Sources */,
@@ -4911,6 +4952,7 @@
 				DC9911A6267AE43400EF9B26 /* TSImageBaseModel.m in Sources */,
 				F530CC6626803E43009DC29A /* Progress.m in Sources */,
 				DC06D6E6268812CB0013633F /* TSGridGoodsCollectionView.m in Sources */,
+				65BBA03E268DC337007AF8D0 /* TSInviteFriendsShareCell.m in Sources */,
 				DFB3FFC926844A0A00FC8FF9 /* TSShareView.m in Sources */,
 				DC45FEBA267742F700CE762E /* TSCategoryGroup.m in Sources */,
 				F55D2D35267B3F04006BACCF /* TSRankHeaderView.m in Sources */,

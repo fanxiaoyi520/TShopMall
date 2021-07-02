@@ -24,46 +24,44 @@
     self.contentView.backgroundColor = UIColor.whiteColor;
     
     [self.contentView addSubview:self.seperateImgView];
-    [self.contentView addSubview:self.walletImgView];
-    [self.contentView addSubview:self.nameLabel];
+//    [self.contentView addSubview:self.walletImgView];
+//    [self.contentView addSubview:self.nameLabel];
     [self.contentView addSubview:self.earnLabel];
     [self.contentView addSubview:self.earnMoneyLabel];
     [self.contentView addSubview:self.eyeButton];
     
     [self.seperateImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.contentView).offset(-66);
-        make.width.mas_equalTo(6);
-        make.height.mas_equalTo(34);
+        make.right.equalTo(self.contentView).offset(-20);
+        make.centerY.equalTo(self.contentView);
+        make.height.width.mas_equalTo(16);
+    }];
+    
+//    [self.walletImgView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.contentView).offset(9);
+//        make.width.height.mas_equalTo(26);
+//        make.height.height.mas_equalTo(24);
+//        make.right.equalTo(self.contentView).offset(-22);
+//    }];
+    
+//    [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.walletImgView.mas_bottom).offset(6);
+//        make.right.equalTo(self.contentView);
+//        make.left.equalTo(self.seperateImgView.mas_right).offset(0);
+//    }];
+    
+    [self.earnLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.contentView.mas_left).offset(16);
         make.centerY.equalTo(self.contentView);
     }];
     
-    [self.walletImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.contentView).offset(9);
-        make.width.height.mas_equalTo(26);
-        make.height.height.mas_equalTo(24);
-        make.right.equalTo(self.contentView).offset(-22);
-    }];
-    
-    [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.walletImgView.mas_bottom).offset(6);
-        make.right.equalTo(self.contentView);
-        make.left.equalTo(self.seperateImgView.mas_right).offset(0);
-    }];
-    
-    [self.earnLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.contentView.mas_bottom).offset(-12);
-        make.width.mas_equalTo(50);
-        make.centerX.equalTo(self.contentView).offset(-40);
-    }];
-    
     [self.earnMoneyLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.earnLabel.mas_top).offset(-3);
-        make.centerX.equalTo(self.earnLabel);
-        make.height.mas_equalTo(22);
+       
+        make.centerY.equalTo(self.contentView);
+        make.right.equalTo(self.seperateImgView.mas_left).offset(-6);
     }];
     
     [self.eyeButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.earnLabel.mas_right).offset(0);
+        make.left.equalTo(self.earnLabel.mas_right).offset(9);
         make.centerY.equalTo(self.earnLabel);
         make.width.height.mas_equalTo(30);
     }];
@@ -72,7 +70,14 @@
 - (void)setDelegate:(id<UniversalCollectionViewCellDataDelegate>)delegate {
     [super setDelegate:delegate];
     TSMineWalletEarningModel *model = [delegate universalCollectionViewCellModel:self.indexPath];
-    _earnMoneyLabel.text = [NSString stringWithFormat:@"¥%@",model.arrivalAmount];
+    if (model.eyeIsOn) {
+        _earnMoneyLabel.textColor = KHexColor(@"#FF6460");
+        _earnMoneyLabel.text = [NSString stringWithFormat:@"¥%@",model.arrivalAmount];
+    } else {
+        _earnMoneyLabel.text = @"****";
+        _earnMoneyLabel.textColor = KHexColor(@"#333333");
+    }
+   
     _eyeButton.selected = model.eyeIsOn;
 }
 
@@ -80,12 +85,14 @@
 -(void)eyeAction:(UIButton *)sender{
     if (sender.selected) {
         _earnMoneyLabel.text = @"****";
+        _earnMoneyLabel.textColor = KHexColor(@"#333333");
         sender.selected = NO;
     } else {
         if ([self.delegate respondsToSelector:@selector(universalCollectionViewCellClick:params:)]) {
             TSMineWalletEarningModel *model = [self.delegate universalCollectionViewCellModel:self.indexPath];
             _earnMoneyLabel.text = [NSString stringWithFormat:@"¥%@",model.arrivalAmount];
         }
+        _earnMoneyLabel.textColor = KHexColor(@"#FF6460");
         sender.selected = YES;
     }
     
@@ -120,7 +127,7 @@
 -(UIImageView *)seperateImgView{
     if (!_seperateImgView) {
         _seperateImgView = [[UIImageView alloc] init];
-        _seperateImgView.image = KImageMake(@"mall_mine_wallet_seperate");
+        _seperateImgView.image = KImageMake(@"mall_detail_more") ;
     }
     return _seperateImgView;
 }
@@ -128,7 +135,7 @@
 -(UILabel *)earnLabel{
     if (!_earnLabel) {
         _earnLabel = [[UILabel alloc] init];
-        _earnLabel.font = KRegularFont(12);
+        _earnLabel.font = KRegularFont(16);
         _earnLabel.textAlignment = NSTextAlignmentCenter;
         _earnLabel.textColor = KHexColor(@"#333333");
         _earnLabel.text = @"我的收益";
@@ -139,9 +146,9 @@
 -(UILabel *)earnMoneyLabel{
     if (!_earnMoneyLabel) {
         _earnMoneyLabel = [[UILabel alloc] init];
-        _earnMoneyLabel.font = KFont(PingFangSCMedium, 16);
+        _earnMoneyLabel.font = KFont(PingFangSCMedium, 18);
         _earnMoneyLabel.textAlignment = NSTextAlignmentCenter;
-        _earnMoneyLabel.textColor = KHexColor(@"#333333");
+        _earnMoneyLabel.textColor = KHexColor(@"#FF6460");
         _earnMoneyLabel.text = @"¥999";
         _earnMoneyLabel.hidden = NO;
     }

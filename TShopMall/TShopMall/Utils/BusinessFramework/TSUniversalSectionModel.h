@@ -39,8 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///每个item之间的左右间距
 @property (nonatomic, assign) CGFloat interitemSpacing;
 ///本区区头和上个区区尾的间距
-@property (nonatomic, assign) CGFloat spacingWithLastSection;
-
+@property (nonatomic, assign) CGFloat spacingWithLastSection; 
 @end
 
 NS_ASSUME_NONNULL_END
