@@ -320,7 +320,7 @@
                  }];
                 [self dismissViewControllerAnimated:NO completion:^{
                     if (self.bindBlock) {
-                        self.bindBlock();
+                        self.bindBlock(token);
                     }
                 }];
             }
@@ -449,7 +449,7 @@
                     /// 跳转绑定手机号
                     [self dismissViewControllerAnimated:NO completion:^{
                         if (self.bindBlock) {
-                            self.bindBlock();
+                            self.bindBlock(token);
                         }
                     }];
                 }

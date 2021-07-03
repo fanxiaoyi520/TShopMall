@@ -78,18 +78,11 @@
                 [self otherLoginWithAnimation:YES];
             }];
         };
-        oneClickLoginVC.loginBlock = ^{
-            @strongify(self)
-            [[NTESQuickLoginManager sharedInstance] closeAuthController:^{
-                if (self.loginBlock) {
-                    self.loginBlock();
-                }
-            }];
-            
-        };
-        oneClickLoginVC.bindBlock = ^{
+        oneClickLoginVC.loginBlock = self.loginBlock;
+        oneClickLoginVC.bindBlock = ^(NSString *token){
             
             TSBindMobileController *vc = [TSBindMobileController new];
+            vc.token = token;
             TSBaseNavigationController *nav = [[TSBaseNavigationController alloc] initWithRootViewController:vc];
             
             vc.bindedBlock = self.loginBlock;
@@ -103,6 +96,16 @@
         loginVC.needClose = NO;
         TSBaseNavigationController *nav = [[TSBaseNavigationController alloc] initWithRootViewController:loginVC];
         loginVC.loginBlock = self.loginBlock;
+        loginVC.bindBlock = ^(NSString * _Nonnull token) {
+            TSBindMobileController *vc = [TSBindMobileController new];
+            vc.token = token;
+            TSBaseNavigationController *nav = [[TSBaseNavigationController alloc] initWithRootViewController:vc];
+            
+            vc.bindedBlock = self.loginBlock;
+            nav.modalPresentationStyle = UIModalPresentationFullScreen;
+            [[UIApplication sharedApplication].delegate.window.rootViewController presentViewController:nav animated:YES completion:^{
+            }];
+        };
         callBack(nav);
     }
     

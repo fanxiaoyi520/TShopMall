@@ -21,7 +21,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(void)fetchKindsComplete:(void(^)(BOOL isSucess))complete;
 
-- (NSIndexPath *)fatchContentIndexPath:(NSInteger)section;
 @end
 
 NS_ASSUME_NONNULL_END

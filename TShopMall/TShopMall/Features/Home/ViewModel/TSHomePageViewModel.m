@@ -19,76 +19,17 @@
 @end
 
 @implementation TSHomePageViewModel
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(netWorkStatusChanged:) name:TS_NetWork_State object:nil];
-    }
-    return self;
-}
-- (void)loadDefaultData{
-//    TSHomePageBannerViewModel *bannerViewModel = [TSHomePageBannerViewModel new];
-//    TSHomePageCellTemplateModel *templateModel = [TSHomePageCellTemplateModel new];
-//    templateModel.templateName = @"TSHomePageBanner";
-//    bannerViewModel.model = templateModel;
-//
-//    TSHomePageCategoryViewModel *categoryViewModel = [TSHomePageCategoryViewModel new];
-//    templateModel = [TSHomePageCellTemplateModel new];
-//    templateModel.templateName = @"TSHomePageCategory";
-//    categoryViewModel.model = templateModel;
-//
-//    TSHomePageReleaseTitleViewModel *releaseTitleViewModel = [TSHomePageReleaseTitleViewModel new];
-//    templateModel = [TSHomePageCellTemplateModel new];
-//    templateModel.templateName = @"TSHomePageReleaseTitle";
-//    releaseTitleViewModel.model = templateModel;
-//
-//
-//    TSHomePageReleaseViewModel *releaseViewModel = [TSHomePageReleaseViewModel new];
-//    templateModel = [TSHomePageCellTemplateModel new];
-//    templateModel.templateName = @"TSHomePageRelease";
-//    releaseViewModel.model = templateModel;
-//
-//
-//    TSCategoryGroupViewModel *containerViewModel = [TSCategoryGroupViewModel new];
-//    templateModel = [TSHomePageCellTemplateModel new];
-//    templateModel.templateName = @"TSHomePageContainer";
-//    templateModel.headerTemplateName = @"TSHomePageContainerHeader";
-//
-//    containerViewModel.model = templateModel;
-//    _containerViewModel = containerViewModel;
-    
-    
-//    NSArray *temp = self.model.data[@"list"];
-//
-//     NSMutableArray *marr = @[].mutableCopy;
-//
-//     for (NSDictionary *dic in temp) {
-//         TSCategoryGroup *model = [TSCategoryGroup new];
-//         model.name = dic[@"groupName"];
-//         model.groupId = dic[@"goodsgroupUuid"];
-//         [marr addObject:model];
-//     }
-    
-
-//    NSMutableArray *sections = [NSMutableArray array];
-//
-//    for (TSHomePageContentModel *model in temp) {
-//        TSHomePageCellViewModel *viewModel = [self configSection:model];
-//        if(viewModel){
-//            [sections addObject:viewModel];
-//        }
-//    }
-//    
-//    self.dataSource = sections;
- 
-}
 
 -(void)fetchData{
+    
+    if (![AFNetworkReachabilityManager sharedManager].reachable) {
+        NSString *content = [TSJsonCacheData readPlistWithKey:@"homePageList"];
+        if (content) {
+            [self setUITemplateWithResponseData:content];
+        }
+        return;
+    }
+    
     
     NSMutableDictionary *body = [NSMutableDictionary dictionary];
         [body setValue:@"APP" forKey:@"uiType"];
@@ -188,15 +129,4 @@
     
 }
 
-- (void)netWorkStatusChanged:(NSNotification *)noti{
-    NSInteger state = [noti.object intValue];
-    if (state == 0) {
-        /// 取缓存
-        NSString *content = [TSJsonCacheData readPlistWithKey:@"homePageList"];
-        if (content) {
-            [self setUITemplateWithResponseData:content];
-        }
-    }
-   
-}
 @end

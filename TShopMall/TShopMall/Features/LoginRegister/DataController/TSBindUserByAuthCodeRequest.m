@@ -33,7 +33,13 @@
 }
 
 -(NSString *)requestUrl{
-    NSString *requestUrl = [NSString stringWithFormat:@"%@?appId=%@&tenantId=%@&appSecret=%@&platformId=%@&type=%@&phone=%@&token=%@&smsCode=%@",kBindUserByAuthCode,kAppId,@"tcl",kAppSecret, self.platformId, self.type, self.phone, self.token, self.smsCode];
+    NSString *requestUrl;
+    if (self.phone == nil) {
+        requestUrl = [NSString stringWithFormat:@"%@?appId=%@&tenantId=%@&appSecret=%@&platformId=%@&type=%@&token=%@",kBindUserByAuthCode,kAppId,@"tcl",kAppSecret, self.platformId, self.type, self.token];
+    }
+    else{
+        requestUrl = [NSString stringWithFormat:@"%@?appId=%@&tenantId=%@&appSecret=%@&platformId=%@&type=%@&phone=%@&token=%@&smsCode=%@",kBindUserByAuthCode,kAppId,@"tcl",kAppSecret, self.platformId, self.type, self.phone, self.token, self.smsCode];
+    }
     return requestUrl;
 }
 

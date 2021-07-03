@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TSLoginViewController : TSBaseViewController
 @property (nonatomic, copy) void(^ _Nonnull loginBlock)(void);
-@property (nonatomic, copy) void(^ _Nonnull bindBlock)(void);
+@property (nonatomic, copy) void(^ _Nonnull bindBlock)(NSString *token);
 @property (nonatomic, assign) BOOL needClose;
 
 @end

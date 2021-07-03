@@ -104,7 +104,7 @@
 - (UIImageView *)imageView{
     if (!_imageView) {
         _imageView = [[UIImageView alloc] init];
-        _imageView.backgroundColor = KGrayColor;
+        _imageView.backgroundColor = KWhiteColor;
     }
     return _imageView;
 }
