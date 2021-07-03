@@ -119,6 +119,8 @@ UIKIT_EXTERN NSString *const kSalesmanInvitationRecord;
 UIKIT_EXTERN NSString *const kAboutMeAgreementUrl;
 UIKIT_EXTERN NSString *const kModifyUserUrl;
 UIKIT_EXTERN NSString *const kUploadImageUrl;
+UIKIT_EXTERN NSString *const kSetWithdrawalPwdUrl;
+UIKIT_EXTERN NSString *const kCheckWithdrawalPwdUrl;
 
 UIKIT_EXTERN NSString * const kMineWithdrawalApply;//提现申请
 UIKIT_EXTERN NSString * const kMineQueryAppBankCardAccountList;//查询银行卡列表
