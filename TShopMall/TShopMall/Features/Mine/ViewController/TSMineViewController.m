@@ -163,6 +163,7 @@
     TSUniversalCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:item.identify forIndexPath:indexPath];
     cell.indexPath = indexPath;
     cell.delegate = self;
+    cell.cellSuperViewCollectionView = self.collectionView;
     return cell;
 }
 
@@ -251,9 +252,14 @@
     
     //邀请好友
     if ([model.headerName isEqualToString: @"邀请"]) {
-        TSInviteFriendsViewController *vc = [TSInviteFriendsViewController new];
-        vc.salesmanUuid = self.dataController.merchantUserInformationModel.ucUuid;
-        [self.navigationController pushViewController:vc animated:YES];
+        TSMineSectionAdsItemModel *item = (TSMineSectionAdsItemModel *)model.items.firstObject;
+        NSString *uri = [[TSServicesManager sharedInstance].uriHandler configUriWithTypeValue:item.imageAdModel.linkData.typeValue objectValue:item.imageAdModel.linkData.objectValue];
+        [[TSServicesManager sharedInstance].uriHandler openURI:uri];
+        NSLog(@"uri:%@",uri);
+        
+//        TSInviteFriendsViewController *vc = [TSInviteFriendsViewController new];
+//        vc.salesmanUuid = self.dataController.merchantUserInformationModel.ucUuid;
+//        [self.navigationController pushViewController:vc animated:YES];
     }
     
     //我的钱包
@@ -303,7 +309,7 @@
     } else if ([sectionModel.items[indexPath.row].identify isEqualToString: @"TSMinePartnerCenterCell"]) {
         return  self.dataController.partnerCenterDataModel;
     } else if ([sectionModel.items[indexPath.row].identify isEqualToString: @"TSMineAdsCell"]) {
-        return  self.dataController.content;
+        return  sectionModel.items.firstObject;
     }   else {
         return sectionModel.items[indexPath.row];
     }
