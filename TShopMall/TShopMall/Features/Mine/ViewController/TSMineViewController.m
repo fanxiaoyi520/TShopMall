@@ -118,6 +118,14 @@
 
 #pragma mark - Action
 -(void)setAction:(UIButton *)sender{
+    
+//    NSString *path = @"http://10.68.245.26:8080/seller-app-h5/pages/bridgeDemo/index";
+//    TSHybridViewController *hybrid = [[TSHybridViewController alloc] initWithURLString:path];
+//    [self.navigationController pushViewController:hybrid animated:YES];
+//    return;
+    
+    
+    
     TSSettingViewController *settingVC = [[TSSettingViewController alloc] init];
     [self.navigationController pushViewController:settingVC animated:YES];
 }
