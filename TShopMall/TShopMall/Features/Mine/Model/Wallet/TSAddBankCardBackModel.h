@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic ,copy) NSString *accountBankCode;
 @property (nonatomic ,copy) NSString *bankName;
-
+@property (nonatomic ,copy) NSString *bankCode;
 @end
 
 NS_ASSUME_NONNULL_END

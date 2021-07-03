@@ -40,7 +40,7 @@
     [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self).offset(32);
         make.left.equalTo(self).offset(16);
-        make.left.equalTo(self).offset(-16);
+        make.right.equalTo(self).offset(-16);
         make.width.mas_equalTo(kScreenWidth-32);
         make.height.mas_equalTo(1);
     }];
@@ -67,7 +67,7 @@
 - (UIView *)lineView {
     if (!_lineView) {
         _lineView = [UIView new];
-        _lineView.backgroundColor = KHexColor(@"##E6E6E6");
+        _lineView.backgroundColor = KlineColor;
     }
     return _lineView;
 }

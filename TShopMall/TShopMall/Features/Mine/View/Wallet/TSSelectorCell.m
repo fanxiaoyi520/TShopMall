@@ -40,12 +40,12 @@
         make.height.mas_equalTo(30);
     }];
     
-    [self addSubview:self.tipsImageView];
-    [self.tipsImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self).offset(-16);
-        make.centerY.equalTo(self);
-        make.width.height.mas_equalTo(16);
-    }];
+//    [self addSubview:self.tipsImageView];
+//    [self.tipsImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.right.equalTo(self).offset(-16);
+//        make.centerY.equalTo(self);
+//        make.width.height.mas_equalTo(16);
+//    }];
     
     [self addSubview:self.lineView];
     [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -93,7 +93,7 @@
 - (UIView *)lineView {
     if (!_lineView) {
         _lineView = [UIView new];
-        _lineView.backgroundColor = KHexAlphaColor(@"#E6E6E6", .5);
+        _lineView.backgroundColor = KlineColor;
     }
     return _lineView;
 }
@@ -229,7 +229,7 @@
 - (UIView *)lineView {
     if (!_lineView) {
         _lineView = [UIView new];
-        _lineView.backgroundColor = KHexAlphaColor(@"#E6E6E6", .5);
+        _lineView.backgroundColor = KlineColor;
     }
     return _lineView;
 }

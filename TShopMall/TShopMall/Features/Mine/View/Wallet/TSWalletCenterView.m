@@ -17,7 +17,6 @@
 
 @property (nonatomic ,strong)UIButton *mineBankCardBtn;
 @property (nonatomic ,strong)UILabel *mineBankCardLab;
-@property (nonatomic ,strong)UILabel *mineBankCardNumLab;
 
 @end
 @implementation TSWalletCenterView

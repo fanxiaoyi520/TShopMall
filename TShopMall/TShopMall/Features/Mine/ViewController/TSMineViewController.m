@@ -61,8 +61,8 @@
             __strong __typeof(weakSelf)strongSelf = weakSelf;
             if (isSucess) {
                 [strongSelf.infoView setModel:strongSelf.dataController.merchantUserInformationModel];
-                [strongSelf.leftBarView.userImg sd_setImageWithURL:[NSURL URLWithString:strongSelf.dataController.merchantUserInformationModel.customerImgUrl]];
-                strongSelf.leftBarView.userName.text = strongSelf.dataController.merchantUserInformationModel.customerName;
+                [strongSelf.leftBarView.userImg sd_setImageWithURL:[NSURL URLWithString:[TSGlobalManager shareInstance].currentUserInfo.user.avatar]];
+                strongSelf.leftBarView.userName.text = [TSGlobalManager shareInstance].currentUserInfo.user.nickname;
                 [strongSelf.collectionView reloadData];
             }
         }];
@@ -128,12 +128,14 @@
     CGFloat progress = offsetY / GK_STATUSBAR_NAVBAR_HEIGHT;
     self.gk_navigationBar.alpha = progress;
     if (offsetY <= 0) {
-//        CGRect frame = self.bgImageView.frame;
+        CGRect frame = self.bgImageView.frame;
 //        frame.origin.y +=  offsetY;
-//        self.bgImageView.frame = frame;
+        frame.size.height = 143 + GK_STATUSBAR_NAVBAR_HEIGHT - offsetY;
+        self.bgImageView.frame = frame;
 
     } else {
         CGRect frame = self.bgImageView.frame;
+        frame.size.height = 143 + GK_STATUSBAR_NAVBAR_HEIGHT;
         frame.origin.y = -offsetY;
         self.bgImageView.frame = frame;
     }

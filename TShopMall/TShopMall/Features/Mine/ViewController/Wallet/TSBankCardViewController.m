@@ -9,7 +9,6 @@
 #import "TSBankCardCell.h"
 #import "TSUnbundlingCardViewController.h"
 #import "TSAddCardViewController.h"
-#import "TSMineDataController.h"
 
 @interface TSBankCardViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,TSBankCardFooterDelegate> {
     ///开始滑动时的 Y 值
@@ -22,6 +21,7 @@
 }
 @property (nonatomic ,strong) TSMineDataController *dataController;
 @property (nonatomic ,strong) UICollectionView *collectionView;
+@property (nonatomic ,strong) UICollectionViewFlowLayout *flatout;
 @end
 
 @implementation TSBankCardViewController
@@ -40,6 +40,14 @@
     [self.dataController fetchQueryBankCardListDataComplete:^(BOOL isSucess) {
         @strongify(self);
         if (isSucess) {
+            CGFloat width = kScreenWidth-32;
+            if (self.dataController.bankCardArray.count < 3) {
+                self.flatout.itemSize = CGSizeMake(width, 120);
+                self.flatout.minimumLineSpacing = 11;
+            } else {
+                self.flatout.itemSize = CGSizeMake(width, 83);
+                self.flatout.minimumLineSpacing = -11;
+            }
             [self.collectionView reloadData];
         }
     }];
@@ -48,24 +56,21 @@
 - (void)initData {
     _firstRun=YES;
     _upSliding=YES;
-    _bankNameArray=@[@"中国银行",@"建设银行",@"中信银行",@"中国农业银行"];
-    //_bankNameArray=@[@"中国银行",@"建设银行"];
-    //_bankNameArray = @[];
 }
 
 - (void)fillCustomView {
     [self initData];
+    CGFloat width = kScreenWidth-32;
+    if ([self.dataController.walletModel.count integerValue] < 3) {
+        self.flatout.itemSize = CGSizeMake(width, 120);
+        self.flatout.minimumLineSpacing = 11;
+    } else {
+        self.flatout.itemSize = CGSizeMake(width, 83);
+        self.flatout.minimumLineSpacing = -11;
+    }
     
     UICollectionViewFlowLayout *flatout = [[UICollectionViewFlowLayout alloc] init];
-    CGFloat width = kScreenWidth-32;
-//    if (_bankNameArray.count < 3) {
-    if (self.dataController.bankCardArray.count < 3) {
-        flatout.itemSize = CGSizeMake(width, 120);
-        flatout.minimumLineSpacing = 11;
-    } else {
-        flatout.itemSize = CGSizeMake(width, 83);
-        flatout.minimumLineSpacing = -11;
-    }
+    self.flatout = flatout;
     UICollectionView * collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0,GK_STATUSBAR_NAVBAR_HEIGHT, kScreenWidth, kScreenHeight-GK_STATUSBAR_NAVBAR_HEIGHT) collectionViewLayout:flatout];
     collectionView.dataSource=self;
     collectionView.delegate=self;
@@ -79,16 +84,46 @@
     [collectionView registerClass:[TSBankCardCell class] forCellWithReuseIdentifier:@"cellIdentifier"];
     [collectionView registerClass:[TSBankCardFooter class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"FooterView"];
     [collectionView registerClass:[TSBankCardHeader class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView"];
+    
+    RefreshGifHeader *mj_header = [RefreshGifHeader headerWithRefreshingTarget:self refreshingAction:@selector(mjHeadreRefresh)];
+    if (GK_STATUSBAR_HEIGHT > 20) {
+        mj_header.loadingOffsetTop = 30;
+    }
+    collectionView.mj_header = mj_header;
+    collectionView.mj_header.hidden = YES;
+}
+
+// MARK: actions
+- (void)mjHeadreRefresh {
+    @weakify(self);
+    [self.dataController fetchQueryBankCardListDataComplete:^(BOOL isSucess) {
+        @strongify(self);
+        if (isSucess) {
+            CGFloat width = kScreenWidth-32;
+            if (self.dataController.bankCardArray.count < 3) {
+                self.flatout.itemSize = CGSizeMake(width, 120);
+                self.flatout.minimumLineSpacing = 11;
+            } else {
+                self.flatout.itemSize = CGSizeMake(width, 83);
+                self.flatout.minimumLineSpacing = -11;
+            }
+            [self.collectionView.mj_header endRefreshing];
+            self.collectionView.mj_header.hidden = YES;
+            [self.collectionView reloadData];
+        }
+    }];
 }
 
 // MARK: UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    //return _bankNameArray.count;
+    if (!self.dataController.bankCardArray || self.dataController.bankCardArray.count == 0)
+        return 0;
     return self.dataController.bankCardArray.count;
 }
+
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     TSBankCardCell * cell =[collectionView dequeueReusableCellWithReuseIdentifier:@"cellIdentifier" forIndexPath:indexPath];
-    [cell setModel:self.dataController.bankCardArray[indexPath.row]];
+    [cell setModel:self.dataController.bankCardArray[indexPath.row] indexPath:indexPath];
     return cell;
 }
 
@@ -98,7 +133,6 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
-    //if (!_bankNameArray || _bankNameArray.count == 0)
     if (!self.dataController.bankCardArray || self.dataController.bankCardArray.count == 0)
         return CGSizeMake(kScreenWidth, 314);
     return CGSizeMake(0, 0);
@@ -167,21 +201,20 @@
 
 // MARK: TSBankCardFooterDelegate
 - (void)bankCardFooterAddBankCardAction:(id)sender {
-    TSAddCardViewController *vc = [TSAddCardViewController new];
-    vc.popToWhere = BankCardList;
-    [self.navigationController pushViewController:vc animated:YES];
+    if (self.dataController.bankCardArray.count < 6) {
+        TSAddCardViewController *vc = [TSAddCardViewController new];
+        vc.isNotice = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    } else {
+        [Popover popToastOnWindowWithText:@"最多添加6张银行卡"];
+    }
 }
 
 // MARK: TSGlobalNotifyServer
-- (void)addKeyCommand:(UIKeyCommand *)keyCommand {
+-(void)addBankCard:(id _Nullable)info {
     dispatch_async(dispatch_get_main_queue(), ^{
-        @weakify(self);
-        [self.dataController fetchQueryBankCardListDataComplete:^(BOOL isSucess) {
-            @strongify(self);
-            if (isSucess) {
-                [self.collectionView reloadData];
-            }
-        }];
+        self.collectionView.mj_header.hidden = NO;
+        [self.collectionView.mj_header beginRefreshing];
     });
 }
 

@@ -30,10 +30,15 @@
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.gk_navTitle = @"我的钱包";
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [self.dataController fetchMineWalletDataComplete:^(BOOL isSucess) {
         if (isSucess) {
             [self.mainScrollView addSubview:self.walletCenterView];
             self.walletCenterView.frame = CGRectMake(0, -13, kScreenWidth, 237);
+            self.walletCenterView.mineBankCardNumLab.text = self.dataController.walletModel.count;
         }
     }];
 }
@@ -52,6 +57,7 @@
 }
 - (void)walletBindingCardAction:(id _Nullable)sender {
     TSBankCardViewController *vc = [TSBankCardViewController new];
+    vc.kDataController = self.dataController;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

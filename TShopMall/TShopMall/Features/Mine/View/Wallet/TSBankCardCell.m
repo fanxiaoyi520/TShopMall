@@ -15,21 +15,23 @@
     UIImageView * _masterLabelBackImageView;
     UILabel * _masterLabel;
     UIImageView * _bgImageView;
+    UIImageView * _yinyingImageView;
 }
 - (instancetype)initWithFrame:(CGRect)frame {
     self=[super initWithFrame:frame];
     if (self) {
-        self.layer.cornerRadius = 12;
-//        self.layer.shadowColor = [UIColor blackColor].CGColor;
-//        self.layer.shadowOffset = CGSizeMake(0, 0);
-//        self.layer.shadowRadius = 5.0f;
-//        self.layer.shadowOpacity = 1.f;
-        self.layer.masksToBounds = NO;
         [self uiConfigue];
     }
     return self;
 }
+
 - (void)uiConfigue {
+    _yinyingImageView = [UIImageView new];
+    _yinyingImageView.image = KImageMake(@"mine_yinying");
+    _yinyingImageView.frame = CGRectMake(0, -(_yinyingImageView.image.size.height/2), self.width, _yinyingImageView.image.size.height);
+    [self.contentView addSubview:_yinyingImageView];
+    _yinyingImageView.hidden = YES;
+
     _bgImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.width, self.height)];
     _bgImageView.image=[UIImage imageNamed:@"mine_red_bg"];
      [self.contentView addSubview:_bgImageView];
@@ -55,31 +57,46 @@
 }
 
 // MARK: model
-- (void)setModel:(id)model {
+- (void)setModel:(id _Nullable)model indexPath:(NSIndexPath *)indexPath {
     if (!model) return;
+    
+    if (self.sourceInt != 5 && indexPath.row != 0)
+        _yinyingImageView.hidden = NO;
+
     TSBankCardModel *kModel = model;
     _bankNameLabel.text = kModel.accountBank;
-    _accountLabel.text = [NSString returnBankCard:kModel.bankCardNo];
+
+    NSString *endStr = nil;
+    if (kModel.bankCardNo.length >= 16) {
+        endStr = [kModel.bankCardNo substringFromIndex:kModel.bankCardNo.length-4];
+        _accountLabel.text = [NSString stringWithFormat:@"····%@",endStr];
+    } else {
+        _accountLabel.text = kModel.bankCardNo;
+    }
     
     if (self.height == 120) {
         _accountLabel.top = 87;
         
-        if ([kModel.bankStatus isEqualToString:@"0"]) {
+        if ([kModel.bankStatus isEqualToString:@"0"]) {//待审核
             _bgImageView.image=[UIImage imageNamed:@"mine_shenhezhong_da"];
             _accountLabel.text = kModel.bankStatusName;
-        } else if ([kModel.bankStatus isEqualToString:@"1"]) {
-            _bgImageView.image=[UIImage imageNamed:@"mine_bankstatus_hong"];
-        } else {
-            _bgImageView.image=[UIImage imageNamed:@"mine_yellow_bg1"];
+        } else if ([kModel.bankStatus isEqualToString:@"1"]) {//审核通过
+            if (indexPath.item % 2 == 0) {
+                _bgImageView.image=[UIImage imageNamed:@"mine_bankstatus_hong"];
+            } else {
+                _bgImageView.image=[UIImage imageNamed:@"mine_yellow_bg1"];
+            }
         }
     } else {
-        if ([kModel.bankStatus isEqualToString:@"0"]) {
+        if ([kModel.bankStatus isEqualToString:@"0"]) {//待审核
             _bgImageView.image=[UIImage imageNamed:@"mine_grey_bg"];
             _accountLabel.text = kModel.bankStatusName;
-        } else if ([kModel.bankStatus isEqualToString:@"1"]) {
-            _bgImageView.image=[UIImage imageNamed:@"mine_red_bg"];
-        } else {
-            _bgImageView.image=[UIImage imageNamed:@"mine_yellow_bg2"];
+        } else if ([kModel.bankStatus isEqualToString:@"1"]) {//审核通过
+            if (indexPath.item % 2 == 0) {
+                _bgImageView.image=[UIImage imageNamed:@"mine_red_bg"];
+            } else {
+                _bgImageView.image=[UIImage imageNamed:@"mine_yellow_bg2"];
+            }
         }
     }
     

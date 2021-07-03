@@ -136,6 +136,8 @@
 }
 
 - (void)setData:(id)data {
+    [super setData:data];
+    
     TSRankSectionItemModel *item = (TSRankSectionItemModel *)data;
     NSInteger rank = item.userModel.rank.integerValue;
     if (rank == 1) {

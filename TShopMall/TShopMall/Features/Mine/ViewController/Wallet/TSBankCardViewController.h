@@ -6,11 +6,13 @@
 //
 
 #import "TSBaseViewController.h"
+#import "TSMineDataController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TSBankCardViewController : TSBaseViewController
 
+@property (nonatomic ,strong) TSMineDataController *kDataController;
 @end
 
 NS_ASSUME_NONNULL_END

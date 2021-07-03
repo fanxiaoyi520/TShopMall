@@ -211,7 +211,7 @@
 - (UIView *)lineView {
     if (!_lineView) {
         _lineView = [UIView new];
-        _lineView.backgroundColor = KHexAlphaColor(@"#E6E6E6", .5);
+        _lineView.backgroundColor = KlineColor;
     }
     return _lineView;
 }

@@ -338,7 +338,7 @@
         if (self.model.bankCardNo) {
             _cardNumberLab.text = [NSString stringWithFormat:@"提现到银行卡账号:%@",[self returnBankCard:self.model.bankCardNo]];
         } else {
-            _cardNumberLab.textColor = KHexAlphaColor(@"#2D3132", .5);
+            _cardNumberLab.textColor = KlineColor;
             _cardNumberLab.text =  @"请先绑定提现银行卡账号";
         }
     }

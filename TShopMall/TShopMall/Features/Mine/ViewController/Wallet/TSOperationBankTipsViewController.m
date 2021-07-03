@@ -7,7 +7,7 @@
 
 #import "TSOperationBankTipsViewController.h"
 
-@interface TSOperationBankTipsViewController ()
+@interface TSOperationBankTipsViewController ()<UIGestureRecognizerDelegate>
 
 @property (nonatomic ,strong) UIImageView *tipsImageView;
 @property (nonatomic ,strong) UILabel *tipsLab;
@@ -24,11 +24,14 @@
     // Do any additional setup after loading the view.
     
     self.gk_navTitle = self.kNavTitle;
+    id traget = self.navigationController.interactivePopGestureRecognizer.delegate;
+    UIPanGestureRecognizer * pan = [[UIPanGestureRecognizer alloc]initWithTarget:traget action:nil];
+    [self.view addGestureRecognizer:pan];
 }
       
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    if (([self.kNavTitle isEqualToString:@"添加银行卡"] && self.popToWhere == KBankCardList) || [self.kNavTitle isEqualToString:@"银行卡"])
+    if (_isNotice)
         [[TSGlobalNotifyServer sharedServer] postAddBankCard:nil];
 }
 
