@@ -71,11 +71,11 @@
 - (void)initNetworkReachability {
     // 监听网络状况
     AFNetworkReachabilityManager *mgr = [AFNetworkReachabilityManager sharedManager];
-    [mgr setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
-        /// 简化成两种状态 0 为 无网络 1 为有网络
-        NSInteger state = status == AFNetworkReachabilityStatusNotReachable?0:1;
-        [[NSNotificationCenter defaultCenter] postNotificationName:TS_NetWork_State object:@(state)];
-    }];
+//    [mgr setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+//        /// 简化成两种状态 0 为 无网络 1 为有网络
+//        NSInteger state = status == AFNetworkReachabilityStatusNotReachable?0:1;
+//        [[NSNotificationCenter defaultCenter] postNotificationName:TS_NetWork_State object:@(state)];
+//    }];
     [mgr startMonitoring];
 }
 

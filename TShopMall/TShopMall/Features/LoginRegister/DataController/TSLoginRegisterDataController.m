@@ -13,8 +13,71 @@
 #import "TSLoginByAuthCodeRequest.h"
 #import "TSLoginByTokenRequest.h"
 #import "TSChangeBindRequest.h"
-
+#import "TSBindUserByAuthCodeRequest.h"
 @implementation TSLoginRegisterDataController
+
+-(void)fetchBindUserByAuthCode:(NSString *)token
+                          type:(NSString *)type
+                    platformId:(NSString *)platformId
+                         phone:(NSString * __nullable)phone
+                       smsCode:(NSString * __nullable)smsCode
+                      complete:(void(^)(BOOL isSucess))complete{
+    TSBindUserByAuthCodeRequest *codeRequest = [[TSBindUserByAuthCodeRequest alloc] initWithType:type platformId:platformId phone:phone token:token smsCode:smsCode];
+    [codeRequest startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+        
+        if (request.responseModel.isSucceed) {
+            
+            TSUserInfoManager *userInfo = [TSUserInfoManager userInfo];
+            userInfo.accessToken = request.responseModel.originalData[@"accessToken"];
+            userInfo.refreshToken = request.responseModel.originalData[@"refreshToken"];
+            userInfo.userName = request.responseModel.originalData[@"username"];
+            userInfo.accountId = request.responseModel.originalData[@"accountId"];
+            [[TSUserInfoManager userInfo] saveUserInfo:userInfo];
+            [[TSUserInfoManager userInfo] updateUserInfo:complete];
+            [Popover removePopoverOnWindow];
+            
+            if (complete) {
+                complete(YES);
+            }
+        }else{
+            [Popover popToastOnWindowWithText:request.responseModel.originalData[@"failCause"]];
+
+            if (complete) {
+                complete(NO);
+            }
+        }
+        
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        if (complete) {
+            complete(NO);
+        }
+    }];
+}
+
+-(void)fetchBindSMSCodeMobile:(NSString *)mobile
+                     complete:(void(^)(BOOL isSucess))complete{
+    TSSMSCodeRequest *codeRequest = [[TSSMSCodeRequest alloc] initWithMobile:mobile type:@"BINDING"];
+    [codeRequest startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+        
+        if (request.responseModel.isSucceed) {
+            if (complete) {
+                complete(YES);
+            }
+        }else{
+            [Popover popToastOnWindowWithText:request.responseModel.originalData[@"failCause"]];
+
+            if (complete) {
+                complete(NO);
+            }
+        }
+        
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        if (complete) {
+            complete(NO);
+        }
+    }];
+}
+
 -(void)fetchCheckSalesmanWithMobile:(NSString *)mobile
                            complete:(void(^)(BOOL isSucess))complete{
     NSMutableDictionary *body = [NSMutableDictionary dictionary];
@@ -155,7 +218,7 @@
     login.animatingView = self.context.view;
     [login startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
         if (request.responseModel.isSucceed) {
-            TSUserInfoManager *userInfo = [[TSUserInfoManager alloc] init];
+            TSUserInfoManager *userInfo = [TSUserInfoManager userInfo];
             userInfo.accessToken = request.responseModel.originalData[@"accessToken"];
             userInfo.refreshToken = request.responseModel.originalData[@"refreshToken"];
             userInfo.userName = request.responseModel.originalData[@"username"];
@@ -222,13 +285,12 @@
         if (request.responseModel.isSucceed) {
             if (request.responseModel.data) {
                 NSDictionary *dic = request.responseModel.data;
-                TSUserInfoManager *userInfo = [[TSUserInfoManager alloc] init];
+                TSUserInfoManager *userInfo = [TSUserInfoManager userInfo];
                 userInfo.accessToken = dic[@"accessToken"];
                 userInfo.refreshToken = dic[@"refreshToken"];
                 userInfo.userName = dic[@"username"];
                 userInfo.accountId = dic[@"accountId"];
                 [[TSUserInfoManager userInfo] saveUserInfo:userInfo];
-                //complete(YES);
                 [[TSUserInfoManager userInfo] updateUserInfo:complete];
             }
             
@@ -251,7 +313,7 @@
     request.animatingView = self.context.view;
     [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
         if (request.responseModel.isSucceed) {
-            TSUserInfoManager *userInfo = [[TSUserInfoManager alloc] init];
+            TSUserInfoManager *userInfo = [TSUserInfoManager userInfo];
             userInfo.accessToken = request.responseModel.originalData[@"accessToken"];
             userInfo.refreshToken = request.responseModel.originalData[@"refreshToken"];
             userInfo.userName = request.responseModel.originalData[@"username"];
@@ -259,7 +321,6 @@
             [[TSUserInfoManager userInfo] saveUserInfo:userInfo];
             [[TSUserInfoManager userInfo] updateUserInfo:complete];
             [Popover removePopoverOnWindow];
-            //complete(YES);
         }
         else{
             complete(NO);
@@ -274,14 +335,31 @@
 -(void)fetchLoginByAuthCode:(NSString *)code
                     platformId:(NSString *)platformId
                      sucess:(void(^)(BOOL isHaveMobile, NSString *token))complete{
+//    @weakify(self);
     TSLoginByAuthCodeRequest *request = [[TSLoginByAuthCodeRequest alloc] initWithCode:code platformId:platformId];
     [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+//        @strongify(self)
         if (request.responseModel.isSucceed) {
             NSDictionary *dic = request.responseModel.data;
             if ([dic[@"flag"] intValue] == 1) {
                 complete(NO, dic[@"token"]);
             }else if([dic[@"flag"] intValue] == 3){
-                complete(YES, dic[@"token"]);
+                
+                TSUserInfoManager *userInfo = [TSUserInfoManager userInfo];
+                userInfo.accessToken = request.responseModel.originalData[@"accessToken"];
+                userInfo.refreshToken = request.responseModel.originalData[@"refreshToken"];
+                userInfo.userName = request.responseModel.originalData[@"username"];
+                userInfo.accountId = request.responseModel.originalData[@"accountId"];
+                [[TSUserInfoManager userInfo] saveUserInfo:userInfo];
+                [[TSUserInfoManager userInfo] updateUserInfo:nil];
+                [Popover removePopoverOnWindow];
+                complete(YES, nil);
+//                complete(YES, dic[@"token"]);
+//                [self fetchBindUserByAuthCode:dic[@"token"] type:@"1" platformId:@"3" phone:nil smsCode:nil complete:^(BOOL isSucess) {
+//                    if (isSucess) {
+//                        complete(YES, nil);
+//                    }
+//                }];
             }
         }
         else{
@@ -306,7 +384,15 @@
                 if ([dic[@"flag"] intValue] == 1) {
                     complete(NO, dic[@"token"]);
                 }else if([dic[@"flag"] intValue] == 3){
-                    complete(YES, dic[@"token"]);
+                    TSUserInfoManager *userInfo = [TSUserInfoManager userInfo];
+                    userInfo.accessToken = request.responseModel.originalData[@"accessToken"];
+                    userInfo.refreshToken = request.responseModel.originalData[@"refreshToken"];
+                    userInfo.userName = request.responseModel.originalData[@"username"];
+                    userInfo.accountId = request.responseModel.originalData[@"accountId"];
+                    [[TSUserInfoManager userInfo] saveUserInfo:userInfo];
+                    [[TSUserInfoManager userInfo] updateUserInfo:nil];
+                    [Popover removePopoverOnWindow];
+                    complete(YES, nil);
                 }
                 
             }

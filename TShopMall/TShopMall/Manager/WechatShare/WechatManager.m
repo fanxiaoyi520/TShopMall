@@ -10,6 +10,9 @@
 #import "TSAccountConst.h"
 
 @interface WechatManager()<WXApiDelegate>
+@property (nonatomic, copy) NSString *access_token;
+@property (nonatomic, copy) NSString *refresh_token;
+@property (nonatomic, copy) NSString *openId;
 
 @end
 
@@ -128,7 +131,7 @@
         switch (response.errCode) {
             case WXSuccess: {
                 NSLog(@"用户同意");
-//                [self getAccessTokenWithCode:response.code];
+                
                 if (self.WXSuccess) {
                     self.WXSuccess(response.code);
                 }
@@ -239,7 +242,7 @@
     }
 }
 
-- (void)getAccessTokenWithCode:(NSString *)code{
+- (void)getAccessTokenWithCode:(NSString *)code sucess:(void (^)(BOOL))sucess{
     NSString *urlStr = [NSString stringWithFormat:@"https://api.weixin.qq.com/sns/oauth2/access_token?appid=%@&secret=%@&code=%@&grant_type=authorization_code", WXAPPId, WXAPPSecret, code];
     NSURL *url = [NSURL URLWithString:urlStr];
     NSURLSession *session = [NSURLSession sharedSession];
@@ -248,31 +251,56 @@
             id objc = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
             NSLog(@"%@",objc);
             dispatch_async(dispatch_get_main_queue(), ^{
-                
+                self.refresh_token = objc[@"refresh_token"];
+                self.access_token = objc[@"access_token"];
+                self.openId = objc[@"openid"];
+                sucess(YES);
+//                [self updateRefreshToken];
             });
+        }else{
+            sucess(NO);
         }
         
     }];
     [firsttask resume];
 }
 
-- (void)refreshToken{
-    
-//https://api.weixin.qq.com/sns/oauth2/refresh_token?appid=APPID&grant_type=refresh_token&refresh_token=REFRESH_TOKEN
-    
-//    NSString *urlStr = [NSString stringWithFormat:@"https://api.weixin.qq.com/sns/oauth2/access_token?appid=%@&secret=%@&code=%@&grant_type=authorization_code", WXAPPId, WXAPPSecret, code];
-//    NSURL *url = [NSURL URLWithString:urlStr];
-//    NSURLSession *session = [NSURLSession sharedSession];
-//    NSURLSessionDataTask *firsttask = [session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-//        if(error == nil){
-//            id objc = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-//            NSLog(@"%@",objc);
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//
-//            });
-//        }
-//
-//    }];
-//    [firsttask resume];
+- (void)updateRefreshTokenSucess:(void(^)(BOOL isSucess))sucess{
+        
+    NSString *urlStr = [NSString stringWithFormat:@"https://api.weixin.qq.com/sns/oauth2/refresh_token?appid=%@&grant_type=refresh_token&refresh_token=%@", WXAPPId, self.refresh_token];
+    NSURL *url = [NSURL URLWithString:urlStr];
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *firsttask = [session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if(error == nil){
+            id objc = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+            NSLog(@"%@",objc);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                sucess(YES);
+            });
+        }else{
+            sucess(NO);
+        }
+
+    }];
+    [firsttask resume];
+}
+
+- (void)getUserInfo:(void(^)(NSDictionary *))callBack{
+    NSString *urlStr = [NSString stringWithFormat:@"https://api.weixin.qq.com/sns/userinfo?access_token=%@_TOKEN&openid=%@", self.access_token, self.openId];
+    NSURL *url = [NSURL URLWithString:urlStr];
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *firsttask = [session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if(error == nil){
+            id objc = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+            NSLog(@"%@",objc);
+            dispatch_async(dispatch_get_main_queue(), ^{
+
+                callBack(objc);
+                
+            });
+        }
+
+    }];
+    [firsttask resume];
 }
 @end

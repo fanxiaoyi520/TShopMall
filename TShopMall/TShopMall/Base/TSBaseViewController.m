@@ -24,14 +24,8 @@
     [self setupBasic];
     [self setupNavigationBar];
     [self fillCustomView];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(netWorkStatusChanged:) name:TS_NetWork_State object:nil];
-    
+        
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userInfoUpdated) name:TSUserInfoModifiedNotificationName object:nil];
-    
-}
-
-- (void)netWorkStatusChanged:(NSNotification *)noti{
     
 }
 

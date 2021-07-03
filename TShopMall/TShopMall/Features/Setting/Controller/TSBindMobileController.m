@@ -81,9 +81,13 @@
 #pragma mark - Actions
 /** 绑定手机号的操作 */
 - (void)bindMobile:(NSString *)phoneNumber code:(NSString *)code {
-    [self.dataController fetchBindUserByAuthCode:self.token type:@"2" platformId:@"3" phone:phoneNumber smsCode:code complete:^(BOOL isSucess) {
-        if (self.bindedBlock) {
-            self.bindedBlock();
+    @weakify(self);
+    [[TSServicesManager sharedInstance].acconutService fetchBindUserByAuthCode:self.token type:@"2" platformId:@"3" phone:phoneNumber smsCode:code complete:^(BOOL isSucess) {
+        @strongify(self);
+        if (isSucess) {
+            if (self.bindedBlock) {
+                self.bindedBlock();
+            }
         }
     }];
 }
@@ -117,7 +121,7 @@
         TSBindMobileCell *bindMobileCell = (TSBindMobileCell *)cell;
         bindMobileCell.codeButtonClickBlock = ^(NSString *phoneNumber){
             @strongify(self);
-            [self.dataController fetchLoginSMSCodeMobile:phoneNumber complete:^(BOOL isSucess) {
+            [[TSServicesManager sharedInstance].acconutService fetchLoginSMSCodeMobile:phoneNumber complete:^(BOOL isSucess) {
                 if (isSucess) {
                     
                 }else
