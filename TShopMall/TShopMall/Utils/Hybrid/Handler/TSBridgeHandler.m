@@ -12,6 +12,7 @@
 #import "TSWKMessageHandlerHelper.h"
 #import "TSConventionAlertView.h"
 #import <Photos/Photos.h>
+#import "TSMakeOrderController.h"
 
 @implementation TSBridgeHandler
 
@@ -143,9 +144,17 @@
 -(void)navigation:(NSDictionary *)params{
     NSDictionary *data = params[@"data"];
     NSDictionary *paramsDic = data[@"params"];
-    NSString *controllerName = paramsDic[@"name"];
-    Class className = NSClassFromString(controllerName);
-    UIViewController *con = [[className alloc] init];
+    NSString *controllerName = paramsDic[@"dest"];
+    UIViewController *con;
+    if ([@"toOrderPay" isEqualToString:controllerName]) {
+        TSMakeOrderController *order = [[TSMakeOrderController alloc] init];
+        order.isFromCart = NO;
+        con = order;
+    }else{
+        Class className = NSClassFromString(controllerName);
+        con = [[className alloc] init];
+    }
+    
     TSHybridViewController *controller = [TSWKAppManager currentController:params[@"webview"]];
     [controller.navigationController pushViewController:con animated:YES];
 }
