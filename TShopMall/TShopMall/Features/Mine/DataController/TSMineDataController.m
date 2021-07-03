@@ -68,9 +68,6 @@
                     break;
 
                 case 4:
-                    item.orderCount = self.orderInfo.waitpay;
-                    break;
-                case 5:
                     item.orderCount = self.orderInfo.afterorder;
                     break;
                 default:

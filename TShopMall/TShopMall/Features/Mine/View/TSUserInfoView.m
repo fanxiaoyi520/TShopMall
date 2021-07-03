@@ -117,8 +117,7 @@
 - (void)setModel:(TSMineMerchantUserInformationModel *)model {
     if (!model) return;
     _model = model;
-    [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:[TSGlobalManager shareInstance].currentUserInfo.user.avatar] placeholderImage:nil];
-    [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:model.customerImgUrl] placeholderImage:nil];
+    [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:[TSGlobalManager shareInstance].currentUserInfo.user.avatar] placeholderImage:nil]; 
     if ([TSGlobalManager shareInstance].currentUserInfo) {
     [self.loginButton setTitle:[TSGlobalManager shareInstance].currentUserInfo.user.nickname forState:UIControlStateNormal];
     } else {
@@ -128,14 +127,27 @@
     }
     if ([model.staff isEqualToString:@"staff"]) {
         self.staffImageView.image = KImageMake(@"mall_mine_staff");
+        self.staffImageView.hidden = NO;
     } else {
         self.staffImageView.hidden = YES;
     }
     
     if ([model.privilege isEqualToString:@"privilege"]) {
         self.partnerImageView.hidden = YES;
+        [self.partnerImageView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.mas_equalTo(0);
+        }];
     } else {
-        self.partnerImageView.image = KImageMake(@"mall_mine_partner");
+     
+        if ([model.salesmanRankLevel isEqualToString:@"1"]) {
+            self.partnerImageView.image = KImageMake(@"mall_mine_partner_hight");
+        } else {
+            self.partnerImageView.image = KImageMake(@"mall_mine_partner");
+        }
+        self.partnerImageView.hidden = NO;
+        [self.partnerImageView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.mas_equalTo(60);
+        }];
     }
     
     if (model.invitationCode == nil) {

@@ -7,12 +7,7 @@
 
 #import "TSBaseDataController.h"
 #import "TSInviteFriendsSectionModel.h"
-NS_ASSUME_NONNULL_BEGIN
-//@protocol <#protocol name#> <NSObject>
-//
-//<#methods#>
-//
-//@end
+NS_ASSUME_NONNULL_BEGIN 
 @interface TSInviteFriendsDataController : TSBaseDataController
 //全局参数
 @property (nonatomic ,assign)NSInteger pageNo;
