@@ -14,10 +14,10 @@
 #import "AuthAppleIDManager.h"
 #import <AuthenticationServices/AuthenticationServices.h>
 #import "TSBindMobileController.h"
+#import "UIViewController+Plugin.h"
 
-@interface TSOneClickLoginViewController ()<TSHybridViewControllerDelegate, NTESQuickLoginManagerDelegate>
+@interface TSOneClickLoginViewController ()<TSHybridViewControllerDelegate>
 @property (nonatomic, strong) NTESQuickLoginModel  *customModel;
-@property(nonatomic, assign) TSServiceProvider provider;
 
 @end
 
@@ -33,7 +33,10 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self getPhoneNumber];
+    if ([[UIViewController windowRootViewController].childViewControllers.firstObject isKindOfClass:self.class]) {
+        [self getPhoneNumber];
+    }
+   
 }
 
 - (void)viewDidLoad {
@@ -55,16 +58,7 @@
     @weakify(self);
     [[NTESQuickLoginManager sharedInstance] getPhoneNumberCompletion:^(NSDictionary * _Nonnull resultDic1) {
         @strongify(self)
-        
-        if ([resultDic1[@"resultCode"] isEqualToString:@"103000"]) {
-            self.provider = TSServiceProviderYD;
-        }
-        else if ([resultDic1[@"resultCode"] isEqualToString:@"100"]){
-            self.provider = TSServiceProviderLT;
-        }
-        else if ([resultDic1[@"resultCode"] isEqualToString:@"0"]){
-            self.provider = TSServiceProviderDX;
-        }
+      
         NSNumber *boolNum = [resultDic1 objectForKey:@"success"];
         BOOL success = [boolNum boolValue];
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -76,15 +70,12 @@
                         BOOL success = [boolNum boolValue];
                         if (success) {
                             [[TSServicesManager sharedInstance].acconutService fetchOneStepLoginToken:[resultDic1 objectForKey:@"token"] accessToken:[resultDic2 objectForKey:@"accessToken"] complete:^(BOOL isSucess) {
+                               
                                 if (isSucess) {
                                     [[NTESQuickLoginManager sharedInstance] closeAuthController:^{
-
-                                     }];
-                                    [self dismissViewControllerAnimated:YES completion:^{
                                         if (self.loginBlock) {
                                             self.loginBlock();
                                         }
-                                        
                                     }];
                                 }
                             }];
@@ -104,22 +95,17 @@
 - (void)setCustomUI {
    
     NTESQLHomePageCustomUIModel *uiModel = [NTESQLHomePageCustomUIModel getInstance];
-    self.customModel = [uiModel configCustomUIModel:NTESPresentDirectionPush withType:0 faceOrientation:UIInterfaceOrientationPortrait];
-    self.customModel.currentVC = self;
+    NTESQuickLoginModel  *customModel = [uiModel configCustomUIModel:NTESPresentDirectionPush withType:0 faceOrientation:UIInterfaceOrientationPortrait];
+    customModel.currentVC = self;
     
-    [[NTESQuickLoginManager sharedInstance] setupModel:self.customModel];
+    [[NTESQuickLoginManager sharedInstance] setupModel:customModel];
     @weakify(self);
     
     uiModel.otherLoginBlock = ^{
         @strongify(self)
-        [[NTESQuickLoginManager sharedInstance] closeAuthController:^{
-
-         }];
-        [self dismissViewControllerAnimated:NO completion:^{
-            if (self.otherLoginBlock) {
-                self.otherLoginBlock();
-            }
-        }];
+        if (self.otherLoginBlock) {
+            self.otherLoginBlock();
+        }
     };
     uiModel.appleLoginBlock = ^{
         @strongify(self)
@@ -132,17 +118,16 @@
                  }];
                 if (isHaveMobile) {
                     /// 完成登录
-                    [self dismissViewControllerAnimated:YES completion:^{
+                    [[NTESQuickLoginManager sharedInstance] closeAuthController:^{
                         if (self.loginBlock) {
                             self.loginBlock();
                         }
-                        
                     }];
                 }
                 else{
-                    [self dismissViewControllerAnimated:NO completion:^{
-                        if (self.bindBlock) {
-                            self.bindBlock();
+                    [[NTESQuickLoginManager sharedInstance] closeAuthController:^{
+                        if (self.loginBlock) {
+                            self.loginBlock();
                         }
                     }];
                 }
@@ -157,17 +142,17 @@
         @strongify(self)
         [self dismissViewControllerAnimated:NO completion:nil];
     };
-    self.customModel.rootViewController = self;
-    self.customModel.pageCustomBlock = ^(int privacyType) {
+    customModel.rootViewController = self;
+    customModel.pageCustomBlock = ^(int privacyType) {
         NSString *url;
         if (privacyType == 0) {
-            if (self.provider == TSServiceProviderYD) {
+            if ([[NTESQuickLoginManager sharedInstance] getCarrier] == NTESCarrierTypeMobile) {
                 url = @"https://wap.cmpassport.com/resources/html/contract.html";
             }
-            else if (self.provider == TSServiceProviderLT){
+            else if ([[NTESQuickLoginManager sharedInstance] getCarrier] == NTESCarrierTypeUnicom){
                 url = @"https://ms.zzx9.cn/html/oauth/protocol2.html";
             }
-            else if (self.provider == TSServiceProviderDX){
+            else if ([[NTESQuickLoginManager sharedInstance] getCarrier] == NTESCarrierTypeTelecom){
                 url = @"https://e.189.cn/sdk/agreement/content.do?type=main&appKey=&hidetop=true";
             }
         }else{

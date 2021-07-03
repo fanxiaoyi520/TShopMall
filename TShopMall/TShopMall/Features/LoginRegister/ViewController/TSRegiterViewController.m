@@ -162,8 +162,10 @@
     [[TSServicesManager sharedInstance].acconutService fetchRegisterMobile:phoneNumber validCode:[self.topView getCode] invitationCode:[self.topView getInvitationCode] complete:^(BOOL isSucess) {
         if (isSucess) {
             @strongify(self)
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"TS_LoginUpdateNotification" object:@0];
-            [self dismissViewControllerAnimated:YES completion:nil];
+            [self dismissViewControllerAnimated:NO completion:nil];
+            if (self.loginBlock) {
+                self.loginBlock();
+            }
         }
     }];
 }

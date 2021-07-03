@@ -61,8 +61,8 @@
             __strong __typeof(weakSelf)strongSelf = weakSelf;
             if (isSucess) {
                 [strongSelf.infoView setModel:strongSelf.dataController.merchantUserInformationModel];
-                [strongSelf.leftBarView.userImg sd_setImageWithURL:[NSURL URLWithString:strongSelf.dataController.merchantUserInformationModel.customerImgUrl]];
-                strongSelf.leftBarView.userName.text = strongSelf.dataController.merchantUserInformationModel.customerName;
+                [strongSelf.leftBarView.userImg sd_setImageWithURL:[NSURL URLWithString:[TSGlobalManager shareInstance].currentUserInfo.user.avatar]];
+                strongSelf.leftBarView.userName.text = [TSGlobalManager shareInstance].currentUserInfo.user.nickname;
                 [strongSelf.collectionView reloadData];
             }
         }];
@@ -136,12 +136,14 @@
     CGFloat progress = offsetY / GK_STATUSBAR_NAVBAR_HEIGHT;
     self.gk_navigationBar.alpha = progress;
     if (offsetY <= 0) {
-//        CGRect frame = self.bgImageView.frame;
+        CGRect frame = self.bgImageView.frame;
 //        frame.origin.y +=  offsetY;
-//        self.bgImageView.frame = frame;
+        frame.size.height = 143 + GK_STATUSBAR_NAVBAR_HEIGHT - offsetY;
+        self.bgImageView.frame = frame;
 
     } else {
         CGRect frame = self.bgImageView.frame;
+        frame.size.height = 143 + GK_STATUSBAR_NAVBAR_HEIGHT;
         frame.origin.y = -offsetY;
         self.bgImageView.frame = frame;
     }
@@ -171,6 +173,7 @@
     TSUniversalCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:item.identify forIndexPath:indexPath];
     cell.indexPath = indexPath;
     cell.delegate = self;
+    cell.cellSuperViewCollectionView = self.collectionView;
     return cell;
 }
 
@@ -259,9 +262,14 @@
     
     //邀请好友
     if ([model.headerName isEqualToString: @"邀请"]) {
-        TSInviteFriendsViewController *vc = [TSInviteFriendsViewController new];
-        vc.salesmanUuid = self.dataController.merchantUserInformationModel.ucUuid;
-        [self.navigationController pushViewController:vc animated:YES];
+        TSMineSectionAdsItemModel *item = (TSMineSectionAdsItemModel *)model.items.firstObject;
+        NSString *uri = [[TSServicesManager sharedInstance].uriHandler configUriWithTypeValue:item.imageAdModel.linkData.typeValue objectValue:item.imageAdModel.linkData.objectValue];
+        [[TSServicesManager sharedInstance].uriHandler openURI:uri];
+        NSLog(@"uri:%@",uri);
+        
+//        TSInviteFriendsViewController *vc = [TSInviteFriendsViewController new];
+//        vc.salesmanUuid = self.dataController.merchantUserInformationModel.ucUuid;
+//        [self.navigationController pushViewController:vc animated:YES];
     }
     
     //我的钱包
@@ -311,7 +319,7 @@
     } else if ([sectionModel.items[indexPath.row].identify isEqualToString: @"TSMinePartnerCenterCell"]) {
         return  self.dataController.partnerCenterDataModel;
     } else if ([sectionModel.items[indexPath.row].identify isEqualToString: @"TSMineAdsCell"]) {
-        return  self.dataController.content;
+        return  sectionModel.items.firstObject;
     }   else {
         return sectionModel.items[indexPath.row];
     }

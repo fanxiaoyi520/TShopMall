@@ -7,6 +7,7 @@
 
 #import "TSMineDataController.h"
 
+
 @interface TSMineDataController()
 
 @property (nonatomic, strong) NSMutableArray <TSMineSectionModel *> *sections;
@@ -25,7 +26,8 @@
 @property (nonatomic, strong) TSMineOrderCountModel *orderInfo;
 @property (nonatomic, strong) NSMutableArray <TSProvinceListModel *> *provinceListArray;
 @property (nonatomic, strong) NSMutableArray <TSCityListModel *> *cityListArray;
-@property (nonatomic,copy) NSString* content;
+@property (nonatomic, strong) TSImageBaseModel *imageAdModel;
+
 @end
 
 @implementation TSMineDataController
@@ -68,9 +70,6 @@
                     break;
 
                 case 4:
-                    item.orderCount = self.orderInfo.waitpay;
-                    break;
-                case 5:
                     item.orderCount = self.orderInfo.afterorder;
                     break;
                 default:
@@ -100,12 +99,14 @@
         TSMineSectionAdsItemModel *item = [[TSMineSectionAdsItemModel alloc] init];
         item.cellHeight = 58;
         item.identify = @"TSMineAdsCell";
-
+        item.imageAdModel = self.imageAdModel;
+        
         TSMineSectionModel *section = [[TSMineSectionModel alloc] init];
         section.spacingWithLastSection = 12;
         section.headerName = @"邀请";
         section.sectionInset = UIEdgeInsetsMake(0, 16, 0, 16);
         section.items = @[item];
+        
 //        if ([self.merchantUserInformationModel.salesmanRankLevel isEqualToString:@"1"]) {
         [sections addObject:section];
 //        }
@@ -284,7 +285,6 @@
 {
     NSString *request = [NSString stringWithFormat:@"request%ld",(long)aIndex];
     SEL requestSel = NSSelectorFromString(request);
-    
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
      [(SSGenaralRequest *)[self performSelector:requestSel] startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
@@ -302,10 +302,13 @@
                self.earningModel = [TSMineWalletEarningModel yy_modelWithDictionary:data];
                  self.earningModel.eyeIsOn = YES;
              } else if (aIndex == 4) {
-                 NSLog(@"%@",data);
-                 self.content = [data stringForkey:@"content"];
-                 NSDictionary *dic = [self.content jsonValueDecoded];
-                 NSLog(@"%@",dic.description);
+                 NSArray *contentArr = [[data stringForkey:@"content"] jsonValueDecoded][@"items"];
+                 NSArray <TSHomePageContentModel *> *temp = [NSArray yy_modelArrayWithClass:TSHomePageContentModel.class json:contentArr];
+                 if ([temp.firstObject.type isEqualToString:@"ImageAd"]) {
+                     NSArray <TSImageBaseModel *> *baseModels = [NSArray yy_modelArrayWithClass:TSImageBaseModel.class json:temp.firstObject.data[@"list"]];
+                     self.imageAdModel = baseModels.firstObject;
+                     
+                 }
              } else if (aIndex == 5){
                  self.orderInfo =  [TSMineOrderCountModel yy_modelWithDictionary:data];
              }

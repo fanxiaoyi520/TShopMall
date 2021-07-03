@@ -7,7 +7,7 @@
 
 #import "TSUniversalSectionModel.h"
 #import "TSUniversaItemModel.h"
-
+#import "TSImageBaseModel.h"
 
 @class TSMineSectionItemModel;
 
@@ -34,7 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface TSMineSectionAdsItemModel : TSMineSectionItemModel
-
+@property (nonatomic, strong) TSImageBaseModel *imageAdModel;
 @end
 
 @interface TSMineSectionEarnItemModel : TSMineSectionItemModel

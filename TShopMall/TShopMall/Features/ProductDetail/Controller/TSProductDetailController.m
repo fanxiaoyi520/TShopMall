@@ -451,11 +451,6 @@
 }
 -(void)productDetailBottomView:(TSProductDetailBottomView *_Nullable)bottomView addClick:(TSDetailFunctionButton *_Nullable)sender{
     
-    if ([TSUserLoginManager shareInstance].state == TSLoginStateNone) {
-        [[TSUserLoginManager shareInstance] startLogin];
-        return;
-    }
-    
     __weak __typeof(self)weakSelf = self;
     [self.dataController fetchProductDetailAddProductToCart:self.dataController.productUuid
                                                      buyNum:self.dataController.buyNum
