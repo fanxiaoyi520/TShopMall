@@ -219,6 +219,11 @@
 - (void)goToRegister {
     if (self.navigationController) {
         TSRegiterViewController *registerVC = [[TSRegiterViewController alloc] init];
+        @weakify(self);
+        registerVC.loginBlock = ^{
+            @strongify(self)
+            self.loginBlock();
+        };
         [self.navigationController pushViewController:registerVC animated:YES];
     } else {
         [self dismissViewControllerAnimated:YES completion:nil];
@@ -265,6 +270,7 @@
                 @strongify(self)
                 if (isSucess) {
                     [Popover removePopoverOnWindow];
+                    [self dismissViewControllerAnimated:NO completion:nil];
                     if (self.loginBlock) {
                         self.loginBlock();
                     }

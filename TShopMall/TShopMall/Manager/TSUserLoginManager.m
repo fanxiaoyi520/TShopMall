@@ -16,6 +16,7 @@
 #import "TSLoginRegisterDataController.h"
 #import "TSBindMobileController.h"
 @interface TSUserLoginManager ()
+@property (nonatomic, strong) TSBaseNavigationController *nav;
 
 @end
 
@@ -28,42 +29,6 @@
         [instance registerQuickLogin];
     });
     return instance;
-}
-
-- (void)startLogin{
-    BOOL shouldQL = [[NTESQuickLoginManager sharedInstance] shouldQuickLogin];
-    if (shouldQL) {
-        TSOneClickLoginViewController *oneClickLoginVC = [TSOneClickLoginViewController new];
-        TSBaseNavigationController *nav = [[TSBaseNavigationController alloc] initWithRootViewController:oneClickLoginVC];
-        @weakify(self);
-        oneClickLoginVC.otherLoginBlock = ^{
-            @strongify(self)
-            [self otherLoginWithAnimation:YES];
-        };
-        oneClickLoginVC.loginBlock = ^{
-            self.loginBlock();
-        };
-        oneClickLoginVC.bindBlock = ^{
-            TSBindMobileController *vc = [TSBindMobileController new];
-            TSBaseNavigationController *nav = [[TSBaseNavigationController alloc] initWithRootViewController:vc];
-            
-            vc.bindedBlock = ^{
-                self.loginBlock();
-                
-            };
-            nav.modalPresentationStyle = UIModalPresentationFullScreen;
-            [[UIApplication sharedApplication].delegate.window.rootViewController presentViewController:nav animated:YES completion:^{
-            }];
-        };
-        UIViewController *vc = [UIApplication sharedApplication].delegate.window.rootViewController;
-        nav.modalPresentationStyle = UIModalPresentationFullScreen;
-        [vc presentViewController:nav animated:YES completion:^{
-        }];
-       
-    }else{
-        [self otherLoginWithAnimation:YES];
-    }
-   
 }
 
 - (void)logout{
@@ -93,17 +58,11 @@
     TSLoginViewController *loginViewController = [TSLoginViewController new];
     loginViewController.needClose = YES;
     TSBaseNavigationController *homeController = [[TSBaseNavigationController alloc] initWithRootViewController:loginViewController];
-    loginViewController.loginBlock = ^{
-        self.loginBlock();
-    };
+    loginViewController.loginBlock = self.loginBlock;
     UIViewController *vc = [UIApplication sharedApplication].delegate.window.rootViewController;
     homeController.modalPresentationStyle = UIModalPresentationFullScreen;
     [vc presentViewController:homeController animated:animation completion:^{
     }];
-}
-
-- (void)postNotificationWithLoginState:(TSLoginState)state{
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"TS_LoginUpdateNotification" object:@(state)];
 }
 
 -(void)configLoginController:(void(^)(UIViewController *))callBack{
@@ -115,36 +74,36 @@
         @weakify(self);
         oneClickLoginVC.otherLoginBlock = ^{
             @strongify(self)
-            [self otherLoginWithAnimation:YES];
+            [[NTESQuickLoginManager sharedInstance] closeAuthController:^{
+                [self otherLoginWithAnimation:YES];
+            }];
         };
         oneClickLoginVC.loginBlock = ^{
             @strongify(self)
-            if (self.loginBlock) {
-                self.loginBlock();
-            }
+            [[NTESQuickLoginManager sharedInstance] closeAuthController:^{
+                if (self.loginBlock) {
+                    self.loginBlock();
+                }
+            }];
+            
         };
         oneClickLoginVC.bindBlock = ^{
             
             TSBindMobileController *vc = [TSBindMobileController new];
             TSBaseNavigationController *nav = [[TSBaseNavigationController alloc] initWithRootViewController:vc];
             
-            vc.bindedBlock = ^{
-                self.loginBlock();
-                
-            };
+            vc.bindedBlock = self.loginBlock;
             nav.modalPresentationStyle = UIModalPresentationFullScreen;
             [[UIApplication sharedApplication].delegate.window.rootViewController presentViewController:nav animated:YES completion:^{
             }];
         };
-        callBack(oneClickLoginVC);
+        callBack(nav);
     }else{
-        TSLoginViewController *loginViewController = [TSLoginViewController new];
-        loginViewController.needClose = NO;
-        TSBaseNavigationController *homeController = [[TSBaseNavigationController alloc] initWithRootViewController:loginViewController];
-        loginViewController.loginBlock = ^{
-            self.loginBlock();
-        };
-        callBack(loginViewController);
+        TSLoginViewController *loginVC = [TSLoginViewController new];
+        loginVC.needClose = NO;
+        TSBaseNavigationController *nav = [[TSBaseNavigationController alloc] initWithRootViewController:loginVC];
+        loginVC.loginBlock = self.loginBlock;
+        callBack(nav);
     }
     
 }

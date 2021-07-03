@@ -10,6 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TSRegiterViewController : TSBaseViewController
+@property (nonatomic, copy) void(^ _Nonnull loginBlock)(void);
 
 @end
 

@@ -50,7 +50,8 @@
                 content.OneLevelImg = itemDic[@"OneLevelImg"];
                 content.TwoLevel = itemDic[@"TwoLevel"];
                 content.goodsList = itemDic[@"goodsList"];
-                
+                content.objectValue = itemDic[@"objectValue"];
+                content.typeValue = itemDic[@"typeValue"];
                 [sections addObject:content];
             }
             

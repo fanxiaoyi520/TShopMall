@@ -26,15 +26,15 @@
 
 - (void)addConstraints {
     [self.wechatButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.mas_centerX).with.offset(KRateW(-60));
-        make.width.mas_equalTo(KRateW(30));
-        make.height.mas_equalTo(KRateW(30));
+        make.centerX.equalTo(self.mas_centerX).with.offset(-60);
+        make.width.mas_equalTo(30);
+        make.height.mas_equalTo(30);
         make.top.equalTo(self);
     }];
     [self.appleButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.mas_centerX).with.offset(KRateW(60));
-        make.width.mas_equalTo(KRateW(30));
-        make.height.mas_equalTo(KRateW(30));
+        make.centerX.equalTo(self.mas_centerX).with.offset(60);
+        make.width.mas_equalTo(30);
+        make.height.mas_equalTo(30);
         make.top.equalTo(self);
     }];
 }
