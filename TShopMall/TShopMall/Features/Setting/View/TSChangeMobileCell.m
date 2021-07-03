@@ -314,6 +314,9 @@
 }
 
 - (void)textFieldDidChangeValue:(UITextField *)textField {
+    if (self.mobileTextField.text.length == 0){
+        self.tipsLabel.hidden = YES;
+    }
     if (self.mobileTextField.text.length && [TSTools isPhoneNumber: self.mobileTextField.text]) {
         self.codeButton.enabled = YES;
         if (self.codeTextField.text.length) {
@@ -342,7 +345,7 @@
     [[UIViewController windowCurrentViewController].view endEditing:YES];
     
     [self.dataController fetchChangeBindWithNewMobile:self.mobileTextField.text validCode:self.codeTextField.text success:^{
-        [Popover popToastOnWindowWithText:@"换绑成功"];
+        [Popover popToastOnWindowWithText:@"更换手机号成功"];
         [[UIViewController windowCurrentViewController].navigationController popViewControllerAnimated:YES];
     } failure:^(NSString * _Nonnull errorMsg) {
         if ([errorMsg isEqualToString:@"被绑定的邮箱或者手机号已存在"]) {

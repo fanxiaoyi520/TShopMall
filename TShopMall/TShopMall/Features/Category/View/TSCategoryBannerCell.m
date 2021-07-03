@@ -36,8 +36,12 @@
 }
 
 #pragma mark - SDCycleScrollViewDelegate
--(void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didScrollToIndex:(NSInteger)index{
 
+- (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index{
+    TSCategoryContentModel *model = (TSCategoryContentModel *)self.data;
+    NSString *uri = [[TSServicesManager sharedInstance].uriHandler configUriWithTypeValue:model.typeValue objectValue:model.objectValue];
+    [[TSServicesManager sharedInstance].uriHandler openURI:uri];
+    NSLog(@"uri:%@",uri);
 }
 
 #pragma mark - Getter

@@ -56,7 +56,7 @@
         lab.frame = CGRectMake(16, 74+idx*(38+22), 100, 22);
         
         UIView *lineView = [UIView new];
-        lineView.backgroundColor = KHexAlphaColor(@"#E6E6E6",1);
+        lineView.backgroundColor = KlineColor;
         [self.bgView addSubview:lineView];
         lineView.frame = CGRectMake(25, 115+idx*(1+60), kScreenWidth-50, 1);
         
@@ -128,9 +128,19 @@
 }
 
 - (void)allAmountBtnAction:(UIButton *)sender {
+    
     [self.dataController fetchCheckMyBalanceDataComplete:^(BOOL isSucess) {
         if (isSucess) {
             self.inputTextField.text = [NSString stringWithFormat:@"¥%.2f",(floorf([self.dataController.amount floatValue]))/100];
+            UILabel *taxDeductionAmountLab = [self.bgView viewWithTag:50];//扣税金额
+            UILabel *afterTaxAmountLab = [self.bgView viewWithTag:51];//税后金额
+            CGFloat inputAmount = [[self.inputTextField.text stringByReplacingOccurrencesOfString:@"¥" withString:@"0"] floatValue];//输入金额
+            CGFloat taxDeductionAmount = [self calculationRules:inputAmount];//扣税金额
+            CGFloat afterTaxAmount = inputAmount - taxDeductionAmount;//税后金额
+            taxDeductionAmountLab.text = [NSString stringWithFormat:@"¥%.2f",taxDeductionAmount];
+            afterTaxAmountLab.text = [NSString stringWithFormat:@"¥%.2f",afterTaxAmount];
+
+            
             if (self.inputTextField.text.length > 0) {
                 [self.sureBtn setBackgroundImage:KImageMake(@"btn_large_black_norm1") forState:UIControlStateNormal];
                 self.sureBtn.userInteractionEnabled = YES;
@@ -143,16 +153,25 @@
 }
 
 - (void)sureAction:(UIButton *)sender {
+//    [self dismissViewControllerAnimated:YES completion:^{
+//        if ([self.kDelegate respondsToSelector:@selector(withdrawalApplication:)]) {
+//            [self.kDelegate withdrawalApplication:sender];
+//        }
+//    }];
     self.dataController.bankCardAccountId = self.kDataController.myIncomeModel.bankCardId;
     CGFloat inputAmount = [[self.inputTextField.text stringByReplacingOccurrencesOfString:@"¥" withString:@""] floatValue];//输入金额---转成分
-    self.dataController.withdrawalAmount = [NSString stringWithFormat:@"%f",inputAmount*100];
-    @weakify(self);
-    [self.dataController fetchWithdrawalApplicationDataComplete:^(BOOL isSucess) {
-        @strongify(self);
-        if (isSucess) {
-            [self dismissViewControllerAnimated:YES completion:nil];
-        }
-    }];
+    if (inputAmount*100 >= 100) {
+        self.dataController.withdrawalAmount = [NSString stringWithFormat:@"%f",inputAmount*100];
+        @weakify(self);
+        [self.dataController fetchWithdrawalApplicationDataComplete:^(BOOL isSucess) {
+            @strongify(self);
+            if (isSucess) {
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }
+        }];
+    } else {
+        [Popover popToastOnWindowWithText:@"提现金额必须大于1元"];
+    }
 }
 
 - (void)textFieldAction:(UITextField *)textField {

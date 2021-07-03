@@ -11,6 +11,7 @@
 #import "TSPresentationController.h"
 #import "TSMineDataController.h"
 #import "TSAddCardViewController.h"
+#import "TSInputPasswordViewController.h"
 
 #import "TSWalletHeaderView.h"
 
@@ -93,7 +94,7 @@
 // MARK: TSWalletCellViewDelegate
 - (void)walletCellViewIsBindingAction:(id)sender {
     TSAddCardViewController *vc = [TSAddCardViewController new];
-    vc.popToWhere = MyIncome;
+    vc.isNotice = NO;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -102,9 +103,13 @@
     return [[TSPresentationController alloc] initWithPresentedViewController:presented presentingViewController:presenting];
 }
 
-// MARK:
+// MARK: WithdrawalDelegate
 - (void)withdrawalApplication:(id _Nullable)sender {
-    [Popover popToastOnWindowWithText:@"申请成功"];
+    //[Popover popToastOnWindowWithText:@"申请成功"];
+    TSInputPasswordViewController *vc = [TSInputPasswordViewController new];
+    vc.modalPresentationStyle = UIModalPresentationCustom;
+    vc.transitioningDelegate = self;
+    [self presentViewController:vc animated:YES completion:nil];
 }
 
 // MARK: get

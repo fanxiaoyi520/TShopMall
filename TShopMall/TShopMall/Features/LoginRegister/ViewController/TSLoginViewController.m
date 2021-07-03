@@ -219,6 +219,11 @@
 - (void)goToRegister {
     if (self.navigationController) {
         TSRegiterViewController *registerVC = [[TSRegiterViewController alloc] init];
+        @weakify(self);
+        registerVC.loginBlock = ^{
+            @strongify(self)
+            self.loginBlock();
+        };
         [self.navigationController pushViewController:registerVC animated:YES];
     } else {
         [self dismissViewControllerAnimated:YES completion:nil];
@@ -255,21 +260,28 @@
     [Popover popProgressOnWindowWithProgressModel:[Popover defaultConfig] appearBlock:^(id frontView) {
         
     }];
-    
     @weakify(self);
-    [[TSServicesManager sharedInstance].acconutService fetchQuickLoginUsername:[self.topView getPhoneNumber]
-                                       validCode:[self.topView getCode]
-                                        complete:^(BOOL isSucess) {
-        @strongify(self)
+    [[TSServicesManager sharedInstance].acconutService fetchCheckSalesmanWithMobile:[self.topView getPhoneNumber] complete:^(BOOL isSucess) {
         if (isSucess) {
-            [Popover removePopoverOnWindow];
-            
-            if (self.loginBlock) {
-                self.loginBlock();
-            }
+            [[TSServicesManager sharedInstance].acconutService fetchQuickLoginUsername:[self.topView getPhoneNumber]
+                                                                             validCode:[self.topView getCode]
+                                                                              complete:^(BOOL isSucess)
+            {
+                @strongify(self)
+                if (isSucess) {
+                    [Popover removePopoverOnWindow];
+                    [self dismissViewControllerAnimated:NO completion:nil];
+                    if (self.loginBlock) {
+                        self.loginBlock();
+                    }
+                }
+            }];
         }
-        
     }];
+    
+    
+   
+    
 }
 
 - (void)inputDoneAction {

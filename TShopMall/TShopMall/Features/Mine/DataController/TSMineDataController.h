@@ -20,7 +20,8 @@
 #import "TSMineOrderCountModel.h"
 #import "TSProvinceListModel.h"
 #import "TSCityListModel.h"
-
+#import "TSImageBaseModel.h"
+#import "TSHomePageContentModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSInteger, RequestMethod){
@@ -71,10 +72,9 @@ typedef NS_ENUM(NSInteger, RequestMethod){
 @property (nonatomic, strong, readonly) NSMutableArray <TSProvinceListModel *> *provinceListArray;
 @property (nonatomic, strong, readonly) NSMutableArray <TSCityListModel *> *cityListArray;
 
+
 //订单数
 @property (nonatomic, strong, readonly) TSMineOrderCountModel *orderInfo;
-//html富文本
-@property (nonatomic,copy,readonly) NSString* content;
 
 -(void)fetchMineContentsComplete:(void(^)(BOOL isSucess))complete;
 -(void)fetchDataComplete:(void(^)(BOOL isSucess))complete;

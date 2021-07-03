@@ -6,7 +6,8 @@
 //
 
 #import "TSMineAdsCell.h"
-
+#import "TSImageBaseModel.h"
+#import "TSMineSectionModel.h"
 @interface TSMineAdsCell()
 
 @property(nonatomic, strong) UIImageView *adsImageView;
@@ -25,19 +26,27 @@
 }
 
 - (void)setDelegate:(id<UniversalCollectionViewCellDataDelegate>)delegate {
-   NSString *content = [delegate universalCollectionViewCellModel:self.indexPath];
-    if (content.length > 0 ) { //^http://([\\w-]+.)+[\\w-]+(/[\\w-./?%&=])?$
-        NSError *error;
-        NSRegularExpression *regular = [NSRegularExpression regularExpressionWithPattern:@"(https{1}|http{1})://([\\w-]+.)+[\\w-]+(/[\\w-./?%&=])?" options: NSRegularExpressionCaseInsensitive | NSRegularExpressionAnchorsMatchLines
-                                                                                   error:&error];
-      
-       NSRange matchRange = [regular rangeOfFirstMatchInString:content options:0 range:NSMakeRange(0, content.length)];
-        if (matchRange.location != NSNotFound) {
-            NSString *url = [content substringWithRange:matchRange];
-            [_adsImageView sd_setImageWithURL:[NSURL URLWithString:url]];
-        }
-       
+
+    TSMineSectionAdsItemModel *item = [delegate universalCollectionViewCellModel:self.indexPath];
+    if (item.imageAdModel) {
+        CGFloat height = (kScreenWidth-32)/(CGFloat)item.imageAdModel.imageData.width * item.imageAdModel.imageData.height;
+        item.cellHeight = height;
+        [self collectionViewReloadCell];
+        [_adsImageView sd_setImageWithURL:[NSURL URLWithString:item.imageAdModel.imageData.url]];
     }
+    
+//    if (content.length > 0 ) { //^http://([\\w-]+.)+[\\w-]+(/[\\w-./?%&=])?$
+//        NSError *error;
+//        NSRegularExpression *regular = [NSRegularExpression regularExpressionWithPattern:@"(https{1}|http{1})://([\\w-]+.)+[\\w-]+(/[\\w-./?%&=])?" options: NSRegularExpressionCaseInsensitive | NSRegularExpressionAnchorsMatchLines
+//                                                                                   error:&error];
+//
+//       NSRange matchRange = [regular rangeOfFirstMatchInString:content options:0 range:NSMakeRange(0, content.length)];
+//        if (matchRange.location != NSNotFound) {
+//            NSString *url = [content substringWithRange:matchRange];
+//            [_adsImageView sd_setImageWithURL:[NSURL URLWithString:url]];
+//        }
+//
+//    }
    
 }
 

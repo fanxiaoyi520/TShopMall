@@ -292,6 +292,7 @@
 		CE5674B726833A5000252F5D /* TSWalletHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5674B626833A5000252F5D /* TSWalletHeaderView.m */; };
 		CE5674BB2683570300252F5D /* TSWalletModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5674BA2683570300252F5D /* TSWalletModel.m */; };
 		CE5C706D2689DA4100D455DB /* TSMyIncomeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5C706C2689DA4100D455DB /* TSMyIncomeModel.m */; };
+		CE5C8C54268EE8F20063B470 /* TSInputPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5C8C53268EE8F20063B470 /* TSInputPasswordViewController.m */; };
 		CE6361D9268C3A2900606E02 /* TSDropDownView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6361D8268C3A2900606E02 /* TSDropDownView.m */; };
 		CE6361DC268C508400606E02 /* TSBranchCardModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6361DB268C508400606E02 /* TSBranchCardModel.m */; };
 		CE63BFA5268D603500D00720 /* TSSelectAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE63BFA4268D603500D00720 /* TSSelectAddressViewController.m */; };
@@ -351,6 +352,7 @@
 		DCA035DD2681ACC8003DE5F7 /* TSLogoutRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA035DC2681ACC8003DE5F7 /* TSLogoutRequest.m */; };
 		DCA035F8268355D2003DE5F7 /* TSServicesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA035F7268355D2003DE5F7 /* TSServicesManager.m */; };
 		DCA035FB2683578C003DE5F7 /* NSObject+TSProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA035FA2683578C003DE5F7 /* NSObject+TSProperty.m */; };
+		DF25A6EA268EFEEC00AAEA3B /* UIView+CMSDrawLine.m in Sources */ = {isa = PBXBuildFile; fileRef = DF25A6E8268EFEEC00AAEA3B /* UIView+CMSDrawLine.m */; };
 		DFB30000268AEE7700FC8FF9 /* TSOneRowsGoodsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB3FFFF268AEE7700FC8FF9 /* TSOneRowsGoodsCollectionViewCell.m */; };
 		DFB30003268AF5D600FC8FF9 /* TSCategoryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB30002268AF5D600FC8FF9 /* TSCategoryDetailViewController.m */; };
 		DFB30007268B3ECB00FC8FF9 /* TSCategoryContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB30006268B3ECB00FC8FF9 /* TSCategoryContainerViewController.m */; };
@@ -1156,6 +1158,8 @@
 		CE5674BA2683570300252F5D /* TSWalletModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSWalletModel.m; sourceTree = "<group>"; };
 		CE5C706B2689DA4100D455DB /* TSMyIncomeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSMyIncomeModel.h; sourceTree = "<group>"; };
 		CE5C706C2689DA4100D455DB /* TSMyIncomeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSMyIncomeModel.m; sourceTree = "<group>"; };
+		CE5C8C52268EE8F20063B470 /* TSInputPasswordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSInputPasswordViewController.h; sourceTree = "<group>"; };
+		CE5C8C53268EE8F20063B470 /* TSInputPasswordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSInputPasswordViewController.m; sourceTree = "<group>"; };
 		CE6361D7268C3A2900606E02 /* TSDropDownView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSDropDownView.h; sourceTree = "<group>"; };
 		CE6361D8268C3A2900606E02 /* TSDropDownView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSDropDownView.m; sourceTree = "<group>"; };
 		CE6361DA268C508400606E02 /* TSBranchCardModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSBranchCardModel.h; sourceTree = "<group>"; };
@@ -1279,6 +1283,8 @@
 		DCA035F7268355D2003DE5F7 /* TSServicesManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSServicesManager.m; sourceTree = "<group>"; };
 		DCA035F92683578C003DE5F7 /* NSObject+TSProperty.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+TSProperty.h"; sourceTree = "<group>"; };
 		DCA035FA2683578C003DE5F7 /* NSObject+TSProperty.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+TSProperty.m"; sourceTree = "<group>"; };
+		DF25A6E8268EFEEC00AAEA3B /* UIView+CMSDrawLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CMSDrawLine.m"; sourceTree = "<group>"; };
+		DF25A6E9268EFEEC00AAEA3B /* UIView+CMSDrawLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CMSDrawLine.h"; sourceTree = "<group>"; };
 		DFB30001268AF5D600FC8FF9 /* TSCategoryDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSCategoryDetailViewController.h; sourceTree = "<group>"; };
 		DFB30002268AF5D600FC8FF9 /* TSCategoryDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSCategoryDetailViewController.m; sourceTree = "<group>"; };
 		DFB30005268B3ECB00FC8FF9 /* TSCategoryContainerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSCategoryContainerViewController.h; sourceTree = "<group>"; };
@@ -2630,6 +2636,8 @@
 				CE4F6BD32685CEF200812275 /* TSSelectorViewController.m */,
 				CE63BFA3268D603500D00720 /* TSSelectAddressViewController.h */,
 				CE63BFA4268D603500D00720 /* TSSelectAddressViewController.m */,
+				CE5C8C52268EE8F20063B470 /* TSInputPasswordViewController.h */,
+				CE5C8C53268EE8F20063B470 /* TSInputPasswordViewController.m */,
 			);
 			path = Wallet;
 			sourceTree = "<group>";
@@ -2977,6 +2985,8 @@
 		F530CC6C26803FCD009DC29A /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
+				DF25A6E9268EFEEC00AAEA3B /* UIView+CMSDrawLine.h */,
+				DF25A6E8268EFEEC00AAEA3B /* UIView+CMSDrawLine.m */,
 				04651733268C8C32000829C2 /* UIViewController+Plugin.h */,
 				04651734268C8C32000829C2 /* UIViewController+Plugin.m */,
 				F530CC7326803FCD009DC29A /* UIAlertController+Color.h */,
@@ -4856,6 +4866,7 @@
 				F530CC3C26803862009DC29A /* NSTimer+TSBlcokTimer.m in Sources */,
 				F530CCA726803FCD009DC29A /* UIControl+RepeatClick.m in Sources */,
 				F530CE8D26846BE0009DC29A /* TSToolsManager.m in Sources */,
+				DF25A6EA268EFEEC00AAEA3B /* UIView+CMSDrawLine.m in Sources */,
 				F54973612668A22100181E3F /* SSBaseRequest.m in Sources */,
 				C24A69BB26896ADE0022A81F /* TSPayTimeView.m in Sources */,
 				04F1EFAD2682D22100FF007D /* TSRealnameInfoSectionModel.m in Sources */,
@@ -4917,6 +4928,7 @@
 				F549739E2668AABD00181E3F /* TSInterfacedConst.m in Sources */,
 				DFB3FFB42682E4B300FC8FF9 /* NTESQLHomePageCustomUIModel.m in Sources */,
 				04651735268C8C32000829C2 /* UIViewController+Plugin.m in Sources */,
+				CE5C8C54268EE8F20063B470 /* TSInputPasswordViewController.m in Sources */,
 				F55D2AD0266F5F53006BACCF /* TSHomePageBannerCell.m in Sources */,
 				C3A6C478267A1BEA00FC71D6 /* TSSecurityViewController.m in Sources */,
 				70EBC074268C0DC0009D735B /* UIView+AZGradient.m in Sources */,

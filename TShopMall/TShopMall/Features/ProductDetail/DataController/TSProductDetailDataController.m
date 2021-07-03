@@ -49,11 +49,22 @@
                                                                requestHeader:@{}
                                                                  requestBody:params
                                                               needErrorToast:NO];
-    [request startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
+    [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+        
+        if (isRequired) {
+            dispatch_group_leave(group);
+        }
+        
+        if (!request.responseModel.isSucceed) {
+            self.errorMsg = request.responseJSONObject[@"message"];
+            complete(NO);
+            return;
+        }
         
         NSMutableArray *urls = [NSMutableArray array];
         
         NSDictionary *data = request.responseJSONObject[@"data"];
+        
         NSDictionary *productModel = data[@"productModel"];
         NSDictionary *productSku = data[@"productSku"];
         self.skuNo = productSku[@"skuNo"];
@@ -65,13 +76,17 @@
             NSDictionary *productImage = productModel[@"productImage"];
             NSArray *productMultiImage = productModel[@"productMultiImage"];
             
-            [urls addObject:productImage[@"bigImageUrl"]];
-            
-            self.bigImageUrl = productImage[@"bigImageUrl"];
-            
+            if (![productImage[@"bigImageUrl"] isKindOfClass:[NSNull class]]) {
+                [urls addObject:productImage[@"bigImageUrl"]];
+                self.bigImageUrl = productImage[@"bigImageUrl"];
+            }
+
             for (NSDictionary *dic in productMultiImage) {
                 NSString *basicImageUrl = dic[@"basicImageUrl"];
-                [urls addObject:basicImageUrl];
+                
+                if (![basicImageUrl isKindOfClass:[NSNull class]]) {
+                    [urls addObject:basicImageUrl];
+                }
             }
             TSGoodDetailSectionModel *section = self.sections[0];
             TSGoodDetailItemBannerModel *item = (TSGoodDetailItemBannerModel *)[section.items firstObject];
@@ -85,19 +100,24 @@
             NSArray *productSku = productModel[@"productSku"];
             NSDictionary *productSkuDic = [productSku firstObject];
             
-            self.attrId = font[@"skuNo"];
+            if (![font[@"skuNo"] isKindOfClass:[NSNull class]]) {
+                self.attrId = font[@"skuNo"];
+            }
+            
             TSGoodDetailSectionModel *section = self.sections[1];
             TSGoodDetailItemPriceModel *item = (TSGoodDetailItemPriceModel *)[section.items firstObject];
-            item.marketPrice = promotionInteactiveModel[@"marketPrice"];
-            item.staffPrice = promotionInteactiveModel[@"staffPrice"];
-            item.earnMost = productSkuDic[@"earnMost"];
+            
+            item.marketPrice = [promotionInteactiveModel objectForKey:@"marketPrice"];
+            item.staffPrice = [promotionInteactiveModel objectForKey:@"staffPrice"];
+            item.earnMost = [productSkuDic objectForKey:@"earnMost"];
         }
         
         {   //卖点
             
             NSDictionary *productMain = productModel[@"productMain"];
-            NSString *productName = productMain[@"productName"];
-            NSString *adviceNote = productMain[@"adviceNote"];
+    
+            NSString *productName = [productMain objectForKey:@"productName"];
+            NSString *adviceNote = [productMain objectForKey:@"adviceNote"];
             
             if ([adviceNote isKindOfClass:[NSNull class]]) {
                 adviceNote = @"";
@@ -189,10 +209,6 @@
                 NSMutableArray *items = [self detailImageModelsWithJsonString:descriptionJson];
                 section.items = items;
             }
-        }
-        
-        if (isRequired) {
-            dispatch_group_leave(group);
         }
         
         if (complete) {

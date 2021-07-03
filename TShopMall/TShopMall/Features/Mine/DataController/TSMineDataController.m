@@ -7,6 +7,7 @@
 
 #import "TSMineDataController.h"
 
+
 @interface TSMineDataController()
 
 @property (nonatomic, strong) NSMutableArray <TSMineSectionModel *> *sections;
@@ -25,7 +26,8 @@
 @property (nonatomic, strong) TSMineOrderCountModel *orderInfo;
 @property (nonatomic, strong) NSMutableArray <TSProvinceListModel *> *provinceListArray;
 @property (nonatomic, strong) NSMutableArray <TSCityListModel *> *cityListArray;
-@property (nonatomic,copy) NSString* content;
+@property (nonatomic, strong) TSImageBaseModel *imageAdModel;
+
 @end
 
 @implementation TSMineDataController
@@ -68,9 +70,6 @@
                     break;
 
                 case 4:
-                    item.orderCount = self.orderInfo.waitpay;
-                    break;
-                case 5:
                     item.orderCount = self.orderInfo.afterorder;
                     break;
                 default:
@@ -100,12 +99,14 @@
         TSMineSectionAdsItemModel *item = [[TSMineSectionAdsItemModel alloc] init];
         item.cellHeight = 58;
         item.identify = @"TSMineAdsCell";
-
+        item.imageAdModel = self.imageAdModel;
+        
         TSMineSectionModel *section = [[TSMineSectionModel alloc] init];
         section.spacingWithLastSection = 12;
         section.headerName = @"邀请";
         section.sectionInset = UIEdgeInsetsMake(0, 16, 0, 16);
         section.items = @[item];
+        
 //        if ([self.merchantUserInformationModel.salesmanRankLevel isEqualToString:@"1"]) {
         [sections addObject:section];
 //        }
@@ -284,7 +285,6 @@
 {
     NSString *request = [NSString stringWithFormat:@"request%ld",(long)aIndex];
     SEL requestSel = NSSelectorFromString(request);
-    
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
      [(SSGenaralRequest *)[self performSelector:requestSel] startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
@@ -302,8 +302,13 @@
                self.earningModel = [TSMineWalletEarningModel yy_modelWithDictionary:data];
                  self.earningModel.eyeIsOn = YES;
              } else if (aIndex == 4) {
-                 NSLog(@"%@",data);
-                 self.content = [data stringForkey:@"content"];
+                 NSArray *contentArr = [[data stringForkey:@"content"] jsonValueDecoded][@"items"];
+                 NSArray <TSHomePageContentModel *> *temp = [NSArray yy_modelArrayWithClass:TSHomePageContentModel.class json:contentArr];
+                 if ([temp.firstObject.type isEqualToString:@"ImageAd"]) {
+                     NSArray <TSImageBaseModel *> *baseModels = [NSArray yy_modelArrayWithClass:TSImageBaseModel.class json:temp.firstObject.data[@"list"]];
+                     self.imageAdModel = baseModels.firstObject;
+                     
+                 }
              } else if (aIndex == 5){
                  self.orderInfo =  [TSMineOrderCountModel yy_modelWithDictionary:data];
              }
@@ -403,6 +408,7 @@
     
     return request;
 }
+
 // MARK: 我的钱包
 - (void)fetchMineWalletDataComplete:(void(^)(BOOL isSucess))complete {
     SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kMineWalletData
@@ -416,14 +422,13 @@
             NSDictionary *data = request.responseModel.data;
             TSWalletModel *model = [TSWalletModel yy_modelWithDictionary:data];
             self.walletModel = model;
-        }
-        if (complete) {
             complete(YES);
-        }
-    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-        if (complete) {
+        } else {
+            [Popover popToastOnWindowWithText:request.responseModel.responseMsg];
             complete(NO);
         }
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+            complete(NO);
     }];
 }
 
@@ -440,25 +445,25 @@
             NSDictionary *data = request.responseModel.data;
             TSMyIncomeModel *model = [TSMyIncomeModel yy_modelWithDictionary:data];
             self.myIncomeModel = model;
-        }
-        if (complete) {
             complete(YES);
-        }
-    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-        if (complete) {
+        } else {
+            [Popover popToastOnWindowWithText:request.responseModel.responseMsg];
             complete(NO);
         }
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+            complete(NO);
     }];
 }
 
 // MARK: 提现申请
 - (void)fetchWithdrawalApplicationDataComplete:(void(^)(BOOL isSucess))complete {
     NSMutableDictionary *body = [NSMutableDictionary dictionary];
-    [body setValue:self.withdrawalAmount forKey:@"withdrawalAmount"];
+    
+    [body setValue:@([self.withdrawalAmount integerValue]) forKey:@"withdrawalAmount"];
     [body setValue:self.bankCardAccountId forKey:@"bankCardAccountId"];
     SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kMineWithdrawalApply
                                                                requestMethod:YTKRequestMethodPOST
-                                                       requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON
+                                                       requestSerializerType:YTKRequestSerializerTypeJSON responseSerializerType:YTKResponseSerializerTypeJSON
                                                                requestHeader:NSDictionary.dictionary
                                                                  requestBody:body
                                                               needErrorToast:YES];
@@ -506,14 +511,13 @@
                 [self.withdrawalRecordArray addObjectsFromArray:array];
                 if (array.count<10) self.pageNo = 1;
             }
-        }
-        if (complete) {
             complete(YES);
-        }
-    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-        if (complete) {
+        } else {
+            [Popover popToastOnWindowWithText:request.responseModel.responseMsg];
             complete(NO);
         }
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        complete(NO);
     }];
 }
 
@@ -527,8 +531,6 @@
     }
     NSMutableDictionary *body = [NSMutableDictionary dictionary];
     [body setValue:@(1) forKey:@"pageNo"];
-    if (self.requestMethod == Ordinary)
-        [self.bankCardArray removeAllObjects];
     SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kMineQueryAppBankCardAccountList
                                                                requestMethod:YTKRequestMethodGET
                                                        requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON
@@ -543,14 +545,12 @@
                 TSBankCardModel *model = [TSBankCardModel yy_modelWithDictionary:(NSDictionary *)obj];
                 [array addObject:model];
             }];
-            if (self.requestMethod == Refresh || self.requestMethod == Ordinary) {
-                self.bankCardArray = array;
-            } else {
-                [self.bankCardArray addObjectsFromArray:array];
-                if (array.count<10) self.pageNo = 1;
-            }
+            self.bankCardArray = array;
+            complete(YES);
+        } else {
+            [Popover popToastOnWindowWithText:request.responseModel.responseMsg];
+            complete(NO);
         }
-        complete(YES);
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
         complete(NO);
     }];
@@ -560,8 +560,8 @@
 - (void)fetchAddToBankCardDataComplete:(void(^)(BOOL isSucess))complete {
     NSMutableDictionary *body = [NSMutableDictionary dictionary];
     [body setValue:self.addBankCardModel.bankCardNo forKey:@"bankCardNo"];
-    [body setValue:self.addBankCardBackModel.bankName forKey:@"accountBank"];
-    [body setValue:self.addBankCardBackModel.accountBankCode forKey:@"accountBankCode"];
+    [body setValue:self.addBankCardModel.accountBank forKey:@"accountBank"];
+    [body setValue:self.addBankCardModel.accountBankCode forKey:@"accountBankCode"];
     [body setValue:self.addBankCardModel.userName forKey:@"userName"];
     [body setValue:self.addBankCardModel.bankName forKey:@"bankName"];
     [body setValue:self.addBankCardModel.bankBranchId forKey:@"bankBranchId"];
@@ -571,7 +571,7 @@
     [body setValue:self.addBankCardModel.bankAddressCityCode forKey:@"bankAddressCityCode"];
     SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kMineAddBankCardAccount
                                                                requestMethod:YTKRequestMethodPOST
-                                                       requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON
+                                                       requestSerializerType:YTKRequestSerializerTypeJSON responseSerializerType:YTKResponseSerializerTypeJSON
                                                                requestHeader:NSDictionary.dictionary
                                                                  requestBody:body
                                                               needErrorToast:YES];
@@ -579,8 +579,11 @@
 
         if (request.responseModel.isSucceed) {
             NSDictionary *data = request.responseModel.data;
+            complete(YES);
+        } else {
+            [Popover popToastOnWindowWithText:request.responseModel.responseMsg];
+            complete(NO);
         }
-        complete(YES);
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
         complete(NO);
     }];
@@ -603,6 +606,7 @@
             self.addBankCardBackModel = model;
             complete(YES);
         } else {
+            [Popover popToastOnWindowWithText:request.responseModel.responseMsg];
             complete(NO);
         }
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
@@ -629,8 +633,11 @@
                 [array addObject:model];
             }];
             self.branchCardArray = array;
+            complete(YES);
+        } else {
+            [Popover popToastOnWindowWithText:request.responseModel.responseMsg];
+            complete(NO);
         }
-        complete(YES);
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
         complete(NO);
     }];
@@ -651,8 +658,11 @@
             NSDictionary *data = request.responseModel.data;
             TSAddBankCardBackModel *model = [TSAddBankCardBackModel yy_modelWithDictionary:data];
             self.addBankCardBackModel = model;
+            complete(YES);
+        } else {
+            [Popover popToastOnWindowWithText:request.responseModel.responseMsg];
+            complete(NO);
         }
-        complete(YES);
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
         complete(NO);
     }];
@@ -670,8 +680,11 @@
         if (request.responseModel.isSucceed) {
             NSString *data = request.responseModel.data;
             self.amount = data;
+            complete(YES);
+        } else {
+            [Popover popToastOnWindowWithText:request.responseModel.responseMsg];
+            complete(NO);
         }
-        complete(YES);
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
         complete(NO);
     }];
@@ -679,14 +692,11 @@
 
  // MARK: 查询银行列表
  - (void)fetchQueryBankDataComplete:(void(^)(BOOL isSucess))complete {
-    NSMutableDictionary *body = [NSMutableDictionary dictionary];
-    [body setValue:@"北京银行" forKey:@"bankName"];
-    [body setValue:@(1) forKey:@"pageNo"];
     SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kMineGetBankNames
                                                                 requestMethod:YTKRequestMethodGET
                                                         requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON
                                                                 requestHeader:NSDictionary.dictionary
-                                                                  requestBody:body
+                                                                  requestBody:NSDictionary.dictionary
                                                                needErrorToast:YES];
     NSMutableArray *array = [NSMutableArray array];
     [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
@@ -700,6 +710,7 @@
              self.addBankCardBackArray = array;
              complete(YES);
          } else {
+             [Popover popToastOnWindowWithText:request.responseModel.responseMsg];
              complete(NO);
          }
      } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
@@ -727,6 +738,7 @@
             self.provinceListArray = [array1 mutableCopy];
              complete(YES);
          } else {
+             [Popover popToastOnWindowWithText:request.responseModel.responseMsg];
              complete(NO);
          }
      } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
@@ -753,10 +765,11 @@
                  [array addObject:model];
              }];
             NSArray<TSProvinceListModel *> *array1 = [self getOrderArraywithArray:array];
-            self.provinceListArray = array;
+            self.provinceListArray = [array1 mutableCopy];
             complete(YES);
          } else {
-            complete(NO);
+             [Popover popToastOnWindowWithText:request.responseModel.responseMsg];
+             complete(NO);
          }
      } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
          complete(NO);

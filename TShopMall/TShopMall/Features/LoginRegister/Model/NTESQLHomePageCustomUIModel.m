@@ -78,7 +78,8 @@
         [customView addSubview:weChatButton];
         [customView addSubview:appleButton];
 
-        [@[weChatButton, appleButton] mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:100 leadSpacing:108 tailSpacing:108];
+        CGFloat margin = kScreenWidth - 100 - 30 * 2;
+        [@[weChatButton, appleButton] mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:100 leadSpacing:margin/2 tailSpacing:margin/2];
         // 设置array的垂直方向的约束
         [@[weChatButton, appleButton] mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(customView.mas_bottom).offset(-135);

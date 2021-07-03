@@ -9,8 +9,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TSRankRecommendCell : TSTableViewBaseCell
+@protocol TSRankRecommendCellDelegate <NSObject>
 
+- (void)didSelectRowAtCell:(id)selectItem index:(NSInteger)index;
+
+@end
+
+@interface TSRankRecommendCell : TSTableViewBaseCell
+@property (nonatomic, weak) id<TSRankRecommendCellDelegate> delegate;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -9,8 +9,10 @@
 #import "TSTableViewBaseCell.h"
 #import "TSRankHeaderView.h"
 #import "TSPersonalRankView.h"
+#import "TSProductDetailController.h"
+#import "TSRankRecommendCell.h"
 
-@interface TSRankMonthViewController ()<UITableViewDelegate, UITableViewDataSource>
+@interface TSRankMonthViewController ()<UITableViewDelegate, UITableViewDataSource, TSRankRecommendCellDelegate>
 
 @property (nonatomic, strong) UIImageView * background_imgView;
 
@@ -91,15 +93,32 @@
     Class className = NSClassFromString(item.identify);
     [tableView registerClass:[className class] forCellReuseIdentifier:item.identify];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:item.identify forIndexPath:indexPath];
+    
     if ([cell isKindOfClass:TSTableViewBaseCell.class]) {
         TSTableViewBaseCell *contentCell = (TSTableViewBaseCell *)cell;
         contentCell.indexPath = indexPath;
         contentCell.cellSuperViewTableView = self.tableView;
         contentCell.data = item;
     }
+    
+    if ([cell isKindOfClass:TSRankRecommendCell.class]) {
+        TSRankRecommendCell *contentCell = (TSRankRecommendCell *)cell;
+        contentCell.delegate = self;
+    }
+    
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
+}
+
+// 点击热销
+- (void)didSelectRowAtCell:(id)selectItem index:(NSInteger)index {
+    id<TSRecomendGoodsProtocol> item = selectItem;
+    NSLog(@"%@-%ld", item, index);
+    
+    TSProductDetailController *detail = [[TSProductDetailController alloc] init];
+    detail.uuid = item.uuid;
+    [self.navigationController pushViewController:detail animated:YES];
 }
 
 //- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

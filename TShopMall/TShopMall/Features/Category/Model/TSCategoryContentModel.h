@@ -10,7 +10,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TSCategoryContentModel : NSObject
-
+@property(nonatomic, copy) NSString *typeValue;
+@property(nonatomic, copy) NSString *objectValue;
 @property(nonatomic, copy) NSString *OneLevelTitle;
 @property(nonatomic, copy) NSString *OneLevelImg;
 @property(nonatomic, strong) NSArray *TwoLevel;

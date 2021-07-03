@@ -28,8 +28,10 @@
     responseModel.code = response[@"code"];
     if (response[@"responseMsg"]) {
         responseModel.responseMsg = response[@"responseMsg"];
-    } else {
+    } else if (response[@"message"]){
         responseModel.responseMsg = response[@"message"];
+    } else {
+        responseModel.responseMsg = response[@"msg"];
     }
     responseModel.data = response[@"data"];
     responseModel.originalData = response;

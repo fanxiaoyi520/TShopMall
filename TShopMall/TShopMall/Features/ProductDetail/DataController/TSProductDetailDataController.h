@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TSProductDetailDataController : TSBaseDataController
 
+@property(nonatomic, copy) NSString *errorMsg;
+
 /// 商品主图
 @property(nonatomic, copy) NSString *bigImageUrl;
 

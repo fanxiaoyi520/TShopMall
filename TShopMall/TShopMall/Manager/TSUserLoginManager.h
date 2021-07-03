@@ -21,7 +21,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) void(^ _Nonnull loginBlock)(void);
 @property (nonatomic, copy) void(^ _Nonnull logoutBlock)(void);
 
--(void)startLogin;
 -(void)logout;
 -(void)configLoginController:(void(^)(UIViewController *))callBack;
 

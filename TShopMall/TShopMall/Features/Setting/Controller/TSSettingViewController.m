@@ -152,6 +152,9 @@
     } else if (indexPath.section == 1 && indexPath.item == 0) {///账号安全
         TSSecurCenterViewController *personalVC = [[TSSecurCenterViewController alloc] init];
         [self.navigationController pushViewController:personalVC animated:YES];
+    } else if (indexPath.section == 1 && indexPath.item == 1) {
+        UIViewController *con = [NSClassFromString(@"TSShippingAddressController") new];
+        [self.navigationController pushViewController:con animated:YES];
         return;
     } else if (indexPath.section == 1 && indexPath.item == 1) {///地址管理
         TSShippingAddressController *addressVC = [[TSShippingAddressController alloc] init];
