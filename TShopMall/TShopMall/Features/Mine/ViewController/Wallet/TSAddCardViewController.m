@@ -290,11 +290,6 @@
 }
 
 - (void)addBankCardFooterSureAction:(id _Nullable)sender {
-//    TSOperationBankTipsViewController *vc = [TSOperationBankTipsViewController new];
-//    vc.kNavTitle = @"添加银行卡";
-//    vc.isNotice = self.isNotice;
-//    [self.navigationController pushViewController:vc animated:YES];
-//
     if (![self checkAllParameter:YES]) return;
 
     self.dataController.addBankCardModel = self.model;

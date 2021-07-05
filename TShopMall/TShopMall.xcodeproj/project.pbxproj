@@ -301,6 +301,7 @@
 		CE5C8C54268EE8F20063B470 /* TSInputPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5C8C53268EE8F20063B470 /* TSInputPasswordViewController.m */; };
 		CE5C8C57269058EF0063B470 /* NNValidationCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5C8C56269058EF0063B470 /* NNValidationCodeView.m */; };
 		CE5C8C5A2692D3BA0063B470 /* TSUnbundlingCardViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5C8C592692D3BA0063B470 /* TSUnbundlingCardViewCell.m */; };
+		CE5C8C5C2692F0C70063B470 /* Bank.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE5C8C5B2692F0C70063B470 /* Bank.plist */; };
 		CE6361D9268C3A2900606E02 /* TSDropDownView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6361D8268C3A2900606E02 /* TSDropDownView.m */; };
 		CE6361DC268C508400606E02 /* TSBranchCardModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6361DB268C508400606E02 /* TSBranchCardModel.m */; };
 		CE63BFA5268D603500D00720 /* TSSelectAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE63BFA4268D603500D00720 /* TSSelectAddressViewController.m */; };
@@ -385,7 +386,6 @@
 		DFB3FFEF2686E60C00FC8FF9 /* TSURLRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB3FFEE2686E60C00FC8FF9 /* TSURLRouter.m */; };
 		DFB3FFF326899EF300FC8FF9 /* TSTableViewBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB3FFF226899EF300FC8FF9 /* TSTableViewBaseCell.m */; };
 		DFB3FFF62689A7AE00FC8FF9 /* TSRankRecommendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB3FFF52689A7AE00FC8FF9 /* TSRankRecommendCell.m */; };
-		DFB3FFF92689C1AA00FC8FF9 /* TSMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB3FFF82689C1AA00FC8FF9 /* TSMainViewController.m */; };
 		DFB3FFFD268AB6EF00FC8FF9 /* TSJsonCacheData.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB3FFFC268AB6EF00FC8FF9 /* TSJsonCacheData.m */; };
 		E2BE996F8804E0C3E7D5AE61 /* libPods-TShopMall-TShopMallUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD1ABBE857D307088E9BF2DC /* libPods-TShopMall-TShopMallUITests.a */; };
 		F530C6D526802E5D009DC29A /* TSSMSCodeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F530C6CC26802E5D009DC29A /* TSSMSCodeRequest.m */; };
@@ -1184,6 +1184,7 @@
 		CE5C8C56269058EF0063B470 /* NNValidationCodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNValidationCodeView.m; sourceTree = "<group>"; };
 		CE5C8C582692D3BA0063B470 /* TSUnbundlingCardViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSUnbundlingCardViewCell.h; sourceTree = "<group>"; };
 		CE5C8C592692D3BA0063B470 /* TSUnbundlingCardViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSUnbundlingCardViewCell.m; sourceTree = "<group>"; };
+		CE5C8C5B2692F0C70063B470 /* Bank.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Bank.plist; sourceTree = "<group>"; };
 		CE6361D7268C3A2900606E02 /* TSDropDownView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSDropDownView.h; sourceTree = "<group>"; };
 		CE6361D8268C3A2900606E02 /* TSDropDownView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSDropDownView.m; sourceTree = "<group>"; };
 		CE6361DA268C508400606E02 /* TSBranchCardModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSBranchCardModel.h; sourceTree = "<group>"; };
@@ -1358,8 +1359,6 @@
 		DFB3FFF226899EF300FC8FF9 /* TSTableViewBaseCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSTableViewBaseCell.m; sourceTree = "<group>"; };
 		DFB3FFF42689A7AE00FC8FF9 /* TSRankRecommendCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSRankRecommendCell.h; sourceTree = "<group>"; };
 		DFB3FFF52689A7AE00FC8FF9 /* TSRankRecommendCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSRankRecommendCell.m; sourceTree = "<group>"; };
-		DFB3FFF72689C1AA00FC8FF9 /* TSMainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSMainViewController.h; sourceTree = "<group>"; };
-		DFB3FFF82689C1AA00FC8FF9 /* TSMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSMainViewController.m; sourceTree = "<group>"; };
 		DFB3FFFB268AB6EF00FC8FF9 /* TSJsonCacheData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSJsonCacheData.h; sourceTree = "<group>"; };
 		DFB3FFFC268AB6EF00FC8FF9 /* TSJsonCacheData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSJsonCacheData.m; sourceTree = "<group>"; };
 		DFB3FFFE268AEE7700FC8FF9 /* TSOneRowsGoodsCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSOneRowsGoodsCollectionViewCell.h; sourceTree = "<group>"; };
@@ -2837,6 +2836,34 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		DF25A6EB2692F5B000AAEA3B /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				DC06D6DD268761E20013633F /* TSBestSellingRecommendService.h */,
+				DC06D6DE268761E20013633F /* TSBestSellingRecommendService.m */,
+				043C2350268B248300460FDB /* TSUserInfoService.h */,
+				043C2351268B248300460FDB /* TSUserInfoService.m */,
+				04651736268C969C000829C2 /* TSUploadImageService.h */,
+				04651737268C969C000829C2 /* TSUploadImageService.m */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		DF25A6EC2692FFE500AAEA3B /* User */ = {
+			isa = PBXGroup;
+			children = (
+				DCA035D52680765B003DE5F7 /* TSUserLoginManager.h */,
+				DCA035D62680765B003DE5F7 /* TSUserLoginManager.m */,
+				F55D2C9B26745E63006BACCF /* TSUserInfoManager.h */,
+				F55D2C9C26745E64006BACCF /* TSUserInfoManager.m */,
+				F55D2C9E26745E7A006BACCF /* TSLastUserInfoManager.h */,
+				F55D2C9F26745E7A006BACCF /* TSLastUserInfoManager.m */,
+				04651690268C0290000829C2 /* TSUser.h */,
+				04651691268C0290000829C2 /* TSUser.m */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
 		DFB3FFC026844A0A00FC8FF9 /* WechatShare */ = {
 			isa = PBXGroup;
 			children = (
@@ -3226,6 +3253,7 @@
 			children = (
 				F530CD392680CD6A009DC29A /* Tabbar */,
 				F530CD322680CCC5009DC29A /* Lanuch */,
+				CE5C8C5B2692F0C70063B470 /* Bank.plist */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -3369,6 +3397,7 @@
 				DFB3FFBF2684236F00FC8FF9 /* TShopMall.entitlements */,
 				F54973682668A2C700181E3F /* AppDelegate */,
 				F55D2C9726745C9B006BACCF /* Manager */,
+				DF25A6EB2692F5B000AAEA3B /* Service */,
 				F54973782668A94600181E3F /* Base */,
 				F54973792668A94600181E3F /* Features */,
 				F549739F2668AD9B00181E3F /* Expand */,
@@ -3478,8 +3507,6 @@
 				F54973D12668CF3300181E3F /* AppDelegate+RootController.m */,
 				F56D4B64266E053800C1AD9E /* AppDelegate+Initialize.h */,
 				F56D4B65266E053800C1AD9E /* AppDelegate+Initialize.m */,
-				DFB3FFF72689C1AA00FC8FF9 /* TSMainViewController.h */,
-				DFB3FFF82689C1AA00FC8FF9 /* TSMainViewController.m */,
 			);
 			path = AppDelegate;
 			sourceTree = "<group>";
@@ -3908,29 +3935,16 @@
 		F55D2C9726745C9B006BACCF /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				DF25A6EC2692FFE500AAEA3B /* User */,
 				DFB3FFC026844A0A00FC8FF9 /* WechatShare */,
 				F55D2C9826745E2E006BACCF /* TSGlobalManager.h */,
 				F55D2C9926745E2E006BACCF /* TSGlobalManager.m */,
-				DCA035D52680765B003DE5F7 /* TSUserLoginManager.h */,
-				DCA035D62680765B003DE5F7 /* TSUserLoginManager.m */,
-				F55D2C9B26745E63006BACCF /* TSUserInfoManager.h */,
-				F55D2C9C26745E64006BACCF /* TSUserInfoManager.m */,
-				F55D2C9E26745E7A006BACCF /* TSLastUserInfoManager.h */,
-				F55D2C9F26745E7A006BACCF /* TSLastUserInfoManager.m */,
 				DCA035F6268355D2003DE5F7 /* TSServicesManager.h */,
 				DCA035F7268355D2003DE5F7 /* TSServicesManager.m */,
-				DC06D6DD268761E20013633F /* TSBestSellingRecommendService.h */,
-				DC06D6DE268761E20013633F /* TSBestSellingRecommendService.m */,
-				043C2350268B248300460FDB /* TSUserInfoService.h */,
-				043C2351268B248300460FDB /* TSUserInfoService.m */,
-				04651736268C969C000829C2 /* TSUploadImageService.h */,
-				04651737268C969C000829C2 /* TSUploadImageService.m */,
 				DFB3FFDD268571B100FC8FF9 /* AuthAppleIDManager.h */,
 				DFB3FFDE268571B100FC8FF9 /* AuthAppleIDManager.m */,
 				DFB3FFED2686E60C00FC8FF9 /* TSURLRouter.h */,
 				DFB3FFEE2686E60C00FC8FF9 /* TSURLRouter.m */,
-				04651690268C0290000829C2 /* TSUser.h */,
-				04651691268C0290000829C2 /* TSUser.m */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -4404,6 +4418,7 @@
 				046516F9268C57EF000829C2 /* SelectorDialogArrow.png in Resources */,
 				F530CC4726803B1C009DC29A /* PulldownRefreshStyleWhite.json in Resources */,
 				F530CCF226804167009DC29A /* TXKJSBridge.js in Resources */,
+				CE5C8C5C2692F0C70063B470 /* Bank.plist in Resources */,
 				F530CD382680CCC5009DC29A /* launch.png in Resources */,
 				F530CC6A26803E43009DC29A /* ProgressAnimation.json in Resources */,
 				F530CD5A26819449009DC29A /* mall_launch_bottom.png in Resources */,
@@ -4942,7 +4957,6 @@
 				DC3440DF2672FC3900F5B0DA /* TSHomePageBaseModel.m in Sources */,
 				C2EF88B82670997100E7374A /* TSCartModel.m in Sources */,
 				CE4F6BE82687908200812275 /* TSOfficialServicesCell.m in Sources */,
-				DFB3FFF92689C1AA00FC8FF9 /* TSMainViewController.m in Sources */,
 				DFB3FFD92684837300FC8FF9 /* TSPaySuccessCell.m in Sources */,
 				C3A6C471267A1BEA00FC71D6 /* TSBindThirdViewController.m in Sources */,
 				F54973662668A22100181E3F /* YTKBaseRequest+AnimatingAccessory.m in Sources */,

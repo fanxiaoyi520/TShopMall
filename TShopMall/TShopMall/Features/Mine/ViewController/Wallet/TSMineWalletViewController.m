@@ -72,7 +72,8 @@
 
 // MARK: actions
 - (void)problemAction:(UIButton *)sender {
-    NSLog(@"问题");
+    TSWithdrawalRecordViewController *vc = [TSWithdrawalRecordViewController new];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)withdrawalAction:(UIButton *)sender {

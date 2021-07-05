@@ -6,6 +6,7 @@
 //
 
 #import "TSGoodsShowCell.h"
+#import "TSHotSectionModel.h"
 
 @interface TSGoodsShowCell ()
 /// 背景视图
@@ -19,7 +20,8 @@
 @property(nonatomic, weak) UIImageView *leftImgV;
 @property(nonatomic, weak) UIImageView *leftIconImgV;
 /** title显示  */
-@property(nonatomic, weak) UIButton *titleButton;
+@property (nonatomic, weak) UIImageView * champion_title_bg;
+@property (nonatomic, weak) UILabel * champion_title;
 
 @end
 
@@ -34,62 +36,68 @@
 
 - (void)addConstraints {
     [self.bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.contentView.mas_top).with.offset(0);
-        make.left.equalTo(self.contentView.mas_left).with.offset(0);
-        make.right.equalTo(self.contentView.mas_right).with.offset(0);
-        make.height.mas_equalTo(240);
+        make.top.equalTo(self.contentView);
+        make.left.offset(-1);
+        make.right.offset(1);
+        make.height.mas_equalTo(KRateW(250));
     }];
     [self.rankBottomImgV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contentView.mas_left).with.offset(0);
         make.right.equalTo(self.contentView.mas_right).with.offset(0);
-        make.bottom.equalTo(self.bgImageView.mas_bottom).with.offset(10);
-        make.height.mas_equalTo(51.22);
+        make.bottom.equalTo(self.contentView).offset(-KRateW(10));
+        make.height.mas_equalTo(KRateW(65));
     }];
+    
     [self.championImgV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.contentView.mas_centerX).with.offset(0);
-        make.bottom.equalTo(self.rankBottomImgV.mas_top).with.offset(-5);
-        make.width.mas_equalTo(154);
-        make.height.mas_equalTo(64);
+        make.bottom.equalTo(self.champion_title_bg.mas_top).with.offset(KRateW(10));
+        make.width.mas_equalTo(KRateW(154));
+        make.height.mas_equalTo(KRateW(64));
     }];
     [self.championIconImgV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.championImgV.mas_centerX).with.offset(0);
-        make.bottom.equalTo(self.championImgV.mas_top).with.offset(28);
-        make.width.mas_equalTo(154);
-        make.height.mas_equalTo(88);
+        make.bottom.equalTo(self.championImgV.mas_top).offset(KRateW(10));
+        make.width.mas_equalTo(KRateW(154));
+        make.height.mas_equalTo(KRateW(88));
     }];
+    
     [self.rightImgV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.contentView.mas_right).with.offset(-KRateW(43));
-        make.bottom.equalTo(self.championImgV.mas_top).with.offset(10);
-        make.width.mas_equalTo(98);
-        make.height.mas_equalTo(41);
+        make.bottom.equalTo(self.championIconImgV);
+        make.width.mas_equalTo(KRateW(98));
+        make.height.mas_equalTo(KRateW(41));
     }];
     [self.rightIconImgV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.rightImgV.mas_centerX).with.offset(0);
-        make.bottom.equalTo(self.rightImgV.mas_top).with.offset(28);
-        make.width.mas_equalTo(98);
-        make.height.mas_equalTo(66);
+        make.bottom.equalTo(self.rightImgV.mas_top).with.offset(KRateW(10));
+        make.width.mas_equalTo(KRateW(98));
+        make.height.mas_equalTo(KRateW(66));
     }];
     
     [self.leftImgV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contentView.mas_left).with.offset(KRateW(40));
         make.centerY.equalTo(self.rightImgV.mas_centerY).with.offset(0);
-        make.width.mas_equalTo(98);
-        make.height.mas_equalTo(41);
+        make.width.mas_equalTo(KRateW(98));
+        make.height.mas_equalTo(KRateW(41));
     }];
     [self.leftIconImgV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.leftImgV.mas_centerX).with.offset(0);
-        make.bottom.equalTo(self.leftImgV.mas_top).with.offset(28);
-        make.width.mas_equalTo(98);
-        make.height.mas_equalTo(66);
+        make.bottom.equalTo(self.leftImgV.mas_top).with.offset(KRateW(10));
+        make.width.mas_equalTo(KRateW(98));
+        make.height.mas_equalTo(KRateW(66));
     }];
-    [self.titleButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.contentView.mas_centerX).with.offset(0);
-        make.top.equalTo(self.championImgV.mas_bottom).with.offset(-20);
-        make.width.mas_equalTo(195);
-        make.height.mas_equalTo(32);
+    
+    [self.champion_title_bg mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.contentView);
+        make.bottom.equalTo(self.bgImageView).offset(-KRateW(45));
+        make.width.mas_equalTo(KRateW(195));
+        make.height.mas_equalTo(KRateW(32));
+    }];
+    
+    [self.champion_title mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.champion_title_bg).mas_equalTo(UIEdgeInsetsMake(0, 20, 0, 20));
     }];
 }
-
 
 #pragma mark - Getter
 - (UIImageView *)bgImageView{
@@ -178,18 +186,54 @@
     return _leftIconImgV;
 }
 
-- (UIButton *)titleButton {
-    if (_titleButton == nil) {
-        UIButton *titleButton = [[UIButton alloc] init];
-        _titleButton = titleButton;
-        _titleButton.enabled = NO;
-        _titleButton.titleLabel.font = KRegularFont(14);
-        [_titleButton setTitle:@"TCL 灵犀C12  65寸 " forState:UIControlStateNormal];
-        [_titleButton setTitleColor:KWhiteColor forState:(UIControlStateNormal)];
-        [_titleButton setBackgroundImage:KImageMake(@"mall_rank_titlebg") forState:(UIControlStateNormal)];
-        [self.contentView addSubview: _titleButton];
+- (UIImageView *)champion_title_bg {
+    if (_champion_title_bg == nil) {
+        UIImageView *champion_title_bg = [[UIImageView alloc] init];
+        champion_title_bg = [[UIImageView alloc] initWithImage:KImageMake(@"mall_rank_titlebg")];
+        _champion_title_bg = champion_title_bg;
+        [self.contentView addSubview: _champion_title_bg];
     }
-    return _titleButton;
+    return _champion_title_bg;
+}
+
+- (UILabel *)champion_title {
+    if (_champion_title == nil) {
+        UILabel *label = [UILabel new];
+        _champion_title = label;
+        _champion_title.font = KRegularFont(14);
+        _champion_title.textColor = KWhiteColor;
+        _champion_title.text = @"等待上榜";
+        [self.champion_title_bg addSubview: _champion_title];
+    }
+    return _champion_title;
+}
+
+- (void)setDelegate:(id<UniversalCollectionViewCellDataDelegate>)delegate {
+    TSHotSectionItemModel *item = [delegate universalCollectionViewCellModel:self.indexPath];
+    
+    self.championIconImgV.image = KImageMake(@"image_test");
+    self.leftIconImgV.image = KImageMake(@"image_test");
+    self.rightIconImgV.image = KImageMake(@"image_test");
+    self.champion_title.text = @"等待上榜";
+    
+    //冠军
+    if (item.rankList.count > 0) {
+        TSRecomendGoods *goodModel = item.rankList[0];
+        [self.championIconImgV sd_setImageWithURL:[NSURL URLWithString:goodModel.imageUrl] placeholderImage:KImageMake(@"image_test")];
+        self.champion_title.text = goodModel.name;
+        
+        //亚军
+        if (item.rankList.count > 1) {
+            TSRecomendGoods *goodModel = item.rankList[1];
+            [self.leftIconImgV sd_setImageWithURL:[NSURL URLWithString:goodModel.imageUrl] placeholderImage:KImageMake(@"image_test")];
+            
+            //季军
+            if (item.rankList.count > 2) {
+                TSRecomendGoods *goodModel = item.rankList[1];
+                [self.rightIconImgV sd_setImageWithURL:[NSURL URLWithString:goodModel.imageUrl] placeholderImage:KImageMake(@"image_test")];
+            }
+        }
+    }
 }
 
 

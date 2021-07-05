@@ -272,7 +272,6 @@
         [_addButton setImage:KImageMake(@"mall_detail_add") forState:UIControlStateHighlighted];
         [_addButton setImage:KImageMake(@"mall_detail_add_disable") forState:UIControlStateDisabled];
         [_addButton addTarget:self action:@selector(addAction:) forControlEvents:UIControlEventTouchUpInside];
-        [_addButton setBackgroundColor:UIColor.redColor];
     }
     return _addButton;
 }

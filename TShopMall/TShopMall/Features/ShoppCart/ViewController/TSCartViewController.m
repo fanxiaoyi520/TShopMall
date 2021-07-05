@@ -18,7 +18,6 @@
 #import "TSProductDetailController.h"
 #import "AppDelegate.h"
 #import "TSBaseNavigationController.h"
-#import "TSMainViewController.h"
 
 @interface TSCartViewController ()<TSCartProtocol>
 @property (nonatomic, strong) UIButton *editBtn;

@@ -445,7 +445,7 @@
         if (request.responseModel.isSucceed) {
             complete(YES);
         }else{
-            [Popover popToastOnWindowWithText:request.responseJSONObject[@"msg"]];
+            [Popover popToastOnWindowWithText:request.responseModel.responseMsg];
         }
         
         } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
