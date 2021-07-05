@@ -9,6 +9,7 @@
 #import "TSHotDataController.h"
 #import "TSUniversalFlowLayout.h"
 #import "TSUniversalCollectionViewCell.h"
+#import "TSProductDetailController.h"
 
 @interface TSRankHotCellController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate>
 
@@ -98,7 +99,12 @@
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    
+    if (indexPath.section < 1) return;
+    TSHotSectionModel *model = self.dataController.sections[indexPath.section];
+    TSHotSectionItemModel *item = model.items[indexPath.row];
+    TSProductDetailController *detail = [[TSProductDetailController alloc] init];
+    detail.uuid = item.goodModel.uuid;
+    [self.navigationController pushViewController:detail animated:YES];
 }
 
 #pragma mark - UniversalCollectionViewCellDataDelegate

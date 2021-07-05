@@ -298,19 +298,19 @@
     if (item.rankList.count > 0) {
         TSRankUserModel *userModel = item.rankList[0];
         [self.championIconImgV sd_setImageWithURL:[NSURL URLWithString:userModel.imageUrl] placeholderImage:KImageMake(@"mall_setting_defautlhead")];
-        self.championLabel.text = userModel.userName;
+        self.championLabel.text = userModel.mobile;
         
         //亚军
         if (item.rankList.count > 1) {
             TSRankUserModel *userModel = item.rankList[1];
             [self.secondIconImgV sd_setImageWithURL:[NSURL URLWithString:userModel.imageUrl] placeholderImage:KImageMake(@"mall_setting_defautlhead")];
-            self.secondLabel.text = userModel.userName;
+            self.secondLabel.text = userModel.mobile;
             
             //季军
             if (item.rankList.count > 2) {
                 TSRankUserModel *userModel = item.rankList[2];
                 [self.thirdIconImgV sd_setImageWithURL:[NSURL URLWithString:userModel.imageUrl] placeholderImage:KImageMake(@"mall_setting_defautlhead")];
-                self.thirdLabel.text = userModel.userName;
+                self.thirdLabel.text = userModel.mobile;
             }
         }
     }

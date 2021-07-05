@@ -42,7 +42,7 @@
             //当前用户
             TSRankUserModel *userModel = self.dataController.currentUserRankModel;
             [self.personalRankView.headImgV sd_setImageWithURL:[NSURL URLWithString:userModel.imageUrl] placeholderImage:KImageMake(@"mall_setting_defautlhead")];
-            self.personalRankView.usernameLabel.text = userModel.userName;
+            self.personalRankView.usernameLabel.text = userModel.mobile;
             self.personalRankView.rankNumLabel.text = userModel.rank;
             if (userModel.money.integerValue > 0) {
                 self.personalRankView.salesNumLabel.text = [NSString stringWithFormat:@"¥%@", userModel.money];
