@@ -11,8 +11,15 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TSUserInfoService : NSObject
-/** 用户  */
-//@property(nonatomic, strong) TSUser *user;
+
+/** 校验已有的提现密码 */
+- (void)checkWithrawalPwd:(NSString *)withrawalPwd
+                success:(void(^_Nullable)(void))success
+                  failure:(void(^_Nullable)(NSString *errorMsg))failure;
+/** 设置提现密码 */
+- (void)setWithrawalPwd:(NSString *)withrawalPwd
+                success:(void(^_Nullable)(void))success
+                failure:(void(^_Nullable)(NSString *errorMsg))failure;
 
 - (void)getUserInfoAccountId:(NSString *)accountId
                      success:(void(^_Nullable)(TSUser *user))success

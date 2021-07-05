@@ -16,7 +16,6 @@
 #import <NTESQuickPass/NTESQuickPass.h>
 
 @interface AppDelegate()<TSFirstEnterAgreementViewDelegate, TSHybridViewControllerDelegate, NTESQuickLoginManagerDelegate>
-
 @end
 
 @implementation AppDelegate (RootController)
@@ -24,13 +23,7 @@
 -(void)setupRootController{
     self.window = [[UIWindow alloc] init];
     self.window.frame = [UIScreen mainScreen].bounds;
-//    TSMainViewController *mainVC = [TSMainViewController new];
-//    TSBaseNavigationController *nav = [[TSBaseNavigationController alloc] initWithRootViewController:mainVC];
-//    @weakify(self);
-//    mainVC.rootViewControllerBlock = ^(UIViewController *vc){
-//        @strongify(self)
-//        self.window.rootViewController = vc;
-//    };
+
     /**
      * 第一次加载键盘慢
      */
@@ -50,7 +43,6 @@
     }
     
     [TSUserLoginManager shareInstance].loginBlock = ^{
-        @strongify(self)
         self.window.rootViewController = [TSTabBarController new];
     };
     
@@ -66,10 +58,11 @@
     @weakify(self);
     [[TSUserLoginManager shareInstance] configLoginController:^(UIViewController * _Nonnull vc) {
         @strongify(self)
-        self.window.rootViewController = vc.navigationController;
+        self.window.rootViewController = vc;
         
-        if ([vc isKindOfClass:TSLoginViewController.class]) {
-            [self showAlertInView:vc.view];
+        if ([vc.childViewControllers.firstObject isKindOfClass:TSLoginViewController.class]) {
+            TSLoginViewController *loginViewController = vc.childViewControllers.firstObject;
+            [self showAlertInView:loginViewController.view];
         }
     }];
 }
@@ -95,6 +88,7 @@
     else{
         
         TSHybridViewController *web = [[TSHybridViewController alloc] initWithURLString:[agreementModel.serverUrl stringByAppendingString:@"&mode=webview"]];
+        web.isPresent = YES;
         TSBaseNavigationController *nav1 = [[TSBaseNavigationController alloc] initWithRootViewController:web];
         nav1.modalPresentationStyle = UIModalPresentationFullScreen;
         web.delegate = self;

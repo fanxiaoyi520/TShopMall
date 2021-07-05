@@ -6,7 +6,7 @@
 //
 
 #import "TSCategoryDataController.h"
-
+#import "TSJsonCacheData.h"
 @interface TSCategoryDataController()
 
 @property (nonatomic, strong) NSMutableArray <TSCategoryKindModel *> *kinds;
@@ -18,6 +18,15 @@
 
 -(void)fetchKindsComplete:(void(^)(BOOL isSucess))complete{
 
+    if (![AFNetworkReachabilityManager sharedManager].reachable) {
+        NSString *content = [TSJsonCacheData readPlistWithKey:@"categoryList"];
+        if (content) {
+            [self setUITemplateWithResponseData:content];
+            complete(YES);
+        }
+        return;
+    }
+    
     NSMutableDictionary *body = [NSMutableDictionary dictionary];
     [body setValue:@"productGroup_page" forKey:@"pageType"];
     [body setValue:@"APP" forKey:@"uiType"];
@@ -33,29 +42,10 @@
         
         if (request.responseModel.isSucceed) {
             NSString *content = request.responseModel.data[@"content"];
-            NSArray *contentArr = [content jsonValueDecoded];
             
-            NSMutableArray *kinds = [NSMutableArray array];
-            NSMutableArray *sections = [NSMutableArray array];
+            [TSJsonCacheData writePlistWithData:content saveKey:@"categoryList"];
             
-            for (int i = 0; i < contentArr.count; i++) {
-                NSDictionary *itemDic = contentArr[i];
-                TSCategoryKindModel *kindModel = [[TSCategoryKindModel alloc] init];
-                kindModel.kind = itemDic[@"OneLevelTitle"];
-                kindModel.startSection = i * categoryContentCount;
-                [kinds addObject:kindModel];
-                
-                TSCategoryContentModel *content = [[TSCategoryContentModel alloc] init];
-                content.OneLevelTitle = itemDic[@"OneLevelTitle"];
-                content.OneLevelImg = itemDic[@"OneLevelImg"];
-                content.TwoLevel = itemDic[@"TwoLevel"];
-                content.goodsList = itemDic[@"goodsList"];
-                
-                [sections addObject:content];
-            }
-            
-            self.kinds = kinds;
-            self.sections = sections;
+            [self setUITemplateWithResponseData:content];
             
             complete(YES);
         }
@@ -67,8 +57,32 @@
 
 }
 
-- (NSIndexPath *)fatchContentIndexPath:(NSInteger)section {
-    return [NSIndexPath indexPathForItem:section % categoryContentCount inSection:section / categoryContentCount];
+- (void)setUITemplateWithResponseData:(NSString *)responseData{
+    NSArray *contentArr = [responseData jsonValueDecoded];
+    
+    NSMutableArray *kinds = [NSMutableArray array];
+    NSMutableArray *sections = [NSMutableArray array];
+    
+    for (int i = 0; i < contentArr.count; i++) {
+        NSDictionary *itemDic = contentArr[i];
+        TSCategoryKindModel *kindModel = [[TSCategoryKindModel alloc] init];
+        kindModel.kind = itemDic[@"OneLevelTitle"];
+        kindModel.startSection = i * categoryContentCount;
+        [kinds addObject:kindModel];
+        
+        TSCategoryContentModel *content = [[TSCategoryContentModel alloc] init];
+        content.OneLevelTitle = itemDic[@"OneLevelTitle"];
+        content.OneLevelImg = itemDic[@"OneLevelImg"];
+        content.TwoLevel = itemDic[@"TwoLevel"];
+        content.goodsList = itemDic[@"goodsList"];
+        content.objectValue = itemDic[@"objectValue"];
+        content.typeValue = itemDic[@"typeValue"];
+        [sections addObject:content];
+    }
+    
+    self.kinds = kinds;
+    self.sections = sections;
 }
+
 
 @end

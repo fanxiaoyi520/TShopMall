@@ -15,6 +15,7 @@
 #import "TSSecurityViewController.h"
 #import "UIAlertController+Color.h"
 #import "TSAlertView.h"
+#import "TSShippingAddressController.h"
 
 @interface TSSettingViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate>
 /// 数据中心
@@ -144,19 +145,18 @@
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section == 0 && indexPath.item == 0) {
+    if (indexPath.section == 0 && indexPath.item == 0) {///个人资料
         TSPersonalViewController *personalVC = [[TSPersonalViewController alloc] init];
         [self.navigationController pushViewController:personalVC animated:YES];
         return;
-    } else if (indexPath.section == 1 && indexPath.item == 0) {
-        TSSecurityViewController *securityVC = [[TSSecurityViewController alloc] init];
-        [self.navigationController pushViewController:securityVC animated:YES];
+    } else if (indexPath.section == 1 && indexPath.item == 0) {///账号安全
+        TSSecurCenterViewController *personalVC = [[TSSecurCenterViewController alloc] init];
+        [self.navigationController pushViewController:personalVC animated:YES];
+    } else if (indexPath.section == 1 && indexPath.item == 1) {///地址管理
+        TSShippingAddressController *addressVC = [[TSShippingAddressController alloc] init];
+        [self.navigationController pushViewController:addressVC animated:YES];
         return;
-    } else if (indexPath.section == 1 && indexPath.item == 1) {
-        UIViewController *con = [NSClassFromString(@"TSShippingAddressController") new];
-        [self.navigationController pushViewController:con animated:YES];
-        return;
-    } else if (indexPath.section == 2 && indexPath.item == 0) {
+    } else if (indexPath.section == 2 && indexPath.item == 0) {///清理缓存
         //清理缓存
         @weakify(self);
         [self.dataController clearCacheWithComplete:^(BOOL isSucess) {
@@ -166,11 +166,11 @@
             }
         }];
         return;
-    } else if (indexPath.section == 2 && indexPath.item == 1) {
+    } else if (indexPath.section == 2 && indexPath.item == 1) {///关于我们
         TSAboutMeViewController *aboutMeVC = [[TSAboutMeViewController alloc] init];
         [self.navigationController pushViewController:aboutMeVC animated:YES];
         return;
-    } else if (indexPath.section == 3 && indexPath.item == 0) {
+    } else if (indexPath.section == 3 && indexPath.item == 0) {///退出登陆
         [self exitAlert];
         return;
     }

@@ -21,12 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) void(^ _Nonnull loginBlock)(void);
 @property (nonatomic, copy) void(^ _Nonnull logoutBlock)(void);
 
--(void)startLogin;
 -(void)logout;
 -(void)configLoginController:(void(^)(UIViewController *))callBack;
-
-/** 获取注册登录的协议信息 */
-- (void)fetchAgreementWithCompleted: (void(^)(NSArray<TSAgreementModel *> *agreementModels))completed;
 
 @end
 

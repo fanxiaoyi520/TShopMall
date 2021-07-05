@@ -136,16 +136,15 @@
 }
 
 - (void)getAgreementInfo {
-    NSArray *agreementModels = [TSGlobalManager shareInstance].agreementModels;
-    if (agreementModels.count) {
-        self.checkedView.agreementModels = agreementModels;
-        self.quickCheckView.agreementModels = agreementModels;
-    } else {
-        [[TSUserLoginManager shareInstance] fetchAgreementWithCompleted:^(NSArray<TSAgreementModel *> * _Nonnull agreementModels) {
-            self.checkedView.agreementModels = agreementModels;
-            self.quickCheckView.agreementModels = agreementModels;
-        }];
-    }
+    @weakify(self);
+    [self.KVOController observe:[TSGlobalManager shareInstance] keyPath:@"agreementModels" options:(NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew) block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
+        @strongify(self)
+        if ([TSGlobalManager shareInstance].agreementModels.count) {
+            self.checkedView.agreementModels = [TSGlobalManager shareInstance].agreementModels;
+        }
+        
+        self.checkedView.hidden = ![TSGlobalManager shareInstance].agreementModels.count;
+    }];
 }
 
 #pragma mark - Actions
@@ -173,7 +172,7 @@
 - (void)otherLogin {
     self.quickView.hidden = YES;
     self.quickCheckView.hidden = YES;
-    self.checkedView.hidden = NO;
+    self.checkedView.hidden = ![TSGlobalManager shareInstance].agreementModels.count;
     self.topView.hidden = NO;
 }
 
@@ -219,6 +218,11 @@
 - (void)goToRegister {
     if (self.navigationController) {
         TSRegiterViewController *registerVC = [[TSRegiterViewController alloc] init];
+        @weakify(self);
+        registerVC.loginBlock = ^{
+            @strongify(self)
+            self.loginBlock();
+        };
         [self.navigationController pushViewController:registerVC animated:YES];
     } else {
         [self dismissViewControllerAnimated:YES completion:nil];
@@ -265,6 +269,7 @@
                 @strongify(self)
                 if (isSucess) {
                     [Popover removePopoverOnWindow];
+                    [self dismissViewControllerAnimated:NO completion:nil];
                     if (self.loginBlock) {
                         self.loginBlock();
                     }
@@ -272,8 +277,6 @@
             }];
         }
     }];
-    
-    
    
     
 }
@@ -296,7 +299,7 @@
 
 - (void)goToApple {
     @weakify(self);
-   
+  
     AuthAppleIDManager *manager = [AuthAppleIDManager sharedInstance];
     [manager authorizationAppleID];
     manager.loginByTokenBlock = ^(NSString * _Nonnull token) {
@@ -314,7 +317,7 @@
                  }];
                 [self dismissViewControllerAnimated:NO completion:^{
                     if (self.bindBlock) {
-                        self.bindBlock();
+                        self.bindBlock(token);
                     }
                 }];
             }
@@ -339,7 +342,6 @@
 
 #pragma mark - TSHybridViewControllerDelegate
 -(void)hybridViewControllerWillDidDisappear:(TSHybridViewController *)hybridViewController params:(NSDictionary *)param{
-    
     
 }
 
@@ -443,7 +445,7 @@
                     /// 跳转绑定手机号
                     [self dismissViewControllerAnimated:NO completion:^{
                         if (self.bindBlock) {
-                            self.bindBlock();
+                            self.bindBlock(token);
                         }
                     }];
                 }

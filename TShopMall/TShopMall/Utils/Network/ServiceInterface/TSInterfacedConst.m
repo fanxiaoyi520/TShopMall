@@ -169,6 +169,8 @@ NSString *const kSalesmanInvitationRecord = @"v2/sysback/salesman/get/salesman/p
 NSString *const kAboutMeAgreementUrl = @"/rest/v2/front/shopStatement/getShopStatementList";
 NSString *const kModifyUserUrl = @"/user/mng/user";
 NSString *const kUploadImageUrl = @"/rest/v2/usercenter/batchfileupload/batch/upload";
+NSString *const kSetWithdrawalPwdUrl = @"/usercenter/customer/setCustomerWithdrawalPwd";
+NSString *const kCheckWithdrawalPwdUrl = @"/usercenter/customer/checkWithdrawalPwd";
 
 NSString *const kMineWithdrawalApply = @"/rest/v2/withdrawal/record/withdrawalApply";
 NSString *const kMineQueryAppBankCardAccountList = @"/rest/v2/bankCardAccount/queryAppBankCardAccountList";

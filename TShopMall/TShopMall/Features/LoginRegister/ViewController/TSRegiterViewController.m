@@ -32,10 +32,10 @@
 @end
 
 @implementation TSRegiterViewController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.gk_navigationBar.hidden = YES;
+    
 }
 
 - (void)fillCustomView {
@@ -48,6 +48,10 @@
     self.view.backgroundColor = UIColor.whiteColor;
     UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panAction:)];
     [self.view addGestureRecognizer:panGestureRecognizer];
+    [self getAgreementInfo];
+}
+
+- (void)reachabilityStatusChanged{
     [self getAgreementInfo];
 }
 
@@ -78,14 +82,17 @@
 }
 
 - (void)getAgreementInfo {
-    NSArray *agreementModels = [TSGlobalManager shareInstance].agreementModels;
-    if (agreementModels.count) {
-        self.checkedView.agreementModels = agreementModels;
-    } else {
-        [[TSUserLoginManager shareInstance] fetchAgreementWithCompleted:^(NSArray<TSAgreementModel *> * _Nonnull agreementModels) {
-            self.checkedView.agreementModels = agreementModels;
-        }];
-    }
+    
+    @weakify(self);
+    [self.KVOController observe:[TSGlobalManager shareInstance] keyPath:@"agreementModels" options:(NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew) block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
+        @strongify(self)
+        if ([TSGlobalManager shareInstance].agreementModels.count) {
+            self.checkedView.agreementModels = [TSGlobalManager shareInstance].agreementModels;
+        }
+        
+        self.checkedView.hidden = ![TSGlobalManager shareInstance].agreementModels.count;
+    }];
+
 }
 
 #pragma mark - Lazy Method
@@ -162,8 +169,10 @@
     [[TSServicesManager sharedInstance].acconutService fetchRegisterMobile:phoneNumber validCode:[self.topView getCode] invitationCode:[self.topView getInvitationCode] complete:^(BOOL isSucess) {
         if (isSucess) {
             @strongify(self)
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"TS_LoginUpdateNotification" object:@0];
-            [self dismissViewControllerAnimated:YES completion:nil];
+            [self dismissViewControllerAnimated:NO completion:nil];
+            if (self.loginBlock) {
+                self.loginBlock();
+            }
         }
     }];
 }

@@ -42,6 +42,7 @@ static const CGFloat BottomViewHeight = 100.0;
     self.gk_navTitleColor = KWhiteColor;
     self.gk_backImage = KImageMake(@"mall_white_naviback");
     self.gk_navBackgroundColor = KBlackColor;
+    self.gk_navBarAlpha = 0.5;
     [self.view setBackgroundColor:[UIColor blackColor]];
     _selfWidth = self.view.frame.size.width;
     _contentViewHeight = self.view.frame.size.height - 100;

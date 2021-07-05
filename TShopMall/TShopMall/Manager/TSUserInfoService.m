@@ -16,6 +16,53 @@
 @end
 
 @implementation TSUserInfoService
+/** 设置提现密码 */
+- (void)setWithrawalPwd:(NSString *)withrawalPwd
+                success:(void(^_Nullable)(void))success
+                failure:(void(^_Nullable)(NSString *errorMsg))failure {
+    
+    NSMutableDictionary *body = [NSMutableDictionary dictionary];
+    [body setValue:withrawalPwd forKey:@"checkPw"];
+    
+    NSMutableDictionary *header = [NSMutableDictionary dictionary];
+    [header setValue:@"thome" forKey:@"storeUuid"];
+    [header setValue:@"tcl" forKey:@"t-id"];
+    [header setValue:[TSUserInfoManager userInfo].accessToken forKey:@"accessToken"];
+    [header setValue:@"platform_tcl_shop" forKey:@"platform"];
+    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kSetWithdrawalPwdUrl
+                                                               requestMethod:YTKRequestMethodPOST
+                                                       requestSerializerType:YTKRequestSerializerTypeHTTP
+                                                      responseSerializerType:YTKResponseSerializerTypeJSON requestHeader:header            requestBody:body needErrorToast:YES];
+    [request startWithCompletionBlockWithSuccess:^(__kindof SSGenaralRequest * _Nonnull request) {
+        NSLog(@"设置提现密码 ==== %@", request);
+    } failure:^(__kindof SSGenaralRequest * _Nonnull request) {
+        NSLog(@"设置提现密码 ==== %@", request);
+    }];
+}
+
+/** 校验已有的提现密码 */
+- (void)checkWithrawalPwd:(NSString *)withrawalPwd
+                success:(void(^_Nullable)(void))success
+                failure:(void(^_Nullable)(NSString *errorMsg))failure {
+    NSMutableDictionary *body = [NSMutableDictionary dictionary];
+    [body setValue:withrawalPwd forKey:@"checkPw"];
+    NSMutableDictionary *header = [NSMutableDictionary dictionary];
+    [header setValue:@"thome" forKey:@"storeUuid"];
+    [header setValue:@"tcl" forKey:@"t-id"];
+    [header setValue:[TSUserInfoManager userInfo].accessToken forKey:@"accessToken"];
+    [header setValue:@"platform_tcl_shop" forKey:@"platform"];
+    
+    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithBaseUrl:kAccountCenterApiPrefix
+                                                               RequestUrl:kCheckWithdrawalPwdUrl
+                                                               requestMethod:YTKRequestMethodPOST
+                                                       requestSerializerType:YTKRequestSerializerTypeJSON
+                                                      responseSerializerType:YTKResponseSerializerTypeJSON requestHeader:header            requestBody:body needErrorToast:YES];
+    [request startWithCompletionBlockWithSuccess:^(__kindof SSGenaralRequest * _Nonnull request) {
+        NSLog(@"校验已有的提现密码 ==== %@", request);
+    } failure:^(__kindof SSGenaralRequest * _Nonnull request) {
+        NSLog(@"设置提现密码 ==== %@", request.response);
+    }];
+}
 
 - (void)getUserInfoAccountId:(NSString *)accountId
                      success:(void(^_Nullable)(TSUser *user))success

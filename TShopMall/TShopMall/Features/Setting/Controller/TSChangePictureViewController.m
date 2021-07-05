@@ -39,6 +39,10 @@
     
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+}
+
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
 }
@@ -88,7 +92,7 @@
         make.bottom.equalTo(self.topView.mas_bottom).with.offset(0);
     }];
     [self.avatarImgV mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.topView.mas_centerY).with.offset(20);
+        make.centerY.equalTo(self.topView.mas_centerY).with.offset(KRateH(25));
         make.centerX.equalTo(self.topView.mas_centerX).with.offset(0);
         make.width.height.mas_equalTo(86);
     }];
@@ -179,7 +183,8 @@
     if (_bgImgV == nil) {
         UIImageView *bgImgV = [[UIImageView alloc] init];
         _bgImgV = bgImgV;
-        //_bgImgV.contentMode = UIViewContentModeScaleToFill;
+        _bgImgV.contentMode = UIViewContentModeScaleAspectFill;
+        _bgImgV.clipsToBounds = YES;
         _bgImgV.image = [UIImage imageWithColor:KHexAlphaColor(@"#898989", 0.45)];
         [self.topView insertSubview:_bgImgV atIndex:0];
     }
@@ -234,14 +239,6 @@
 
 - (void)back {
     [self.navigationController popViewControllerAnimated:YES];
-}
-
-- (UIImage *)getSquareImage:(UIView *)view {
-    UIGraphicsBeginImageContext(view.bounds.size);
-    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return [image applyLightEffect];
 }
 
 #pragma mark - UICollectionViewDataSource

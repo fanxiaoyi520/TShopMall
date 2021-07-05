@@ -39,6 +39,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self addChildViewController:self.container];
+    
+//    @weakify(self);
+//    [self.KVOController observe:self.dataController keyPath:@"kinds" options:(NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew) block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
+//        @strongify(self)
+//        if (self.dataController.kinds) {
+//            [self.kindViewModel viewModelWithKinds:self.dataController.kinds selectedRow:0];
+//            [self.tableView reloadData];
+//        }
+//    }];
+//    
+//    [self.KVOController observe:self.dataController keyPath:@"sections" options:(NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew) block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
+//        @strongify(self)
+//        if (self.dataController.sections) {
+//            self.container.dataSource = self;
+//            [self.container showContentAtPage:0];
+//        }
+//    }];
 
     __weak __typeof(self)weakSelf = self;
     [self.dataController fetchKindsComplete:^(BOOL isSucess) {

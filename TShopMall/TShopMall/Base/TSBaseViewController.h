@@ -20,7 +20,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// 添加子控件
 -(void)fillCustomView;
 
-- (void)netWorkStatusChanged:(NSNotification *)noti;
 - (void)userInfoUpdated;
 @end
 
