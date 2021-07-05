@@ -280,7 +280,6 @@
     }
     self.codeButton.enabled = NO;
     __weak typeof(self) weakSelf = self;
-   
     [self.dataController fetchChangeMobileSMSCodeMobile:phoneNumber complete:^(BOOL isSucess) {
         weakSelf.timer = [NSTimer ts_scheduledTimerWithTimeInterval:1 block:^{
              [weakSelf goToRun];
@@ -298,12 +297,12 @@
         self.count--;
         [self.codeButton setTitle:[NSString stringWithFormat:@"%lds", (long)self.count] forState:UIControlStateNormal];
     }
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setValue:NSStringFromClass([self class]) forKey:@"cellType"];
-    [params setValue:@(ChangeMobileValueTypeSendCode) forKey:@"ChangeMobileButtonClickType"];
-    if (_delegate && [_delegate respondsToSelector:@selector(universalCollectionViewCellClick:params:)]) {
-        [_delegate universalCollectionViewCellClick:self.indexPath params:params];
-    }
+//    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+//    [params setValue:NSStringFromClass([self class]) forKey:@"cellType"];
+//    [params setValue:@(ChangeMobileValueTypeSendCode) forKey:@"ChangeMobileButtonClickType"];
+//    if (_delegate && [_delegate respondsToSelector:@selector(universalCollectionViewCellClick:params:)]) {
+//        [_delegate universalCollectionViewCellClick:self.indexPath params:params];
+//    }
 }
 
 - (void)enabledButton:(BOOL)enabled {
@@ -343,7 +342,6 @@
     }
     self.errorTipsLabel.hidden = YES;
     [[UIViewController windowCurrentViewController].view endEditing:YES];
-    
     [self.dataController fetchChangeBindWithNewMobile:self.mobileTextField.text validCode:self.codeTextField.text success:^{
         [Popover popToastOnWindowWithText:@"更换手机号成功"];
         [[UIViewController windowCurrentViewController].navigationController popViewControllerAnimated:YES];

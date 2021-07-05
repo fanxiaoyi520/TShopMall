@@ -6,11 +6,21 @@
 //
 
 #import "TSSearchResultDataController.h"
+#import "TSRecomendModel.h"
+#import "TSRecomendDataController.h"
+
+@interface TSSearchResultDataController()
+@property (nonatomic, assign) NSInteger currentNum;
+@property (nonatomic, assign) NSInteger totalNum;//总商品数量
+@property (nonatomic, copy) void(^requestFinished)(NSString *message);
+@property (nonatomic, strong) NSArray<TSRecomendGoods *> *recomendGoods;
+@end
 
 @implementation TSSearchResultDataController
 - (instancetype)init{
     if (self == [super init]) {
         self.isGrid = YES;
+        self.allGoods = [NSMutableArray array];
         self.lists = [NSMutableArray array];
         self.sort = SortWeight;
         self.sort = 1;
@@ -19,18 +29,20 @@
     return self;
 }
 
-- (void)queryGoods:(void(^)(NSError *))finished{
-    [self goodsListRequest].animatingView = self.context.view;
-    [[self goodsListRequest] startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+- (void)queryGoods:(void (^)(NSString *))finished{
+    self.requestFinished = finished;
+    SSGenaralRequest *request = [self goodsListRequest];
+    request.animatingView = self.context.view;
+    [request startWithCompletionBlockWithSuccess:^(__kindof SSGenaralRequest * _Nonnull request) {
         if (request.responseModel.isSucceed == YES) {
             [self handleRequestRes:request.responseJSONObject[@"data"]];
         } else {
             self.currentPage -- ;
+            finished(request.responseModel.responseMsg);
         }
-        finished(request.error);
-    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+    } failure:^(__kindof SSGenaralRequest * _Nonnull request) {
         self.currentPage --;
-        finished(request.error);
+        finished(request.responseModel.responseMsg);
     }];
 }
 
@@ -38,8 +50,8 @@
     self.currentPage  = 1;
     self.currentNum = 0;
     self.totalNum = 10000;
-    self.result = nil;
     [self.lists removeAllObjects];
+    [self.allGoods removeAllObjects];
 }
 
 - (SSGenaralRequest *)goodsListRequest{
@@ -81,46 +93,30 @@
     return request;
 }
 
+//处理数据
 - (void)handleRequestRes:(id)obj{
-    BOOL isGetMoreData = NO;//是否是下拉数据
-    if (self.currentPage > 1) {
-        isGetMoreData = YES;
-    }
     TSSearchResult *result = [TSSearchResult yy_modelWithJSON:obj];
+    [self.allGoods addObjectsFromArray:result.list];
     self.totalNum = result.totalNum;
-    if (self.result == nil) {
-        self.result = result;
+    self.currentNum = self.allGoods.count;
+    if (self.allGoods.count == 0) {//需要配置 Empty 视图, 加载推荐数据
+        [self.lists removeAllObjects];
+        [self configEmptySection];
+        [self fetchRecomendGoods];
     } else {
-        NSMutableArray *lists = [NSMutableArray array];
-        [lists addObjectsFromArray:self.result.list==nil? @[]:self.result.list];
-        [lists addObjectsFromArray:result.list==nil? @[]:result.list];
-        self.result.list = [lists yy_modelToJSONObject];
-    }
-    if (isGetMoreData == YES) {
-        TSSearchSection *section = self.lists[0];
-        NSMutableArray<TSSearchRow *> *rows = [NSMutableArray arrayWithArray:section.rows];
+        NSArray<TSSearchRow *> *rows = [self rowsWithDatas:result.list];//创建新的row
+        TSSearchSection *section = [self findoutGoodsSection];
+        NSMutableArray *arr = [NSMutableArray arrayWithArray:section.rows];
+        [arr addObjectsFromArray:rows];
+        section.rows = arr;
         
-        NSArray<TSSearchRow *> *a = [self rowsWithDatas:result.list];
-        [rows addObjectsFromArray:a];
-        self.lists[0].rows = a;
-        self.currentNum = rows.count;
-        return;
+        if (self.lists.count == 0) {
+            [self.lists addObject:section];
+        } else {
+            [self.lists replaceObjectAtIndex:0 withObject:section];
+        }
     }
-    
-    self.isEmptyView = NO;
-    TSSearchSection *section = [self defaultSection];
-    NSArray<TSSearchRow *> *rows = [self rowsWithDatas:result.list];
-    if (rows.count == 0) {
-        self.isEmptyView = YES;
-        self.lists = [NSMutableArray arrayWithArray:[self configEmptySection]];
-        self.currentNum = 0;
-        return;
-    }
-    NSMutableArray *row = [NSMutableArray arrayWithArray:section.rows];
-    [row addObjectsFromArray:rows];
-    section.rows = row;
-    self.lists = [NSMutableArray arrayWithObject:section];
-    self.currentNum = self.lists.count==0? 0:[self.lists lastObject].rows.count;
+    self.requestFinished(@"");
 }
 
 - (NSArray<TSSearchRow *> *)rowsWithDatas:(NSArray<TSSearchList *> *)lists{
@@ -130,7 +126,7 @@
     NSMutableArray *rows = [NSMutableArray array];
     for (TSSearchList *list in lists) {
         TSSearchResultViewModel *vm = [[TSSearchResultViewModel alloc] initWithList:list];
-
+        
         TSSearchRow *row = [TSSearchRow new];
         row.cellIdentifier = self.isGrid==YES? @"TSSearchResultCell":@"TSSearchResultRailCell";
         row.rowSize = self.isGrid==YES? CGSizeMake((kScreenWidth - KRateW(40.0))/2.0, KRateW(282.0)):CGSizeMake(kScreenWidth-KRateW(32.0), KRateW(120.0));
@@ -141,9 +137,6 @@
 }
 
 - (TSSearchSection *)defaultSection{
-    if (self.lists.count != 0) {
-        return [self.lists lastObject];
-    }
     TSSearchSection *section = [TSSearchSection new];
     section.headerIdentifier = @"UICollectionReusableView";
     section.footerIdentifier = @"UICollectionReusableView";
@@ -153,32 +146,28 @@
     return section;
 }
 
-- (NSArray<TSSearchSection *> *)sectionsForUIWithDatas:(NSArray<TSSearchList *> *)lists{
-    if (lists.count == 0) {
-        return nil;
+- (void)updateUIStyle:(BOOL)isGrid complete:(void(^)(void))complete{
+    self.isGrid = isGrid;
+    if (self.allGoods.count == 0) {
+        for (TSSearchRow *row in [self findoutRecomendSection].rows) {
+            if (self.isGrid == YES) {
+                row.cellIdentifier = @"TSSearchResultRecomendCell";
+                row.rowSize = CGSizeMake((kScreenWidth - KRateW(40.0))/2.0, KRateW(282.0));
+            } else {
+                row.cellIdentifier = @"TSSearchResultRecomendWidthCell";
+                row.rowSize = CGSizeMake(kScreenWidth-KRateW(32.0), KRateW(120.0));
+            }
+        }
+        return;
     }
-    NSMutableArray *rows = [NSMutableArray array];
-    for (TSSearchList *list in lists) {
-        TSSearchResultViewModel *vm = [[TSSearchResultViewModel alloc] initWithList:list];
-
-        TSSearchRow *row = [TSSearchRow new];
+    for (TSSearchRow *row in [self findoutGoodsSection].rows) {
         row.cellIdentifier = self.isGrid==YES? @"TSSearchResultCell":@"TSSearchResultRailCell";
         row.rowSize = self.isGrid==YES? CGSizeMake((kScreenWidth - KRateW(40.0))/2.0, KRateW(282.0)):CGSizeMake(kScreenWidth-KRateW(32.0), KRateW(120.0));
-        row.obj = vm;
-        [rows addObject:row];
     }
-    
-    TSSearchSection *section = [TSSearchSection new];
-    section.headerIdentifier = @"UICollectionReusableView";
-    section.footerIdentifier = @"UICollectionReusableView";
-    section.headerHeight = KRateW(10.0);
-    section.footerHeight = 0;
-    section.rows = rows;
-    return @[section];
+    complete();
 }
 
-
-- (NSArray<TSSearchSection *> *)configEmptySection{
+- (void)configEmptySection{
     TSSearchRow *row = [TSSearchRow new];
     row.cellIdentifier = @"TSSearchResultEmptyCell";
     row.rowSize = CGSizeMake(kScreenWidth, KRateW(320.0));
@@ -190,6 +179,81 @@
     section.footerHeight = 0;
     section.rows = @[row];
     
-    return @[section];
+    [self.lists addObject:section];
 }
+
+- (TSSearchSection *)findoutGoodsSection{
+    for (TSSearchSection *section in self.lists) {
+        TSSearchRow *row = [section.rows lastObject];
+        if ([row.cellIdentifier isEqualToString:@"TSSearchResultCell"] ||
+            [row.cellIdentifier isEqualToString:@"TSSearchResultRailCell"]) {
+            return section;
+        }
+    }
+    return [self defaultSection];
+}
+
+- (TSSearchSection *)findoutRecomendSection {
+    for (TSSearchSection *section in self.lists) {
+        TSSearchRow *row = [section.rows lastObject];
+        if ([row.cellIdentifier isEqualToString:@"TSSearchResultRecomendCell"] ||
+            [row.cellIdentifier isEqualToString:@"TSSearchResultRecomendWidthCell"]) {
+            return section;
+        }
+    }
+    return [self defaultSection];
+}
+
+- (void)fetchRecomendGoods{
+    if (self.recomendGoods.count == 0) {
+        [TSRecomendDataController checkCurrentRecomendPage:RecomendSearchResultPage finished:^(TSRecomendModel *recomendInfo, TSRecomendPageInfo *pageInfo) {
+            [self configRecomendView:recomendInfo.goodsList];
+        }];
+    } else {
+        [self configRecomendView:self.recomendGoods];
+    }
+}
+
+- (void)configRecomendView:(NSArray<TSRecomendGoods *> *)recomendGoods{
+    
+    NSMutableArray *rows = [NSMutableArray array];
+    for (TSRecomendGoods *good in recomendGoods) {
+        TSSearchRow *row = [TSSearchRow new];
+        if (self.isGrid == YES) {
+            row.cellIdentifier = @"TSSearchResultRecomendCell";
+            row.rowSize = CGSizeMake((kScreenWidth - KRateW(40.0))/2.0, KRateW(282.0));
+        } else {
+            row.cellIdentifier = @"TSSearchResultRecomendWidthCell";
+            row.rowSize = CGSizeMake(kScreenWidth-KRateW(32.0), KRateW(120.0));
+        }
+        row.obj = good;
+        
+        [rows addObject:row];
+    }
+    
+    TSSearchSection *section = [self defaultSection];
+    section.headerTitle = @"热门推荐";
+    section.headerIdentifier = @"TSRecomendHeaderTitleView";
+    section.headerTextAlignment = self.isGrid==YES? NSTextAlignmentCenter:NSTextAlignmentLeft;
+    section.headerHeight = KRateW(56);
+    section.footerHeight = 0.1f;
+    section.rows = rows;
+    
+    [self.lists addObject:section];
+    
+    self.requestFinished(@"");
+}
+
+- (NSInteger)currentNum{
+    return self.allGoods.count;
+}
+
+- (BOOL)isEmptyView{
+    return self.allGoods.count==0? YES:NO;
+}
+
+- (BOOL)hasMoreData{
+    return self.currentNum == self.totalNum? NO:YES;
+}
+
 @end

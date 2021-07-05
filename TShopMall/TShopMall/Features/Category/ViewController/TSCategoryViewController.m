@@ -17,6 +17,8 @@
 #import "TSRecommendCell.h"
 #import "TSTableViewBaseCell.h"
 #import "TSTabBarController.h"
+#import "TSCartViewController.h"
+
 @interface TSCategoryViewController ()<UITableViewDelegate,UITableViewDataSource, TSCategoryContainerDataSource, TSTabBarControllerProtocol>
 
 /// 搜索按钮
@@ -112,7 +114,8 @@
 }
 
 -(void)categoryAction:(UIButton *)sender{
-
+    TSCartViewController *cart = [[TSCartViewController alloc] init];
+    [self.navigationController pushViewController:cart animated:YES];
 }
 
 #pragma mark - UITableViewDataSource

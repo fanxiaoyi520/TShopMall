@@ -444,6 +444,8 @@
     [fastBuy startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
         if (request.responseModel.isSucceed) {
             complete(YES);
+        }else{
+            [Popover popToastOnWindowWithText:request.responseJSONObject[@"msg"]];
         }
         
         } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
@@ -498,24 +500,25 @@
     YTKChainRequest *chainReq = [[YTKChainRequest alloc] init];
     __weak __typeof(YTKChainRequest *)weakSelf = chainReq;
     [chainReq addRequest:relevanceRequest callback:^(YTKChainRequest * _Nonnull chainRequest, YTKBaseRequest * _Nonnull baseRequest) {
-        SSGenaralRequest *result = (SSGenaralRequest *)baseRequest;
-        
-        NSString *shareToken = result.responseJSONObject[@"data"][@"shareToken"];
-        
-        NSMutableDictionary *setParams = [NSMutableDictionary dictionary];
-        [setParams setValue:@"price" forKey:@"discountType"];
-        [setParams setValue:discountPrice forKey:@"discountPrice"];
-        [setParams setValue:self.productUuid forKey:@"productUuid"];
-        [setParams setValue:shareToken forKey:@"shareToken"];
-        
-        SSGenaralRequest *setRequest = [[SSGenaralRequest alloc] initWithRequestUrl:kGoodDetailSetProductDiscountPriceUrl
-                                                                      requestMethod:YTKRequestMethodPOST
-                                                              requestSerializerType:YTKRequestSerializerTypeHTTP
-                                                             responseSerializerType:YTKResponseSerializerTypeJSON
-                                                                      requestHeader:@{}
-                                                                        requestBody:setParams
-                                                                     needErrorToast:YES];
-        [weakSelf addRequest:setRequest callback:nil];
+        SSBaseRequest *result = (SSGenaralRequest *)baseRequest;
+        if (result.responseModel.isSucceed) {
+            NSString *shareToken = result.responseJSONObject[@"data"][@"shareToken"];
+            
+            NSMutableDictionary *setParams = [NSMutableDictionary dictionary];
+            [setParams setValue:@"price" forKey:@"discountType"];
+            [setParams setValue:discountPrice forKey:@"discountPrice"];
+            [setParams setValue:self.productUuid forKey:@"productUuid"];
+            [setParams setValue:shareToken forKey:@"shareToken"];
+            
+            SSGenaralRequest *setRequest = [[SSGenaralRequest alloc] initWithRequestUrl:kGoodDetailSetProductDiscountPriceUrl
+                                                                          requestMethod:YTKRequestMethodPOST
+                                                                  requestSerializerType:YTKRequestSerializerTypeHTTP
+                                                                 responseSerializerType:YTKResponseSerializerTypeJSON
+                                                                          requestHeader:@{}
+                                                                            requestBody:setParams
+                                                                         needErrorToast:YES];
+            [weakSelf addRequest:setRequest callback:nil];
+        }
     }];
     chainReq.delegate = self;
     [chainReq start];

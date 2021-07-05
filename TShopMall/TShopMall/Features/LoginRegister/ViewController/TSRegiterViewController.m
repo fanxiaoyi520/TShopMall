@@ -165,6 +165,9 @@
         return;
     }
     [self.view endEditing:YES];
+    
+    
+    
     @weakify(self);
     [[TSServicesManager sharedInstance].acconutService fetchRegisterMobile:phoneNumber validCode:[self.topView getCode] invitationCode:[self.topView getInvitationCode] complete:^(BOOL isSucess) {
         if (isSucess) {

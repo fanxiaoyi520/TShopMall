@@ -9,8 +9,10 @@
 #import "TSUniversalFlowLayout.h"
 #import "TSUniversalCollectionViewCell.h"
 #import "TSPhoneNumDataController.h"
+#import "TSPhoneNumVeriCell.h"
+#import "TSWithdrawalPswSetController.h"
 
-@interface TSPhoneNumVeriViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate>
+@interface TSPhoneNumVeriViewController ()<UICollectionViewDelegate, UICollectionViewDataSource, UniversalFlowLayoutDelegate, UniversalCollectionViewCellDataDelegate, TSPhoneNumVeriCellDelegate>
 /// 数据中心
 @property(nonatomic, strong) TSPhoneNumDataController *dataController;
 /// CollectionView
@@ -58,7 +60,7 @@
         UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero
                                              collectionViewLayout:flowLayout];
         _collectionView = collectionView;
-        _collectionView.backgroundColor = KGrayColor;//KHexColor(@"#E6E6E6");
+        _collectionView.backgroundColor = KGrayColor;
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.showsVerticalScrollIndicator = NO;
@@ -73,6 +75,33 @@
         _dataController = [[TSPhoneNumDataController alloc] init];
     }
     return _dataController;
+}
+
+#pragma mark - TSPhoneNumVeriCellDelegate
+- (void)commitActionWithCode:(NSString *)code mobile:(nonnull NSString *)mobile commitButton:(nonnull UIButton *)commitButton {
+    [Popover popProgressOnWindowWithText:@"正在校验..."];
+    ///校验验证码
+    [[TSServicesManager sharedInstance].userInfoService checkCodeMobile:mobile code:code success:^{
+        [Popover removePopoverOnWindow];
+        TSWithdrawalPswSetController *withdrawalVC = [[TSWithdrawalPswSetController alloc] init];
+        [self.navigationController pushViewController:withdrawalVC animated:YES];
+    } failure:^(NSString * _Nonnull errorMsg) {
+        [Popover popToastOnWindowWithText:errorMsg];
+        commitButton.enabled = YES;
+    }];
+}
+
+- (void)sendCodeWithMobile:(NSString *)mobile codeButton:(UIButton *)codeButton cell:(nonnull TSPhoneNumVeriCell *)cell {
+    [self.dataController fetchCheckMobileSMSCodeMobile:mobile complete:^(BOOL isSucess) {
+        if (isSucess) {
+            ///开启定时器
+            [cell startTimer];
+            [Popover popToastOnWindowWithText:@"发送手机号验证码成功！"];
+        } else {
+            ///让验证码按钮enable
+            codeButton.enabled = YES;
+        }
+    }];
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -93,6 +122,10 @@
     TSUniversalCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:item.identify forIndexPath:indexPath];
     cell.indexPath = indexPath;
     cell.delegate = self;
+    if ([cell isKindOfClass:[TSPhoneNumVeriCell class]]) {
+        TSPhoneNumVeriCell *_cell = (TSPhoneNumVeriCell *)cell;
+        _cell.actionDelegate = self;
+    }
     return cell;
 }
 

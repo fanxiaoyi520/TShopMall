@@ -306,7 +306,7 @@
 -(UIButton *)preferenceButton{
     if (!_preferenceButton) {
         _preferenceButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_preferenceButton setImage:KImageMake(@"mall_detail_normal") forState:UIControlStateNormal];
+        [_preferenceButton setImage:KImageMake(@"mall_detail_selected") forState:UIControlStateNormal];
         [_preferenceButton setImage:KImageMake(@"mall_detail_selected") forState:UIControlStateSelected];
         [_preferenceButton addTarget:self action:@selector(preferenceAction:) forControlEvents:UIControlEventTouchUpInside];
     }

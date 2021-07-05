@@ -61,7 +61,8 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     [textField endEditing:YES];
-    self.startSearch(textField.text);
+    NSString *str = [textField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    self.startSearch(str);
     return self;
 }
 
