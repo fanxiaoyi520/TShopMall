@@ -16,6 +16,8 @@
 
 @property (nonatomic, strong) NSMutableArray <TSGoodDetailSectionModel *> *sections;
 
+@property(nonatomic, assign) BOOL hasCopyWriter;
+
 @end
 
 @implementation TSProductDetailDataController
@@ -196,16 +198,17 @@
         {   //商品文案
             
             NSDictionary *productInfo = productModel[@"productInfo"];
-            
-            TSGoodDetailSectionModel *section = self.sections[4];
-            TSGoodDetailItemCopyModel *item = (TSGoodDetailItemCopyModel *)[section.items firstObject];
-            
             NSString *write = productInfo[@"productShareContent"];
-            
-            if ([write isKindOfClass:[NSNull class]]) {
+            if ([write isKindOfClass:[NSNull class]] || write.length <= 0) {
                 write = @"";
+                self.hasCopyWriter = NO;
+                [self.sections removeObjectAtIndex:4];
+            }else{
+                self.hasCopyWriter = YES;
+                TSGoodDetailSectionModel *section = self.sections[4];
+                TSGoodDetailItemCopyModel *item = (TSGoodDetailItemCopyModel *)[section.items firstObject];
+                item.writeStr = write;
             }
-            item.writeStr = write;
         }
         
         {   //已选等
@@ -217,7 +220,12 @@
             NSArray *selectNameArr = front[@"selectName"];
             NSString *selected = [selectNameArr componentsJoinedByString:@","];
 
-            TSGoodDetailSectionModel *section = self.sections[5];
+            TSGoodDetailSectionModel *section;
+            if (self.hasCopyWriter) {
+                section = self.sections[5];
+            } else {
+                section = self.sections[4];
+            }
             TSGoodDetailItemPurchaseModel *item = (TSGoodDetailItemPurchaseModel *)[section.items firstObject];
             item.selectedStr = selected;
             item.localaddress = self.locationModel.localaddress;
@@ -328,9 +336,14 @@
         
         if (request.responseModel.isSucceed) {
 
-            TSGoodDetailSectionModel *section = self.sections[5];
+            TSGoodDetailSectionModel *section;
+            if (self.hasCopyWriter) {
+                section = self.sections[5];
+            } else {
+                section = self.sections[4];
+            }
+            
             TSGoodDetailItemPurchaseModel *item = (TSGoodDetailItemPurchaseModel *)[section.items firstObject];
-
             item.freight = [NSString stringWithFormat:@"%@",request.responseJSONObject[@"data"]];
 
             if (complete) {
@@ -384,7 +397,12 @@
         
         if (request.responseModel.isSucceed) {
 
-            TSGoodDetailSectionModel *section = self.sections[5];
+            TSGoodDetailSectionModel *section;
+            if (self.hasCopyWriter) {
+                section = self.sections[5];
+            } else {
+                section = self.sections[4];
+            }
             TSGoodDetailItemPurchaseModel *item = (TSGoodDetailItemPurchaseModel *)[section.items firstObject];
             NSDictionary *data = request.responseJSONObject[@"data"];
 
