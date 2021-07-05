@@ -410,6 +410,7 @@
     [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
         
         if (request.responseModel.isSucceed) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:TS_SHOULD_REFRESH_CARTS_NUMBER object:nil];
             [Popover popToastOnWindowWithText:@"加入购物车成功"];
         }
         

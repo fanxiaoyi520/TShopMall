@@ -14,3 +14,5 @@ UIKIT_EXTERN NSString *const TSUserInfoModifiedNotificationName;
 UIKIT_EXTERN NSString *const TSTimeCountdownNotificationName;
 
 UIKIT_EXTERN NSString *const TS_NetWork_State;
+
+UIKIT_EXTERN NSString * const TS_SHOULD_REFRESH_CARTS_NUMBER;
