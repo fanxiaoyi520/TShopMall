@@ -34,7 +34,7 @@
     user.phone = [self.phone copyWithZone:zone];
     user.regRegion = [self.regRegion copyWithZone:zone];
     user.region = [self.region copyWithZone:zone];
-    user.sex = self.sex;//[self.sex copyWithZone:zone];
+    user.sex = [self.sex copyWithZone:zone];
     user.userType = [self.userType copyWithZone:zone];
     user.username = [self.username copyWithZone:zone];
     return user;
@@ -61,7 +61,7 @@
         _phone = [coder decodeObjectForKey:@"phone"];
         _region = [coder decodeObjectForKey:@"region"];
         _regRegion = [coder decodeObjectForKey:@"regRegion"];
-        _sex = [coder decodeIntForKey:@"sex"];
+        _sex = [coder decodeObjectForKey:@"sex"];
         _userType = [coder decodeObjectForKey:@"userType"];
         _username = [coder decodeObjectForKey:@"username"];
     }

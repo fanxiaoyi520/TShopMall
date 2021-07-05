@@ -101,7 +101,7 @@ static const CGFloat DefaulToastyTinterval = 1.5;
     ToastyModel *model = [[ToastyModel alloc] init];
     model.type = ToastyTypeNormal;
     model.subTitle = text;
-    [self popToastOnView:[self keyView] popPosition:PopPositionBottom toastyModel:model appearBlock:nil];
+    [self popToastOnView:[self keyView] popPosition:PopPositionMiddle toastyModel:model appearBlock:nil];
 }
 
 /// 显示 Toast 方法 (显示在指定UIView)
@@ -109,7 +109,7 @@ static const CGFloat DefaulToastyTinterval = 1.5;
     ToastyModel *model = [[ToastyModel alloc] init];
     model.type = ToastyTypeNormal;
     model.subTitle = text;
-    [self popToastOnView:view popPosition:PopPositionBottom toastyModel:model appearBlock:nil];
+    [self popToastOnView:view popPosition:PopPositionMiddle toastyModel:model appearBlock:nil];
 }
 
 /// 显示 Toast 方法 (显示在指定UIView)
@@ -130,7 +130,7 @@ static const CGFloat DefaulToastyTinterval = 1.5;
     model.type = ToastyTypeNormal;
     model.subTitle = text;
     model.topOffset = topOffset;
-    [self popToastOnView:view popPosition:PopPositionBottom toastyModel:model appearBlock:nil];
+    [self popToastOnView:view popPosition:PopPositionMiddle toastyModel:model appearBlock:nil];
 }
 
 /// 显示 Toast 方法

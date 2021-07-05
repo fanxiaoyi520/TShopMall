@@ -36,7 +36,7 @@
         make.width.mas_lessThanOrEqualTo(150);
     }];
     [self.splitView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.contentView.mas_left).with.offset(16);
+        make.left.equalTo(self.contentView.mas_left).with.offset(0);
         make.right.equalTo(self.contentView.mas_right).with.offset(0);
         make.bottom.equalTo(self.contentView.mas_bottom).with.offset(0);
         make.height.mas_equalTo(0.33);
@@ -67,7 +67,7 @@
     if (_splitView == nil) {
         UIView *splitView = [[UIView alloc] init];
         _splitView = splitView;
-        _splitView.backgroundColor = KHexColor(@"#E6E6E6");
+        _splitView.backgroundColor = KHexColor(@"#F4F4F4");
         [self.contentView addSubview:_splitView];
     }
     return _splitView;

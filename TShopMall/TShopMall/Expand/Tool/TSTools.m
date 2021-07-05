@@ -83,6 +83,12 @@
     NSDate *day14date = [NSDate dateWithTimeIntervalSince1970:after20dayInterval];
     return [day14date stringWithFormat:@"yyyy-MM-dd HH:mm:ss"];
 }
+///获取版本号
++ (NSString *)getVersion {
+    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+    NSString *appVersion = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+    return appVersion;
+}
 
 /*
 + (BOOL)isPhoneNumber:(NSString *)phoneNumber {
