@@ -6,9 +6,10 @@
 //
 
 #import "TSUnbundlingCardViewController.h"
-#import "TSBankCardCell.h"
 #import "TSOperationBankTipsViewController.h"
 #import "TSAlertView.h"
+#import "TSUnbundlingCardViewCell.h"
+#import "TSBankCardCell.h"
 
 @interface TSUnbundlingCardViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,TSBankCardUnbundlingFooterDelegate>{
     NSArray * _bankNameArray;
@@ -55,8 +56,9 @@
     collectionView.alwaysBounceVertical = YES;
     collectionView.backgroundColor=KWhiteColor;
     [self.view addSubview:collectionView];
-    [collectionView registerClass:[TSBankCardCell class] forCellWithReuseIdentifier:@"cellIdentifier"];
-    [collectionView registerClass:[TSBankCardUnbundlingFooter class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"FooterView"];
+    [collectionView registerClass:[TSUnbundlingCardViewCell class] forCellWithReuseIdentifier:@"cellIdentifier"];
+    if (![self.model.bankStatus isEqualToString:@"0"])
+        [collectionView registerClass:[TSBankCardUnbundlingFooter class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"FooterView"];
 }
 
 // MARK: UICollectionViewDataSource
@@ -64,7 +66,7 @@
     return _bankNameArray.count;
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    TSBankCardCell * cell =[collectionView dequeueReusableCellWithReuseIdentifier:@"cellIdentifier" forIndexPath:indexPath];
+    TSUnbundlingCardViewCell * cell =[collectionView dequeueReusableCellWithReuseIdentifier:@"cellIdentifier" forIndexPath:indexPath];
     cell.sourceInt = 5;
     [cell setModel:@[self.model][indexPath.row] indexPath:indexPath];
     return cell;
@@ -72,7 +74,9 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
 {
-    return CGSizeMake(kScreenWidth, 83);
+    if (![self.model.bankStatus isEqualToString:@"0"])
+        return CGSizeMake(kScreenWidth, 83);
+    return CGSizeMake(0, 0);
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
