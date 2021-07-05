@@ -37,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 下载素材
 @property (nonatomic, strong) NSArray <TSMaterialImageModel *> *materialModels;
 
-
+@property(nonatomic, assign) BOOL hasCopyWriter;
 
 @property (nonatomic, strong, readonly) NSMutableArray <TSGoodDetailSectionModel *> *sections;
 

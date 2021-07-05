@@ -356,6 +356,10 @@
 }
 
 #pragma mark - GoodDetailSkuViewDelegate
+-(void)goodDetailSkuViewCloseClick:(TSGoodDetailSkuView *)skuView{
+    [self.skuPpopups dismissAnimated:YES completion:nil];
+}
+
 -(void)goodDetailSkuView:(TSGoodDetailSkuView *)skuView addShoppingCartNum:(NSString *)buyNum{
     [self.skuPpopups dismissAnimated:YES completion:nil];
     
@@ -643,7 +647,12 @@
         if ([params[@"purchaseType"] intValue] == 0) {//赠品
             
         } else if ([params[@"purchaseType"] intValue] == 1){//已选
-            TSGoodDetailSectionModel *section = self.dataController.sections[5];
+            TSGoodDetailSectionModel *section;
+            if (self.dataController.hasCopyWriter) {
+                section = self.dataController.sections[5];
+            } else {
+                section = self.dataController.sections[4];
+            }
             [self.skuPpopups presentAnimated:YES completion:NULL];
             self.skuView.purchaseModel = (TSGoodDetailItemPurchaseModel *)[section.items firstObject];
         } else if ([params[@"purchaseType"] intValue] == 2){//配送

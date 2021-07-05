@@ -16,8 +16,6 @@
 
 @property (nonatomic, strong) NSMutableArray <TSGoodDetailSectionModel *> *sections;
 
-@property(nonatomic, assign) BOOL hasCopyWriter;
-
 @end
 
 @implementation TSProductDetailDataController
@@ -405,8 +403,8 @@
             }
             TSGoodDetailItemPurchaseModel *item = (TSGoodDetailItemPurchaseModel *)[section.items firstObject];
             NSDictionary *data = request.responseJSONObject[@"data"];
-
-            item.canBuy = [data[@"canBuy"] boolValue];
+            BOOL canBuy = [data[@"canBuy"] boolValue];
+            item.canBuy = canBuy;
             item.hasProduct = [data[@"hasProduct"] boolValue];
             item.totalNum = [data[@"totalNum"] integerValue];
 
