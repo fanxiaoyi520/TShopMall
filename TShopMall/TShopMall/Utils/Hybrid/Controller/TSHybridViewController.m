@@ -191,7 +191,7 @@ typedef enum : NSUInteger {
         [button setImage:KImageMake(@"mall_navigationbar_back") forState:UIControlStateNormal];
         [button setImage:KImageMake(@"mall_navigationbar_back") forState:UIControlStateHighlighted];
         button.frame = CGRectMake(0, 0, 40, 40);
-        self.gk_navRightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+        self.gk_navLeftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
     }
     
     self.view.backgroundColor = [UIColor whiteColor];

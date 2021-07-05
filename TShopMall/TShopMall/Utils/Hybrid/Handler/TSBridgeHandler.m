@@ -12,7 +12,7 @@
 #import "TSWKMessageHandlerHelper.h"
 #import "TSConventionAlertView.h"
 #import <Photos/Photos.h>
-#import "TSMakeOrderController.h"
+#import "TSPayController.h"
 
 @implementation TSBridgeHandler
 
@@ -147,9 +147,16 @@
     NSString *controllerName = paramsDic[@"dest"];
     UIViewController *con;
     if ([@"toOrderPay" isEqualToString:controllerName]) {
-        TSMakeOrderController *order = [[TSMakeOrderController alloc] init];
-        order.isFromCart = NO;
-        con = order;
+        NSString *uuid  = [NSString stringWithFormat:@"%@", paramsDic[@"data"][@"uuid"]];
+        NSString *isGroup = @"1";
+        if (uuid.length != 0) {
+            NSString *str = [uuid substringWithRange:NSMakeRange(0, 1)];
+            isGroup = [str isEqualToString:@"I"]? @"2":@"1";
+        }
+        TSPayController *payCon = [[TSPayController alloc] init];
+        payCon.payOrderId = uuid;//订单号
+        payCon.isGroup = isGroup;//是否是组订单
+        con = payCon;
     }else{
         Class className = NSClassFromString(controllerName);
         con = [[className alloc] init];

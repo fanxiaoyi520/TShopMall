@@ -15,3 +15,6 @@ NSString *const TSTimeCountdownNotificationName = @"TSTimeCountdownNotificationN
 
 NSString *const TS_NetWork_State = @"TS_NetWork_StateNotification";
 
+
+///更新购物车角标的通知
+NSString * const TS_SHOULD_REFRESH_CARTS_NUMBER = @"ShouleRefreshCartsNumber";
