@@ -74,7 +74,7 @@
                                 if (isSucess) {
                                     [[NTESQuickLoginManager sharedInstance] closeAuthController:^{
                                         if (self.loginBlock) {
-                                            self.loginBlock();
+                                            self.loginBlock(YES);
                                         }
                                     }];
                                 }
@@ -120,14 +120,14 @@
                     /// 完成登录
                     [[NTESQuickLoginManager sharedInstance] closeAuthController:^{
                         if (self.loginBlock) {
-                            self.loginBlock();
+                            self.loginBlock(YES);
                         }
                     }];
                 }
                 else{
                     [[NTESQuickLoginManager sharedInstance] closeAuthController:^{
                         if (self.loginBlock) {
-                            self.loginBlock();
+                            self.loginBlock(YES);
                         }
                     }];
                 }
@@ -193,7 +193,7 @@
                     /// 完成登录
                     [self dismissViewControllerAnimated:YES completion:^{
                         if (self.loginBlock) {
-                            self.loginBlock();
+                            self.loginBlock(YES);
                         }
                         
                     }];
