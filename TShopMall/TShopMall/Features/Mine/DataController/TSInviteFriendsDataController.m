@@ -7,6 +7,8 @@
 
 #import "TSInviteFriendsDataController.h"
 #import "TSInviteFriendsDataModel.h"
+#import "TSConventionAlertView.h"
+#import <Photos/Photos.h>
 @interface TSInviteFriendsDataController()
 @property (nonatomic, strong) NSMutableArray <TSInviteFriendsSectionModel *> *sections;
 
@@ -206,5 +208,62 @@
 - (void)setShowAll:(BOOL)showAll {
     _showAll = showAll;
     [self fetchInvitationRecord];
+}
+#pragma mark 绘制海报
+- (UIImage *)createImage:(UIImage *)image  {
+    CGSize size = UIScreen.mainScreen.bounds.size;
+    NSString *title = @"TCL之家";
+    NSString *des = @"有品质  有保障  放心买家";
+    NSString *inviteCode = @"邀请码：RWRTNA";
+    UIImage *codeImage = [UIImage imageNamed:@"mall_category_btn_gird"];
+    NSString *codeIntro = @"长按图片下载APP";
+    UIGraphicsBeginImageContext(size);
+    
+    UIGraphicsBeginImageContextWithOptions(size, YES, UIScreen.mainScreen.scale);
+    [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
+  
+    CGContextRef context = UIGraphicsGetCurrentContext();
+//    CGContextTranslateCTM(context, 0, 0);
+    CGContextAddRect(context, CGRectMake(0, size.height - 90, size.width, 90));
+    CGContextSetRGBFillColor(context, 1, 1, 1, 1);
+    CGContextDrawPath(context, kCGPathFill );
+    CGContextSaveGState(context);
+    [codeImage drawInRect:CGRectMake(size.width - 65, size.height - 80, 59, 59)];
+    [title drawAtPoint:CGPointMake(66, size.height - 90 + 11) withAttributes:@{NSFontAttributeName:KFont(PingFangSCRegular, 16),NSForegroundColorAttributeName:KHexColor(@"#2D3132")}];
+    CGContextSetAlpha(context, 0.4);
+    [des drawAtPoint:CGPointMake(66,size.height - 90 + 35) withAttributes:@{NSFontAttributeName:KFont(PingFangSCRegular, 8),NSForegroundColorAttributeName:[UIColor colorWithRed:45/255.0 green:49/255.0 blue:50/255.0 alpha:1.0]}];
+    [codeIntro drawAtPoint:CGPointMake(size.width - 65, size.height - 90 + 71) withAttributes:@{NSFontAttributeName:KFont(PingFangSCRegular, 6),NSForegroundColorAttributeName:[UIColor colorWithRed:45/255.0 green:49/255.0 blue:50/255.0 alpha:1.0]}];
+    CGContextRestoreGState(context);
+    [inviteCode drawAtPoint:CGPointMake(16,size.height - 90 + 63) withAttributes:@{NSFontAttributeName:KFont(PingFangSCRegular, 16),NSForegroundColorAttributeName:KHexColor(@"#2D3132")}];
+    UIImage *scaleImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+//    CGContextRelease(context);
+    return scaleImage;
+}
+-(void)shareWithType:(ShareActionType) type {
+    UIImage *shareImg = [self createImage:KImageMake(@"邀请画面")];
+    switch (type) {
+        case ShareActionTypeFriends:
+            
+            break;
+        case ShareActionTypeTimeline:
+            
+            break;
+        default:
+            UIImageWriteToSavedPhotosAlbum(shareImg, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+            break;
+    }
+}
+
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error  contextInfo:(void *)contextInfo{
+//    PHAuthorizationStatus status = [PHPhotoLibrary authorizationStatus];
+    if (error) {
+        TSConventionAlertView *alert =   [TSConventionAlertView tcl_alertViewWithTitle:@"存储失败" message:@"请打开 设置-隐私-照片 来进行设置" preferredStyle:TCLAlertViewStyleAlert msgFont:KRegularFont(16.0) widthMargin:16.0 highlightedText:@"" hasPrefixStr:@"" highlightedColor:KTextColor];
+        TSConventionAlertItem  *sureAlert  = [TSConventionAlertItem tcl_itemWithTitle:@"确定"  titleColor:KTextColor style:TCLAlertItemStyleDefault handler:^(TSConventionAlertItem *item) {}];
+        [alert tcl_addAlertItem:sureAlert];
+        [alert tcl_showView];
+    }else{
+        [Popover popToastOnWindowWithText:@"保存成功"];
+    }
 }
 @end

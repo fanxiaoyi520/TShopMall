@@ -7,6 +7,11 @@
 
 #import "TSBaseDataController.h"
 #import "TSInviteFriendsSectionModel.h"
+typedef NS_ENUM(NSUInteger,ShareActionType){
+    ShareActionTypeFriends,
+    ShareActionTypeTimeline,
+    ShareActionTypeSave
+};
 NS_ASSUME_NONNULL_BEGIN 
 @interface TSInviteFriendsDataController : TSBaseDataController
 //全局参数
@@ -30,6 +35,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)fetchInvitationCode;
 
 - (void)fetchInvitationRecord;
+//
+-(void)shareWithType:(ShareActionType) type;
 @end
 
 NS_ASSUME_NONNULL_END
