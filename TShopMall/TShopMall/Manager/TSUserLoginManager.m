@@ -16,7 +16,7 @@
 #import "TSLoginRegisterDataController.h"
 #import "TSBindMobileController.h"
 @interface TSUserLoginManager ()
-@property (nonatomic, strong) TSBaseNavigationController *nav;
+@property (nonatomic, strong) NSMutableArray *marr;
 
 @end
 
@@ -68,6 +68,7 @@
 -(void)configLoginController:(void(^)(UIViewController *))callBack{
     
     BOOL shouldQL = [[NTESQuickLoginManager sharedInstance] shouldQuickLogin];
+    [self.marr removeAllObjects];
     if (shouldQL && [[UIApplication sharedApplication].appBundleID isEqualToString:QuickLoginBundleID]) {
         TSOneClickLoginViewController *oneClickLoginVC = [TSOneClickLoginViewController new];
         TSBaseNavigationController *nav = [[TSBaseNavigationController alloc] initWithRootViewController:oneClickLoginVC];
@@ -78,7 +79,11 @@
                 [self otherLoginWithAnimation:YES];
             }];
         };
-        oneClickLoginVC.loginBlock = self.loginBlock;
+//        oneClickLoginVC.loginBlock = self.loginBlock;
+        oneClickLoginVC.loginBlock = ^{
+            [self.marr removeAllObjects];
+            self.loginBlock();
+        };
         oneClickLoginVC.bindBlock = ^(NSString *token){
             
             TSBindMobileController *vc = [TSBindMobileController new];
@@ -90,12 +95,16 @@
             [[UIApplication sharedApplication].delegate.window.rootViewController presentViewController:nav animated:YES completion:^{
             }];
         };
+        [self.marr addObject:nav];
         callBack(nav);
     }else{
         TSLoginViewController *loginVC = [TSLoginViewController new];
         loginVC.needClose = NO;
         TSBaseNavigationController *nav = [[TSBaseNavigationController alloc] initWithRootViewController:loginVC];
-        loginVC.loginBlock = self.loginBlock;
+        loginVC.loginBlock = ^{
+            [self.marr removeAllObjects];
+            self.loginBlock();
+        };
         loginVC.bindBlock = ^(NSString * _Nonnull token) {
             TSBindMobileController *vc = [TSBindMobileController new];
             vc.token = token;
@@ -106,6 +115,7 @@
             [[UIApplication sharedApplication].delegate.window.rootViewController presentViewController:nav animated:YES completion:^{
             }];
         };
+        [self.marr addObject:nav];
         callBack(nav);
     }
     
@@ -142,4 +152,11 @@
     }];
 }
 
+- (NSMutableArray *)marr
+{
+    if (!_marr) {
+        _marr = @[].mutableCopy;
+    }
+    return _marr;
+}
 @end
