@@ -19,22 +19,40 @@
 @implementation TSLoginRegisterDataController
 
 -(void)fetchAccountPublicKeyComplete:(void(^)(BOOL isSucess))complete{
+    NSString *urlStr = [NSString stringWithFormat:@"%@%@", kAccountCenterApiPrefix,kAccountPublicKeyUrl];
+    NSURL *url = [NSURL URLWithString:urlStr];
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *firsttask = [session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if(error == nil){
+            id objc = [data utf8String];
+            NSLog(@"%@",objc);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [TSGlobalManager shareInstance].publicKey = objc;
+               if (complete) {
+                   complete(YES);
+               }
+            });
+        }else{
+           
+        }
 
-    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithBaseUrl:kAccountCenterApiPrefix RequestUrl:kAccountPublicKeyUrl requestMethod:YTKRequestMethodGET requestSerializerType:YTKRequestSerializerTypeJSON responseSerializerType:YTKResponseSerializerTypeJSON requestHeader:@{} requestBody:@{} needErrorToast:YES];
-    [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
-        
-        if (request.responseString) {
-            [TSGlobalManager shareInstance].publicKey = request.responseString;
-            if (complete) {
-                complete(YES);
-            }
-        }
-        
-    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-        if (complete) {
-            complete(NO);
-        }
     }];
+    [firsttask resume];
+//    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithBaseUrl:kAccountCenterApiPrefix RequestUrl:kAccountPublicKeyUrl requestMethod:YTKRequestMethodGET requestSerializerType:YTKRequestSerializerTypeJSON responseSerializerType:YTKResponseSerializerTypeJSON requestHeader:@{} requestBody:@{} needErrorToast:YES];
+//    [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+//
+//        if (request.responseString) {
+//            [TSGlobalManager shareInstance].publicKey = request.responseString;
+//            if (complete) {
+//                complete(YES);
+//            }
+//        }
+//
+//    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+//        if (complete) {
+//            complete(NO);
+//        }
+//    }];
 }
 
 - (void)fetchLogoutComplete:(void (^)(BOOL))complete{

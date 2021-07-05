@@ -6,7 +6,7 @@
 //
 
 #import "TSUserInfoManager.h"
-#import "RSA.h"
+#import "JWT.h"
 @interface TSUserInfoManager()<NSCoding>
 
 @end
@@ -102,12 +102,6 @@
 
 - (void)setAccessToken:(NSString *)accessToken{
     _accessToken = accessToken;
-    if ([TSGlobalManager shareInstance].publicKey) {
-        NSLog(@"%@", [TSGlobalManager shareInstance].publicKey);
-        NSString *decrypeStr1 = [RSA decryptString:accessToken publicKey:[TSGlobalManager shareInstance].publicKey];
-        NSLog(@"私钥加密公钥解密后的数据 %@",decrypeStr1);
-    }
-   
     
 }
 @end
