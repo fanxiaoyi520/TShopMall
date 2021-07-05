@@ -55,7 +55,7 @@
         configure.backStyle = GKNavigationBarBackStyleBlack;
         configure.gk_navItemLeftSpace = 12.0f;
         configure.gk_navItemRightSpace = 12.0f;
-        configure.backImage = [UIImage imageNamed:@"mall_navigationbar_back"];
+//        configure.backImage = [UIImage imageNamed:@"mall_navigationbar_back"];
         configure.gk_openScrollViewGestureHandle = YES;
     }];
 }
