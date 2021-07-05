@@ -67,7 +67,9 @@
     else if([typeValue isEqualToString:@"Goods"] || [typeValue isEqualToString:@"GOODS"]){
         uri = [NSString stringWithFormat:@"page://quote/productDetail?uuid=%@", objectValue];
     }
-    
+    else if([typeValue isEqualToString:@"INVITE_FRIENDS"]){
+        uri = @"page://quote/inviteFriends";
+    }
     return uri;
 }
 
@@ -98,6 +100,8 @@
         @"page://quote/productDetail": @"TSProductDetailController",
         @"page://quote/category": @"TSCategoryViewController",
         @"page://quote/categoryDetail": @"TSCategoryDetailViewController",
+        @"page://quote/inviteFriends": @"TSInviteFriendsViewController",
+        
     };
 }
 @end
