@@ -10,6 +10,8 @@
 #import "TSUniversalFlowLayout.h"
 #import "TSUniversalCollectionViewCell.h"
 #import "TSProductDetailController.h"
+#import "TSGridGoodsCollectionViewCell.h"
+#import "TSHotGoodsHeaderView.h"
 
 @interface TSRankHotCellController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate>
 
@@ -66,12 +68,12 @@
         UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero
                                              collectionViewLayout:flowLayout];
         _collectionView = collectionView;
-        _collectionView.backgroundColor = KWhiteColor;
+        _collectionView.backgroundColor = KGrayColor;
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.showsVerticalScrollIndicator = NO;
         _collectionView.showsHorizontalScrollIndicator = NO;
-        _collectionView.contentInset = UIEdgeInsetsZero;
+        _collectionView.contentInset = UIEdgeInsetsMake(0, 0, 20, 0);
         [self.view addSubview:_collectionView];
     }
     return _collectionView;
@@ -92,10 +94,17 @@
     TSHotSectionItemModel *item = model.items[indexPath.row];
     Class className = NSClassFromString(item.identify);
     [collectionView registerClass:[className class] forCellWithReuseIdentifier:item.identify];
-    TSUniversalCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:item.identify forIndexPath:indexPath];
-    cell.indexPath = indexPath;
-    cell.delegate = self;
-    return cell;
+    
+    if ([item.identify isEqualToString:NSStringFromClass(TSGridGoodsCollectionViewCell.class)]) {
+        TSGridGoodsCollectionViewCell *contentCell = [collectionView dequeueReusableCellWithReuseIdentifier:item.identify forIndexPath:indexPath];
+        contentCell.item = item.goodModel;
+        return contentCell;
+    }else {
+        TSUniversalCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:item.identify forIndexPath:indexPath];
+        cell.indexPath = indexPath;
+        cell.delegate = self;
+        return cell;
+    }
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -150,5 +159,45 @@ spacingWithLastSectionForSectionAtIndex:(NSInteger)section{
     TSHotSectionModel *model = self.dataController.sections[section];
     return model.spacingWithLastSection;
 }
+
+- (BOOL)collectionView:(UICollectionView *_Nullable)collectionView
+                layout:(TSUniversalFlowLayout *_Nullable)collectionViewLayout
+ hasHeaderReusableView:(NSIndexPath *_Nullable)indexPath{
+    TSHotSectionModel *model = self.dataController.sections[indexPath.section];
+    return model.hasHeader;
+}
+
+- (CGSize)collectionView:(UICollectionView *_Nullable)collectionView
+                  layout:(TSUniversalFlowLayout *_Nullable)collectionViewLayout
+referenceSizeForHeaderInSection:(NSInteger)section{
+    TSHotSectionModel *model = self.dataController.sections[section];
+    return model.headerSize;
+}
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
+           viewForSupplementaryElementOfKind:(NSString *)kind
+                                 atIndexPath:(NSIndexPath *)indexPath{
+    TSHotSectionModel *sectionModel = self.dataController.sections[indexPath.section];
+    
+    if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
+        Class className = NSClassFromString(sectionModel.headerIdentify);
+        [collectionView registerClass:[className class]
+           forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
+                  withReuseIdentifier:sectionModel.headerIdentify];
+        
+        TSHotGoodsHeaderView *header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:sectionModel.headerIdentify forIndexPath:indexPath];
+        header.title_label.text = sectionModel.header_title;
+        
+        return header;
+    }else{
+        return nil;
+    }
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    TSHotSectionModel *model = self.dataController.sections[section];
+    return model.sectionInset;
+}
+
 
 @end

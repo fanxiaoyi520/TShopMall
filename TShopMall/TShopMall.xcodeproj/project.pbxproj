@@ -95,6 +95,7 @@
 		65F71270268C1D7C002A1ECC /* TSMineLeftBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F7126F268C1D7C002A1ECC /* TSMineLeftBarView.m */; };
 		65F71273268C4154002A1ECC /* TSMineOrderCountModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F71272268C4154002A1ECC /* TSMineOrderCountModel.m */; };
 		65F71276268C7AE0002A1ECC /* NSDictionary+Value.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F71274268C7ADF002A1ECC /* NSDictionary+Value.m */; };
+		70A0F4352693108B00DD28C9 /* TSHotGoodsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 70A0F4342693108B00DD28C9 /* TSHotGoodsHeaderView.m */; };
 		70A6AF7F268EBD780035F6A3 /* TSSaleRankRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 70A6AF7E268EBD780035F6A3 /* TSSaleRankRequest.m */; };
 		70E5A5C2268F0B16008D961E /* TSProfitRankRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E5A5C1268F0B16008D961E /* TSProfitRankRequest.m */; };
 		70EBC074268C0DC0009D735B /* UIView+AZGradient.m in Sources */ = {isa = PBXBuildFile; fileRef = 70EBC073268C0DC0009D735B /* UIView+AZGradient.m */; };
@@ -804,6 +805,8 @@
 		65F71272268C4154002A1ECC /* TSMineOrderCountModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSMineOrderCountModel.m; sourceTree = "<group>"; };
 		65F71274268C7ADF002A1ECC /* NSDictionary+Value.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Value.m"; sourceTree = "<group>"; };
 		65F71275268C7AE0002A1ECC /* NSDictionary+Value.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Value.h"; sourceTree = "<group>"; };
+		70A0F4332693108B00DD28C9 /* TSHotGoodsHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSHotGoodsHeaderView.h; sourceTree = "<group>"; };
+		70A0F4342693108B00DD28C9 /* TSHotGoodsHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSHotGoodsHeaderView.m; sourceTree = "<group>"; };
 		70A6AF7D268EBD780035F6A3 /* TSSaleRankRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSSaleRankRequest.h; sourceTree = "<group>"; };
 		70A6AF7E268EBD780035F6A3 /* TSSaleRankRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSSaleRankRequest.m; sourceTree = "<group>"; };
 		70E5A5C0268F0B16008D961E /* TSProfitRankRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSProfitRankRequest.h; sourceTree = "<group>"; };
@@ -4118,6 +4121,8 @@
 				70EBC07D268C3F0B009D735B /* TSPersonalRankView.m */,
 				70EBC082268C5F52009D735B /* TSRecommendMaxPriceView.h */,
 				70EBC083268C5F52009D735B /* TSRecommendMaxPriceView.m */,
+				70A0F4332693108B00DD28C9 /* TSHotGoodsHeaderView.h */,
+				70A0F4342693108B00DD28C9 /* TSHotGoodsHeaderView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4630,6 +4635,7 @@
 				F55D2D3B267B3F72006BACCF /* TSRankRecommendHeaderView.m in Sources */,
 				F55D2CC926784ACD006BACCF /* TSUserInfoView.m in Sources */,
 				CE66DAF82684709000E8D433 /* TSWithdrawalViewController.m in Sources */,
+				70A0F4352693108B00DD28C9 /* TSHotGoodsHeaderView.m in Sources */,
 				C2A34C7D2674A56C0095497E /* TSSearchTextView.m in Sources */,
 				04113171268021CC000B5BAF /* TSEdgeInsetLabel.m in Sources */,
 				C22EE2852681B16500E59C86 /* TSRecomendModel.m in Sources */,
