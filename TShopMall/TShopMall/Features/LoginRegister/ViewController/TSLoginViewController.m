@@ -278,8 +278,6 @@
             }];
         }
     }];
-    
-    
    
     
 }
@@ -302,7 +300,7 @@
 
 - (void)goToApple {
     @weakify(self);
-   
+  
     AuthAppleIDManager *manager = [AuthAppleIDManager sharedInstance];
     [manager authorizationAppleID];
     manager.loginByTokenBlock = ^(NSString * _Nonnull token) {
@@ -345,7 +343,6 @@
 
 #pragma mark - TSHybridViewControllerDelegate
 -(void)hybridViewControllerWillDidDisappear:(TSHybridViewController *)hybridViewController params:(NSDictionary *)param{
-    
     
 }
 

@@ -61,7 +61,8 @@
         self.window.rootViewController = vc;
         
         if ([vc.childViewControllers.firstObject isKindOfClass:TSLoginViewController.class]) {
-            [self showAlertInView:vc.view];
+            TSLoginViewController *loginViewController = vc.childViewControllers.firstObject;
+            [self showAlertInView:loginViewController.view];
         }
     }];
 }
