@@ -80,6 +80,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(void)fetchCheckSalesmanWithToken:(NSString *)token
                              complete:(void(^)(BOOL isSucess))complete;
+/// 登出
+-(void)fetchLogoutComplete:(void(^)(BOOL isSucess))complete;
+/// 获取公钥
+-(void)fetchAccountPublicKeyComplete:(void(^)(BOOL isSucess))complete;
 
 /** 获取注册登录的协议信息 */
 - (void)fetchAgreementWithCompleted: (void(^)(NSArray<TSAgreementModel *> *agreementModels))completed;

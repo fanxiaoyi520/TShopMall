@@ -14,8 +14,39 @@
 #import "TSLoginByTokenRequest.h"
 #import "TSChangeBindRequest.h"
 #import "TSBindUserByAuthCodeRequest.h"
+#import "TSLogoutRequest.h"
 
 @implementation TSLoginRegisterDataController
+
+-(void)fetchAccountPublicKeyComplete:(void(^)(BOOL isSucess))complete{
+
+    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithBaseUrl:kAccountCenterApiPrefix RequestUrl:kAccountPublicKeyUrl requestMethod:YTKRequestMethodGET requestSerializerType:YTKRequestSerializerTypeJSON responseSerializerType:YTKResponseSerializerTypeJSON requestHeader:@{} requestBody:@{} needErrorToast:YES];
+    [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+        
+        if (request.responseString) {
+            [TSGlobalManager shareInstance].publicKey = request.responseString;
+            if (complete) {
+                complete(YES);
+            }
+        }
+        
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        if (complete) {
+            complete(NO);
+        }
+    }];
+}
+
+- (void)fetchLogoutComplete:(void (^)(BOOL))complete{
+    TSLogoutRequest *request = [TSLogoutRequest new];
+    [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+        [[TSUserInfoManager userInfo] clearUserInfo];
+        complete(YES);
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        
+    }];
+}
+
 -(void)fetchRefershTokenComplete:(void(^)(BOOL isSucess))complete{
     NSString *requestUrl = [NSString stringWithFormat:@"%@?appId=%@&tenantId=%@&appSecret=%@&userName=%@",kAccountRefershTokenUrl,kAppId,@"tcl",kAppSecret, [TSUserInfoManager userInfo].userName];
 
