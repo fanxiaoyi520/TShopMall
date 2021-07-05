@@ -165,16 +165,29 @@
         return;
     }
     [self.view endEditing:YES];
+    
+    
+    
     @weakify(self);
-    [[TSServicesManager sharedInstance].acconutService fetchRegisterMobile:phoneNumber validCode:[self.topView getCode] invitationCode:[self.topView getInvitationCode] complete:^(BOOL isSucess) {
+    
+    /// 先判断分销员
+    [[TSServicesManager sharedInstance].acconutService fetchCheckSalesmanWithMobile:phoneNumber complete:^(BOOL isSucess) {
+        @strongify(self)
         if (isSucess) {
-            @strongify(self)
-            [self dismissViewControllerAnimated:NO completion:nil];
-            if (self.loginBlock) {
-                self.loginBlock();
-            }
+            [[TSServicesManager sharedInstance].acconutService fetchRegisterMobile:phoneNumber validCode:[self.topView getCode] invitationCode:[self.topView getInvitationCode] complete:^(BOOL isSucess) {
+                if (isSucess) {
+                    @strongify(self)
+                    [self dismissViewControllerAnimated:NO completion:nil];
+                    if (self.loginBlock) {
+                        self.loginBlock();
+                    }
+                }
+            }];
+        }else{
+            
         }
     }];
+   
 }
 
 - (void)sendCode {
