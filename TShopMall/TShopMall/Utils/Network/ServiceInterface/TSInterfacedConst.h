@@ -120,6 +120,7 @@ UIKIT_EXTERN NSString *const kCustomerInvitationCode;
 //一级分销员通过邀请码推广记录
 UIKIT_EXTERN NSString *const kSalesmanInvitationRecord;
 #pragma mark - 设置
+UIKIT_EXTERN NSString *const kCheckCodeUrl;
 UIKIT_EXTERN NSString *const kAboutMeAgreementUrl;
 UIKIT_EXTERN NSString *const kModifyUserUrl;
 UIKIT_EXTERN NSString *const kUploadImageUrl;

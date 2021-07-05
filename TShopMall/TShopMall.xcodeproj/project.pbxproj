@@ -13,6 +13,8 @@
 		041131D2268096DA000B5BAF /* TSHotSectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 041131D0268096D9000B5BAF /* TSHotSectionModel.m */; };
 		041131D7268096F6000B5BAF /* TSGoodsShowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041131D4268096F6000B5BAF /* TSGoodsShowCell.m */; };
 		041131D8268096F6000B5BAF /* TSGoodsHotRankCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041131D5268096F6000B5BAF /* TSGoodsHotRankCell.m */; };
+		0428706E26904E6600A89F83 /* TSPayPasswordInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0428706D26904E6600A89F83 /* TSPayPasswordInputView.m */; };
+		0428707126905C4F00A89F83 /* TSPayPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0428707026905C4F00A89F83 /* TSPayPwdViewController.m */; };
 		042F423A2681A05C00555F5D /* TSRecommendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042F42382681A05B00555F5D /* TSRecommendCell.m */; };
 		042F423D2681FDB000555F5D /* TSRealNameAuthCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042F423C2681FDB000555F5D /* TSRealNameAuthCell.m */; };
 		042F42402681FDFE00555F5D /* TSRealNameInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042F423F2681FDFE00555F5D /* TSRealNameInfoCell.m */; };
@@ -22,6 +24,8 @@
 		043C2352268B248300460FDB /* TSUserInfoService.m in Sources */ = {isa = PBXBuildFile; fileRef = 043C2351268B248300460FDB /* TSUserInfoService.m */; };
 		043C2355268B454A00460FDB /* TSUserInfoRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 043C2354268B454A00460FDB /* TSUserInfoRequest.m */; };
 		044AAEAF26871A89000DB09F /* TSAgreementModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 044AAEAE26871A89000DB09F /* TSAgreementModel.m */; };
+		046195BF2692A3D000B91E18 /* TSRememberPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 046195BE2692A3D000B91E18 /* TSRememberPwdViewController.m */; };
+		046195C32692F4A600B91E18 /* RSA.m in Sources */ = {isa = PBXBuildFile; fileRef = 046195C22692F4A600B91E18 /* RSA.m */; };
 		04651692268C0290000829C2 /* TSUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 04651691268C0290000829C2 /* TSUser.m */; };
 		046516A3268C5641000829C2 /* ImageCompresser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0465169A268C5641000829C2 /* ImageCompresser.m */; };
 		046516EC268C57EF000829C2 /* DialogTextTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 046516A8268C57EE000829C2 /* DialogTextTool.m */; };
@@ -631,6 +635,10 @@
 		041131D4268096F6000B5BAF /* TSGoodsShowCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSGoodsShowCell.m; sourceTree = "<group>"; };
 		041131D5268096F6000B5BAF /* TSGoodsHotRankCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSGoodsHotRankCell.m; sourceTree = "<group>"; };
 		041131D6268096F6000B5BAF /* TSGoodsHotRankCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSGoodsHotRankCell.h; sourceTree = "<group>"; };
+		0428706C26904E6600A89F83 /* TSPayPasswordInputView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSPayPasswordInputView.h; sourceTree = "<group>"; };
+		0428706D26904E6600A89F83 /* TSPayPasswordInputView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSPayPasswordInputView.m; sourceTree = "<group>"; };
+		0428706F26905C4F00A89F83 /* TSPayPwdViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSPayPwdViewController.h; sourceTree = "<group>"; };
+		0428707026905C4F00A89F83 /* TSPayPwdViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSPayPwdViewController.m; sourceTree = "<group>"; };
 		042F42382681A05B00555F5D /* TSRecommendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSRecommendCell.m; sourceTree = "<group>"; };
 		042F42392681A05C00555F5D /* TSRecommendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSRecommendCell.h; sourceTree = "<group>"; };
 		042F423B2681FDB000555F5D /* TSRealNameAuthCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSRealNameAuthCell.h; sourceTree = "<group>"; };
@@ -649,6 +657,10 @@
 		043C2354268B454A00460FDB /* TSUserInfoRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSUserInfoRequest.m; sourceTree = "<group>"; };
 		044AAEAD26871A89000DB09F /* TSAgreementModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSAgreementModel.h; sourceTree = "<group>"; };
 		044AAEAE26871A89000DB09F /* TSAgreementModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSAgreementModel.m; sourceTree = "<group>"; };
+		046195BD2692A3D000B91E18 /* TSRememberPwdViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSRememberPwdViewController.h; sourceTree = "<group>"; };
+		046195BE2692A3D000B91E18 /* TSRememberPwdViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSRememberPwdViewController.m; sourceTree = "<group>"; };
+		046195C12692F4A600B91E18 /* RSA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSA.h; sourceTree = "<group>"; };
+		046195C22692F4A600B91E18 /* RSA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSA.m; sourceTree = "<group>"; };
 		04651690268C0290000829C2 /* TSUser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSUser.h; sourceTree = "<group>"; };
 		04651691268C0290000829C2 /* TSUser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSUser.m; sourceTree = "<group>"; };
 		0465169A268C5641000829C2 /* ImageCompresser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCompresser.m; sourceTree = "<group>"; };
@@ -1794,6 +1806,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		046195C02692F49700B91E18 /* RSA */ = {
+			isa = PBXGroup;
+			children = (
+				046195C12692F4A600B91E18 /* RSA.h */,
+				046195C22692F4A600B91E18 /* RSA.m */,
+			);
+			path = RSA;
+			sourceTree = "<group>";
+		};
 		046516A6268C57EE000829C2 /* DialogView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2444,6 +2465,10 @@
 				04F1EFB52682DF1000FF007D /* TSRealNameAuthViewController.m */,
 				043C2347268AB47400460FDB /* TSModifyNicknameViewController.h */,
 				043C2348268AB47400460FDB /* TSModifyNicknameViewController.m */,
+				0428706F26905C4F00A89F83 /* TSPayPwdViewController.h */,
+				0428707026905C4F00A89F83 /* TSPayPwdViewController.m */,
+				046195BD2692A3D000B91E18 /* TSRememberPwdViewController.h */,
+				046195BE2692A3D000B91E18 /* TSRememberPwdViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2561,6 +2586,8 @@
 				042F423F2681FDFE00555F5D /* TSRealNameInfoCell.m */,
 				043C234A268AB9BB00460FDB /* TSClearButton.h */,
 				043C234B268AB9BB00460FDB /* TSClearButton.m */,
+				0428706C26904E6600A89F83 /* TSPayPasswordInputView.h */,
+				0428706D26904E6600A89F83 /* TSPayPasswordInputView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3354,6 +3381,7 @@
 		F54973162668A22100181E3F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				046195C02692F49700B91E18 /* RSA */,
 				04DC6CD9268DB03A001F282E /* CropperPhoto */,
 				04DC6CB4268DA83B001F282E /* CMPhotoSelector */,
 				046516A6268C57EE000829C2 /* DialogView */,
@@ -4560,6 +4588,7 @@
 				C2EF88DE2671E92400E7374A /* TSCartEmptyCell.m in Sources */,
 				C2A34C992674C1760095497E /* TSSearchMarkCell.m in Sources */,
 				C2C765482679FCBA004757B9 /* TSMakeOrderGoodsCell.m in Sources */,
+				046195BF2692A3D000B91E18 /* TSRememberPwdViewController.m in Sources */,
 				043C234F268AF50500460FDB /* TSModifyUserInfoRequest.m in Sources */,
 				C3A6C4BA267A1C5700FC71D6 /* TSPersonalCommonCell.m in Sources */,
 				F54973BA2668BC0B00181E3F /* TSMineViewController.m in Sources */,
@@ -4799,6 +4828,7 @@
 				046516F6268C57EF000829C2 /* Dialog+SpecialColors.m in Sources */,
 				DC9911C4267C475000EF9B26 /* YBNestTableView.m in Sources */,
 				DFB3FFE52685C19700FC8FF9 /* TSLoginByAuthCodeRequest.m in Sources */,
+				046195C32692F4A600B91E18 /* RSA.m in Sources */,
 				C3A6C472267A1BEA00FC71D6 /* TSPhoneNumVeriViewController.m in Sources */,
 				C3A6C4E5267A1CAF00FC71D6 /* TSPersonalDataController.m in Sources */,
 				CE63BFA5268D603500D00720 /* TSSelectAddressViewController.m in Sources */,
@@ -4936,6 +4966,7 @@
 				F55D2CDF26788193006BACCF /* TSProductDetailDataController.m in Sources */,
 				F56D4B4A266DFB8900C1AD9E /* FMLayoutCrossSection.m in Sources */,
 				F530CC4826803B1C009DC29A /* RefreshGifHeader.m in Sources */,
+				0428707126905C4F00A89F83 /* TSPayPwdViewController.m in Sources */,
 				F56D4B4F266DFB8900C1AD9E /* FMLayoutDebugLog.m in Sources */,
 				C2C7654B267A097D004757B9 /* TSMakeOrderOperationCell.m in Sources */,
 				DFB3FFEC2686BDEC00FC8FF9 /* TSCustomPageControl.m in Sources */,
@@ -5026,6 +5057,7 @@
 				F55D2CD026784CF3006BACCF /* TSMineNavigationBar.m in Sources */,
 				F56D4B43266DFB8900C1AD9E /* FMLayout.m in Sources */,
 				DFB3FFB82683205600FC8FF9 /* TSOneStepLoginRequest.m in Sources */,
+				0428706E26904E6600A89F83 /* TSPayPasswordInputView.m in Sources */,
 				C35F1866267C7F8A00F65AF9 /* TSChangePictureActionSheet.m in Sources */,
 				F54973AE2668BB8100181E3F /* TSHomeViewController.m in Sources */,
 				F56D4B40266DFB8900C1AD9E /* FMLayoutScaleSection.m in Sources */,

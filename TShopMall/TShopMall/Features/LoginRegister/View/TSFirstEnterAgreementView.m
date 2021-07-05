@@ -20,7 +20,6 @@
 @property(nonatomic, weak) UIButton *cancelButton;
 /** 确认按钮 */
 @property(nonatomic, weak) UIButton *confirmButton;
-
 /** 协议信息  */
 @property(nonatomic, strong) NSArray<TSAgreementModel *> *agreementModels;
 
