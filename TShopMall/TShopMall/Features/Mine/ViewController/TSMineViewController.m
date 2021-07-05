@@ -48,6 +48,15 @@
     [super viewDidLoad];
    
     __weak __typeof(self)weakSelf = self;
+    RefreshGifHeader *header = [RefreshGifHeader headerWithRefreshingBlock:^{
+       [weakSelf.dataController fetchDataComplete:^(BOOL isSucess) {
+           [weakSelf.collectionView.mj_header endRefreshing];
+           [weakSelf.collectionView reloadData];
+       }];
+   }];
+    header.indicatorStyle = IndicatorStyleWhite;
+    self.collectionView.mj_header = header;
+    
     [self.dataController fetchMineContentsComplete:^(BOOL isSucess) {
         __strong __typeof(weakSelf)strongSelf = weakSelf;
         if (isSucess) {
@@ -239,7 +248,7 @@
 
             UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"站点设置" message:[NSString stringWithFormat:@"当前站点：%@",kMallH5ApiPrefix] preferredStyle:UIAlertControllerStyleAlert];
             [alertVc addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-                
+                textField.text = @"";
             }];
             UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 

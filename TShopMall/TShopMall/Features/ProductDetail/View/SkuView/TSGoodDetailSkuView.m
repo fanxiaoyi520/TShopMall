@@ -36,6 +36,13 @@
 -(void)setupViews{
     
     [self addSubview:self.headerView];
+    
+    __weak __typeof(self)weakSelf = self;
+    [self.headerView setCloseBlock:^{
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
+        [strongSelf.delegate goodDetailSkuViewCloseClick:strongSelf];
+            
+    }];
 //    [self addSubview:self.collectionView];
     [self addSubview:self.footerView];
     
@@ -49,7 +56,6 @@
         make.height.mas_equalTo(136);
     }];
     
-    __weak __typeof(self)weakSelf = self;
     self.footerView.cartBlock = ^{
         __strong __typeof(weakSelf)strongSelf = weakSelf;
         [strongSelf.delegate goodDetailSkuView:strongSelf addShoppingCartNum:strongSelf.headerView.num];

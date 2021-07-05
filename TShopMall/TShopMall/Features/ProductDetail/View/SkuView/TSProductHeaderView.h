@@ -15,6 +15,8 @@
 
 @property(nonatomic, copy) void(^buyNumChangeBlock) (NSString *buyNum);
 
+@property(nonatomic, copy) void(^closeBlock) ();
+
 @property(nonatomic, strong) TSGoodDetailItemPurchaseModel *purchaseModel;
 
 @end
