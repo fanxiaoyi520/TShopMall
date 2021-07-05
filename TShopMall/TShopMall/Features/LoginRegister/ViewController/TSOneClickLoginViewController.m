@@ -74,7 +74,7 @@
                                 if (isSucess) {
                                     [[NTESQuickLoginManager sharedInstance] closeAuthController:^{
                                         if (self.loginBlock) {
-                                            self.loginBlock();
+                                            self.loginBlock(YES);
                                         }
                                     }];
                                 }
@@ -82,6 +82,7 @@
                             
                         } else {
                              // 取号失败
+                            [Popover popToastOnWindowWithText:@"取号失败"];
                         }
                       }];
             } else {
@@ -120,14 +121,14 @@
                     /// 完成登录
                     [[NTESQuickLoginManager sharedInstance] closeAuthController:^{
                         if (self.loginBlock) {
-                            self.loginBlock();
+                            self.loginBlock(YES);
                         }
                     }];
                 }
                 else{
                     [[NTESQuickLoginManager sharedInstance] closeAuthController:^{
                         if (self.loginBlock) {
-                            self.loginBlock();
+                            self.loginBlock(YES);
                         }
                     }];
                 }
@@ -183,15 +184,17 @@
     payManager.WXSuccess = ^(NSString *code){
         @strongify(self)
         if (code) {
+            
             [[TSServicesManager sharedInstance].acconutService fetchLoginByAuthCode:code platformId:@"3" sucess:^(BOOL isHaveMobile, NSString * _Nonnull token) {
                 [[NTESQuickLoginManager sharedInstance] closeAuthController:^{
 
                  }];
                 if (isHaveMobile) {
+                    
                     /// 完成登录
                     [self dismissViewControllerAnimated:YES completion:^{
                         if (self.loginBlock) {
-                            self.loginBlock();
+                            self.loginBlock(YES);
                         }
                         
                     }];
@@ -200,7 +203,7 @@
                     /// 跳转绑定手机号
                     [self dismissViewControllerAnimated:NO completion:^{
                         if (self.bindBlock) {
-                            self.bindBlock();
+                            self.bindBlock(token);
                         }
                     }];
                 }

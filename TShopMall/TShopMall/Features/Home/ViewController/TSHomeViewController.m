@@ -68,13 +68,6 @@
             [self configObserve];
         }
     }];
-
-//    if (![TSGlobalManager shareInstance].isLogin) {
-//        [self.view addSubview:self.loginBar];
-//        self.loginBar.clickBlock = ^{
-//            [[TSUserLoginManager shareInstance] startLogin];
-//        };
-//    }
     
 }
 

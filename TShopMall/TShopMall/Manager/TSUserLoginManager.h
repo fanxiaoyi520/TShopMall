@@ -24,9 +24,6 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)logout;
 -(void)configLoginController:(void(^)(UIViewController *))callBack;
 
-/** 获取注册登录的协议信息 */
-- (void)fetchAgreementWithCompleted: (void(^)(NSArray<TSAgreementModel *> *agreementModels))completed;
-
 @end
 
 NS_ASSUME_NONNULL_END

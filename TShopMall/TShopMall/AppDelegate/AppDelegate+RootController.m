@@ -61,7 +61,8 @@
         self.window.rootViewController = vc;
         
         if ([vc.childViewControllers.firstObject isKindOfClass:TSLoginViewController.class]) {
-            [self showAlertInView:vc.view];
+            TSLoginViewController *loginViewController = vc.childViewControllers.firstObject;
+            [self showAlertInView:loginViewController.view];
         }
     }];
 }
@@ -87,6 +88,7 @@
     else{
         
         TSHybridViewController *web = [[TSHybridViewController alloc] initWithURLString:[agreementModel.serverUrl stringByAppendingString:@"&mode=webview"]];
+        web.isPresent = YES;
         TSBaseNavigationController *nav1 = [[TSBaseNavigationController alloc] initWithRootViewController:web];
         nav1.modalPresentationStyle = UIModalPresentationFullScreen;
         web.delegate = self;

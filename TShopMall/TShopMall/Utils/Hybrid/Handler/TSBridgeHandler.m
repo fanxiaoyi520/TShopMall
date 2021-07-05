@@ -12,6 +12,7 @@
 #import "TSWKMessageHandlerHelper.h"
 #import "TSConventionAlertView.h"
 #import <Photos/Photos.h>
+#import "TSPayController.h"
 
 @implementation TSBridgeHandler
 
@@ -49,7 +50,15 @@
         for (UIViewController *con in childs) {
             if ([con isKindOfClass:[TSHybridViewController class]]) {
                 TSHybridViewController *hybrid = (TSHybridViewController *)con;
-                if ([hybrid.request.URL.absoluteString isEqualToString:backUrl]) {
+                NSString *query = [hybrid.request.URL query];
+                NSMutableString *baseUrl = [NSMutableString stringWithString:hybrid.request.URL.absoluteString];
+                NSString *frountUrl = @"";
+                if (query.length > 0) {
+                    NSArray *componets = [baseUrl componentsSeparatedByString:@"?"];
+                    frountUrl = [componets firstObject];
+                }
+                
+                if ([hybrid.request.URL.absoluteString isEqualToString:backUrl] || [frountUrl containsString:backUrl]) {
                     if (leftUrl.length > 0) {
                         NSDictionary *callBackDic = paramsDic[@"data"];
                         NSString *json = @"";
@@ -144,8 +153,23 @@
     NSDictionary *data = params[@"data"];
     NSDictionary *paramsDic = data[@"params"];
     NSString *controllerName = paramsDic[@"name"];
-    Class className = NSClassFromString(controllerName);
-    UIViewController *con = [[className alloc] init];
+    UIViewController *con;
+    if ([@"TSPayController" isEqualToString:controllerName]) {
+        NSString *uuid  = [NSString stringWithFormat:@"%@", paramsDic[@"data"][@"uuid"]];
+        NSString *isGroup = @"1";
+        if (uuid.length != 0) {
+            NSString *str = [uuid substringWithRange:NSMakeRange(0, 1)];
+            isGroup = [str isEqualToString:@"I"]? @"2":@"1";
+        }
+        TSPayController *payCon = [[TSPayController alloc] init];
+        payCon.payOrderId = uuid;//订单号
+        payCon.isGroup = isGroup;//是否是组订单
+        con = payCon;
+    }else{
+        Class className = NSClassFromString(controllerName);
+        con = [[className alloc] init];
+    }
+    
     TSHybridViewController *controller = [TSWKAppManager currentController:params[@"webview"]];
     [controller.navigationController pushViewController:con animated:YES];
 }

@@ -20,6 +20,7 @@
     if ( reponseModel.stateCode == 999) {
         [[NSNotificationCenter defaultCenter] postNotificationName:TS_Login_State object:@(1)];
     }
+
    
 }
 
@@ -31,11 +32,18 @@
     NSLog(@"url --%@%@",self.baseUrl,self.requestUrl);
     NSLog(@" --%@",reponseModel.data);
 #endif
+    
+    NSString *code = self.responseJSONObject[@"code"];
+    if ([code integerValue] == 403) {
+        [[TSServicesManager sharedInstance].acconutService fetchRefershTokenComplete:nil];
+    }
+    
     if (!reponseModel.isSucceed) {//网络请求失败
         if (self.needErrorToast) {//toast提示
             
         }
     }
+    
 }
 
 #pragma mark - Super Method

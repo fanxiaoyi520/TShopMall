@@ -26,6 +26,7 @@
 + (void)hangleWechatAuthWith:(SendAuthReq *)req;
 
 ///刷新或续期 access_token 使用
-- (void)refreshToken;
-
+- (void)updateRefreshTokenSucess:(void(^)(BOOL isSucess))sucess;
+- (void)getUserInfo:(void(^)(NSDictionary *))callBack;
+- (void)getAccessTokenWithCode:(NSString *)code sucess:(void(^)(BOOL isSucess))sucess;
 @end

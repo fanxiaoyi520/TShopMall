@@ -37,6 +37,12 @@
     
     [self hideTabBarShadowImageView];
     
+    [self notificationToRefreshCartsNumber];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationToRefreshCartsNumber) name:TS_SHOULD_REFRESH_CARTS_NUMBER object:nil];
+}
+
+///需要更新购物车数量
+- (void)notificationToRefreshCartsNumber{
     [TSCartDataController checkCartNumber:^(NSInteger num) {
         [self updateCartsBadge:num];
     }];

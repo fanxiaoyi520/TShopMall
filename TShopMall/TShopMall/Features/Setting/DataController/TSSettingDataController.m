@@ -158,7 +158,7 @@
     [Popover popProgressOnWindowWithText:@"清理中"];
     
     [TSJsonCacheData clearWithKey:@"homePageList"];
-    
+    [TSJsonCacheData clearWithKey:@"categoryList"];
     [[SDImageCache sharedImageCache] clearDiskOnCompletion:^{
         @strongify(self);
         //延时
