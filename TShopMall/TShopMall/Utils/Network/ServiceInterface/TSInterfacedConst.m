@@ -92,7 +92,8 @@ NSString *const kAccountCancelUrl = @"/auth/account/cancel";
 NSString *const kAccountCancelBackUrl = @"/auth/account/cancelBack";
 NSString *const kAccountCancelInfoUrl = @"/auth/account/cancelInfo";
 NSString *const kAccountCheckSalesmanWithMobileUrl = @"/rest/sysback/salesman/checkSalesman";
-NSString *const kAccountCheckSalesmanWithTokenUrl = @"/rest/sysback/salesman/checkSalesman";
+NSString *const kAccountCheckSalesmanWithTokenUrl = @"/rest/sysback/salesman/checkSalesmanByToken";
+NSString *const kAccountRefershTokenUrl = @"/auth/auth/refershToken";
 
 #pragma mark - 首页
 
@@ -165,7 +166,7 @@ NSString *const kCustomerInvitationCode  = @"v2/sysback/salesman/get/customer/in
 //一级分销员通过邀请码推广记录
 NSString *const kSalesmanInvitationRecord = @"v2/sysback/salesman/get/salesman/page";
 #pragma mark - 设置
-
+NSString *const kCheckCodeUrl = @"/captcha/captcha/checkCaptcha";
 NSString *const kAboutMeAgreementUrl = @"/rest/v2/front/shopStatement/getShopStatementList";
 NSString *const kModifyUserUrl = @"/user/mng/user";
 NSString *const kUploadImageUrl = @"/rest/v2/usercenter/batchfileupload/batch/upload";

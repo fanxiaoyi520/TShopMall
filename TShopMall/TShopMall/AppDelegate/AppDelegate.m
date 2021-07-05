@@ -30,9 +30,9 @@
     [self setupRootController];
     [self initWechatConfig];
     [self initRouteConfig];
-    [self initNetworkReachability];
     [self initService];///初始化service，顺序不能换
-    [self getNetData];/// 获取网络必要数据，改方法所在位置不能写前面
+    [self initNetworkReachability];
+//    [self getNetData];/// 获取网络必要数据，改方法所在位置不能写前面
     
     if (@available(iOS 13.0, *)) {
         

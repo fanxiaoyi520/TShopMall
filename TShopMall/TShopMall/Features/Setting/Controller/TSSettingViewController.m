@@ -150,8 +150,8 @@
         [self.navigationController pushViewController:personalVC animated:YES];
         return;
     } else if (indexPath.section == 1 && indexPath.item == 0) {///账号安全
-        TSSecurCenterViewController *personalVC = [[TSSecurCenterViewController alloc] init];
-        [self.navigationController pushViewController:personalVC animated:YES];
+        TSSecurityViewController *securityVC = [[TSSecurityViewController alloc] init];
+        [self.navigationController pushViewController:securityVC animated:YES];
     } else if (indexPath.section == 1 && indexPath.item == 1) {///地址管理
         TSShippingAddressController *addressVC = [[TSShippingAddressController alloc] init];
         [self.navigationController pushViewController:addressVC animated:YES];

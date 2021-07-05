@@ -82,6 +82,7 @@
                             
                         } else {
                              // 取号失败
+                            [Popover popToastOnWindowWithText:@"取号失败"];
                         }
                       }];
             } else {
