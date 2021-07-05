@@ -54,9 +54,9 @@
     [[NTESQuickLoginManager sharedInstance] registerWithBusinessID:QuickLoginBusinessID];
 }
 
-- (void)otherLoginWithAnimation:(BOOL)animation{
+- (void)otherLoginWithAnimation:(BOOL)animation needClose:(BOOL)needClose{
     TSLoginViewController *loginViewController = [TSLoginViewController new];
-    loginViewController.needClose = YES;
+    loginViewController.needClose = needClose;
     TSBaseNavigationController *homeController = [[TSBaseNavigationController alloc] initWithRootViewController:loginViewController];
     loginViewController.loginBlock = self.loginBlock;
     UIViewController *vc = [UIApplication sharedApplication].delegate.window.rootViewController;
@@ -76,7 +76,7 @@
         oneClickLoginVC.otherLoginBlock = ^{
             @strongify(self)
             [[NTESQuickLoginManager sharedInstance] closeAuthController:^{
-                [self otherLoginWithAnimation:YES];
+                [self otherLoginWithAnimation:YES needClose:YES];
             }];
         };
 //        oneClickLoginVC.loginBlock = self.loginBlock;
@@ -86,7 +86,7 @@
                 self.loginBlock();
             }else
             {
-                
+                [self otherLoginWithAnimation:NO needClose:NO];
             }
             
         };

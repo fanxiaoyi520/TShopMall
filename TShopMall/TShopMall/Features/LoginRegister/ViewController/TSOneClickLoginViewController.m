@@ -82,6 +82,11 @@
                             
                         } else {
                              // 取号失败
+                            [[NTESQuickLoginManager sharedInstance] closeAuthController:^{
+                                if (self.loginBlock) {
+                                    self.loginBlock(NO);
+                                }
+                            }];
                         }
                       }];
             } else {
