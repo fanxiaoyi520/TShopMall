@@ -165,7 +165,7 @@
 // 3.动态调整导航栏
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGFloat offsetY = scrollView.contentOffset.y;
-    NSLog(@"%lf", offsetY);
+//    NSLog(@"%lf", offsetY);
     
     if (offsetY > 0) {
         self.background_imgView.frame = CGRectMake(0, - offsetY, kScreenWidth, KRateW(280));
