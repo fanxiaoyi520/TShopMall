@@ -15,10 +15,10 @@
 #import "TSChangeBindRequest.h"
 #import "TSBindUserByAuthCodeRequest.h"
 #import "TSLogoutRequest.h"
-
+#import "NSString+Plugin.h"
 @implementation TSLoginRegisterDataController
 
--(void)fetchAccountPublicKeyComplete:(void(^)(BOOL isSucess))complete{
+-(void)fetchAccountPublicKeyComplete:(void(^)(NSString *publicKey))complete{
     NSString *urlStr = [NSString stringWithFormat:@"%@%@", kAccountCenterApiPrefix,kAccountPublicKeyUrl];
     NSURL *url = [NSURL URLWithString:urlStr];
     NSURLSession *session = [NSURLSession sharedSession];
@@ -27,10 +27,8 @@
             id objc = [data utf8String];
             NSLog(@"%@",objc);
             dispatch_async(dispatch_get_main_queue(), ^{
-                [TSGlobalManager shareInstance].publicKey = objc;
-               if (complete) {
-                   complete(YES);
-               }
+                complete(objc);
+
             });
         }else{
            
@@ -38,21 +36,7 @@
 
     }];
     [firsttask resume];
-//    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithBaseUrl:kAccountCenterApiPrefix RequestUrl:kAccountPublicKeyUrl requestMethod:YTKRequestMethodGET requestSerializerType:YTKRequestSerializerTypeJSON responseSerializerType:YTKResponseSerializerTypeJSON requestHeader:@{} requestBody:@{} needErrorToast:YES];
-//    [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
-//
-//        if (request.responseString) {
-//            [TSGlobalManager shareInstance].publicKey = request.responseString;
-//            if (complete) {
-//                complete(YES);
-//            }
-//        }
-//
-//    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-//        if (complete) {
-//            complete(NO);
-//        }
-//    }];
+
 }
 
 - (void)fetchLogoutComplete:(void (^)(BOOL))complete{
@@ -65,7 +49,7 @@
     }];
 }
 
--(void)fetchRefershTokenComplete:(void(^)(BOOL isSucess))complete{
+-(void)fetchRefershToken{
     NSString *requestUrl = [NSString stringWithFormat:@"%@?appId=%@&tenantId=%@&appSecret=%@&userName=%@",kAccountRefershTokenUrl,kAppId,@"tcl",kAppSecret, [TSUserInfoManager userInfo].userName];
 
     SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithBaseUrl:kAccountCenterApiPrefix RequestUrl:requestUrl requestMethod:YTKRequestMethodGET requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON requestHeader:@{@"refreshToken":[TSUserInfoManager userInfo].refreshToken} requestBody:@{} needErrorToast:YES];
@@ -75,15 +59,11 @@
             userInfo.accessToken = request.responseModel.originalData[@"accessToken"];
             userInfo.refreshToken = request.responseModel.originalData[@"refreshToken"];
             [[TSUserInfoManager userInfo] saveUserInfo:userInfo];
-            if (complete) {
-                complete(YES);
-            }
+           
         }
         
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-        if (complete) {
-            complete(NO);
-        }
+        
     }];
 }
 -(void)fetchBindUserByAuthCode:(NSString *)token

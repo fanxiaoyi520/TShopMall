@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
                              complete:(void(^)(BOOL isSucess))complete;///换绑
 
 /// 刷新token
--(void)fetchRefershTokenComplete:(void(^)(BOOL isSucess))complete;
+-(void)fetchRefershToken;
 
 /// 注册
 -(void)fetchRegisterMobile:(NSString *)mobile
@@ -83,7 +83,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 登出
 -(void)fetchLogoutComplete:(void(^)(BOOL isSucess))complete;
 /// 获取公钥
--(void)fetchAccountPublicKeyComplete:(void(^)(BOOL isSucess))complete;
+-(void)fetchAccountPublicKeyComplete:(void(^)(NSString *publicKey))complete;
 
 /** 获取注册登录的协议信息 */
 - (void)fetchAgreementWithCompleted: (void(^)(NSArray<TSAgreementModel *> *agreementModels))completed;

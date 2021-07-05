@@ -6,7 +6,7 @@
 //
 
 #import "TSUserInfoManager.h"
-#import "JWT.h"
+
 @interface TSUserInfoManager()<NSCoding>
 
 @end
@@ -53,6 +53,7 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSData *data = [userDefaults objectForKey:UserInfo_Save_Key];
     TSUserInfoManager *userInfo = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    
     if (!userInfo) {
         userInfo = [[TSUserInfoManager alloc] init];
     }
@@ -100,8 +101,4 @@
     }];
 }
 
-- (void)setAccessToken:(NSString *)accessToken{
-    _accessToken = accessToken;
-    
-}
 @end

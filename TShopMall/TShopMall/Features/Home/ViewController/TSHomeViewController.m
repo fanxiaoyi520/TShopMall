@@ -17,7 +17,7 @@
 #import "TSHomePageLoginBarView.h"
 #import "TSHomePagePerchView.h"
 #import "RefreshGifHeader.h"
-#import "JWT.h"
+
 #define tableViewBackGroundViewHeight 204.0
 
 @interface TSHomeViewController ()<UITableViewDelegate, UITableViewDataSource>
@@ -69,20 +69,6 @@
         }
     }];
     
-    
-    if ([TSGlobalManager shareInstance].publicKey) {
-       
-        NSString *publicKey = [TSGlobalManager shareInstance].publicKey; // load public key. Or use it as raw string.
-
-      NSString *algorithmName = @"RS256";
-
-//        JWTBuilder *decodeBuilder = [JWTBuilder decodeMessage:accessToken].secret(publicKey).algorithmName(algorithmName);
-        NSError *error;
-        NSDictionary *envelopedPayload = [JWT decodeMessage:[TSUserInfoManager userInfo].accessToken withSecret:publicKey withError:&error];
-
-        NSLog(@"%@",envelopedPayload);
-        
-    }
 }
 
 #pragma mark - UI

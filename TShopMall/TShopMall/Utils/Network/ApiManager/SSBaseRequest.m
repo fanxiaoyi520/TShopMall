@@ -7,7 +7,7 @@
 
 #import "SSBaseRequest.h"
 #import "SSResponseModel.h"
-
+#import "NSString+Plugin.h"
 @implementation SSBaseRequest
 
 #pragma mark - 失败处理器（stateCode != 200）
@@ -27,9 +27,7 @@
 #endif
     
     if ([self.responseModel.code integerValue] == 403) {
-        [[TSServicesManager sharedInstance].acconutService fetchRefershTokenComplete:^(BOOL isSucess) {
-            
-        }];
+        [[TSServicesManager sharedInstance].acconutService fetchRefershToken];
     }
     
     /// 被挤下线
@@ -75,6 +73,13 @@
     [commonRequestHeader setValue:@"02" forKey:@"terminalType"];
     
     if ([TSGlobalManager shareInstance].currentUserInfo.accessToken.length > 0) {
+        NSDictionary *dic = [[TSUserInfoManager userInfo].accessToken jwtDecodeWithJwtString];
+        double expTime = [dic[@"exp"] doubleValue];
+        NSTimeInterval nowTime = (long long)[[NSDate date] timeIntervalSince1970];
+        double time  = expTime - nowTime;
+        if (time < 5*60) {
+            [[TSServicesManager sharedInstance].acconutService fetchRefershToken];
+        }
         [commonRequestHeader setValue:[TSGlobalManager shareInstance].currentUserInfo.accessToken forKey:@"accessToken"];
     }else{
         [commonRequestHeader setValue:@"" forKey:@"accessToken"];
