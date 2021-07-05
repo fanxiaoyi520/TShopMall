@@ -16,6 +16,54 @@
 @end
 
 @implementation TSUserInfoService
+
+/** 校验验证码 */
+- (void)checkCodeMobile:(NSString *)mobile
+                   code:(NSString *)code
+                success:(void(^_Nullable)(void))success
+                failure:(void(^_Nullable)(NSString *errorMsg))failure {
+    NSMutableDictionary *body = [NSMutableDictionary dictionary];
+    [body setValue:kAppId forKey:@"appId"];
+    [body setValue:@"tcl" forKey:@"tenantId"];
+    [body setValue:kAppSecret forKey:@"appSecret"];
+    [body setValue:mobile forKey:@"key"];
+    [body setValue:code forKey:@"captcha"];
+    [body setValue:@"SMS" forKey:@"type"];
+    
+    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithBaseUrl:kAccountCenterApiPrefix
+                                                               RequestUrl:kCheckCodeUrl
+                                                            requestMethod:YTKRequestMethodGET
+                                                    requestSerializerType:YTKRequestSerializerTypeHTTP
+                                                   responseSerializerType:YTKResponseSerializerTypeJSON
+                                                            requestHeader:@{}
+                                                              requestBody:body
+                                                           needErrorToast:YES];
+    [request startWithCompletionBlockWithSuccess:^(__kindof SSGenaralRequest * _Nonnull request) {
+        if (request.responseModel.isSucceed) {
+            NSDictionary *data = request.responseModel.originalData[@"data"];
+            BOOL check = [data[@"check"] boolValue];
+            NSString *msg = data[@"msg"];
+            if (check) {
+                if (success) {
+                    success();
+                }
+            } else {
+                if (failure) {
+                    failure(msg);
+                }
+            }
+        } else {
+            if (failure) {
+                failure(request.responseModel.originalData[@"failCause"]);
+            }
+        }
+    } failure:^(__kindof SSGenaralRequest * _Nonnull request) {
+        if (failure) {
+            failure(@"服务器发生未知错误~~");
+        }
+    }];
+}
+
 /** 设置提现密码 */
 - (void)setWithrawalPwd:(NSString *)withrawalPwd
                 success:(void(^_Nullable)(void))success
@@ -23,20 +71,24 @@
     
     NSMutableDictionary *body = [NSMutableDictionary dictionary];
     [body setValue:withrawalPwd forKey:@"checkPw"];
-    
     NSMutableDictionary *header = [NSMutableDictionary dictionary];
     [header setValue:@"thome" forKey:@"storeUuid"];
     [header setValue:@"tcl" forKey:@"t-id"];
     [header setValue:[TSUserInfoManager userInfo].accessToken forKey:@"accessToken"];
-    [header setValue:@"platform_tcl_shop" forKey:@"platform"];
+    ///[header setValue:@"platform_tcl_shop" forKey:@"platform"];
     SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kSetWithdrawalPwdUrl
                                                                requestMethod:YTKRequestMethodPOST
                                                        requestSerializerType:YTKRequestSerializerTypeHTTP
                                                       responseSerializerType:YTKResponseSerializerTypeJSON requestHeader:header            requestBody:body needErrorToast:YES];
     [request startWithCompletionBlockWithSuccess:^(__kindof SSGenaralRequest * _Nonnull request) {
-        NSLog(@"设置提现密码 ==== %@", request);
+        NSLog(@"设置提现密码 ==== %@", request.responseModel.originalData);
+        if (request.responseModel.isSucceed) {
+            NSDictionary *data = request.responseModel.originalData[@"data"];
+            NSString *msg = data[@"msg"];
+            NSLog(@"msg == %@", msg);
+        }
     } failure:^(__kindof SSGenaralRequest * _Nonnull request) {
-        NSLog(@"设置提现密码 ==== %@", request);
+        NSLog(@"设置提现密码error ==== %@", request.response);
     }];
 }
 

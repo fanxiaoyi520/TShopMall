@@ -107,7 +107,7 @@
     if (_phoneNumLabel == nil) {
         UILabel *phoneNumLabel = [[UILabel alloc] init];
         _phoneNumLabel = phoneNumLabel;
-        _phoneNumLabel.text = @"133-7869-2380";
+        ///_phoneNumLabel.text = @"133-7869-2380";
         _phoneNumLabel.textColor = KTextColor;
         _phoneNumLabel.font = KRegularFont(24);
         [self.contentView addSubview:_phoneNumLabel];
@@ -200,6 +200,8 @@
         _commitButton.titleLabel.font = KRegularFont(16);
         _commitButton.enabled = NO;
         [_commitButton setTitleColor:KWhiteColor forState:(UIControlStateNormal)];
+        [_commitButton setTitleColor:KWhiteColor forState:(UIControlStateDisabled)];
+        [_commitButton setTitleColor:KWhiteColor forState:(UIControlStateHighlighted)];
         [_commitButton setTitleColor:KHexAlphaColor(@"#2D3132", 0.4) forState:(UIControlStateDisabled)];
         [_commitButton setTitle:@"提交" forState:UIControlStateNormal];
         [_commitButton addTarget:self action:@selector(commitAction) forControlEvents:UIControlEventTouchUpInside];
@@ -225,11 +227,19 @@
         phoneNumber = [phoneNumber stringByReplacingOccurrencesOfString:@"-" withString:@""];
     }
     if (![TSTools isPhoneNumber: phoneNumber]) {
-        [self.contentView makeToast:@"不是正确的手机号" duration:3.0 position:CSToastPositionCenter];
+        [self.contentView makeToast:@"请输入正确的手机号" duration:3.0 position:CSToastPositionCenter];
         return;
     }
-    __weak typeof(self) weakSelf = self;
     self.codeButton.enabled = NO;
+    if ([self.actionDelegate respondsToSelector:@selector(sendCodeWithMobile:codeButton:cell:)]) {
+        [self.actionDelegate sendCodeWithMobile:phoneNumber codeButton:self.codeButton cell:self];
+    }
+}
+
+- (void)startTimer {
+    [self.timer invalidate];
+    self.timer = nil;
+    __weak typeof(self) weakSelf = self;
     self.timer = [NSTimer ts_scheduledTimerWithTimeInterval:1 block:^{
          [weakSelf goToRun];
     } repeats:YES];
@@ -263,7 +273,18 @@
 }
 
 - (void)commitAction {
-    
+    NSString *phoneNumber = self.phoneNumLabel.text;
+    if ([self.phoneNumLabel.text containsString:@"-"]) {
+        phoneNumber = [phoneNumber stringByReplacingOccurrencesOfString:@"-" withString:@""];
+    }
+    if (self.codeTextField.text.length == 0) {
+        [self.contentView makeToast:@"请输入验证码" duration:3.0 position:CSToastPositionCenter];
+        return;
+    }
+    self.commitButton.enabled = NO;
+    if ([self.actionDelegate respondsToSelector:@selector(commitActionWithCode:mobile:commitButton:)]) {
+        [self.actionDelegate commitActionWithCode:self.codeTextField.text mobile:phoneNumber commitButton:self.commitButton];
+    }
 }
 
 - (void)setDelegate:(id<UniversalCollectionViewCellDataDelegate>)delegate {

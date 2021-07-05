@@ -10,6 +10,7 @@
 #import "TSUniversalCollectionViewCell.h"
 #import "TSSecurityCenterDataController.h"
 #import "TSHybridViewController.h"
+
 @interface TSSecurCenterViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate>
 /// 数据中心
 @property(nonatomic, strong) TSSecurityCenterDataController *dataController;
@@ -96,8 +97,10 @@
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    TSHybridViewController *web = [[TSHybridViewController alloc] initWithURLString:self.dataController.agreementModels[indexPath.row-1].serverUrl];
-    [self.navigationController pushViewController:web animated:YES];
+    if (indexPath.item >= 1 && self.dataController.agreementModels.count) {
+        TSHybridViewController *web = [[TSHybridViewController alloc] initWithURLString:self.dataController.agreementModels[indexPath.item-1].serverUrl];
+        [self.navigationController pushViewController:web animated:YES];
+    }
 }
 
 #pragma mark - UniversalCollectionViewCellDataDelegate
