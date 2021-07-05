@@ -80,9 +80,15 @@
             }];
         };
 //        oneClickLoginVC.loginBlock = self.loginBlock;
-        oneClickLoginVC.loginBlock = ^{
-            [self.marr removeAllObjects];
-            self.loginBlock();
+        oneClickLoginVC.loginBlock = ^(BOOL sucess){
+            @strongify(self)
+            if (sucess) {
+                self.loginBlock();
+            }else
+            {
+                
+            }
+            
         };
         oneClickLoginVC.bindBlock = ^(NSString *token){
             
