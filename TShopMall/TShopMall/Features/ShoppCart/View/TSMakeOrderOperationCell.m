@@ -69,7 +69,7 @@
     self.billView.title.text = @"发票";
     self.billView.textField.text = @"选择发票抬头";
     self.messageView.title.text = @"给商家留言";
-    self.messageView.textField.placeholder = @"留言建议留言建议提前协商（50字以内）";
+    self.messageView.textField.placeholder = @"留言建议提前协商（50字以内）";
 }
 
 - (void)layoutSubviews{

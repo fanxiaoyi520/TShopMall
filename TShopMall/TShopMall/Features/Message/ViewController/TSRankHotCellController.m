@@ -9,6 +9,7 @@
 #import "TSHotDataController.h"
 #import "TSUniversalFlowLayout.h"
 #import "TSUniversalCollectionViewCell.h"
+#import "TSProductDetailController.h"
 
 @interface TSRankHotCellController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate>
 
@@ -40,9 +41,7 @@
 
 - (void)fillCustomView {
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.view.mas_left).with.offset(0);
-        make.right.equalTo(self.view.mas_right).with.offset(0);
-        make.top.equalTo(self.view.mas_top).with.offset(0.5);
+        make.top.left.right.equalTo(self.view);
         make.bottom.equalTo(self.view.mas_bottom).with.offset(self.view.ts_safeAreaInsets.bottom);
     }];
 }
@@ -72,6 +71,7 @@
         _collectionView.dataSource = self;
         _collectionView.showsVerticalScrollIndicator = NO;
         _collectionView.showsHorizontalScrollIndicator = NO;
+        _collectionView.contentInset = UIEdgeInsetsZero;
         [self.view addSubview:_collectionView];
     }
     return _collectionView;
@@ -99,7 +99,12 @@
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    
+    if (indexPath.section < 1) return;
+    TSHotSectionModel *model = self.dataController.sections[indexPath.section];
+    TSHotSectionItemModel *item = model.items[indexPath.row];
+    TSProductDetailController *detail = [[TSProductDetailController alloc] init];
+    detail.uuid = item.goodModel.uuid;
+    [self.navigationController pushViewController:detail animated:YES];
 }
 
 #pragma mark - UniversalCollectionViewCellDataDelegate

@@ -14,6 +14,7 @@
 #import "TSLoginByTokenRequest.h"
 #import "TSChangeBindRequest.h"
 #import "TSBindUserByAuthCodeRequest.h"
+
 @implementation TSLoginRegisterDataController
 -(void)fetchRefershTokenComplete:(void(^)(BOOL isSucess))complete{
     NSString *requestUrl = [NSString stringWithFormat:@"%@?appId=%@&tenantId=%@&appSecret=%@&userName=%@",kAccountRefershTokenUrl,kAppId,@"tcl",kAppSecret, [TSUserInfoManager userInfo].userName];

@@ -105,7 +105,6 @@
         return list;
     }else{
         TSRankHotCellController *list = [[TSRankHotCellController alloc] init];
-        //list.titles = titles;
         return list;
     }
 }

@@ -74,6 +74,7 @@
 }
 
 + (void)handleRes:(SSGenaralRequest *)resq{
+    [[NSNotificationCenter defaultCenter] postNotificationName:TS_SHOULD_REFRESH_CARTS_NUMBER object:nil];
     if (resq.responseModel.isSucceed == NO) {
         [Popover popToastOnWindowWithText:resq.responseObject[@"message"]];
     }

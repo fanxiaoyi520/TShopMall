@@ -6,8 +6,8 @@
 //
 
 #import "TSGoodsHotRankCell.h"
-#import "TSEdgeInsetLabel.h"
 #import "TSHotSectionModel.h"
+#import "TSRecommendMaxPriceView.h"
 
 @interface TSGoodsHotRankCell ()
 /** 冠军背景视图  */
@@ -27,12 +27,8 @@
 /** 原价（提货价） */
 @property(nonatomic, weak) UILabel *originPriceLabel;
 
-/** 最高赚文字的显示  */
-@property(nonatomic, weak) TSEdgeInsetLabel *bestLabel;
-/** 最高赚数字的显示  */
-@property(nonatomic, weak) TSEdgeInsetLabel *bestNumLabel;
-/** 最高赚父视图  */
-@property(nonatomic, weak) UIView *bestView;
+/// 最高赚
+@property (nonatomic, strong) TSRecommendMaxPriceView *maxPriceView;
 
 /** 分割线  */
 @property(nonatomic, weak) UIView *splitView;
@@ -79,31 +75,19 @@
     }];
     [self.priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.rmbLabel.mas_right).with.offset(1);
-        make.centerY.equalTo(self.bestView);
+        make.centerY.equalTo(self.maxPriceView);
     }];
     [self.originPriceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.rmbLabel.mas_left).with.offset(0);
         make.top.equalTo(self.priceLabel.mas_bottom).with.offset(5);
     }];
     
-    [self.bestView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.priceLabel.mas_right).offset(10);
+    [self.maxPriceView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.titleLabel.mas_bottom).with.offset(14);
-        make.width.mas_equalTo(70);
-        make.height.mas_equalTo(18);
+        make.left.equalTo(self.priceLabel.mas_right).offset(10);
+        make.size.sizeOffset(CGSizeMake(69, 18));
     }];
-    [self.bestNumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.bestView.mas_right).with.offset(0);
-        make.top.equalTo(self.bestView.mas_top).with.offset(0);
-        make.width.mas_equalTo(46);
-        make.height.mas_equalTo(18);
-    }];
-    [self.bestLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.bestNumLabel.mas_left).with.offset(12);
-        make.centerY.equalTo(self.bestNumLabel.mas_centerY).with.offset(0);
-        make.width.mas_equalTo(37);
-        make.height.mas_equalTo(18);
-    }];
+    
     [self.splitView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.contentView.mas_right).with.offset(0);
         make.left.equalTo(self.titleLabel.mas_left).with.offset(0);
@@ -182,36 +166,12 @@
     return _rmbLabel;
 }
 
-- (TSEdgeInsetLabel *)bestLabel {
-    if (_bestLabel == nil) {
-        TSEdgeInsetLabel *bestLabel = [[TSEdgeInsetLabel alloc] init];
-        _bestLabel = bestLabel;
-        _bestLabel.textColor = KWhiteColor;
-        _bestLabel.backgroundColor = KHexColor(@"#F9AB50");
-        _bestLabel.font = KRegularFont(10);
-        _bestLabel.text = @"最高赚";
-        _bestLabel.textAlignment = NSTextAlignmentCenter;
-        _bestLabel.textInsets = UIEdgeInsetsMake(0.f, 1.0f, 0.f, 2.0f);
-        _bestLabel.clipsToBounds = YES;
-        [_bestLabel setCorners:(UIRectCornerTopRight|UIRectCornerBottomRight) radius:9.0];
-        [self.bestView addSubview: _bestLabel];
+- (TSRecommendMaxPriceView *)maxPriceView {
+    if (!_maxPriceView) {
+        _maxPriceView = [[TSRecommendMaxPriceView alloc] init];
+        [self.contentView addSubview: self.maxPriceView];
     }
-    return _bestLabel;
-}
-
-- (TSEdgeInsetLabel *)bestNumLabel {
-    if (_bestNumLabel == nil) {
-        TSEdgeInsetLabel *bestNumLabel = [[TSEdgeInsetLabel alloc] init];
-        _bestNumLabel = bestNumLabel;
-        _bestNumLabel.textColor = KWhiteColor;
-        _bestNumLabel.backgroundColor = KHexColor(@"#FF4D49");
-        _bestNumLabel.font = KRegularFont(9);
-        _bestNumLabel.text = @"￥19999";
-        _bestNumLabel.textAlignment = NSTextAlignmentLeft;
-        _bestNumLabel.textInsets = UIEdgeInsetsMake(0.f, 10.0f, 0.f, 0.0f);
-        [self.bestView insertSubview:_bestNumLabel belowSubview:self.bestLabel];
-    }
-    return _bestNumLabel;
+    return _maxPriceView;
 }
 
 - (UILabel *)originPriceLabel {
@@ -226,18 +186,6 @@
     return _originPriceLabel;
 }
 
-- (UIView *)bestView {
-    if (_bestView == nil) {
-        UIView *bestView = [[UIView alloc] init];
-        _bestView = bestView;
-        _bestView.backgroundColor = UIColor.brownColor;
-        _bestView.clipsToBounds = YES;
-        [_bestView setCorners:UIRectCornerAllCorners radius:3.0];
-        [self.contentView addSubview: _bestView];
-    }
-    return _bestView;
-}
-
 - (UIView *)splitView {
     if (_splitView == nil) {
         UIView *splitView = [[UIView alloc] init];
@@ -250,18 +198,27 @@
 
 - (void)setDelegate:(id<UniversalCollectionViewCellDataDelegate>)delegate {
     TSHotSectionItemModel *item = [delegate universalCollectionViewCellModel:self.indexPath];
-    if (item.rank == 1) {
+    TSRecomendGoods *goodModel = item.goodModel;
+    
+    if (self.indexPath.row == 0) {
         self.rankImgV.hidden = NO;
         self.rankImgV.image = KImageMake(@"mall_hot_no1");
-    } else if (item.rank == 2) {
+    } else if (self.indexPath.row == 1) {
         self.rankImgV.hidden = NO;
         self.rankImgV.image = KImageMake(@"mall_hot_no2");
-    } else if (item.rank == 3) {
+    } else if (self.indexPath.row == 2) {
         self.rankImgV.hidden = NO;
         self.rankImgV.image = KImageMake(@"mall_hot_no3");
     } else {
         self.rankImgV.hidden = YES;
     }
+    
+    self.titleLabel.text = goodModel.name;
+    self.priceLabel.text = goodModel.price;
+    self.originPriceLabel.text = [NSString stringWithFormat:@"提货价 ￥%@", goodModel.staffPrice];
+    self.maxPriceView.maxPrice =  goodModel.earnMost;
+    
+    [self.goodsImgV sd_setImageWithURL:[NSURL URLWithString:goodModel.imageUrl] placeholderImage:KImageMake(@"image_test")];
 }
 
 @end

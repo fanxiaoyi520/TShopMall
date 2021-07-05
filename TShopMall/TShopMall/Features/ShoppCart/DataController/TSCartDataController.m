@@ -33,6 +33,8 @@
     __weak typeof(self) weakSelf = self;
     [self.sections removeAllObjects];
     self.cartModel = nil;
+    self.validCarts = nil;
+    self.invalidCarts = nil;
     SSBaseRequest *res = [self cartShowRequest];
     res.animatingView = self.context.view;
     [res startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
@@ -213,6 +215,16 @@
     NSMutableArray *arr = [NSMutableArray array];
     for (TSCart *cart in self.cartModel.carts) {
         if (cart.checked == YES) {
+            [arr addObject:cart];
+        }
+    }
+    return arr;
+}
+
+- (NSArray<TSCart *> *)invalidGoods{
+    NSMutableArray *arr = [NSMutableArray array];
+    for (TSCart *cart in self.cartModel.carts) {
+        if (cart.isInvalid == YES) {
             [arr addObject:cart];
         }
     }
