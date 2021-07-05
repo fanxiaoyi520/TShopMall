@@ -185,6 +185,15 @@ typedef enum : NSUInteger {
         self.gk_navRightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
     }
     
+    if (self.isPresent) {
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        [button addTarget:self action:@selector(dismissAction:) forControlEvents:UIControlEventTouchUpInside];
+        [button setImage:KImageMake(@"mall_navigationbar_back") forState:UIControlStateNormal];
+        [button setImage:KImageMake(@"mall_navigationbar_back") forState:UIControlStateHighlighted];
+        button.frame = CGRectMake(0, 0, 40, 40);
+        self.gk_navRightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+    }
+    
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:_webView];
 }
@@ -217,6 +226,10 @@ typedef enum : NSUInteger {
 #pragma mark - Actions
 - (void)rightButtonOnClick:(UIButton *)item event:(UIEvent *)event{
     
+}
+
+-(void)dismissAction:(UIButton *)sender{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)rightAction:(TSHybridRightButton *)sender{

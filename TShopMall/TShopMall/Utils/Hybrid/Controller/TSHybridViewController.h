@@ -47,6 +47,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly, getter=isLoading)    BOOL       loading;
 
 
+/// 是否present出来
+@property(nonatomic, assign) BOOL isPresent;
 
 /// 开启新页面的时候，h5传过来的参数
 @property (nonatomic, strong) NSDictionary *jsDataParams;
