@@ -58,7 +58,12 @@
 - (NSString *)configUriWithTypeValue:(NSString *_Nullable)typeValue objectValue:(NSString *)objectValue{
     NSString *uri;
     if ([typeValue isEqualToString:@"APP_PAGE"]) {
-        uri = @"page://quote/category";
+        if ([objectValue isEqualToString:@"CATEGORY"]) {
+            uri = @"page://quote/category";
+        }else if ([objectValue isEqualToString:@"INVITE_FRIENDS"]){
+            uri = @"page://quote/inviteFriends";
+        }
+       
     }
     else if([typeValue isEqualToString:@"goodsGroup"]){
         uri = [NSString stringWithFormat:@"page://quote/categoryDetail?uuid=%@", objectValue];
@@ -67,9 +72,7 @@
     else if([typeValue isEqualToString:@"Goods"] || [typeValue isEqualToString:@"GOODS"]){
         uri = [NSString stringWithFormat:@"page://quote/productDetail?uuid=%@", objectValue];
     }
-    else if([typeValue isEqualToString:@"INVITE_FRIENDS"]){
-        uri = @"page://quote/inviteFriends";
-    }
+   
     return uri;
 }
 
