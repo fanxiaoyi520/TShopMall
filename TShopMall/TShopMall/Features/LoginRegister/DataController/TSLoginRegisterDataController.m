@@ -205,6 +205,7 @@
         
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
         if (complete) {
+            [Popover popToastOnWindowWithText:@"无网络连接"];
             complete(NO);
         }
     }];
@@ -234,7 +235,7 @@
         }
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
         complete(NO);
-
+        [Popover popToastOnWindowWithText:@"无网络连接"];
 
     }];
     
