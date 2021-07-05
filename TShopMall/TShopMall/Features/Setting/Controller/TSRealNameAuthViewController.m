@@ -24,6 +24,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+  
     // Do any additional setup after loading the view.
 }
 
@@ -42,6 +43,10 @@
         if (isSucess) {
             [strongSelf.collectionView reloadData];
         }
+    }];
+    
+    [self.dataController checkRealAuthComplete:^(BOOL isSucess) {
+        
     }];
 }
 

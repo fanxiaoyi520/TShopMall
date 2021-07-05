@@ -344,11 +344,18 @@
         [self.navigationController pushViewController:nicknameVC animated:YES];
         return;
     } else if (indexPath.item == 2) {
-//        TSRealnameInfoViewController *realnameInfoVC = [[TSRealnameInfoViewController alloc] init];
-//        [self.navigationController pushViewController:realnameInfoVC animated:YES];
-        TSRealNameAuthViewController *realnameAuthVC = [[TSRealNameAuthViewController alloc] init];
-        [self.navigationController pushViewController:realnameAuthVC animated:YES];
-        return;
+        MJWeakSelf
+        [self.dataController checkRealAuthComplete:^(NSDictionary * _Nullable info) {
+            NSString *idCard = [info stringForkey:@"idCard"];
+            if (idCard == nil) {
+                TSRealNameAuthViewController *realnameAuthVC = [[TSRealNameAuthViewController alloc] init];
+                [weakSelf.navigationController pushViewController:realnameAuthVC animated:YES];
+            } else {
+                TSRealnameInfoViewController *realnameInfoVC = [[TSRealnameInfoViewController alloc] init];
+                [weakSelf.navigationController pushViewController:realnameInfoVC animated:YES];
+            }
+        }];
+      
     } else if (indexPath.item == 3) {
         [self showSexAlert];
         return;
