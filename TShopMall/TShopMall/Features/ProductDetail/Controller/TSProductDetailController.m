@@ -487,11 +487,29 @@
 
 #pragma mark - GoodDetailMaterialViewDelegate
 -(void)goodDetailMaterialView:(TSGoodDetailMaterialView *_Nullable)materialView downloadClick:(UIButton *_Nullable)sender{
+    
+    int selected = 0;
+    
     for (TSMaterialImageModel *model in self.materials) {
         if (model.selected && model.materialImage) {
-            UIImageWriteToSavedPhotosAlbum(model.materialImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+            selected = selected + 1;
         }
     }
+    
+    if (selected <= 0) {
+        [Popover popToastOnWindowWithText:@"请选择要下载的图片"];
+        return;
+    }
+    
+    [self.dataController isCanVisitPhotoLibrary:^(BOOL hasPersion) {
+        if (hasPersion) {
+            for (TSMaterialImageModel *model in self.materials) {
+                if (model.selected && model.materialImage) {
+                    UIImageWriteToSavedPhotosAlbum(model.materialImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+                }
+            }
+        }
+    }];
 }
 
 #pragma mark - TSChangePriceViewDelegate
@@ -598,11 +616,28 @@
             [self.materialView reloadMaterialView];
         } else {// 直接下载素材,保存图片到相册
             
+            int selected = 0;
+            
             for (TSMaterialImageModel *model in self.materials) {
                 if (model.selected && model.materialImage) {
-                    UIImageWriteToSavedPhotosAlbum(model.materialImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+                    selected = selected + 1;
                 }
             }
+            
+            if (selected <= 0) {
+                [Popover popToastOnWindowWithText:@"请选择要下载的图片"];
+                return;
+            }
+            
+            [self.dataController isCanVisitPhotoLibrary:^(BOOL hasPersion) {
+                if (hasPersion) {
+                    for (TSMaterialImageModel *model in self.materials) {
+                        if (model.selected && model.materialImage) {
+                            UIImageWriteToSavedPhotosAlbum(model.materialImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+                        }
+                    }
+                }
+            }];
         }
     }else if ([@"TSProductDetailPurchaseCell" isEqualToString:params[@"cellType"]]){
         if ([params[@"purchaseType"] intValue] == 0) {//赠品

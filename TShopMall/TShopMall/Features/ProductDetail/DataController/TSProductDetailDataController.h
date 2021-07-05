@@ -41,6 +41,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong, readonly) NSMutableArray <TSGoodDetailSectionModel *> *sections;
 
+/// 请求照册权限
+- (void)isCanVisitPhotoLibrary:(void(^)(BOOL hasPersion))result;
+
 
 /// 请求商品详情数据
 /// @param uuid 商品UUID
@@ -132,6 +135,8 @@ NS_ASSUME_NONNULL_BEGIN
                                 discountType:(NSString *)discountType
                                discountPrice:(NSString *)discountPrice
                                     complete:(void(^)(BOOL isSucess, NSDictionary *data))complete;
+
+
 
 @end
 

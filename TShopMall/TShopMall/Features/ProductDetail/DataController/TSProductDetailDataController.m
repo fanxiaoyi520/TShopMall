@@ -8,6 +8,7 @@
 #import "TSProductDetailDataController.h"
 #import "NSString+Plugin.h"
 #import "TSMaterialImageCell.h"
+#import <Photos/Photos.h>
 
 @interface TSProductDetailDataController()<YTKChainRequestDelegate>
 
@@ -25,6 +26,35 @@
         self.locationModel = [TSLocationInfoModel locationInfoModel];
     }
     return self;
+}
+
+- (void)isCanVisitPhotoLibrary:(void(^)(BOOL hasPersion))result {
+    PHAuthorizationStatus status = [PHPhotoLibrary authorizationStatus];
+    if (status == PHAuthorizationStatusAuthorized) {
+        result(YES);
+        return;
+    }
+    if (status == PHAuthorizationStatusRestricted || status == PHAuthorizationStatusDenied) {
+        [Popover popToastOnWindowWithText:@"请打开 设置-隐私-照片 来进行设置"];
+        result(NO);
+        return ;
+    }
+    
+    if (status == PHAuthorizationStatusNotDetermined) {
+        
+        [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (status != PHAuthorizationStatusAuthorized) {
+                    [Popover popToastOnWindowWithText:@"请打开 设置-隐私-照片 来进行设置"];
+                      result(NO);
+                      return ;
+                  }
+                  result(YES);
+            });
+  
+        }];
+    }
+    
 }
 
 #pragma mark - 查询商品详情数据
