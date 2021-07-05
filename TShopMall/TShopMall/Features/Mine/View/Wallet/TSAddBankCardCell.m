@@ -273,7 +273,7 @@ static NSInteger const kGroupSize = 4;
         [_inputInfoTextField addTarget:self action:@selector(inputInfoTextFieldEditingDidBeginAction:) forControlEvents:UIControlEventEditingDidBegin];
         _inputInfoTextField.textColor = KHexColor(@"#2D3132");
         _inputInfoTextField.font = KRegularFont(14);
-        _inputInfoTextField.textAlignment = NSTextAlignmentRight;
+        _inputInfoTextField.textAlignment = NSTextAlignmentLeft;
     }
     return _inputInfoTextField;
 }

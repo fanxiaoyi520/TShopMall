@@ -295,6 +295,7 @@
 		CE5C8C54268EE8F20063B470 /* TSInputPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5C8C53268EE8F20063B470 /* TSInputPasswordViewController.m */; };
 		CE5C8C57269058EF0063B470 /* NNValidationCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5C8C56269058EF0063B470 /* NNValidationCodeView.m */; };
 		CE5C8C5A2692D3BA0063B470 /* TSUnbundlingCardViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5C8C592692D3BA0063B470 /* TSUnbundlingCardViewCell.m */; };
+		CE5C8C5C2692F0C70063B470 /* Bank.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE5C8C5B2692F0C70063B470 /* Bank.plist */; };
 		CE6361D9268C3A2900606E02 /* TSDropDownView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6361D8268C3A2900606E02 /* TSDropDownView.m */; };
 		CE6361DC268C508400606E02 /* TSBranchCardModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6361DB268C508400606E02 /* TSBranchCardModel.m */; };
 		CE63BFA5268D603500D00720 /* TSSelectAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE63BFA4268D603500D00720 /* TSSelectAddressViewController.m */; };
@@ -1166,6 +1167,7 @@
 		CE5C8C56269058EF0063B470 /* NNValidationCodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNValidationCodeView.m; sourceTree = "<group>"; };
 		CE5C8C582692D3BA0063B470 /* TSUnbundlingCardViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSUnbundlingCardViewCell.h; sourceTree = "<group>"; };
 		CE5C8C592692D3BA0063B470 /* TSUnbundlingCardViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSUnbundlingCardViewCell.m; sourceTree = "<group>"; };
+		CE5C8C5B2692F0C70063B470 /* Bank.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Bank.plist; sourceTree = "<group>"; };
 		CE6361D7268C3A2900606E02 /* TSDropDownView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSDropDownView.h; sourceTree = "<group>"; };
 		CE6361D8268C3A2900606E02 /* TSDropDownView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSDropDownView.m; sourceTree = "<group>"; };
 		CE6361DA268C508400606E02 /* TSBranchCardModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSBranchCardModel.h; sourceTree = "<group>"; };
@@ -3189,6 +3191,7 @@
 			children = (
 				F530CD392680CD6A009DC29A /* Tabbar */,
 				F530CD322680CCC5009DC29A /* Lanuch */,
+				CE5C8C5B2692F0C70063B470 /* Bank.plist */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -4366,6 +4369,7 @@
 				046516F9268C57EF000829C2 /* SelectorDialogArrow.png in Resources */,
 				F530CC4726803B1C009DC29A /* PulldownRefreshStyleWhite.json in Resources */,
 				F530CCF226804167009DC29A /* TXKJSBridge.js in Resources */,
+				CE5C8C5C2692F0C70063B470 /* Bank.plist in Resources */,
 				F530CD382680CCC5009DC29A /* launch.png in Resources */,
 				F530CC6A26803E43009DC29A /* ProgressAnimation.json in Resources */,
 				F530CD5A26819449009DC29A /* mall_launch_bottom.png in Resources */,

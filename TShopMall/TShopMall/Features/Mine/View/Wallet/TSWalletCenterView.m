@@ -49,7 +49,7 @@
     [self.eyeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.mineAssetsLab).offset(-3);
         make.left.equalTo(@[self.mineAssetsLab.mas_right]).offset(6);
-        make.width.mas_equalTo(15);
+        make.width.mas_equalTo(30);
         make.height.mas_equalTo(30);
     }];
     

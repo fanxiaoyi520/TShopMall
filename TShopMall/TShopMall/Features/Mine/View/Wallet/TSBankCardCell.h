@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TSBankCardCell : UICollectionViewCell
 @property (nonatomic ,assign) NSInteger sourceInt;
-- (void)setModel:(id _Nullable)model indexPath:(NSIndexPath *)indexPath;
+- (void)setModel:(id _Nullable)model indexPath:(NSIndexPath *)indexPath dataList:(NSArray *)dataList;
 @end
 
 @interface TSBankCardHeader : UICollectionReusableView

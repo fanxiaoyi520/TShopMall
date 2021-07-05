@@ -11,6 +11,7 @@
     UIImageView * _bankImageCion;
     UILabel * _bankNameLabel;
     UILabel * _accountLabel;
+    UILabel * _bankStatusName;
     UIImageView * _masterLabelBackImageView;
     UILabel * _masterLabel;
     UIImageView * _bgImageView;
@@ -37,8 +38,6 @@
      [self.contentView addSubview:_bgImageView];
     
     _bankImageCion = [[UIImageView alloc] initWithFrame:CGRectMake(15, 15, 40, 40)];
-    _bankImageCion.backgroundColor=[UIColor colorWithRed: arc4random_uniform(256)/255.0f green: arc4random_uniform(256)/255.0f blue: arc4random_uniform(256)/255.0f alpha:1];
-    _bankImageCion.image=[UIImage imageNamed:@""];
     _bankImageCion.layer.cornerRadius=_bankImageCion.width/2;
     _bankImageCion.layer.masksToBounds=YES;
     [_bgImageView addSubview:_bankImageCion];
@@ -54,6 +53,13 @@
     _accountLabel.textColor=KWhiteColor;
     _accountLabel.textAlignment = NSTextAlignmentRight;
     [_bgImageView addSubview:_accountLabel];
+    
+    _bankStatusName = [[UILabel alloc] initWithFrame:CGRectMake(self.width - 200 - 10, 18, 200, 30)];
+    _bankStatusName.font=KRegularFont(16);
+    _bankStatusName.textColor=KWhiteColor;
+    _bankStatusName.textAlignment = NSTextAlignmentRight;
+    _bankStatusName.hidden = YES;
+    [_bgImageView addSubview:_bankStatusName];
 }
 
 // MARK: model
@@ -65,6 +71,15 @@
 
     TSBankCardModel *kModel = model;
     _bankNameLabel.text = kModel.accountBank;
+    
+    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"Bank" ofType:@"plist"];
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
+    NSArray *array = [dic allValues];
+    if ([array containsObject:kModel.bankName]) {
+        _bankImageCion.image = KImageMake(kModel.bankName);
+    } else {
+        _bankImageCion.image = KImageMake(@"其他银行");
+    }
 
     NSString *endStr = nil;
     if (kModel.bankCardNo.length >= 16) {
@@ -79,7 +94,8 @@
         
         if ([kModel.bankStatus isEqualToString:@"0"]) {//待审核
             _bgImageView.image=[UIImage imageNamed:@"mine_shenhezhong_da"];
-            _accountLabel.text = kModel.bankStatusName;
+            _bankStatusName.hidden = NO;
+            _bankStatusName.text = kModel.bankStatusName;
         } else if ([kModel.bankStatus isEqualToString:@"1"]) {//审核通过
             if (indexPath.item % 2 == 0) {
                 _bgImageView.image=[UIImage imageNamed:@"mine_bankstatus_hong"];

@@ -107,6 +107,7 @@
                 self.flatout.itemSize = CGSizeMake(width, 83);
                 self.flatout.minimumLineSpacing = -11;
             }
+            self.collectionView.top = GK_STATUSBAR_NAVBAR_HEIGHT;
             [self.collectionView.mj_header endRefreshing];
             self.collectionView.mj_header.hidden = YES;
             [self.collectionView reloadData];
@@ -123,7 +124,7 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     TSBankCardCell * cell =[collectionView dequeueReusableCellWithReuseIdentifier:@"cellIdentifier" forIndexPath:indexPath];
-    [cell setModel:self.dataController.bankCardArray[indexPath.row] indexPath:indexPath];
+    [cell setModel:self.dataController.bankCardArray[indexPath.row] indexPath:indexPath dataList:self.dataController.bankCardArray];
     return cell;
 }
 
