@@ -15,7 +15,27 @@
 #import "TSChangeBindRequest.h"
 #import "TSBindUserByAuthCodeRequest.h"
 @implementation TSLoginRegisterDataController
+-(void)fetchRefershTokenComplete:(void(^)(BOOL isSucess))complete{
+    NSString *requestUrl = [NSString stringWithFormat:@"%@?appId=%@&tenantId=%@&appSecret=%@&userName=%@",kAccountRefershTokenUrl,kAppId,@"tcl",kAppSecret, [TSUserInfoManager userInfo].userName];
 
+    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithBaseUrl:kAccountCenterApiPrefix RequestUrl:requestUrl requestMethod:YTKRequestMethodGET requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON requestHeader:@{@"refreshToken":[TSUserInfoManager userInfo].refreshToken} requestBody:@{} needErrorToast:YES];
+    [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+        if (request.responseModel.isSucceed) {
+            TSUserInfoManager *userInfo = [TSUserInfoManager userInfo];
+            userInfo.accessToken = request.responseModel.originalData[@"accessToken"];
+            userInfo.refreshToken = request.responseModel.originalData[@"refreshToken"];
+            [[TSUserInfoManager userInfo] saveUserInfo:userInfo];
+            if (complete) {
+                complete(YES);
+            }
+        }
+        
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        if (complete) {
+            complete(NO);
+        }
+    }];
+}
 -(void)fetchBindUserByAuthCode:(NSString *)token
                           type:(NSString *)type
                     platformId:(NSString *)platformId

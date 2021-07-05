@@ -52,7 +52,8 @@ UIKIT_EXTERN NSString *const kAccountCancelInfoUrl;
 UIKIT_EXTERN NSString *const kAccountCheckSalesmanWithMobileUrl;
 ///Token校验分销员是否存在
 UIKIT_EXTERN NSString *const kAccountCheckSalesmanWithTokenUrl;
-
+///Token刷新
+UIKIT_EXTERN NSString *const kAccountRefershTokenUrl;
 #pragma mark - 首页
 UIKIT_EXTERN NSString *const kHomePageInfoUrl;
 UIKIT_EXTERN NSString *const kSearchKey;//搜索关键词
