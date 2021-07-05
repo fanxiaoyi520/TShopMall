@@ -21,6 +21,8 @@
 @property (nonatomic, strong) UICollectionReusableView *viewForFooter;
 @property (nonatomic, copy) NSString *headerTitle;
 @property (nonatomic, strong) NSArray<id<TSSearchCollectionRowDelegate>> *rows;
+
+@property (nonatomic, assign) NSTextAlignment headerTextAlignment;
 @end
 
 

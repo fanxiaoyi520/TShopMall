@@ -8,6 +8,8 @@
 #import "TSSearchResultCollectionView.h"
 #import "TSSearchResultCell.h"
 #import "TSSearchResultViewModel.h"
+#import "TSRecomendModel.h"
+#import "TSRecomendHeaderTitleView.h"
 
 @interface TSSearchResultCollectionView()<UICollectionViewDelegate,UICollectionViewDataSource>
 
@@ -51,6 +53,10 @@
     TSSearchSection *section = self.sections[indexPath.section];
     [collectionView registerClass:NSClassFromString(section.headerIdentifier) forSupplementaryViewOfKind:kind withReuseIdentifier:section.headerIdentifier];
     UICollectionReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:section.headerIdentifier forIndexPath:indexPath];
+    if (kind == UICollectionElementKindSectionHeader && [section.headerIdentifier isEqualToString:@"TSRecomendHeaderTitleView"]) {
+        TSRecomendHeaderTitleView *recomendHeader = (TSRecomendHeaderTitleView *)view;
+        [recomendHeader updateTitle:section.headerTitle textAlignment:section.headerTextAlignment];
+    }
     return view;
 }
 
@@ -71,8 +77,11 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     TSSearchRow *row = self.sections[indexPath.section].rows[indexPath.row];
-    TSSearchResultViewModel *vm = (TSSearchResultViewModel *)row.obj;
-    if (vm != nil) {
+    if ([row.obj isKindOfClass:[TSSearchResultViewModel class]]) {
+        TSSearchResultViewModel *vm = (TSSearchResultViewModel *)row.obj;
+        self.goodsSelected(vm.uuid);
+    } else if ([row.obj isKindOfClass:[TSRecomendGoods class]]) {
+        TSRecomendGoods *vm =(TSRecomendGoods *)row.obj;
         self.goodsSelected(vm.uuid);
     }
 }

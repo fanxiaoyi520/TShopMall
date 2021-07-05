@@ -17,6 +17,7 @@
 #import "TSAlertView.h"
 #import "TSChangeMobileViewController.h"
 #import "TSAccountCancelDropViewController.h"
+#import "TSPayPwdViewController.h"
 
 @interface TSSecurityViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate>
 /// 数据中心
@@ -140,8 +141,12 @@
         }];
         return;
     } else if (indexPath.section == 1 && indexPath.item == 0) {
-        TSWithdrawalPswSetController *pswSetVC = [[TSWithdrawalPswSetController alloc] init];
-        [self.navigationController pushViewController:pswSetVC animated:YES];
+        TSPhoneNumVeriViewController *phoneNumVeriVC = [[TSPhoneNumVeriViewController alloc] init];
+        [self.navigationController pushViewController:phoneNumVeriVC animated:YES];
+//        TSWithdrawalPswSetController *pswSetVC = [[TSWithdrawalPswSetController alloc] init];
+//        [self.navigationController pushViewController:pswSetVC animated:YES];
+//        TSPayPwdViewController *pswSetVC = [[TSPayPwdViewController alloc] init];
+//        [self.navigationController pushViewController:pswSetVC animated:YES];
         return;
     } else if (indexPath.section == 3 && indexPath.item == 0) {
         TSSecurCenterViewController *secriCenterVC = [[TSSecurCenterViewController alloc] init];

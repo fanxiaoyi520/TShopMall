@@ -75,6 +75,7 @@
 }
 
 - (void)goToGoodsList:(NSString *)key{
+    if (key.length == 0) return;
     [TSSearchKeyViewModel handleHistoryKeys:key];
     [self.dataCon configHistorySection];
     

@@ -50,7 +50,15 @@
         for (UIViewController *con in childs) {
             if ([con isKindOfClass:[TSHybridViewController class]]) {
                 TSHybridViewController *hybrid = (TSHybridViewController *)con;
-                if ([hybrid.request.URL.absoluteString isEqualToString:backUrl]) {
+                NSString *query = [hybrid.request.URL query];
+                NSMutableString *baseUrl = [NSMutableString stringWithString:hybrid.request.URL.absoluteString];
+                NSString *frountUrl = @"";
+                if (query.length > 0) {
+                    NSArray *componets = [baseUrl componentsSeparatedByString:@"?"];
+                    frountUrl = [componets firstObject];
+                }
+                
+                if ([hybrid.request.URL.absoluteString isEqualToString:backUrl] || [frountUrl containsString:backUrl]) {
                     if (leftUrl.length > 0) {
                         NSDictionary *callBackDic = paramsDic[@"data"];
                         NSString *json = @"";
@@ -144,9 +152,9 @@
 -(void)navigation:(NSDictionary *)params{
     NSDictionary *data = params[@"data"];
     NSDictionary *paramsDic = data[@"params"];
-    NSString *controllerName = paramsDic[@"dest"];
+    NSString *controllerName = paramsDic[@"name"];
     UIViewController *con;
-    if ([@"toOrderPay" isEqualToString:controllerName]) {
+    if ([@"TSPayController" isEqualToString:controllerName]) {
         NSString *uuid  = [NSString stringWithFormat:@"%@", paramsDic[@"data"][@"uuid"]];
         NSString *isGroup = @"1";
         if (uuid.length != 0) {

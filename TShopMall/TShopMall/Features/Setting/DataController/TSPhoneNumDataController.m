@@ -6,6 +6,8 @@
 //
 
 #import "TSPhoneNumDataController.h"
+#import "TSSMSCodeRequest.h"
+#import "TSLoginSMSModel.h"
 
 @interface TSPhoneNumDataController ()
 
@@ -20,7 +22,7 @@
     {
         NSMutableArray *items = [NSMutableArray array];
         TSPhoneNumSectionItemModel *item = [[TSPhoneNumSectionItemModel alloc] init];
-        item.phoneNum = @"133-7869-2380";
+        item.phoneNum = [TSUserInfoManager userInfo].user.phone;//@"133-7869-2380";
         item.cellHeight = kScreenHeight;
         item.identify = @"TSPhoneNumVeriCell";
         [items addObject:item];
@@ -33,6 +35,32 @@
     if (complete) {
         complete(YES);
     }
+}
+/** 修改提现密码模块的手机发送验证码 */
+-(void)fetchCheckMobileSMSCodeMobile:(NSString *)mobile
+                             complete:(void(^)(BOOL isSucess))complete {
+    TSSMSCodeRequest *codeRequest = [[TSSMSCodeRequest alloc] initWithMobile:mobile type:@"ALTER_PASSWORD"];
+    [codeRequest startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+        if (request.responseModel.isSucceed) {
+            self.smsModel = [[TSLoginSMSModel alloc] init];
+            self.smsModel.key = request.responseModel.data[@"key"];
+            self.smsModel.text = request.responseModel.data[@"text"];
+            self.smsModel.expirationTime = request.responseModel.data[@"expirationTime"];
+            if (complete) {
+                complete(YES);
+            }
+        }else{
+            self.smsModel = [[TSLoginSMSModel alloc] init];
+            [Popover popToastOnWindowWithText:request.responseModel.originalData[@"failCause"]];
+            if (complete) {
+                complete(NO);
+            }
+        }
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        if (complete) {
+            complete(NO);
+        }
+    }];
 }
 
 @end

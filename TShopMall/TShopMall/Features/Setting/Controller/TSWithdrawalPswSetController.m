@@ -77,7 +77,11 @@
 #pragma mark - Actions
 /** 提交提现密码的设置 */
 - (void)commitWithWithdrawalpsw:(NSString *)psw {
-    
+    [[TSServicesManager sharedInstance].userInfoService setWithrawalPwd:psw success:^{
+        
+    } failure:^(NSString * _Nonnull errorMsg) {
+        
+    }];
 }
 
 #pragma mark - UICollectionViewDataSource

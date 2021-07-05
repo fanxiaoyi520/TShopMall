@@ -15,13 +15,6 @@
     SSResponseModel *reponseModel = [[SSResponseModel alloc] init];
     reponseModel.stateCode = 500;
     self.responseModel = reponseModel;
-    
-    /// token 失效
-    if ( reponseModel.stateCode == 999) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:TS_Login_State object:@(1)];
-    }
-
-   
 }
 
 #pragma mark - 请求成功过滤器（stateCode == 200）
@@ -32,9 +25,21 @@
     NSLog(@"url --%@%@",self.baseUrl,self.requestUrl);
     NSLog(@" --%@",reponseModel.data);
 #endif
+    
+    if ([self.responseModel.code integerValue] == 403) {
+        [[TSServicesManager sharedInstance].acconutService fetchRefershTokenComplete:^(BOOL isSucess) {
+            
+        }];
+    }
+    
+    /// 被挤下线
+    if (reponseModel.stateCode == 999) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:TS_Login_State object:@(1)];
+    }
+    
     if (!reponseModel.isSucceed) {//网络请求失败
         if (self.needErrorToast) {//toast提示
-            
+            [Popover popToastOnWindowWithText:reponseModel.responseMsg];
         }
     }
 }

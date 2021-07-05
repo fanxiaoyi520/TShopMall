@@ -166,7 +166,7 @@ NSString *const kCustomerInvitationCode  = @"v2/sysback/salesman/get/customer/in
 //一级分销员通过邀请码推广记录
 NSString *const kSalesmanInvitationRecord = @"v2/sysback/salesman/get/salesman/page";
 #pragma mark - 设置
-
+NSString *const kCheckCodeUrl = @"/captcha/captcha/checkCaptcha";
 NSString *const kAboutMeAgreementUrl = @"/rest/v2/front/shopStatement/getShopStatementList";
 NSString *const kModifyUserUrl = @"/user/mng/user";
 NSString *const kUploadImageUrl = @"/rest/v2/usercenter/batchfileupload/batch/upload";
