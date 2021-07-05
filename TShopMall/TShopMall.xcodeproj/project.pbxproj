@@ -293,6 +293,8 @@
 		CE5674BB2683570300252F5D /* TSWalletModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5674BA2683570300252F5D /* TSWalletModel.m */; };
 		CE5C706D2689DA4100D455DB /* TSMyIncomeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5C706C2689DA4100D455DB /* TSMyIncomeModel.m */; };
 		CE5C8C54268EE8F20063B470 /* TSInputPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5C8C53268EE8F20063B470 /* TSInputPasswordViewController.m */; };
+		CE5C8C57269058EF0063B470 /* NNValidationCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5C8C56269058EF0063B470 /* NNValidationCodeView.m */; };
+		CE5C8C5A2692D3BA0063B470 /* TSUnbundlingCardViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5C8C592692D3BA0063B470 /* TSUnbundlingCardViewCell.m */; };
 		CE6361D9268C3A2900606E02 /* TSDropDownView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6361D8268C3A2900606E02 /* TSDropDownView.m */; };
 		CE6361DC268C508400606E02 /* TSBranchCardModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6361DB268C508400606E02 /* TSBranchCardModel.m */; };
 		CE63BFA5268D603500D00720 /* TSSelectAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE63BFA4268D603500D00720 /* TSSelectAddressViewController.m */; };
@@ -1160,6 +1162,10 @@
 		CE5C706C2689DA4100D455DB /* TSMyIncomeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSMyIncomeModel.m; sourceTree = "<group>"; };
 		CE5C8C52268EE8F20063B470 /* TSInputPasswordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSInputPasswordViewController.h; sourceTree = "<group>"; };
 		CE5C8C53268EE8F20063B470 /* TSInputPasswordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSInputPasswordViewController.m; sourceTree = "<group>"; };
+		CE5C8C55269058EE0063B470 /* NNValidationCodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNValidationCodeView.h; sourceTree = "<group>"; };
+		CE5C8C56269058EF0063B470 /* NNValidationCodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNValidationCodeView.m; sourceTree = "<group>"; };
+		CE5C8C582692D3BA0063B470 /* TSUnbundlingCardViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSUnbundlingCardViewCell.h; sourceTree = "<group>"; };
+		CE5C8C592692D3BA0063B470 /* TSUnbundlingCardViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSUnbundlingCardViewCell.m; sourceTree = "<group>"; };
 		CE6361D7268C3A2900606E02 /* TSDropDownView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSDropDownView.h; sourceTree = "<group>"; };
 		CE6361D8268C3A2900606E02 /* TSDropDownView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSDropDownView.m; sourceTree = "<group>"; };
 		CE6361DA268C508400606E02 /* TSBranchCardModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSBranchCardModel.h; sourceTree = "<group>"; };
@@ -2622,6 +2628,8 @@
 				CE66DAEE26841F2600E8D433 /* TSWithdrawalRecordViewController.m */,
 				CE66DAF62684709000E8D433 /* TSWithdrawalViewController.h */,
 				CE66DAF72684709000E8D433 /* TSWithdrawalViewController.m */,
+				CE5C8C52268EE8F20063B470 /* TSInputPasswordViewController.h */,
+				CE5C8C53268EE8F20063B470 /* TSInputPasswordViewController.m */,
 				CE66DAF92684729600E8D433 /* TSPresentationController.h */,
 				CE66DAFA2684729600E8D433 /* TSPresentationController.m */,
 				CE66DB052684A50000E8D433 /* TSBankCardViewController.h */,
@@ -2636,8 +2644,6 @@
 				CE4F6BD32685CEF200812275 /* TSSelectorViewController.m */,
 				CE63BFA3268D603500D00720 /* TSSelectAddressViewController.h */,
 				CE63BFA4268D603500D00720 /* TSSelectAddressViewController.m */,
-				CE5C8C52268EE8F20063B470 /* TSInputPasswordViewController.h */,
-				CE5C8C53268EE8F20063B470 /* TSInputPasswordViewController.m */,
 			);
 			path = Wallet;
 			sourceTree = "<group>";
@@ -2645,6 +2651,8 @@
 		CE5674B426833A0E00252F5D /* Wallet */ = {
 			isa = PBXGroup;
 			children = (
+				CE5C8C55269058EE0063B470 /* NNValidationCodeView.h */,
+				CE5C8C56269058EF0063B470 /* NNValidationCodeView.m */,
 				CE6361D7268C3A2900606E02 /* TSDropDownView.h */,
 				CE6361D8268C3A2900606E02 /* TSDropDownView.m */,
 				CE66DB02268490BB00E8D433 /* TSWalletCenterView.h */,
@@ -2655,6 +2663,8 @@
 				CE66DAF12684222F00E8D433 /* TSWithdrawalRecordCell.m */,
 				CE66DB082684AA7C00E8D433 /* TSBankCardCell.h */,
 				CE66DB092684AA7C00E8D433 /* TSBankCardCell.m */,
+				CE5C8C582692D3BA0063B470 /* TSUnbundlingCardViewCell.h */,
+				CE5C8C592692D3BA0063B470 /* TSUnbundlingCardViewCell.m */,
 				CE4F6BCF26859ED300812275 /* TSAddBankCardCell.h */,
 				CE4F6BD026859ED300812275 /* TSAddBankCardCell.m */,
 				CE4F6BD52685D30A00812275 /* TSSelectorCell.h */,
@@ -4577,6 +4587,7 @@
 				F56D4B63266E037600C1AD9E /* MyDimeScale.m in Sources */,
 				F530CC3B26803862009DC29A /* NSDate+Plugin.m in Sources */,
 				C3A6C4BF267A1C5700FC71D6 /* TSSecurityCell.m in Sources */,
+				CE5C8C5A2692D3BA0063B470 /* TSUnbundlingCardViewCell.m in Sources */,
 				F55D2D1D267B1E90006BACCF /* TSRankWealthController.m in Sources */,
 				C3A6C4BC267A1C5700FC71D6 /* TSSettingExitCell.m in Sources */,
 				F55D2D052678D139006BACCF /* TSProductDetailHeaderView.m in Sources */,
@@ -4996,6 +5007,7 @@
 				04651707268C57EF000829C2 /* TextDialogElement.m in Sources */,
 				F54973642668A22100181E3F /* YTKBatchRequest+AnimatingAccessory.m in Sources */,
 				F530C6D526802E5D009DC29A /* TSSMSCodeRequest.m in Sources */,
+				CE5C8C57269058EF0063B470 /* NNValidationCodeView.m in Sources */,
 				F54973A82668B98000181E3F /* TSTabBarController.m in Sources */,
 				F530CCA226803FCD009DC29A /* UILabel+size.m in Sources */,
 				F530CCA026803FCD009DC29A /* UIView+DefaultPageView.m in Sources */,

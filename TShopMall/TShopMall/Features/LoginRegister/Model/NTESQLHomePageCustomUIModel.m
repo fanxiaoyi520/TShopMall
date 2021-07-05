@@ -47,10 +47,11 @@
     model.numberOffsetTopY = 190;
 
     ///  品牌
-    model.brandHidden = YES;
+    model.brandHidden = NO;
+    model.brandOffsetTopY = 225;
     
     model.customViewBlock = ^(UIView * _Nullable customView) {
-        
+
         UILabel *otherLabel = [[UILabel alloc] init];
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(labelTapped)];
         [otherLabel addGestureRecognizer:tap];
@@ -60,32 +61,32 @@
         otherLabel.textColor = KHexAlphaColor(@"#2D3132", 0.6);
         otherLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:14];
         [customView addSubview:otherLabel];
-        
+
         [otherLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(customView);
             make.top.equalTo(customView).mas_offset(355);
             make.height.mas_equalTo(16);
         }];
-        
 
-        UIButton *weChatButton = [UIButton new];
-        UIButton *appleButton = [UIButton new];
-        [weChatButton setBackgroundImage:KImageMake(@"mall_login_wechat") forState:UIControlStateNormal];
-        [weChatButton addTarget:self action:@selector(goToWechat) forControlEvents:UIControlEventTouchUpInside];
-        
-        [appleButton setBackgroundImage:KImageMake(@"mall_login_apple") forState:UIControlStateNormal];
-        [appleButton addTarget:self action:@selector(goToApple) forControlEvents:UIControlEventTouchUpInside];
-        [customView addSubview:weChatButton];
-        [customView addSubview:appleButton];
+//
+//        UIButton *weChatButton = [UIButton new];
+//        UIButton *appleButton = [UIButton new];
+//        [weChatButton setBackgroundImage:KImageMake(@"mall_login_wechat") forState:UIControlStateNormal];
+//        [weChatButton addTarget:self action:@selector(goToWechat) forControlEvents:UIControlEventTouchUpInside];
+//
+//        [appleButton setBackgroundImage:KImageMake(@"mall_login_apple") forState:UIControlStateNormal];
+//        [appleButton addTarget:self action:@selector(goToApple) forControlEvents:UIControlEventTouchUpInside];
+//        [customView addSubview:weChatButton];
+//        [customView addSubview:appleButton];
+//
+//        CGFloat margin = kScreenWidth - 100 - 30 * 2;
+//        [@[weChatButton, appleButton] mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:100 leadSpacing:margin/2 tailSpacing:margin/2];
+//        // 设置array的垂直方向的约束
+//        [@[weChatButton, appleButton] mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.top.equalTo(customView.mas_bottom).offset(-135);
+//            make.height.equalTo(@(30));
+//        }];
 
-        CGFloat margin = kScreenWidth - 100 - 30 * 2;
-        [@[weChatButton, appleButton] mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:100 leadSpacing:margin/2 tailSpacing:margin/2];
-        // 设置array的垂直方向的约束
-        [@[weChatButton, appleButton] mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(customView.mas_bottom).offset(-135);
-            make.height.equalTo(@(30));
-        }];
-        
     };
     
         /// 登录按钮

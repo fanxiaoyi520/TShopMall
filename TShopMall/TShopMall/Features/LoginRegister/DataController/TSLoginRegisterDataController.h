@@ -27,6 +27,9 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)fetchChangeMobileSMSCodeMobile:(NSString *)mobile
                              complete:(void(^)(BOOL isSucess))complete;///换绑
 
+/// 刷新token
+-(void)fetchRefershTokenComplete:(void(^)(BOOL isSucess))complete;
+
 /// 注册
 -(void)fetchRegisterMobile:(NSString *)mobile
                      validCode:(NSString *)validCode

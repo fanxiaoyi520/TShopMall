@@ -136,16 +136,15 @@
 }
 
 - (void)getAgreementInfo {
-    NSArray *agreementModels = [TSGlobalManager shareInstance].agreementModels;
-    if (agreementModels.count) {
-        self.checkedView.agreementModels = agreementModels;
-        self.quickCheckView.agreementModels = agreementModels;
-    } else {
-        [[TSUserLoginManager shareInstance] fetchAgreementWithCompleted:^(NSArray<TSAgreementModel *> * _Nonnull agreementModels) {
-            self.checkedView.agreementModels = agreementModels;
-            self.quickCheckView.agreementModels = agreementModels;
-        }];
-    }
+    @weakify(self);
+    [self.KVOController observe:[TSGlobalManager shareInstance] keyPath:@"agreementModels" options:(NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew) block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
+        @strongify(self)
+        if ([TSGlobalManager shareInstance].agreementModels.count) {
+            self.checkedView.agreementModels = [TSGlobalManager shareInstance].agreementModels;
+        }
+        
+        self.checkedView.hidden = ![TSGlobalManager shareInstance].agreementModels.count;
+    }];
 }
 
 #pragma mark - Actions
@@ -173,7 +172,7 @@
 - (void)otherLogin {
     self.quickView.hidden = YES;
     self.quickCheckView.hidden = YES;
-    self.checkedView.hidden = NO;
+    self.checkedView.hidden = ![TSGlobalManager shareInstance].agreementModels.count;
     self.topView.hidden = NO;
 }
 

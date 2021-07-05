@@ -92,7 +92,8 @@ NSString *const kAccountCancelUrl = @"/auth/account/cancel";
 NSString *const kAccountCancelBackUrl = @"/auth/account/cancelBack";
 NSString *const kAccountCancelInfoUrl = @"/auth/account/cancelInfo";
 NSString *const kAccountCheckSalesmanWithMobileUrl = @"/rest/sysback/salesman/checkSalesman";
-NSString *const kAccountCheckSalesmanWithTokenUrl = @"/rest/sysback/salesman/checkSalesman";
+NSString *const kAccountCheckSalesmanWithTokenUrl = @"/rest/sysback/salesman/checkSalesmanByToken";
+NSString *const kAccountRefershTokenUrl = @"/auth/auth/refershToken";
 
 #pragma mark - 首页
 

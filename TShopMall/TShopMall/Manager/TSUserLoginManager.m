@@ -54,9 +54,9 @@
     [[NTESQuickLoginManager sharedInstance] registerWithBusinessID:QuickLoginBusinessID];
 }
 
-- (void)otherLoginWithAnimation:(BOOL)animation{
+- (void)otherLoginWithAnimation:(BOOL)animation needClose:(BOOL)needClose{
     TSLoginViewController *loginViewController = [TSLoginViewController new];
-    loginViewController.needClose = YES;
+    loginViewController.needClose = needClose;
     TSBaseNavigationController *homeController = [[TSBaseNavigationController alloc] initWithRootViewController:loginViewController];
     loginViewController.loginBlock = self.loginBlock;
     UIViewController *vc = [UIApplication sharedApplication].delegate.window.rootViewController;
@@ -76,7 +76,7 @@
         oneClickLoginVC.otherLoginBlock = ^{
             @strongify(self)
             [[NTESQuickLoginManager sharedInstance] closeAuthController:^{
-                [self otherLoginWithAnimation:YES];
+                [self otherLoginWithAnimation:YES needClose:YES];
             }];
         };
 //        oneClickLoginVC.loginBlock = self.loginBlock;
@@ -86,7 +86,7 @@
                 self.loginBlock();
             }else
             {
-                
+                [self otherLoginWithAnimation:NO needClose:NO];
             }
             
         };
@@ -125,37 +125,6 @@
         callBack(nav);
     }
     
-}
-
-/** 获取注册登录的协议信息 */
-- (void)fetchAgreementWithCompleted: (void(^)(NSArray<TSAgreementModel *> *agreementModels))completed {
-    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kLoginRegisterAgreementUrl
-                                                               requestMethod:YTKRequestMethodGET
-                                                       requestSerializerType:YTKRequestSerializerTypeJSON
-                                                      responseSerializerType:YTKResponseSerializerTypeJSON
-                                                               requestHeader:@{}
-                                                                 requestBody:@{}
-                                                              needErrorToast:NO];
-    [request startWithCompletionBlockWithSuccess:^(__kindof SSGenaralRequest * _Nonnull request) {
-        if (request.responseModel.isSucceed) {
-            NSArray *data = request.responseObject[@"data"];
-            if (data != nil && data.count) {
-                NSMutableArray *_agreementModels = [NSMutableArray array];
-                for (int i = 0; i < data.count; i++) {
-                    NSDictionary *dict = data[i];
-                    TSAgreementModel *agreementModel = [[TSAgreementModel alloc] init];
-                    agreementModel.serverUrl = dict[@"serverUrl"];
-                    agreementModel.title = dict[@"title"];
-                    [_agreementModels addObject:agreementModel];
-                }
-                if (completed) {
-                    completed([_agreementModels copy]);
-                }
-            }
-        }
-    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-        
-    }];
 }
 
 - (NSMutableArray *)marr

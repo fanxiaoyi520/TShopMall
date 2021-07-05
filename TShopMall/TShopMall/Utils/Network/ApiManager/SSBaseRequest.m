@@ -20,6 +20,7 @@
     if ( reponseModel.stateCode == 999) {
         [[NSNotificationCenter defaultCenter] postNotificationName:TS_Login_State object:@(1)];
     }
+
    
 }
 
