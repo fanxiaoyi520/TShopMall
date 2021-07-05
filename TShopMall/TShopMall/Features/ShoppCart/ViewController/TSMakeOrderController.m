@@ -13,6 +13,7 @@
 #import "TSMakeOrderCommitOrderDataController.h"
 #import "TSPayController.h"
 #import "TSHybridViewController.h"
+#import "TSAlertView.h"
 
 @interface TSMakeOrderController ()
 @property (nonatomic, strong) TSMakeOrderView *makeOrderView;
@@ -24,7 +25,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.gk_navTitle = @"确认下单";
+    self.gk_navTitle = @"确认订单";
     if (@available(iOS 11.0, *)) {
         self.makeOrderView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     } else {
@@ -42,6 +43,15 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+- (BOOL)navigationShouldPopOnClick{
+    TSAlertView.new.alertInfo(@"", @"订单尚未提交成功，确认离开吗？").confirm(@"我再想想", ^{
+        
+    }).cancel(@"确认离开", ^{
+        [self.navigationController popViewControllerAnimated:YES];
+    }).show();
+    return NO;
+}
+
 - (void)refreshData{
     
     __weak typeof(self) weakSelf = self;
@@ -53,7 +63,7 @@
 
 - (void)updateUI{
     self.makeOrderView.sections = self.dataCon.sections;
-    self.commitView.price.text = [NSString stringWithFormat:@"¥%d", self.dataCon.balanceModel.orderTotalMoney.intValue];
+    self.commitView.price.text = [NSString stringWithFormat:@"¥%@", self.dataCon.balanceModel.orderTotalMoney];
 }
 
 //选择地址
@@ -82,7 +92,6 @@
 
 - (void)operationForMessageEditEnd:(NSString *)message{
     [self.dataCon updateMessage:message];
-    self.makeOrderView.sections = self.dataCon.sections;
 }
 
 - (void)invoiceChanged:(NSNotification *)noti{

@@ -27,6 +27,7 @@
 
 - (void)clearInvalideGoods{}
 - (void)scrollDeleteCart:(TSCart *)cart{}
+- (void)recomendGoodsSelected:(NSString *)uuid{}
 
 
 - (void)setSections:(NSArray<TSCartGoodsSection *> *)sections{
@@ -51,6 +52,12 @@
     cell.delegate = self.controller;
     cell.indexPath = indexPath;
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    TSCartGoodsRow *row = self.sections[indexPath.section].rows[indexPath.row];
+    TSCart *cart = (TSCart *)row.obj;
+    [self.controller performSelector:@selector(recomendGoodsSelected:) withObject:cart.productId];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

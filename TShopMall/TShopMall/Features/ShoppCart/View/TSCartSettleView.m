@@ -65,18 +65,18 @@
     if (isEdit == YES) {
         self.price.hidden = YES;
         self.tips.hidden = YES;
-        self.settleBtn.layer.cornerRadius = KRateW(20.0);
         self.settleBtn.layer.borderWidth = 0.5;
         self.settleBtn.layer.borderColor = KHexColor(@"2D3132").CGColor;
         [self.settleBtn setTitle:@"删除" forState:UIControlStateNormal];
         [self.settleBtn setTitleColor:KHexColor(@"2D3132") forState:UIControlStateNormal];
+        self.settleBtn.backgroundColor = [UIColor whiteColor];
     } else {
         self.price.hidden = NO;
         self.tips.hidden = NO;
-        self.settleBtn.layer.cornerRadius = 0;
         self.settleBtn.layer.borderWidth = 0;
         self.settleBtn.layer.borderColor = [UIColor clearColor].CGColor;
         [self.settleBtn setTitleColor:KHexColor(@"#FFFFFF") forState:UIControlStateNormal];
+        [self.settleBtn setBackgroundColor:KHexColor(@"#FF4D49")];
         [self updateSettleBtnText:0];
     }
 }

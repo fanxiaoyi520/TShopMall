@@ -75,18 +75,23 @@
     sender.selected = !sender.selected;
     
     [self.settleView updateSettleViewStates:sender.selected];
+    [self.settleView updateSettleBtnText:self.dataCon.selectedCount];
 }
 
 //失效区清空按钮事件
 - (void)clearInvalideGoods{
     TSAlertView.new.alertInfo(@"提示", @"您确定要清空失效商品吗?").confirm(@"确定", ^{
-        
+        [self deleteSelectedCarts:[self.dataCon invalidGoods]];
     }).cancel(@"取消", ^{}).show();
 }
 
 - (void)goToSettle{
+    NSArray *carts = [self.dataCon selectedGoods];
+    if (carts.count == 0) {
+        [Popover popToastOnView:self.view text:@"请选择商品"];
+        return;
+    }
     if (self.editBtn.selected == YES) {//编辑
-        NSArray *carts = [self.dataCon selectedGoods];
         TSAlertView.new.alertInfo(nil, @"确认删除选中商品吗？").confirm(@"确定", ^{
             [self deleteSelectedCarts:carts];
         }).cancel(@"取消", ^{}).show();
@@ -135,9 +140,14 @@
 
 //去购物
 - (void)goToShopping{
-    self.tabBarController.selectedIndex = 0;
+    if ([self isRootControllerInNivagationController] == NO) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    } else {
+        self.tabBarController.selectedIndex = 0;
+    }
 }
 
+//去商品详情
 - (void)recomendGoodsSelected:(NSString *)uuid{
     TSProductDetailController *detail = [[TSProductDetailController alloc] init];
     detail.uuid = uuid;

@@ -42,7 +42,7 @@
             //当前用户
             TSRankUserModel *userModel = self.dataController.currentUserRankModel;
             [self.personalRankView.headImgV sd_setImageWithURL:[NSURL URLWithString:userModel.imageUrl] placeholderImage:KImageMake(@"mall_setting_defautlhead")];
-            self.personalRankView.usernameLabel.text = userModel.userName;
+            self.personalRankView.usernameLabel.text = userModel.mobile;
             self.personalRankView.rankNumLabel.text = userModel.rank;
             if (userModel.money.integerValue > 0) {
                 self.personalRankView.salesNumLabel.text = [NSString stringWithFormat:@"¥%@", userModel.money];
@@ -165,7 +165,7 @@
 // 3.动态调整导航栏
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGFloat offsetY = scrollView.contentOffset.y;
-    NSLog(@"%lf", offsetY);
+//    NSLog(@"%lf", offsetY);
     
     if (offsetY > 0) {
         self.background_imgView.frame = CGRectMake(0, - offsetY, kScreenWidth, KRateW(280));
