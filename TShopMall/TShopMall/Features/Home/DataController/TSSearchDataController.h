@@ -20,6 +20,8 @@
 - (void)configHistorySection;
 
 - (void)configRecomendSection:(NSArray<TSRecomendGoods *> *)goods isGrid:(BOOL)isGrid;
+
++ (void)queryKeyWords:(void(^)(NSArray *))complete;
 @end
 
 

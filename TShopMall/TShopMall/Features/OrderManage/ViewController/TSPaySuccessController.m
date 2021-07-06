@@ -33,17 +33,6 @@
     [self configRecomendView];
 }
 
-- (BOOL)navigationShouldPopOnClick{
-    NSMutableArray *arr = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
-    for (UIViewController *con in arr) {
-        if ([con isKindOfClass:NSClassFromString(@"TSMakeOrderController")]) {
-            
-        }
-    }
-    
-    return YES;
-}
-
 - (void)setupNavigationBar{
     self.gk_navTitle = @"支付成功";
     self.gk_backImage = KImageMake(@"mall_white_naviback");

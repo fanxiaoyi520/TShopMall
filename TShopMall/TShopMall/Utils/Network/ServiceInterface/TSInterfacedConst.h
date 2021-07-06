@@ -58,6 +58,7 @@ UIKIT_EXTERN NSString *const kAccountRefershTokenUrl;
 UIKIT_EXTERN NSString *const kAccountPublicKeyUrl;
 #pragma mark - 首页
 UIKIT_EXTERN NSString *const kHomePageInfoUrl;
+UIKIT_EXTERN NSString * const kQueryKeyWord;
 UIKIT_EXTERN NSString *const kSearchKey;//搜索关键词
 UIKIT_EXTERN NSString *const kSearchAssociateWord;//搜索联想关键词
 UIKIT_EXTERN NSString *const kSearchHotKey;//搜索热门关键词

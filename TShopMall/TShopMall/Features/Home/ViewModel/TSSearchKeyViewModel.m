@@ -33,7 +33,11 @@
 }
 
 + (NSArray *)readHistoryKeys{
-    return [[NSUserDefaults standardUserDefaults] objectForKey:@"SearchHistoryKeys"];
+    NSArray *arr = [[NSUserDefaults standardUserDefaults] objectForKey:@"SearchHistoryKeys"];
+    if (arr.count <= 10) {
+        return arr;
+    }
+    return [arr subarrayWithRange:NSMakeRange(0, 10)];
 }
 
 + (void)clearHistorySearchKeys{
