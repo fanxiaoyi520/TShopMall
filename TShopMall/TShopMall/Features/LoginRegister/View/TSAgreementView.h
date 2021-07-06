@@ -25,13 +25,14 @@ NS_ASSUME_NONNULL_BEGIN
 /** 内容  */
 @property(nonatomic, copy) NSString *content;
 
+
 @end
 
 @interface TSAgreementView : UIView
+//@property(nonatomic, copy) NSString *url;
+- (instancetype)initWithTitle:(NSString *)title AndState:(NSString *)state ;
 
-- (instancetype)initWithTitle:(NSString *)title;
-
-+ (instancetype)agreementViewWithTitle:(NSString *)title;
++ (instancetype)agreementViewWithTitle:(NSString *)title AndState:(NSString *)state ;
 
 - (void)show;
 
@@ -43,10 +44,10 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface TSAgreementDataController : TSBaseDataController
-/** sections  */
-@property(nonatomic, strong, readonly) NSMutableArray<TSAgreementSectionModel *> *sections;
+ 
+@property(nonatomic, strong, readonly) TSAgreementModel *agreementModel ;
 
-- (void)fetchAgreementContentsComplete:(void(^)(BOOL isSucess))complete;
+- (void)fetchAgreementContentsWithState:(NSString *)state Complete:(void(^)(BOOL isSucess))complete;
 
 @end
 

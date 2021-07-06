@@ -157,6 +157,7 @@
 		C25AD833268B13AC000D2258 /* TSInvoiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C25AD832268B13AC000D2258 /* TSInvoiceModel.m */; };
 		C262E2932692E37D00E65162 /* TSSearchResultRecomendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C262E2922692E37D00E65162 /* TSSearchResultRecomendCell.m */; };
 		C262E2962692EC1200E65162 /* TSRecomendHeaderTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = C262E2952692EC1200E65162 /* TSRecomendHeaderTitleView.m */; };
+		C262E2992693156300E65162 /* TSSearchFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = C262E2982693156300E65162 /* TSSearchFlowLayout.m */; };
 		C2A34C6A267449080095497E /* TSAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2A34C69267449080095497E /* TSAlertView.m */; };
 		C2A34C7726749E3E0095497E /* TSSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2A34C7626749E3D0095497E /* TSSearchController.m */; };
 		C2A34C7A26749FCD0095497E /* TSSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2A34C7926749FCD0095497E /* TSSearchView.m */; };
@@ -930,6 +931,8 @@
 		C262E2922692E37D00E65162 /* TSSearchResultRecomendCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSSearchResultRecomendCell.m; sourceTree = "<group>"; };
 		C262E2942692EC1200E65162 /* TSRecomendHeaderTitleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSRecomendHeaderTitleView.h; sourceTree = "<group>"; };
 		C262E2952692EC1200E65162 /* TSRecomendHeaderTitleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSRecomendHeaderTitleView.m; sourceTree = "<group>"; };
+		C262E2972693156300E65162 /* TSSearchFlowLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSSearchFlowLayout.h; sourceTree = "<group>"; };
+		C262E2982693156300E65162 /* TSSearchFlowLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSSearchFlowLayout.m; sourceTree = "<group>"; };
 		C2A34C68267449060095497E /* TSAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSAlertView.h; sourceTree = "<group>"; };
 		C2A34C69267449080095497E /* TSAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSAlertView.m; sourceTree = "<group>"; };
 		C2A34C7526749E3D0095497E /* TSSearchController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSSearchController.h; sourceTree = "<group>"; };
@@ -2234,6 +2237,8 @@
 		C22EE25E268067DE00E59C86 /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				C262E2972693156300E65162 /* TSSearchFlowLayout.h */,
+				C262E2982693156300E65162 /* TSSearchFlowLayout.m */,
 				C2A34C7826749FCD0095497E /* TSSearchView.h */,
 				C2A34C7926749FCD0095497E /* TSSearchView.m */,
 				C2A34C7B2674A56C0095497E /* TSSearchTextView.h */,
@@ -5013,6 +5018,7 @@
 				C262E2962692EC1200E65162 /* TSRecomendHeaderTitleView.m in Sources */,
 				C2C7654B267A097D004757B9 /* TSMakeOrderOperationCell.m in Sources */,
 				DFB3FFEC2686BDEC00FC8FF9 /* TSCustomPageControl.m in Sources */,
+				C262E2992693156300E65162 /* TSSearchFlowLayout.m in Sources */,
 				F530CD4A2681750A009DC29A /* TSTopFunctionView.m in Sources */,
 				F530C6D826802E5D009DC29A /* TSLoginSMSModel.m in Sources */,
 				F56D4B66266E053800C1AD9E /* AppDelegate+Initialize.m in Sources */,

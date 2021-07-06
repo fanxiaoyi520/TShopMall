@@ -10,9 +10,9 @@
 
 
 @interface TSAddressViewModel : NSObject
-@property (nonatomic, copy) NSString *address;
+@property (nonatomic, copy) NSString *address;//手写的地址
 @property (nonatomic, copy) NSString *alias;
-@property (nonatomic, copy) NSString *area;
+@property (nonatomic, copy) NSString *area;//选择的地址
 @property (nonatomic, copy) NSString *city;
 @property (nonatomic, copy) NSString *cityName;
 @property (nonatomic, copy) NSString *community;

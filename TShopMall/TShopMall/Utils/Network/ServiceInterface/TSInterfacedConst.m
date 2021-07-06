@@ -184,4 +184,7 @@ NSString *const kMineGetBankNames = @"/rest/v2/bankCardAccount/getBankNames";
 NSString *const kSecurCenterAgreementUrl = @"/rest/v2/front/shopStatement/getShopStatementList";
 NSString *const kMineGetAllProvince = @"/rest/v2/withdrawal/record/getAllProvince";
 NSString *const kMineGetAllCityByProvinceUuid = @"/rest/v2/withdrawal/record/getAllCityByProvinceUuid";
+NSString * const kMineCheckRealAuth = @"/usercenter/customer/checkRealAuth";//查询是否已实名认证
+NSString * const kMineRealAuth = @"/usercenter/customer/realAuth";//实名认证
+NSString * const kShopStatement = @"v2/front/shopStatement/getShopStatementListByState"; 
 

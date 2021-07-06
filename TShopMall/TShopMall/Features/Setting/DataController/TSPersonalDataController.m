@@ -63,4 +63,27 @@
     }
 }
 
+- (void)checkRealAuthComplete:(void(^)( NSDictionary * _Nullable info))complete{
+    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kMineCheckRealAuth
+                                                               requestMethod:YTKRequestMethodGET
+                                                       requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON
+                                                               requestHeader:NSDictionary.dictionary
+                                                                 requestBody:NSDictionary.dictionary
+                                                              needErrorToast:YES];
+    [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+        if (request.responseModel.isSucceed) {
+            NSDictionary *data = request.responseModel.data;
+            
+            complete(data);
+        } else {
+            [Popover popToastOnWindowWithText:request.responseModel.responseMsg];
+            complete(nil);
+        }
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        complete(nil);
+    }];
+}
+
+
+
 @end

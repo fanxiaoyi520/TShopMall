@@ -61,9 +61,9 @@
     } else if (object == self.phoneItem.textField) {
         self.vm.mobile = self.phoneItem.textField.text;
     } else if (object == self.addressItem.textField) {
-        self.vm.address = self.addressItem.textField.text;
+        self.vm.area = self.addressItem.textField.text;
     } else if (object == self.detailItem.textField) {
-        self.vm.area = self.detailItem.textField.text;
+        self.vm.address = self.detailItem.textField.text;
     }
 }
 
@@ -96,8 +96,8 @@
     }
     self.nameItem.textField.text = self.vm.consignee;
     self.phoneItem.textField.text = self.vm.mobile;
-    self.addressItem.textField.text = vm.address;
-    self.detailItem.textField.text = self.vm.area;
+    self.addressItem.textField.text = vm.area;
+    self.detailItem.textField.text = self.vm.address;
     self.markView.currentMark = self.vm.tag;
     self.isDefaultItem.selBtn.selected = self.vm.isDefault;
 }
