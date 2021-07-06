@@ -23,8 +23,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TSRankUserModel : NSObject
 @property (nonatomic, copy) NSString * rank;
+@property (nonatomic, copy) NSString * customerUuid;
 @property (nonatomic, copy) NSString * imageUrl;
-@property (nonatomic, copy) NSString * userName;
+@property (nonatomic, copy) NSString * name;
 @property (nonatomic, copy) NSString * mobile;
 @property (nonatomic, copy) NSString * money;
 @end

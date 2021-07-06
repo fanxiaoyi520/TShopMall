@@ -16,12 +16,13 @@
 
 @implementation TSWithdrawalPswSetDataController
 
-- (void)fetchWithdrawalPswSetContentsComplete:(void(^)(BOOL isSucess))complete {
+- (void)fetchWithdrawalPswSetContentsWithHasSet:(BOOL)hasSet complete:(void(^)(BOOL isSucess))complete {
     NSMutableArray *sections = [NSMutableArray array];
     {
         NSMutableArray *items = [NSMutableArray array];
         TSWithdrawalPswSetSectionItemModel *item = [[TSWithdrawalPswSetSectionItemModel alloc] init];
         item.cellHeight = kScreenHeight;
+        item.hasSet = hasSet;
         item.identify = @"TSWithdrawalPswSettingCell";
         [items addObject:item];
         TSWithdrawalPswSetSectionModel *section = [[TSWithdrawalPswSetSectionModel alloc] init];

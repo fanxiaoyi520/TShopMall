@@ -11,6 +11,7 @@ typedef enum {
     none = 0,
     male = 1,
     female = 2,
+    unknow = -1,
 } Sex;
 
 NS_ASSUME_NONNULL_BEGIN

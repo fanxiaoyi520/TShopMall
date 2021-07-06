@@ -1,18 +1,18 @@
 //
-//  UIView+CMSDrawLine.m
-//  CMSPaaS
+//  UIView+TSDrawLine.m
+//
 //
 //  Created by SJ on 2020/10/15.
 //
 
-#import "UIView+CMSDrawLine.h"
+#import "UIView+TSDrawLine.h"
 
 #define HEXCOLOR(hexValue)              [UIColor colorWithRed : ((CGFloat)((hexValue & 0xFF0000) >> 16)) / 255.0 green : ((CGFloat)((hexValue & 0xFF00) >> 8)) / 255.0 blue : ((CGFloat)(hexValue & 0xFF)) / 255.0 alpha : 1.0]
 
 
-@implementation UIView (CMSDrawLine)
+@implementation UIView (TSDrawLine)
 
-- (UIView *)cms_addLineAt:(CGPoint)origin
+- (UIView *)ts_addLineAt:(CGPoint)origin
            isVertical:(BOOL)isVertical
                length:(CGFloat)length {
     
@@ -29,12 +29,12 @@
     return line;
 }
 
-- (CALayer *)cms_drawLineAt:(CGPoint)origin
+- (CALayer *)ts_drawLineAt:(CGPoint)origin
               isVertical:(BOOL)isVertical
                   length:(CGFloat)length
                    color:(UIColor *)color {
     
-    CALayer * layerLine = [self cms_drawLineAt:origin
+    CALayer * layerLine = [self ts_drawLineAt:origin
                                  lineWidth:1.0/[UIScreen mainScreen].scale      // 单像素
                                 isVertical:isVertical
                                     length:length
@@ -42,7 +42,7 @@
     return layerLine;
 }
 
-- (CALayer *)cms_drawLineAt:(CGPoint)origin
+- (CALayer *)ts_drawLineAt:(CGPoint)origin
                lineWidth:(CGFloat)width
               isVertical:(BOOL)isVertical
                   length:(CGFloat)length

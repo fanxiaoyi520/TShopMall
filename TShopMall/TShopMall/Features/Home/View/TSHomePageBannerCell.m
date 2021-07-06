@@ -61,6 +61,7 @@
     if (!_cycleScrollView) {
         _cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectZero delegate:self placeholderImage:nil];
         _cycleScrollView.showPageControl = NO;
+        _cycleScrollView.backgroundColor = KGrayColor;
         _cycleScrollView.autoScroll  = YES;
         _cycleScrollView.autoScrollTimeInterval = 4;
         _cycleScrollView.clipsToBounds = YES;

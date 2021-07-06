@@ -16,7 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy) NSString *OneLevelImg;
 @property(nonatomic, strong) NSArray *TwoLevel;
 @property(nonatomic, strong) NSArray *goodsList;
-
+@property(nonatomic, copy, readonly) NSString *TwoLevelTitle;
+@property(nonatomic, copy, readonly) NSString *goodsListTitle;
 
 @end
 

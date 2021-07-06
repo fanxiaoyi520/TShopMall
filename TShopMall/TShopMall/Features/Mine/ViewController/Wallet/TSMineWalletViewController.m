@@ -119,11 +119,8 @@
 }
 
 - (void)withdrawalApplication:(id _Nullable)sender {
-    //[Popover popToastOnWindowWithText:@"申请成功"];
-    TSInputPasswordViewController *vc = [TSInputPasswordViewController new];
-    vc.modalPresentationStyle = UIModalPresentationCustom;
-    vc.transitioningDelegate = self;
-    [self presentViewController:vc animated:YES completion:nil];
+    TSWithdrawalRecordViewController *vc = [TSWithdrawalRecordViewController new];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 // MARK: get

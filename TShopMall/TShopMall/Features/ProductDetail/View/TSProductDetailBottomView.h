@@ -26,6 +26,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, weak) id <ProductDetailBottomViewDelegate> delegate;
 
+@property(nonatomic, copy) NSString *cartBadge;
+
 @end
 
 NS_ASSUME_NONNULL_END

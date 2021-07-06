@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// item
 @property (nonatomic, strong) NSArray <TSHotSectionItemModel *> *items;
 
+@property (nonatomic, copy) NSString * header_title;
+
 @end
 
 @interface TSHotSectionItemModel : TSUniversaItemModel
