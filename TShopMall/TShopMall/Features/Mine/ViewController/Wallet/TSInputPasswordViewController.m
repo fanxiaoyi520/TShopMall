@@ -34,7 +34,7 @@
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
     if (self.flags == 1) {
-        self.bgView.frame = CGRectMake(36, 94, kScreenWidth-72, 262);
+        self.bgView.frame = CGRectMake(36, 115, kScreenWidth-72, 262);
         [self.bgView jaf_customFilletRectCorner:UIRectCornerAllCorners cornerRadii:CGSizeMake(8, 8)];
         self.bgView.backgroundColor = KWhiteColor;
         self.tipsLab.hidden = NO;
@@ -107,30 +107,27 @@
         if (codeString.length == 6) {
             isFinished = YES;
             self.boxInputViewstr = codeString;
-            
+            self.dataController.inputPassword = codeString;
+            self.dataController.bankCardAccountId = self.kDataController.myIncomeModel.bankCardId;
             self.dataController.withdrawalAmount = [NSString stringWithFormat:@"%f",[self.inputAmount floatValue]*100];
             @weakify(self);
-            [self.dataController fetchWithdrawalApplicationDataComplete:^(BOOL isSucess) {
+            [self.dataController fetchWithdrawalPasswordDataComplete:^(BOOL isSucess) {
                 @strongify(self);
                 if (isSucess) {
-                    [self dismissViewControllerAnimated:YES completion:nil];
+                    if (/* DISABLES CODE */ (1)) {
+                        [self dismissViewControllerAnimated:NO completion:nil];
+                        if ([self.kDelegate respondsToSelector:@selector(setPaymentPassword:isFinished:)]) {
+                            [self.kDelegate setPaymentPassword:codeString isFinished:YES];
+                        }
+                    } else {
+                        self.flags = 1;
+                        [self.view setNeedsLayout];
+                        //输入次数过多弹窗
+                        TSAlertView.new.alertInfo(nil, @"提现密码输入次数过多，请点击忘记密码进行找回或10分钟后再试").confirm(@"忘记密码", ^{
+                        }).cancel(@"我知道了", ^{}).show();
+                    }
                 }
             }];
-            
-            //校验密码接口
-            if (![codeString isEqualToString:@"1"]) {
-                self.flags = 1;
-                [self.view setNeedsLayout];
-                
-                //输入次数过多弹窗
-                TSAlertView.new.alertInfo(nil, @"提现密码输入次数过多，请点击忘记密码进行找回或10分钟后再试").confirm(@"忘记密码", ^{
-
-                }).cancel(@"我知道了", ^{}).show();
-            } else {
-                if ([self.kDelegate respondsToSelector:@selector(setPaymentPassword:isFinished:)]) {
-                    [self.kDelegate setPaymentPassword:codeString isFinished:YES];
-                }
-            }
         }
     };
 }

@@ -6,7 +6,7 @@
 //
 
 #import "TSMineDataController.h"
-
+#import "RSA.h"
 
 @interface TSMineDataController()
 
@@ -28,6 +28,7 @@
 @property (nonatomic, strong) NSMutableArray <TSCityListModel *> *cityListArray;
 @property (nonatomic, strong) TSImageBaseModel *imageAdModel;
 @property (nonatomic,   copy) NSString *isSetWithdrawalPassword;//是否设置提现密码
+@property (nonatomic,   copy) NSString *withdrawalPasswordPublicKey;//提现密码公钥
 @end
 
 @implementation TSMineDataController
@@ -461,6 +462,7 @@
     
     [body setValue:@([self.withdrawalAmount integerValue]) forKey:@"withdrawalAmount"];
     [body setValue:self.bankCardAccountId forKey:@"bankCardAccountId"];
+    //[body setValue:self.withdrawalPassword forKey:@"withdrawalPassword"];
     SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kMineWithdrawalApply
                                                                requestMethod:YTKRequestMethodPOST
                                                        requestSerializerType:YTKRequestSerializerTypeJSON responseSerializerType:YTKResponseSerializerTypeJSON
@@ -864,11 +866,8 @@
         dispatch_semaphore_wait(semaphoreLock, DISPATCH_TIME_FOREVER);
         [self requestMethodWithSemaphore:semaphoreLock withIndex:11];
         dispatch_semaphore_wait(semaphoreLock, DISPATCH_TIME_FOREVER);
-        [self requestMethodWithSemaphore:semaphoreLock withIndex:12];
-        dispatch_semaphore_wait(semaphoreLock, DISPATCH_TIME_FOREVER);
-        
+
         dispatch_async(dispatch_get_main_queue(), ^{
-            NSLog(@"任务完成");
             complete(YES);
         });
     });
@@ -886,9 +885,16 @@
 
      [request_z startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
          if (request.responseModel.isSucceed) {
-             NSDictionary *data = request.responseModel.data;
-             dispatch_semaphore_signal(semaphoreLock);
+             if (aIndex == 10) {
+                 NSString *data = request.responseModel.data;
+                 self.withdrawalPasswordPublicKey = data;
+             } else if (aIndex == 11) {
+                 
+             }
+         } else {
+             [Popover popToastOnWindowWithText:request.responseModel.responseMsg];
          }
+         dispatch_semaphore_signal(semaphoreLock);
      } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
          dispatch_semaphore_signal(semaphoreLock);
      }];
@@ -905,25 +911,13 @@
     return request;
 }
 
-//校验密码是否正确
-- (SSGenaralRequest *)request11{
-    NSMutableDictionary *body = [NSMutableDictionary dictionary];
-    [body setValue:@"" forKey:@"checkPw"];
-    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kMineCheckWithdrawalPwd
-                                                               requestMethod:YTKRequestMethodPOST
-                                                       requestSerializerType:YTKRequestSerializerTypeJSON responseSerializerType:YTKResponseSerializerTypeJSON
-                                                               requestHeader:NSDictionary.dictionary
-                                                                 requestBody:body
-                                                              needErrorToast:YES];
-    return request;
-}
-
 // 提现申请
-- (SSGenaralRequest *)request12{
+- (SSGenaralRequest *)request11{
+    NSString *encryptedPassword = [RSA encryptString:self.inputPassword publicKey:self.withdrawalPasswordPublicKey];
     NSMutableDictionary *body = [NSMutableDictionary dictionary];
-    
     [body setValue:@([self.withdrawalAmount integerValue]) forKey:@"withdrawalAmount"];
     [body setValue:self.bankCardAccountId forKey:@"bankCardAccountId"];
+    [body setValue:encryptedPassword forKey:@"checkPw"];
     SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kMineWithdrawalApply
                                                                requestMethod:YTKRequestMethodPOST
                                                        requestSerializerType:YTKRequestSerializerTypeJSON responseSerializerType:YTKResponseSerializerTypeJSON

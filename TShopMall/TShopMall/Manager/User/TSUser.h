@@ -49,7 +49,7 @@ NS_ASSUME_NONNULL_BEGIN
 /** region  */
 @property(nonatomic, copy) NSString *region;
 /** 性别1、男，2、女  */
-@property(nonatomic, assign) int sex;
+@property(nonatomic, copy) NSString *sex;
 /** 用户类型  */
 @property(nonatomic, copy) NSString *userType;
 /** 用户姓名  */

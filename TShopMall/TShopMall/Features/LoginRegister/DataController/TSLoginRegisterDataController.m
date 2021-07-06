@@ -16,27 +16,31 @@
 #import "TSBindUserByAuthCodeRequest.h"
 #import "TSLogoutRequest.h"
 #import "NSString+Plugin.h"
+
+
 @implementation TSLoginRegisterDataController
 
--(void)fetchAccountPublicKeyComplete:(void(^)(NSString *publicKey))complete{
-    NSString *urlStr = [NSString stringWithFormat:@"%@%@", kAccountCenterApiPrefix,kAccountPublicKeyUrl];
+
+- (void)fetchAccountPublicKeyComplete:(void(^)(NSString *publicKey))complete {
+    NSString *urlStr = [NSString stringWithFormat:@"%@%@", kAccountCenterApiPrefix, kAccountPublicKeyUrl];
     NSURL *url = [NSURL URLWithString:urlStr];
     NSURLSession *session = [NSURLSession sharedSession];
     NSURLSessionDataTask *firsttask = [session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if(error == nil){
-            id objc = [data utf8String];
-            NSLog(@"%@",objc);
+            NSString *publicKey = [data utf8String];
             dispatch_async(dispatch_get_main_queue(), ^{
-                complete(objc);
+                complete(publicKey);
             });
-        }else{
+        } else {
             complete(nil);
         }
     }];
     [firsttask resume];
+
 }
 
-- (void)fetchLogoutComplete:(void (^)(BOOL))complete{
+
+-(void)fetchRefershTokenComplete:(void(^)(BOOL isSucess))complete{
     TSLogoutRequest *request = [TSLogoutRequest new];
     [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
         [[TSUserInfoManager userInfo] clearUserInfo];
@@ -63,6 +67,7 @@
         
     }];
 }
+
 -(void)fetchBindUserByAuthCode:(NSString *)token
                           type:(NSString *)type
                     platformId:(NSString *)platformId

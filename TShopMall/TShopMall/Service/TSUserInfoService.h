@@ -11,6 +11,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TSUserInfoService : NSObject
+
+/** 校验是否设置过提现密码 */
+- (void)checkHasSetWithrawalPwdSuccess:(void(^_Nullable)(BOOL hasSet))success
+                               failure:(void(^_Nullable)(NSString *errorMsg))failure;
 /** 校验验证码 */
 - (void)checkCodeMobile:(NSString *)mobile
                    code:(NSString *)code

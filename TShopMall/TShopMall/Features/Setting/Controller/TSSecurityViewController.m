@@ -18,6 +18,7 @@
 #import "TSChangeMobileViewController.h"
 #import "TSAccountCancelDropViewController.h"
 #import "TSPayPwdViewController.h"
+#import "TSRememberPwdViewController.h"
 
 @interface TSSecurityViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate>
 /// 数据中心
@@ -96,6 +97,24 @@
     }).cancel(@"取消", ^{}).show();
 }
 
+- (void)checkHasSetWithrawalPwd {
+    [Popover popProgressOnWindowWithText:@"正在加载..."];
+    [[TSServicesManager sharedInstance].userInfoService checkHasSetWithrawalPwdSuccess:^(BOOL hasSet) {
+        [Popover removePopoverOnWindow];
+        if (hasSet) {
+            TSRememberPwdViewController *rememberVC = [[TSRememberPwdViewController alloc] init];
+            [self.navigationController pushViewController:rememberVC animated:YES];
+        } else {
+            TSPhoneNumVeriViewController *phoneNumVeriVC = [[TSPhoneNumVeriViewController alloc] init];
+            phoneNumVeriVC.hasSet = hasSet;
+            [self.navigationController pushViewController:phoneNumVeriVC animated:YES];
+        }
+    } failure:^(NSString * _Nonnull errorMsg) {
+        [Popover popToastOnWindowWithText:errorMsg];
+    }];
+}
+
+
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return self.dataController.sections.count;
@@ -120,7 +139,6 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0 && indexPath.item == 0) {
         TSChangeMobileViewController *bindVC = [[TSChangeMobileViewController alloc] init];
-//        TSPhoneNumVeriViewController *bindVC = [[TSPhoneNumVeriViewController alloc] init];
         [self.navigationController pushViewController:bindVC animated:YES];
         return;
     } else if (indexPath.section == 0 && indexPath.item == 1) {
@@ -141,12 +159,7 @@
         }];
         return;
     } else if (indexPath.section == 1 && indexPath.item == 0) {
-        TSPhoneNumVeriViewController *phoneNumVeriVC = [[TSPhoneNumVeriViewController alloc] init];
-        [self.navigationController pushViewController:phoneNumVeriVC animated:YES];
-//        TSWithdrawalPswSetController *pswSetVC = [[TSWithdrawalPswSetController alloc] init];
-//        [self.navigationController pushViewController:pswSetVC animated:YES];
-//        TSPayPwdViewController *pswSetVC = [[TSPayPwdViewController alloc] init];
-//        [self.navigationController pushViewController:pswSetVC animated:YES];
+        [self checkHasSetWithrawalPwd];
         return;
     } else if (indexPath.section == 3 && indexPath.item == 0) {
         TSSecurCenterViewController *secriCenterVC = [[TSSecurCenterViewController alloc] init];

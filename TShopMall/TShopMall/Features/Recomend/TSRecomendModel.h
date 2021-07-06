@@ -9,12 +9,15 @@
 #import "TSRecomendGoodsProtocol.h"
 @class TSRecomendGoods;
 @class TSRecomendPageInfo;
+@class TSRecomendGoodsGroup;
 
 @interface TSRecomendModel : NSObject
 @property (nonatomic, copy) NSString *accountType;
 @property (nonatomic, strong) NSDictionary *data;
 @property (nonatomic, copy) NSString *type;
 @property (nonatomic, strong) NSArray<TSRecomendGoods *> *goodsList;
+@property (nonatomic, strong) NSArray<TSRecomendGoodsGroup *> *goodsGroup;
+@property (nonatomic, copy) NSString *sourceGoods;
 @property (nonatomic, copy) NSString *padding;
 @property (nonatomic, assign) NSInteger listStyle;
 @property (nonatomic, strong) TSRecomendPageInfo *pageInfo;
@@ -41,4 +44,13 @@
 @interface TSRecomendPageInfo : NSObject
 @property (nonatomic, copy) NSString *actionType;
 @property (nonatomic, copy) NSString *backgroundColor;
+@end
+
+
+@interface TSRecomendGoodsGroup : NSObject
+@property (nonatomic, copy) NSString *categoryName;
+@property (nonatomic, copy) NSString *goodsgroupUuid;
+@property (nonatomic, copy) NSString *groupName;
+@property (nonatomic, assign) NSInteger productCount;
+@property (nonatomic, assign) NSInteger radioSelect;
 @end

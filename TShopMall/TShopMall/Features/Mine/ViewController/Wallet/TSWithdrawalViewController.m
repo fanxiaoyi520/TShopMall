@@ -182,6 +182,7 @@
     if (inputAmount*100 >= 100) {
         //校验是否设置过提现密码
         self.dataController.withdrawalAmount = [NSString stringWithFormat:@"%f",inputAmount*100];
+        self.dataController.bankCardAccountId = self.kDataController.bankCardAccountId;
         @weakify(self);
         [self.dataController fetchCheckWhetherSetWithdrawalPwdDataComplete:^(BOOL isSucess) {
             @strongify(self);
@@ -317,8 +318,10 @@
 
 // MARK: TSInputPasswordDelegate
 - (void)setPaymentPassword:(id)info isFinished:(BOOL)isFinished {
-    NSString *passWordStr = (NSString *)info;
-    NSLog(@"%@",passWordStr);
+    [self dismissViewControllerAnimated:YES completion:nil];
+    if ([self.kDelegate respondsToSelector:@selector(withdrawalApplication:)]) {
+        [self.kDelegate withdrawalApplication:nil];
+    }
 }
 
 - (void)forgetPassAction:(id _Nullable)sender {

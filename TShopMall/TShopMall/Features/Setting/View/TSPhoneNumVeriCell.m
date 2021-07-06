@@ -65,7 +65,7 @@
         make.left.equalTo(self.contentView.mas_left).with.offset(0);
         make.right.equalTo(self.contentView.mas_right).with.offset(0);
         make.top.equalTo(self.phoneNumLabel.mas_bottom).with.offset(24);
-        make.height.mas_equalTo(0.5);
+        make.height.mas_equalTo(0.33);
     }];
     [self.codeTextField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contentView.mas_left).with.offset(16);
@@ -82,7 +82,7 @@
         make.left.equalTo(self.contentView.mas_left).with.offset(0);
         make.right.equalTo(self.contentView.mas_right).with.offset(0);
         make.top.equalTo(self.codeTextField.mas_bottom).with.offset(0);
-        make.height.mas_equalTo(0.5);
+        make.height.mas_equalTo(0.33);
     }];
     [self.commitButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contentView.mas_left).with.offset(25);
@@ -99,7 +99,7 @@
         make.right.equalTo(self.codeButton.mas_left).with.offset(0);
         make.centerY.equalTo(self.codeButton.mas_centerY).with.offset(0);
         make.height.mas_equalTo(24);
-        make.width.mas_equalTo(0.5);
+        make.width.mas_equalTo(0.33);
     }];
 }
 
@@ -143,7 +143,7 @@
     if (_splitTopView == nil) {
         UIView *splitTopView = [[UIView alloc] init];
         _splitTopView = splitTopView;
-        _splitTopView.backgroundColor = KHexColor(@"#E6E6E6");
+        _splitTopView.backgroundColor = KHexColor(@"#F4F4F4");
         [self.contentView addSubview:_splitTopView];
     }
     return _splitTopView;
@@ -153,7 +153,7 @@
     if (_splitBottomView == nil) {
         UIView *splitBottomView = [[UIView alloc] init];
         _splitBottomView = splitBottomView;
-        _splitBottomView.backgroundColor = KHexColor(@"#E6E6E6");
+        _splitBottomView.backgroundColor = KHexColor(@"#F4F4F4");
         [self.contentView addSubview:_splitBottomView];
     }
     return _splitBottomView;
@@ -177,7 +177,7 @@
     if (_codeTextField == nil) {
         UITextField *codeTextField = [[UITextField alloc] init];
         _codeTextField = codeTextField;
-        _codeTextField.keyboardType = UIKeyboardTypeDefault;
+        _codeTextField.keyboardType = UIKeyboardTypeNumberPad;
         _codeTextField.textColor = KHexColor(@"#2D3132");
         _codeTextField.font = KRegularFont(16);
         _codeTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"验证码" attributes:@{NSForegroundColorAttributeName : KHexAlphaColor(@"#2D3132", 0.2)}];
