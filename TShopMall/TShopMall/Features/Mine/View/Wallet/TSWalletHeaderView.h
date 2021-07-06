@@ -29,6 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 @interface TSWalletCellView : UIView
 - (instancetype)initWithModel:(TSMyIncomeModel *)model;
+@property (nonatomic ,strong) UILabel *cardNumberLab;
 //- (void)setModel:(TSMyIncomeModel *)model;
 @property (nonatomic, assign)id <TSWalletCellViewDelegate> kDelegate;
 @end

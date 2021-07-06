@@ -77,6 +77,8 @@ typedef NS_ENUM(NSInteger, RequestMethod){
 @property (nonatomic, strong, readonly) NSMutableArray <TSCityListModel *> *cityListArray;
 @property (nonatomic,   copy, readonly) NSString *isSetWithdrawalPassword;//是否设置提现密码
 @property (nonatomic,   copy, readonly) NSString *withdrawalPasswordPublicKey;//提现密码公钥
+@property (nonatomic,   copy, readonly) NSString *responseMsg;//密码错误提示
+@property (nonatomic,   copy, readonly) NSString *responseCode;//code
 
 //订单数
 @property (nonatomic, strong, readonly) TSMineOrderCountModel *orderInfo;

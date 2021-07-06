@@ -36,8 +36,10 @@
     }
     
     if (!reponseModel.isSucceed) {//网络请求失败
-        if (self.needErrorToast) {//toast提示
-            [Popover popToastOnWindowWithText:reponseModel.responseMsg];
+        if (![reponseModel.code isEqualToString:@"KY19020"]) {
+            if (self.needErrorToast) {//toast提示
+                [Popover popToastOnWindowWithText:reponseModel.responseMsg];
+            }
         }
     }
 }

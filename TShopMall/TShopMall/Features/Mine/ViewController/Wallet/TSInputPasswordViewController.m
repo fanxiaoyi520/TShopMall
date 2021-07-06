@@ -114,17 +114,25 @@
             [self.dataController fetchWithdrawalPasswordDataComplete:^(BOOL isSucess) {
                 @strongify(self);
                 if (isSucess) {
-                    if (/* DISABLES CODE */ (1)) {
-                        [self dismissViewControllerAnimated:NO completion:nil];
+                    [self dismissViewControllerAnimated:NO completion:^{
                         if ([self.kDelegate respondsToSelector:@selector(setPaymentPassword:isFinished:)]) {
                             [self.kDelegate setPaymentPassword:codeString isFinished:YES];
                         }
+                    }];
+                } else {
+                    if ([self.dataController.responseCode isEqualToString:@"KY19020"] && [self.dataController.responseMsg isEqualToString:@"密码输入错误次数过多，请10分钟之后再试"]) {
+                        //输入次数过多弹窗
+                        TSAlertView.new.alertInfo(nil, self.dataController.responseMsg).confirm(@"忘记密码", ^{
+                            [self dismissViewControllerAnimated:NO completion:^{
+                                if ([self.kDelegate respondsToSelector:@selector(forgetPassAction:)]) {
+                                    [self.kDelegate forgetPassAction:nil];
+                                }
+                            }];
+                        }).cancel(@"我知道了", ^{}).show();
                     } else {
                         self.flags = 1;
+                        self.tipsLab.text = self.dataController.responseMsg;
                         [self.view setNeedsLayout];
-                        //输入次数过多弹窗
-                        TSAlertView.new.alertInfo(nil, @"提现密码输入次数过多，请点击忘记密码进行找回或10分钟后再试").confirm(@"忘记密码", ^{
-                        }).cancel(@"我知道了", ^{}).show();
                     }
                 }
             }];
@@ -137,9 +145,11 @@
 }
 
 - (void)forgetPassAction:(UIButton *)sender {
-    if ([self.kDelegate respondsToSelector:@selector(forgetPassAction:)]) {
-        [self.kDelegate forgetPassAction:sender];
-    }
+    [self dismissViewControllerAnimated:NO completion:^{
+        if ([self.kDelegate respondsToSelector:@selector(forgetPassAction:)]) {
+            [self.kDelegate forgetPassAction:nil];
+        }
+    }];
 }
 
 // MARK: keyboard noti

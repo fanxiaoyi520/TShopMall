@@ -318,14 +318,19 @@
 
 // MARK: TSInputPasswordDelegate
 - (void)setPaymentPassword:(id)info isFinished:(BOOL)isFinished {
-    [self dismissViewControllerAnimated:YES completion:nil];
-    if ([self.kDelegate respondsToSelector:@selector(withdrawalApplication:)]) {
-        [self.kDelegate withdrawalApplication:nil];
-    }
+    [self dismissViewControllerAnimated:YES completion:^{
+        if ([self.kDelegate respondsToSelector:@selector(withdrawalApplication:)]) {
+            [self.kDelegate withdrawalApplication:nil];
+        }
+    }];
 }
 
 - (void)forgetPassAction:(id _Nullable)sender {
-    NSLog(@"忘记密码");
+    [self dismissViewControllerAnimated:NO completion:^{
+        if ([self.kDelegate respondsToSelector:@selector(forgetThePassword:)]) {
+            [self.kDelegate forgetThePassword:nil];
+        }
+    }];
 }
 
 // MARK: UIViewControllerTransitioningDelegate

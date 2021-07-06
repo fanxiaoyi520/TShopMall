@@ -13,10 +13,11 @@
 #import "TSAddCardViewController.h"
 #import "TSInputPasswordViewController.h"
 #import "TSPhoneNumVeriViewController.h"
+#import "TSBankCardViewController.h"
 
 #import "TSWalletHeaderView.h"
 #import "TSAlertView.h"
-
+#import "NSString+Plugin.h"
 @interface TSMineWalletViewController ()<TSWalletHeaderViewDelegate,TSWalletCellViewDelegate,UIViewControllerTransitioningDelegate,WithdrawalDelegate>
 
 @property (nonatomic ,strong) UIScrollView *profitScrollView;
@@ -96,9 +97,23 @@
 
 // MARK: TSWalletCellViewDelegate
 - (void)walletCellViewIsBindingAction:(id)sender {
-    TSAddCardViewController *vc = [TSAddCardViewController new];
-    vc.isNotice = NO;
-    [self.navigationController pushViewController:vc animated:YES];
+    UIButton *btn = (UIButton *)sender;
+    if ([btn.titleLabel.text isEqualToString:@"去绑定"]) {
+        TSAddCardViewController *vc = [TSAddCardViewController new];
+        vc.isNotice = NO;
+        [self.navigationController pushViewController:vc animated:YES];
+
+    } else {
+        TSBankCardViewController *vc = [TSBankCardViewController new];
+        vc.kDataController = self.dataController;
+        vc.sourceStr = @"TSMineWalletViewController";
+        vc.sourceBlock = ^(id _Nullable info) {
+            TSBankCardModel *model = (TSBankCardModel *)info;
+            self.dataController.myIncomeModel.bankCardId = model.bank_id;
+            self.walletCellView.cardNumberLab.text = [NSString stringWithFormat:@"提现到银行卡账号:%@",[NSString returnBankCard:model.bankCardNo]];
+        };
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 // MARK: UIViewControllerTransitioningDelegate
@@ -114,6 +129,7 @@
         [userDefaults synchronize];
         
         TSPhoneNumVeriViewController *phoneNumVeriVC = [[TSPhoneNumVeriViewController alloc] init];
+        phoneNumVeriVC.hasSet = NO;
         [self.navigationController pushViewController:phoneNumVeriVC animated:YES];
     }).cancel(@"我知道了", ^{}).show();
 }
@@ -121,6 +137,16 @@
 - (void)withdrawalApplication:(id _Nullable)sender {
     TSWithdrawalRecordViewController *vc = [TSWithdrawalRecordViewController new];
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)forgetThePassword:(id _Nullable)sender {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setValue:@"TSMineWalletViewController" forKey:@"JumpSource"];
+    [userDefaults synchronize];
+    
+    TSPhoneNumVeriViewController *phoneNumVeriVC = [[TSPhoneNumVeriViewController alloc] init];
+    phoneNumVeriVC.hasSet = YES;
+    [self.navigationController pushViewController:phoneNumVeriVC animated:YES];
 }
 
 // MARK: get

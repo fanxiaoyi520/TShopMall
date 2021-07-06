@@ -29,6 +29,8 @@
 @property (nonatomic, strong) TSImageBaseModel *imageAdModel;
 @property (nonatomic,   copy) NSString *isSetWithdrawalPassword;//是否设置提现密码
 @property (nonatomic,   copy) NSString *withdrawalPasswordPublicKey;//提现密码公钥
+@property (nonatomic,   copy) NSString *responseMsg;//密码错误提示
+@property (nonatomic,   copy) NSString *responseCode;//code
 @end
 
 @implementation TSMineDataController
@@ -862,19 +864,22 @@
     dispatch_queue_t customQuue = dispatch_queue_create("com.wumeng.network", DISPATCH_QUEUE_SERIAL);
     dispatch_semaphore_t semaphoreLock = dispatch_semaphore_create(0);
     dispatch_async(customQuue, ^{
-        [self requestMethodWithSemaphore:semaphoreLock withIndex:10];
+        __block BOOL isEndSucess = 0;
+        [self requestMethodWithSemaphore:semaphoreLock withIndex:10 complete:nil];
         dispatch_semaphore_wait(semaphoreLock, DISPATCH_TIME_FOREVER);
-        [self requestMethodWithSemaphore:semaphoreLock withIndex:11];
+        [self requestMethodWithSemaphore:semaphoreLock withIndex:11 complete:^(BOOL isSucess) {
+            isEndSucess = isSucess;
+        }];
         dispatch_semaphore_wait(semaphoreLock, DISPATCH_TIME_FOREVER);
 
         dispatch_async(dispatch_get_main_queue(), ^{
-            complete(YES);
+            complete(isEndSucess);
         });
     });
 }
 
 
-- (void)requestMethodWithSemaphore:(dispatch_semaphore_t)semaphoreLock withIndex:(NSInteger)aIndex
+- (void)requestMethodWithSemaphore:(dispatch_semaphore_t)semaphoreLock withIndex:(NSInteger)aIndex complete:(void(^)(BOOL isSucess))complete
 {
     NSString *request = [NSString stringWithFormat:@"request%ld",(long)aIndex];
     SEL requestSel = NSSelectorFromString(request);
@@ -889,10 +894,17 @@
                  NSString *data = request.responseModel.data;
                  self.withdrawalPasswordPublicKey = data;
              } else if (aIndex == 11) {
-                 
+                 complete (YES);
              }
          } else {
-             [Popover popToastOnWindowWithText:request.responseModel.responseMsg];
+             if (aIndex == 11) {
+                 if ([request.responseModel.code isEqualToString:@"KY19020"]) {
+                     self.responseMsg = request.responseModel.responseMsg;
+                     complete (NO);
+                 } else {
+                     complete (NO);
+                 }
+             }
          }
          dispatch_semaphore_signal(semaphoreLock);
      } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
@@ -917,7 +929,7 @@
     NSMutableDictionary *body = [NSMutableDictionary dictionary];
     [body setValue:@([self.withdrawalAmount integerValue]) forKey:@"withdrawalAmount"];
     [body setValue:self.bankCardAccountId forKey:@"bankCardAccountId"];
-    [body setValue:encryptedPassword forKey:@"checkPw"];
+    [body setValue:encryptedPassword forKey:@"withdrawalPassword"];
     SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kMineWithdrawalApply
                                                                requestMethod:YTKRequestMethodPOST
                                                        requestSerializerType:YTKRequestSerializerTypeJSON responseSerializerType:YTKResponseSerializerTypeJSON
