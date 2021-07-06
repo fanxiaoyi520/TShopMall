@@ -19,7 +19,8 @@
     params[@"totalMoneyShow"] = balanceInfo.orderTotalMoney;//订单总价
     
     if (invoice) {
-        params[@"invoiceCate"] = [NSString stringWithFormat:@"%ld", invoice.formType];
+        NSString *invoiceCate = [NSString stringWithFormat:@"%ld", invoice.formType==1? 2:invoice.formType];
+        params[@"invoiceCate"] = invoiceCate;
         params[@"invoiceUuid"] = invoice.uuid.length==0? @"":invoice.uuid;
         params[@"electron_titleContent"] = invoice.titleContent.length==0? @"":invoice.titleContent;
         params[@"electron_code"] = invoice.code.length==0? @"":invoice.code;

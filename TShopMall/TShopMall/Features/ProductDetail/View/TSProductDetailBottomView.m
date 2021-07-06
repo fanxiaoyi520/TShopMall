@@ -168,7 +168,8 @@
         [_addButton setImage:KImageMake(@"mall_detail_addCart") forState:UIControlStateHighlighted];
         [_addButton addTarget:self action:@selector(addAction:) forControlEvents:UIControlEventTouchUpInside];
         [_addButton setBadgeBGColor:UIColor.redColor];
-        [_addButton setBadgeOriginX:17];
+        [_addButton setBadgeOriginX:25];
+        [_addButton setBadgeOriginY:-2];
         [_addButton setBadgeTextColor:UIColor.whiteColor];
         [_addButton setShouldHideBadgeAtZero:YES];
         [_addButton setShouldAnimateBadge:YES];

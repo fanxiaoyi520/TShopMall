@@ -22,7 +22,10 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
-
+   
+    
+    [self initService];///初始化service，顺序不能换
+    [self initNetworkReachability];
     [self initNetworkConfig];
     [self setUITemplateSize];
     [self setKeywordAttribute];
@@ -30,10 +33,7 @@
     [self setupRootController];
     [self initWechatConfig];
     [self initRouteConfig];
-    [self initService];///初始化service，顺序不能换
-    [self initNetworkReachability];
-//    [self getNetData];/// 获取网络必要数据，改方法所在位置不能写前面
-    
+ 
     if (@available(iOS 13.0, *)) {
         
         // 注意 存储用户标识信息需要使用钥匙串来存储 这里使用NSUserDefaults 做的简单示例

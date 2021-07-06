@@ -35,15 +35,19 @@
 
     [NTESQuickLoginManager sharedInstance].delegate = self;
     
-    @weakify(self);
     if ([TSUserLoginManager shareInstance].state == TSLoginStateNone) {
         [self configLoginController];
     }else{
         self.window.rootViewController = [TSTabBarController new];
     }
-    
+    @weakify(self);
     [TSUserLoginManager shareInstance].loginBlock = ^{
+        @strongify(self)
         self.window.rootViewController = [TSTabBarController new];
+        self.window.rootViewController.view.alpha = 0;
+        [UIView animateWithDuration:.3 animations:^{
+            self.window.rootViewController.view.alpha = 1;
+        }];
     };
     
     [TSUserLoginManager shareInstance].logoutBlock = ^{
@@ -59,7 +63,6 @@
     [[TSUserLoginManager shareInstance] configLoginController:^(UIViewController * _Nonnull vc) {
         @strongify(self)
         self.window.rootViewController = vc;
-        
         if ([vc.childViewControllers.firstObject isKindOfClass:TSLoginViewController.class]) {
             TSLoginViewController *loginViewController = vc.childViewControllers.firstObject;
             [self showAlertInView:loginViewController.view];

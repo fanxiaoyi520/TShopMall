@@ -98,7 +98,7 @@ NSString *const kAccountPublicKeyUrl = @"/auth/common/publicKey";
 #pragma mark - 首页
 
 NSString *const kHomePageInfoUrl = @"/rest/v2/front/shopContent/getIndexPageInfo";
-
+NSString * const kQueryKeyWord = @"/rest/v2/front/product/queryKeyWord";
 NSString * const kSearchKey = @"/rest/v2/front/product/queryKeyWord";
 NSString * const kSearchAssociateWord = @"/rest/v2/front/product/associateWord";
 NSString * const kSearchHotKey = @"/rest/v2/front/product/queryKeyWord";
@@ -190,4 +190,5 @@ NSString *const kMineCheckWhetherSetWithdrawalPwd = @"/rest/usercenter/customer/
 NSString * const kMineCheckWithdrawalPwd = @"/rest/usercenter/customer/checkWithdrawalPwd";
 NSString * const kMineCheckRealAuth = @"/usercenter/customer/checkRealAuth";//查询是否已实名认证
 NSString * const kMineRealAuth = @"/usercenter/customer/realAuth";//实名认证
-NSString * const kShopStatement = @"v2/front/shopStatement/getShopStatementListByState"; 
+NSString * const kShopStatement = @"v2/front/shopStatement/getShopStatementListByState";
+NSString * const kFeedbackUrl = @"v2/about/suggestionFeedback/addSuggestion";

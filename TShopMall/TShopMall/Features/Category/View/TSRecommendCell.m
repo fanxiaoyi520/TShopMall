@@ -20,7 +20,10 @@
 - (void)setupUI{
     [self.contentView addSubview:self.collectionView];
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.contentView);
+        make.top.equalTo(self.contentView);
+        make.left.equalTo(self.contentView);
+        make.right.equalTo(self.contentView);
+        make.bottom.equalTo(self.contentView).priorityLow();
     }];
 }
 
