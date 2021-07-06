@@ -9,6 +9,8 @@
 #import "TSWithdrawalPswSetDataController.h"
 #import "TSUniversalFlowLayout.h"
 #import "TSUniversalCollectionViewCell.h"
+#import "RSA.h"
+#import "TSTools.h"
 
 @interface TSWithdrawalPswSetController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate>
 /// 数据中心
@@ -26,9 +28,13 @@
 
 - (void)setupBasic {
     [super setupBasic];
-    self.gk_navTitle = @"提现密码设置";
+    if (self.hasSet) {
+        self.gk_navTitle = @"修改提现密码";
+    } else {
+        self.gk_navTitle = @"设置提现密码";
+    }
     __weak __typeof(self)weakSelf = self;
-    [self.dataController fetchWithdrawalPswSetContentsComplete:^(BOOL isSucess) {
+    [self.dataController fetchWithdrawalPswSetContentsWithHasSet:self.hasSet complete:^(BOOL isSucess) {
         __strong __typeof(weakSelf)strongSelf = weakSelf;
         if (isSucess) {
             [strongSelf.collectionView reloadData];
@@ -77,11 +83,28 @@
 #pragma mark - Actions
 /** 提交提现密码的设置 */
 - (void)commitWithWithdrawalpsw:(NSString *)psw {
-    [[TSServicesManager sharedInstance].userInfoService setWithrawalPwd:psw success:^{
-        
-    } failure:^(NSString * _Nonnull errorMsg) {
-        
+    [Popover popProgressOnWindowWithText:@"正在设置..."];
+    [[TSServicesManager sharedInstance].acconutService fetchAccountPublicKeyComplete:^(NSString * _Nonnull publicKey) {
+        ///利用公钥对密码进行加密
+        NSString *rsaPwd = [RSA encryptString:psw publicKey:publicKey];
+        NSString *base64String = [TSTools base64EncodedString:rsaPwd];
+        [[TSServicesManager sharedInstance].userInfoService setWithrawalPwd:base64String success:^{
+            [Popover popToastOnWindowWithText:@"提现密码设置成功"];
+            [self back];
+        } failure:^(NSString * _Nonnull errorMsg) {
+            [Popover popToastOnWindowWithText:errorMsg];
+        }];
     }];
+}
+
+- (void)back {
+    NSArray *childrenVCs = self.navigationController.viewControllers;
+    for (UIViewController *vc in childrenVCs) {
+        if ([vc isKindOfClass: NSClassFromString(@"TSSecurityViewController")]) {
+            [self.navigationController popToViewController:vc animated:YES];
+            break;
+        }
+    }
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -125,6 +148,10 @@
 }
 
 #pragma mark - UniversalFlowLayoutDelegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [self.view endEditing:YES];
+}
+
 - (CGFloat)collectionView:(UICollectionView *_Nullable)collectionView
                    layout:(TSUniversalFlowLayout *_Nullable)collectionViewLayout
   heightForRowAtIndexPath:(NSIndexPath *_Nullable)indexPath

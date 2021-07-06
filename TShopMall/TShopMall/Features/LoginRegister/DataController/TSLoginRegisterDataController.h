@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface TSLoginRegisterDataController : TSBaseDataController
 
 @property(nonatomic, strong) TSLoginSMSModel *smsModel;
+/** 获取公钥 */
+- (void)fetchAccountPublicKeyComplete:(void(^)(NSString *publicKey))complete;
 /// 验证码
 -(void)fetchLoginSMSCodeMobile:(NSString *)mobile
                       complete:(void(^)(BOOL isSucess))complete;///登录

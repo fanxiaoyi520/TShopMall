@@ -9,6 +9,14 @@
 
 @implementation TSTools
 
++ (NSString *)base64EncodedString:(NSString *)text {
+    NSData *data = [text dataUsingEncoding:NSUTF8StringEncoding];
+    //指定编码方式.默认0
+    NSString *base64String= [data base64EncodedStringWithOptions:0];
+    
+    return base64String;
+}
+
 /** 宽松的手机号校验 */
 + (BOOL)isPhoneNumber:(NSString *)phoneNumber {
     ///去掉空格的手机号
@@ -88,6 +96,14 @@
     NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
     NSString *appVersion = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
     return appVersion;
+}
+/** 获取密文手机号 */
++ (NSString *)getCipherPhone:(NSString *)phoneNumber {
+    if (phoneNumber.length < 11) {
+        return phoneNumber;
+    }
+    NSString *cipher = [phoneNumber substringWithRange:NSMakeRange(3,4)];
+    return [phoneNumber stringByReplacingOccurrencesOfString:cipher withString:@"****"];
 }
 
 /*

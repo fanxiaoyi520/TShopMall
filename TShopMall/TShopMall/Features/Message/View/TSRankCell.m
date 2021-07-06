@@ -7,6 +7,7 @@
 
 #import "TSRankCell.h"
 #import "TSRankSectionModel.h"
+#import "TSTools.h"
 
 @interface TSRankCell ()
 /// 信息背景
@@ -159,8 +160,7 @@
     }
     
     [_headImgV sd_setImageWithURL:[NSURL URLWithString:item.userModel.imageUrl] placeholderImage:KImageMake(@"mall_setting_defautlhead")];
-    NSString *centerStr = [item.userModel.mobile substringWithRange:NSMakeRange(3,4)];
-    _usernameLabel.text = [item.userModel.mobile stringByReplacingOccurrencesOfString:centerStr withString:@"****"];
+    _usernameLabel.text = [TSTools getCipherPhone:item.userModel.mobile];
     _salesNumLabel.text = [NSString stringWithFormat:@"¥%@", item.userModel.money];
     
     //最底部切圆角

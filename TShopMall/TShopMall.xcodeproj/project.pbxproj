@@ -26,6 +26,7 @@
 		044AAEAF26871A89000DB09F /* TSAgreementModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 044AAEAE26871A89000DB09F /* TSAgreementModel.m */; };
 		046195BF2692A3D000B91E18 /* TSRememberPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 046195BE2692A3D000B91E18 /* TSRememberPwdViewController.m */; };
 		046195C32692F4A600B91E18 /* RSA.m in Sources */ = {isa = PBXBuildFile; fileRef = 046195C22692F4A600B91E18 /* RSA.m */; };
+		046195C62693EA5900B91E18 /* TSSettingWithrawalRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 046195C52693EA5900B91E18 /* TSSettingWithrawalRequest.m */; };
 		04651692268C0290000829C2 /* TSUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 04651691268C0290000829C2 /* TSUser.m */; };
 		046516A3268C5641000829C2 /* ImageCompresser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0465169A268C5641000829C2 /* ImageCompresser.m */; };
 		046516EC268C57EF000829C2 /* DialogTextTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 046516A8268C57EE000829C2 /* DialogTextTool.m */; };
@@ -663,6 +664,8 @@
 		046195BE2692A3D000B91E18 /* TSRememberPwdViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSRememberPwdViewController.m; sourceTree = "<group>"; };
 		046195C12692F4A600B91E18 /* RSA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSA.h; sourceTree = "<group>"; };
 		046195C22692F4A600B91E18 /* RSA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSA.m; sourceTree = "<group>"; };
+		046195C42693EA5900B91E18 /* TSSettingWithrawalRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSSettingWithrawalRequest.h; sourceTree = "<group>"; };
+		046195C52693EA5900B91E18 /* TSSettingWithrawalRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSSettingWithrawalRequest.m; sourceTree = "<group>"; };
 		04651690268C0290000829C2 /* TSUser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSUser.h; sourceTree = "<group>"; };
 		04651691268C0290000829C2 /* TSUser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSUser.m; sourceTree = "<group>"; };
 		0465169A268C5641000829C2 /* ImageCompresser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCompresser.m; sourceTree = "<group>"; };
@@ -2510,6 +2513,8 @@
 				04F1EFBB2682E33600FF007D /* TSRealNameAuthDataController.m */,
 				043C234D268AF50500460FDB /* TSModifyUserInfoRequest.h */,
 				043C234E268AF50500460FDB /* TSModifyUserInfoRequest.m */,
+				046195C42693EA5900B91E18 /* TSSettingWithrawalRequest.h */,
+				046195C52693EA5900B91E18 /* TSSettingWithrawalRequest.m */,
 			);
 			path = DataController;
 			sourceTree = "<group>";
@@ -4856,6 +4861,7 @@
 				F530CCEB26804167009DC29A /* UICollectionView+TSWebImageAutoSize.m in Sources */,
 				F530CC3D26803862009DC29A /* NSString+Time.m in Sources */,
 				C3A6C4C4267A1C5700FC71D6 /* TSPhoneNumVeriCell.m in Sources */,
+				046195C62693EA5900B91E18 /* TSSettingWithrawalRequest.m in Sources */,
 				F530CCF726804167009DC29A /* WKWebView+TSCookiesManager.m in Sources */,
 				F54973AB2668B9B500181E3F /* TSBaseNavigationController.m in Sources */,
 				C21A4B99267CAAC100766F72 /* TSAreaModel.m in Sources */,

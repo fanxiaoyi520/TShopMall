@@ -89,7 +89,7 @@
     [coder encodeObject:self.phone forKey:@"phone"];
     [coder encodeObject:self.region forKey:@"region"];
     [coder encodeObject:self.regRegion forKey:@"regRegion"];
-    [coder encodeInt:self.sex forKey:@"sex"];
+    [coder encodeObject:self.sex forKey:@"sex"];
     [coder encodeObject:self.userType forKey:@"userType"];
     [coder encodeObject:self.username forKey:@"username"];
 }

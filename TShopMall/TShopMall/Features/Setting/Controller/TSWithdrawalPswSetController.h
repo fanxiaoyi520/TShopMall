@@ -10,6 +10,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TSWithdrawalPswSetController : TSBaseViewController
+/** 是否设置过提现密码  */
+@property(nonatomic, assign) BOOL hasSet;
 
 @end
 

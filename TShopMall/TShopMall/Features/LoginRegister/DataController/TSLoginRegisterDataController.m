@@ -15,6 +15,26 @@
 #import "TSChangeBindRequest.h"
 #import "TSBindUserByAuthCodeRequest.h"
 @implementation TSLoginRegisterDataController
+
+- (void)fetchAccountPublicKeyComplete:(void(^)(NSString *publicKey))complete {
+    NSString *urlStr = [NSString stringWithFormat:@"%@%@", kAccountCenterApiPrefix, kAccountPublicKeyUrl];
+    NSURL *url = [NSURL URLWithString:urlStr];
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *firsttask = [session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if(error == nil){
+            NSString *publicKey = [data utf8String];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                complete(publicKey);
+            });
+        } else {
+           
+        }
+    }];
+    [firsttask resume];
+
+}
+
+
 -(void)fetchRefershTokenComplete:(void(^)(BOOL isSucess))complete{
     NSString *requestUrl = [NSString stringWithFormat:@"%@?appId=%@&tenantId=%@&appSecret=%@&userName=%@",kAccountRefershTokenUrl,kAppId,@"tcl",kAppSecret, [TSUserInfoManager userInfo].userName];
 

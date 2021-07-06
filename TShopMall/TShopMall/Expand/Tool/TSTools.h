@@ -26,7 +26,10 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)getAfter20DaysDate;
 ///获取版本号
 + (NSString *)getVersion;
-
+/**base64加密 */
++ (NSString *)base64EncodedString:(NSString *)text;
+/** 获取密文手机号 */
++ (NSString *)getCipherPhone:(NSString *)phoneNumber;
 @end
 
 NS_ASSUME_NONNULL_END
