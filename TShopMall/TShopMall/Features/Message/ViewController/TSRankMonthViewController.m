@@ -42,7 +42,7 @@
             //当前用户
             TSRankUserModel *userModel = self.dataController.currentUserRankModel;
             [self.personalRankView.headImgV sd_setImageWithURL:[NSURL URLWithString:userModel.imageUrl] placeholderImage:KImageMake(@"mall_setting_defautlhead")];
-            self.personalRankView.usernameLabel.text = userModel.mobile;
+            self.personalRankView.usernameLabel.text = userModel.name;
             self.personalRankView.rankNumLabel.text = userModel.rank;
             if (userModel.money.integerValue > 0) {
                 self.personalRankView.salesNumLabel.text = [NSString stringWithFormat:@"¥%@", userModel.money];
@@ -65,13 +65,13 @@
     
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.equalTo(self.view);
-        make.bottom.equalTo(self.personalRankView);
+        make.bottom.equalTo(self.personalRankView).priorityLow();
     }];
     
     [self.personalRankView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.view);
-        make.height.offset(84);
-        make.bottom.equalTo(self.view).offset(- GK_TABBAR_HEIGHT - GK_STATUSBAR_NAVBAR_HEIGHT - 44);
+        make.bottom.equalTo(self.view).offset(- GK_TABBAR_HEIGHT - GK_STATUSBAR_NAVBAR_HEIGHT - 44).priorityHigh();
+        make.height.offset(84).priorityHigh();
     }];
 }
 

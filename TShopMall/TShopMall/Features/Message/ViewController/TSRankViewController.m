@@ -31,8 +31,8 @@
     [self.view addSubview:_background_imgView];
     
     self.myCategoryView.titles = @[@"冲冠榜", @"财富榜", @"热销榜"];
-    self.myCategoryView.contentEdgeInsetLeft = 24;
-    self.myCategoryView.contentEdgeInsetRight = 24;
+    self.myCategoryView.contentEdgeInsetLeft = KRateW(24);
+    self.myCategoryView.contentEdgeInsetRight = KRateW(24);
     self.myCategoryView.cellSpacing = 0;
     self.myCategoryView.titleFont = KRegularFont(14);
     self.myCategoryView.titleSelectedFont = KRegularFont(14);

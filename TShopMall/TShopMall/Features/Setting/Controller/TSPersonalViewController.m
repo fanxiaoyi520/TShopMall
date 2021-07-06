@@ -123,13 +123,11 @@
 - (void)showSexAlert {
     @weakify(self);
     TSUser *user = [TSUserInfoManager userInfo].user;
-    TSChangePictureActionSheet *actionSheet = [[TSChangePictureActionSheet alloc] initWithTitles:@[@"男", @"女"] selectIndex:(user.sex - 1) actionHandler:^(NSInteger index, NSString * _Nonnull title) {
+    int selectedIndex = user.sex.length == 0 ? 0 : ([user.sex intValue] - 1);
+    TSChangePictureActionSheet *actionSheet = [[TSChangePictureActionSheet alloc] initWithTitles:@[@"男", @"女"] selectIndex:(selectedIndex) actionHandler:^(NSInteger index, NSString * _Nonnull title) {
         @strongify(self);
-        NSLog(@"%ld-%@", index, title);
         NSString *sexString = [NSString stringWithFormat:@"%ld", index + 1];
         [self modifyUserInfoWithKey:@"sex" value:sexString completed:^{
-//            @strongify(self);
-            //[TSUserInfoManager userInfo].user.sex = sex;
         }];
     }];
     [actionSheet show];

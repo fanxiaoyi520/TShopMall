@@ -74,7 +74,6 @@
 - (TSPasswordShowButton *)createPwdShowButton {
     TSPasswordShowButton *showPwdButton = [[TSPasswordShowButton alloc] init];
     showPwdButton.titleLabel.font = KFont(PingFangSCSemibold, 50);
-    //[showPwdButton setTitle:@"·" forState:(UIControlStateNormal)];
     [showPwdButton setTitleColor:KTextColor forState:(UIControlStateNormal)];
     [showPwdButton setBackgroundColor:KHexColor(@"#F4F4F4")];
     [showPwdButton setCorners:UIRectCornerAllCorners radius:4];
@@ -98,6 +97,14 @@
 - (void)showKeyboard {
     ///调起键盘
     [self.passwordTextField becomeFirstResponder];
+}
+/** 清理密码输入框 */
+- (void)clear {
+    self.passwordTextField.text = nil;
+    for (int i = 0; i < self.dotsArray.count; i++) {///
+        TSPasswordShowButton *pwdButton = self.dotsArray[i];
+        [pwdButton setTitle:@"" forState:(UIControlStateNormal)];
+    }
 }
 /**
  *  重置显示的点

@@ -1,6 +1,6 @@
 //
-//  UIView+CMSDrawLine.h
-//  CMSPaaS
+//  UIView+TSDrawLine.h
+//  
 //
 //  Created by SJ on 2020/10/15.
 //
@@ -9,19 +9,19 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface UIView (CMSDrawLine)
+@interface UIView (TSDrawLine)
 
 
-- (UIView *)cms_addLineAt:(CGPoint)origin
+- (UIView *)ts_addLineAt:(CGPoint)origin
            isVertical:(BOOL)isVertical
                length:(CGFloat)length;
 
-- (CALayer *)cms_drawLineAt:(CGPoint)origin
+- (CALayer *)ts_drawLineAt:(CGPoint)origin
              isVertical:(BOOL)isVertical
                  length:(CGFloat)length
                   color:(UIColor *)color;
 
-- (CALayer *)cms_drawLineAt:(CGPoint)origin
+- (CALayer *)ts_drawLineAt:(CGPoint)origin
               lineWidth:(CGFloat)width
              isVertical:(BOOL)isVertical
                  length:(CGFloat)length

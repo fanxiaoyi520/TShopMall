@@ -8,6 +8,7 @@
 #import "TSRememberPwdViewController.h"
 #import "TSPhoneNumVeriViewController.h"
 #import "TSPayPwdViewController.h"
+#import "TSTools.h"
 
 @interface TSRememberPwdViewController ()
 ///提示语的标题
@@ -21,14 +22,15 @@
 /** 确认按钮 */
 @property(nonatomic, weak) UIButton *confirmButton;
 
-
 @end
 
 @implementation TSRememberPwdViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.view.backgroundColor = KWhiteColor;
+    self.gk_navTitle = @"修改提现密码";
+    self.phoneNumLabel.text = [TSTools getCipherPhone:[TSUserInfoManager userInfo].user.phone];
 }
 
 - (void)setupBasic {
@@ -135,6 +137,7 @@
 
 - (void)cancelAction {
     TSPhoneNumVeriViewController *phoneNumVeriVC = [[TSPhoneNumVeriViewController alloc] init];
+    phoneNumVeriVC.hasSet = YES;
     [self.navigationController pushViewController:phoneNumVeriVC animated:YES];
 }
 

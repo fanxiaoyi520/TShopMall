@@ -54,9 +54,8 @@ UIKIT_EXTERN NSString *const kAccountCheckSalesmanWithMobileUrl;
 UIKIT_EXTERN NSString *const kAccountCheckSalesmanWithTokenUrl;
 ///Token刷新
 UIKIT_EXTERN NSString *const kAccountRefershTokenUrl;
-///获取公钥
+///公钥获取URL
 UIKIT_EXTERN NSString *const kAccountPublicKeyUrl;
-
 #pragma mark - 首页
 UIKIT_EXTERN NSString *const kHomePageInfoUrl;
 UIKIT_EXTERN NSString *const kSearchKey;//搜索关键词
@@ -130,6 +129,8 @@ UIKIT_EXTERN NSString *const kModifyUserUrl;
 UIKIT_EXTERN NSString *const kUploadImageUrl;
 UIKIT_EXTERN NSString *const kSetWithdrawalPwdUrl;
 UIKIT_EXTERN NSString *const kCheckWithdrawalPwdUrl;
+///校验是否设置过提现密码
+UIKIT_EXTERN NSString *const kCheckHasSetWithdrawalPwdUrl;
 
 UIKIT_EXTERN NSString * const kMineWithdrawalApply;//提现申请
 UIKIT_EXTERN NSString * const kMineQueryAppBankCardAccountList;//查询银行卡列表

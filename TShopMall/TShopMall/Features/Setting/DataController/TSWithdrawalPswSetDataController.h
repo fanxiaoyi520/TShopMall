@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong, readonly) NSMutableArray <TSWithdrawalPswSetSectionModel *> *sections;
 
-- (void)fetchWithdrawalPswSetContentsComplete:(void(^)(BOOL isSucess))complete;
+- (void)fetchWithdrawalPswSetContentsWithHasSet:(BOOL)hasSet complete:(void(^)(BOOL isSucess))complete;
 
 @end
 

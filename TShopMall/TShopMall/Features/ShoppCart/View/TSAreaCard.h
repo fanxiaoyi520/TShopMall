@@ -19,6 +19,7 @@
 @class TSAreaView;
 @class TSAreaButton;
 @class TSAreaIndexView;
+@class TSAreaIndexIndeView;
 
 @interface TSAreaCard : UIView
 @property (nonatomic, weak) id controller;
@@ -60,11 +61,14 @@
 
 @interface TSAreaIndexView : UIView
 @property (nonatomic, strong) NSArray<NSString *> *indexs;
-@property (nonatomic, strong) UIImageView *indeImg;
-@property (nonatomic, strong) UILabel *indeDes;
-@property (nonatomic, strong) UIView *bgView;
 @property (nonatomic, assign) NSInteger lastTag;
-@property (nonatomic, copy) void(^indexChanged)(NSInteger index);
+@property (nonatomic, copy) void(^indexChanged)(NSInteger index, NSString *tag);
+@property (nonatomic, copy) void(^shouldShowIndeImg)(BOOL show);
+@end
+
+@interface TSAreaIndexIndeView : UIImageView
+@property (nonatomic, strong) UILabel *indeDes;
+- (void)shouldShow:(BOOL)show;
 @end
 
 

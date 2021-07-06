@@ -84,6 +84,7 @@
     [[TSServicesManager sharedInstance].userInfoService checkCodeMobile:mobile code:code success:^{
         [Popover removePopoverOnWindow];
         TSWithdrawalPswSetController *withdrawalVC = [[TSWithdrawalPswSetController alloc] init];
+        withdrawalVC.hasSet = self.hasSet;
         [self.navigationController pushViewController:withdrawalVC animated:YES];
     } failure:^(NSString * _Nonnull errorMsg) {
         [Popover popToastOnWindowWithText:errorMsg];
@@ -140,6 +141,10 @@
 }
 
 #pragma mark - UniversalFlowLayoutDelegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [self.view endEditing:YES];
+}
+
 - (CGFloat)collectionView:(UICollectionView *_Nullable)collectionView
                    layout:(TSUniversalFlowLayout *_Nullable)collectionViewLayout
   heightForRowAtIndexPath:(NSIndexPath *_Nullable)indexPath

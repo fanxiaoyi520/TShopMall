@@ -374,6 +374,7 @@
                                                                              group:dispatch_group_create()
                                                                           complete:^(BOOL isSucess) {
             [strongSelf.topCartBtn setBadgeValue:strongSelf.dataController.cartNumber];
+            [strongSelf.bottomView setCartBadge:strongSelf.dataController.cartNumber];
         }];
             
     }];
