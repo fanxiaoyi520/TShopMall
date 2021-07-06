@@ -296,21 +296,21 @@
     
     //冠军
     if (item.rankList.count > 0) {
-        TSRankUserModel *userModel = item.rankList[0];
-        [self.championIconImgV sd_setImageWithURL:[NSURL URLWithString:userModel.imageUrl] placeholderImage:KImageMake(@"mall_setting_defautlhead")];
-        self.championLabel.text = userModel.mobile;
+        TSRankUserModel *championUserModel = item.rankList[0];
+        [self.championIconImgV sd_setImageWithURL:[NSURL URLWithString:championUserModel.imageUrl] placeholderImage:KImageMake(@"mall_setting_defautlhead")];
+        self.championLabel.text = championUserModel.name;
         
         //亚军
         if (item.rankList.count > 1) {
-            TSRankUserModel *userModel = item.rankList[1];
-            [self.secondIconImgV sd_setImageWithURL:[NSURL URLWithString:userModel.imageUrl] placeholderImage:KImageMake(@"mall_setting_defautlhead")];
-            self.secondLabel.text = userModel.mobile;
+            TSRankUserModel *secondUserModel = item.rankList[1];
+            [self.secondIconImgV sd_setImageWithURL:[NSURL URLWithString:secondUserModel.imageUrl] placeholderImage:KImageMake(@"mall_setting_defautlhead")];
+            self.secondLabel.text = secondUserModel.name;
             
             //季军
             if (item.rankList.count > 2) {
-                TSRankUserModel *userModel = item.rankList[2];
-                [self.thirdIconImgV sd_setImageWithURL:[NSURL URLWithString:userModel.imageUrl] placeholderImage:KImageMake(@"mall_setting_defautlhead")];
-                self.thirdLabel.text = userModel.mobile;
+                TSRankUserModel *thirdUserModel = item.rankList[2];
+                [self.thirdIconImgV sd_setImageWithURL:[NSURL URLWithString:thirdUserModel.imageUrl] placeholderImage:KImageMake(@"mall_setting_defautlhead")];
+                self.thirdLabel.text = thirdUserModel.name;
             }
         }
     }

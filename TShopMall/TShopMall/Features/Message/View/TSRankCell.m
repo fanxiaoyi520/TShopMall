@@ -159,7 +159,7 @@
     }
     
     [_headImgV sd_setImageWithURL:[NSURL URLWithString:item.userModel.imageUrl] placeholderImage:KImageMake(@"mall_setting_defautlhead")];
-    _usernameLabel.text = item.userModel.mobile;
+    _usernameLabel.text = item.userModel.name;
     
     _salesNumLabel.text = [NSString stringWithFormat:@"¥%@", item.userModel.money];
     
