@@ -54,6 +54,10 @@ typedef NS_ENUM(NSInteger, RequestMethod){
  * 根据省份uuid获取它下面的城市参数
  */
 @property (nonatomic ,strong)TSProvinceListModel *provinceListModel;
+/**
+ *用户提现密码校验参数
+ */
+@property (nonatomic ,copy)NSString *inputPassword;
 
 
 @property (nonatomic, strong, readonly) NSMutableArray <TSMineSectionModel *> *sections;
@@ -72,6 +76,7 @@ typedef NS_ENUM(NSInteger, RequestMethod){
 @property (nonatomic, strong, readonly) NSMutableArray <TSProvinceListModel *> *provinceListArray;
 @property (nonatomic, strong, readonly) NSMutableArray <TSCityListModel *> *cityListArray;
 @property (nonatomic,   copy, readonly) NSString *isSetWithdrawalPassword;//是否设置提现密码
+@property (nonatomic,   copy, readonly) NSString *withdrawalPasswordPublicKey;//提现密码公钥
 
 //订单数
 @property (nonatomic, strong, readonly) TSMineOrderCountModel *orderInfo;
