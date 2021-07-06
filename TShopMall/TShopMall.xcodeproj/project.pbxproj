@@ -2286,13 +2286,15 @@
 			name = SearchResult;
 			sourceTree = "<group>";
 		};
-		C22EE27126807A9500E59C86 /* SearchResult */ = {
+		C22EE27126807A9500E59C86 /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				C2C7652626788E29004757B9 /* TSSearchKeyViewModel.h */,
+				C2C7652726788E29004757B9 /* TSSearchKeyViewModel.m */,
 				C22EE27226807AB900E59C86 /* TSSearchResultViewModel.h */,
 				C22EE27326807AB900E59C86 /* TSSearchResultViewModel.m */,
 			);
-			name = SearchResult;
+			name = Search;
 			sourceTree = "<group>";
 		};
 		C22EE27B268098F100E59C86 /* SearchResult */ = {
@@ -3596,7 +3598,7 @@
 		F549737B2668A94600181E3F /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				C22EE27126807A9500E59C86 /* SearchResult */,
+				C22EE27126807A9500E59C86 /* Search */,
 				DC3440B926722DB600F5B0DA /* TSHomePageViewModel.h */,
 				DC3440BA26722DB600F5B0DA /* TSHomePageViewModel.m */,
 				DC3440CB2672604400F5B0DA /* TSCategoryGroupViewModel.h */,
@@ -3611,8 +3613,6 @@
 				DC3440C92672601F00F5B0DA /* TSHomePageReleaseViewModel.m */,
 				DC99119A267A195400EF9B26 /* TSHomePageReleaseTitleViewModel.h */,
 				DC99119B267A195400EF9B26 /* TSHomePageReleaseTitleViewModel.m */,
-				C2C7652626788E29004757B9 /* TSSearchKeyViewModel.h */,
-				C2C7652726788E29004757B9 /* TSSearchKeyViewModel.m */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";

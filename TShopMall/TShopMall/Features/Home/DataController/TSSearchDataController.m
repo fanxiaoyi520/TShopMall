@@ -13,6 +13,22 @@
 
 @implementation TSSearchDataController
 
++ (void)queryKeyWords:(void(^)(NSArray *))complete{
+    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kQueryKeyWord
+                                                               requestMethod:YTKRequestMethodGET
+                                                       requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON
+                                                               requestHeader:NSMutableDictionary.dictionary
+                                                                 requestBody:@{@"type":@"1"}
+                                                              needErrorToast:YES];
+    [request startWithCompletionBlockWithSuccess:^(__kindof SSGenaralRequest * _Nonnull request) {
+        if (request.responseModel.isSucceed) {
+            
+        }
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        
+    }];
+}
+
 - (void)fetchData:(void (^)(void))finished{
     [self.sections removeAllObjects];
     __weak typeof(self) weakSelf = self;
@@ -46,6 +62,9 @@
 - (void)handleRequest:(SSGenaralRequest *)request{
     NSArray *data = request.responseJSONObject[@"data"];
     self.hotkeys = [NSArray yy_modelArrayWithClass:TSSearchHotKeyModel.class json:data];
+    if (self.hotkeys.count > 10) {
+        self.hotkeys = [self.hotkeys subarrayWithRange:NSMakeRange(0, 10)];
+    }
     [self configHotKeySection];
     [self configHistorySection];
     if (self.sections.count == 0) {

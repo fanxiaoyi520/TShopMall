@@ -98,7 +98,7 @@ NSString *const kAccountPublicKeyUrl = @"/auth/common/publicKey";
 #pragma mark - 首页
 
 NSString *const kHomePageInfoUrl = @"/rest/v2/front/shopContent/getIndexPageInfo";
-
+NSString * const kQueryKeyWord = @"/rest/v2/front/product/queryKeyWord";
 NSString * const kSearchKey = @"/rest/v2/front/product/queryKeyWord";
 NSString * const kSearchAssociateWord = @"/rest/v2/front/product/associateWord";
 NSString * const kSearchHotKey = @"/rest/v2/front/product/queryKeyWord";

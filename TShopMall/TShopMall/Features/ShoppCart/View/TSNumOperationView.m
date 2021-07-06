@@ -33,6 +33,11 @@
     [self updateBtnStatus];
 }
 
+- (void)updateNumberText:(NSString *)numberText{
+    self.number.text = numberText;
+    [self updateBtnStatus];
+}
+
 - (void)updateBtnStatus{
     NSInteger num = self.number.text.intValue;
     if (num <= self.min) {
