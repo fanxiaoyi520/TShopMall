@@ -28,15 +28,12 @@
             NSLog(@"%@",objc);
             dispatch_async(dispatch_get_main_queue(), ^{
                 complete(objc);
-
             });
         }else{
-           
+            complete(nil);
         }
-
     }];
     [firsttask resume];
-
 }
 
 - (void)fetchLogoutComplete:(void (^)(BOOL))complete{

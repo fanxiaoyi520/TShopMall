@@ -22,7 +22,7 @@
 
 -(void)fetchData{
     
-    if (![AFNetworkReachabilityManager sharedManager].reachable) {
+    if ([AFNetworkReachabilityManager sharedManager].networkReachabilityStatus == AFNetworkReachabilityStatusNotReachable) {
         NSString *content = [TSJsonCacheData readPlistWithKey:@"homePageList"];
         if (content) {
             [self setUITemplateWithResponseData:content];
@@ -32,7 +32,7 @@
     
     
     NSMutableDictionary *body = [NSMutableDictionary dictionary];
-        [body setValue:@"APP" forKey:@"uiType"];
+    [body setValue:@"APP" forKey:@"uiType"];
 
     SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kHomePageInfoUrl
                                                                requestMethod:YTKRequestMethodPOST
