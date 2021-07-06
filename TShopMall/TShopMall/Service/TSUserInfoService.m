@@ -119,6 +119,9 @@
 - (void)getUserInfoAccountId:(NSString *)accountId
                      success:(void(^_Nullable)(TSUser *user))success
                      failure:(void(^_Nullable)(NSString *errorMsg))failure {
+    if (accountId == nil) {
+        return;
+    }
     TSUserInfoRequest *request = [[TSUserInfoRequest alloc] initWithAccountId:accountId];
     [request startWithCompletionBlockWithSuccess:^(__kindof SSGenaralRequest * _Nonnull request) {
         NSLog(@"获取用户信息 === %@", request.responseModel.originalData);

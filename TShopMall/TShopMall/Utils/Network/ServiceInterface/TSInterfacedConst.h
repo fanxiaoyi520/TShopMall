@@ -54,6 +54,9 @@ UIKIT_EXTERN NSString *const kAccountCheckSalesmanWithMobileUrl;
 UIKIT_EXTERN NSString *const kAccountCheckSalesmanWithTokenUrl;
 ///Token刷新
 UIKIT_EXTERN NSString *const kAccountRefershTokenUrl;
+///获取公钥
+UIKIT_EXTERN NSString *const kAccountPublicKeyUrl;
+
 #pragma mark - 首页
 UIKIT_EXTERN NSString *const kHomePageInfoUrl;
 UIKIT_EXTERN NSString *const kSearchKey;//搜索关键词
@@ -143,3 +146,8 @@ UIKIT_EXTERN NSString * const kMineGetAllCityByProvinceUuid;//根据省份uuid�
 UIKIT_EXTERN NSString * const kMineGetPublicKey;//获取公钥密钥
 UIKIT_EXTERN NSString * const kMineCheckWhetherSetWithdrawalPwd;//校验该用户是否设置过提现密码
 UIKIT_EXTERN NSString * const kMineCheckWithdrawalPwd;//校验提现密码是否正确
+UIKIT_EXTERN NSString * const kMineCheckRealAuth;//查询是否已实名认证
+UIKIT_EXTERN NSString * const kMineRealAuth;//实名认证
+///获取指定类型的授权协议（实名认证协议：2 合伙人协议：3）
+UIKIT_EXTERN NSString * const kShopStatement; 
+

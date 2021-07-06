@@ -96,7 +96,7 @@
     if (_usernameLabel == nil) {
         UILabel *usernameLabel = [[UILabel alloc] init];
         _usernameLabel = usernameLabel;
-        _usernameLabel.text = @"JERRYJUICE";
+        _usernameLabel.text = @"-";
         _usernameLabel.font = KFont(PingFangSCMedium, 16);
         _usernameLabel.textColor = KTextColor;
         [self addSubview: _usernameLabel];
@@ -120,7 +120,7 @@
     if (_rankNumLabel == nil) {
         UILabel *rankNumLabel = [[UILabel alloc] init];
         _rankNumLabel = rankNumLabel;
-        _rankNumLabel.text = @"6";
+        _rankNumLabel.text = @"-";
         _rankNumLabel.font = KRegularFont(12);
         _rankNumLabel.textColor = KHexColor(@"#2D3132");
         [self addSubview: _rankNumLabel];
@@ -144,7 +144,7 @@
     if (_salesNumLabel == nil) {
         UILabel *salesNumLabel = [[UILabel alloc] init];
         _salesNumLabel = salesNumLabel;
-        _salesNumLabel.text = @"￥89000";
+        _salesNumLabel.text = @"-";
         _salesNumLabel.font = KFont(PingFangSCMedium, 12);
         _salesNumLabel.textColor = KHexColor(@"#2D3132");
         [self addSubview: _salesNumLabel];

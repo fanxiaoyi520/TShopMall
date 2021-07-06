@@ -157,6 +157,7 @@
 		C25AD833268B13AC000D2258 /* TSInvoiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C25AD832268B13AC000D2258 /* TSInvoiceModel.m */; };
 		C262E2932692E37D00E65162 /* TSSearchResultRecomendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C262E2922692E37D00E65162 /* TSSearchResultRecomendCell.m */; };
 		C262E2962692EC1200E65162 /* TSRecomendHeaderTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = C262E2952692EC1200E65162 /* TSRecomendHeaderTitleView.m */; };
+		C262E2992693156300E65162 /* TSSearchFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = C262E2982693156300E65162 /* TSSearchFlowLayout.m */; };
 		C2A34C6A267449080095497E /* TSAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2A34C69267449080095497E /* TSAlertView.m */; };
 		C2A34C7726749E3E0095497E /* TSSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2A34C7626749E3D0095497E /* TSSearchController.m */; };
 		C2A34C7A26749FCD0095497E /* TSSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2A34C7926749FCD0095497E /* TSSearchView.m */; };
@@ -386,7 +387,6 @@
 		DFB3FFEF2686E60C00FC8FF9 /* TSURLRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB3FFEE2686E60C00FC8FF9 /* TSURLRouter.m */; };
 		DFB3FFF326899EF300FC8FF9 /* TSTableViewBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB3FFF226899EF300FC8FF9 /* TSTableViewBaseCell.m */; };
 		DFB3FFF62689A7AE00FC8FF9 /* TSRankRecommendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB3FFF52689A7AE00FC8FF9 /* TSRankRecommendCell.m */; };
-		DFB3FFF92689C1AA00FC8FF9 /* TSMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB3FFF82689C1AA00FC8FF9 /* TSMainViewController.m */; };
 		DFB3FFFD268AB6EF00FC8FF9 /* TSJsonCacheData.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB3FFFC268AB6EF00FC8FF9 /* TSJsonCacheData.m */; };
 		E2BE996F8804E0C3E7D5AE61 /* libPods-TShopMall-TShopMallUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD1ABBE857D307088E9BF2DC /* libPods-TShopMall-TShopMallUITests.a */; };
 		F530C6D526802E5D009DC29A /* TSSMSCodeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F530C6CC26802E5D009DC29A /* TSSMSCodeRequest.m */; };
@@ -460,9 +460,9 @@
 		F530CD2B2680B912009DC29A /* TSGoodDetailReusableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CD252680B911009DC29A /* TSGoodDetailReusableHeaderView.m */; };
 		F530CD2D2680B912009DC29A /* TSProductCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CD292680B912009DC29A /* TSProductCollectionViewCell.m */; };
 		F530CD302680BB57009DC29A /* TSProductFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CD2F2680BB57009DC29A /* TSProductFooterView.m */; };
-		F530CD362680CCC5009DC29A /* launch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F530CD332680CCC5009DC29A /* launch@2x.png */; };
-		F530CD372680CCC5009DC29A /* launch@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F530CD342680CCC5009DC29A /* launch@3x.png */; };
-		F530CD382680CCC5009DC29A /* launch.png in Resources */ = {isa = PBXBuildFile; fileRef = F530CD352680CCC5009DC29A /* launch.png */; };
+		F530CD362680CCC5009DC29A /* shopMall_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F530CD332680CCC5009DC29A /* shopMall_bg@2x.png */; };
+		F530CD372680CCC5009DC29A /* shopMall_bg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F530CD342680CCC5009DC29A /* shopMall_bg@3x.png */; };
+		F530CD382680CCC5009DC29A /* shopMall_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = F530CD352680CCC5009DC29A /* shopMall_bg.png */; };
 		F530CD3F2680CD6A009DC29A /* tabbar_rank.json in Resources */ = {isa = PBXBuildFile; fileRef = F530CD3A2680CD6A009DC29A /* tabbar_rank.json */; };
 		F530CD402680CD6A009DC29A /* tabbar_home.json in Resources */ = {isa = PBXBuildFile; fileRef = F530CD3B2680CD6A009DC29A /* tabbar_home.json */; };
 		F530CD412680CD6A009DC29A /* tabbar_category.json in Resources */ = {isa = PBXBuildFile; fileRef = F530CD3C2680CD6A009DC29A /* tabbar_category.json */; };
@@ -471,10 +471,10 @@
 		F530CD462680CDF5009DC29A /* TSGoodDetailMaterialView.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CD452680CDF5009DC29A /* TSGoodDetailMaterialView.m */; };
 		F530CD4A2681750A009DC29A /* TSTopFunctionView.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CD492681750A009DC29A /* TSTopFunctionView.m */; };
 		F530CD4E26819012009DC29A /* TSChangePriceView.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CD4D26819012009DC29A /* TSChangePriceView.m */; };
-		F530CD5826819449009DC29A /* mall_launch_bottom@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F530CD4F26819448009DC29A /* mall_launch_bottom@3x.png */; };
+		F530CD5826819449009DC29A /* shopMall_bottom@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F530CD4F26819448009DC29A /* shopMall_bottom@3x.png */; };
 		F530CD5926819449009DC29A /* mall_logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F530CD5026819448009DC29A /* mall_logo@3x.png */; };
-		F530CD5A26819449009DC29A /* mall_launch_bottom.png in Resources */ = {isa = PBXBuildFile; fileRef = F530CD5126819448009DC29A /* mall_launch_bottom.png */; };
-		F530CD5B26819449009DC29A /* mall_launch_bottom@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F530CD5226819448009DC29A /* mall_launch_bottom@2x.png */; };
+		F530CD5A26819449009DC29A /* shopMall_bottom.png in Resources */ = {isa = PBXBuildFile; fileRef = F530CD5126819448009DC29A /* shopMall_bottom.png */; };
+		F530CD5B26819449009DC29A /* shopMall_bottom@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F530CD5226819448009DC29A /* shopMall_bottom@2x.png */; };
 		F530CD5C26819449009DC29A /* mall_goods.png in Resources */ = {isa = PBXBuildFile; fileRef = F530CD5326819448009DC29A /* mall_goods.png */; };
 		F530CD5D26819449009DC29A /* mall_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = F530CD5426819448009DC29A /* mall_logo.png */; };
 		F530CD5E26819449009DC29A /* mall_goods@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F530CD5526819448009DC29A /* mall_goods@3x.png */; };
@@ -930,6 +930,8 @@
 		C262E2922692E37D00E65162 /* TSSearchResultRecomendCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSSearchResultRecomendCell.m; sourceTree = "<group>"; };
 		C262E2942692EC1200E65162 /* TSRecomendHeaderTitleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSRecomendHeaderTitleView.h; sourceTree = "<group>"; };
 		C262E2952692EC1200E65162 /* TSRecomendHeaderTitleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSRecomendHeaderTitleView.m; sourceTree = "<group>"; };
+		C262E2972693156300E65162 /* TSSearchFlowLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSSearchFlowLayout.h; sourceTree = "<group>"; };
+		C262E2982693156300E65162 /* TSSearchFlowLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSSearchFlowLayout.m; sourceTree = "<group>"; };
 		C2A34C68267449060095497E /* TSAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSAlertView.h; sourceTree = "<group>"; };
 		C2A34C69267449080095497E /* TSAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSAlertView.m; sourceTree = "<group>"; };
 		C2A34C7526749E3D0095497E /* TSSearchController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSSearchController.h; sourceTree = "<group>"; };
@@ -1360,8 +1362,6 @@
 		DFB3FFF226899EF300FC8FF9 /* TSTableViewBaseCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSTableViewBaseCell.m; sourceTree = "<group>"; };
 		DFB3FFF42689A7AE00FC8FF9 /* TSRankRecommendCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSRankRecommendCell.h; sourceTree = "<group>"; };
 		DFB3FFF52689A7AE00FC8FF9 /* TSRankRecommendCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSRankRecommendCell.m; sourceTree = "<group>"; };
-		DFB3FFF72689C1AA00FC8FF9 /* TSMainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSMainViewController.h; sourceTree = "<group>"; };
-		DFB3FFF82689C1AA00FC8FF9 /* TSMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSMainViewController.m; sourceTree = "<group>"; };
 		DFB3FFFB268AB6EF00FC8FF9 /* TSJsonCacheData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSJsonCacheData.h; sourceTree = "<group>"; };
 		DFB3FFFC268AB6EF00FC8FF9 /* TSJsonCacheData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSJsonCacheData.m; sourceTree = "<group>"; };
 		DFB3FFFE268AEE7700FC8FF9 /* TSOneRowsGoodsCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSOneRowsGoodsCollectionViewCell.h; sourceTree = "<group>"; };
@@ -1504,9 +1504,9 @@
 		F530CD292680B912009DC29A /* TSProductCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSProductCollectionViewCell.m; sourceTree = "<group>"; };
 		F530CD2E2680BB57009DC29A /* TSProductFooterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSProductFooterView.h; sourceTree = "<group>"; };
 		F530CD2F2680BB57009DC29A /* TSProductFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSProductFooterView.m; sourceTree = "<group>"; };
-		F530CD332680CCC5009DC29A /* launch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "launch@2x.png"; sourceTree = "<group>"; };
-		F530CD342680CCC5009DC29A /* launch@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "launch@3x.png"; sourceTree = "<group>"; };
-		F530CD352680CCC5009DC29A /* launch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch.png; sourceTree = "<group>"; };
+		F530CD332680CCC5009DC29A /* shopMall_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shopMall_bg@2x.png"; sourceTree = "<group>"; };
+		F530CD342680CCC5009DC29A /* shopMall_bg@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shopMall_bg@3x.png"; sourceTree = "<group>"; };
+		F530CD352680CCC5009DC29A /* shopMall_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shopMall_bg.png; sourceTree = "<group>"; };
 		F530CD3A2680CD6A009DC29A /* tabbar_rank.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tabbar_rank.json; sourceTree = "<group>"; };
 		F530CD3B2680CD6A009DC29A /* tabbar_home.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tabbar_home.json; sourceTree = "<group>"; };
 		F530CD3C2680CD6A009DC29A /* tabbar_category.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tabbar_category.json; sourceTree = "<group>"; };
@@ -1518,10 +1518,10 @@
 		F530CD492681750A009DC29A /* TSTopFunctionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSTopFunctionView.m; sourceTree = "<group>"; };
 		F530CD4C26819012009DC29A /* TSChangePriceView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSChangePriceView.h; sourceTree = "<group>"; };
 		F530CD4D26819012009DC29A /* TSChangePriceView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSChangePriceView.m; sourceTree = "<group>"; };
-		F530CD4F26819448009DC29A /* mall_launch_bottom@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mall_launch_bottom@3x.png"; sourceTree = "<group>"; };
+		F530CD4F26819448009DC29A /* shopMall_bottom@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shopMall_bottom@3x.png"; sourceTree = "<group>"; };
 		F530CD5026819448009DC29A /* mall_logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mall_logo@3x.png"; sourceTree = "<group>"; };
-		F530CD5126819448009DC29A /* mall_launch_bottom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mall_launch_bottom.png; sourceTree = "<group>"; };
-		F530CD5226819448009DC29A /* mall_launch_bottom@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mall_launch_bottom@2x.png"; sourceTree = "<group>"; };
+		F530CD5126819448009DC29A /* shopMall_bottom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shopMall_bottom.png; sourceTree = "<group>"; };
+		F530CD5226819448009DC29A /* shopMall_bottom@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shopMall_bottom@2x.png"; sourceTree = "<group>"; };
 		F530CD5326819448009DC29A /* mall_goods.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mall_goods.png; sourceTree = "<group>"; };
 		F530CD5426819448009DC29A /* mall_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mall_logo.png; sourceTree = "<group>"; };
 		F530CD5526819448009DC29A /* mall_goods@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mall_goods@3x.png"; sourceTree = "<group>"; };
@@ -2234,6 +2234,8 @@
 		C22EE25E268067DE00E59C86 /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				C262E2972693156300E65162 /* TSSearchFlowLayout.h */,
+				C262E2982693156300E65162 /* TSSearchFlowLayout.m */,
 				C2A34C7826749FCD0095497E /* TSSearchView.h */,
 				C2A34C7926749FCD0095497E /* TSSearchView.m */,
 				C2A34C7B2674A56C0095497E /* TSSearchTextView.h */,
@@ -2839,6 +2841,34 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		DF25A6EB2692F5B000AAEA3B /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				DC06D6DD268761E20013633F /* TSBestSellingRecommendService.h */,
+				DC06D6DE268761E20013633F /* TSBestSellingRecommendService.m */,
+				043C2350268B248300460FDB /* TSUserInfoService.h */,
+				043C2351268B248300460FDB /* TSUserInfoService.m */,
+				04651736268C969C000829C2 /* TSUploadImageService.h */,
+				04651737268C969C000829C2 /* TSUploadImageService.m */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		DF25A6EC2692FFE500AAEA3B /* User */ = {
+			isa = PBXGroup;
+			children = (
+				DCA035D52680765B003DE5F7 /* TSUserLoginManager.h */,
+				DCA035D62680765B003DE5F7 /* TSUserLoginManager.m */,
+				F55D2C9B26745E63006BACCF /* TSUserInfoManager.h */,
+				F55D2C9C26745E64006BACCF /* TSUserInfoManager.m */,
+				F55D2C9E26745E7A006BACCF /* TSLastUserInfoManager.h */,
+				F55D2C9F26745E7A006BACCF /* TSLastUserInfoManager.m */,
+				04651690268C0290000829C2 /* TSUser.h */,
+				04651691268C0290000829C2 /* TSUser.m */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
 		DFB3FFC026844A0A00FC8FF9 /* WechatShare */ = {
 			isa = PBXGroup;
 			children = (
@@ -3271,15 +3301,15 @@
 		F530CD322680CCC5009DC29A /* Lanuch */ = {
 			isa = PBXGroup;
 			children = (
-				F530CD332680CCC5009DC29A /* launch@2x.png */,
-				F530CD342680CCC5009DC29A /* launch@3x.png */,
-				F530CD352680CCC5009DC29A /* launch.png */,
+				F530CD332680CCC5009DC29A /* shopMall_bg@2x.png */,
+				F530CD342680CCC5009DC29A /* shopMall_bg@3x.png */,
+				F530CD352680CCC5009DC29A /* shopMall_bg.png */,
 				F530CD5326819448009DC29A /* mall_goods.png */,
 				F530CD5626819449009DC29A /* mall_goods@2x.png */,
 				F530CD5526819448009DC29A /* mall_goods@3x.png */,
-				F530CD5126819448009DC29A /* mall_launch_bottom.png */,
-				F530CD5226819448009DC29A /* mall_launch_bottom@2x.png */,
-				F530CD4F26819448009DC29A /* mall_launch_bottom@3x.png */,
+				F530CD5126819448009DC29A /* shopMall_bottom.png */,
+				F530CD5226819448009DC29A /* shopMall_bottom@2x.png */,
+				F530CD4F26819448009DC29A /* shopMall_bottom@3x.png */,
 				F530CD5426819448009DC29A /* mall_logo.png */,
 				F530CD5726819449009DC29A /* mall_logo@2x.png */,
 				F530CD5026819448009DC29A /* mall_logo@3x.png */,
@@ -3372,6 +3402,7 @@
 				DFB3FFBF2684236F00FC8FF9 /* TShopMall.entitlements */,
 				F54973682668A2C700181E3F /* AppDelegate */,
 				F55D2C9726745C9B006BACCF /* Manager */,
+				DF25A6EB2692F5B000AAEA3B /* Service */,
 				F54973782668A94600181E3F /* Base */,
 				F54973792668A94600181E3F /* Features */,
 				F549739F2668AD9B00181E3F /* Expand */,
@@ -3481,8 +3512,6 @@
 				F54973D12668CF3300181E3F /* AppDelegate+RootController.m */,
 				F56D4B64266E053800C1AD9E /* AppDelegate+Initialize.h */,
 				F56D4B65266E053800C1AD9E /* AppDelegate+Initialize.m */,
-				DFB3FFF72689C1AA00FC8FF9 /* TSMainViewController.h */,
-				DFB3FFF82689C1AA00FC8FF9 /* TSMainViewController.m */,
 			);
 			path = AppDelegate;
 			sourceTree = "<group>";
@@ -3911,29 +3940,16 @@
 		F55D2C9726745C9B006BACCF /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				DF25A6EC2692FFE500AAEA3B /* User */,
 				DFB3FFC026844A0A00FC8FF9 /* WechatShare */,
 				F55D2C9826745E2E006BACCF /* TSGlobalManager.h */,
 				F55D2C9926745E2E006BACCF /* TSGlobalManager.m */,
-				DCA035D52680765B003DE5F7 /* TSUserLoginManager.h */,
-				DCA035D62680765B003DE5F7 /* TSUserLoginManager.m */,
-				F55D2C9B26745E63006BACCF /* TSUserInfoManager.h */,
-				F55D2C9C26745E64006BACCF /* TSUserInfoManager.m */,
-				F55D2C9E26745E7A006BACCF /* TSLastUserInfoManager.h */,
-				F55D2C9F26745E7A006BACCF /* TSLastUserInfoManager.m */,
 				DCA035F6268355D2003DE5F7 /* TSServicesManager.h */,
 				DCA035F7268355D2003DE5F7 /* TSServicesManager.m */,
-				DC06D6DD268761E20013633F /* TSBestSellingRecommendService.h */,
-				DC06D6DE268761E20013633F /* TSBestSellingRecommendService.m */,
-				043C2350268B248300460FDB /* TSUserInfoService.h */,
-				043C2351268B248300460FDB /* TSUserInfoService.m */,
-				04651736268C969C000829C2 /* TSUploadImageService.h */,
-				04651737268C969C000829C2 /* TSUploadImageService.m */,
 				DFB3FFDD268571B100FC8FF9 /* AuthAppleIDManager.h */,
 				DFB3FFDE268571B100FC8FF9 /* AuthAppleIDManager.m */,
 				DFB3FFED2686E60C00FC8FF9 /* TSURLRouter.h */,
 				DFB3FFEE2686E60C00FC8FF9 /* TSURLRouter.m */,
-				04651690268C0290000829C2 /* TSUser.h */,
-				04651691268C0290000829C2 /* TSUser.m */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -4408,16 +4424,16 @@
 				F530CC4726803B1C009DC29A /* PulldownRefreshStyleWhite.json in Resources */,
 				F530CCF226804167009DC29A /* TXKJSBridge.js in Resources */,
 				CE5C8C5C2692F0C70063B470 /* Bank.plist in Resources */,
-				F530CD382680CCC5009DC29A /* launch.png in Resources */,
+				F530CD382680CCC5009DC29A /* shopMall_bg.png in Resources */,
 				F530CC6A26803E43009DC29A /* ProgressAnimation.json in Resources */,
-				F530CD5A26819449009DC29A /* mall_launch_bottom.png in Resources */,
+				F530CD5A26819449009DC29A /* shopMall_bottom.png in Resources */,
 				F530CC6826803E43009DC29A /* Toast_Success.png in Resources */,
 				046516F8268C57EF000829C2 /* SelectorDialogDot1.png in Resources */,
-				F530CD372680CCC5009DC29A /* launch@3x.png in Resources */,
+				F530CD372680CCC5009DC29A /* shopMall_bg@3x.png in Resources */,
 				F54973752668A31000181E3F /* Main.storyboard in Resources */,
 				F530CD5D26819449009DC29A /* mall_logo.png in Resources */,
 				F530CD5C26819449009DC29A /* mall_goods.png in Resources */,
-				F530CD362680CCC5009DC29A /* launch@2x.png in Resources */,
+				F530CD362680CCC5009DC29A /* shopMall_bg@2x.png in Resources */,
 				F54973732668A31000181E3F /* Assets.xcassets in Resources */,
 				F530CD6026819449009DC29A /* mall_logo@2x.png in Resources */,
 				F54973742668A31000181E3F /* LaunchScreen.storyboard in Resources */,
@@ -4426,11 +4442,11 @@
 				F530CD422680CD6A009DC29A /* tabbar_mine.json in Resources */,
 				F530CD432680CD6A009DC29A /* tabbar_cart.json in Resources */,
 				F530CD3F2680CD6A009DC29A /* tabbar_rank.json in Resources */,
-				F530CD5826819449009DC29A /* mall_launch_bottom@3x.png in Resources */,
+				F530CD5826819449009DC29A /* shopMall_bottom@3x.png in Resources */,
 				F530CD5F26819449009DC29A /* mall_goods@2x.png in Resources */,
 				F530CD5E26819449009DC29A /* mall_goods@3x.png in Resources */,
 				F530CC6926803E43009DC29A /* Toast_Failure.png in Resources */,
-				F530CD5B26819449009DC29A /* mall_launch_bottom@2x.png in Resources */,
+				F530CD5B26819449009DC29A /* shopMall_bottom@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4946,7 +4962,6 @@
 				DC3440DF2672FC3900F5B0DA /* TSHomePageBaseModel.m in Sources */,
 				C2EF88B82670997100E7374A /* TSCartModel.m in Sources */,
 				CE4F6BE82687908200812275 /* TSOfficialServicesCell.m in Sources */,
-				DFB3FFF92689C1AA00FC8FF9 /* TSMainViewController.m in Sources */,
 				DFB3FFD92684837300FC8FF9 /* TSPaySuccessCell.m in Sources */,
 				C3A6C471267A1BEA00FC71D6 /* TSBindThirdViewController.m in Sources */,
 				F54973662668A22100181E3F /* YTKBaseRequest+AnimatingAccessory.m in Sources */,
@@ -4997,6 +5012,7 @@
 				C262E2962692EC1200E65162 /* TSRecomendHeaderTitleView.m in Sources */,
 				C2C7654B267A097D004757B9 /* TSMakeOrderOperationCell.m in Sources */,
 				DFB3FFEC2686BDEC00FC8FF9 /* TSCustomPageControl.m in Sources */,
+				C262E2992693156300E65162 /* TSSearchFlowLayout.m in Sources */,
 				F530CD4A2681750A009DC29A /* TSTopFunctionView.m in Sources */,
 				F530C6D826802E5D009DC29A /* TSLoginSMSModel.m in Sources */,
 				F56D4B66266E053800C1AD9E /* AppDelegate+Initialize.m in Sources */,

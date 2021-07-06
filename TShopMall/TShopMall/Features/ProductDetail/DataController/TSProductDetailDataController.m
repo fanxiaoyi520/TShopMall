@@ -8,6 +8,7 @@
 #import "TSProductDetailDataController.h"
 #import "NSString+Plugin.h"
 #import "TSMaterialImageCell.h"
+#import <Photos/Photos.h>
 
 @interface TSProductDetailDataController()<YTKChainRequestDelegate>
 
@@ -25,6 +26,35 @@
         self.locationModel = [TSLocationInfoModel locationInfoModel];
     }
     return self;
+}
+
+- (void)isCanVisitPhotoLibrary:(void(^)(BOOL hasPersion))result {
+    PHAuthorizationStatus status = [PHPhotoLibrary authorizationStatus];
+    if (status == PHAuthorizationStatusAuthorized) {
+        result(YES);
+        return;
+    }
+    if (status == PHAuthorizationStatusRestricted || status == PHAuthorizationStatusDenied) {
+        [Popover popToastOnWindowWithText:@"请打开 设置-隐私-照片 来进行设置"];
+        result(NO);
+        return ;
+    }
+    
+    if (status == PHAuthorizationStatusNotDetermined) {
+        
+        [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (status != PHAuthorizationStatusAuthorized) {
+                    [Popover popToastOnWindowWithText:@"请打开 设置-隐私-照片 来进行设置"];
+                      result(NO);
+                      return ;
+                  }
+                  result(YES);
+            });
+  
+        }];
+    }
+    
 }
 
 #pragma mark - 查询商品详情数据
@@ -166,16 +196,17 @@
         {   //商品文案
             
             NSDictionary *productInfo = productModel[@"productInfo"];
-            
-            TSGoodDetailSectionModel *section = self.sections[4];
-            TSGoodDetailItemCopyModel *item = (TSGoodDetailItemCopyModel *)[section.items firstObject];
-            
             NSString *write = productInfo[@"productShareContent"];
-            
-            if ([write isKindOfClass:[NSNull class]]) {
+            if ([write isKindOfClass:[NSNull class]] || write.length <= 0) {
                 write = @"";
+                self.hasCopyWriter = NO;
+                [self.sections removeObjectAtIndex:4];
+            }else{
+                self.hasCopyWriter = YES;
+                TSGoodDetailSectionModel *section = self.sections[4];
+                TSGoodDetailItemCopyModel *item = (TSGoodDetailItemCopyModel *)[section.items firstObject];
+                item.writeStr = write;
             }
-            item.writeStr = write;
         }
         
         {   //已选等
@@ -187,7 +218,12 @@
             NSArray *selectNameArr = front[@"selectName"];
             NSString *selected = [selectNameArr componentsJoinedByString:@","];
 
-            TSGoodDetailSectionModel *section = self.sections[5];
+            TSGoodDetailSectionModel *section;
+            if (self.hasCopyWriter) {
+                section = self.sections[5];
+            } else {
+                section = self.sections[4];
+            }
             TSGoodDetailItemPurchaseModel *item = (TSGoodDetailItemPurchaseModel *)[section.items firstObject];
             item.selectedStr = selected;
             item.localaddress = self.locationModel.localaddress;
@@ -298,9 +334,14 @@
         
         if (request.responseModel.isSucceed) {
 
-            TSGoodDetailSectionModel *section = self.sections[5];
+            TSGoodDetailSectionModel *section;
+            if (self.hasCopyWriter) {
+                section = self.sections[5];
+            } else {
+                section = self.sections[4];
+            }
+            
             TSGoodDetailItemPurchaseModel *item = (TSGoodDetailItemPurchaseModel *)[section.items firstObject];
-
             item.freight = [NSString stringWithFormat:@"%@",request.responseJSONObject[@"data"]];
 
             if (complete) {
@@ -354,11 +395,16 @@
         
         if (request.responseModel.isSucceed) {
 
-            TSGoodDetailSectionModel *section = self.sections[5];
+            TSGoodDetailSectionModel *section;
+            if (self.hasCopyWriter) {
+                section = self.sections[5];
+            } else {
+                section = self.sections[4];
+            }
             TSGoodDetailItemPurchaseModel *item = (TSGoodDetailItemPurchaseModel *)[section.items firstObject];
             NSDictionary *data = request.responseJSONObject[@"data"];
-
-            item.canBuy = [data[@"canBuy"] boolValue];
+            BOOL canBuy = [data[@"canBuy"] boolValue];
+            item.canBuy = canBuy;
             item.hasProduct = [data[@"hasProduct"] boolValue];
             item.totalNum = [data[@"totalNum"] integerValue];
 
@@ -445,7 +491,7 @@
         if (request.responseModel.isSucceed) {
             complete(YES);
         }else{
-            [Popover popToastOnWindowWithText:request.responseJSONObject[@"msg"]];
+            [Popover popToastOnWindowWithText:request.responseModel.responseMsg];
         }
         
         } failure:^(__kindof YTKBaseRequest * _Nonnull request) {

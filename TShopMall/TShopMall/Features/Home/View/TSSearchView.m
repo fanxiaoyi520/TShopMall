@@ -74,12 +74,12 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
     TSSearchSection *searchSection = self.sections[section];
-    return CGSizeMake(kScreenWidth, searchSection.headerHeight);
+    return CGSizeMake(kScreenWidth - KRateW(32.0), searchSection.headerHeight);
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section{
     TSSearchSection *searchSection = self.sections[section];
-    return CGSizeMake(kScreenWidth, searchSection.footerHeight);
+    return CGSizeMake(kScreenWidth - KRateW(32.0), searchSection.footerHeight);
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -94,6 +94,11 @@
     if ([cell.obj isKindOfClass:[TSRecomendModel class]]) {
         TSRecomendGoods *obj = cell.obj;
         [self.controller performSelector:@selector(recomentGoodsSelected:) withObject:obj.goodsUuid];
+    }
+    if ([cell.obj isKindOfClass:[TSRecomendGoods class]]) {
+        TSRecomendGoods *obj = cell.obj;
+        NSString *uri = [[TSServicesManager sharedInstance].uriHandler configUriWithTypeValue:@"Goods" objectValue:obj.uuid];
+        [[TSServicesManager sharedInstance].uriHandler openURI:uri];
     }
 }
 
