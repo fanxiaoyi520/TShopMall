@@ -25,11 +25,17 @@
 }
 
 - (void)itemTap:(TSSearchResultFittleButton *)sender{
+    if (sender.selected == YES) {
+        sender.isUp = !sender.isUp;
+        [self.delegate operationType:sender.tag sortType:sender.isUp == YES? 2:1];
+        return;
+    }
     for (UIView *view in self.subviews) {
         if ([view isKindOfClass:[TSSearchResultFittleButton class]]) {
             TSSearchResultFittleButton *btn = (TSSearchResultFittleButton *)view;
             if (btn.tag == sender.tag) {
                 btn.selected = YES;
+                btn.isUp = NO;
             } else {
                 btn.selected = NO;
             }
@@ -37,7 +43,7 @@
     }
     
     if (sender.selected == YES) {
-        sender.isUp = !sender.isUp;
+//        sender.isUp = !sender.isUp;
         [self.delegate operationType:sender.tag sortType:sender.isUp == YES? 2:1];
     }
 }
