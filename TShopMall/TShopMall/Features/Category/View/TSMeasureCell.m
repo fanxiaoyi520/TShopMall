@@ -39,23 +39,25 @@
         [self.collectionView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.height.equalTo(@(self.contentView.width - 32));
         }];
-        [self showEmptyView:self.collectionView];
-       
     }else{
         [self.collectionView reloadData];
     }
-    
+    [self showEmptyView:self.collectionView];
     [self tableviewReloadCell];
 
 }
 
 - (void)showEmptyView:(TSGridButtonCollectionView *)view{
 
-    [view addSubview:self.emptyView];
-    [self.emptyView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.equalTo(view);
-    }];
-    self.emptyView.hidden = view.items.count;
+    if (!view.items.count) {
+        [view addSubview:self.emptyView];
+        [self.emptyView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.edges.equalTo(view);
+        }];
+    }
+    else{
+        [self.emptyView removeFromSuperview];
+    }
 }
 
 #pragma mark - Getter
