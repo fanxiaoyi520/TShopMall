@@ -26,7 +26,7 @@
             NSString *title = titles[i];
             TSPersonalSectionItemModel *item = [[TSPersonalSectionItemModel alloc] init];
             item.title = title;
-            item.cellHeight = 56.5;
+            item.cellHeight = 57;
             item.identify = @"TSPersonalCommonCell";
             if (i == 0) {///头像
                 NSString *avatar = user.avatar;
@@ -42,13 +42,14 @@
                 item.sex = none;
                 item.head = nil;
             } else if(i == 3) {///性别
-                item.sex = user.sex;
+                item.sex = user.sex.length == 0 ? unknow : [user.sex intValue];
                 item.head = nil;
                 item.detail = nil;
             } else if(i == 4) {///出生年月
                 item.detail = user.birthday;
                 item.head = nil;
                 item.sex = none;
+                item.cellHeight = 57.33;
             }
             [items addObject:item];
         }

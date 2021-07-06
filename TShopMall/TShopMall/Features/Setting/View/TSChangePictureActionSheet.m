@@ -340,7 +340,7 @@
         return;
     }
     TSChangePictureActionSheetSectionModel *model = self.dataController.sections[indexPath.section];
-    TSChangePictureActionSheetItemModel *item = model.items[indexPath.row];
+    TSChangePictureActionSheetItemModel *item = model.items[indexPath.item];
     if (self.actionHandler) {
         self.actionHandler(indexPath.item, item.title);
         [self dismiss];

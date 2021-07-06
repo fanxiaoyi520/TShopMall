@@ -8,12 +8,13 @@
 #import "TSWithdrawalPswSettingCell.h"
 #import "TSTools.h"
 #import <Toast.h>
+#import "TSWithdrawalPswSetSectionModel.h"
 
 typedef NS_ENUM(NSUInteger, WithdrawalPswSetClickType){
     WithdrawalPswSetClickTypeCommit = 1,///提交按钮
 };
 
-@interface TSWithdrawalPswSettingCell ()
+@interface TSWithdrawalPswSettingCell ()<UITextFieldDelegate>
 /** 密码文字显示 */
 @property(nonatomic, weak) UILabel *pswLabel;
 /** 分割线 */
@@ -28,24 +29,47 @@ typedef NS_ENUM(NSUInteger, WithdrawalPswSetClickType){
 @property(nonatomic, weak) UIButton *saveButton;
 /** 提示语 */
 @property(nonatomic, weak) UILabel *tipsLabel;
+/** 标题视图  */
+@property(nonatomic, weak) UIView *topTitleView;
+///提示语的标题
+@property (nonatomic, weak) UILabel *tipTilteLabel;
+///提示语
+@property (nonatomic, weak) UILabel *tipsSubtitleLabel;
 
 @end
 
 @implementation TSWithdrawalPswSettingCell
 
+@synthesize delegate = _delegate;
+
 - (void)fillCustomContentView {
     [super fillCustomContentView];
     self.contentView.backgroundColor = KWhiteColor;
+    self.tipTilteLabel.text = [NSString stringWithFormat:@"请为账号%@", [TSTools getCipherPhone:[TSUserInfoManager userInfo].user.phone]];
     ///添加约束
     [self addConstraints];
 }
 
 - (void)addConstraints {
+    [self.topTitleView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.contentView.mas_left).offset(0);
+        make.top.equalTo(self.contentView.mas_top).offset(0);
+        make.right.equalTo(self.contentView.mas_right).offset(0);
+        make.height.mas_equalTo(127);
+    }];
+    [self.tipTilteLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.topTitleView.mas_centerX).offset(0);
+        make.top.equalTo(self.topTitleView.mas_top).offset(48);
+    }];
+    [self.tipsSubtitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.topTitleView.mas_centerX).offset(0);
+        make.top.equalTo(self.tipTilteLabel.mas_bottom).offset(8);
+    }];
     [self.splitTopView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contentView.mas_left).with.offset(0);
         make.right.equalTo(self.contentView.mas_right).with.offset(0);
-        make.top.equalTo(self.contentView.mas_top).with.offset(10);
-        make.height.mas_equalTo(0.5);
+        make.top.equalTo(self.topTitleView.mas_bottom).with.offset(0);
+        make.height.mas_equalTo(0.33);
     }];
     [self.pswTextField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contentView.mas_left).with.offset(80);
@@ -66,7 +90,7 @@ typedef NS_ENUM(NSUInteger, WithdrawalPswSetClickType){
         make.left.equalTo(self.contentView.mas_left).with.offset(0);
         make.right.equalTo(self.contentView.mas_right).with.offset(0);
         make.top.equalTo(self.pswTextField.mas_bottom).with.offset(0);
-        make.height.mas_equalTo(0.5);
+        make.height.mas_equalTo(0.33);
     }];
     [self.tipsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contentView.mas_left).with.offset(25);
@@ -98,6 +122,7 @@ typedef NS_ENUM(NSUInteger, WithdrawalPswSetClickType){
         UILabel *tipsLabel = [[UILabel alloc] init];
         _tipsLabel = tipsLabel;
         _tipsLabel.text = @"*密码必须是6位数字组合";
+        _tipsLabel.numberOfLines = 0;
         _tipsLabel.textColor = KHexAlphaColor(@"#2D3132", 0.4);
         _tipsLabel.font = KRegularFont(12);
         [self.contentView addSubview:_tipsLabel];
@@ -109,7 +134,7 @@ typedef NS_ENUM(NSUInteger, WithdrawalPswSetClickType){
     if (_splitTopView == nil) {
         UIView *splitTopView = [[UIView alloc] init];
         _splitTopView = splitTopView;
-        _splitTopView.backgroundColor = KHexColor(@"#E6E6E6");
+        _splitTopView.backgroundColor = KHexColor(@"#F4F4F4");
         [self.contentView addSubview:_splitTopView];
     }
     return _splitTopView;
@@ -119,10 +144,19 @@ typedef NS_ENUM(NSUInteger, WithdrawalPswSetClickType){
     if (_splitBottomView == nil) {
         UIView *splitBottomView = [[UIView alloc] init];
         _splitBottomView = splitBottomView;
-        _splitBottomView.backgroundColor = KHexColor(@"#E6E6E6");
+        _splitBottomView.backgroundColor = KHexColor(@"#F4F4F4");
         [self.contentView addSubview:_splitBottomView];
     }
     return _splitBottomView;
+}
+
+- (UIView *)topTitleView {
+    if (_topTitleView == nil) {
+        UIView *topTitleView = [[UIView alloc] init];
+        _topTitleView = topTitleView;
+        [self.contentView addSubview:_topTitleView];
+    }
+    return _topTitleView;
 }
 
 - (UIButton *)showPswButton {
@@ -147,6 +181,7 @@ typedef NS_ENUM(NSUInteger, WithdrawalPswSetClickType){
         _pswTextField.secureTextEntry = YES;
         _pswTextField.textColor = KHexColor(@"#2D3132");
         _pswTextField.font = KRegularFont(16);
+        _pswTextField.delegate = self;
         _pswTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"请输入密码" attributes:@{NSForegroundColorAttributeName : KHexAlphaColor(@"#2D3132", 0.2)}];
         [_pswTextField addTarget:self
                            action:@selector(textFieldDidChangeValue:)
@@ -170,6 +205,29 @@ typedef NS_ENUM(NSUInteger, WithdrawalPswSetClickType){
         [self.contentView addSubview:_saveButton];
     }
     return _saveButton;
+}
+
+- (UILabel *)tipTilteLabel {
+    if (_tipTilteLabel == nil) {
+        UILabel *tipTilteLabel = [[UILabel alloc] init];
+        _tipTilteLabel = tipTilteLabel;
+        _tipTilteLabel.textColor = KHexAlphaColor(@"#2D3132", 0.6);;
+        _tipTilteLabel.font = KRegularFont(14);
+        [self.topTitleView addSubview: _tipTilteLabel];
+    }
+    return _tipTilteLabel;
+}
+
+- (UILabel *)tipsSubtitleLabel {
+    if (_tipsSubtitleLabel == nil) {
+        UILabel *tipsSubtitleLabel = [[UILabel alloc] init];
+        _tipsSubtitleLabel = tipsSubtitleLabel;
+        _tipsSubtitleLabel.text = @"设置新的提现密码";
+        _tipsSubtitleLabel.font = KFont(PingFangSCMedium, 16);
+        _tipsSubtitleLabel.textColor = KTextColor;
+        [self.topTitleView addSubview: _tipsSubtitleLabel];
+    }
+    return _tipsSubtitleLabel;
 }
 
 #pragma mark - Actions
@@ -207,6 +265,34 @@ typedef NS_ENUM(NSUInteger, WithdrawalPswSetClickType){
     if (self.delegate && [self.delegate respondsToSelector:@selector(universalCollectionViewCellClick:params:)]) {
         [self.delegate universalCollectionViewCellClick:self.indexPath params:params];
     }
+}
+
+- (void)setDelegate:(id<UniversalCollectionViewCellDataDelegate>)delegate {
+    _delegate = delegate;
+    TSWithdrawalPswSetSectionItemModel *item = [delegate universalCollectionViewCellModel:self.indexPath];
+    if (item.hasSet) {
+        self.tipsLabel.text = @"*密码必须是6位数字组合\n*不可与旧密码重复";
+    } else {
+        self.topTitleView.hidden = YES;
+        [self.topTitleView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(10);
+        }];
+    }
+}
+
+#pragma mark - UITextFieldDelegate
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    if([string isEqualToString:@"\n"]) {
+        //按回车关闭键盘
+        [textField resignFirstResponder];
+        return NO;
+    } else if(string.length == 0) {
+        //判断是不是删除键
+        return YES;
+    } else if(textField.text.length >= 6) {
+        return NO;
+    }
+    return YES;
 }
 
 @end

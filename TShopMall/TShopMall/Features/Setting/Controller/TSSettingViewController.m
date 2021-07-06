@@ -87,31 +87,11 @@
 
 #pragma mark - Actions
 - (void)exitAlert {
-//    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:@"退出后不会删除任何历史资料,\n下次登录依然可以使用本账号" preferredStyle:UIAlertControllerStyleAlert];
-//    alertController.messageColor = KHexColor(@"#333333");
-//    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-//
-//    }];
-//    cancelAction.textColor = KHexColor(@"#333333");
-//    UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"退出" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-//
-//    }];
-//    confirmAction.textColor = KHexColor(@"#333333");
-//    [alertController addAction:cancelAction];
-//    [alertController addAction:confirmAction];
-//    [self presentViewController: alertController animated:YES completion: ^{
-//
-//    }];
     TSAlertView.new.alertInfo(nil, @"退出后不会删除任何历史资料,\n下次登录依然可以使用本账号").confirm(@"退出", ^{
         NSLog(@"退出=========");
         [[TSUserLoginManager shareInstance] logout];
 
     }).cancel(@"取消", ^{}).show();
-//    TSAlertView.new.alertInfo(@"下线通知", @"你的账号于00:00在另一台手机设备登录。请确认是否为本人操作，若非本人操作，建议重新登录App，进行密码重置。").confirm(@"确定", ^{
-//        NSLog(@"退出=========");
-//        [[TSUserLoginManager shareInstance] logout];
-//
-//    }).show();
 }
 
 #pragma mark - Noti

@@ -12,6 +12,8 @@
     _listStyle = [data[@"listStyle"] integerValue];
     _padding = data[@"padding"];
     _goodsList = [NSArray yy_modelArrayWithClass:TSRecomendGoods.class json:data[@"goodsList"]];
+    _sourceGoods = data[@"sourceGoods"];
+    _goodsGroup = [NSArray yy_modelArrayWithClass:TSRecomendGoodsGroup.class json:data[@"goodsGroup"]];
 }
 
 @end
@@ -42,5 +44,10 @@
 @end
 
 @implementation TSRecomendPageInfo
+
+@end
+
+@implementation TSRecomendGoodsGroup
+
 
 @end

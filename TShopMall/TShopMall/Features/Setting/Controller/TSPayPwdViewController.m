@@ -8,6 +8,9 @@
 #import "TSPayPwdViewController.h"
 #import "TSPayPasswordInputView.h"
 #import <IQKeyboardManager/IQKeyboardManager.h>
+#import "RSA.h"
+#import "TSTools.h"
+#import "TSWithdrawalPswSetController.h"
 
 @interface TSPayPwdViewController ()<TSPayPasswordInputViewDelegate>
 ///提示语的标题
@@ -58,7 +61,7 @@
         _tipTilteLabel = tipTilteLabel;
         _tipTilteLabel.text = @"验证提现密码";
         _tipTilteLabel.textColor = KTextColor;
-        _tipTilteLabel.font = KRegularFont(24);//KFont(PingFangSCMedium, 24);
+        _tipTilteLabel.font = KRegularFont(24);
         [self.view addSubview: _tipTilteLabel];
     }
     return _tipTilteLabel;
@@ -88,7 +91,22 @@
 
 #pragma mark - <TSPayPasswordInputViewDelegate>
 - (void)inputDoneActionWithPwd:(NSString *)pwd {
-    
+    [Popover popProgressOnWindowWithText:@"正在校验密码..."];
+    [[TSServicesManager sharedInstance].acconutService fetchAccountPublicKeyComplete:^(NSString * _Nonnull publicKey) {
+        ///利用公钥对密码进行加密
+        NSString *rsaPwd = [RSA encryptString:pwd publicKey:publicKey];
+        NSString *base64String = [TSTools base64EncodedString:rsaPwd];
+        [[TSServicesManager sharedInstance].userInfoService checkWithrawalPwd:base64String success:^{
+            [Popover popToastOnWindowWithText:@"提现密码校验成功"];
+            TSWithdrawalPswSetController *withrawalVC = [[TSWithdrawalPswSetController alloc] init];
+            withrawalVC.hasSet = YES;
+            [self.navigationController pushViewController:withrawalVC animated:YES];
+        } failure:^(NSString * _Nonnull errorMsg) {
+            ///清理密码框
+            [self.payPwdInputView clear];
+            [Popover popToastOnWindowWithText:errorMsg];
+        }];
+    }];
 }
 
 

@@ -26,12 +26,12 @@
             NSString *title = titles[i];
             TSSettingCommonSectionItemModel *item = [[TSSettingCommonSectionItemModel alloc] init];
             item.title = title;
-            item.cellHeight = 56.5;
+            item.cellHeight = 57;
             item.identify = @"TSSettingCommonCell";
             item.showLine = YES;
             if (i == titles.count - 1) {
                 item.showLine = NO;
-                item.cellHeight = 56;
+                item.cellHeight = 57;
             }
             [items addObject:item];
         }
@@ -44,7 +44,7 @@
         NSMutableArray *items = [NSMutableArray array];
         TSSettingCommonSectionItemModel *item = [[TSSettingCommonSectionItemModel alloc] init];
         item.title = @"提现密码设置";
-        item.cellHeight = 56.5;
+        item.cellHeight = 57;
         item.identify = @"TSSettingCommonCell";
         item.showLine = NO;
         [items addObject:item];
@@ -57,12 +57,12 @@
     {
         NSMutableArray *items = [NSMutableArray array];
         
-        NSArray *titles = @[@"登录绑定", @"微信号码", @"Apple号码"];
+        NSArray *titles = @[@"登陆绑定", @"微信号码", @"Apple号码"];
         for (int i = 0; i < titles.count; i++) {
             NSString *title = titles[i];
             TSSettingCommonSectionItemModel *item = [[TSSettingCommonSectionItemModel alloc] init];
             item.title = title;
-            item.cellHeight = 56.5;
+            item.cellHeight = 57;
             if (i == 0) {
                 item.identify = @"TSSecurityCenterTitleCell";
             } else {
@@ -71,7 +71,7 @@
                 item.on = YES;
                 if (i == titles.count - 1) {
                     item.showLine = NO;
-                    item.cellHeight = 56;
+                    item.cellHeight = 57;
                     item.detail = @"";
                     item.on = NO;
                 }
@@ -89,7 +89,7 @@
         NSMutableArray *items = [NSMutableArray array];
         TSSettingCommonSectionItemModel *item = [[TSSettingCommonSectionItemModel alloc] init];
         item.title = @"安全中心";
-        item.cellHeight = 56.5;
+        item.cellHeight = 57;
         item.identify = @"TSSettingCommonCell";
         item.showLine = NO;
         [items addObject:item];
