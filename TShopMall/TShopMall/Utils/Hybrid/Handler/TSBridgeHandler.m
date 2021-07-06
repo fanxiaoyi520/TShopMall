@@ -152,7 +152,8 @@
 -(void)navigation:(NSDictionary *)params{
     NSDictionary *data = params[@"data"];
     NSDictionary *paramsDic = data[@"params"];
-    NSString *controllerName = paramsDic[@"name"];
+
+    NSString *controllerName = [[paramsDic[@"name"] componentsSeparatedByString:@"-"] firstObject];
     UIViewController *con;
     if ([@"TSPayController" isEqualToString:controllerName]) {
         NSString *uuid  = [NSString stringWithFormat:@"%@", paramsDic[@"data"][@"uuid"]];
@@ -181,7 +182,8 @@
 
 #pragma mark - 登出
 -(void)logOut:(NSDictionary *)params{
-
+    WKWebView *webView = params[@"webview"];
+    [webView reload];
 }
 
 #pragma mark - Show Loading
@@ -235,6 +237,11 @@
         NSURL *fileUrl = [[NSURL alloc] initWithString:decodeString];
         [[UIApplication sharedApplication] openURL:fileUrl];
     }
+}
+
+#pragma mark - 刷新页面
+-(void)refreshData:(NSDictionary *)param{
+    
 }
 
 #pragma mark - Private
