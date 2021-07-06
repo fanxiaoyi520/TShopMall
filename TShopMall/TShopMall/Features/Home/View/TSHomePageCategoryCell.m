@@ -49,7 +49,7 @@
 - (TSGridButtonCollectionView *)collectionView {
     if (!_collectionView) {
         UIEdgeInsets padding = UIEdgeInsetsMake(13, 13, 16, 13);
-        _collectionView = [[TSGridButtonCollectionView alloc] initWithFrame:CGRectZero items:nil ColumnSpacing:22 rowSpacing:17 itemsHeight:69 rows:2 columns:5 padding:padding clickedBlock:^(id selectItem, NSInteger index) {
+        _collectionView = [[TSGridButtonCollectionView alloc] initWithFrame:CGRectZero items:nil ColumnSpacing:22 rowSpacing:17 itemsHeight:69 rows:0 columns:5 padding:padding clickedBlock:^(id selectItem, NSInteger index) {
             TSImageBaseModel *model = (TSImageBaseModel *)selectItem;
             NSString *uri = [[TSServicesManager sharedInstance].uriHandler configUriWithTypeValue:model.linkData.typeValue objectValue:model.linkData.objectValue];
             

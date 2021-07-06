@@ -27,12 +27,12 @@
 #endif
     
     if ([self.responseModel.code integerValue] == 403) {
-        [[TSServicesManager sharedInstance].acconutService fetchRefershToken];
+        [[TSUserLoginManager shareInstance] logout];
     }
     
     /// 被挤下线
     if (reponseModel.stateCode == 999) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:TS_Login_State object:@(1)];
+        [[TSUserLoginManager shareInstance] logout];
     }
     
     if (!reponseModel.isSucceed) {//网络请求失败
