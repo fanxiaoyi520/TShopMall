@@ -18,6 +18,7 @@
 - (void)setPlaceholder:(NSString *)placeholder{
     UIColor *color = self.placeholderColor==nil? KPlaceholderColor:self.placeholderColor;
     UIFont *font = self.placeholderFont==nil? KRegularFont(16.0):self.placeholderFont;
+    if (!placeholder) return;
     NSAttributedString *attStr = [[NSAttributedString alloc] initWithString:placeholder attributes:@{
         NSForegroundColorAttributeName : color,
         NSFontAttributeName : font

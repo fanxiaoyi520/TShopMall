@@ -17,6 +17,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)fetchRealNameAuthContentsComplete:(void(^)(BOOL isSucess))complete;
 
+- (void)checkRealAuthComplete:(void(^)(BOOL isSucess))complete;
+
+-(void)realAuthWithName:(NSString *)name AndIdCard:(NSString *)idcard complete:(void(^)(BOOL isSucess))complete;
 @end
 
 NS_ASSUME_NONNULL_END
