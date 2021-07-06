@@ -8,10 +8,11 @@
 #import "TSMeasureCell.h"
 #import "TSCategoryContentModel.h"
 #import "TSGridButtonCollectionView.h"
-
+#import "TSEmptyAlertView.h"
+#import "UIButton+TSLayout.h"
 @interface TSMeasureCell()
 @property(nonatomic, strong) TSGridButtonCollectionView *collectionView;
-
+@property(nonatomic, strong) UIButton *emptyView;
 
 @end
 
@@ -33,9 +34,28 @@
     NSArray *twoLevel = model.TwoLevel;
     
     self.collectionView.items = twoLevel;
-    [self.collectionView reloadData];
+    
+    if (self.collectionView.items.count == 0) {
+        [self.collectionView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.equalTo(@(self.contentView.width - 32));
+        }];
+        [self showEmptyView:self.collectionView];
+       
+    }else{
+        [self.collectionView reloadData];
+    }
+    
     [self tableviewReloadCell];
 
+}
+
+- (void)showEmptyView:(TSGridButtonCollectionView *)view{
+
+    [view addSubview:self.emptyView];
+    [self.emptyView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(view);
+    }];
+    self.emptyView.hidden = view.items.count;
 }
 
 #pragma mark - Getter
@@ -78,5 +98,18 @@
         };
     }
     return _collectionView;
+}
+
+- (UIButton *)emptyView {
+    if (!_emptyView ) {
+        _emptyView = [[UIButton alloc] init];
+        [_emptyView setImage:[UIImage imageNamed:@"alert_category_empty"] forState:UIControlStateNormal];
+        [_emptyView setTitle:@"商品准备中，敬请期待" forState:UIControlStateNormal];
+        [_emptyView setTitleColor:KHexColor(@"#2D3132") forState:UIControlStateNormal];
+        _emptyView.titleLabel.font = KFont(PingFangSCRegular, 14.0);
+        [_emptyView ts_layoutWithEdgeInsetsStyle:TSButtonEdgeInsetsStyleTop imageTitleSpace:16];
+        _emptyView.adjustsImageWhenHighlighted = NO;
+    }
+    return _emptyView;
 }
 @end

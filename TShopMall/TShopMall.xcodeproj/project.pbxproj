@@ -361,7 +361,8 @@
 		DCA035DD2681ACC8003DE5F7 /* TSLogoutRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA035DC2681ACC8003DE5F7 /* TSLogoutRequest.m */; };
 		DCA035F8268355D2003DE5F7 /* TSServicesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA035F7268355D2003DE5F7 /* TSServicesManager.m */; };
 		DCA035FB2683578C003DE5F7 /* NSObject+TSProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA035FA2683578C003DE5F7 /* NSObject+TSProperty.m */; };
-		DF25A6EA268EFEEC00AAEA3B /* UIView+CMSDrawLine.m in Sources */ = {isa = PBXBuildFile; fileRef = DF25A6E8268EFEEC00AAEA3B /* UIView+CMSDrawLine.m */; };
+		DF25A6EA268EFEEC00AAEA3B /* UIView+TSDrawLine.m in Sources */ = {isa = PBXBuildFile; fileRef = DF25A6E8268EFEEC00AAEA3B /* UIView+TSDrawLine.m */; };
+		DF25A6EF2693FA6E00AAEA3B /* UIButton+TSLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = DF25A6ED2693FA6D00AAEA3B /* UIButton+TSLayout.m */; };
 		DFB30000268AEE7700FC8FF9 /* TSOneRowsGoodsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB3FFFF268AEE7700FC8FF9 /* TSOneRowsGoodsCollectionViewCell.m */; };
 		DFB30003268AF5D600FC8FF9 /* TSCategoryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB30002268AF5D600FC8FF9 /* TSCategoryDetailViewController.m */; };
 		DFB30007268B3ECB00FC8FF9 /* TSCategoryContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB30006268B3ECB00FC8FF9 /* TSCategoryContainerViewController.m */; };
@@ -1308,8 +1309,10 @@
 		DCA035F7268355D2003DE5F7 /* TSServicesManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSServicesManager.m; sourceTree = "<group>"; };
 		DCA035F92683578C003DE5F7 /* NSObject+TSProperty.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+TSProperty.h"; sourceTree = "<group>"; };
 		DCA035FA2683578C003DE5F7 /* NSObject+TSProperty.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+TSProperty.m"; sourceTree = "<group>"; };
-		DF25A6E8268EFEEC00AAEA3B /* UIView+CMSDrawLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CMSDrawLine.m"; sourceTree = "<group>"; };
-		DF25A6E9268EFEEC00AAEA3B /* UIView+CMSDrawLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CMSDrawLine.h"; sourceTree = "<group>"; };
+		DF25A6E8268EFEEC00AAEA3B /* UIView+TSDrawLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+TSDrawLine.m"; sourceTree = "<group>"; };
+		DF25A6E9268EFEEC00AAEA3B /* UIView+TSDrawLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+TSDrawLine.h"; sourceTree = "<group>"; };
+		DF25A6ED2693FA6D00AAEA3B /* UIButton+TSLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+TSLayout.m"; sourceTree = "<group>"; };
+		DF25A6EE2693FA6D00AAEA3B /* UIButton+TSLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+TSLayout.h"; sourceTree = "<group>"; };
 		DFB30001268AF5D600FC8FF9 /* TSCategoryDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSCategoryDetailViewController.h; sourceTree = "<group>"; };
 		DFB30002268AF5D600FC8FF9 /* TSCategoryDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSCategoryDetailViewController.m; sourceTree = "<group>"; };
 		DFB30005268B3ECB00FC8FF9 /* TSCategoryContainerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSCategoryContainerViewController.h; sourceTree = "<group>"; };
@@ -3059,8 +3062,10 @@
 		F530CC6C26803FCD009DC29A /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
-				DF25A6E9268EFEEC00AAEA3B /* UIView+CMSDrawLine.h */,
-				DF25A6E8268EFEEC00AAEA3B /* UIView+CMSDrawLine.m */,
+				DF25A6EE2693FA6D00AAEA3B /* UIButton+TSLayout.h */,
+				DF25A6ED2693FA6D00AAEA3B /* UIButton+TSLayout.m */,
+				DF25A6E9268EFEEC00AAEA3B /* UIView+TSDrawLine.h */,
+				DF25A6E8268EFEEC00AAEA3B /* UIView+TSDrawLine.m */,
 				04651733268C8C32000829C2 /* UIViewController+Plugin.h */,
 				04651734268C8C32000829C2 /* UIViewController+Plugin.m */,
 				F530CC7326803FCD009DC29A /* UIAlertController+Color.h */,
@@ -4732,6 +4737,7 @@
 				043C2349268AB47400460FDB /* TSModifyNicknameViewController.m in Sources */,
 				DFB3FFDF268571B100FC8FF9 /* AuthAppleIDManager.m in Sources */,
 				F530CCAB26803FCD009DC29A /* UIAlertController+Color.m in Sources */,
+				DF25A6EF2693FA6E00AAEA3B /* UIButton+TSLayout.m in Sources */,
 				C3A6C4BD267A1C5700FC71D6 /* TSSecurityCenterTitleCell.m in Sources */,
 				C22EE28E2681BC6200E59C86 /* TSRecomendViewModel.m in Sources */,
 				F55D2C6926722807006BACCF /* TSCategoryDataController.m in Sources */,
@@ -4933,7 +4939,7 @@
 				F530CC3C26803862009DC29A /* NSTimer+TSBlcokTimer.m in Sources */,
 				F530CCA726803FCD009DC29A /* UIControl+RepeatClick.m in Sources */,
 				F530CE8D26846BE0009DC29A /* TSToolsManager.m in Sources */,
-				DF25A6EA268EFEEC00AAEA3B /* UIView+CMSDrawLine.m in Sources */,
+				DF25A6EA268EFEEC00AAEA3B /* UIView+TSDrawLine.m in Sources */,
 				F54973612668A22100181E3F /* SSBaseRequest.m in Sources */,
 				C24A69BB26896ADE0022A81F /* TSPayTimeView.m in Sources */,
 				04F1EFAD2682D22100FF007D /* TSRealnameInfoSectionModel.m in Sources */,
