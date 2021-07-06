@@ -70,8 +70,8 @@
     }];
     [self.codeButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.mas_right).with.offset(-25);
-        make.width.mas_equalTo(KRateW(67));
-        make.height.mas_equalTo(KRateW(23));
+        make.width.mas_equalTo(KRateW(88));
+        make.height.mas_equalTo(KRateW(30));
         make.centerY.equalTo(self.codeInput.mas_centerY).with.offset(0);
     }];
     [self.splitCodeView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -182,7 +182,7 @@
         [_codeButton setBackgroundColor:KHexColor(@"#D7D8D8")];
         [_codeButton setTitleColor:KWhiteColor forState:UIControlStateDisabled];
         [_codeButton setTitle:@"获取验证码" forState:UIControlStateNormal];
-        [_codeButton setCorners:UIRectCornerAllCorners radius:2.5];
+        [_codeButton setCorners:UIRectCornerAllCorners radius:15];
         _codeButton.clipsToBounds = YES;
         [_codeButton addTarget:self action:@selector(sendCode) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_codeButton];
