@@ -27,7 +27,7 @@
 @property (nonatomic, strong) NSMutableArray <TSProvinceListModel *> *provinceListArray;
 @property (nonatomic, strong) NSMutableArray <TSCityListModel *> *cityListArray;
 @property (nonatomic, strong) TSImageBaseModel *imageAdModel;
-
+@property (nonatomic,   copy) NSString *isSetWithdrawalPassword;//是否设置提现密码
 @end
 
 @implementation TSMineDataController
@@ -783,4 +783,153 @@
     return result;
 }
 
+// MARK: 获取公钥密钥
+- (void)fetchGetPublicKeyDataComplete:(void(^)(BOOL isSucess))complete {
+    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kMineGetPublicKey
+                                                               requestMethod:YTKRequestMethodPOST
+                                                       requestSerializerType:YTKRequestSerializerTypeJSON responseSerializerType:YTKResponseSerializerTypeJSON
+                                                               requestHeader:NSDictionary.dictionary
+                                                                 requestBody:NSDictionary.dictionary
+                                                              needErrorToast:YES];
+    [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+        if (request.responseModel.isSucceed) {
+            NSString *data = request.responseModel.data;
+            self.amount = data;
+            complete(YES);
+        } else {
+            [Popover popToastOnWindowWithText:request.responseModel.responseMsg];
+            complete(NO);
+        }
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        complete(NO);
+    }];
+}
+
+// MARK: 校验该用户是否设置过提现密码
+- (void)fetchCheckWhetherSetWithdrawalPwdDataComplete:(void(^)(BOOL isSucess))complete {
+    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kMineCheckWhetherSetWithdrawalPwd
+                                                               requestMethod:YTKRequestMethodGET
+                                                       requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON
+                                                               requestHeader:NSDictionary.dictionary
+                                                                 requestBody:NSDictionary.dictionary
+                                                              needErrorToast:YES];
+    [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+        if (request.responseModel.isSucceed) {
+            NSString *data = request.responseModel.data;
+            self.isSetWithdrawalPassword = data;
+            complete(YES);
+        } else {
+            [Popover popToastOnWindowWithText:request.responseModel.responseMsg];
+            complete(NO);
+        }
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        complete(NO);
+    }];
+}
+
+// MARK: 校验提现密码是否正确
+- (void)fetchCheckWithdrawalPwdDataComplete:(void(^)(BOOL isSucess))complete {
+    NSMutableDictionary *body = [NSMutableDictionary dictionary];
+    [body setValue:@"" forKey:@"checkPw"];
+    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kMineCheckWithdrawalPwd
+                                                               requestMethod:YTKRequestMethodPOST
+                                                       requestSerializerType:YTKRequestSerializerTypeJSON responseSerializerType:YTKResponseSerializerTypeJSON
+                                                               requestHeader:NSDictionary.dictionary
+                                                                 requestBody:body
+                                                              needErrorToast:YES];
+    [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+        if (request.responseModel.isSucceed) {
+            NSString *data = request.responseModel.data;
+            self.amount = data;
+            complete(YES);
+        } else {
+            [Popover popToastOnWindowWithText:request.responseModel.responseMsg];
+            complete(NO);
+        }
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        complete(NO);
+    }];
+}
+
+// MARK: 提现密码业务-----------多个网络请求
+/**
+ * 提现密码业务-----------多个网络请求
+ */
+-(void)fetchWithdrawalPasswordDataComplete:(void(^)(BOOL isSucess))complete {
+    
+    dispatch_queue_t customQuue = dispatch_queue_create("com.wumeng.network", DISPATCH_QUEUE_SERIAL);
+    dispatch_semaphore_t semaphoreLock = dispatch_semaphore_create(0);
+    dispatch_async(customQuue, ^{
+        [self requestMethodWithSemaphore:semaphoreLock withIndex:10];
+        dispatch_semaphore_wait(semaphoreLock, DISPATCH_TIME_FOREVER);
+        [self requestMethodWithSemaphore:semaphoreLock withIndex:11];
+        dispatch_semaphore_wait(semaphoreLock, DISPATCH_TIME_FOREVER);
+        [self requestMethodWithSemaphore:semaphoreLock withIndex:12];
+        dispatch_semaphore_wait(semaphoreLock, DISPATCH_TIME_FOREVER);
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSLog(@"任务完成");
+            complete(YES);
+        });
+    });
+}
+
+
+- (void)requestMethodWithSemaphore:(dispatch_semaphore_t)semaphoreLock withIndex:(NSInteger)aIndex
+{
+    NSString *request = [NSString stringWithFormat:@"request%ld",(long)aIndex];
+    SEL requestSel = NSSelectorFromString(request);
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+    SSGenaralRequest *request_z = (SSGenaralRequest *)[self performSelector:requestSel];
+#pragma clang diagnostic pop
+
+     [request_z startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+         if (request.responseModel.isSucceed) {
+             NSDictionary *data = request.responseModel.data;
+             dispatch_semaphore_signal(semaphoreLock);
+         }
+     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+         dispatch_semaphore_signal(semaphoreLock);
+     }];
+}
+
+//获取公钥
+- (SSGenaralRequest *)request10{
+    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kMineGetPublicKey
+                                                               requestMethod:YTKRequestMethodPOST
+                                                       requestSerializerType:YTKRequestSerializerTypeJSON responseSerializerType:YTKResponseSerializerTypeJSON
+                                                               requestHeader:NSDictionary.dictionary
+                                                                 requestBody:NSDictionary.dictionary
+                                                              needErrorToast:YES];
+    return request;
+}
+
+//校验密码是否正确
+- (SSGenaralRequest *)request11{
+    NSMutableDictionary *body = [NSMutableDictionary dictionary];
+    [body setValue:@"" forKey:@"checkPw"];
+    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kMineCheckWithdrawalPwd
+                                                               requestMethod:YTKRequestMethodPOST
+                                                       requestSerializerType:YTKRequestSerializerTypeJSON responseSerializerType:YTKResponseSerializerTypeJSON
+                                                               requestHeader:NSDictionary.dictionary
+                                                                 requestBody:body
+                                                              needErrorToast:YES];
+    return request;
+}
+
+// 提现申请
+- (SSGenaralRequest *)request12{
+    NSMutableDictionary *body = [NSMutableDictionary dictionary];
+    
+    [body setValue:@([self.withdrawalAmount integerValue]) forKey:@"withdrawalAmount"];
+    [body setValue:self.bankCardAccountId forKey:@"bankCardAccountId"];
+    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kMineWithdrawalApply
+                                                               requestMethod:YTKRequestMethodPOST
+                                                       requestSerializerType:YTKRequestSerializerTypeJSON responseSerializerType:YTKResponseSerializerTypeJSON
+                                                               requestHeader:NSDictionary.dictionary
+                                                                 requestBody:body
+                                                              needErrorToast:YES];
+    return request;
+}
 @end

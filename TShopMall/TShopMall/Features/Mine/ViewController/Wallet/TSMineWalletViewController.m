@@ -12,8 +12,10 @@
 #import "TSMineDataController.h"
 #import "TSAddCardViewController.h"
 #import "TSInputPasswordViewController.h"
+#import "TSPhoneNumVeriViewController.h"
 
 #import "TSWalletHeaderView.h"
+#import "TSAlertView.h"
 
 @interface TSMineWalletViewController ()<TSWalletHeaderViewDelegate,TSWalletCellViewDelegate,UIViewControllerTransitioningDelegate,WithdrawalDelegate>
 
@@ -105,6 +107,17 @@
 }
 
 // MARK: WithdrawalDelegate
+- (void)withdrawalPasswordNotSet:(id _Nullable)sender {
+    TSAlertView.new.alertInfo(nil, @"您未设置提现密码，请前往设置").confirm(@"前往设置", ^{
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        [userDefaults setValue:@"TSMineWalletViewController" forKey:@"JumpSource"];
+        [userDefaults synchronize];
+        
+        TSPhoneNumVeriViewController *phoneNumVeriVC = [[TSPhoneNumVeriViewController alloc] init];
+        [self.navigationController pushViewController:phoneNumVeriVC animated:YES];
+    }).cancel(@"我知道了", ^{}).show();
+}
+
 - (void)withdrawalApplication:(id _Nullable)sender {
     //[Popover popToastOnWindowWithText:@"申请成功"];
     TSInputPasswordViewController *vc = [TSInputPasswordViewController new];
