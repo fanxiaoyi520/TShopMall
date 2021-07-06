@@ -116,6 +116,7 @@
                     [self dismissViewControllerAnimated:YES completion:nil];
                 }
             }];
+            
             //校验密码接口
             if (![codeString isEqualToString:@"1"]) {
                 self.flags = 1;

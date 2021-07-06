@@ -71,7 +71,7 @@ typedef NS_ENUM(NSInteger, RequestMethod){
 @property (nonatomic, strong, readonly) TSMineWalletEarningModel *earningModel;
 @property (nonatomic, strong, readonly) NSMutableArray <TSProvinceListModel *> *provinceListArray;
 @property (nonatomic, strong, readonly) NSMutableArray <TSCityListModel *> *cityListArray;
-
+@property (nonatomic,   copy, readonly) NSString *isSetWithdrawalPassword;//是否设置提现密码
 
 //订单数
 @property (nonatomic, strong, readonly) TSMineOrderCountModel *orderInfo;
@@ -105,6 +105,17 @@ typedef NS_ENUM(NSInteger, RequestMethod){
 - (void)fetchGetAllProvinceDataComplete:(void(^)(BOOL isSucess))complete;
 //根据省份uuid获取它下面的城市
 - (void)fetchGetAllCityByProvinceUuidDataComplete:(void(^)(BOOL isSucess))complete;
+//获取公钥密钥
+- (void)fetchGetPublicKeyDataComplete:(void(^)(BOOL isSucess))complete;
+//校验该用户是否设置过提现密码
+- (void)fetchCheckWhetherSetWithdrawalPwdDataComplete:(void(^)(BOOL isSucess))complete;
+//校验提现密码是否正确
+- (void)fetchCheckWithdrawalPwdDataComplete:(void(^)(BOOL isSucess))complete;
+
+/**
+ * 提现密码业务-----------多个网络请求
+ */
+-(void)fetchWithdrawalPasswordDataComplete:(void(^)(BOOL isSucess))complete;
 @end
 
 NS_ASSUME_NONNULL_END

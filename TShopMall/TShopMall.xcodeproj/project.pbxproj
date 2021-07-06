@@ -157,6 +157,7 @@
 		C25AD833268B13AC000D2258 /* TSInvoiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C25AD832268B13AC000D2258 /* TSInvoiceModel.m */; };
 		C262E2932692E37D00E65162 /* TSSearchResultRecomendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C262E2922692E37D00E65162 /* TSSearchResultRecomendCell.m */; };
 		C262E2962692EC1200E65162 /* TSRecomendHeaderTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = C262E2952692EC1200E65162 /* TSRecomendHeaderTitleView.m */; };
+		C262E2992693156300E65162 /* TSSearchFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = C262E2982693156300E65162 /* TSSearchFlowLayout.m */; };
 		C2A34C6A267449080095497E /* TSAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2A34C69267449080095497E /* TSAlertView.m */; };
 		C2A34C7726749E3E0095497E /* TSSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2A34C7626749E3D0095497E /* TSSearchController.m */; };
 		C2A34C7A26749FCD0095497E /* TSSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2A34C7926749FCD0095497E /* TSSearchView.m */; };
@@ -361,7 +362,8 @@
 		DCA035DD2681ACC8003DE5F7 /* TSLogoutRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA035DC2681ACC8003DE5F7 /* TSLogoutRequest.m */; };
 		DCA035F8268355D2003DE5F7 /* TSServicesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA035F7268355D2003DE5F7 /* TSServicesManager.m */; };
 		DCA035FB2683578C003DE5F7 /* NSObject+TSProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA035FA2683578C003DE5F7 /* NSObject+TSProperty.m */; };
-		DF25A6EA268EFEEC00AAEA3B /* UIView+CMSDrawLine.m in Sources */ = {isa = PBXBuildFile; fileRef = DF25A6E8268EFEEC00AAEA3B /* UIView+CMSDrawLine.m */; };
+		DF25A6EA268EFEEC00AAEA3B /* UIView+TSDrawLine.m in Sources */ = {isa = PBXBuildFile; fileRef = DF25A6E8268EFEEC00AAEA3B /* UIView+TSDrawLine.m */; };
+		DF25A6EF2693FA6E00AAEA3B /* UIButton+TSLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = DF25A6ED2693FA6D00AAEA3B /* UIButton+TSLayout.m */; };
 		DFB30000268AEE7700FC8FF9 /* TSOneRowsGoodsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB3FFFF268AEE7700FC8FF9 /* TSOneRowsGoodsCollectionViewCell.m */; };
 		DFB30003268AF5D600FC8FF9 /* TSCategoryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB30002268AF5D600FC8FF9 /* TSCategoryDetailViewController.m */; };
 		DFB30007268B3ECB00FC8FF9 /* TSCategoryContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB30006268B3ECB00FC8FF9 /* TSCategoryContainerViewController.m */; };
@@ -459,9 +461,9 @@
 		F530CD2B2680B912009DC29A /* TSGoodDetailReusableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CD252680B911009DC29A /* TSGoodDetailReusableHeaderView.m */; };
 		F530CD2D2680B912009DC29A /* TSProductCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CD292680B912009DC29A /* TSProductCollectionViewCell.m */; };
 		F530CD302680BB57009DC29A /* TSProductFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CD2F2680BB57009DC29A /* TSProductFooterView.m */; };
-		F530CD362680CCC5009DC29A /* launch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F530CD332680CCC5009DC29A /* launch@2x.png */; };
-		F530CD372680CCC5009DC29A /* launch@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F530CD342680CCC5009DC29A /* launch@3x.png */; };
-		F530CD382680CCC5009DC29A /* launch.png in Resources */ = {isa = PBXBuildFile; fileRef = F530CD352680CCC5009DC29A /* launch.png */; };
+		F530CD362680CCC5009DC29A /* shopMall_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F530CD332680CCC5009DC29A /* shopMall_bg@2x.png */; };
+		F530CD372680CCC5009DC29A /* shopMall_bg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F530CD342680CCC5009DC29A /* shopMall_bg@3x.png */; };
+		F530CD382680CCC5009DC29A /* shopMall_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = F530CD352680CCC5009DC29A /* shopMall_bg.png */; };
 		F530CD3F2680CD6A009DC29A /* tabbar_rank.json in Resources */ = {isa = PBXBuildFile; fileRef = F530CD3A2680CD6A009DC29A /* tabbar_rank.json */; };
 		F530CD402680CD6A009DC29A /* tabbar_home.json in Resources */ = {isa = PBXBuildFile; fileRef = F530CD3B2680CD6A009DC29A /* tabbar_home.json */; };
 		F530CD412680CD6A009DC29A /* tabbar_category.json in Resources */ = {isa = PBXBuildFile; fileRef = F530CD3C2680CD6A009DC29A /* tabbar_category.json */; };
@@ -470,10 +472,10 @@
 		F530CD462680CDF5009DC29A /* TSGoodDetailMaterialView.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CD452680CDF5009DC29A /* TSGoodDetailMaterialView.m */; };
 		F530CD4A2681750A009DC29A /* TSTopFunctionView.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CD492681750A009DC29A /* TSTopFunctionView.m */; };
 		F530CD4E26819012009DC29A /* TSChangePriceView.m in Sources */ = {isa = PBXBuildFile; fileRef = F530CD4D26819012009DC29A /* TSChangePriceView.m */; };
-		F530CD5826819449009DC29A /* mall_launch_bottom@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F530CD4F26819448009DC29A /* mall_launch_bottom@3x.png */; };
+		F530CD5826819449009DC29A /* shopMall_bottom@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F530CD4F26819448009DC29A /* shopMall_bottom@3x.png */; };
 		F530CD5926819449009DC29A /* mall_logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F530CD5026819448009DC29A /* mall_logo@3x.png */; };
-		F530CD5A26819449009DC29A /* mall_launch_bottom.png in Resources */ = {isa = PBXBuildFile; fileRef = F530CD5126819448009DC29A /* mall_launch_bottom.png */; };
-		F530CD5B26819449009DC29A /* mall_launch_bottom@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F530CD5226819448009DC29A /* mall_launch_bottom@2x.png */; };
+		F530CD5A26819449009DC29A /* shopMall_bottom.png in Resources */ = {isa = PBXBuildFile; fileRef = F530CD5126819448009DC29A /* shopMall_bottom.png */; };
+		F530CD5B26819449009DC29A /* shopMall_bottom@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F530CD5226819448009DC29A /* shopMall_bottom@2x.png */; };
 		F530CD5C26819449009DC29A /* mall_goods.png in Resources */ = {isa = PBXBuildFile; fileRef = F530CD5326819448009DC29A /* mall_goods.png */; };
 		F530CD5D26819449009DC29A /* mall_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = F530CD5426819448009DC29A /* mall_logo.png */; };
 		F530CD5E26819449009DC29A /* mall_goods@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F530CD5526819448009DC29A /* mall_goods@3x.png */; };
@@ -929,6 +931,8 @@
 		C262E2922692E37D00E65162 /* TSSearchResultRecomendCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSSearchResultRecomendCell.m; sourceTree = "<group>"; };
 		C262E2942692EC1200E65162 /* TSRecomendHeaderTitleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSRecomendHeaderTitleView.h; sourceTree = "<group>"; };
 		C262E2952692EC1200E65162 /* TSRecomendHeaderTitleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSRecomendHeaderTitleView.m; sourceTree = "<group>"; };
+		C262E2972693156300E65162 /* TSSearchFlowLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSSearchFlowLayout.h; sourceTree = "<group>"; };
+		C262E2982693156300E65162 /* TSSearchFlowLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSSearchFlowLayout.m; sourceTree = "<group>"; };
 		C2A34C68267449060095497E /* TSAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSAlertView.h; sourceTree = "<group>"; };
 		C2A34C69267449080095497E /* TSAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSAlertView.m; sourceTree = "<group>"; };
 		C2A34C7526749E3D0095497E /* TSSearchController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSSearchController.h; sourceTree = "<group>"; };
@@ -1308,8 +1312,10 @@
 		DCA035F7268355D2003DE5F7 /* TSServicesManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSServicesManager.m; sourceTree = "<group>"; };
 		DCA035F92683578C003DE5F7 /* NSObject+TSProperty.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+TSProperty.h"; sourceTree = "<group>"; };
 		DCA035FA2683578C003DE5F7 /* NSObject+TSProperty.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+TSProperty.m"; sourceTree = "<group>"; };
-		DF25A6E8268EFEEC00AAEA3B /* UIView+CMSDrawLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CMSDrawLine.m"; sourceTree = "<group>"; };
-		DF25A6E9268EFEEC00AAEA3B /* UIView+CMSDrawLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CMSDrawLine.h"; sourceTree = "<group>"; };
+		DF25A6E8268EFEEC00AAEA3B /* UIView+TSDrawLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+TSDrawLine.m"; sourceTree = "<group>"; };
+		DF25A6E9268EFEEC00AAEA3B /* UIView+TSDrawLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+TSDrawLine.h"; sourceTree = "<group>"; };
+		DF25A6ED2693FA6D00AAEA3B /* UIButton+TSLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+TSLayout.m"; sourceTree = "<group>"; };
+		DF25A6EE2693FA6D00AAEA3B /* UIButton+TSLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+TSLayout.h"; sourceTree = "<group>"; };
 		DFB30001268AF5D600FC8FF9 /* TSCategoryDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSCategoryDetailViewController.h; sourceTree = "<group>"; };
 		DFB30002268AF5D600FC8FF9 /* TSCategoryDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSCategoryDetailViewController.m; sourceTree = "<group>"; };
 		DFB30005268B3ECB00FC8FF9 /* TSCategoryContainerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSCategoryContainerViewController.h; sourceTree = "<group>"; };
@@ -1501,9 +1507,9 @@
 		F530CD292680B912009DC29A /* TSProductCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSProductCollectionViewCell.m; sourceTree = "<group>"; };
 		F530CD2E2680BB57009DC29A /* TSProductFooterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSProductFooterView.h; sourceTree = "<group>"; };
 		F530CD2F2680BB57009DC29A /* TSProductFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSProductFooterView.m; sourceTree = "<group>"; };
-		F530CD332680CCC5009DC29A /* launch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "launch@2x.png"; sourceTree = "<group>"; };
-		F530CD342680CCC5009DC29A /* launch@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "launch@3x.png"; sourceTree = "<group>"; };
-		F530CD352680CCC5009DC29A /* launch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch.png; sourceTree = "<group>"; };
+		F530CD332680CCC5009DC29A /* shopMall_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shopMall_bg@2x.png"; sourceTree = "<group>"; };
+		F530CD342680CCC5009DC29A /* shopMall_bg@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shopMall_bg@3x.png"; sourceTree = "<group>"; };
+		F530CD352680CCC5009DC29A /* shopMall_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shopMall_bg.png; sourceTree = "<group>"; };
 		F530CD3A2680CD6A009DC29A /* tabbar_rank.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tabbar_rank.json; sourceTree = "<group>"; };
 		F530CD3B2680CD6A009DC29A /* tabbar_home.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tabbar_home.json; sourceTree = "<group>"; };
 		F530CD3C2680CD6A009DC29A /* tabbar_category.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tabbar_category.json; sourceTree = "<group>"; };
@@ -1515,10 +1521,10 @@
 		F530CD492681750A009DC29A /* TSTopFunctionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSTopFunctionView.m; sourceTree = "<group>"; };
 		F530CD4C26819012009DC29A /* TSChangePriceView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSChangePriceView.h; sourceTree = "<group>"; };
 		F530CD4D26819012009DC29A /* TSChangePriceView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSChangePriceView.m; sourceTree = "<group>"; };
-		F530CD4F26819448009DC29A /* mall_launch_bottom@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mall_launch_bottom@3x.png"; sourceTree = "<group>"; };
+		F530CD4F26819448009DC29A /* shopMall_bottom@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shopMall_bottom@3x.png"; sourceTree = "<group>"; };
 		F530CD5026819448009DC29A /* mall_logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mall_logo@3x.png"; sourceTree = "<group>"; };
-		F530CD5126819448009DC29A /* mall_launch_bottom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mall_launch_bottom.png; sourceTree = "<group>"; };
-		F530CD5226819448009DC29A /* mall_launch_bottom@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mall_launch_bottom@2x.png"; sourceTree = "<group>"; };
+		F530CD5126819448009DC29A /* shopMall_bottom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shopMall_bottom.png; sourceTree = "<group>"; };
+		F530CD5226819448009DC29A /* shopMall_bottom@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shopMall_bottom@2x.png"; sourceTree = "<group>"; };
 		F530CD5326819448009DC29A /* mall_goods.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mall_goods.png; sourceTree = "<group>"; };
 		F530CD5426819448009DC29A /* mall_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mall_logo.png; sourceTree = "<group>"; };
 		F530CD5526819448009DC29A /* mall_goods@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mall_goods@3x.png"; sourceTree = "<group>"; };
@@ -2231,6 +2237,8 @@
 		C22EE25E268067DE00E59C86 /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				C262E2972693156300E65162 /* TSSearchFlowLayout.h */,
+				C262E2982693156300E65162 /* TSSearchFlowLayout.m */,
 				C2A34C7826749FCD0095497E /* TSSearchView.h */,
 				C2A34C7926749FCD0095497E /* TSSearchView.m */,
 				C2A34C7B2674A56C0095497E /* TSSearchTextView.h */,
@@ -3059,8 +3067,10 @@
 		F530CC6C26803FCD009DC29A /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
-				DF25A6E9268EFEEC00AAEA3B /* UIView+CMSDrawLine.h */,
-				DF25A6E8268EFEEC00AAEA3B /* UIView+CMSDrawLine.m */,
+				DF25A6EE2693FA6D00AAEA3B /* UIButton+TSLayout.h */,
+				DF25A6ED2693FA6D00AAEA3B /* UIButton+TSLayout.m */,
+				DF25A6E9268EFEEC00AAEA3B /* UIView+TSDrawLine.h */,
+				DF25A6E8268EFEEC00AAEA3B /* UIView+TSDrawLine.m */,
 				04651733268C8C32000829C2 /* UIViewController+Plugin.h */,
 				04651734268C8C32000829C2 /* UIViewController+Plugin.m */,
 				F530CC7326803FCD009DC29A /* UIAlertController+Color.h */,
@@ -3296,15 +3306,15 @@
 		F530CD322680CCC5009DC29A /* Lanuch */ = {
 			isa = PBXGroup;
 			children = (
-				F530CD332680CCC5009DC29A /* launch@2x.png */,
-				F530CD342680CCC5009DC29A /* launch@3x.png */,
-				F530CD352680CCC5009DC29A /* launch.png */,
+				F530CD332680CCC5009DC29A /* shopMall_bg@2x.png */,
+				F530CD342680CCC5009DC29A /* shopMall_bg@3x.png */,
+				F530CD352680CCC5009DC29A /* shopMall_bg.png */,
 				F530CD5326819448009DC29A /* mall_goods.png */,
 				F530CD5626819449009DC29A /* mall_goods@2x.png */,
 				F530CD5526819448009DC29A /* mall_goods@3x.png */,
-				F530CD5126819448009DC29A /* mall_launch_bottom.png */,
-				F530CD5226819448009DC29A /* mall_launch_bottom@2x.png */,
-				F530CD4F26819448009DC29A /* mall_launch_bottom@3x.png */,
+				F530CD5126819448009DC29A /* shopMall_bottom.png */,
+				F530CD5226819448009DC29A /* shopMall_bottom@2x.png */,
+				F530CD4F26819448009DC29A /* shopMall_bottom@3x.png */,
 				F530CD5426819448009DC29A /* mall_logo.png */,
 				F530CD5726819449009DC29A /* mall_logo@2x.png */,
 				F530CD5026819448009DC29A /* mall_logo@3x.png */,
@@ -4419,16 +4429,16 @@
 				F530CC4726803B1C009DC29A /* PulldownRefreshStyleWhite.json in Resources */,
 				F530CCF226804167009DC29A /* TXKJSBridge.js in Resources */,
 				CE5C8C5C2692F0C70063B470 /* Bank.plist in Resources */,
-				F530CD382680CCC5009DC29A /* launch.png in Resources */,
+				F530CD382680CCC5009DC29A /* shopMall_bg.png in Resources */,
 				F530CC6A26803E43009DC29A /* ProgressAnimation.json in Resources */,
-				F530CD5A26819449009DC29A /* mall_launch_bottom.png in Resources */,
+				F530CD5A26819449009DC29A /* shopMall_bottom.png in Resources */,
 				F530CC6826803E43009DC29A /* Toast_Success.png in Resources */,
 				046516F8268C57EF000829C2 /* SelectorDialogDot1.png in Resources */,
-				F530CD372680CCC5009DC29A /* launch@3x.png in Resources */,
+				F530CD372680CCC5009DC29A /* shopMall_bg@3x.png in Resources */,
 				F54973752668A31000181E3F /* Main.storyboard in Resources */,
 				F530CD5D26819449009DC29A /* mall_logo.png in Resources */,
 				F530CD5C26819449009DC29A /* mall_goods.png in Resources */,
-				F530CD362680CCC5009DC29A /* launch@2x.png in Resources */,
+				F530CD362680CCC5009DC29A /* shopMall_bg@2x.png in Resources */,
 				F54973732668A31000181E3F /* Assets.xcassets in Resources */,
 				F530CD6026819449009DC29A /* mall_logo@2x.png in Resources */,
 				F54973742668A31000181E3F /* LaunchScreen.storyboard in Resources */,
@@ -4437,11 +4447,11 @@
 				F530CD422680CD6A009DC29A /* tabbar_mine.json in Resources */,
 				F530CD432680CD6A009DC29A /* tabbar_cart.json in Resources */,
 				F530CD3F2680CD6A009DC29A /* tabbar_rank.json in Resources */,
-				F530CD5826819449009DC29A /* mall_launch_bottom@3x.png in Resources */,
+				F530CD5826819449009DC29A /* shopMall_bottom@3x.png in Resources */,
 				F530CD5F26819449009DC29A /* mall_goods@2x.png in Resources */,
 				F530CD5E26819449009DC29A /* mall_goods@3x.png in Resources */,
 				F530CC6926803E43009DC29A /* Toast_Failure.png in Resources */,
-				F530CD5B26819449009DC29A /* mall_launch_bottom@2x.png in Resources */,
+				F530CD5B26819449009DC29A /* shopMall_bottom@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4732,6 +4742,7 @@
 				043C2349268AB47400460FDB /* TSModifyNicknameViewController.m in Sources */,
 				DFB3FFDF268571B100FC8FF9 /* AuthAppleIDManager.m in Sources */,
 				F530CCAB26803FCD009DC29A /* UIAlertController+Color.m in Sources */,
+				DF25A6EF2693FA6E00AAEA3B /* UIButton+TSLayout.m in Sources */,
 				C3A6C4BD267A1C5700FC71D6 /* TSSecurityCenterTitleCell.m in Sources */,
 				C22EE28E2681BC6200E59C86 /* TSRecomendViewModel.m in Sources */,
 				F55D2C6926722807006BACCF /* TSCategoryDataController.m in Sources */,
@@ -4933,7 +4944,7 @@
 				F530CC3C26803862009DC29A /* NSTimer+TSBlcokTimer.m in Sources */,
 				F530CCA726803FCD009DC29A /* UIControl+RepeatClick.m in Sources */,
 				F530CE8D26846BE0009DC29A /* TSToolsManager.m in Sources */,
-				DF25A6EA268EFEEC00AAEA3B /* UIView+CMSDrawLine.m in Sources */,
+				DF25A6EA268EFEEC00AAEA3B /* UIView+TSDrawLine.m in Sources */,
 				F54973612668A22100181E3F /* SSBaseRequest.m in Sources */,
 				C24A69BB26896ADE0022A81F /* TSPayTimeView.m in Sources */,
 				04F1EFAD2682D22100FF007D /* TSRealnameInfoSectionModel.m in Sources */,
@@ -5007,6 +5018,7 @@
 				C262E2962692EC1200E65162 /* TSRecomendHeaderTitleView.m in Sources */,
 				C2C7654B267A097D004757B9 /* TSMakeOrderOperationCell.m in Sources */,
 				DFB3FFEC2686BDEC00FC8FF9 /* TSCustomPageControl.m in Sources */,
+				C262E2992693156300E65162 /* TSSearchFlowLayout.m in Sources */,
 				F530CD4A2681750A009DC29A /* TSTopFunctionView.m in Sources */,
 				F530C6D826802E5D009DC29A /* TSLoginSMSModel.m in Sources */,
 				F56D4B66266E053800C1AD9E /* AppDelegate+Initialize.m in Sources */,

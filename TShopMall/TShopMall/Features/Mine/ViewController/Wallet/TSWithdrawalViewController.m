@@ -177,16 +177,31 @@
 //    } else {
 //        [Popover popToastOnWindowWithText:@"提现金额必须大于1元"];
 //    }
+    
     CGFloat inputAmount = [[self.inputTextField.text stringByReplacingOccurrencesOfString:@"¥" withString:@""] floatValue];
     if (inputAmount*100 >= 100) {
-        TSInputPasswordViewController *vc = [TSInputPasswordViewController new];
-        vc.modalPresentationStyle = UIModalPresentationCustom;
-        vc.transitioningDelegate = self;
-        vc.kDataController = self.kDataController;
-        vc.inputAmount = [self.inputTextField.text stringByReplacingOccurrencesOfString:@"¥" withString:@""];//输入金额---转成分
-        vc.kDelegate = self;
-        [self presentViewController:vc animated:YES completion:nil];
-
+        //校验是否设置过提现密码
+        self.dataController.withdrawalAmount = [NSString stringWithFormat:@"%f",inputAmount*100];
+        @weakify(self);
+        [self.dataController fetchCheckWhetherSetWithdrawalPwdDataComplete:^(BOOL isSucess) {
+            @strongify(self);
+            if (isSucess) {
+                if ([self.dataController.isSetWithdrawalPassword isEqualToString:@"true"]) {
+                    TSInputPasswordViewController *vc = [TSInputPasswordViewController new];
+                    vc.modalPresentationStyle = UIModalPresentationCustom;
+                    vc.transitioningDelegate = self;
+                    vc.kDataController = self.kDataController;
+                    vc.inputAmount = [self.inputTextField.text stringByReplacingOccurrencesOfString:@"¥" withString:@""];//输入金额---转成分
+                    vc.kDelegate = self;
+                    [self presentViewController:vc animated:YES completion:nil];
+                } else {
+                    if ([self.kDelegate respondsToSelector:@selector(withdrawalPasswordNotSet:)]) {
+                        [self.kDelegate withdrawalPasswordNotSet:nil];
+                    }
+                    [self dismissViewControllerAnimated:YES completion:nil];
+                }
+            }
+        }];
     } else {
         [Popover popToastOnWindowWithText:@"提现金额必须大于1元"];
     }

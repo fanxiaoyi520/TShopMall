@@ -29,7 +29,7 @@
     [super setupBasic];
     self.gk_navTitle = @"实名认证";
     __weak __typeof(self)weakSelf = self;
-    [self.dataController fetchRealnameInfoContentsComplete:^(BOOL isSucess) {
+    [self.dataController checkRealAuthComplete:^(BOOL isSucess) {
         __strong __typeof(weakSelf)strongSelf = weakSelf;
         if (isSucess) {
             [strongSelf.collectionView reloadData];

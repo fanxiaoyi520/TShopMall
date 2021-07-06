@@ -16,10 +16,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" image="launch.png" translatesAutoresizingMaskIntoConstraints="NO" id="BHA-Fm-h2p">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" image="shopMall_bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="BHA-Fm-h2p">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mall_launch_bottom.png" translatesAutoresizingMaskIntoConstraints="NO" id="9HC-yc-1kU">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shopMall_bottom.png" translatesAutoresizingMaskIntoConstraints="NO" id="9HC-yc-1kU">
                                 <rect key="frame" x="0.0" y="779" width="414" height="117"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="117" id="mqb-Lj-N1u"/>
@@ -56,9 +56,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="launch.png" width="375" height="677"/>
         <image name="mall_goods.png" width="375" height="67"/>
-        <image name="mall_launch_bottom.png" width="375" height="117"/>
         <image name="mall_logo.png" width="135" height="42"/>
+        <image name="shopMall_bg.png" width="375" height="677"/>
+        <image name="shopMall_bottom.png" width="375" height="117"/>
     </resources>
 </document>
