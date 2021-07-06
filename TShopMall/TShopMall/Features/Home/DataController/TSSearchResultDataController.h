@@ -18,20 +18,19 @@ typedef NS_ENUM(NSInteger, TSGoodsListSortType) {
 };
 
 @interface TSSearchResultDataController : TSBaseDataController
-@property (nonatomic, assign) NSInteger totalNum;//总商品数量
-@property (nonatomic, assign) NSInteger currentNum;
+@property (nonatomic, assign, readonly) BOOL isEmptyView;
+@property (nonatomic, assign, readonly) BOOL hasMoreData;
 @property (nonatomic, assign) NSInteger currentPage;//当前分页数
 @property (nonatomic, assign) TSGoodsListSortType sortType;
 @property (nonatomic, copy) NSString *keyword;//关键字
 @property (nonatomic, assign) NSInteger sort;//排序   1-降序，2-升序
-
-@property (nonatomic, assign) BOOL isEmptyView;
-
 @property (nonatomic, assign) BOOL isGrid;
-@property (nonatomic, strong) TSSearchResult *result;
+
+@property (nonatomic, strong) NSMutableArray<TSSearchList *> *allGoods;//所有商品
 @property (nonatomic, strong) NSMutableArray<TSSearchSection *> *lists;
-- (void)queryGoods:(void(^)(NSError *))finished;
-- (NSArray<TSSearchSection *> *)sectionsForUIWithDatas:(NSArray<TSSearchList *> *)lists;
+
+- (void)queryGoods:(void(^)(NSString *message))finished;
+- (void)updateUIStyle:(BOOL)isGrid complete:(void(^)(void))complete;
 
 - (void)defaultConfig;
 @end

@@ -18,6 +18,7 @@
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UIView *bottomView;
 @property (nonatomic, strong) UIButton *addBtn;
+@property (nonatomic, strong) UIButton *editBtn;
 @end
 
 @implementation TSShippingAddressController
@@ -34,6 +35,11 @@
     }
     
     [self fetchAddress];
+}
+
+- (void)setupNavigationBar{
+    [super setupNavigationBar];
+    self.gk_navRightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.editBtn];
 }
 
 - (void)fetchAddress{
@@ -207,4 +213,20 @@
     
     return self.bottomView;
 }
+
+
+- (UIButton *)editBtn{
+    if (_editBtn) {
+        return _editBtn;
+    }
+    self.editBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.editBtn.titleLabel.font = [UIFont font:PingFangSCRegular size:KRateW(14.0)];
+    [self.editBtn setTitle:@"添加" forState:UIControlStateNormal];
+    [self.editBtn setTitleColor:KHexColor(@"#2D3132") forState:UIControlStateNormal];
+    self.editBtn.frame = CGRectMake(0, 0, KRateW(32.0), KRateW(24.0));
+    [self.editBtn addTarget:self action:@selector(gotoAddNewAddress) forControlEvents:UIControlEventTouchUpInside];
+    
+    return self.editBtn;
+}
+
 @end

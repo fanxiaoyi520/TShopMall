@@ -24,6 +24,7 @@
 - (void)viewCart:(void(^)(void))finished;
 
 - (NSArray<TSCart *> *)selectedGoods;
+- (NSArray<TSCart *> *)invalidGoods;
 
 ///配置推荐商品
 - (void)configRecomendSectons:(NSArray<TSRecomendGoods *> *)goods isGrid:(BOOL)isGrid;

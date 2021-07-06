@@ -61,7 +61,12 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     [textField endEditing:YES];
-    self.startSearch(textField.text);
+    
+    //先过滤
+    NSString *str = [textField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:@"@／：；（）¥「」＂、[]{}#%-*+=_\\|~＜＞$€^•'@#$%^&*()_+'\""];
+    str = [str stringByTrimmingCharactersInSet:set];
+    self.startSearch(str);
     return self;
 }
 

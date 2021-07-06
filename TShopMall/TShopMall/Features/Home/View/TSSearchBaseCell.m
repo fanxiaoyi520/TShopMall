@@ -28,7 +28,6 @@
     CGRect cellFrame = layoutAttributes.frame;
     cellFrame.size = size;
     layoutAttributes.frame= cellFrame;
-
     return layoutAttributes;
 }
 

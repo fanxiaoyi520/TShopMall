@@ -11,7 +11,7 @@
 #import "TSEmptyAlertView.h"
 #import "RefreshGifFooter.h"
 #import "TSSearchResultFittleView.h"
-#import "UIView+CMSDrawLine.h"
+#import "UIView+TSDrawLine.h"
 @interface TSCategoryDetailViewController ()<TSSearchResultFittleDelegate>
 @property (nonatomic, strong) TSGridGoodsCollectionView *collectionView;
 @property (nonatomic, strong) TSCategoryGroupViewModel *viewModel;
@@ -49,7 +49,7 @@
         make.height.equalTo(@(56.0));
     }];
     [self.view layoutIfNeeded];
-   UIView *line = [self.view cms_addLineAt:CGPointMake(0, self.fittleView.bottom) isVertical:NO length:kScreenWidth];
+   UIView *line = [self.view ts_addLineAt:CGPointMake(0, self.fittleView.bottom) isVertical:NO length:kScreenWidth];
     [self.view addSubview:self.collectionView];
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.equalTo(self.view);

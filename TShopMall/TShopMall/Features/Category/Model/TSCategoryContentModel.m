@@ -8,5 +8,11 @@
 #import "TSCategoryContentModel.h"
 
 @implementation TSCategoryContentModel
+- (NSString *)TwoLevelTitle{
+    return @"产品类型";
+}
 
+- (NSString *)goodsListTitle{
+    return @"推荐商品";
+}
 @end

@@ -144,3 +144,11 @@ UIKIT_EXTERN NSString * const kAboutMeAgreementUrl;
 UIKIT_EXTERN NSString * const kSecurCenterAgreementUrl;//安全中心协议
 UIKIT_EXTERN NSString * const kMineGetAllProvince;//获取全部省和直辖市
 UIKIT_EXTERN NSString * const kMineGetAllCityByProvinceUuid;//根据省份uuid获取它下面的城市
+UIKIT_EXTERN NSString * const kMineGetPublicKey;//获取公钥密钥
+UIKIT_EXTERN NSString * const kMineCheckWhetherSetWithdrawalPwd;//校验该用户是否设置过提现密码
+UIKIT_EXTERN NSString * const kMineCheckWithdrawalPwd;//校验提现密码是否正确
+UIKIT_EXTERN NSString * const kMineCheckRealAuth;//查询是否已实名认证
+UIKIT_EXTERN NSString * const kMineRealAuth;//实名认证
+///获取指定类型的授权协议（实名认证协议：2 合伙人协议：3）
+UIKIT_EXTERN NSString * const kShopStatement; 
+

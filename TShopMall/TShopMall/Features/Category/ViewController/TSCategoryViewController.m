@@ -41,23 +41,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self addChildViewController:self.container];
-    
-//    @weakify(self);
-//    [self.KVOController observe:self.dataController keyPath:@"kinds" options:(NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew) block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
-//        @strongify(self)
-//        if (self.dataController.kinds) {
-//            [self.kindViewModel viewModelWithKinds:self.dataController.kinds selectedRow:0];
-//            [self.tableView reloadData];
-//        }
-//    }];
-//    
-//    [self.KVOController observe:self.dataController keyPath:@"sections" options:(NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew) block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
-//        @strongify(self)
-//        if (self.dataController.sections) {
-//            self.container.dataSource = self;
-//            [self.container showContentAtPage:0];
-//        }
-//    }];
 
     __weak __typeof(self)weakSelf = self;
     [self.dataController fetchKindsComplete:^(BOOL isSucess) {
@@ -167,31 +150,19 @@
     if (tableView == self.leftTableView) {
         return nil;
     }
-    if (section != 0) {
-        UIView *view = [UIView new];
-        UILabel *titleLabel = [UILabel new];
-        titleLabel = [[UILabel alloc] init];
-        titleLabel.text = section==1?@"产品类型":@"推荐商品";
-        titleLabel.font = KFont(PingFangSCMedium, 14);
-        titleLabel.textAlignment = NSTextAlignmentLeft;
-        titleLabel.textColor = KTextColor;
-        [view addSubview:titleLabel];
-        [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(view).offset(16);
-            make.centerY.equalTo(view);
-        }];
-        return view;
-    }
-    return nil;
+    return [self loadContainerHeaderViewWithSection:section];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if (tableView == self.leftTableView) {
         return 0;
     }else{
-        if (section != 0) {
-            return 32;
+        if (section == 1) {
+            return self.dataController.sections[self.kindViewModel.selectedRow].TwoLevel.count?32:0;
+        }else if (section == 2){
+            return self.dataController.sections[self.kindViewModel.selectedRow].goodsList.count?32:0;
         }
+        else
         return 0;
     }
 }
@@ -311,5 +282,27 @@
             [strongSelf.container showContentAtPage:0];
         }
     }];
+}
+
+- (UIView *)loadContainerHeaderViewWithSection:(NSInteger)section{
+    TSCategoryContentModel *model = self.dataController.sections[self.kindViewModel.selectedRow];
+    if (section == 1 && model.TwoLevel.count == 0) {
+        return nil;
+    }else if (section == 2 && model.goodsList.count == 0){
+        return nil;
+    }
+    UIView *view = [UIView new];
+    UILabel *titleLabel = [UILabel new];
+    titleLabel = [[UILabel alloc] init];
+    titleLabel.text = section==1?model.TwoLevelTitle:model.goodsListTitle;
+    titleLabel.font = KFont(PingFangSCMedium, 14);
+    titleLabel.textAlignment = NSTextAlignmentLeft;
+    titleLabel.textColor = KTextColor;
+    [view addSubview:titleLabel];
+    [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(view).offset(16);
+        make.centerY.equalTo(view);
+    }];
+    return view;
 }
 @end

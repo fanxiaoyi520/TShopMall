@@ -21,6 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, readonly) TSUserInfoManager *currentUserInfo;
 /// 用户唯一标识（设备唯一标识）
 @property (nonatomic, copy) NSString *clientID;
+
 /// app版本号
 @property(nonatomic, copy) NSString *appVersion;
 /** 是否是第一次进入APP  */

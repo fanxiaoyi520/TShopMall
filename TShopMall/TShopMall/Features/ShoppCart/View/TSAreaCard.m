@@ -21,6 +21,7 @@
 @property (nonatomic, strong) TSAreaView *areaView;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) TSAreaIndexView *indexView;
+@property (nonatomic, strong) TSAreaIndexIndeView *indexIndeView;
 @end
 
 @implementation TSAreaCard
@@ -78,7 +79,7 @@
     self.indexView.indexs = keys;
     [self.tableView reloadData];
     if (keys.count == 0) {
-        TSEmptyAlertView.new.alertInfo(@"未查询到ju数据, 请刷新", @"刷新").alertImage(@"alert_net_error").show(self.tableView, @"top", ^{
+        TSEmptyAlertView.new.alertInfo(@"未查询到数据, 请刷新", @"刷新").alertImage(@"alert_net_error").show(self.tableView, @"top", ^{
             [self.delegate reloadData];
         });
     } else {
@@ -226,7 +227,14 @@
         make.right.equalTo(self.mas_right).offset(-KRateW(16.0));
         make.centerY.equalTo(self.tableView);
         make.height.mas_equalTo(0);
-        make.width.mas_equalTo(72.0);
+        make.width.mas_equalTo(16.0);
+    }];
+    
+    [self.indexIndeView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.indexView.mas_left).offset(-KRateW(8.0));
+        make.width.mas_equalTo(KRateW(44.0));
+        make.height.mas_equalTo(KRateW(36.0));
+        make.centerY.equalTo(self.indexView.mas_top);
     }];
 }
 
@@ -337,12 +345,35 @@
     [self addSubview:self.indexView];
     
     __weak typeof(self) weakSelf = self;
-    self.indexView.indexChanged = ^(NSInteger index) {
+    self.indexView.indexChanged = ^(NSInteger index, NSString *tag) {
+        [UIView animateWithDuration:0.3 animations:^{
+            weakSelf.indexIndeView.indeDes.text = tag;
+            [weakSelf.indexIndeView mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.centerY.equalTo(weakSelf.indexView.mas_top).offset(KRateW(28.0) * (index + 1) - KRateW(28.0)/2.0);
+            }];
+            [weakSelf layoutSubviews];
+        }];
+        
         [weakSelf.tableView scrollToRow:0 inSection:index atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    };
+    self.indexView.shouldShowIndeImg = ^(BOOL show) {
+        [weakSelf.indexIndeView shouldShow:show];
     };
     
     return self.indexView;
 }
+
+- (TSAreaIndexIndeView *)indexIndeView{
+    if (_indexIndeView) {
+        return _indexIndeView;
+    }
+    self.indexIndeView = [TSAreaIndexIndeView new];
+    self.indexIndeView.hidden = YES;
+    [self addSubview:self.indexIndeView];
+    
+    return self.indexIndeView;
+}
+
 @end
 
 
@@ -564,7 +595,9 @@
 
 - (instancetype)init{
     if (self == [super init]) {
-        [self layouView];
+        self.backgroundColor = KHexColor(@"#EAEAEA");
+        self.layer.cornerRadius = KRateW(8.0);
+        self.layer.masksToBounds = YES;
     }
     return self;
 }
@@ -577,7 +610,7 @@
 
 - (void)tapAction:(UIButton *)sender{
     if (sender.selected == YES) return;
-    for (UIButton *btn in self.bgView.subviews) {
+    for (UIButton *btn in self.subviews) {
         if (btn.tag == sender.tag) {
             btn.selected = YES;
         } else {
@@ -585,15 +618,15 @@
         }
     }
     self.lastTag = sender.tag;
-    [self updateIndeImgae:sender.tag];
-    self.indeDes.text = self.indexs[sender.tag];
+    
+    self.shouldShowIndeImg(YES);
+    self.indexChanged(sender.tag, self.indexs[sender.tag]);
 }
 
 - (void)configIndexUI{
-    for (UIView *view in self.bgView.subviews) {
+    for (UIView *view in self.subviews) {
         [view removeFromSuperview];
     }
-    [self.bgView layoutIfNeeded];
     CGFloat h = KRateW(28.0);
     for (NSInteger i=0; i<self.indexs.count; i++) {
         UIButton *btn = [UIButton new];
@@ -601,62 +634,46 @@
         [btn setTitleColor:KHexColor(@"#333333") forState:UIControlStateSelected];
         btn.titleLabel.font = KRegularFont(8.0);
         [btn setTitle:self.indexs[i] forState:UIControlStateNormal];
-        [self.bgView addSubview:btn];
+        [self addSubview:btn];
         [btn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.equalTo(self.bgView);
-            make.top.equalTo(self.bgView.mas_top).offset(h * i);
+            make.left.right.equalTo(self);
+            make.top.equalTo(self.mas_top).offset(h * i);
             make.height.mas_equalTo(h);
         }];
         btn.tag = i;
+        btn.userInteractionEnabled = NO;
         [btn addTarget:self action:@selector(tapAction:) forControlEvents:UIControlEventTouchUpInside];
     }
 }
 
-- (void)bgViewPanGestureAction:(UIPanGestureRecognizer *)panGes{
-    
-}
-
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     UITouch *touch = [touches anyObject];
+    self.shouldShowIndeImg(YES);
     [self handleTouch:touch];
 }
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self defaultUI];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        self.shouldShowIndeImg(NO);
+    });
 }
 
-- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(nullable UIEvent *)event{
+- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     UITouch *touch = [touches anyObject];
     [self handleTouch:touch];
 }
 
 - (void)handleTouch:(UITouch *)touch{
     CGPoint point = [touch locationInView:self];
-    CGFloat availableX = self.frame.size.width - KRateW(16.0);
-    if (point.x >= availableX) {
-        self.indeImg.hidden = NO;
-        self.indeImg.alpha = 1;
-        NSInteger index = point.y / KRateW(28.0);
-        NSString *str = self.indexs[index];
-        self.indeDes.text = str;
-        [self updateBtnStatus:index];
-        [self updateIndeImgae:index];
-        if (self.indexChanged) {
-            self.indexChanged(index);
-        }
-    } else {
-        [self performSelector:@selector(defaultUI) afterDelay:2.3];
-    }
+    NSInteger index = point.y / KRateW(28.0);
+    NSString *str = self.indexs[index];
+    [self updateBtnStatus:index];
+    self.indexChanged(index, str);
 }
 
 - (void)defaultUI{
-    [UIView animateWithDuration:0.4 animations:^{
-        self.indeImg.alpha = 0;
-    } completion:^(BOOL finished) {
-        self.indeImg.hidden = YES;
-    }];
-    
-    for (UIButton *btn in self.bgView.subviews) {
+    for (UIButton *btn in self.subviews) {
         btn.selected = NO;
     }
 }
@@ -664,7 +681,7 @@
 - (void)updateBtnStatus:(NSInteger)index{
     if (self.lastTag == index) return;
     self.lastTag = index;
-    for (UIButton *btn in self.bgView.subviews) {
+    for (UIButton *btn in self.subviews) {
         if (btn.tag == index) {
             btn.selected = YES;
         } else {
@@ -673,58 +690,24 @@
     }
 }
 
-- (void)updateIndeImgae:(NSInteger)index{
-    [UIView animateWithDuration:0.3 animations:^{
-        [self.indeImg mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.centerY.equalTo(self.bgView.mas_top).offset(KRateW(28.0) * (index + 1) - KRateW(28.0)/2.0);
-        }];
-        [self layoutSubviews];
-    }];
-}
+@end
 
-- (void)layouView{
-    [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.top.bottom.equalTo(self);
-        make.width.mas_equalTo(KRateW(16.0));
-    }];
-    
-    [self.indeImg mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.bgView.mas_left).offset(-KRateW(8.0));
-        make.width.mas_equalTo(KRateW(44.0));
-        make.height.mas_equalTo(KRateW(36.0));
-        make.centerY.equalTo(self.bgView.mas_top).offset(KRateW(28.0));
-    }];
-    
-    [self.indeDes mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.indeImg.mas_centerX).offset(-KRateW(3.0));
-        make.top.bottom.equalTo(self.indeImg);
-    }];
-}
+@implementation TSAreaIndexIndeView
 
-- (UIView *)bgView{
-    if (_bgView) {
-        return _bgView;
+- (instancetype)init{
+    if (self == [super init]) {
+        self.image = KImageMake(@"address_index_bg");
     }
-    self.bgView = [UIView new];
-    self.bgView.layer.cornerRadius = KRateW(8.0);
-    self.bgView.layer.masksToBounds = YES;
-    self.bgView.backgroundColor = KHexColor(@"#EAEAEA");
-    [self addSubview:self.bgView];
-    self.bgView.userInteractionEnabled = NO;
-    
-    return self.bgView;
+    return self;
 }
 
-- (UIImageView *)indeImg{
-    if (_indeImg) {
-        return _indeImg;
-    }
-    self.indeImg = [UIImageView new];
-    self.indeImg.hidden = YES;
-    self.indeImg.image = KImageMake(@"address_index_bg");
-    [self addSubview:self.indeImg];
-    
-    return self.indeImg;
+- (void)shouldShow:(BOOL)show{
+    self.alpha = show==YES? 0:1;
+    [UIView animateWithDuration:0.4 animations:^{
+        self.alpha = show==YES? 1:0;
+    } completion:^(BOOL finished) {
+        self.hidden = !show;
+    }];
 }
 
 - (UILabel *)indeDes{
@@ -734,10 +717,15 @@
     self.indeDes = [UILabel new];
     self.indeDes.font = KFont(PingFangSCMedium, 24.0);
     self.indeDes.textColor = KHexColor(@"#FFFFFF");
-    [self.indeImg addSubview:self.indeDes];
+    [self addSubview:self.indeDes];
+    [self.indeDes mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.mas_centerX).offset(-KRateW(3.0));
+        make.top.bottom.equalTo(self);
+    }];
     
     return self.indeDes;
 }
+
 
 @end
 

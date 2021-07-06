@@ -13,6 +13,15 @@
 
 @implementation TSRankUserModel
 
+- (NSString *)mobile {
+    if (_mobile.length >= 11) {
+        NSString *centerStr = [_mobile substringWithRange:NSMakeRange(3,4)];
+        return [_mobile stringByReplacingOccurrencesOfString:centerStr withString:@"****"];
+    }else {
+        return _mobile;
+    }
+}
+
 @end
 
 @implementation TSRankSectionItemModel

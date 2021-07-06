@@ -46,31 +46,28 @@
     [self hiddenNavigationBar];
     [self configRefreshFooterWithTarget:self selector:@selector(mjFooterRefresh:)];
     [self configRefreshHeaderWithTarget:self selector:@selector(mjHeadreRefresh:)];
+    
+    [self showSearchResultView];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    
-    [self showSearchResultView];
 }
 
 - (void)refreshGoods{
     if (self.sections.count == 0) {
         [self shouldShowSkeletonView:YES];
     }
+    self.dataCon.keyword = self.searchKey;
     __weak typeof(self) weakSelf = self;
-    [self.dataCon queryGoods:^(NSError *error) {
+    [self.dataCon queryGoods:^(NSString *message) {
         [self shouldShowSkeletonView:NO];
-        if (error) {
+        if (message.length != 0) {
             
         } else {
             self.sections = self.dataCon.lists;
         }
-        BOOL isNoMoreData = NO;
-        if (self.dataCon.totalNum == self.dataCon.currentNum) {
-            isNoMoreData = YES;
-        }
-        [weakSelf endRefreshIsNoMoreData:isNoMoreData isEmptyData:weakSelf.dataCon.isEmptyView];
+        [weakSelf endRefreshIsNoMoreData:!self.dataCon.hasMoreData isEmptyData:weakSelf.dataCon.isEmptyView];
     }];
 }
 
@@ -97,13 +94,14 @@
 
 - (void)showSytleChanged:(UIButton *)sender{
     sender.selected = !sender.selected;
+    
+    __weak typeof(self) weakSelf = self;
+    [self.dataCon updateUIStyle:!sender.selected complete:^{
+        weakSelf.sections = weakSelf.dataCon.lists;
+    }];
     if (sender.selected == YES) {
-        self.dataCon.isGrid = NO;
-        self.sections = [self.dataCon sectionsForUIWithDatas:self.dataCon.result.list];
         [self updateCollectionBackgroundColor:UIColor.whiteColor];
     } else {
-        self.dataCon.isGrid = YES;
-        self.sections = [self.dataCon sectionsForUIWithDatas:self.dataCon.result.list];
         [self updateCollectionBackgroundColor:KHexColor(@"#F4F4F5")];
     }
 }
@@ -149,6 +147,7 @@
     [self.view addSubview:self.naviView];
     __weak typeof(self) weakSelf = self;
     self.naviView.searchView.startSearch = ^(NSString *key) {
+        if (key.length == 0) return;
         [TSSearchKeyViewModel handleHistoryKeys:key];
         [weakSelf.dataCon defaultConfig];
         weakSelf.searchKey = key;

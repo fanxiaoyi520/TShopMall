@@ -39,7 +39,7 @@
     //点击空白区域回收键盘
     maneger.shouldResignOnTouchOutside = YES;
     //关闭自带键盘工具条
-    maneger.enableAutoToolbar = NO;
+//    maneger.enableAutoToolbar = NO;
     //是否显示占位文字
     maneger.shouldShowToolbarPlaceholder = NO;
     //设置键盘textField的距离，不能小于零，默认是10.0
@@ -92,6 +92,7 @@
 }
 
 - (void)getNetData {
+        
     [[TSServicesManager sharedInstance].userInfoService getUserInfoAccountId:[TSUserInfoManager userInfo].accountId success:^(TSUser * _Nonnull user) {
         [[TSUserInfoManager userInfo] updateUserInfo:nil];
     } failure:nil];

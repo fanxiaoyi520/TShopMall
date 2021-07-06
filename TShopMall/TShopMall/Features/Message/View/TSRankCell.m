@@ -52,7 +52,7 @@
     self.headImgV.layer.masksToBounds = YES;
     self.headImgV.layer.cornerRadius = 33/2;
     [self.headImgV mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.usernameLabel.mas_left).with.offset(-2);
+        make.right.equalTo(self.usernameLabel.mas_left).with.offset(-5);
         make.top.offset(10);
         make.bottom.offset(-10);
         make.width.mas_equalTo(33);

@@ -29,6 +29,7 @@ target 'TShopMall' do
     pod 'NTESQuickPass'
     pod 'JAFMultiDelegate'
     pod 'TZImagePickerController'
+    pod "JWT"
   target 'TShopMallTests' do
     inherit! :search_paths
     # Pods for testing
