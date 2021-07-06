@@ -27,6 +27,7 @@
     webRequest.animatingView = self.context.view;
     [webRequest startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
         
+        NSLog(@"oneyian!");
         BOOL status = request.responseModel.isSucceed;
         
         //延时

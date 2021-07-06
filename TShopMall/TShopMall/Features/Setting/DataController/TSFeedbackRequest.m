@@ -45,6 +45,7 @@
 
 - (NSDictionary<NSString *,NSString *> *)requestHeaderFieldValueDictionary {
     NSMutableDictionary *comHeader = [self commonHeader];
+    [comHeader setValue:@"application/json" forKey:@"Content-Type"];
     [comHeader setValue:[TSUserInfoManager userInfo].accessToken forKey:@"ihome-token"];
     return comHeader;
 }
@@ -54,7 +55,7 @@
     if (self.content) {
         [params setValue:self.content forKey:@"content"];
     }
-    [params setValue:@"1" forKey:@"sourceType"];
+    [params setValue:@(1) forKey:@"sourceType"];
     
     NSMutableDictionary *comBody = [self commonBady];
     [comBody setValuesForKeysWithDictionary:params];
