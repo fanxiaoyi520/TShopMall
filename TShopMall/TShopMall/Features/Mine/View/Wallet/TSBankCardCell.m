@@ -83,8 +83,8 @@
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"Bank" ofType:@"plist"];
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
     NSArray *array = [dic allValues];
-    if ([array containsObject:kModel.bankName]) {
-        _bankImageCion.image = KImageMake(kModel.bankName);
+    if ([array containsObject:kModel.accountBank]) {
+        _bankImageCion.image = KImageMake(kModel.accountBank);
     } else {
         _bankImageCion.image = KImageMake(@"其他银行");
     }
