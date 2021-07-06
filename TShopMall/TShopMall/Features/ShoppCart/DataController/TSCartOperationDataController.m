@@ -56,7 +56,7 @@
         if (idStr.length == 0) {
             idStr = [NSString stringWithFormat:@"remove,%@,%@", cart.productId, cart.attrIds];
         } else {
-            idStr = [NSString stringWithFormat:@";remove,%@,%@", cart.productId, cart.attrIds];
+            idStr = [NSString stringWithFormat:@"%@;remove,%@,%@", idStr,cart.productId, cart.attrIds];
         }
     }
     NSDictionary *params = @{
@@ -76,7 +76,8 @@
 + (void)handleRes:(SSGenaralRequest *)resq{
     [[NSNotificationCenter defaultCenter] postNotificationName:TS_SHOULD_REFRESH_CARTS_NUMBER object:nil];
     if (resq.responseModel.isSucceed == NO) {
-        [Popover popToastOnWindowWithText:resq.responseObject[@"message"]];
+         NSString *message = [NSString stringWithFormat:@"%@", resq.responseObject[@"message"]];
+        [Popover popToastOnWindowWithText:message];
     }
 }
 

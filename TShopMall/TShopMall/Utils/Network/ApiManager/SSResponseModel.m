@@ -39,4 +39,11 @@
     return responseModel;
 }
 
+- (NSString *)responseMsg{
+    if ([_responseMsg isKindOfClass:[NSNull class]] || _responseMsg.length == 0) {
+        return @"";
+    }
+    return _responseMsg;
+}
+
 @end
