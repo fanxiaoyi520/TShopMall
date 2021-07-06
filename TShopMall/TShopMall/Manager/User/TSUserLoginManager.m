@@ -32,14 +32,14 @@
 }
 
 - (void)logout{
-    TSLogoutRequest *request = [TSLogoutRequest new];
-    [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
-        [[TSUserInfoManager userInfo] clearUserInfo];
-        if (self.logoutBlock) {
-            self.logoutBlock();
+    @weakify(self);
+    [[TSServicesManager sharedInstance].acconutService fetchLogoutComplete:^(BOOL isSucess) {
+        if (isSucess) {
+            @strongify(self)
+            if (self.logoutBlock) {
+                self.logoutBlock();
+            }
         }
-    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-        
     }];
 }
 
@@ -79,14 +79,13 @@
                 [self otherLoginWithAnimation:YES needClose:YES];
             }];
         };
-//        oneClickLoginVC.loginBlock = self.loginBlock;
         oneClickLoginVC.loginBlock = ^(BOOL sucess){
             @strongify(self)
             if (sucess) {
                 self.loginBlock();
             }else
             {
-                [self otherLoginWithAnimation:NO needClose:NO];
+                
             }
             
         };

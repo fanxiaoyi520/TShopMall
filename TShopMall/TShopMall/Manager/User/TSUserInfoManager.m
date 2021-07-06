@@ -53,6 +53,7 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSData *data = [userDefaults objectForKey:UserInfo_Save_Key];
     TSUserInfoManager *userInfo = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    
     if (!userInfo) {
         userInfo = [[TSUserInfoManager alloc] init];
     }

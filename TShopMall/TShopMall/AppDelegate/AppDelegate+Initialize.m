@@ -92,6 +92,7 @@
 }
 
 - (void)getNetData {
+        
     [[TSServicesManager sharedInstance].userInfoService getUserInfoAccountId:[TSUserInfoManager userInfo].accountId success:^(TSUser * _Nonnull user) {
         [[TSUserInfoManager userInfo] updateUserInfo:nil];
     } failure:nil];
