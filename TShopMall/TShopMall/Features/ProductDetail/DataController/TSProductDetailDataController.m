@@ -458,6 +458,8 @@
         if (request.responseModel.isSucceed) {
             [[NSNotificationCenter defaultCenter] postNotificationName:TS_SHOULD_REFRESH_CARTS_NUMBER object:nil];
             [Popover popToastOnWindowWithText:@"加入购物车成功"];
+        }else{
+            [Popover popToastOnWindowWithText:request.responseModel.responseMsg];
         }
         
         if (complete) {
@@ -465,7 +467,6 @@
         }
         
         } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-
     }];
 }
 

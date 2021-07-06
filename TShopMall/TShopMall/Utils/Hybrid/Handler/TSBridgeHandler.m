@@ -241,7 +241,8 @@
 
 #pragma mark - 刷新页面
 -(void)refreshData:(NSDictionary *)param{
-    
+    WKWebView *webview = param[@"webview"];
+    [webview reload];
 }
 
 #pragma mark - Private

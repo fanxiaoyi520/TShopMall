@@ -130,6 +130,7 @@
         if (result) {
             [self.collectionView reloadData];
             [self.topCartBtn setBadgeValue:self.dataController.cartNumber];
+            [self.bottomView setCartBadge:self.dataController.cartNumber];
             [self fetchFreightInventory];
         }else{
             self.stockoutView.hidden = NO;
@@ -467,6 +468,7 @@
                                                                              group:dispatch_group_create()
                                                                           complete:^(BOOL isSucess) {
             [strongSelf.topCartBtn setBadgeValue:strongSelf.dataController.cartNumber];
+            [strongSelf.bottomView setCartBadge:strongSelf.dataController.cartNumber];
         }];
         
     }];
