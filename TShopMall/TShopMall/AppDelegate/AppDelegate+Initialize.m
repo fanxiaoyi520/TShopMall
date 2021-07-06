@@ -77,7 +77,7 @@
         NSInteger state = status == AFNetworkReachabilityStatusNotReachable?0:1;
         if (state != 0) {
             @strongify(self)
-            [self getNetData];
+            [self fetchGlobalInterfaceSource];
         }
        
     }];
@@ -91,7 +91,7 @@
     [TSServicesManager sharedInstance].uploadImageService = [TSUploadImageService new];
 }
 
-- (void)getNetData {
+- (void)fetchGlobalInterfaceSource {
         
     [[TSServicesManager sharedInstance].userInfoService getUserInfoAccountId:[TSUserInfoManager userInfo].accountId success:^(TSUser * _Nonnull user) {
         [[TSUserInfoManager userInfo] updateUserInfo:nil];

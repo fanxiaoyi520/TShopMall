@@ -38,7 +38,7 @@
     self.name.text = self.cart.productName;
     self.specification.text = self.cart.attrValueStr;
     self.numView.hidden  = NO;
-    self.numView.number.text = [NSString stringWithFormat:@"%ld", self.cart.buyNum];
+    [self.numView updateNumberText:[NSString stringWithFormat:@"%ld", self.cart.buyNum]];
     self.priceTitle.text = @"提货价";
     self.price.text = [NSString stringWithFormat:@"¥%d", self.cart.singleMarketPrice.intValue];
     

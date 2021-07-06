@@ -39,6 +39,15 @@
 
 }
 
+- (void)fetchLogoutComplete:(void (^)(BOOL))complete{
+    TSLogoutRequest *request = [TSLogoutRequest new];
+    [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+        [[TSUserInfoManager userInfo] clearUserInfo];
+        complete(YES);
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        
+    }];
+}
 
 -(void)fetchRefershTokenComplete:(void(^)(BOOL isSucess))complete{
     TSLogoutRequest *request = [TSLogoutRequest new];

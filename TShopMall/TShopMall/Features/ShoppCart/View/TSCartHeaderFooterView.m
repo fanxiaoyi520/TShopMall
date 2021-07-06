@@ -96,7 +96,7 @@
         return _title;
     }
     self.title = [UILabel new];
-    self.title.text = @"热销推荐";
+    self.title.text = @"爆款推荐";
     self.title.font = KFont(PingFangSCRegular, 16.0);
     self.title.textColor = KHexColor(@"#2D3132");
     [self.contentView addSubview:self.title];

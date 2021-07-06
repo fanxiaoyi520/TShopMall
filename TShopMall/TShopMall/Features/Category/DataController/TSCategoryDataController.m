@@ -18,7 +18,7 @@
 
 -(void)fetchKindsComplete:(void(^)(BOOL isSucess))complete{
 
-    if (![AFNetworkReachabilityManager sharedManager].reachable) {
+    if ([AFNetworkReachabilityManager sharedManager].networkReachabilityStatus == AFNetworkReachabilityStatusNotReachable) {
         NSString *content = [TSJsonCacheData readPlistWithKey:@"categoryList"];
         if (content) {
             [self setUITemplateWithResponseData:content];
