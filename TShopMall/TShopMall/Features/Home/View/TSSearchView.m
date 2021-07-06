@@ -95,6 +95,11 @@
         TSRecomendGoods *obj = cell.obj;
         [self.controller performSelector:@selector(recomentGoodsSelected:) withObject:obj.goodsUuid];
     }
+    if ([cell.obj isKindOfClass:[TSRecomendGoods class]]) {
+        TSRecomendGoods *obj = cell.obj;
+        NSString *uri = [[TSServicesManager sharedInstance].uriHandler configUriWithTypeValue:@"Goods" objectValue:obj.uuid];
+        [[TSServicesManager sharedInstance].uriHandler openURI:uri];
+    }
 }
 
 - (void)layoutSubviews{

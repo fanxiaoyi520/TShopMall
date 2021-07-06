@@ -68,16 +68,17 @@
     NSMutableDictionary *commonRequestHeader = [NSMutableDictionary dictionary];
     [commonRequestHeader setValue:@"platform_tcl_shop" forKey:@"platform"];
     [commonRequestHeader setValue:@"thome" forKey:@"storeUuid"];
-//  [commonRequestHeader setValue:@"tclplus" forKey:@"storeUuid"];
     [commonRequestHeader setValue:@"TCL" forKey:@"t-id"];
     [commonRequestHeader setValue:@"02" forKey:@"terminalType"];
     
     if ([TSGlobalManager shareInstance].currentUserInfo.accessToken.length > 0) {
         NSDictionary *dic = [[TSUserInfoManager userInfo].accessToken jwtDecodeWithJwtString];
         double expTime = [dic[@"exp"] doubleValue];
+        double iatTime = [dic[@"iat"] doubleValue];
+        
         NSTimeInterval nowTime = (long long)[[NSDate date] timeIntervalSince1970];
-        double time  = expTime - nowTime;
-        if (time < 5*60) {
+        double time  = (expTime - iatTime) * .7 + iatTime;
+        if (nowTime > time) {
             [[TSServicesManager sharedInstance].acconutService fetchRefershToken];
         }
         [commonRequestHeader setValue:[TSGlobalManager shareInstance].currentUserInfo.accessToken forKey:@"accessToken"];
