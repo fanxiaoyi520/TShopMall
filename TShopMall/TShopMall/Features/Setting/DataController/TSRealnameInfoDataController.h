@@ -14,9 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 /** sections  */
 @property(nonatomic, strong, readonly) NSMutableArray<TSRealnameInfoSectionModel *> *sections;
 
-- (void)fetchRealnameInfoContentsComplete:(void(^)(BOOL isSucess))complete;
+- (void)fetchRealnameInfoContentsComplete;
 
-
+- (void)checkRealAuthComplete:(void(^)(BOOL isSucess))complete;
 @end
 
 NS_ASSUME_NONNULL_END

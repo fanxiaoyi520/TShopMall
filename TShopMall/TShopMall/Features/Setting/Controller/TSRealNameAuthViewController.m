@@ -24,14 +24,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-  
+    
+    TSAgreementView *agreementView = [[TSAgreementView  alloc] initWithTitle:@"" AndState:@"2"];
+    [agreementView show];
     // Do any additional setup after loading the view.
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    TSAgreementView *agreementView = [TSAgreementView agreementViewWithTitle:@"TCL App实名认证服务协议"];
-    [agreementView show];
+    
+  
 }
 
 - (void)setupBasic {
@@ -95,6 +97,12 @@
 #pragma mark - TSRealNameAuthCellDelegate
 /** 开始实名认证 */
 - (void)startAuthWithRealname:(NSString *)realname idcard:(NSString *)idcard authButton:(UIButton *)authButton {
+    MJWeakSelf
+    [self.dataController realAuthWithName:realname AndIdCard:idcard complete:^(BOOL isSucess) {
+        if (isSucess) {
+            [weakSelf.navigationController popViewControllerAnimated:true];
+        }
+    }];
     NSLog(@"realname == %@, idcard = %@", realname, idcard);
     
 }

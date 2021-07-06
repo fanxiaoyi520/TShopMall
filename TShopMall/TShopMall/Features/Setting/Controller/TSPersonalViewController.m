@@ -355,7 +355,7 @@
                 [weakSelf.navigationController pushViewController:realnameInfoVC animated:YES];
             }
         }];
-      
+        return;
     } else if (indexPath.item == 3) {
         [self showSexAlert];
         return;
