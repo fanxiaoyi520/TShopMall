@@ -14,9 +14,43 @@
 #import "TSLoginByTokenRequest.h"
 #import "TSChangeBindRequest.h"
 #import "TSBindUserByAuthCodeRequest.h"
+#import "TSLogoutRequest.h"
+#import "NSString+Plugin.h"
+
 
 @implementation TSLoginRegisterDataController
+
+
+- (void)fetchAccountPublicKeyComplete:(void(^)(NSString *publicKey))complete {
+    NSString *urlStr = [NSString stringWithFormat:@"%@%@", kAccountCenterApiPrefix, kAccountPublicKeyUrl];
+    NSURL *url = [NSURL URLWithString:urlStr];
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *firsttask = [session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if(error == nil){
+            NSString *publicKey = [data utf8String];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                complete(publicKey);
+            });
+        } else {
+            complete(nil);
+        }
+    }];
+    [firsttask resume];
+
+}
+
+
 -(void)fetchRefershTokenComplete:(void(^)(BOOL isSucess))complete{
+    TSLogoutRequest *request = [TSLogoutRequest new];
+    [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+        [[TSUserInfoManager userInfo] clearUserInfo];
+        complete(YES);
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        
+    }];
+}
+
+-(void)fetchRefershToken{
     NSString *requestUrl = [NSString stringWithFormat:@"%@?appId=%@&tenantId=%@&appSecret=%@&userName=%@",kAccountRefershTokenUrl,kAppId,@"tcl",kAppSecret, [TSUserInfoManager userInfo].userName];
 
     SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithBaseUrl:kAccountCenterApiPrefix RequestUrl:requestUrl requestMethod:YTKRequestMethodGET requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON requestHeader:@{@"refreshToken":[TSUserInfoManager userInfo].refreshToken} requestBody:@{} needErrorToast:YES];
@@ -26,17 +60,14 @@
             userInfo.accessToken = request.responseModel.originalData[@"accessToken"];
             userInfo.refreshToken = request.responseModel.originalData[@"refreshToken"];
             [[TSUserInfoManager userInfo] saveUserInfo:userInfo];
-            if (complete) {
-                complete(YES);
-            }
+           
         }
         
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-        if (complete) {
-            complete(NO);
-        }
+        
     }];
 }
+
 -(void)fetchBindUserByAuthCode:(NSString *)token
                           type:(NSString *)type
                     platformId:(NSString *)platformId

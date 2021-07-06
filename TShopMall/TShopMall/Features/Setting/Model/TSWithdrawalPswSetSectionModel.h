@@ -19,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface TSWithdrawalPswSetSectionItemModel : TSUniversaItemModel
+/** 是否设置过提现密码  */
+@property(nonatomic, assign) BOOL hasSet;
 
 @end
 

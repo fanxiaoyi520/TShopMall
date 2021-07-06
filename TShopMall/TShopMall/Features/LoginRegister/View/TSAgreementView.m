@@ -7,7 +7,7 @@
 
 #import "TSAgreementView.h"
 #import "TSUniversalFlowLayout.h"
-
+#import "TSWKWebView.h"
 @implementation TSAgreementSectionModel
 
 @end
@@ -17,32 +17,48 @@
 @end
 
 @interface TSAgreementDataController ()
-/** sections  */
-@property(nonatomic, strong) NSMutableArray<TSAgreementSectionModel *> *sections;
-
+@property(nonatomic, strong) TSAgreementModel *agreementModel ;
 @end
 
 @implementation TSAgreementDataController
-
-- (void)fetchAgreementContentsComplete:(void(^)(BOOL isSucess))complete {
-    NSMutableArray *sections = [NSMutableArray array];
-    {
-        NSMutableArray *items = [NSMutableArray array];
-        TSAgreementSectionItemModel *item = [[TSAgreementSectionItemModel alloc] init];
-        item.content = @"协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容\n协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容\n协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容\n协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容\n协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容\n协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容\n协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容\n协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容协议内容end";
-        item.cellHeight = [item.content heightForFont:KRegularFont(12) width:(kScreenWidth - KRateW(36) * 2 - 48)];
-        item.identify = @"TSAgreementCell";
-        [items addObject:item];
-        TSAgreementSectionModel *section = [[TSAgreementSectionModel alloc] init];
-        section.column = 1;
-        section.items = items;
-        section.sectionInset = UIEdgeInsetsMake(0, 0, 0, 8);
-        [sections addObject:section];
-    }
-    self.sections = sections;
-    if (complete) {
-        complete(YES);
-    }
+ 
+ 
+- (void)fetchAgreementContentsWithState:(NSString *)state Complete:(void (^)(BOOL))complete {
+    NSMutableDictionary *body = [NSMutableDictionary dictionary];
+    [body setValue:state forKey:@"state"];
+    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kShopStatement
+                                                               requestMethod:YTKRequestMethodPOST
+                                                       requestSerializerType:YTKRequestSerializerTypeHTTP
+                                                      responseSerializerType:YTKResponseSerializerTypeJSON
+                                                               requestHeader:@{}
+                                                                 requestBody:body
+                                                              needErrorToast:NO];
+    [request startWithCompletionBlockWithSuccess:^(__kindof SSGenaralRequest * _Nonnull request) {
+        if (request.responseModel.isSucceed) {
+            NSArray *data = request.responseObject[@"data"];
+            if (data != nil && data.count) {
+                NSMutableArray *_agreementModels = [NSMutableArray array];
+                for (int i = 0; i < data.count; i++) {
+                    NSDictionary *dict = data[i];
+                    TSAgreementModel *agreementModel = [[TSAgreementModel alloc] init];
+                    agreementModel.serverUrl = dict[@"serverUrl"];
+                    agreementModel.title = dict[@"title"];
+                    self.agreementModel = agreementModel;
+                }
+                if (complete) {
+                    complete(YES);
+                }
+            }
+        } else {
+            if (complete) {
+                complete(NO);
+            }
+        }
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        if (complete) {
+            complete(NO);
+        }
+    }];
 }
 
 @end
@@ -86,44 +102,45 @@
 @end
 
 
-@interface TSAgreementView ()<UICollectionViewDelegate, UICollectionViewDataSource, UniversalFlowLayoutDelegate, UniversalCollectionViewCellDataDelegate>
+@interface TSAgreementView ()
 /** 背景视图 */
-@property(nonatomic, weak) UIView *contentView;
-/// CollectionView
-@property(nonatomic, weak) UICollectionView *collectionView;
+@property(nonatomic, strong) UIView *contentView;
 /** 标题  */
-@property(nonatomic, weak) UILabel *titleLabel;
+@property(nonatomic, strong) UILabel *titleLabel;
 /** 关闭按钮  */
-@property(nonatomic, weak) UIButton *closeButton;
+@property(nonatomic, strong) UIButton *closeButton;
 /** data */
 @property (nonatomic, strong) TSAgreementDataController *dataController;
 /** title  */
 @property(nonatomic, copy) NSString *title;
 
+
+
+@property(nonatomic, strong) TSWKWebView *webView;
 @end
 
 @implementation TSAgreementView
 
-- (instancetype)initWithTitle:(NSString *)title {
+- (instancetype)initWithTitle:(NSString *)title AndState:(NSString *)state {
     if (self = [super init]) {
         _title = title;
         [self setUpInit];
         __weak __typeof(self)weakSelf = self;
-        [self.dataController fetchAgreementContentsComplete:^(BOOL isSucess) {
-            __strong __typeof(weakSelf)strongSelf = weakSelf;
-            if (isSucess) {
-                [strongSelf.collectionView reloadData];
-            }
+        [self.dataController  fetchAgreementContentsWithState:state Complete:^(BOOL isSucess) {
+            weakSelf.titleLabel.text  = weakSelf.dataController.agreementModel.title;
+            NSString *url = [weakSelf.dataController.agreementModel.serverUrl stringByAppendingString:@"&mode=webview"];
+            [weakSelf.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
         }];
     }
     return self;
 }
 
-+ (instancetype)agreementViewWithTitle:(NSString *)title {
-    return [[self alloc] initWithTitle:title];
++ (instancetype)agreementViewWithTitle:(NSString *)title AndState:(NSString *)state   {
+    return [[self alloc] initWithTitle:title AndState:state];
 }
-
+ 
 - (void)show {
+   
     [[UIApplication sharedApplication].keyWindow addSubview:self];
     [UIView animateWithDuration:.5 animations:^{
         CGRect rect = self.contentView.frame;
@@ -144,21 +161,28 @@
 
 - (void)setUpInit {
     self.contentView.backgroundColor = KWhiteColor;
+   
     self.frame = [[UIScreen mainScreen] bounds];
     self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
     self.contentView.frame = CGRectMake(KRateW(36), kScreenHeight, kScreenWidth - KRateW(36) * 2, kScreenHeight - GK_STATUSBAR_NAVBAR_HEIGHT * 2);
+    [self addSubview:self.contentView];
+    [self.contentView addSubview: self.titleLabel];
+    [self.contentView addSubview:self.webView];
+    [self.contentView addSubview:self.closeButton];
+  
     [self.contentView setCorners:UIRectCornerAllCorners radius:12];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contentView.mas_left).with.offset(42);
         make.right.equalTo(self.contentView.mas_right).with.offset(-42);
         make.top.equalTo(self.contentView.mas_top).with.offset(24);
     }];
-    [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.contentView.mas_left).with.offset(24);
-        make.right.equalTo(self.contentView.mas_right).with.offset(-12);
-        make.top.equalTo(self.titleLabel.mas_bottom).with.offset(16);
-        make.bottom.equalTo(self.contentView.mas_bottom).with.offset(-24);
+    
+    [self.webView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.equalTo(self.contentView);
+        make.top.equalTo(self.titleLabel.mas_bottom);
     }];
+    
+ 
     [self.closeButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.contentView.mas_right).with.offset(0);
         make.centerY.equalTo(self.contentView.mas_top).with.offset(0);
@@ -169,40 +193,21 @@
 
 - (UIView *)contentView {
     if (_contentView == nil) {
-        UIView *contentView = [[UIView alloc] init];
-        _contentView = contentView;
-        [self addSubview:_contentView];
+        _contentView = [[UIView alloc] init];
     }
     return _contentView;
 }
 
-- (UICollectionView *)collectionView {
-    if (_collectionView == nil) {
-        TSUniversalFlowLayout *flowLayout = [[TSUniversalFlowLayout alloc]init];
-        flowLayout.delegate = self;
-        UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero
-                                             collectionViewLayout:flowLayout];
-        _collectionView = collectionView;
-        _collectionView.backgroundColor = KWhiteColor;
-        _collectionView.delegate = self;
-        _collectionView.dataSource = self;
-        _collectionView.showsVerticalScrollIndicator = YES;
-        _collectionView.showsHorizontalScrollIndicator = NO;
-        [self.contentView addSubview:_collectionView];
-    }
-    return _collectionView;
-}
+ 
 
 - (UILabel *)titleLabel {
     if (_titleLabel == nil) {
-        UILabel *titleLabel = [[UILabel alloc] init];
-        _titleLabel = titleLabel;
-        _titleLabel.text = self.title;
+        _titleLabel = [[UILabel alloc] init];
         _titleLabel.font = KFont(PingFangSCMedium, 16);
         _titleLabel.textColor = KTextColor;
         _titleLabel.numberOfLines = 0;
         _titleLabel.textAlignment = NSTextAlignmentCenter;
-        [self.contentView addSubview: _titleLabel];
+       
     }
     return _titleLabel;
 }
@@ -214,7 +219,7 @@
         //_closeButton.hidden = YES;
         [_closeButton setBackgroundImage:KImageMake(@"close_icon") forState:(UIControlStateNormal)];
         [_closeButton addTarget:self action:@selector(closeAction) forControlEvents:(UIControlEventTouchUpInside)];
-        [self insertSubview:_closeButton aboveSubview:self.contentView];
+      
     }
     return _closeButton;
 }
@@ -226,65 +231,17 @@
     return _dataController;
 }
 
+- (TSWKWebView *)webView {
+    if (!_webView) {
+        _webView = [[TSWKWebView alloc]init];
+    }
+    return _webView;
+}
+
 #pragma mark - Actions
 - (void)closeAction {
     [self dismiss];
 }
-
-#pragma mark - UICollectionViewDataSource
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return self.dataController.sections.count;
-}
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    TSAgreementSectionModel *model = self.dataController.sections[section];
-    return model.items.count;
-}
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    TSAgreementSectionModel *model = self.dataController.sections[indexPath.section];
-    TSAgreementSectionItemModel *item = model.items[indexPath.row];
-    Class className = NSClassFromString(item.identify);
-    [collectionView registerClass:[className class] forCellWithReuseIdentifier:item.identify];
-    TSUniversalCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:item.identify forIndexPath:indexPath];
-    cell.indexPath = indexPath;
-    cell.delegate = self;
-    return cell;
-}
-
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-}
-
-#pragma mark - UniversalCollectionViewCellDataDelegate
-- (id)universalCollectionViewCellModel:(NSIndexPath *)indexPath{
-    TSAgreementSectionModel *sectionModel = self.dataController.sections[indexPath.section];
-    return sectionModel.items[indexPath.row];
-}
-
-#pragma mark - UniversalFlowLayoutDelegate
-- (CGFloat)collectionView:(UICollectionView *_Nullable)collectionView
-                   layout:(TSUniversalFlowLayout *_Nullable)collectionViewLayout
-  heightForRowAtIndexPath:(NSIndexPath *_Nullable)indexPath
-                itemWidth:(CGFloat)itemWidth{
-    TSAgreementSectionModel *model = self.dataController.sections[indexPath.section];
-    TSAgreementSectionItemModel *item = model.items[indexPath.row];
-    return item.cellHeight;
-}
-
-- (NSInteger)collectionView:(UICollectionView *_Nullable)collectionView
-                     layout:(TSUniversalFlowLayout *_Nullable)collectionViewLayout
-      columnNumberAtSection:(NSInteger )section{
-    TSAgreementSectionModel *model = self.dataController.sections[section];
-    return model.column;
-}
-
-- (UIEdgeInsets)collectionView:(UICollectionView *_Nullable)collectionView
-                        layout:(TSUniversalFlowLayout *_Nullable)collectionViewLayout
-        insetForSectionAtIndex:(NSInteger)section{
-    TSAgreementSectionModel *model = self.dataController.sections[section];
-    return model.sectionInset;
-}
-
+ 
 
 @end

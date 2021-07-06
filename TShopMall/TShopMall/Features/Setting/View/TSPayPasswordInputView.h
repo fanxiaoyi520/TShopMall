@@ -27,6 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString *)getInputPassword;
 /** 调起键盘 */
 - (void)showKeyboard;
+/** 清理密码输入框 */
+- (void)clear;
 
 @end
 

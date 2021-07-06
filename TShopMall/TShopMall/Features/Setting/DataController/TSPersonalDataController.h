@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)fetchPersonalContentsComplete:(void(^)(BOOL isSucess))complete;
 
+- (void)checkRealAuthComplete:(void(^)(NSDictionary * _Nullable))complete;
 @end
 
 NS_ASSUME_NONNULL_END

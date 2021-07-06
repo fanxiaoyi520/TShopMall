@@ -79,6 +79,10 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
      
+    TSInviteFriendsSectionModel *model = self.dataController.sections[indexPath.section];
+    if ([model.identify isEqualToString:@"TSInviteFriendsShareCell"]) {
+        [self.dataController shareWithType:indexPath.row];
+    }
     }
    
 

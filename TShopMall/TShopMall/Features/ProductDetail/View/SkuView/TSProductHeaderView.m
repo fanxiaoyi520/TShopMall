@@ -124,7 +124,9 @@
 
 #pragma mark - Actions
 -(void)closePopupEvent:(UIButton *)sender{
-    
+    if (self.closeBlock) {
+        self.closeBlock();
+    }
 }
 
 -(void)reduceAction:(UIButton *)sender{

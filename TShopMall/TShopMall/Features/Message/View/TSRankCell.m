@@ -7,6 +7,7 @@
 
 #import "TSRankCell.h"
 #import "TSRankSectionModel.h"
+#import "TSTools.h"
 
 @interface TSRankCell ()
 /// 信息背景
@@ -160,7 +161,6 @@
     
     [_headImgV sd_setImageWithURL:[NSURL URLWithString:item.userModel.imageUrl] placeholderImage:KImageMake(@"mall_setting_defautlhead")];
     _usernameLabel.text = item.userModel.name;
-    
     _salesNumLabel.text = [NSString stringWithFormat:@"¥%@", item.userModel.money];
     
     //最底部切圆角

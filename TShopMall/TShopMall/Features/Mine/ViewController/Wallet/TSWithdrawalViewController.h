@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 @protocol WithdrawalDelegate <NSObject>
 
+- (void)withdrawalPasswordNotSet:(id _Nullable)sender;
 - (void)withdrawalApplication:(id _Nullable)sender;
 @end
 @interface TSWithdrawalViewController : UIViewController

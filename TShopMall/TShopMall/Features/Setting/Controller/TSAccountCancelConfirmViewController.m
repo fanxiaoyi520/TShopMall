@@ -23,8 +23,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    NSLog(@"时间 === %@, Nickname ==== %@", self.date, self.nickname);
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {

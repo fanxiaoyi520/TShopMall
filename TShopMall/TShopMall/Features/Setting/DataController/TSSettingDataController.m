@@ -40,14 +40,14 @@
         item1.title = @"账号安全";
         item1.detail = @"";
         item1.showLine = NO;
-        item1.cellHeight = 56;
+        item1.cellHeight = 57;
         item1.identify = @"TSSettingCommonCell";
         [items addObject:item1];
         TSSettingCommonSectionItemModel *item2 = [[TSSettingCommonSectionItemModel alloc] init];
         item2.title = @"地址管理";
         item2.detail = @"";
         item2.showLine = NO;
-        item2.cellHeight = 56;
+        item2.cellHeight = 57;
         item2.identify = @"TSSettingCommonCell";
         [items addObject:item2];
         TSSettingSectionModel *section = [[TSSettingSectionModel alloc] init];
@@ -63,7 +63,7 @@
         item1.title = @"清理缓存";
         item1.detail = [self getWebImageCache];
         item1.showLine = YES;
-        item1.cellHeight = 56.5;
+        item1.cellHeight = 57;
         item1.identify = @"TSSettingCommonCell";
         [items addObject:item1];
         
@@ -71,7 +71,7 @@
         item2.title = @"关于我们";
         item2.detail = @"";
         item2.showLine = NO;
-        item2.cellHeight = 56;
+        item2.cellHeight = 57;
         item2.identify = @"TSSettingCommonCell";
         [items addObject:item2];
         
@@ -86,7 +86,7 @@
     {
         NSMutableArray *items = [NSMutableArray array];
         TSSettingExitSectionItemModel *item = [[TSSettingExitSectionItemModel alloc] init];
-        item.cellHeight = 56;
+        item.cellHeight = 57;
         item.identify = @"TSSettingExitCell";
         [items addObject:item];
         TSSettingSectionModel *section = [[TSSettingSectionModel alloc] init];

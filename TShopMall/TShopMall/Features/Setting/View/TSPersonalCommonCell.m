@@ -61,7 +61,7 @@
         make.width.height.mas_equalTo(16);
     }];
     [self.splitView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.contentView.mas_left).with.offset(16);
+        make.left.equalTo(self.contentView.mas_left).with.offset(0);
         make.right.equalTo(self.contentView.mas_right).with.offset(0);
         make.bottom.equalTo(self.contentView.mas_bottom).with.offset(0);
         make.height.mas_equalTo(0.33);
@@ -126,7 +126,7 @@
     if (_splitView == nil) {
         UIView *splitView = [[UIView alloc] init];
         _splitView = splitView;
-        _splitView.backgroundColor = KHexColor(@"#E6E6E6");
+        _splitView.backgroundColor = KHexColor(@"#F4F4F4");
         [self.contentView addSubview:_splitView];
     }
     return _splitView;
@@ -151,10 +151,14 @@
         self.sexImgV.hidden = YES;
     }
     if (item.sex != none) {
-        self.sexImgV.image = item.sex == male ? KImageMake(@"mall_setting_male") : KImageMake(@"mall_setting_female");
+        if (item.sex == unknow) {///未知
+            self.sexImgV.hidden = YES;
+        } else {
+            self.sexImgV.hidden = NO;
+            self.sexImgV.image = item.sex == male ? KImageMake(@"mall_setting_male") : KImageMake(@"mall_setting_female");
+        }
         self.detailLabel.hidden = YES;
         self.headImgV.hidden = YES;
-        self.sexImgV.hidden = NO;
     }
 }
 

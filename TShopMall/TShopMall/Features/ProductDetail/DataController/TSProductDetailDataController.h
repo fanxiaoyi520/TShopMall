@@ -37,9 +37,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// 下载素材
 @property (nonatomic, strong) NSArray <TSMaterialImageModel *> *materialModels;
 
-
+@property(nonatomic, assign) BOOL hasCopyWriter;
 
 @property (nonatomic, strong, readonly) NSMutableArray <TSGoodDetailSectionModel *> *sections;
+
+/// 请求照册权限
+- (void)isCanVisitPhotoLibrary:(void(^)(BOOL hasPersion))result;
 
 
 /// 请求商品详情数据
@@ -132,6 +135,8 @@ NS_ASSUME_NONNULL_BEGIN
                                 discountType:(NSString *)discountType
                                discountPrice:(NSString *)discountPrice
                                     complete:(void(^)(BOOL isSucess, NSDictionary *data))complete;
+
+
 
 @end
 

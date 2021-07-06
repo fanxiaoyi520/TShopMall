@@ -49,6 +49,7 @@
     ///  品牌
     model.brandHidden = NO;
     model.brandOffsetTopY = 225;
+    model.brandColor = KGrayColor;
     
     model.customViewBlock = ^(UIView * _Nullable customView) {
 

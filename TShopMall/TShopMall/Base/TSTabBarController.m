@@ -51,8 +51,8 @@
 #pragma mark - CYLTabBarControllerDelegate
 -(void)tabBarController:(UITabBarController *)tabBarController
        didSelectControl:(UIControl *)control{
-    UITabBarItem *item = [tabBarController.tabBar.items objectAtIndex:tabBarController.selectedIndex];
-    item.badgeValue = nil;
+//    UITabBarItem *item = [tabBarController.tabBar.items objectAtIndex:tabBarController.selectedIndex];
+//    item.badgeValue = nil;
     TSBaseNavigationController *nav = tabBarController.childViewControllers[tabBarController.selectedIndex];
     if ([nav.topViewController conformsToProtocol:@protocol(TSTabBarControllerProtocol)]) {
         [nav.topViewController performSelector:@selector(refreshData)];
@@ -160,7 +160,11 @@
 
 - (void)updateCartsBadge:(NSInteger)number{
     UITabBarItem *item = [[[self tabBar] items] objectAtIndex:3];
-    item.badgeValue = [NSString stringWithFormat:@"%ld", number];
+    if (number == 0) {
+        item.badgeValue = nil;
+    } else {
+        item.badgeValue = [NSString stringWithFormat:@"%ld", number];
+    }
 }
                                 
 

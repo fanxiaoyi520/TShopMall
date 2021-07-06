@@ -16,6 +16,33 @@
 @end
 
 @implementation TSUserInfoService
+/** 校验是否设置过提现密码 */
+- (void)checkHasSetWithrawalPwdSuccess:(void(^_Nullable)(BOOL hasSet))success
+                                 failure:(void(^_Nullable)(NSString *errorMsg))failure {
+    SSGenaralRequest *request = [[SSGenaralRequest alloc]
+                                 initWithRequestUrl:kCheckHasSetWithdrawalPwdUrl                  requestMethod:YTKRequestMethodGET
+                              requestSerializerType:YTKRequestSerializerTypeJSON
+                             responseSerializerType:YTKResponseSerializerTypeJSON         requestHeader:@{}
+                                   requestBody:@{}
+                                 needErrorToast:YES];
+    [request startWithCompletionBlockWithSuccess:^(__kindof SSGenaralRequest * _Nonnull request) {
+        if (request.responseModel.isSucceed) {
+            BOOL hasSet = [request.responseModel.originalData[@"data"] boolValue];
+            if (success) {
+                success(hasSet);
+            }
+        } else {
+            if (failure) {
+                failure(request.responseModel.originalData[@"message"]);
+            }
+        }
+    } failure:^(__kindof SSGenaralRequest * _Nonnull request) {
+        if (failure) {
+            failure(@"服务器发生未知错误~~");
+        }
+    }];
+}
+    
 
 /** 校验验证码 */
 - (void)checkCodeMobile:(NSString *)mobile
@@ -68,24 +95,22 @@
 - (void)setWithrawalPwd:(NSString *)withrawalPwd
                 success:(void(^_Nullable)(void))success
                 failure:(void(^_Nullable)(NSString *errorMsg))failure {
-    
     NSMutableDictionary *body = [NSMutableDictionary dictionary];
-    [body setValue:withrawalPwd forKey:@"checkPw"];
-    NSMutableDictionary *header = [NSMutableDictionary dictionary];
-    [header setValue:@"thome" forKey:@"storeUuid"];
-    [header setValue:@"tcl" forKey:@"t-id"];
-    [header setValue:[TSUserInfoManager userInfo].accessToken forKey:@"accessToken"];
-    ///[header setValue:@"platform_tcl_shop" forKey:@"platform"];
-    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kSetWithdrawalPwdUrl
+    [body setValue:withrawalPwd forKey:@"withdrawal"];
+    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithBaseUrl:kMallApiPrefix
+                                                               RequestUrl:kSetWithdrawalPwdUrl
                                                                requestMethod:YTKRequestMethodPOST
-                                                       requestSerializerType:YTKRequestSerializerTypeHTTP
-                                                      responseSerializerType:YTKResponseSerializerTypeJSON requestHeader:header            requestBody:body needErrorToast:YES];
+                                                       requestSerializerType:YTKRequestSerializerTypeJSON
+                                                   responseSerializerType:YTKResponseSerializerTypeJSON requestHeader:@{}            requestBody:body needErrorToast:YES];
     [request startWithCompletionBlockWithSuccess:^(__kindof SSGenaralRequest * _Nonnull request) {
-        NSLog(@"设置提现密码 ==== %@", request.responseModel.originalData);
         if (request.responseModel.isSucceed) {
-            NSDictionary *data = request.responseModel.originalData[@"data"];
-            NSString *msg = data[@"msg"];
-            NSLog(@"msg == %@", msg);
+            if (success) {
+                success();
+            }
+        } else {
+            if (failure) {
+                failure(request.responseModel.responseMsg);
+            }
         }
     } failure:^(__kindof SSGenaralRequest * _Nonnull request) {
         NSLog(@"设置提现密码error ==== %@", request.response);
@@ -96,29 +121,39 @@
 - (void)checkWithrawalPwd:(NSString *)withrawalPwd
                 success:(void(^_Nullable)(void))success
                 failure:(void(^_Nullable)(NSString *errorMsg))failure {
+    
     NSMutableDictionary *body = [NSMutableDictionary dictionary];
     [body setValue:withrawalPwd forKey:@"checkPw"];
-    NSMutableDictionary *header = [NSMutableDictionary dictionary];
-    [header setValue:@"thome" forKey:@"storeUuid"];
-    [header setValue:@"tcl" forKey:@"t-id"];
-    [header setValue:[TSUserInfoManager userInfo].accessToken forKey:@"accessToken"];
-    [header setValue:@"platform_tcl_shop" forKey:@"platform"];
-    
-    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithBaseUrl:kAccountCenterApiPrefix
-                                                               RequestUrl:kCheckWithdrawalPwdUrl
-                                                               requestMethod:YTKRequestMethodPOST
-                                                       requestSerializerType:YTKRequestSerializerTypeJSON
-                                                      responseSerializerType:YTKResponseSerializerTypeJSON requestHeader:header            requestBody:body needErrorToast:YES];
+    SSGenaralRequest *request = [[SSGenaralRequest alloc]
+                                 initWithRequestUrl:kCheckWithdrawalPwdUrl
+                                      requestMethod:YTKRequestMethodPOST
+                              requestSerializerType:YTKRequestSerializerTypeJSON
+                             responseSerializerType:YTKResponseSerializerTypeJSON     requestHeader:@{}
+                                        requestBody:body
+                                     needErrorToast:YES];
     [request startWithCompletionBlockWithSuccess:^(__kindof SSGenaralRequest * _Nonnull request) {
-        NSLog(@"校验已有的提现密码 ==== %@", request);
+        if (request.responseModel.isSucceed) {
+            if (success) {
+                success();
+            }
+        } else {
+            if (failure) {
+                failure(request.responseModel.responseMsg);
+            }
+        }
     } failure:^(__kindof SSGenaralRequest * _Nonnull request) {
-        NSLog(@"设置提现密码 ==== %@", request.response);
+        if (failure) {
+            failure(@"服务器发生未知错误~~");
+        }
     }];
 }
 
 - (void)getUserInfoAccountId:(NSString *)accountId
                      success:(void(^_Nullable)(TSUser *user))success
                      failure:(void(^_Nullable)(NSString *errorMsg))failure {
+    if (accountId == nil) {
+        return;
+    }
     TSUserInfoRequest *request = [[TSUserInfoRequest alloc] initWithAccountId:accountId];
     [request startWithCompletionBlockWithSuccess:^(__kindof SSGenaralRequest * _Nonnull request) {
         NSLog(@"获取用户信息 === %@", request.responseModel.originalData);
@@ -130,7 +165,9 @@
         }
         
     } failure:^(__kindof SSGenaralRequest * _Nonnull request) {
-        
+        if (failure) {
+            failure(@"服务器发生未知错误~~");
+        }
     }];
 }
 

@@ -167,7 +167,8 @@ static inline NSString *TStringToString(NSString *str) { return TStringIsEmpty(s
 
 //银行卡部分秘文展示
 + (NSString *)returnBankCard:(NSString *)BankCardStr;
-
+//jwt token 解析
+-(id)jwtDecodeWithJwtString;
 @end
 
 

@@ -94,10 +94,10 @@
         if (provice == nil) {
             weakSelf.editView.vm.address = location;
         } else {
-            NSString *address = [NSString stringWithFormat:@"%@%@%@%@", provice.provinceName, city.cityName, eare.regionName, street.streetName];
-            weakSelf.editView.vm.address = address;
+            NSString *area = [NSString stringWithFormat:@"%@%@%@%@", provice.provinceName, city.cityName, eare.regionName, street.streetName];
+            weakSelf.editView.vm.area = area;
         }
-        [weakSelf.editView updateAddress:weakSelf.editView.vm.address];
+        [weakSelf.editView updateAddress:weakSelf.editView.vm.area];
     } OnController:self];
 }
 

@@ -34,4 +34,48 @@
     }
 }
 
+- (void)checkRealAuthComplete:(void(^)(BOOL isSucess))complete {
+    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kMineCheckRealAuth
+                                                               requestMethod:YTKRequestMethodGET
+                                                       requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON
+                                                               requestHeader:NSDictionary.dictionary
+                                                                 requestBody:NSDictionary.dictionary
+                                                              needErrorToast:YES];
+    [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+        if (request.responseModel.isSucceed) {
+            NSDictionary *data = request.responseModel.data;
+           
+        } else {
+            [Popover popToastOnWindowWithText:request.responseModel.responseMsg];
+            complete(NO);
+        }
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+            complete(NO);
+    }];
+}
+
+-(void)realAuthWithName:(NSString *)name AndIdCard:(NSString *)idcard complete:(void(^)(BOOL isSucess))complete {
+    
+    NSMutableDictionary *body = [NSMutableDictionary dictionary];
+    [body setValue:name forKey:@"realName"];
+    [body setValue:idcard forKey:@"idCard"];
+    SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kMineRealAuth
+                                                               requestMethod:YTKRequestMethodPOST
+                                                       requestSerializerType:YTKRequestSerializerTypeHTTP responseSerializerType:YTKResponseSerializerTypeJSON
+                                                               requestHeader:NSDictionary.dictionary
+                                                                 requestBody:body
+                                                              needErrorToast:YES];
+    [request startWithCompletionBlockWithSuccess:^(__kindof SSBaseRequest * _Nonnull request) {
+        if (request.responseModel.isSucceed) {
+//            NSDictionary *data = request.responseModel.data;
+            complete(YES);
+        } else {
+            [Popover popToastOnWindowWithText:request.responseModel.responseMsg];
+            complete(NO);
+        }
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+            complete(NO);
+    }];
+}
+
 @end

@@ -94,7 +94,7 @@ NSString *const kAccountCancelInfoUrl = @"/auth/account/cancelInfo";
 NSString *const kAccountCheckSalesmanWithMobileUrl = @"/rest/sysback/salesman/checkSalesman";
 NSString *const kAccountCheckSalesmanWithTokenUrl = @"/rest/sysback/salesman/checkSalesmanByToken";
 NSString *const kAccountRefershTokenUrl = @"/auth/auth/refershToken";
-
+NSString *const kAccountPublicKeyUrl = @"/auth/common/publicKey";
 #pragma mark - 首页
 
 NSString *const kHomePageInfoUrl = @"/rest/v2/front/shopContent/getIndexPageInfo";
@@ -172,6 +172,7 @@ NSString *const kModifyUserUrl = @"/user/mng/user";
 NSString *const kUploadImageUrl = @"/rest/v2/usercenter/batchfileupload/batch/upload";
 NSString *const kSetWithdrawalPwdUrl = @"/usercenter/customer/setCustomerWithdrawalPwd";
 NSString *const kCheckWithdrawalPwdUrl = @"/usercenter/customer/checkWithdrawalPwd";
+NSString *const kCheckHasSetWithdrawalPwdUrl = @"/usercenter/customer/checkWhetherSetWithdrawalPwd";
 
 NSString *const kMineWithdrawalApply = @"/rest/v2/withdrawal/record/withdrawalApply";
 NSString *const kMineQueryAppBankCardAccountList = @"/rest/v2/bankCardAccount/queryAppBankCardAccountList";
@@ -184,4 +185,9 @@ NSString *const kMineGetBankNames = @"/rest/v2/bankCardAccount/getBankNames";
 NSString *const kSecurCenterAgreementUrl = @"/rest/v2/front/shopStatement/getShopStatementList";
 NSString *const kMineGetAllProvince = @"/rest/v2/withdrawal/record/getAllProvince";
 NSString *const kMineGetAllCityByProvinceUuid = @"/rest/v2/withdrawal/record/getAllCityByProvinceUuid";
-
+NSString *const kMineGetPublicKey = @"/rest/usercenter/customer/security";
+NSString *const kMineCheckWhetherSetWithdrawalPwd = @"/rest/usercenter/customer/checkWhetherSetWithdrawalPwd";
+NSString * const kMineCheckWithdrawalPwd = @"/rest/usercenter/customer/checkWithdrawalPwd";
+NSString * const kMineCheckRealAuth = @"/usercenter/customer/checkRealAuth";//查询是否已实名认证
+NSString * const kMineRealAuth = @"/usercenter/customer/realAuth";//实名认证
+NSString * const kShopStatement = @"v2/front/shopStatement/getShopStatementListByState"; 
