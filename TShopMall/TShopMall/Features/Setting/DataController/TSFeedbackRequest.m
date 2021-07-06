@@ -1,25 +1,23 @@
 //
-//  TSSaleRankRequest.m
+//  TSFeedbackRequest.m
 //  TShopMall
 //
-//  Created by oneyian on 2021/7/2.
+//  Created by oneyian on 2021/7/6.
 //
 
-#import "TSSaleRankRequest.h"
+#import "TSFeedbackRequest.h"
 
-@interface TSSaleRankRequest ()
-@property (nonatomic, assign) NSInteger time;
-@property (nonatomic, assign) NSInteger rankNum;
+@interface TSFeedbackRequest ()
+@property (nonatomic, copy) NSString * content;
 @end
 
-@implementation TSSaleRankRequest
+@implementation TSFeedbackRequest
 
-- (instancetype)initWithTime:(NSInteger)time rankNum:(NSInteger)rankNum
+- (instancetype)initWithContent:(NSString *)content
 {
     self = [super init];
     if (self) {
-        self.time = time;
-        self.rankNum = rankNum;
+        self.content = content;
     }
     return self;
 }
@@ -30,7 +28,7 @@
 }
 
 - (NSString *)requestUrl {
-    return kRankSaleRankUrl;
+    return kFeedbackUrl;
 }
 
 - (YTKRequestSerializerType)requestSerializerType {
@@ -42,7 +40,7 @@
 }
 
 - (YTKRequestMethod)requestMethod {
-    return YTKRequestMethodGET;
+    return YTKRequestMethodPOST;
 }
 
 - (NSDictionary<NSString *,NSString *> *)requestHeaderFieldValueDictionary {
@@ -53,9 +51,10 @@
 
 - (id)requestArgument {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    
-    [params setValue:@(self.time) forKey:@"time"];
-    if (self.rankNum > 0) [params setValue:@(self.rankNum) forKey:@"rankNum"];
+    if (self.content) {
+        [params setValue:self.content forKey:@"content"];
+    }
+    [params setValue:@"1" forKey:@"sourceType"];
     
     NSMutableDictionary *comBody = [self commonBady];
     [comBody setValuesForKeysWithDictionary:params];

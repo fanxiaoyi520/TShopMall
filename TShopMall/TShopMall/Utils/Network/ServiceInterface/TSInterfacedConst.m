@@ -190,4 +190,5 @@ NSString *const kMineCheckWhetherSetWithdrawalPwd = @"/rest/usercenter/customer/
 NSString * const kMineCheckWithdrawalPwd = @"/rest/usercenter/customer/checkWithdrawalPwd";
 NSString * const kMineCheckRealAuth = @"/usercenter/customer/checkRealAuth";//查询是否已实名认证
 NSString * const kMineRealAuth = @"/usercenter/customer/realAuth";//实名认证
-NSString * const kShopStatement = @"v2/front/shopStatement/getShopStatementListByState"; 
+NSString * const kShopStatement = @"v2/front/shopStatement/getShopStatementListByState";
+NSString * const kFeedbackUrl = @"rest/v2/about/suggestionFeedback/addSuggestion";
