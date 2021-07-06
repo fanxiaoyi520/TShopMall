@@ -36,9 +36,9 @@
 - (void)addConstraints {
     [self.rankImgV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contentView.mas_left).with.offset(32);
-        make.centerY.equalTo(self.contentView.mas_centerY).with.offset(0);
-        make.width.mas_equalTo(25);
-        make.height.mas_equalTo(32);
+        make.centerY.equalTo(self.contentView);
+        make.width.offset(25);
+        make.height.offset(32);
     }];
     [self.rankNumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.rankImgV.mas_centerX).with.offset(0);
@@ -53,10 +53,9 @@
     self.headImgV.layer.cornerRadius = 33/2;
     [self.headImgV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.usernameLabel.mas_left).with.offset(-5);
-        make.top.offset(10);
-        make.bottom.offset(-10);
-        make.width.mas_equalTo(33);
-        make.height.mas_equalTo(33);
+        make.top.offset(10).priorityLow();
+        make.bottom.offset(-10).priorityLow();
+        make.width.height.offset(33).priorityHigh();
     }];
     [self.salesNumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.contentView.mas_right).with.offset(-21);

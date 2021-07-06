@@ -65,13 +65,13 @@
     
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.equalTo(self.view);
-        make.bottom.equalTo(self.personalRankView);
+        make.bottom.equalTo(self.personalRankView).priorityLow();
     }];
     
     [self.personalRankView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.view);
-        make.height.offset(84);
-        make.bottom.equalTo(self.view).offset(- GK_TABBAR_HEIGHT - GK_STATUSBAR_NAVBAR_HEIGHT - 44);
+        make.bottom.equalTo(self.view).offset(- GK_TABBAR_HEIGHT - GK_STATUSBAR_NAVBAR_HEIGHT - 44).priorityHigh();
+        make.height.offset(84).priorityHigh();
     }];
 }
 

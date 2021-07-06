@@ -6,10 +6,11 @@
 //
 
 #import "TSBaseViewController.h"
+#import <JXCategoryView/JXCategoryView.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TSRankHotCellController : TSBaseViewController
+@interface TSRankHotCellController : TSBaseViewController <JXCategoryListContentViewDelegate>
 
 @end
 
