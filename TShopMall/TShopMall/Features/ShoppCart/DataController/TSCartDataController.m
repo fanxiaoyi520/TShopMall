@@ -152,7 +152,7 @@
         if (isGrid) {
             NSMutableArray *arr = [NSMutableArray array];
             [arr addObject:goods[2*i]];
-            if (2*i+1 <= a - 1) {
+            if (2*i+1 <= goods.count - 1) {
                 [arr addObject:goods[2*i+1]];
             }
             obj = arr;
