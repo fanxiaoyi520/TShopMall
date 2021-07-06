@@ -337,7 +337,7 @@ static NSInteger const kGroupSize = 4;
         _titleLable = [UILabel new];
         _titleLable.textColor = KHexColor(@"#2D3132");
         _titleLable.font = KRegularFont(16);
-        _titleLable.text = @"您好，JERRYJUICE";
+        _titleLable.text = [NSString stringWithFormat:@"您好,%@",[TSGlobalManager shareInstance].currentUserInfo.userName];
     }
     return _titleLable;
 }

@@ -33,7 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 初始化service
 - (void)initService;
 /// 获取网络必要的数据
-- (void)getNetData;
+- (void)fetchGlobalInterfaceSource;
 @end
 
 NS_ASSUME_NONNULL_END

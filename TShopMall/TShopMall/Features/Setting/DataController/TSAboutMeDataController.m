@@ -33,13 +33,14 @@
     }
     {
         NSMutableArray *items = [NSMutableArray array];
-        NSMutableArray *titles = [NSMutableArray arrayWithArray:@[@"版本信息", @"意见反馈"]];
+        NSMutableArray *titles = [NSMutableArray arrayWithArray:@[@"版权信息", @"意见反馈"]];
     
         for (int i = 0; i < titles.count; i++) {
             NSString *title = titles[i];
             TSAboutMeBottomSectionItemModel *item = [[TSAboutMeBottomSectionItemModel alloc] init];
             item.title = title;
             item.detail = @"";
+            item.serverURL = @"home";
             item.identify = @"TSSettingCommonCell";
             item.cellHeight = 57;
             item.showLine = YES;

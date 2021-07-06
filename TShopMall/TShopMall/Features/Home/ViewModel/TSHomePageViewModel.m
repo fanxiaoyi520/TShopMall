@@ -19,20 +19,31 @@
 @end
 
 @implementation TSHomePageViewModel
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        @weakify(self);
+        [self.KVOController observe:[AFNetworkReachabilityManager sharedManager] keyPath:@"networkReachabilityStatus" options:( NSKeyValueObservingOptionNew) block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
+            @strongify(self)
+            NSLog(@"%ld",[AFNetworkReachabilityManager sharedManager].networkReachabilityStatus);
+            if ([AFNetworkReachabilityManager sharedManager].networkReachabilityStatus == AFNetworkReachabilityStatusNotReachable) {
+                NSString *content = [TSJsonCacheData readPlistWithKey:@"homePageList"];
+                if (content) {
+                    [self setUITemplateWithResponseData:content];
+                }
+            }else{
+                [self fetchData];
+            }
+        }];
+    }
+    return self;
+}
 
 -(void)fetchData{
     
-    if (![AFNetworkReachabilityManager sharedManager].reachable) {
-        NSString *content = [TSJsonCacheData readPlistWithKey:@"homePageList"];
-        if (content) {
-            [self setUITemplateWithResponseData:content];
-        }
-        return;
-    }
-    
-    
     NSMutableDictionary *body = [NSMutableDictionary dictionary];
-        [body setValue:@"APP" forKey:@"uiType"];
+    [body setValue:@"APP" forKey:@"uiType"];
 
     SSGenaralRequest *request = [[SSGenaralRequest alloc] initWithRequestUrl:kHomePageInfoUrl
                                                                requestMethod:YTKRequestMethodPOST

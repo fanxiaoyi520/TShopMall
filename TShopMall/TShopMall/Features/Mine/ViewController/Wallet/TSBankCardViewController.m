@@ -179,9 +179,19 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    TSUnbundlingCardViewController *vc = [TSUnbundlingCardViewController new];
-    vc.model = self.dataController.bankCardArray[indexPath.row];
-    [self.navigationController pushViewController:vc animated:YES];
+    if ([self.sourceStr isEqualToString:@"TSMineWalletViewController"]) {
+        TSBankCardModel *model = self.dataController.bankCardArray[indexPath.row];
+        if (![model.bankStatus isEqualToString:@"0"]) {
+            if (self.sourceBlock) {
+                self.sourceBlock(self.dataController.bankCardArray[indexPath.row]);
+            }
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    } else {
+        TSUnbundlingCardViewController *vc = [TSUnbundlingCardViewController new];
+        vc.model = self.dataController.bankCardArray[indexPath.row];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 // MARK: UIScrollViewDelegate

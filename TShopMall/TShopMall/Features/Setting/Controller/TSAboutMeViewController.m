@@ -11,6 +11,8 @@
 #import "TSUniversalCollectionViewCell.h"
 #import "TSHybridViewController.h"
 
+#import "TSFeedbackViewController.h"
+
 @interface TSAboutMeViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UniversalFlowLayoutDelegate,UniversalCollectionViewCellDataDelegate, TSHybridViewControllerDelegate>
 /// 数据中心
 @property(nonatomic, strong) TSAboutMeDataController *dataController;
@@ -99,17 +101,22 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 1) {
-        TSAboutMeSectionModel *model = self.dataController.sections[indexPath.section];
-        TSAboutMeSectionItemModel *item = model.items[indexPath.item];
-        if ([item isKindOfClass:[TSAboutMeBottomSectionItemModel class]]) {
-            TSAboutMeBottomSectionItemModel *_item = (TSAboutMeBottomSectionItemModel *)item;
-            if (_item.serverURL.length) {
-                TSHybridViewController *web = [[TSHybridViewController alloc] initWithURLString:[_item.serverURL stringByAppendingString:@"&mode=webview"]];
-                web.delegate = self;
-                [self.navigationController pushViewController:web animated:YES];
+        if (indexPath.row == 1) {
+            //意见反馈
+            TSFeedbackViewController *feedbackVc = [TSFeedbackViewController new];
+            [self.navigationController pushViewController:feedbackVc animated:YES];
+        }else {
+            TSAboutMeSectionModel *model = self.dataController.sections[indexPath.section];
+            TSAboutMeSectionItemModel *item = model.items[indexPath.item];
+            if ([item isKindOfClass:[TSAboutMeBottomSectionItemModel class]]) {
+                TSAboutMeBottomSectionItemModel *_item = (TSAboutMeBottomSectionItemModel *)item;
+                if (_item.serverURL.length) {
+                    TSHybridViewController *web = [[TSHybridViewController alloc] initWithURLString:[_item.serverURL stringByAppendingString:@"&mode=webview"]];
+                    web.delegate = self;
+                    [self.navigationController pushViewController:web animated:YES];
+                }
             }
         }
-        
     }
 }
 

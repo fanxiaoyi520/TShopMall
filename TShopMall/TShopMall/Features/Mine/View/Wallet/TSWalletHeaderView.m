@@ -6,6 +6,7 @@
 //
 
 #import "TSWalletHeaderView.h"
+#import "NSString+Plugin.h"
 
 @interface TSWalletHeaderView ()
 
@@ -228,7 +229,7 @@
 
 @property (nonatomic ,strong) UIImageView *bankImageView;
 @property (nonatomic ,strong) UILabel *titleLab;
-@property (nonatomic ,strong) UILabel *cardNumberLab;
+
 @property (nonatomic ,strong) UIButton *isBindingLab;
 @property (nonatomic ,strong) UIImageView *instrucImgView;
 @property (nonatomic ,strong) TSMyIncomeModel *model;
@@ -336,7 +337,7 @@
         _cardNumberLab.textColor = KHexColor(@"#2D3132");
         _cardNumberLab.font = KRegularFont(10);
         if (self.model.bankCardNo) {
-            _cardNumberLab.text = [NSString stringWithFormat:@"提现到银行卡账号:%@",[self returnBankCard:self.model.bankCardNo]];
+            _cardNumberLab.text = [NSString stringWithFormat:@"提现到银行卡账号:%@",[NSString returnBankCard:self.model.bankCardNo]];
         } else {
             _cardNumberLab.textColor = KlineColor;
             _cardNumberLab.text =  @"请先绑定提现银行卡账号";
@@ -352,6 +353,7 @@
         _isBindingLab.titleLabel.font = KRegularFont(14);
         if (self.model.bankCardNo) {
             [_isBindingLab setTitle:@"已绑定" forState:UIControlStateNormal];
+            [_isBindingLab addTarget:self action:@selector(isBindingAction:) forControlEvents:UIControlEventTouchUpInside];
         } else {
             [_isBindingLab setTitle:@"去绑定" forState:UIControlStateNormal];
             [_isBindingLab addTarget:self action:@selector(isBindingAction:) forControlEvents:UIControlEventTouchUpInside];

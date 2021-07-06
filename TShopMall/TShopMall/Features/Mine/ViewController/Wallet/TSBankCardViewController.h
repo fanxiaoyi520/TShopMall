@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface TSBankCardViewController : TSBaseViewController
 
 @property (nonatomic ,strong) TSMineDataController *kDataController;
+@property (nonatomic ,copy) NSString *sourceStr;// == @"TSMineWalletViewController"区分
+@property (nonatomic ,copy)void (^sourceBlock)(id _Nullable info);
 @end
 
 NS_ASSUME_NONNULL_END
