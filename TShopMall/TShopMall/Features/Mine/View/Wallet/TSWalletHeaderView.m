@@ -114,9 +114,13 @@
 - (void)eyeAction:(UIButton *)sender {
     if (sender.selected) {
         _amountNumLab.text = @"****";
+        _amountReceivedNumLab.text = @"****";
+        _amountNotReceivedNumLab.text = @"****";
         sender.selected = NO;
     } else {
         _amountNumLab.text = [NSString stringWithFormat:@"¥%@",self.model.totalRevenue];
+        _amountReceivedNumLab.text = [NSString stringWithFormat:@"¥%@",self.model.arrivalAmount];
+        _amountNotReceivedNumLab.text = [NSString stringWithFormat:@"¥%@",self.model.noArrivalAmount];
         sender.selected = YES;
     }
     if ([self.kDelegate respondsToSelector:@selector(walletHeaderEyeAction:)]) {

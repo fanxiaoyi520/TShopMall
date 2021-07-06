@@ -90,9 +90,11 @@
 - (void)eyeAction:(UIButton *)sender {
     if (sender.selected) {
         self.mineProfitNumLab.text = @"****";
+        self.mineBankCardNumLab.text = @"****";
         sender.selected = NO;
     } else {
         self.mineProfitNumLab.text = [NSString stringWithFormat:@"¥%@",self.model.totalRevenue];
+        self.mineBankCardNumLab.text = self.model.count;
         sender.selected = YES;
     }
 }
