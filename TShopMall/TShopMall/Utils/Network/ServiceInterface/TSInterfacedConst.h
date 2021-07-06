@@ -151,5 +151,6 @@ UIKIT_EXTERN NSString * const kMineCheckWithdrawalPwd;//校验提现密码是否
 UIKIT_EXTERN NSString * const kMineCheckRealAuth;//查询是否已实名认证
 UIKIT_EXTERN NSString * const kMineRealAuth;//实名认证
 ///获取指定类型的授权协议（实名认证协议：2 合伙人协议：3）
-UIKIT_EXTERN NSString * const kShopStatement; 
+UIKIT_EXTERN NSString * const kShopStatement;
+UIKIT_EXTERN NSString * const kFeedbackUrl;//反馈意见
 
