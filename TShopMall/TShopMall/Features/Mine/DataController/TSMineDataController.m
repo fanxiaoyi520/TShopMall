@@ -902,6 +902,7 @@
                      self.responseMsg = request.responseModel.responseMsg;
                      complete (NO);
                  } else {
+                     self.responseMsg = request.responseModel.responseMsg;
                      complete (NO);
                  }
              }

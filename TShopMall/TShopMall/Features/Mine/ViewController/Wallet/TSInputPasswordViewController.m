@@ -130,9 +130,13 @@
                             }];
                         }).cancel(@"我知道了", ^{}).show();
                     } else {
-                        self.flags = 1;
-                        self.tipsLab.text = self.dataController.responseMsg;
-                        [self.view setNeedsLayout];
+                        if (![self.dataController.responseMsg isEqualToString:@"您的今天的提现次数已用完"]) {
+                            self.flags = 1;
+                            self.tipsLab.text = self.dataController.responseMsg;
+                            [self.view setNeedsLayout];
+                        } else {
+                            [self dismissViewControllerAnimated:NO completion:nil];
+                        }
                     }
                 }
             }];

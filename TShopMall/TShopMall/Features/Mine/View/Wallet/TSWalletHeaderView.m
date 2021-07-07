@@ -282,6 +282,7 @@
         make.height.mas_offset(22);
         make.right.equalTo(self).offset(-41);
     }];
+    [self.isBindingLab jaf_setEnlargeEdgeWithTop:21 right:41 bottom:21 left:40];
     
     [self.instrucImgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(@[self.isBindingLab.mas_top]).offset(1.5);
